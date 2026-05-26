@@ -1,0 +1,82 @@
+---
+title: "YOUR ARTICLE TITLE HERE"
+description: "A short description that will appear in search results and as the article intro. Keep it under 160 characters."
+category: "Category Name"
+categoryUrl: "/category-url"
+readTime: 12
+sections:
+  - id: "section-one"
+    title: "First Main Section"
+  - id: "section-two"
+    title: "Second Main Section"
+  - id: "section-three"
+    title: "Third Main Section"
+relatedArticles:
+  - href: "/category/existing-article-slug"
+    title: "Related Article Title"
+    color: "from-blue-50 to-blue-100"
+    description: "Brief description of what this article covers."
+  - href: "/another-category/another-article"
+    title: "Another Related Article"
+    color: "from-teal-50 to-teal-100"
+    description: "What readers learn from this one."
+---
+
+## First Main Section
+
+Start with your first main idea. Use clear, parent-friendly language.
+
+> **Football Parent note:** Use blockquotes like this for important tips or callouts. The styling is automatic.
+
+### A Subsection Within First Section
+
+Break up longer sections with subsections to improve readability.
+
+---
+
+## Second Main Section
+
+Each `##` creates a new main section that appears in the table of contents sidebar.
+
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Use tables | for comparisons | or summaries |
+| You can | have multiple | rows |
+
+### Small lists work well
+
+- Bullet point one
+- Bullet point two
+- Bullet point three
+
+Or numbered lists:
+
+1. First item
+2. Second item
+3. Third item
+
+---
+
+## Third Main Section
+
+You can link to other articles using markdown:
+
+[Link text here](/category/article-slug)
+
+**Bold text** for emphasis and *italic text* for lighter emphasis.
+
+---
+
+## FAQ
+
+Q: What should I include in an FAQ section?
+
+A: Common questions parents ask about the topic. Usually 3-5 Q&As that address concerns not covered in the main sections.
+
+Q: Are all these sections required?
+
+A: No. Create sections based on your content. The only required sections are those listed in `frontmatter.sections` — keep those in sync with your actual `##` headings.
+
+Q: How do I add this to the site?
+
+A: Save this file as `content/[category]/[slug].mdx`, then create a corresponding `app/[category]/[slug]/page.tsx` that imports and renders it using `ArticleLayout`.
