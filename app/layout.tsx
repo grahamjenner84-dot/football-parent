@@ -1,3 +1,4 @@
+import Script from 'next/script'
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "./components/header";
@@ -33,6 +34,20 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Script
+  src="https://www.googletagmanager.com/gtag/js?id=G-TVN979WNKN"
+  strategy="afterInteractive"
+/>
+
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-TVN979WNKN');
+  `}
+</Script>
       </body>
     </html>
   );
