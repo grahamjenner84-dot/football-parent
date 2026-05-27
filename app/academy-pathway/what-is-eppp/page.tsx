@@ -246,8 +246,7 @@ export default function WhatIsEPPPPage() {
       <div className="bg-gray-50 border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
           <div className="max-w-4xl">
-            <h2 className="text-3xl font-bold text-gray-900 mb-10">Related Articles</h2>
-            <div className="grid md:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-3 gap-6">
               <article className="group">
                 <Link href="/academy-pathway/how-academy-football-works" className="block">
                   <div className="mb-4 h-40 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg group-hover:from-blue-100 group-hover:to-blue-200 transition-all"></div>

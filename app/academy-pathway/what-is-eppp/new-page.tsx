@@ -21,7 +21,6 @@ export default async function Page() {
       categoryUrl={article.frontmatter.categoryUrl}
       readTime={article.frontmatter.readTime}
       sections={article.frontmatter.sections}
-      relatedArticles={article.frontmatter.relatedArticles}
     >
       <MDXContent content={article.content} />
     </ArticleLayout>

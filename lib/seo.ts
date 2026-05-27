@@ -20,11 +20,9 @@ export function generateSEO({
   return {
     title,
     description,
-
     alternates: {
       canonical: url,
     },
-
     openGraph: {
       title,
       description,
@@ -33,7 +31,6 @@ export function generateSEO({
       locale: "en_GB",
       type,
     },
-
     twitter: {
       card: "summary_large_image",
       title,

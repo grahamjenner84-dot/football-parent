@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Academy Categories Explained | Football Parent",
   description:
     "Understand Category 1, 2, 3 and 4 football academies in England and what each academy category means for young players.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/academy-pathway/academy-categories-explained",
-  },
-  openGraph: {
-    title: "Academy Categories Explained | Football Parent",
-    description:
-      "Understand Category 1, 2, 3 and 4 football academies in England and what each academy category means for young players.",
-    url: "https://www.footballparent.co.uk/academy-pathway/academy-categories-explained",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Academy Categories Explained | Football Parent",
-    description:
-      "Understand Category 1, 2, 3 and 4 football academies in England and what each academy category means for young players.",
-  },
-};
+  path: "/academy-pathway/academy-categories-explained",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(
@@ -41,7 +24,7 @@ export default async function Page() {
       categoryUrl={article.frontmatter.categoryUrl}
       readTime={article.frontmatter.readTime}
       sections={article.frontmatter.sections}
-      relatedArticles={article.frontmatter.relatedArticles}
+      
     >
       <MDXContent content={article.content} />
     </ArticleLayout>
