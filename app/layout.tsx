@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Football Parent",
-  description: "Honest guidance for parents navigating UK football development and academy pathways.",
+  description:
+    "Honest guidance for parents navigating UK football development and academy pathways.",
 };
 
 export default function RootLayout({
@@ -32,22 +33,30 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Header />
-        <main className="flex-1">{children}</main>
+
+        <main className="flex-1">
+          {children}
+        </main>
+
         <Footer />
+
+        {/* Google Analytics */}
         <Script
-  src="https://www.googletagmanager.com/gtag/js?id=G-TVN979WNKN"
-  strategy="afterInteractive"
-/>
+          src="https://www.googletagmanager.com/gtag/js?id=G-2206W12H84"
+          strategy="afterInteractive"
+        />
 
-<Script id="google-analytics" strategy="afterInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-    gtag('config', 'G-TVN979WNKN');
-  `}
-</Script>
+            gtag('config', 'G-2206W12H84', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
       </body>
     </html>
   );
