@@ -243,37 +243,7 @@ export default function WhatIsEPPPPage() {
         </div>
       </div>
 
-      <div className="bg-gray-50 border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
-          <div className="max-w-4xl">
-                        <div className="grid md:grid-cols-3 gap-6">
-              <article className="group">
-                <Link href="/academy-pathway/how-academy-football-works" className="block">
-                  <div className="mb-4 h-40 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg group-hover:from-blue-100 group-hover:to-blue-200 transition-all"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-2">How Academy Football Works</h3>
-                  <p className="text-sm text-gray-600">Understanding the academy system structure and pathways.</p>
-                </Link>
-              </article>
-              
-              <article className="group">
-                <Link href="/academy-pathway/academy-categories-explained" className="block">
-                  <div className="mb-4 h-40 bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg group-hover:from-teal-100 group-hover:to-teal-200 transition-all"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-teal-700 transition-colors mb-2">Academy Categories Explained</h3>
-                  <p className="text-sm text-gray-600">What each category means for your child's experience.</p>
-                </Link>
-              </article>
-              
-              <article className="group">
-                <Link href="/academy-pathway/what-age-do-football-academies-recruit" className="block">
-                  <div className="mb-4 h-40 bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg group-hover:from-amber-100 group-hover:to-amber-200 transition-all"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 group-hover:text-amber-700 transition-colors mb-2">What Age Do Academies Recruit?</h3>
-                  <p className="text-sm text-gray-600">When and how clubs sign players at different age groups.</p>
-                </Link>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <div className="bg-white border-t border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-12 lg:py-16">
