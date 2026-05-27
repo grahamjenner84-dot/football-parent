@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Girls Academy vs Grassroots Football | Football Parent",
   description:
-    "Compare girls academy football and grassroots football, including development environment, commitment, pressure and parent considerations.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/girls-football/girls-academy-vs-grassroots-football",
-  },
-  openGraph: {
-    title: "Girls Academy vs Grassroots Football | Football Parent",
-    description:
-      "Compare girls academy football and grassroots football, including development environment, commitment, pressure and parent considerations.",
-    url: "https://www.footballparent.co.uk/girls-football/girls-academy-vs-grassroots-football",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Girls Academy vs Grassroots Football | Football Parent",
-    description:
-      "Compare girls academy football and grassroots football, including development environment, commitment, pressure and parent considerations.",
-  },
-};
+    "Compare girls academy football and grassroots football, including development environment, commitment and player experience.",
+  path: "/girls-football/girls-academy-vs-grassroots-football",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

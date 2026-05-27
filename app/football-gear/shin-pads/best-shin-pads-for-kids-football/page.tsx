@@ -1,31 +1,14 @@
 import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Best Shin Pads for Kids Football | Football Parent",
   description:
     "A practical guide to choosing shin pads for kids football, including fit, comfort, protection and what parents should check before buying.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football",
-  },
-  openGraph: {
-    title: "Best Shin Pads for Kids Football | Football Parent",
-    description:
-      "A practical guide to choosing shin pads for kids football, including fit, comfort, protection and what parents should check before buying.",
-    url: "https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Best Shin Pads for Kids Football | Football Parent",
-    description:
-      "A practical guide to choosing shin pads for kids football, including fit, comfort, protection and what parents should check before buying.",
-  },
-};
+  path: "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

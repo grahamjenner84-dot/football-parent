@@ -1,31 +1,14 @@
 import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Understanding Academy Release | Football Parent",
   description:
     "Practical guidance for parents on academy release, what it means and how to support a young player after being released.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/academy-pathway/understanding-academy-release",
-  },
-  openGraph: {
-    title: "Understanding Academy Release | Football Parent",
-    description:
-      "Practical guidance for parents on academy release, what it means and how to support a young player after being released.",
-    url: "https://www.footballparent.co.uk/academy-pathway/understanding-academy-release",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Understanding Academy Release | Football Parent",
-    description:
-      "Practical guidance for parents on academy release, what it means and how to support a young player after being released.",
-  },
-};
+  path: "/academy-pathway/understanding-academy-release",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "What to Say After Football Matches | Football Parent",
   description:
-    "Practical advice for football parents on what to say after matches, helping young players feel supported and confident.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/parent-guides/what-to-say-after-football-matches",
-  },
-  openGraph: {
-    title: "What to Say After Football Matches | Football Parent",
-    description:
-      "Practical advice for football parents on what to say after matches, helping young players feel supported and confident.",
-    url: "https://www.footballparent.co.uk/parent-guides/what-to-say-after-football-matches",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "What to Say After Football Matches | Football Parent",
-    description:
-      "Practical advice for football parents on what to say after matches, helping young players feel supported and confident.",
-  },
-};
+    "Learn what parents should say after football matches to help young players build confidence, resilience and enjoyment.",
+  path: "/parent-guides/what-to-say-after-football-matches",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

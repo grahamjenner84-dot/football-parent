@@ -1,34 +1,20 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Girls Football Trials | Football Parent",
   description:
     "A parent-friendly guide to girls football trials, including what to expect, how to prepare and how academy pathways work.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/girls-football/girls-football-trials",
-  },
-  openGraph: {
-    title: "Girls Football Trials | Football Parent",
-    description:
-      "A parent-friendly guide to girls football trials, including what to expect, how to prepare and how academy pathways work.",
-    url: "https://www.footballparent.co.uk/girls-football/girls-football-trials",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Girls Football Trials | Football Parent",
-    description:
-      "A parent-friendly guide to girls football trials, including what to expect, how to prepare and how academy pathways work.",
-  },
-};
+  path: "/girls-football/girls-football-trials",
+});
 
 export default async function Page() {
-  const article = getArticleBySlug("girls-football", "girls-football-trials");
+  const article = getArticleBySlug(
+    "girls-football",
+    "girls-football-trials"
+  );
 
   return (
     <ArticleLayout

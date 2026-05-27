@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "What Happens at Academy Trials? | Football Parent",
   description:
     "A parent-friendly guide to what happens at football academy trials, including drills, matches and what young players should expect.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/academy-trials/what-happens-at-academy-trials",
-  },
-  openGraph: {
-    title: "What Happens at Academy Trials? | Football Parent",
-    description:
-      "A parent-friendly guide to what happens at football academy trials, including drills, matches and what young players should expect.",
-    url: "https://www.footballparent.co.uk/academy-trials/what-happens-at-academy-trials",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "What Happens at Academy Trials? | Football Parent",
-    description:
-      "A parent-friendly guide to what happens at football academy trials, including drills, matches and what young players should expect.",
-  },
-};
+  path: "/academy-trials/what-happens-at-academy-trials",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

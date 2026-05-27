@@ -1,31 +1,14 @@
 import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Biggest Football Parent Mistakes | Football Parent",
   description:
-    "Common mistakes football parents make, from pressure after matches to unrealistic expectations, and how to support young players better.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/parent-guides/biggest-football-parent-mistakes",
-  },
-  openGraph: {
-    title: "Biggest Football Parent Mistakes | Football Parent",
-    description:
-      "Common mistakes football parents make, from pressure after matches to unrealistic expectations, and how to support young players better.",
-    url: "https://www.footballparent.co.uk/parent-guides/biggest-football-parent-mistakes",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Biggest Football Parent Mistakes | Football Parent",
-    description:
-      "Common mistakes football parents make, from pressure after matches to unrealistic expectations, and how to support young players better.",
-  },
-};
+    "Learn the most common football parent mistakes and how to better support young players in healthy long-term development.",
+  path: "/parent-guides/biggest-football-parent-mistakes",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "What Age Do Football Academies Recruit? | Football Parent",
   description:
     "Find out what age football academies usually recruit players in the UK and what parents should realistically expect.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/academy-pathway/what-age-do-football-academies-recruit",
-  },
-  openGraph: {
-    title: "What Age Do Football Academies Recruit? | Football Parent",
-    description:
-      "Find out what age football academies usually recruit players in the UK and what parents should realistically expect.",
-    url: "https://www.footballparent.co.uk/academy-pathway/what-age-do-football-academies-recruit",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "What Age Do Football Academies Recruit? | Football Parent",
-    description:
-      "Find out what age football academies usually recruit players in the UK and what parents should realistically expect.",
-  },
-};
+  path: "/academy-pathway/what-age-do-football-academies-recruit",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

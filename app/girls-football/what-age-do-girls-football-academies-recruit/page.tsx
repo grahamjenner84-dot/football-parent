@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "What Age Do Girls Football Academies Recruit? | Football Parent",
   description:
-    "Find out what age girls football academies usually recruit players, how pathways work and what parents should realistically expect.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/girls-football/what-age-do-girls-football-academies-recruit",
-  },
-  openGraph: {
-    title: "What Age Do Girls Football Academies Recruit? | Football Parent",
-    description:
-      "Find out what age girls football academies usually recruit players, how pathways work and what parents should realistically expect.",
-    url: "https://www.footballparent.co.uk/girls-football/what-age-do-girls-football-academies-recruit",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "What Age Do Girls Football Academies Recruit? | Football Parent",
-    description:
-      "Find out what age girls football academies usually recruit players, how pathways work and what parents should realistically expect.",
-  },
-};
+    "Find out what age girls football academies usually recruit players and what parents should realistically expect.",
+  path: "/girls-football/what-age-do-girls-football-academies-recruit",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

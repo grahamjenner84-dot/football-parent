@@ -1,31 +1,14 @@
 import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Best Football Boots for Wide Feet Kids | Football Parent",
   description:
     "A parent-friendly guide to choosing comfortable football boots for children with wide feet, including fit, comfort and surface advice.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
-  },
-  openGraph: {
-    title: "Best Football Boots for Wide Feet Kids | Football Parent",
-    description:
-      "A parent-friendly guide to choosing comfortable football boots for children with wide feet, including fit, comfort and surface advice.",
-    url: "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Best Football Boots for Wide Feet Kids | Football Parent",
-    description:
-      "A parent-friendly guide to choosing comfortable football boots for children with wide feet, including fit, comfort and surface advice.",
-  },
-};
+  path: "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

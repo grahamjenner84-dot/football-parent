@@ -1,31 +1,14 @@
 import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
-  title: "Leave Grassroots Football for an Academy? | Football Parent",
+export const metadata = generateSEO({
+  title: "Should You Leave Grassroots Football for an Academy? | Football Parent",
   description:
-    "Understand whether leaving grassroots football for an academy is the right move, including benefits, risks and what parents should consider.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/parent-guides/leave-grassroots-football-for-an-academy",
-  },
-  openGraph: {
-    title: "Leave Grassroots Football for an Academy? | Football Parent",
-    description:
-      "Understand whether leaving grassroots football for an academy is the right move, including benefits, risks and what parents should consider.",
-    url: "https://www.footballparent.co.uk/parent-guides/leave-grassroots-football-for-an-academy",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Leave Grassroots Football for an Academy? | Football Parent",
-    description:
-      "Understand whether leaving grassroots football for an academy is the right move, including benefits, risks and what parents should consider.",
-  },
-};
+    "An honest guide to deciding whether a child should leave grassroots football for academy football and what parents should consider first.",
+  path: "/parent-guides/leave-grassroots-football-for-an-academy",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

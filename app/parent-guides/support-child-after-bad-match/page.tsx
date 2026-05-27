@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Support Your Child After a Bad Match | Football Parent",
   description:
-    "Learn how to support a young footballer after a bad match with calm, practical and confidence-building parent advice.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/parent-guides/support-child-after-bad-match",
-  },
-  openGraph: {
-    title: "Support Your Child After a Bad Match | Football Parent",
-    description:
-      "Learn how to support a young footballer after a bad match with calm, practical and confidence-building parent advice.",
-    url: "https://www.footballparent.co.uk/parent-guides/support-child-after-bad-match",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Support Your Child After a Bad Match | Football Parent",
-    description:
-      "Learn how to support a young footballer after a bad match with calm, practical and confidence-building parent advice.",
-  },
-};
+    "Practical advice for supporting young footballers emotionally after difficult matches, mistakes or disappointing performances.",
+  path: "/parent-guides/support-child-after-bad-match",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Football Trials Near Me | Football Parent",
   description:
     "How to find legitimate football trials in the UK, what to avoid, and what parents should realistically expect from academy opportunities.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/academy-trials/football-trials-near-me",
-  },
-  openGraph: {
-    title: "Football Trials Near Me | Football Parent",
-    description:
-      "How to find legitimate football trials in the UK, what to avoid, and what parents should realistically expect from academy opportunities.",
-    url: "https://www.footballparent.co.uk/academy-trials/football-trials-near-me",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Football Trials Near Me | Football Parent",
-    description:
-      "How to find legitimate football trials in the UK, what to avoid, and what parents should realistically expect from academy opportunities.",
-  },
-};
+  path: "/academy-trials/football-trials-near-me",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

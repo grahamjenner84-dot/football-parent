@@ -1,7 +1,6 @@
 import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
-
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({

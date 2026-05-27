@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "How Girls Football Academies Work | Football Parent",
   description:
     "Understand how girls football academies work in the UK, including pathways, trials, development and what parents should expect.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/girls-football/how-girls-football-academies-work",
-  },
-  openGraph: {
-    title: "How Girls Football Academies Work | Football Parent",
-    description:
-      "Understand how girls football academies work in the UK, including pathways, trials, development and what parents should expect.",
-    url: "https://www.footballparent.co.uk/girls-football/how-girls-football-academies-work",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "How Girls Football Academies Work | Football Parent",
-    description:
-      "Understand how girls football academies work in the UK, including pathways, trials, development and what parents should expect.",
-  },
-};
+  path: "/girls-football/how-girls-football-academies-work",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

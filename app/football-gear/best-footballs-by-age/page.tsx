@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Best Footballs by Age | Football Parent",
   description:
     "Choose the right football size by age, including guidance for young players, training sessions and match use.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
-  },
-  openGraph: {
-    title: "Best Footballs by Age | Football Parent",
-    description:
-      "Choose the right football size by age, including guidance for young players, training sessions and match use.",
-    url: "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Best Footballs by Age | Football Parent",
-    description:
-      "Choose the right football size by age, including guidance for young players, training sessions and match use.",
-  },
-};
+  path: "/football-gear/best-footballs-by-age",
+});
 
 export default async function Page() {
   const article = getArticleBySlug("football-gear", "best-footballs-by-age");

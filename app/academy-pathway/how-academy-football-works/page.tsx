@@ -1,31 +1,14 @@
 import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "How Academy Football Works | Football Parent",
   description:
     "A clear guide to how academy football works in the UK, including age groups, training, fixtures and what parents should expect.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/academy-pathway/how-academy-football-works",
-  },
-  openGraph: {
-    title: "How Academy Football Works | Football Parent",
-    description:
-      "A clear guide to how academy football works in the UK, including age groups, training, fixtures and what parents should expect.",
-    url: "https://www.footballparent.co.uk/academy-pathway/how-academy-football-works",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "How Academy Football Works | Football Parent",
-    description:
-      "A clear guide to how academy football works in the UK, including age groups, training, fixtures and what parents should expect.",
-  },
-};
+  path: "/academy-pathway/how-academy-football-works",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

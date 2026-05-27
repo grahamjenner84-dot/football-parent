@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Late Developers in Football | Football Parent",
   description:
     "Why late developers in football can still progress, and how parents can support young players who develop at different speeds.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/football-development/late-developers-in-football",
-  },
-  openGraph: {
-    title: "Late Developers in Football | Football Parent",
-    description:
-      "Why late developers in football can still progress, and how parents can support young players who develop at different speeds.",
-    url: "https://www.footballparent.co.uk/football-development/late-developers-in-football",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Late Developers in Football | Football Parent",
-    description:
-      "Why late developers in football can still progress, and how parents can support young players who develop at different speeds.",
-  },
-};
+  path: "/football-development/late-developers-in-football",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(

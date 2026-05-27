@@ -1,31 +1,14 @@
 ﻿import { getArticleBySlug } from "@/lib/content";
 import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
+import { generateSEO } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = generateSEO({
   title: "Improve Football Decision Making | Football Parent",
   description:
     "Help young footballers improve decision making, awareness and game understanding with practical parent-friendly advice.",
-  alternates: {
-    canonical:
-      "https://www.footballparent.co.uk/football-development/improve-football-decision-making",
-  },
-  openGraph: {
-    title: "Improve Football Decision Making | Football Parent",
-    description:
-      "Help young footballers improve decision making, awareness and game understanding with practical parent-friendly advice.",
-    url: "https://www.footballparent.co.uk/football-development/improve-football-decision-making",
-    siteName: "Football Parent",
-    locale: "en_GB",
-    type: "article",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Improve Football Decision Making | Football Parent",
-    description:
-      "Help young footballers improve decision making, awareness and game understanding with practical parent-friendly advice.",
-  },
-};
+  path: "/football-development/improve-football-decision-making",
+});
 
 export default async function Page() {
   const article = getArticleBySlug(
