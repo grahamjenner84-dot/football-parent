@@ -6,12 +6,14 @@ type SEOProps = {
   title: string;
   description: string;
   path: string;
+  type?: "article" | "website";
 };
 
 export function generateSEO({
   title,
   description,
   path,
+  type = "article",
 }: SEOProps): Metadata {
   const url = `${siteUrl}${path}`;
 
@@ -29,7 +31,7 @@ export function generateSEO({
       url,
       siteName: "Football Parent",
       locale: "en_GB",
-      type: "article",
+      type,
     },
 
     twitter: {
