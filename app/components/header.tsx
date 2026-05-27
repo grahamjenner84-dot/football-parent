@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 const navItems = [
@@ -20,9 +21,17 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link
           href="/"
-          className="block text-xl font-bold tracking-tight text-slate-950 no-underline"
+          scroll={true}
+          className="flex items-center no-underline"
         >
-          Football Parent
+          <Image
+            src="/logo.png"
+            alt="Football Parent"
+            width={220}
+            height={60}
+            priority
+            className="h-auto w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
@@ -30,6 +39,7 @@ export default function Header() {
             <Link
               key={item.href}
               href={item.href}
+              scroll={true}
               className="text-slate-700 no-underline transition hover:text-slate-950"
             >
               {item.label}
@@ -55,6 +65,7 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
+                scroll={true}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-3 py-3 text-sm font-medium text-slate-800 no-underline transition hover:bg-slate-100 hover:text-slate-950"
               >
