@@ -3,8 +3,27 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "FG vs AG Football Boots for Kids | Football Parent",
-  description: "Understanding different boot types for different playing surfaces.",
+  title: "AG vs FG Football Boots Explained | Football Parent",
+  description:
+    "Understand the difference between AG and FG football boots, which surfaces they are designed for, and what parents should know before buying.",
+  alternates: {
+    canonical: "https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots",
+  },
+  openGraph: {
+    title: "AG vs FG Football Boots Explained | Football Parent",
+    description:
+      "Understand the difference between AG and FG football boots, which surfaces they are designed for, and what parents should know before buying.",
+    url: "https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AG vs FG Football Boots Explained | Football Parent",
+    description:
+      "Understand the difference between AG and FG football boots, which surfaces they are designed for, and what parents should know before buying.",
+  },
 };
 
 export default async function Page() {

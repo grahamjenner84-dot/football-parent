@@ -3,9 +3,28 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "Understanding Academy Release In Football | Football Parent",
+  title: "Understanding Academy Release | Football Parent",
   description:
-    "An honest guide for football parents on academy release — what it means, how clubs handle it, and how to support young players emotionally after being released.",
+    "Practical guidance for parents on academy release, what it means and how to support a young player after being released.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/academy-pathway/understanding-academy-release",
+  },
+  openGraph: {
+    title: "Understanding Academy Release | Football Parent",
+    description:
+      "Practical guidance for parents on academy release, what it means and how to support a young player after being released.",
+    url: "https://www.footballparent.co.uk/academy-pathway/understanding-academy-release",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Understanding Academy Release | Football Parent",
+    description:
+      "Practical guidance for parents on academy release, what it means and how to support a young player after being released.",
+  },
 };
 
 export default async function Page() {

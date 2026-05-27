@@ -4,11 +4,34 @@ import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
   title: "Football Trials Near Me | Football Parent",
-  description: "Guide to academy recruitment, open trials, and avoiding scams.",
+  description:
+    "How to find legitimate football trials in the UK, what to avoid, and what parents should realistically expect from academy opportunities.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/academy-trials/football-trials-near-me",
+  },
+  openGraph: {
+    title: "Football Trials Near Me | Football Parent",
+    description:
+      "How to find legitimate football trials in the UK, what to avoid, and what parents should realistically expect from academy opportunities.",
+    url: "https://www.footballparent.co.uk/academy-trials/football-trials-near-me",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Football Trials Near Me | Football Parent",
+    description:
+      "How to find legitimate football trials in the UK, what to avoid, and what parents should realistically expect from academy opportunities.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("academy-trials", "football-trials-near-me");
+  const article = getArticleBySlug(
+    "academy-trials",
+    "football-trials-near-me"
+  );
 
   return (
     <ArticleLayout

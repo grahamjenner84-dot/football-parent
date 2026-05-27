@@ -3,12 +3,35 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "Why Some Kids Develop Later In Football | Football Parent",
-  description: "Understanding late development in football and why it's not uncommon.",
+  title: "Late Developers in Football | Football Parent",
+  description:
+    "Why late developers in football can still progress, and how parents can support young players who develop at different speeds.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/football-development/late-developers-in-football",
+  },
+  openGraph: {
+    title: "Late Developers in Football | Football Parent",
+    description:
+      "Why late developers in football can still progress, and how parents can support young players who develop at different speeds.",
+    url: "https://www.footballparent.co.uk/football-development/late-developers-in-football",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Late Developers in Football | Football Parent",
+    description:
+      "Why late developers in football can still progress, and how parents can support young players who develop at different speeds.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("football-development", "late-developers-in-football");
+  const article = getArticleBySlug(
+    "football-development",
+    "late-developers-in-football"
+  );
 
   return (
     <ArticleLayout

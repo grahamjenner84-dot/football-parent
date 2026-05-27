@@ -3,12 +3,35 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "How To Build Confidence In Young Footballers | Football Parent",
-  description: "Strategies for building and maintaining confidence in young football players.",
+  title: "Build Confidence in Young Footballers | Football Parent",
+  description:
+    "Practical ways parents can help young footballers build confidence, recover from mistakes and enjoy their development.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/football-development/build-confidence-young-footballers",
+  },
+  openGraph: {
+    title: "Build Confidence in Young Footballers | Football Parent",
+    description:
+      "Practical ways parents can help young footballers build confidence, recover from mistakes and enjoy their development.",
+    url: "https://www.footballparent.co.uk/football-development/build-confidence-young-footballers",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Build Confidence in Young Footballers | Football Parent",
+    description:
+      "Practical ways parents can help young footballers build confidence, recover from mistakes and enjoy their development.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("football-development", "build-confidence-young-footballers");
+  const article = getArticleBySlug(
+    "football-development",
+    "build-confidence-young-footballers"
+  );
 
   return (
     <ArticleLayout

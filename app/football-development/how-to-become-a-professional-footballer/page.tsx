@@ -3,12 +3,38 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "How to Become a Professional Footballer | Football Parent",
-  description: "Real pathways into professional football and what parents should know.",
+  title:
+    "How to Become a Professional Footballer | Football Parent",
+  description:
+    "A realistic guide to becoming a professional footballer, including development pathways, academy football and long-term progression.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer",
+  },
+  openGraph: {
+    title:
+      "How to Become a Professional Footballer | Football Parent",
+    description:
+      "A realistic guide to becoming a professional footballer, including development pathways, academy football and long-term progression.",
+    url: "https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "How to Become a Professional Footballer | Football Parent",
+    description:
+      "A realistic guide to becoming a professional footballer, including development pathways, academy football and long-term progression.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("football-development", "how-to-become-a-professional-footballer");
+  const article = getArticleBySlug(
+    "football-development",
+    "how-to-become-a-professional-footballer"
+  );
 
   return (
     <ArticleLayout

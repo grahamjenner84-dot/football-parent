@@ -3,12 +3,35 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "How To Improve Football Decision Making | Football Parent",
-  description: "How to help young players think faster and better on the pitch.",
+  title: "Improve Football Decision Making | Football Parent",
+  description:
+    "Help young footballers improve decision making, awareness and game understanding with practical parent-friendly advice.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/football-development/improve-football-decision-making",
+  },
+  openGraph: {
+    title: "Improve Football Decision Making | Football Parent",
+    description:
+      "Help young footballers improve decision making, awareness and game understanding with practical parent-friendly advice.",
+    url: "https://www.footballparent.co.uk/football-development/improve-football-decision-making",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Improve Football Decision Making | Football Parent",
+    description:
+      "Help young footballers improve decision making, awareness and game understanding with practical parent-friendly advice.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("football-development", "improve-football-decision-making");
+  const article = getArticleBySlug(
+    "football-development",
+    "improve-football-decision-making"
+  );
 
   return (
     <ArticleLayout

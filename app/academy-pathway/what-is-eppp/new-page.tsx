@@ -6,6 +6,24 @@ export const metadata = {
   title: "What Is EPPP? | Football Parent",
   description:
     "A beginner's guide to the Elite Player Performance Plan (EPPP), how it changed youth football in England, and what it means for your child's development.",
+  alternates: {
+    canonical: "https://www.footballparent.co.uk/academy-pathway/what-is-eppp",
+  },
+  openGraph: {
+    title: "What Is EPPP? | Football Parent",
+    description:
+      "A beginner's guide to the Elite Player Performance Plan (EPPP), how it changed youth football in England, and what it means for your child's development.",
+    url: "https://www.footballparent.co.uk/academy-pathway/what-is-eppp",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "What Is EPPP? | Football Parent",
+    description:
+      "A beginner's guide to the Elite Player Performance Plan (EPPP), how it changed youth football in England, and what it means for your child's development.",
+  },
 };
 
 export default async function Page() {

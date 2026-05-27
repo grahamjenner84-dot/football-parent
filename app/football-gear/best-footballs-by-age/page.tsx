@@ -3,8 +3,28 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "Best Footballs For Different Ages | Football Parent",
-  description: "Guide to choosing the right football size and type for different ages.",
+  title: "Best Footballs by Age | Football Parent",
+  description:
+    "Choose the right football size by age, including guidance for young players, training sessions and match use.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
+  },
+  openGraph: {
+    title: "Best Footballs by Age | Football Parent",
+    description:
+      "Choose the right football size by age, including guidance for young players, training sessions and match use.",
+    url: "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Footballs by Age | Football Parent",
+    description:
+      "Choose the right football size by age, including guidance for young players, training sessions and match use.",
+  },
 };
 
 export default async function Page() {

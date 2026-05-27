@@ -3,9 +3,28 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "The Biggest Football Parent Mistakes | Football Parent",
+  title: "Biggest Football Parent Mistakes | Football Parent",
   description:
-    "Common mistakes football parents make — and how to better support young players long-term.",
+    "Common mistakes football parents make, from pressure after matches to unrealistic expectations, and how to support young players better.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/parent-guides/biggest-football-parent-mistakes",
+  },
+  openGraph: {
+    title: "Biggest Football Parent Mistakes | Football Parent",
+    description:
+      "Common mistakes football parents make, from pressure after matches to unrealistic expectations, and how to support young players better.",
+    url: "https://www.footballparent.co.uk/parent-guides/biggest-football-parent-mistakes",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Biggest Football Parent Mistakes | Football Parent",
+    description:
+      "Common mistakes football parents make, from pressure after matches to unrealistic expectations, and how to support young players better.",
+  },
 };
 
 export default async function Page() {

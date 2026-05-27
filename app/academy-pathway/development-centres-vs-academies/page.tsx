@@ -4,11 +4,34 @@ import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
   title: "Development Centres vs Academies | Football Parent",
-  description: "What is the difference between academies and development centres?",
+  description:
+    "Learn the difference between football development centres and academies, and what each option means for young players.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies",
+  },
+  openGraph: {
+    title: "Development Centres vs Academies | Football Parent",
+    description:
+      "Learn the difference between football development centres and academies, and what each option means for young players.",
+    url: "https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Development Centres vs Academies | Football Parent",
+    description:
+      "Learn the difference between football development centres and academies, and what each option means for young players.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("academy-pathway", "development-centres-vs-academies");
+  const article = getArticleBySlug(
+    "academy-pathway",
+    "development-centres-vs-academies"
+  );
 
   return (
     <ArticleLayout

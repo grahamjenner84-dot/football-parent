@@ -3,12 +3,35 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "How Academy Football Works In The UK | Football Parent",
-  description: "A guide to understanding the EPPP framework, academy phases, what training looks like at different levels, and how the academy system actually operates.",
+  title: "How Academy Football Works | Football Parent",
+  description:
+    "A clear guide to how academy football works in the UK, including age groups, training, fixtures and what parents should expect.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/academy-pathway/how-academy-football-works",
+  },
+  openGraph: {
+    title: "How Academy Football Works | Football Parent",
+    description:
+      "A clear guide to how academy football works in the UK, including age groups, training, fixtures and what parents should expect.",
+    url: "https://www.footballparent.co.uk/academy-pathway/how-academy-football-works",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "How Academy Football Works | Football Parent",
+    description:
+      "A clear guide to how academy football works in the UK, including age groups, training, fixtures and what parents should expect.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("academy-pathway", "how-academy-football-works");
+  const article = getArticleBySlug(
+    "academy-pathway",
+    "how-academy-football-works"
+  );
 
   return (
     <ArticleLayout

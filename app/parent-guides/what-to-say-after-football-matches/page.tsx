@@ -3,12 +3,35 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 
 export const metadata = {
-  title: "What Should Parents Say After Football Matches? | Football Parent",
-  description: "Guidance on what parents should and shouldn't say to their children after matches.",
+  title: "What to Say After Football Matches | Football Parent",
+  description:
+    "Practical advice for football parents on what to say after matches, helping young players feel supported and confident.",
+  alternates: {
+    canonical:
+      "https://www.footballparent.co.uk/parent-guides/what-to-say-after-football-matches",
+  },
+  openGraph: {
+    title: "What to Say After Football Matches | Football Parent",
+    description:
+      "Practical advice for football parents on what to say after matches, helping young players feel supported and confident.",
+    url: "https://www.footballparent.co.uk/parent-guides/what-to-say-after-football-matches",
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "What to Say After Football Matches | Football Parent",
+    description:
+      "Practical advice for football parents on what to say after matches, helping young players feel supported and confident.",
+  },
 };
 
 export default async function Page() {
-  const article = getArticleBySlug("parent-guides", "what-to-say-after-football-matches");
+  const article = getArticleBySlug(
+    "parent-guides",
+    "what-to-say-after-football-matches"
+  );
 
   return (
     <ArticleLayout
