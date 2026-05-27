@@ -1,4 +1,13 @@
 import CategoryPage from "../components/category-page";
+import { generateSEO } from "@/lib/seo";
+
+export const metadata = generateSEO({
+  title: "Girls Football | Football Parent",
+  description:
+    "Guidance for parents navigating girls football, academy pathways, trials and long-term player development in the UK.",
+  path: "/girls-football",
+  type: "website",
+});
 
 export default function GirlsFootballPage() {
   return (

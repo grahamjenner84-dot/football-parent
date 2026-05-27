@@ -1,4 +1,13 @@
 import CategoryPage from "../components/category-page";
+import { generateSEO } from "@/lib/seo";
+
+export const metadata = generateSEO({
+  title: "Parent Guides | Football Parent",
+  description:
+    "Honest football parenting advice covering confidence, matchday behaviour, academy decisions and supporting young players.",
+  path: "/parent-guides",
+  type: "website",
+});
 
 export default function ParentGuidesPage() {
   return (

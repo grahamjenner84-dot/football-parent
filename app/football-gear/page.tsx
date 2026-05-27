@@ -1,4 +1,13 @@
 import CategoryPage from "../components/category-page";
+import { generateSEO } from "@/lib/seo";
+
+export const metadata = generateSEO({
+  title: "Football Gear | Football Parent",
+  description:
+    "Parent-friendly football gear advice including boots, shin pads, footballs and training equipment for young players.",
+  path: "/football-gear",
+  type: "website",
+});
 
 export default function FootballGearPage() {
   return (

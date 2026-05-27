@@ -1,4 +1,13 @@
 import CategoryPage from "../components/category-page";
+import { generateSEO } from "@/lib/seo";
+
+export const metadata = generateSEO({
+  title: "Academy Trials | Football Parent",
+  description:
+    "Advice for parents navigating football academy trials, scouts, recruitment and what coaches look for in young players.",
+  path: "/academy-trials",
+  type: "website",
+});
 
 export default function AcademyTrialsPage() {
   return (
