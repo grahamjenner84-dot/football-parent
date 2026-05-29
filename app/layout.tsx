@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Football Parent",
   description:
     "Honest guidance for parents navigating UK football development and academy pathways.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -27,6 +30,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Football Parent",
+    url: "https://www.footballparent.co.uk",
+    logo: "https://www.footballparent.co.uk/logo.png",
+  };
+
   return (
     <html
       lang="en"
@@ -42,6 +53,14 @@ export default function RootLayout({
         </main>
 
         <Footer />
+
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
 
         {/* Google Analytics */}
         <Script
