@@ -7,9 +7,6 @@ export default function Footer() {
           <a href="https://www.tiktok.com/@footballparentuk" className="hover:text-black">
             TikTok
           </a>
-          <a href="https://www.instagram.com/footballparentuk/?hl=en" className="hover:text-black">
-            Instagram
-          </a>
           <a href="https://www.youtube.com/channel/UCLxRWA0LswKxL0vZuQfrsmA" className="hover:text-black">
             YouTube
           </a>

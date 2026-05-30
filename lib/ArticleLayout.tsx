@@ -108,7 +108,14 @@ export default function ArticleLayout({
           <div className="max-w-4xl">
             <div className="bg-gray-50 rounded-lg p-8 lg:p-10">
               <div className="flex gap-6 mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex-shrink-0"></div>
+                <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-white border border-gray-200">
+                  <img
+                    src="/logo.png"
+                    alt="Football Parent"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
                 <div className="flex-1">
                   <h3 className="text-lg font-bold text-gray-900 mb-2">
                     Football Parent
