@@ -40,6 +40,12 @@ export default function AcademyTrialsPage() {
           description:
             "Learn the technical, physical and psychological traits coaches value.",
         },
+         {
+          title: "How Football Clubs Recruit Young Players",
+          href: "/academy-trials/how-football-clubs-recruit-young-players",
+          description:
+            "Learn how football clubs identify and recruit young talent, and what parents should know about the recruitment process.",
+        },
       ]}
     />
   );

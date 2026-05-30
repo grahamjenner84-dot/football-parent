@@ -20,12 +20,20 @@ const routes = [
   '/academy-pathway/understanding-academy-release',
   '/academy-pathway/what-age-do-football-academies-recruit',
   '/academy-pathway/what-is-eppp',
+  '/academy-pathway/uk-football-development-centres-explained',
+  '/academy-pathway/pdc-vs-ptc-vs-rtc-explained',
+  '/academy-pathway/how-players-progress-through-football-development-centres',
+  '/academy-pathway/chelsea-fc-development-centre-guide',
+  '/academy-pathway/arsenal-fc-development-centre-guide',
+  '/academy-pathway/football-development-centres-in-london',
+  '/academy-pathway/premier-league-development-centres-guide',
 
   // Academy Trials
   '/academy-trials/football-trials-near-me',
   '/academy-trials/how-football-scouts-identify-players',
   '/academy-trials/what-do-academy-coaches-look-for',
   '/academy-trials/what-happens-at-academy-trials',
+  '/academy-trials/how-football-clubs-recruit-young-players',
 
   // Football Development
   '/football-development/build-confidence-young-footballers',
@@ -50,12 +58,14 @@ const routes = [
   '/girls-football/how-girls-football-academies-work',
   '/girls-football/late-developers-in-girls-football',
   '/girls-football/what-age-do-girls-football-academies-recruit',
+  '/girls-football/girls-rtcs-explained',
 
   // Parent Guides
   '/parent-guides/biggest-football-parent-mistakes',
   '/parent-guides/leave-grassroots-football-for-an-academy',
   '/parent-guides/support-child-after-bad-match',
   '/parent-guides/what-to-say-after-football-matches',
+  '/parent-guides/are-football-development-centres-worth-it',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

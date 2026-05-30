@@ -64,6 +64,36 @@ export default function AcademyPathwayPage() {
           description:
             "Understand the differences between PDC, PTC, and RTC in UK football development  .",
         },
+        {
+          title: "How Players Progress Through Football Development Centres",
+          href: "/academy-pathway/how-players-progress-through-football-development-centres",
+          description:
+            "Understand how young players advance through different stages of football development centres and academies.",
+        },
+         {
+          title: "How Chelsea FC's Development Centre Works",
+          href: "/academy-pathway/chelsea-fc-development-centre-guide",
+          description:
+            "Understand Chelsea FC's development centre and how it supports young footballers.",
+        },
+         {
+          title: "Premier League Development Centres List",
+          href: "/academy-pathway/premier-league-development-centres-list",
+          description:
+            "A comprehensive list of Premier League development centres and how they support young footballers.",
+        },
+          {
+          title: "How Arsenal FC's Development Centre Works",
+          href: "/academy-pathway/arsenal-development-centre-guide",
+          description:
+            "Understand Arsenal FC's development centre and how it supports young footballers.",
+        },
+         {
+          title: "Football Development Centres in London",
+          href: "/academy-pathway/football-development-centres-in-london",
+          description:
+            "A guide to football development centres in London and how they support young players in their journey.",
+        },
       ]}
     />
   );
