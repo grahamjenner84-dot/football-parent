@@ -7,7 +7,7 @@ export const metadata = generateSEO({
   title: "UK Football Development Centres Explained | Football Parent",
   description:
     "A clear guide to how football development centres work in the UK, including age groups, training, fixtures and what parents should expect.",
-  path: "/uk-football-development-centres-explained",
+  path: "/academy-pathway/uk-football-development-centres-explained",
 });
 
 export default async function Page() {
