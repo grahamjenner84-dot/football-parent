@@ -7,7 +7,7 @@ export const metadata = generateSEO({
   title: "PDC vs PTC vs RTC Explained | Football Parent",
   description:
     "A clear guide to understanding the differences between PDC, PTC, and RTC in UK football development.",
-  path: "/pdc-vs-ptc-vs-rtc-explained",
+  path: "/academy-pathway/pdc-vs-ptc-vs-rtc-explained",
 });
 
 export default async function Page() {

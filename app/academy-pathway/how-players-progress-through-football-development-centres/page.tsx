@@ -4,10 +4,10 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "PDC vs PTC vs RTC Explained | Football Parent",
+  title: "How Players Progress Through Football Development Centres | Football Parent",
   description:
-    "A clear guide to understanding the differences between PDC, PTC, and RTC in UK football development.",
-  path: "/how-players-progress-through-football-development-centres",
+    "A clear guide to understanding the progression paths for players in UK football development centres.",
+  path: "/academy-pathway/how-players-progress-through-football-development-centres",
 });
 
 export default async function Page() {
