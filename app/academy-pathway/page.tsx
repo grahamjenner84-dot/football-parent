@@ -52,6 +52,18 @@ export default function AcademyPathwayPage() {
           description:
             "Practical support for parents dealing with academy release decisions.",
         },
+        {
+          title: "Uk Football Development Centres Explained",
+          href: "/academy-pathway/uk-football-development-centres-explained",
+          description:
+            "Understand how football development centres work in the UK.",
+        },
+         {
+          title: "PDC vs PTC vs RTC Explained",
+          href: "/academy-pathway/pdc-vs-ptc-vs-rtc-explained",
+          description:
+            "Understand the differences between PDC, PTC, and RTC in UK football development  .",
+        },
       ]}
     />
   );

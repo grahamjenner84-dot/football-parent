@@ -40,6 +40,12 @@ export default function ParentGuidesPage() {
           description:
             "Factors parents should consider before making the move.",
         },
+          {
+          title: "Are Football Development Centres Worth It?",
+          href: "/parent-guides/are-football-development-centres-worth-it",
+          description:
+            "Weighing up the pros and cons of football development centres.",
+        },
       ]}
     />
   );

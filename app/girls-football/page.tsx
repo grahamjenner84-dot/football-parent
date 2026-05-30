@@ -46,7 +46,13 @@ export default function GirlsFootballPage() {
           description:
             "A guide to recruitment ages and development stages.",
         },
-      ]}
+         {
+          title: "Girls RTCs Explained ",
+          href: "/girls-football/girls-rtcs-explained",
+          description:
+            "A guide to Regional Talent Clubs (RTCs) and how they fit into the girls football development pathway.",
+        },
+  ]}
     />
   );
 }
