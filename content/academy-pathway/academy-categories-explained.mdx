@@ -34,147 +34,95 @@ relatedArticles:
 
 ## At a Glance: Category Comparison
 
-<div className="space-y-5 my-10">
+<div className="grid gap-6 my-10">
 
-  <div className="rounded-3xl border border-red-200 bg-red-50 p-6">
-    <div className="flex gap-5">
-
-      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-red-600 text-white font-bold text-lg">
+  <div className="rounded-3xl border border-red-200 bg-gradient-to-br from-red-50 to-white p-8 shadow-sm">
+    <div className="flex items-center gap-4 mb-5">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-600 text-white font-bold">
         1
       </div>
-
       <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+        <h3 className="text-2xl font-bold text-gray-900">
           Category 1
         </h3>
+        <p className="text-sm text-gray-600">
+          Typically Premier League and leading Championship academies
+        </p>
+      </div>
+    </div>
 
-        <div className="space-y-2 text-gray-700">
-          <div>
-            <strong>Typical clubs:</strong> Premier League / Top Championship
-          </div>
-
-          <div>
-            <strong>U9-U11 hours:</strong> Highest permitted levels
-          </div>
-
-          <div>
-            <strong>Travel demands:</strong> Highest
-          </div>
-
-          <div>
-            <strong>Squad competition:</strong> Very high
-          </div>
+    <div className="grid gap-3 sm:grid-cols-3">
+      <div className="rounded-xl bg-white p-4 border border-red-100">
+        <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+          Training
+        </div>
+        <div className="font-semibold text-gray-900">
+          Highest permitted levels
         </div>
       </div>
 
+      <div className="rounded-xl bg-white p-4 border border-red-100">
+        <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+          Travel
+        </div>
+        <div className="font-semibold text-gray-900">
+          Highest demands
+        </div>
+      </div>
+
+      <div className="rounded-xl bg-white p-4 border border-red-100">
+        <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+          Competition
+        </div>
+        <div className="font-semibold text-gray-900">
+          Very high
+        </div>
+      </div>
     </div>
   </div>
 
-
-
-  <div className="rounded-3xl border border-amber-200 bg-amber-50 p-6">
-    <div className="flex gap-5">
-
-      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-amber-500 text-white font-bold text-lg">
+  <div className="rounded-3xl border border-amber-200 bg-gradient-to-br from-amber-50 to-white p-8 shadow-sm">
+    <div className="flex items-center gap-4 mb-5">
+      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-amber-500 text-white font-bold">
         2
       </div>
-
       <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+        <h3 className="text-2xl font-bold text-gray-900">
           Category 2
         </h3>
-
-        <div className="space-y-2 text-gray-700">
-          <div>
-            <strong>Typical clubs:</strong> Championship
-          </div>
-
-          <div>
-            <strong>U9-U11 hours:</strong> Moderate
-          </div>
-
-          <div>
-            <strong>Travel demands:</strong> Moderate to high
-          </div>
-
-          <div>
-            <strong>Squad competition:</strong> High
-          </div>
-        </div>
+        <p className="text-sm text-gray-600">
+          Typically Championship academies
+        </p>
       </div>
-
     </div>
-  </div>
 
-
-
-  <div className="rounded-3xl border border-blue-200 bg-blue-50 p-6">
-    <div className="flex gap-5">
-
-      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-blue-600 text-white font-bold text-lg">
-        3
-      </div>
-
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          Category 3
-        </h3>
-
-        <div className="space-y-2 text-gray-700">
-          <div>
-            <strong>Typical clubs:</strong> Championship / League One
-          </div>
-
-          <div>
-            <strong>U9-U11 hours:</strong> Lower
-          </div>
-
-          <div>
-            <strong>Travel demands:</strong> Moderate
-          </div>
-
-          <div>
-            <strong>Squad competition:</strong> Moderate
-          </div>
+    <div className="grid gap-3 sm:grid-cols-3">
+      <div className="rounded-xl bg-white p-4 border border-amber-100">
+        <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+          Training
+        </div>
+        <div className="font-semibold text-gray-900">
+          Moderate
         </div>
       </div>
 
-    </div>
-  </div>
-
-
-
-  <div className="rounded-3xl border border-emerald-200 bg-emerald-50 p-6">
-    <div className="flex gap-5">
-
-      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white font-bold text-lg">
-        4
-      </div>
-
-      <div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          Category 4
-        </h3>
-
-        <div className="space-y-2 text-gray-700">
-          <div>
-            <strong>Typical clubs:</strong> League Two
-          </div>
-
-          <div>
-            <strong>U9-U11 hours:</strong> Minimum
-          </div>
-
-          <div>
-            <strong>Travel demands:</strong> Lower
-          </div>
-
-          <div>
-            <strong>Squad competition:</strong> Lower
-          </div>
+      <div className="rounded-xl bg-white p-4 border border-amber-100">
+        <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+          Travel
+        </div>
+        <div className="font-semibold text-gray-900">
+          Moderate to high
         </div>
       </div>
 
+      <div className="rounded-xl bg-white p-4 border border-amber-100">
+        <div className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+          Competition
+        </div>
+        <div className="font-semibold text-gray-900">
+          High
+        </div>
+      </div>
     </div>
   </div>
 
@@ -262,9 +210,7 @@ Yes. Category 3 academies can and do produce professional and Premier League pla
 
 ## Sources
 
--**[Premier League Elite Player Performance Plan (EPPP)](https://www.premierleague.com/en/footballandcommunity/youth-development/eppp)**  
-  Overview of the EPPP on the Premier League site.
-
+-**[Premier League Elite Player Performance Plan (EPPP)](https://www.premierleague.com/en/footballandcommunity/youth-development/eppp)**  Overview of the EPPP on the Premier League site.
 
 ## Related Articles
 
