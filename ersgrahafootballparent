@@ -1,0 +1,61 @@
+[1mdiff --git a/lib/ArticleLayout.tsx b/lib/ArticleLayout.tsx[m
+[1mindex 5187c80..0a9e77f 100644[m
+[1m--- a/lib/ArticleLayout.tsx[m
+[1m+++ b/lib/ArticleLayout.tsx[m
+[36m@@ -38,12 +38,22 @@[m [mfunction createSchemaId(text: string) {[m
+     .replace(/\s+/g, "-");[m
+ }[m
+ [m
+[31m-function formatDate(date: string) {[m
+[32m+[m[32mfunction formatDate(date?: string) {[m
+[32m+[m[32m  if (!date) {[m
+[32m+[m[32m    return null;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  const parsedDate = new Date(date);[m
+[32m+[m
+[32m+[m[32m  if (Number.isNaN(parsedDate.getTime())) {[m
+[32m+[m[32m    return null;[m
+[32m+[m[32m  }[m
+[32m+[m
+   return new Intl.DateTimeFormat("en-GB", {[m
+     day: "numeric",[m
+     month: "long",[m
+     year: "numeric",[m
+[31m-  }).format(new Date(date));[m
+[32m+[m[32m  }).format(parsedDate);[m
+ }[m
+ [m
+ export default function ArticleLayout({[m
+[36m@@ -181,19 +191,19 @@[m [mexport default function ArticleLayout({[m
+               </Link>[m
+             </div>[m
+ [m
+[31m-            {datePublished && ([m
+[31m-              <>[m
+[31m-                <span className="text-gray-300">•</span>[m
+[31m-                <span>Published {formatDate(datePublished)}</span>[m
+[31m-              </>[m
+[31m-            )}[m
+[32m+[m[32m            {formatDate(datePublished) && ([m
+[32m+[m[32m  <>[m
+[32m+[m[32m    <span className="text-gray-300">•</span>[m
+[32m+[m[32m    <span>Published {formatDate(datePublished)}</span>[m
+[32m+[m[32m  </>[m
+[32m+[m[32m)}[m
+ [m
+[31m-            {dateModified && ([m
+[31m-              <>[m
+[31m-                <span className="text-gray-300">•</span>[m
+[31m-                <span>Updated {formatDate(dateModified)}</span>[m
+[31m-              </>[m
+[31m-            )}[m
+[32m+[m[32m            {formatDate(dateModified) && ([m
+[32m+[m[32m  <>[m
+[32m+[m[32m    <span className="text-gray-300">•</span>[m
+[32m+[m[32m    <span>Updated {formatDate(dateModified)}</span>[m
+[32m+[m[32m  </>[m
+[32m+[m[32m)}[m
+ [m
+             <span className="text-gray-300">•</span>[m
+             <span>{readTime} min read</span>[m

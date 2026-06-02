@@ -38,12 +38,22 @@ function createSchemaId(text: string) {
     .replace(/\s+/g, "-");
 }
 
-function formatDate(date: string) {
+function formatDate(date?: string) {
+  if (!date) {
+    return null;
+  }
+
+  const parsedDate = new Date(date);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return null;
+  }
+
   return new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(new Date(date));
+  }).format(parsedDate);
 }
 
 export default function ArticleLayout({
@@ -181,19 +191,19 @@ export default function ArticleLayout({
               </Link>
             </div>
 
-            {datePublished && (
-              <>
-                <span className="text-gray-300">•</span>
-                <span>Published {formatDate(datePublished)}</span>
-              </>
-            )}
+            {formatDate(datePublished) && (
+  <>
+    <span className="text-gray-300">•</span>
+    <span>Published {formatDate(datePublished)}</span>
+  </>
+)}
 
-            {dateModified && (
-              <>
-                <span className="text-gray-300">•</span>
-                <span>Updated {formatDate(dateModified)}</span>
-              </>
-            )}
+            {formatDate(dateModified) && (
+  <>
+    <span className="text-gray-300">•</span>
+    <span>Updated {formatDate(dateModified)}</span>
+  </>
+)}
 
             <span className="text-gray-300">•</span>
             <span>{readTime} min read</span>
