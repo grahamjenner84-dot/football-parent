@@ -19,6 +19,8 @@ export default async function Page() {
   return (
     <ArticleLayout
       title={article.frontmatter.title}
+      datePublished={article.frontmatter.date}
+      path="/parent-guides/leave-grassroots-football-for-an-academy"
       description={article.frontmatter.description}
       category={article.frontmatter.category}
       categoryUrl={article.frontmatter.categoryUrl}

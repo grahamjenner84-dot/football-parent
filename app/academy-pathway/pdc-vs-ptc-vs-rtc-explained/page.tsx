@@ -19,6 +19,8 @@ export default async function Page() {
   return (
     <ArticleLayout
       title={article.frontmatter.title}
+      datePublished={article.frontmatter.date}
+      path="/academy-pathway/pdc-vs-ptc-vs-rtc-explained"
       description={article.frontmatter.description}
       category={article.frontmatter.category}
       categoryUrl={article.frontmatter.categoryUrl}

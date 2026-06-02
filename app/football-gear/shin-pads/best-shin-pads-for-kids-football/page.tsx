@@ -19,6 +19,8 @@ export default async function Page() {
   return (
     <ArticleLayout
       title={article.frontmatter.title}
+      datePublished={article.frontmatter.date}
+      path="/football-gear/shin-pads/best-shin-pads-for-kids-football"
       description={article.frontmatter.description}
       category={article.frontmatter.category}
       categoryUrl={article.frontmatter.categoryUrl}

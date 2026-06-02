@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 
 interface ArticleLayoutProps {
   title: string;
@@ -7,6 +8,9 @@ interface ArticleLayoutProps {
   categoryUrl: string;
   readTime: number;
   sections: { id: string; title: string }[];
+  path?: string;
+  datePublished?: string;
+  dateModified?: string;
   relatedArticles?: {
     href: string;
     title: string;
@@ -16,6 +20,32 @@ interface ArticleLayoutProps {
   children: React.ReactNode;
 }
 
+function createAbsoluteUrl(path: string) {
+  if (path.startsWith("https://")) {
+    return path;
+  }
+
+  return `https://www.footballparent.co.uk${
+    path.startsWith("/") ? path : `/${path}`
+  }`;
+}
+
+function createSchemaId(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+function formatDate(date: string) {
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
 export default function ArticleLayout({
   title,
   description,
@@ -23,10 +53,93 @@ export default function ArticleLayout({
   categoryUrl,
   readTime,
   sections,
+  path,
+  datePublished,
+  dateModified,
   children,
 }: ArticleLayoutProps) {
+  const articleUrl = path ? createAbsoluteUrl(path) : undefined;
+  const categoryAbsoluteUrl = createAbsoluteUrl(categoryUrl);
+  const schemaId = createSchemaId(title);
+
+  const breadcrumbSchema = articleUrl
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://www.footballparent.co.uk",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: category,
+            item: categoryAbsoluteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: title,
+            item: articleUrl,
+          },
+        ],
+      }
+    : null;
+
+  const articleSchema = articleUrl
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: title,
+        description,
+        author: {
+          "@type": "Person",
+          name: "Graham Jenner",
+          url: "https://www.footballparent.co.uk/author/graham-jenner",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Football Parent",
+          url: "https://www.footballparent.co.uk",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://www.footballparent.co.uk/logo.png",
+          },
+        },
+        ...(datePublished ? { datePublished } : {}),
+        ...(dateModified ? { dateModified } : {}),
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": articleUrl,
+        },
+      }
+    : null;
+
   return (
     <main className="min-h-screen bg-white">
+      {articleSchema && (
+        <Script
+          id={`article-schema-${schemaId}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(articleSchema),
+          }}
+        />
+      )}
+
+      {breadcrumbSchema && (
+        <Script
+          id={`breadcrumb-schema-${schemaId}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema),
+          }}
+        />
+      )}
+
       <div className="bg-gray-50 border-b border-gray-200">
         <nav className="max-w-7xl mx-auto px-6 py-4 text-sm">
           <div className="flex items-center gap-2 text-gray-600">
@@ -60,12 +173,28 @@ export default function ArticleLayout({
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 pt-6 border-t border-gray-200">
             <div className="flex items-center gap-2">
               <span className="text-gray-400">By</span>
-              <span className="font-medium text-gray-700">
-                Football Parent
-              </span>
+              <Link
+                href="/author/graham-jenner"
+                className="font-medium text-gray-700 hover:text-gray-900"
+              >
+                Graham Jenner
+              </Link>
             </div>
-            <span className="text-gray-300">•</span>
-            <span>Updated May 2026</span>
+
+            {datePublished && (
+              <>
+                <span className="text-gray-300">•</span>
+                <span>Published {formatDate(datePublished)}</span>
+              </>
+            )}
+
+            {dateModified && (
+              <>
+                <span className="text-gray-300">•</span>
+                <span>Updated {formatDate(dateModified)}</span>
+              </>
+            )}
+
             <span className="text-gray-300">•</span>
             <span>{readTime} min read</span>
           </div>
@@ -117,12 +246,24 @@ export default function ArticleLayout({
                 </div>
 
                 <div className="flex-1">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
+                    Written by
+                  </p>
+
                   <h3 className="text-lg font-bold text-gray-900 mb-2">
-                    Football Parent
+                    <Link
+                      href="/author/graham-jenner"
+                      className="hover:text-gray-700"
+                    >
+                      Graham Jenner
+                    </Link>
                   </h3>
+
                   <p className="text-gray-600">
-                    Independent guidance for parents navigating the youth
-                    football system in the UK.
+                    Graham Jenner is the founder of Football Parent. As a
+                    football parent and grassroots coach, he provides
+                    independent guidance on academies, development centres,
+                    trials and youth football pathways in the UK.
                   </p>
                 </div>
               </div>

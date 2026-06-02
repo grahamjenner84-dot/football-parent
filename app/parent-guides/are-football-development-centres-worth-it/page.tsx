@@ -19,6 +19,8 @@ export default async function Page() {
   return (
     <ArticleLayout
       title={article.frontmatter.title}
+      datePublished={article.frontmatter.date}
+      path="/parent-guides/are-football-development-centres-worth-it"
       description={article.frontmatter.description}
       category={article.frontmatter.category}
       categoryUrl={article.frontmatter.categoryUrl}

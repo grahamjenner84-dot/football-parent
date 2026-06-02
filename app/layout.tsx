@@ -38,6 +38,35 @@ export default function RootLayout({
     logo: "https://www.footballparent.co.uk/logo.png",
   };
 
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Football Parent",
+    url: "https://www.footballparent.co.uk",
+    description:
+      "Independent guidance for UK families navigating football academies, development centres and youth football pathways.",
+    publisher: {
+      "@type": "Organization",
+      name: "Football Parent",
+      url: "https://www.footballparent.co.uk",
+    },
+  };
+
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Graham Jenner",
+    url: "https://www.footballparent.co.uk/author/graham-jenner",
+    jobTitle: "Founder, Football Parent",
+    description:
+      "Football parent and grassroots coach helping families navigate football academies, development centres, trials and youth football pathways in the UK.",
+    worksFor: {
+      "@type": "Organization",
+      name: "Football Parent",
+      url: "https://www.footballparent.co.uk",
+    },
+  };
+
   return (
     <html
       lang="en"
@@ -48,9 +77,7 @@ export default function RootLayout({
 
         <Header />
 
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
 
         <Footer />
 
@@ -59,6 +86,22 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+
+        <Script
+          id="person-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema),
           }}
         />
 
