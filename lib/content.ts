@@ -5,11 +5,11 @@ import matter from "gray-matter";
 export interface ArticleFrontmatter {
   title: string;
   description: string;
+  date: string;
   category: string;
   categoryUrl: string;
   readTime: number;
   sections: { id: string; title: string }[];
-  relatedArticles: { href: string; title: string; color: string; description: string }[];
 }
 
 export interface Article {
