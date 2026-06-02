@@ -40,7 +40,7 @@ export default function EditorialPolicyPage() {
 
           <p>
             This page explains how content is researched, written, reviewed and
-            maintained — and what our commitment to independence means in
+            maintained - and what our commitment to independence means in
             practice.
           </p>
 
@@ -190,14 +190,14 @@ export default function EditorialPolicyPage() {
           </p>
 
           <p>
-            To report an error, use the{" "}
-            <Link
-              href="/contact"
-              className="font-semibold text-blue-700 hover:text-blue-900"
-            >
-              contact page
-            </Link>{" "}
-            and describe the specific claim you believe to be incorrect.
+            To report an error, email:{" "}
+<a
+  href="mailto:footballparentuk@gmail.com"
+  className="font-semibold text-blue-700 hover:text-blue-900"
+>
+  footballparentuk@gmail.com
+</a>
+{" "}and describe the specific claim you believe to be incorrect.
           </p>
 
           <p>If a factual error is confirmed, we will:</p>
@@ -271,15 +271,15 @@ export default function EditorialPolicyPage() {
           </h2>
 
           <p>
-            To report an error, suggest a correction, ask about a topic or raise
-            a concern about any content on the site, please use the{" "}
-            <Link
-              href="/contact"
-              className="font-semibold text-blue-700 hover:text-blue-900"
-            >
-              contact page
-            </Link>
-            .
+            If you have questions or topics you would like covered, you can get
+in touch at:{" "}
+<a
+  href="mailto:footballparentuk@gmail.com"
+  className="font-semibold text-blue-700 hover:text-blue-900"
+>
+  footballparentuk@gmail.com
+</a>.
+            
           </p>
 
           <p className="pt-6 italic text-gray-600">

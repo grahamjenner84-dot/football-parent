@@ -22,6 +22,13 @@ export default function Footer() {
           </Link>
 
           <a
+            href="mailto:footballparentuk@gmail.com"
+            className="hover:text-black"
+          >
+            Contact
+          </a>
+
+          <a
             href="https://www.tiktok.com/@footballparentuk"
             className="hover:text-black"
             target="_blank"

@@ -306,15 +306,14 @@ export default function AboutFootballParentPage() {
           </p>
 
           <p>
-            If you have found something that seems out of date, or if there is a
-            topic you think should be covered, the{" "}
-            <Link
-              href="/contact"
-              className="font-semibold text-blue-700 hover:text-blue-900"
-            >
-              contact page
-            </Link>{" "}
-            is the place to reach out.
+           If you have questions or topics you would like covered, you can get
+in touch at{" "}
+<a
+  href="mailto:footballparentuk@gmail.com"
+  className="font-semibold text-blue-700 hover:text-blue-900"
+>
+  footballparentuk@gmail.com
+</a>.
           </p>
 
           <p className="pt-6 italic text-gray-600">
