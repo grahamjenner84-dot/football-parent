@@ -100,6 +100,61 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <section className="border-t border-slate-200 bg-white">
+  <div className="mx-auto max-w-4xl px-5 py-12 md:py-16">
+    <h2 className="text-3xl font-bold text-slate-950 mb-6">
+      About Football Parent
+    </h2>
+
+<div className="space-y-5 text-slate-700 leading-8">
+  <p>
+    Football Parent is an independent resource for UK families navigating
+    youth football. The site covers football academies, development
+    centres, academy trials, girls football pathways, grassroots football
+    and player development.
+  </p>
+
+  <p>
+    The aim is to help parents understand the system clearly, ask better
+    questions and make informed decisions without hype, pressure or
+    unrealistic expectations about academy success.
+  </p>
+
+  <p>
+    Football Parent combines first-hand experience with research from
+    trusted football organisations to provide practical guidance for
+    families supporting young footballers at every stage of their journey.
+  </p>
+
+  <p>
+    Learn more about our{" "}
+    <Link
+      href="/about"
+      className="font-medium text-emerald-700 hover:text-emerald-800"
+    >
+      mission and background
+    </Link>
+    , read our{" "}
+    <Link
+      href="/editorial-policy"
+      className="font-medium text-emerald-700 hover:text-emerald-800"
+    >
+      Editorial Policy
+    </Link>
+    , or visit the{" "}
+    <Link
+      href="/author/graham-jenner"
+      className="font-medium text-emerald-700 hover:text-emerald-800"
+    >
+      author profile
+    </Link>
+    .
+  </p>
+</div>
+
+  </div>
+</section>
+
     </main>
   );
 }

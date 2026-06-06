@@ -24,7 +24,7 @@ export default function GrahamJennerAuthorPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            I&apos;m Graham Jenner - football parent, grassroots coach, and the
+            I&apos;m Graham - football parent, grassroots coach, and the
             person behind Football Parent.
           </p>
         </div>
