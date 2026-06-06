@@ -29,6 +29,7 @@ const routes = [
   '/academy-pathway/premier-league-development-centres-list',
 
   // Academy Trials
+  '/academy-trials/football-academy-trials-uk',
   '/academy-trials/football-trials-near-me',
   '/academy-trials/how-football-scouts-identify-players',
   '/academy-trials/what-do-academy-coaches-look-for',

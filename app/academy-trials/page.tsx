@@ -16,6 +16,12 @@ export default function AcademyTrialsPage() {
       title="Academy Trials"
       description="Guidance for football parents on academy trials, scouting and preparing young players for trial environments."
       articles={[
+         {
+          title: "Football Academy Trials in the UK",
+          href: "/academy-trials/football-academy-trials-uk",
+          description:
+            "A comprehensive guide to football academy trials in the UK.",
+        },
         {
           title: "Football Trials Near Me",
           href: "/academy-trials/football-trials-near-me",
