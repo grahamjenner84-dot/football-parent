@@ -7,7 +7,7 @@ export const metadata = generateSEO({
   title: "Crystal Palace Development Centre Guide | Football Parent",
   description:
     "Learn about the Crystal Palace Development Centre and how it supports young footballers in their development journey.",
-  path: "/academy-pathway/crystal-palace-development-centre-guide copy",
+  path: "/academy-pathway/crystal-palace-development-centre-guide",
 });
 
 export default async function Page() {
