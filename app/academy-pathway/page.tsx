@@ -94,6 +94,12 @@ export default function AcademyPathwayPage() {
           description:
             "A guide to football development centres in London and how they support young players in their journey.",
         },
+         {
+          title: "How Crystal Palace's Development Centre Works",
+          href: "/academy-pathway/crystal-palace-development-centre-guide",
+          description:
+            "A guide to how Crystal Palace's development centre supports young footballers.",
+        },
       ]}
     />
   );

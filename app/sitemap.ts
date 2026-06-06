@@ -24,9 +24,9 @@ const routes = [
   '/academy-pathway/pdc-vs-ptc-vs-rtc-explained',
   '/academy-pathway/how-players-progress-through-football-development-centres',
   '/academy-pathway/chelsea-fc-development-centre-guide',
-  '/academy-pathway/arsenal-fc-development-centre-guide',
-  '/academy-pathway/football-development-centres-in-london',
-  '/academy-pathway/premier-league-development-centres-guide',
+  '/academy-pathway/arsenal-development-centre-guide',
+  '/academy-pathway/crystal-palace-development-centre-guide',
+  '/academy-pathway/premier-league-development-centres-list',
 
   // Academy Trials
   '/academy-trials/football-trials-near-me',
