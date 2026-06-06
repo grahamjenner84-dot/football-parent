@@ -22,6 +22,12 @@ export default function GirlsFootballPage() {
           description:
             "Understand how girls academies are structured and how pathways work.",
         },
+         {
+          title: "Emerging Talent Centres Explained",
+          href: "/girls-football/emerging-talent-centres-explained",
+          description:
+            "Learn about emerging talent centres in girls' football and how they support player development.",
+        },
         {
           title: "Girls Football Trials",
           href: "/girls-football/girls-football-trials",

@@ -55,6 +55,7 @@ const routes = [
 
   // Girls Football
   '/girls-football/girls-academy-vs-grassroots-football',
+  '/girls-football/emerging-talent-centres-explained',
   '/girls-football/girls-football-trials',
   '/girls-football/how-girls-football-academies-work',
   '/girls-football/late-developers-in-girls-football',
