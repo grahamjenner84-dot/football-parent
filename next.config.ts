@@ -1,7 +1,30 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: '/pdc-vs-ptc-vs-rtc-explained',
+        destination: '/academy-pathway/pdc-vs-ptc-vs-rtc-explained',
+        permanent: true,
+      },
+      {
+        source: '/uk-football-development-centres-explained',
+        destination: '/academy-pathway/uk-football-development-centres-explained',
+        permanent: true,
+      },
+      {
+        source: '/academy-pathway/chelsea-development-centre-guide',
+        destination: '/academy-pathway/chelsea-fc-development-centre-guide',
+        permanent: true,
+      },
+      {
+        source: '/academy-pathway/how-players-progress-through-development-centres',
+        destination: '/academy-pathway/how-players-progress-through-football-development-centres',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
