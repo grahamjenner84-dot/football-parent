@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
         destination: '/academy-pathway/how-players-progress-through-football-development-centres',
         permanent: true,
       },
+      {
+        source: '/academy-pathway/arsenal-fc-development-centre-guide',
+        destination: '/academy-pathway/arsenal-development-centre-guide',
+        permanent: true,
+      },
+      {
+        source: '/academy-pathway/premier-league-development-centres-guide',
+        destination: '/academy-pathway/premier-league-development-centres-list',
+        permanent: true,
+      },
     ];
   },
 };
