@@ -18,6 +18,7 @@ const routes = [
   '/academy-pathway/development-centres-vs-academies',
   '/academy-pathway/how-academy-football-works',
   '/academy-pathway/understanding-academy-release',
+  '/academy-pathway/how-to-join-a-football-academy',
   '/academy-pathway/what-age-do-football-academies-recruit',
   '/academy-pathway/what-is-eppp',
   '/academy-pathway/uk-football-development-centres-explained',
@@ -27,6 +28,7 @@ const routes = [
   '/academy-pathway/arsenal-development-centre-guide',
   '/academy-pathway/crystal-palace-development-centre-guide',
   '/academy-pathway/premier-league-development-centres-list',
+  '/academy-pathway/football-scholarships-uk',
 
   // Academy Trials
   '/academy-trials/football-academy-trials-uk',
@@ -34,6 +36,7 @@ const routes = [
   '/academy-trials/how-football-scouts-identify-players',
   '/academy-trials/what-do-academy-coaches-look-for',
   '/academy-trials/what-happens-at-academy-trials',
+  '/academy-trials/how-to-get-scouted-for-football',
   '/academy-trials/how-football-clubs-recruit-young-players',
 
   // Football Development

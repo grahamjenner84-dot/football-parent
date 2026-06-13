@@ -40,6 +40,12 @@ export default function AcademyTrialsPage() {
           description:
             "A parent-friendly guide to what players can expect at trials.",
         },
+          {
+          title: "How to Get Scouted for Football",
+          href: "/academy-trials/how-to-get-scouted-for-football",
+          description:
+            "Learn how to increase your chances of getting scouted for football, from technical ability to decision making and attitude.",
+        },
         {
           title: "What Do Academy Coaches Look For?",
           href: "/academy-trials/what-do-academy-coaches-look-for",

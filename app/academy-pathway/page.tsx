@@ -35,6 +35,12 @@ description:
 "Learn how development centres differ from full academy environments.",
 },
 {
+title: "How to join a Football Academy",
+href: "/academy-pathway/how-to-join-a-football-academy",
+description:
+"A guide to the process of joining a football academy in the UK.",
+},
+{
 title: "What Age Do Football Academies Recruit?",
 href: "/academy-pathway/what-age-do-football-academies-recruit",
 description:
@@ -93,6 +99,12 @@ title: "Football Development Centres in London",
 href: "/academy-pathway/football-development-centres-in-london",
 description:
 "A guide to football development centres in London and how they support young players in their journey.",
+},
+{
+title: "How football scholarships work in the UK",
+href: "/academy-pathway/football-scholarships-uk",
+description:
+"A guide to football scholarships in the UK.",
 },
 {
 title: "How Crystal Palace's Development Centre Works",
