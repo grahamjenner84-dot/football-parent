@@ -29,6 +29,7 @@ const routes = [
   '/academy-pathway/crystal-palace-development-centre-guide',
   '/academy-pathway/premier-league-development-centres-list',
   '/academy-pathway/football-scholarships-uk',
+  '/academy-pathway/premier-league-development-centres',
 
   // Academy Trials
   '/academy-trials/football-academy-trials-uk',

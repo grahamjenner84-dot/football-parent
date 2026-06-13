@@ -83,10 +83,16 @@ description:
 "Understand Chelsea FC's development centre and how it supports young footballers.",
 },
 {
-title: "Premier League Development Centres List",
-href: "/academy-pathway/premier-league-development-centres-list",
-description:
-"A comprehensive list of Premier League development centres and how they support young footballers.",
+  title: "Premier League Development Centres: A Parent's Guide",
+  href: "/academy-pathway/premier-league-development-centres-list",
+  description:
+    "How Premier League clubs structure their development programmes, what they involve, and what to consider before pursuing an opportunity.",
+},
+{
+  title: "Football Development Centres in England: Find Clubs Near You",
+  href: "/academy-pathway/premier-league-development-centres",
+  description:
+    "A regional directory of development centre programmes run by professional clubs and their foundations across England.",
 },
 {
 title: "How Arsenal FC's Development Centre Works",
