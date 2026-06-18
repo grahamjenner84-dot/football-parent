@@ -13,11 +13,45 @@ export default function AcademyTrialsPage() {
   return (
     <CategoryPage
       eyebrow="Academy trials"
-      title="Academy Trials"
+      title="Football Academy Trials"
       description="Guidance for football parents on academy trials, scouting and preparing young players for trial environments."
       intro={[
-  "Football academy trials are one of the most misunderstood parts of youth football development. Most players will attend at least one trial during their development years, whether that is an open trial at a local club, an invitation to an EPPP academy session, or a development centre assessment. Having been through the process with my own child at Crystal Palace, I know how little honest information there is for parents going in for the first time. The guides below cover what scouts look for, how clubs recruit, and what really happens on the day.",
-]}
+        "Football academy trials are one of the most misunderstood parts of youth football development. Parents often use the phrase to describe several different situations: an open trial at a local club, an invitation to train with an academy group, a development centre assessment, or a scout-led observation period.",
+        "The route into academy football is rarely as simple as applying for a trial. Many young players are identified through grassroots football, development centres, referrals and long-term observation. Having been through professional club development-centre environments with my own child, including Crystal Palace, I know how little honest information there can be for parents going in for the first time.",
+        "The guides below cover how football academy trials work, how scouts identify players, how clubs recruit young talent, what coaches look for and what parents should realistically expect.",
+      ]}
+      startHere={{
+        title: "Start Here",
+        description:
+          "New to academy trials? These guides explain the main parts of the process.",
+        links: [
+          {
+            title: "Football Academy Trials in the UK",
+            href: "/academy-trials/football-academy-trials-uk",
+            description:
+              "explains how trials, scouting and recruitment usually work.",
+          },
+          {
+            title: "Football Trials Near Me",
+            href: "/academy-trials/football-trials-near-me",
+            description:
+              "covers how to find genuine opportunities and avoid unrealistic promises.",
+          },
+          {
+            title: "How to Get Scouted for Football",
+            href: "/academy-trials/how-to-get-scouted-for-football",
+            description:
+              "looks at how young players get noticed by clubs and scouts.",
+          },
+          {
+            title: "What Happens at Academy Trials",
+            href: "/academy-trials/what-happens-at-academy-trials",
+            description:
+              "is useful if your child already has a trial or assessment coming up.",
+          },
+        ],
+      }}
+      articlesHeading="All Academy Trial Guides"
       articles={[
         {
           title: "Football Academy Trials in the UK",

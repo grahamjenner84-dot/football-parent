@@ -6,12 +6,26 @@ type Article = {
   description: string;
 };
 
+type StartHereLink = {
+  title: string;
+  href: string;
+  description: string;
+};
+
+type StartHereSection = {
+  title: string;
+  description?: string;
+  links: StartHereLink[];
+};
+
 type CategoryPageProps = {
   eyebrow: string;
   title: string;
   description: string;
   articles: Article[];
   intro?: string[];
+  startHere?: StartHereSection;
+  articlesHeading?: string;
 };
 
 export default function CategoryPage({
@@ -20,6 +34,8 @@ export default function CategoryPage({
   description,
   articles,
   intro,
+  startHere,
+  articlesHeading = "All Guides",
 }: CategoryPageProps) {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -39,19 +55,54 @@ export default function CategoryPage({
         </div>
       </section>
 
-      {intro && intro.length > 0 && (
+      {((intro && intro.length > 0) || startHere) && (
         <section className="border-b border-slate-200 bg-white">
           <div className="mx-auto max-w-6xl px-5 pt-6 pb-10">
-            <div className="max-w-3xl space-y-4 text-base leading-7 text-slate-600">
-              {intro.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
+            {intro && intro.length > 0 && (
+              <div className="max-w-3xl space-y-4 text-base leading-7 text-slate-600">
+                {intro.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+            )}
+
+            {startHere && (
+              <div className="mt-8 max-w-3xl rounded-2xl border border-emerald-100 bg-emerald-50 p-6">
+                <h2 className="text-xl font-bold tracking-tight text-slate-950">
+                  {startHere.title}
+                </h2>
+
+                {startHere.description && (
+                  <p className="mt-3 leading-7 text-slate-700">
+                    {startHere.description}
+                  </p>
+                )}
+
+                <ul className="mt-4 space-y-3 leading-7 text-slate-700">
+                  {startHere.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="font-semibold text-emerald-700 hover:text-emerald-800"
+                      >
+                        {link.title}
+                      </Link>
+                      {" "}
+                      {link.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         </section>
       )}
 
       <section className="mx-auto max-w-6xl px-5 py-12 md:py-16">
+        <h2 className="mb-6 text-2xl font-bold tracking-tight text-slate-950">
+          {articlesHeading}
+        </h2>
+
         <div className="grid gap-6 md:grid-cols-2">
           {articles.map((article) => (
             <Link

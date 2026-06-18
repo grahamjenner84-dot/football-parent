@@ -270,7 +270,7 @@ export default function ArticleLayout({
                   </h3>
 
                   <p className="text-gray-600">
-                    Graham Jenner is the founder of Football Parent. As a
+                    Graham is the founder of Football Parent. As a
                     football parent and grassroots coach, he provides
                     independent guidance on academies, development centres,
                     trials and youth football pathways in the UK.
