@@ -51,11 +51,11 @@ export default function GrahamJennerAuthorPage() {
           </p>
 
           <p>
-            The moment he was invited to attend a development centre, I
+            As my son loved football and begun to get better I started to wonder whether I should push him to a higher level.He began attending a development centre, I
             genuinely didn&apos;t know what to expect. What would sessions
             involve? What were the coaches looking for? How should we approach
             it as a family? What happened next if things went well - or if they
-            didn&apos;t?
+            didn&apos;t? But over time it has also helped me reflect on how I can support him and keep football enjoyable for him, whatever level he plays at.
           </p>
 
           <p>That gap was the starting point for Football Parent.</p>
@@ -67,8 +67,7 @@ export default function GrahamJennerAuthorPage() {
           <p>
             I&apos;m not a former professional footballer. I&apos;ve never
             worked for an academy and I&apos;ve never been a scout. I&apos;m a
-            football parent who has spent years navigating the same system that
-            many families are navigating now.
+            football parent who has spent years asking the same questions you might have now.
           </p>
 
           <p>
@@ -80,8 +79,8 @@ export default function GrahamJennerAuthorPage() {
 
           <p>
             Alongside being a parent, I&apos;ve also coached. I took my
-            son&apos;s grassroots team from under-6s to under-8s and found it
-            one of the most rewarding things I&apos;ve done. I also hold an FA
+            son&apos;s grassroots team from under-6s and found it
+            one of the most rewarding and challenging things I&apos;ve done. Having coached youth football before, nothing quite prepares you for the difference, emotionally, coaching your own son's team. I also hold an FA
             Level 2 coaching qualification, but the real education has come from
             the pitchside and from being a parent in the system.
           </p>
@@ -145,7 +144,7 @@ export default function GrahamJennerAuthorPage() {
 
 
           <p className="pt-6 italic text-gray-600">
-            Graham Jenner is the founder of Football Parent.
+            Graham 
           </p>
         </div>
       </section>
