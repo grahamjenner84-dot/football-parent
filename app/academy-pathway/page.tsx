@@ -15,7 +15,11 @@ return (
 eyebrow="Academy pathway"
 title="Academy Pathway"
 description="Clear guidance for parents trying to understand football academy pathways in the UK, including academy recruitment, development centres, academy trials, scholarships, scouting and player development."
+intro={[
+  "The football academy system in the UK is structured around the Elite Player Performance Plan, which divides clubs into Category 1 to 4 academies with different levels of resource, coaching, and player commitment. Alongside full academies, most professional clubs also run development centres that are open to a wider range of players. Understanding where your child fits in this pathway, and what each stage actually involves, is what these guides are designed to help with. Written from first-hand experience of Crystal Palace and Chelsea's development programmes in south London.",
+]}
 articles={[
+  
 {
 title: "How Academy Football Works",
 href: "/academy-pathway/how-academy-football-works",
@@ -59,7 +63,7 @@ description:
 "Practical support for parents dealing with academy release decisions.",
 },
 {
-title: "Uk Football Development Centres Explained",
+title: "UK Football Development Centres Explained",
 href: "/academy-pathway/uk-football-development-centres-explained",
 description:
 "Understand how football development centres work in the UK.",

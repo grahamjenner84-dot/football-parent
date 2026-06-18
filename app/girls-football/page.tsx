@@ -15,6 +15,9 @@ export default function GirlsFootballPage() {
       eyebrow="Girls football"
       title="Girls Football"
       description="Support and guidance for parents navigating girls football pathways, academies, trials and long-term development."
+      intro={[
+  "Girls football in the UK has changed significantly in recent years, but the pathway from grassroots to academy level remains poorly understood by most parents. Whether your daughter is playing for a local club and wondering about the next step, or you have heard about Emerging Talent Centres and Regional Talent Clubs and want to know what they actually involve, these guides explain how the girls football development system works and what to realistically expect at each stage.",
+]}
       articles={[
         {
           title: "How Girls Football Academies Work",

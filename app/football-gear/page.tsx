@@ -15,6 +15,9 @@ export default function FootballGearPage() {
       eyebrow="Football gear"
       title="Football Gear"
       description="Trusted football equipment advice for parents buying boots, shin pads, gloves and training essentials."
+      intro={[
+  "Buying football equipment for a child who is developing quickly is rarely straightforward. Boot technology has outpaced most buying guides, sizing varies between brands, and what works on a 3G surface does not always work on grass. These guides cut through the noise with honest, practical advice on boots, goals, training equipment and kit, written for parents rather than coaches or serious players.",
+]}
       articles={[
         {
           title: "AG vs FG Boots",

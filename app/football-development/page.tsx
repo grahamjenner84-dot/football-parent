@@ -2,9 +2,9 @@ import CategoryPage from "../components/category-page";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Development | Football Parent",
+  title: "Football Development for Young Players | Football Parent",
   description:
-    "Practical football development advice for parents, including confidence, training balance, decision making and long-term progression.",
+    "Practical advice for parents on supporting long-term football development. Training balance, building confidence, decision making and knowing when your child is ready for more.",
   path: "/football-development",
   type: "website",
 });
@@ -15,6 +15,9 @@ export default function FootballDevelopmentPage() {
       eyebrow="Football development"
       title="Football Development"
       description="Advice for parents supporting long-term football development, confidence, training balance and player progression."
+      intro={[
+  "Football development is a long game. The players who make it are rarely the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development actually looks like at each stage. As a parent with first-hand experience of development centre environments in south London, I have written these guides to give you an honest picture of what to expect and how to help.",
+]}
       articles={[
         {
           title: "How to Become a Professional Footballer",

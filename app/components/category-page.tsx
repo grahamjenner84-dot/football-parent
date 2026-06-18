@@ -11,6 +11,7 @@ type CategoryPageProps = {
   title: string;
   description: string;
   articles: Article[];
+  intro?: string[];
 };
 
 export default function CategoryPage({
@@ -18,11 +19,12 @@ export default function CategoryPage({
   title,
   description,
   articles,
+  intro,
 }: CategoryPageProps) {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+        <div className="mx-auto max-w-6xl px-5 pt-14 pb-6 md:pt-20 md:pb-8">
           <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-emerald-700">
             {eyebrow}
           </p>
@@ -36,6 +38,18 @@ export default function CategoryPage({
           </p>
         </div>
       </section>
+
+      {intro && intro.length > 0 && (
+        <section className="border-b border-slate-200 bg-white">
+          <div className="mx-auto max-w-6xl px-5 pt-6 pb-10">
+            <div className="max-w-3xl space-y-4 text-base leading-7 text-slate-600">
+              {intro.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-5 py-12 md:py-16">
         <div className="grid gap-6 md:grid-cols-2">

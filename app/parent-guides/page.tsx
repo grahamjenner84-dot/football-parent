@@ -15,6 +15,9 @@ export default function ParentGuidesPage() {
       eyebrow="Parent guides"
       title="Parent Guides"
       description="Realistic support and guidance for football parents navigating youth football and player development."
+      intro={[
+  "Being a football parent is more demanding than most people expect, and the way you show up on the touchline, in the car on the way home, and in conversations after a bad performance has a bigger impact on your child's development than most coaching manuals will tell you. These guides cover the practical and emotional side of supporting a young footballer, from how to handle academy rejection to what to say after a difficult match, all written from the perspective of a parent who has been through it.",
+]}
       articles={[
         {
           title: "What to Say After Football Matches",
