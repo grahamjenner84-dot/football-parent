@@ -48,6 +48,7 @@ const routes = [
   '/football-development/improve-football-decision-making',
   '/football-development/is-private-football-coaching-worth-it',
   '/football-development/late-developers-in-football',
+  '/football-development/relative-age-effect-football',
   '/football-development/signs-your-child-is-ready-for-academy-football',
 
   // Football Gear

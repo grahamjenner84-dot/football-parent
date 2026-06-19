@@ -61,6 +61,12 @@ export default function FootballDevelopmentPage() {
           description:
             "Why late developers can still thrive in football long term.",
         },
+         {
+          title: "Relative Age Effect in Football",
+          href: "/football-development/relative-age-effect-football",
+          description:
+            "How relative age can impact a young footballer's development and opportunities in the sport.",
+        },
         {
           title: "Is Private Football Coaching Worth It?",
           href: "/football-development/is-private-football-coaching-worth-it",
