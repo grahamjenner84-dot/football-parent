@@ -18,7 +18,38 @@ export default function FootballDevelopmentPage() {
       intro={[
   "Football development is a long game. The players who make it are rarely the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development actually looks like at each stage. As a parent with first-hand experience of development centre environments in south London, I have written these guides to give you an honest picture of what to expect and how to help.",
 ]}
-      articles={[
+startHere={{
+  title: "Start Here",
+  description:
+    "These guides cover the main development questions football parents usually face.",
+  links: [
+    {
+      title: "Build Confidence in Young Footballers",
+      href: "/football-development/build-confidence-young-footballers",
+      description:
+        "gives practical ways to support confidence without adding pressure.",
+    },
+    {
+      title: "Good Football Development Environment",
+      href: "/football-development/good-football-development-environment",
+      description:
+        "explains what parents should look for in a positive development setting.",
+    },
+    {
+      title: "Improve Football Decision Making",
+      href: "/football-development/improve-football-decision-making",
+      description:
+        "covers how young players improve game understanding and decision making.",
+    },
+    {
+      title: "Late Developers in Football",
+      href: "/football-development/late-developers-in-football",
+      description:
+        "explains why early ability is not always the best guide to long-term potential.",
+    },
+  ],
+}}      
+articles={[
         {
           title: "How to Become a Professional Footballer",
           href: "/football-development/how-to-become-a-professional-footballer",

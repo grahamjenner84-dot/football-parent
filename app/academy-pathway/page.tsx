@@ -18,6 +18,37 @@ description="Clear guidance for parents trying to understand football academy pa
 intro={[
   "The football academy system in the UK is structured around the Elite Player Performance Plan, which divides clubs into Category 1 to 4 academies with different levels of resource, coaching, and player commitment. Alongside full academies, most professional clubs also run development centres that are open to a wider range of players. Understanding where your child fits in this pathway, and what each stage actually involves, is what these guides are designed to help with. Written from first-hand experience of Crystal Palace and Chelsea's development programmes in south London.",
 ]}
+startHere={{
+  title: "Start Here",
+  description:
+    "New to academy football? These guides explain the main parts of the pathway.",
+  links: [
+    {
+      title: "How Academy Football Works",
+      href: "/academy-pathway/how-academy-football-works",
+      description:
+        "explains how academy football is structured and what parents need to know.",
+    },
+    {
+      title: "How to Join a Football Academy",
+      href: "/academy-pathway/how-to-join-a-football-academy",
+      description:
+        "covers the realistic routes into academy football, including scouting and recruitment.",
+    },
+    {
+      title: "UK Football Development Centres Explained",
+      href: "/academy-pathway/uk-football-development-centres-explained",
+      description:
+        "explains how development centres work and where they sit in the pathway.",
+    },
+    {
+      title: "Football Scholarships UK",
+      href: "/academy-pathway/football-scholarships-uk",
+      description:
+        "looks at football scholarships, education routes and post-16 options.",
+    },
+  ],
+}}
 articles={[
   
 {
@@ -109,6 +140,12 @@ title: "Football Development Centres in London",
 href: "/academy-pathway/football-development-centres-in-london",
 description:
 "A guide to football development centres in London and how they support young players in their journey.",
+},
+{
+title: "How to Find a Football Agent for Your Child",
+href: "/academy-pathway/how-to-find-a-football-agent-for-your-child",
+description:
+"A guide for parents on how to find a qualified football agent to represent their child's interests.",
 },
 {
 title: "How football scholarships work in the UK",

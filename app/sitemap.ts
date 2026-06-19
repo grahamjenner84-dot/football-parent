@@ -30,6 +30,7 @@ const routes = [
   '/academy-pathway/premier-league-development-centres-list',
   '/academy-pathway/football-scholarships-uk',
   '/academy-pathway/premier-league-development-centres',
+  '/academy-pathway/how-to-find-a-football-agent-for-your-child',
 
   // Academy Trials
   '/academy-trials/football-academy-trials-uk',

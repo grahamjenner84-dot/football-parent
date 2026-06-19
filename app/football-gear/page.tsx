@@ -18,7 +18,38 @@ export default function FootballGearPage() {
       intro={[
   "Buying football equipment for a child who is developing quickly is rarely straightforward. Boot technology has outpaced most buying guides, sizing varies between brands, and what works on a 3G surface does not always work on grass. These guides cut through the noise with honest, practical advice on boots, goals, training equipment and kit, written for parents rather than coaches or serious players.",
 ]}
-      articles={[
+startHere={{
+  title: "Start Here",
+  description:
+    "These guides help parents choose suitable football kit and equipment for young players.",
+  links: [
+    {
+      title: "Best Footballs by Age",
+      href: "/football-gear/best-footballs-by-age",
+      description:
+        "explains which football size is right for different age groups.",
+    },
+    {
+      title: "AG vs FG Boots",
+      href: "/football-gear/ag-vs-fg-boots",
+      description:
+        "explains the difference between artificial grass and firm ground boots.",
+    },
+    {
+      title: "Best Football Boots for Wide Feet Kids",
+      href: "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+      description:
+        "helps parents find boots for children who need a wider fit.",
+    },
+    {
+      title: "Best Shin Pads for Kids Football",
+      href: "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+      description:
+        "covers what to look for when choosing shin pads for young players.",
+    },
+  ],
+}}      
+articles={[
         {
           title: "AG vs FG Boots",
           href: "/football-gear/ag-vs-fg-boots",

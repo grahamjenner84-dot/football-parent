@@ -18,7 +18,38 @@ export default function GirlsFootballPage() {
       intro={[
   "Girls football in the UK has changed significantly in recent years, but the pathway from grassroots to academy level remains poorly understood by most parents. Whether your daughter is playing for a local club and wondering about the next step, or you have heard about Emerging Talent Centres and Regional Talent Clubs and want to know what they actually involve, these guides explain how the girls football development system works and what to realistically expect at each stage.",
 ]}
-      articles={[
+startHere={{
+  title: "Start Here",
+  description:
+    "New to the girls football pathway? These guides explain academies, ETCs, RTCs and trials.",
+  links: [
+    {
+      title: "How Girls Football Academies Work",
+      href: "/girls-football/how-girls-football-academies-work",
+      description:
+        "explains the structure of girls academy football and the wider pathway.",
+    },
+    {
+      title: "Emerging Talent Centres Explained",
+      href: "/girls-football/emerging-talent-centres-explained",
+      description:
+        "covers how ETCs work and where they fit in the girls talent pathway.",
+    },
+    {
+      title: "Girls RTCs Explained",
+      href: "/girls-football/girls-rtcs-explained",
+      description:
+        "explains Regional Talent Clubs and how they differ from other pathway options.",
+    },
+    {
+      title: "Girls Football Trials",
+      href: "/girls-football/girls-football-trials",
+      description:
+        "looks at trials, assessments and how girls can access football opportunities.",
+    },
+  ],
+}}      
+articles={[
         {
           title: "How Girls Football Academies Work",
           href: "/girls-football/how-girls-football-academies-work",
