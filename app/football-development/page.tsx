@@ -99,6 +99,18 @@ articles={[
             "How relative age can impact a young footballer's development and opportunities in the sport.",
         },
         {
+          title: "Understanding the New FA Youth Football Format",
+          href: "/football-development/new-fa-youth-football-format",
+          description:
+            "An overview of the new FA youth football format and its impact on young players.",
+        },
+        {
+          title: "Playing Up an Age Group in Football",
+          href: "/football-development/playing-up-an-age-group-football",
+          description:
+            "When and how to support young players who are playing up an age group in football.",
+        },
+        {
           title: "Is Private Football Coaching Worth It?",
           href: "/football-development/is-private-football-coaching-worth-it",
           description:

@@ -31,6 +31,7 @@ const routes = [
   '/academy-pathway/football-scholarships-uk',
   '/academy-pathway/premier-league-development-centres',
   '/academy-pathway/how-to-find-a-football-agent-for-your-child',
+  '/academy-pathway/west-ham-player-pathway-guide',
 
   // Academy Trials
   '/academy-trials/football-academy-trials-uk',
@@ -51,6 +52,8 @@ const routes = [
   '/football-development/late-developers-in-football',
   '/football-development/relative-age-effect-football',
   '/football-development/signs-your-child-is-ready-for-academy-football',
+  '/football-development/playing-up-an-age-group-football',
+  '/football-development/new-fa-youth-football-format',
 
   // Football Gear
   '/football-gear/ag-vs-fg-boots',

@@ -36,6 +36,12 @@ startHere={{
         "covers the realistic routes into academy football, including scouting and recruitment.",
     },
     {
+      title: "West Ham Player Pathway Guide",
+      href: "/academy-pathway/west-ham-player-pathway-guide",
+      description:
+        "A comprehensive guide to understanding the West Ham United player pathway and how young players can progress through the academy system.",
+    },
+    {
       title: "UK Football Development Centres Explained",
       href: "/academy-pathway/uk-football-development-centres-explained",
       description:
