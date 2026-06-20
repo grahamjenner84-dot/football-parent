@@ -165,6 +165,12 @@ href: "/academy-pathway/crystal-palace-development-centre-guide",
 description:
 "A guide to how Crystal Palace's development centre supports young footballers.",
 },
+{
+title: "West Ham Player Pathway Guide",
+href: "/academy-pathway/west-ham-player-pathway-guide",
+description:
+"A comprehensive guide to understanding the West Ham United player pathway and how young players can progress through the academy system.",
+},
 ]}
 />
 );
