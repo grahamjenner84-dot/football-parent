@@ -32,6 +32,8 @@ const routes = [
   '/academy-pathway/premier-league-development-centres',
   '/academy-pathway/how-to-find-a-football-agent-for-your-child',
   '/academy-pathway/west-ham-player-pathway-guide',
+  '/academy-pathway/can-academy-players-play-grassroots-football',
+  '/academy-pathway/how-much-does-academy-football-cost',
 
   // Academy Trials
   '/academy-trials/football-academy-trials-uk',

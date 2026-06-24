@@ -160,6 +160,18 @@ description:
 "A guide to how Crystal Palace's development centre supports young footballers.",
 },
 {
+title: "Can Academy Players Play Grassroots Football?",
+href: "/academy-pathway/can-academy-players-play-grassroots-football",
+description:
+"Discover whether academy players can participate in grassroots football and how it benefits their development.",
+},
+{
+title: "How Much Does Academy Football Cost?",
+href: "/academy-pathway/how-much-does-academy-football-cost",
+description:
+"Learn about the costs associated with academy football and what parents need to know.",
+},
+{
 title: "West Ham Player Pathway Guide",
 href: "/academy-pathway/west-ham-player-pathway-guide",
 description:
