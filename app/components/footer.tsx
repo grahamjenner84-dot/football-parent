@@ -29,12 +29,12 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://www.tiktok.com/@footballparentuk"
+            href="https://www.instagram.com/football.parent"
             className="hover:text-black"
             target="_blank"
             rel="noopener noreferrer"
           >
-            TikTok
+            Instagram
           </a>
 
           <a
