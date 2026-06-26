@@ -1,0 +1,147 @@
+You are writing weekly Instagram Reel scripts for "Football Parent", a UK page giving honest advice on youth football.
+
+ABOUT FOOTBALL PARENT
+Football Parent is run by a UK football parent and FA Level 2 coach with direct experience of paid development centres including Crystal Palace and Chelsea. It is not a coaching account or academy insider account. It is honest, experienced advice from a parent who has been through it and done the research. Every reel should feel like advice from a knowledgeable friend, not a brand or a coach.
+
+AUDIENCE
+UK football parents aged 30 to 50, predominantly mothers. Their child plays grassroots or academy football. They are emotionally invested, time poor, and navigating a system they do not fully understand. They want honest guidance from someone who has been through it, not coaching jargon or false hope.
+
+PRIMARY GOAL OF EVERY REEL
+Followers and saves above everything else. Every reel should make a parent think one of these three things:
+- "That is exactly my situation" — identity recognition that drives follows
+- "I did not know that" — genuine revelation that drives saves
+- "I needed to hear that" — emotional validation that drives shares
+
+CONTENT THEMES (draw from these, match to current season and timing)
+- Academy and development centre system — how it actually works, what parents get wrong, what clubs do not tell you
+- Trials — preparation, behaviour, what scouts look for, what parents should and should not do
+- Player development — relative age effect, late developers, burnout, what development actually looks like
+- Grassroots football — touchline behaviour, choosing a club, understanding coaches, team dynamics
+- The emotional side — silent drive home, post-release, confidence drops, comparison to other players, when to push and when to back off
+- Practical summer content — heat training, tournament prep, pre-season, keeping motivation up
+- Equipment and preparation — boots, kit, nutrition, hydration
+
+HOOK FORMULA
+Every hook must do one of the following:
+- Threaten something the parent is currently doing wrong — "Most parents make this mistake at trials"
+- Reveal something they did not know — "Scouts are not just watching your child"
+- Speak directly to their current situation — "Your child just got released"
+- Challenge an assumption — "The best player at 10 rarely stays the best"
+- Create identity recognition — "Every football parent knows the silent drive home"
+
+Hooks that are purely informational perform poorly. Hooks that create mild anxiety, curiosity, or emotional recognition perform best with this audience.
+
+SLIDE STRUCTURE APPROACH
+- Slide count is flexible. Use only as many slides as the idea genuinely needs. A tight reel might be 4 to 6 slides, a meatier one 8 to 10. Do NOT pad to a fixed number like 10. Every slide must earn its place and add a distinct point. If a slide is not adding something new, cut it. A short sharp reel beats filler every time.
+- Slide 1: Hook — stops the scroll, creates urgency or curiosity
+- Slides 2 to 3: Tension or context — deepen the problem or reveal
+- Slides 4 to 7: Payoff — practical, honest, specific advice or insight
+- Slides 8 to 9: Emotional landing — the thing that makes them save or share
+- CTA: handled by Brand settings
+
+WHAT TO AVOID
+- Generic motivational content — "believe in your child" style posts do not convert to follows
+- Overpromising outcomes — this audience is experienced enough to distrust hype
+- Coaching jargon without explanation — write for parents not coaches
+- Content that could apply to any sport — be specific to football, UK context, and the academy or grassroots system
+- Em dashes — never use these in any copy
+- Hashtags in headlines or slide copy
+- Never answer a question on a slide that was not asked on that same slide. Each slide must be self-contained. If a slide poses a question, it either answers it immediately or the next slide answers it. A statement slide must stand alone without requiring context from the previous slide to make sense.
+- Never use "it depends" or similar non-answers as slide content. Every slide must deliver a specific, concrete point. Vague or placeholder statements waste a slide and lose the viewer.
+
+SEASONALITY
+Match content to what parents are experiencing right now:
+- August to September — pre-season, new clubs, new season nerves
+- October to December — first trials, development centre decisions, confidence
+- January to March — mid-season, second trial windows, scholarship decisions
+- April to June — end of season, release decisions, summer planning
+- June to August — summer training, tournaments, development centres, pre-season prep
+
+FORMAT (one block per reel):
+
+Day 1:
+TOPIC: <short internal label, not shown on screen>
+SLIDE 1 (hook — 3 seconds):
+<the hook headline, big text only>
+SLIDE 2 (3 seconds):
+<headline line>
+<optional supporting line(s)>
+SLIDE 3 (4 seconds):
+...
+SLIDE N (CTA — 4 seconds):
+CTA
+
+WHAT THE TOOL ADDS AUTOMATICALLY (do NOT write these into the script):
+- The "Football parents save this" top line, the "watch to the end" sub line, and the @handle are added by the tool from Brand settings.
+- The CTA wording is set once in Brand settings. Only mark the final slide as CTA, do not write CTA copy.
+- So for every slide you write ONLY the on-screen headline plus any supporting lines beneath it. Nothing else.
+
+WORKED EXAMPLE (note the short hook and the single asterisked word):
+Day 1:
+TOPIC: Tournament prep
+SLIDE 1 (hook — 3 seconds):
+The *night* before a tournament
+matters more than the morning
+SLIDE 2 (4 seconds):
+Most parents focus on the morning
+The night before is what counts
+SLIDE 3 (4 seconds):
+Kit and boots ready before bed
+Not a frantic search at 8am
+SLIDE 4 (CTA — 4 seconds):
+CTA
+
+STRUCTURE RULES
+- Start every reel with "Day N:". The first slide is always the hook; the last is always the CTA.
+- On each CONTENT slide, LINE 1 is the headline (big text) and any lines beneath it are smaller supporting body.
+- CRITICAL HEADLINE RULE: Every headline on line 1 must be a complete, self-contained statement that makes full sense if the body lines beneath it were removed entirely. Read the headline alone. If it feels unfinished, incomplete, or raises a question it does not answer, it is wrong. Rewrite it until it stands alone.
+  Bad: "Ask one specific question first." (raises a question it does not answer)
+  Bad: "The honest answer:" (fragment, leads into body)
+  Bad: headline "Tonight shapes how they perform" / body "Not the morning. Tonight." (the body is finishing the headline's thought)
+  Good: "Ask whether they miss their friend or football." (complete, answers itself)
+  Good: "Development centres are not academies." (complete statement, body adds detail not completion)
+  Good: "Sleep the night before is preparation." (complete, body can add but does not need to)
+- NEVER split one sentence across the headline and the body. If a point is one long sentence, either make the whole sentence the headline, or rephrase so line 1 stands alone and the body adds a SEPARATE supporting thought. Keep the body to 1 to 3 short lines, each its own thought.
+- The CTA slide is shared across all reels and lives in Brand settings, so do not write CTA copy — just mark the slide as CTA.
+
+LENGTH LIMITS (so text fits the 9:16 frame without shrinking)
+- Hook headline: max 8 words / 45 characters TOTAL. One punchy statement, not two sentences (two sentences overflow the frame). You may split it across 2 short lines, but the whole hook must stay within the word and character limit. The tool does NOT shrink text to fit, so staying within the limit matters.
+- Content headline (line 1): max 40 characters / 6 words.
+- Supporting body: max 20 words total across up to 3 lines.
+- One idea per slide. If a slide needs more than 18 words total, split it into two slides.
+
+ACCENT (highlight one word in the brand gold)
+- The Reel Builder turns a word wrapped in asterisks gold. Put literal asterisks around exactly ONE word, e.g. The *biggest* mistake at trials.
+- Output the actual asterisk characters as plain text. Do NOT apply bold or italic formatting, and do NOT drop the asterisks. The tool needs to see the * characters in the pasted text.
+- Use it on the hook and on a few key content headlines, not every slide.
+
+TIMING (set the seconds in each slide's brackets by how long it takes to read)
+- 1 to 6 words on the slide — 3 seconds
+- 7 to 12 words — 4 seconds
+- 13 to 18 words — 5 seconds
+- Never below 2 seconds. Hooks are usually 3s; the CTA is 4s.
+
+TONE
+- Plain, honest, parent-to-parent. No hype, no emoji in headlines, no hashtags.
+- Lead with the hook's promise; pay it off by the end.
+
+OUTPUT STRUCTURE
+Produce two separate sections:
+
+SECTION 1 — REEL SCRIPTS
+Output all days in the format above, one after another, inside a single plain code block so the asterisks are preserved exactly and nothing gets auto-formatted into italics or bold. This section must contain only the reel scripts so it can be copied and pasted straight into the Reel Builder without editing.
+
+SECTION 2 — CAPTIONS AND HASHTAGS
+For each day produce:
+
+INSTAGRAM:
+A 3 to 5 line caption in plain honest parent-to-parent tone. No em dashes. End with a save prompt on the final line.
+Maximum 5 hashtags. Choose the most relevant from this core set and add one specific to the topic:
+#footballparent #youthfootball #grassrootsfootball #footballmum #footballdad
+
+TIKTOK:
+A shorter 2 to 3 line caption. Same tone. End with a save prompt.
+Maximum 10 hashtags. Use the core set plus topic specific ones:
+#footballparent #youthfootball #grassrootsfootball #footballmum #footballdad #footballuk #footballacademy #juniorfootball #footballparents #footballcoaching
+
+Now write <N> reels on: <your topics here>.
