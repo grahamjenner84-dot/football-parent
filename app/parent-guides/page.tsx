@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Parent Guides | Football Parent",
   description:
-    "Honest football parenting advice covering confidence, matchday behaviour, academy decisions and supporting young players.",
+    "Independent football parenting advice covering academy decisions, the Junior Premier League, player development, confidence, matchday behaviour and supporting young players.",
   path: "/parent-guides",
   type: "website",
 });
@@ -14,42 +14,78 @@ export default function ParentGuidesPage() {
     <CategoryPage
       eyebrow="Parent guides"
       title="Parent Guides"
-      description="Realistic support and guidance for football parents navigating youth football and player development."
+      description="Independent, evidence-based advice to help football parents make confident decisions about youth football, player development, academies and the Junior Premier League."
       intro={[
-  "Being a football parent is more demanding than most people expect, and the way you show up on the touchline, in the car on the way home, and in conversations after a bad performance has a bigger impact on your child's development than most coaching manuals will tell you. These guides cover the practical and emotional side of supporting a young footballer, from how to handle academy rejection to what to say after a difficult match.",
-]}
-startHere={{
-  title: "Start Here",
-  description:
-    "These guides cover common decisions, worries and mistakes football parents face.",
-  links: [
-    {
-      title: "Are Football Development Centres Worth It?",
-      href: "/parent-guides/are-football-development-centres-worth-it",
-      description:
-        "helps parents weigh up the cost, value and expectations of development centres.",
-    },
-    {
-      title: "Leave Grassroots Football for an Academy?",
-      href: "/parent-guides/leave-grassroots-football-for-an-academy",
-      description:
-        "looks at one of the biggest decisions families face in youth football.",
-    },
-    {
-      title: "Biggest Football Parent Mistakes",
-      href: "/parent-guides/biggest-football-parent-mistakes",
-      description:
-        "covers common parent behaviours that can harm confidence and enjoyment.",
-    },
-    {
-      title: "What to Say After Football Matches",
-      href: "/parent-guides/what-to-say-after-football-matches",
-      description:
-        "gives practical advice for supporting children after games.",
-    },
-  ],
-}}      
-articles={[
+        "Being a football parent involves far more than standing on the touchline. You'll make decisions about clubs, leagues, development centres, academy opportunities and how best to support your child through both successes and setbacks. These guides combine practical football parenting advice with independent explanations of common pathways, helping you make informed decisions without the hype or pressure that often surrounds youth football.",
+      ]}
+      startHere={{
+        title: "Start Here",
+        description:
+          "These guides cover the common decisions, worries and mistakes football parents face.",
+        links: [
+          {
+            title: "Should You Leave Grassroots Football for an Academy?",
+            href: "/parent-guides/leave-grassroots-football-for-an-academy",
+            description:
+              "looks at one of the biggest decisions families face in youth football.",
+          },
+          {
+            title: "What is the Junior Premier League?",
+            href: "/parent-guides/what-is-the-junior-premier-league",
+            description:
+              "explains what the JPL is, how it works and what parents should consider.",
+          },
+          {
+            title: "Are Football Development Centres Worth It?",
+            href: "/parent-guides/are-football-development-centres-worth-it",
+            description:
+              "helps parents weigh up the cost, value and expectations of development centres.",
+          },
+          {
+            title: "Biggest Football Parent Mistakes",
+            href: "/parent-guides/biggest-football-parent-mistakes",
+            description:
+              "covers common parent behaviours that can harm confidence and enjoyment.",
+          },
+        ],
+      }}
+      articles={[
+        {
+          title: "Should You Leave Grassroots Football for an Academy?",
+          href: "/parent-guides/leave-grassroots-football-for-an-academy",
+          description:
+            "Factors parents should consider before making the move from grassroots to academy football.",
+        },
+        {
+          title: "What is the Junior Premier League?",
+          href: "/parent-guides/what-is-the-junior-premier-league",
+          description:
+            "A parent-friendly guide to what the Junior Premier League is, how it works and whether it may suit your child.",
+        },
+        {
+          title: "JPL vs Grassroots Football",
+          href: "/parent-guides/jpl-vs-grassroots-football",
+          description:
+            "Compare the Junior Premier League with traditional grassroots football to understand the differences, benefits and trade-offs.",
+        },
+        {
+          title: "JPL and Academy Football",
+          href: "/parent-guides/jpl-and-academy-football",
+          description:
+            "Understand the relationship between the Junior Premier League, academy scouting and player development.",
+        },
+        {
+          title: "How to Get Into the JPL",
+          href: "/parent-guides/how-to-get-into-the-jpl",
+          description:
+            "Practical advice on finding JPL clubs, contacting teams, attending assessments and deciding whether to accept a place.",
+        },
+        {
+          title: "Are Football Development Centres Worth It?",
+          href: "/parent-guides/are-football-development-centres-worth-it",
+          description:
+            "Weighing up the pros, cons, costs and expectations of football development centres.",
+        },
         {
           title: "What to Say After Football Matches",
           href: "/parent-guides/what-to-say-after-football-matches",
@@ -67,18 +103,6 @@ articles={[
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:
             "Common mistakes football parents make and how to avoid them.",
-        },
-        {
-          title: "Should You Leave Grassroots Football for an Academy?",
-          href: "/parent-guides/leave-grassroots-football-for-an-academy",
-          description:
-            "Factors parents should consider before making the move.",
-        },
-          {
-          title: "Are Football Development Centres Worth It?",
-          href: "/parent-guides/are-football-development-centres-worth-it",
-          description:
-            "Weighing up the pros and cons of football development centres.",
         },
       ]}
     />

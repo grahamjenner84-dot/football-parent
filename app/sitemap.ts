@@ -79,6 +79,10 @@ const routes = [
   '/parent-guides/support-child-after-bad-match',
   '/parent-guides/what-to-say-after-football-matches',
   '/parent-guides/are-football-development-centres-worth-it',
+  '/parent-guides/what-is-the-junior-premier-league',
+  '/parent-guides/jpl-vs-grassroots-football',
+  '/parent-guides/jpl-and-academy-football',
+  '/parent-guides/how-to-get-into-the-jpl',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
