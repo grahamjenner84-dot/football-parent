@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Development for Young Players | Football Parent",
   description:
-    "Practical advice for parents on supporting long-term football development. Training balance, building confidence, decision making and knowing when your child is ready for more.",
+    "Practical advice for parents on football development, football confidence, decision making, training balance, late developers and knowing when a child is ready for more.",
   path: "/football-development",
   type: "website",
 });
@@ -14,42 +14,43 @@ export default function FootballDevelopmentPage() {
     <CategoryPage
       eyebrow="Football development"
       title="Football Development"
-      description="Advice for parents supporting long-term football development, confidence, training balance and player progression."
+      description="Advice for parents supporting long-term football development, football confidence, training balance, decision making and player progression."
       intro={[
-  "Football development is a long game. The players who make it are rarely the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development actually looks like at each stage. As a parent with first-hand experience of development centre environments in south London, I have written these guides to give you an honest picture of what to expect and how to help.",
-]}
-startHere={{
-  title: "Start Here",
-  description:
-    "These guides cover the main development questions football parents usually face.",
-  links: [
-    {
-      title: "Build Confidence in Young Footballers",
-      href: "/football-development/build-confidence-young-footballers",
-      description:
-        "gives practical ways to support confidence without adding pressure.",
-    },
-    {
-      title: "Good Football Development Environment",
-      href: "/football-development/good-football-development-environment",
-      description:
-        "explains what parents should look for in a positive development setting.",
-    },
-    {
-      title: "Improve Football Decision Making",
-      href: "/football-development/improve-football-decision-making",
-      description:
-        "covers how young players improve game understanding and decision making.",
-    },
-    {
-      title: "Late Developers in Football",
-      href: "/football-development/late-developers-in-football",
-      description:
-        "explains why early ability is not always the best guide to long-term potential.",
-    },
-  ],
-}}      
-articles={[
+        "Football development is a long game. The players who make progress are rarely just the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development actually looks like at each stage.",
+        "These guides cover the parts of player development that parents often worry about most: football confidence, decision making, football IQ, training load, relative age, late developers and knowing when a child may be ready for a more demanding environment. As a parent with first-hand experience of development centre environments in south London, I have written these guides to give you a realistic picture of what to expect and how to help.",
+      ]}
+      startHere={{
+        title: "Start Here",
+        description:
+          "These guides cover the main development questions football parents usually face.",
+        links: [
+          {
+            title: "Build Confidence in Young Footballers",
+            href: "/football-development/build-confidence-young-footballers",
+            description:
+              "explains how football confidence develops and how parents can support it without adding pressure.",
+          },
+          {
+            title: "Improve Football Decision Making",
+            href: "/football-development/improve-football-decision-making",
+            description:
+              "covers scanning, football IQ, game understanding and how young players make better decisions.",
+          },
+          {
+            title: "Good Football Development Environment",
+            href: "/football-development/good-football-development-environment",
+            description:
+              "explains what parents should look for in a positive development setting.",
+          },
+          {
+            title: "Relative Age Effect in Football",
+            href: "/football-development/relative-age-effect-football",
+            description:
+              "explains how birth month, maturity and physical development can affect young players.",
+          },
+        ],
+      }}
+      articles={[
         {
           title: "How to Become a Professional Footballer",
           href: "/football-development/how-to-become-a-professional-footballer",
@@ -72,13 +73,13 @@ articles={[
           title: "Build Confidence in Young Footballers",
           href: "/football-development/build-confidence-young-footballers",
           description:
-            "Practical ways to help young players develop confidence and resilience.",
+            "Practical ways to help young players develop football confidence and resilience.",
         },
         {
           title: "Improve Football Decision Making",
           href: "/football-development/improve-football-decision-making",
           description:
-            "Help players improve awareness, scanning and game understanding.",
+            "Help players improve football IQ, awareness, scanning and game understanding.",
         },
         {
           title: "Good Football Development Environment",
@@ -92,11 +93,11 @@ articles={[
           description:
             "Why late developers can still thrive in football long term.",
         },
-         {
+        {
           title: "Relative Age Effect in Football",
           href: "/football-development/relative-age-effect-football",
           description:
-            "How relative age can impact a young footballer's development and opportunities in the sport.",
+            "How relative age can impact a young footballer's development and opportunities.",
         },
         {
           title: "Understanding the New FA Youth Football Format",
@@ -108,7 +109,7 @@ articles={[
           title: "Playing Up an Age Group in Football",
           href: "/football-development/playing-up-an-age-group-football",
           description:
-            "When and how to support young players who are playing up an age group in football.",
+            "When and how to support young players who are playing up an age group.",
         },
         {
           title: "Is Private Football Coaching Worth It?",
