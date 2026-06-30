@@ -99,6 +99,12 @@ export default function ParentGuidesPage() {
             "Practical guidance for helping players bounce back positively.",
         },
         {
+          title: "FutureFit Football DNA Interview Part 1",
+          href: "/parent-guides/futurefit-football-dna-interview-part-1",
+          description:
+            "Join us for an exclusive interview with FutureFit Football's DNA expert as we explore the science behind player development.",
+        },
+        {
           title: "Biggest Football Parent Mistakes",
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:
