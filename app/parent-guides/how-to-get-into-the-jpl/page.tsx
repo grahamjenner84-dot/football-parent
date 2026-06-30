@@ -4,9 +4,9 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "How to Get Into the JPL | Football Parent",
+  title: "JPL Trials: How to Get Into the JPL | Football Parent",
   description:
-    "Learn how your child can get into the Junior Premier League and what it takes to succeed.",
+    "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process.",
   path: "/parent-guides/how-to-get-into-the-jpl",
 });
 

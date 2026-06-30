@@ -75,10 +75,10 @@ export default function ParentGuidesPage() {
             "Understand the relationship between the Junior Premier League, academy scouting and player development.",
         },
         {
-          title: "How to Get Into the JPL",
+          title: "JPL Trials: How to Get Into the JPL",
           href: "/parent-guides/how-to-get-into-the-jpl",
           description:
-            "Practical advice on finding JPL clubs, contacting teams, attending assessments and deciding whether to accept a place.",
+            "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process.",
         },
         {
           title: "Are Football Development Centres Worth It?",
