@@ -29,7 +29,7 @@ const routes = [
   '/academy-pathway/crystal-palace-development-centre-guide',
   '/academy-pathway/premier-league-development-centres-list',
   '/academy-pathway/football-scholarships-uk',
-  '/academy-pathway/premier-league-development-centres',
+  '/academy-pathway/football-development-centres-near-me',
   '/academy-pathway/how-to-find-a-football-agent-for-your-child',
   '/academy-pathway/west-ham-player-pathway-guide',
   '/academy-pathway/can-academy-players-play-grassroots-football',
