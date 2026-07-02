@@ -124,10 +124,10 @@ description:
     "How Premier League clubs structure their development programmes, what they involve, and what to consider before pursuing an opportunity.",
 },
 {
-  title: "Football Development Centres in England: Find Clubs Near You",
-  href: "/academy-pathway/premier-league-development-centres",
+  title: "Football Development Centres Near Me | Find Professional Club Programmes Across England",
+  href: "/academy-pathway/football-development-centres-near-me",
   description:
-    "A regional directory of development centre programmes run by professional clubs and their foundations across England.",
+    "Looking for a football development centre near you? Browse verified development centres run by Premier League and EFL clubs across England, organised by region with links to official programmes.",
 },
 {
 title: "How Arsenal FC's Development Centre Works",

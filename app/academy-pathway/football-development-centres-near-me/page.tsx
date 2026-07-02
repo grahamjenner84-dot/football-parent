@@ -4,23 +4,23 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Development Centres in England: Find Clubs Near You | Football Parent",
+  title: "Football Development Centres Near Me | Find Professional Club Programmes Across England",
   description:
-    "A regional guide to football development centres run by professional clubs and their foundations across England, covering Premier League, Championship, League One and League Two clubs.",
-  path: "/academy-pathway/premier-league-development-centres",
+    "Looking for a football development centre near you? Browse verified development centres run by Premier League and EFL clubs across England, organised by region with links to official programmes.",
+  path: "/academy-pathway/football-development-centres-near-me",
 });
 
 export default async function Page() {
   const article = getArticleBySlug(
     "academy-pathway",
-    "premier-league-development-centres"
+    "football-development-centres-near-me"
   );
 
   return (
     <ArticleLayout
       title={article.frontmatter.title}
       datePublished={article.frontmatter.date}
-      path="/academy-pathway/premier-league-development-centres"
+      path="/academy-pathway/football-development-centres-near-me"
       description={article.frontmatter.description}
       category={article.frontmatter.category}
       categoryUrl={article.frontmatter.categoryUrl}

@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
         destination: '/academy-pathway/premier-league-development-centres-list',
         permanent: true,
       },
+      {
+        source: '/academy-pathway/premier-league-development-centres',
+        destination: '/academy-pathway/football-development-centres-near-me',
+        permanent: true,
+      },
     ];
   },
 };
