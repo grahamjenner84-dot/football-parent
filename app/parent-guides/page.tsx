@@ -111,6 +111,14 @@ export default function ParentGuidesPage() {
             "Common mistakes football parents make and how to avoid them.",
         },
       ]}
+      bottomContent={{
+        title: "About Football Parent Guides",
+        content: [
+          "Football parenting is often about making judgement calls without having perfect information. Parents may need to decide whether to move clubs, accept a development centre place, attend JPL trials, pursue academy opportunities, change teams or simply step back and let a child enjoy the game. Those decisions can feel bigger than they are when everyone around youth football seems to have an opinion.",
+          "Good football parenting is not about pushing a child as far as possible as quickly as possible. It is about understanding the environment, protecting confidence, asking better questions and recognising when an opportunity genuinely supports long-term development. The right decision for one child may be completely wrong for another, depending on personality, maturity, motivation, coaching quality, match time and family circumstances.",
+          "The guides in this section help parents navigate the wider football journey, including grassroots football, academy decisions, the Junior Premier League, development centres, matchday behaviour, confidence and setbacks. The aim is to give families realistic, independent advice so they can support young players with more clarity and less pressure.",
+        ],
+      }}
     />
   );
 }

@@ -18,6 +18,11 @@ type StartHereSection = {
   links: StartHereLink[];
 };
 
+type BottomContentSection = {
+  title: string;
+  content: string[];
+};
+
 type CategoryPageProps = {
   eyebrow: string;
   title: string;
@@ -26,6 +31,7 @@ type CategoryPageProps = {
   intro?: string[];
   startHere?: StartHereSection;
   articlesHeading?: string;
+  bottomContent?: BottomContentSection;
 };
 
 export default function CategoryPage({
@@ -36,6 +42,7 @@ export default function CategoryPage({
   intro,
   startHere,
   articlesHeading = "All Guides",
+  bottomContent,
 }: CategoryPageProps) {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -86,8 +93,7 @@ export default function CategoryPage({
                         className="font-semibold text-emerald-700 hover:text-emerald-800"
                       >
                         {link.title}
-                      </Link>
-                      {" "}
+                      </Link>{" "}
                       {link.description}
                     </li>
                   ))}
@@ -124,6 +130,20 @@ export default function CategoryPage({
             </Link>
           ))}
         </div>
+
+        {bottomContent && (
+          <div className="mt-14 max-w-3xl border-t border-slate-200 pt-10">
+            <h2 className="text-2xl font-bold tracking-tight text-slate-950">
+              {bottomContent.title}
+            </h2>
+
+            <div className="mt-5 space-y-4 text-base leading-7 text-slate-600">
+              {bottomContent.content.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
     </main>
   );

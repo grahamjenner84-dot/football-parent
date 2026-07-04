@@ -94,6 +94,14 @@ export default function AcademyTrialsPage() {
             "Learn how football clubs identify and recruit young talent, and what parents should know about the recruitment process.",
         },
       ]}
+      bottomContent={{
+        title: "About Football Academy Trials",
+        content: [
+          "Football academy trials are only one part of the wider recruitment process. Many young players are identified through grassroots matches, school football, development centres and recommendations before they are ever invited to attend a formal trial. Equally, attending a trial does not necessarily mean a club is looking to recruit immediately. Some assessments are simply opportunities for coaches to observe how a player learns, adapts and performs within a different environment.",
+          "Understanding how academy scouting and recruitment works can help parents set realistic expectations. Coaches are rarely looking for the child who scores the most goals in a single session. Instead, they assess qualities such as decision making, technical ability, attitude, coachability and how consistently a player performs over time. Different clubs may also prioritise different attributes depending on the age group and stage of development.",
+          "The guides in this section explain the academy trial process from a parent's perspective, including how players are scouted, what happens during assessments, what academy coaches typically look for and how families can best support children before, during and after a trial. The aim is to replace myths with practical, evidence-based guidance so parents can approach every opportunity with confidence and realistic expectations.",
+        ],
+      }}
     />
   );
 }

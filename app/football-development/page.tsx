@@ -118,6 +118,14 @@ export default function FootballDevelopmentPage() {
             "An honest look at the pros and cons of private coaching.",
         },
       ]}
+      bottomContent={{
+        title: "About Football Development",
+        content: [
+          "Football development is about more than technical practice or moving into a higher-level team as early as possible. For young players, progress usually depends on a mix of confidence, game understanding, physical maturity, decision making, enjoyment and the quality of the environment around them. Parents often see only the visible parts of development, such as goals, tackles or selection decisions, but many of the most important improvements happen gradually over time.",
+          "A good football development pathway should help children become more skilful, more resilient and more confident without losing their love of the game. That means balancing training with recovery, recognising the impact of growth and relative age, understanding that late developers can still catch up, and judging opportunities by how well they support the individual child rather than by the badge on the kit.",
+          "The guides in this section are designed to help parents make sense of player development at grassroots, development centre and academy level. They cover football confidence, decision making, football IQ, training load, late development, playing up an age group and knowing when a child may be ready for a more demanding football environment.",
+        ],
+      }}
     />
   );
 }

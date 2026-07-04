@@ -2,7 +2,7 @@
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Parent | Honest Guidance for Football Parents",
+  title: "Football Parent | Independent Guidance for Football Parents",
   description:
     "Independent advice for parents navigating academy football, grassroots football and player development in the UK.",
   path: "/",
@@ -65,13 +65,13 @@ export default function Home() {
             </p>
 
             <h1 className="text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">
-              Helping parents understand youth football in the UK
+              Helping parents navigate youth football with confidence
             </h1>
 
             <p className="mt-6 text-lg leading-8 text-slate-600 md:text-xl">
               Clear, practical advice on academy football, grassroots
               development, football trials, player progression and supporting
-              young footballers.
+              young footballers. Helping football parents make confident decisions.
             </p>
           </div>
         </div>
@@ -108,22 +108,15 @@ export default function Home() {
 
 <div className="space-y-5 text-slate-700 leading-8">
   <p>
-    Football Parent is an independent resource for UK families navigating
-    youth football. The site covers football academies, development
-    centres, academy trials, girls football pathways, grassroots football
-    and player development.
+    Football Parent is an independent UK resource for families navigating youth football. Whether your child plays grassroots football, attends a development centre, trials with an academy or simply loves the game, our aim is to help parents make informed decisions based on evidence rather than hype.
   </p>
 
   <p>
-    The aim is to help parents understand the system clearly, ask better
-    questions and make informed decisions without hype, pressure or
-    unrealistic expectations about academy success.
+    The site covers academy football, football development, football trials, girls football pathways, equipment advice and the everyday questions that football parents face as children progress through the game.
   </p>
 
   <p>
-    Football Parent combines first-hand experience with research from
-    trusted football organisations to provide practical guidance for
-    families supporting young footballers at every stage of their journey.
+    Every guide is written from the perspective of a football parent, combining first-hand experience with trusted research to provide clear, balanced advice that puts children's long-term development first.
   </p>
 
   <p>
