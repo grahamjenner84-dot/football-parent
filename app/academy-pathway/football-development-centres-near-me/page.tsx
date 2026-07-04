@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Development Centres Near Me | Find Professional Club Programmes Across England",
+  title: "Football Development Centres Near Me | Football Parent",
   description:
     "Looking for a football development centre near you? Browse verified development centres run by Premier League and EFL clubs across England, organised by region with links to official programmes.",
   path: "/academy-pathway/football-development-centres-near-me",

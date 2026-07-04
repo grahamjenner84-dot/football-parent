@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "When Your Child Is Struggling in Football: A Parent's Guide | Football Parent",
+  title: "When Your Child Is Struggling in Football | Football Parent",
   description:
     "Practical advice for supporting young footballers emotionally after difficult matches, mistakes or disappointing performances.",
   path: "/parent-guides/support-child-after-bad-match",
