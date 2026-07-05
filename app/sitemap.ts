@@ -34,6 +34,7 @@ const routes = [
   '/academy-pathway/west-ham-player-pathway-guide',
   '/academy-pathway/can-academy-players-play-grassroots-football',
   '/academy-pathway/how-much-does-academy-football-cost',
+  '/academy-pathway/football-development-centres-in-london',
 
   // Academy Trials
   '/academy-trials/football-academy-trials-uk',
@@ -84,6 +85,7 @@ const routes = [
   '/parent-guides/jpl-and-academy-football',
   '/parent-guides/how-to-get-into-the-jpl',
   '/parent-guides/futurefit-football-dna-interview-part-1',
+  '/parent-guides/what-is-grassroots-football',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

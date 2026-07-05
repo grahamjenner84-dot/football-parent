@@ -105,6 +105,12 @@ export default function ParentGuidesPage() {
             "Join us for an exclusive interview with FutureFit Football's DNA expert as we explore the science behind player development.",
         },
         {
+          title: "What is Grassroots Football?",
+          href: "/parent-guides/what-is-grassroots-football",
+          description:
+            "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football. A clear guide for UK parents.",
+        },
+        {
           title: "Biggest Football Parent Mistakes",
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:
