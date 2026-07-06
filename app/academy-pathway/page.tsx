@@ -165,6 +165,12 @@ export default function AcademyPathwayPage() {
             "Discover whether academy players can participate in grassroots football and how it benefits their development.",
         },
         {
+          title: "What Is Pre-Academy Football?",
+          href: "/academy-pathway/pre-academy-football",
+          description:
+            "Learn about pre-academy football and how it fits into the wider academy system.",
+        },
+        {
           title: "How Much Does Academy Football Cost?",
           href: "/academy-pathway/how-much-does-academy-football-cost",
           description:
