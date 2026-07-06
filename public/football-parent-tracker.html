@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Parent Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0b0c0a;
+    --surface: #16170f;
+    --surface-2: #1f2116;
+    --border: #2c2e22;
+    --gold: #D4AF37;
+    --gold-dim: #8f7a2c;
+    --white: #F5F4EF;
+    --muted: #9a9a8f;
+    --danger: #c0503f;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', -apple-system, sans-serif;
+    padding-bottom: 4rem;
+  }
+  h1,h2,h3, .display{ font-family:'Montserrat', sans-serif; font-weight:800; letter-spacing:0.01em; }
+  .wrap{ max-width: 720px; margin: 0 auto; padding: 0 1.25rem; }
+  header{
+    background: linear-gradient(180deg, #111208 0%, #0b0c0a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 1.75rem 0 0;
+    position: sticky; top:0; z-index: 5;
+  }
+  header .title{ display:flex; align-items:baseline; justify-content:space-between; }
+  header h1{ font-size: 1.4rem; color: var(--gold); margin:0; text-transform:uppercase; }
+  header .sub{ color: var(--muted); font-size:0.8rem; margin: 0.15rem 0 1.25rem; }
+  nav{ display:flex; gap: 0.25rem; }
+  nav button{
+    flex:1; background:none; border:none; color: var(--muted);
+    font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.78rem;
+    text-transform:uppercase; letter-spacing:0.04em;
+    padding: 0.85rem 0.25rem; cursor:pointer; border-bottom: 2px solid transparent;
+  }
+  nav button.active{ color: var(--gold); border-bottom: 2px solid var(--gold); }
+  main{ padding-top: 1.5rem; }
+  .card{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 0.9rem;
+  }
+  .card .meta{ display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; }
+  .card .meta .date{ color: var(--gold); font-weight:600; font-size:0.85rem; }
+  .card .meta .tag{ color: var(--muted); font-size:0.75rem; }
+  .card p{ margin: 0.3rem 0; font-size:0.92rem; line-height:1.5; }
+  .card p.label{ color: var(--muted); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:2px; }
+  .row{ display:flex; gap:0.6rem; flex-wrap:wrap; }
+  .row > *{ flex:1; min-width: 140px; }
+  label{ display:block; font-size:0.72rem; color: var(--muted); text-transform:uppercase; letter-spacing:0.04em; margin: 0.7rem 0 0.25rem; }
+  input, textarea, select{
+    width:100%; background: var(--surface-2); border:1px solid var(--border); color: var(--white);
+    border-radius:6px; padding:0.55rem 0.65rem; font-family:'Inter',sans-serif; font-size:0.9rem;
+  }
+  textarea{ min-height: 60px; resize: vertical; }
+  input:focus, textarea:focus, select:focus{ outline: 1px solid var(--gold); border-color: var(--gold); }
+  button.primary{
+    background: var(--gold); color: #14150c; border:none; border-radius:6px;
+    font-family:'Montserrat',sans-serif; font-weight:700; font-size:0.82rem;
+    padding:0.65rem 1.1rem; cursor:pointer; text-transform:uppercase; letter-spacing:0.03em;
+  }
+  button.ghost{
+    background:none; border:1px solid var(--border); color: var(--white);
+    border-radius:6px; padding:0.55rem 0.9rem; font-size:0.82rem; cursor:pointer;
+  }
+  button.link{ background:none; border:none; color: var(--gold-dim); font-size:0.78rem; cursor:pointer; padding: 0.2rem 0; text-align:left; }
+  button.icon-btn{ background:none; border:none; color: var(--muted); cursor:pointer; font-size:1rem; padding:0.1rem 0.4rem; }
+  .add-toggle{ margin: 1.2rem 0 0.8rem; display:flex; justify-content:flex-end; }
+  .form-card{ background: var(--surface-2); border:1px solid var(--gold-dim); border-radius:10px; padding:1.1rem; margin-bottom:1.2rem; }
+  .form-card h3{ font-size:0.95rem; color: var(--gold); margin:0 0 0.4rem; text-transform:uppercase; }
+  .form-actions{ display:flex; gap:0.6rem; justify-content:flex-end; margin-top:1rem; }
+  .goal-row, .scorer-row{ display:flex; gap:0.5rem; align-items:center; margin-top:0.4rem; }
+  .goal-row input[type=text]{ flex:2; }
+  .goal-row select{ flex:1; }
+  .empty{ text-align:center; color: var(--muted); padding: 2.5rem 1rem; font-size:0.9rem; }
+  .empty .display{ color: var(--gold); font-size:1rem; margin-bottom:0.4rem; }
+  .quarters{ display:flex; gap:6px; margin-top:0.5rem; }
+  .quarter{
+    flex:1; border-radius:6px; padding: 0.4rem 0.3rem; text-align:center; font-size:0.7rem;
+    border:1px solid var(--border); color: var(--muted);
+  }
+  .quarter.played{ background: rgba(212,175,55,0.14); border-color: var(--gold-dim); color: var(--gold); }
+  .quarter .qn{ font-weight:700; font-family:'Montserrat',sans-serif; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.03em; }
+  .quarter .pos{ margin-top:2px; font-size:0.78rem; color: var(--white); }
+  .stat-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:0.7rem; margin-bottom:1.2rem; }
+  .stat-card{ background: var(--surface); border:1px solid var(--border); border-radius:10px; padding:0.9rem 1rem; }
+  .stat-card .num{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:1.6rem; color: var(--gold); }
+  .stat-card .lbl{ font-size:0.75rem; color: var(--muted); margin-top:2px; }
+  .bar-list{ margin-top:0.4rem; }
+  .bar-item{ margin-bottom:0.6rem; }
+  .bar-item .bar-lbl{ display:flex; justify-content:space-between; font-size:0.8rem; margin-bottom:3px; }
+  .bar-track{ height:8px; background: var(--surface-2); border-radius:4px; overflow:hidden; }
+  .bar-fill{ height:100%; background: var(--gold); }
+  .remove-x{ color: var(--danger); cursor:pointer; font-size:0.85rem; padding: 0 0.3rem; }
+  .divider{ border:none; border-top:1px solid var(--border); margin: 0.7rem 0; }
+  .rating-stars{ display:flex; gap:4px; margin-top:0.3rem; }
+  .rating-stars span{ cursor:pointer; font-size:1.3rem; color: var(--border); }
+  .rating-stars span.on{ color: var(--gold); }
+  .goal-desc-list{ margin: 0.3rem 0 0; padding-left: 1.1rem; }
+  .goal-desc-list li{ font-size:0.85rem; margin-bottom:2px; }
+  .saved-note{ font-size:0.7rem; color: var(--muted); text-align:center; margin-top: -0.4rem; margin-bottom:0.6rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="title">
+      <h1>Football Parent Tracker</h1>
+    </div>
+    <p class="sub">Training notes, match log and playing time, all in one place.</p>
+    <nav>
+      <button data-tab="training" class="active">Training</button>
+      <button data-tab="matches">Matches</button>
+      <button data-tab="insights">Insights</button>
+    </nav>
+    <div style="display:flex; justify-content:flex-end; gap:0.8rem; padding: 0.5rem 0 0.9rem;">
+      <button class="link" id="btn-backup" style="padding:0;">Download backup</button>
+      <button class="link" id="btn-restore" style="padding:0;">Restore from backup</button>
+      <input type="file" id="restore-file" accept="application/json" style="display:none;">
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="tab-training">
+    <div class="add-toggle"><button class="primary" id="btn-add-training">+ Add training note</button></div>
+    <div id="form-training-wrap"></div>
+    <div class="row" style="margin-bottom:0.8rem;">
+      <div><label style="margin-top:0;">Filter by team / group</label><select id="tr-filter"><option value="all">All</option></select></div>
+    </div>
+    <div id="training-list"></div>
+  </section>
+
+  <section id="tab-matches" style="display:none;">
+    <div class="add-toggle"><button class="primary" id="btn-add-match">+ Add match</button></div>
+    <div id="form-match-wrap"></div>
+    <div class="row" style="margin-bottom:0.8rem;">
+      <div><label style="margin-top:0;">Filter by team</label><select id="m-filter"><option value="all">All</option></select></div>
+    </div>
+    <div id="match-list"></div>
+  </section>
+
+  <section id="tab-insights" style="display:none;">
+    <div class="row" style="margin-bottom:0.8rem;">
+      <div><label style="margin-top:0;">Filter by team</label><select id="ins-filter"><option value="all">All</option></select></div>
+    </div>
+    <div id="insights-content"></div>
+  </section>
+
+  <datalist id="team-tags"></datalist>
+
+</main>
+
+<script>
+let trainingEntries = [];
+let matchEntries = [];
+let currentTrainingFilter = 'all';
+let currentMatchFilter = 'all';
+let currentInsightsFilter = 'all';
+
+const TABS = ['training','matches','insights'];
+
+function switchTab(tab){
+  TABS.forEach(t => document.getElementById('tab-'+t).style.display = (t===tab ? 'block' : 'none'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  if(tab === 'insights') renderInsights();
+}
+document.querySelectorAll('nav button').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+
+function allTeamTags(){
+  const set = new Set();
+  trainingEntries.forEach(e => { if(e.team) set.add(e.team); });
+  matchEntries.forEach(m => { if(m.team) set.add(m.team); });
+  return [...set].sort();
+}
+
+function refreshTagOptions(){
+  const tags = allTeamTags();
+  document.getElementById('team-tags').innerHTML = tags.map(t => `<option value="${escapeHtml(t)}">`).join('');
+  [
+    { el: document.getElementById('tr-filter'), current: currentTrainingFilter },
+    { el: document.getElementById('m-filter'), current: currentMatchFilter },
+    { el: document.getElementById('ins-filter'), current: currentInsightsFilter }
+  ].forEach(({el, current}) => {
+    el.innerHTML = `<option value="all">All</option>` + tags.map(t => `<option value="${escapeHtml(t)}" ${current === t ? 'selected' : ''}>${escapeHtml(t)}</option>`).join('');
+    el.value = tags.includes(current) ? current : 'all';
+  });
+}
+
+document.getElementById('tr-filter').addEventListener('change', (e) => { currentTrainingFilter = e.target.value; renderTraining(); });
+document.getElementById('m-filter').addEventListener('change', (e) => { currentMatchFilter = e.target.value; renderMatches(); });
+document.getElementById('ins-filter').addEventListener('change', (e) => { currentInsightsFilter = e.target.value; renderInsights(); });
+
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+function parseOtherScorers(raw){
+  return raw.split(',').map(s => s.trim()).filter(Boolean).flatMap(entry => {
+    const match = entry.match(/^(.*?)\s*\((\d+)\)$/);
+    if(match){
+      const name = match[1].trim();
+      const count = parseInt(match[2]) || 1;
+      return name ? Array(count).fill(name) : [];
+    }
+    return [entry];
+  });
+}
+function compressOthers(arr){
+  if(!arr || !arr.length) return '';
+  const counts = {};
+  const order = [];
+  arr.forEach(n => { if(!(n in counts)){ counts[n] = 0; order.push(n); } counts[n]++; });
+  return order.map(n => counts[n] > 1 ? `${n} (${counts[n]})` : n).join(', ');
+}
+function fmtDate(d){
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+}
+function todayStr(){ return new Date().toISOString().slice(0,10); }
+
+async function loadAll(){
+  try{
+    const t = localStorage.getItem('training-entries');
+    trainingEntries = t ? JSON.parse(t) : [];
+  }catch(e){ trainingEntries = []; }
+  try{
+    const m = localStorage.getItem('match-entries');
+    matchEntries = m ? JSON.parse(m) : [];
+  }catch(e){ matchEntries = []; }
+  renderTraining();
+  renderMatches();
+}
+
+async function saveTraining(){
+  try{ localStorage.setItem('training-entries', JSON.stringify(trainingEntries)); }
+  catch(e){ console.error('Save failed', e); alert('Could not save. Your browser storage may be full or blocked.'); }
+}
+async function saveMatches(){
+  try{ localStorage.setItem('match-entries', JSON.stringify(matchEntries)); }
+  catch(e){ console.error('Save failed', e); alert('Could not save. Your browser storage may be full or blocked.'); }
+}
+
+/* ---------- TRAINING ---------- */
+
+document.getElementById('btn-add-training').addEventListener('click', () => openTrainingForm(null));
+
+function openTrainingForm(existing){
+  const wrap = document.getElementById('form-training-wrap');
+  const isEdit = !!existing;
+  if(!isEdit && wrap.innerHTML){ wrap.innerHTML = ''; return; }
+  wrap.innerHTML = `
+    <div class="form-card">
+      <h3>${isEdit ? 'Edit training note' : 'New training note'}</h3>
+      <div class="row">
+        <div><label>Date</label><input type="date" id="tr-date" value="${isEdit ? existing.date : todayStr()}"></div>
+        <div><label>Time (optional)</label><input type="time" id="tr-time" value="${isEdit ? existing.time : ''}"></div>
+      </div>
+      <label>Team / group</label>
+      <input type="text" id="tr-team" list="team-tags" placeholder="e.g. Crystal Palace DC, Sunday league, 1-2-1 coaching" value="${isEdit ? escapeHtml(existing.team || '') : ''}">
+      <label>What he did well</label>
+      <textarea id="tr-well" placeholder="e.g. First touch under pressure was much sharper">${isEdit ? escapeHtml(existing.well) : ''}</textarea>
+      <label>What to work on</label>
+      <textarea id="tr-work" placeholder="e.g. Needs to scan more before receiving">${isEdit ? escapeHtml(existing.work) : ''}</textarea>
+      <label>General notes</label>
+      <textarea id="tr-notes" placeholder="Anything else from the session">${isEdit ? escapeHtml(existing.notes) : ''}</textarea>
+      <div class="form-actions">
+        <button class="ghost" id="tr-cancel">Cancel</button>
+        <button class="primary" id="tr-save">${isEdit ? 'Save changes' : 'Save note'}</button>
+      </div>
+    </div>
+  `;
+  wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+  document.getElementById('tr-cancel').addEventListener('click', () => wrap.innerHTML = '');
+  document.getElementById('tr-save').addEventListener('click', async () => {
+    const date = document.getElementById('tr-date').value;
+    if(!date){ alert('Add a date for this session.'); return; }
+    const data = {
+      date,
+      time: document.getElementById('tr-time').value || '',
+      team: document.getElementById('tr-team').value.trim(),
+      well: document.getElementById('tr-well').value.trim(),
+      work: document.getElementById('tr-work').value.trim(),
+      notes: document.getElementById('tr-notes').value.trim(),
+    };
+    if(isEdit){
+      const idx = trainingEntries.findIndex(e => e.id === existing.id);
+      if(idx > -1) trainingEntries[idx] = { ...trainingEntries[idx], ...data };
+    } else {
+      trainingEntries.push({ id: uid(), ...data });
+    }
+    await saveTraining();
+    wrap.innerHTML = '';
+    renderTraining();
+  });
+}
+
+function renderTraining(){
+  refreshTagOptions();
+  const list = document.getElementById('training-list');
+  const filtered = currentTrainingFilter === 'all' ? trainingEntries : trainingEntries.filter(e => e.team === currentTrainingFilter);
+  if(trainingEntries.length === 0){
+    list.innerHTML = `<div class="empty"><div class="display">No training notes yet</div>Add one after the next session and it'll build into a full picture over time.</div>`;
+    return;
+  }
+  if(filtered.length === 0){
+    list.innerHTML = `<div class="empty"><div class="display">No sessions for this filter</div>Try a different team or group, or choose All.</div>`;
+    return;
+  }
+  const sorted = [...filtered].sort((a,b) => (b.date+b.time).localeCompare(a.date+a.time));
+  list.innerHTML = sorted.map(e => `
+    <div class="card">
+      <div class="meta">
+        <span class="date">${fmtDate(e.date)}${e.time ? ' · ' + e.time : ''}${e.team ? ` <span class="tag">· ${escapeHtml(e.team)}</span>` : ''}</span>
+        <span>
+          <button class="icon-btn edit-tr" data-id="${e.id}" title="Edit">&#9998;</button>
+          <span class="remove-x" data-id="${e.id}" title="Delete">&times;</span>
+        </span>
+      </div>
+      ${e.well ? `<p class="label">Went well</p><p>${escapeHtml(e.well)}</p>` : ''}
+      ${e.work ? `<p class="label">To work on</p><p>${escapeHtml(e.work)}</p>` : ''}
+      ${e.notes ? `<p class="label">Notes</p><p>${escapeHtml(e.notes)}</p>` : ''}
+    </div>
+  `).join('');
+  list.querySelectorAll('.edit-tr').forEach(btn => btn.addEventListener('click', () => {
+    const entry = trainingEntries.find(e => e.id === btn.dataset.id);
+    if(entry) openTrainingForm(entry);
+  }));
+  list.querySelectorAll('.remove-x').forEach(x => x.addEventListener('click', async () => {
+    if(!confirm('Delete this training note?')) return;
+    trainingEntries = trainingEntries.filter(e => e.id !== x.dataset.id);
+    await saveTraining();
+    renderTraining();
+  }));
+}
+
+/* ---------- MATCHES ---------- */
+
+document.getElementById('btn-add-match').addEventListener('click', () => openMatchForm(null));
+
+function openMatchForm(existing){
+  const wrap = document.getElementById('form-match-wrap');
+  const isEdit = !!existing;
+  if(!isEdit && wrap.innerHTML){ wrap.innerHTML = ''; return; }
+  const defaultNumQ = isEdit && existing.quarters && existing.quarters.length ? existing.quarters.length : 4;
+  const defaultQLen = isEdit && existing.quarters && existing.quarters.length ? (existing.quarters[0].minutes || 10) : 10;
+  wrap.innerHTML = `
+    <div class="form-card">
+      <h3>${isEdit ? 'Edit match' : 'New match'}</h3>
+      <div class="row">
+        <div><label>Date</label><input type="date" id="m-date" value="${isEdit ? existing.date : todayStr()}"></div>
+        <div><label>Opponent (optional)</label><input type="text" id="m-opp" placeholder="e.g. Selhurst Colts" value="${isEdit ? escapeHtml(existing.opponent) : ''}"></div>
+      </div>
+      <label>Team</label>
+      <input type="text" id="m-team" list="team-tags" placeholder="e.g. Crystal Palace DC, Sunday league" value="${isEdit ? escapeHtml(existing.team || '') : ''}">
+      <div class="row">
+        <div><label>Our score</label><input type="number" min="0" id="m-us" value="${isEdit ? existing.ourScore : ''}"></div>
+        <div><label>Their score</label><input type="number" min="0" id="m-them" value="${isEdit ? existing.theirScore : ''}"></div>
+      </div>
+      <label>How he played</label>
+      <div class="rating-stars" id="m-rating">
+        ${[1,2,3,4,5].map(n => `<span data-n="${n}" class="${isEdit && existing.rating >= n ? 'on' : ''}">&#9733;</span>`).join('')}
+      </div>
+
+      <label>Goals scored</label>
+      <div id="m-goals"></div>
+      <button class="link" id="m-add-goal">+ Add a goal</button>
+
+      <label>Other goalscorers (comma separated, use (2) for multiple)</label>
+      <input type="text" id="m-others" placeholder="e.g. Jake (2), Oscar, Wilf" value="${isEdit ? escapeHtml(compressOthers(existing.others)) : ''}">
+
+      <hr class="divider">
+      <label style="margin-top:0;">Team sheet (optional)</label>
+      <div class="row">
+        <div><label>Quarters/halves played</label><input type="number" id="m-numq" value="${defaultNumQ}" min="1" max="8"></div>
+        <div><label>Length each (minutes)</label><input type="number" id="m-qlen" value="${defaultQLen}" min="1"></div>
+      </div>
+      <button class="link" id="m-build-quarters">${isEdit && existing.quarters && existing.quarters.length ? 'Rebuild team sheet' : 'Build team sheet'}</button>
+      <div id="m-quarters-form"></div>
+
+      <div class="form-actions">
+        <button class="ghost" id="m-cancel">Cancel</button>
+        <button class="primary" id="m-save">${isEdit ? 'Save changes' : 'Save match'}</button>
+      </div>
+    </div>
+  `;
+  wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  let rating = isEdit ? (existing.rating || 0) : 0;
+
+  wrap.querySelectorAll('#m-rating span').forEach(s => s.addEventListener('click', () => {
+    rating = parseInt(s.dataset.n);
+    wrap.querySelectorAll('#m-rating span').forEach(x => x.classList.toggle('on', parseInt(x.dataset.n) <= rating));
+  }));
+
+  function addGoalRow(goal){
+    const div = document.createElement('div');
+    div.className = 'goal-row';
+    div.innerHTML = `
+      <input type="text" placeholder="How it went in, e.g. Curled far post from the edge of the box" value="${goal ? escapeHtml(goal.description) : ''}">
+      <select>
+        <option value="">Quarter (if known)</option>
+        ${Array.from({length:8}).map((_,i)=>`<option value="${i+1}" ${goal && goal.quarter === i+1 ? 'selected' : ''}>Q${i+1}</option>`).join('')}
+      </select>
+      <span class="remove-x" title="Remove">&times;</span>
+    `;
+    div.querySelector('.remove-x').addEventListener('click', () => div.remove());
+    document.getElementById('m-goals').appendChild(div);
+  }
+  document.getElementById('m-add-goal').addEventListener('click', () => addGoalRow(null));
+  if(isEdit && existing.goals && existing.goals.length){
+    existing.goals.forEach(g => addGoalRow(g));
+  }
+
+  const POSITIONS = ['Goalkeeper', 'Defender', 'Left Midfield', 'Right Midfield', 'Striker'];
+
+  function buildQuartersForm(numQ, qlen, prefillQuarters){
+    const qf = document.getElementById('m-quarters-form');
+    qf.innerHTML = Array.from({length: numQ}).map((_,i) => {
+      const pf = prefillQuarters && prefillQuarters[i];
+      const pfPos = pf ? pf.position : '';
+      return `
+      <div class="row" style="align-items:center; margin-top:0.4rem;">
+        <div style="flex:0 0 50px; font-size:0.8rem; color:var(--muted);">Q${i+1}</div>
+        <div>
+          <select data-q="${i+1}" class="q-pos">
+            <option value="">Position not recorded</option>
+            ${POSITIONS.map(p => `<option value="${p}" ${pfPos.toLowerCase() === p.toLowerCase() ? 'selected' : ''}>${p}</option>`).join('')}
+          </select>
+        </div>
+        <div style="flex:0 0 90px; display:flex; align-items:center; gap:6px; font-size:0.8rem;">
+          <input type="checkbox" data-q="${i+1}" class="q-played" style="width:auto;" ${(!pf || pf.played) ? 'checked' : ''}> Played
+        </div>
+      </div>
+    `;
+    }).join('');
+  }
+  document.getElementById('m-build-quarters').addEventListener('click', () => {
+    const numQ = parseInt(document.getElementById('m-numq').value) || 4;
+    buildQuartersForm(numQ, parseInt(document.getElementById('m-qlen').value) || 10, null);
+  });
+  if(isEdit && existing.quarters && existing.quarters.length){
+    buildQuartersForm(existing.quarters.length, defaultQLen, existing.quarters);
+  }
+
+  document.getElementById('m-cancel').addEventListener('click', () => wrap.innerHTML = '');
+
+  document.getElementById('m-save').addEventListener('click', async () => {
+    const date = document.getElementById('m-date').value;
+    if(!date){ alert('Add a date for this match.'); return; }
+
+    const goals = [...document.querySelectorAll('#m-goals .goal-row')].map(row => ({
+      description: row.querySelector('input[type=text]').value.trim(),
+      quarter: row.querySelector('select').value ? parseInt(row.querySelector('select').value) : null
+    })).filter(g => g.description);
+
+    const others = parseOtherScorers(document.getElementById('m-others').value);
+
+    const qlen = parseInt(document.getElementById('m-qlen').value) || 10;
+    const quarters = [...document.querySelectorAll('.q-pos')].map(sel => {
+      const q = sel.dataset.q;
+      const played = document.querySelector(`.q-played[data-q="${q}"]`).checked;
+      return { quarter: parseInt(q), position: sel.value, played, minutes: played ? qlen : 0, scheduledMinutes: qlen };
+    });
+
+    const data = {
+      date,
+      opponent: document.getElementById('m-opp').value.trim(),
+      team: document.getElementById('m-team').value.trim(),
+      ourScore: document.getElementById('m-us').value,
+      theirScore: document.getElementById('m-them').value,
+      rating,
+      goals,
+      others,
+      quarters
+    };
+
+    if(isEdit){
+      const idx = matchEntries.findIndex(m => m.id === existing.id);
+      if(idx > -1) matchEntries[idx] = { ...matchEntries[idx], ...data };
+    } else {
+      matchEntries.push({ id: uid(), ...data });
+    }
+
+    await saveMatches();
+    wrap.innerHTML = '';
+    renderMatches();
+  });
+}
+
+function renderMatches(){
+  refreshTagOptions();
+  const list = document.getElementById('match-list');
+  const filtered = currentMatchFilter === 'all' ? matchEntries : matchEntries.filter(m => m.team === currentMatchFilter);
+  if(matchEntries.length === 0){
+    list.innerHTML = `<div class="empty"><div class="display">No matches logged yet</div>Add a match to start tracking goals, form and playing time.</div>`;
+    return;
+  }
+  if(filtered.length === 0){
+    list.innerHTML = `<div class="empty"><div class="display">No matches for this filter</div>Try a different team, or choose All.</div>`;
+    return;
+  }
+  const sorted = [...filtered].sort((a,b) => b.date.localeCompare(a.date));
+  list.innerHTML = sorted.map(m => `
+    <div class="card">
+      <div class="meta">
+        <span class="date">${fmtDate(m.date)}${m.opponent ? ' vs ' + escapeHtml(m.opponent) : ''}${m.team ? ` <span class="tag">· ${escapeHtml(m.team)}</span>` : ''}</span>
+        <span>
+          <button class="icon-btn edit-m" data-id="${m.id}" title="Edit">&#9998;</button>
+          <span class="remove-x" data-id="${m.id}" title="Delete">&times;</span>
+        </span>
+      </div>
+      <div class="row">
+        ${(m.ourScore !== '' && m.theirScore !== '') ? `<p class="label" style="flex:none;">Score</p>` : ''}
+      </div>
+      ${(m.ourScore !== '' && m.theirScore !== '') ? `<p>${m.ourScore} &ndash; ${m.theirScore}</p>` : ''}
+      ${m.rating ? `<p class="label">How he played</p><p>${'&#9733;'.repeat(m.rating)}${'&#9734;'.repeat(5-m.rating)}</p>` : ''}
+      ${m.goals && m.goals.length ? `
+        <p class="label">Goals (${m.goals.length})</p>
+        <ul class="goal-desc-list">
+          ${m.goals.map(g => `<li>${escapeHtml(g.description)}${g.quarter ? ` <span style="color:var(--muted)">(Q${g.quarter})</span>` : ''}</li>`).join('')}
+        </ul>` : ''}
+      ${m.others && m.others.length ? `<p class="label">Also scored</p><p>${escapeHtml(compressOthers(m.others))}</p>` : ''}
+      ${m.quarters && m.quarters.length ? `
+        <p class="label">Team sheet</p>
+        <div class="quarters">
+          ${m.quarters.map(q => `
+            <div class="quarter ${q.played ? 'played' : ''}">
+              <div class="qn">Q${q.quarter}</div>
+              <div class="pos">${q.played ? (escapeHtml(q.position) || 'Played') : 'Bench'}</div>
+            </div>
+          `).join('')}
+        </div>` : ''}
+    </div>
+  `).join('');
+  list.querySelectorAll('.edit-m').forEach(btn => btn.addEventListener('click', () => {
+    const entry = matchEntries.find(m => m.id === btn.dataset.id);
+    if(entry) openMatchForm(entry);
+  }));
+  list.querySelectorAll('.remove-x').forEach(x => x.addEventListener('click', async () => {
+    if(!confirm('Delete this match?')) return;
+    matchEntries = matchEntries.filter(m => m.id !== x.dataset.id);
+    await saveMatches();
+    renderMatches();
+  }));
+}
+
+/* ---------- INSIGHTS ---------- */
+
+function renderInsights(){
+  refreshTagOptions();
+  const el = document.getElementById('insights-content');
+  const source = currentInsightsFilter === 'all' ? matchEntries : matchEntries.filter(m => m.team === currentInsightsFilter);
+  if(matchEntries.length === 0){
+    el.innerHTML = `<div class="empty"><div class="display">Nothing to show yet</div>Log a few matches and this page fills in with goals, form and playing time patterns.</div>`;
+    return;
+  }
+  if(source.length === 0){
+    el.innerHTML = `<div class="empty"><div class="display">No matches for this filter</div>Try a different team, or choose All.</div>`;
+    return;
+  }
+
+  const totalGoals = source.reduce((s,m) => s + (m.goals ? m.goals.length : 0), 0);
+  const totalMatches = source.length;
+  const rated = source.filter(m => m.rating);
+  const avgRating = rated.length ? (rated.reduce((s,m) => s + m.rating, 0) / rated.length) : 0;
+
+  let totalMinutes = 0, totalQuartersPlayed = 0, totalQuartersAvailable = 0;
+  const positionCount = {};
+  source.forEach(m => {
+    (m.quarters || []).forEach(q => {
+      totalQuartersAvailable++;
+      if(q.played){
+        totalQuartersPlayed++;
+        totalMinutes += (q.minutes || 0);
+        if(q.position){
+          const p = q.position.toUpperCase();
+          positionCount[p] = (positionCount[p] || 0) + 1;
+        }
+      }
+    });
+  });
+
+  const goalsPerQuarter = {};
+  source.forEach(m => (m.goals||[]).forEach(g => {
+    if(g.quarter){ goalsPerQuarter[g.quarter] = (goalsPerQuarter[g.quarter] || 0) + 1; }
+  }));
+
+  const otherGoalsCount = {};
+  const otherGoalsDisplay = {};
+  source.forEach(m => (m.others||[]).forEach(n => {
+    const key = n.trim().toLowerCase();
+    if(!key) return;
+    otherGoalsCount[key] = (otherGoalsCount[key] || 0) + 1;
+    if(!otherGoalsDisplay[key]) otherGoalsDisplay[key] = n.trim();
+  }));
+  const topScorers = Object.entries(otherGoalsCount)
+    .map(([key, count]) => ({ name: otherGoalsDisplay[key], count }))
+    .sort((a,b) => b.count - a.count);
+
+  const minutesPerGoal = totalGoals > 0 && totalMinutes > 0 ? (totalMinutes / totalGoals) : null;
+
+  // Typical scheduled game length, from matches that have a team sheet logged
+  const gameLengths = source
+    .map(m => (m.quarters || []).reduce((s,q) => s + (q.scheduledMinutes || q.minutes || 0), 0))
+    .filter(len => len > 0);
+  const typicalGameLength = gameLengths.length ? Math.round(gameLengths.reduce((a,b)=>a+b,0) / gameLengths.length) : null;
+  const goalsPerTypicalGame = (typicalGameLength && minutesPerGoal) ? (typicalGameLength / minutesPerGoal) : null;
+
+  const benchRate = totalQuartersAvailable > 0 ? Math.round(100 * (1 - totalQuartersPlayed/totalQuartersAvailable)) : null;
+
+  const topPositions = Object.entries(positionCount).sort((a,b) => b[1]-a[1]);
+  const maxQGoals = Math.max(1, ...Object.values(goalsPerQuarter));
+  const maxPos = Math.max(1, ...topPositions.map(p => p[1]));
+
+  el.innerHTML = `
+    <div class="stat-grid">
+      <div class="stat-card"><div class="num">${totalGoals}</div><div class="lbl">Goals across ${totalMatches} match${totalMatches===1?'':'es'}</div></div>
+      <div class="stat-card"><div class="num">${avgRating ? avgRating.toFixed(1) : '–'}</div><div class="lbl">Average rating out of 5</div></div>
+      <div class="stat-card"><div class="num">${totalMinutes || '–'}</div><div class="lbl">Minutes on the pitch logged</div></div>
+      <div class="stat-card">
+        <div class="num">${minutesPerGoal !== null ? Math.round(minutesPerGoal) : '–'}</div>
+        <div class="lbl">${minutesPerGoal !== null ? 'Minutes played per goal' : 'Not enough data yet for a goal rate'}</div>
+      </div>
+    </div>
+    ${goalsPerTypicalGame !== null ? `
+      <div class="card">
+        <p class="label">Scoring rate</p>
+        <p>About ${goalsPerTypicalGame.toFixed(1)} goal${goalsPerTypicalGame >= 1.05 || goalsPerTypicalGame < 0.95 ? 's' : ''} every ${typicalGameLength} minutes played, based on his typical game length.</p>
+      </div>` : ''}
+
+    ${Object.keys(goalsPerQuarter).length ? `
+      <div class="card">
+        <p class="label">Where the goals come from (by quarter)</p>
+        <div class="bar-list">
+          ${Object.entries(goalsPerQuarter).sort((a,b)=>a[0]-b[0]).map(([q,c]) => `
+            <div class="bar-item">
+              <div class="bar-lbl"><span>Q${q}</span><span>${c} goal${c===1?'':'s'}</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${(c/maxQGoals*100).toFixed(0)}%"></div></div>
+            </div>
+          `).join('')}
+        </div>
+        <p style="font-size:0.72rem; color:var(--muted); margin-top:0.5rem;">Only goals with a quarter recorded are counted here.</p>
+      </div>` : ''}
+
+    ${topScorers.length ? `
+      <div class="card">
+        <p class="label">Top goalscorers (team mates)</p>
+        <table style="width:100%; font-size:0.88rem; border-collapse:collapse; margin-top:0.3rem;">
+          <tbody>
+            ${topScorers.map(t => `
+              <tr>
+                <td style="padding:6px 0; border-bottom:1px solid var(--border);">${escapeHtml(t.name)}</td>
+                <td style="padding:6px 0; border-bottom:1px solid var(--border); text-align:right; color:var(--gold); font-weight:500;">${t.count}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>` : ''}
+
+    ${topPositions.length ? `
+      <div class="card">
+        <p class="label">Most played positions</p>
+        <div class="bar-list">
+          ${topPositions.map(([p,c]) => `
+            <div class="bar-item">
+              <div class="bar-lbl"><span>${escapeHtml(p)}</span><span>${c} quarter${c===1?'':'s'}</span></div>
+              <div class="bar-track"><div class="bar-fill" style="width:${(c/maxPos*100).toFixed(0)}%"></div></div>
+            </div>
+          `).join('')}
+        </div>
+      </div>` : ''}
+
+    ${benchRate !== null ? `
+      <div class="card">
+        <p class="label">Playing time</p>
+        <p>Played ${totalQuartersPlayed} of ${totalQuartersAvailable} logged quarters (benched ${benchRate}% of the time).</p>
+      </div>` : ''}
+  `;
+}
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str || '';
+  return d.innerHTML;
+}
+
+loadAll();
+
+document.getElementById('btn-backup').addEventListener('click', () => {
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    trainingEntries,
+    matchEntries
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = todayStr();
+  a.href = url;
+  a.download = `football-parent-backup-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('btn-restore').addEventListener('click', () => {
+  document.getElementById('restore-file').click();
+});
+
+document.getElementById('restore-file').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+  try{
+    const text = await file.text();
+    const data = JSON.parse(text);
+    if(!Array.isArray(data.trainingEntries) || !Array.isArray(data.matchEntries)){
+      alert('That file doesn\'t look like a valid backup.');
+      return;
+    }
+    const incomingCount = data.trainingEntries.length + data.matchEntries.length;
+    const currentCount = trainingEntries.length + matchEntries.length;
+    const merge = currentCount > 0
+      ? confirm(`This backup has ${incomingCount} entries. You currently have ${currentCount} saved here.\n\nClick OK to MERGE the backup in alongside what's already here (duplicates possible if it's the same backup twice), or Cancel to REPLACE everything with the backup.`)
+      : true;
+    if(merge){
+      const existingTrainingIds = new Set(trainingEntries.map(x => x.id));
+      const existingMatchIds = new Set(matchEntries.map(x => x.id));
+      data.trainingEntries.forEach(x => { if(!existingTrainingIds.has(x.id)) trainingEntries.push(x); });
+      data.matchEntries.forEach(x => { if(!existingMatchIds.has(x.id)) matchEntries.push(x); });
+    } else {
+      if(!confirm('This will permanently replace everything currently saved with the contents of the backup file. Continue?')) return;
+      trainingEntries = data.trainingEntries;
+      matchEntries = data.matchEntries;
+    }
+    await saveTraining();
+    await saveMatches();
+    renderTraining();
+    renderMatches();
+    alert('Backup restored.');
+  }catch(err){
+    console.error(err);
+    alert('Could not read that file. Make sure it\'s a backup downloaded from this app.');
+  }
+  e.target.value = '';
+});
+</script>
+
+</body>
+</html>
