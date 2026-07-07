@@ -1,6 +1,6 @@
 # Internal Link Audit
 
-_Generated 2026-07-07T19:23:47.475Z_
+_Generated 2026-07-07T20:24:19.702Z_
 
 _No Search Console data found (gsc-pages.csv not present) - priorities are based on link structure only._
 
@@ -8,31 +8,15 @@ _No Search Console data found (gsc-pages.csv not present) - priorities are based
 
 _Threshold: fewer than 3 total inbound links. Contextual (in-body) links are worth more than footer/related links._
 
-### FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development (`/parent-guides/futurefit-football-dna-interview-part-1`)
-Total inbound: 0 | Contextual: 0 | Related/footer: 0
-
-- Add a link from **Biggest Football Parent Mistakes?** (`/parent-guides/biggest-football-parent-mistakes`) — relevance 6.5
-  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
-  - Paragraph 23: "Parents who prioritise academy status over their child's enjoyment sometimes find themselves making decisions the child never asked for, for..."
-- Add a link from **What Should Parents Say After Football Matches?** (`/parent-guides/what-to-say-after-football-matches`) — relevance 5
-  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
-  - Paragraph 9: "This sounds simple. From experience the difficulty is you are also processing your own feelings about what just happened. Whether you're fru..."
-- Add a link from **When Your Child Is Struggling in Football | Football Parent** (`/parent-guides/support-child-after-bad-match`) — relevance 5
-  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
-  - Paragraph 64: "Yes, and it is more common than most parents realise. The standard at development centre and academy level is high, and the competition with..."
-- Add a link from **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`) — relevance 5
-  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
-  - Paragraph 1: "Many parents see the Junior Premier League as a possible route into academy football. The hope is simple: better matches, stronger opponents..."
-
 ### Best Shin Pads For Kids Football (`/football-gear/best-shin-pads-for-kids-football`)
 Total inbound: 0 | Contextual: 0 | Related/footer: 0
 
+- Add a link from **Football Sizes by Age: Best Footballs For Kids** (`/football-gear/best-footballs-by-age`) — relevance 4.5
+  - Suggested anchor: "Best Shin Pads For Kids Football"
+  - Paragraph 39: "Getting the ball size right matters, but so does the rest of the kit: see our guides to [football gloves for winter training](/football-gear..."
 - Add a link from **Best Football Boots For Wide Feet Kids** (`/football-gear/best-football-boots-for-wide-feet-kids`) — relevance 4.5
   - Suggested anchor: "Best Shin Pads For Kids Football"
   - Paragraph 33: "- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots) - [Best Shin Pads for Kids Football](/football-gear/shin-pads/best-shin-pads-for-..."
-- Add a link from **Best Footballs For Different Ages** (`/football-gear/best-footballs-by-age`) — relevance 4
-  - Suggested anchor: "Best Shin Pads For Kids Football"
-  - Paragraph 68: "- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots) - [Best Football Boots For Wide Feet Kids](/football-gear/boots/best-football-boo..."
 - Add a link from **Best Football Gloves For Winter Training** (`/football-gear/best-football-gloves-for-winter-training`) — relevance 4
   - Suggested anchor: "Best Shin Pads For Kids Football"
   - Paragraph 58: "- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots) - [Best Shin Pads For Kids Football](/football-gear/shin-pads/best-shin-pads-for-..."
@@ -46,15 +30,15 @@ Total inbound: 0 | Contextual: 0 | Related/footer: 0
 - Add a link from **FG vs AG Football Boots for Kids: A Practical Parent's Guide** (`/football-gear/ag-vs-fg-boots`) — relevance 5.5
   - Suggested anchor: "Best Football Boots For Wide Feet Kids"
   - Paragraph 63: "Once you've settled on a sole type, the same fit principles apply to [boots for wide feet](/football-gear/boots/best-football-boots-for-wide..."
+- Add a link from **Football Sizes by Age: Best Footballs For Kids** (`/football-gear/best-footballs-by-age`) — relevance 5
+  - Suggested anchor: "Best Football Boots For Wide Feet Kids"
+  - Paragraph 39: "Getting the ball size right matters, but so does the rest of the kit: see our guides to [football gloves for winter training](/football-gear..."
 - Add a link from **Best Football Gloves For Winter Training** (`/football-gear/best-football-gloves-for-winter-training`) — relevance 5
   - Suggested anchor: "Best Football Boots For Wide Feet Kids"
   - Paragraph 58: "- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots) - [Best Shin Pads For Kids Football](/football-gear/shin-pads/best-shin-pads-for-..."
 - Add a link from **Best Shin Pads For Kids Football** (`/football-gear/best-shin-pads-for-kids-football`) — relevance 4.5
   - Suggested anchor: "Best Football Boots For Wide Feet Kids"
   - Paragraph 26: "Shin pads are only one part of a proper kit setup: it's worth checking [the right boots for wide feet](/football-gear/boots/best-football-bo..."
-- Add a link from **Best Footballs For Different Ages** (`/football-gear/best-footballs-by-age`) — relevance 4.5
-  - Suggested anchor: "Best Football Boots For Wide Feet Kids"
-  - Paragraph 62: "Getting the ball size right matters, but so does the rest of the kit: see our guides to [football gloves for winter training](/football-gear..."
 
 ### How to Find a Football Agent for Your Child (`/academy-pathway/how-to-find-a-football-agent-for-your-child`)
 Total inbound: 0 | Contextual: 0 | Related/footer: 0
@@ -72,22 +56,6 @@ Total inbound: 0 | Contextual: 0 | Related/footer: 0
   - Suggested anchor: "How to Find a Football Agent for Your Child"
   - Paragraph 31: "The girls' pathway is structured somewhat differently from the boys', with ETCs playing a formal role in identifying and developing talent. ..."
 
-### Private Football Coaching: Is 1-to-1 Football Coaching Worth It? (`/football-development/is-private-football-coaching-worth-it`)
-Total inbound: 1 | Contextual: 0 | Related/footer: 1
-
-- Add a link from **How To Improve Football Decision Making In Young Players** (`/football-development/improve-football-decision-making`) — relevance 5
-  - Suggested anchor: "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?"
-  - Paragraph 24: "> **Football Parent note:** If you find yourself constantly shouting instructions during matches, it's worth pausing to consider whether you..."
-- Add a link from **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`) — relevance 5
-  - Suggested anchor: "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?"
-  - Paragraph 15: "If your child regularly comes home from training without having broken a sweat, or describes sessions that were mostly standing around watch..."
-- Add a link from **Should My Child Play Up an Age Group in Football?** (`/football-development/playing-up-an-age-group-football`) — relevance 4.5
-  - Suggested anchor: "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?"
-  - Paragraph 1: "A coach pulls you aside after training. "Have you thought about him playing up?" It sounds like a compliment, and often it is one. But it's ..."
-- Add a link from **How Much Training Is Too Much For Young Footballers?** (`/football-development/how-much-training-is-too-much`) — relevance 4.5
-  - Suggested anchor: "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?"
-  - Paragraph 6: "For many young players, the ideal balance is lots of football touches alongside a variety of other sports and physical activities. Just as i..."
-
 ### How to Get Scouted for Football: What Parents Need to Know (`/academy-trials/how-to-get-scouted-for-football`)
 Total inbound: 1 | Contextual: 0 | Related/footer: 1
 
@@ -104,45 +72,26 @@ Total inbound: 1 | Contextual: 0 | Related/footer: 1
   - Suggested anchor: "How to Get Scouted for Football: What Parents Need to Know"
   - Paragraph 3: "- **Scouting at matches.** Academy scouts attend grassroots and school games regularly. Our guide to [How Football Scouts Identify Players](..."
 
-### JPL Trials: How Do You Get Into the Junior Premier League? (`/parent-guides/how-to-get-into-the-jpl`)
+### FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development (`/parent-guides/futurefit-football-dna-interview-part-1`)
 Total inbound: 2 | Contextual: 1 | Related/footer: 1
 
-- Add a link from **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`) — relevance 6
-  - Suggested anchor: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - Paragraph 1: "Many parents see the Junior Premier League as a possible route into academy football. The hope is simple: better matches, stronger opponents..."
-- Add a link from **JPL vs Grassroots Football: Which Is Right for Your Child?** (`/parent-guides/jpl-vs-grassroots-football`) — relevance 5
-  - Suggested anchor: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - Paragraph 1: "At some point in your child's football journey, someone will mention the Junior Premier League. Maybe a coach suggests it. Maybe another par..."
-- Add a link from **What Should Parents Say After Football Matches?** (`/parent-guides/what-to-say-after-football-matches`) — relevance 4.5
-  - Suggested anchor: "JPL Trials: How Do You Get Into the Junior Premier League?"
+- Add a link from **Biggest Football Parent Mistakes?** (`/parent-guides/biggest-football-parent-mistakes`) — relevance 6.5
+  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
+  - Paragraph 23: "Parents who prioritise academy status over their child's enjoyment sometimes find themselves making decisions the child never asked for, for..."
+- Add a link from **What Should Parents Say After Football Matches?** (`/parent-guides/what-to-say-after-football-matches`) — relevance 5
+  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
   - Paragraph 9: "This sounds simple. From experience the difficulty is you are also processing your own feelings about what just happened. Whether you're fru..."
-- Add a link from **What Is Grassroots Football? A Parent's Guide to the UK Game** (`/parent-guides/what-is-grassroots-football`) — relevance 4.5
-  - Suggested anchor: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - Paragraph 1: "Grassroots football is community football played outside the professional academy system. It includes children's football, youth football an..."
-
-### Best Football Gloves For Winter Training (`/football-gear/best-football-gloves-for-winter-training`)
-Total inbound: 2 | Contextual: 2 | Related/footer: 0
-
-- Add a link from **Best Football Boots For Wide Feet Kids** (`/football-gear/best-football-boots-for-wide-feet-kids`) — relevance 5
-  - Suggested anchor: "Best Football Gloves For Winter Training"
-  - Paragraph 30: "**How much growing room should football boots have?** Roughly a thumb's width at the toe is the general guide - similar to regular footwear...."
-- Add a link from **FG vs AG Football Boots for Kids: A Practical Parent's Guide** (`/football-gear/ag-vs-fg-boots`) — relevance 4.5
-  - Suggested anchor: "Best Football Gloves For Winter Training"
-  - Paragraph 4: "FG boots work well on well-maintained natural grass pitches, particularly in dry or slightly soft conditions. They're what most people imagi..."
-- Add a link from **What Should Parents Say After Football Matches?** (`/parent-guides/what-to-say-after-football-matches`) — relevance 2.5
-  - Suggested anchor: "Best Football Gloves For Winter Training"
-  - Paragraph 16: "### Nothing Silence, music, talking about something completely unrelated. Some of the best post-match journeys are the ones where football i..."
-- Add a link from **When Your Child Is Struggling in Football | Football Parent** (`/parent-guides/support-child-after-bad-match`) — relevance 2.5
-  - Suggested anchor: "Best Football Gloves For Winter Training"
-  - Paragraph 6: "- They stop talking about football at home, even when they used to talk about it constantly - They begin making excuses to miss training ses..."
+- Add a link from **When Your Child Is Struggling in Football | Football Parent** (`/parent-guides/support-child-after-bad-match`) — relevance 5
+  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
+  - Paragraph 64: "Yes, and it is more common than most parents realise. The standard at development centre and academy level is high, and the competition with..."
+- Add a link from **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`) — relevance 5
+  - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
+  - Paragraph 1: "Many parents see the Junior Premier League as a possible route into academy football. The hope is simple: better matches, stronger opponents..."
 
 
 ## 2. Orphan or near-orphan pages
 
 _High priority: pages with zero total inbound links, or zero contextual (in-body) inbound links._
-
-### FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development (`/parent-guides/futurefit-football-dna-interview-part-1`) — ORPHAN (0 inbound links)
-Total inbound: 0 | Contextual: 0 | Related/footer: 0
 
 ### Best Shin Pads For Kids Football (`/football-gear/best-shin-pads-for-kids-football`) — ORPHAN (0 inbound links)
 Total inbound: 0 | Contextual: 0 | Related/footer: 0
@@ -152,9 +101,6 @@ Total inbound: 0 | Contextual: 0 | Related/footer: 0
 
 ### How to Find a Football Agent for Your Child (`/academy-pathway/how-to-find-a-football-agent-for-your-child`) — ORPHAN (0 inbound links)
 Total inbound: 0 | Contextual: 0 | Related/footer: 0
-
-### Private Football Coaching: Is 1-to-1 Football Coaching Worth It? (`/football-development/is-private-football-coaching-worth-it`) — NEAR-ORPHAN (0 contextual inbound links)
-Total inbound: 1 | Contextual: 0 | Related/footer: 1
 
 ### How to Get Scouted for Football: What Parents Need to Know (`/academy-trials/how-to-get-scouted-for-football`) — NEAR-ORPHAN (0 contextual inbound links)
 Total inbound: 1 | Contextual: 0 | Related/footer: 1
@@ -211,7 +157,7 @@ _Pages linking to the same target multiple times in the body. Consider swapping 
   Consider linking one mention to instead:
   - **When Your Child Is Struggling in Football | Football Parent** (`/parent-guides/support-child-after-bad-match`) — relevance 5
   - **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`) — relevance 5
-  - **JPL Trials: How Do You Get Into the Junior Premier League?** (`/parent-guides/how-to-get-into-the-jpl`) — relevance 5
+  - **FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development** (`/parent-guides/futurefit-football-dna-interview-part-1`) — relevance 4
 
 ### Does the Junior Premier League Lead to Academy Football? (`/parent-guides/jpl-and-academy-football`)
 - Links to **What Is the Junior Premier League (JPL)?** (`/parent-guides/what-is-the-junior-premier-league`) 2 times
@@ -220,8 +166,8 @@ _Pages linking to the same target multiple times in the body. Consider swapping 
 - Links to **Football Academy Trials UK: How They Really Work** (`/academy-trials/football-academy-trials-uk`) 2 times
   Consider linking one mention to instead:
   - **What Is Grassroots Football? A Parent's Guide to the UK Game** (`/parent-guides/what-is-grassroots-football`) — relevance 6
-  - **JPL Trials: How Do You Get Into the Junior Premier League?** (`/parent-guides/how-to-get-into-the-jpl`) — relevance 6
   - **What Should Parents Say After Football Matches?** (`/parent-guides/what-to-say-after-football-matches`) — relevance 5
+  - **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`) — relevance 5
 
 ### JPL Trials: How Do You Get Into the Junior Premier League? (`/parent-guides/how-to-get-into-the-jpl`)
 - Links to **What Is the Junior Premier League (JPL)?** (`/parent-guides/what-is-the-junior-premier-league`) 2 times
@@ -319,6 +265,13 @@ _Pages linking to the same target multiple times in the body. Consider swapping 
   - **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) — relevance 3.5
   - **PDC vs PTC vs RTC vs ETC: Football Pathway Terms Explained** (`/academy-pathway/pdc-vs-ptc-vs-rtc-explained`) — relevance 3
 
+### Football Sizes by Age: Best Footballs For Kids (`/football-gear/best-footballs-by-age`)
+- Links to **Best Football Gloves For Winter Training** (`/football-gear/best-football-gloves-for-winter-training`) 2 times
+  Consider linking one mention to instead:
+  - **Best Football Boots For Wide Feet Kids** (`/football-gear/best-football-boots-for-wide-feet-kids`) — relevance 5
+  - **Best Shin Pads For Kids Football** (`/football-gear/best-shin-pads-for-kids-football`) — relevance 4.5
+  - **What Should Parents Say After Football Matches?** (`/parent-guides/what-to-say-after-football-matches`) — relevance 2
+
 ### Signs Your Child Is Ready for Academy Football (`/football-development/signs-your-child-is-ready-for-academy-football`)
 - Links to **What Is the Relative Age Effect in Youth Football?** (`/football-development/relative-age-effect-football`) 2 times
 - Links to **How Football Clubs Recruit Young Players** (`/academy-trials/how-football-clubs-recruit-young-players`) 2 times
@@ -342,12 +295,13 @@ _Pages linking to the same target multiple times in the body. Consider swapping 
   Consider linking one mention to instead:
   - **Signs Your Child Is Ready for Academy Football** (`/football-development/signs-your-child-is-ready-for-academy-football`) — relevance 5
   - **How to Become a Professional Footballer: What Parents Should Actually Know** (`/football-development/how-to-become-a-professional-footballer`) — relevance 5
-  - **Private Football Coaching: Is 1-to-1 Football Coaching Worth It?** (`/football-development/is-private-football-coaching-worth-it`) — relevance 4.5
+  - **How To Build Confidence In Young Footballers** (`/football-development/build-confidence-young-footballers`) — relevance 4
 
 ### Understanding the New FA Youth Football Format Changes (`/football-development/new-fa-youth-football-format`)
 - Links to **What Is the Relative Age Effect in Youth Football?** (`/football-development/relative-age-effect-football`) 2 times
 - Links to **Should My Child Play Up an Age Group in Football?** (`/football-development/playing-up-an-age-group-football`) 2 times
 - Links to **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`) 2 times
+- Links to **FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development** (`/parent-guides/futurefit-football-dna-interview-part-1`) 2 times
   Consider linking one mention to instead:
   - **Signs Your Child Is Ready for Academy Football** (`/football-development/signs-your-child-is-ready-for-academy-football`) — relevance 5.5
   - **How to Become a Professional Footballer: What Parents Should Actually Know** (`/football-development/how-to-become-a-professional-footballer`) — relevance 5.5
@@ -377,9 +331,9 @@ _Pages linking to the same target multiple times in the body. Consider swapping 
 - Links to **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`) 2 times
 - Links to **How To Build Confidence In Young Footballers** (`/football-development/build-confidence-young-footballers`) 2 times
   Consider linking one mention to instead:
-  - **Private Football Coaching: Is 1-to-1 Football Coaching Worth It?** (`/football-development/is-private-football-coaching-worth-it`) — relevance 5
   - **How Much Training Is Too Much For Young Footballers?** (`/football-development/how-much-training-is-too-much`) — relevance 4.5
   - **Signs Your Child Is Ready for Academy Football** (`/football-development/signs-your-child-is-ready-for-academy-football`) — relevance 4
+  - **Why Some Kids Develop Later In Football** (`/football-development/late-developers-in-football`) — relevance 3.5
 
 ### How to Become a Professional Footballer: What Parents Should Actually Know (`/football-development/how-to-become-a-professional-footballer`)
 - Links to **How Academy Football Works In The UK** (`/academy-pathway/how-academy-football-works`) 2 times
@@ -398,7 +352,7 @@ _Pages linking to the same target multiple times in the body. Consider swapping 
   Consider linking one mention to instead:
   - **How to Become a Professional Footballer: What Parents Should Actually Know** (`/football-development/how-to-become-a-professional-footballer`) — relevance 5.5
   - **What Is the Relative Age Effect in Youth Football?** (`/football-development/relative-age-effect-football`) — relevance 4.5
-  - **Private Football Coaching: Is 1-to-1 Football Coaching Worth It?** (`/football-development/is-private-football-coaching-worth-it`) — relevance 4.5
+  - **How To Improve Football Decision Making In Young Players** (`/football-development/improve-football-decision-making`) — relevance 4.5
 
 ### What Makes A Good Football Development Environment? (`/football-development/good-football-development-environment`)
 - Links to **Signs Your Child Is Ready for Academy Football** (`/football-development/signs-your-child-is-ready-for-academy-football`) 2 times
@@ -685,25 +639,25 @@ Total outbound: 3 | Contextual: 1 | Related/footer: 2
   - Suggested anchor: "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?"
   - Paragraph 31: "**Are more expensive shin pads worth it for children?** Not necessarily. A mid-range moulded pad from a reputable brand is perfectly adequat..."
 
-### Best Footballs For Different Ages (`/football-gear/best-footballs-by-age`)
+### Football Sizes by Age: Best Footballs For Kids (`/football-gear/best-footballs-by-age`)
 Total outbound: 3 | Contextual: 1 | Related/footer: 2
 
-- Add a link to **Best Football Boots For Wide Feet Kids** (`/football-gear/best-football-boots-for-wide-feet-kids`) — relevance 4.5
+- Add a link to **Best Football Boots For Wide Feet Kids** (`/football-gear/best-football-boots-for-wide-feet-kids`) — relevance 5
   - Suggested anchor: "Best Football Boots For Wide Feet Kids"
-  - Paragraph 62: "Getting the ball size right matters, but so does the rest of the kit: see our guides to [football gloves for winter training](/football-gear..."
-- Add a link to **Best Shin Pads For Kids Football** (`/football-gear/best-shin-pads-for-kids-football`) — relevance 4
+  - Paragraph 39: "Getting the ball size right matters, but so does the rest of the kit: see our guides to [football gloves for winter training](/football-gear..."
+- Add a link to **Best Shin Pads For Kids Football** (`/football-gear/best-shin-pads-for-kids-football`) — relevance 4.5
   - Suggested anchor: "Best Shin Pads For Kids Football"
-  - Paragraph 68: "- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots) - [Best Football Boots For Wide Feet Kids](/football-gear/boots/best-football-boo..."
+  - Paragraph 39: "Getting the ball size right matters, but so does the rest of the kit: see our guides to [football gloves for winter training](/football-gear..."
 
 ### Best Football Gloves For Winter Training (`/football-gear/best-football-gloves-for-winter-training`)
 Total outbound: 2 | Contextual: 0 | Related/footer: 2
 
+- Add a link to **Football Sizes by Age: Best Footballs For Kids** (`/football-gear/best-footballs-by-age`) — relevance 5
+  - Suggested anchor: "Football Sizes by Age: Best Footballs For Kids"
+  - Paragraph 19: "This is often the most overlooked factor. Many football gloves are designed for adults, and children's sizes - where they exist - can be inc..."
 - Add a link to **Best Football Boots For Wide Feet Kids** (`/football-gear/best-football-boots-for-wide-feet-kids`) — relevance 5
   - Suggested anchor: "Best Football Boots For Wide Feet Kids"
   - Paragraph 58: "- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots) - [Best Shin Pads For Kids Football](/football-gear/shin-pads/best-shin-pads-for-..."
-- Add a link to **Best Footballs For Different Ages** (`/football-gear/best-footballs-by-age`) — relevance 4.5
-  - Suggested anchor: "Best Footballs For Different Ages"
-  - Paragraph 1: "## Best Football Gloves For Winter Training..."
 - Add a link to **Best Shin Pads For Kids Football** (`/football-gear/best-shin-pads-for-kids-football`) — relevance 4
   - Suggested anchor: "Best Shin Pads For Kids Football"
   - Paragraph 58: "- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots) - [Best Shin Pads For Kids Football](/football-gear/shin-pads/best-shin-pads-for-..."
@@ -764,7 +718,6 @@ _Cases where A links to B but B doesn't link back, and the two are clearly relat
 - Add a link from **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) back to **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) — relevance 6.5
 - Add a link from **Development Centres vs Academies: What's the Difference?** (`/academy-pathway/development-centres-vs-academies`) back to **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) — relevance 6.5
 - Add a link from **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) back to **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) — relevance 6.5
-- Add a link from **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`) back to **JPL Trials: How Do You Get Into the Junior Premier League?** (`/parent-guides/how-to-get-into-the-jpl`) — relevance 6
 - Add a link from **What Is the Relative Age Effect in Youth Football?** (`/football-development/relative-age-effect-football`) back to **Signs Your Child Is Ready for Academy Football** (`/football-development/signs-your-child-is-ready-for-academy-football`) — relevance 6
 - Add a link from **What Is the Relative Age Effect in Youth Football?** (`/football-development/relative-age-effect-football`) back to **Signs Your Child Is Ready for Academy Football** (`/football-development/signs-your-child-is-ready-for-academy-football`) — relevance 6
 - Add a link from **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`) back to **Understanding the New FA Youth Football Format Changes** (`/football-development/new-fa-youth-football-format`) — relevance 6
@@ -795,6 +748,7 @@ _Cases where A links to B but B doesn't link back, and the two are clearly relat
 - Add a link from **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) back to **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`) — relevance 5.5
 - Add a link from **How Academy Football Works In The UK** (`/academy-pathway/how-academy-football-works`) back to **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`) — relevance 5.5
 - Add a link from **How Academy Football Works In The UK** (`/academy-pathway/how-academy-football-works`) back to **How Players Progress Through Football Development Centres** (`/academy-pathway/how-players-progress-through-football-development-centres`) — relevance 5.5
+- Add a link from **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`) back to **Football Development Centres Near Me** (`/academy-pathway/football-development-centres-near-me`) — relevance 5.5
 
 ## 7. Pillar articles and cluster coverage
 
