@@ -25,7 +25,7 @@ export default function Header() {
           className="flex items-center no-underline"
         >
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="Football Parent"
             width={220}
             height={60}

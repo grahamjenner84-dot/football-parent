@@ -24,7 +24,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "Football Parent",
     url: "https://www.footballparent.co.uk",
-    logo: "https://www.footballparent.co.uk/logo.png",
+    logo: "https://www.footballparent.co.uk/logo.webp",
   };
 
   const websiteSchema = {
