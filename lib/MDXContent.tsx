@@ -1,9 +1,11 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import React from "react";
 import Link from "next/link";
+import InfoTable from "@/app/components/mdx/InfoTable";
 
 // Custom components for MDX rendering with styling
 const components = {
+  InfoTable,
   h2: ({ children }: any) => <h2 id={typeof children === "string" ? children.toLowerCase().replace(/[^\w\s-]/g, "").replace(/\s+/g, "-") : ""} className="scroll-mt-24 text-3xl font-bold text-gray-900 mb-6 pt-8">{children}</h2>,
   h3: ({ children }: any) => <h3 className="text-xl font-bold text-gray-900 mb-4 pt-4">{children}</h3>,
   h4: ({ children }: any) => <h4 className="text-lg font-bold text-gray-900 mb-3">{children}</h4>,
