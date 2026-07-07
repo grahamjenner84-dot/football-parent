@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Premier League Development Centres: A Parent's Guide | Football Parent",
+  title: "Premier League Development Centres | Football Parent",
   description:
     "How Premier League clubs structure their development programmes, what they involve, and what families should understand before pursuing an opportunity.",
   path: "/academy-pathway/premier-league-development-centres-list",

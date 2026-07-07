@@ -117,7 +117,7 @@ export default function AcademyPathwayPage() {
             "Understand Chelsea FC's development centre and how it supports young footballers.",
         },
         {
-          title: "Premier League Development Centres: A Parent's Guide",
+          title: "Premier League Development Centres",
           href: "/academy-pathway/premier-league-development-centres-list",
           description:
             "How Premier League clubs structure their development programmes, what they involve, and what to consider before pursuing an opportunity.",
