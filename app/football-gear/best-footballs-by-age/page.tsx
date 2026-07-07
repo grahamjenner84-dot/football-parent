@@ -4,9 +4,9 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Best Footballs by Age | Football Parent",
+  title: "Football Sizes by Age: Best Footballs For Kids | Football Parent",
   description:
-    "Choose the right football size by age, including guidance for young players, training sessions and match use.",
+    "A UK parent guide to football sizes by age group, including what size football children use at U7, U8, U9, U10, U11, U12, U13, U14 and older age groups.",
   path: "/football-gear/best-footballs-by-age",
 });
 

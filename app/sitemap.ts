@@ -35,7 +35,7 @@ const routes = [
   '/academy-pathway/can-academy-players-play-grassroots-football',
   '/academy-pathway/how-much-does-academy-football-cost',
   '/academy-pathway/football-development-centres-in-london',
-  'academy-pathway/pre-academy-football',
+  '/academy-pathway/pre-academy-football',
 
   // Academy Trials
   '/academy-trials/football-academy-trials-uk',
