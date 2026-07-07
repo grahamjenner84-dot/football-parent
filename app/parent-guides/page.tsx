@@ -69,7 +69,7 @@ export default function ParentGuidesPage() {
             "Compare the Junior Premier League with traditional grassroots football to understand the differences, benefits and trade-offs.",
         },
         {
-          title: "JPL and Academy Football",
+          title: "Does the Junior Premier League Lead to Academy Football?",
           href: "/parent-guides/jpl-and-academy-football",
           description:
             "Understand the relationship between the Junior Premier League, academy scouting and player development.",
