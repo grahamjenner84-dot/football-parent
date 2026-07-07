@@ -1,6 +1,6 @@
 # Internal Link Audit
 
-_Generated 2026-07-07T20:24:19.702Z_
+_Generated 2026-07-07T20:41:01.076Z_
 
 _No Search Console data found (gsc-pages.csv not present) - priorities are based on link structure only._
 
@@ -40,22 +40,6 @@ Total inbound: 0 | Contextual: 0 | Related/footer: 0
   - Suggested anchor: "Best Football Boots For Wide Feet Kids"
   - Paragraph 26: "Shin pads are only one part of a proper kit setup: it's worth checking [the right boots for wide feet](/football-gear/boots/best-football-bo..."
 
-### How to Find a Football Agent for Your Child (`/academy-pathway/how-to-find-a-football-agent-for-your-child`)
-Total inbound: 0 | Contextual: 0 | Related/footer: 0
-
-- Add a link from **Chelsea FC Development Centre: A Parent's Guide** (`/academy-pathway/chelsea-fc-development-centre-guide`) — relevance 6
-  - Suggested anchor: "How to Find a Football Agent for Your Child"
-  - Paragraph 19: "Importantly, reaching PPC does not make a player a Chelsea academy player. The programme sits separately from Chelsea's formal academy and p..."
-- Add a link from **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) — relevance 6
-  - Suggested anchor: "How to Find a Football Agent for Your Child"
-  - Paragraph 24: "For families travelling across London, the practical realities of weekly attendance can become a significant factor. Travel time, school com..."
-- Add a link from **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`) — relevance 5.5
-  - Suggested anchor: "How to Find a Football Agent for Your Child"
-  - Paragraph 1: "West Ham United has a long and genuine history of producing players from within its own ranks. The club's Academy of Football, based at Chad..."
-- Add a link from **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`) — relevance 5.5
-  - Suggested anchor: "How to Find a Football Agent for Your Child"
-  - Paragraph 31: "The girls' pathway is structured somewhat differently from the boys', with ETCs playing a formal role in identifying and developing talent. ..."
-
 ### How to Get Scouted for Football: What Parents Need to Know (`/academy-trials/how-to-get-scouted-for-football`)
 Total inbound: 1 | Contextual: 0 | Related/footer: 1
 
@@ -88,6 +72,22 @@ Total inbound: 2 | Contextual: 1 | Related/footer: 1
   - Suggested anchor: "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development"
   - Paragraph 1: "Many parents see the Junior Premier League as a possible route into academy football. The hope is simple: better matches, stronger opponents..."
 
+### How to Find a Football Agent for Your Child (`/academy-pathway/how-to-find-a-football-agent-for-your-child`)
+Total inbound: 2 | Contextual: 2 | Related/footer: 0
+
+- Add a link from **Chelsea FC Development Centre: A Parent's Guide** (`/academy-pathway/chelsea-fc-development-centre-guide`) — relevance 6
+  - Suggested anchor: "How to Find a Football Agent for Your Child"
+  - Paragraph 19: "Importantly, reaching PPC does not make a player a Chelsea academy player. The programme sits separately from Chelsea's formal academy and p..."
+- Add a link from **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) — relevance 6
+  - Suggested anchor: "How to Find a Football Agent for Your Child"
+  - Paragraph 24: "For families travelling across London, the practical realities of weekly attendance can become a significant factor. Travel time, school com..."
+- Add a link from **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`) — relevance 5.5
+  - Suggested anchor: "How to Find a Football Agent for Your Child"
+  - Paragraph 1: "West Ham United has a long and genuine history of producing players from within its own ranks. The club's Academy of Football, based at Chad..."
+- Add a link from **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`) — relevance 5.5
+  - Suggested anchor: "How to Find a Football Agent for Your Child"
+  - Paragraph 31: "The girls' pathway is structured somewhat differently from the boys', with ETCs playing a formal role in identifying and developing talent. ..."
+
 
 ## 2. Orphan or near-orphan pages
 
@@ -97,9 +97,6 @@ _High priority: pages with zero total inbound links, or zero contextual (in-body
 Total inbound: 0 | Contextual: 0 | Related/footer: 0
 
 ### Best Football Boots For Wide Feet Kids (`/football-gear/best-football-boots-for-wide-feet-kids`) — ORPHAN (0 inbound links)
-Total inbound: 0 | Contextual: 0 | Related/footer: 0
-
-### How to Find a Football Agent for Your Child (`/academy-pathway/how-to-find-a-football-agent-for-your-child`) — ORPHAN (0 inbound links)
 Total inbound: 0 | Contextual: 0 | Related/footer: 0
 
 ### How to Get Scouted for Football: What Parents Need to Know (`/academy-trials/how-to-get-scouted-for-football`) — NEAR-ORPHAN (0 contextual inbound links)
