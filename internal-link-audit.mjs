@@ -11,6 +11,7 @@ const MIN_OUTBOUND_LINKS = 3;      // pages with this many outbound internal lin
 const TARGET_OUTBOUND_LINKS = 5;   // suggestions top up to roughly this many
 const RECIPROCAL_LIMIT = 50;       // cap on reciprocal-link-opportunity rows in the report
 const GSC_CSV_PATH = 'gsc-pages.csv';
+const SITEMAP_FILE = 'app/sitemap.ts'; // used as the source of truth for real URLs where possible
 
 // Flat list of pillar/hub article URL paths. A cluster (folder) can have more
 // than one pillar - each is checked independently against the other pages in
@@ -104,10 +105,44 @@ function loadGSCData() {
   return map;
 }
 
+function loadSitemapRoutes() {
+  if (!fs.existsSync(SITEMAP_FILE)) {
+    console.log(`No ${SITEMAP_FILE} found - falling back to folder-based URL guessing for every page.`);
+    return null;
+  }
+  const raw = fs.readFileSync(SITEMAP_FILE, 'utf8');
+  const arrayMatch = raw.match(/const\s+routes\s*=\s*\[([\s\S]*?)\]/);
+  if (!arrayMatch) {
+    console.log(`Could not find a "routes" array in ${SITEMAP_FILE} - falling back to folder-based URL guessing.`);
+    return null;
+  }
+  const routes = [];
+  const strRe = /'([^']*)'|"([^"]*)"/g;
+  let m;
+  while ((m = strRe.exec(arrayMatch[1]))) {
+    let r = (m[1] ?? m[2]).trim();
+    if (r === '') continue; // skip homepage
+    if (!r.startsWith('/')) r = '/' + r; // fix any missing leading slash
+    routes.push(r);
+  }
+  console.log(`Loaded ${routes.length} route(s) from ${SITEMAP_FILE}.`);
+  return routes;
+}
+
 // ---------- page loading ----------
-function loadPages() {
+function loadPages(sitemapRoutes) {
   const files = glob.sync(`${CONTENT_DIR}/**/*.mdx`);
   const pages = [];
+
+  // slug -> list of full sitemap routes ending in that slug
+  const slugToRoutes = {};
+  if (sitemapRoutes) {
+    for (const r of sitemapRoutes) {
+      const slug = r.split('/').filter(Boolean).pop();
+      if (!slug) continue;
+      (slugToRoutes[slug] ||= []).push(r);
+    }
+  }
 
   for (const file of files) {
     const raw = fs.readFileSync(file, 'utf8');
@@ -116,7 +151,23 @@ function loadPages() {
     const rel = path.relative(CONTENT_DIR, file).replace(/\.mdx$/, '');
     const parts = rel.split(path.sep);
     const categoryFolder = parts[0];
-    const urlPath = '/' + parts.join('/');
+    const guessedUrlPath = '/' + parts.join('/');
+    const slug = parts[parts.length - 1];
+
+    let urlPath = guessedUrlPath;
+    if (sitemapRoutes) {
+      const candidates = (slugToRoutes[slug] || []).filter((r) => r.startsWith('/' + categoryFolder + '/'));
+      if (candidates.length === 1) {
+        urlPath = candidates[0];
+        if (urlPath !== guessedUrlPath) {
+          console.log(`URL corrected from sitemap: ${guessedUrlPath} -> ${urlPath}`);
+        }
+      } else if (candidates.length === 0) {
+        console.log(`Warning: no sitemap route found for ${file} (slug "${slug}") - using guessed URL ${guessedUrlPath}. Check this is correct.`);
+      } else {
+        console.log(`Warning: multiple sitemap routes match slug "${slug}" for ${file} - using guessed URL ${guessedUrlPath}. Check manually.`);
+      }
+    }
 
     const relatedMatch = RELATED_HEADING_REGEX.exec(content);
     const relatedSectionIndex = relatedMatch ? relatedMatch.index : Infinity;
@@ -213,6 +264,20 @@ function suggestAnchors(page) {
   return [...options].slice(0, 3);
 }
 
+function splitSentences(paragraph) {
+  return paragraph
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function inlineAnchorPhrase(target) {
+  let phrase = target.title.replace(/\s*\|.*$/, '').trim();
+  phrase = phrase.replace(/[?!:]+$/, '');
+  if (phrase.length === 0) return target.urlPath.split('/').pop().replace(/-/g, ' ');
+  return phrase.charAt(0).toLowerCase() + phrase.slice(1);
+}
+
 function findBestParagraph(source, target) {
   const targetSlugWords = target.urlPath.split('/').pop().replace(/-/g, ' ');
   const targetWords = new Set(
@@ -227,14 +292,40 @@ function findBestParagraph(source, target) {
     const paraWords = new Set(para.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
     const overlap = [...paraWords].filter((w) => targetWords.has(w));
     if (overlap.length > 0 && (!best || overlap.length > best.score)) {
-      best = { paragraphIndex: idx + 1, score: overlap.length, excerpt: para.slice(0, 140).replace(/\s+/g, ' ') };
+      best = { paragraphIndex: idx + 1, score: overlap.length, paragraphText: para };
     }
   });
 
+  const anchor = inlineAnchorPhrase(target);
+  const pasteReadySentence = `This is covered in more detail in our guide on [${anchor}](${target.urlPath}).`;
+
   if (!best) {
-    return { paragraphIndex: null, excerpt: 'No obvious paragraph match. Add where it naturally fits.' };
+    return {
+      paragraphIndex: null,
+      excerpt: 'No obvious paragraph match. Add where it naturally fits.',
+      nearestSentence: null,
+      pasteReadySentence,
+    };
   }
-  return best;
+
+  const sentences = splitSentences(best.paragraphText);
+  let bestSentence = sentences[0] || best.paragraphText.slice(0, 140);
+  let bestSentenceScore = -1;
+  for (const s of sentences) {
+    const sWords = new Set(s.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
+    const overlap = [...sWords].filter((w) => targetWords.has(w));
+    if (overlap.length > bestSentenceScore) {
+      bestSentenceScore = overlap.length;
+      bestSentence = s;
+    }
+  }
+
+  return {
+    paragraphIndex: best.paragraphIndex,
+    excerpt: best.paragraphText.slice(0, 140).replace(/\s+/g, ' '),
+    nearestSentence: bestSentence.replace(/\s+/g, ' '),
+    pasteReadySentence,
+  };
 }
 
 function csvEscape(value) {
@@ -254,7 +345,8 @@ function priorityFromLevel(level, urlPath, gscMap) {
 }
 
 function run() {
-  const pages = loadPages();
+  const sitemapRoutes = loadSitemapRoutes();
+  const pages = loadPages(sitemapRoutes);
   if (pages.length === 0) {
     console.error(`No .mdx files found under "${CONTENT_DIR}". Check you're running this from your project root.`);
     process.exit(1);
@@ -335,8 +427,10 @@ function run() {
         Target: r.target.urlPath,
         'Suggested Anchor': s.anchors[0] || r.target.title,
         'Suggested Location': s.location.paragraphIndex
-          ? `Paragraph ${s.location.paragraphIndex}: "${s.location.excerpt}..."`
-          : s.location.excerpt,
+          ? `Paragraph ${s.location.paragraphIndex}`
+          : 'No obvious paragraph match',
+        'Nearest Existing Sentence': s.location.nearestSentence || '',
+        'Paste-Ready Sentence': s.location.pasteReadySentence,
         Reason: `Only ${r.stats.total} total inbound link(s) (${r.stats.contextual} contextual)`,
         Done: '',
       });
@@ -363,8 +457,10 @@ function run() {
         Target: r.page.urlPath,
         'Suggested Anchor': suggestAnchors(r.page)[0] || r.page.title,
         'Suggested Location': location.paragraphIndex
-          ? `Paragraph ${location.paragraphIndex}: "${location.excerpt}..."`
-          : location.excerpt,
+          ? `Paragraph ${location.paragraphIndex}`
+          : 'No obvious paragraph match',
+        'Nearest Existing Sentence': location.nearestSentence || '',
+        'Paste-Ready Sentence': location.pasteReadySentence,
         Reason:
           r.stats.total === 0
             ? 'Zero inbound links from anywhere on the site'
@@ -422,8 +518,10 @@ function run() {
         Target: c.other.urlPath,
         'Suggested Anchor': suggestAnchors(c.other)[0] || c.other.title,
         'Suggested Location': location.paragraphIndex
-          ? `Paragraph ${location.paragraphIndex}: "${location.excerpt}..."`
-          : location.excerpt,
+          ? `Paragraph ${location.paragraphIndex}`
+          : 'No obvious paragraph match',
+        'Nearest Existing Sentence': location.nearestSentence || '',
+        'Paste-Ready Sentence': location.pasteReadySentence,
         Reason: `Only ${r.stats.total} outbound link(s) currently (aiming for ~${TARGET_OUTBOUND_LINKS})`,
         Done: '',
       });
@@ -490,8 +588,10 @@ function run() {
         Target: r.pillarPath,
         'Suggested Anchor': suggestAnchors(byPath[r.pillarPath])[0] || r.title,
         'Suggested Location': location.paragraphIndex
-          ? `Paragraph ${location.paragraphIndex}: "${location.excerpt}..."`
-          : location.excerpt,
+          ? `Paragraph ${location.paragraphIndex}`
+          : 'No obvious paragraph match',
+        'Nearest Existing Sentence': location.nearestSentence || '',
+        'Paste-Ready Sentence': location.pasteReadySentence,
         Reason: `${r.folder} cluster page does not link to pillar "${r.title}" (${r.pillarPath})`,
         Done: '',
       });
@@ -514,8 +614,12 @@ function run() {
     }
     for (const s of r.suggestions) {
       md += `- Add a link from **${s.other.title}** (\`${s.other.urlPath}\`) — relevance ${s.score}\n`;
-      md += `  - Suggested anchor: "${s.anchors[0] || r.target.title}"\n`;
-      md += `  - ${s.location.paragraphIndex ? `Paragraph ${s.location.paragraphIndex}: "${s.location.excerpt}..."` : s.location.excerpt}\n`;
+      if (s.location.nearestSentence) {
+        md += `  - Near this existing sentence (paragraph ${s.location.paragraphIndex}): "${s.location.nearestSentence}"\n`;
+      } else {
+        md += `  - ${s.location.excerpt}\n`;
+      }
+      md += `  - Paste this sentence in: "${s.location.pasteReadySentence}"\n`;
     }
     md += `\n`;
   }
@@ -555,8 +659,12 @@ function run() {
     for (const c of r.candidates) {
       const location = findBestParagraph(r.page, c.other);
       md += `- Add a link to **${c.other.title}** (\`${c.other.urlPath}\`) — relevance ${c.score}\n`;
-      md += `  - Suggested anchor: "${suggestAnchors(c.other)[0] || c.other.title}"\n`;
-      md += `  - ${location.paragraphIndex ? `Paragraph ${location.paragraphIndex}: "${location.excerpt}..."` : location.excerpt}\n`;
+      if (location.nearestSentence) {
+        md += `  - Near this existing sentence (paragraph ${location.paragraphIndex}): "${location.nearestSentence}"\n`;
+      } else {
+        md += `  - ${location.excerpt}\n`;
+      }
+      md += `  - Paste this sentence in: "${location.pasteReadySentence}"\n`;
     }
     md += `\n`;
   }
@@ -602,7 +710,7 @@ function run() {
   fs.writeFileSync('link-audit-report.md', md);
 
   // ================= WRITE CSV =================
-  const headers = ['Priority', 'Type', 'Source', 'Target', 'Suggested Anchor', 'Suggested Location', 'Reason', 'Done'];
+  const headers = ['Priority', 'Type', 'Source', 'Target', 'Suggested Anchor', 'Suggested Location', 'Nearest Existing Sentence', 'Paste-Ready Sentence', 'Reason', 'Done'];
   const csvLines = [headers.join(',')];
   for (const row of csvRows) {
     csvLines.push(headers.map((h) => csvEscape(row[h])).join(','));
