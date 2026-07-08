@@ -2,7 +2,6 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import ScrollToTop from "./components/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -59,8 +58,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
-        <ScrollToTop />
-
         <Header />
 
         <main className="flex-1">{children}</main>

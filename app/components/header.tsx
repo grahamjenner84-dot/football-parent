@@ -19,18 +19,13 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white text-slate-950 shadow-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <Link
-          href="/"
-          scroll={true}
-          className="flex items-center no-underline"
-        >
+        <Link href="/" scroll={true} className="flex items-center no-underline">
           <Image
             src="/logo.webp"
             alt="Football Parent"
             width={220}
             height={60}
-            priority
-         />
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
