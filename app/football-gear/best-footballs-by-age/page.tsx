@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Sizes by Age: Best Footballs For Kids | Football Parent",
   description:
-    "A UK parent guide to football sizes by age group, including what size football children use at U7, U8, U9, U10, U11, U12, U13, U14 and older age groups.",
+    "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players.",
   path: "/football-gear/best-footballs-by-age",
 });
 

@@ -81,7 +81,7 @@ export default function AcademyPathwayPage() {
             "A parent-friendly guide to when academy recruitment usually starts.",
         },
         {
-          title: "What Is EPPP?",
+          title: "What Is EPPP in Football?",
           href: "/academy-pathway/what-is-eppp",
           description:
             "Understand the Elite Player Performance Plan and why it matters.",

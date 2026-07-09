@@ -24,7 +24,7 @@ export default function FootballGearPage() {
           "These guides help parents choose suitable football kit and equipment for young players.",
         links: [
           {
-            title: "Best Footballs by Age",
+            title: "Football Sizes by Age: Best Footballs For Kids",
             href: "/football-gear/best-footballs-by-age",
             description:
               "explains which football size is right for different age groups.",
@@ -63,7 +63,7 @@ export default function FootballGearPage() {
             "Warm, practical glove options for winter football sessions.",
         },
         {
-          title: "Best Footballs by Age",
+          title: "Football Sizes by Age: Best Footballs For Kids",
           href: "/football-gear/best-footballs-by-age",
           description:
             "Choose the right football size and type for different ages.",

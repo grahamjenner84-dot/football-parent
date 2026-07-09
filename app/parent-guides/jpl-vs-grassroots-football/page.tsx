@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "JPL vs. Grassroots Football | Football Parent",
   description:
-    "Compare the Junior Premier League with traditional grassroots football to understand the differences and benefits for your child.",
+    "Is JPL better than grassroots football? A practical parent comparison covering coaching, match standard, playing time, costs, travel, development and family commitment.",
   path: "/parent-guides/jpl-vs-grassroots-football",
 });
 
