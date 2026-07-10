@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Should You Leave Grassroots Football for an Academy? | Football Parent",
   description:
-    "An honest guide to deciding whether a child should leave grassroots football for academy football and what parents should consider first.",
+    "Should your child leave grassroots football for an academy? Compare the coaching, commitment, pressure, travel and development benefits before deciding.",
   path: "/parent-guides/leave-grassroots-football-for-an-academy",
 });
 

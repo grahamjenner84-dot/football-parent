@@ -27,7 +27,7 @@ export default function ParentGuidesPage() {
             title: "Should You Leave Grassroots Football for an Academy?",
             href: "/parent-guides/leave-grassroots-football-for-an-academy",
             description:
-              "looks at one of the biggest decisions families face in youth football.",
+              "Should your child leave grassroots football for an academy? Compare the coaching, commitment, pressure, travel and development benefits before deciding.",
           },
           {
             title: "What is the Junior Premier League?",

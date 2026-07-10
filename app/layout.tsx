@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Football Parent",
   description:
-    "Honest guidance for parents navigating UK football development and academy pathways.",
+    "Independent guidance for parents navigating UK football development and academy pathways.",
   icons: {
     icon: "/icon.png",
   },

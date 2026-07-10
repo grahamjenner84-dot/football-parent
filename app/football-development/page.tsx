@@ -115,7 +115,7 @@ export default function FootballDevelopmentPage() {
           title: "Is Private Football Coaching Worth It?",
           href: "/football-development/is-private-football-coaching-worth-it",
           description:
-            "An honest look at the pros and cons of private coaching.",
+            "Understanding look at the pros and cons of private coaching.",
         },
       ]}
       bottomContent={{

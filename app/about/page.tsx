@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "About Football Parent | Football Parent",
   description:
-    "Football Parent is an independent website helping UK families navigate football academies, development centres, trials and youth football pathways. No agenda. Just honest guidance.",
+    "Football Parent is an independent website helping UK families navigate football academies, development centres, trials and youth football pathways.",
   alternates: {
     canonical: "https://www.footballparent.co.uk/about",
   },
