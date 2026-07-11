@@ -112,6 +112,12 @@ export default function FootballDevelopmentPage() {
             "When and how to support young players who are playing up an age group.",
         },
         {
+          title: "What Is Football IQ? A Parent's Guide to Football Intelligence",
+          href: "/football-development/what-is-football-iq",
+          description:
+            "Understanding the concept of football IQ and how it impacts player development.",
+        },
+        {
           title: "Is Private Football Coaching Worth It?",
           href: "/football-development/is-private-football-coaching-worth-it",
           description:

@@ -58,6 +58,7 @@ const routes = [
   '/football-development/signs-your-child-is-ready-for-academy-football',
   '/football-development/playing-up-an-age-group-football',
   '/football-development/new-fa-youth-football-format',
+  '/football-development/what-is-football-iq',
 
   // Football Gear
   '/football-gear/ag-vs-fg-boots',
