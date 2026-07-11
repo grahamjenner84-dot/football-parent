@@ -111,6 +111,12 @@ export default function ParentGuidesPage() {
             "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football. A clear guide for UK parents.",
         },
         {
+          title: "How to become a football coach",
+          href: "/parent-guides/how-to-become-a-football-coach",
+          description:
+            "A guide for parents interested in getting involved with grassroots football coaching.",
+        },
+        {
           title: "Biggest Football Parent Mistakes",
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:

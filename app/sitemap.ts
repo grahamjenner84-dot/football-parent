@@ -87,6 +87,7 @@ const routes = [
   '/parent-guides/how-to-get-into-the-jpl',
   '/parent-guides/futurefit-football-dna-interview-part-1',
   '/parent-guides/what-is-grassroots-football',
+  '/parent-guides/how-to-become-a-football-coach',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
