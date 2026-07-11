@@ -396,7 +396,7 @@
   }
   .scoreboard{
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:center;
     gap:20px;
     background:var(--pitch-dark);
@@ -406,6 +406,7 @@
     margin-bottom:16px;
   }
   .scoreboard .team{ text-align:center; }
+  .scoreboard .vs-label{ font-family:'Oswald',sans-serif; font-size:22px; color:#89998f; margin-top:8px; }
   .scoreboard .name{ font-size:13px; color:#b7c9bf; }
   .scoreboard .num{ font-family:'Oswald',sans-serif; font-size:38px; }
   .scoreboard .plus{
@@ -413,6 +414,10 @@
     border:none;color:white;
     width:26px;height:26px;border-radius:50%;
     cursor:pointer;font-size:14px;margin-top:4px;
+  }
+  .scoreboard .plus-spacer{
+    width:26px;height:26px;margin-top:4px;
+    visibility:hidden;
   }
   .hint{
     font-size:12px;
@@ -679,8 +684,9 @@
           <div class="team">
             <div class="num" id="score-us">0</div>
             <div class="name">Us</div>
+            <div class="plus-spacer"></div>
           </div>
-          <div style="font-family:'Oswald',sans-serif;font-size:22px;color:#89998f;">VS</div>
+          <div class="vs-label">VS</div>
           <div class="team">
             <div class="num" id="score-them">0</div>
             <div class="name" id="score-them-label">Them</div>
