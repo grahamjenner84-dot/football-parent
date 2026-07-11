@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Sheet — Coach App</title>
+
+<!-- PWA: manifest + icons -->
+<link rel="manifest" href="/coach-app/manifest.json">
+<meta name="theme-color" content="#163a2c">
+<link rel="icon" href="/coach-app/icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="/coach-app/icons/apple-touch-icon.png">
+
+<!-- PWA: iOS-specific "installed app" behaviour -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FP Coach">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch-dark: #163a2c;
+    --pitch: #1f5c42;
+    --pitch-line: rgba(255,255,255,0.55);
+    --cream: #f6f5f0;
+    --ink: #14201b;
+    --ink-soft: #4b564f;
+    --card: #ffffff;
+    --border: #e2e2da;
+    --gk: #2fbf71;
+    --def: #ffcb3d;
+    --mid: #ff8c42;
+    --fwd: #3ea6ff;
+    --sub: #aeb6bd;
+    --danger: #e15554;
+    --shadow: 0 2px 10px rgba(20,32,27,0.08);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+  }
+  h1,h2,h3,.display{
+    font-family:'Oswald',sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+  header.top{
+    background:var(--pitch-dark);
+    color:white;
+    padding:18px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  header.top .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  header.top .crest{
+    width:38px;height:38px;border-radius:50%;
+    background:var(--pitch);
+    border:2px solid var(--pitch-line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:14px;
+  }
+  header.top h1{
+    font-size:20px;
+    margin:0;
+    font-weight:600;
+  }
+  header.top .sub{
+    font-size:12px;
+    color:#b7c9bf;
+    text-transform:none;
+    letter-spacing:0;
+    font-family:'Inter',sans-serif;
+  }
+  nav.tabs{
+    display:flex;
+    gap:4px;
+  }
+  nav.tabs button{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.25);
+    color:#dfe9e3;
+    padding:8px 16px;
+    border-radius:20px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+  }
+  nav.tabs button.active{
+    background:var(--pitch);
+    border-color:var(--pitch);
+    color:white;
+  }
+  main{
+    max-width:980px;
+    margin:0 auto;
+    padding:24px;
+  }
+  .panel{
+    display:none;
+  }
+  .panel.active{
+    display:block;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:20px;
+    box-shadow:var(--shadow);
+    margin-bottom:18px;
+  }
+  .card h2{
+    font-size:16px;
+    margin:0 0 14px 0;
+    color:var(--ink);
+  }
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .row input[type=text], .row input[type=date], .row input[type=number], .row select{
+    flex:1 1 130px;
+    min-width:0;
+  }
+  input[type=text], input[type=date], input[type=number], select{
+    font-family:'Inter',sans-serif;
+    padding:9px 12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    font-size:14px;
+    background:white;
+    color:var(--ink);
+  }
+  button.action{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    padding:9px 16px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    background:var(--pitch);
+    color:white;
+  }
+  button.action.ghost{
+    background:transparent;
+    color:var(--pitch-dark);
+    border:1px solid var(--border);
+  }
+  button.action.danger{
+    background:var(--danger);
+  }
+  button.action:hover{ filter:brightness(1.06); }
+  .player-chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--cream);
+    border:1px solid var(--border);
+    padding:6px 6px 6px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:500;
+  }
+  .player-chip button{
+    border:none;
+    background:transparent;
+    color:var(--danger);
+    cursor:pointer;
+    font-size:14px;
+    padding:2px 6px;
+  }
+  .empty-state{
+    color:var(--ink-soft);
+    font-size:14px;
+    padding:14px 0;
+  }
+  table.stats{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  table.stats th, table.stats td{
+    padding:9px 8px;
+    text-align:center;
+    border-bottom:1px solid var(--border);
+  }
+  table.stats th{
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  table.stats td:first-child, table.stats th:first-child{
+    text-align:left;
+    font-weight:600;
+  }
+  .swatch{
+    display:inline-block;
+    width:10px;height:10px;border-radius:2px;margin-right:5px;
+  }
+  .legend{
+    display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--ink-soft);margin-top:10px;
+  }
+  /* Match list */
+  .match-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:border-color 0.15s;
+  }
+  .match-row:hover{ border-color:var(--pitch); }
+  .match-row .meta{ font-size:13px; color:var(--ink-soft); }
+  .match-row .opp{ font-family:'Oswald',sans-serif; font-size:16px; }
+  .status-pill{
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:12px;
+    letter-spacing:0.04em;
+  }
+  .status-scheduled{ background:#eee; color:#666; }
+  .status-live{ background:#ffe1e1; color:#c92a2a; }
+  .status-completed{ background:#e3f4e9; color:#1f5c42; }
+  /* Pitch view */
+  .pitch-wrap{
+    background:linear-gradient(180deg, var(--pitch) 0%, var(--pitch-dark) 100%);
+    border-radius:14px;
+    padding:20px;
+    position:relative;
+    min-height:340px;
+    overflow:hidden;
+  }
+  .pitch-lines{
+    position:absolute;
+    inset:20px;
+    border:2px solid var(--pitch-line);
+    border-radius:6px;
+  }
+  .pitch-lines::before{
+    content:'';
+    position:absolute;
+    left:50%; top:0; bottom:0;
+    width:0; border-left:2px solid var(--pitch-line);
+  }
+  .pitch-lines::after{
+    content:'';
+    position:absolute;
+    left:50%; top:50%;
+    width:90px; height:90px;
+    border:2px solid var(--pitch-line);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .pos-slot{
+    position:absolute;
+    transform:translate(-50%,-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    cursor:pointer;
+    z-index:2;
+  }
+  .pos-badge{
+    width:56px;height:56px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    font-size:11px;
+    color:var(--ink);
+    border:3px solid white;
+    box-shadow:0 3px 8px rgba(0,0,0,0.25);
+    text-align:center;
+    line-height:1.1;
+    padding:2px;
+  }
+  .pos-slot.selected .pos-badge{
+    outline:3px solid #fff;
+    outline-offset:2px;
+  }
+  .pos-name{
+    background:rgba(0,0,0,0.55);
+    color:white;
+    font-size:11px;
+    font-weight:600;
+    padding:2px 8px;
+    border-radius:10px;
+    white-space:nowrap;
+    max-width:110px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .pos-extra{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+    justify-content:center;
+    max-width:120px;
+  }
+  .pos-actions{
+    display:flex;
+    gap:6px;
+    justify-content:center;
+  }
+  .pos-goals{
+    background:#ffd23f;
+    color:#3a2a00;
+    font-size:10px;
+    font-weight:700;
+    border-radius:8px;
+    padding:1px 6px;
+    margin-left:4px;
+    cursor:pointer;
+    border:1px solid rgba(0,0,0,0.15);
+  }
+  .pos-goals:hover{ filter:brightness(0.93); }
+  .pos-assist{
+    background:#bde0fe;
+    color:#0b3d66;
+    font-size:10px;
+    font-weight:700;
+    border-radius:8px;
+    padding:1px 6px;
+    cursor:pointer;
+    border:1px solid rgba(0,0,0,0.15);
+  }
+  .pos-assist:hover{ filter:brightness(0.93); }
+  .bench-strip{
+    margin-top:14px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .bench-slot{
+    background:var(--cream);
+    border:2px solid var(--border);
+    border-radius:20px;
+    padding:6px 14px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  .bench-slot.selected{
+    border-color:var(--ink);
+  }
+  .quarter-tabs{
+    display:flex;
+    gap:6px;
+    margin-bottom:14px;
+  }
+  .quarter-tabs button{
+    flex:1;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:white;
+    font-family:'Oswald',sans-serif;
+    font-weight:600;
+    cursor:pointer;
+    font-size:13px;
+  }
+  .quarter-tabs button.active{
+    background:var(--pitch);
+    color:white;
+    border-color:var(--pitch);
+  }
+  .quarter-tabs button.current::after{
+    content:' ●';
+    color:#ff8c42;
+  }
+  .scoreboard{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:20px;
+    background:var(--pitch-dark);
+    color:white;
+    border-radius:12px;
+    padding:16px;
+    margin-bottom:16px;
+  }
+  .scoreboard .team{ text-align:center; }
+  .scoreboard .name{ font-size:13px; color:#b7c9bf; }
+  .scoreboard .num{ font-family:'Oswald',sans-serif; font-size:38px; }
+  .scoreboard .plus{
+    background:rgba(255,255,255,0.15);
+    border:none;color:white;
+    width:26px;height:26px;border-radius:50%;
+    cursor:pointer;font-size:14px;margin-top:4px;
+  }
+  .hint{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-top:10px;
+  }
+  .view-toggle{
+    display:flex;
+    gap:6px;
+    margin-bottom:14px;
+  }
+  .view-toggle button{
+    padding:8px 14px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:white;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .view-toggle button.active{
+    background:var(--pitch-dark);
+    color:white;
+    border-color:var(--pitch-dark);
+  }
+  table.lineup{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+  }
+  table.lineup th, table.lineup td{
+    padding:9px 8px;
+    text-align:center;
+    border:1px solid var(--border);
+  }
+  table.lineup th{
+    font-family:'Oswald',sans-serif;
+    font-size:11px;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    background:var(--pitch-dark);
+    color:white;
+  }
+  table.lineup td.pos-label{
+    background:var(--cream);
+    font-weight:700;
+    text-align:left;
+    white-space:nowrap;
+  }
+  table.lineup td.cell-GK{ background:rgba(47,191,113,0.20); }
+  table.lineup td.cell-DEF{ background:rgba(255,203,61,0.28); }
+  table.lineup td.cell-MID{ background:rgba(255,140,66,0.22); }
+  table.lineup td.cell-FWD{ background:rgba(62,166,255,0.22); }
+  table.lineup td.cell-SUB{ background:rgba(174,182,189,0.25); }
+  table.lineup td{ vertical-align:top; }
+  .cell-name{
+    font-weight:600;
+    margin-bottom:4px;
+    word-break:break-word;
+  }
+  .cell-badges{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .icon-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:26px;height:26px;
+    border-radius:50%;
+    font-size:13px;
+    cursor:pointer;
+    border:1px dashed rgba(0,0,0,0.35);
+    background:rgba(255,255,255,0.9);
+  }
+  .icon-btn:hover{ background:white; }
+  .goal-btn{ border-color:#b8860b; }
+  .assist-btn{ border-color:#0b3d66; }
+  .cell-actions{
+    display:flex;
+    gap:6px;
+    justify-content:center;
+    margin:4px 0;
+  }
+  .table-scroll{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .player-breakdown{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 14px;
+    margin-bottom:8px;
+    background:var(--cream);
+  }
+  .player-breakdown summary{
+    cursor:pointer;
+    font-weight:600;
+    font-size:13px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+  }
+  .player-breakdown .tally{
+    font-weight:500;
+    color:var(--ink-soft);
+    font-size:12px;
+  }
+  .breakdown-grid{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+  table.stats.mini{
+    width:auto;
+    min-width:200px;
+  }
+  table.stats.mini th, table.stats.mini td{
+    padding:6px 8px;
+  }
+  .checkbox-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .checkbox-list label{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:var(--cream);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:5px 12px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .back-link{
+    background:none;border:none;color:var(--pitch-dark);
+    font-weight:600;font-size:13px;cursor:pointer;
+    padding:0 0 10px 0;
+    display:inline-flex;align-items:center;gap:4px;
+  }
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(20,32,27,0.55);
+    display:flex; align-items:center; justify-content:center;
+    z-index:1000; padding:20px;
+  }
+  .modal-box{
+    background:var(--card); border-radius:12px; padding:22px;
+    max-width:360px; width:100%; box-shadow:0 10px 30px rgba(20,32,27,0.25);
+  }
+  .modal-message{
+    font-size:14px; color:var(--ink); line-height:1.5; margin:0 0 18px 0;
+    white-space:pre-line;
+  }
+  .modal-actions{
+    display:flex; justify-content:flex-end; gap:10px;
+  }
+  @media (max-width:600px){
+    main{ padding:14px; }
+    header.top{ padding:14px 16px; }
+    header.top h1{ font-size:17px; }
+    .card{ padding:14px; }
+    .pitch-wrap{ min-height:400px; padding:14px; }
+    .pos-badge{ width:46px; height:46px; font-size:10px; }
+    .pos-name{ max-width:88px; font-size:10px; }
+    .scoreboard{ gap:10px; padding:12px; }
+    .scoreboard .num{ font-size:28px; }
+    .quarter-tabs button{ padding:8px 4px; font-size:12px; }
+    .view-toggle button{ padding:7px 10px; font-size:12px; flex:1; }
+    table.stats, table.lineup{ font-size:11.5px; }
+    table.stats th, table.stats td,
+    table.lineup th, table.lineup td{ padding:6px 5px; }
+    .pos-label, table.lineup td.pos-label{ white-space:normal; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="crest">FP</div>
+    <div>
+      <h1>Team Sheet</h1>
+      <div class="sub">Coach's lineup &amp; stats tracker</div>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button data-tab="squad" class="active">Squad</button>
+    <button data-tab="matches">Matches</button>
+    <button data-tab="stats">Season Stats</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- SQUAD TAB -->
+  <section id="panel-squad" class="panel active">
+    <div class="card">
+      <h2>Season Squad</h2>
+      <div class="row" style="margin-bottom:14px;">
+        <input type="text" id="new-player-name" placeholder="Player name">
+        <button class="action" id="add-player-btn">Add Player</button>
+      </div>
+      <div id="squad-list" class="row"></div>
+      <div class="hint">Add every child you'll pick from this season. You can still mark someone unavailable per match if they miss a game.</div>
+    </div>
+  </section>
+
+  <!-- MATCHES TAB -->
+  <section id="panel-matches" class="panel">
+    <div id="matches-list-view">
+      <div class="card">
+        <h2>Add a Match</h2>
+        <div class="row">
+          <input type="date" id="match-date">
+          <input type="text" id="match-opponent" placeholder="Opponent name">
+          <select id="match-venue">
+            <option value="H">Home</option>
+            <option value="A">Away</option>
+          </select>
+          <input type="number" id="match-total-mins" placeholder="Match length (mins)" value="40" min="4" style="width:150px;">
+          <select id="match-period-type">
+            <option value="4">4 Quarters</option>
+            <option value="2">2 Halves</option>
+          </select>
+        </div>
+        <div style="margin-top:12px;">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Who's available this match?</div>
+          <div id="match-available-checks" class="checkbox-list"></div>
+        </div>
+        <div style="margin-top:14px;">
+          <button class="action" id="add-match-btn">Add Match</button>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Fixtures</h2>
+        <div id="matches-list"></div>
+      </div>
+    </div>
+
+    <div id="match-detail-view" style="display:none;">
+      <button class="back-link" id="back-to-matches">&larr; Back to fixtures</button>
+      <div class="card">
+        <div class="row" style="justify-content:space-between;align-items:center;">
+          <div>
+            <h2 id="detail-title" style="margin-bottom:2px;"></h2>
+            <div class="hint" id="detail-subtitle" style="margin-top:0;"></div>
+          </div>
+          <div class="row">
+            <button class="action ghost" id="generate-team-btn">Generate Team</button>
+            <button class="action danger" id="delete-match-btn">Delete Match</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="scoreboard">
+          <div class="team">
+            <div class="num" id="score-us">0</div>
+            <div class="name">Us</div>
+          </div>
+          <div style="font-family:'Oswald',sans-serif;font-size:22px;color:#89998f;">VS</div>
+          <div class="team">
+            <div class="num" id="score-them">0</div>
+            <div class="name" id="score-them-label">Them</div>
+            <button class="plus" id="opp-goal-btn">+1</button>
+          </div>
+        </div>
+
+        <div class="quarter-tabs" id="quarter-tabs"></div>
+
+        <div class="view-toggle" id="view-toggle">
+          <button data-view="pitch">Pitch View</button>
+          <button data-view="table" class="active">Full Match Table</button>
+        </div>
+
+        <div id="pitch-view-container" style="display:none;">
+          <div class="pitch-wrap" id="pitch-wrap">
+            <div class="pitch-lines"></div>
+          </div>
+          <div class="bench-strip" id="bench-strip"></div>
+        </div>
+        <div id="table-view-container">
+          <div id="lineup-table-wrap"></div>
+        </div>
+        <div class="hint" id="view-hint">Tap two spots (pitch or bench) to swap players. During the match, tap a player's name to log a goal — tap the goal badge to remove one.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS TAB -->
+  <section id="panel-stats" class="panel">
+    <div class="card">
+      <h2>Season Stats</h2>
+      <div id="stats-table-wrap"></div>
+      <div class="legend">
+        <span><span class="swatch" style="background:var(--gk)"></span>Goalkeeper</span>
+        <span><span class="swatch" style="background:var(--def)"></span>Defence</span>
+        <span><span class="swatch" style="background:var(--mid)"></span>Midfield (L/R)</span>
+        <span><span class="swatch" style="background:var(--fwd)"></span>Forward</span>
+        <span><span class="swatch" style="background:var(--sub)"></span>Substitute</span>
+      </div>
+      <div class="hint">Position percentages show share of total available minutes this season. Mins/Goal is minutes on pitch divided by goals scored — lower means they score more often. Assists are optional — only logged when you spot one.</div>
+    </div>
+  </section>
+
+</main>
+
+<div id="modal-root"></div>
+
+<script>
+/* ---------- STATE ---------- */
+const STORAGE_KEY = 'coachesAppState_v1';
+const POSITIONS = ['GK','DEF','LM','RM','ST'];
+const POS_LABEL = {GK:'Goalkeeper', DEF:'Defender', LM:'Left Mid', RM:'Right Mid', ST:'Striker'};
+const POS_CATEGORY = {GK:'GK', DEF:'DEF', LM:'MID', RM:'MID', ST:'FWD', SUB:'SUB'};
+const POS_COORDS = { // % positions within pitch-wrap, laid out like a real 5-a-side shape
+  ST:  {top:'16%', left:'50%'},
+  LM:  {top:'48%', left:'20%'},
+  RM:  {top:'48%', left:'80%'},
+  DEF: {top:'70%', left:'50%'},
+  GK:  {top:'92%', left:'50%'}
+};
+
+/* ---------- CUSTOM MODAL (replaces native confirm/alert, which can silently fail in some browser contexts) ---------- */
+function closeModal(){
+  const root = document.getElementById('modal-root');
+  root.innerHTML = '';
+}
+function showAlert(message){
+  const root = document.getElementById('modal-root');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal-box">
+        <p class="modal-message"></p>
+        <div class="modal-actions">
+          <button class="action" id="modal-ok-btn">OK</button>
+        </div>
+      </div>
+    </div>
+  `;
+  root.querySelector('.modal-message').textContent = message;
+  const overlay = root.querySelector('.modal-overlay');
+  const okBtn = document.getElementById('modal-ok-btn');
+  okBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+  okBtn.focus();
+}
+function showConfirm(message, onConfirm){
+  const root = document.getElementById('modal-root');
+  root.innerHTML = `
+    <div class="modal-overlay">
+      <div class="modal-box">
+        <p class="modal-message"></p>
+        <div class="modal-actions">
+          <button class="action ghost" id="modal-cancel-btn">Cancel</button>
+          <button class="action" id="modal-confirm-btn">Confirm</button>
+        </div>
+      </div>
+    </div>
+  `;
+  root.querySelector('.modal-message').textContent = message;
+  const overlay = root.querySelector('.modal-overlay');
+  document.getElementById('modal-cancel-btn').addEventListener('click', closeModal);
+  document.getElementById('modal-confirm-btn').addEventListener('click', ()=>{
+    closeModal();
+    onConfirm();
+  });
+  overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
+  document.getElementById('modal-confirm-btn').focus();
+}
+
+function loadState(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  let s = { players: [], matches: [] };
+  if(raw){
+    try{ s = JSON.parse(raw); }catch(e){}
+  }
+  // migrate any matches saved before per-quarter goal/assist tracking existed
+  (s.matches||[]).forEach(m=>{
+    if(!m.quarterGoals){
+      m.quarterGoals = [{},{},{},{}];
+      if(m.goals){
+        // old format only stored a match total per player with no quarter info —
+        // best effort: drop those into Q1 so the goal isn't lost, coach can move it if needed
+        Object.entries(m.goals).forEach(([pid,g])=>{ m.quarterGoals[0][pid] = g; });
+      }
+    }
+    if(!m.quarterAssists) m.quarterAssists = [{},{},{},{}];
+    if(!m.numPeriods) m.numPeriods = m.quarterGoals.length || 4;
+    delete m.goals;
+  });
+  return s;
+}
+function periodLabels(numPeriods){
+  if(numPeriods === 2) return ['H1','H2'];
+  return Array.from({length:numPeriods}, (_,i)=>'Q'+(i+1));
+}
+function saveState(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+let state = loadState();
+
+/* selection for pitch/bench swaps, and current viewed match/quarter */
+let selectedSlot = null;
+let currentMatchId = null;
+let currentQuarterView = 0;
+let viewMode = 'table';
+
+function uid(){ return 'id_' + Math.random().toString(36).slice(2,10); }
+
+/* ---------- TAB NAV ---------- */
+document.querySelectorAll('nav.tabs button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+    if(btn.dataset.tab === 'stats') renderStats();
+    if(btn.dataset.tab === 'matches') renderMatchesList();
+  });
+});
+
+/* ---------- SQUAD ---------- */
+function renderSquad(){
+  const wrap = document.getElementById('squad-list');
+  if(state.players.length === 0){
+    wrap.innerHTML = '<div class="empty-state">No players yet. Add your squad above.</div>';
+    return;
+  }
+  wrap.innerHTML = state.players.map(p=>`
+    <span class="player-chip">${escapeHtml(p.name)}
+      <button data-id="${p.id}" class="remove-player" title="Remove">&times;</button>
+    </span>
+  `).join('');
+  wrap.querySelectorAll('.remove-player').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      showConfirm('Remove this player from the squad? Past match stats stay recorded.', ()=>{
+        state.players = state.players.filter(p=>p.id !== btn.dataset.id);
+        saveState();
+        renderSquad();
+      });
+    });
+  });
+}
+document.getElementById('add-player-btn').addEventListener('click', ()=>{
+  const input = document.getElementById('new-player-name');
+  const name = input.value.trim();
+  if(!name) return;
+  state.players.push({id: uid(), name});
+  input.value = '';
+  saveState();
+  renderSquad();
+});
+document.getElementById('new-player-name').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') document.getElementById('add-player-btn').click();
+});
+
+function escapeHtml(str){
+  return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ---------- MATCHES: ADD FORM ---------- */
+function renderAvailableChecks(){
+  const wrap = document.getElementById('match-available-checks');
+  if(state.players.length === 0){
+    wrap.innerHTML = '<div class="empty-state">Add players to the squad first.</div>';
+    return;
+  }
+  wrap.innerHTML = state.players.map(p=>`
+    <label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)}</label>
+  `).join('');
+}
+
+document.getElementById('add-match-btn').addEventListener('click', ()=>{
+  const date = document.getElementById('match-date').value;
+  const opponent = document.getElementById('match-opponent').value.trim();
+  const venue = document.getElementById('match-venue').value;
+  const totalMins = parseInt(document.getElementById('match-total-mins').value) || 40;
+  const numPeriods = parseInt(document.getElementById('match-period-type').value) || 4;
+  const qMins = totalMins / numPeriods;
+  const availableIds = Array.from(document.querySelectorAll('.avail-check:checked')).map(c=>c.value);
+
+  if(!opponent){ showAlert('Add an opponent name.'); return; }
+  if(availableIds.length === 0){ showAlert('Select at least one available player.'); return; }
+
+  const match = {
+    id: uid(),
+    date: date || new Date().toISOString().slice(0,10),
+    opponent, venue, quarterMinutes: qMins, numPeriods,
+    availableIds,
+    quarters: null,
+    quarterGoals: Array.from({length:numPeriods}, ()=>({})),
+    quarterAssists: Array.from({length:numPeriods}, ()=>({})),
+    opponentGoals: 0,
+    status: 'scheduled',
+    currentQuarter: 0
+  };
+  state.matches.push(match);
+  saveState();
+
+  document.getElementById('match-opponent').value = '';
+  renderMatchesList();
+});
+
+function totalGoalsForMatch(m){
+  return (m.quarterGoals||[]).reduce((sum,qg)=> sum + Object.values(qg).reduce((a,b)=>a+b,0), 0);
+}
+
+/* ---------- MATCHES: LIST ---------- */
+function renderMatchesList(){
+  renderAvailableChecks();
+  const wrap = document.getElementById('matches-list');
+  const sorted = [...state.matches].sort((a,b)=> b.date.localeCompare(a.date));
+  if(sorted.length === 0){
+    wrap.innerHTML = '<div class="empty-state">No matches yet — add one above.</div>';
+    return;
+  }
+  wrap.innerHTML = sorted.map(m=>{
+    const goalsFor = totalGoalsForMatch(m);
+    const statusClass = 'status-' + m.status;
+    return `
+    <div class="match-row" data-id="${m.id}">
+      <div>
+        <div class="opp">${m.venue === 'H' ? 'vs' : '@'} ${escapeHtml(m.opponent)}</div>
+        <div class="meta">${m.date} · ${m.availableIds.length} players available${m.status==='completed' ? ' · ' + goalsFor + '-' + m.opponentGoals : ''}</div>
+      </div>
+      <span class="status-pill ${statusClass}">${m.status}</span>
+    </div>`;
+  }).join('');
+  wrap.querySelectorAll('.match-row').forEach(row=>{
+    row.addEventListener('click', ()=> openMatch(row.dataset.id));
+  });
+}
+
+document.getElementById('delete-match-btn').addEventListener('click', ()=>{
+  showConfirm('Delete this match permanently? This removes its stats from the season too.', ()=>{
+    state.matches = state.matches.filter(m=>m.id !== currentMatchId);
+    saveState();
+    closeMatchDetail();
+  });
+});
+
+function getMatch(id){ return state.matches.find(m=>m.id===id); }
+
+/* ---------- MATCH DETAIL / LINEUP ---------- */
+function openMatch(id){
+  currentMatchId = id;
+  currentQuarterView = getMatch(id).currentQuarter || 0;
+  document.getElementById('matches-list-view').style.display = 'none';
+  document.getElementById('match-detail-view').style.display = 'block';
+  renderMatchDetail();
+}
+function closeMatchDetail(){
+  currentMatchId = null;
+  document.getElementById('matches-list-view').style.display = 'block';
+  document.getElementById('match-detail-view').style.display = 'none';
+  renderMatchesList();
+}
+document.getElementById('back-to-matches').addEventListener('click', closeMatchDetail);
+
+function renderMatchDetail(){
+  const m = getMatch(currentMatchId);
+  if(!m) return closeMatchDetail();
+
+  document.getElementById('detail-title').textContent = `${m.venue==='H' ? 'vs' : '@'} ${m.opponent}`;
+  const periodWord = m.numPeriods === 2 ? 'halves' : 'quarters';
+  document.getElementById('detail-subtitle').textContent = `${m.date} · ${Math.round(m.quarterMinutes*m.numPeriods)} min match (${m.quarterMinutes} min ${periodWord}) · ${m.availableIds.length} available`;
+  document.getElementById('score-them-label').textContent = m.opponent;
+  document.getElementById('score-us').textContent = totalGoalsForMatch(m);
+  document.getElementById('score-them').textContent = m.opponentGoals;
+
+  // quarter tabs
+  const qTabsWrap = document.getElementById('quarter-tabs');
+  const labels = periodLabels(m.numPeriods);
+  qTabsWrap.innerHTML = labels.map((label,i)=>`
+    <button data-q="${i}" class="${i===currentQuarterView?'active':''} ${i===m.currentQuarter && m.status==='live' ? 'current':''}">${label}</button>
+  `).join('');
+  qTabsWrap.querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      currentQuarterView = parseInt(btn.dataset.q);
+      selectedSlot = null;
+      renderMatchDetail();
+    });
+  });
+
+  renderPitch(m);
+  renderBench(m);
+  renderLineupTable(m);
+
+  const genBtn = document.getElementById('generate-team-btn');
+  const locked = m.status !== 'scheduled';
+  genBtn.disabled = locked;
+  genBtn.style.opacity = locked ? '0.5' : '1';
+  genBtn.style.cursor = locked ? 'not-allowed' : 'pointer';
+  genBtn.textContent = locked ? 'Lineup Locked' : 'Generate Team';
+
+  document.querySelectorAll('#view-toggle button').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.view === viewMode);
+    btn.onclick = ()=>{
+      viewMode = btn.dataset.view;
+      selectedSlot = null;
+      renderMatchDetail();
+    };
+  });
+  document.getElementById('pitch-view-container').style.display = viewMode === 'pitch' ? 'block' : 'none';
+  document.getElementById('table-view-container').style.display = viewMode === 'table' ? 'block' : 'none';
+  document.getElementById('view-hint').textContent = viewMode === 'table'
+    ? (m.status === 'scheduled'
+        ? "This is the full team sheet, Q1–Q4. Switch to Pitch View to set the lineup and swap players before kickoff."
+        : "Tap ⚽ to log a goal or 🅰 to log an assist in the quarter it happened — tap a count badge to remove one.")
+    : (m.status === 'scheduled'
+        ? "Tap two spots (pitch or bench) to swap players before kickoff. Once you start the match, the lineup locks and ⚽/🅰 buttons appear."
+        : "Lineup's locked in — tap ⚽ to log a goal or 🅰 to log an assist, tap a count badge to remove one.");
+}
+
+document.getElementById('generate-team-btn').addEventListener('click', ()=>{
+  const m = getMatch(currentMatchId);
+  if(!m) return;
+  if(m.status !== 'scheduled'){
+    showAlert("The lineup is locked once a match has started, so past team sheets and stats can't shift under you. You can still fix goal counts, but a fresh generate isn't allowed here.");
+    return;
+  }
+  const doGenerate = ()=>{
+    m.quarters = generateLineup(m);
+    saveState();
+    renderMatchDetail();
+  };
+  if(m.quarters){
+    showConfirm('Regenerate the team? This will overwrite the current lineup for all 4 quarters.', doGenerate);
+  } else {
+    doGenerate();
+  }
+});
+
+document.getElementById('opp-goal-btn').addEventListener('click', ()=>{
+  const m = getMatch(currentMatchId);
+  if(!m) return;
+  m.opponentGoals = (m.opponentGoals||0) + 1;
+  saveState();
+  renderMatchDetail();
+});
+
+/* ---------- LINEUP GENERATION ---------- */
+function generateLineup(match){
+  const squad = match.availableIds.map(id => state.players.find(p=>p.id===id)).filter(Boolean);
+  const seasonStats = computeSeasonStats(match.id); // exclude this match itself if already counted
+  const numOnField = Math.min(5, squad.length);
+  const cumMinutes = {};
+  const positionsPlayedThisMatch = {};
+  const lastPosition = {};
+  squad.forEach(p=>{ cumMinutes[p.id] = 0; positionsPlayedThisMatch[p.id] = new Set(); lastPosition[p.id] = null; });
+
+  const quarters = [];
+  for(let q=0; q<match.numPeriods; q++){
+    const numSubsNeeded = Math.max(0, squad.length - numOnField);
+    // choose bench: players with HIGHEST cumMinutes so far sit first (spread minutes fairly)
+    const sortedByMinutesDesc = [...squad].sort((a,b)=> cumMinutes[b.id]-cumMinutes[a.id] || Math.random()-0.5);
+    const bench = squad.length > 5 ? sortedByMinutesDesc.slice(0, numSubsNeeded) : [];
+    const benchIds = new Set(bench.map(p=>p.id));
+    let onField = squad.filter(p=>!benchIds.has(p.id));
+
+    // Evaluate whole permutations of (position slot) assignments at once, rather than
+    // greedily filling one position at a time. Greedy fill-by-position can strand the
+    // last position with whichever player is left over, even if that player already
+    // played that exact position earlier in the match (see: Harry double-ST bug).
+    const activePositions = POSITIONS.slice(0, Math.min(5, onField.length));
+    const assignment = {};
+
+    if(activePositions.length === 0 || onField.length === 0){
+      POSITIONS.forEach(pos=>{ assignment[pos] = null; });
+    } else {
+      const perCandidateScore = (p, pos)=>{
+        const playedBefore = positionsPlayedThisMatch[p.id].has(pos) ? 1 : 0;
+        const sameAsLastQ = lastPosition[p.id] === pos ? 1 : 0;
+        const seasonPosMins = (seasonStats[p.id]?.categoryMinutes?.[POS_CATEGORY[pos]]) || 0;
+        return [playedBefore, sameAsLastQ, seasonPosMins];
+      };
+
+      // Generate all permutations of onField players taken activePositions.length at a time,
+      // assigned to activePositions in order. Squads are small (<=5 on field), so this is
+      // at most 5! = 120 permutations: cheap.
+      function permute(arr, k){
+        if(k === 0) return [[]];
+        const results = [];
+        arr.forEach((item, i)=>{
+          const rest = arr.slice(0,i).concat(arr.slice(i+1));
+          permute(rest, k-1).forEach(tail=>{
+            results.push([item, ...tail]);
+          });
+        });
+        return results;
+      }
+
+      const perms = permute(onField, activePositions.length);
+      let best = null;
+      let bestKey = null;
+      perms.forEach(perm=>{
+        // total score = sum of [playedBefore, sameAsLastQ, seasonPosMins] across the whole
+        // quarter's assignment, compared lexicographically: minimizing repeats first,
+        // then same-as-last-quarter, then season position overload.
+        const totals = [0,0,0];
+        perm.forEach((p, idx)=>{
+          const pos = activePositions[idx];
+          const s = perCandidateScore(p, pos);
+          totals[0]+=s[0]; totals[1]+=s[1]; totals[2]+=s[2];
+        });
+        if(bestKey === null){
+          best = perm; bestKey = totals;
+        } else {
+          for(let i=0;i<totals.length;i++){
+            if(totals[i] !== bestKey[i]){
+              if(totals[i] < bestKey[i]){ best = perm; bestKey = totals; }
+              break;
+            }
+          }
+        }
+      });
+
+      best.forEach((p, idx)=>{ assignment[activePositions[idx]] = p.id; });
+    }
+    // if fewer than 5 available, leave missing positions null
+    POSITIONS.forEach(pos=>{ if(!(pos in assignment)) assignment[pos] = null; });
+    assignment.SUBS = bench.map(p=>p.id);
+
+    quarters.push(assignment);
+
+    // update trackers
+    POSITIONS.forEach(pos=>{
+      const pid = assignment[pos];
+      if(!pid) return;
+      cumMinutes[pid] += match.quarterMinutes;
+      positionsPlayedThisMatch[pid].add(pos);
+      lastPosition[pid] = pos;
+    });
+    bench.forEach(p=>{
+      cumMinutes[p.id] += 0; // no pitch minutes, but they're present at the match
+      lastPosition[p.id] = 'SUB';
+    });
+  }
+  return quarters;
+}
+
+/* ---------- PITCH RENDER ---------- */
+function renderPitch(match){
+  const wrap = document.getElementById('pitch-wrap');
+  // clear existing slots and any leftover empty-state message
+  wrap.querySelectorAll('.pos-slot').forEach(el=>el.remove());
+  const existingMsg = document.getElementById('pitch-empty-msg');
+  if(existingMsg) existingMsg.remove();
+
+  if(!match.quarters){
+    const msg = document.createElement('div');
+    msg.id = 'pitch-empty-msg';
+    msg.style.cssText = 'position:relative;z-index:2;color:white;text-align:center;padding:60px 20px;font-size:14px;';
+    msg.textContent = "No lineup yet — hit Generate Team to fill the pitch.";
+    wrap.appendChild(msg);
+    return;
+  }
+
+  const q = match.quarters[currentQuarterView];
+  POSITIONS.forEach(pos=>{
+    const pid = q[pos];
+    const coords = POS_COORDS[pos];
+    const slot = document.createElement('div');
+    slot.className = 'pos-slot';
+    slot.style.top = coords.top;
+    slot.style.left = coords.left;
+    const slotId = `${currentQuarterView}_${pos}`;
+    slot.dataset.slotId = slotId;
+    if(selectedSlot === slotId) slot.classList.add('selected');
+
+    const player = pid ? state.players.find(p=>p.id===pid) : null;
+    const goals = (pid && match.quarterGoals[currentQuarterView][pid]) || 0;
+    const assists = (pid && match.quarterAssists[currentQuarterView][pid]) || 0;
+    const bg = {GK:'var(--gk)',DEF:'var(--def)',LM:'var(--mid)',RM:'var(--mid)',ST:'var(--fwd)'}[pos];
+    const started = match.status !== 'scheduled';
+
+    slot.innerHTML = `
+      <div class="pos-badge" style="background:${bg}">${player ? initials(player.name) : POS_LABEL[pos]}</div>
+      <div class="pos-name">${player ? escapeHtml(player.name) : '— empty —'}</div>
+      ${player && started ? `<div class="pos-actions">
+        <span class="icon-btn goal-btn" data-add-goal="1" title="Add goal">⚽</span>
+        <span class="icon-btn assist-btn" data-add-assist="1" title="Add assist">🅰</span>
+      </div>` : ''}
+      ${player ? `<div class="pos-extra">
+        ${goals>0 ? `<span class="pos-goals" data-remove-goal="1">⚽ ${goals} &minus;</span>` : ''}
+        ${assists>0 ? `<span class="pos-assist" data-remove-assist="1">🅰 ${assists} &minus;</span>` : ''}
+      </div>` : ''}
+    `;
+    slot.addEventListener('click', ()=> handleSlotClick(slotId, pid, match));
+    const addGoalBtn = slot.querySelector('[data-add-goal]');
+    if(addGoalBtn){
+      addGoalBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        addGoal(match, pid, currentQuarterView);
+      });
+    }
+    const addAssistBtn = slot.querySelector('[data-add-assist]');
+    if(addAssistBtn){
+      addAssistBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        addAssist(match, pid, currentQuarterView);
+      });
+    }
+    const removeGoalBtn = slot.querySelector('[data-remove-goal]');
+    if(removeGoalBtn){
+      removeGoalBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        removeGoal(match, pid, currentQuarterView);
+      });
+    }
+    const removeAssistBtn = slot.querySelector('[data-remove-assist]');
+    if(removeAssistBtn){
+      removeAssistBtn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        removeAssist(match, pid, currentQuarterView);
+      });
+    }
+    wrap.appendChild(slot);
+  });
+}
+
+function addGoal(match, playerId, quarterIdx){
+  if(!playerId) return;
+  match.quarterGoals[quarterIdx][playerId] = (match.quarterGoals[quarterIdx][playerId] || 0) + 1;
+  saveState();
+  renderMatchDetail();
+}
+function removeGoal(match, playerId, quarterIdx){
+  if(!playerId || !match.quarterGoals[quarterIdx][playerId]) return;
+  match.quarterGoals[quarterIdx][playerId] = Math.max(0, match.quarterGoals[quarterIdx][playerId] - 1);
+  if(match.quarterGoals[quarterIdx][playerId] === 0) delete match.quarterGoals[quarterIdx][playerId];
+  saveState();
+  renderMatchDetail();
+}
+function addAssist(match, playerId, quarterIdx){
+  if(!playerId) return;
+  match.quarterAssists[quarterIdx][playerId] = (match.quarterAssists[quarterIdx][playerId] || 0) + 1;
+  saveState();
+  renderMatchDetail();
+}
+function removeAssist(match, playerId, quarterIdx){
+  if(!playerId || !match.quarterAssists[quarterIdx][playerId]) return;
+  match.quarterAssists[quarterIdx][playerId] = Math.max(0, match.quarterAssists[quarterIdx][playerId] - 1);
+  if(match.quarterAssists[quarterIdx][playerId] === 0) delete match.quarterAssists[quarterIdx][playerId];
+  saveState();
+  renderMatchDetail();
+}
+
+function initials(name){
+  return name.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+}
+
+function renderLineupTable(match){
+  const wrap = document.getElementById('lineup-table-wrap');
+  if(!wrap) return;
+  if(!match.quarters){
+    wrap.innerHTML = '<div class="empty-state">No lineup yet — hit Generate Team first.</div>';
+    return;
+  }
+  const locked = match.status !== 'scheduled';
+  const numPeriods = match.numPeriods || match.quarters.length;
+  const labels = periodLabels(numPeriods);
+  const maxSubs = Math.max(...match.quarters.map(q => (q.SUBS||[]).length), 0);
+  const nameOf = (pid)=> pid ? escapeHtml(state.players.find(p=>p.id===pid)?.name || '—') : '—';
+
+  function cellHtml(pid, qIdx, cat){
+    const goals = (pid && match.quarterGoals[qIdx][pid]) || 0;
+    const assists = (pid && match.quarterAssists[qIdx][pid]) || 0;
+    return `<td class="cell-${cat}" data-pid="${pid||''}" data-q="${qIdx}">
+      <div class="cell-name">${nameOf(pid)}</div>
+      ${pid && locked ? `<div class="cell-actions">
+        <span class="icon-btn goal-btn" data-role="add-goal" title="Add goal">⚽</span>
+        <span class="icon-btn assist-btn" data-role="add-assist" title="Add assist">🅰</span>
+      </div>` : ''}
+      ${pid ? `<div class="cell-badges">
+        ${goals>0 ? `<span class="pos-goals" data-role="remove-goal">⚽ ${goals}</span>` : ''}
+        ${assists>0 ? `<span class="pos-assist" data-role="remove-assist">🅰 ${assists}</span>` : ''}
+      </div>` : ''}
+    </td>`;
+  }
+
+  let rows = '';
+  POSITIONS.forEach(pos=>{
+    const cat = POS_CATEGORY[pos];
+    rows += `<tr><td class="pos-label">${POS_LABEL[pos]}</td>`;
+    for(let q=0;q<numPeriods;q++){
+      rows += cellHtml(match.quarters[q][pos], q, cat);
+    }
+    rows += '</tr>';
+  });
+  for(let s=0; s<maxSubs; s++){
+    rows += `<tr><td class="pos-label">Sub ${s+1}</td>`;
+    for(let q=0;q<numPeriods;q++){
+      rows += cellHtml((match.quarters[q].SUBS||[])[s], q, 'SUB');
+    }
+    rows += '</tr>';
+  }
+
+  wrap.innerHTML = `
+    <div class="table-scroll">
+      <table class="lineup">
+        <thead>
+          <tr><th></th>${labels.map(l=>`<th>${l}</th>`).join('')}</tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  `;
+
+  // wire up interactions
+  wrap.querySelectorAll('td[data-pid]').forEach(td=>{
+    const pid = td.dataset.pid;
+    const qIdx = parseInt(td.dataset.q);
+    if(!pid) return;
+    const ag = td.querySelector('[data-role="add-goal"]');
+    if(ag) ag.addEventListener('click', (e)=>{ e.stopPropagation(); addGoal(match, pid, qIdx); });
+    const aa = td.querySelector('[data-role="add-assist"]');
+    if(aa) aa.addEventListener('click', (e)=>{ e.stopPropagation(); addAssist(match, pid, qIdx); });
+    const rg = td.querySelector('[data-role="remove-goal"]');
+    if(rg) rg.addEventListener('click', (e)=>{ e.stopPropagation(); removeGoal(match, pid, qIdx); });
+    const ra = td.querySelector('[data-role="remove-assist"]');
+    if(ra) ra.addEventListener('click', (e)=>{ e.stopPropagation(); removeAssist(match, pid, qIdx); });
+  });
+}
+
+function renderBench(match){
+  const wrap = document.getElementById('bench-strip');
+  wrap.innerHTML = '';
+  if(!match.quarters) return;
+  const q = match.quarters[currentQuarterView];
+  const subs = q.SUBS || [];
+  if(subs.length === 0){
+    wrap.innerHTML = '<div class="empty-state">No substitutes this quarter.</div>';
+    return;
+  }
+  subs.forEach((pid, idx)=>{
+    const player = state.players.find(p=>p.id===pid);
+    const slotId = `${currentQuarterView}_SUB_${idx}`;
+    const el = document.createElement('div');
+    el.className = 'bench-slot' + (selectedSlot === slotId ? ' selected' : '');
+    el.textContent = player ? player.name : '—';
+    el.addEventListener('click', ()=> handleSlotClick(slotId, pid, match));
+    wrap.appendChild(el);
+  });
+}
+
+/* ---------- SLOT CLICK: swap or log goal ---------- */
+function handleSlotClick(slotId, playerId, match){
+  const lineupLocked = match.status !== 'scheduled';
+
+  if(lineupLocked){
+    // lineup is frozen once the match has started - use the goal/assist icon buttons instead
+    return;
+  }
+
+  // before the match starts: taps select/swap players in the draft lineup
+  if(!selectedSlot){
+    selectedSlot = slotId;
+    renderMatchDetail();
+    return;
+  }
+  if(selectedSlot === slotId){
+    selectedSlot = null;
+    renderMatchDetail();
+    return;
+  }
+  // perform swap (only within the same quarter)
+  const [q1] = selectedSlot.split('_');
+  const [q2] = slotId.split('_');
+  if(q1 !== q2){
+    // different quarter selected — just move selection there instead of swapping across quarters
+    selectedSlot = slotId;
+    renderMatchDetail();
+    return;
+  }
+  const valA = getSlotValue(match, selectedSlot);
+  const valB = getSlotValue(match, slotId);
+  setSlotValue(match, selectedSlot, valB);
+  setSlotValue(match, slotId, valA);
+  selectedSlot = null;
+  saveState();
+  renderMatchDetail();
+}
+
+function getSlotValue(match, slotId){
+  const parts = slotId.split('_');
+  const q = match.quarters[parseInt(parts[0])];
+  if(parts[1] === 'SUB') return q.SUBS[parseInt(parts[2])];
+  return q[parts[1]];
+}
+function setSlotValue(match, slotId, val){
+  const parts = slotId.split('_');
+  const q = match.quarters[parseInt(parts[0])];
+  if(parts[1] === 'SUB') q.SUBS[parseInt(parts[2])] = val;
+  else q[parts[1]] = val;
+}
+
+/* ---------- LIVE MATCH CONTROLS ---------- */
+/* Add start/next/end controls dynamically above the pitch */
+function ensureLiveControls(){
+  let ctrl = document.getElementById('live-controls');
+  if(!ctrl){
+    ctrl = document.createElement('div');
+    ctrl.id = 'live-controls';
+    ctrl.className = 'row';
+    ctrl.style.marginBottom = '14px';
+    document.getElementById('quarter-tabs').insertAdjacentElement('beforebegin', ctrl);
+  }
+  const m = getMatch(currentMatchId);
+  if(!m){ ctrl.innerHTML=''; return; }
+  if(!m.quarters){ ctrl.innerHTML = ''; return; }
+  if(m.status === 'scheduled'){
+    ctrl.innerHTML = `<button class="action" id="start-match-btn">Start Match</button>`;
+    document.getElementById('start-match-btn').addEventListener('click', ()=>{
+      m.status = 'live'; m.currentQuarter = 0; currentQuarterView = 0;
+      saveState(); renderMatchDetail();
+    });
+  } else if(m.status === 'live'){
+    const labels = periodLabels(m.numPeriods);
+    const isLastQ = m.currentQuarter >= m.numPeriods - 1;
+    ctrl.innerHTML = `
+      <span class="status-pill status-live" style="align-self:center;">Live — ${labels[m.currentQuarter]}</span>
+      ${!isLastQ ? `<button class="action" id="next-q-btn">Next ${m.numPeriods===2?'Half':'Quarter'}</button>` : ''}
+      <button class="action ghost" id="end-match-btn">End Match</button>
+    `;
+    const nextBtn = document.getElementById('next-q-btn');
+    if(nextBtn) nextBtn.addEventListener('click', ()=>{
+      m.currentQuarter += 1; currentQuarterView = m.currentQuarter;
+      saveState(); renderMatchDetail();
+    });
+    document.getElementById('end-match-btn').addEventListener('click', ()=>{
+      showConfirm('End this match? It will be marked completed.', ()=>{
+        m.status = 'completed';
+        saveState(); renderMatchDetail();
+      });
+    });
+  } else {
+    ctrl.innerHTML = `<span class="status-pill status-completed" style="align-self:center;">Completed — final ${totalGoalsForMatch(m)}-${m.opponentGoals}</span>`;
+  }
+}
+
+const originalRenderMatchDetail = renderMatchDetail;
+renderMatchDetail = function(){
+  originalRenderMatchDetail();
+  ensureLiveControls();
+};
+
+/* ---------- SEASON STATS ---------- */
+function computeSeasonStats(excludeMatchId){
+  const stats = {};
+  state.players.forEach(p=>{
+    stats[p.id] = { goals:0, assists:0, gamesPlayed:0, totalMinutes:0, categoryMinutes:{GK:0,DEF:0,MID:0,FWD:0,SUB:0} };
+  });
+  state.matches.forEach(m=>{
+    if(excludeMatchId && m.id === excludeMatchId) return;
+    if(m.status === 'scheduled') return; // only count actual playing time, not a draft lineup
+    if(!m.quarters) return;
+    m.availableIds.forEach(pid=>{
+      if(stats[pid]) stats[pid].gamesPlayed += 1;
+    });
+    (m.quarterGoals||[]).forEach(qg=>{
+      Object.entries(qg).forEach(([pid, g])=>{
+        if(stats[pid]) stats[pid].goals += g;
+      });
+    });
+    (m.quarterAssists||[]).forEach(qa=>{
+      Object.entries(qa).forEach(([pid, a])=>{
+        if(stats[pid]) stats[pid].assists += a;
+      });
+    });
+    m.quarters.forEach(q=>{
+      POSITIONS.forEach(pos=>{
+        const pid = q[pos];
+        if(pid && stats[pid]){
+          stats[pid].totalMinutes += m.quarterMinutes;
+          stats[pid].categoryMinutes[POS_CATEGORY[pos]] += m.quarterMinutes;
+        }
+      });
+      (q.SUBS||[]).forEach(pid=>{
+        if(pid && stats[pid]){
+          stats[pid].totalMinutes += m.quarterMinutes;
+          stats[pid].categoryMinutes.SUB += m.quarterMinutes;
+        }
+      });
+    });
+  });
+  return stats;
+}
+
+function computePlayerBreakdown(playerId, numPeriods){
+  const byQuarter = Array.from({length:numPeriods}, ()=>({goals:0, assists:0}));
+  const byPosition = {GK:{goals:0,assists:0}, DEF:{goals:0,assists:0}, MID:{goals:0,assists:0}, FWD:{goals:0,assists:0}, SUB:{goals:0,assists:0}};
+
+  state.matches.forEach(m=>{
+    if(m.status === 'scheduled' || !m.quarters) return;
+    const mPeriods = m.numPeriods || m.quarters.length;
+    for(let q=0; q<mPeriods; q++){
+      const g = (m.quarterGoals[q] || {})[playerId] || 0;
+      const a = (m.quarterAssists[q] || {})[playerId] || 0;
+      if(g === 0 && a === 0) continue;
+      if(byQuarter[q]){
+        byQuarter[q].goals += g;
+        byQuarter[q].assists += a;
+      }
+
+      let cat = null;
+      const qData = m.quarters[q];
+      for(const pos of POSITIONS){
+        if(qData[pos] === playerId){ cat = POS_CATEGORY[pos]; break; }
+      }
+      if(!cat && (qData.SUBS||[]).includes(playerId)) cat = 'SUB';
+      if(cat){
+        byPosition[cat].goals += g;
+        byPosition[cat].assists += a;
+      }
+    }
+  });
+
+  return {byQuarter, byPosition};
+}
+
+function renderStats(){
+  const stats = computeSeasonStats(null);
+  const wrap = document.getElementById('stats-table-wrap');
+  if(state.players.length === 0){
+    wrap.innerHTML = '<div class="empty-state">Add players and play some matches to see stats.</div>';
+    return;
+  }
+
+  // --- Top Scorers ---
+  const scorers = state.players
+    .map(p=>({p, s:stats[p.id]}))
+    .filter(x=> x.s.goals>0 || x.s.assists>0)
+    .sort((a,b)=> b.s.goals-a.s.goals || b.s.assists-a.s.assists || a.p.name.localeCompare(b.p.name));
+
+  const scorerRows = scorers.map((x,i)=>{
+    const onPitchMins = Math.max(0, x.s.totalMinutes - x.s.categoryMinutes.SUB);
+    const minsPerGoal = x.s.goals>0 ? Math.round(onPitchMins/x.s.goals) : '—';
+    return `
+      <tr>
+        <td>${i+1}</td>
+        <td style="text-align:left;">${escapeHtml(x.p.name)}</td>
+        <td>${x.s.goals}</td>
+        <td>${x.s.assists}</td>
+        <td>${onPitchMins}</td>
+        <td>${minsPerGoal}</td>
+      </tr>`;
+  }).join('');
+
+  const scorersTable = scorers.length === 0
+    ? '<div class="empty-state">No goals logged yet this season.</div>'
+    : `
+      <div class="table-scroll">
+        <table class="stats">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Goals</th><th>Assists</th><th>Mins Played</th><th>Mins/Goal</th></tr>
+          </thead>
+          <tbody>${scorerRows}</tbody>
+        </table>
+      </div>`;
+
+  // --- Position time split (as sent to parents) ---
+  const rows = state.players.map(p=>{
+    const s = stats[p.id];
+    const total = s.totalMinutes || 0;
+    const pct = (mins)=> total>0 ? (mins/total).toFixed(2) : '0.00';
+    return `
+      <tr>
+        <td>${escapeHtml(p.name)}</td>
+        <td>${s.goals}</td>
+        <td>${pct(s.categoryMinutes.GK)}</td>
+        <td>${pct(s.categoryMinutes.DEF)}</td>
+        <td>${pct(s.categoryMinutes.MID)}</td>
+        <td>${pct(s.categoryMinutes.FWD)}</td>
+        <td>${pct(s.categoryMinutes.SUB)}</td>
+        <td>${s.gamesPlayed}</td>
+      </tr>`;
+  }).join('');
+
+  // --- Per-player breakdown ---
+  const playedPlayers = state.players.filter(p => stats[p.id] && stats[p.id].gamesPlayed > 0);
+  const maxPeriods = Math.max(4, ...state.matches.filter(m=>m.status!=='scheduled' && m.quarters).map(m=>m.numPeriods || m.quarters.length), 4);
+  const periodLabelsForBreakdown = periodLabels(maxPeriods);
+  const breakdownHtml = playedPlayers.length === 0
+    ? '<div class="empty-state">Play some matches to see per-player breakdowns.</div>'
+    : playedPlayers.map(p=>{
+        const s = stats[p.id];
+        const b = computePlayerBreakdown(p.id, maxPeriods);
+        const qRow = (label, key)=> `<tr><td>${label}</td>${periodLabelsForBreakdown.map((_,i)=>`<td>${b.byQuarter[i][key]}</td>`).join('')}</tr>`;
+        const posRow = (label, key)=> `<tr><td>${label}</td>${['GK','DEF','MID','FWD','SUB'].map(c=>`<td>${b.byPosition[c][key]}</td>`).join('')}</tr>`;
+        return `
+        <details class="player-breakdown">
+          <summary>${escapeHtml(p.name)} <span class="tally">⚽ ${s.goals} · 🅰 ${s.assists}</span></summary>
+          <div class="breakdown-grid">
+            <div class="table-scroll">
+              <table class="stats mini">
+                <thead><tr><th></th>${periodLabelsForBreakdown.map(l=>`<th>${l}</th>`).join('')}</tr></thead>
+                <tbody>${qRow('Goals','goals')}${qRow('Assists','assists')}</tbody>
+              </table>
+            </div>
+            <div class="table-scroll">
+              <table class="stats mini">
+                <thead><tr><th></th><th>GK</th><th>Def</th><th>Mid</th><th>Fwd</th><th>Sub</th></tr></thead>
+                <tbody>${posRow('Goals','goals')}${posRow('Assists','assists')}</tbody>
+              </table>
+            </div>
+          </div>
+        </details>`;
+      }).join('');
+
+  wrap.innerHTML = `
+    <h3 style="font-size:14px;margin:0 0 10px 0;">Top Scorers</h3>
+    ${scorersTable}
+    <h3 style="font-size:14px;margin:22px 0 10px 0;">Position Time Split</h3>
+    <div class="table-scroll">
+      <table class="stats">
+        <thead>
+          <tr><th>Name</th><th>Goals</th><th>GK</th><th>Def</th><th>Mid</th><th>Fwd</th><th>Sub</th><th>Games</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <h3 style="font-size:14px;margin:22px 0 10px 0;">Player Breakdown</h3>
+    <div class="hint" style="margin:0 0 10px 0;">Tap a name to see when and where they've scored.</div>
+    ${breakdownHtml}
+  `;
+}
+
+/* ---------- INIT ---------- */
+renderSquad();
+renderMatchesList();
+renderStats();
+
+/* ---------- PWA: service worker registration ---------- */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/coach-app/sw.js').catch((err) => {
+      console.warn('Service worker registration failed:', err);
+    });
+  });
+}
+</script>
+</body>
+</html>

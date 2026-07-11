@@ -40,6 +40,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/coach-app',
+        destination: '/coach-app/index.html',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

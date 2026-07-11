@@ -1,0 +1,31 @@
+{
+  "name": "Football Parent Coach",
+  "short_name": "FP Coach",
+  "description": "Team sheets, lineups, and fair rotation tracking for grassroots coaches.",
+  "start_url": "/coach-app/",
+  "scope": "/coach-app/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#163a2c",
+  "theme_color": "#163a2c",
+  "icons": [
+    {
+      "src": "/coach-app/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/coach-app/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/coach-app/icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
