@@ -840,9 +840,25 @@
             <option value="2">2 Halves</option>
           </select>
         </div>
-        <div style="margin-top:12px;">
+        <div class="row" style="margin-top:10px;">
+          <select id="match-format-override" style="min-width:150px;"></select>
+          <select id="match-formation-override" style="min-width:150px;"></select>
+          <span class="hint" style="margin:0;align-self:center;">Defaults to this season's format &mdash; change it for a tournament or one-off fixture with different rules.</span>
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <input type="text" id="match-address" placeholder="Address / venue location (optional)" style="flex:1;">
+        </div>
+        <div style="margin-top:10px;">
+          <textarea id="match-notes" placeholder="Notes (optional) &mdash; e.g. kit colour, meeting time, parking" style="width:100%;min-height:56px;font-family:'Inter',sans-serif;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid var(--border);resize:vertical;"></textarea>
+        </div>
+        <div style="margin-top:14px;">
           <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Who's available this match?</div>
           <div id="match-available-checks" class="checkbox-list"></div>
+          <div class="row" style="margin-top:8px;">
+            <input type="text" id="match-guest-name" placeholder="Guest player name" style="flex:1;">
+            <button class="action ghost" id="match-add-guest-btn" type="button">+ Add Guest</button>
+          </div>
+          <div class="hint" style="margin-top:4px;">Guests are one-off players for this match only &mdash; they won't clutter your regular squad, but their stats count if they play.</div>
         </div>
         <div style="margin-top:14px;">
           <button class="action" id="add-match-btn">Add Match</button>
@@ -863,8 +879,22 @@
             <div class="hint" id="detail-subtitle" style="margin-top:0;"></div>
           </div>
           <div class="row">
+            <button class="action ghost" id="edit-availability-btn">Edit Availability</button>
             <button class="action ghost" id="generate-team-btn">Generate Team</button>
             <button class="action danger" id="delete-match-btn">Delete Match</button>
+          </div>
+        </div>
+        <div id="detail-address-notes" class="hint" style="margin-top:6px;"></div>
+        <div id="edit-availability-panel" style="display:none;margin-top:14px;border-top:1px solid var(--border);padding-top:14px;">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Who's available this match?</div>
+          <div id="detail-available-checks" class="checkbox-list"></div>
+          <div class="row" style="margin-top:8px;">
+            <input type="text" id="detail-guest-name" placeholder="Guest player name" style="flex:1;">
+            <button class="action ghost" id="detail-add-guest-btn" type="button">+ Add Guest</button>
+          </div>
+          <div class="row" style="margin-top:10px;">
+            <button class="action" id="save-availability-btn">Save Availability</button>
+            <button class="action ghost" id="cancel-availability-btn" type="button">Cancel</button>
           </div>
         </div>
       </div>
@@ -1232,6 +1262,7 @@ async function syncSeasonToCloud(season){
       season_id: season.cloudId,
       name: p.name,
       active: p.active !== false,
+      guest: !!p.guest,
       position_group: p.positionGroup || 'ANY'
     };
     if(p.cloudId){
@@ -1251,6 +1282,8 @@ async function syncSeasonToCloud(season){
       match_date: m.date,
       opponent: m.opponent,
       venue: m.venue || null,
+      address: m.address || null,
+      notes: m.notes || null,
       quarter_minutes: m.quarterMinutes,
       num_periods: m.numPeriods,
       format: m.format,
@@ -1299,11 +1332,12 @@ async function tryRestoreFromCloud(silent){
     const seasons = seasonRows.map(sr=>{
       const players = playerRows.filter(p=>p.season_id === sr.id).map(p=>({
         id: uid(), cloudId: p.id, name: p.name,
-        active: p.active !== false, positionGroup: p.position_group || 'ANY'
+        active: p.active !== false, guest: !!p.guest, positionGroup: p.position_group || 'ANY'
       }));
       const matches = matchRows.filter(m=>m.season_id === sr.id).map(m=>migrateMatch({
         id: uid(), cloudId: m.id,
         date: m.match_date, opponent: m.opponent, venue: m.venue,
+        address: m.address || '', notes: m.notes || '',
         quarterMinutes: m.quarter_minutes, numPeriods: m.num_periods,
         format: m.format, formation: m.formation, rotationMode: m.rotation_mode,
         availableIds: m.available_ids || [], quarters: m.quarters,
@@ -1672,7 +1706,7 @@ function getActiveSeason(){
   return state.seasons.find(s=>s.id===state.activeSeasonId) || null;
 }
 function activePlayers(season){
-  return (season.players||[]).filter(p=>p.active !== false);
+  return (season.players||[]).filter(p=>p.active !== false && !p.guest);
 }
 function findPlayer(season, pid){
   return (season.players||[]).find(p=>p.id===pid);
@@ -1782,8 +1816,13 @@ let settingsForced = false;
 
 const POSITION_GROUP_LABEL = { ANY:'Any', GK:'GK', DEF:'Def', MID:'Mid', FWD:'Fwd' };
 
-function populateFormationSelect(format, selectedFormation){
-  const sel = document.getElementById('settings-formation');
+function populateFormatSelect(selectId, selectedFormat){
+  const sel = document.getElementById(selectId);
+  sel.innerHTML = Object.entries(FORMATS).map(([key,f])=>`<option value="${key}">${escapeHtml(f.label)}</option>`).join('');
+  sel.value = FORMATS[selectedFormat] ? selectedFormat : '5v5';
+}
+function populateFormationSelect(format, selectedFormation, selectId){
+  const sel = document.getElementById(selectId || 'settings-formation');
   const keys = formationKeysFor(format);
   const fmt = FORMATS[format] || FORMATS['5v5'];
   sel.innerHTML = keys.map(k=>`<option value="${k}">${escapeHtml(fmt.formations[k].label)}</option>`).join('');
@@ -1829,8 +1868,8 @@ function renderSettingsSquad(){
   // immediately shows/hides the per-player position pickers
   const fixedMode = document.getElementById('settings-rotation-mode').value === 'fixed';
 
-  const active = season.players.filter(p=>p.active !== false);
-  const removed = season.players.filter(p=>p.active === false);
+  const active = season.players.filter(p=>p.active !== false && !p.guest);
+  const removed = season.players.filter(p=>p.active === false && !p.guest);
 
   listWrap.innerHTML = active.length === 0
     ? '<div class="empty-state">No players yet. Add your squad above.</div>'
@@ -2019,18 +2058,44 @@ document.getElementById('new-season-btn').addEventListener('click', ()=>{
 });
 
 /* ---------- MATCHES: ADD FORM ---------- */
+let pendingMatchGuests = []; // guests added via the Add Match form before it's submitted
+
+function guestCheckboxHtml(p){
+  return `<label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)} <span style="color:var(--ink-soft);font-weight:400;">(guest)</span></label>`;
+}
+
 function renderAvailableChecks(){
   const season = getActiveSeason();
   const wrap = document.getElementById('match-available-checks');
   const players = season ? activePlayers(season) : [];
+  pendingMatchGuests = [];
   if(players.length === 0){
-    wrap.innerHTML = '<div class="empty-state">Add players to the squad first (Settings).</div>';
-    return;
+    wrap.innerHTML = '<div class="empty-state">Add players to the squad first (Settings), or add a guest below.</div>';
+  } else {
+    wrap.innerHTML = players.map(p=>`
+      <label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)}</label>
+    `).join('');
   }
-  wrap.innerHTML = players.map(p=>`
-    <label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)}</label>
-  `).join('');
+  const formatSel = document.getElementById('match-format-override');
+  if(season && formatSel){
+    populateFormatSelect('match-format-override', season.format);
+    populateFormationSelect(season.format, season.formation, 'match-formation-override');
+  }
 }
+document.getElementById('match-format-override').addEventListener('change', ()=>{
+  populateFormationSelect(document.getElementById('match-format-override').value, null, 'match-formation-override');
+});
+document.getElementById('match-add-guest-btn').addEventListener('click', ()=>{
+  const nameInput = document.getElementById('match-guest-name');
+  const name = nameInput.value.trim();
+  if(!name){ showAlert('Enter a name for the guest player.'); return; }
+  const guest = { id: uid(), name, active:false, guest:true, positionGroup:'ANY' };
+  pendingMatchGuests.push(guest);
+  const wrap = document.getElementById('match-available-checks');
+  if(wrap.querySelector('.empty-state')) wrap.innerHTML = '';
+  wrap.insertAdjacentHTML('beforeend', guestCheckboxHtml(guest));
+  nameInput.value = '';
+});
 
 document.getElementById('add-match-btn').addEventListener('click', ()=>{
   const season = getActiveSeason();
@@ -2038,21 +2103,29 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
   const date = document.getElementById('match-date').value;
   const opponent = document.getElementById('match-opponent').value.trim();
   const venue = document.getElementById('match-venue').value;
+  const address = document.getElementById('match-address').value.trim();
+  const notes = document.getElementById('match-notes').value.trim();
+  const format = document.getElementById('match-format-override').value || season.format;
+  const formation = document.getElementById('match-formation-override').value || season.formation;
   const totalMins = parseInt(document.getElementById('match-total-mins').value) || 40;
   const numPeriods = parseInt(document.getElementById('match-period-type').value) || 4;
   const qMins = totalMins / numPeriods;
-  const availableIds = Array.from(document.querySelectorAll('.avail-check:checked')).map(c=>c.value);
+  const availableIds = Array.from(document.querySelectorAll('#match-available-checks .avail-check:checked')).map(c=>c.value);
 
   if(!opponent){ showAlert('Add an opponent name.'); return; }
   if(availableIds.length === 0){ showAlert('Select at least one available player.'); return; }
+
+  // commit any guests added in this session to the squad now the match is really being created
+  pendingMatchGuests.forEach(g=> season.players.push(g));
+  pendingMatchGuests = [];
 
   const match = {
     id: uid(),
     cloudId: null,
     date: date || new Date().toISOString().slice(0,10),
-    opponent, venue, quarterMinutes: qMins, numPeriods,
-    format: season.format,
-    formation: season.formation,
+    opponent, venue, address, notes, quarterMinutes: qMins, numPeriods,
+    format,
+    formation,
     rotationMode: season.rotationMode,
     availableIds,
     quarters: null,
@@ -2066,6 +2139,9 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
   saveState();
 
   document.getElementById('match-opponent').value = '';
+  document.getElementById('match-address').value = '';
+  document.getElementById('match-notes').value = '';
+  document.getElementById('match-guest-name').value = '';
   renderMatchesList();
 });
 
@@ -2138,6 +2214,12 @@ function renderMatchDetail(){
   document.getElementById('detail-title').textContent = `${m.venue==='H' ? 'vs' : '@'} ${m.opponent}`;
   const periodWord = m.numPeriods === 2 ? 'halves' : 'quarters';
   document.getElementById('detail-subtitle').textContent = `${m.date} · ${Math.round(m.quarterMinutes*m.numPeriods)} min match (${m.quarterMinutes} min ${periodWord}) · ${m.availableIds.length} available`;
+  const addressNotesBits = [];
+  if(m.address) addressNotesBits.push('📍 ' + m.address);
+  if(m.notes) addressNotesBits.push(m.notes);
+  document.getElementById('detail-address-notes').textContent = addressNotesBits.join(' · ');
+  const editAvailBtn = document.getElementById('edit-availability-btn');
+  editAvailBtn.style.display = m.status === 'scheduled' ? 'inline-flex' : 'none';
   document.getElementById('score-them-label').textContent = m.opponent;
   document.getElementById('score-us').textContent = totalGoalsForMatch(m);
   document.getElementById('score-them').textContent = m.opponentGoals;
@@ -2185,6 +2267,61 @@ function renderMatchDetail(){
         ? "Tap two spots (pitch or bench) to swap players before kickoff. Once you start the match, the lineup locks and ⚽/🅰 buttons appear."
         : "Lineup's locked in — tap ⚽ to log a goal or 🅰 to log an assist, tap a count badge to remove one.");
 }
+
+/* ---------- MATCH DETAIL: EDIT AVAILABILITY ---------- */
+function renderDetailAvailableChecks(m, season){
+  const wrap = document.getElementById('detail-available-checks');
+  const availSet = new Set(m.availableIds);
+  const squadPlayers = activePlayers(season);
+  // guests already attached to this specific match (created via a previous edit) won't be
+  // in activePlayers() since they're inactive-by-default — surface them here too.
+  const matchGuests = (season.players||[]).filter(p=>p.guest && availSet.has(p.id));
+  const rows = squadPlayers.map(p=>`
+    <label><input type="checkbox" class="detail-avail-check" value="${p.id}" ${availSet.has(p.id)?'checked':''}> ${escapeHtml(p.name)}</label>
+  `).concat(matchGuests.map(p=>`
+    <label><input type="checkbox" class="detail-avail-check" value="${p.id}" checked> ${escapeHtml(p.name)} <span style="color:var(--ink-soft);font-weight:400;">(guest)</span></label>
+  `));
+  wrap.innerHTML = rows.length ? rows.join('') : '<div class="empty-state">Add players to the squad first (Settings), or add a guest below.</div>';
+}
+
+document.getElementById('edit-availability-btn').addEventListener('click', ()=>{
+  const m = getMatch(currentMatchId);
+  const season = getActiveSeason();
+  if(!m || !season) return;
+  renderDetailAvailableChecks(m, season);
+  document.getElementById('edit-availability-panel').style.display = 'block';
+});
+document.getElementById('cancel-availability-btn').addEventListener('click', ()=>{
+  document.getElementById('edit-availability-panel').style.display = 'none';
+});
+document.getElementById('detail-add-guest-btn').addEventListener('click', ()=>{
+  const season = getActiveSeason();
+  if(!season) return;
+  const nameInput = document.getElementById('detail-guest-name');
+  const name = nameInput.value.trim();
+  if(!name){ showAlert('Enter a name for the guest player.'); return; }
+  const guest = { id: uid(), name, active:false, guest:true, positionGroup:'ANY' };
+  season.players.push(guest);
+  saveState();
+  const wrap = document.getElementById('detail-available-checks');
+  if(wrap.querySelector('.empty-state')) wrap.innerHTML = '';
+  wrap.insertAdjacentHTML('beforeend', `<label><input type="checkbox" class="detail-avail-check" value="${guest.id}" checked> ${escapeHtml(guest.name)} <span style="color:var(--ink-soft);font-weight:400;">(guest)</span></label>`);
+  nameInput.value = '';
+});
+document.getElementById('save-availability-btn').addEventListener('click', ()=>{
+  const m = getMatch(currentMatchId);
+  if(!m) return;
+  const newIds = Array.from(document.querySelectorAll('#detail-available-checks .detail-avail-check:checked')).map(c=>c.value);
+  if(newIds.length === 0){ showAlert('Select at least one available player.'); return; }
+  const hadLineup = !!m.quarters;
+  m.availableIds = newIds;
+  saveState();
+  document.getElementById('edit-availability-panel').style.display = 'none';
+  renderMatchDetail();
+  if(hadLineup){
+    showAlert("Availability updated. The existing lineup wasn't automatically changed — hit Generate Team again if you'd like it to reflect who's available now.");
+  }
+});
 
 document.getElementById('generate-team-btn').addEventListener('click', ()=>{
   const m = getMatch(currentMatchId);
@@ -2604,6 +2741,10 @@ function setSlotValue(match, slotId, val){
 
 /* ---------- LIVE MATCH CONTROLS ---------- */
 /* Add start/next/end controls dynamically above the pitch */
+function lineupHasRealAssignment(m){
+  if(!m.quarters || m.quarters.length === 0) return false;
+  return m.quarters.some(q => Object.keys(q).some(k => k !== 'SUBS' && q[k]));
+}
 function ensureLiveControls(){
   let ctrl = document.getElementById('live-controls');
   if(!ctrl){
@@ -2615,13 +2756,22 @@ function ensureLiveControls(){
   }
   const m = getMatch(currentMatchId);
   if(!m){ ctrl.innerHTML=''; return; }
-  if(!m.quarters){ ctrl.innerHTML = ''; return; }
   if(m.status === 'scheduled'){
-    ctrl.innerHTML = `<button class="action" id="start-match-btn">Start Match</button>`;
-    document.getElementById('start-match-btn').addEventListener('click', ()=>{
-      m.status = 'live'; m.currentQuarter = 0; currentQuarterView = 0;
-      saveState(); renderMatchDetail();
-    });
+    if(m.availableIds.length === 0){
+      ctrl.innerHTML = `<div class="hint" style="color:var(--danger);margin:0;">Mark at least one player available (Edit Availability above) before starting.</div>`;
+    } else if(!lineupHasRealAssignment(m)){
+      ctrl.innerHTML = `<div class="hint" style="color:var(--danger);margin:0;">Hit Generate Team above to set a lineup before starting the match.</div>`;
+    } else {
+      ctrl.innerHTML = `<button class="action" id="start-match-btn">Start Match</button>`;
+      document.getElementById('start-match-btn').addEventListener('click', ()=>{
+        if(m.availableIds.length === 0 || !lineupHasRealAssignment(m)){
+          showAlert("This match doesn't have a full lineup yet — mark players available and hit Generate Team first.");
+          return;
+        }
+        m.status = 'live'; m.currentQuarter = 0; currentQuarterView = 0;
+        saveState(); renderMatchDetail();
+      });
+    }
   } else if(m.status === 'live'){
     const labels = periodLabels(m.numPeriods);
     const isLastQ = m.currentQuarter >= m.numPeriods - 1;
