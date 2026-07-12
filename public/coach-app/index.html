@@ -1214,9 +1214,16 @@ async function syncSeasonToCloud(season){
     const { error } = await supabaseClient.from('seasons').update(seasonPayload).eq('id', season.cloudId);
     if(error) throw error;
   } else {
-    const { data, error } = await supabaseClient.from('seasons').insert(seasonPayload).select().single();
+    // Generate the id here and insert it explicitly, then don't ask for the row
+    // back (no .select()). Asking for the inserted row back runs seasons' SELECT
+    // policy in the same instant the AFTER INSERT trigger is adding this user's
+    // season_members row — that membership isn't reliably visible yet, so the
+    // read half of the request can fail even though the write succeeded. Since we
+    // already know the id we generated, we don't need to read anything back.
+    const newId = crypto.randomUUID();
+    const { error } = await supabaseClient.from('seasons').insert({ id: newId, ...seasonPayload });
     if(error) throw error;
-    season.cloudId = data.id;
+    season.cloudId = newId;
     persistLocal();
   }
 
