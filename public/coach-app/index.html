@@ -127,6 +127,23 @@
   .settings-btn:hover{ border-color:white; color:white; }
 
   /* ---- Auth gate (sign-in overlay, shown before any app content) ---- */
+  /* ---- "Newer data on your account" banner ---- */
+  #update-banner{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    background:var(--def, #d4af37); color:var(--pitch-dark, #14201b);
+    font-family:'Inter',sans-serif; font-size:13px; font-weight:600;
+    padding:9px 16px; text-align:center; flex-wrap:wrap;
+  }
+  #update-banner button{
+    background:var(--pitch-dark, #14201b); color:white;
+    border:none; border-radius:6px; padding:6px 12px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px;
+    cursor:pointer;
+  }
+  #update-banner .dismiss{
+    background:transparent; color:inherit; padding:6px 4px; font-weight:400;
+  }
+
   #auth-gate{
     position:fixed; inset:0; z-index:500;
     display:flex; align-items:center; justify-content:center;
@@ -802,6 +819,9 @@
 
 <div id="app-shell" style="display:none;">
 
+<div id="update-banner" style="display:none;"></div>
+
+
 <header class="top">
   <div class="brand">
     <div class="crest" id="crest-initials">FP</div>
@@ -1081,14 +1101,18 @@ function renderAuthUI(){
     authDropdownOpen = !authDropdownOpen;
     renderAuthUI();
   });
+function confirmAndRestoreFromCloud(){
+  showConfirm('Restore from cloud will replace all seasons, players and matches currently on this device with what\'s saved to your account. Continue?', ()=>{
+    tryRestoreFromCloud(false);
+  });
+}
+
   if(authDropdownOpen){
     document.getElementById('auth-signout-btn').addEventListener('click', signOutOfSupabase);
     document.getElementById('auth-restore-btn').addEventListener('click', ()=>{
       authDropdownOpen = false;
       renderAuthUI();
-      showConfirm('Restore from cloud will replace all seasons, players and matches currently on this device with what\'s saved to your account. Continue?', ()=>{
-        tryRestoreFromCloud(false);
-      });
+      confirmAndRestoreFromCloud();
     });
   }
   setSyncStatus(lastSyncStatus);
@@ -1166,6 +1190,7 @@ async function handleAuthResolved(){
     } else {
       renderAll();
     }
+    startCloudUpdatePolling();
   } else {
     hideAuthGate();
   }
@@ -1207,6 +1232,7 @@ async function syncStateToCloud(){
       await syncSeasonToCloud(season);
     }
     setSyncStatus('synced');
+    await refreshSyncPointerBaseline();
   }catch(e){
     console.warn('Cloud sync failed, will retry:', e.message);
     setSyncStatus('error');
@@ -1360,6 +1386,7 @@ async function tryRestoreFromCloud(silent){
     hideAuthGate();
     renderHeader();
     renderAll();
+    await refreshSyncPointerBaseline(); // this restore IS the latest cloud state, so don't immediately re-flag it as "newer"
     showAlert(silent
       ? `Welcome back — restored ${seasons.length} season(s) from your account.`
       : `Restored ${seasons.length} season(s) from your account.`);
@@ -1368,6 +1395,69 @@ async function tryRestoreFromCloud(silent){
     if(!silent) showAlert('Restore failed: ' + e.message);
     return false;
   }
+}
+
+/* ---------- CLOUD UPDATE CHECK ----------
+   A tiny sync_pointer table (bumped by DB triggers on any seasons/players/matches
+   change) lets us cheaply ask "has my account's data changed since I last looked,"
+   without re-fetching all your seasons just to check. Used to show a lightweight
+   "newer data available" banner rather than silently going stale on a second
+   device — but never auto-overwrites local data, since there's no merge logic. */
+async function refreshSyncPointerBaseline(){
+  if(!currentUser) return;
+  try{
+    const { data, error } = await supabaseClient
+      .from('sync_pointer').select('updated_at').eq('user_id', currentUser.id).maybeSingle();
+    if(error) throw error;
+    state.lastSeenCloudUpdate = data ? data.updated_at : new Date().toISOString();
+    persistLocal();
+  }catch(e){ /* non-critical — worst case we re-show a banner unnecessarily next check */ }
+}
+
+async function checkForCloudUpdates(){
+  if(!currentUser) return;
+  try{
+    const { data, error } = await supabaseClient
+      .from('sync_pointer').select('updated_at').eq('user_id', currentUser.id).maybeSingle();
+    if(error) throw error;
+    if(!data) return; // nothing ever synced from any device yet
+    if(!state.lastSeenCloudUpdate){
+      state.lastSeenCloudUpdate = data.updated_at;
+      persistLocal();
+      return;
+    }
+    if(new Date(data.updated_at) > new Date(state.lastSeenCloudUpdate)){
+      showUpdateBanner();
+    }
+  }catch(e){ console.warn('Cloud update check failed:', e.message); }
+}
+
+function showUpdateBanner(){
+  const banner = document.getElementById('update-banner');
+  banner.innerHTML = `
+    <span>Newer data is saved to your account from another device.</span>
+    <button id="update-banner-refresh-btn" type="button">Refresh Now</button>
+    <button class="dismiss" id="update-banner-dismiss-btn" type="button">Dismiss</button>
+  `;
+  banner.style.display = 'flex';
+  document.getElementById('update-banner-refresh-btn').addEventListener('click', ()=>{
+    hideUpdateBanner();
+    confirmAndRestoreFromCloud();
+  });
+  document.getElementById('update-banner-dismiss-btn').addEventListener('click', hideUpdateBanner);
+}
+function hideUpdateBanner(){
+  document.getElementById('update-banner').style.display = 'none';
+}
+
+let cloudUpdatePollTimer = null;
+function startCloudUpdatePolling(){
+  if(cloudUpdatePollTimer) return;
+  checkForCloudUpdates();
+  cloudUpdatePollTimer = setInterval(checkForCloudUpdates, 60000);
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.visibilityState === 'visible') checkForCloudUpdates();
+  });
 }
 
 /* ---------- FORMAT DEFINITIONS ---------- */
@@ -2898,13 +2988,19 @@ function renderStats(){
     .filter(x=> x.s.goals>0 || x.s.assists>0)
     .sort((a,b)=> b.s.goals-a.s.goals || b.s.assists-a.s.assists || a.p.name.localeCompare(b.p.name));
 
-  const scorerRows = scorers.map((x,i)=>{
+function playerStatusTag(p){
+  if(p.guest) return ' <span style="color:var(--ink-soft);font-weight:400;">(guest)</span>';
+  if(p.active === false) return ' <span style="color:var(--ink-soft);font-weight:400;">(removed)</span>';
+  return '';
+}
+
+const scorerRows = scorers.map((x,i)=>{
     const onPitchMins = Math.max(0, x.s.totalMinutes - x.s.categoryMinutes.SUB);
     const minsPerGoal = x.s.goals>0 ? Math.round(onPitchMins/x.s.goals) : '—';
     return `
       <tr>
         <td>${i+1}</td>
-        <td style="text-align:left;">${escapeHtml(x.p.name)}${x.p.active===false ? ' <span style="color:var(--ink-soft);font-weight:400;">(removed)</span>' : ''}</td>
+        <td style="text-align:left;">${escapeHtml(x.p.name)}${playerStatusTag(x.p)}</td>
         <td>${x.s.goals}</td>
         <td>${x.s.assists}</td>
         <td>${onPitchMins}</td>
@@ -2934,7 +3030,7 @@ function renderStats(){
     const pct = (mins)=> total>0 ? Math.round((mins/total)*100) + '%' : '0%';
     return `
       <tr>
-        <td>${escapeHtml(p.name)}${p.active===false ? ' <span style="color:var(--ink-soft);font-weight:400;">(removed)</span>' : ''}</td>
+        <td>${escapeHtml(p.name)}${playerStatusTag(p)}</td>
         <td>${s.goals}</td>
         <td>${pct(s.categoryMinutes.GK)}</td>
         <td>${pct(s.categoryMinutes.DEF)}</td>
@@ -2958,7 +3054,7 @@ function renderStats(){
         const posRow = (label, key)=> `<tr><td>${label}</td>${['GK','DEF','MID','FWD','SUB'].map(c=>`<td>${b.byPosition[c][key]}</td>`).join('')}</tr>`;
         return `
         <details class="player-breakdown">
-          <summary>${escapeHtml(p.name)}${p.active===false ? ' <span style="color:var(--ink-soft);font-weight:400;">(removed)</span>' : ''} <span class="tally">⚽ ${s.goals} · 🅰 ${s.assists}</span></summary>
+          <summary><span>${escapeHtml(p.name)}${playerStatusTag(p)}</span> <span class="tally">⚽ ${s.goals} · 🅰 ${s.assists}</span></summary>
           <div class="breakdown-grid">
             <div class="table-scroll">
               <table class="stats mini">
