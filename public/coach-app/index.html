@@ -738,15 +738,22 @@
     justify-content:center;
   }
   .icon-btn{
+    position:relative;
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    width:32px;height:32px;
-    min-width:44px;min-height:44px;
+    width:26px;height:26px;
     border-radius:50%;
-    font-size:14px;
+    font-size:13px;
     cursor:pointer;
     border:1px solid transparent;
+  }
+  .icon-btn::before{
+    /* invisible expanded hit area — meets the 44px tap-target guidance
+       without adding real width/height to pitch slots or table cells */
+    content:'';
+    position:absolute;
+    inset:-9px;
   }
   .goal-btn{ background:rgba(245,179,1,.14); border-color:rgba(245,179,1,.5); color:#f5b301; }
   .assist-btn{ background:rgba(120,170,255,.16); border-color:rgba(120,170,255,.5); color:#9ecbff; }
