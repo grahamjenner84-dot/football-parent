@@ -84,6 +84,12 @@
     letter-spacing:0;
     font-family:'Inter',sans-serif;
   }
+  header.top .right-controls{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
   nav.tabs{
     display:flex;
     gap:4px;
@@ -104,6 +110,21 @@
     border-color:var(--pitch);
     color:white;
   }
+  .settings-btn{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.35);
+    color:#dfe9e3;
+    padding:8px 14px;
+    border-radius:20px;
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:13px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .settings-btn:hover{ border-color:white; color:white; }
   main{
     max-width:980px;
     margin:0 auto;
@@ -166,6 +187,7 @@
     background:var(--danger);
   }
   button.action:hover{ filter:brightness(1.06); }
+  button.action:disabled{ opacity:0.5; cursor:not-allowed; }
   .player-chip{
     display:inline-flex;
     align-items:center;
@@ -185,6 +207,10 @@
     font-size:14px;
     padding:2px 6px;
   }
+  .player-chip.removed{
+    opacity:0.6;
+  }
+  .player-chip.removed button{ color:var(--pitch-dark); }
   .empty-state{
     color:var(--ink-soft);
     font-size:14px;
@@ -373,9 +399,11 @@
     display:flex;
     gap:6px;
     margin-bottom:14px;
+    flex-wrap:wrap;
   }
   .quarter-tabs button{
     flex:1;
+    min-width:44px;
     padding:10px;
     border-radius:8px;
     border:1px solid var(--border);
@@ -569,10 +597,12 @@
     position:fixed; inset:0; background:rgba(20,32,27,0.55);
     display:flex; align-items:center; justify-content:center;
     z-index:1000; padding:20px;
+    overflow-y:auto;
   }
   .modal-box{
     background:var(--card); border-radius:12px; padding:22px;
     max-width:360px; width:100%; box-shadow:0 10px 30px rgba(20,32,27,0.25);
+    margin:auto;
   }
   .modal-message{
     font-size:14px; color:var(--ink); line-height:1.5; margin:0 0 18px 0;
@@ -580,6 +610,39 @@
   }
   .modal-actions{
     display:flex; justify-content:flex-end; gap:10px;
+  }
+  /* Settings panel */
+  .settings-box{
+    max-width:520px;
+  }
+  .settings-section-title{
+    font-family:'Oswald',sans-serif;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+    margin:18px 0 8px 0;
+  }
+  .settings-section-title:first-child{ margin-top:0; }
+  .season-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:10px 12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin-bottom:8px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .season-row .season-meta{ font-size:12px; color:var(--ink-soft); }
+  .season-row .season-name{ font-weight:600; font-size:13px; }
+  .season-row.is-active{ border-color:var(--pitch); background:rgba(31,92,66,0.06); }
+  .required-badge{
+    color:var(--danger);
+    font-size:12px;
+    margin-top:-4px;
+    margin-bottom:8px;
   }
   @media (max-width:600px){
     main{ padding:14px; }
@@ -604,36 +667,26 @@
 
 <header class="top">
   <div class="brand">
-    <div class="crest">FP</div>
+    <div class="crest" id="crest-initials">FP</div>
     <div>
-      <h1>Team Sheet</h1>
-      <div class="sub">Coach's lineup &amp; stats tracker</div>
+      <h1 id="header-team-name">Team Sheet</h1>
+      <div class="sub" id="header-sub">Coach's lineup &amp; stats tracker</div>
     </div>
   </div>
-  <nav class="tabs">
-    <button data-tab="squad" class="active">Squad</button>
-    <button data-tab="matches">Matches</button>
-    <button data-tab="stats">Season Stats</button>
-  </nav>
+  <div class="right-controls">
+    <nav class="tabs">
+      <button data-tab="matches" class="active">Matches</button>
+      <button data-tab="stats">Season Stats</button>
+    </nav>
+    <div id="auth-controls" style="display:flex;align-items:center;"></div>
+    <button class="settings-btn" id="settings-open-btn">⚙ Settings</button>
+  </div>
 </header>
 
 <main>
 
-  <!-- SQUAD TAB -->
-  <section id="panel-squad" class="panel active">
-    <div class="card">
-      <h2>Season Squad</h2>
-      <div class="row" style="margin-bottom:14px;">
-        <input type="text" id="new-player-name" placeholder="Player name">
-        <button class="action" id="add-player-btn">Add Player</button>
-      </div>
-      <div id="squad-list" class="row"></div>
-      <div class="hint">Add every child you'll pick from this season. You can still mark someone unavailable per match if they miss a game.</div>
-    </div>
-  </section>
-
   <!-- MATCHES TAB -->
-  <section id="panel-matches" class="panel">
+  <section id="panel-matches" class="panel active">
     <div id="matches-list-view">
       <div class="card">
         <h2>Add a Match</h2>
@@ -723,7 +776,7 @@
       <div class="legend">
         <span><span class="swatch" style="background:var(--gk)"></span>Goalkeeper</span>
         <span><span class="swatch" style="background:var(--def)"></span>Defence</span>
-        <span><span class="swatch" style="background:var(--mid)"></span>Midfield (L/R)</span>
+        <span><span class="swatch" style="background:var(--mid)"></span>Midfield</span>
         <span><span class="swatch" style="background:var(--fwd)"></span>Forward</span>
         <span><span class="swatch" style="background:var(--sub)"></span>Substitute</span>
       </div>
@@ -735,19 +788,405 @@
 
 <div id="modal-root"></div>
 
+<!-- SETTINGS OVERLAY -->
+<div id="settings-overlay" class="modal-overlay" style="display:none;">
+  <div class="modal-box settings-box">
+    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <h2 style="margin:0;" id="settings-title">Season Settings</h2>
+      <button class="back-link" id="settings-close-btn" style="padding:0;">Close</button>
+    </div>
+    <div class="hint" id="settings-forced-hint" style="display:none;margin-top:0;margin-bottom:14px;">Set up your team to get started. You can change any of this later from Settings.</div>
+
+    <div class="settings-section-title">Team</div>
+    <div class="row" style="margin-bottom:10px;">
+      <input type="text" id="settings-team-name" placeholder="Team name">
+    </div>
+    <div class="row" style="margin-bottom:4px;">
+      <input type="text" id="settings-age-group" placeholder="Age group (e.g. U9)">
+      <select id="settings-format">
+        <option value="5v5">5-a-side</option>
+        <option value="7v7">7-a-side</option>
+        <option value="9v9">9-a-side</option>
+        <option value="11v11">11-a-side</option>
+      </select>
+      <select id="settings-formation"></select>
+    </div>
+    <div class="hint" style="margin-top:0;margin-bottom:14px;">Format and formation control the pitch layout and lineup generator for matches created from now on.</div>
+
+    <div class="settings-section-title">Playing style</div>
+    <div class="row" style="margin-bottom:4px;">
+      <select id="settings-rotation-mode" style="flex:1 1 100%;">
+        <option value="rotate">Rotate positions — everyone plays every role (recommended for younger ages)</option>
+        <option value="fixed">Set positions — each player has a designated role, equal minutes within it</option>
+      </select>
+    </div>
+    <div class="hint" style="margin-top:0;margin-bottom:14px;">In "Set positions" mode, give each player a designated role below. The generator keeps them there and only moves someone out of position if there genuinely aren't enough of that role available that week.</div>
+
+    <div class="settings-section-title">Squad</div>
+    <div class="row" style="margin-bottom:10px;">
+      <input type="text" id="settings-new-player-name" placeholder="Player name">
+      <button class="action" id="settings-add-player-btn">Add</button>
+    </div>
+    <div id="settings-squad-list" class="row" style="margin-bottom:8px;"></div>
+    <div id="settings-removed-wrap" style="display:none;">
+      <div class="hint" style="margin-bottom:6px;">Removed this season (stats kept, hidden from match builder):</div>
+      <div id="settings-removed-list" class="row" style="margin-bottom:8px;"></div>
+    </div>
+    <div class="hint">Removing a player takes them out of future matches but keeps everything they've already played in your season stats.</div>
+
+    <div class="modal-actions" style="margin-top:18px;justify-content:space-between;">
+      <button class="action ghost" id="settings-manage-seasons-btn">Manage Seasons</button>
+      <button class="action" id="settings-save-btn">Save</button>
+    </div>
+
+    <div id="season-manager" style="display:none;margin-top:18px;border-top:1px solid var(--border);padding-top:16px;">
+      <div class="settings-section-title" style="margin-top:0;">Seasons</div>
+      <div id="season-list"></div>
+      <button class="action ghost" id="new-season-btn" style="margin-top:6px;">+ Start New Season</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-/* ---------- STATE ---------- */
-const STORAGE_KEY = 'coachesAppState_v1';
-const POSITIONS = ['GK','DEF','LM','RM','ST'];
-const POS_LABEL = {GK:'Goalkeeper', DEF:'Defender', LM:'Left Mid', RM:'Right Mid', ST:'Striker'};
-const POS_CATEGORY = {GK:'GK', DEF:'DEF', LM:'MID', RM:'MID', ST:'FWD', SUB:'SUB'};
-const POS_COORDS = { // % positions within pitch-wrap, laid out like a real 5-a-side shape
-  ST:  {top:'16%', left:'50%'},
-  LM:  {top:'48%', left:'20%'},
-  RM:  {top:'48%', left:'80%'},
-  DEF: {top:'70%', left:'50%'},
-  GK:  {top:'92%', left:'50%'}
+/* ---------- SUPABASE SETUP ---------- */
+const SUPABASE_URL = 'https://uqdtprphhsyrnhzfvzrk.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Ve6MvtADpWd_b6Jdu-I7tQ_5xGqmeuv';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+let currentUser = null;
+
+async function signInWithGoogle(){
+  const { error } = await supabaseClient.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.href }
+  });
+  if(error) showAlert('Sign-in failed: ' + error.message);
+}
+
+async function signOutOfSupabase(){
+  await supabaseClient.auth.signOut();
+}
+
+function renderAuthUI(){
+  const el = document.getElementById('auth-controls');
+  if(!el) return;
+  if(currentUser){
+    el.innerHTML = `
+      <span class="auth-email" style="color:white;font-size:12.5px;margin-right:8px;">${escapeHtml(currentUser.email || '')}</span>
+      <button class="settings-btn" id="cloud-push-btn" style="margin-right:6px;">⬆ Push to Cloud</button>
+      <button class="settings-btn" id="cloud-pull-btn" style="margin-right:6px;">⬇ Pull from Cloud</button>
+      <button class="settings-btn" id="sign-out-btn">Sign Out</button>
+    `;
+    document.getElementById('sign-out-btn').addEventListener('click', signOutOfSupabase);
+    document.getElementById('cloud-push-btn').addEventListener('click', pushStateToSupabase);
+    document.getElementById('cloud-pull-btn').addEventListener('click', pullStateFromSupabase);
+  } else {
+    el.innerHTML = `<button class="settings-btn" id="google-signin-btn">Sign in with Google</button>`;
+    document.getElementById('google-signin-btn').addEventListener('click', signInWithGoogle);
+  }
+}
+
+supabaseClient.auth.onAuthStateChange((_event, session)=>{
+  currentUser = session ? session.user : null;
+  renderAuthUI();
+});
+
+/* ---------- CLOUD SYNC (proof-of-concept slice: seasons + players + matches) ----------
+   This does NOT replace localStorage yet. It's a one-way push/pull so we can prove
+   the Supabase connection works end-to-end before rewriting loadState/saveState
+   to use it as the primary store. */
+async function pushStateToSupabase(){
+  if(!currentUser){ showAlert('Sign in first.'); return; }
+  try{
+    for(const season of state.seasons){
+      const { data: seasonRow, error: seasonErr } = await supabaseClient
+        .from('seasons')
+        .insert({
+          owner_id: currentUser.id,
+          team_name: season.teamName || '',
+          age_group: season.ageGroup || '',
+          format: season.format,
+          formation: season.formation,
+          rotation_mode: season.rotationMode === 'fixed' ? 'fixed' : 'rotate'
+        })
+        .select()
+        .single();
+      if(seasonErr) throw seasonErr;
+
+      const playerRows = (season.players||[]).map(p=>({
+        season_id: seasonRow.id,
+        name: p.name,
+        active: p.active !== false,
+        position_group: p.positionGroup || 'ANY'
+      }));
+      if(playerRows.length){
+        const { error: playersErr } = await supabaseClient.from('players').insert(playerRows);
+        if(playersErr) throw playersErr;
+      }
+
+      const matchRows = (season.matches||[]).map(m=>({
+        season_id: seasonRow.id,
+        match_date: m.date,
+        opponent: m.opponent,
+        venue: m.venue || null,
+        quarter_minutes: m.quarterMinutes,
+        num_periods: m.numPeriods,
+        format: m.format,
+        formation: m.formation,
+        rotation_mode: m.rotationMode === 'fixed' ? 'fixed' : 'rotate',
+        available_ids: m.availableIds || [],
+        quarters: m.quarters,
+        quarter_goals: m.quarterGoals || [],
+        quarter_assists: m.quarterAssists || [],
+        opponent_goals: m.opponentGoals || 0,
+        status: m.status || 'scheduled',
+        current_quarter: m.currentQuarter || 0
+      }));
+      if(matchRows.length){
+        const { error: matchesErr } = await supabaseClient.from('matches').insert(matchRows);
+        if(matchesErr) throw matchesErr;
+      }
+    }
+    showAlert('Pushed ' + state.seasons.length + ' season(s) to Supabase.');
+  }catch(e){
+    showAlert('Push failed: ' + e.message);
+  }
+}
+
+async function pullStateFromSupabase(){
+  if(!currentUser){ showAlert('Sign in first.'); return; }
+  try{
+    const { data: seasons, error: seasonsErr } = await supabaseClient
+      .from('seasons')
+      .select('id, team_name')
+      .eq('owner_id', currentUser.id);
+    if(seasonsErr) throw seasonsErr;
+
+    const { data: players, error: playersErr } = await supabaseClient
+      .from('players')
+      .select('id, season_id, name');
+    if(playersErr) throw playersErr;
+
+    const { data: matches, error: matchesErr } = await supabaseClient
+      .from('matches')
+      .select('id, season_id, opponent, match_date');
+    if(matchesErr) throw matchesErr;
+
+    showAlert(
+      `Pulled from Supabase: ${seasons.length} season(s), ${players.length} player(s), ${matches.length} match(es). ` +
+      `(This is a read-only proof for now, nothing overwritten locally yet.)`
+    );
+  }catch(e){
+    showAlert('Pull failed: ' + e.message);
+  }
+}
+
+/* ---------- FORMAT DEFINITIONS ---------- */
+/* Every format lists its on-field positions (goalkeeper included), a display label
+   per position, and a % top/left coordinate for the pitch diagram. Position
+   "category" (GK/DEF/MID/FWD) is derived from the key prefix rather than stored
+   per-format, so stats aggregation stays uniform across formats. */
+const FORMATS = {
+  '5v5': {
+    label: '5-a-side',
+    formations: {
+      'diamond': {
+        label: 'Diamond (1-2-1)',
+        positions: ['GK','DEF','LM','RM','ST'],
+        posLabel: { GK:'Goalkeeper', DEF:'Defender', LM:'Left Mid', RM:'Right Mid', ST:'Striker' },
+        posCoords: {
+          ST:  {top:'16%', left:'50%'},
+          LM:  {top:'48%', left:'20%'},
+          RM:  {top:'48%', left:'80%'},
+          DEF: {top:'70%', left:'50%'},
+          GK:  {top:'92%', left:'50%'}
+        }
+      }
+    }
+  },
+  '7v7': {
+    label: '7-a-side',
+    formations: {
+      '2-3-1': {
+        label: '2-3-1',
+        positions: ['GK','DEF-L','DEF-R','MID-L','MID-C','MID-R','ST'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-C':'Centre Mid', 'MID-R':'Right Mid', ST:'Striker' },
+        posCoords: {
+          ST:      {top:'12%', left:'50%'},
+          'MID-L': {top:'38%', left:'20%'},
+          'MID-C': {top:'38%', left:'50%'},
+          'MID-R': {top:'38%', left:'80%'},
+          'DEF-L': {top:'66%', left:'25%'},
+          'DEF-R': {top:'66%', left:'75%'},
+          GK:      {top:'90%', left:'50%'}
+        }
+      },
+      '3-2-1': {
+        label: '3-2-1',
+        positions: ['GK','DEF-L','DEF-C','DEF-R','MID-L','MID-R','ST'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-C':'Centre Back', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-R':'Right Mid', ST:'Striker' },
+        posCoords: {
+          ST:      {top:'12%', left:'50%'},
+          'MID-L': {top:'40%', left:'25%'},
+          'MID-R': {top:'40%', left:'75%'},
+          'DEF-L': {top:'66%', left:'20%'},
+          'DEF-C': {top:'66%', left:'50%'},
+          'DEF-R': {top:'66%', left:'80%'},
+          GK:      {top:'90%', left:'50%'}
+        }
+      }
+    }
+  },
+  '9v9': {
+    label: '9-a-side',
+    formations: {
+      '3-3-2': {
+        label: '3-3-2',
+        positions: ['GK','DEF-L','DEF-C','DEF-R','MID-L','MID-C','MID-R','ST-L','ST-R'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-C':'Centre Back', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-C':'Centre Mid', 'MID-R':'Right Mid', 'ST-L':'Striker L', 'ST-R':'Striker R' },
+        posCoords: {
+          'ST-L':  {top:'12%', left:'35%'},
+          'ST-R':  {top:'12%', left:'65%'},
+          'MID-L': {top:'38%', left:'18%'},
+          'MID-C': {top:'38%', left:'50%'},
+          'MID-R': {top:'38%', left:'82%'},
+          'DEF-L': {top:'64%', left:'20%'},
+          'DEF-C': {top:'64%', left:'50%'},
+          'DEF-R': {top:'64%', left:'80%'},
+          GK:      {top:'90%', left:'50%'}
+        }
+      },
+      '3-2-3': {
+        label: '3-2-3',
+        positions: ['GK','DEF-L','DEF-C','DEF-R','MID-L','MID-R','ST-L','ST-C','ST-R'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-C':'Centre Back', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-R':'Right Mid', 'ST-L':'Striker L', 'ST-C':'Striker C', 'ST-R':'Striker R' },
+        posCoords: {
+          'ST-L':  {top:'12%', left:'25%'},
+          'ST-C':  {top:'8%',  left:'50%'},
+          'ST-R':  {top:'12%', left:'75%'},
+          'MID-L': {top:'42%', left:'25%'},
+          'MID-R': {top:'42%', left:'75%'},
+          'DEF-L': {top:'66%', left:'20%'},
+          'DEF-C': {top:'66%', left:'50%'},
+          'DEF-R': {top:'66%', left:'80%'},
+          GK:      {top:'90%', left:'50%'}
+        }
+      },
+      '4-2-2': {
+        label: '4-2-2',
+        positions: ['GK','DEF-L','DEF-CL','DEF-CR','DEF-R','MID-L','MID-R','ST-L','ST-R'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-CL':'Centre Back L', 'DEF-CR':'Centre Back R', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-R':'Right Mid', 'ST-L':'Striker L', 'ST-R':'Striker R' },
+        posCoords: {
+          'ST-L':  {top:'14%', left:'35%'},
+          'ST-R':  {top:'14%', left:'65%'},
+          'MID-L': {top:'42%', left:'25%'},
+          'MID-R': {top:'42%', left:'75%'},
+          'DEF-L': {top:'66%', left:'15%'},
+          'DEF-CL':{top:'66%', left:'38%'},
+          'DEF-CR':{top:'66%', left:'62%'},
+          'DEF-R': {top:'66%', left:'85%'},
+          GK:      {top:'90%', left:'50%'}
+        }
+      }
+    }
+  },
+  '11v11': {
+    label: '11-a-side',
+    formations: {
+      '4-4-2': {
+        label: '4-4-2',
+        positions: ['GK','DEF-L','DEF-CL','DEF-CR','DEF-R','MID-L','MID-CL','MID-CR','MID-R','ST-L','ST-R'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-CL':'Centre Back L', 'DEF-CR':'Centre Back R', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-CL':'Centre Mid L', 'MID-CR':'Centre Mid R', 'MID-R':'Right Mid', 'ST-L':'Striker L', 'ST-R':'Striker R' },
+        posCoords: {
+          'ST-L':   {top:'10%', left:'38%'},
+          'ST-R':   {top:'10%', left:'62%'},
+          'MID-L':  {top:'36%', left:'12%'},
+          'MID-CL': {top:'36%', left:'38%'},
+          'MID-CR': {top:'36%', left:'62%'},
+          'MID-R':  {top:'36%', left:'88%'},
+          'DEF-L':  {top:'62%', left:'12%'},
+          'DEF-CL': {top:'62%', left:'38%'},
+          'DEF-CR': {top:'62%', left:'62%'},
+          'DEF-R':  {top:'62%', left:'88%'},
+          GK:       {top:'88%', left:'50%'}
+        }
+      },
+      '4-3-3': {
+        label: '4-3-3',
+        positions: ['GK','DEF-L','DEF-CL','DEF-CR','DEF-R','MID-L','MID-C','MID-R','ST-L','ST-C','ST-R'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-CL':'Centre Back L', 'DEF-CR':'Centre Back R', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-C':'Centre Mid', 'MID-R':'Right Mid', 'ST-L':'Striker L', 'ST-C':'Striker C', 'ST-R':'Striker R' },
+        posCoords: {
+          'ST-L':   {top:'12%', left:'30%'},
+          'ST-C':   {top:'8%',  left:'50%'},
+          'ST-R':   {top:'12%', left:'70%'},
+          'MID-L':  {top:'38%', left:'18%'},
+          'MID-C':  {top:'38%', left:'50%'},
+          'MID-R':  {top:'38%', left:'82%'},
+          'DEF-L':  {top:'64%', left:'14%'},
+          'DEF-CL': {top:'64%', left:'38%'},
+          'DEF-CR': {top:'64%', left:'62%'},
+          'DEF-R':  {top:'64%', left:'86%'},
+          GK:       {top:'88%', left:'50%'}
+        }
+      },
+      '3-5-2': {
+        label: '3-5-2',
+        positions: ['GK','DEF-L','DEF-C','DEF-R','MID-L','MID-CL','MID-CR','MID-R','ST-L','ST-R'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-C':'Centre Back', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-CL':'Centre Mid L', 'MID-CR':'Centre Mid R', 'MID-R':'Right Mid', 'ST-L':'Striker L', 'ST-R':'Striker R' },
+        posCoords: {
+          'ST-L':   {top:'12%', left:'38%'},
+          'ST-R':   {top:'12%', left:'62%'},
+          'MID-L':  {top:'38%', left:'10%'},
+          'MID-CL': {top:'38%', left:'37%'},
+          'MID-CR': {top:'38%', left:'63%'},
+          'MID-R':  {top:'38%', left:'90%'},
+          'DEF-L':  {top:'64%', left:'25%'},
+          'DEF-C':  {top:'64%', left:'50%'},
+          'DEF-R':  {top:'64%', left:'75%'},
+          GK:       {top:'88%', left:'50%'}
+        }
+      },
+      '4-5-1': {
+        label: '4-5-1',
+        positions: ['GK','DEF-L','DEF-CL','DEF-CR','DEF-R','MID-L','MID-CL','MID-C','MID-CR','MID-R','ST'],
+        posLabel: { GK:'Goalkeeper', 'DEF-L':'Left Back', 'DEF-CL':'Centre Back L', 'DEF-CR':'Centre Back R', 'DEF-R':'Right Back', 'MID-L':'Left Mid', 'MID-CL':'Centre Mid L', 'MID-C':'Centre Mid', 'MID-CR':'Centre Mid R', 'MID-R':'Right Mid', ST:'Striker' },
+        posCoords: {
+          ST:       {top:'10%', left:'50%'},
+          'MID-L':  {top:'38%', left:'8%'},
+          'MID-CL': {top:'38%', left:'30%'},
+          'MID-C':  {top:'38%', left:'50%'},
+          'MID-CR': {top:'38%', left:'70%'},
+          'MID-R':  {top:'38%', left:'92%'},
+          'DEF-L':  {top:'64%', left:'14%'},
+          'DEF-CL': {top:'64%', left:'38%'},
+          'DEF-CR': {top:'64%', left:'62%'},
+          'DEF-R':  {top:'64%', left:'86%'},
+          GK:       {top:'88%', left:'50%'}
+        }
+      }
+    }
+  }
 };
+const DEFAULT_FORMATION = { '5v5':'diamond', '7v7':'2-3-1', '9v9':'3-3-2', '11v11':'4-4-2' };
+function formationKeysFor(format){ return Object.keys((FORMATS[format]||FORMATS['5v5']).formations); }
+function categoryForPos(pos){
+  if(pos === 'GK') return 'GK';
+  if(pos.indexOf('DEF') === 0) return 'DEF';
+  if(pos.indexOf('MID') === 0) return 'MID';
+  if(pos === 'LM' || pos === 'RM') return 'MID'; // 5-a-side shorthand keys, don't start with 'MID'
+  if(pos.indexOf('ST') === 0) return 'FWD';
+  return 'SUB';
+}
+const CATEGORY_COLOR = { GK:'var(--gk)', DEF:'var(--def)', MID:'var(--mid)', FWD:'var(--fwd)' };
+/* Returns the concrete formation object (positions/labels/coords) a given match was built
+   with. Matches snapshot both format and formation at creation time, so changing either
+   later in Settings doesn't retroactively corrupt older matches' team sheets. */
+function formationOf(match){
+  const fmt = FORMATS[match.format] || FORMATS['5v5'];
+  const formKey = (match.formation && fmt.formations[match.formation]) ? match.formation : (DEFAULT_FORMATION[match.format] || Object.keys(fmt.formations)[0]);
+  return fmt.formations[formKey];
+}
 
 /* ---------- CUSTOM MODAL (replaces native confirm/alert, which can silently fail in some browser contexts) ---------- */
 function closeModal(){
@@ -797,36 +1236,98 @@ function showConfirm(message, onConfirm){
   document.getElementById('modal-confirm-btn').focus();
 }
 
+/* ---------- STATE ---------- */
+const STORAGE_KEY = 'coachesAppState_v2';
+const LEGACY_STORAGE_KEY = 'coachesAppState_v1';
+
+function uid(){ return 'id_' + Math.random().toString(36).slice(2,10); }
+
+function blankSeason(overrides){
+  return Object.assign({
+    id: uid(),
+    teamName: '',
+    ageGroup: '',
+    format: '5v5',
+    formation: DEFAULT_FORMATION['5v5'],
+    rotationMode: 'rotate', // 'rotate' = spread positions fairly (younger ages); 'fixed' = respect each player's designated position
+    players: [],
+    matches: [],
+    createdAt: Date.now()
+  }, overrides || {});
+}
+
+function migrateMatch(m){
+  if(!m.quarterGoals){
+    m.quarterGoals = [{},{},{},{}];
+    if(m.goals){
+      Object.entries(m.goals).forEach(([pid,g])=>{ m.quarterGoals[0][pid] = g; });
+    }
+  }
+  if(!m.quarterAssists) m.quarterAssists = [{},{},{},{}];
+  if(!m.numPeriods) m.numPeriods = m.quarterGoals.length || 4;
+  if(!m.format) m.format = '5v5'; // matches created before multi-format support were always 5-a-side
+  if(!m.formation) m.formation = DEFAULT_FORMATION[m.format] || 'diamond';
+  if(!m.rotationMode) m.rotationMode = 'rotate'; // matches created before this feature always rotated positions
+  delete m.goals;
+  return m;
+}
+
 function loadState(){
   const raw = localStorage.getItem(STORAGE_KEY);
-  let s = { players: [], matches: [] };
   if(raw){
-    try{ s = JSON.parse(raw); }catch(e){}
+    try{
+      const s = JSON.parse(raw);
+      (s.seasons||[]).forEach(season=>{
+        if(!season.formation) season.formation = DEFAULT_FORMATION[season.format] || 'diamond';
+        if(!season.rotationMode) season.rotationMode = 'rotate';
+        (season.players||[]).forEach(p=>{
+          if(p.active === undefined) p.active = true;
+          if(!p.positionGroup) p.positionGroup = 'ANY';
+        });
+        (season.matches||[]).forEach(migrateMatch);
+      });
+      return s;
+    }catch(e){ /* fall through to legacy/blank */ }
   }
-  // migrate any matches saved before per-quarter goal/assist tracking existed
-  (s.matches||[]).forEach(m=>{
-    if(!m.quarterGoals){
-      m.quarterGoals = [{},{},{},{}];
-      if(m.goals){
-        // old format only stored a match total per player with no quarter info —
-        // best effort: drop those into Q1 so the goal isn't lost, coach can move it if needed
-        Object.entries(m.goals).forEach(([pid,g])=>{ m.quarterGoals[0][pid] = g; });
-      }
-    }
-    if(!m.quarterAssists) m.quarterAssists = [{},{},{},{}];
-    if(!m.numPeriods) m.numPeriods = m.quarterGoals.length || 4;
-    delete m.goals;
-  });
-  return s;
-}
-function periodLabels(numPeriods){
-  if(numPeriods === 2) return ['H1','H2'];
-  return Array.from({length:numPeriods}, (_,i)=>'Q'+(i+1));
+  // legacy single-season save (pre-settings/seasons feature)
+  const legacyRaw = localStorage.getItem(LEGACY_STORAGE_KEY);
+  if(legacyRaw){
+    try{
+      const legacy = JSON.parse(legacyRaw);
+      const players = (legacy.players||[]).map(p=>Object.assign({active:true, positionGroup:'ANY'}, p));
+      const matches = (legacy.matches||[]).map(migrateMatch);
+      const season = blankSeason({ teamName:'My Team', players, matches });
+      return { seasons:[season], activeSeasonId: season.id };
+    }catch(e){ /* fall through to blank */ }
+  }
+  return { seasons: [], activeSeasonId: null };
 }
 function saveState(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 let state = loadState();
+saveState(); // persist immediately so a legacy migration (or a blank first run) is written under the new key right away
+
+function getActiveSeason(){
+  return state.seasons.find(s=>s.id===state.activeSeasonId) || null;
+}
+function activePlayers(season){
+  return (season.players||[]).filter(p=>p.active !== false);
+}
+function findPlayer(season, pid){
+  return (season.players||[]).find(p=>p.id===pid);
+}
+
+function periodLabels(numPeriods){
+  if(numPeriods === 2) return ['H1','H2'];
+  return Array.from({length:numPeriods}, (_,i)=>'Q'+(i+1));
+}
+function escapeHtml(str){
+  return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function initials(name){
+  return name.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
+}
 
 /* selection for pitch/bench swaps, and current viewed match/quarter */
 let selectedSlot = null;
@@ -834,72 +1335,342 @@ let currentMatchId = null;
 let currentQuarterView = 0;
 let viewMode = 'table';
 
-function uid(){ return 'id_' + Math.random().toString(36).slice(2,10); }
+/* ---------- HUNGARIAN ALGORITHM (min-cost assignment) ----------
+   generateLineup used to brute-force every permutation of on-field players
+   against positions. That's fine up to 5! = 120 options, but for 11-a-side it
+   would be 11! = ~40 million, which would hang the browser. This is the
+   standard O(n^3) assignment-problem solver instead: same "best possible"
+   result, but it scales cleanly from 5v5 up to 11v11. */
+function hungarianMinCost(costMatrix){
+  const n = costMatrix.length;
+  const INF = Infinity;
+  const u = new Array(n+1).fill(0);
+  const v = new Array(n+1).fill(0);
+  const p = new Array(n+1).fill(0); // p[j] = row (1-indexed) currently assigned to col j
+  const way = new Array(n+1).fill(0);
+  for(let i=1;i<=n;i++){
+    p[0] = i;
+    let j0 = 0;
+    const minv = new Array(n+1).fill(INF);
+    const used = new Array(n+1).fill(false);
+    do{
+      used[j0] = true;
+      const i0 = p[j0];
+      let delta = INF, j1 = -1;
+      for(let j=1;j<=n;j++){
+        if(!used[j]){
+          const cur = costMatrix[i0-1][j-1] - u[i0] - v[j];
+          if(cur < minv[j]){ minv[j] = cur; way[j] = j0; }
+          if(minv[j] < delta){ delta = minv[j]; j1 = j; }
+        }
+      }
+      for(let j=0;j<=n;j++){
+        if(used[j]){ u[p[j]] += delta; v[j] -= delta; }
+        else { minv[j] -= delta; }
+      }
+      j0 = j1;
+    } while(p[j0] !== 0);
+    do{
+      const j1 = way[j0];
+      p[j0] = p[j1];
+      j0 = j1;
+    } while(j0 !== 0);
+  }
+  const assignment = new Array(n).fill(-1); // assignment[row 0-indexed] = col 0-indexed
+  for(let j=1;j<=n;j++){
+    if(p[j] > 0) assignment[p[j]-1] = j-1;
+  }
+  return assignment;
+}
 
 /* ---------- TAB NAV ---------- */
 document.querySelectorAll('nav.tabs button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
-    if(btn.dataset.tab === 'stats') renderStats();
-    if(btn.dataset.tab === 'matches') renderMatchesList();
+    switchTab(btn.dataset.tab);
   });
 });
+function switchTab(tab){
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+tab).classList.add('active');
+  if(tab === 'stats') renderStats();
+  if(tab === 'matches') renderMatchesList();
+}
 
-/* ---------- SQUAD ---------- */
-function renderSquad(){
-  const wrap = document.getElementById('squad-list');
-  if(state.players.length === 0){
-    wrap.innerHTML = '<div class="empty-state">No players yet. Add your squad above.</div>';
+/* ---------- HEADER ---------- */
+function renderHeader(){
+  const season = getActiveSeason();
+  const nameEl = document.getElementById('header-team-name');
+  const subEl = document.getElementById('header-sub');
+  const crestEl = document.getElementById('crest-initials');
+  if(!season){
+    nameEl.textContent = 'Team Sheet';
+    subEl.textContent = "Coach's lineup & stats tracker";
+    crestEl.textContent = 'FP';
     return;
   }
-  wrap.innerHTML = state.players.map(p=>`
-    <span class="player-chip">${escapeHtml(p.name)}
-      <button data-id="${p.id}" class="remove-player" title="Remove">&times;</button>
-    </span>
-  `).join('');
-  wrap.querySelectorAll('.remove-player').forEach(btn=>{
+  nameEl.textContent = season.teamName || 'Team Sheet';
+  const fmtObj = FORMATS[season.format];
+  const formationLabel = fmtObj && fmtObj.formations[season.formation] ? fmtObj.formations[season.formation].label : '';
+  const bits = [season.ageGroup, fmtObj ? fmtObj.label : season.format, formationLabel].filter(Boolean);
+  subEl.textContent = bits.length ? bits.join(' · ') : "Coach's lineup & stats tracker";
+  crestEl.textContent = season.teamName ? initials(season.teamName) : 'FP';
+}
+
+/* ---------- SETTINGS OVERLAY ---------- */
+let settingsForced = false;
+
+const POSITION_GROUP_LABEL = { ANY:'Any', GK:'GK', DEF:'Def', MID:'Mid', FWD:'Fwd' };
+
+function populateFormationSelect(format, selectedFormation){
+  const sel = document.getElementById('settings-formation');
+  const keys = formationKeysFor(format);
+  const fmt = FORMATS[format] || FORMATS['5v5'];
+  sel.innerHTML = keys.map(k=>`<option value="${k}">${escapeHtml(fmt.formations[k].label)}</option>`).join('');
+  sel.value = keys.includes(selectedFormation) ? selectedFormation : (DEFAULT_FORMATION[format] || keys[0]);
+}
+document.getElementById('settings-format').addEventListener('change', ()=>{
+  populateFormationSelect(document.getElementById('settings-format').value, null);
+});
+document.getElementById('settings-rotation-mode').addEventListener('change', renderSettingsSquad);
+
+function openSettings(forced){
+  settingsForced = !!forced;
+  const season = getActiveSeason();
+  document.getElementById('settings-forced-hint').style.display = settingsForced ? 'block' : 'none';
+  document.getElementById('settings-close-btn').style.display = settingsForced ? 'none' : 'inline-flex';
+  document.getElementById('settings-title').textContent = settingsForced ? 'Set Up Your Team' : 'Season Settings';
+  document.getElementById('settings-team-name').value = season ? season.teamName : '';
+  document.getElementById('settings-age-group').value = season ? season.ageGroup : '';
+  document.getElementById('settings-format').value = season ? season.format : '5v5';
+  populateFormationSelect(season ? season.format : '5v5', season ? season.formation : null);
+  document.getElementById('settings-rotation-mode').value = season ? season.rotationMode : 'rotate';
+  document.getElementById('season-manager').style.display = 'none';
+  renderSettingsSquad();
+  renderSeasonList();
+  document.getElementById('settings-overlay').style.display = 'flex';
+}
+function closeSettingsOverlay(){
+  if(settingsForced) return; // must save first when there's no active season yet
+  document.getElementById('settings-overlay').style.display = 'none';
+  renderAvailableChecks(); // squad may have changed while settings was open
+}
+document.getElementById('settings-open-btn').addEventListener('click', ()=> openSettings(false));
+document.getElementById('settings-close-btn').addEventListener('click', closeSettingsOverlay);
+
+function renderSettingsSquad(){
+  const season = getActiveSeason();
+  const listWrap = document.getElementById('settings-squad-list');
+  const removedWrap = document.getElementById('settings-removed-wrap');
+  const removedList = document.getElementById('settings-removed-list');
+  if(!season){ listWrap.innerHTML = ''; removedWrap.style.display = 'none'; return; }
+
+  // draft preview: reflects the (not-yet-saved) rotation-mode select so toggling it
+  // immediately shows/hides the per-player position pickers
+  const fixedMode = document.getElementById('settings-rotation-mode').value === 'fixed';
+
+  const active = season.players.filter(p=>p.active !== false);
+  const removed = season.players.filter(p=>p.active === false);
+
+  listWrap.innerHTML = active.length === 0
+    ? '<div class="empty-state">No players yet. Add your squad above.</div>'
+    : active.map(p=>`
+        <span class="player-chip">${escapeHtml(p.name)}
+          ${fixedMode ? `<select class="player-pos-select" data-id="${p.id}" style="border:none;background:transparent;font-size:12px;font-weight:600;color:var(--ink-soft);">
+            ${Object.entries(POSITION_GROUP_LABEL).map(([val,lbl])=>`<option value="${val}" ${p.positionGroup===val?'selected':''}>${lbl}</option>`).join('')}
+          </select>` : ''}
+          <button data-id="${p.id}" class="remove-player" title="Remove from squad">&times;</button>
+        </span>
+      `).join('');
+  listWrap.querySelectorAll('.remove-player').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      showConfirm('Remove this player from the squad? Past match stats stay recorded.', ()=>{
-        state.players = state.players.filter(p=>p.id !== btn.dataset.id);
+      showConfirm('Remove this player from the squad? Stats they already have this season stay recorded.', ()=>{
+        const p = findPlayer(season, btn.dataset.id);
+        if(p) p.active = false;
         saveState();
-        renderSquad();
+        renderSettingsSquad();
+      });
+    });
+  });
+  listWrap.querySelectorAll('.player-pos-select').forEach(sel=>{
+    sel.addEventListener('change', ()=>{
+      const p = findPlayer(season, sel.dataset.id);
+      if(p) p.positionGroup = sel.value;
+      saveState();
+    });
+  });
+
+  if(removed.length === 0){
+    removedWrap.style.display = 'none';
+  } else {
+    removedWrap.style.display = 'block';
+    removedList.innerHTML = removed.map(p=>`
+      <span class="player-chip removed">${escapeHtml(p.name)}
+        <button data-id="${p.id}" class="restore-player" title="Add back to squad">&#8635;</button>
+      </span>
+    `).join('');
+    removedList.querySelectorAll('.restore-player').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const p = findPlayer(season, btn.dataset.id);
+        if(p) p.active = true;
+        saveState();
+        renderSettingsSquad();
+      });
+    });
+  }
+}
+document.getElementById('settings-add-player-btn').addEventListener('click', ()=>{
+  const season = getActiveSeason();
+  if(!season) return;
+  const input = document.getElementById('settings-new-player-name');
+  const name = input.value.trim();
+  if(!name) return;
+  season.players.push({id: uid(), name, active:true, positionGroup:'ANY'});
+  input.value = '';
+  saveState();
+  renderSettingsSquad();
+});
+document.getElementById('settings-new-player-name').addEventListener('keydown', e=>{
+  if(e.key === 'Enter') document.getElementById('settings-add-player-btn').click();
+});
+
+document.getElementById('settings-save-btn').addEventListener('click', ()=>{
+  const teamName = document.getElementById('settings-team-name').value.trim();
+  const ageGroup = document.getElementById('settings-age-group').value.trim();
+  const format = document.getElementById('settings-format').value;
+  const formation = document.getElementById('settings-formation').value;
+  const rotationMode = document.getElementById('settings-rotation-mode').value;
+
+  if(!teamName){ showAlert('Give your team a name before saving.'); return; }
+
+  let season = getActiveSeason();
+  if(!season){
+    season = blankSeason({});
+    state.seasons.push(season);
+    state.activeSeasonId = season.id;
+  }
+  season.teamName = teamName;
+  season.ageGroup = ageGroup;
+  season.format = format;
+  season.formation = formation;
+  season.rotationMode = rotationMode;
+  saveState();
+
+  const wasForced = settingsForced;
+  settingsForced = false;
+  document.getElementById('settings-overlay').style.display = 'none';
+  renderHeader();
+  renderAll();
+  if(wasForced) switchTab('matches');
+});
+
+document.getElementById('settings-manage-seasons-btn').addEventListener('click', ()=>{
+  const panel = document.getElementById('season-manager');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  if(panel.style.display === 'block') renderSeasonList();
+});
+
+function renderSeasonList(){
+  const wrap = document.getElementById('season-list');
+  if(state.seasons.length === 0){
+    wrap.innerHTML = '<div class="empty-state">No seasons yet.</div>';
+    return;
+  }
+  const sorted = [...state.seasons].sort((a,b)=> (b.createdAt||0)-(a.createdAt||0));
+  wrap.innerHTML = sorted.map(s=>{
+    const isActive = s.id === state.activeSeasonId;
+    const fmtObj = FORMATS[s.format];
+    const formationLabel = fmtObj && fmtObj.formations[s.formation] ? fmtObj.formations[s.formation].label : '';
+    const meta = [s.ageGroup, fmtObj ? fmtObj.label : s.format, formationLabel, s.matches.length + ' match' + (s.matches.length===1?'':'es')].filter(Boolean).join(' · ');
+    return `
+      <div class="season-row ${isActive?'is-active':''}" data-id="${s.id}">
+        <div>
+          <div class="season-name">${escapeHtml(s.teamName || 'Untitled season')} ${isActive ? ' (active)' : ''}</div>
+          <div class="season-meta">${escapeHtml(meta)}</div>
+        </div>
+        <div class="row" style="gap:6px;">
+          ${!isActive ? `<button class="action ghost switch-season-btn" data-id="${s.id}">Switch</button>` : ''}
+          <button class="action danger delete-season-btn" data-id="${s.id}">Delete</button>
+        </div>
+      </div>`;
+  }).join('');
+  wrap.querySelectorAll('.switch-season-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      state.activeSeasonId = btn.dataset.id;
+      saveState();
+      const season = getActiveSeason();
+      document.getElementById('settings-team-name').value = season.teamName;
+      document.getElementById('settings-age-group').value = season.ageGroup;
+      document.getElementById('settings-format').value = season.format;
+      populateFormationSelect(season.format, season.formation);
+      document.getElementById('settings-rotation-mode').value = season.rotationMode;
+      renderSettingsSquad();
+      renderSeasonList();
+      renderHeader();
+      renderAll();
+      document.getElementById('settings-overlay').style.display = 'none';
+      switchTab('matches');
+    });
+  });
+  wrap.querySelectorAll('.delete-season-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      showConfirm('Delete this season permanently? All its matches and stats will be lost.', ()=>{
+        const wasActive = btn.dataset.id === state.activeSeasonId;
+        state.seasons = state.seasons.filter(s=>s.id !== btn.dataset.id);
+        if(wasActive){
+          state.activeSeasonId = state.seasons.length ? state.seasons[0].id : null;
+        }
+        saveState();
+        renderSeasonList();
+        renderHeader();
+        if(!getActiveSeason()){
+          openSettings(true);
+        } else {
+          const season = getActiveSeason();
+          document.getElementById('settings-team-name').value = season.teamName;
+          document.getElementById('settings-age-group').value = season.ageGroup;
+          document.getElementById('settings-format').value = season.format;
+          populateFormationSelect(season.format, season.formation);
+          document.getElementById('settings-rotation-mode').value = season.rotationMode;
+          renderSettingsSquad();
+        }
+        renderAll();
       });
     });
   });
 }
-document.getElementById('add-player-btn').addEventListener('click', ()=>{
-  const input = document.getElementById('new-player-name');
-  const name = input.value.trim();
-  if(!name) return;
-  state.players.push({id: uid(), name});
-  input.value = '';
+document.getElementById('new-season-btn').addEventListener('click', ()=>{
+  const season = blankSeason({ teamName: 'New Season' });
+  state.seasons.push(season);
+  state.activeSeasonId = season.id;
   saveState();
-  renderSquad();
+  document.getElementById('settings-team-name').value = season.teamName;
+  document.getElementById('settings-age-group').value = '';
+  document.getElementById('settings-format').value = '5v5';
+  populateFormationSelect('5v5', DEFAULT_FORMATION['5v5']);
+  document.getElementById('settings-rotation-mode').value = 'rotate';
+  renderSettingsSquad();
+  renderSeasonList();
+  renderHeader();
 });
-document.getElementById('new-player-name').addEventListener('keydown', e=>{
-  if(e.key === 'Enter') document.getElementById('add-player-btn').click();
-});
-
-function escapeHtml(str){
-  return str.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
 
 /* ---------- MATCHES: ADD FORM ---------- */
 function renderAvailableChecks(){
+  const season = getActiveSeason();
   const wrap = document.getElementById('match-available-checks');
-  if(state.players.length === 0){
-    wrap.innerHTML = '<div class="empty-state">Add players to the squad first.</div>';
+  const players = season ? activePlayers(season) : [];
+  if(players.length === 0){
+    wrap.innerHTML = '<div class="empty-state">Add players to the squad first (Settings).</div>';
     return;
   }
-  wrap.innerHTML = state.players.map(p=>`
+  wrap.innerHTML = players.map(p=>`
     <label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)}</label>
   `).join('');
 }
 
 document.getElementById('add-match-btn').addEventListener('click', ()=>{
+  const season = getActiveSeason();
+  if(!season) return;
   const date = document.getElementById('match-date').value;
   const opponent = document.getElementById('match-opponent').value.trim();
   const venue = document.getElementById('match-venue').value;
@@ -915,6 +1686,9 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
     id: uid(),
     date: date || new Date().toISOString().slice(0,10),
     opponent, venue, quarterMinutes: qMins, numPeriods,
+    format: season.format,
+    formation: season.formation,
+    rotationMode: season.rotationMode,
     availableIds,
     quarters: null,
     quarterGoals: Array.from({length:numPeriods}, ()=>({})),
@@ -923,7 +1697,7 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
     status: 'scheduled',
     currentQuarter: 0
   };
-  state.matches.push(match);
+  season.matches.push(match);
   saveState();
 
   document.getElementById('match-opponent').value = '';
@@ -937,8 +1711,10 @@ function totalGoalsForMatch(m){
 /* ---------- MATCHES: LIST ---------- */
 function renderMatchesList(){
   renderAvailableChecks();
+  const season = getActiveSeason();
   const wrap = document.getElementById('matches-list');
-  const sorted = [...state.matches].sort((a,b)=> b.date.localeCompare(a.date));
+  if(!season){ wrap.innerHTML = ''; return; }
+  const sorted = [...season.matches].sort((a,b)=> b.date.localeCompare(a.date));
   if(sorted.length === 0){
     wrap.innerHTML = '<div class="empty-state">No matches yet — add one above.</div>';
     return;
@@ -962,13 +1738,17 @@ function renderMatchesList(){
 
 document.getElementById('delete-match-btn').addEventListener('click', ()=>{
   showConfirm('Delete this match permanently? This removes its stats from the season too.', ()=>{
-    state.matches = state.matches.filter(m=>m.id !== currentMatchId);
+    const season = getActiveSeason();
+    season.matches = season.matches.filter(m=>m.id !== currentMatchId);
     saveState();
     closeMatchDetail();
   });
 });
 
-function getMatch(id){ return state.matches.find(m=>m.id===id); }
+function getMatch(id){
+  const season = getActiveSeason();
+  return season ? season.matches.find(m=>m.id===id) : null;
+}
 
 /* ---------- MATCH DETAIL / LINEUP ---------- */
 function openMatch(id){
@@ -1034,8 +1814,8 @@ function renderMatchDetail(){
   document.getElementById('table-view-container').style.display = viewMode === 'table' ? 'block' : 'none';
   document.getElementById('view-hint').textContent = viewMode === 'table'
     ? (m.status === 'scheduled'
-        ? "This is the full team sheet, Q1–Q4. Switch to Pitch View to set the lineup and swap players before kickoff."
-        : "Tap ⚽ to log a goal or 🅰 to log an assist in the quarter it happened — tap a count badge to remove one.")
+        ? "This is the full team sheet across all periods. Switch to Pitch View to set the lineup and swap players before kickoff."
+        : "Tap ⚽ to log a goal or 🅰 to log an assist in the period it happened — tap a count badge to remove one.")
     : (m.status === 'scheduled'
         ? "Tap two spots (pitch or bench) to swap players before kickoff. Once you start the match, the lineup locks and ⚽/🅰 buttons appear."
         : "Lineup's locked in — tap ⚽ to log a goal or 🅰 to log an assist, tap a count badge to remove one.");
@@ -1049,12 +1829,16 @@ document.getElementById('generate-team-btn').addEventListener('click', ()=>{
     return;
   }
   const doGenerate = ()=>{
-    m.quarters = generateLineup(m);
+    const result = generateLineup(m);
+    m.quarters = result.quarters;
     saveState();
     renderMatchDetail();
+    if(result.outOfPositionCount > 0){
+      showAlert("Heads up: with Set Positions on, there weren't quite enough players in some designated roles this week, so a few spots were filled from outside their usual position to keep the team full. Check the pitch view if you'd like to adjust manually.");
+    }
   };
   if(m.quarters){
-    showConfirm('Regenerate the team? This will overwrite the current lineup for all 4 quarters.', doGenerate);
+    showConfirm('Regenerate the team? This will overwrite the current lineup for all periods.', doGenerate);
   } else {
     doGenerate();
   }
@@ -1070,83 +1854,109 @@ document.getElementById('opp-goal-btn').addEventListener('click', ()=>{
 
 /* ---------- LINEUP GENERATION ---------- */
 function generateLineup(match){
-  const squad = match.availableIds.map(id => state.players.find(p=>p.id===id)).filter(Boolean);
+  const season = getActiveSeason();
+  const format = formationOf(match);
+  const POSITIONS = format.positions;
+  const squad = match.availableIds.map(id => findPlayer(season, id)).filter(Boolean);
   const seasonStats = computeSeasonStats(match.id); // exclude this match itself if already counted
-  const numOnField = Math.min(5, squad.length);
+  const numOnFieldFull = POSITIONS.length;
+  const numOnField = Math.min(numOnFieldFull, squad.length);
   const cumMinutes = {};
   const positionsPlayedThisMatch = {};
   const lastPosition = {};
   squad.forEach(p=>{ cumMinutes[p.id] = 0; positionsPlayedThisMatch[p.id] = new Set(); lastPosition[p.id] = null; });
 
+  const rotationMode = match.rotationMode || 'rotate';
+  let outOfPositionCount = 0;
+
+  // In fixed mode, slot counts per category are needed up front so bench selection can
+  // guarantee each category keeps enough of its own players on the field (rather than a
+  // naive global "highest minutes sits" pick accidentally benching, say, 3 of your 4
+  // defenders while a striker with more minutes stays on).
+  const slotCountByCategory = {};
+  POSITIONS.forEach(pos=>{ const c = categoryForPos(pos); slotCountByCategory[c] = (slotCountByCategory[c]||0) + 1; });
+
   const quarters = [];
   for(let q=0; q<match.numPeriods; q++){
-    const numSubsNeeded = Math.max(0, squad.length - numOnField);
-    // choose bench: players with HIGHEST cumMinutes so far sit first (spread minutes fairly)
-    const sortedByMinutesDesc = [...squad].sort((a,b)=> cumMinutes[b.id]-cumMinutes[a.id] || Math.random()-0.5);
-    const bench = squad.length > 5 ? sortedByMinutesDesc.slice(0, numSubsNeeded) : [];
-    const benchIds = new Set(bench.map(p=>p.id));
-    let onField = squad.filter(p=>!benchIds.has(p.id));
+    let onField, bench;
 
-    // Evaluate whole permutations of (position slot) assignments at once, rather than
-    // greedily filling one position at a time. Greedy fill-by-position can strand the
-    // last position with whichever player is left over, even if that player already
-    // played that exact position earlier in the match (see: Harry double-ST bug).
-    const activePositions = POSITIONS.slice(0, Math.min(5, onField.length));
+    if(rotationMode === 'fixed'){
+      const byCumAsc = (a,b)=> cumMinutes[a.id]-cumMinutes[b.id] || Math.random()-0.5;
+      const byCumDesc = (a,b)=> cumMinutes[b.id]-cumMinutes[a.id] || Math.random()-0.5;
+      const mustPlay = [];
+      const flexPool = []; // 'ANY' players, plus surplus beyond each category's own slot count
+      ['GK','DEF','MID','FWD'].forEach(cat=>{
+        const inCat = squad.filter(p=>p.positionGroup === cat).sort(byCumAsc);
+        const need = slotCountByCategory[cat] || 0;
+        mustPlay.push(...inCat.slice(0, need));
+        flexPool.push(...inCat.slice(need)); // surplus in this category, only used if another category is short
+      });
+      flexPool.push(...squad.filter(p=>!p.positionGroup || p.positionGroup === 'ANY'));
+      flexPool.sort(byCumAsc);
+
+      onField = [...mustPlay];
+      const stillNeeded = Math.max(0, numOnField - onField.length);
+      const onFieldIds = new Set(onField.map(p=>p.id));
+      flexPool.forEach(p=>{
+        if(onField.length - mustPlay.length >= stillNeeded) return;
+        if(onFieldIds.has(p.id)) return;
+        onField.push(p);
+        onFieldIds.add(p.id);
+      });
+      // if squad is smaller than the full formation, everyone plays regardless of category
+      if(squad.length <= numOnFieldFull){
+        onField = [...squad];
+        bench = [];
+      } else {
+        bench = squad.filter(p=>!onFieldIds.has(p.id)).sort(byCumDesc);
+      }
+    } else {
+      const numSubsNeeded = Math.max(0, squad.length - numOnField);
+      // choose bench: players with HIGHEST cumMinutes so far sit first (spread minutes fairly)
+      const sortedByMinutesDesc = [...squad].sort((a,b)=> cumMinutes[b.id]-cumMinutes[a.id] || Math.random()-0.5);
+      bench = squad.length > numOnFieldFull ? sortedByMinutesDesc.slice(0, numSubsNeeded) : [];
+      const benchIds = new Set(bench.map(p=>p.id));
+      onField = squad.filter(p=>!benchIds.has(p.id));
+    }
+
+    const activePositions = POSITIONS.slice(0, Math.min(numOnFieldFull, onField.length));
     const assignment = {};
 
     if(activePositions.length === 0 || onField.length === 0){
       POSITIONS.forEach(pos=>{ assignment[pos] = null; });
     } else {
-      const perCandidateScore = (p, pos)=>{
-        const playedBefore = positionsPlayedThisMatch[p.id].has(pos) ? 1 : 0;
-        const sameAsLastQ = lastPosition[p.id] === pos ? 1 : 0;
-        const seasonPosMins = (seasonStats[p.id]?.categoryMinutes?.[POS_CATEGORY[pos]]) || 0;
-        return [playedBefore, sameAsLastQ, seasonPosMins];
-      };
-
-      // Generate all permutations of onField players taken activePositions.length at a time,
-      // assigned to activePositions in order. Squads are small (<=5 on field), so this is
-      // at most 5! = 120 permutations: cheap.
-      function permute(arr, k){
-        if(k === 0) return [[]];
-        const results = [];
-        arr.forEach((item, i)=>{
-          const rest = arr.slice(0,i).concat(arr.slice(i+1));
-          permute(rest, k-1).forEach(tail=>{
-            results.push([item, ...tail]);
-          });
+      // Cost matrix: rows = onField players, cols = activePositions. Lower is better.
+      // Tiered so each factor only ever breaks ties left by the one above it:
+      //   1. (fixed mode only) whether this player's designated position matches the slot's
+      //      category — this dominates everything else, so the solver only ever places someone
+      //      out of position when there's a genuine shortage in their group that quarter.
+      //   2. whether they've already played this exact position this match
+      //   3. whether they played this exact position last quarter
+      //   4. their season-to-date minutes in this position's category
+      // Solved as an assignment problem (Hungarian algorithm) rather than brute-force
+      // permutations, so it stays fast even at 11v11 (11! permutations would not).
+      const costMatrix = onField.map(p=>{
+        return activePositions.map(pos=>{
+          const cat = categoryForPos(pos);
+          const outOfGroup = (rotationMode === 'fixed' && p.positionGroup && p.positionGroup !== 'ANY' && p.positionGroup !== cat) ? 1 : 0;
+          const playedBefore = positionsPlayedThisMatch[p.id].has(pos) ? 1 : 0;
+          const sameAsLastQ = lastPosition[p.id] === pos ? 1 : 0;
+          const seasonPosMins = (seasonStats[p.id]?.categoryMinutes?.[cat]) || 0;
+          return outOfGroup*1e12 + playedBefore*1e9 + sameAsLastQ*1e6 + seasonPosMins;
         });
-        return results;
-      }
-
-      const perms = permute(onField, activePositions.length);
-      let best = null;
-      let bestKey = null;
-      perms.forEach(perm=>{
-        // total score = sum of [playedBefore, sameAsLastQ, seasonPosMins] across the whole
-        // quarter's assignment, compared lexicographically: minimizing repeats first,
-        // then same-as-last-quarter, then season position overload.
-        const totals = [0,0,0];
-        perm.forEach((p, idx)=>{
-          const pos = activePositions[idx];
-          const s = perCandidateScore(p, pos);
-          totals[0]+=s[0]; totals[1]+=s[1]; totals[2]+=s[2];
-        });
-        if(bestKey === null){
-          best = perm; bestKey = totals;
-        } else {
-          for(let i=0;i<totals.length;i++){
-            if(totals[i] !== bestKey[i]){
-              if(totals[i] < bestKey[i]){ best = perm; bestKey = totals; }
-              break;
-            }
+      });
+      const assignRowToCol = hungarianMinCost(costMatrix);
+      assignRowToCol.forEach((colIdx, rowIdx)=>{
+        if(colIdx >= 0){
+          const pos = activePositions[colIdx];
+          const player = onField[rowIdx];
+          assignment[pos] = player.id;
+          if(rotationMode === 'fixed' && player.positionGroup && player.positionGroup !== 'ANY' && player.positionGroup !== categoryForPos(pos)){
+            outOfPositionCount += 1;
           }
         }
       });
-
-      best.forEach((p, idx)=>{ assignment[activePositions[idx]] = p.id; });
     }
-    // if fewer than 5 available, leave missing positions null
     POSITIONS.forEach(pos=>{ if(!(pos in assignment)) assignment[pos] = null; });
     assignment.SUBS = bench.map(p=>p.id);
 
@@ -1165,11 +1975,14 @@ function generateLineup(match){
       lastPosition[p.id] = 'SUB';
     });
   }
-  return quarters;
+  return { quarters, outOfPositionCount };
 }
 
 /* ---------- PITCH RENDER ---------- */
 function renderPitch(match){
+  const season = getActiveSeason();
+  const format = formationOf(match);
+  const POSITIONS = format.positions;
   const wrap = document.getElementById('pitch-wrap');
   // clear existing slots and any leftover empty-state message
   wrap.querySelectorAll('.pos-slot').forEach(el=>el.remove());
@@ -1188,7 +2001,7 @@ function renderPitch(match){
   const q = match.quarters[currentQuarterView];
   POSITIONS.forEach(pos=>{
     const pid = q[pos];
-    const coords = POS_COORDS[pos];
+    const coords = format.posCoords[pos];
     const slot = document.createElement('div');
     slot.className = 'pos-slot';
     slot.style.top = coords.top;
@@ -1197,14 +2010,14 @@ function renderPitch(match){
     slot.dataset.slotId = slotId;
     if(selectedSlot === slotId) slot.classList.add('selected');
 
-    const player = pid ? state.players.find(p=>p.id===pid) : null;
+    const player = pid ? findPlayer(season, pid) : null;
     const goals = (pid && match.quarterGoals[currentQuarterView][pid]) || 0;
     const assists = (pid && match.quarterAssists[currentQuarterView][pid]) || 0;
-    const bg = {GK:'var(--gk)',DEF:'var(--def)',LM:'var(--mid)',RM:'var(--mid)',ST:'var(--fwd)'}[pos];
+    const bg = CATEGORY_COLOR[categoryForPos(pos)];
     const started = match.status !== 'scheduled';
 
     slot.innerHTML = `
-      <div class="pos-badge" style="background:${bg}">${player ? initials(player.name) : POS_LABEL[pos]}</div>
+      <div class="pos-badge" style="background:${bg}">${player ? initials(player.name) : format.posLabel[pos]}</div>
       <div class="pos-name">${player ? escapeHtml(player.name) : '— empty —'}</div>
       ${player && started ? `<div class="pos-actions">
         <span class="icon-btn goal-btn" data-add-goal="1" title="Add goal">⚽</span>
@@ -1275,11 +2088,10 @@ function removeAssist(match, playerId, quarterIdx){
   renderMatchDetail();
 }
 
-function initials(name){
-  return name.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase();
-}
-
 function renderLineupTable(match){
+  const season = getActiveSeason();
+  const format = formationOf(match);
+  const POSITIONS = format.positions;
   const wrap = document.getElementById('lineup-table-wrap');
   if(!wrap) return;
   if(!match.quarters){
@@ -1290,7 +2102,7 @@ function renderLineupTable(match){
   const numPeriods = match.numPeriods || match.quarters.length;
   const labels = periodLabels(numPeriods);
   const maxSubs = Math.max(...match.quarters.map(q => (q.SUBS||[]).length), 0);
-  const nameOf = (pid)=> pid ? escapeHtml(state.players.find(p=>p.id===pid)?.name || '—') : '—';
+  const nameOf = (pid)=> pid ? escapeHtml((findPlayer(season, pid)||{}).name || '—') : '—';
 
   function cellHtml(pid, qIdx, cat){
     const goals = (pid && match.quarterGoals[qIdx][pid]) || 0;
@@ -1310,8 +2122,8 @@ function renderLineupTable(match){
 
   let rows = '';
   POSITIONS.forEach(pos=>{
-    const cat = POS_CATEGORY[pos];
-    rows += `<tr><td class="pos-label">${POS_LABEL[pos]}</td>`;
+    const cat = categoryForPos(pos);
+    rows += `<tr><td class="pos-label">${format.posLabel[pos]}</td>`;
     for(let q=0;q<numPeriods;q++){
       rows += cellHtml(match.quarters[q][pos], q, cat);
     }
@@ -1353,6 +2165,7 @@ function renderLineupTable(match){
 }
 
 function renderBench(match){
+  const season = getActiveSeason();
   const wrap = document.getElementById('bench-strip');
   wrap.innerHTML = '';
   if(!match.quarters) return;
@@ -1363,7 +2176,7 @@ function renderBench(match){
     return;
   }
   subs.forEach((pid, idx)=>{
-    const player = state.players.find(p=>p.id===pid);
+    const player = findPlayer(season, pid);
     const slotId = `${currentQuarterView}_SUB_${idx}`;
     const el = document.createElement('div');
     el.className = 'bench-slot' + (selectedSlot === slotId ? ' selected' : '');
@@ -1415,13 +2228,13 @@ function getSlotValue(match, slotId){
   const parts = slotId.split('_');
   const q = match.quarters[parseInt(parts[0])];
   if(parts[1] === 'SUB') return q.SUBS[parseInt(parts[2])];
-  return q[parts[1]];
+  return q[parts.slice(1).join('_')];
 }
 function setSlotValue(match, slotId, val){
   const parts = slotId.split('_');
   const q = match.quarters[parseInt(parts[0])];
   if(parts[1] === 'SUB') q.SUBS[parseInt(parts[2])] = val;
-  else q[parts[1]] = val;
+  else q[parts.slice(1).join('_')] = val;
 }
 
 /* ---------- LIVE MATCH CONTROLS ---------- */
@@ -1476,14 +2289,19 @@ renderMatchDetail = function(){
 
 /* ---------- SEASON STATS ---------- */
 function computeSeasonStats(excludeMatchId){
+  const season = getActiveSeason();
   const stats = {};
-  state.players.forEach(p=>{
+  if(!season) return stats;
+  // include every player who has ever been part of this season (active or removed),
+  // so removed players keep their historical stats visible.
+  season.players.forEach(p=>{
     stats[p.id] = { goals:0, assists:0, gamesPlayed:0, totalMinutes:0, categoryMinutes:{GK:0,DEF:0,MID:0,FWD:0,SUB:0} };
   });
-  state.matches.forEach(m=>{
+  season.matches.forEach(m=>{
     if(excludeMatchId && m.id === excludeMatchId) return;
     if(m.status === 'scheduled') return; // only count actual playing time, not a draft lineup
     if(!m.quarters) return;
+    const POSITIONS = formationOf(m).positions;
     m.availableIds.forEach(pid=>{
       if(stats[pid]) stats[pid].gamesPlayed += 1;
     });
@@ -1502,7 +2320,7 @@ function computeSeasonStats(excludeMatchId){
         const pid = q[pos];
         if(pid && stats[pid]){
           stats[pid].totalMinutes += m.quarterMinutes;
-          stats[pid].categoryMinutes[POS_CATEGORY[pos]] += m.quarterMinutes;
+          stats[pid].categoryMinutes[categoryForPos(pos)] += m.quarterMinutes;
         }
       });
       (q.SUBS||[]).forEach(pid=>{
@@ -1517,11 +2335,13 @@ function computeSeasonStats(excludeMatchId){
 }
 
 function computePlayerBreakdown(playerId, numPeriods){
+  const season = getActiveSeason();
   const byQuarter = Array.from({length:numPeriods}, ()=>({goals:0, assists:0}));
   const byPosition = {GK:{goals:0,assists:0}, DEF:{goals:0,assists:0}, MID:{goals:0,assists:0}, FWD:{goals:0,assists:0}, SUB:{goals:0,assists:0}};
 
-  state.matches.forEach(m=>{
+  season.matches.forEach(m=>{
     if(m.status === 'scheduled' || !m.quarters) return;
+    const POSITIONS = formationOf(m).positions;
     const mPeriods = m.numPeriods || m.quarters.length;
     for(let q=0; q<mPeriods; q++){
       const g = (m.quarterGoals[q] || {})[playerId] || 0;
@@ -1535,7 +2355,7 @@ function computePlayerBreakdown(playerId, numPeriods){
       let cat = null;
       const qData = m.quarters[q];
       for(const pos of POSITIONS){
-        if(qData[pos] === playerId){ cat = POS_CATEGORY[pos]; break; }
+        if(qData[pos] === playerId){ cat = categoryForPos(pos); break; }
       }
       if(!cat && (qData.SUBS||[]).includes(playerId)) cat = 'SUB';
       if(cat){
@@ -1549,15 +2369,16 @@ function computePlayerBreakdown(playerId, numPeriods){
 }
 
 function renderStats(){
-  const stats = computeSeasonStats(null);
+  const season = getActiveSeason();
   const wrap = document.getElementById('stats-table-wrap');
-  if(state.players.length === 0){
-    wrap.innerHTML = '<div class="empty-state">Add players and play some matches to see stats.</div>';
+  if(!season || season.players.length === 0){
+    wrap.innerHTML = '<div class="empty-state">Add players (in Settings) and play some matches to see stats.</div>';
     return;
   }
+  const stats = computeSeasonStats(null);
 
   // --- Top Scorers ---
-  const scorers = state.players
+  const scorers = season.players
     .map(p=>({p, s:stats[p.id]}))
     .filter(x=> x.s.goals>0 || x.s.assists>0)
     .sort((a,b)=> b.s.goals-a.s.goals || b.s.assists-a.s.assists || a.p.name.localeCompare(b.p.name));
@@ -1568,7 +2389,7 @@ function renderStats(){
     return `
       <tr>
         <td>${i+1}</td>
-        <td style="text-align:left;">${escapeHtml(x.p.name)}</td>
+        <td style="text-align:left;">${escapeHtml(x.p.name)}${x.p.active===false ? ' <span style="color:var(--ink-soft);font-weight:400;">(removed)</span>' : ''}</td>
         <td>${x.s.goals}</td>
         <td>${x.s.assists}</td>
         <td>${onPitchMins}</td>
@@ -1589,13 +2410,16 @@ function renderStats(){
       </div>`;
 
   // --- Position time split (as sent to parents) ---
-  const rows = state.players.map(p=>{
+  // Active players always show (even with 0 games); removed players only show if
+  // they actually played, so the table doesn't fill up with empty rows.
+  const splitPlayers = season.players.filter(p=> p.active !== false || (stats[p.id] && stats[p.id].gamesPlayed>0));
+  const rows = splitPlayers.map(p=>{
     const s = stats[p.id];
     const total = s.totalMinutes || 0;
-    const pct = (mins)=> total>0 ? (mins/total).toFixed(2) : '0.00';
+    const pct = (mins)=> total>0 ? Math.round((mins/total)*100) + '%' : '0%';
     return `
       <tr>
-        <td>${escapeHtml(p.name)}</td>
+        <td>${escapeHtml(p.name)}${p.active===false ? ' <span style="color:var(--ink-soft);font-weight:400;">(removed)</span>' : ''}</td>
         <td>${s.goals}</td>
         <td>${pct(s.categoryMinutes.GK)}</td>
         <td>${pct(s.categoryMinutes.DEF)}</td>
@@ -1607,8 +2431,8 @@ function renderStats(){
   }).join('');
 
   // --- Per-player breakdown ---
-  const playedPlayers = state.players.filter(p => stats[p.id] && stats[p.id].gamesPlayed > 0);
-  const maxPeriods = Math.max(4, ...state.matches.filter(m=>m.status!=='scheduled' && m.quarters).map(m=>m.numPeriods || m.quarters.length), 4);
+  const playedPlayers = season.players.filter(p => stats[p.id] && stats[p.id].gamesPlayed > 0);
+  const maxPeriods = Math.max(4, ...season.matches.filter(m=>m.status!=='scheduled' && m.quarters).map(m=>m.numPeriods || m.quarters.length), 4);
   const periodLabelsForBreakdown = periodLabels(maxPeriods);
   const breakdownHtml = playedPlayers.length === 0
     ? '<div class="empty-state">Play some matches to see per-player breakdowns.</div>'
@@ -1619,7 +2443,7 @@ function renderStats(){
         const posRow = (label, key)=> `<tr><td>${label}</td>${['GK','DEF','MID','FWD','SUB'].map(c=>`<td>${b.byPosition[c][key]}</td>`).join('')}</tr>`;
         return `
         <details class="player-breakdown">
-          <summary>${escapeHtml(p.name)} <span class="tally">⚽ ${s.goals} · 🅰 ${s.assists}</span></summary>
+          <summary>${escapeHtml(p.name)}${p.active===false ? ' <span style="color:var(--ink-soft);font-weight:400;">(removed)</span>' : ''} <span class="tally">⚽ ${s.goals} · 🅰 ${s.assists}</span></summary>
           <div class="breakdown-grid">
             <div class="table-scroll">
               <table class="stats mini">
@@ -1656,9 +2480,16 @@ function renderStats(){
 }
 
 /* ---------- INIT ---------- */
-renderSquad();
-renderMatchesList();
-renderStats();
+function renderAll(){
+  renderMatchesList();
+  renderStats();
+}
+renderHeader();
+if(!getActiveSeason()){
+  openSettings(true);
+} else {
+  renderAll();
+}
 
 /* ---------- PWA: service worker registration ---------- */
 if ('serviceWorker' in navigator) {
