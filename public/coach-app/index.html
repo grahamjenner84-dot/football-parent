@@ -1446,6 +1446,7 @@ async function checkForCloudUpdates(){
 
 function showUpdateBanner(){
   const banner = document.getElementById('update-banner');
+  if(banner.style.display === 'flex') return; // already showing — don't replace the button under a pending tap
   banner.innerHTML = `
     <span>Newer data is saved to your account from another device.</span>
     <button id="update-banner-refresh-btn" type="button">Refresh Now</button>
