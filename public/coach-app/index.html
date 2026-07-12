@@ -125,6 +125,134 @@
     gap:6px;
   }
   .settings-btn:hover{ border-color:white; color:white; }
+
+  /* ---- Auth gate (sign-in overlay, shown before any app content) ---- */
+  #auth-gate{
+    position:fixed; inset:0; z-index:500;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--pitch-dark);
+    padding:24px;
+  }
+  .auth-gate-card{
+    background:var(--card);
+    border-radius:14px;
+    padding:32px 28px;
+    max-width:340px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.25);
+  }
+  .auth-gate-card .crest{
+    width:48px;height:48px;border-radius:50%;
+    background:var(--pitch);
+    border:2px solid var(--pitch-line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:white;
+    margin:0 auto 16px;
+  }
+  .auth-gate-card h2{
+    font-size:19px;
+    margin:0 0 8px;
+    color:var(--ink);
+  }
+  .auth-gate-card p{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+    line-height:1.5;
+  }
+  .google-signin-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    width:100%;
+    padding:11px 16px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:white;
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+  }
+  .google-signin-btn:hover{ background:#f5f5f5; }
+
+  /* ---- Header account control (avatar + dropdown, replaces email/push/pull) ---- */
+  #auth-controls{ position:relative; }
+  .auth-avatar-btn{
+    display:flex; align-items:center; gap:7px;
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.35);
+    border-radius:20px;
+    padding:4px 12px 4px 4px;
+    cursor:pointer;
+    color:#dfe9e3;
+    font-family:'Inter',sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+  }
+  .auth-avatar-btn:hover{ border-color:white; color:white; }
+  .auth-avatar-img{
+    width:26px; height:26px; border-radius:50%;
+    display:block; object-fit:cover;
+  }
+  .auth-avatar-initials{
+    width:26px; height:26px; border-radius:50%;
+    background:var(--pitch);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Oswald',sans-serif;
+    font-size:11px; font-weight:700;
+    color:white;
+  }
+  .sync-dot{
+    width:7px; height:7px; border-radius:50%;
+    display:inline-block;
+    background:var(--sub);
+    flex-shrink:0;
+  }
+  .sync-dot.syncing{ background:var(--def); }
+  .sync-dot.synced{ background:var(--gk); }
+  .sync-dot.error{ background:var(--danger); }
+  .auth-dropdown{
+    position:absolute;
+    top:calc(100% + 6px);
+    right:0;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:10px;
+    box-shadow:var(--shadow);
+    min-width:190px;
+    padding:6px;
+    z-index:50;
+  }
+  .auth-dropdown button{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:transparent;
+    border:none;
+    padding:9px 10px;
+    border-radius:6px;
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .auth-dropdown button:hover{ background:var(--cream); }
+  .auth-dropdown .auth-dropdown-email{
+    font-size:11.5px;
+    color:var(--ink-soft);
+    padding:6px 10px 8px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:4px;
+    word-break:break-all;
+  }
+
   main{
     max-width:980px;
     margin:0 auto;
@@ -665,6 +793,10 @@
 </head>
 <body>
 
+<div id="auth-gate" style="display:none;"></div>
+
+<div id="app-shell" style="display:none;">
+
 <header class="top">
   <div class="brand">
     <div class="crest" id="crest-initials">FP</div>
@@ -786,6 +918,8 @@
 
 </main>
 
+</div><!-- /#app-shell -->
+
 <div id="modal-root"></div>
 
 <!-- SETTINGS OVERLAY -->
@@ -855,6 +989,8 @@ const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Ve6MvtADpWd_b6Jdu-I7tQ_5xGqmeuv
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 
 let currentUser = null;
+let appBooted = false;
+let authDropdownOpen = false;
 
 async function signInWithGoogle(){
   const { error } = await supabaseClient.auth.signInWithOAuth({
@@ -865,120 +1001,310 @@ async function signInWithGoogle(){
 }
 
 async function signOutOfSupabase(){
+  authDropdownOpen = false;
   await supabaseClient.auth.signOut();
+}
+
+function avatarInitials(user){
+  const name = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || user.email || '';
+  return name.trim().split(/\s+/).map(w=>w[0]).slice(0,2).join('').toUpperCase() || '?';
+}
+function firstName(user){
+  const name = (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || '';
+  if(name) return name.trim().split(/\s+/)[0];
+  return (user.email || '').split('@')[0];
 }
 
 function renderAuthUI(){
   const el = document.getElementById('auth-controls');
   if(!el) return;
-  if(currentUser){
-    el.innerHTML = `
-      <span class="auth-email" style="color:white;font-size:12.5px;margin-right:8px;">${escapeHtml(currentUser.email || '')}</span>
-      <button class="settings-btn" id="cloud-push-btn" style="margin-right:6px;">⬆ Push to Cloud</button>
-      <button class="settings-btn" id="cloud-pull-btn" style="margin-right:6px;">⬇ Pull from Cloud</button>
-      <button class="settings-btn" id="sign-out-btn">Sign Out</button>
-    `;
-    document.getElementById('sign-out-btn').addEventListener('click', signOutOfSupabase);
-    document.getElementById('cloud-push-btn').addEventListener('click', pushStateToSupabase);
-    document.getElementById('cloud-pull-btn').addEventListener('click', pullStateFromSupabase);
-  } else {
-    el.innerHTML = `<button class="settings-btn" id="google-signin-btn">Sign in with Google</button>`;
-    document.getElementById('google-signin-btn').addEventListener('click', signInWithGoogle);
+  if(!currentUser){
+    el.innerHTML = '';
+    return;
   }
+  const avatarUrl = currentUser.user_metadata && currentUser.user_metadata.avatar_url;
+  const avatarHtml = avatarUrl
+    ? `<img class="auth-avatar-img" src="${escapeHtml(avatarUrl)}" alt="">`
+    : `<span class="auth-avatar-initials">${escapeHtml(avatarInitials(currentUser))}</span>`;
+
+  el.innerHTML = `
+    <button class="auth-avatar-btn" id="auth-avatar-toggle" type="button">
+      ${avatarHtml}
+      <span>${escapeHtml(firstName(currentUser))}</span>
+      <span class="sync-dot" id="sync-dot" title="Not synced yet"></span>
+    </button>
+    ${authDropdownOpen ? `
+      <div class="auth-dropdown" id="auth-dropdown">
+        <div class="auth-dropdown-email">${escapeHtml(currentUser.email || '')}</div>
+        <button id="auth-restore-btn" type="button">Restore from cloud</button>
+        <button id="auth-signout-btn" type="button">Sign out</button>
+      </div>
+    ` : ''}
+  `;
+  document.getElementById('auth-avatar-toggle').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    authDropdownOpen = !authDropdownOpen;
+    renderAuthUI();
+  });
+  if(authDropdownOpen){
+    document.getElementById('auth-signout-btn').addEventListener('click', signOutOfSupabase);
+    document.getElementById('auth-restore-btn').addEventListener('click', ()=>{
+      authDropdownOpen = false;
+      renderAuthUI();
+      showConfirm('Restore from cloud will replace all seasons, players and matches currently on this device with what\'s saved to your account. Continue?', ()=>{
+        tryRestoreFromCloud(false);
+      });
+    });
+  }
+  setSyncStatus(lastSyncStatus);
+}
+document.addEventListener('click', ()=>{
+  if(authDropdownOpen){ authDropdownOpen = false; renderAuthUI(); }
+});
+
+let lastSyncStatus = 'idle';
+function setSyncStatus(status){
+  lastSyncStatus = status;
+  const dot = document.getElementById('sync-dot');
+  if(!dot) return;
+  dot.className = 'sync-dot' + (status === 'idle' ? '' : ' ' + status);
+  const titles = {
+    idle: 'Not synced yet',
+    syncing: 'Syncing to your account…',
+    synced: 'Saved to your account',
+    error: 'Could not sync — will retry'
+  };
+  dot.title = titles[status] || '';
 }
 
 supabaseClient.auth.onAuthStateChange((_event, session)=>{
+  const wasSignedIn = !!currentUser;
   currentUser = session ? session.user : null;
-  renderAuthUI();
+  if(!currentUser && wasSignedIn) appBooted = false; // allow a different account to re-init cleanly
+  handleAuthResolved();
 });
 
-/* ---------- CLOUD SYNC (proof-of-concept slice: seasons + players + matches) ----------
-   This does NOT replace localStorage yet. It's a one-way push/pull so we can prove
-   the Supabase connection works end-to-end before rewriting loadState/saveState
-   to use it as the primary store. */
-async function pushStateToSupabase(){
-  if(!currentUser){ showAlert('Sign in first.'); return; }
-  try{
-    for(const season of state.seasons){
-      const { data: seasonRow, error: seasonErr } = await supabaseClient
-        .from('seasons')
-        .insert({
-          owner_id: currentUser.id,
-          team_name: season.teamName || '',
-          age_group: season.ageGroup || '',
-          format: season.format,
-          formation: season.formation,
-          rotation_mode: season.rotationMode === 'fixed' ? 'fixed' : 'rotate'
-        })
-        .select()
-        .single();
-      if(seasonErr) throw seasonErr;
+/* ---------- AUTH GATE ----------
+   Sign-in is required before any team setup or app UI is shown. The app stays
+   hidden behind #auth-gate until we know whether a session exists. */
+function showAuthGate(mode){
+  const gate = document.getElementById('auth-gate');
+  const shell = document.getElementById('app-shell');
+  if(mode === 'signin'){
+    gate.innerHTML = `
+      <div class="auth-gate-card">
+        <div class="crest">FP</div>
+        <h2>Coaches App</h2>
+        <p>Sign in to save your team, players and match data to your account, and keep it backed up across devices.</p>
+        <button class="google-signin-btn" id="gate-google-signin-btn" type="button">Sign in with Google</button>
+      </div>`;
+    document.getElementById('gate-google-signin-btn').addEventListener('click', signInWithGoogle);
+  } else {
+    gate.innerHTML = `<div class="auth-gate-card"><p style="margin:0;">Loading…</p></div>`;
+  }
+  gate.style.display = 'flex';
+  shell.style.display = 'none';
+}
+function hideAuthGate(){
+  document.getElementById('auth-gate').style.display = 'none';
+  document.getElementById('app-shell').style.display = '';
+}
 
-      const playerRows = (season.players||[]).map(p=>({
-        season_id: seasonRow.id,
-        name: p.name,
-        active: p.active !== false,
-        position_group: p.positionGroup || 'ANY'
-      }));
-      if(playerRows.length){
-        const { error: playersErr } = await supabaseClient.from('players').insert(playerRows);
-        if(playersErr) throw playersErr;
-      }
-
-      const matchRows = (season.matches||[]).map(m=>({
-        season_id: seasonRow.id,
-        match_date: m.date,
-        opponent: m.opponent,
-        venue: m.venue || null,
-        quarter_minutes: m.quarterMinutes,
-        num_periods: m.numPeriods,
-        format: m.format,
-        formation: m.formation,
-        rotation_mode: m.rotationMode === 'fixed' ? 'fixed' : 'rotate',
-        available_ids: m.availableIds || [],
-        quarters: m.quarters,
-        quarter_goals: m.quarterGoals || [],
-        quarter_assists: m.quarterAssists || [],
-        opponent_goals: m.opponentGoals || 0,
-        status: m.status || 'scheduled',
-        current_quarter: m.currentQuarter || 0
-      }));
-      if(matchRows.length){
-        const { error: matchesErr } = await supabaseClient.from('matches').insert(matchRows);
-        if(matchesErr) throw matchesErr;
-      }
+async function handleAuthResolved(){
+  if(!currentUser){
+    showAuthGate('signin');
+    renderAuthUI();
+    return;
+  }
+  renderAuthUI();
+  if(!appBooted){
+    appBooted = true;
+    if(state.seasons.length === 0){
+      const restored = await tryRestoreFromCloud(true);
+      if(!restored) hideAuthGate();
+    } else {
+      hideAuthGate();
     }
-    showAlert('Pushed ' + state.seasons.length + ' season(s) to Supabase.');
-  }catch(e){
-    showAlert('Push failed: ' + e.message);
+    renderHeader();
+    if(!getActiveSeason()){
+      openSettings(true);
+    } else {
+      renderAll();
+    }
+  } else {
+    hideAuthGate();
   }
 }
 
-async function pullStateFromSupabase(){
-  if(!currentUser){ showAlert('Sign in first.'); return; }
-  try{
-    const { data: seasons, error: seasonsErr } = await supabaseClient
-      .from('seasons')
-      .select('id, team_name')
-      .eq('owner_id', currentUser.id);
-    if(seasonsErr) throw seasonsErr;
+async function bootApp(){
+  showAuthGate('loading');
+  const { data } = await supabaseClient.auth.getSession();
+  currentUser = data && data.session ? data.session.user : null;
+  await handleAuthResolved();
+}
 
-    const { data: players, error: playersErr } = await supabaseClient
-      .from('players')
-      .select('id, season_id, name');
+/* ---------- CLOUD SYNC (automatic, silent) ----------
+   LocalStorage remains the primary store the app always reads/writes from —
+   this never blocks on network and works with no signal. Every saveState()
+   also schedules a background push to Supabase; if it fails (offline, etc.)
+   it just retries next save or when the browser comes back online. Records
+   carry a cloudId once first synced so later syncs update instead of
+   duplicating. */
+let cloudSyncTimer = null;
+let syncInFlight = false;
+let syncQueued = false;
+
+function scheduleCloudSync(){
+  if(!currentUser) return;
+  clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(syncStateToCloud, 1000);
+}
+window.addEventListener('online', scheduleCloudSync);
+
+async function syncStateToCloud(){
+  if(!currentUser) return;
+  if(syncInFlight){ syncQueued = true; return; }
+  syncInFlight = true;
+  setSyncStatus('syncing');
+  try{
+    for(const season of state.seasons){
+      await syncSeasonToCloud(season);
+    }
+    setSyncStatus('synced');
+  }catch(e){
+    console.warn('Cloud sync failed, will retry:', e.message);
+    setSyncStatus('error');
+  }finally{
+    syncInFlight = false;
+    if(syncQueued){ syncQueued = false; syncStateToCloud(); }
+  }
+}
+
+async function syncSeasonToCloud(season){
+  const seasonPayload = {
+    owner_id: currentUser.id,
+    team_name: season.teamName || '',
+    age_group: season.ageGroup || '',
+    format: season.format,
+    formation: season.formation,
+    rotation_mode: season.rotationMode === 'fixed' ? 'fixed' : 'rotate'
+  };
+  if(season.cloudId){
+    const { error } = await supabaseClient.from('seasons').update(seasonPayload).eq('id', season.cloudId);
+    if(error) throw error;
+  } else {
+    const { data, error } = await supabaseClient.from('seasons').insert(seasonPayload).select().single();
+    if(error) throw error;
+    season.cloudId = data.id;
+    persistLocal();
+  }
+
+  for(const p of (season.players||[])){
+    const payload = {
+      season_id: season.cloudId,
+      name: p.name,
+      active: p.active !== false,
+      position_group: p.positionGroup || 'ANY'
+    };
+    if(p.cloudId){
+      const { error } = await supabaseClient.from('players').update(payload).eq('id', p.cloudId);
+      if(error) throw error;
+    } else {
+      const { data, error } = await supabaseClient.from('players').insert(payload).select().single();
+      if(error) throw error;
+      p.cloudId = data.id;
+      persistLocal();
+    }
+  }
+
+  for(const m of (season.matches||[])){
+    const payload = {
+      season_id: season.cloudId,
+      match_date: m.date,
+      opponent: m.opponent,
+      venue: m.venue || null,
+      quarter_minutes: m.quarterMinutes,
+      num_periods: m.numPeriods,
+      format: m.format,
+      formation: m.formation,
+      rotation_mode: m.rotationMode === 'fixed' ? 'fixed' : 'rotate',
+      available_ids: m.availableIds || [],
+      quarters: m.quarters,
+      quarter_goals: m.quarterGoals || [],
+      quarter_assists: m.quarterAssists || [],
+      opponent_goals: m.opponentGoals || 0,
+      status: m.status || 'scheduled',
+      current_quarter: m.currentQuarter || 0
+    };
+    if(m.cloudId){
+      const { error } = await supabaseClient.from('matches').update(payload).eq('id', m.cloudId);
+      if(error) throw error;
+    } else {
+      const { data, error } = await supabaseClient.from('matches').insert(payload).select().single();
+      if(error) throw error;
+      m.cloudId = data.id;
+      persistLocal();
+    }
+  }
+}
+
+/* ---------- CLOUD RESTORE ----------
+   Used automatically on first sign-in when this device has no local seasons,
+   and available manually (with confirmation) from the avatar menu as a
+   recovery option if local data ever gets corrupted or wiped. */
+async function tryRestoreFromCloud(silent){
+  try{
+    const { data: seasonRows, error: seasonsErr } = await supabaseClient
+      .from('seasons').select('*').eq('owner_id', currentUser.id);
+    if(seasonsErr) throw seasonsErr;
+    if(!seasonRows || seasonRows.length === 0) return false;
+
+    const seasonIds = seasonRows.map(s=>s.id);
+    const { data: playerRows, error: playersErr } = await supabaseClient
+      .from('players').select('*').in('season_id', seasonIds);
     if(playersErr) throw playersErr;
 
-    const { data: matches, error: matchesErr } = await supabaseClient
-      .from('matches')
-      .select('id, season_id, opponent, match_date');
+    const { data: matchRows, error: matchesErr } = await supabaseClient
+      .from('matches').select('*').in('season_id', seasonIds);
     if(matchesErr) throw matchesErr;
 
-    showAlert(
-      `Pulled from Supabase: ${seasons.length} season(s), ${players.length} player(s), ${matches.length} match(es). ` +
-      `(This is a read-only proof for now, nothing overwritten locally yet.)`
-    );
+    const seasons = seasonRows.map(sr=>{
+      const players = playerRows.filter(p=>p.season_id === sr.id).map(p=>({
+        id: uid(), cloudId: p.id, name: p.name,
+        active: p.active !== false, positionGroup: p.position_group || 'ANY'
+      }));
+      const matches = matchRows.filter(m=>m.season_id === sr.id).map(m=>migrateMatch({
+        id: uid(), cloudId: m.id,
+        date: m.match_date, opponent: m.opponent, venue: m.venue,
+        quarterMinutes: m.quarter_minutes, numPeriods: m.num_periods,
+        format: m.format, formation: m.formation, rotationMode: m.rotation_mode,
+        availableIds: m.available_ids || [], quarters: m.quarters,
+        quarterGoals: m.quarter_goals || [], quarterAssists: m.quarter_assists || [],
+        opponentGoals: m.opponent_goals || 0, status: m.status || 'scheduled',
+        currentQuarter: m.current_quarter || 0
+      }));
+      return blankSeason({
+        id: uid(), cloudId: sr.id,
+        teamName: sr.team_name, ageGroup: sr.age_group,
+        format: sr.format, formation: sr.formation, rotationMode: sr.rotation_mode,
+        players, matches
+      });
+    });
+
+    state.seasons = seasons;
+    state.activeSeasonId = seasons[0].id;
+    persistLocal();
+    setSyncStatus('synced');
+    hideAuthGate();
+    renderHeader();
+    renderAll();
+    showAlert(silent
+      ? `Welcome back — restored ${seasons.length} season(s) from your account.`
+      : `Restored ${seasons.length} season(s) from your account.`);
+    return true;
   }catch(e){
-    showAlert('Pull failed: ' + e.message);
+    if(!silent) showAlert('Restore failed: ' + e.message);
+    return false;
   }
 }
 
@@ -1245,6 +1571,7 @@ function uid(){ return 'id_' + Math.random().toString(36).slice(2,10); }
 function blankSeason(overrides){
   return Object.assign({
     id: uid(),
+    cloudId: null,
     teamName: '',
     ageGroup: '',
     format: '5v5',
@@ -1302,8 +1629,12 @@ function loadState(){
   }
   return { seasons: [], activeSeasonId: null };
 }
-function saveState(){
+function persistLocal(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+function saveState(){
+  persistLocal();
+  scheduleCloudSync();
 }
 let state = loadState();
 saveState(); // persist immediately so a legacy migration (or a blank first run) is written under the new key right away
@@ -1525,7 +1856,7 @@ document.getElementById('settings-add-player-btn').addEventListener('click', ()=
   const input = document.getElementById('settings-new-player-name');
   const name = input.value.trim();
   if(!name) return;
-  season.players.push({id: uid(), name, active:true, positionGroup:'ANY'});
+  season.players.push({id: uid(), cloudId: null, name, active:true, positionGroup:'ANY'});
   input.value = '';
   saveState();
   renderSettingsSquad();
@@ -1684,6 +2015,7 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
 
   const match = {
     id: uid(),
+    cloudId: null,
     date: date || new Date().toISOString().slice(0,10),
     opponent, venue, quarterMinutes: qMins, numPeriods,
     format: season.format,
@@ -2484,12 +2816,7 @@ function renderAll(){
   renderMatchesList();
   renderStats();
 }
-renderHeader();
-if(!getActiveSeason()){
-  openSettings(true);
-} else {
-  renderAll();
-}
+bootApp();
 
 /* ---------- PWA: service worker registration ---------- */
 if ('serviceWorker' in navigator) {
