@@ -727,6 +727,11 @@
     z-index:1000; padding:20px;
     overflow-y:auto;
   }
+  /* Alerts/confirms (rendered into #modal-root) must always sit above the
+     Settings modal, even though both use .modal-overlay and Settings comes
+     later in DOM order — otherwise a confirm dialog opened while Settings
+     is open renders invisibly underneath it. */
+  #modal-root .modal-overlay{ z-index:1200; }
   .modal-box{
     background:var(--card); border-radius:12px; padding:22px;
     max-width:360px; width:100%; box-shadow:0 10px 30px rgba(20,32,27,0.25);
@@ -1167,6 +1172,7 @@ async function syncStateToCloud(){
   syncInFlight = true;
   setSyncStatus('syncing');
   try{
+    await flushPendingCloudDeletes();
     for(const season of state.seasons){
       await syncSeasonToCloud(season);
     }
@@ -1178,6 +1184,21 @@ async function syncStateToCloud(){
     syncInFlight = false;
     if(syncQueued){ syncQueued = false; syncStateToCloud(); }
   }
+}
+
+async function flushPendingCloudDeletes(){
+  if(!state.pendingCloudDeletes || state.pendingCloudDeletes.length === 0) return;
+  const remaining = [];
+  for(const cloudId of state.pendingCloudDeletes){
+    try{
+      const { error } = await supabaseClient.from('seasons').delete().eq('id', cloudId);
+      if(error) throw error;
+    }catch(e){
+      remaining.push(cloudId); // leave it queued, try again next sync
+    }
+  }
+  state.pendingCloudDeletes = remaining;
+  persistLocal();
 }
 
 async function syncSeasonToCloud(season){
@@ -1604,6 +1625,7 @@ function loadState(){
   if(raw){
     try{
       const s = JSON.parse(raw);
+      if(!Array.isArray(s.pendingCloudDeletes)) s.pendingCloudDeletes = [];
       (s.seasons||[]).forEach(season=>{
         if(!season.formation) season.formation = DEFAULT_FORMATION[season.format] || 'diamond';
         if(!season.rotationMode) season.rotationMode = 'rotate';
@@ -1624,10 +1646,10 @@ function loadState(){
       const players = (legacy.players||[]).map(p=>Object.assign({active:true, positionGroup:'ANY'}, p));
       const matches = (legacy.matches||[]).map(migrateMatch);
       const season = blankSeason({ teamName:'My Team', players, matches });
-      return { seasons:[season], activeSeasonId: season.id };
+      return { seasons:[season], activeSeasonId: season.id, pendingCloudDeletes: [] };
     }catch(e){ /* fall through to blank */ }
   }
-  return { seasons: [], activeSeasonId: null };
+  return { seasons: [], activeSeasonId: null, pendingCloudDeletes: [] };
 }
 function persistLocal(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -1947,6 +1969,10 @@ function renderSeasonList(){
     btn.addEventListener('click', ()=>{
       showConfirm('Delete this season permanently? All its matches and stats will be lost.', ()=>{
         const wasActive = btn.dataset.id === state.activeSeasonId;
+        const seasonToDelete = state.seasons.find(s=>s.id === btn.dataset.id);
+        if(seasonToDelete && seasonToDelete.cloudId){
+          state.pendingCloudDeletes.push(seasonToDelete.cloudId);
+        }
         state.seasons = state.seasons.filter(s=>s.id !== btn.dataset.id);
         if(wasActive){
           state.activeSeasonId = state.seasons.length ? state.seasons[0].id : null;
