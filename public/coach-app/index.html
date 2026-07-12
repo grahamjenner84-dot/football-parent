@@ -1243,17 +1243,29 @@ async function syncStateToCloud(){
 }
 
 async function flushPendingCloudDeletes(){
-  if(!state.pendingCloudDeletes || state.pendingCloudDeletes.length === 0) return;
-  const remaining = [];
-  for(const cloudId of state.pendingCloudDeletes){
+  const seasonQueue = state.pendingCloudDeletes || [];
+  const matchQueue = state.pendingCloudMatchDeletes || [];
+  if(seasonQueue.length === 0 && matchQueue.length === 0) return;
+  const remainingSeasons = [];
+  for(const cloudId of seasonQueue){
     try{
       const { error } = await supabaseClient.from('seasons').delete().eq('id', cloudId);
       if(error) throw error;
     }catch(e){
-      remaining.push(cloudId); // leave it queued, try again next sync
+      remainingSeasons.push(cloudId); // leave it queued, try again next sync
     }
   }
-  state.pendingCloudDeletes = remaining;
+  const remainingMatches = [];
+  for(const cloudId of matchQueue){
+    try{
+      const { error } = await supabaseClient.from('matches').delete().eq('id', cloudId);
+      if(error) throw error;
+    }catch(e){
+      remainingMatches.push(cloudId);
+    }
+  }
+  state.pendingCloudDeletes = remainingSeasons;
+  state.pendingCloudMatchDeletes = remainingMatches;
   persistLocal();
 }
 
@@ -1757,6 +1769,7 @@ function loadState(){
     try{
       const s = JSON.parse(raw);
       if(!Array.isArray(s.pendingCloudDeletes)) s.pendingCloudDeletes = [];
+      if(!Array.isArray(s.pendingCloudMatchDeletes)) s.pendingCloudMatchDeletes = [];
       (s.seasons||[]).forEach(season=>{
         if(!season.formation) season.formation = DEFAULT_FORMATION[season.format] || 'diamond';
         if(!season.rotationMode) season.rotationMode = 'rotate';
@@ -1777,10 +1790,10 @@ function loadState(){
       const players = (legacy.players||[]).map(p=>Object.assign({active:true, positionGroup:'ANY'}, p));
       const matches = (legacy.matches||[]).map(migrateMatch);
       const season = blankSeason({ teamName:'My Team', players, matches });
-      return { seasons:[season], activeSeasonId: season.id, pendingCloudDeletes: [] };
+      return { seasons:[season], activeSeasonId: season.id, pendingCloudDeletes: [], pendingCloudMatchDeletes: [] };
     }catch(e){ /* fall through to blank */ }
   }
-  return { seasons: [], activeSeasonId: null, pendingCloudDeletes: [] };
+  return { seasons: [], activeSeasonId: null, pendingCloudDeletes: [], pendingCloudMatchDeletes: [] };
 }
 function persistLocal(){
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -2270,6 +2283,10 @@ function renderMatchesList(){
 document.getElementById('delete-match-btn').addEventListener('click', ()=>{
   showConfirm('Delete this match permanently? This removes its stats from the season too.', ()=>{
     const season = getActiveSeason();
+    const matchToDelete = season.matches.find(m=>m.id === currentMatchId);
+    if(matchToDelete && matchToDelete.cloudId){
+      state.pendingCloudMatchDeletes.push(matchToDelete.cloudId);
+    }
     season.matches = season.matches.filter(m=>m.id !== currentMatchId);
     saveState();
     closeMatchDetail();
