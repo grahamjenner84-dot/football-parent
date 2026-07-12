@@ -1190,6 +1190,11 @@ function firstName(user){
   return (user.email || '').split('@')[0];
 }
 
+function confirmAndRestoreFromCloud(){
+  showConfirm('Restore from cloud will replace all seasons, players and matches currently on this device with what\'s saved to your account. Continue?', ()=>{
+    tryRestoreFromCloud(false);
+  });
+}
 function renderAuthUI(){
   const el = document.getElementById('auth-controls');
   if(!el) return;
@@ -1221,11 +1226,6 @@ function renderAuthUI(){
     authDropdownOpen = !authDropdownOpen;
     renderAuthUI();
   });
-function confirmAndRestoreFromCloud(){
-  showConfirm('Restore from cloud will replace all seasons, players and matches currently on this device with what\'s saved to your account. Continue?', ()=>{
-    tryRestoreFromCloud(false);
-  });
-}
 
   if(authDropdownOpen){
     document.getElementById('auth-signout-btn').addEventListener('click', signOutOfSupabase);
@@ -1303,6 +1303,7 @@ async function handleAuthResolved(){
       if(!restored) hideAuthGate();
     } else {
       hideAuthGate();
+      scheduleCloudSync(); // pushes any pending local changes, including one-off id migrations
     }
     renderHeader();
     if(!getActiveSeason()){
@@ -1389,6 +1390,37 @@ async function flushPendingCloudDeletes(){
   persistLocal();
 }
 
+/* Renames every reference to a player's id within a season's matches — used when
+   a player's id needs to become stable across devices (see syncSeasonToCloud). */
+function renamePidInSeason(season, oldId, newId){
+  if(!oldId || !newId || oldId === newId) return;
+  (season.matches||[]).forEach(m=>{
+    if(Array.isArray(m.availableIds)){
+      m.availableIds = m.availableIds.map(id => id === oldId ? newId : id);
+    }
+    if(Array.isArray(m.quarters)){
+      m.quarters.forEach(q=>{
+        if(!q) return;
+        Object.keys(q).forEach(key=>{
+          if(key === 'SUBS'){
+            if(Array.isArray(q.SUBS)) q.SUBS = q.SUBS.map(id => id === oldId ? newId : id);
+          } else if(q[key] === oldId){
+            q[key] = newId;
+          }
+        });
+      });
+    }
+    ['quarterGoals','quarterAssists'].forEach(key=>{
+      (m[key]||[]).forEach(obj=>{
+        if(obj && Object.prototype.hasOwnProperty.call(obj, oldId)){
+          obj[newId] = (obj[newId] || 0) + obj[oldId];
+          delete obj[oldId];
+        }
+      });
+    });
+  });
+}
+
 async function syncSeasonToCloud(season){
   const seasonPayload = {
     owner_id: currentUser.id,
@@ -1426,9 +1458,24 @@ async function syncSeasonToCloud(season){
     if(p.cloudId){
       const { error } = await supabaseClient.from('players').update(payload).eq('id', p.cloudId);
       if(error) throw error;
+      // Older local data (from before player ids were made stable across devices)
+      // may still have a local id that doesn't match its cloud id — fix that up
+      // now so lineup/goal/assist references resolve the same way on every device.
+      if(p.id !== p.cloudId){
+        renamePidInSeason(season, p.id, p.cloudId);
+        p.id = p.cloudId;
+        persistLocal();
+      }
     } else {
       const { data, error } = await supabaseClient.from('players').insert(payload).select().single();
       if(error) throw error;
+      // Adopt the cloud row's own id as this player's id everywhere (rather than
+      // keeping the random id this device generated) so any other device that
+      // later syncs or restores this player sees the exact same id — otherwise
+      // lineup positions and goal/assist tallies (which reference players by id)
+      // would only ever resolve correctly on the device that created them.
+      renamePidInSeason(season, p.id, data.id);
+      p.id = data.id;
       p.cloudId = data.id;
       persistLocal();
     }
@@ -1487,13 +1534,25 @@ async function tryRestoreFromCloud(silent){
       .from('matches').select('*').in('season_id', seasonIds);
     if(matchesErr) throw matchesErr;
 
+    // Seasons and matches keep this device's existing local id when we recognise
+    // their cloudId, so an in-progress session (e.g. a currently-open match)
+    // doesn't go stale mid-restore. Players don't need this: their id is now
+    // always set to their Supabase row id directly (see syncSeasonToCloud), so
+    // it's already identical and stable on every device.
+    const existingSeasonIdByCloud = {};
+    const existingMatchIdByCloud = {};
+    (state.seasons||[]).forEach(s=>{
+      if(s.cloudId) existingSeasonIdByCloud[s.cloudId] = s.id;
+      (s.matches||[]).forEach(m=>{ if(m.cloudId) existingMatchIdByCloud[m.cloudId] = m.id; });
+    });
+
     const seasons = seasonRows.map(sr=>{
       const players = playerRows.filter(p=>p.season_id === sr.id).map(p=>({
-        id: uid(), cloudId: p.id, name: p.name,
+        id: p.id, cloudId: p.id, name: p.name,
         active: p.active !== false, guest: !!p.guest, positionGroup: p.position_group || 'ANY'
       }));
       const matches = matchRows.filter(m=>m.season_id === sr.id).map(m=>migrateMatch({
-        id: uid(), cloudId: m.id,
+        id: existingMatchIdByCloud[m.id] || uid(), cloudId: m.id,
         date: m.match_date, opponent: m.opponent, venue: m.venue,
         address: m.address || '', notes: m.notes || '',
         quarterMinutes: m.quarter_minutes, numPeriods: m.num_periods,
@@ -1504,7 +1563,7 @@ async function tryRestoreFromCloud(silent){
         currentQuarter: m.current_quarter || 0
       }));
       return blankSeason({
-        id: uid(), cloudId: sr.id,
+        id: existingSeasonIdByCloud[sr.id] || uid(), cloudId: sr.id,
         teamName: sr.team_name, ageGroup: sr.age_group,
         format: sr.format, formation: sr.formation, rotationMode: sr.rotation_mode,
         players, matches
@@ -1512,7 +1571,7 @@ async function tryRestoreFromCloud(silent){
     });
 
     state.seasons = seasons;
-    state.activeSeasonId = seasons[0].id;
+    state.activeSeasonId = existingSeasonIdByCloud[seasonRows[0].id] || seasons[0].id;
     persistLocal();
     setSyncStatus('synced');
     hideAuthGate();
