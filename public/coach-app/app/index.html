@@ -6,7 +6,7 @@
 <title>Team Sheet — Coach App</title>
 
 <!-- PWA: manifest + icons -->
-<link rel="manifest" href="/coach-app/manifest.json">
+<link rel="manifest" href="/coach-app/app/manifest.json">
 <meta name="theme-color" content="#0d0c0a">
 <link rel="icon" href="/coach-app/icons/icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="/coach-app/icons/apple-touch-icon.png">
@@ -3361,7 +3361,7 @@ bootApp();
 /* ---------- PWA: service worker registration ---------- */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/coach-app/sw.js').catch((err) => {
+    navigator.serviceWorker.register('/coach-app/app/sw.js').catch((err) => {
       console.warn('Service worker registration failed:', err);
     });
   });

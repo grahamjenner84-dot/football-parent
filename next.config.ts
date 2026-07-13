@@ -38,13 +38,31 @@ const nextConfig: NextConfig = {
         destination: '/academy-pathway/football-development-centres-near-me',
         permanent: true,
       },
+      {
+        source: '/coach-app',
+        destination: '/coach-app/app',
+        permanent: false, // temporary - remove once /coach-app becomes the marketing page
+      },
     ];
   },
   async rewrites() {
     return [
       {
-        source: '/coach-app',
-        destination: '/coach-app/index.html',
+        source: '/coach-app/app',
+        destination: '/coach-app/app/index.html',
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: '/coach-app/app',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
       },
     ];
   },
