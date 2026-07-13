@@ -1,10 +1,10 @@
 // Football Parent Coach — service worker
 // Bump CACHE_VERSION whenever you deploy a change, this forces old caches to clear.
-const CACHE_VERSION = 'fp-coach-v1';
+const CACHE_VERSION = 'fp-coach-v2';
 const APP_SHELL = [
-  '/coach-app/',
-  '/coach-app/index.html',
-  '/coach-app/manifest.json',
+  '/coach-app/app/',
+  '/coach-app/app/index.html',
+  '/coach-app/app/manifest.json',
   '/coach-app/icons/icon-192.png',
   '/coach-app/icons/icon-512.png',
 ];
@@ -48,7 +48,7 @@ self.addEventListener('fetch', (event) => {
           caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy));
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match('/coach-app/index.html')))
+        .catch(() => caches.match(request).then((cached) => cached || caches.match('/coach-app/app/index.html')))
     );
     return;
   }
