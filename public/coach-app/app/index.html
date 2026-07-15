@@ -2902,10 +2902,16 @@ function getMatch(id){
 }
 
 /* ---------- MATCH DETAIL / LINEUP ---------- */
+let matchDetailOrigin = 'matches'; // which tab "back" should return to — a match can now be opened from either
+
 function openMatch(id){
   currentMatchId = id;
   currentQuarterView = getMatch(id).currentQuarter || 0;
-  switchTab('matches'); // a match can now be opened from the Fixtures tab too — make sure that panel is the one showing
+  const activeTabBtn = document.querySelector('#bottom-nav button.active');
+  matchDetailOrigin = (activeTabBtn && activeTabBtn.dataset.tab === 'fixtures') ? 'fixtures' : 'matches';
+  document.getElementById('back-to-matches').textContent =
+    matchDetailOrigin === 'fixtures' ? '← Back to Fixtures' : '← Back to Matches';
+  switchTab('matches'); // make sure the panel holding match-detail-view is the one showing
   document.getElementById('matches-list-view').style.display = 'none';
   document.getElementById('match-detail-view').style.display = 'block';
   renderMatchDetail();
@@ -2915,7 +2921,7 @@ function closeMatchDetail(){
   availabilityChecksRenderedForMatchId = null;
   document.getElementById('matches-list-view').style.display = 'block';
   document.getElementById('match-detail-view').style.display = 'none';
-  renderMatchesList();
+  switchTab(matchDetailOrigin === 'fixtures' ? 'fixtures' : 'matches');
 }
 document.getElementById('back-to-matches').addEventListener('click', closeMatchDetail);
 
