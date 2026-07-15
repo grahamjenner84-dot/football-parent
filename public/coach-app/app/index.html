@@ -1070,8 +1070,9 @@
             <input type="text" id="detail-guest-name" placeholder="Guest player name" style="flex:1;">
             <button class="action ghost" id="detail-add-guest-btn" type="button">+ Add Guest</button>
           </div>
-          <div class="row" style="margin-top:10px;">
+          <div class="row" style="margin-top:10px;align-items:center;">
             <button class="action" id="save-availability-btn">Save Availability</button>
+            <span class="hint" id="availability-saved-hint" style="display:none;margin:0;color:var(--gk);">&#10003; Saved</span>
           </div>
         </div>
       </div>
@@ -3138,6 +3139,7 @@ document.getElementById('detail-add-guest-btn').addEventListener('click', ()=>{
   wrap.insertAdjacentHTML('beforeend', `<label><input type="checkbox" class="detail-avail-check" value="${guest.id}" checked> ${escapeHtml(guest.name)} <span style="color:var(--ink-soft);font-weight:400;">(guest)</span></label>`);
   nameInput.value = '';
 });
+let availabilitySavedHintTimer = null;
 document.getElementById('save-availability-btn').addEventListener('click', ()=>{
   const m = getMatch(currentMatchId);
   if(!m) return;
@@ -3146,10 +3148,16 @@ document.getElementById('save-availability-btn').addEventListener('click', ()=>{
   const hadLineup = !!m.quarters;
   m.availableIds = newIds;
   saveState();
-  document.getElementById('edit-availability-panel').style.display = 'none';
   renderMatchDetail();
   if(hadLineup){
     showAlert("Availability updated. The existing lineup wasn't automatically changed — hit Generate Team again if you'd like it to reflect who's available now.");
+  } else {
+    // A modal here would be overkill for something this routine — a brief inline
+    // confirmation is enough to make it clear the tap actually did something.
+    const hint = document.getElementById('availability-saved-hint');
+    hint.style.display = 'inline';
+    clearTimeout(availabilitySavedHintTimer);
+    availabilitySavedHintTimer = setTimeout(()=>{ hint.style.display = 'none'; }, 2000);
   }
 });
 
