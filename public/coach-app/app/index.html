@@ -2656,7 +2656,17 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
   season.matches.push(match);
   if(pendingFixtureLinkId){
     const linkedFixture = (season.fixtures||[]).find(fx=>fx.id === pendingFixtureLinkId);
-    if(linkedFixture) linkedFixture.matchId = match.id;
+    if(linkedFixture){
+      linkedFixture.matchId = match.id;
+      // Whatever was actually typed/changed in this form (not just what the
+      // fixture was pre-filled with) becomes the fixture's record too, so the
+      // Fixtures tab and Matches summary don't keep showing stale details.
+      linkedFixture.opponent = match.opponent || linkedFixture.opponent;
+      linkedFixture.homeAway = match.venue === 'A' ? 'away' : 'home';
+      linkedFixture.venue = match.address || linkedFixture.venue;
+      linkedFixture.date = match.date || linkedFixture.date;
+      linkedFixture.status = 'confirmed';
+    }
     pendingFixtureLinkId = null;
   }
   saveState();
@@ -2807,15 +2817,8 @@ function renderFixtures(){
 }
 
 function openFixture(id){
-  const season = getActiveSeason();
   const f = getFixture(id);
-  if(!f || !season) return;
-  if(f.matchId){
-    // Once match day is set up (or played), the match itself is the richer view
-    // (availability, notes, format, live scoring) — go straight there.
-    const m = (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
-    if(m){ switchTab('matches'); openMatch(m.id); return; }
-  }
+  if(!f) return;
   currentFixtureId = id;
   if(f.status === 'cancelled') openFixtureCancelledView(f);
   else openFixtureEditSheet(f);
@@ -2823,6 +2826,7 @@ function openFixture(id){
 
 function openFixtureEditSheet(f){
   const isPlaceholder = f.status === 'placeholder';
+  const hasMatch = !!f.matchId;
   document.getElementById('fixture-edit-title').textContent = isPlaceholder ? 'Confirm Fixture' : 'Edit Fixture';
   document.getElementById('fixture-edit-date-context').textContent =
     formatFixtureDate(f.date) + (f.kickoffTime ? ` — kickoff ${f.kickoffTime}` : ' — kickoff TBC');
@@ -2836,7 +2840,9 @@ function openFixtureEditSheet(f){
   document.getElementById('fixture-edit-actions').style.display = 'flex';
   document.getElementById('fixture-cancelled-actions').style.display = 'none';
   document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
-  document.getElementById('fixture-setup-match-wrap').style.display = (f.status === 'confirmed') ? 'block' : 'none';
+  document.getElementById('fixture-setup-match-btn').textContent = hasMatch ? 'Go to match day →' : 'Set up match day →';
+  document.getElementById('fixture-setup-match-wrap').style.display =
+    (f.status === 'confirmed' || f.status === 'played') ? 'block' : 'none';
   document.getElementById('fixture-edit-overlay').style.display = 'flex';
 }
 function openFixtureCancelledView(f){
@@ -2869,6 +2875,18 @@ document.getElementById('fixture-edit-save-btn').addEventListener('click', ()=>{
   f.kickoffTime = document.getElementById('fixture-edit-kickoff').value || null;
   if(f.status === 'placeholder') f.status = 'confirmed';
   f.updatedAt = Date.now();
+  // Keep a linked match's own opponent/venue/date in step, so a later correction
+  // here doesn't leave the match showing an old name while the fixture shows the new one.
+  if(f.matchId){
+    const season = getActiveSeason();
+    const m = season && (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
+    if(m){
+      if(f.opponent) m.opponent = f.opponent;
+      m.venue = f.homeAway === 'away' ? 'A' : 'H';
+      if(f.venue) m.address = f.venue;
+      if(f.date) m.date = f.date;
+    }
+  }
   saveState();
   closeFixtureEditOverlay();
   renderFixtures();
@@ -2894,6 +2912,15 @@ document.getElementById('fixture-cancel-confirm-btn').addEventListener('click', 
 document.getElementById('fixture-setup-match-btn').addEventListener('click', ()=>{
   const f = getFixture(currentFixtureId);
   if(!f) return;
+  if(f.matchId){
+    // Match day already exists for this fixture — go straight to it rather than
+    // creating a second match.
+    const season = getActiveSeason();
+    const m = season && (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
+    closeFixtureEditOverlay();
+    if(m){ switchTab('matches'); openMatch(m.id); }
+    return;
+  }
   closeFixtureEditOverlay();
   switchTab('matches');
   document.getElementById('matches-list-view').style.display = 'block';
