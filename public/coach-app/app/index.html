@@ -2128,6 +2128,36 @@ function foldLegacyFixturesIntoMatches(season){
   delete season.fixtures;
 }
 
+/* Two local match objects pointing at the same cloud row is always a bug (it
+   happened for real: the fold-in above used to recreate matches the server
+   migration had already created), and once it happens, restoring from cloud
+   or opening the app on any device that still has the stale copy in local
+   storage can't fix it — each copy keeps re-syncing over the other. Rather
+   than rely on the coach finding and closing every other open tab/device,
+   collapse any local matches that share a cloudId down to one, keeping
+   whichever copy has the most real data in it, every time state loads. */
+function matchRichnessScore(m){
+  let score = (m.availableIds||[]).length;
+  if(m.opponent) score += 1;
+  if(m.address) score += 1;
+  if(m.kickoffTime) score += 1;
+  if(m.quarters) score += 10;
+  if(m.status === 'completed' || m.status === 'live') score += 5;
+  return score;
+}
+function dedupeMatchesByCloudId(season){
+  const bestByCloudId = new Map();
+  const withoutCloudId = [];
+  (season.matches||[]).forEach(m=>{
+    if(!m.cloudId){ withoutCloudId.push(m); return; }
+    const existing = bestByCloudId.get(m.cloudId);
+    if(!existing || matchRichnessScore(m) > matchRichnessScore(existing)){
+      bestByCloudId.set(m.cloudId, m);
+    }
+  });
+  season.matches = [...withoutCloudId, ...bestByCloudId.values()];
+}
+
 function loadState(){
   const raw = localStorage.getItem(STORAGE_KEY);
   if(raw){
@@ -2144,6 +2174,7 @@ function loadState(){
         });
         (season.matches||[]).forEach(migrateMatch);
         foldLegacyFixturesIntoMatches(season);
+        dedupeMatchesByCloudId(season);
       });
       return s;
     }catch(e){ /* fall through to legacy/blank */ }
