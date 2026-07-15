@@ -548,8 +548,12 @@ function run() {
   // ---------- 6. Reciprocal link opportunities ----------
   const reciprocalOpportunities = [];
   for (const page of pages) {
-    for (const link of page.outboundLinks) {
-      const target = byPath[link.targetPath];
+    // Iterate unique targets, not every raw link occurrence - a page linking to
+    // the same target twice (see section 3) would otherwise push the identical
+    // reciprocal suggestion once per occurrence.
+    const uniqueTargetPaths = new Set(page.outboundLinks.map((l) => l.targetPath));
+    for (const targetPath of uniqueTargetPaths) {
+      const target = byPath[targetPath];
       if (!target) continue;
       const targetLinksBack = target.outboundLinks.some((l) => l.targetPath === page.urlPath);
       if (targetLinksBack) continue;
