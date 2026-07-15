@@ -2109,42 +2109,21 @@ function migrateMatch(m){
    placeholder/scheduled/cancelled match), matching the same mapping used for
    the one-time database migration. */
 function foldLegacyFixturesIntoMatches(season){
-  if(!Array.isArray(season.fixtures) || season.fixtures.length === 0){
-    delete season.fixtures;
-    return;
-  }
-  const statusMap = { placeholder:'placeholder', confirmed:'scheduled', cancelled:'cancelled', played:'completed' };
+  if(!Array.isArray(season.fixtures)) return;
+  // Fixtures were merged into matches directly, with a one-time server-side
+  // migration that already covered every fixture that existed at the time. Any
+  // local fixtures array still hanging around in a device's cached state is now
+  // stale — recreating an unlinked one here would very likely duplicate a match
+  // the migration already created server-side (this happened once for real), so
+  // only the linked case is folded in (it just annotates an existing match by id,
+  // never creates a new one); unlinked leftovers are simply dropped.
   season.fixtures.forEach(f=>{
-    if(f.matchId){
-      const linked = season.matches.find(m=>m.id===f.matchId || m.cloudId===f.matchId);
-      if(linked){
-        if(!linked.kickoffTime) linked.kickoffTime = f.kickoffTime || null;
-        if(!linked.cancellationReason) linked.cancellationReason = f.cancellationReason || null;
-      }
-      return;
+    if(!f.matchId) return;
+    const linked = season.matches.find(m=>m.id===f.matchId || m.cloudId===f.matchId);
+    if(linked){
+      if(!linked.kickoffTime) linked.kickoffTime = f.kickoffTime || null;
+      if(!linked.cancellationReason) linked.cancellationReason = f.cancellationReason || null;
     }
-    season.matches.push({
-      id: uid(), cloudId: null,
-      date: f.date,
-      opponent: f.opponent || null,
-      venue: f.homeAway === 'away' ? 'A' : (f.homeAway === 'home' ? 'H' : null),
-      address: f.venue || null,
-      notes: '',
-      kickoffTime: f.kickoffTime || null,
-      cancellationReason: f.cancellationReason || null,
-      quarterMinutes: 10,
-      numPeriods: 4,
-      format: season.format,
-      formation: season.formation,
-      rotationMode: season.rotationMode,
-      availableIds: [],
-      quarters: null,
-      quarterGoals: [{},{},{},{}],
-      quarterAssists: [{},{},{},{}],
-      opponentGoals: [0,0,0,0],
-      status: statusMap[f.status] || 'placeholder',
-      currentQuarter: 0
-    });
   });
   delete season.fixtures;
 }
@@ -2669,6 +2648,12 @@ function daysUntil(dateStr){
   const d = new Date(dateStr + 'T00:00:00');
   return Math.round((d - today) / 86400000);
 }
+// Sorting by date alone leaves same-day games in whatever order they happen to sit
+// in the array (not kickoff order) — fold kickoff time into the sort key so a 6:20am
+// game always sorts ahead of a 9am game on the same date.
+function matchSortKey(m){
+  return m.date + 'T' + (m.kickoffTime || '00:00');
+}
 function fixtureRowHtml(m){
   const dateLabel = formatFixtureDate(m.date);
   if(m.status === 'cancelled'){
@@ -2732,10 +2717,10 @@ function renderFixtures(){
   const matches = season.matches || [];
   const upcoming = matches
     .filter(m => m.date >= todayStr && (m.status === 'placeholder' || m.status === 'scheduled' || m.status === 'live'))
-    .sort((a,b)=> a.date.localeCompare(b.date));
+    .sort((a,b)=> matchSortKey(a).localeCompare(matchSortKey(b)));
   const past = matches
     .filter(m => m.date < todayStr || m.status === 'completed' || m.status === 'cancelled')
-    .sort((a,b)=> b.date.localeCompare(a.date));
+    .sort((a,b)=> matchSortKey(b).localeCompare(matchSortKey(a)));
 
   upcomingWrap.innerHTML = upcoming.length
     ? upcoming.map(m=>fixtureRowHtml(m)).join('')
@@ -2885,8 +2870,8 @@ function renderMatchesSummary(){
   if(!season){ nextWrap.innerHTML = ''; return; }
   const todayStr = new Date().toISOString().slice(0,10);
   const nextFixture = (season.matches||[])
-    .filter(m => m.date >= todayStr && (m.status === 'placeholder' || m.status === 'scheduled'))
-    .sort((a,b)=> a.date.localeCompare(b.date))[0];
+    .filter(m => m.date >= todayStr && (m.status === 'placeholder' || m.status === 'scheduled' || m.status === 'live'))
+    .sort((a,b)=> matchSortKey(a).localeCompare(matchSortKey(b)))[0];
   nextWrap.innerHTML = nextFixture
     ? fixtureRowHtml(nextFixture)
     : '<div class="empty-state">No upcoming fixture &mdash; add one from the Fixtures tab.</div>';
