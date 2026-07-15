@@ -478,6 +478,30 @@
   .result-badge.result-W{ background:#6fbf7f; color:#12100b; }
   .result-badge.result-D{ background:#e0c266; color:#12100b; }
   .result-badge.result-L{ background:#c56b5b; color:#fff; }
+  /* Fixtures list */
+  .fixture-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:10px;
+    cursor:pointer;
+    transition:border-color 0.15s;
+  }
+  .fixture-row:hover{ border-color:var(--brand); }
+  .fixture-row .meta{ font-size:13px; color:var(--ink-soft); }
+  .fixture-row .opp{ font-family:'Oswald',sans-serif; font-size:16px; }
+  .fixture-row.fixture-warning{ border-color:var(--danger); background:rgba(197,107,91,0.08); }
+  .fixture-row.fixture-cancelled{ opacity:0.55; }
+  .fixture-alert-icon{ margin-right:6px; }
+  .result-dot{
+    display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px;
+  }
+  .result-dot.result-dot-W{ background:var(--gk); }
+  .result-dot.result-dot-D{ background:var(--ink-dim); }
+  .result-dot.result-dot-L{ background:var(--danger); }
   /* Pitch view */
   .pitch-wrap{
     background:linear-gradient(180deg, var(--pitch) 0%, var(--pitch-dark) 100%);
@@ -933,6 +957,7 @@
 
 <nav class="bottom-nav" id="bottom-nav">
   <button data-tab="matches" class="active"><span class="bn-icon">🏟</span>Matches</button>
+  <button data-tab="fixtures"><span class="bn-icon">📅</span>Fixtures</button>
   <button data-tab="stats"><span class="bn-icon">📊</span>Stats</button>
   <button data-tab="settings"><span class="bn-icon">⚙</span>Settings</button>
 </nav>
@@ -1054,6 +1079,24 @@
     </div>
   </section>
 
+  <!-- FIXTURES TAB -->
+  <section id="panel-fixtures" class="panel">
+    <div class="card">
+      <div class="row" style="justify-content:space-between;align-items:center;">
+        <h2 style="margin:0;">Fixtures</h2>
+        <button class="action" id="fixtures-add-btn">+ Add</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Upcoming</h2>
+      <div id="fixtures-upcoming-list"></div>
+    </div>
+    <div class="card">
+      <h2>Past</h2>
+      <div id="fixtures-past-list"></div>
+    </div>
+  </section>
+
   <!-- STATS TAB -->
   <section id="panel-stats" class="panel">
     <div class="card">
@@ -1140,6 +1183,118 @@
       <div class="settings-section-title" style="margin-top:0;">Seasons</div>
       <div id="season-list"></div>
       <button class="action ghost" id="new-season-btn" style="margin-top:6px;">+ Start New Season</button>
+    </div>
+  </div>
+</div>
+
+<!-- FIXTURES: ADD OVERLAY -->
+<div id="fixtures-add-overlay" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <h2 style="margin:0;">Add Fixtures</h2>
+      <button class="back-link" id="fixtures-add-close-btn" style="padding:0;">Close</button>
+    </div>
+
+    <div id="fixtures-add-choice">
+      <div class="hint" style="margin-top:0;">Choose how you'd like to add fixtures.</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+        <button class="action ghost" id="fixtures-add-block-choice-btn" style="width:100%;">Add a block of dates</button>
+        <button class="action ghost" id="fixtures-add-single-choice-btn" style="width:100%;">Add a single fixture</button>
+      </div>
+    </div>
+
+    <div id="fixtures-add-block" style="display:none;">
+      <div class="settings-section-title" style="margin-top:0;">Repeats</div>
+      <div class="row" style="margin-bottom:10px;">
+        <select id="fixtures-block-weekday" style="flex:1 1 100%;">
+          <option value="0">Sunday</option>
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+        </select>
+      </div>
+      <div class="row" style="margin-bottom:10px;">
+        <input type="date" id="fixtures-block-from" style="flex:1;">
+        <input type="date" id="fixtures-block-until" style="flex:1;">
+      </div>
+      <div class="hint" id="fixtures-block-count-hint" style="margin-top:0;"></div>
+      <div class="modal-actions" style="margin-top:14px;">
+        <button class="action ghost" id="fixtures-block-back-btn" type="button">Back</button>
+        <button class="action" id="fixtures-block-submit-btn">Create fixtures</button>
+      </div>
+    </div>
+
+    <div id="fixtures-add-single" style="display:none;">
+      <div class="row" style="margin-bottom:10px;">
+        <input type="date" id="fixtures-single-date" style="flex:1 1 130px;">
+        <input type="time" id="fixtures-single-kickoff" style="flex:1 1 130px;">
+      </div>
+      <div class="row" style="margin-bottom:10px;">
+        <input type="text" id="fixtures-single-opponent" placeholder="Opponent" style="flex:1;">
+      </div>
+      <div class="row" style="margin-bottom:10px;">
+        <input type="text" id="fixtures-single-venue" placeholder="Venue" style="flex:1;">
+        <select id="fixtures-single-home-away" style="flex:1 1 130px;">
+          <option value="home">Home</option>
+          <option value="away">Away</option>
+        </select>
+      </div>
+      <div class="modal-actions" style="margin-top:14px;">
+        <button class="action ghost" id="fixtures-single-back-btn" type="button">Back</button>
+        <button class="action" id="fixtures-single-submit-btn">Add fixture</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIXTURES: EDIT / VIEW OVERLAY (placeholder confirm, confirmed edit, cancelled view) -->
+<div id="fixture-edit-overlay" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <h2 style="margin:0;" id="fixture-edit-title">Fixture</h2>
+      <button class="back-link" id="fixture-edit-close-btn" style="padding:0;">Close</button>
+    </div>
+    <div class="hint" id="fixture-edit-date-context" style="margin-top:0;margin-bottom:12px;"></div>
+
+    <div id="fixture-edit-fields">
+      <div class="row" style="margin-bottom:10px;">
+        <input type="text" id="fixture-edit-opponent" placeholder="Opponent" style="flex:1;">
+      </div>
+      <div class="row" style="margin-bottom:10px;">
+        <input type="text" id="fixture-edit-venue" placeholder="Venue" style="flex:1;">
+        <select id="fixture-edit-home-away">
+          <option value="">Home / Away</option>
+          <option value="home">Home</option>
+          <option value="away">Away</option>
+        </select>
+      </div>
+      <div class="row" style="margin-bottom:10px;">
+        <input type="time" id="fixture-edit-kickoff" style="flex:1;">
+      </div>
+    </div>
+
+    <div id="fixture-cancelled-view" style="display:none;">
+      <div class="hint" id="fixture-cancelled-reason" style="margin-top:0;"></div>
+    </div>
+
+    <div id="fixture-cancel-reason-panel" style="display:none;margin-top:6px;border-top:1px solid var(--border);padding-top:12px;">
+      <input type="text" id="fixture-cancel-reason-input" placeholder="Reason (optional, e.g. Weather)" style="width:100%;margin-bottom:10px;">
+      <div class="row">
+        <button class="action danger" id="fixture-cancel-confirm-btn" type="button">Confirm Cancellation</button>
+        <button class="action ghost" id="fixture-cancel-abort-btn" type="button">Never mind</button>
+      </div>
+    </div>
+
+    <div class="modal-actions" id="fixture-edit-actions" style="margin-top:14px;justify-content:space-between;">
+      <button class="action ghost" id="fixture-edit-cancel-fixture-btn" type="button">Postpone / Cancel</button>
+      <button class="action" id="fixture-edit-save-btn">Save</button>
+    </div>
+
+    <div id="fixture-cancelled-actions" style="display:none;margin-top:14px;">
+      <button class="action" id="fixture-add-rearranged-btn" style="width:100%;">+ Add rearranged fixture</button>
     </div>
   </div>
 </div>
@@ -1514,6 +1669,29 @@ async function syncSeasonToCloud(season){
       persistLocal();
     }
   }
+
+  for(const f of (season.fixtures||[])){
+    const payload = {
+      season_id: season.cloudId,
+      date: f.date,
+      kickoff_time: f.kickoffTime || null,
+      opponent: f.opponent || null,
+      venue: f.venue || null,
+      home_away: f.homeAway || null,
+      status: f.status || 'placeholder',
+      match_id: f.matchId || null,
+      cancellation_reason: f.cancellationReason || null
+    };
+    if(f.cloudId){
+      const { error } = await supabaseClient.from('fixtures').update(payload).eq('id', f.cloudId);
+      if(error) throw error;
+    } else {
+      const { data, error } = await supabaseClient.from('fixtures').insert(payload).select().single();
+      if(error) throw error;
+      f.cloudId = data.id;
+      persistLocal();
+    }
+  }
 }
 
 /* ---------- CLOUD RESTORE ----------
@@ -1536,16 +1714,22 @@ async function tryRestoreFromCloud(silent){
       .from('matches').select('*').in('season_id', seasonIds);
     if(matchesErr) throw matchesErr;
 
-    // Seasons and matches keep this device's existing local id when we recognise
-    // their cloudId, so an in-progress session (e.g. a currently-open match)
-    // doesn't go stale mid-restore. Players don't need this: their id is now
-    // always set to their Supabase row id directly (see syncSeasonToCloud), so
-    // it's already identical and stable on every device.
+    const { data: fixtureRows, error: fixturesErr } = await supabaseClient
+      .from('fixtures').select('*').in('season_id', seasonIds);
+    if(fixturesErr) throw fixturesErr;
+
+    // Seasons, matches and fixtures keep this device's existing local id when we
+    // recognise their cloudId, so an in-progress session (e.g. a currently-open
+    // match) doesn't go stale mid-restore. Players don't need this: their id is
+    // now always set to their Supabase row id directly (see syncSeasonToCloud),
+    // so it's already identical and stable on every device.
     const existingSeasonIdByCloud = {};
     const existingMatchIdByCloud = {};
+    const existingFixtureIdByCloud = {};
     (state.seasons||[]).forEach(s=>{
       if(s.cloudId) existingSeasonIdByCloud[s.cloudId] = s.id;
       (s.matches||[]).forEach(m=>{ if(m.cloudId) existingMatchIdByCloud[m.cloudId] = m.id; });
+      (s.fixtures||[]).forEach(f=>{ if(f.cloudId) existingFixtureIdByCloud[f.cloudId] = f.id; });
     });
 
     const seasons = seasonRows.map(sr=>{
@@ -1564,11 +1748,17 @@ async function tryRestoreFromCloud(silent){
         opponentGoals: m.opponent_goals || [], status: m.status || 'scheduled',
         currentQuarter: m.current_quarter || 0
       }));
+      const fixtures = fixtureRows.filter(f=>f.season_id === sr.id).map(f=>({
+        id: existingFixtureIdByCloud[f.id] || uid(), cloudId: f.id,
+        date: f.date, kickoffTime: f.kickoff_time, opponent: f.opponent, venue: f.venue,
+        homeAway: f.home_away, status: f.status || 'placeholder', matchId: f.match_id,
+        cancellationReason: f.cancellation_reason
+      }));
       return blankSeason({
         id: existingSeasonIdByCloud[sr.id] || uid(), cloudId: sr.id,
         teamName: sr.team_name, ageGroup: sr.age_group,
         format: sr.format, formation: sr.formation, rotationMode: sr.rotation_mode,
-        players, matches
+        players, matches, fixtures
       });
     });
 
@@ -1925,6 +2115,7 @@ function blankSeason(overrides){
     rotationMode: 'rotate', // 'rotate' = spread positions fairly (younger ages); 'fixed' = respect each player's designated position
     players: [],
     matches: [],
+    fixtures: [],
     createdAt: Date.now()
   }, overrides || {});
 }
@@ -1969,6 +2160,7 @@ function loadState(){
           if(!p.positionGroup) p.positionGroup = 'ANY';
         });
         (season.matches||[]).forEach(migrateMatch);
+        if(!Array.isArray(season.fixtures)) season.fixtures = [];
       });
       return s;
     }catch(e){ /* fall through to legacy/blank */ }
@@ -2085,6 +2277,7 @@ function switchTab(tab){
   document.getElementById('matches-fab').style.display = tab === 'matches' ? 'flex' : 'none';
   if(tab === 'stats') renderStats();
   if(tab === 'matches') renderMatchesList();
+  if(tab === 'fixtures') renderFixtures();
 }
 document.getElementById('matches-fab').addEventListener('click', ()=>{
   switchTab('matches');
@@ -2455,6 +2648,313 @@ function totalGoalsForMatch(m){
 function totalOppGoalsForMatch(m){
   return (m.opponentGoals||[]).reduce((a,b)=>a+b, 0);
 }
+
+/* ---------- FIXTURES ---------- */
+let currentFixtureId = null;
+
+function getFixture(id){
+  const season = getActiveSeason();
+  return season ? (season.fixtures||[]).find(f=>f.id===id) : null;
+}
+function formatFixtureDate(dateStr){
+  if(!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  const weekday = d.toLocaleDateString('en-GB', { weekday: 'short' });
+  const day = d.getDate();
+  const month = d.toLocaleDateString('en-GB', { month: 'short' });
+  return `${weekday} ${day} ${month}`;
+}
+function daysUntil(dateStr){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const d = new Date(dateStr + 'T00:00:00');
+  return Math.round((d - today) / 86400000);
+}
+function fixtureResultInfo(f, season){
+  if(!f.matchId) return null;
+  const m = (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
+  if(!m) return null;
+  const goalsFor = totalGoalsForMatch(m);
+  const oppGoals = totalOppGoalsForMatch(m);
+  const letter = goalsFor > oppGoals ? 'W' : (goalsFor < oppGoals ? 'L' : 'D');
+  const word = letter === 'W' ? 'Won' : (letter === 'L' ? 'Lost' : 'Drew');
+  return { match: m, letter, label: `${word} ${goalsFor}-${oppGoals}` };
+}
+
+function fixtureRowHtml(f, season){
+  const dateLabel = formatFixtureDate(f.date);
+  if(f.status === 'cancelled'){
+    return `
+    <div class="fixture-row fixture-cancelled" data-id="${f.id}">
+      <div>
+        <div class="opp">${f.opponent ? escapeHtml(f.opponent) : dateLabel}</div>
+        <div class="meta">🌧 ${f.cancellationReason ? escapeHtml(f.cancellationReason) : 'Postponed'}</div>
+      </div>
+    </div>`;
+  }
+  if(f.status === 'played'){
+    const info = fixtureResultInfo(f, season);
+    const dotClass = info ? 'result-dot-' + info.letter : '';
+    return `
+    <div class="fixture-row" data-id="${f.id}">
+      <div>
+        <div class="opp"><span class="result-dot ${dotClass}"></span>vs ${escapeHtml(f.opponent||'')}</div>
+        <div class="meta">${dateLabel}${info ? ' &middot; ' + info.label : ''}</div>
+      </div>
+    </div>`;
+  }
+  if(f.status === 'confirmed'){
+    return `
+    <div class="fixture-row" data-id="${f.id}">
+      <div>
+        <div class="opp">vs ${escapeHtml(f.opponent||'')}${f.homeAway ? ' (' + (f.homeAway==='home'?'H':'A') + ')' : ''}</div>
+        <div class="meta">${dateLabel}${f.kickoffTime ? ' &middot; ' + f.kickoffTime : ''}${f.venue ? ' &middot; ' + escapeHtml(f.venue) : ''}</div>
+      </div>
+    </div>`;
+  }
+  // placeholder
+  const soon = daysUntil(f.date) <= 6;
+  return `
+    <div class="fixture-row ${soon ? 'fixture-warning' : ''}" data-id="${f.id}">
+      <div>
+        <div class="opp">${soon ? '<span class="fixture-alert-icon">⚠️</span>' : ''}${dateLabel}</div>
+        <div class="meta">Opponent TBC</div>
+      </div>
+    </div>`;
+}
+
+function renderFixtures(){
+  const season = getActiveSeason();
+  const upcomingWrap = document.getElementById('fixtures-upcoming-list');
+  const pastWrap = document.getElementById('fixtures-past-list');
+  if(!season){ upcomingWrap.innerHTML=''; pastWrap.innerHTML=''; return; }
+  const todayStr = new Date().toISOString().slice(0,10);
+  const fixtures = season.fixtures || [];
+  const upcoming = fixtures
+    .filter(f => f.date >= todayStr && (f.status === 'placeholder' || f.status === 'confirmed'))
+    .sort((a,b)=> a.date.localeCompare(b.date));
+  const past = fixtures
+    .filter(f => f.date < todayStr || f.status === 'played' || f.status === 'cancelled')
+    .sort((a,b)=> b.date.localeCompare(a.date));
+
+  upcomingWrap.innerHTML = upcoming.length
+    ? upcoming.map(f=>fixtureRowHtml(f, season)).join('')
+    : '<div class="empty-state">No upcoming fixtures &mdash; tap + Add to create some.</div>';
+  pastWrap.innerHTML = past.length
+    ? past.map(f=>fixtureRowHtml(f, season)).join('')
+    : '<div class="empty-state">No past fixtures yet.</div>';
+
+  [upcomingWrap, pastWrap].forEach(wrap=>{
+    wrap.querySelectorAll('.fixture-row').forEach(row=>{
+      row.addEventListener('click', ()=> openFixture(row.dataset.id));
+    });
+  });
+}
+
+function openFixture(id){
+  const season = getActiveSeason();
+  const f = getFixture(id);
+  if(!f || !season) return;
+  if(f.status === 'played'){
+    const info = fixtureResultInfo(f, season);
+    if(info){ openMatch(info.match.id); switchTab('matches'); }
+    else showAlert('This fixture is marked played but no match result is linked yet.');
+    return;
+  }
+  currentFixtureId = id;
+  if(f.status === 'cancelled') openFixtureCancelledView(f);
+  else openFixtureEditSheet(f);
+}
+
+function openFixtureEditSheet(f){
+  const isPlaceholder = f.status === 'placeholder';
+  document.getElementById('fixture-edit-title').textContent = isPlaceholder ? 'Confirm Fixture' : 'Edit Fixture';
+  document.getElementById('fixture-edit-date-context').textContent =
+    formatFixtureDate(f.date) + (f.kickoffTime ? ` — kickoff ${f.kickoffTime}` : ' — kickoff TBC');
+  document.getElementById('fixture-edit-opponent').value = f.opponent || '';
+  document.getElementById('fixture-edit-venue').value = f.venue || '';
+  document.getElementById('fixture-edit-home-away').value = f.homeAway || '';
+  document.getElementById('fixture-edit-kickoff').value = f.kickoffTime || '';
+  document.getElementById('fixture-edit-save-btn').textContent = isPlaceholder ? 'Save as confirmed' : 'Save';
+  document.getElementById('fixture-edit-fields').style.display = 'block';
+  document.getElementById('fixture-cancelled-view').style.display = 'none';
+  document.getElementById('fixture-edit-actions').style.display = 'flex';
+  document.getElementById('fixture-cancelled-actions').style.display = 'none';
+  document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
+  document.getElementById('fixture-edit-overlay').style.display = 'flex';
+}
+function openFixtureCancelledView(f){
+  document.getElementById('fixture-edit-title').textContent = 'Postponed Fixture';
+  document.getElementById('fixture-edit-date-context').textContent = formatFixtureDate(f.date);
+  document.getElementById('fixture-cancelled-reason').textContent = f.cancellationReason ? f.cancellationReason : 'Postponed';
+  document.getElementById('fixture-edit-fields').style.display = 'none';
+  document.getElementById('fixture-cancelled-view').style.display = 'block';
+  document.getElementById('fixture-edit-actions').style.display = 'none';
+  document.getElementById('fixture-cancelled-actions').style.display = 'block';
+  document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
+  document.getElementById('fixture-edit-overlay').style.display = 'flex';
+}
+function closeFixtureEditOverlay(){
+  document.getElementById('fixture-edit-overlay').style.display = 'none';
+  currentFixtureId = null;
+}
+document.getElementById('fixture-edit-close-btn').addEventListener('click', closeFixtureEditOverlay);
+document.getElementById('fixture-edit-overlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'fixture-edit-overlay') closeFixtureEditOverlay();
+});
+
+document.getElementById('fixture-edit-save-btn').addEventListener('click', ()=>{
+  const f = getFixture(currentFixtureId);
+  if(!f) return;
+  f.opponent = document.getElementById('fixture-edit-opponent').value.trim() || null;
+  f.venue = document.getElementById('fixture-edit-venue').value.trim() || null;
+  f.homeAway = document.getElementById('fixture-edit-home-away').value || null;
+  f.kickoffTime = document.getElementById('fixture-edit-kickoff').value || null;
+  if(f.status === 'placeholder') f.status = 'confirmed';
+  f.updatedAt = Date.now();
+  saveState();
+  closeFixtureEditOverlay();
+  renderFixtures();
+});
+document.getElementById('fixture-edit-cancel-fixture-btn').addEventListener('click', ()=>{
+  document.getElementById('fixture-cancel-reason-panel').style.display = 'block';
+});
+document.getElementById('fixture-cancel-abort-btn').addEventListener('click', ()=>{
+  document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
+});
+document.getElementById('fixture-cancel-confirm-btn').addEventListener('click', ()=>{
+  const f = getFixture(currentFixtureId);
+  if(!f) return;
+  f.status = 'cancelled';
+  f.cancellationReason = document.getElementById('fixture-cancel-reason-input').value.trim() || null;
+  f.updatedAt = Date.now();
+  saveState();
+  closeFixtureEditOverlay();
+  renderFixtures();
+});
+document.getElementById('fixture-add-rearranged-btn').addEventListener('click', ()=>{
+  const f = getFixture(currentFixtureId);
+  closeFixtureEditOverlay();
+  openFixturesAddOverlay();
+  showFixturesAddSingle();
+  if(f && f.opponent) document.getElementById('fixtures-single-opponent').value = f.opponent;
+});
+
+/* ---------- FIXTURES: ADD FLOW ---------- */
+function openFixturesAddOverlay(){
+  document.getElementById('fixtures-add-choice').style.display = 'block';
+  document.getElementById('fixtures-add-block').style.display = 'none';
+  document.getElementById('fixtures-add-single').style.display = 'none';
+  document.getElementById('fixtures-add-overlay').style.display = 'flex';
+}
+function closeFixturesAddOverlay(){
+  document.getElementById('fixtures-add-overlay').style.display = 'none';
+}
+document.getElementById('fixtures-add-btn').addEventListener('click', openFixturesAddOverlay);
+document.getElementById('fixtures-add-close-btn').addEventListener('click', closeFixturesAddOverlay);
+document.getElementById('fixtures-add-overlay').addEventListener('click', (e)=>{
+  if(e.target.id === 'fixtures-add-overlay') closeFixturesAddOverlay();
+});
+
+function showFixturesAddBlock(){
+  const season = getActiveSeason();
+  document.getElementById('fixtures-add-choice').style.display = 'none';
+  document.getElementById('fixtures-add-single').style.display = 'none';
+  document.getElementById('fixtures-add-block').style.display = 'block';
+  const fixtures = season ? (season.fixtures||[]) : [];
+  if(fixtures.length){
+    const latest = [...fixtures].sort((a,b)=> b.date.localeCompare(a.date))[0];
+    const wd = new Date(latest.date + 'T00:00:00').getDay();
+    document.getElementById('fixtures-block-weekday').value = String(wd);
+  }
+  document.getElementById('fixtures-block-from').value = '';
+  document.getElementById('fixtures-block-until').value = '';
+  document.getElementById('fixtures-block-count-hint').textContent = '';
+}
+function showFixturesAddSingle(){
+  document.getElementById('fixtures-add-choice').style.display = 'none';
+  document.getElementById('fixtures-add-block').style.display = 'none';
+  document.getElementById('fixtures-add-single').style.display = 'block';
+  document.getElementById('fixtures-single-date').value = '';
+  document.getElementById('fixtures-single-kickoff').value = '';
+  document.getElementById('fixtures-single-opponent').value = '';
+  document.getElementById('fixtures-single-venue').value = '';
+  document.getElementById('fixtures-single-home-away').value = 'home';
+}
+document.getElementById('fixtures-add-block-choice-btn').addEventListener('click', showFixturesAddBlock);
+document.getElementById('fixtures-add-single-choice-btn').addEventListener('click', showFixturesAddSingle);
+document.getElementById('fixtures-block-back-btn').addEventListener('click', ()=>{
+  document.getElementById('fixtures-add-block').style.display = 'none';
+  document.getElementById('fixtures-add-choice').style.display = 'block';
+});
+document.getElementById('fixtures-single-back-btn').addEventListener('click', ()=>{
+  document.getElementById('fixtures-add-single').style.display = 'none';
+  document.getElementById('fixtures-add-choice').style.display = 'block';
+});
+
+function computeBlockDates(weekday, fromStr, untilStr){
+  const dates = [];
+  if(!fromStr || !untilStr) return dates;
+  let d = new Date(fromStr + 'T00:00:00');
+  const until = new Date(untilStr + 'T00:00:00');
+  if(until < d) return dates;
+  while(d.getDay() !== weekday) d.setDate(d.getDate()+1);
+  while(d <= until){
+    dates.push(d.toISOString().slice(0,10));
+    d.setDate(d.getDate()+7);
+  }
+  return dates;
+}
+function refreshFixturesBlockCountHint(){
+  const weekday = parseInt(document.getElementById('fixtures-block-weekday').value);
+  const from = document.getElementById('fixtures-block-from').value;
+  const until = document.getElementById('fixtures-block-until').value;
+  const dates = computeBlockDates(weekday, from, until);
+  document.getElementById('fixtures-block-count-hint').textContent = dates.length
+    ? `Create ${dates.length} placeholder fixture${dates.length===1?'':'s'}.`
+    : '';
+}
+['fixtures-block-weekday','fixtures-block-from','fixtures-block-until'].forEach(id=>{
+  document.getElementById(id).addEventListener('change', refreshFixturesBlockCountHint);
+});
+document.getElementById('fixtures-block-submit-btn').addEventListener('click', ()=>{
+  const season = getActiveSeason();
+  if(!season) return;
+  const weekday = parseInt(document.getElementById('fixtures-block-weekday').value);
+  const from = document.getElementById('fixtures-block-from').value;
+  const until = document.getElementById('fixtures-block-until').value;
+  const dates = computeBlockDates(weekday, from, until);
+  if(dates.length === 0){ showAlert('Pick a from and until date that includes at least one of the chosen weekday.'); return; }
+  showConfirm(`Create ${dates.length} placeholder fixture${dates.length===1?'':'s'}?`, ()=>{
+    dates.forEach(date=>{
+      season.fixtures.push({
+        id: uid(), cloudId: null, date, kickoffTime: null, opponent: null, venue: null,
+        homeAway: null, status: 'placeholder', matchId: null, cancellationReason: null,
+        createdAt: Date.now(), updatedAt: Date.now()
+      });
+    });
+    saveState();
+    closeFixturesAddOverlay();
+    renderFixtures();
+  });
+});
+document.getElementById('fixtures-single-submit-btn').addEventListener('click', ()=>{
+  const season = getActiveSeason();
+  if(!season) return;
+  const date = document.getElementById('fixtures-single-date').value;
+  const opponent = document.getElementById('fixtures-single-opponent').value.trim();
+  const venue = document.getElementById('fixtures-single-venue').value.trim();
+  const kickoffTime = document.getElementById('fixtures-single-kickoff').value || null;
+  const homeAway = document.getElementById('fixtures-single-home-away').value;
+  if(!date || !opponent || !venue || !homeAway){ showAlert('Fill in date, opponent, venue and home/away.'); return; }
+  season.fixtures.push({
+    id: uid(), cloudId: null, date, kickoffTime, opponent, venue, homeAway,
+    status: 'confirmed', matchId: null, cancellationReason: null,
+    createdAt: Date.now(), updatedAt: Date.now()
+  });
+  saveState();
+  closeFixturesAddOverlay();
+  renderFixtures();
+});
 
 /* ---------- MATCHES: LIST ---------- */
 function renderMatchesList(){
@@ -3354,6 +3854,7 @@ const scorerRows = scorers.map((x,i)=>{
 /* ---------- INIT ---------- */
 function renderAll(){
   renderMatchesList();
+  renderFixtures();
   renderStats();
 }
 bootApp();
