@@ -1,6 +1,6 @@
 // Football Parent Coach — service worker
 // Bump CACHE_VERSION whenever you deploy a change, this forces old caches to clear.
-const CACHE_VERSION = 'fp-coach-v3';
+const CACHE_VERSION = 'fp-coach-v4';
 const APP_SHELL = [
   '/coach-app/app/',
   '/coach-app/app/index.html',

@@ -969,6 +969,14 @@
   <section id="panel-matches" class="panel active">
     <div id="matches-list-view">
       <div class="card">
+        <h2>Next Fixture</h2>
+        <div id="matches-next-fixture"></div>
+      </div>
+      <div class="card">
+        <h2>Last 3 Results</h2>
+        <div id="matches-last-results"></div>
+      </div>
+      <div class="card">
         <h2>Add a Match</h2>
         <div class="row">
           <input type="date" id="match-date">
@@ -1198,8 +1206,8 @@
     <div id="fixtures-add-choice">
       <div class="hint" style="margin-top:0;">Choose how you'd like to add fixtures.</div>
       <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
-        <button class="action ghost" id="fixtures-add-block-choice-btn" style="width:100%;">Add a block of dates</button>
-        <button class="action ghost" id="fixtures-add-single-choice-btn" style="width:100%;">Add a single fixture</button>
+        <button class="action ghost" id="fixtures-add-block-choice-btn" style="width:100%;">Add a block of weekly dates</button>
+        <button class="action ghost" id="fixtures-add-single-choice-btn" style="width:100%;">Add one fixture</button>
       </div>
     </div>
 
@@ -1228,16 +1236,18 @@
     </div>
 
     <div id="fixtures-add-single" style="display:none;">
-      <div class="row" style="margin-bottom:10px;">
+      <div class="hint" style="margin-top:0;">Date is all you need for a placeholder &mdash; fill in the rest now if you already know them.</div>
+      <div class="row" style="margin-bottom:10px;margin-top:10px;">
         <input type="date" id="fixtures-single-date" style="flex:1 1 130px;">
         <input type="time" id="fixtures-single-kickoff" style="flex:1 1 130px;">
       </div>
       <div class="row" style="margin-bottom:10px;">
-        <input type="text" id="fixtures-single-opponent" placeholder="Opponent" style="flex:1;">
+        <input type="text" id="fixtures-single-opponent" placeholder="Opponent (optional)" style="flex:1;">
       </div>
       <div class="row" style="margin-bottom:10px;">
-        <input type="text" id="fixtures-single-venue" placeholder="Venue" style="flex:1;">
+        <input type="text" id="fixtures-single-venue" placeholder="Venue (optional)" style="flex:1;">
         <select id="fixtures-single-home-away" style="flex:1 1 130px;">
+          <option value="">Home / Away</option>
           <option value="home">Home</option>
           <option value="away">Away</option>
         </select>
@@ -2700,7 +2710,7 @@ function fixtureRowHtml(f, season){
   const dateLabel = formatFixtureDate(f.date);
   if(f.status === 'cancelled'){
     return `
-    <div class="fixture-row fixture-cancelled" data-id="${f.id}">
+    <div class="fixture-row fixture-cancelled" data-type="fixture" data-id="${f.id}">
       <div>
         <div class="opp">${f.opponent ? escapeHtml(f.opponent) : dateLabel}</div>
         <div class="meta">🌧 ${f.cancellationReason ? escapeHtml(f.cancellationReason) : 'Postponed'}</div>
@@ -2711,7 +2721,7 @@ function fixtureRowHtml(f, season){
     const info = fixtureResultInfo(f, season);
     const dotClass = info ? 'result-dot-' + info.letter : '';
     return `
-    <div class="fixture-row" data-id="${f.id}">
+    <div class="fixture-row" data-type="fixture" data-id="${f.id}">
       <div>
         <div class="opp"><span class="result-dot ${dotClass}"></span>vs ${escapeHtml(f.opponent||'')}</div>
         <div class="meta">${dateLabel}${info ? ' &middot; ' + info.label : ''}</div>
@@ -2720,7 +2730,7 @@ function fixtureRowHtml(f, season){
   }
   if(f.status === 'confirmed'){
     return `
-    <div class="fixture-row" data-id="${f.id}">
+    <div class="fixture-row" data-type="fixture" data-id="${f.id}">
       <div>
         <div class="opp">vs ${escapeHtml(f.opponent||'')}${f.homeAway ? ' (' + (f.homeAway==='home'?'H':'A') + ')' : ''}</div>
         <div class="meta">${dateLabel}${f.kickoffTime ? ' &middot; ' + f.kickoffTime : ''}${f.venue ? ' &middot; ' + escapeHtml(f.venue) : ''}</div>
@@ -2730,12 +2740,36 @@ function fixtureRowHtml(f, season){
   // placeholder
   const soon = daysUntil(f.date) <= 6;
   return `
-    <div class="fixture-row ${soon ? 'fixture-warning' : ''}" data-id="${f.id}">
+    <div class="fixture-row ${soon ? 'fixture-warning' : ''}" data-type="fixture" data-id="${f.id}">
       <div>
         <div class="opp">${soon ? '<span class="fixture-alert-icon">⚠️</span>' : ''}${dateLabel}</div>
         <div class="meta">Opponent TBC</div>
       </div>
     </div>`;
+}
+
+/* A completed match that was logged directly (Add a Match) rather than via a
+   fixture still needs to show up as history — render it the same way a played
+   fixture would, but sourced straight from the match. */
+function matchHasLinkedFixture(m, season){
+  return (season.fixtures||[]).some(f => f.matchId === m.id || f.matchId === m.cloudId);
+}
+function orphanMatchRowHtml(m){
+  const goalsFor = totalGoalsForMatch(m);
+  const oppGoals = totalOppGoalsForMatch(m);
+  const letter = goalsFor > oppGoals ? 'W' : (goalsFor < oppGoals ? 'L' : 'D');
+  const word = letter === 'W' ? 'Won' : (letter === 'L' ? 'Lost' : 'Drew');
+  return `
+    <div class="fixture-row" data-type="match" data-id="${m.id}">
+      <div>
+        <div class="opp"><span class="result-dot result-dot-${letter}"></span>${m.venue==='H' ? 'vs' : '@'} ${escapeHtml(m.opponent||'')}</div>
+        <div class="meta">${formatFixtureDate(m.date)} &middot; ${word} ${goalsFor}-${oppGoals}</div>
+      </div>
+    </div>`;
+}
+function openPastRow(row){
+  if(row.dataset.type === 'match'){ switchTab('matches'); openMatch(row.dataset.id); }
+  else openFixture(row.dataset.id);
 }
 
 function renderFixtures(){
@@ -2748,21 +2782,27 @@ function renderFixtures(){
   const upcoming = fixtures
     .filter(f => f.date >= todayStr && (f.status === 'placeholder' || f.status === 'confirmed'))
     .sort((a,b)=> a.date.localeCompare(b.date));
-  const past = fixtures
-    .filter(f => f.date < todayStr || f.status === 'played' || f.status === 'cancelled')
-    .sort((a,b)=> b.date.localeCompare(a.date));
+  const pastFixtures = fixtures
+    .filter(f => f.date < todayStr || f.status === 'played' || f.status === 'cancelled');
+  const orphanMatches = (season.matches||[])
+    .filter(m => m.status === 'completed' && !matchHasLinkedFixture(m, season));
+  const past = [
+    ...pastFixtures.map(f=>({ date: f.date, html: fixtureRowHtml(f, season) })),
+    ...orphanMatches.map(m=>({ date: m.date, html: orphanMatchRowHtml(m) }))
+  ].sort((a,b)=> b.date.localeCompare(a.date));
 
   upcomingWrap.innerHTML = upcoming.length
     ? upcoming.map(f=>fixtureRowHtml(f, season)).join('')
     : '<div class="empty-state">No upcoming fixtures &mdash; tap + Add to create some.</div>';
   pastWrap.innerHTML = past.length
-    ? past.map(f=>fixtureRowHtml(f, season)).join('')
+    ? past.map(item=>item.html).join('')
     : '<div class="empty-state">No past fixtures yet.</div>';
 
-  [upcomingWrap, pastWrap].forEach(wrap=>{
-    wrap.querySelectorAll('.fixture-row').forEach(row=>{
-      row.addEventListener('click', ()=> openFixture(row.dataset.id));
-    });
+  upcomingWrap.querySelectorAll('.fixture-row').forEach(row=>{
+    row.addEventListener('click', ()=> openPastRow(row));
+  });
+  pastWrap.querySelectorAll('.fixture-row').forEach(row=>{
+    row.addEventListener('click', ()=> openPastRow(row));
   });
 }
 
@@ -2832,6 +2872,7 @@ document.getElementById('fixture-edit-save-btn').addEventListener('click', ()=>{
   saveState();
   closeFixtureEditOverlay();
   renderFixtures();
+  renderMatchesSummary();
 });
 document.getElementById('fixture-edit-cancel-fixture-btn').addEventListener('click', ()=>{
   document.getElementById('fixture-cancel-reason-panel').style.display = 'block';
@@ -2848,6 +2889,7 @@ document.getElementById('fixture-cancel-confirm-btn').addEventListener('click', 
   saveState();
   closeFixtureEditOverlay();
   renderFixtures();
+  renderMatchesSummary();
 });
 document.getElementById('fixture-setup-match-btn').addEventListener('click', ()=>{
   const f = getFixture(currentFixtureId);
@@ -2912,7 +2954,7 @@ function showFixturesAddSingle(){
   document.getElementById('fixtures-single-kickoff').value = '';
   document.getElementById('fixtures-single-opponent').value = '';
   document.getElementById('fixtures-single-venue').value = '';
-  document.getElementById('fixtures-single-home-away').value = 'home';
+  document.getElementById('fixtures-single-home-away').value = '';
 }
 document.getElementById('fixtures-add-block-choice-btn').addEventListener('click', showFixturesAddBlock);
 document.getElementById('fixtures-add-single-choice-btn').addEventListener('click', showFixturesAddSingle);
@@ -2969,6 +3011,7 @@ document.getElementById('fixtures-block-submit-btn').addEventListener('click', (
     saveState();
     closeFixturesAddOverlay();
     renderFixtures();
+    renderMatchesSummary();
   });
 });
 document.getElementById('fixtures-single-submit-btn').addEventListener('click', ()=>{
@@ -2978,20 +3021,47 @@ document.getElementById('fixtures-single-submit-btn').addEventListener('click', 
   const opponent = document.getElementById('fixtures-single-opponent').value.trim();
   const venue = document.getElementById('fixtures-single-venue').value.trim();
   const kickoffTime = document.getElementById('fixtures-single-kickoff').value || null;
-  const homeAway = document.getElementById('fixtures-single-home-away').value;
-  if(!date || !opponent || !venue || !homeAway){ showAlert('Fill in date, opponent, venue and home/away.'); return; }
+  const homeAway = document.getElementById('fixtures-single-home-away').value || null;
+  if(!date){ showAlert('Pick a date.'); return; }
   season.fixtures.push({
-    id: uid(), cloudId: null, date, kickoffTime, opponent, venue, homeAway,
-    status: 'confirmed', matchId: null, cancellationReason: null,
+    id: uid(), cloudId: null, date, kickoffTime,
+    opponent: opponent || null, venue: venue || null, homeAway,
+    status: opponent ? 'confirmed' : 'placeholder', matchId: null, cancellationReason: null,
     createdAt: Date.now(), updatedAt: Date.now()
   });
   saveState();
   closeFixturesAddOverlay();
   renderFixtures();
+  renderMatchesSummary();
 });
 
 /* ---------- MATCHES: LIST ---------- */
+function renderMatchesSummary(){
+  const season = getActiveSeason();
+  const nextWrap = document.getElementById('matches-next-fixture');
+  const lastWrap = document.getElementById('matches-last-results');
+  if(!season){ nextWrap.innerHTML = ''; lastWrap.innerHTML = ''; return; }
+  const todayStr = new Date().toISOString().slice(0,10);
+  const nextFixture = (season.fixtures||[])
+    .filter(f => f.date >= todayStr && (f.status === 'placeholder' || f.status === 'confirmed'))
+    .sort((a,b)=> a.date.localeCompare(b.date))[0];
+  nextWrap.innerHTML = nextFixture
+    ? fixtureRowHtml(nextFixture, season)
+    : '<div class="empty-state">No upcoming fixture &mdash; add one from the Fixtures tab.</div>';
+  nextWrap.querySelectorAll('.fixture-row').forEach(row=> row.addEventListener('click', ()=> openPastRow(row)));
+
+  const lastResults = [...(season.matches||[])]
+    .filter(m => m.status === 'completed')
+    .sort((a,b)=> b.date.localeCompare(a.date))
+    .slice(0,3);
+  lastWrap.innerHTML = lastResults.length
+    ? lastResults.map(m=>orphanMatchRowHtml(m)).join('')
+    : '<div class="empty-state">No results yet.</div>';
+  lastWrap.querySelectorAll('.fixture-row').forEach(row=> row.addEventListener('click', ()=> openMatch(row.dataset.id)));
+}
+
 function renderMatchesList(){
+  renderMatchesSummary();
   renderAvailableChecks();
   const season = getActiveSeason();
   const wrap = document.getElementById('matches-list');
