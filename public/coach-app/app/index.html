@@ -1030,12 +1030,32 @@
             <div class="hint" id="detail-subtitle" style="margin-top:0;"></div>
           </div>
           <div class="row">
-            <button class="action ghost" id="edit-availability-btn">Edit Availability</button>
+            <button class="action ghost" id="edit-match-btn">Edit Match</button>
             <button class="action ghost" id="generate-team-btn">Generate Team</button>
             <button class="action danger" id="delete-match-btn">Delete Match</button>
           </div>
         </div>
         <div id="detail-address-notes" class="hint" style="margin-top:6px;"></div>
+        <div id="edit-match-panel" style="display:none;margin-top:14px;border-top:1px solid var(--border);padding-top:14px;">
+          <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Match details</div>
+          <div class="row" style="margin-bottom:10px;">
+            <input type="date" id="edit-match-date" style="flex:1 1 130px;">
+            <select id="edit-match-venue" style="flex:1 1 130px;">
+              <option value="H">Home</option>
+              <option value="A">Away</option>
+            </select>
+          </div>
+          <div class="row" style="margin-bottom:10px;">
+            <input type="text" id="edit-match-opponent" placeholder="Opponent name" style="flex:1;">
+          </div>
+          <div class="row" style="margin-bottom:10px;">
+            <input type="text" id="edit-match-address" placeholder="Address / venue location (optional)" style="flex:1;">
+          </div>
+          <div class="row">
+            <button class="action" id="edit-match-save-btn">Save</button>
+            <button class="action ghost" id="edit-match-cancel-btn" type="button">Cancel</button>
+          </div>
+        </div>
         <div id="edit-availability-panel" style="display:none;margin-top:14px;border-top:1px solid var(--border);padding-top:14px;">
           <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Who's available this match?</div>
           <div id="detail-available-checks" class="checkbox-list"></div>
@@ -1045,7 +1065,6 @@
           </div>
           <div class="row" style="margin-top:10px;">
             <button class="action" id="save-availability-btn">Save Availability</button>
-            <button class="action ghost" id="cancel-availability-btn" type="button">Cancel</button>
           </div>
         </div>
       </div>
@@ -2234,6 +2253,7 @@ let selectedSlot = null;
 let currentMatchId = null;
 let currentQuarterView = 0;
 let viewMode = 'table';
+let availabilityChecksRenderedForMatchId = null; // avoids wiping unsaved tick changes on every re-render
 
 /* ---------- HUNGARIAN ALGORITHM (min-cost assignment) ----------
    generateLineup used to brute-force every permutation of on-field players
@@ -3150,6 +3170,7 @@ function openMatch(id){
 }
 function closeMatchDetail(){
   currentMatchId = null;
+  availabilityChecksRenderedForMatchId = null;
   document.getElementById('matches-list-view').style.display = 'block';
   document.getElementById('match-detail-view').style.display = 'none';
   renderMatchesList();
@@ -3167,8 +3188,19 @@ function renderMatchDetail(){
   if(m.address) addressNotesBits.push('📍 ' + m.address);
   if(m.notes) addressNotesBits.push(m.notes);
   document.getElementById('detail-address-notes').textContent = addressNotesBits.join(' · ');
-  const editAvailBtn = document.getElementById('edit-availability-btn');
-  editAvailBtn.style.display = m.status === 'scheduled' ? 'inline-flex' : 'none';
+  const availPanel = document.getElementById('edit-availability-panel');
+  if(m.status === 'scheduled'){
+    availPanel.style.display = 'block';
+    // Only (re)build the checklist when switching to a different match — this
+    // function runs on every quarter-tab/view-toggle re-render too, and rebuilding
+    // it every time would silently discard ticks the coach hasn't saved yet.
+    if(availabilityChecksRenderedForMatchId !== currentMatchId){
+      renderDetailAvailableChecks(m, getActiveSeason());
+      availabilityChecksRenderedForMatchId = currentMatchId;
+    }
+  } else {
+    availPanel.style.display = 'none';
+  }
   document.getElementById('score-them-label').textContent = m.opponent;
   document.getElementById('score-us').textContent = totalGoalsForMatch(m);
   document.getElementById('score-them').textContent = totalOppGoalsForMatch(m);
@@ -3233,15 +3265,42 @@ function renderDetailAvailableChecks(m, season){
   wrap.innerHTML = rows.length ? rows.join('') : '<div class="empty-state">Add players to the squad first (Settings), or add a guest below.</div>';
 }
 
-document.getElementById('edit-availability-btn').addEventListener('click', ()=>{
+document.getElementById('edit-match-btn').addEventListener('click', ()=>{
+  const m = getMatch(currentMatchId);
+  if(!m) return;
+  document.getElementById('edit-match-date').value = m.date || '';
+  document.getElementById('edit-match-opponent').value = m.opponent || '';
+  document.getElementById('edit-match-venue').value = m.venue === 'A' ? 'A' : 'H';
+  document.getElementById('edit-match-address').value = m.address || '';
+  document.getElementById('edit-match-panel').style.display = 'block';
+});
+document.getElementById('edit-match-cancel-btn').addEventListener('click', ()=>{
+  document.getElementById('edit-match-panel').style.display = 'none';
+});
+document.getElementById('edit-match-save-btn').addEventListener('click', ()=>{
   const m = getMatch(currentMatchId);
   const season = getActiveSeason();
   if(!m || !season) return;
-  renderDetailAvailableChecks(m, season);
-  document.getElementById('edit-availability-panel').style.display = 'block';
-});
-document.getElementById('cancel-availability-btn').addEventListener('click', ()=>{
-  document.getElementById('edit-availability-panel').style.display = 'none';
+  const opponent = document.getElementById('edit-match-opponent').value.trim();
+  if(!opponent){ showAlert('Add an opponent name.'); return; }
+  m.opponent = opponent;
+  m.venue = document.getElementById('edit-match-venue').value;
+  m.address = document.getElementById('edit-match-address').value.trim();
+  m.date = document.getElementById('edit-match-date').value || m.date;
+  // Keep a fixture that's linked to this match showing the same details, same
+  // as editing the fixture side already pushes changes onto the match.
+  const linkedFixture = (season.fixtures||[]).find(fx => fx.matchId === m.id || fx.matchId === m.cloudId);
+  if(linkedFixture){
+    linkedFixture.opponent = m.opponent;
+    linkedFixture.homeAway = m.venue === 'A' ? 'away' : 'home';
+    linkedFixture.venue = m.address || linkedFixture.venue;
+    linkedFixture.date = m.date || linkedFixture.date;
+  }
+  saveState();
+  document.getElementById('edit-match-panel').style.display = 'none';
+  renderMatchDetail();
+  renderFixtures();
+  renderMatchesSummary();
 });
 document.getElementById('detail-add-guest-btn').addEventListener('click', ()=>{
   const season = getActiveSeason();
