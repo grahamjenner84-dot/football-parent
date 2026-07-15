@@ -43,15 +43,17 @@ export type Database = {
         Row: {
           address: string | null
           available_ids: Json
+          cancellation_reason: string | null
           created_at: string
           current_quarter: number
           format: string
           formation: string | null
           id: string
+          kickoff_time: string | null
           match_date: string
           notes: string | null
           num_periods: number
-          opponent: string
+          opponent: string | null
           opponent_goals: Json
           quarter_assists: Json
           quarter_goals: Json
@@ -65,15 +67,17 @@ export type Database = {
         Insert: {
           address?: string | null
           available_ids?: Json
+          cancellation_reason?: string | null
           created_at?: string
           current_quarter?: number
           format: string
           formation?: string | null
           id?: string
+          kickoff_time?: string | null
           match_date: string
           notes?: string | null
           num_periods?: number
-          opponent: string
+          opponent?: string | null
           opponent_goals?: Json
           quarter_assists?: Json
           quarter_goals?: Json
@@ -87,15 +91,17 @@ export type Database = {
         Update: {
           address?: string | null
           available_ids?: Json
+          cancellation_reason?: string | null
           created_at?: string
           current_quarter?: number
           format?: string
           formation?: string | null
           id?: string
+          kickoff_time?: string | null
           match_date?: string
           notes?: string | null
           num_periods?: number
-          opponent?: string
+          opponent?: string | null
           opponent_goals?: Json
           quarter_assists?: Json
           quarter_goals?: Json

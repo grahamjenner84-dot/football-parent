@@ -973,10 +973,6 @@
         <div id="matches-next-fixture"></div>
       </div>
       <div class="card">
-        <h2>Last 3 Results</h2>
-        <div id="matches-last-results"></div>
-      </div>
-      <div class="card">
         <h2>Add a Match</h2>
         <div class="row">
           <input type="date" id="match-date">
@@ -1015,14 +1011,10 @@
           <button class="action" id="add-match-btn">Add Match</button>
         </div>
       </div>
-      <div class="card">
-        <h2>Fixtures</h2>
-        <div id="matches-list"></div>
-      </div>
     </div>
 
     <div id="match-detail-view" style="display:none;">
-      <button class="back-link" id="back-to-matches">&larr; Back to fixtures</button>
+      <button class="back-link" id="back-to-matches">&larr; Back to Matches</button>
       <div class="card">
         <div class="row" style="justify-content:space-between;align-items:center;">
           <div>
@@ -1036,24 +1028,39 @@
           </div>
         </div>
         <div id="detail-address-notes" class="hint" style="margin-top:6px;"></div>
+        <div id="cancelled-match-banner" class="hint" style="display:none;margin-top:6px;color:var(--danger);"></div>
+        <div id="create-rearranged-wrap" style="display:none;margin-top:10px;">
+          <button class="action" id="create-rearranged-btn" style="width:100%;">+ Create rearranged fixture</button>
+        </div>
         <div id="edit-match-panel" style="display:none;margin-top:14px;border-top:1px solid var(--border);padding-top:14px;">
           <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Match details</div>
           <div class="row" style="margin-bottom:10px;">
             <input type="date" id="edit-match-date" style="flex:1 1 130px;">
+            <input type="time" id="edit-match-kickoff" style="flex:1 1 130px;">
+          </div>
+          <div class="row" style="margin-bottom:10px;">
+            <input type="text" id="edit-match-opponent" placeholder="Opponent name" style="flex:1;">
             <select id="edit-match-venue" style="flex:1 1 130px;">
               <option value="H">Home</option>
               <option value="A">Away</option>
             </select>
           </div>
           <div class="row" style="margin-bottom:10px;">
-            <input type="text" id="edit-match-opponent" placeholder="Opponent name" style="flex:1;">
-          </div>
-          <div class="row" style="margin-bottom:10px;">
             <input type="text" id="edit-match-address" placeholder="Address / venue location (optional)" style="flex:1;">
+          </div>
+          <div class="row" style="justify-content:space-between;margin-bottom:10px;">
+            <button class="action ghost" id="edit-match-cancel-fixture-btn" type="button">Postpone / Cancel</button>
+          </div>
+          <div id="edit-match-cancel-reason-panel" style="display:none;margin-bottom:10px;border-top:1px solid var(--border);padding-top:10px;">
+            <input type="text" id="edit-match-cancel-reason-input" placeholder="Reason (optional, e.g. Weather)" style="width:100%;margin-bottom:10px;">
+            <div class="row">
+              <button class="action danger" id="edit-match-cancel-confirm-btn" type="button">Confirm Cancellation</button>
+              <button class="action ghost" id="edit-match-cancel-abort-btn" type="button">Never mind</button>
+            </div>
           </div>
           <div class="row">
             <button class="action" id="edit-match-save-btn">Save</button>
-            <button class="action ghost" id="edit-match-cancel-btn" type="button">Cancel</button>
+            <button class="action ghost" id="edit-match-cancel-btn" type="button">Close</button>
           </div>
         </div>
         <div id="edit-availability-panel" style="display:none;margin-top:14px;border-top:1px solid var(--border);padding-top:14px;">
@@ -1275,60 +1282,6 @@
         <button class="action ghost" id="fixtures-single-back-btn" type="button">Back</button>
         <button class="action" id="fixtures-single-submit-btn">Add fixture</button>
       </div>
-    </div>
-  </div>
-</div>
-
-<!-- FIXTURES: EDIT / VIEW OVERLAY (placeholder confirm, confirmed edit, cancelled view) -->
-<div id="fixture-edit-overlay" class="modal-overlay" style="display:none;">
-  <div class="modal-box">
-    <div class="row" style="justify-content:space-between;align-items:center;margin-bottom:6px;">
-      <h2 style="margin:0;" id="fixture-edit-title">Fixture</h2>
-      <button class="back-link" id="fixture-edit-close-btn" style="padding:0;">Close</button>
-    </div>
-    <div class="hint" id="fixture-edit-date-context" style="margin-top:0;margin-bottom:12px;"></div>
-
-    <div id="fixture-edit-fields">
-      <div class="row" style="margin-bottom:10px;">
-        <input type="text" id="fixture-edit-opponent" placeholder="Opponent" style="flex:1;">
-      </div>
-      <div class="row" style="margin-bottom:10px;">
-        <input type="text" id="fixture-edit-venue" placeholder="Venue" style="flex:1;">
-        <select id="fixture-edit-home-away">
-          <option value="">Home / Away</option>
-          <option value="home">Home</option>
-          <option value="away">Away</option>
-        </select>
-      </div>
-      <div class="row" style="margin-bottom:10px;">
-        <input type="time" id="fixture-edit-kickoff" style="flex:1;">
-      </div>
-    </div>
-
-    <div id="fixture-setup-match-wrap" style="display:none;margin-bottom:4px;">
-      <button class="action ghost" id="fixture-setup-match-btn" style="width:100%;" type="button">Set up match day &rarr;</button>
-      <div class="hint" style="margin-top:6px;">Adds availability, notes and format &mdash; opens the usual Add a Match form, pre-filled from this fixture.</div>
-    </div>
-
-    <div id="fixture-cancelled-view" style="display:none;">
-      <div class="hint" id="fixture-cancelled-reason" style="margin-top:0;"></div>
-    </div>
-
-    <div id="fixture-cancel-reason-panel" style="display:none;margin-top:6px;border-top:1px solid var(--border);padding-top:12px;">
-      <input type="text" id="fixture-cancel-reason-input" placeholder="Reason (optional, e.g. Weather)" style="width:100%;margin-bottom:10px;">
-      <div class="row">
-        <button class="action danger" id="fixture-cancel-confirm-btn" type="button">Confirm Cancellation</button>
-        <button class="action ghost" id="fixture-cancel-abort-btn" type="button">Never mind</button>
-      </div>
-    </div>
-
-    <div class="modal-actions" id="fixture-edit-actions" style="margin-top:14px;justify-content:space-between;">
-      <button class="action ghost" id="fixture-edit-cancel-fixture-btn" type="button">Postpone / Cancel</button>
-      <button class="action" id="fixture-edit-save-btn">Save</button>
-    </div>
-
-    <div id="fixture-cancelled-actions" style="display:none;margin-top:14px;">
-      <button class="action" id="fixture-add-rearranged-btn" style="width:100%;">+ Add rearranged fixture</button>
     </div>
   </div>
 </div>
@@ -1676,10 +1629,12 @@ async function syncSeasonToCloud(season){
     const payload = {
       season_id: season.cloudId,
       match_date: m.date,
-      opponent: m.opponent,
+      opponent: m.opponent || null,
       venue: m.venue || null,
       address: m.address || null,
       notes: m.notes || null,
+      kickoff_time: m.kickoffTime || null,
+      cancellation_reason: m.cancellationReason || null,
       quarter_minutes: m.quarterMinutes,
       num_periods: m.numPeriods,
       format: m.format,
@@ -1699,35 +1654,7 @@ async function syncSeasonToCloud(season){
     } else {
       const { data, error } = await supabaseClient.from('matches').insert(payload).select().single();
       if(error) throw error;
-      const oldId = m.id;
       m.cloudId = data.id;
-      // A fixture created via "Set up match day" links to this match's local id before
-      // it has a cloudId — follow that link to the real cloud id now, since fixtures.match_id
-      // is a foreign key into the match's actual database row, not its local id.
-      (season.fixtures||[]).forEach(f=>{ if(f.matchId === oldId) f.matchId = data.id; });
-      persistLocal();
-    }
-  }
-
-  for(const f of (season.fixtures||[])){
-    const payload = {
-      season_id: season.cloudId,
-      date: f.date,
-      kickoff_time: f.kickoffTime || null,
-      opponent: f.opponent || null,
-      venue: f.venue || null,
-      home_away: f.homeAway || null,
-      status: f.status || 'placeholder',
-      match_id: f.matchId || null,
-      cancellation_reason: f.cancellationReason || null
-    };
-    if(f.cloudId){
-      const { error } = await supabaseClient.from('fixtures').update(payload).eq('id', f.cloudId);
-      if(error) throw error;
-    } else {
-      const { data, error } = await supabaseClient.from('fixtures').insert(payload).select().single();
-      if(error) throw error;
-      f.cloudId = data.id;
       persistLocal();
     }
   }
@@ -1753,22 +1680,16 @@ async function tryRestoreFromCloud(silent){
       .from('matches').select('*').in('season_id', seasonIds);
     if(matchesErr) throw matchesErr;
 
-    const { data: fixtureRows, error: fixturesErr } = await supabaseClient
-      .from('fixtures').select('*').in('season_id', seasonIds);
-    if(fixturesErr) throw fixturesErr;
-
-    // Seasons, matches and fixtures keep this device's existing local id when we
-    // recognise their cloudId, so an in-progress session (e.g. a currently-open
-    // match) doesn't go stale mid-restore. Players don't need this: their id is
-    // now always set to their Supabase row id directly (see syncSeasonToCloud),
-    // so it's already identical and stable on every device.
+    // Seasons and matches keep this device's existing local id when we recognise
+    // their cloudId, so an in-progress session (e.g. a currently-open match)
+    // doesn't go stale mid-restore. Players don't need this: their id is now
+    // always set to their Supabase row id directly (see syncSeasonToCloud), so
+    // it's already identical and stable on every device.
     const existingSeasonIdByCloud = {};
     const existingMatchIdByCloud = {};
-    const existingFixtureIdByCloud = {};
     (state.seasons||[]).forEach(s=>{
       if(s.cloudId) existingSeasonIdByCloud[s.cloudId] = s.id;
       (s.matches||[]).forEach(m=>{ if(m.cloudId) existingMatchIdByCloud[m.cloudId] = m.id; });
-      (s.fixtures||[]).forEach(f=>{ if(f.cloudId) existingFixtureIdByCloud[f.cloudId] = f.id; });
     });
 
     const seasons = seasonRows.map(sr=>{
@@ -1780,6 +1701,7 @@ async function tryRestoreFromCloud(silent){
         id: existingMatchIdByCloud[m.id] || uid(), cloudId: m.id,
         date: m.match_date, opponent: m.opponent, venue: m.venue,
         address: m.address || '', notes: m.notes || '',
+        kickoffTime: m.kickoff_time, cancellationReason: m.cancellation_reason,
         quarterMinutes: m.quarter_minutes, numPeriods: m.num_periods,
         format: m.format, formation: m.formation, rotationMode: m.rotation_mode,
         availableIds: m.available_ids || [], quarters: m.quarters,
@@ -1787,17 +1709,11 @@ async function tryRestoreFromCloud(silent){
         opponentGoals: m.opponent_goals || [], status: m.status || 'scheduled',
         currentQuarter: m.current_quarter || 0
       }));
-      const fixtures = fixtureRows.filter(f=>f.season_id === sr.id).map(f=>({
-        id: existingFixtureIdByCloud[f.id] || uid(), cloudId: f.id,
-        date: f.date, kickoffTime: f.kickoff_time, opponent: f.opponent, venue: f.venue,
-        homeAway: f.home_away, status: f.status || 'placeholder', matchId: f.match_id,
-        cancellationReason: f.cancellation_reason
-      }));
       return blankSeason({
         id: existingSeasonIdByCloud[sr.id] || uid(), cloudId: sr.id,
         teamName: sr.team_name, ageGroup: sr.age_group,
         format: sr.format, formation: sr.formation, rotationMode: sr.rotation_mode,
-        players, matches, fixtures
+        players, matches
       });
     });
 
@@ -2154,7 +2070,6 @@ function blankSeason(overrides){
     rotationMode: 'rotate', // 'rotate' = spread positions fairly (younger ages); 'fixed' = respect each player's designated position
     players: [],
     matches: [],
-    fixtures: [],
     createdAt: Date.now()
   }, overrides || {});
 }
@@ -2180,8 +2095,58 @@ function migrateMatch(m){
   }
   if(!Array.isArray(m.opponentGoals)) m.opponentGoals = Array.from({length:m.numPeriods}, ()=>0);
   while(m.opponentGoals.length < m.numPeriods) m.opponentGoals.push(0);
+  if(m.kickoffTime === undefined) m.kickoffTime = null;
+  if(m.cancellationReason === undefined) m.cancellationReason = null;
+  if(!m.status) m.status = 'scheduled';
   delete m.goals;
   return m;
+}
+
+/* Fixtures used to be a separate array/table linked to matches by id. Any
+   device that still has unsynced local fixtures from before the merge gets
+   them folded into season.matches here (a linked fixture's kickoff time/
+   cancellation reason merges onto its match; an unlinked one becomes its own
+   placeholder/scheduled/cancelled match), matching the same mapping used for
+   the one-time database migration. */
+function foldLegacyFixturesIntoMatches(season){
+  if(!Array.isArray(season.fixtures) || season.fixtures.length === 0){
+    delete season.fixtures;
+    return;
+  }
+  const statusMap = { placeholder:'placeholder', confirmed:'scheduled', cancelled:'cancelled', played:'completed' };
+  season.fixtures.forEach(f=>{
+    if(f.matchId){
+      const linked = season.matches.find(m=>m.id===f.matchId || m.cloudId===f.matchId);
+      if(linked){
+        if(!linked.kickoffTime) linked.kickoffTime = f.kickoffTime || null;
+        if(!linked.cancellationReason) linked.cancellationReason = f.cancellationReason || null;
+      }
+      return;
+    }
+    season.matches.push({
+      id: uid(), cloudId: null,
+      date: f.date,
+      opponent: f.opponent || null,
+      venue: f.homeAway === 'away' ? 'A' : (f.homeAway === 'home' ? 'H' : null),
+      address: f.venue || null,
+      notes: '',
+      kickoffTime: f.kickoffTime || null,
+      cancellationReason: f.cancellationReason || null,
+      quarterMinutes: 10,
+      numPeriods: 4,
+      format: season.format,
+      formation: season.formation,
+      rotationMode: season.rotationMode,
+      availableIds: [],
+      quarters: null,
+      quarterGoals: [{},{},{},{}],
+      quarterAssists: [{},{},{},{}],
+      opponentGoals: [0,0,0,0],
+      status: statusMap[f.status] || 'placeholder',
+      currentQuarter: 0
+    });
+  });
+  delete season.fixtures;
 }
 
 function loadState(){
@@ -2199,7 +2164,7 @@ function loadState(){
           if(!p.positionGroup) p.positionGroup = 'ANY';
         });
         (season.matches||[]).forEach(migrateMatch);
-        if(!Array.isArray(season.fixtures)) season.fixtures = [];
+        foldLegacyFixturesIntoMatches(season);
       });
       return s;
     }catch(e){ /* fall through to legacy/blank */ }
@@ -2596,7 +2561,6 @@ document.getElementById('new-season-btn').addEventListener('click', ()=>{
 
 /* ---------- MATCHES: ADD FORM ---------- */
 let pendingMatchGuests = []; // guests added via the Add Match form before it's submitted
-let pendingFixtureLinkId = null; // set when "Set up match day" opens this form from a fixture, so the new match links back to it
 
 function guestCheckboxHtml(p){
   return `<label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)} <span style="color:var(--ink-soft);font-weight:400;">(guest)</span></label>`;
@@ -2661,7 +2625,8 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
     id: uid(),
     cloudId: null,
     date: date || new Date().toISOString().slice(0,10),
-    opponent, venue, address, notes, quarterMinutes: qMins, numPeriods,
+    opponent, venue, address, notes, kickoffTime: null, cancellationReason: null,
+    quarterMinutes: qMins, numPeriods,
     format,
     formation,
     rotationMode: season.rotationMode,
@@ -2674,21 +2639,6 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
     currentQuarter: 0
   };
   season.matches.push(match);
-  if(pendingFixtureLinkId){
-    const linkedFixture = (season.fixtures||[]).find(fx=>fx.id === pendingFixtureLinkId);
-    if(linkedFixture){
-      linkedFixture.matchId = match.id;
-      // Whatever was actually typed/changed in this form (not just what the
-      // fixture was pre-filled with) becomes the fixture's record too, so the
-      // Fixtures tab and Matches summary don't keep showing stale details.
-      linkedFixture.opponent = match.opponent || linkedFixture.opponent;
-      linkedFixture.homeAway = match.venue === 'A' ? 'away' : 'home';
-      linkedFixture.venue = match.address || linkedFixture.venue;
-      linkedFixture.date = match.date || linkedFixture.date;
-      linkedFixture.status = 'confirmed';
-    }
-    pendingFixtureLinkId = null;
-  }
   saveState();
 
   document.getElementById('match-opponent').value = '';
@@ -2706,12 +2656,6 @@ function totalOppGoalsForMatch(m){
 }
 
 /* ---------- FIXTURES ---------- */
-let currentFixtureId = null;
-
-function getFixture(id){
-  const season = getActiveSeason();
-  return season ? (season.fixtures||[]).find(f=>f.id===id) : null;
-}
 function formatFixtureDate(dateStr){
   if(!dateStr) return '';
   const d = new Date(dateStr + 'T00:00:00');
@@ -2725,81 +2669,58 @@ function daysUntil(dateStr){
   const d = new Date(dateStr + 'T00:00:00');
   return Math.round((d - today) / 86400000);
 }
-function fixtureResultInfo(f, season){
-  if(!f.matchId) return null;
-  const m = (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
-  if(!m) return null;
-  const goalsFor = totalGoalsForMatch(m);
-  const oppGoals = totalOppGoalsForMatch(m);
-  const letter = goalsFor > oppGoals ? 'W' : (goalsFor < oppGoals ? 'L' : 'D');
-  const word = letter === 'W' ? 'Won' : (letter === 'L' ? 'Lost' : 'Drew');
-  return { match: m, letter, label: `${word} ${goalsFor}-${oppGoals}` };
-}
-
-function fixtureRowHtml(f, season){
-  const dateLabel = formatFixtureDate(f.date);
-  if(f.status === 'cancelled'){
+function fixtureRowHtml(m){
+  const dateLabel = formatFixtureDate(m.date);
+  if(m.status === 'cancelled'){
     return `
-    <div class="fixture-row fixture-cancelled" data-type="fixture" data-id="${f.id}">
+    <div class="fixture-row fixture-cancelled" data-id="${m.id}">
       <div>
-        <div class="opp">${f.opponent ? escapeHtml(f.opponent) : dateLabel}</div>
-        <div class="meta">🌧 ${f.cancellationReason ? escapeHtml(f.cancellationReason) : 'Postponed'}</div>
+        <div class="opp">${m.opponent ? escapeHtml(m.opponent) : dateLabel}</div>
+        <div class="meta">🌧 ${m.cancellationReason ? escapeHtml(m.cancellationReason) : 'Postponed'}</div>
       </div>
     </div>`;
   }
-  if(f.status === 'played'){
-    const info = fixtureResultInfo(f, season);
-    const dotClass = info ? 'result-dot-' + info.letter : '';
+  if(m.status === 'completed'){
+    const goalsFor = totalGoalsForMatch(m);
+    const oppGoals = totalOppGoalsForMatch(m);
+    const letter = goalsFor > oppGoals ? 'W' : (goalsFor < oppGoals ? 'L' : 'D');
+    const word = letter === 'W' ? 'Won' : (letter === 'L' ? 'Lost' : 'Drew');
     return `
-    <div class="fixture-row" data-type="fixture" data-id="${f.id}">
+    <div class="fixture-row" data-id="${m.id}">
       <div>
-        <div class="opp"><span class="result-dot ${dotClass}"></span>vs ${escapeHtml(f.opponent||'')}</div>
-        <div class="meta">${dateLabel}${info ? ' &middot; ' + info.label : ''}</div>
+        <div class="opp"><span class="result-dot result-dot-${letter}"></span>${m.venue==='H' ? 'vs' : '@'} ${escapeHtml(m.opponent||'')}</div>
+        <div class="meta">${dateLabel} &middot; ${word} ${goalsFor}-${oppGoals}</div>
       </div>
     </div>`;
   }
-  if(f.status === 'confirmed'){
+  if(m.status === 'live'){
     return `
-    <div class="fixture-row" data-type="fixture" data-id="${f.id}">
+    <div class="fixture-row" data-id="${m.id}">
       <div>
-        <div class="opp">vs ${escapeHtml(f.opponent||'')}${f.homeAway ? ' (' + (f.homeAway==='home'?'H':'A') + ')' : ''}</div>
-        <div class="meta">${dateLabel}${f.kickoffTime ? ' &middot; ' + f.kickoffTime : ''}${f.venue ? ' &middot; ' + escapeHtml(f.venue) : ''}</div>
+        <div class="opp">${m.venue==='H' ? 'vs' : '@'} ${escapeHtml(m.opponent||'')}</div>
+        <div class="meta">${dateLabel}${m.kickoffTime ? ' &middot; ' + m.kickoffTime : ''}</div>
+      </div>
+      <span class="status-pill status-live">&#9679; Live</span>
+    </div>`;
+  }
+  if(m.status === 'scheduled'){
+    return `
+    <div class="fixture-row" data-id="${m.id}">
+      <div>
+        <div class="opp">vs ${escapeHtml(m.opponent||'')}${m.venue ? ' (' + m.venue + ')' : ''}</div>
+        <div class="meta">${dateLabel}${m.kickoffTime ? ' &middot; ' + m.kickoffTime : ''}${m.address ? ' &middot; ' + escapeHtml(m.address) : ''}</div>
       </div>
     </div>`;
   }
   // placeholder
-  const soon = daysUntil(f.date) <= 6;
+  const soon = daysUntil(m.date) <= 6;
   return `
-    <div class="fixture-row ${soon ? 'fixture-warning' : ''}" data-type="fixture" data-id="${f.id}">
+    <div class="fixture-row ${soon ? 'fixture-warning' : ''}" data-id="${m.id}">
       <div>
         <div class="opp">${soon ? '<span class="fixture-alert-icon">⚠️</span>' : ''}${dateLabel}</div>
         <div class="meta">Opponent TBC</div>
       </div>
     </div>`;
-}
-
-/* A completed match that was logged directly (Add a Match) rather than via a
-   fixture still needs to show up as history — render it the same way a played
-   fixture would, but sourced straight from the match. */
-function matchHasLinkedFixture(m, season){
-  return (season.fixtures||[]).some(f => f.matchId === m.id || f.matchId === m.cloudId);
-}
-function orphanMatchRowHtml(m){
-  const goalsFor = totalGoalsForMatch(m);
-  const oppGoals = totalOppGoalsForMatch(m);
-  const letter = goalsFor > oppGoals ? 'W' : (goalsFor < oppGoals ? 'L' : 'D');
-  const word = letter === 'W' ? 'Won' : (letter === 'L' ? 'Lost' : 'Drew');
-  return `
-    <div class="fixture-row" data-type="match" data-id="${m.id}">
-      <div>
-        <div class="opp"><span class="result-dot result-dot-${letter}"></span>${m.venue==='H' ? 'vs' : '@'} ${escapeHtml(m.opponent||'')}</div>
-        <div class="meta">${formatFixtureDate(m.date)} &middot; ${word} ${goalsFor}-${oppGoals}</div>
-      </div>
-    </div>`;
-}
-function openPastRow(row){
-  if(row.dataset.type === 'match'){ switchTab('matches'); openMatch(row.dataset.id); }
-  else openFixture(row.dataset.id);
 }
 
 function renderFixtures(){
@@ -2808,159 +2729,27 @@ function renderFixtures(){
   const pastWrap = document.getElementById('fixtures-past-list');
   if(!season){ upcomingWrap.innerHTML=''; pastWrap.innerHTML=''; return; }
   const todayStr = new Date().toISOString().slice(0,10);
-  const fixtures = season.fixtures || [];
-  const upcoming = fixtures
-    .filter(f => f.date >= todayStr && (f.status === 'placeholder' || f.status === 'confirmed'))
+  const matches = season.matches || [];
+  const upcoming = matches
+    .filter(m => m.date >= todayStr && (m.status === 'placeholder' || m.status === 'scheduled' || m.status === 'live'))
     .sort((a,b)=> a.date.localeCompare(b.date));
-  const pastFixtures = fixtures
-    .filter(f => f.date < todayStr || f.status === 'played' || f.status === 'cancelled');
-  const orphanMatches = (season.matches||[])
-    .filter(m => m.status === 'completed' && !matchHasLinkedFixture(m, season));
-  const past = [
-    ...pastFixtures.map(f=>({ date: f.date, html: fixtureRowHtml(f, season) })),
-    ...orphanMatches.map(m=>({ date: m.date, html: orphanMatchRowHtml(m) }))
-  ].sort((a,b)=> b.date.localeCompare(a.date));
+  const past = matches
+    .filter(m => m.date < todayStr || m.status === 'completed' || m.status === 'cancelled')
+    .sort((a,b)=> b.date.localeCompare(a.date));
 
   upcomingWrap.innerHTML = upcoming.length
-    ? upcoming.map(f=>fixtureRowHtml(f, season)).join('')
+    ? upcoming.map(m=>fixtureRowHtml(m)).join('')
     : '<div class="empty-state">No upcoming fixtures &mdash; tap + Add to create some.</div>';
   pastWrap.innerHTML = past.length
-    ? past.map(item=>item.html).join('')
+    ? past.map(m=>fixtureRowHtml(m)).join('')
     : '<div class="empty-state">No past fixtures yet.</div>';
 
-  upcomingWrap.querySelectorAll('.fixture-row').forEach(row=>{
-    row.addEventListener('click', ()=> openPastRow(row));
+  [upcomingWrap, pastWrap].forEach(wrap=>{
+    wrap.querySelectorAll('.fixture-row').forEach(row=>{
+      row.addEventListener('click', ()=> openMatch(row.dataset.id));
+    });
   });
-  pastWrap.querySelectorAll('.fixture-row').forEach(row=>{
-    row.addEventListener('click', ()=> openPastRow(row));
-  });
 }
-
-function openFixture(id){
-  const f = getFixture(id);
-  if(!f) return;
-  currentFixtureId = id;
-  if(f.status === 'cancelled') openFixtureCancelledView(f);
-  else openFixtureEditSheet(f);
-}
-
-function openFixtureEditSheet(f){
-  const isPlaceholder = f.status === 'placeholder';
-  const hasMatch = !!f.matchId;
-  document.getElementById('fixture-edit-title').textContent = isPlaceholder ? 'Confirm Fixture' : 'Edit Fixture';
-  document.getElementById('fixture-edit-date-context').textContent =
-    formatFixtureDate(f.date) + (f.kickoffTime ? ` — kickoff ${f.kickoffTime}` : ' — kickoff TBC');
-  document.getElementById('fixture-edit-opponent').value = f.opponent || '';
-  document.getElementById('fixture-edit-venue').value = f.venue || '';
-  document.getElementById('fixture-edit-home-away').value = f.homeAway || '';
-  document.getElementById('fixture-edit-kickoff').value = f.kickoffTime || '';
-  document.getElementById('fixture-edit-save-btn').textContent = isPlaceholder ? 'Save as confirmed' : 'Save';
-  document.getElementById('fixture-edit-fields').style.display = 'block';
-  document.getElementById('fixture-cancelled-view').style.display = 'none';
-  document.getElementById('fixture-edit-actions').style.display = 'flex';
-  document.getElementById('fixture-cancelled-actions').style.display = 'none';
-  document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
-  document.getElementById('fixture-setup-match-btn').textContent = hasMatch ? 'Go to match day →' : 'Set up match day →';
-  document.getElementById('fixture-setup-match-wrap').style.display =
-    (f.status === 'confirmed' || f.status === 'played') ? 'block' : 'none';
-  document.getElementById('fixture-edit-overlay').style.display = 'flex';
-}
-function openFixtureCancelledView(f){
-  document.getElementById('fixture-edit-title').textContent = 'Postponed Fixture';
-  document.getElementById('fixture-edit-date-context').textContent = formatFixtureDate(f.date);
-  document.getElementById('fixture-cancelled-reason').textContent = f.cancellationReason ? f.cancellationReason : 'Postponed';
-  document.getElementById('fixture-edit-fields').style.display = 'none';
-  document.getElementById('fixture-cancelled-view').style.display = 'block';
-  document.getElementById('fixture-edit-actions').style.display = 'none';
-  document.getElementById('fixture-cancelled-actions').style.display = 'block';
-  document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
-  document.getElementById('fixture-setup-match-wrap').style.display = 'none';
-  document.getElementById('fixture-edit-overlay').style.display = 'flex';
-}
-function closeFixtureEditOverlay(){
-  document.getElementById('fixture-edit-overlay').style.display = 'none';
-  currentFixtureId = null;
-}
-document.getElementById('fixture-edit-close-btn').addEventListener('click', closeFixtureEditOverlay);
-document.getElementById('fixture-edit-overlay').addEventListener('click', (e)=>{
-  if(e.target.id === 'fixture-edit-overlay') closeFixtureEditOverlay();
-});
-
-document.getElementById('fixture-edit-save-btn').addEventListener('click', ()=>{
-  const f = getFixture(currentFixtureId);
-  if(!f) return;
-  f.opponent = document.getElementById('fixture-edit-opponent').value.trim() || null;
-  f.venue = document.getElementById('fixture-edit-venue').value.trim() || null;
-  f.homeAway = document.getElementById('fixture-edit-home-away').value || null;
-  f.kickoffTime = document.getElementById('fixture-edit-kickoff').value || null;
-  if(f.status === 'placeholder') f.status = 'confirmed';
-  f.updatedAt = Date.now();
-  // Keep a linked match's own opponent/venue/date in step, so a later correction
-  // here doesn't leave the match showing an old name while the fixture shows the new one.
-  if(f.matchId){
-    const season = getActiveSeason();
-    const m = season && (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
-    if(m){
-      if(f.opponent) m.opponent = f.opponent;
-      m.venue = f.homeAway === 'away' ? 'A' : 'H';
-      if(f.venue) m.address = f.venue;
-      if(f.date) m.date = f.date;
-    }
-  }
-  saveState();
-  closeFixtureEditOverlay();
-  renderFixtures();
-  renderMatchesSummary();
-});
-document.getElementById('fixture-edit-cancel-fixture-btn').addEventListener('click', ()=>{
-  document.getElementById('fixture-cancel-reason-panel').style.display = 'block';
-});
-document.getElementById('fixture-cancel-abort-btn').addEventListener('click', ()=>{
-  document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
-});
-document.getElementById('fixture-cancel-confirm-btn').addEventListener('click', ()=>{
-  const f = getFixture(currentFixtureId);
-  if(!f) return;
-  f.status = 'cancelled';
-  f.cancellationReason = document.getElementById('fixture-cancel-reason-input').value.trim() || null;
-  f.updatedAt = Date.now();
-  saveState();
-  closeFixtureEditOverlay();
-  renderFixtures();
-  renderMatchesSummary();
-});
-document.getElementById('fixture-setup-match-btn').addEventListener('click', ()=>{
-  const f = getFixture(currentFixtureId);
-  if(!f) return;
-  if(f.matchId){
-    // Match day already exists for this fixture — go straight to it rather than
-    // creating a second match.
-    const season = getActiveSeason();
-    const m = season && (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
-    closeFixtureEditOverlay();
-    if(m){ switchTab('matches'); openMatch(m.id); }
-    return;
-  }
-  closeFixtureEditOverlay();
-  switchTab('matches');
-  document.getElementById('matches-list-view').style.display = 'block';
-  document.getElementById('match-detail-view').style.display = 'none';
-  document.getElementById('match-date').value = f.date || '';
-  document.getElementById('match-opponent').value = f.opponent || '';
-  document.getElementById('match-venue').value = f.homeAway === 'away' ? 'A' : 'H';
-  document.getElementById('match-address').value = f.venue || '';
-  pendingFixtureLinkId = f.id;
-  const card = document.getElementById('match-opponent');
-  card.scrollIntoView({ behavior:'smooth', block:'center' });
-  card.focus();
-});
-document.getElementById('fixture-add-rearranged-btn').addEventListener('click', ()=>{
-  const f = getFixture(currentFixtureId);
-  closeFixtureEditOverlay();
-  openFixturesAddOverlay();
-  showFixturesAddSingle();
-  if(f && f.opponent) document.getElementById('fixtures-single-opponent').value = f.opponent;
-});
 
 /* ---------- FIXTURES: ADD FLOW ---------- */
 function openFixturesAddOverlay(){
@@ -2983,9 +2772,9 @@ function showFixturesAddBlock(){
   document.getElementById('fixtures-add-choice').style.display = 'none';
   document.getElementById('fixtures-add-single').style.display = 'none';
   document.getElementById('fixtures-add-block').style.display = 'block';
-  const fixtures = season ? (season.fixtures||[]) : [];
-  if(fixtures.length){
-    const latest = [...fixtures].sort((a,b)=> b.date.localeCompare(a.date))[0];
+  const matches = season ? (season.matches||[]) : [];
+  if(matches.length){
+    const latest = [...matches].sort((a,b)=> b.date.localeCompare(a.date))[0];
     const wd = new Date(latest.date + 'T00:00:00').getDay();
     document.getElementById('fixtures-block-weekday').value = String(wd);
   }
@@ -3049,10 +2838,13 @@ document.getElementById('fixtures-block-submit-btn').addEventListener('click', (
   if(dates.length === 0){ showAlert('Pick a from and until date that includes at least one of the chosen weekday.'); return; }
   showConfirm(`Create ${dates.length} placeholder fixture${dates.length===1?'':'s'}?`, ()=>{
     dates.forEach(date=>{
-      season.fixtures.push({
-        id: uid(), cloudId: null, date, kickoffTime: null, opponent: null, venue: null,
-        homeAway: null, status: 'placeholder', matchId: null, cancellationReason: null,
-        createdAt: Date.now(), updatedAt: Date.now()
+      season.matches.push({
+        id: uid(), cloudId: null, date, opponent: null, venue: null, address: null, notes: '',
+        kickoffTime: null, cancellationReason: null,
+        quarterMinutes: 10, numPeriods: 4, format: season.format, formation: season.formation,
+        rotationMode: season.rotationMode, availableIds: [], quarters: null,
+        quarterGoals: [{},{},{},{}], quarterAssists: [{},{},{},{}], opponentGoals: [0,0,0,0],
+        status: 'placeholder', currentQuarter: 0
       });
     });
     saveState();
@@ -3070,11 +2862,15 @@ document.getElementById('fixtures-single-submit-btn').addEventListener('click', 
   const kickoffTime = document.getElementById('fixtures-single-kickoff').value || null;
   const homeAway = document.getElementById('fixtures-single-home-away').value || null;
   if(!date){ showAlert('Pick a date.'); return; }
-  season.fixtures.push({
-    id: uid(), cloudId: null, date, kickoffTime,
-    opponent: opponent || null, venue: venue || null, homeAway,
-    status: opponent ? 'confirmed' : 'placeholder', matchId: null, cancellationReason: null,
-    createdAt: Date.now(), updatedAt: Date.now()
+  season.matches.push({
+    id: uid(), cloudId: null, date,
+    opponent: opponent || null,
+    venue: homeAway === 'away' ? 'A' : (homeAway === 'home' ? 'H' : null),
+    address: venue || null, notes: '', kickoffTime, cancellationReason: null,
+    quarterMinutes: 10, numPeriods: 4, format: season.format, formation: season.formation,
+    rotationMode: season.rotationMode, availableIds: [], quarters: null,
+    quarterGoals: [{},{},{},{}], quarterAssists: [{},{},{},{}], opponentGoals: [0,0,0,0],
+    status: opponent ? 'scheduled' : 'placeholder', currentQuarter: 0
   });
   saveState();
   closeFixturesAddOverlay();
@@ -3086,60 +2882,20 @@ document.getElementById('fixtures-single-submit-btn').addEventListener('click', 
 function renderMatchesSummary(){
   const season = getActiveSeason();
   const nextWrap = document.getElementById('matches-next-fixture');
-  const lastWrap = document.getElementById('matches-last-results');
-  if(!season){ nextWrap.innerHTML = ''; lastWrap.innerHTML = ''; return; }
+  if(!season){ nextWrap.innerHTML = ''; return; }
   const todayStr = new Date().toISOString().slice(0,10);
-  const nextFixture = (season.fixtures||[])
-    .filter(f => f.date >= todayStr && (f.status === 'placeholder' || f.status === 'confirmed'))
+  const nextFixture = (season.matches||[])
+    .filter(m => m.date >= todayStr && (m.status === 'placeholder' || m.status === 'scheduled'))
     .sort((a,b)=> a.date.localeCompare(b.date))[0];
   nextWrap.innerHTML = nextFixture
-    ? fixtureRowHtml(nextFixture, season)
+    ? fixtureRowHtml(nextFixture)
     : '<div class="empty-state">No upcoming fixture &mdash; add one from the Fixtures tab.</div>';
-  nextWrap.querySelectorAll('.fixture-row').forEach(row=> row.addEventListener('click', ()=> openPastRow(row)));
-
-  const lastResults = [...(season.matches||[])]
-    .filter(m => m.status === 'completed')
-    .sort((a,b)=> b.date.localeCompare(a.date))
-    .slice(0,3);
-  lastWrap.innerHTML = lastResults.length
-    ? lastResults.map(m=>orphanMatchRowHtml(m)).join('')
-    : '<div class="empty-state">No results yet.</div>';
-  lastWrap.querySelectorAll('.fixture-row').forEach(row=> row.addEventListener('click', ()=> openMatch(row.dataset.id)));
+  nextWrap.querySelectorAll('.fixture-row').forEach(row=> row.addEventListener('click', ()=> openMatch(row.dataset.id)));
 }
 
 function renderMatchesList(){
   renderMatchesSummary();
   renderAvailableChecks();
-  const season = getActiveSeason();
-  const wrap = document.getElementById('matches-list');
-  if(!season){ wrap.innerHTML = ''; return; }
-  const sorted = [...season.matches].sort((a,b)=> b.date.localeCompare(a.date));
-  if(sorted.length === 0){
-    wrap.innerHTML = '<div class="empty-state">No matches yet — add one above.</div>';
-    return;
-  }
-  wrap.innerHTML = sorted.map(m=>{
-    const goalsFor = totalGoalsForMatch(m);
-    const oppGoals = totalOppGoalsForMatch(m);
-    const statusClass = 'status-' + m.status;
-    const statusLabel = m.status === 'live' ? '● Live' : m.status;
-    let resultBadge = '';
-    if(m.status === 'completed'){
-      const r = goalsFor > oppGoals ? 'W' : (goalsFor < oppGoals ? 'L' : 'D');
-      resultBadge = `<span class="result-badge result-${r}">${r}</span>`;
-    }
-    return `
-    <div class="match-row" data-id="${m.id}">
-      <div>
-        <div class="opp">${m.venue === 'H' ? 'vs' : '@'} ${escapeHtml(m.opponent)}</div>
-        <div class="meta">${m.date} · ${m.availableIds.length} players available${m.status==='completed' ? ' · ' + goalsFor + '-' + oppGoals : ''}</div>
-      </div>
-      <span>${resultBadge}<span class="status-pill ${statusClass}">${statusLabel}</span></span>
-    </div>`;
-  }).join('');
-  wrap.querySelectorAll('.match-row').forEach(row=>{
-    row.addEventListener('click', ()=> openMatch(row.dataset.id));
-  });
 }
 
 document.getElementById('delete-match-btn').addEventListener('click', ()=>{
@@ -3164,6 +2920,7 @@ function getMatch(id){
 function openMatch(id){
   currentMatchId = id;
   currentQuarterView = getMatch(id).currentQuarter || 0;
+  switchTab('matches'); // a match can now be opened from the Fixtures tab too — make sure that panel is the one showing
   document.getElementById('matches-list-view').style.display = 'none';
   document.getElementById('match-detail-view').style.display = 'block';
   renderMatchDetail();
@@ -3181,13 +2938,38 @@ function renderMatchDetail(){
   const m = getMatch(currentMatchId);
   if(!m) return closeMatchDetail();
 
-  document.getElementById('detail-title').textContent = `${m.venue==='H' ? 'vs' : '@'} ${m.opponent}`;
+  const dateLabel = formatFixtureDate(m.date);
+  document.getElementById('detail-title').textContent = m.opponent
+    ? `${m.venue==='H' ? 'vs' : '@'} ${m.opponent}`
+    : `Fixture — ${dateLabel}`;
   const periodWord = m.numPeriods === 2 ? 'halves' : 'quarters';
-  document.getElementById('detail-subtitle').textContent = `${m.date} · ${Math.round(m.quarterMinutes*m.numPeriods)} min match (${m.quarterMinutes} min ${periodWord}) · ${m.availableIds.length} available`;
+  document.getElementById('detail-subtitle').textContent = m.opponent
+    ? `${m.date}${m.kickoffTime ? ' · ' + m.kickoffTime : ''} · ${Math.round(m.quarterMinutes*m.numPeriods)} min match (${m.quarterMinutes} min ${periodWord}) · ${m.availableIds.length} available`
+    : `${m.date}${m.kickoffTime ? ' · ' + m.kickoffTime : ''} · Opponent TBC`;
   const addressNotesBits = [];
   if(m.address) addressNotesBits.push('📍 ' + m.address);
   if(m.notes) addressNotesBits.push(m.notes);
   document.getElementById('detail-address-notes').textContent = addressNotesBits.join(' · ');
+
+  // Opponent/venue/kickoff/address stay editable through placeholder and scheduled —
+  // once the match has started, finished, or been cancelled, those facts are locked
+  // (same rule the lineup generator already uses for "Lineup Locked"). This never
+  // affects goal/assist editing, which has its own independent gating below.
+  const editable = m.status === 'placeholder' || m.status === 'scheduled';
+  document.getElementById('edit-match-btn').style.display = editable ? 'inline-flex' : 'none';
+  if(!editable) document.getElementById('edit-match-panel').style.display = 'none';
+
+  const cancelledBanner = document.getElementById('cancelled-match-banner');
+  const rearrangedWrap = document.getElementById('create-rearranged-wrap');
+  if(m.status === 'cancelled'){
+    cancelledBanner.style.display = 'block';
+    cancelledBanner.textContent = '🌧 ' + (m.cancellationReason ? m.cancellationReason : 'Postponed');
+    rearrangedWrap.style.display = 'block';
+  } else {
+    cancelledBanner.style.display = 'none';
+    rearrangedWrap.style.display = 'none';
+  }
+
   const availPanel = document.getElementById('edit-availability-panel');
   if(m.status === 'scheduled'){
     availPanel.style.display = 'block';
@@ -3201,7 +2983,7 @@ function renderMatchDetail(){
   } else {
     availPanel.style.display = 'none';
   }
-  document.getElementById('score-them-label').textContent = m.opponent;
+  document.getElementById('score-them-label').textContent = m.opponent || 'Them';
   document.getElementById('score-us').textContent = totalGoalsForMatch(m);
   document.getElementById('score-them').textContent = totalOppGoalsForMatch(m);
 
@@ -3269,9 +3051,11 @@ document.getElementById('edit-match-btn').addEventListener('click', ()=>{
   const m = getMatch(currentMatchId);
   if(!m) return;
   document.getElementById('edit-match-date').value = m.date || '';
+  document.getElementById('edit-match-kickoff').value = m.kickoffTime || '';
   document.getElementById('edit-match-opponent').value = m.opponent || '';
   document.getElementById('edit-match-venue').value = m.venue === 'A' ? 'A' : 'H';
   document.getElementById('edit-match-address').value = m.address || '';
+  document.getElementById('edit-match-cancel-reason-panel').style.display = 'none';
   document.getElementById('edit-match-panel').style.display = 'block';
 });
 document.getElementById('edit-match-cancel-btn').addEventListener('click', ()=>{
@@ -3279,28 +3063,44 @@ document.getElementById('edit-match-cancel-btn').addEventListener('click', ()=>{
 });
 document.getElementById('edit-match-save-btn').addEventListener('click', ()=>{
   const m = getMatch(currentMatchId);
-  const season = getActiveSeason();
-  if(!m || !season) return;
+  if(!m) return;
   const opponent = document.getElementById('edit-match-opponent').value.trim();
-  if(!opponent){ showAlert('Add an opponent name.'); return; }
-  m.opponent = opponent;
+  m.opponent = opponent || null;
   m.venue = document.getElementById('edit-match-venue').value;
-  m.address = document.getElementById('edit-match-address').value.trim();
+  m.address = document.getElementById('edit-match-address').value.trim() || null;
   m.date = document.getElementById('edit-match-date').value || m.date;
-  // Keep a fixture that's linked to this match showing the same details, same
-  // as editing the fixture side already pushes changes onto the match.
-  const linkedFixture = (season.fixtures||[]).find(fx => fx.matchId === m.id || fx.matchId === m.cloudId);
-  if(linkedFixture){
-    linkedFixture.opponent = m.opponent;
-    linkedFixture.homeAway = m.venue === 'A' ? 'away' : 'home';
-    linkedFixture.venue = m.address || linkedFixture.venue;
-    linkedFixture.date = m.date || linkedFixture.date;
-  }
+  m.kickoffTime = document.getElementById('edit-match-kickoff').value || null;
+  if(m.status === 'placeholder' && opponent) m.status = 'scheduled';
   saveState();
   document.getElementById('edit-match-panel').style.display = 'none';
   renderMatchDetail();
   renderFixtures();
   renderMatchesSummary();
+});
+document.getElementById('edit-match-cancel-fixture-btn').addEventListener('click', ()=>{
+  document.getElementById('edit-match-cancel-reason-panel').style.display = 'block';
+});
+document.getElementById('edit-match-cancel-abort-btn').addEventListener('click', ()=>{
+  document.getElementById('edit-match-cancel-reason-panel').style.display = 'none';
+});
+document.getElementById('edit-match-cancel-confirm-btn').addEventListener('click', ()=>{
+  const m = getMatch(currentMatchId);
+  if(!m) return;
+  m.status = 'cancelled';
+  m.cancellationReason = document.getElementById('edit-match-cancel-reason-input').value.trim() || null;
+  saveState();
+  document.getElementById('edit-match-panel').style.display = 'none';
+  renderMatchDetail();
+  renderFixtures();
+  renderMatchesSummary();
+});
+document.getElementById('create-rearranged-btn').addEventListener('click', ()=>{
+  const m = getMatch(currentMatchId);
+  closeMatchDetail();
+  switchTab('fixtures');
+  openFixturesAddOverlay();
+  showFixturesAddSingle();
+  if(m && m.opponent) document.getElementById('fixtures-single-opponent').value = m.opponent;
 });
 document.getElementById('detail-add-guest-btn').addEventListener('click', ()=>{
   const season = getActiveSeason();
@@ -3797,7 +3597,11 @@ function ensureLiveControls(){
   }
   const m = getMatch(currentMatchId);
   if(!m){ ctrl.innerHTML=''; return; }
-  if(m.status === 'scheduled'){
+  if(m.status === 'placeholder'){
+    ctrl.innerHTML = `<div class="hint" style="margin:0;">Fill in the match details above to set this fixture up.</div>`;
+  } else if(m.status === 'cancelled'){
+    ctrl.innerHTML = '';
+  } else if(m.status === 'scheduled'){
     if(m.availableIds.length === 0){
       ctrl.innerHTML = `<div class="hint" style="color:var(--danger);margin:0;">Mark at least one player available (Edit Availability above) before starting.</div>`;
     } else if(!lineupHasRealAssignment(m)){
@@ -3829,9 +3633,6 @@ function ensureLiveControls(){
     document.getElementById('end-match-btn').addEventListener('click', ()=>{
       showConfirm('End this match? It will be marked completed.', ()=>{
         m.status = 'completed';
-        const season = getActiveSeason();
-        const linkedFixture = season && (season.fixtures||[]).find(fx => fx.matchId === m.id || fx.matchId === m.cloudId);
-        if(linkedFixture) linkedFixture.status = 'played';
         saveState(); renderMatchDetail();
       });
     });
