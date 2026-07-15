@@ -1276,6 +1276,11 @@
       </div>
     </div>
 
+    <div id="fixture-setup-match-wrap" style="display:none;margin-bottom:4px;">
+      <button class="action ghost" id="fixture-setup-match-btn" style="width:100%;" type="button">Set up match day &rarr;</button>
+      <div class="hint" style="margin-top:6px;">Adds availability, notes and format &mdash; opens the usual Add a Match form, pre-filled from this fixture.</div>
+    </div>
+
     <div id="fixture-cancelled-view" style="display:none;">
       <div class="hint" id="fixture-cancelled-reason" style="margin-top:0;"></div>
     </div>
@@ -1665,7 +1670,12 @@ async function syncSeasonToCloud(season){
     } else {
       const { data, error } = await supabaseClient.from('matches').insert(payload).select().single();
       if(error) throw error;
+      const oldId = m.id;
       m.cloudId = data.id;
+      // A fixture created via "Set up match day" links to this match's local id before
+      // it has a cloudId — follow that link to the real cloud id now, since fixtures.match_id
+      // is a foreign key into the match's actual database row, not its local id.
+      (season.fixtures||[]).forEach(f=>{ if(f.matchId === oldId) f.matchId = data.id; });
       persistLocal();
     }
   }
@@ -2556,6 +2566,7 @@ document.getElementById('new-season-btn').addEventListener('click', ()=>{
 
 /* ---------- MATCHES: ADD FORM ---------- */
 let pendingMatchGuests = []; // guests added via the Add Match form before it's submitted
+let pendingFixtureLinkId = null; // set when "Set up match day" opens this form from a fixture, so the new match links back to it
 
 function guestCheckboxHtml(p){
   return `<label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)} <span style="color:var(--ink-soft);font-weight:400;">(guest)</span></label>`;
@@ -2633,6 +2644,11 @@ document.getElementById('add-match-btn').addEventListener('click', ()=>{
     currentQuarter: 0
   };
   season.matches.push(match);
+  if(pendingFixtureLinkId){
+    const linkedFixture = (season.fixtures||[]).find(fx=>fx.id === pendingFixtureLinkId);
+    if(linkedFixture) linkedFixture.matchId = match.id;
+    pendingFixtureLinkId = null;
+  }
   saveState();
 
   document.getElementById('match-opponent').value = '';
@@ -2754,11 +2770,11 @@ function openFixture(id){
   const season = getActiveSeason();
   const f = getFixture(id);
   if(!f || !season) return;
-  if(f.status === 'played'){
-    const info = fixtureResultInfo(f, season);
-    if(info){ openMatch(info.match.id); switchTab('matches'); }
-    else showAlert('This fixture is marked played but no match result is linked yet.');
-    return;
+  if(f.matchId){
+    // Once match day is set up (or played), the match itself is the richer view
+    // (availability, notes, format, live scoring) — go straight there.
+    const m = (season.matches||[]).find(mm => mm.cloudId === f.matchId || mm.id === f.matchId);
+    if(m){ switchTab('matches'); openMatch(m.id); return; }
   }
   currentFixtureId = id;
   if(f.status === 'cancelled') openFixtureCancelledView(f);
@@ -2780,6 +2796,7 @@ function openFixtureEditSheet(f){
   document.getElementById('fixture-edit-actions').style.display = 'flex';
   document.getElementById('fixture-cancelled-actions').style.display = 'none';
   document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
+  document.getElementById('fixture-setup-match-wrap').style.display = (f.status === 'confirmed') ? 'block' : 'none';
   document.getElementById('fixture-edit-overlay').style.display = 'flex';
 }
 function openFixtureCancelledView(f){
@@ -2791,6 +2808,7 @@ function openFixtureCancelledView(f){
   document.getElementById('fixture-edit-actions').style.display = 'none';
   document.getElementById('fixture-cancelled-actions').style.display = 'block';
   document.getElementById('fixture-cancel-reason-panel').style.display = 'none';
+  document.getElementById('fixture-setup-match-wrap').style.display = 'none';
   document.getElementById('fixture-edit-overlay').style.display = 'flex';
 }
 function closeFixtureEditOverlay(){
@@ -2830,6 +2848,22 @@ document.getElementById('fixture-cancel-confirm-btn').addEventListener('click', 
   saveState();
   closeFixtureEditOverlay();
   renderFixtures();
+});
+document.getElementById('fixture-setup-match-btn').addEventListener('click', ()=>{
+  const f = getFixture(currentFixtureId);
+  if(!f) return;
+  closeFixtureEditOverlay();
+  switchTab('matches');
+  document.getElementById('matches-list-view').style.display = 'block';
+  document.getElementById('match-detail-view').style.display = 'none';
+  document.getElementById('match-date').value = f.date || '';
+  document.getElementById('match-opponent').value = f.opponent || '';
+  document.getElementById('match-venue').value = f.homeAway === 'away' ? 'A' : 'H';
+  document.getElementById('match-address').value = f.venue || '';
+  pendingFixtureLinkId = f.id;
+  const card = document.getElementById('match-opponent');
+  card.scrollIntoView({ behavior:'smooth', block:'center' });
+  card.focus();
 });
 document.getElementById('fixture-add-rearranged-btn').addEventListener('click', ()=>{
   const f = getFixture(currentFixtureId);
@@ -3639,6 +3673,9 @@ function ensureLiveControls(){
     document.getElementById('end-match-btn').addEventListener('click', ()=>{
       showConfirm('End this match? It will be marked completed.', ()=>{
         m.status = 'completed';
+        const season = getActiveSeason();
+        const linkedFixture = season && (season.fixtures||[]).find(fx => fx.matchId === m.id || fx.matchId === m.cloudId);
+        if(linkedFixture) linkedFixture.status = 'played';
         saveState(); renderMatchDetail();
       });
     });
