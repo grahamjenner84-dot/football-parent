@@ -1,6 +1,6 @@
 # Internal Link Audit
 
-_Generated 2026-07-16T21:07:56.842Z_
+_Generated 2026-07-16T21:21:51.166Z_
 
 _No Search Console data found (gsc-pages.csv not present) - priorities are based on link structure only._
 
@@ -12,16 +12,16 @@ _Threshold: fewer than 3 total inbound links. Contextual (in-body) links are wor
 Total inbound: 2 | Contextual: 1 | Related/footer: 1
 
 - Add a link from **How To Improve Football Decision Making In Young Players** (`/football-development/improve-football-decision-making`) — relevance 228.2
-  - Near this existing sentence (paragraph 18): "England Football's FutureFit changes continue this philosophy by extending age-appropriate small-sided football for longer, giving young players more opportunities to stay involved, solve problems and make decisions."
+  - Near this existing sentence (paragraph 16): "The research on youth football development is fairly consistent on this: small-sided games (5v5, 6v6, 7v7) produce more decision-making opportunities per player than larger formats."
   - Paste this sentence in: "This is covered in more detail in our guide on [futureFit Explained: Football DNA on 3v3, More Touches and Youth Development](/parent-guides/futurefit-football-dna-interview-part-1)."
 - Add a link from **What Is Football IQ? Football Intelligence Explained** (`/football-development/what-is-football-iq`) — relevance 197.3
-  - Near this existing sentence (paragraph 1): "More useful approaches include: - Asking open questions after a match, such as "what did you see there?" rather than giving the answer - Setting up small, low-stakes games in the garden or park, such as a quick 1v1 to two small cone goals, where a child has to make quick decisions without an adult narrating them - Praising a good decision specifically, even when it did not lead to a good outcome, which also helps [build confidence](/football-development/build-confidence-young-footballers) in a child's own judgement Children whose parents shout instructions constantly during matches often become dependent on that voice, looking to the sideline for the next instruction rather than reading the game themselves."
+  - Near this existing sentence (paragraph 20): "You often hear ex pro's talk about having pictures, this is what they mean."
   - Paste this sentence in: "This is covered in more detail in our guide on [futureFit Explained: Football DNA on 3v3, More Touches and Youth Development](/parent-guides/futurefit-football-dna-interview-part-1)."
 - Add a link from **Biggest Football Parent Mistakes?** (`/parent-guides/biggest-football-parent-mistakes`) — relevance 197.2
   - Near this existing sentence (paragraph 24): "But you might also find they stop enjoying football and you have actually harmed their development more long term."
   - Paste this sentence in: "This is covered in more detail in our guide on [futureFit Explained: Football DNA on 3v3, More Touches and Youth Development](/parent-guides/futurefit-football-dna-interview-part-1)."
 - Add a link from **Football Academy Trials UK: How They Really Work** (`/academy-trials/football-academy-trials-uk`) — relevance 194.3
-  - Near this existing sentence (paragraph 1): "Most players enter academy pathways through one or more of the following routes: - Grassroots football - Development centres - Scouting - School football - County football - Referrals from trusted coaches While some clubs do run open trials, many academy players are identified through long-term observation rather than a single assessment event."
+  - Near this existing sentence (paragraph 6): "A football academy trial is an opportunity for a young player to be assessed by coaches or scouts at a professional club's youth setup."
   - Paste this sentence in: "This is covered in more detail in our guide on [futureFit Explained: Football DNA on 3v3, More Touches and Youth Development](/parent-guides/futurefit-football-dna-interview-part-1)."
 
 
@@ -37,46 +37,103 @@ _Grouped by how likely the duplicate actually hurts the page - see each group's 
 
 ### 3a. High priority — 3 or more links to the same target (19)
 
-_Unconditionally worth trimming back to one or two mentions. Where this page also has a missing pillar link (section 7), the freed-up slot is suggested for that first — one edit resolves both findings._
+_Unconditionally worth trimming back to one or two mentions. Where this page also has a missing pillar link (section 7), the freed-up slot is suggested for that first — one edit resolves both findings. The suggested insertion spot avoids paragraphs that already have a link, so this never trades one duplicate for a different kind of overlinking._
 
 - **What Is the Junior Premier League (JPL)?** (`/parent-guides/what-is-the-junior-premier-league`) links to **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`) 3 times
-  - Trim one mention and link that spot to **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`, relevance 165.5) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`, relevance 165.5)
+    - Paragraph 1: "Before you start comparing fees or booking trials, it helps to understand what the JPL actually is and what it is not."
+    - Paste this sentence in: "This is covered in more detail in our guide on [west Ham United Development Centre: A Parent's Guide](/academy-pathway/west-ham-player-pathway-guide)."
 - **What Is the Junior Premier League (JPL)?** (`/parent-guides/what-is-the-junior-premier-league`) links to **JPL vs Grassroots Football: Which Is Right for Your Child?** (`/parent-guides/jpl-vs-grassroots-football`) 3 times
-  - Trim one mention and link that spot to **What Is Grassroots Football?** (`/parent-guides/what-is-grassroots-football`, relevance 162.4) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **What Is Grassroots Football?** (`/parent-guides/what-is-grassroots-football`, relevance 162.4)
+    - Paragraph 2: "This guide covers the basics: how the JPL is structured, who runs it, what the football looks like, and what the commitment involves."
+    - Paste this sentence in: "This is covered in more detail in our guide on [what Is Grassroots Football](/parent-guides/what-is-grassroots-football)."
 - **JPL vs Grassroots Football: Which Is Right for Your Child?** (`/parent-guides/jpl-vs-grassroots-football`) links to **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`) 3 times
-  - Trim one mention and link that spot to **Football Academy Trials UK: How They Really Work** (`/academy-trials/football-academy-trials-uk`, relevance 218.8) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **Football Academy Trials UK: How They Really Work** (`/academy-trials/football-academy-trials-uk`, relevance 218.8)
+    - Paragraph 23: "However, children moving from grassroots football may still experience less playing time than they were used to if they previously played every minute of every game."
+    - Paste this sentence in: "This is covered in more detail in our guide on [football Academy Trials UK: How They Really Work](/academy-trials/football-academy-trials-uk)."
 - **Are Football Development Centres Worth It?** (`/parent-guides/are-football-development-centres-worth-it`) links to **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`) 3 times
-  - Trim one mention and link that spot to pillar **What Is Grassroots Football?** (`/parent-guides/what-is-grassroots-football`) instead — also fixes a missing pillar link from section 7
+  - Remove: the Related Articles entry for this link
+  - Add instead: pillar **What Is Grassroots Football?** (`/parent-guides/what-is-grassroots-football`) — this page doesn't link to it yet, so this also fixes a section 7 gap
+    - Paragraph 7: "Some parents are primarily focused on the pathway, they want to know whether the programme is a genuine route towards academy football."
+    - Paste this sentence in: "This is covered in more detail in our guide on [what Is Grassroots Football](/parent-guides/what-is-grassroots-football)."
 - **Late Developers In Girls Football** (`/girls-football/late-developers-in-girls-football`) links to **What Age Do Girls Football Academies Recruit?** (`/girls-football/what-age-do-girls-football-academies-recruit`) 3 times
-  - Trim one mention and link that spot to pillar **How Girls Football Academies Work In The UK** (`/girls-football/how-girls-football-academies-work`) instead — also fixes a missing pillar link from section 7
+  - Remove: the Related Articles entry for this link
+  - Add instead: pillar **How Girls Football Academies Work In The UK** (`/girls-football/how-girls-football-academies-work`) — this page doesn't link to it yet, so this also fixes a section 7 gap
+    - Paragraph 50: "Development in girls' football doesn't end at 13."
+    - Paste this sentence in: "This is covered in more detail in our guide on [how Girls Football Academies Work In The UK](/girls-football/how-girls-football-academies-work)."
 - **How Much Training Is Too Much For Young Footballers?** (`/football-development/how-much-training-is-too-much`) links to **How To Build Confidence In Young Footballers** (`/football-development/build-confidence-young-footballers`) 3 times
-  - Trim one mention and link that spot to **How To Improve Football Decision Making In Young Players** (`/football-development/improve-football-decision-making`, relevance 209) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **How To Improve Football Decision Making In Young Players** (`/football-development/improve-football-decision-making`, relevance 209)
+    - Paragraph 51: "Unstructured play - kickabouts in the park, street football, games in the garden - also develops creativity and decision making in ways that organised coaching often doesn't."
+    - Paste this sentence in: "This is covered in more detail in our guide on [how To Improve Football Decision Making In Young Players](/football-development/improve-football-decision-making)."
 - **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`) links to **How To Build Confidence In Young Footballers** (`/football-development/build-confidence-young-footballers`) 3 times
-  - Trim one mention and link that spot to **When Your Child Is Struggling in Football | Football Parent** (`/parent-guides/support-child-after-bad-match`, relevance 219.6) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **When Your Child Is Struggling in Football | Football Parent** (`/parent-guides/support-child-after-bad-match`, relevance 219.6)
+    - Paragraph 10: "> **Football Parent note:** Watch a training session before committing your child to a club."
+    - Paste this sentence in: "This is covered in more detail in our guide on [when Your Child Is Struggling in Football](/parent-guides/support-child-after-bad-match)."
 - **How to Get Scouted for Football** (`/academy-trials/how-to-get-scouted-for-football`) links to **What Do Academy Coaches Look For?** (`/academy-trials/what-do-academy-coaches-look-for`) 3 times
-  - Trim one mention and link that spot to **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`, relevance 226.5) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`, relevance 226.5)
+    - Paragraph 1: "Most parents want to understand how scouting works and what they can do to help their child get noticed."
+    - Paste this sentence in: "This is covered in more detail in our guide on [does the Junior Premier League Lead to Academy Football](/parent-guides/jpl-and-academy-football)."
 - **Football Academy Trials UK: How They Really Work** (`/academy-trials/football-academy-trials-uk`) links to **How Football Scouts Identify Players** (`/academy-trials/how-football-scouts-identify-players`) 3 times
-  - Trim one mention and link that spot to **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`, relevance 290.7) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`, relevance 290.7)
+    - Paragraph 1: "Football academy trials are one of the most searched topics by parents hoping to help their child enter academy football."
+    - Paste this sentence in: "This is covered in more detail in our guide on [how to Join a Football Academy: A Realistic Guide for Parents](/academy-pathway/how-to-join-a-football-academy)."
 - **Football Academy Trials UK: How They Really Work** (`/academy-trials/football-academy-trials-uk`) links to **Football Trials Near Me: A Realistic Parent's Guide to Academy Recruitment in the UK** (`/academy-trials/football-trials-near-me`) 3 times
-  - Trim one mention and link that spot to **JPL Trials: How Do You Get Into the Junior Premier League?** (`/parent-guides/how-to-get-into-the-jpl`, relevance 267.3) instead
+  - Remove: the mention in paragraph 107 — "The best starting point is to visit the official websites of professional clubs in your area. Clubs occasionally advertise recruitment opportunities, developmen"
+  - Add instead: **JPL Trials: How Do You Get Into the Junior Premier League?** (`/parent-guides/how-to-get-into-the-jpl`, relevance 267.3)
+    - Paragraph 1: "Whether you're looking for football academy trials near you, wondering if open football trials are genuine, or trying to understand how academy recruitment really works, the process is often very different from what families expect."
+    - Paste this sentence in: "This is covered in more detail in our guide on [jPL Trials: How Do You Get Into the Junior Premier League](/parent-guides/how-to-get-into-the-jpl)."
 - **Football Academy Trials UK: How They Really Work** (`/academy-trials/football-academy-trials-uk`) links to **Are Football Development Centres Worth It?** (`/parent-guides/are-football-development-centres-worth-it`) 3 times
-  - Trim one mention and link that spot to **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`, relevance 254.7) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`, relevance 254.7)
+    - Paragraph 52: "Development centres run by professional clubs (often called Player Development Centres or Player Training Centres) are fee-paying environments where players are coached by club-affiliated staff."
+    - Paste this sentence in: "This is covered in more detail in our guide on [premier League Development Centres](/academy-pathway/premier-league-development-centres-list)."
 - **What Is EPPP in Football?** (`/academy-pathway/what-is-eppp`) links to **How Academy Football Works in the UK** (`/academy-pathway/how-academy-football-works`) 3 times
-  - Trim one mention and link that spot to **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`, relevance 149.8) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`, relevance 149.8)
+    - Paragraph 12: "It is the academy framework used in professional football in England to set standards around coaching, contact hours, facilities, education, safeguarding and player development."
+    - Paste this sentence in: "This is covered in more detail in our guide on [should My Child Leave Grassroots Football For An Academy](/parent-guides/leave-grassroots-football-for-an-academy)."
 - **What Age Do Football Academies Recruit?** (`/academy-pathway/what-age-do-football-academies-recruit`) links to **Football Scholarships UK: What Parents Need to Know** (`/academy-pathway/football-scholarships-uk`) 3 times
-  - Trim one mention and link that spot to pillar **Development Centres vs Academies: What's the Difference?** (`/academy-pathway/development-centres-vs-academies`) instead — also fixes a missing pillar link from section 7
+  - Remove: the Related Articles entry for this link
+  - Add instead: pillar **Development Centres vs Academies: What's the Difference?** (`/academy-pathway/development-centres-vs-academies`) — this page doesn't link to it yet, so this also fixes a section 7 gap
+    - Paragraph 23: "> **Football Parent note:** Many parents assume academy recruitment largely ends at Under-12."
+    - Paste this sentence in: "This is covered in more detail in our guide on [development Centres vs Academies: What's the Difference](/academy-pathway/development-centres-vs-academies)."
 - **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) links to **Development Centres vs Academies: What's the Difference?** (`/academy-pathway/development-centres-vs-academies`) 3 times
-  - Trim one mention and link that spot to **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`, relevance 220.6) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`, relevance 220.6)
+    - Paragraph 71: "**Keep other football activities going.** Grassroots football, school teams, and enjoyment of the game should not be sacrificed for a development centre."
+    - Paste this sentence in: "This is covered in more detail in our guide on [should My Child Leave Grassroots Football For An Academy](/parent-guides/leave-grassroots-football-for-an-academy)."
 - **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) links to **How Players Progress Through Football Development Centres** (`/academy-pathway/how-players-progress-through-football-development-centres`) 3 times
-  - Trim one mention and link that spot to **Emerging Talent Centres (ETCs) Explained** (`/girls-football/emerging-talent-centres-explained`, relevance 202.9) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **Emerging Talent Centres (ETCs) Explained** (`/girls-football/emerging-talent-centres-explained`, relevance 202.9)
+    - Paragraph 4: "This guide explains how development centres work across UK football, what the different terms mean, and what families should realistically expect before getting involved."
+    - Paste this sentence in: "This is covered in more detail in our guide on [emerging Talent Centres (ETCs) Explained](/girls-football/emerging-talent-centres-explained)."
 - **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`) links to **Development Centres vs Academies: What's the Difference?** (`/academy-pathway/development-centres-vs-academies`) 3 times
-  - Trim one mention and link that spot to pillar **Category 1, 2, 3 and 4 Football Academies Explained** (`/academy-pathway/academy-categories-explained`) instead — also fixes a missing pillar link from section 7
+  - Remove: the Related Articles entry for this link
+  - Add instead: pillar **Category 1, 2, 3 and 4 Football Academies Explained** (`/academy-pathway/academy-categories-explained`) — this page doesn't link to it yet, so this also fixes a section 7 gap
+    - Paragraph 43: "If you're wondering how to get your son into a football academy, or simply how to improve your child's chances of being noticed, these are the approaches most likely to make a genuine difference."
+    - Paste this sentence in: "This is covered in more detail in our guide on [category 1, 2, 3 and 4 Football Academies Explained](/academy-pathway/academy-categories-explained)."
 - **How Academy Football Works in the UK** (`/academy-pathway/how-academy-football-works`) links to **Understanding Academy Release In Football** (`/academy-pathway/understanding-academy-release`) 3 times
-  - Trim one mention and link that spot to **How to Become a Professional Footballer: What Parents Should Actually Know** (`/football-development/how-to-become-a-professional-footballer`, relevance 175.2) instead
+  - Remove: the Related Articles entry for this link
+  - Add instead: **How to Become a Professional Footballer: What Parents Should Actually Know** (`/football-development/how-to-become-a-professional-footballer`, relevance 175.2)
+    - Paragraph 2: "A football academy is the youth development system run by a professional football club to identify, coach and develop talented young players."
+    - Paste this sentence in: "This is covered in more detail in our guide on [how to Become a Professional Footballer: What Parents Should Actually Know](/football-development/how-to-become-a-professional-footballer)."
 - **Football Development Centres Near Me** (`/academy-pathway/football-development-centres-near-me`) links to **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) 4 times
-  - Trim one mention and link that spot to pillar **How Academy Football Works in the UK** (`/academy-pathway/how-academy-football-works`) instead — also fixes a missing pillar link from section 7
+  - Remove: the Related Articles entry for this link
+  - Add instead: pillar **How Academy Football Works in the UK** (`/academy-pathway/how-academy-football-works`) — this page doesn't link to it yet, so this also fixes a section 7 gap
+    - Paragraph 1: "Professional football clubs across England run development centres for young players outside their formal EPPP academy."
+    - Paste this sentence in: "This is covered in more detail in our guide on [how Academy Football Works in the UK](/academy-pathway/how-academy-football-works)."
 - **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) links to **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`) 3 times
-  - Trim one mention and link that spot to pillar **How Academy Football Works in the UK** (`/academy-pathway/how-academy-football-works`) instead — also fixes a missing pillar link from section 7
+  - Remove: the Related Articles entry for this link
+  - Add instead: pillar **How Academy Football Works in the UK** (`/academy-pathway/how-academy-football-works`) — this page doesn't link to it yet, so this also fixes a section 7 gap
+    - Paragraph 5: "This guide explains what is publicly known and how the wider pathway works, but parents should expect to contact the club directly for current, specific programme details."
+    - Paste this sentence in: "This is covered in more detail in our guide on [how Academy Football Works in the UK](/academy-pathway/how-academy-football-works)."
 
 ### 3b. Medium priority — 2 links, both in the body (9)
 

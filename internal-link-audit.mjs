@@ -184,8 +184,12 @@ function loadPages(sitemapRoutes) {
       headings.push({ text: hm[1].trim(), index: hm.index });
     }
 
+    // (?:\r?\n){2,} rather than \n{2,} - CRLF files (23 of 65 in this repo) have a
+    // \r between every \n, so two consecutive blank-line newlines are "\r\n\r\n",
+    // which \n{2,} never matches. Getting this wrong silently treated the entire
+    // rest of the article as one giant paragraph for every CRLF file.
     const paragraphs = content
-      .split(/\n{2,}/)
+      .split(/(?:\r?\n){2,}/)
       .map((p) => p.trim())
       .filter((p) => p.length > 20 && !p.startsWith('import ') && !p.startsWith('export '));
 
@@ -324,6 +328,46 @@ function splitSentences(paragraph) {
     .filter(Boolean);
 }
 
+// Same split/filter rules as loadPages()'s page.paragraphs, but keeping each
+// paragraph's character offset in the raw content so a link's raw-content
+// index (from extractInternalLinks) can be mapped back to a paragraph number -
+// needed to tell the coach exactly which of several duplicate mentions to remove.
+function paragraphsWithOffsets(content) {
+  // Same (?:\r?\n){2,} reasoning as loadPages() - must match loadPages()'s split
+  // exactly (paragraph text/order/count) or paragraphIndex numbers here would
+  // point at the wrong paragraph relative to page.paragraphs everywhere else.
+  const pieces = content.split(/((?:\r?\n){2,})/); // capturing group keeps separators in the array
+  const result = [];
+  let offset = 0;
+  for (const piece of pieces) {
+    const trimmed = piece.trim();
+    if (trimmed.length > 20 && !trimmed.startsWith('import ') && !trimmed.startsWith('export ')) {
+      const start = offset + piece.indexOf(trimmed);
+      result.push({ text: trimmed, start, end: start + trimmed.length });
+    }
+    offset += piece.length;
+  }
+  return result;
+}
+
+function paragraphNumberForIndex(page, charIndex) {
+  if (!page._paragraphOffsets) page._paragraphOffsets = paragraphsWithOffsets(page.content);
+  const list = page._paragraphOffsets;
+  for (let i = 0; i < list.length; i++) {
+    if (charIndex >= list[i].start && charIndex <= list[i].end) return i + 1;
+  }
+  let nearest = null;
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].start <= charIndex) nearest = i + 1;
+  }
+  return nearest;
+}
+
+function paragraphExcerpt(page, paragraphIndex) {
+  const para = page.paragraphs[paragraphIndex - 1];
+  return para ? para.slice(0, 160).replace(/\s+/g, ' ') : null;
+}
+
 function inlineAnchorPhrase(target) {
   let phrase = target.title.replace(/\s*\|.*$/, '').trim();
   phrase = phrase.replace(/[?!:]+$/, '');
@@ -331,6 +375,14 @@ function inlineAnchorPhrase(target) {
   return phrase.charAt(0).toLowerCase() + phrase.slice(1);
 }
 
+function paragraphHasLink(text) {
+  return /\[[^\]]+\]\([^)]+\)/.test(text);
+}
+
+// Finds the best paragraph to add a new link in. Prefers a paragraph that
+// doesn't already contain a link - two links in one paragraph reads as spammy -
+// and only falls back to a linked paragraph if no link-free paragraph has any
+// real topical overlap with the target at all.
 function findBestParagraph(source, target) {
   const targetSlugWords = target.urlPath.split('/').pop().replace(/-/g, ' ');
   const targetWords = new Set(
@@ -340,29 +392,34 @@ function findBestParagraph(source, target) {
       .filter((w) => w.length > 3)
   );
 
-  let best = null;
+  let best = null; // best among paragraphs with no existing link
+  let bestAny = null; // best overall, regardless of existing links (fallback)
   source.paragraphs.forEach((para, idx) => {
     const paraWords = new Set(para.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
     const overlap = [...paraWords].filter((w) => targetWords.has(w));
-    if (overlap.length > 0 && (!best || overlap.length > best.score)) {
-      best = { paragraphIndex: idx + 1, score: overlap.length, paragraphText: para };
-    }
+    if (overlap.length === 0) return;
+    const candidate = { paragraphIndex: idx + 1, score: overlap.length, paragraphText: para };
+    if (!bestAny || overlap.length > bestAny.score) bestAny = candidate;
+    if (!paragraphHasLink(para) && (!best || overlap.length > best.score)) best = candidate;
   });
+  const chosen = best || bestAny;
+  const crowded = !best && !!bestAny;
 
   const anchor = inlineAnchorPhrase(target);
   const pasteReadySentence = `This is covered in more detail in our guide on [${anchor}](${target.urlPath}).`;
 
-  if (!best) {
+  if (!chosen) {
     return {
       paragraphIndex: null,
       excerpt: 'No obvious paragraph match. Add where it naturally fits.',
       nearestSentence: null,
       pasteReadySentence,
+      crowded: false,
     };
   }
 
-  const sentences = splitSentences(best.paragraphText);
-  let bestSentence = sentences[0] || best.paragraphText.slice(0, 140);
+  const sentences = splitSentences(chosen.paragraphText);
+  let bestSentence = sentences[0] || chosen.paragraphText.slice(0, 140);
   let bestSentenceScore = -1;
   for (const s of sentences) {
     const sWords = new Set(s.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
@@ -374,10 +431,11 @@ function findBestParagraph(source, target) {
   }
 
   return {
-    paragraphIndex: best.paragraphIndex,
-    excerpt: best.paragraphText.slice(0, 140).replace(/\s+/g, ' '),
+    paragraphIndex: chosen.paragraphIndex,
+    excerpt: chosen.paragraphText.slice(0, 140).replace(/\s+/g, ' '),
     nearestSentence: bestSentence.replace(/\s+/g, ' '),
     pasteReadySentence,
+    crowded,
   };
 }
 
@@ -587,6 +645,19 @@ function run() {
       const currentScore = target ? relevanceScore(page, target) : 0;
 
       if (count >= 3) {
+        // Which of the 3+ mentions to remove: a Related Articles occurrence is
+        // the least disruptive to cut (no prose to rewrite), so prefer that if
+        // one exists; otherwise cut the latest contextual mention and keep the
+        // first (usually the one that first introduces the topic naturally).
+        const occurrences = page.outboundLinks
+          .filter((l) => l.targetPath === targetPath)
+          .map((l) => ({ ...l, paragraphIndex: paragraphNumberForIndex(page, l.index) }));
+        const nonContextualOccurrence = occurrences.find((o) => !o.contextual);
+        const toRemove = nonContextualOccurrence || [...occurrences].sort((a, b) => b.index - a.index)[0];
+        const removeExcerpt = toRemove.contextual && toRemove.paragraphIndex
+          ? paragraphExcerpt(page, toRemove.paragraphIndex)
+          : null;
+
         // Trimming this down to 1-2 mentions frees up a slot - prefer filling it
         // with a pillar this page doesn't yet link to (fixes section 7's gap at
         // the same time) over a generic best-scoring alternative.
@@ -603,7 +674,8 @@ function run() {
             claimedReplacements.add(alt.other.urlPath);
           }
         }
-        items.push({ targetPath, title, count, tier: 1, currentScore, replacement });
+        const insertLocation = replacement ? findBestParagraph(page, byPath[replacement.other.urlPath] || replacement.other) : null;
+        items.push({ targetPath, title, count, tier: 1, currentScore, replacement, toRemove, removeExcerpt, insertLocation });
       } else if (ctxCount === 1) {
         const better = alternativesPool.find(
           (c) => c.score > currentScore && !claimedReplacements.has(c.other.urlPath)
@@ -630,23 +702,29 @@ function run() {
   for (const r of overlinkReport) {
     for (const d of r.duplicates) {
       if (d.tier === 1) {
-        const reason = d.replacement
+        const removalNote = d.toRemove.contextual
+          ? (d.removeExcerpt
+              ? `remove the mention in paragraph ${d.toRemove.paragraphIndex} ("${d.removeExcerpt}")`
+              : `remove one contextual mention (paragraph ${d.toRemove.paragraphIndex})`)
+          : 'remove the Related Articles entry for this link';
+        const additionNote = d.replacement
           ? d.replacement.viaPillarGap
-            ? `Linked ${d.count} times - trim one mention and use the freed slot for pillar "${d.replacement.other.title}", which this page doesn't link to yet (also resolves a section 7 gap)`
-            : `Linked ${d.count} times - trim one mention and use the freed slot for "${d.replacement.other.title}" (relevance ${d.replacement.score}) instead`
-          : `Linked ${d.count} times in this article - trim to 1-2 mentions`;
+            ? `use the freed slot for pillar "${d.replacement.other.title}", which this page doesn't link to yet (also resolves a section 7 gap)`
+            : `use the freed slot for "${d.replacement.other.title}" (relevance ${d.replacement.score}) instead`
+          : 'no strong alternative found - just cut back to 1-2 mentions';
+        const suggestedLocation = d.insertLocation && d.insertLocation.paragraphIndex
+          ? `Paragraph ${d.insertLocation.paragraphIndex}${d.insertLocation.crowded ? ' (already has a link in it - check it still reads cleanly)' : ''}`
+          : d.replacement ? 'No obvious paragraph match' : '';
         csvRows.push({
           Priority: priorityFromLevel('High', r.from, gscMap),
           Type: 'Overlinking (3+ mentions)',
           Source: r.from,
           Target: d.targetPath,
           'Suggested Anchor': d.replacement ? d.replacement.other.title : '',
-          'Suggested Location': 'Body text (multiple mentions)',
-          'Nearest Existing Sentence': '',
-          'Paste-Ready Sentence': d.replacement
-            ? `Trim one mention of "${d.title}" (${d.targetPath}) and link that spot to [${d.replacement.other.title}](${d.replacement.other.urlPath}) instead.`
-            : '',
-          Reason: reason,
+          'Suggested Location': suggestedLocation,
+          'Nearest Existing Sentence': d.insertLocation ? d.insertLocation.nearestSentence || '' : '',
+          'Paste-Ready Sentence': d.insertLocation ? d.insertLocation.pasteReadySentence : '',
+          Reason: `Linked ${d.count} times - ${removalNote}, then ${additionNote}`,
           Done: '',
         });
       } else if (d.tier === 3) {
@@ -833,16 +911,27 @@ function run() {
     }
 
     md += `### 3a. High priority — 3 or more links to the same target (${tier1.length})\n\n`;
-    md += `_Unconditionally worth trimming back to one or two mentions. Where this page also has a missing pillar link (section 7), the freed-up slot is suggested for that first — one edit resolves both findings._\n\n`;
+    md += `_Unconditionally worth trimming back to one or two mentions. Where this page also has a missing pillar link (section 7), the freed-up slot is suggested for that first — one edit resolves both findings. The suggested insertion spot avoids paragraphs that already have a link, so this never trades one duplicate for a different kind of overlinking._\n\n`;
     if (tier1.length === 0) md += `_None found._\n\n`;
     for (const d of tier1) {
       md += `- **${d.fromTitle}** (\`${d.from}\`) links to **${d.title}** (\`${d.targetPath}\`) ${d.count} times\n`;
-      if (d.replacement && d.replacement.viaPillarGap) {
-        md += `  - Trim one mention and link that spot to pillar **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`) instead — also fixes a missing pillar link from section 7\n`;
-      } else if (d.replacement) {
-        md += `  - Trim one mention and link that spot to **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`, relevance ${d.replacement.score}) instead\n`;
+      if (d.toRemove.contextual && d.removeExcerpt) {
+        md += `  - Remove: the mention in paragraph ${d.toRemove.paragraphIndex} — "${d.removeExcerpt}"\n`;
+      } else if (d.toRemove.contextual) {
+        md += `  - Remove: the contextual mention in paragraph ${d.toRemove.paragraphIndex}\n`;
       } else {
-        md += `  - No strong alternative found — just cut back to one or two mentions\n`;
+        md += `  - Remove: the Related Articles entry for this link\n`;
+      }
+      if (d.replacement && d.replacement.viaPillarGap) {
+        md += `  - Add instead: pillar **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`) — this page doesn't link to it yet, so this also fixes a section 7 gap\n`;
+      } else if (d.replacement) {
+        md += `  - Add instead: **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`, relevance ${d.replacement.score})\n`;
+      } else {
+        md += `  - Add instead: no strong alternative found — just cut back to one or two mentions\n`;
+      }
+      if (d.insertLocation && d.insertLocation.paragraphIndex) {
+        md += `    - Paragraph ${d.insertLocation.paragraphIndex}${d.insertLocation.crowded ? ' (already has a link in it — check it still reads cleanly)' : ''}: "${d.insertLocation.nearestSentence}"\n`;
+        md += `    - Paste this sentence in: "${d.insertLocation.pasteReadySentence}"\n`;
       }
     }
     if (tier1.length) md += `\n`;
