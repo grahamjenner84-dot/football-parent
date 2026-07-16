@@ -471,28 +471,99 @@ function run() {
   }
 
   // ---------- 3. Overlinking ----------
+  // Tiered by how likely the duplicate actually hurts the page, not just whether
+  // one exists:
+  //   Tier 1 (high):   3+ mentions of the same target - unconditionally worth trimming.
+  //   Tier 2 (medium):  exactly 2 mentions, both in the body (contextual) - worth a
+  //                      look, but not automatically wrong.
+  //   Tier 3 (low):     exactly 2 mentions, one contextual + one in Related Articles -
+  //                      only flagged if a genuinely better candidate exists for that
+  //                      related-articles slot. If the duplicated target is already the
+  //                      most relevant thing to put there, having it in both places is
+  //                      fine (e.g. a recruitment article linking to both trials and
+  //                      "what coaches look for" in-body and in Related Articles), so
+  //                      it's left alone rather than flagged.
   const overlinkReport = [];
   for (const page of pages) {
     const counts = {};
+    const contextualCounts = {};
     for (const link of page.outboundLinks) {
       counts[link.targetPath] = (counts[link.targetPath] || 0) + 1;
+      if (link.contextual) contextualCounts[link.targetPath] = (contextualCounts[link.targetPath] || 0) + 1;
     }
     const duplicated = Object.entries(counts).filter(([, count]) => count > 1);
     if (duplicated.length === 0) continue;
 
     const linkedPaths = new Set(page.outboundLinks.map((l) => l.targetPath));
-    const alternatives = rankedCandidates(page, linkedPaths).slice(0, 3);
+    const alternativesPool = rankedCandidates(page, linkedPaths);
+    // Each tier-3 duplicate on this page needs its own distinct replacement -
+    // recommending the same single best alternative for two different related-
+    // articles slots would just trade one duplicate for another.
+    const claimedReplacements = new Set();
+
+    const items = [];
+    for (const [targetPath, count] of duplicated) {
+      const ctxCount = contextualCounts[targetPath] || 0;
+      const target = byPath[targetPath];
+      const title = target?.title || targetPath;
+      const currentScore = target ? relevanceScore(page, target) : 0;
+
+      if (count >= 3) {
+        items.push({ targetPath, title, count, tier: 1, currentScore });
+      } else if (ctxCount === 1) {
+        const better = alternativesPool.find(
+          (c) => c.score > currentScore && !claimedReplacements.has(c.other.urlPath)
+        );
+        if (!better) continue; // already the best pick for that related-articles slot
+        claimedReplacements.add(better.other.urlPath);
+        items.push({ targetPath, title, count, tier: 3, currentScore, replacement: better });
+      } else {
+        items.push({ targetPath, title, count, tier: 2, currentScore });
+      }
+    }
+    if (items.length === 0) continue;
+    items.sort((a, b) => a.tier - b.tier);
 
     overlinkReport.push({
       from: page.urlPath,
       title: page.title,
-      duplicates: duplicated.map(([targetPath, count]) => ({
-        targetPath,
-        count,
-        title: byPath[targetPath]?.title || targetPath,
-      })),
-      alternatives,
+      worstTier: Math.min(...items.map((i) => i.tier)),
+      duplicates: items,
     });
+  }
+  overlinkReport.sort((a, b) => a.worstTier - b.worstTier);
+
+  for (const r of overlinkReport) {
+    for (const d of r.duplicates) {
+      if (d.tier === 1) {
+        csvRows.push({
+          Priority: priorityFromLevel('High', r.from, gscMap),
+          Type: 'Overlinking (3+ mentions)',
+          Source: r.from,
+          Target: d.targetPath,
+          'Suggested Anchor': '',
+          'Suggested Location': 'Body text (multiple mentions)',
+          'Nearest Existing Sentence': '',
+          'Paste-Ready Sentence': '',
+          Reason: `Linked ${d.count} times in this article - trim to 1-2 mentions`,
+          Done: '',
+        });
+      } else if (d.tier === 3) {
+        csvRows.push({
+          Priority: priorityFromLevel('Low', r.from, gscMap),
+          Type: 'Overlinking (related-slot swap)',
+          Source: r.from,
+          Target: d.targetPath,
+          'Suggested Anchor': d.replacement.other.title,
+          'Suggested Location': 'Related Articles list',
+          'Nearest Existing Sentence': '',
+          'Paste-Ready Sentence': `Replace the Related Articles entry for "${d.title}" (${d.targetPath}) with [${d.replacement.other.title}](${d.replacement.other.urlPath}).`,
+          Reason: `Already linked contextually to "${d.title}" (relevance ${d.currentScore}) - "${d.replacement.other.title}" (relevance ${d.replacement.score}) is a better fit for the remaining related-articles slot`,
+          Done: '',
+        });
+      }
+      // tier 2 stays report-only - which of the two mentions to trim is an editorial call
+    }
   }
 
   // ---------- 4. Pages with too few outbound links ----------
@@ -637,21 +708,42 @@ function run() {
     md += `Total inbound: ${r.stats.total} | Contextual: ${r.stats.contextual} | Related/footer: ${r.stats.related}\n\n`;
   }
 
-  md += `\n## 3. Overlinking (same page linked to more than once)\n\n`;
-  md += `_Pages linking to the same target multiple times in the body. Consider swapping a repeat mention for a different, relevant article._\n\n`;
-  if (overlinkReport.length === 0) md += `_None found._\n`;
-  for (const r of overlinkReport) {
-    md += `### ${r.title} (\`${r.from}\`)\n`;
-    for (const d of r.duplicates) {
-      md += `- Links to **${d.title}** (\`${d.targetPath}\`) ${d.count} times\n`;
-    }
-    if (r.alternatives.length) {
-      md += `  Consider linking one mention to instead:\n`;
-      for (const alt of r.alternatives) {
-        md += `  - **${alt.other.title}** (\`${alt.other.urlPath}\`) — relevance ${alt.score}\n`;
+  md += `\n## 3. Overlinking (same target linked more than once in an article)\n\n`;
+  md += `_Grouped by how likely the duplicate actually hurts the page - see each group's note before acting on it._\n\n`;
+  {
+    const tier1 = [];
+    const tier2 = [];
+    const tier3 = [];
+    for (const r of overlinkReport) {
+      for (const d of r.duplicates) {
+        const row = { from: r.from, fromTitle: r.title, ...d };
+        (d.tier === 1 ? tier1 : d.tier === 2 ? tier2 : tier3).push(row);
       }
     }
-    md += `\n`;
+
+    md += `### 3a. High priority — 3 or more links to the same target (${tier1.length})\n\n`;
+    md += `_Unconditionally worth trimming back to one or two mentions._\n\n`;
+    if (tier1.length === 0) md += `_None found._\n\n`;
+    for (const d of tier1) {
+      md += `- **${d.fromTitle}** (\`${d.from}\`) links to **${d.title}** (\`${d.targetPath}\`) ${d.count} times\n`;
+    }
+    if (tier1.length) md += `\n`;
+
+    md += `### 3b. Medium priority — 2 links, both in the body (${tier2.length})\n\n`;
+    md += `_Might be overlinking, but not automatically wrong — e.g. one early mention and one nearer a directly relevant section can both earn their place. Use judgement._\n\n`;
+    if (tier2.length === 0) md += `_None found._\n\n`;
+    for (const d of tier2) {
+      md += `- **${d.fromTitle}** (\`${d.from}\`) links to **${d.title}** (\`${d.targetPath}\`) twice in the body\n`;
+    }
+    if (tier2.length) md += `\n`;
+
+    md += `### 3c. Low priority — 1 contextual + 1 Related Articles mention, better related pick available (${tier3.length})\n\n`;
+    md += `_Only listed when swapping in the alternative would genuinely improve the related-articles slot. If the duplicated link is already the most relevant thing to put there (e.g. a recruitment article pointing to both trials and what coaches look for, in-body and in Related Articles), it's left alone and won't appear here._\n\n`;
+    if (tier3.length === 0) md += `_None found._\n\n`;
+    for (const d of tier3) {
+      md += `- **${d.fromTitle}** (\`${d.from}\`): Related Articles repeats the in-body link to **${d.title}** (relevance ${d.currentScore}) — swap it for **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`, relevance ${d.replacement.score})\n`;
+    }
+    if (tier3.length) md += `\n`;
   }
 
   md += `\n## 4. Pages with too few outbound links\n\n`;
