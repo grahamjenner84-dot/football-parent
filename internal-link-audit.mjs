@@ -10,11 +10,13 @@ const UNDERLINKED_THRESHOLD = 3;   // pages with fewer TOTAL inbound links than 
 const MIN_OUTBOUND_LINKS = 3;      // pages with this many outbound internal links or fewer get flagged
 const TARGET_OUTBOUND_LINKS = 5;   // suggestions top up to roughly this many
 const RECIPROCAL_LIMIT = 50;       // cap on reciprocal-link-opportunity rows in the report
-// Minimum relevanceScore for a reciprocal-link suggestion. Calibrated against the
-// full-body TF-IDF scoring (see relevanceScore) rather than the old title/
-// description-only scale - re-run with DEBUG_SCORE_DIST=1 to recheck this against
-// the actual score distribution if the content set changes a lot.
-const RECIPROCAL_MIN_SCORE = 40;
+// Minimum relevanceScore for a reciprocal-link suggestion, matching
+// MIN_CONFIDENT_SCORE. Checked against the real distribution with
+// DEBUG_SCORE_DIST=1 (cosine similarity scale): p90=2.1, max=3.24 across 281
+// unlinked-back pairs, so 3 left only a single suggestion site-wide - too
+// strict for what's meant to be a top-10%-ish opportunity list. Re-check this
+// if the content set changes a lot.
+const RECIPROCAL_MIN_SCORE = 2;
 const GSC_CSV_PATH = 'gsc-pages.csv';
 const SITEMAP_FILE = 'app/sitemap.ts'; // used as the source of truth for real URLs where possible
 
@@ -266,12 +268,25 @@ function tokenize(text) {
 // Relevance is judged on full article body content (not just title/description -
 // one sentence rarely has enough distinctive vocabulary to tell two genuinely
 // related articles apart from two that just happen to share a category and some
-// generic phrasing), weighted by how RARE each shared word is across the whole
-// site. A word every article uses ("football", "parent", "training") contributes
-// almost nothing; a word only a handful of pages share ("eppp", "development
-// centre", "relative age effect") is a real signal. This is a standard TF-IDF-
-// style weighting - DOC_FREQ/TOTAL_PAGES are populated once by buildDocFrequency()
+// generic phrasing), weighted by how RARE each word is across the whole site -
+// standard TF-IDF. DOC_FREQ/TOTAL_PAGES are populated once by buildDocFrequency()
 // before any scoring happens.
+//
+// Scoring is cosine similarity between each page's TF-IDF vector, not a raw sum
+// of shared words' IDF. The raw sum was tried first and had a real flaw: two
+// long articles inevitably share hundreds of moderately-rare words (site-wide)
+// that are still just same-genre boilerplate between them specifically ("tiers",
+// "booking", "regulations", "geography" showed up as top contributors between a
+// JPL explainer and a West Ham development centre guide - real words, no genuine
+// connection). Cosine similarity normalises by each document's own vector length,
+// so raw word-count no longer inflates the score just because both articles are
+// long - only the *proportion* of a page's distinctive vocabulary that's shared
+// counts. It still can't understand meaning, only word statistics, so two
+// same-cluster articles in the same format (e.g. two club development-centre
+// guides) can still score moderately even when not specifically about each
+// other - see MIN_CONFIDENT_SCORE below, which exists specifically so the
+// report doesn't state a suggestion with more confidence than the signal
+// actually supports.
 let DOC_FREQ = {};
 let TOTAL_PAGES = 0;
 
@@ -292,22 +307,56 @@ function buildDocFrequency(pages) {
   }
 }
 
+// Term-frequency-weighted TF-IDF vector for a page, with sublinear TF scaling
+// (1 + log(count)) so a word mentioned 20 times isn't 20x as important as one
+// mentioned once, and words present in every page (idf <= 0) are dropped
+// entirely rather than diluting the vector with zero-signal terms.
+function pageTfIdfVector(page) {
+  if (page._tfidfVector) return page._tfidfVector;
+  const counts = {};
+  for (const w of tokenize(`${page.title} ${page.description} ${page.content}`)) {
+    counts[w] = (counts[w] || 0) + 1;
+  }
+  const vector = {};
+  let magnitudeSq = 0;
+  for (const [w, count] of Object.entries(counts)) {
+    const df = DOC_FREQ[w] || TOTAL_PAGES;
+    const idf = Math.log(TOTAL_PAGES / df);
+    if (idf <= 0) continue;
+    const weight = (1 + Math.log(count)) * idf;
+    vector[w] = weight;
+    magnitudeSq += weight * weight;
+  }
+  page._tfidfVector = { vector, magnitude: Math.sqrt(magnitudeSq) };
+  return page._tfidfVector;
+}
+
 function relevanceScore(a, b) {
   if (a.urlPath === b.urlPath) return -1;
-  // Same-category is now a light nudge, not the dominant signal - real content
-  // overlap does most of the work.
-  let score = a.categoryFolder === b.categoryFolder ? 1 : 0;
+  // Same-category is a light nudge, not the dominant signal - real content
+  // overlap (via cosine similarity below) does the actual work.
+  let score = a.categoryFolder === b.categoryFolder ? 0.3 : 0;
 
-  const wordsA = pageWordSet(a);
-  const wordsB = pageWordSet(b);
-  const [smaller, larger] = wordsA.size <= wordsB.size ? [wordsA, wordsB] : [wordsB, wordsA];
-  for (const w of smaller) {
-    if (!larger.has(w)) continue;
-    const df = DOC_FREQ[w] || TOTAL_PAGES;
-    score += Math.log(TOTAL_PAGES / df);
+  const vecA = pageTfIdfVector(a);
+  const vecB = pageTfIdfVector(b);
+  if (vecA.magnitude > 0 && vecB.magnitude > 0) {
+    const [smaller, larger] = Object.keys(vecA.vector).length <= Object.keys(vecB.vector).length
+      ? [vecA.vector, vecB.vector]
+      : [vecB.vector, vecA.vector];
+    let dot = 0;
+    for (const w in smaller) {
+      if (larger[w]) dot += smaller[w] * larger[w];
+    }
+    score += (dot / (vecA.magnitude * vecB.magnitude)) * 10; // scale cosine (0-1) to a readable 0-10-ish range
   }
-  return Math.round(score * 10) / 10;
+  return Math.round(score * 100) / 100;
 }
+
+// Below this, a candidate is "the best available" rather than "clearly related" -
+// the report says so explicitly instead of naming a pick with false confidence.
+// Calibrated against the real score distribution (DEBUG_SCORE_DIST=1) after
+// switching to cosine similarity.
+const MIN_CONFIDENT_SCORE = 2;
 
 function suggestAnchors(page) {
   const options = new Set();
@@ -379,42 +428,63 @@ function paragraphHasLink(text) {
   return /\[[^\]]+\]\([^)]+\)/.test(text);
 }
 
+// The target's most distinctive vocabulary (by TF-IDF weight), reusing the
+// same vector relevanceScore() already computes. Matching a source paragraph
+// against this - instead of just the target's title/description - is what
+// makes "which paragraph" reflect what the target article is actually about
+// in depth, not just its headline framing.
+function targetTopicWords(target, limit = 25) {
+  if (target._topicWords) return target._topicWords;
+  const { vector } = pageTfIdfVector(target);
+  const sorted = Object.entries(vector).sort((a, b) => b[1] - a[1]).slice(0, limit);
+  target._topicWords = new Map(sorted); // word -> weight
+  return target._topicWords;
+}
+
+// A paragraph needs at least this much weighted overlap with the target's
+// topic words to count as a genuine match, not a coincidental one-word hit.
+// Below this, forcing a "best" paragraph produces a technically-non-empty but
+// substantively unrelated insertion point - which is worse than admitting no
+// good spot was found.
+const MIN_PARAGRAPH_OVERLAP_WEIGHT = 3;
+
 // Finds the best paragraph to add a new link in. Prefers a paragraph that
 // doesn't already contain a link - two links in one paragraph reads as spammy -
-// and only falls back to a linked paragraph if no link-free paragraph has any
-// real topical overlap with the target at all.
+// and only falls back to a linked paragraph if no link-free paragraph clears
+// the overlap floor. If nothing clears it anywhere, says so explicitly rather
+// than pointing at a paragraph that doesn't actually relate to the target.
 function findBestParagraph(source, target) {
-  const targetSlugWords = target.urlPath.split('/').pop().replace(/-/g, ' ');
-  const targetWords = new Set(
-    `${target.title} ${targetSlugWords} ${target.description}`
-      .toLowerCase()
-      .split(/\W+/)
-      .filter((w) => w.length > 3)
-  );
+  const targetWords = targetTopicWords(target);
 
   let best = null; // best among paragraphs with no existing link
   let bestAny = null; // best overall, regardless of existing links (fallback)
   source.paragraphs.forEach((para, idx) => {
     const paraWords = new Set(para.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
-    const overlap = [...paraWords].filter((w) => targetWords.has(w));
-    if (overlap.length === 0) return;
-    const candidate = { paragraphIndex: idx + 1, score: overlap.length, paragraphText: para };
-    if (!bestAny || overlap.length > bestAny.score) bestAny = candidate;
-    if (!paragraphHasLink(para) && (!best || overlap.length > best.score)) best = candidate;
+    let weight = 0;
+    for (const w of paraWords) {
+      if (targetWords.has(w)) weight += targetWords.get(w);
+    }
+    if (weight === 0) return;
+    const candidate = { paragraphIndex: idx + 1, score: weight, paragraphText: para };
+    if (!bestAny || weight > bestAny.score) bestAny = candidate;
+    if (!paragraphHasLink(para) && (!best || weight > best.score)) best = candidate;
   });
-  const chosen = best || bestAny;
-  const crowded = !best && !!bestAny;
+
+  const strongest = best || bestAny;
+  const confident = !!strongest && strongest.score >= MIN_PARAGRAPH_OVERLAP_WEIGHT;
+  const chosen = confident ? strongest : null;
+  const crowded = confident && !best && !!bestAny;
 
   const anchor = inlineAnchorPhrase(target);
-  const pasteReadySentence = `This is covered in more detail in our guide on [${anchor}](${target.urlPath}).`;
 
   if (!chosen) {
     return {
       paragraphIndex: null,
-      excerpt: 'No obvious paragraph match. Add where it naturally fits.',
+      excerpt: 'No paragraph has strong enough overlap with what this article actually covers - add manually where it fits, or reconsider whether this pairing belongs at all.',
       nearestSentence: null,
-      pasteReadySentence,
+      pasteReadySentence: `You may want to link to our guide on [${anchor}](${target.urlPath}) somewhere relevant.`,
       crowded: false,
+      confident: false,
     };
   }
 
@@ -423,12 +493,17 @@ function findBestParagraph(source, target) {
   let bestSentenceScore = -1;
   for (const s of sentences) {
     const sWords = new Set(s.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
-    const overlap = [...sWords].filter((w) => targetWords.has(w));
-    if (overlap.length > bestSentenceScore) {
-      bestSentenceScore = overlap.length;
+    let sWeight = 0;
+    for (const w of sWords) {
+      if (targetWords.has(w)) sWeight += targetWords.get(w);
+    }
+    if (sWeight > bestSentenceScore) {
+      bestSentenceScore = sWeight;
       bestSentence = s;
     }
   }
+
+  const pasteReadySentence = `This is covered in more detail in our guide on [${anchor}](${target.urlPath}).`;
 
   return {
     paragraphIndex: chosen.paragraphIndex,
@@ -436,6 +511,7 @@ function findBestParagraph(source, target) {
     nearestSentence: bestSentence.replace(/\s+/g, ' '),
     pasteReadySentence,
     crowded,
+    confident: true,
   };
 }
 
@@ -504,9 +580,21 @@ function run() {
 
   function rankedCandidates(page, excludePaths) {
     return pages
-      .map((other) => ({ other, score: relevanceScore(page, other) }))
+      .map((other) => {
+        const score = relevanceScore(page, other);
+        return { other, score, confident: score >= MIN_CONFIDENT_SCORE };
+      })
       .filter((r) => r.score > 0 && !excludePaths.has(r.other.urlPath))
       .sort((a, b) => b.score - a.score);
+  }
+
+  // Prefers candidates that clear the confidence floor; only falls back to a
+  // weak one if nothing does, so a genuinely link-starved page still gets a
+  // suggestion instead of silence - callers must check `.confident` and flag
+  // it in their reasoning text rather than stating a weak pick as certain.
+  function confidentFirst(ranked) {
+    const confident = ranked.filter((c) => c.confident);
+    return confident.length ? confident : ranked;
   }
 
   // Computed early so section 3's overlinking fixes can prioritise a missing
@@ -541,7 +629,7 @@ function run() {
     const stats = inboundStats(target.urlPath);
     const already = new Set(stats.sources.map((l) => l.from));
     already.add(target.urlPath);
-    const candidates = rankedCandidates(target, already).slice(0, 4);
+    const candidates = confidentFirst(rankedCandidates(target, already)).slice(0, 4);
     const suggestions = candidates.map((c) => ({
       ...c,
       anchors: suggestAnchors(target),
@@ -553,6 +641,7 @@ function run() {
   for (const r of underlinkedReport) {
     const level = r.stats.total === 0 ? 'High' : 'Medium';
     for (const s of r.suggestions.slice(0, 2)) {
+      const weakNote = s.confident ? '' : ' - weak content overlap, verify relevance manually';
       csvRows.push({
         Priority: priorityFromLevel(level, r.target.urlPath, gscMap),
         Type: 'Underlinked page',
@@ -564,7 +653,7 @@ function run() {
           : 'No obvious paragraph match',
         'Nearest Existing Sentence': s.location.nearestSentence || '',
         'Paste-Ready Sentence': s.location.pasteReadySentence,
-        Reason: `Only ${r.stats.total} total inbound link(s) (${r.stats.contextual} contextual)`,
+        Reason: `Only ${r.stats.total} total inbound link(s) (${r.stats.contextual} contextual)${weakNote}`,
         Done: '',
       });
     }
@@ -580,9 +669,10 @@ function run() {
     if (csvRows.some((row) => row.Target === r.page.urlPath && row.Type === 'Underlinked page')) continue;
     const already = new Set(r.stats.sources.map((l) => l.from));
     already.add(r.page.urlPath);
-    const candidates = rankedCandidates(r.page, already).slice(0, 2);
+    const candidates = confidentFirst(rankedCandidates(r.page, already)).slice(0, 2);
     for (const c of candidates) {
       const location = findBestParagraph(c.other, r.page);
+      const weakNote = c.confident ? '' : ' - weak content overlap, verify relevance manually';
       csvRows.push({
         Priority: 'High',
         Type: r.stats.total === 0 ? 'Orphan page' : 'Zero contextual links',
@@ -595,9 +685,9 @@ function run() {
         'Nearest Existing Sentence': location.nearestSentence || '',
         'Paste-Ready Sentence': location.pasteReadySentence,
         Reason:
-          r.stats.total === 0
+          (r.stats.total === 0
             ? 'Zero inbound links from anywhere on the site'
-            : `${r.stats.total} inbound link(s) but none in body text (all footer/related only)`,
+            : `${r.stats.total} inbound link(s) but none in body text (all footer/related only)`) + weakNote,
         Done: '',
       });
     }
@@ -668,7 +758,10 @@ function run() {
           claimedReplacements.add(pillarPick.pillarPath);
           pillarGapHandledByOverlink.add(`${page.urlPath}|${pillarPick.pillarPath}`);
         } else {
-          const alt = alternativesPool.find((c) => !claimedReplacements.has(c.other.urlPath));
+          // Only a candidate that clears the confidence floor is worth naming -
+          // otherwise "no strong alternative found" (below) is more honest than
+          // a specific-sounding pick backed by a weak signal.
+          const alt = alternativesPool.find((c) => c.confident && !claimedReplacements.has(c.other.urlPath));
           if (alt) {
             replacement = alt;
             claimedReplacements.add(alt.other.urlPath);
@@ -678,7 +771,7 @@ function run() {
         items.push({ targetPath, title, count, tier: 1, currentScore, replacement, toRemove, removeExcerpt, insertLocation });
       } else if (ctxCount === 1) {
         const better = alternativesPool.find(
-          (c) => c.score > currentScore && !claimedReplacements.has(c.other.urlPath)
+          (c) => c.confident && c.score > currentScore && !claimedReplacements.has(c.other.urlPath)
         );
         if (!better) continue; // already the best pick for that related-articles slot
         claimedReplacements.add(better.other.urlPath);
@@ -714,7 +807,7 @@ function run() {
           : 'no strong alternative found - just cut back to 1-2 mentions';
         const suggestedLocation = d.insertLocation && d.insertLocation.paragraphIndex
           ? `Paragraph ${d.insertLocation.paragraphIndex}${d.insertLocation.crowded ? ' (already has a link in it - check it still reads cleanly)' : ''}`
-          : d.replacement ? 'No obvious paragraph match' : '';
+          : d.insertLocation ? d.insertLocation.excerpt : '';
         csvRows.push({
           Priority: priorityFromLevel('High', r.from, gscMap),
           Type: 'Overlinking (3+ mentions)',
@@ -752,7 +845,7 @@ function run() {
     if (stats.total > MIN_OUTBOUND_LINKS) continue;
     const linkedPaths = new Set(page.outboundLinks.map((l) => l.targetPath));
     const needed = TARGET_OUTBOUND_LINKS - stats.total;
-    const candidates = rankedCandidates(page, linkedPaths).slice(0, Math.max(needed, 0));
+    const candidates = confidentFirst(rankedCandidates(page, linkedPaths)).slice(0, Math.max(needed, 0));
     if (candidates.length) {
       sparseOutboundReport.push({ page, stats, candidates });
     }
@@ -761,6 +854,7 @@ function run() {
   for (const r of sparseOutboundReport) {
     for (const c of r.candidates.slice(0, 2)) {
       const location = findBestParagraph(r.page, c.other);
+      const weakNote = c.confident ? '' : ' - weak content overlap, verify relevance manually';
       csvRows.push({
         Priority: priorityFromLevel('Medium', r.page.urlPath, gscMap),
         Type: 'Too few outbound links',
@@ -772,7 +866,7 @@ function run() {
           : 'No obvious paragraph match',
         'Nearest Existing Sentence': location.nearestSentence || '',
         'Paste-Ready Sentence': location.pasteReadySentence,
-        Reason: `Only ${r.stats.total} outbound link(s) currently (aiming for ~${TARGET_OUTBOUND_LINKS})`,
+        Reason: `Only ${r.stats.total} outbound link(s) currently (aiming for ~${TARGET_OUTBOUND_LINKS})${weakNote}`,
         Done: '',
       });
     }
