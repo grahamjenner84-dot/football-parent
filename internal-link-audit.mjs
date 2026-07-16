@@ -10,6 +10,11 @@ const UNDERLINKED_THRESHOLD = 3;   // pages with fewer TOTAL inbound links than 
 const MIN_OUTBOUND_LINKS = 3;      // pages with this many outbound internal links or fewer get flagged
 const TARGET_OUTBOUND_LINKS = 5;   // suggestions top up to roughly this many
 const RECIPROCAL_LIMIT = 50;       // cap on reciprocal-link-opportunity rows in the report
+// Minimum relevanceScore for a reciprocal-link suggestion. Calibrated against the
+// full-body TF-IDF scoring (see relevanceScore) rather than the old title/
+// description-only scale - re-run with DEBUG_SCORE_DIST=1 to recheck this against
+// the actual score distribution if the content set changes a lot.
+const RECIPROCAL_MIN_SCORE = 40;
 const GSC_CSV_PATH = 'gsc-pages.csv';
 const SITEMAP_FILE = 'app/sitemap.ts'; // used as the source of truth for real URLs where possible
 
@@ -237,19 +242,67 @@ function extractInternalLinks(page, pages) {
   return found;
 }
 
+// Common English function words - filtered out before scoring alongside the
+// site-wide-generic-word handling below (that part is statistical, not a list).
+const STOPWORDS = new Set([
+  'this', 'that', 'with', 'from', 'have', 'will', 'your', 'their', 'about', 'there',
+  'which', 'would', 'should', 'could', 'into', 'than', 'then', 'when', 'what', 'where',
+  'while', 'some', 'more', 'most', 'such', 'only', 'also', 'been', 'being', 'were',
+  'they', 'them', 'these', 'those', 'just', 'like', 'over', 'under', 'after', 'before',
+  'both', 'each', 'every', 'through', 'because', 'other', 'still', 'even', 'much',
+  'many', 'very', 'really', 'around', 'again', 'without', 'between', 'during',
+  'however', 'among', 'across', 'within', 'toward', 'towards', 'once', 'here', 'above',
+  'below', 'same', 'does', 'doing', 'having', 'ours', 'yours', 'theirs',
+]);
+
+function tokenize(text) {
+  return text.toLowerCase().split(/\W+/).filter((w) => w.length > 3 && !STOPWORDS.has(w));
+}
+
+// Relevance is judged on full article body content (not just title/description -
+// one sentence rarely has enough distinctive vocabulary to tell two genuinely
+// related articles apart from two that just happen to share a category and some
+// generic phrasing), weighted by how RARE each shared word is across the whole
+// site. A word every article uses ("football", "parent", "training") contributes
+// almost nothing; a word only a handful of pages share ("eppp", "development
+// centre", "relative age effect") is a real signal. This is a standard TF-IDF-
+// style weighting - DOC_FREQ/TOTAL_PAGES are populated once by buildDocFrequency()
+// before any scoring happens.
+let DOC_FREQ = {};
+let TOTAL_PAGES = 0;
+
+function pageWordSet(page) {
+  if (!page._wordSet) {
+    page._wordSet = new Set(tokenize(`${page.title} ${page.description} ${page.content}`));
+  }
+  return page._wordSet;
+}
+
+function buildDocFrequency(pages) {
+  TOTAL_PAGES = pages.length;
+  DOC_FREQ = {};
+  for (const page of pages) {
+    for (const w of pageWordSet(page)) {
+      DOC_FREQ[w] = (DOC_FREQ[w] || 0) + 1;
+    }
+  }
+}
+
 function relevanceScore(a, b) {
   if (a.urlPath === b.urlPath) return -1;
-  let score = 0;
-  if (a.categoryFolder === b.categoryFolder) score += 3;
+  // Same-category is now a light nudge, not the dominant signal - real content
+  // overlap does most of the work.
+  let score = a.categoryFolder === b.categoryFolder ? 1 : 0;
 
-  const textA = `${a.title} ${a.description}`.toLowerCase();
-  const textB = `${b.title} ${b.description}`.toLowerCase();
-  const wordsA = new Set(textA.split(/\W+/).filter((w) => w.length > 3));
-  const wordsB = new Set(textB.split(/\W+/).filter((w) => w.length > 3));
-  const overlap = [...wordsA].filter((w) => wordsB.has(w));
-  score += overlap.length * 0.5;
-
-  return score;
+  const wordsA = pageWordSet(a);
+  const wordsB = pageWordSet(b);
+  const [smaller, larger] = wordsA.size <= wordsB.size ? [wordsA, wordsB] : [wordsB, wordsA];
+  for (const w of smaller) {
+    if (!larger.has(w)) continue;
+    const df = DOC_FREQ[w] || TOTAL_PAGES;
+    score += Math.log(TOTAL_PAGES / df);
+  }
+  return Math.round(score * 10) / 10;
 }
 
 function suggestAnchors(page) {
@@ -353,6 +406,7 @@ function run() {
   }
 
   const gscMap = loadGSCData();
+  buildDocFrequency(pages);
 
   const inboundLinks = {}; // urlPath -> [{ from, anchorText, contextual }]
   pages.forEach((p) => (inboundLinks[p.urlPath] = []));
@@ -396,6 +450,27 @@ function run() {
       .filter((r) => r.score > 0 && !excludePaths.has(r.other.urlPath))
       .sort((a, b) => b.score - a.score);
   }
+
+  // Computed early so section 3's overlinking fixes can prioritise a missing
+  // pillar link over a generic alternative when one applies to the same page -
+  // one edit then fixes two findings at once. Reused as-is by section 7.
+  const missingPillarsByPage = {}; // urlPath -> [{ pillarPath, pillarTitle }]
+  for (const pillarPath of PILLAR_ARTICLES) {
+    const pillar = byPath[pillarPath];
+    if (!pillar) continue;
+    const clusterPages = pages.filter(
+      (p) => p.categoryFolder === pillar.categoryFolder && p.urlPath !== pillarPath && !PILLAR_ARTICLES.includes(p.urlPath)
+    );
+    for (const p of clusterPages) {
+      const alreadyLinks = p.outboundLinks.some((l) => l.targetPath === pillarPath);
+      if (!alreadyLinks) {
+        (missingPillarsByPage[p.urlPath] ||= []).push({ pillarPath, pillarTitle: pillar.title });
+      }
+    }
+  }
+  // (sourceUrlPath|pillarPath) pairs resolved via a section-3 suggestion instead of
+  // getting their own standalone "missing link to pillar" task in section 7.
+  const pillarGapHandledByOverlink = new Set();
 
   const csvRows = [];
 
@@ -496,10 +571,13 @@ function run() {
 
     const linkedPaths = new Set(page.outboundLinks.map((l) => l.targetPath));
     const alternativesPool = rankedCandidates(page, linkedPaths);
-    // Each tier-3 duplicate on this page needs its own distinct replacement -
-    // recommending the same single best alternative for two different related-
-    // articles slots would just trade one duplicate for another.
+    // Every duplicate fixed on this page (tier 1 or tier 3) needs its own distinct
+    // replacement - recommending the same single best alternative for two
+    // different slots would just trade one duplicate for another.
     const claimedReplacements = new Set();
+    const pillarOptions = (missingPillarsByPage[page.urlPath] || []).filter(
+      (opt) => !linkedPaths.has(opt.pillarPath)
+    );
 
     const items = [];
     for (const [targetPath, count] of duplicated) {
@@ -509,7 +587,23 @@ function run() {
       const currentScore = target ? relevanceScore(page, target) : 0;
 
       if (count >= 3) {
-        items.push({ targetPath, title, count, tier: 1, currentScore });
+        // Trimming this down to 1-2 mentions frees up a slot - prefer filling it
+        // with a pillar this page doesn't yet link to (fixes section 7's gap at
+        // the same time) over a generic best-scoring alternative.
+        let replacement = null;
+        const pillarPick = pillarOptions.find((opt) => !claimedReplacements.has(opt.pillarPath));
+        if (pillarPick) {
+          replacement = { other: { title: pillarPick.pillarTitle, urlPath: pillarPick.pillarPath }, score: null, viaPillarGap: true };
+          claimedReplacements.add(pillarPick.pillarPath);
+          pillarGapHandledByOverlink.add(`${page.urlPath}|${pillarPick.pillarPath}`);
+        } else {
+          const alt = alternativesPool.find((c) => !claimedReplacements.has(c.other.urlPath));
+          if (alt) {
+            replacement = alt;
+            claimedReplacements.add(alt.other.urlPath);
+          }
+        }
+        items.push({ targetPath, title, count, tier: 1, currentScore, replacement });
       } else if (ctxCount === 1) {
         const better = alternativesPool.find(
           (c) => c.score > currentScore && !claimedReplacements.has(c.other.urlPath)
@@ -536,16 +630,23 @@ function run() {
   for (const r of overlinkReport) {
     for (const d of r.duplicates) {
       if (d.tier === 1) {
+        const reason = d.replacement
+          ? d.replacement.viaPillarGap
+            ? `Linked ${d.count} times - trim one mention and use the freed slot for pillar "${d.replacement.other.title}", which this page doesn't link to yet (also resolves a section 7 gap)`
+            : `Linked ${d.count} times - trim one mention and use the freed slot for "${d.replacement.other.title}" (relevance ${d.replacement.score}) instead`
+          : `Linked ${d.count} times in this article - trim to 1-2 mentions`;
         csvRows.push({
           Priority: priorityFromLevel('High', r.from, gscMap),
           Type: 'Overlinking (3+ mentions)',
           Source: r.from,
           Target: d.targetPath,
-          'Suggested Anchor': '',
+          'Suggested Anchor': d.replacement ? d.replacement.other.title : '',
           'Suggested Location': 'Body text (multiple mentions)',
           'Nearest Existing Sentence': '',
-          'Paste-Ready Sentence': '',
-          Reason: `Linked ${d.count} times in this article - trim to 1-2 mentions`,
+          'Paste-Ready Sentence': d.replacement
+            ? `Trim one mention of "${d.title}" (${d.targetPath}) and link that spot to [${d.replacement.other.title}](${d.replacement.other.urlPath}) instead.`
+            : '',
+          Reason: reason,
           Done: '',
         });
       } else if (d.tier === 3) {
@@ -629,11 +730,17 @@ function run() {
       const targetLinksBack = target.outboundLinks.some((l) => l.targetPath === page.urlPath);
       if (targetLinksBack) continue;
       const score = relevanceScore(target, page);
-      if (score < 3) continue;
+      if (score < RECIPROCAL_MIN_SCORE) continue;
       reciprocalOpportunities.push({ from: target.urlPath, fromTitle: target.title, to: page.urlPath, toTitle: page.title, score });
     }
   }
   reciprocalOpportunities.sort((a, b) => b.score - a.score);
+  if (process.env.DEBUG_SCORE_DIST) {
+    const scores = [...reciprocalOpportunities].map((r) => r.score).sort((a, b) => a - b);
+    const pct = (p) => scores[Math.floor((scores.length - 1) * p)];
+    console.log('reciprocal candidate count (pre-cap):', scores.length);
+    console.log('score percentiles: p10=%s p25=%s p50=%s p75=%s p90=%s max=%s', pct(0.1), pct(0.25), pct(0.5), pct(0.75), pct(0.9), scores[scores.length - 1]);
+  }
   const reciprocalReport = reciprocalOpportunities.slice(0, RECIPROCAL_LIMIT);
 
   // ---------- 7. Pillar articles and cluster coverage ----------
@@ -654,7 +761,11 @@ function run() {
 
   for (const r of pillarReport) {
     if (r.missing) continue;
-    for (const p of r.missingLinks.slice(0, 3)) {
+    // Pairs already picked up by a section-3 overlinking fix get one task, not two.
+    const remainingMissingLinks = r.missingLinks.filter(
+      (p) => !pillarGapHandledByOverlink.has(`${p.urlPath}|${r.pillarPath}`)
+    );
+    for (const p of remainingMissingLinks.slice(0, 3)) {
       const location = findBestParagraph(p, byPath[r.pillarPath]);
       csvRows.push({
         Priority: priorityFromLevel('Medium', p.urlPath, gscMap),
@@ -722,10 +833,17 @@ function run() {
     }
 
     md += `### 3a. High priority — 3 or more links to the same target (${tier1.length})\n\n`;
-    md += `_Unconditionally worth trimming back to one or two mentions._\n\n`;
+    md += `_Unconditionally worth trimming back to one or two mentions. Where this page also has a missing pillar link (section 7), the freed-up slot is suggested for that first — one edit resolves both findings._\n\n`;
     if (tier1.length === 0) md += `_None found._\n\n`;
     for (const d of tier1) {
       md += `- **${d.fromTitle}** (\`${d.from}\`) links to **${d.title}** (\`${d.targetPath}\`) ${d.count} times\n`;
+      if (d.replacement && d.replacement.viaPillarGap) {
+        md += `  - Trim one mention and link that spot to pillar **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`) instead — also fixes a missing pillar link from section 7\n`;
+      } else if (d.replacement) {
+        md += `  - Trim one mention and link that spot to **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`, relevance ${d.replacement.score}) instead\n`;
+      } else {
+        md += `  - No strong alternative found — just cut back to one or two mentions\n`;
+      }
     }
     if (tier1.length) md += `\n`;
 
@@ -798,7 +916,8 @@ function run() {
     }
     md += `Pages in this cluster that don't yet link to the pillar:\n`;
     for (const p of r.missingLinks) {
-      md += `- **${p.title}** (\`${p.urlPath}\`)\n`;
+      const handled = pillarGapHandledByOverlink.has(`${p.urlPath}|${r.pillarPath}`);
+      md += `- **${p.title}** (\`${p.urlPath}\`)${handled ? ' — fix suggested in section 3a (trimming an overlinked mention)' : ''}\n`;
     }
     md += `\n`;
   }
