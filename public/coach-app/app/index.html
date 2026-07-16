@@ -1046,6 +1046,17 @@
             </select>
           </div>
           <div class="row" style="margin-bottom:10px;">
+            <input type="number" id="edit-match-total-mins" placeholder="Match length (mins)" min="4" style="width:150px;">
+            <select id="edit-match-period-type">
+              <option value="4">4 Quarters</option>
+              <option value="2">2 Halves</option>
+            </select>
+          </div>
+          <div class="row" style="margin-bottom:10px;">
+            <select id="edit-match-format" style="min-width:150px;"></select>
+            <select id="edit-match-formation" style="min-width:150px;"></select>
+          </div>
+          <div class="row" style="margin-bottom:10px;">
             <input type="text" id="edit-match-address" placeholder="Address / venue location (optional)" style="flex:1;">
           </div>
           <div class="row" style="justify-content:space-between;margin-bottom:10px;">
@@ -1452,6 +1463,7 @@ async function handleAuthResolved(){
     }
     renderHeader();
     if(!getActiveSeason()){
+      ensureActiveSeasonForSetup();
       openSettings(true);
     } else {
       renderAll();
@@ -2346,6 +2358,19 @@ document.getElementById('settings-format').addEventListener('change', ()=>{
 });
 document.getElementById('settings-rotation-mode').addEventListener('change', renderSettingsSquad);
 
+// Forced first-run setup (and the "deleted your last season" case) opens Settings
+// with no season to attach a squad to yet — renderSettingsSquad() and the Add
+// player button both silently no-op without one. Create the draft season up
+// front so players can be added on this very first screen; settings-save-btn
+// already finds and updates this same season rather than creating a second one.
+function ensureActiveSeasonForSetup(){
+  if(getActiveSeason()) return;
+  const season = blankSeason({});
+  state.seasons.push(season);
+  state.activeSeasonId = season.id;
+  saveState();
+}
+
 function openSettings(forced){
   settingsForced = !!forced;
   document.getElementById('settings-theme').value = getThemePref();
@@ -2540,6 +2565,7 @@ function renderSeasonList(){
         renderSeasonList();
         renderHeader();
         if(!getActiveSeason()){
+          ensureActiveSeasonForSetup();
           openSettings(true);
         } else {
           const season = getActiveSeason();
@@ -2581,14 +2607,16 @@ function renderAvailableChecks(){
   const season = getActiveSeason();
   const wrap = document.getElementById('match-available-checks');
   const players = season ? activePlayers(season) : [];
-  pendingMatchGuests = [];
-  if(players.length === 0){
-    wrap.innerHTML = '<div class="empty-state">Add players to the squad first (Settings), or add a guest below.</div>';
-  } else {
-    wrap.innerHTML = players.map(p=>`
-      <label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)}</label>
-    `).join('');
-  }
+  // This runs on every tab switch and every match-list refresh, not just once —
+  // it used to also reset pendingMatchGuests, which silently discarded any guest
+  // players already added to an in-progress match (e.g. added via Settings while
+  // the guests were still pending) the moment anything else triggered a re-render.
+  const rows = players.map(p=>`
+    <label><input type="checkbox" class="avail-check" value="${p.id}" checked> ${escapeHtml(p.name)}</label>
+  `).concat(pendingMatchGuests.map(guestCheckboxHtml));
+  wrap.innerHTML = rows.length
+    ? rows.join('')
+    : '<div class="empty-state">Add players to the squad first (Settings), or add a guest below.</div>';
   const formatSel = document.getElementById('match-format-override');
   if(season && formatSel){
     populateFormatSelect('match-format-override', season.format);
@@ -3077,9 +3105,16 @@ document.getElementById('edit-match-btn').addEventListener('click', ()=>{
   document.getElementById('edit-match-kickoff').value = m.kickoffTime || '';
   document.getElementById('edit-match-opponent').value = m.opponent || '';
   document.getElementById('edit-match-venue').value = m.venue === 'A' ? 'A' : 'H';
+  document.getElementById('edit-match-total-mins').value = Math.round((m.quarterMinutes || 10) * (m.numPeriods || 4)) || 40;
+  document.getElementById('edit-match-period-type').value = String(m.numPeriods || 4);
+  populateFormatSelect('edit-match-format', m.format);
+  populateFormationSelect(m.format, m.formation, 'edit-match-formation');
   document.getElementById('edit-match-address').value = m.address || '';
   document.getElementById('edit-match-cancel-reason-panel').style.display = 'none';
   document.getElementById('edit-match-panel').style.display = 'block';
+});
+document.getElementById('edit-match-format').addEventListener('change', ()=>{
+  populateFormationSelect(document.getElementById('edit-match-format').value, null, 'edit-match-formation');
 });
 document.getElementById('edit-match-cancel-btn').addEventListener('click', ()=>{
   document.getElementById('edit-match-panel').style.display = 'none';
@@ -3088,17 +3123,39 @@ document.getElementById('edit-match-save-btn').addEventListener('click', ()=>{
   const m = getMatch(currentMatchId);
   if(!m) return;
   const opponent = document.getElementById('edit-match-opponent').value.trim();
+  const format = document.getElementById('edit-match-format').value;
+  const formation = document.getElementById('edit-match-formation').value;
+  const numPeriods = parseInt(document.getElementById('edit-match-period-type').value) || 4;
+  const totalMins = parseInt(document.getElementById('edit-match-total-mins').value) || 40;
+  // A lineup already generated is tied to this exact format/formation/period count —
+  // changing any of them invalidates it. Safe to just clear it: this can only happen
+  // pre-lock (status placeholder/scheduled), before any goals could have been logged.
+  const lineupInvalidated = !!m.quarters && (m.format !== format || m.formation !== formation || m.numPeriods !== numPeriods);
   m.opponent = opponent || null;
   m.venue = document.getElementById('edit-match-venue').value;
   m.address = document.getElementById('edit-match-address').value.trim() || null;
   m.date = document.getElementById('edit-match-date').value || m.date;
   m.kickoffTime = document.getElementById('edit-match-kickoff').value || null;
+  m.format = format;
+  m.formation = formation;
+  m.numPeriods = numPeriods;
+  m.quarterMinutes = totalMins / numPeriods;
+  if(lineupInvalidated) m.quarters = null;
+  while(m.quarterGoals.length < numPeriods) m.quarterGoals.push({});
+  m.quarterGoals.length = numPeriods;
+  while(m.quarterAssists.length < numPeriods) m.quarterAssists.push({});
+  m.quarterAssists.length = numPeriods;
+  while(m.opponentGoals.length < numPeriods) m.opponentGoals.push(0);
+  m.opponentGoals.length = numPeriods;
   if(m.status === 'placeholder' && opponent) m.status = 'scheduled';
   saveState();
   document.getElementById('edit-match-panel').style.display = 'none';
   renderMatchDetail();
   renderFixtures();
   renderMatchesSummary();
+  if(lineupInvalidated){
+    showAlert('Format, formation or period count changed, so the existing lineup was cleared — hit Generate Team again.');
+  }
 });
 document.getElementById('edit-match-cancel-fixture-btn').addEventListener('click', ()=>{
   document.getElementById('edit-match-cancel-reason-panel').style.display = 'block';
