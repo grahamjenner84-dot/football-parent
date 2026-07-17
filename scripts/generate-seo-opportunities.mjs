@@ -63,9 +63,19 @@ const STRIKING_DISTANCE_MAX_POS = 20;
 const STRIKING_DISTANCE_MIN_IMPRESSIONS = 20;
 const LOW_CTR_MIN_IMPRESSIONS = 50;
 const DECAY_MIN_CLICK_DROP_PCT = 30;
-const DECAY_MIN_PRIOR_CLICKS = 5;
+// Decay gets its own, shorter current/prior window (see DECAY_CURRENT_PERIOD_DAYS
+// below) rather than sharing the 90-day window used for striking distance/low
+// CTR/cannibalisation - a 90-vs-90 comparison averages a real ranking drop
+// across so much time that it's both slow to detect and, on a young site,
+// often has no prior-period data to compare against at all. Raised from 5:
+// a shorter window means fewer accumulated clicks per page, so the floor
+// needs to stay meaningful in weekly-rate terms, not just raw count, to avoid
+// flagging "decay" that's really just noise on a low-traffic page.
+const DECAY_MIN_PRIOR_CLICKS = 8;
 const CURRENT_PERIOD_DAYS = 90;
 const COMPARE_PERIOD_DAYS = 90;
+const DECAY_CURRENT_PERIOD_DAYS = 28;
+const DECAY_COMPARE_PERIOD_DAYS = 28;
 
 const EXPECTED_CTR_BY_POSITION = {
   1: 0.28, 2: 0.15, 3: 0.11, 4: 0.08, 5: 0.06,
@@ -398,17 +408,23 @@ async function main() {
   const priorEnd = addDays(currentStart, -1);
   const priorStart = addDays(priorEnd, -COMPARE_PERIOD_DAYS);
 
+  // Decay's own, shorter window - see the constant comments above.
+  const decayCurrentStart = addDays(currentEnd, -DECAY_CURRENT_PERIOD_DAYS);
+  const decayPriorEnd = addDays(decayCurrentStart, -1);
+  const decayPriorStart = addDays(decayPriorEnd, -DECAY_COMPARE_PERIOD_DAYS);
+
   console.log("Fetching GSC data...");
-  const [queryPageRows, pageRowsCurrent, pageRowsPrior] = await Promise.all([
+  const [queryPageRows, pageRowsCurrent, decayRowsCurrent, decayRowsPrior] = await Promise.all([
     fetchRows(client, isoDate(currentStart), isoDate(currentEnd), ["query", "page"]),
     fetchRows(client, isoDate(currentStart), isoDate(currentEnd), ["page"]),
-    fetchRows(client, isoDate(priorStart), isoDate(priorEnd), ["page"]),
+    fetchRows(client, isoDate(decayCurrentStart), isoDate(currentEnd), ["page"]),
+    fetchRows(client, isoDate(decayPriorStart), isoDate(decayPriorEnd), ["page"]),
   ]);
 
   const opportunities = [
     ...analyseStrikingDistance(queryPageRows),
     ...analyseLowCtr(pageRowsCurrent),
-    ...analyseDecay(pageRowsCurrent, pageRowsPrior),
+    ...analyseDecay(decayRowsCurrent, decayRowsPrior),
   ];
 
   console.log("Scanning repo for matching files...");
