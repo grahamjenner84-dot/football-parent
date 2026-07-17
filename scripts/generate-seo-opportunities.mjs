@@ -268,6 +268,67 @@ function matchFile(routeMap, pageUrl) {
   return { matched: true, pathname, pageFile, mdxFile: mdxFile || null };
 }
 
+// --- current title/meta extraction -----------------------------------
+// Best-effort only: pulls whatever it can find so a suggested rewrite has
+// something concrete to compare against, rather than guessing. If nothing
+// is found, that's reported explicitly rather than left blank/assumed.
+
+function extractFrontmatter(content) {
+  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!match) return {};
+  const fm = {};
+  for (const line of match[1].split(/\r?\n/)) {
+    const m = line.match(/^(\w+):\s*["']?(.*?)["']?\s*$/);
+    if (m) fm[m[1]] = m[2];
+  }
+  return fm;
+}
+
+function extractMetaFromTsx(content) {
+  // Looks for title/description inside an `export const metadata = {...}`
+  // block or a `generateMetadata` return object. Simple regex, not a full
+  // parser - won't catch every pattern, but flags what it can't find.
+  const titleMatch = content.match(/title:\s*[`"']([^`"']+)[`"']/);
+  const descMatch = content.match(/description:\s*[`"']([^`"']+)[`"']/);
+  return {
+    title: titleMatch ? titleMatch[1] : null,
+    description: descMatch ? descMatch[1] : null,
+  };
+}
+
+function getCurrentMeta(match) {
+  let title = null;
+  let description = null;
+  let source = null;
+
+  if (match.mdxFile) {
+    const fullPath = path.join(REPO_ROOT, match.mdxFile);
+    if (fs.existsSync(fullPath)) {
+      const content = fs.readFileSync(fullPath, "utf8");
+      const fm = extractFrontmatter(content);
+      if (fm.title) { title = fm.title; source = match.mdxFile; }
+      if (fm.description) { description = fm.description; source = match.mdxFile; }
+    }
+  }
+
+  if ((!title || !description) && match.pageFile) {
+    const fullPath = path.join(REPO_ROOT, match.pageFile);
+    if (fs.existsSync(fullPath)) {
+      const content = fs.readFileSync(fullPath, "utf8");
+      const meta = extractMetaFromTsx(content);
+      if (!title && meta.title) { title = meta.title; source = match.pageFile; }
+      if (!description && meta.description) { description = meta.description; source = match.pageFile; }
+    }
+  }
+
+  return {
+    title,
+    description,
+    found: Boolean(title || description),
+    source,
+  };
+}
+
 // --- output -----------------------------------------------------------
 
 const GUARDRAILS = `
@@ -309,6 +370,15 @@ function toMarkdown(opportunities, routeMap) {
       if (match.matched) {
         lines.push(`  - file: \`${match.pageFile}\``);
         if (match.mdxFile) lines.push(`  - content: \`${match.mdxFile}\``);
+        if (section === "low_ctr") {
+          const meta = getCurrentMeta(match);
+          if (meta.found) {
+            if (meta.title) lines.push(`  - current title: "${meta.title}"`);
+            if (meta.description) lines.push(`  - current meta description: "${meta.description}"`);
+          } else {
+            lines.push(`  - current title/meta: not found automatically, check \`${match.pageFile}\` manually`);
+          }
+        }
       } else {
         lines.push(`  - no file match found for path \`${match.pathname}\` - check manually`);
       }
@@ -344,10 +414,14 @@ async function main() {
   console.log("Scanning repo for matching files...");
   const routeMap = buildRouteMap();
 
-  const matched = opportunities.map((row) => ({
-    ...row,
-    match: matchFile(routeMap, row.page),
-  }));
+  const matched = opportunities.map((row) => {
+    const match = matchFile(routeMap, row.page);
+    const withMeta = { ...row, match };
+    if (row.type === "low_ctr" && match.matched) {
+      withMeta.currentMeta = getCurrentMeta(match);
+    }
+    return withMeta;
+  });
 
   fs.writeFileSync(
     path.join(REPO_ROOT, "seo-opportunities.json"),

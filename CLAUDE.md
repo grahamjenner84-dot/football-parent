@@ -59,6 +59,7 @@ The short version:
   5. Risk-scale caution to current traffic: `striking_distance`/`cannibalisation` entries usually have little current traffic (more latitude); `low_ctr`/`decay` entries already have real clicks and rankings (be conservative, call out that it's live traffic before changing it).
   6. After publishing, that page goes on a 10-14 day watch list before touching it again — don't stack a second change before knowing whether the first worked.
   7. If a past change caused a ranking/click drop and was reverted, don't reintroduce it later even reframed, unless explicitly asked again with a stated reason.
+  8. When suggesting a new title or meta description, always show the current one first (the opportunities file includes it where found) and present alternatives alongside it rather than just handing over a replacement — if the current title/meta wasn't found automatically, read the actual file before suggesting anything, don't guess at what it currently says.
 
   This exists because a past SEO edit cost a page its rankings entirely; reverting recovered them. The point is traceability and reversibility, not timidity.
 
