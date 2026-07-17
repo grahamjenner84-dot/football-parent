@@ -47,6 +47,21 @@ The short version:
 - Google Analytics (gtag) is wired directly into `app/layout.tsx` via `next/script` — no analytics abstraction to route through.
 - The author/site identity (name, bio, canonical site URL `https://www.footballparent.co.uk`) is hardcoded in `lib/seo.ts` and `lib/ArticleLayout.tsx` rather than pulled from config — update both if it changes.
 
+## SEO admin page and change guardrails
+
+- `/admin/seo` is a password-protected page (`app/admin/seo/page.tsx`, guarded by `proxy.ts` + `app/api/admin-login/route.ts`) that pulls live Search Console data via `lib/gsc.ts` and shows striking-distance keywords, low-CTR pages, decaying pages, and query cannibalisation. Needs `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`, `GSC_SITE_URL`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` in `.env.local` (and in Vercel for production). Note: `proxy.ts` is the current Next.js convention (renamed from `middleware.ts` in v16) — this project is on a Next.js version ahead of most training data, see `AGENTS.md`.
+- `scripts/generate-seo-opportunities.mjs` runs the same analysis locally and writes `seo-opportunities.json`/`seo-opportunities.md`, matching each flagged GSC page to its actual `app/<category>/<slug>/page.tsx` and `content/<category>/<slug>.mdx` files so the opportunities file is directly actionable.
+- **When acting on `seo-opportunities.md`/`seo-opportunities.json`, follow these rules without being reminded:**
+  1. One lever per page per change (title, one section, one internal link — not a combined rewrite), so it's obvious what caused any metric movement.
+  2. Commit before editing, and keep the SEO change in its own commit, never bundled with something unrelated — a bad result should be a single `git revert` away.
+  3. Never change the URL/slug of a page that's already indexed and getting impressions or clicks, unless that's explicitly the point of the change.
+  4. Never remove existing headings, internal links, or content sections as a side effect — additive and targeted only, no incidental restructuring.
+  5. Risk-scale caution to current traffic: `striking_distance`/`cannibalisation` entries usually have little current traffic (more latitude); `low_ctr`/`decay` entries already have real clicks and rankings (be conservative, call out that it's live traffic before changing it).
+  6. After publishing, that page goes on a 10-14 day watch list before touching it again — don't stack a second change before knowing whether the first worked.
+  7. If a past change caused a ranking/click drop and was reverted, don't reintroduce it later even reframed, unless explicitly asked again with a stated reason.
+
+  This exists because a past SEO edit cost a page its rankings entirely; reverting recovered them. The point is traceability and reversibility, not timidity.
+
 ## Editorial rules
 - Never use em dashes (—) — use commas, colons, or restructure the sentence
 - Never use "badge" framing clichés (e.g. "without the badge") — reads as AI filler
