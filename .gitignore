@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local render test output (scripts/render-single-slide-sample.mjs)
+/tmp-renders/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
