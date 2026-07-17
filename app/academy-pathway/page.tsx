@@ -57,10 +57,10 @@ export default function AcademyPathwayPage() {
             "A simple explanation of how academy football is structured and what parents need to know.",
         },
         {
-          title: "Academy Categories Explained",
+          title: "Category 1, 2, 3 & 4 Football Academies Explained",
           href: "/academy-pathway/academy-categories-explained",
           description:
-            "Understand the difference between Category 1, 2, 3 and 4 academies.",
+            "What's the difference between a Category 1 and Category 4 academy? What each level means for training hours, travel, facilities and your child's development.",
         },
         {
           title: "Development Centres vs Academies",
@@ -81,10 +81,10 @@ export default function AcademyPathwayPage() {
             "A parent-friendly guide to when academy recruitment usually starts.",
         },
         {
-          title: "What Is EPPP in Football?",
+          title: "What Is EPPP? The Elite Player Performance Plan Explained",
           href: "/academy-pathway/what-is-eppp",
           description:
-            "Understand the Elite Player Performance Plan and why it matters.",
+            "EPPP stands for Elite Player Performance Plan. What it means for your child's academy journey: categories, coaching hours, catchment rules and player movement.",
         },
         {
           title: "Understanding Academy Release",

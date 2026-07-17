@@ -3,12 +3,10 @@ import ArticleLayout from "@/lib/ArticleLayout";
 import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
-export const dynamic = "force-dynamic";
-
 export const metadata = generateSEO({
-  title: "What Is EPPP in Football? | Football Parent",
+  title: "What Is EPPP? The Elite Player Performance Plan Explained | Football Parent",
   description:
-    "EPPP stands for Elite Player Performance Plan. Here is what it means in academy football, including categories, coaching hours, player movement and what parents need to know.",
+    "EPPP stands for Elite Player Performance Plan. What it means for your child's academy journey: categories, coaching hours, catchment rules and player movement.",
   path: "/academy-pathway/what-is-eppp",
 });
 

@@ -4,9 +4,9 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "What is the Junior Premier League? | Football Parent",
+  title: "What Is the Junior Premier League (JPL)? | Football Parent",
   description:
-    "Learn all about the Junior Premier League and how it can benefit your child's football development.",
+  "An independent guide to the Junior Premier League (JPL): who runs it, how it works, age groups, costs, and whether it's connected to the Premier League.",
   path: "/parent-guides/what-is-the-junior-premier-league",
 });
 
