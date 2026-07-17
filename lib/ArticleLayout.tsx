@@ -192,18 +192,18 @@ export default function ArticleLayout({
             </div>
 
             {formatDate(datePublished) && (
-  <>
-    <span className="text-gray-300">•</span>
-    <span>Published {formatDate(datePublished)}</span>
-  </>
-)}
+              <>
+                <span className="text-gray-300">•</span>
+                <span>Published {formatDate(datePublished)}</span>
+              </>
+            )}
 
             {formatDate(dateModified) && (
-  <>
-    <span className="text-gray-300">•</span>
-    <span>Updated {formatDate(dateModified)}</span>
-  </>
-)}
+              <>
+                <span className="text-gray-300">•</span>
+                <span>Updated {formatDate(dateModified)}</span>
+              </>
+            )}
 
             <span className="text-gray-300">•</span>
             <span>{readTime} min read</span>
@@ -270,10 +270,10 @@ export default function ArticleLayout({
                   </h3>
 
                   <p className="text-gray-600">
-                    Graham is the founder of Football Parent. As a
-                    football parent and grassroots coach, he provides
-                    independent guidance on academies, development centres,
-                    trials and youth football pathways in the UK.
+                    Graham is the founder of Football Parent. As a football
+                    parent and grassroots coach, he provides independent
+                    guidance on academies, development centres, trials and youth
+                    football pathways in the UK.
                   </p>
                 </div>
               </div>
