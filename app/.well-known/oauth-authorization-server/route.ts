@@ -1,17 +1,20 @@
 import { NextResponse } from "next/server";
 
 // RFC 8414 authorization server metadata. This site acts as its own (very
-// minimal) authorization server - the only grant it issues is
-// client_credentials via /api/oauth/token, for the one MCP client
-// (claude.ai's custom connector). See app/api/oauth/token/route.ts.
+// minimal) authorization server for the one MCP client (claude.ai's custom
+// connector) - see app/authorize/route.ts (authorization_code + PKCE) and
+// app/api/oauth/token/route.ts (token exchange, also accepts
+// client_credentials as a fallback).
 export async function GET() {
   const issuer = "https://www.footballparent.co.uk";
   return NextResponse.json({
     issuer,
+    authorization_endpoint: `${issuer}/authorize`,
     token_endpoint: `${issuer}/api/oauth/token`,
-    grant_types_supported: ["client_credentials"],
+    grant_types_supported: ["authorization_code", "client_credentials"],
+    response_types_supported: ["code"],
+    code_challenge_methods_supported: ["S256"],
     token_endpoint_auth_methods_supported: ["client_secret_post", "client_secret_basic"],
-    response_types_supported: [],
   });
 }
 

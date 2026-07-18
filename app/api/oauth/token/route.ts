@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { verifyAuthCode, verifyPkce } from "@/lib/oauthCode";
 
-// Minimal OAuth 2.0 client_credentials token endpoint - just enough for
-// claude.ai's custom connector "Advanced settings" (Client ID + Client
-// Secret) to obtain a bearer token automatically, without a user-facing
-// login/consent screen. There's only one client (Graham), so this checks a
-// single fixed client_id/client_secret pair against env vars and, if they
-// match, hands back the same MCP_ACCESS_TOKEN that app/api/[transport]/
-// route.ts already validates - the actual authorization check doesn't
-// change, this just gives an OAuth-compliant client an automated way to
-// fetch that token instead of it being pasted in manually.
+// OAuth 2.0 token endpoint for the MCP connector - supports both grants:
+// - authorization_code (+ PKCE): what claude.ai's connector actually uses,
+//   completing the browser redirect from app/authorize/route.ts.
+// - client_credentials: kept as a fallback for any client that skips the
+//   browser step and authenticates directly with the client secret.
+// Either way, a successful exchange hands back the same MCP_ACCESS_TOKEN
+// that app/api/[transport]/route.ts already validates on every MCP request -
+// this endpoint only decides whether a client is allowed to *obtain* that
+// token, not what it's allowed to do with it.
 
 function extractClientCredentials(req: NextRequest, body: URLSearchParams) {
   const authHeader = req.headers.get("authorization");
@@ -25,6 +26,15 @@ function extractClientCredentials(req: NextRequest, body: URLSearchParams) {
   };
 }
 
+function tokenResponse() {
+  return NextResponse.json({
+    access_token: process.env.MCP_ACCESS_TOKEN,
+    token_type: "Bearer",
+    expires_in: 31536000, // effectively long-lived - single personal client, no rotation UI
+    scope: "seo:read",
+  });
+}
+
 export async function POST(req: NextRequest) {
   const contentType = req.headers.get("content-type") || "";
   let body: URLSearchParams;
@@ -36,26 +46,48 @@ export async function POST(req: NextRequest) {
   }
 
   const grantType = body.get("grant_type");
-  if (grantType !== "client_credentials") {
-    return NextResponse.json(
-      { error: "unsupported_grant_type", error_description: "Only client_credentials is supported" },
-      { status: 400 }
-    );
-  }
-
-  const { clientId, clientSecret } = extractClientCredentials(req, body);
-  const expectedId = process.env.MCP_CLIENT_ID;
-  const expectedSecret = process.env.MCP_CLIENT_SECRET;
   const accessToken = process.env.MCP_ACCESS_TOKEN;
-
-  if (!expectedId || !expectedSecret || !accessToken || clientId !== expectedId || clientSecret !== expectedSecret) {
-    return NextResponse.json({ error: "invalid_client" }, { status: 401 });
+  if (!accessToken) {
+    return NextResponse.json({ error: "server_error", error_description: "MCP_ACCESS_TOKEN not configured" }, { status: 500 });
   }
 
-  return NextResponse.json({
-    access_token: accessToken,
-    token_type: "Bearer",
-    expires_in: 31536000, // effectively long-lived - single personal client, no rotation UI
-    scope: "seo:read",
-  });
+  if (grantType === "authorization_code") {
+    const code = body.get("code");
+    const redirectUri = body.get("redirect_uri");
+    const codeVerifier = body.get("code_verifier");
+    const { clientId, clientSecret } = extractClientCredentials(req, body);
+
+    if (clientId !== process.env.MCP_CLIENT_ID || clientSecret !== process.env.MCP_CLIENT_SECRET) {
+      return NextResponse.json({ error: "invalid_client" }, { status: 401 });
+    }
+    if (!code || !redirectUri || !codeVerifier) {
+      return NextResponse.json({ error: "invalid_request" }, { status: 400 });
+    }
+
+    const payload = verifyAuthCode(code);
+    if (!payload) {
+      return NextResponse.json({ error: "invalid_grant", error_description: "Code is invalid or expired" }, { status: 400 });
+    }
+    if (payload.redirectUri !== redirectUri) {
+      return NextResponse.json({ error: "invalid_grant", error_description: "redirect_uri mismatch" }, { status: 400 });
+    }
+    if (!verifyPkce(codeVerifier, payload.codeChallenge)) {
+      return NextResponse.json({ error: "invalid_grant", error_description: "PKCE verification failed" }, { status: 400 });
+    }
+
+    return tokenResponse();
+  }
+
+  if (grantType === "client_credentials") {
+    const { clientId, clientSecret } = extractClientCredentials(req, body);
+    if (clientId !== process.env.MCP_CLIENT_ID || clientSecret !== process.env.MCP_CLIENT_SECRET) {
+      return NextResponse.json({ error: "invalid_client" }, { status: 401 });
+    }
+    return tokenResponse();
+  }
+
+  return NextResponse.json(
+    { error: "unsupported_grant_type", error_description: "Use authorization_code or client_credentials" },
+    { status: 400 }
+  );
 }
