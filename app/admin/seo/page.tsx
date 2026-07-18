@@ -7,11 +7,13 @@ import type {
   LowCtrRow,
   DecayRow,
   CannibalRow,
+  SilenceRow,
 } from "@/lib/gsc";
 
-type Tab = "striking" | "ctr" | "decay" | "cannibal";
+type Tab = "silence" | "striking" | "ctr" | "decay" | "cannibal";
 
 const TABS: { id: Tab; label: string }[] = [
+  { id: "silence", label: "Gone quiet" },
   { id: "striking", label: "Striking distance" },
   { id: "ctr", label: "Low CTR" },
   { id: "decay", label: "Decay" },
@@ -31,7 +33,7 @@ export default function SeoAdminPage() {
   const [report, setReport] = useState<SeoReport | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<Tab>("striking");
+  const [tab, setTab] = useState<Tab>("silence");
 
   useEffect(() => {
     fetch("/api/seo-report")
@@ -79,6 +81,7 @@ export default function SeoAdminPage() {
         {error && <p style={styles.error}>{error}</p>}
         {report && !loading && !error && (
           <>
+            {tab === "silence" && <SilenceList rows={report.silence} />}
             {tab === "striking" && <StrikingList rows={report.strikingDistance} />}
             {tab === "ctr" && <LowCtrList rows={report.lowCtr} />}
             {tab === "decay" && <DecayList rows={report.decay} />}
@@ -92,6 +95,8 @@ export default function SeoAdminPage() {
 
 function countFor(report: SeoReport, tab: Tab): number {
   switch (tab) {
+    case "silence":
+      return report.silence.length;
     case "striking":
       return report.strikingDistance.length;
     case "ctr":
@@ -105,6 +110,31 @@ function countFor(report: SeoReport, tab: Tab): number {
 
 function EmptyState({ text }: { text: string }) {
   return <p style={styles.muted}>{text}</p>;
+}
+
+function SilenceList({ rows }: { rows: SilenceRow[] }) {
+  if (!rows.length) return <EmptyState text="Nothing has gone quiet - all pages with real prior traffic still have recent impressions." />;
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        Real prior traffic, near-zero in the recent window. Usually technical
+        (deindexing, noindex, canonical, a bad deploy), not a content issue.
+        Check URL Inspection / Test Live URL before editing anything.
+      </p>
+      {rows.map((r, i) => (
+        <div key={i} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{shortPage(r.page)}</span>
+            <span style={{ ...styles.cardBadge, ...styles.cardBadgeWarn }}>quiet</span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>was {r.baselineImpressions} impr / {r.baselineDays}d</span>
+            <span>now {r.recentImpressions} impr / {r.recentDays}d</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 function StrikingList({ rows }: { rows: StrikingRow[] }) {
@@ -315,6 +345,12 @@ const styles: Record<string, CSSProperties> = {
   muted: {
     color: "#9c8a72",
     fontSize: 14,
+  },
+  sectionNote: {
+    color: "#9c8a72",
+    fontSize: 12,
+    margin: "0 0 4px",
+    lineHeight: 1.5,
   },
   error: {
     color: "#e07856",

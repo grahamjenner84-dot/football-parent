@@ -21,6 +21,15 @@ const COMPARE_PERIOD_DAYS = 90;
 const DECAY_CURRENT_PERIOD_DAYS = 28;
 const DECAY_COMPARE_PERIOD_DAYS = 28;
 
+// "Gone quiet" - pages with real impressions historically that have gone
+// near-silent recently. Both windows end at currentEnd, which is already
+// lag-adjusted, so this only fires if the whole recent window is quiet, not
+// just the last day or two of naturally incomplete GSC data.
+const SILENCE_RECENT_DAYS = 7;
+const SILENCE_BASELINE_DAYS = 21;
+const SILENCE_MIN_BASELINE_IMPRESSIONS = 30;
+const SILENCE_MAX_RECENT_IMPRESSIONS = 2;
+
 // Rough expected CTR by position - industry ballpark, used only to rank
 // opportunities relative to each other, not as an absolute target.
 const EXPECTED_CTR_BY_POSITION: Record<number, number> = {
@@ -230,6 +239,69 @@ function analyseCannibalisation(rows: GscRow[], minImpressions = 20): CannibalRo
   );
 }
 
+export type SilenceRow = {
+  page: string;
+  baselineImpressions: number;
+  baselineClicks: number;
+  baselineDays: number;
+  recentImpressions: number;
+  recentClicks: number;
+  recentDays: number;
+};
+
+// A page going from real, steady impressions to near-zero is usually
+// technical (deindexing, a noindex slip, a broken canonical, a bad deploy)
+// rather than a content problem, and easy to miss by eye across dozens of
+// pages. Both windows end at currentEnd, which is already lag-adjusted, so
+// this only fires if the whole recent window is quiet, not just the last
+// day or two of naturally incomplete GSC data.
+function analyseSilence(pageDateRows: GscRow[], currentEnd: Date): SilenceRow[] {
+  const recentStart = addDays(currentEnd, -(SILENCE_RECENT_DAYS - 1));
+  const baselineEnd = addDays(recentStart, -1);
+  const baselineStart = addDays(baselineEnd, -(SILENCE_BASELINE_DAYS - 1));
+
+  const byPage = new Map<
+    string,
+    { recentImpressions: number; recentClicks: number; baselineImpressions: number; baselineClicks: number }
+  >();
+
+  for (const r of pageDateRows) {
+    const [page, dateStr] = r.keys;
+    const date = new Date(dateStr);
+    if (!byPage.has(page)) {
+      byPage.set(page, { recentImpressions: 0, recentClicks: 0, baselineImpressions: 0, baselineClicks: 0 });
+    }
+    const entry = byPage.get(page)!;
+    if (date >= recentStart && date <= currentEnd) {
+      entry.recentImpressions += r.impressions;
+      entry.recentClicks += r.clicks;
+    } else if (date >= baselineStart && date <= baselineEnd) {
+      entry.baselineImpressions += r.impressions;
+      entry.baselineClicks += r.clicks;
+    }
+  }
+
+  const results: SilenceRow[] = [];
+  for (const [page, stats] of byPage) {
+    if (
+      stats.baselineImpressions >= SILENCE_MIN_BASELINE_IMPRESSIONS &&
+      stats.recentImpressions <= SILENCE_MAX_RECENT_IMPRESSIONS
+    ) {
+      results.push({
+        page,
+        baselineImpressions: stats.baselineImpressions,
+        baselineClicks: stats.baselineClicks,
+        baselineDays: SILENCE_BASELINE_DAYS,
+        recentImpressions: stats.recentImpressions,
+        recentClicks: stats.recentClicks,
+        recentDays: SILENCE_RECENT_DAYS,
+      });
+    }
+  }
+
+  return results.sort((a, b) => b.baselineImpressions - a.baselineImpressions);
+}
+
 // --- main entry point ---------------------------------------------------
 
 export type SeoReport = {
@@ -239,6 +311,7 @@ export type SeoReport = {
   lowCtr: LowCtrRow[];
   decay: DecayRow[];
   cannibalisation: CannibalRow[];
+  silence: SilenceRow[];
 };
 
 export async function getSeoReport(): Promise<SeoReport> {
@@ -253,11 +326,14 @@ export async function getSeoReport(): Promise<SeoReport> {
   const decayPriorEnd = addDays(decayCurrentStart, -1);
   const decayPriorStart = addDays(decayPriorEnd, -DECAY_COMPARE_PERIOD_DAYS);
 
-  const [queryPageRows, pageRowsCurrent, decayRowsCurrent, decayRowsPrior] = await Promise.all([
+  const silenceWindowStart = addDays(currentEnd, -(SILENCE_RECENT_DAYS + SILENCE_BASELINE_DAYS - 1));
+
+  const [queryPageRows, pageRowsCurrent, decayRowsCurrent, decayRowsPrior, pageDateRows] = await Promise.all([
     fetchRows(isoDate(currentStart), isoDate(currentEnd), ["query", "page"]),
     fetchRows(isoDate(currentStart), isoDate(currentEnd), ["page"]),
     fetchRows(isoDate(decayCurrentStart), isoDate(currentEnd), ["page"]),
     fetchRows(isoDate(decayPriorStart), isoDate(decayPriorEnd), ["page"]),
+    fetchRows(isoDate(silenceWindowStart), isoDate(currentEnd), ["page", "date"]),
   ]);
 
   return {
@@ -267,5 +343,6 @@ export async function getSeoReport(): Promise<SeoReport> {
     lowCtr: analyseLowCtr(pageRowsCurrent),
     decay: analyseDecay(decayRowsCurrent, decayRowsPrior),
     cannibalisation: analyseCannibalisation(queryPageRows),
+    silence: analyseSilence(pageDateRows, currentEnd),
   };
 }
