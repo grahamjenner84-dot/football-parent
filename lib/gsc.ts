@@ -30,6 +30,21 @@ const SILENCE_BASELINE_DAYS = 21;
 const SILENCE_MIN_BASELINE_IMPRESSIONS = 30;
 const SILENCE_MAX_RECENT_IMPRESSIONS = 2;
 
+// Rank tracker: "position today" vs "position 7 days ago" per query/page.
+// Real rank-tracking tools (SEMrush etc.) get clean single-day comparisons
+// because they run their own live SERP check once a day - one controlled
+// measurement, not a sample. GSC's position is an impression-weighted average
+// over however many real users happened to search that specific day, so a
+// literal single-day comparison is mostly noise for anything but your very
+// highest-volume queries. Averaging over a few days smooths that out at the
+// cost of it no longer being a literal "today" snapshot.
+const RANK_TRACKER_WINDOW_DAYS = 3;
+// Minimum combined impressions (both windows together) to list a query at
+// all - filters out the long tail of one-off searches that would otherwise
+// dominate the table with meaningless swings.
+const RANK_TRACKER_MIN_COMBINED_IMPRESSIONS = 4;
+const RANK_TRACKER_MAX_ROWS = 150;
+
 // Rough expected CTR by position - industry ballpark, used only to rank
 // opportunities relative to each other, not as an absolute target.
 const EXPECTED_CTR_BY_POSITION: Record<number, number> = {
@@ -239,6 +254,93 @@ function analyseCannibalisation(rows: GscRow[], minImpressions = 20): CannibalRo
   );
 }
 
+export type RankRow = {
+  query: string;
+  page: string;
+  recentPosition: number | null;
+  recentImpressions: number;
+  recentClicks: number;
+  priorPosition: number | null;
+  priorImpressions: number;
+  priorClicks: number;
+  delta: number | null; // positive = improved (moved up the results), negative = declined
+  direction: "up" | "down" | "same" | "new" | "lost";
+};
+
+// "Position today" vs "position 7 days ago" per query/page, each side
+// smoothed over RANK_TRACKER_WINDOW_DAYS - see the constant comment for why
+// a literal single day isn't meaningful with GSC's sampled data.
+function analyseRankTracker(rows: GscRow[], currentEnd: Date): RankRow[] {
+  const recentEnd = currentEnd;
+  const recentStart = addDays(recentEnd, -(RANK_TRACKER_WINDOW_DAYS - 1));
+  const priorEnd = addDays(recentEnd, -7);
+  const priorStart = addDays(recentStart, -7);
+
+  type Bucket = { impressions: number; clicks: number; posWeighted: number };
+  const emptyBucket = (): Bucket => ({ impressions: 0, clicks: 0, posWeighted: 0 });
+  const recentByKey = new Map<string, Bucket>();
+  const priorByKey = new Map<string, Bucket>();
+  const meta = new Map<string, { query: string; page: string }>();
+
+  for (const r of rows) {
+    const [query, page, dateStr] = r.keys;
+    const date = new Date(dateStr);
+    const key = `${query}||${page}`;
+    if (!meta.has(key)) meta.set(key, { query, page });
+
+    let target: Map<string, Bucket> | null = null;
+    if (date >= recentStart && date <= recentEnd) target = recentByKey;
+    else if (date >= priorStart && date <= priorEnd) target = priorByKey;
+    if (!target) continue;
+
+    if (!target.has(key)) target.set(key, emptyBucket());
+    const b = target.get(key)!;
+    b.impressions += r.impressions;
+    b.clicks += r.clicks;
+    b.posWeighted += r.position * r.impressions;
+  }
+
+  const results: RankRow[] = [];
+  for (const [key, { query, page }] of meta) {
+    const recent = recentByKey.get(key);
+    const prior = priorByKey.get(key);
+    const recentImpressions = recent?.impressions || 0;
+    const priorImpressions = prior?.impressions || 0;
+    if (recentImpressions + priorImpressions < RANK_TRACKER_MIN_COMBINED_IMPRESSIONS) continue;
+
+    const recentPosition = recent && recent.impressions ? Math.round((recent.posWeighted / recent.impressions) * 10) / 10 : null;
+    const priorPosition = prior && prior.impressions ? Math.round((prior.posWeighted / prior.impressions) * 10) / 10 : null;
+
+    let direction: RankRow["direction"] = "same";
+    let delta: number | null = null;
+    if (recentPosition !== null && priorPosition !== null) {
+      delta = Math.round((priorPosition - recentPosition) * 10) / 10;
+      direction = delta > 0.1 ? "up" : delta < -0.1 ? "down" : "same";
+    } else if (recentPosition !== null && priorPosition === null) {
+      direction = "new";
+    } else if (recentPosition === null && priorPosition !== null) {
+      direction = "lost";
+    }
+
+    results.push({
+      query,
+      page,
+      recentPosition,
+      recentImpressions,
+      recentClicks: recent?.clicks || 0,
+      priorPosition,
+      priorImpressions,
+      priorClicks: prior?.clicks || 0,
+      delta,
+      direction,
+    });
+  }
+
+  return results
+    .sort((a, b) => b.recentImpressions + b.priorImpressions - (a.recentImpressions + a.priorImpressions))
+    .slice(0, RANK_TRACKER_MAX_ROWS);
+}
+
 export type SilenceRow = {
   page: string;
   baselineImpressions: number;
@@ -312,6 +414,7 @@ export type SeoReport = {
   decay: DecayRow[];
   cannibalisation: CannibalRow[];
   silence: SilenceRow[];
+  rankTracker: RankRow[];
 };
 
 export async function getSeoReport(): Promise<SeoReport> {
@@ -328,12 +431,18 @@ export async function getSeoReport(): Promise<SeoReport> {
 
   const silenceWindowStart = addDays(currentEnd, -(SILENCE_RECENT_DAYS + SILENCE_BASELINE_DAYS - 1));
 
-  const [queryPageRows, pageRowsCurrent, decayRowsCurrent, decayRowsPrior, pageDateRows] = await Promise.all([
+  // Rank tracker needs its "recent" window (currentEnd back RANK_TRACKER_WINDOW_DAYS)
+  // and the same span 7 days earlier - covered by one fetch from the older
+  // boundary through currentEnd.
+  const rankTrackerWindowStart = addDays(currentEnd, -(RANK_TRACKER_WINDOW_DAYS - 1 + 7));
+
+  const [queryPageRows, pageRowsCurrent, decayRowsCurrent, decayRowsPrior, pageDateRows, rankTrackerRows] = await Promise.all([
     fetchRows(isoDate(currentStart), isoDate(currentEnd), ["query", "page"]),
     fetchRows(isoDate(currentStart), isoDate(currentEnd), ["page"]),
     fetchRows(isoDate(decayCurrentStart), isoDate(currentEnd), ["page"]),
     fetchRows(isoDate(decayPriorStart), isoDate(decayPriorEnd), ["page"]),
     fetchRows(isoDate(silenceWindowStart), isoDate(currentEnd), ["page", "date"]),
+    fetchRows(isoDate(rankTrackerWindowStart), isoDate(currentEnd), ["query", "page", "date"]),
   ]);
 
   return {
@@ -344,5 +453,6 @@ export async function getSeoReport(): Promise<SeoReport> {
     decay: analyseDecay(decayRowsCurrent, decayRowsPrior),
     cannibalisation: analyseCannibalisation(queryPageRows),
     silence: analyseSilence(pageDateRows, currentEnd),
+    rankTracker: analyseRankTracker(rankTrackerRows, currentEnd),
   };
 }

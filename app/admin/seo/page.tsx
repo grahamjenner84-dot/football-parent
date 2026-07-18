@@ -8,9 +8,10 @@ import type {
   DecayRow,
   CannibalRow,
   SilenceRow,
+  RankRow,
 } from "@/lib/gsc";
 
-type Tab = "silence" | "striking" | "ctr" | "decay" | "cannibal";
+type Tab = "silence" | "striking" | "ctr" | "decay" | "cannibal" | "rank";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "silence", label: "Gone quiet" },
@@ -18,6 +19,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "ctr", label: "Low CTR" },
   { id: "decay", label: "Decay" },
   { id: "cannibal", label: "Cannibalisation" },
+  { id: "rank", label: "Rank tracker" },
 ];
 
 function shortPage(page: string): string {
@@ -86,6 +88,7 @@ export default function SeoAdminPage() {
             {tab === "ctr" && <LowCtrList rows={report.lowCtr} />}
             {tab === "decay" && <DecayList rows={report.decay} />}
             {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
+            {tab === "rank" && <RankTrackerList rows={report.rankTracker} />}
           </>
         )}
       </main>
@@ -105,6 +108,8 @@ function countFor(report: SeoReport, tab: Tab): number {
       return report.decay.length;
     case "cannibal":
       return report.cannibalisation.length;
+    case "rank":
+      return report.rankTracker.length;
   }
 }
 
@@ -228,6 +233,77 @@ function CannibalList({ rows }: { rows: CannibalRow[] }) {
   );
 }
 
+function directionLabel(r: RankRow): string {
+  switch (r.direction) {
+    case "up":
+      return `▲ ${r.delta} (was #${r.priorPosition})`;
+    case "down":
+      return `▼ ${Math.abs(r.delta ?? 0)} (was #${r.priorPosition})`;
+    case "new":
+      return "new this week";
+    case "lost":
+      return `no longer ranking (was #${r.priorPosition})`;
+    default:
+      return "no change";
+  }
+}
+
+function directionStyle(direction: RankRow["direction"]): CSSProperties {
+  if (direction === "up") return { color: "#8fd19e" };
+  if (direction === "down" || direction === "lost") return { color: "#e07856" };
+  return { color: "#9c8a72" };
+}
+
+function RankTrackerList({ rows }: { rows: RankRow[] }) {
+  const [metric, setMetric] = useState<"impressions" | "clicks">("impressions");
+  if (!rows.length) {
+    return <EmptyState text="Not enough recent search volume yet to track keyword movement." />;
+  }
+  return (
+    <div style={styles.list}>
+      <div style={styles.metricToggle}>
+        <button
+          onClick={() => setMetric("impressions")}
+          style={{ ...styles.toggleButton, ...(metric === "impressions" ? styles.toggleButtonActive : {}) }}
+        >
+          Impressions
+        </button>
+        <button
+          onClick={() => setMetric("clicks")}
+          style={{ ...styles.toggleButton, ...(metric === "clicks" ? styles.toggleButtonActive : {}) }}
+        >
+          Clicks
+        </button>
+      </div>
+      <p style={styles.sectionNote}>
+        Position today is a 3-day average ending today (GSC data lags a few
+        days), compared against the same 3 days one week earlier - a single
+        day is too noisy to trust for most queries.
+      </p>
+      {rows.map((r, i) => {
+        const recentVal = metric === "impressions" ? r.recentImpressions : r.recentClicks;
+        const priorVal = metric === "impressions" ? r.priorImpressions : r.priorClicks;
+        const unit = metric === "impressions" ? "impr" : "clicks";
+        return (
+          <div key={i} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{r.query}</span>
+              <span style={styles.cardBadge}>{r.recentPosition !== null ? `#${r.recentPosition}` : "-"}</span>
+            </div>
+            <p style={styles.cardPage}>{shortPage(r.page)}</p>
+            <div style={styles.cardStats}>
+              <span style={directionStyle(r.direction)}>{directionLabel(r)}</span>
+              <span>
+                {recentVal} {unit} (was {priorVal})
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 const styles: Record<string, CSSProperties> = {
   page: {
     minHeight: "100vh",
@@ -260,7 +336,9 @@ const styles: Record<string, CSSProperties> = {
   tabButton: {
     flex: "0 0 auto",
     background: "#241b14",
-    border: "1px solid #3a2c1d",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#3a2c1d",
     borderRadius: 999,
     padding: "8px 14px",
     color: "#c9b896",
@@ -351,6 +429,28 @@ const styles: Record<string, CSSProperties> = {
     fontSize: 12,
     margin: "0 0 4px",
     lineHeight: 1.5,
+  },
+  metricToggle: {
+    display: "flex",
+    gap: 6,
+    marginBottom: 4,
+  },
+  toggleButton: {
+    background: "#241b14",
+    borderWidth: 1,
+    borderStyle: "solid",
+    borderColor: "#3a2c1d",
+    borderRadius: 999,
+    padding: "4px 10px",
+    color: "#c9b896",
+    fontSize: 12,
+    cursor: "pointer",
+  },
+  toggleButtonActive: {
+    background: "#e8b04b",
+    color: "#1a1410",
+    borderColor: "#e8b04b",
+    fontWeight: 600,
   },
   error: {
     color: "#e07856",
