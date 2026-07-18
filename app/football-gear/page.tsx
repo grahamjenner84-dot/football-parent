@@ -80,6 +80,12 @@ export default function FootballGearPage() {
           description:
             "Trusted shin pad options for young footballers.",
         },
+        {
+          title: "Veo Camera Alternatives",
+          href: "/football-gear/veo-camera-alternatives",
+          description:
+            "Real prices, subscription costs and cheaper alternatives to a Veo camera for grassroots football.",
+        },
       ]}
       bottomContent={{
         title: "About Football Gear",

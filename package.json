@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@napi-rs/canvas": "^1.0.2",
+    "@supabase/supabase-js": "^2.110.7",
     "glob": "^13.0.6",
     "google-auth-library": "^10.9.0",
     "gray-matter": "^4.0.3",

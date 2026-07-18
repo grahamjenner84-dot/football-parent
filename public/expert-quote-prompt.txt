@@ -1,0 +1,62 @@
+You are helping "Football Parent" (a UK youth-football page) turn a long-form article or interview with an expert into a co-branded "Expert Opinion" carousel. I will paste in the full source text (the expert's own words). Your job is to find the strongest hooks inside it and lay them out as a paste-ready import block.
+
+ABOUT THE SERIES
+Football Parent features a guest expert (a coach, academy, physio, nutritionist, referee, etc.) answering questions parents actually ask. The post is co-branded with the guest, flatters them, and they reshare it to their own audience.
+
+AUDIENCE
+UK football parents aged 30 to 50, mostly mums, with a child in grassroots or academy football. Time poor, emotionally invested, want practical reassurance not jargon.
+
+WHAT I WILL GIVE YOU
+- The expert's name / handle and what they are known for.
+- A long-form article, interview transcript, or set of full answers in their own words.
+
+YOUR JOB
+Read the whole source and pull out the 3 to 5 strongest, most parent-relevant hooks. For each hook produce a SHORT summarised question plus an answer drawn from what they actually said.
+
+HARD RULES ON THE QUESTIONS
+- The question is YOURS to write: a short, punchy paraphrase of what the answer addresses. It does NOT need to match any question in the source.
+- Keep it to one simple line a real parent would worry about. "Should they specialise early?" beats "What is your view on early specialisation in youth development pathways?"
+
+HARD RULES ON THE ANSWERS (most important)
+- The answer must be TRUE to what the expert actually said. Do not invent claims, add advice they did not give, or change their meaning.
+- You MAY trim, tighten and lightly edit for flow. A half sentence is fine, as long as the context and meaning are unchanged.
+- Prefer their own phrasing and voice. Cut filler, but never add a new point.
+- If a hook needs context the source does not give, drop it and pick another.
+- Keep each answer to roughly 1 to 3 short sentences so it fits the slide.
+
+HOOK SELECTION
+- Favour the surprising, the reassuring, and the gentle myth-buster.
+- Order the Q&A so the FIRST question is the punchiest, most scroll-stopping one — it may be used as the cover headline, so it must land a parent's real worry in one short line.
+- Each hook should stand alone without the others.
+- Avoid anything controversial, political, or that could embarrass the guest.
+
+ALSO PICK
+- The single punchiest line in the whole source to feature as the big pull-quote (lightly trimmed is fine, must stay true to what they said).
+- A short cover topic line.
+- A closing line.
+
+OUTPUT
+Return ONLY the paste-ready import block below, in EXACTLY this labelled format (the builder's "Import a full post" button reads it). Mark exactly one *word* with asterisks in the topic, each answer, the quote and the closing line (that word renders gold). One label per line:
+
+NAME: <guest name>
+HANDLE: <@handle>
+ROLE: <what they are known for>
+PERSON: <person to credit, or leave blank>
+BIO: <2 to 3 lines on why they are an expert: experience, clubs, qualifications, drawn from the source>
+TOPIC: On *<word>* ...
+Q: <summarised question 1>
+A: <answer 1, true to the source>
+Q: <summarised question 2>
+A: <answer 2, true to the source>
+QUOTE: <punchiest line from the source>
+CTA: <closing line>
+INTERVIEW: <where to watch the full interview, e.g. Full interview — link in our bio>
+BLURB: <one line on what Football Parent is, for the follow slide>
+
+Then paste that block into the builder to load every slide at once.
+
+Source to work from:
+Guest: <name / @handle>
+Known for: <what they do>
+Article / interview:
+<paste the full text here>

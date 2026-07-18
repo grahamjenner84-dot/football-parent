@@ -103,7 +103,7 @@ C: Nobody warned me / the *kit washing* never ends." style="width:100%;height:15
   'use strict';
   var Core = window.SingleSlideCore;
 
-  var PROMPT = "You are writing one-slide posts for \"Football Parent\", a UK page about youth football. These are short, relatable jokes that get posted as 9:16 Reels and TikToks. Your output pastes straight into the Football Parent SINGLE SLIDE BUILDER, so the format below must be followed exactly.\n\nABOUT FOOTBALL PARENT\nFootball Parent is run by a UK football parent and FA Level 2 coach with real experience of grassroots and academy football, including paid development centres. It is honest, parent-to-parent, never a brand or coach voice. The jokes should sound like a knowing wink between parents who live the same touchline life.\n\nAUDIENCE\nUK football parents aged 30 to 50, predominantly mothers. Their child plays grassroots or academy football. They are emotionally invested, time poor, and proud but exhausted. The best jokes make them think \"that is SO me\" and tag another parent.\n\nPRIMARY GOAL\nFollows, saves and shares. Each joke should trigger one of:\n- \"That is literally my life\" identity recognition that drives follows and tags\n- \"Send this to [name]\" instant share to another football parent\n- A genuine laugh of recognition, never a groan\n\nWHAT MAKES THESE JOKES WORK\n- Relatable truth, slightly exaggerated. The humour comes from a real, specific football-parent experience, not a generic sports gag.\n- Setup builds an expectation; punchline subverts or deadpans it.\n- Specific beats vague. \"We have fixtures\" lands harder than \"we are busy\". Name the cones, the 8am kick-off, the kit wash, the silent drive home, the away-game postcode you cannot pronounce, the half-time oranges, the WhatsApp group, the studs in the hallway.\n- Self-deprecating and warm. Laugh WITH football parents, never at the kids or other parents.\n- One clean idea per joke. If it needs explaining, cut it.\n\nTHEMES TO DRAW FROM (mix across the batch)\n- No weekends / no social life / time swallowed by football\n- The endless kit washing, boot drama, lost shinpads, studs everywhere\n- Early kick-offs, far-away grounds, freezing touchlines, British weather\n- The team WhatsApp group and its chaos\n- The emotional rollercoaster: the silent drive home, the comparison, the 89th-minute equaliser\n- Spending money: boots, subs, petrol, tournament entry, the snack bar\n- Being a part-time taxi, kit man, physio, sports psychologist and caterer\n- Tournaments, pre-season, summer heat, half-term \"holidays\" that are actually football\n\nTHE FORMAT (this is what you output, follow it precisely)\n- ONE joke per line. Nothing else on the line.\n- Each line is: setup / punchline\n  The \" / \" (space slash space) splits the setup from the punchline. The setup is the build-up; the punchline is the laugh.\n- A joke can be punchline-only (no setup). If so, just write the punchline with no slash.\n- Wrap EXACTLY ONE word in *asterisks* to highlight it in the brand gold. Pick the funniest or most surprising word, usually in the punchline. Output the literal * characters as plain text. Do NOT bold or italicise, do NOT drop the asterisks.\n- Start a line with \"A:\" or \"C:\" to choose the slide style:\n    A: = dark \"floodlit\" slide (the default punchy look). Use for most jokes.\n    C: = cream \"quote card\" slide. Use occasionally (roughly 1 in 4) for jokes that read like a wry observation or motto, to vary the feed.\n  If you omit the prefix it defaults to A.\n\nLENGTH LIMITS (so text fits the 9:16 frame without shrinking)\n- Whole joke (setup + punchline together): keep it tight, max about 22 words.\n- Setup: max ~12 words. Punchline: max ~10 words. Shorter is funnier.\n- The builder does not shrink text to fit, so do not overrun.\n\nWORKED EXAMPLES (note the single asterisked word and the A:/C: prefixes)\nFootball parents don't have weekends. / We have *fixtures*.\nOther parents: \"How was your weekend?\" / Me: \"4-3, we *equalised* in the 89th.\"\nC: Nobody warned me / the *kit washing* never ends.\nI don't have a social life. / I have a car boot full of *cones*.\nC: My Saturday step count: / *18,000*, all sideline pacing.\n\"Just a quick game,\" they said. / It's a 90-minute round trip to *Slough*.\nMy weekend lie-in ended / the day he signed his *first* registration form.\n\nWHAT TO AVOID\n- Generic sport jokes that could apply to any activity. Be football and UK specific.\n- Punching down at children, other parents, coaches or refs (light ref jokes are fine if warm).\n- Em dashes anywhere in the copy.\n- More than one asterisked word per line.\n- Two-sentence setups that overflow the frame.\n- Emoji inside the joke text (emoji belong only in the caption).\n\nOUTPUT STRUCTURE\nProduce TWO sections.\n\nSECTION 1 JOKES (for the Single Slide Builder)\nOutput all the jokes, one per line, inside a single plain code block so the asterisks and the A:/C: prefixes are preserved exactly and nothing gets auto-formatted. This block must contain ONLY the jokes, so it can be pasted straight into the builder with no editing.\n\nSECTION 2 CAPTIONS AND HASHTAGS\nFor each joke, in the same order, produce:\n\nINSTAGRAM:\nA 2 to 4 line caption in plain, warm, parent-to-parent tone. Open with a relatable hook line. Include a tag-a-parent or share prompt (this is what spreads these). One or two emoji is fine. No em dashes.\nExactly 5 hashtags. Choose the most relevant from this core set and add one specific to the joke's theme:\n#footballparents #grassrootsfootball #footballfamily #soccermom #sundayleague #footballmum #footballdad #youthfootball #footballuk #touchlineparent\n\nTIKTOK:\nA shorter 1 to 2 line caption, same warm parent-to-parent tone. End with a tag or share prompt. One emoji is fine. No em dashes.\nUp to 8 hashtags from the core set plus topic specific ones:\n#footballparents #grassrootsfootball #footballfamily #soccermom #sundayleague #footballmum #footballdad #youthfootball #footballuk #touchlineparent #fyp #footballtiktok\n\nNumber each caption to match its joke (Joke 1, Joke 2, ...).\n\nNow write <N> jokes on: <your themes here, or say \"a mix\">.";
+  var EMBEDDED_PROMPT_FALLBACK = "You are writing one-slide posts for \"Football Parent\", a UK page about youth football. These are short, relatable jokes that get posted as 9:16 Reels and TikToks. Your output pastes straight into the Football Parent SINGLE SLIDE BUILDER.\n\n(Full prompt: this fallback is used only if joke-builder-prompt.txt can't be fetched. See that file for the complete, current prompt.)";
 
   function sampleJokes() {
     return [
@@ -123,7 +123,8 @@ C: Nobody warned me / the *kit washing* never ends." style="width:100%;height:15
     showSafe: false,
     secs: 4,
     status: '',
-    copyMsg: ''
+    copyMsg: '',
+    promptText: EMBEDDED_PROMPT_FALLBACK
   };
 
   function load() {
@@ -131,6 +132,10 @@ C: Nobody warned me / the *kit washing* never ends." style="width:100%;height:15
   }
   function persist() {
     try { localStorage.setItem('fp_joke_builder', JSON.stringify({ pasteText: state.pasteText, jokes: state.jokes })); } catch (e) {}
+  }
+  function loadPrompt() {
+    fetch('joke-builder-prompt.txt', { cache: 'no-store' }).then(function (r) { return (r && r.ok) ? r.text() : null; })
+      .then(function (t) { if (t && t.trim().length > 40) state.promptText = t; }).catch(function () {});
   }
   (function init() {
     var saved = load();
@@ -334,11 +339,11 @@ C: Nobody warned me / the *kit washing* never ends." style="width:100%;height:15
     var btn = document.getElementById('btnCopyPrompt');
     btn.textContent = 'Copying…';
     try {
-      await navigator.clipboard.writeText(PROMPT);
+      await navigator.clipboard.writeText(state.promptText);
       btn.textContent = '✓ Prompt copied';
     } catch (e) {
       try {
-        var ta = document.createElement('textarea'); ta.value = PROMPT; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        var ta = document.createElement('textarea'); ta.value = state.promptText; ta.style.position = 'fixed'; ta.style.opacity = '0';
         document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
         btn.textContent = '✓ Prompt copied';
       } catch (e2) { btn.textContent = 'Copy failed — try again'; }
@@ -425,6 +430,7 @@ C: Nobody warned me / the *kit washing* never ends." style="width:100%;height:15
   document.getElementById('btnExportOne').addEventListener('click', exportOne);
   document.getElementById('btnExportBoth').addEventListener('click', exportBoth);
 
+  loadPrompt();
   ensureFonts().then(render);
   render();
 })();

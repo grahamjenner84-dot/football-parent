@@ -67,6 +67,7 @@ const routes = [
   '/football-gear/best-footballs-by-age',
   '/football-gear/boots/best-football-boots-for-wide-feet-kids',
   '/football-gear/shin-pads/best-shin-pads-for-kids-football',
+  '/football-gear/veo-camera-alternatives',
 
   // Girls Football
   '/girls-football/girls-academy-vs-grassroots-football',
