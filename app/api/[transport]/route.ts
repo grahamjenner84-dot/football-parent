@@ -48,7 +48,11 @@ const authHandler = withMcpAuth(
     if (!expected || bearerToken !== expected) return undefined;
     return { token: bearerToken, clientId: "graham", scopes: ["seo:read"] };
   },
-  { required: true }
+  {
+    required: true,
+    resourceMetadataPath: "/.well-known/oauth-protected-resource",
+    resourceUrl: "https://www.footballparent.co.uk",
+  }
 );
 
 export { authHandler as GET, authHandler as POST };
