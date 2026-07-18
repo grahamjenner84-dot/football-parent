@@ -59,6 +59,7 @@ const routes = [
   '/football-development/playing-up-an-age-group-football',
   '/football-development/new-fa-youth-football-format',
   '/football-development/what-is-football-iq',
+  '/football-development/bio-banding-football',
 
   // Football Gear
   '/football-gear/ag-vs-fg-boots',

@@ -123,6 +123,12 @@ export default function FootballDevelopmentPage() {
           description:
             "Understanding look at the pros and cons of private coaching.",
         },
+        {
+          title: "What Is Bio-Banding in Football? A Parent's Guide",
+          href: "/football-development/bio-banding-football",
+          description:
+            "A jargon-free explanation of bio-banding: what it means, why academies use it and whether parents should be concerned if their child is invited.",
+        },
       ]}
       bottomContent={{
         title: "About Football Development",
