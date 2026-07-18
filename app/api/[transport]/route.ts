@@ -1,6 +1,7 @@
 import { createMcpHandler, withMcpAuth } from "mcp-handler";
 import { z } from "zod";
 import { getSeoReport, getPageInspection } from "@/lib/gsc";
+import { addToContentQueue } from "@/lib/supabase/content-queue";
 
 const handler = createMcpHandler(
   (server) => {
@@ -33,6 +34,33 @@ const handler = createMcpHandler(
         return { content: [{ type: "text", text: JSON.stringify(inspection) }] };
       }
     );
+
+    server.registerTool(
+      "add_to_content_queue",
+      {
+        title: "Add an item to the Instagram content queue",
+        description:
+          "Adds a draft item to the Instagram content_queue for the Football Parent account (football-parent-social Supabase project), e.g. 'queue a joke post about pre-season nerves'. The item lands with status='draft' and source='chat' so it's traceable back to this conversation. This only queues the idea — it does not render, QC, or publish anything.",
+        inputSchema: {
+          content_type: z
+            .enum(["joke", "education", "interview"])
+            .describe("The kind of content this queue item is for."),
+          topic: z
+            .string()
+            .min(1)
+            .describe("The topic or brief for the content, e.g. 'pre-season nerves'."),
+          priority: z
+            .number()
+            .int()
+            .optional()
+            .describe("Optional queue priority, higher sorts first. Defaults to 0."),
+        },
+      },
+      async ({ content_type, topic, priority }) => {
+        const result = await addToContentQueue({ contentType: content_type, topic, priority });
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
   },
   {},
   {
@@ -46,7 +74,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write"] };
   },
   {
     required: true,

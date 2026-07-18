@@ -39,210 +39,317 @@ export type Database = {
   }
   public: {
     Tables: {
-      matches: {
+      accounts: {
         Row: {
-          address: string | null
-          available_ids: Json
-          cancellation_reason: string | null
           created_at: string
-          current_quarter: number
-          format: string
-          formation: string | null
           id: string
-          kickoff_time: string | null
-          match_date: string
-          notes: string | null
-          num_periods: number
-          opponent: string | null
-          opponent_goals: Json
-          quarter_assists: Json
-          quarter_goals: Json
-          quarter_minutes: number
-          quarters: Json | null
-          rotation_mode: string
-          season_id: string
-          status: string
-          venue: string | null
+          instagram_access_token: string | null
+          instagram_account_id: string | null
+          name: string
+          niche: string
+          token_expires_at: string | null
         }
         Insert: {
-          address?: string | null
-          available_ids?: Json
-          cancellation_reason?: string | null
           created_at?: string
-          current_quarter?: number
-          format: string
-          formation?: string | null
           id?: string
-          kickoff_time?: string | null
-          match_date: string
-          notes?: string | null
-          num_periods?: number
-          opponent?: string | null
-          opponent_goals?: Json
-          quarter_assists?: Json
-          quarter_goals?: Json
-          quarter_minutes?: number
-          quarters?: Json | null
-          rotation_mode?: string
-          season_id: string
-          status?: string
-          venue?: string | null
+          instagram_access_token?: string | null
+          instagram_account_id?: string | null
+          name: string
+          niche: string
+          token_expires_at?: string | null
         }
         Update: {
-          address?: string | null
-          available_ids?: Json
-          cancellation_reason?: string | null
           created_at?: string
-          current_quarter?: number
-          format?: string
-          formation?: string | null
           id?: string
-          kickoff_time?: string | null
-          match_date?: string
-          notes?: string | null
-          num_periods?: number
-          opponent?: string | null
-          opponent_goals?: Json
-          quarter_assists?: Json
-          quarter_goals?: Json
-          quarter_minutes?: number
-          quarters?: Json | null
-          rotation_mode?: string
-          season_id?: string
-          status?: string
-          venue?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "matches_season_id_fkey"
-            columns: ["season_id"]
-            isOneToOne: false
-            referencedRelation: "seasons"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      players: {
-        Row: {
-          active: boolean
-          created_at: string
-          guest: boolean
-          id: string
-          name: string
-          position_group: string
-          season_id: string
-        }
-        Insert: {
-          active?: boolean
-          created_at?: string
-          guest?: boolean
-          id?: string
-          name: string
-          position_group?: string
-          season_id: string
-        }
-        Update: {
-          active?: boolean
-          created_at?: string
-          guest?: boolean
-          id?: string
+          instagram_access_token?: string | null
+          instagram_account_id?: string | null
           name?: string
-          position_group?: string
-          season_id?: string
+          niche?: string
+          token_expires_at?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "players_season_id_fkey"
-            columns: ["season_id"]
-            isOneToOne: false
-            referencedRelation: "seasons"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
-      season_members: {
+      ai_suggestions: {
         Row: {
-          role: string
-          season_id: string
-          user_id: string
-        }
-        Insert: {
-          role?: string
-          season_id: string
-          user_id: string
-        }
-        Update: {
-          role?: string
-          season_id?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "season_members_season_id_fkey"
-            columns: ["season_id"]
-            isOneToOne: false
-            referencedRelation: "seasons"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      seasons: {
-        Row: {
-          age_group: string | null
-          created_at: string
-          format: string
-          formation: string | null
+          account_id: string
+          based_on_post_ids: string[]
+          generated_at: string
           id: string
-          owner_id: string
-          rotation_mode: string
-          team_name: string
+          status: Database["public"]["Enums"]["ai_suggestion_status"]
+          suggestion_text: string
         }
         Insert: {
-          age_group?: string | null
-          created_at?: string
-          format?: string
-          formation?: string | null
+          account_id: string
+          based_on_post_ids?: string[]
+          generated_at?: string
           id?: string
-          owner_id: string
-          rotation_mode?: string
-          team_name?: string
+          status?: Database["public"]["Enums"]["ai_suggestion_status"]
+          suggestion_text: string
         }
         Update: {
-          age_group?: string | null
-          created_at?: string
-          format?: string
-          formation?: string | null
+          account_id?: string
+          based_on_post_ids?: string[]
+          generated_at?: string
           id?: string
-          owner_id?: string
-          rotation_mode?: string
-          team_name?: string
+          status?: Database["public"]["Enums"]["ai_suggestion_status"]
+          suggestion_text?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "ai_suggestions_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
-      sync_pointer: {
+      content_queue: {
         Row: {
-          updated_at: string
-          user_id: string
+          account_id: string
+          content_type: Database["public"]["Enums"]["content_type"]
+          created_at: string
+          id: string
+          priority: number
+          source: Database["public"]["Enums"]["content_source"]
+          status: Database["public"]["Enums"]["content_status"]
+          topic: string
         }
         Insert: {
-          updated_at?: string
-          user_id: string
+          account_id: string
+          content_type: Database["public"]["Enums"]["content_type"]
+          created_at?: string
+          id?: string
+          priority?: number
+          source?: Database["public"]["Enums"]["content_source"]
+          status?: Database["public"]["Enums"]["content_status"]
+          topic: string
         }
         Update: {
-          updated_at?: string
-          user_id?: string
+          account_id?: string
+          content_type?: Database["public"]["Enums"]["content_type"]
+          created_at?: string
+          id?: string
+          priority?: number
+          source?: Database["public"]["Enums"]["content_source"]
+          status?: Database["public"]["Enums"]["content_status"]
+          topic?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "content_queue_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hook_library: {
+        Row: {
+          account_id: string
+          created_at: string
+          hook_text: string
+          id: string
+          post_id: string | null
+          style_tag: string | null
+        }
+        Insert: {
+          account_id: string
+          created_at?: string
+          hook_text: string
+          id?: string
+          post_id?: string | null
+          style_tag?: string | null
+        }
+        Update: {
+          account_id?: string
+          created_at?: string
+          hook_text?: string
+          id?: string
+          post_id?: string | null
+          style_tag?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hook_library_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "hook_library_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      post_metrics: {
+        Row: {
+          comments: number | null
+          id: string
+          impressions: number | null
+          likes: number | null
+          post_id: string
+          pulled_at: string
+          reach: number | null
+          saves: number | null
+          shares: number | null
+          views: number | null
+        }
+        Insert: {
+          comments?: number | null
+          id?: string
+          impressions?: number | null
+          likes?: number | null
+          post_id: string
+          pulled_at?: string
+          reach?: number | null
+          saves?: number | null
+          shares?: number | null
+          views?: number | null
+        }
+        Update: {
+          comments?: number | null
+          id?: string
+          impressions?: number | null
+          likes?: number | null
+          post_id?: string
+          pulled_at?: string
+          reach?: number | null
+          saves?: number | null
+          shares?: number | null
+          views?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_metrics_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      post_slides: {
+        Row: {
+          alt_text: string | null
+          id: string
+          image_url: string | null
+          post_id: string
+          slide_order: number
+          text_content: string | null
+          video_url: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          id?: string
+          image_url?: string | null
+          post_id: string
+          slide_order: number
+          text_content?: string | null
+          video_url?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          id?: string
+          image_url?: string | null
+          post_id?: string
+          slide_order?: number
+          text_content?: string | null
+          video_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "post_slides_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          account_id: string
+          caption: string | null
+          content_queue_id: string | null
+          created_at: string
+          format: Database["public"]["Enums"]["post_format"]
+          hook_text: string | null
+          id: string
+          ig_media_id: string | null
+          published_at: string | null
+          scheduled_time: string | null
+          status: Database["public"]["Enums"]["content_status"]
+        }
+        Insert: {
+          account_id: string
+          caption?: string | null
+          content_queue_id?: string | null
+          created_at?: string
+          format: Database["public"]["Enums"]["post_format"]
+          hook_text?: string | null
+          id?: string
+          ig_media_id?: string | null
+          published_at?: string | null
+          scheduled_time?: string | null
+          status?: Database["public"]["Enums"]["content_status"]
+        }
+        Update: {
+          account_id?: string
+          caption?: string | null
+          content_queue_id?: string | null
+          created_at?: string
+          format?: Database["public"]["Enums"]["post_format"]
+          hook_text?: string | null
+          id?: string
+          ig_media_id?: string | null
+          published_at?: string | null
+          scheduled_time?: string | null
+          status?: Database["public"]["Enums"]["content_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_content_queue_id_fkey"
+            columns: ["content_queue_id"]
+            isOneToOne: false
+            referencedRelation: "content_queue"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      debug_whoami: { Args: never; Returns: string }
+      [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      ai_suggestion_status: "pending" | "applied" | "dismissed"
+      content_source: "gsc" | "performance_feedback" | "manual" | "chat"
+      content_status:
+        | "draft"
+        | "pending_qc"
+        | "pending_approval"
+        | "approved"
+        | "rejected"
+        | "scheduled"
+        | "published"
+        | "failed"
+      content_type: "joke" | "education" | "interview"
+      post_format: "carousel" | "reel"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -372,6 +479,21 @@ export const Constants = {
     Enums: {},
   },
   public: {
-    Enums: {},
+    Enums: {
+      ai_suggestion_status: ["pending", "applied", "dismissed"],
+      content_source: ["gsc", "performance_feedback", "manual", "chat"],
+      content_status: [
+        "draft",
+        "pending_qc",
+        "pending_approval",
+        "approved",
+        "rejected",
+        "scheduled",
+        "published",
+        "failed",
+      ],
+      content_type: ["joke", "education", "interview"],
+      post_format: ["carousel", "reel"],
+    },
   },
 } as const

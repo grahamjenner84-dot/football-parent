@@ -47,6 +47,15 @@ The short version:
 - Google Analytics (gtag) is wired directly into `app/layout.tsx` via `next/script` — no analytics abstraction to route through.
 - The author/site identity (name, bio, canonical site URL `https://www.footballparent.co.uk`) is hardcoded in `lib/seo.ts` and `lib/ArticleLayout.tsx` rather than pulled from config — update both if it changes.
 
+## Supabase projects — two, kept fully isolated
+
+There are **two separate Supabase projects** in this org. They must never share credentials, a client, or any data path:
+
+- **`football-parent-social`** (ref `jwlwzoklgrzharqvazeg`) — the reel-templates storage bucket and the Instagram content-automation schema (`accounts`, `content_queue`, `posts`, `post_slides`, `post_metrics`, `hook_library`, `ai_suggestions` — see `supabase/migrations/20260718192031_instagram_content_automation.sql`). `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` in `.env.local`/Vercel point here. The local Supabase CLI link (`supabase/.temp/linked-project.json`) must stay pointed at this project — check it before running `supabase db push`.
+- **`Coach App`** (ref `uqdtprphhsyrnhzfvzrk`) — backs the Coach App PWA's own sync (`matches`, `players`, `seasons`, `season_members`, `sync_pointer`). It holds children's personal data.
+
+**Hard rule: the Instagram/social automation system must never be given credentials for, or any connection to, the Coach App project.** The social system publishes publicly; the Coach App project holds children's data. No code, env var, MCP tool, or migration for the social/publishing system should ever reference the Coach App project ref or its keys. If you're about to add a Supabase client or migration for social/content-automation work, double-check it's targeting `jwlwzoklgrzharqvazeg`, not `uqdtprphhsyrnhzfvzrk`.
+
 ## SEO admin page and change guardrails
 
 - `/admin/seo` is a password-protected page (`app/admin/seo/page.tsx`, guarded by `proxy.ts` + `app/api/admin-login/route.ts`) that pulls live Search Console data via `lib/gsc.ts` and shows pages gone quiet, striking-distance keywords, low-CTR pages, decaying pages, query cannibalisation, and a rank tracker (per-query position today vs 7 days ago, each smoothed over a 3-day window since GSC's per-query position is too sample-noisy for a literal single-day comparison — real rank-tracking tools like SEMrush avoid this by running their own live daily SERP checks instead of deriving position from GSC's sampled impression data). Needs `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY`, `GSC_SITE_URL`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET` in `.env.local` (and in Vercel for production). Note: `proxy.ts` is the current Next.js convention (renamed from `middleware.ts` in v16) — this project is on a Next.js version ahead of most training data, see `AGENTS.md`.
