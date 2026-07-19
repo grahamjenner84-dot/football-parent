@@ -13,12 +13,17 @@ function adminClient() {
 }
 
 export type ContentType = "joke" | "education" | "interview";
+export type ContentSource = "gsc" | "performance_feedback" | "manual" | "chat";
 
 export interface AddToContentQueueInput {
   contentType: ContentType;
   topic: string;
   priority?: number;
   account?: string;
+  // Both default to the MCP chat-tool's existing behavior (source='chat',
+  // sourceRef={}) so that call site is unaffected by this addition.
+  source?: ContentSource;
+  sourceRef?: Record<string, unknown>;
 }
 
 export interface AddToContentQueueResult {
@@ -30,6 +35,7 @@ export interface AddToContentQueueResult {
   priority: number;
   status: string;
   source: string;
+  sourceRef: Record<string, unknown>;
   createdAt: string;
 }
 
@@ -59,9 +65,10 @@ export async function addToContentQueue(
       content_type: input.contentType,
       topic: input.topic,
       priority: input.priority ?? 0,
-      source: "chat",
+      source: input.source ?? "chat",
+      source_ref: input.sourceRef ?? {},
     })
-    .select("id, content_type, topic, priority, status, source, created_at")
+    .select("id, content_type, topic, priority, status, source, source_ref, created_at")
     .single();
 
   if (error) {
@@ -77,6 +84,7 @@ export async function addToContentQueue(
     priority: data.priority,
     status: data.status,
     source: data.source,
+    sourceRef: data.source_ref,
     createdAt: data.created_at,
   };
 }

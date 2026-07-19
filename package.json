@@ -13,9 +13,11 @@
     "render:seed-test-reel": "tsx scripts/render-seed-test-reel.ts",
     "publish": "tsx scripts/publish-run.ts",
     "insights": "tsx scripts/insights-run.ts",
-    "test": "tsx --test tests/graph-client.test.ts tests/publish-flow.test.ts tests/cron-auth.test.ts tests/insights-pipeline.test.ts tests/insights-flow.test.ts"
+    "ideation": "tsx scripts/ideation-run.ts",
+    "test": "tsx --test tests/graph-client.test.ts tests/publish-flow.test.ts tests/cron-auth.test.ts tests/insights-pipeline.test.ts tests/insights-flow.test.ts tests/ideation-pipeline.test.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.112.3",
     "@napi-rs/canvas": "^1.0.2",
     "@supabase/supabase-js": "^2.110.7",
     "glob": "^13.0.6",
