@@ -48,22 +48,24 @@ interface IgMedia {
   permalink: string;
 }
 
+function buildMediaListUrl(igUserId: string, accessToken: string): string {
+  const u = new URL(`https://graph.instagram.com/${GRAPH_API_VERSION}/${igUserId}/media`);
+  u.searchParams.set("fields", "id,media_type,media_product_type,caption,timestamp,permalink");
+  u.searchParams.set("limit", "50");
+  u.searchParams.set("access_token", accessToken);
+  return u.toString();
+}
+
 async function fetchAllMedia(igUserId: string, accessToken: string): Promise<IgMedia[]> {
   const all: IgMedia[] = [];
-  let url: string | null = (() => {
-    const u = new URL(`https://graph.instagram.com/${GRAPH_API_VERSION}/${igUserId}/media`);
-    u.searchParams.set("fields", "id,media_type,media_product_type,caption,timestamp,permalink");
-    u.searchParams.set("limit", "50");
-    u.searchParams.set("access_token", accessToken);
-    return u.toString();
-  })();
+  let nextUrl: string | null = buildMediaListUrl(igUserId, accessToken);
 
-  while (url) {
-    const res = await fetch(url);
+  while (nextUrl) {
+    const res: Response = await fetch(nextUrl);
     const json = await res.json();
     if (!res.ok || json.error) throw new Error(`media list failed: ${JSON.stringify(json)}`);
     all.push(...json.data);
-    url = json.paging?.next ?? null;
+    nextUrl = json.paging?.next ?? null;
   }
   return all;
 }
