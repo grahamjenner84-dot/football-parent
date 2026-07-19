@@ -1,0 +1,18 @@
+-- Phase C: backfilling the 23 pre-existing Instagram posts (published
+-- outside this pipeline, before it existed) into `posts` so the insights
+-- collector can track their metrics needs a DB-enforced way to dedupe on
+-- ig_media_id, not just an application-level check-then-insert, so
+-- re-running the backfill script (scripts/_backfill-legacy-posts.ts) is
+-- actually safe under a concurrent run rather than just "safe in practice
+-- because nobody runs it twice at once".
+--
+-- A plain (non-partial) unique constraint is correct and sufficient here:
+-- Postgres unique constraints already treat every NULL as distinct from
+-- every other NULL, so posts still awaiting publish (ig_media_id null)
+-- are entirely unaffected - this only ever rejects two rows sharing the
+-- same *set* ig_media_id. It's also a plain column constraint rather than
+-- a partial index specifically so it can be used as the ON CONFLICT
+-- target for supabase-js's upsert(..., { onConflict: "ig_media_id" }) -
+-- Postgres can't infer a partial index as a conflict arbiter from just a
+-- column list the way it can a plain unique constraint.
+alter table posts add constraint posts_ig_media_id_key unique (ig_media_id);

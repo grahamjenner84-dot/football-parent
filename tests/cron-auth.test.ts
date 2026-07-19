@@ -57,12 +57,25 @@ test("vercel.json wires the publish endpoint to run every 15 minutes", () => {
   const raw = fs.readFileSync(path.join(REPO_ROOT, "vercel.json"), "utf8");
   const config = JSON.parse(raw);
   assert.equal(Array.isArray(config.crons), true);
-  assert.equal(config.crons.length, 1);
-  assert.equal(config.crons[0].path, "/api/cron/publish");
-  assert.equal(config.crons[0].schedule, "*/15 * * * *");
+  const publishCron = config.crons.find((c: { path: string }) => c.path === "/api/cron/publish");
+  assert.ok(publishCron, "expected a /api/cron/publish entry");
+  assert.equal(publishCron.schedule, "*/15 * * * *");
 });
 
-test("the cron route file exists at the path vercel.json points to", () => {
+test("vercel.json wires the insights collector to run hourly", () => {
+  const raw = fs.readFileSync(path.join(REPO_ROOT, "vercel.json"), "utf8");
+  const config = JSON.parse(raw);
+  const insightsCron = config.crons.find((c: { path: string }) => c.path === "/api/cron/insights");
+  assert.ok(insightsCron, "expected a /api/cron/insights entry");
+  assert.equal(insightsCron.schedule, "0 * * * *");
+});
+
+test("the publish cron route file exists at the path vercel.json points to", () => {
   const routePath = path.join(REPO_ROOT, "app", "api", "cron", "publish", "route.ts");
+  assert.equal(fs.existsSync(routePath), true);
+});
+
+test("the insights cron route file exists at the path vercel.json points to", () => {
+  const routePath = path.join(REPO_ROOT, "app", "api", "cron", "insights", "route.ts");
   assert.equal(fs.existsSync(routePath), true);
 });

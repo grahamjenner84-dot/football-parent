@@ -73,3 +73,60 @@ export function createFakeSupabase(): { client: SupabaseClient; calls: FakeSupab
   };
   return { client: client as unknown as SupabaseClient, calls };
 }
+
+export interface FakePostMetricsRow {
+  post_id: string;
+  pull_window: string;
+  [key: string]: unknown;
+}
+
+// Covers exactly the shape insights-pipeline.ts uses: posts.select().eq()
+// .not().not().order() and post_metrics.select().in() / .upsert(). An
+// in-memory postMetrics array backs both the select and the upsert, so a
+// test can seed(), call getDueInsightsPulls/recordMetricsPull, then call
+// getDueInsightsPulls again against the SAME state to prove idempotency
+// end-to-end, the same way a real cron tick would see the effect of the
+// previous one.
+export function createFakeInsightsSupabase(seed: { posts: PostRow[]; postMetrics?: FakePostMetricsRow[] }): {
+  client: SupabaseClient;
+  state: { posts: PostRow[]; postMetrics: FakePostMetricsRow[] };
+  upsertCalls: FakePostMetricsRow[];
+} {
+  const state = { posts: seed.posts, postMetrics: [...(seed.postMetrics ?? [])] };
+  const upsertCalls: FakePostMetricsRow[] = [];
+
+  const client = {
+    from(table: string) {
+      if (table === "posts") {
+        return {
+          select(_cols: string) {
+            const query = {
+              eq: () => query,
+              not: () => query,
+              order: () => Promise.resolve({ data: state.posts, error: null }),
+            };
+            return query;
+          },
+        };
+      }
+      if (table === "post_metrics") {
+        return {
+          select(_cols: string) {
+            return {
+              in: (_col: string, ids: string[]) => Promise.resolve({ data: state.postMetrics.filter((r) => ids.includes(r.post_id)), error: null }),
+            };
+          },
+          upsert(row: FakePostMetricsRow, _opts: unknown) {
+            upsertCalls.push(row);
+            const idx = state.postMetrics.findIndex((r) => r.post_id === row.post_id && r.pull_window === row.pull_window);
+            if (idx >= 0) state.postMetrics[idx] = { ...state.postMetrics[idx], ...row };
+            else state.postMetrics.push(row);
+            return Promise.resolve({ error: null });
+          },
+        };
+      }
+      throw new Error(`createFakeInsightsSupabase: unexpected table "${table}"`);
+    },
+  };
+  return { client: client as unknown as SupabaseClient, state, upsertCalls };
+}

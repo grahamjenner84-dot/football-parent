@@ -12,7 +12,8 @@
     "render:seed-test": "tsx scripts/render-seed-test.ts",
     "render:seed-test-reel": "tsx scripts/render-seed-test-reel.ts",
     "publish": "tsx scripts/publish-run.ts",
-    "test": "tsx --test tests/graph-client.test.ts tests/publish-flow.test.ts tests/cron-auth.test.ts"
+    "insights": "tsx scripts/insights-run.ts",
+    "test": "tsx --test tests/graph-client.test.ts tests/publish-flow.test.ts tests/cron-auth.test.ts tests/insights-pipeline.test.ts tests/insights-flow.test.ts"
   },
   "dependencies": {
     "@napi-rs/canvas": "^1.0.2",

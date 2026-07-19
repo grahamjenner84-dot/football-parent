@@ -149,6 +149,34 @@ export async function publishContainer(igUserId: string, accessToken: string, cr
   });
 }
 
+// A single insights metric as Meta returns it - lifetime/day metrics come
+// back as a `values` array (usually one entry), but some aggregate metrics
+// (e.g. total_interactions) have been observed returning `total_value`
+// instead. Callers should check both rather than assuming one shape.
+export interface MediaInsightMetric {
+  name: string;
+  period?: string;
+  values?: { value: number }[];
+  total_value?: { value: number };
+}
+
+export interface MediaInsightsResponse {
+  data: MediaInsightMetric[];
+}
+
+// `impressions` is retired platform-wide (2025) - never pass it here, use
+// `reach`/`views` instead. Which metrics are valid depends on media type
+// (reels vs carousel/feed) - see metricsForFormat() in
+// lib/instagram/insights-pipeline.ts. Requesting a metric the media type
+// doesn't support gets a non-transient 400 from Meta, not a silently
+// ignored field.
+export async function getMediaInsights(mediaId: string, accessToken: string, metrics: string[]): Promise<MediaInsightsResponse> {
+  return igRequest<MediaInsightsResponse>(`/${mediaId}/insights`, accessToken, {
+    method: "GET",
+    params: { metric: metrics.join(",") },
+  });
+}
+
 export interface TokenIdentity {
   id: string;
   username?: string;
