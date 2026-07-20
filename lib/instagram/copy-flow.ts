@@ -155,16 +155,35 @@ const DEFAULT_BRAND = {
   tiktokHandle: "@footballparent",
   ctaUrl: "footballparent.co.uk",
   // Explicitly empty rather than omitted: reel-core.js's classic hook
-  // layout does `ctx.fillText(brand.hookSubtitle, ...)` unconditionally -
-  // an undefined value would draw the literal word "undefined" under the
-  // hook headline. Phase F embeds its own per-post subtext INTO slide.head
-  // (see hookHead in generateEducationReel/generateJokeCarousel), so this
-  // fixed site-wide tagline is deliberately blank, not per-post content.
+  // layout does `ctx.fillText(brand.hookSubtitle, ...)` AND
+  // `fillTextEmojiAware(ctx, brand.saveLine, ...)` unconditionally (the
+  // latter drawn separately, above the headline) - an undefined value on
+  // either would draw the literal word "undefined" on the hook slide.
+  // Confirmed by rendering a real joke-reel hook frame and seeing exactly
+  // that. Phase F embeds its own per-post subtext INTO slide.head (see
+  // hookHead in generateEducationReel/generateJokeCarousel), so these fixed
+  // site-wide lines are deliberately blank, not per-post content. saveLine
+  // is available for a real "save this" prompt (a genuine save-driver per
+  // the reference examples) if that's ever wanted - left blank here rather
+  // than choosing that copy unasked.
   hookSubtitle: "",
+  saveLine: "",
   marginX: 96,
   marginRight: 96,
   marginBottom: 220,
 };
+
+// Per-slide hold time for a joke-set reel (public/reel-core.js frames, held
+// static then concatenated by assembleSlideshowMp4 - see render-batch.ts's
+// renderReelVideoPost). Tuned for "long enough to read a short quote +
+// reframe, not so long it drags" - these are deliberately short punchy
+// lines (see the joke-carousel prompt's fit rule), so a few seconds per
+// slide is enough; the title card gets a little longer since it's the
+// curiosity-gap hook the whole reel has to earn a stop-scroll on.
+const JOKE_REEL_HOOK_SECS = 3.5;
+const JOKE_REEL_ENTRY_SECS = 3;
+const JOKE_REEL_BONUS_SECS = 3;
+const JOKE_REEL_CLOSING_SECS = 4;
 
 function allSlidesText(slides: GeneratedSlide[]): string {
   return slides.map((s) => [s.head, s.body, s.attrib].filter(Boolean).join(" ")).join("\n");
@@ -294,15 +313,16 @@ interface JokeCarouselResponse {
   selfCheck: SelfCheck;
 }
 
-// content_type='joke' with a multi-slide carousel renders via reel-core (see
-// Phase F task brief section 3's payload mapping), the SAME core module
-// education reels use, but as individual images rather than a video -
-// mirroring how renderInterviewPost in scripts/render-batch.ts already
-// branches on post.format for expert-quote-core. render-batch.ts's
-// renderJokePost does NOT yet have that branch (today it always assumes
-// content_type='joke' -> single-slide-core) - wiring that up is a Phase A
-// follow-up, out of scope here since this phase only writes render_payload,
-// it doesn't render it.
+// content_type='joke' with a multi-slide set (curiosity-gap title + numbered
+// quote/reframe slides + BONUS + share-CTA closer) renders via reel-core,
+// the SAME core module education reels use, and the SAME way: a silent MP4
+// reel (each slide held for its own `secs`, assembled via
+// assembleSlideshowMp4), not individual carousel images - reels get more
+// reach and reach non-followers, which is the point for this content.
+// render-batch.ts's renderJokePost branches on render_payload having `reel`
+// vs `joke` to pick this path over the single-slide-core one. Rendered
+// silent by design: this posts through Phase G's manual mark-posted path,
+// where a human adds trending audio in-app - never set an audioUrl here.
 export async function generateJokeCarousel(theme: string): Promise<CopyGenerationResult> {
   const system = buildJokeCarouselSystemPrompt();
   const user = buildJokeCarouselUserPrompt(theme);
@@ -327,21 +347,20 @@ export async function generateJokeCarousel(theme: string): Promise<CopyGeneratio
 
   const parsed = result.parsed;
   const reelSlides = [
-    { kind: "hook", head: parsed.title, secs: 3 },
-    ...parsed.entries.map((e) => ({ kind: "content", num: e.number, head: e.quote, body: e.reframe, secs: 3 })),
-    { kind: "content", numberLabel: "BONUS!", head: parsed.bonus.quote, body: parsed.bonus.reframe, secs: 3 },
-    { kind: "content", head: parsed.closing.statement, body: parsed.closing.sharePrompt, secs: 4 },
+    { kind: "hook", head: parsed.title, secs: JOKE_REEL_HOOK_SECS },
+    ...parsed.entries.map((e) => ({ kind: "content", num: e.number, head: e.quote, body: e.reframe, secs: JOKE_REEL_ENTRY_SECS })),
+    { kind: "content", numberLabel: "BONUS!", head: parsed.bonus.quote, body: parsed.bonus.reframe, secs: JOKE_REEL_BONUS_SECS },
+    { kind: "content", head: parsed.closing.statement, body: parsed.closing.sharePrompt, secs: JOKE_REEL_CLOSING_SECS },
   ];
   const renderPayload = {
     reel: { slides: reelSlides },
     brand: DEFAULT_BRAND,
     templateId: "default",
-    format: "carousel" as const,
   };
 
   return {
     contentType: "joke",
-    format: "carousel",
+    format: "reel",
     slides: result.slides,
     renderPayload,
     fit: result.fit,

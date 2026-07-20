@@ -45,41 +45,38 @@ function existingSlide(post: PostRow, slideOrder: number) {
   return post.post_slides.find((s) => s.slide_order === slideOrder) ?? null;
 }
 
-// content_type='joke' -> single-slide-core. One image, one post_slides row.
-async function renderJokePost(supabase: ReturnType<typeof createAdminClient>, post: PostRow): Promise<RenderOutcome> {
-  const existing = existingSlide(post, 1);
-  if (existing?.image_url) return "skipped";
-
-  const payload = post.render_payload as { joke?: { setup?: string; punch?: string; layout?: "A" | "C" }; platform?: "ig" | "tiktok" };
-  const joke = payload.joke;
-  if (!joke || !joke.punch) throw new Error("render_payload.joke.punch is required for a joke post");
-
-  const png = renderSingleSlidePNG({ setup: joke.setup, punch: joke.punch, layout: joke.layout }, payload.platform ?? "ig");
-  const url = await uploadRenderedAsset(supabase, `${post.id}/slide-1.png`, png, "image/png");
-  await upsertPostSlide(supabase, {
-    post_id: post.id,
-    slide_order: 1,
-    image_url: url,
-    text_content: [joke.setup, joke.punch].filter(Boolean).join(" / "),
-  });
-  return "rendered";
+interface ReelVideoPayload {
+  reel?: { day?: number; slides: Array<Record<string, unknown> & { kind: string; secs?: number }> };
+  brand?: Record<string, unknown>;
+  templateId?: string;
+  bgUrlBySlide?: Record<number, string>;
+  audioUrl?: string;
 }
 
-// content_type='education' -> reel-core. Always a video: render each slide
-// as a frame, hold it for its own `secs`, concat into one MP4.
-async function renderEducationPost(supabase: ReturnType<typeof createAdminClient>, post: PostRow): Promise<RenderOutcome> {
+// Shared reel-core video assembly: render each slide as a frame, hold it
+// for its own `secs`, concat into one MP4. Used by content_type='education'
+// (always a reel) AND content_type='joke' when render_payload has a
+// multi-slide `reel.slides` array - a joke SET (curiosity-gap title slide +
+// numbered quote/reframe slides + BONUS slide + share-CTA closer, see
+// copy-flow.ts's generateJokeCarousel) rather than a single joke - see
+// renderJokePost's branch below. Both content types go through this exact
+// same renderer/assembly path, only the slide content differs.
+//
+// audioUrl is only ever honoured if render_payload explicitly sets it.
+// Phase F's joke-set generator never sets it, so joke reels render SILENT
+// by design: these post through Phase G's manual mark-posted path, where a
+// human adds trending audio in-app before posting - the Graph API has no
+// way to attach a trending-audio track, and this renderer must never try.
+async function renderReelVideoPost(
+  supabase: ReturnType<typeof createAdminClient>,
+  post: PostRow,
+  payload: ReelVideoPayload,
+  label: string
+): Promise<RenderOutcome> {
   const existing = existingSlide(post, 1);
   if (existing?.video_url) return "skipped";
   if (!checkFfmpegAvailable()) throw new Error(FFMPEG_INSTALL_HINT);
-
-  const payload = post.render_payload as {
-    reel?: { day?: number; slides: Array<Record<string, unknown> & { kind: string; secs?: number }> };
-    brand?: Record<string, unknown>;
-    templateId?: string;
-    bgUrlBySlide?: Record<number, string>;
-    audioUrl?: string;
-  };
-  if (!payload.reel?.slides?.length) throw new Error("render_payload.reel.slides is required for an education post");
+  if (!payload.reel?.slides?.length) throw new Error(`render_payload.reel.slides is required for a ${label} post`);
 
   const brand = payload.brand ?? {};
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -102,6 +99,43 @@ async function renderEducationPost(supabase: ReturnType<typeof createAdminClient
   const durationSec = frames.reduce((sum, f) => sum + f.durationSec, 0);
   await upsertPostSlide(supabase, { post_id: post.id, slide_order: 1, video_url: url, text_content: post.caption ?? null, duration_sec: durationSec });
   return "rendered";
+}
+
+// content_type='joke' -> single-slide-core for a single joke (setup/punch,
+// one image), OR the shared reel-core video path above for a multi-slide
+// joke SET - distinguished by which field render_payload actually has
+// (`joke` vs `reel`), the same distinction copy-flow.ts's two joke
+// generators (generateJokeSingle / generateJokeCarousel) already produce.
+async function renderJokePost(supabase: ReturnType<typeof createAdminClient>, post: PostRow): Promise<RenderOutcome> {
+  const payload = post.render_payload as {
+    joke?: { setup?: string; punch?: string; layout?: "A" | "C" };
+    platform?: "ig" | "tiktok";
+  } & ReelVideoPayload;
+
+  if (payload.reel?.slides?.length) {
+    return renderReelVideoPost(supabase, post, payload, "joke set");
+  }
+
+  const existing = existingSlide(post, 1);
+  if (existing?.image_url) return "skipped";
+
+  const joke = payload.joke;
+  if (!joke || !joke.punch) throw new Error("render_payload.joke.punch is required for a joke post");
+
+  const png = renderSingleSlidePNG({ setup: joke.setup, punch: joke.punch, layout: joke.layout }, payload.platform ?? "ig");
+  const url = await uploadRenderedAsset(supabase, `${post.id}/slide-1.png`, png, "image/png");
+  await upsertPostSlide(supabase, {
+    post_id: post.id,
+    slide_order: 1,
+    image_url: url,
+    text_content: [joke.setup, joke.punch].filter(Boolean).join(" / "),
+  });
+  return "rendered";
+}
+
+// content_type='education' -> reel-core, always a video.
+async function renderEducationPost(supabase: ReturnType<typeof createAdminClient>, post: PostRow): Promise<RenderOutcome> {
+  return renderReelVideoPost(supabase, post, post.render_payload as ReelVideoPayload, "education");
 }
 
 // content_type='interview' -> expert-quote-core. format='carousel' -> one
