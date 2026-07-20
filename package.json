@@ -16,6 +16,7 @@
     "ideation": "tsx scripts/ideation-run.ts",
     "qc": "tsx scripts/qc-run.ts",
     "copy": "tsx scripts/copy-run.ts",
+    "rejections": "tsx scripts/review-rejections.ts",
     "test": "tsx --test tests/graph-client.test.ts tests/publish-flow.test.ts tests/cron-auth.test.ts tests/insights-pipeline.test.ts tests/insights-flow.test.ts tests/ideation-pipeline.test.ts tests/review-pipeline.test.ts tests/slide-fit.test.ts tests/reel-core-badge.test.ts"
   },
   "dependencies": {

@@ -424,10 +424,34 @@ export default function InstagramReviewPage() {
                     {copiedId === post.id ? "Copied!" : "Copy caption + hashtags"}
                   </button>
 
-                  {markPostedId !== post.id && (
-                    <button style={styles.ghostButtonBig} onClick={() => setMarkPostedId(post.id)}>
-                      Mark as posted
-                    </button>
+                  {markPostedId !== post.id && rejectingId !== post.id && (
+                    <div style={styles.actionRow}>
+                      <button style={styles.ghostButtonBig} onClick={() => setMarkPostedId(post.id)}>
+                        Mark as posted
+                      </button>
+                      <button style={styles.dangerButton} onClick={() => setRejectingId(post.id)}>
+                        Reject
+                      </button>
+                    </div>
+                  )}
+
+                  {rejectingId === post.id && (
+                    <div style={styles.rejectBox}>
+                      <textarea
+                        placeholder="Reason (optional)"
+                        value={rejectReason}
+                        onChange={(e) => setRejectReason(e.target.value)}
+                        style={styles.textarea}
+                      />
+                      <div style={styles.actionRow}>
+                        <button style={styles.dangerButton} onClick={() => submitReject(post.id)}>
+                          Confirm reject
+                        </button>
+                        <button style={styles.ghostButton} onClick={() => setRejectingId(null)}>
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
                   )}
 
                   {markPostedId === post.id && (
