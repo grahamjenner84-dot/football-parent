@@ -1,0 +1,26 @@
+name: Instagram publish cron
+
+# Vercel Hobby plan only allows daily cron schedules, but the publish
+# endpoint IS the Instagram scheduler and needs to poll close to each
+# post's scheduled_time - see lib/cron-auth.ts and app/api/cron/publish/
+# route.ts, which were already written to accept any caller presenting
+# the CRON_SECRET bearer token, not just Vercel's own Cron feature.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  trigger-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call publish endpoint
+        run: |
+          status=$(curl -s -o response.txt -w "%{http_code}" \
+            -X POST "https://www.footballparent.co.uk/api/cron/publish" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}")
+          echo "HTTP status: $status"
+          cat response.txt
+          if [ "$status" -ge 300 ]; then
+            exit 1
+          fi
