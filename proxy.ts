@@ -25,7 +25,8 @@ export async function proxy(req: NextRequest) {
   const isLoginPage = pathname === "/admin/login";
   const isProtected =
     (pathname.startsWith("/admin") && !isLoginPage) ||
-    pathname.startsWith("/api/seo-report");
+    pathname.startsWith("/api/seo-report") ||
+    pathname.startsWith("/api/instagram");
 
   if (!isProtected) return NextResponse.next();
 
@@ -46,5 +47,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/seo-report"],
+  matcher: ["/admin/:path*", "/api/seo-report", "/api/instagram/:path*"],
 };

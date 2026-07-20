@@ -177,6 +177,28 @@ export async function getMediaInsights(mediaId: string, accessToken: string, met
   });
 }
 
+export interface MediaListItem {
+  id: string;
+  permalink?: string;
+  timestamp?: string;
+}
+
+export interface MediaListResponse {
+  data: MediaListItem[];
+}
+
+// Used to resolve ig_media_id for a reel posted manually (outside this
+// pipeline, so no creation_id/container was ever tracked) - see
+// markManualReelPosted in lib/instagram/review-pipeline.ts, which matches a
+// human-pasted post URL against `permalink` here rather than attempting any
+// shortcode-to-media-id conversion (undocumented, not part of the Graph API).
+export async function listRecentMedia(igUserId: string, accessToken: string, limit = 50): Promise<MediaListResponse> {
+  return igRequest<MediaListResponse>(`/${igUserId}/media`, accessToken, {
+    method: "GET",
+    params: { fields: "id,permalink,timestamp", limit },
+  });
+}
+
 export interface TokenIdentity {
   id: string;
   username?: string;
