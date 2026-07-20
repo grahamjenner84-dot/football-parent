@@ -54,6 +54,20 @@ Before you finalise your answer, self-check every slide against this checklist a
 6. Is any real, identifiable child described?
 If any check fails, FIX the copy before answering rather than reporting the failure - "selfCheck.passesAllChecks" should only be false if you were unable to fix an issue (e.g. the source material simply doesn't support a strong claim), in which case explain why in "selfCheck.issues".`;
 
+// The Instagram CAPTION is separate from the on-slide copy above - it's
+// what appears in the feed below the image/video, never drawn on any
+// slide, and it's the field Phase G's manual-post review page copies
+// verbatim (its "Copy caption + hashtags" button reads posts.caption/
+// hook_text directly - see app/admin/instagram-review/page.tsx). Every
+// content type needs one, hashtags included, so G's copy-paste block is
+// complete and ready to post without anyone hand-adding tags afterward.
+export const CAPTION_GUIDANCE_BLOCK = `Also write "caption": the actual Instagram caption text for this post - what appears in the feed below the image/video, separate from and NOT drawn on any slide. Structure, in this order:
+1. One or two short opening lines that earn a read - can echo the hook's idea but must not just repeat it word for word.
+2. Optionally one or two more short lines of context, a soft call to action, or a question inviting comments - keep the whole caption body brief, this is a caption, not an article.
+3. A blank line, then a block of 8-15 hashtags relevant to this specific post and the UK youth football parent niche - mix broad-reach tags (#footballparent #grassrootsfootball #youthfootball #footballparents) with a few specific to what this post actually covers. Never use a hashtag that misrepresents the content (no #academy/#proacademy tags on a joke post, no club-specific tags unless the post is genuinely about that club).
+
+Preserve the line breaks exactly as they should appear when pasted into Instagram (a blank line before the hashtag block) - this field is copied verbatim into the post, not reformatted afterward. The same hard rules apply here as everywhere else in this brief: no em dashes, no banned AI-slop phrases, never promise/imply academy or professional success, British English.`;
+
 const SELF_CHECK_SCHEMA = {
   type: "object",
   properties: {
@@ -85,7 +99,10 @@ Template B - "Grassroots archetype" (term + definition):
 
 CRITICAL: this is a BRITISH account. Use British sideline terms (football, boots, pitch) not American ones (soccer, cleats, field). The humour is RECOGNITION ("we all do this"), never mockery, never punching down at children.
 
-${SHARED_RULES_BLOCK}`;
+${SHARED_RULES_BLOCK}
+
+${CAPTION_GUIDANCE_BLOCK}
+Caption tone for this joke: match the joke's light energy - a save/share prompt is natural here (e.g. "Tag the parent who does this every week").`;
 }
 
 export function buildJokeSingleUserPrompt(topic: string): string {
@@ -98,9 +115,10 @@ export const JOKE_SINGLE_SCHEMA = {
     template: { type: "string", enum: ["A", "B"] },
     head: { type: "string" },
     body: { type: "string" },
+    caption: { type: "string" },
     selfCheck: SELF_CHECK_SCHEMA,
   },
-  required: ["template", "head", "body", "selfCheck"],
+  required: ["template", "head", "body", "caption", "selfCheck"],
   additionalProperties: false,
 } as const;
 
@@ -125,7 +143,10 @@ Saves and shares are the goal, and this exact structure is what has been proven 
 
 4. SHARE-CTA CLOSING SLIDE: a final slide with a punchy statement plus an explicit share prompt that CALLS BACK to one specific earlier numbered entry by number. Example shape: "FOOTBALL PARENTS ARE A DIFFERENT BREED." / "Send this to the parent who definitely yelled 'SETTLE IT!' today." The callback to a specific earlier joke, plus "send this to...", is what earns shares - do not write a generic closing line with no callback.
 
-${SHARED_RULES_BLOCK}`;
+${SHARED_RULES_BLOCK}
+
+${CAPTION_GUIDANCE_BLOCK}
+Caption tone for this carousel: match the title card's energy and can echo the closing slide's share prompt, but do not just repeat it word for word.`;
 }
 
 export function buildJokeCarouselUserPrompt(theme: string): string {
@@ -138,6 +159,7 @@ export const JOKE_CAROUSEL_SCHEMA = {
   type: "object",
   properties: {
     title: { type: "string" },
+    caption: { type: "string" },
     entries: {
       type: "array",
       items: {
@@ -173,7 +195,7 @@ export const JOKE_CAROUSEL_SCHEMA = {
     },
     selfCheck: SELF_CHECK_SCHEMA,
   },
-  required: ["title", "entries", "bonus", "closing", "selfCheck"],
+  required: ["title", "caption", "entries", "bonus", "closing", "selfCheck"],
   additionalProperties: false,
 } as const;
 
@@ -196,7 +218,10 @@ Body slides (returned as "slides", one entry per slide, in order - the hook is N
 - If a point needs more than ~9 lines of copy, split it into two or three consecutive slide objects rather than compressing it into dense text.
 - Any claim needing evidence must come from the brief provided - never invent a fact or statistic that isn't in it. If the brief hedges a claim, you may state it more directly for social, but you cannot claim something the brief doesn't support.
 
-${SHARED_RULES_BLOCK}`;
+${SHARED_RULES_BLOCK}
+
+${CAPTION_GUIDANCE_BLOCK}
+Caption tone for this education reel: point to the practical takeaway rather than just restating the hook, and a soft "save this" or comment-inviting line fits well here.`;
 }
 
 export function buildEducationUserPrompt(brief: string, sourceTitle: string | null): string {
@@ -232,9 +257,10 @@ export const EDUCATION_SCHEMA = {
         additionalProperties: false,
       },
     },
+    caption: { type: "string" },
     selfCheck: SELF_CHECK_SCHEMA,
   },
-  required: ["hook", "slides", "selfCheck"],
+  required: ["hook", "slides", "caption", "selfCheck"],
   additionalProperties: false,
 } as const;
 
@@ -270,7 +296,10 @@ Attribution (the contributor's name and role) is applied automatically from the 
 
 If a contributor's own quote edges into promising an outcome (implies academy/pro success is likely), either pick a different quote or omit that portion via trimming rather than including it - you cannot alter the quoted words to soften them, and you cannot add framing INSIDE a quote slide's text since that would look like part of the quote.
 
-${SHARED_RULES_BLOCK}`;
+${SHARED_RULES_BLOCK}
+
+${CAPTION_GUIDANCE_BLOCK}
+Caption tone for this interview: credit the contributor by name and role once (their words, your own framing), and you may mention the full interview is on the site without inventing a URL or handle you weren't given.`;
 }
 
 export function buildInterviewUserPrompt(contributorName: string, contributorRole: string, contributorBio: string, articleTitle: string, articleBody: string): string {
@@ -311,8 +340,9 @@ export const INTERVIEW_SCHEMA = {
         additionalProperties: false,
       },
     },
+    caption: { type: "string" },
     selfCheck: SELF_CHECK_SCHEMA,
   },
-  required: ["shortBio", "hook", "slides", "selfCheck"],
+  required: ["shortBio", "hook", "slides", "caption", "selfCheck"],
   additionalProperties: false,
 } as const;

@@ -64,6 +64,13 @@ function printSlides(result: CopyGenerationResult): void {
     if (slide.body) console.log(`    body: ${slide.body}`);
     if (slide.attrib) console.log(`    attrib: ${slide.attrib}`);
   }
+  console.log(`\n  [caption] (this is the exact text posts.caption should hold - what G's "Copy caption + hashtags" button copies verbatim)`);
+  console.log(
+    result.caption
+      .split("\n")
+      .map((line) => `    ${line}`)
+      .join("\n")
+  );
 }
 
 function printFit(result: CopyGenerationResult): void {

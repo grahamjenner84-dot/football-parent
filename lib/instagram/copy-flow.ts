@@ -132,6 +132,7 @@ export interface CopyGenerationResult {
   contentType: "joke" | "education" | "interview";
   format: "single" | "carousel" | "reel";
   slides: GeneratedSlide[]; // full visible copy, in render order, for display/QC
+  caption: string; // Instagram caption incl. hashtags - separate from slides, never drawn on any slide. See copy-prompts.ts's CAPTION_GUIDANCE_BLOCK.
   renderPayload: Record<string, unknown>;
   fit: SlideFitResult[];
   modelSelfCheck: SelfCheck;
@@ -197,8 +198,8 @@ function allSlidesText(slides: GeneratedSlide[]): string {
 // via lib/instagram/slide-fit.ts - the SAME module Phase D's QC gate uses
 // (see qc-fit.ts / copy-qc-adapter.ts), so F's self-check and D's QC gate
 // can never disagree about whether a slide fits.
-function evaluateSelfCheck(slides: GeneratedSlide[], fitInputs: SlideFitInput[], modelSelfCheck: SelfCheck): { detIssues: string[]; fit: SlideFitResult[]; ok: boolean } {
-  const detIssues = deterministicIssues(allSlidesText(slides));
+function evaluateSelfCheck(slides: GeneratedSlide[], fitInputs: SlideFitInput[], caption: string, modelSelfCheck: SelfCheck): { detIssues: string[]; fit: SlideFitResult[]; ok: boolean } {
+  const detIssues = deterministicIssues([allSlidesText(slides), caption].join("\n"));
   const fit = checkSlidesFit(fitInputs);
   const fitOk = fit.every((f) => f.fits);
   const ok = detIssues.length === 0 && fitOk && modelSelfCheck.passesAllChecks;
@@ -229,7 +230,7 @@ function failureFeedback(detIssues: string[], fit: SlideFitResult[], modelSelfCh
 // measurement) - the two can differ in shape (see the education hook
 // example above), so they're built together from the same parsed response
 // rather than derived from each other.
-async function generateWithRetry<T extends { selfCheck: SelfCheck }>(
+async function generateWithRetry<T extends { selfCheck: SelfCheck; caption: string }>(
   system: string,
   user: string,
   schema: Record<string, unknown>,
@@ -237,7 +238,7 @@ async function generateWithRetry<T extends { selfCheck: SelfCheck }>(
 ): Promise<{ parsed: T; slides: GeneratedSlide[]; fit: SlideFitResult[]; detIssues: string[]; needsManualReview: boolean; manualReviewReason: string | null; attempts: number; usage: Usage }> {
   let attempt = await callClaude<T>(system, user, schema);
   let built = toSlides(attempt.parsed);
-  let evalResult = evaluateSelfCheck(built.slides, built.fitInputs, attempt.parsed.selfCheck);
+  let evalResult = evaluateSelfCheck(built.slides, built.fitInputs, attempt.parsed.caption, attempt.parsed.selfCheck);
   let usage = attempt.usage;
   let attempts = 1;
 
@@ -245,7 +246,7 @@ async function generateWithRetry<T extends { selfCheck: SelfCheck }>(
     const feedback = failureFeedback(evalResult.detIssues, evalResult.fit, attempt.parsed.selfCheck);
     const retry = await callClaude<T>(system, `${user}\n\n${feedback}`, schema);
     const retryBuilt = toSlides(retry.parsed);
-    const retryEval = evaluateSelfCheck(retryBuilt.slides, retryBuilt.fitInputs, retry.parsed.selfCheck);
+    const retryEval = evaluateSelfCheck(retryBuilt.slides, retryBuilt.fitInputs, retry.parsed.caption, retry.parsed.selfCheck);
     usage = sumUsage(usage, retry.usage);
     attempts = 2;
     attempt = retry;
@@ -273,6 +274,7 @@ interface JokeSingleResponse {
   template: "A" | "B";
   head: string;
   body: string;
+  caption: string;
   selfCheck: SelfCheck;
 }
 
@@ -293,6 +295,7 @@ export async function generateJokeSingle(topic: string): Promise<CopyGenerationR
     contentType: "joke",
     format: "single",
     slides: result.slides,
+    caption: result.parsed.caption,
     renderPayload,
     fit: result.fit,
     modelSelfCheck: result.parsed.selfCheck,
@@ -307,6 +310,7 @@ export async function generateJokeSingle(topic: string): Promise<CopyGenerationR
 
 interface JokeCarouselResponse {
   title: string;
+  caption: string;
   entries: Array<{ number: number; quote: string; reframe: string; mechanic: string }>;
   bonus: { quote: string; reframe: string };
   closing: { statement: string; sharePrompt: string; callbackEntryNumber: number };
@@ -362,6 +366,7 @@ export async function generateJokeCarousel(theme: string): Promise<CopyGeneratio
     contentType: "joke",
     format: "reel",
     slides: result.slides,
+    caption: parsed.caption,
     renderPayload,
     fit: result.fit,
     modelSelfCheck: parsed.selfCheck,
@@ -381,6 +386,7 @@ export async function generateJokeCarousel(theme: string): Promise<CopyGeneratio
 interface EducationResponse {
   hook: { headline: string; subtext: string };
   slides: Array<{ head: string; body: string }>;
+  caption: string;
   selfCheck: SelfCheck;
 }
 
@@ -421,6 +427,7 @@ export async function generateEducationReel(brief: string, sourceArticle: Articl
     contentType: "education",
     format: "reel",
     slides: result.slides,
+    caption: parsed.caption,
     renderPayload,
     fit: result.fit,
     modelSelfCheck: parsed.selfCheck,
@@ -462,6 +469,7 @@ interface InterviewResponse {
   shortBio: string;
   hook: { headline: string; subtext: string };
   slides: Array<{ kind: "context" | "quote"; text: string }>;
+  caption: string;
   selfCheck: SelfCheck;
 }
 
@@ -552,6 +560,7 @@ export async function generateInterviewCarousel(contributor: InterviewContributo
     contentType: "interview",
     format: "carousel",
     slides: result.slides,
+    caption: parsed.caption,
     renderPayload,
     fit: result.fit,
     modelSelfCheck: parsed.selfCheck,
@@ -618,6 +627,7 @@ export async function writeCopyResult(supabase: SupabaseClient, row: ContentQueu
     manualReviewReason: result.manualReviewReason,
     costUsd: result.usage.costUsd,
     renderPayload: result.renderPayload,
+    caption: result.caption,
   };
   const { error } = await supabase
     .from("content_queue")

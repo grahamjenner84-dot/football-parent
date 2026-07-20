@@ -70,12 +70,18 @@ export type CopyQcResult = CopyQcResultGeneric | CopyQcResultInterview;
 
 // The hook is the first slide (kind='hook') if present; every other slide
 // becomes one "point" (head + body combined into a single string, mirroring
-// how ideation-flow.ts's buildTopic() writes one point per bullet).
-function toParsedDraft(slides: GeneratedSlide[]): ParsedDraft {
+// how ideation-flow.ts's buildTopic() writes one point per bullet). The
+// caption (hashtags included - see copy-prompts.ts's CAPTION_GUIDANCE_BLOCK)
+// is real customer-facing copy too, so it's appended as one more "point"
+// rather than left unchecked - this is what puts it through Tier 1's
+// banned-phrase/em-dash scan and Tier 2's overpromising/misleading-framing
+// judgment the same as every slide.
+function toParsedDraft(slides: GeneratedSlide[], caption: string): ParsedDraft {
   const hookSlide = slides.find((s) => s.kind === "hook");
   const bodySlides = slides.filter((s) => s !== hookSlide);
   const hook = hookSlide ? [hookSlide.head, hookSlide.body].filter(Boolean).join(" - ") : "";
   const points = bodySlides.map((s) => [s.head, s.body, s.attrib ? `(${s.attrib})` : null].filter(Boolean).join(" - "));
+  if (caption) points.push(`[caption] ${caption}`);
   const raw = [hook, ...points].join("\n\n");
   return { hook, points, sourceLine: null, structured: true, raw };
 }
@@ -91,7 +97,7 @@ function aggregateFit(tier3Fit: SlideFitResult[], hardFails: string[], softFlags
 }
 
 async function runGenericQc(result: CopyGenerationResult, article: Article | null): Promise<CopyQcResultGeneric> {
-  const parsed = toParsedDraft(result.slides);
+  const parsed = toParsedDraft(result.slides, result.caption);
   const text = visibleCopy(parsed);
 
   const tier1 = runTier1(text);
@@ -150,10 +156,12 @@ async function runGenericQc(result: CopyGenerationResult, article: Article | nul
 
 // Splits interview slides by whose words they are: F's own text is the hook
 // (head+body) plus every slide's "head" field (the context/framing line F
-// wrote to introduce a quote, possibly empty) - the verbatim quotes are the
-// "body" field of kind='quote' slides only. See generateInterviewCarousel's
-// pairContextAndQuotes() in copy-flow.ts for how those fields get set.
-function splitInterviewText(slides: GeneratedSlide[]): { ownText: string; quotes: string[] } {
+// wrote to introduce a quote, possibly empty) plus the caption - the
+// verbatim quotes are the "body" field of kind='quote' slides only. See
+// generateInterviewCarousel's pairContextAndQuotes() in copy-flow.ts for how
+// those fields get set. The caption is always F's own writing, never a
+// contributor quote, so it belongs in ownText, not quotes.
+function splitInterviewText(slides: GeneratedSlide[], caption: string): { ownText: string; quotes: string[] } {
   const ownTextParts: string[] = [];
   const quotes: string[] = [];
   for (const s of slides) {
@@ -161,11 +169,12 @@ function splitInterviewText(slides: GeneratedSlide[]): { ownText: string; quotes
     if (s.kind === "hook" && s.body) ownTextParts.push(s.body);
     if (s.kind === "quote" && s.body) quotes.push(s.body);
   }
+  if (caption) ownTextParts.push(caption);
   return { ownText: ownTextParts.join("\n"), quotes };
 }
 
 async function runInterviewQc(result: CopyGenerationResult, article: Article, meta: { contributorName: string; contributorRole: string }): Promise<CopyQcResultInterview> {
-  const { ownText, quotes } = splitInterviewText(result.slides);
+  const { ownText, quotes } = splitInterviewText(result.slides, result.caption);
 
   const tier1 = runTier1(ownText);
   const tier2 = await runTier2Interview(ownText, quotes, meta.contributorName, meta.contributorRole, article);
