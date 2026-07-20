@@ -212,6 +212,14 @@
     out.para = para.join('\n');
     return out;
   }
+  // The content-kind index badge: a real label (e.g. "BONUS!" - a slide
+  // that breaks a numbered sequence on purpose, see the joke-carousel
+  // BONUS/closing slides) takes priority over the zero-padded number,
+  // which remains the default for an ordinary numbered slide.
+  function badgeText(slide) {
+    if (slide.numberLabel) return String(slide.numberLabel).toUpperCase();
+    return String(slide.num || 1).padStart(2, '0');
+  }
   // Position of this slide among the "middle" (content+quote) slides, for design2's progress dots.
   function middleInfo(slide, reel) {
     if (!reel) return null;
@@ -437,7 +445,7 @@
       if (style === 'design2') {
         var hdrY = Math.max(110, sT);
         ctx.textBaseline = 'top'; ctx.textAlign = 'left';
-        ctx.fillStyle = L.accent; ctx.font = '800 58px ' + bodyFont; ctx.fillText(String(slide.num || 1).padStart(2, '0'), leftX, hdrY + dy);
+        ctx.fillStyle = L.accent; ctx.font = '800 58px ' + bodyFont; ctx.fillText(badgeText(slide), leftX, hdrY + dy);
         var mi = middleInfo(slide, reel);
         if (mi) {
           var dwi = 42, dg = 12, dyy = hdrY + 24 + dy; var dx = W - rightInset - (mi.total * (dwi + dg) - dg);
@@ -467,7 +475,7 @@
         } else if (slide.body) { ctx.fillStyle = L.bodyColor; ctx.textAlign = L.align; ctx.font = '400 42px ' + bf; y6 = drawML(ctx, slide.body, anchorX, y6, maxW, 60); }
       } else {
         var y7 = topY + dy;
-        ctx.fillStyle = L.accent; ctx.font = hw + ' 66px ' + fs; ctx.fillText(String(slide.num || 1).padStart(2, '0'), anchorX, y7); y7 += 84;
+        ctx.fillStyle = L.accent; ctx.font = hw + ' 66px ' + fs; ctx.fillText(badgeText(slide), anchorX, y7); y7 += 84;
         ctx.fillStyle = L.accent;
         if (L.align === 'center') { ctx.fillRect(centerX - 48, y7, 96, 6); } else { ctx.fillRect(leftX, y7, 96, 6); }
         y7 += 46;
@@ -514,6 +522,7 @@
     drawRichHead: drawRichHead,
     drawHeadline: drawHeadline,
     parseBody: parseBody,
+    badgeText: badgeText,
     middleInfo: middleInfo,
     drawChecklist: drawChecklist,
     frameAt: frameAt,
