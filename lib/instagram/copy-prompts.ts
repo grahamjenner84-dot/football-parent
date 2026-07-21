@@ -14,10 +14,34 @@
 
 import { BANNED_AI_SLOP_PHRASES } from "./qc-rules";
 
-export const MODEL = "claude-opus-4-8";
-// Same claude-opus-4-8 pricing used by qc-tier2.ts / ideation-extract.ts.
-export const INPUT_COST_PER_TOKEN = 5 / 1_000_000;
-export const OUTPUT_COST_PER_TOKEN = 25 / 1_000_000;
+// claude-sonnet-5 for joke/education generation - verified against the
+// claude-opus-4-8 baseline (batch-2 cost-reduction task): joke quality held
+// (arguably punchier - concrete details like "still puts their boots on the
+// wrong feet"), education showed the exact same failure patterns as Opus
+// (same hook-overflow cases, same EPPP qualifier-preservation miss), so
+// nothing regressed. ~40% cheaper per generation.
+export const MODEL = "claude-sonnet-5";
+// Interviews stay on Opus: a same-conditions test showed Sonnet silently
+// "fixing" a grammatical typo inside a verbatim source quote ("can
+// suppresses" -> "can suppress") - QC's verbatim-fidelity check caught it,
+// so nothing shipped broken, but interviews are Football Parent's lowest-
+// volume content type and carry real attribution/accuracy stakes (a real
+// person's exact words), so the cost saving isn't worth that risk here.
+export const INTERVIEW_MODEL = "claude-opus-4-8";
+
+interface ModelPricing {
+  inputCostPerToken: number;
+  outputCostPerToken: number;
+}
+const MODEL_PRICING: Record<string, ModelPricing> = {
+  "claude-sonnet-5": { inputCostPerToken: 3 / 1_000_000, outputCostPerToken: 15 / 1_000_000 },
+  "claude-opus-4-8": { inputCostPerToken: 5 / 1_000_000, outputCostPerToken: 25 / 1_000_000 },
+};
+export function pricingFor(model: string): ModelPricing {
+  const pricing = MODEL_PRICING[model];
+  if (!pricing) throw new Error(`No pricing entry for model "${model}" - add one to MODEL_PRICING in copy-prompts.ts`);
+  return pricing;
+}
 
 const BANNED_PHRASES_LIST = BANNED_AI_SLOP_PHRASES.map((p) => `"${p}"`).join(", ");
 
@@ -84,6 +108,13 @@ const SELF_CHECK_SCHEMA = {
 // section 3 and the reference-examples block for the exact mechanics.
 // ---------------------------------------------------------------------------
 
+// Shared between both joke builders - see batch-1 review feedback: punchlines
+// that merely negated the setup ("It was very unlucky for the other lot")
+// passed QC but read as flat, and captions invented implausible specifics.
+const JOKE_RULES_BLOCK = `Punchline quality bar: a punchline (the body/reframe/definition-twist) must supply a concrete, visual, or specific absurdity, not simply negate or restate the setup's sentiment. Before finalising a slide, check: does the body add a specific image, character detail, or exaggeration, or does it just say the opposite of the head in general terms? If the latter, rewrite it or cut the slide. ("It was very unlucky for the other lot" fails this test - it negates without adding anything concrete.)
+
+Caption realism: when a caption references a specific detail (kickoff time, age group, scoreline, weather), use a plausible grassroots default rather than inventing one - grassroots kickoffs typically run mid-morning (roughly 9-11am), not early morning or evening. If you are not sure a specific detail is realistic, use a vaguer phrase ("a Sunday morning") instead of a wrong specific one.`;
+
 export function buildJokeSingleSystemPrompt(): string {
   return `You are writing ONE joke slide for Football Parent (footballparent.co.uk)'s Instagram, a British youth-football-parent account with a knowledgeable-but-warm insider voice (not the American "soccer mom" persona - see below).
 
@@ -98,6 +129,8 @@ Template B - "Grassroots archetype" (term + definition):
 - body: a two-line definition that sets up the archetype, then twists it. Same mechanic as Template A: plain statement of an absurd-but-true pattern. Example shape: RINGER / That kid who "just came to help out"... and scores 5.
 
 CRITICAL: this is a BRITISH account. Use British sideline terms (football, boots, pitch) not American ones (soccer, cleats, field). The humour is RECOGNITION ("we all do this"), never mockery, never punching down at children.
+
+${JOKE_RULES_BLOCK}
 
 ${SHARED_RULES_BLOCK}
 
@@ -123,13 +156,19 @@ export const JOKE_SINGLE_SCHEMA = {
 } as const;
 
 export function buildJokeCarouselSystemPrompt(): string {
-  return `You are writing a full JOKE CAROUSEL for Football Parent (footballparent.co.uk)'s Instagram/TikTok. This is the single best-performing format in this niche - competitor accounts have hit 42,400 likes / 52,000 saves / 3,618 shares with this exact structure. Replicate the MECHANICS below, but in Football Parent's voice: BRITISH English and sideline terms ("football" not "soccer", "boots" not "cleats"), and a knowledgeable-but-warm insider tone, not the American "soccer mom" comedy persona these examples come from.
+  return `You are writing a full JOKE CAROUSEL for Football Parent (footballparent.co.uk)'s Instagram/TikTok. This is the single best-performing format in this niche - competitor accounts have hit 42,400 likes / 52,000 saves / 3,618 shares with this exact FOUR-PART structure (title card, numbered entries, bonus, share-CTA closer). Replicate that four-part structure and the tone/rhythm/comic-timing it demonstrates, in Football Parent's voice: BRITISH English and sideline terms ("football" not "soccer", "boots" not "cleats"), and a knowledgeable-but-warm insider tone, not the American "soccer mom" comedy persona these examples come from.
 
-Saves and shares are the goal, and this exact structure is what has been proven to earn them. Build all four parts every time:
+IMPORTANT: the specific entry format shown below ("things parents shout" quote+reframe) is a style/tone/rhythm reference, not a mandatory template for every carousel. Do not default every batch to that exact shape just because it's the example given - see the entry-format options inside part 2, and pick whichever fits the given theme so consecutive carousels don't all read as repeats of the same shape.
+
+Saves and shares are the goal, and this exact four-part structure is what has been proven to earn them. Build all four parts every time:
 
 1. TITLE CARD (drives saves + comments): a curiosity-gap title, not a plain label. "THINGS FOOTBALL PARENTS SHOUT THAT MAKE ABSOLUTELY NO SENSE" beats a plain "Things football parents shout" - the "that make no sense" promises a payoff. You may use series/crowd-sourced framing ("BASED ON YOUR COMMENTS", "PART 2") if it fits the theme.
 
-2. NUMBERED QUOTE/REFRAME SLIDES (8-10 of them): each slide is a real sideline shout in CAPS and quotation marks as the head, then a short deadpan reframe (4-8 words, 1-2 short lines) as the body. Humour is RECOGNITION ("we all do this"), never mockery of the parent, the kid, or the coach. VARY the reframe mechanic across the carousel - do not use the same joke shape twice in a row. Mechanics to draw on:
+2. NUMBERED ENTRY SLIDES (8-10 of them): choose whichever entry format best fits the given theme, and use it consistently across the whole carousel (don't mix formats within one set unless the theme specifically calls for it):
+   - Quote + reframe (the reference example): head = a real sideline shout in CAPS and quotation marks, body = a short deadpan reframe (4-8 words, 1-2 short lines).
+   - Archetype + definition: head = a single bold label in caps naming a recognisable grassroots archetype (a role, not a real player), body = a two-line definition that sets up the archetype then twists it.
+   - Situational observation: head = a specific, recognisable grassroots moment stated plainly (not necessarily a quote), body = the reframe/twist on it.
+   Whichever format you pick, humour is RECOGNITION ("we all do this"), never mockery of the parent, the kid, or the coach. VARY the reframe/twist mechanic across the carousel - do not use the same joke shape twice in a row. Mechanics to draw on:
    - Contradiction: "SPREAD OUT!" / while nobody knows where to go.
    - Impossible demand: "SETTLE IT!" / as the ball is moving 100mph.
    - Self-own: "SIMPLE PASS!" / from parents who've never played a day in their life.
@@ -137,11 +176,14 @@ Saves and shares are the goal, and this exact structure is what has been proven 
    - Affectionate flip: "WAKE UP!" / to a child who's been running for 70 minutes straight.
    - Plain absurdity: "HANDBALL!" / because the ball touched something and we're emotional.
    - Admitted ignorance: "MARK UP!" / from parents who immediately admit they don't know what that means.
-   Each reframe is SHORT - setup + punch, never a paragraph. That length is the target, not a minimum.
+   Each entry is SHORT - setup + punch, never a paragraph. That length is the target, not a minimum.
+   Character budget for every entry (this includes BONUS, which uses the same layout - the reel-core content slide, not the hook slide): head at ~12 characters per wrapped line, aim for 1 line and never more than 2 (so keep the head to roughly 24 characters or less - a quote, a label, or a short statement, not a sentence); body at ~46 characters per wrapped line, aim for 1-2 short lines (roughly 90 characters or less) so the punch lands fast - the hard technical ceiling is several lines more than that, but a reframe that needs it has stopped being punchy and should be rewritten shorter, not stretched to the ceiling. slide-fit.ts's real renderer measurement is still the authoritative pass/fail gate; these numbers are so you rarely need it to catch anything.
 
-3. BONUS SLIDE: exactly one slide that breaks the numbering, labelled "BONUS!", using the same quote/reframe mechanic, ideally self-aware about the parents themselves (e.g. everyone shouting different advice at once).
+3. BONUS SLIDE: exactly one slide that breaks the numbering, labelled "BONUS!", using the same entry format and mechanic pool as the rest of the carousel, ideally self-aware about the parents themselves (e.g. everyone shouting different advice at once).
 
 4. SHARE-CTA CLOSING SLIDE: a final slide with a punchy statement plus an explicit share prompt that CALLS BACK to one specific earlier numbered entry by number. Example shape: "FOOTBALL PARENTS ARE A DIFFERENT BREED." / "Send this to the parent who definitely yelled 'SETTLE IT!' today." The callback to a specific earlier joke, plus "send this to...", is what earns shares - do not write a generic closing line with no callback.
+
+${JOKE_RULES_BLOCK}
 
 ${SHARED_RULES_BLOCK}
 
@@ -208,15 +250,20 @@ export const JOKE_CAROUSEL_SCHEMA = {
 export function buildEducationSystemPrompt(): string {
   return `You are turning a factual brief into a slide-by-slide Instagram/TikTok EDUCATION REEL for Football Parent (footballparent.co.uk), a British youth-football-parent account. You will be given a brief (already fact-checked and grounded in a source article) - your job is to reshape it into short, punchy SLIDE copy, not to summarise it into a paragraph.
 
+Banned-phrase enforcement, before you write a single word: you must not use any phrase from the banned-phrases list in the hard rules block below, including any variation of "the badge" as a metaphor for club status, pride, or loyalty ("without the badge", "it's not about the badge", "the badge changes", "earning your badge", etc.). This is a hard rule, not a stylistic preference to avoid when convenient - treat every phrase on that list as a forbidden token you must never type, and check every slide against it before finalising.
+
 Hook slide (always slides[0], but also returned separately as "hook"):
 - headline: one or two short declarative sentences, stated plainly - no hedging here.
 - subtext: a line underneath that deepens curiosity. Never answer the headline in the subtext.
+- The hook must create a personal stake or unresolved tension for a football parent, not simply state an interesting fact. Ask: what does the parent risk getting wrong, or what assumption are they currently making that might be false? Do not resolve that tension in the hook itself - the subtext should deepen the question, not answer it. Avoid hooks built around "X exists" or "there's an official Y" - these are trivia, not a fear or curiosity hook.
+- Hard line-length constraint on the hook specifically: the headline and subtext combined must fit within 9 wrapped lines at the render template's font size (assume ~25-30 characters per wrapped line, same assumption as the fit rule below - this is the exact same 9-line hook budget the renderer enforces, not a separate looser guideline). Count wrapped lines against that budget before finalising your answer. If it doesn't fit, cut words - do not rely on QC to catch an overlong hook; treat the line budget as a hard constraint while writing, the same way you treat the slide-body limits below.
 
 Body slides (returned as "slides", one entry per slide, in order - the hook is NOT repeated in this array):
 - One point per slide, or split across as many slides as it needs (head = the point in a punchy line for slide N, head = "" and body continuing the same point for slide N+1 is NOT allowed - instead write a fresh head for each slide, e.g. "...and here's why" style continuations, so every slide reads as a complete unit even mid-point).
 - head = the point in a punchy line. body = the supporting detail, still short, still football-specific (a genuine observation, not generic parenting advice).
 - If a point needs more than ~9 lines of copy, split it into two or three consecutive slide objects rather than compressing it into dense text.
 - Any claim needing evidence must come from the brief provided - never invent a fact or statistic that isn't in it. If the brief hedges a claim, you may state it more directly for social, but you cannot claim something the brief doesn't support.
+- Never include compliance/checklist-style content (safeguarding steps, legal requirements, "before you sign anything" procedural lists, or similar reference-list material) in this social copy - that belongs in the source site article only, not a social carousel. Every slide should stay in hook/insight/payoff shape throughout; never let a slide shift into a reference-list or checklist format.
 
 ${SHARED_RULES_BLOCK}
 

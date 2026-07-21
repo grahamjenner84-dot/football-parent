@@ -15,10 +15,19 @@ import Anthropic from "@anthropic-ai/sdk";
 import type { Article } from "../content";
 import type { ParsedDraft } from "./qc-parse";
 
-const MODEL = "claude-opus-4-8";
-// claude-opus-4-8 pricing: $5/1M input tokens, $25/1M output tokens.
-const INPUT_COST_PER_TOKEN = 5 / 1_000_000;
-const OUTPUT_COST_PER_TOKEN = 25 / 1_000_000;
+// claude-sonnet-5, not opus - Tier 2 is a per-item AI-judgment call that runs
+// on every item that clears Tier 1, so it's the largest QC cost driver.
+// Verified against the batch-1/2 Opus baseline before switching: reproduced
+// the same confirmed claim-grounding hard fail (EPPP contact-hours item) and
+// caught one Opus had missed (grassroots "every club" vs source's "most
+// clubs"), plus correct verbatim-fidelity/attribution splitting on an
+// interview item. claude-haiku-4-5 was also tried and rejected - it doesn't
+// support adaptive thinking at all (400s outright), which would require a
+// different request shape just for that one model.
+const MODEL = "claude-sonnet-5";
+// claude-sonnet-5 pricing: $3/1M input tokens, $15/1M output tokens.
+const INPUT_COST_PER_TOKEN = 3 / 1_000_000;
+const OUTPUT_COST_PER_TOKEN = 15 / 1_000_000;
 // Same cap ideation-extract.ts uses when passing the source article to Claude.
 const MAX_ARTICLE_CHARS = 16000;
 

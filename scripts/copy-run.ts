@@ -102,6 +102,14 @@ function printQc(qc: CopyQcResult): void {
   for (const f of qc.tier1.findings) console.log(`    ${f.hardFail ? "[HARD FAIL]" : "[soft]"} ${f.rule}: ${f.detail}`);
 
   if (qc.kind === "interview") {
+    if (!qc.tier2) {
+      console.log(`  Tier 2: SKIPPED (Tier 1 already hard-failed - no API call spent on AI judgment).`);
+      console.log(`  Tier 3 (fit, expert-quote-core - shared with Phase F's self-check, see lib/instagram/slide-fit.ts):`);
+      printFitFindings(qc.tier3Fit);
+      console.log(`  Safety: identifies_real_child: not checked (Tier 2 skipped)`);
+      printQcFooter(qc);
+      return;
+    }
     console.log(`  Tier 2 (AI judgment - split by whose words they are):`);
     console.log(`    -- Football Parent's OWN text (hook + context lines) --`);
     console.log(`    hook: ${qc.tier2.hookClassification} - ${qc.tier2.hookClassificationReason}`);
@@ -125,6 +133,15 @@ function printQc(qc: CopyQcResult): void {
     return;
   }
 
+  if (!qc.tier2) {
+    console.log(`  Tier 2: SKIPPED (Tier 1 already hard-failed - no API call spent on AI judgment).`);
+    console.log(`  Tier 3 (fit + safety):`);
+    console.log(`    identifies_real_child: not checked (Tier 2 skipped)`);
+    printFitFindings(qc.tier3Fit);
+    printQcFooter(qc);
+    return;
+  }
+
   console.log(`  Tier 2 (AI judgment):`);
   console.log(`    hook: ${qc.tier2.hookClassification} - ${qc.tier2.hookClassificationReason}`);
   console.log(`    promises_success: ${qc.tier2.promisesSuccess} - ${qc.tier2.promisesSuccessDetail}`);
@@ -137,6 +154,15 @@ function printQc(qc: CopyQcResult): void {
   console.log(`    misleading_framing: ${qc.tier2.misleadingFraming} - ${qc.tier2.misleadingFramingDetail}`);
   console.log(`    source article resolved: ${qc.article ? qc.article.frontmatter.title : "(none)"}`);
   console.log(`    hook strength: ${qc.tier2.hookStrength} - ${qc.tier2.hookImprovementSuggestion}`);
+
+  if (qc.qualifierCheck) {
+    console.log(`  Qualifier-preservation check (deterministic trigger, education only - see lib/instagram/qc-qualifier.ts):`);
+    for (const c of qc.qualifierCheck.claims) {
+      const flag = c.qualifierDropped ? "[HARD FAIL]" : "[ok]";
+      console.log(`    ${flag} "${c.slideLabel}": ${c.reason}`);
+    }
+    console.log(`    Qualifier-check API cost: $${qc.qualifierCheck.usage.costUsd.toFixed(4)}`);
+  }
 
   console.log(`  Tier 3 (fit + safety):`);
   console.log(`    identifies_real_child: ${qc.tier2.identifiesRealChild} - ${qc.tier2.identifiesRealChildDetail}`);
@@ -179,6 +205,7 @@ async function main() {
   const source = argValue("source");
   const limit = argValue("limit") ? Number(argValue("limit")) : undefined;
   const articleArg = argValue("article");
+  const topicArg = argValue("topic");
   const contributorName = argValue("contributor-name");
   const contributorRole = argValue("contributor-role");
   const contributorBio = argValue("contributor-bio");
@@ -186,7 +213,7 @@ async function main() {
 
   if (!type) {
     console.error(
-      "Usage: npm run copy -- --type=<joke-carousel|joke-single|education|interview> [--theme=... | --source=gsc --limit=5 | --article=/path --contributor-name=... --contributor-role=... --contributor-bio=... --contributor-photo=...] [--apply]"
+      "Usage: npm run copy -- --type=<joke-carousel|joke-single|education|interview> [--theme=... | --source=gsc --limit=5 | --topic=\"...\" [--article=/path] | --article=/path --contributor-name=... --contributor-role=... --contributor-bio=... --contributor-photo=...] [--apply]"
     );
     process.exitCode = 1;
     return;
@@ -227,6 +254,23 @@ async function main() {
       article
     );
     const { generationCost, qcCost } = await processItem(`Ad hoc interview: ${articleArg} - ${contributorName}`, result, article, false);
+    totalGenerationCost += generationCost;
+    totalQcCost += qcCost;
+    count = 1;
+  } else if (type === "education" && topicArg) {
+    // Ad hoc path - test a specific brief/hook angle without seeding a
+    // content_queue row first, mirroring joke-carousel's --theme path.
+    // --article is optional grounding (same resolveArticle() queue-driven
+    // education uses) - omit it and F gets no source text to fact-check
+    // against, same as a queue item whose source_ref.page doesn't resolve.
+    const article = articleArg ? resolveArticle(articleArg) : null;
+    if (articleArg && !article) {
+      console.error(`--article=${articleArg} did not resolve to a published article (checked content/<category>/<slug>.mdx via getArticleBySlug).`);
+      process.exitCode = 1;
+      return;
+    }
+    const result = await generateEducationReel(topicArg, article);
+    const { generationCost, qcCost } = await processItem(`Ad hoc education: "${topicArg}"`, result, article, false);
     totalGenerationCost += generationCost;
     totalQcCost += qcCost;
     count = 1;

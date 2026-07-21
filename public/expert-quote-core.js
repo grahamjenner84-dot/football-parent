@@ -95,15 +95,22 @@
     }
     return yy;
   }
+  // wrapped[i] must always correspond to paras[i] (every call site in this
+  // file indexes wrapped[0] directly, e.g. drawQA's context line, which is
+  // legitimately empty for consecutive quote slides with no fresh framing -
+  // see copy-flow.ts's pairContextAndQuotes). Previously an empty paragraph
+  // was skipped with `continue` instead of pushed as [], so wrapped could
+  // end up shorter than paras (or empty entirely) and wrapped[0] read as
+  // undefined, crashing drawLines() on undefined.length.
   function fitWords(ctx, paras, maxW, maxH, hi, lo, lhR, gap, fontFn) {
     for (var s = hi; s >= lo; s -= 2) {
       ctx.font = fontFn(s); var space = ctx.measureText(' ').width; var total = 0; var wrapped = [];
-      for (var i = 0; i < paras.length; i++) { var p = paras[i]; if (!p.length) continue; var ls = wrapWords(ctx, p, maxW, space); wrapped.push(ls); total += ls.length; }
+      for (var i = 0; i < paras.length; i++) { var p = paras[i]; if (!p.length) { wrapped.push([]); continue; } var ls = wrapWords(ctx, p, maxW, space); wrapped.push(ls); total += ls.length; }
       var lineH = s * lhR; var h = total * lineH + (wrapped.length > 1 ? (wrapped.length - 1) * gap : 0);
       if (h <= maxH) return { size: s, lineH: lineH, space: space, wrapped: wrapped, height: h };
     }
     ctx.font = fontFn(lo); var space2 = ctx.measureText(' ').width;
-    var wrapped2 = paras.filter(function (p) { return p.length; }).map(function (p) { return wrapWords(ctx, p, maxW, space2); });
+    var wrapped2 = paras.map(function (p) { return p.length ? wrapWords(ctx, p, maxW, space2) : []; });
     var lineH2 = lo * lhR; var h2 = wrapped2.reduce(function (a, l) { return a + l.length; }, 0) * lineH2 + (wrapped2.length > 1 ? (wrapped2.length - 1) * gap : 0);
     return { size: lo, lineH: lineH2, space: space2, wrapped: wrapped2, height: h2 };
   }

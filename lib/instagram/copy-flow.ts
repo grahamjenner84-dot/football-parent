@@ -26,8 +26,8 @@ import { BANNED_AI_SLOP_PHRASES, BADGE_CLICHE_PATTERNS, EM_DASH } from "./qc-rul
 import { checkSlidesFit, SlideFitInput, SlideFitResult } from "./slide-fit";
 import {
   MODEL,
-  INPUT_COST_PER_TOKEN,
-  OUTPUT_COST_PER_TOKEN,
+  INTERVIEW_MODEL,
+  pricingFor,
   buildJokeSingleSystemPrompt,
   buildJokeSingleUserPrompt,
   JOKE_SINGLE_SCHEMA,
@@ -63,10 +63,10 @@ export interface SelfCheck {
   issues: string[];
 }
 
-async function callClaude<T>(system: string, user: string, schema: Record<string, unknown>): Promise<{ parsed: T; usage: Usage }> {
+async function callClaude<T>(system: string, user: string, schema: Record<string, unknown>, model: string): Promise<{ parsed: T; usage: Usage }> {
   const client = getClient();
   const response = await client.messages.create({
-    model: MODEL,
+    model,
     max_tokens: 4096,
     thinking: { type: "adaptive" },
     output_config: {
@@ -88,7 +88,8 @@ async function callClaude<T>(system: string, user: string, schema: Record<string
 
   const inputTokens = (response.usage.input_tokens ?? 0) + (response.usage.cache_creation_input_tokens ?? 0) + (response.usage.cache_read_input_tokens ?? 0);
   const outputTokens = response.usage.output_tokens;
-  const costUsd = inputTokens * INPUT_COST_PER_TOKEN + outputTokens * OUTPUT_COST_PER_TOKEN;
+  const pricing = pricingFor(model);
+  const costUsd = inputTokens * pricing.inputCostPerToken + outputTokens * pricing.outputCostPerToken;
 
   return { parsed, usage: { inputTokens, outputTokens, costUsd } };
 }
@@ -131,6 +132,7 @@ export interface GeneratedSlide {
 export interface CopyGenerationResult {
   contentType: "joke" | "education" | "interview";
   format: "single" | "carousel" | "reel";
+  model: string; // the model actually used to generate this item - see copy-prompts.ts's MODEL/INTERVIEW_MODEL split
   slides: GeneratedSlide[]; // full visible copy, in render order, for display/QC
   caption: string; // Instagram caption incl. hashtags - separate from slides, never drawn on any slide. See copy-prompts.ts's CAPTION_GUIDANCE_BLOCK.
   renderPayload: Record<string, unknown>;
@@ -234,9 +236,10 @@ async function generateWithRetry<T extends { selfCheck: SelfCheck; caption: stri
   system: string,
   user: string,
   schema: Record<string, unknown>,
-  toSlides: (parsed: T) => { slides: GeneratedSlide[]; fitInputs: SlideFitInput[] }
+  toSlides: (parsed: T) => { slides: GeneratedSlide[]; fitInputs: SlideFitInput[] },
+  model: string = MODEL
 ): Promise<{ parsed: T; slides: GeneratedSlide[]; fit: SlideFitResult[]; detIssues: string[]; needsManualReview: boolean; manualReviewReason: string | null; attempts: number; usage: Usage }> {
-  let attempt = await callClaude<T>(system, user, schema);
+  let attempt = await callClaude<T>(system, user, schema, model);
   let built = toSlides(attempt.parsed);
   let evalResult = evaluateSelfCheck(built.slides, built.fitInputs, attempt.parsed.caption, attempt.parsed.selfCheck);
   let usage = attempt.usage;
@@ -244,7 +247,7 @@ async function generateWithRetry<T extends { selfCheck: SelfCheck; caption: stri
 
   if (!evalResult.ok) {
     const feedback = failureFeedback(evalResult.detIssues, evalResult.fit, attempt.parsed.selfCheck);
-    const retry = await callClaude<T>(system, `${user}\n\n${feedback}`, schema);
+    const retry = await callClaude<T>(system, `${user}\n\n${feedback}`, schema, model);
     const retryBuilt = toSlides(retry.parsed);
     const retryEval = evaluateSelfCheck(retryBuilt.slides, retryBuilt.fitInputs, retry.parsed.caption, retry.parsed.selfCheck);
     usage = sumUsage(usage, retry.usage);
@@ -294,6 +297,7 @@ export async function generateJokeSingle(topic: string): Promise<CopyGenerationR
   return {
     contentType: "joke",
     format: "single",
+    model: MODEL,
     slides: result.slides,
     caption: result.parsed.caption,
     renderPayload,
@@ -365,6 +369,7 @@ export async function generateJokeCarousel(theme: string): Promise<CopyGeneratio
   return {
     contentType: "joke",
     format: "reel",
+    model: MODEL,
     slides: result.slides,
     caption: parsed.caption,
     renderPayload,
@@ -426,6 +431,7 @@ export async function generateEducationReel(brief: string, sourceArticle: Articl
   return {
     contentType: "education",
     format: "reel",
+    model: MODEL,
     slides: result.slides,
     caption: parsed.caption,
     renderPayload,
@@ -534,7 +540,7 @@ export async function generateInterviewCarousel(contributor: InterviewContributo
       ...qaSlides.map((s, i) => ({ label: `slide ${i + 2}`, renderer: "expert-quote-core" as const, slideKind: "qa", head: s.q, body: s.a })),
     ];
     return { slides, fitInputs };
-  });
+  }, INTERVIEW_MODEL);
 
   const parsed = result.parsed;
   const qaSlides = pairContextAndQuotes(parsed.slides);
@@ -559,6 +565,7 @@ export async function generateInterviewCarousel(contributor: InterviewContributo
   return {
     contentType: "interview",
     format: "carousel",
+    model: INTERVIEW_MODEL,
     slides: result.slides,
     caption: parsed.caption,
     renderPayload,
@@ -621,7 +628,7 @@ export async function getQueueItemsForCopy(supabase: SupabaseClient, options: Ge
 export async function writeCopyResult(supabase: SupabaseClient, row: ContentQueueRow, result: CopyGenerationResult): Promise<void> {
   const copyRecord = {
     generatedAt: new Date().toISOString(),
-    model: MODEL,
+    model: result.model,
     attempts: result.attempts,
     needsManualReview: result.needsManualReview,
     manualReviewReason: result.manualReviewReason,

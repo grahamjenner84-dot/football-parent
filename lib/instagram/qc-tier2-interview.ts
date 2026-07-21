@@ -23,9 +23,13 @@
 import Anthropic from "@anthropic-ai/sdk";
 import type { Article } from "../content";
 
-const MODEL = "claude-opus-4-8";
-const INPUT_COST_PER_TOKEN = 5 / 1_000_000;
-const OUTPUT_COST_PER_TOKEN = 25 / 1_000_000;
+// claude-sonnet-5, not opus - see qc-tier2.ts's MODEL comment for the
+// verification this was checked against (interview-specific check here:
+// correct verbatim-fidelity/editorial-box/attribution splitting on a real
+// Paul Barry carousel before switching).
+const MODEL = "claude-sonnet-5";
+const INPUT_COST_PER_TOKEN = 3 / 1_000_000;
+const OUTPUT_COST_PER_TOKEN = 15 / 1_000_000;
 const MAX_ARTICLE_CHARS = 16000;
 
 let cachedClient: Anthropic | null = null;

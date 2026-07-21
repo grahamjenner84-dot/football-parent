@@ -42,7 +42,11 @@ export interface QcItemResult {
   parsed: ParsedDraft;
   article: Article | null;
   tier1: Tier1Result;
-  tier2: Tier2Result;
+  // null when Tier 1 already hard-failed - Tier 2 is a paid API call, and an
+  // item that's already rejected on a free deterministic check gains nothing
+  // from also spending on AI judgment, so it's skipped entirely (short-
+  // circuit, not run-and-ignore).
+  tier2: Tier2Result | null;
   tier3Fit: FitFinding[];
   hardFails: string[];
   softFlags: string[];
@@ -85,9 +89,6 @@ export async function runQcOnItem(row: ContentQueueRow): Promise<QcItemResult> {
   const pathname = typeof row.source_ref?.page === "string" ? (row.source_ref.page as string) : null;
   const article = pathname ? resolveArticle(pathname) : null;
 
-  const tier2 = await runTier2(parsed, article);
-  const tier3Fit = checkFit(fitItemsFor(parsed));
-
   const hardFails: string[] = [];
   const softFlags: string[] = [];
 
@@ -95,35 +96,45 @@ export async function runQcOnItem(row: ContentQueueRow): Promise<QcItemResult> {
     (f.hardFail ? hardFails : softFlags).push(`[Tier 1] ${f.rule}: ${f.detail}`);
   }
 
-  if (tier2.hookClassification === "overpromising") {
-    hardFails.push(`[Tier 2] hook_overpromising: ${tier2.hookClassificationReason}`);
-  }
-  if (tier2.promisesSuccess) {
-    hardFails.push(`[Tier 2] promises_success: ${tier2.promisesSuccessDetail}`);
-  }
-  if (tier2.absolutesFound.length > 0) {
-    softFlags.push(`[Tier 2] unsupported_absolutes: ${tier2.absolutesFound.join("; ")}`);
-  }
-  // Only entries the model itself flagged as a genuine problem
-  // (confirmedProblem) count as a failure - one it describes as
-  // grounded/verified/fine (confirmedProblem: false) is not a failure, see
-  // qc-tier2.ts's claim_grounding_issues schema comment.
-  const confirmedGroundingIssues = tier2.claimGroundingIssues.filter((c) => c.confirmedProblem);
-  const noteworthyGroundingIssues = tier2.claimGroundingIssues.filter((c) => !c.confirmedProblem);
-  if (confirmedGroundingIssues.length > 0) {
-    hardFails.push(`[Tier 2] claim_grounding: ${confirmedGroundingIssues.map((c) => `"${c.claim}" - ${c.issue}`).join("; ")}`);
-  }
-  if (noteworthyGroundingIssues.length > 0) {
-    softFlags.push(`[Tier 2] claim_grounding_note: ${noteworthyGroundingIssues.map((c) => `"${c.claim}" - ${c.issue}`).join("; ")}`);
-  }
-  if (tier2.misleadingFraming) {
-    hardFails.push(`[Tier 2] misleading_framing: ${tier2.misleadingFramingDetail}`);
-  }
-  // Safety backstop - bundled into the Tier 2 API call for cost (one call per
-  // item instead of two) but reported as Tier 3, per the task brief's tier
-  // split. See qc-tier2.ts system prompt, identifiesRealChild.
-  if (tier2.identifiesRealChild) {
-    hardFails.push(`[Tier 3] real_child_identified: ${tier2.identifiesRealChildDetail}`);
+  // Short-circuit: Tier 1 is free (regex, no API call); Tier 2 costs real
+  // money. An item Tier 1 already hard-fails is going to be rejected
+  // regardless of what Tier 2 would say, so don't spend the call.
+  const tier2 = tier1.passed ? await runTier2(parsed, article) : null;
+  const tier3Fit = checkFit(fitItemsFor(parsed));
+
+  if (tier2) {
+    if (tier2.hookClassification === "overpromising") {
+      hardFails.push(`[Tier 2] hook_overpromising: ${tier2.hookClassificationReason}`);
+    }
+    if (tier2.promisesSuccess) {
+      hardFails.push(`[Tier 2] promises_success: ${tier2.promisesSuccessDetail}`);
+    }
+    if (tier2.absolutesFound.length > 0) {
+      softFlags.push(`[Tier 2] unsupported_absolutes: ${tier2.absolutesFound.join("; ")}`);
+    }
+    // Only entries the model itself flagged as a genuine problem
+    // (confirmedProblem) count as a failure - one it describes as
+    // grounded/verified/fine (confirmedProblem: false) is not a failure, see
+    // qc-tier2.ts's claim_grounding_issues schema comment.
+    const confirmedGroundingIssues = tier2.claimGroundingIssues.filter((c) => c.confirmedProblem);
+    const noteworthyGroundingIssues = tier2.claimGroundingIssues.filter((c) => !c.confirmedProblem);
+    if (confirmedGroundingIssues.length > 0) {
+      hardFails.push(`[Tier 2] claim_grounding: ${confirmedGroundingIssues.map((c) => `"${c.claim}" - ${c.issue}`).join("; ")}`);
+    }
+    if (noteworthyGroundingIssues.length > 0) {
+      softFlags.push(`[Tier 2] claim_grounding_note: ${noteworthyGroundingIssues.map((c) => `"${c.claim}" - ${c.issue}`).join("; ")}`);
+    }
+    if (tier2.misleadingFraming) {
+      hardFails.push(`[Tier 2] misleading_framing: ${tier2.misleadingFramingDetail}`);
+    }
+    // Safety backstop - bundled into the Tier 2 API call for cost (one call per
+    // item instead of two) but reported as Tier 3, per the task brief's tier
+    // split. See qc-tier2.ts system prompt, identifiesRealChild.
+    if (tier2.identifiesRealChild) {
+      hardFails.push(`[Tier 3] real_child_identified: ${tier2.identifiesRealChildDetail}`);
+    }
+  } else {
+    softFlags.push(`[Tier 2] skipped: Tier 1 already hard-failed, so no API call was spent on AI judgment for this item.`);
   }
 
   for (const f of tier3Fit) {
@@ -150,7 +161,7 @@ export async function runQcOnItem(row: ContentQueueRow): Promise<QcItemResult> {
     hardFails,
     softFlags,
     passed: hardFails.length === 0,
-    apiCostUsd: tier2.usage.costUsd,
+    apiCostUsd: tier2?.usage.costUsd ?? 0,
   };
 }
 
@@ -161,8 +172,8 @@ export async function writeQcResult(supabase: SupabaseClient, row: ContentQueueR
     passed: result.passed,
     hardFails: result.hardFails,
     softFlags: result.softFlags,
-    hookStrength: result.tier2.hookStrength,
-    hookImprovementSuggestion: result.tier2.hookImprovementSuggestion,
+    hookStrength: result.tier2?.hookStrength ?? null,
+    hookImprovementSuggestion: result.tier2?.hookImprovementSuggestion ?? null,
     apiCostUsd: result.apiCostUsd,
   };
   const { error } = await supabase

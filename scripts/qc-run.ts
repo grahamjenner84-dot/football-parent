@@ -52,31 +52,42 @@ function printItemReport(result: QcItemResult): void {
     console.log(`  ${f.hardFail ? "[HARD FAIL]" : "[soft]"} ${f.rule}: ${f.detail}`);
   }
 
-  console.log(`\nTier 2 (AI judgment):`);
-  console.log(`  hook: ${result.tier2.hookClassification} - ${result.tier2.hookClassificationReason}`);
-  console.log(`  promises_success: ${result.tier2.promisesSuccess} - ${result.tier2.promisesSuccessDetail}`);
-  console.log(`  absolutes_found: ${result.tier2.absolutesFound.length ? result.tier2.absolutesFound.join("; ") : "(none)"}`);
-  console.log(
-    `  claim_grounding_issues: ${
-      result.tier2.claimGroundingIssues.length
-        ? result.tier2.claimGroundingIssues.map((c) => `"${c.claim}" (${c.confirmedProblem ? "problem" : "note only"}) - ${c.issue}`).join("; ")
-        : "(none)"
-    }`
-  );
-  console.log(`  misleading_framing: ${result.tier2.misleadingFraming} - ${result.tier2.misleadingFramingDetail}`);
-  console.log(`  source article resolved: ${result.article ? result.article.frontmatter.title : "(none - claim grounding checked on plausibility only)"}`);
+  if (!result.tier2) {
+    console.log(`\nTier 2: SKIPPED (Tier 1 already hard-failed - no API call spent on AI judgment).`);
+    console.log(`\nTier 3 (fit + safety):`);
+    console.log(`  identifies_real_child: not checked (Tier 2 skipped)`);
+    for (const f of result.tier3Fit) {
+      const flag = f.overflow ? "[HARD FAIL]" : f.tooLong ? "[soft]" : "[ok]";
+      console.log(`  ${flag} ${f.label}: ${f.lines} line(s) (hard max ${f.hardMaxLines}, recommended max ${f.recommendedMaxLines})`);
+    }
+    console.log(`\nAPI cost this item: $${result.apiCostUsd.toFixed(4)} (Tier 2 skipped)`);
+  } else {
+    console.log(`\nTier 2 (AI judgment):`);
+    console.log(`  hook: ${result.tier2.hookClassification} - ${result.tier2.hookClassificationReason}`);
+    console.log(`  promises_success: ${result.tier2.promisesSuccess} - ${result.tier2.promisesSuccessDetail}`);
+    console.log(`  absolutes_found: ${result.tier2.absolutesFound.length ? result.tier2.absolutesFound.join("; ") : "(none)"}`);
+    console.log(
+      `  claim_grounding_issues: ${
+        result.tier2.claimGroundingIssues.length
+          ? result.tier2.claimGroundingIssues.map((c) => `"${c.claim}" (${c.confirmedProblem ? "problem" : "note only"}) - ${c.issue}`).join("; ")
+          : "(none)"
+      }`
+    );
+    console.log(`  misleading_framing: ${result.tier2.misleadingFraming} - ${result.tier2.misleadingFramingDetail}`);
+    console.log(`  source article resolved: ${result.article ? result.article.frontmatter.title : "(none - claim grounding checked on plausibility only)"}`);
 
-  console.log(`\nTier 3 (fit + safety):`);
-  console.log(`  identifies_real_child: ${result.tier2.identifiesRealChild} - ${result.tier2.identifiesRealChildDetail}`);
-  for (const f of result.tier3Fit) {
-    const flag = f.overflow ? "[HARD FAIL]" : f.tooLong ? "[soft]" : "[ok]";
-    console.log(`  ${flag} ${f.label}: ${f.lines} line(s) (hard max ${f.hardMaxLines}, recommended max ${f.recommendedMaxLines})`);
+    console.log(`\nTier 3 (fit + safety):`);
+    console.log(`  identifies_real_child: ${result.tier2.identifiesRealChild} - ${result.tier2.identifiesRealChildDetail}`);
+    for (const f of result.tier3Fit) {
+      const flag = f.overflow ? "[HARD FAIL]" : f.tooLong ? "[soft]" : "[ok]";
+      console.log(`  ${flag} ${f.label}: ${f.lines} line(s) (hard max ${f.hardMaxLines}, recommended max ${f.recommendedMaxLines})`);
+    }
+
+    console.log(`\nHook strength: ${result.tier2.hookStrength}`);
+    console.log(`  ${result.tier2.hookImprovementSuggestion}`);
+
+    console.log(`\nAPI cost this item: $${result.apiCostUsd.toFixed(4)} (${result.tier2.usage.inputTokens} in / ${result.tier2.usage.outputTokens} out)`);
   }
-
-  console.log(`\nHook strength: ${result.tier2.hookStrength}`);
-  console.log(`  ${result.tier2.hookImprovementSuggestion}`);
-
-  console.log(`\nAPI cost this item: $${result.apiCostUsd.toFixed(4)} (${result.tier2.usage.inputTokens} in / ${result.tier2.usage.outputTokens} out)`);
   console.log(`\n>>> OVERALL: ${result.passed ? "PASS" : "FAIL"}${result.passed ? "" : ` (${result.hardFails.length} hard fail(s))`}`);
   if (!result.passed) {
     for (const hf of result.hardFails) console.log(`    - ${hf}`);
