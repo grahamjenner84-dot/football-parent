@@ -6,8 +6,13 @@ name: Instagram publish cron
 # route.ts, which were already written to accept any caller presenting
 # the CRON_SECRET bearer token, not just Vercel's own Cron feature.
 on:
-  schedule:
-    - cron: "*/15 * * * *"
+  # Schedule disabled 2026-07-21: stepping back from the automated pipeline
+  # to a chat-driven workflow, and this was a no-op anyway (DRY_RUN fails
+  # closed in prod, so it only ever logged dryRunReady counts). Kept as
+  # workflow_dispatch so it can still be run on purpose - re-add a
+  # `schedule:` block here if auto-publish is ever wanted again.
+  # schedule:
+  #   - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
 jobs:
