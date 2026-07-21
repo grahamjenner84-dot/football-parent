@@ -2,6 +2,7 @@ import { createMcpHandler, withMcpAuth } from "mcp-handler";
 import { z } from "zod";
 import { getSeoReport, getPageInspection } from "@/lib/gsc";
 import { addToContentQueue } from "@/lib/supabase/content-queue";
+import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
 
 const handler = createMcpHandler(
   (server) => {
@@ -61,6 +62,29 @@ const handler = createMcpHandler(
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );
+
+    server.registerTool(
+      "get_instagram_performance",
+      {
+        title: "Get Instagram post performance",
+        description:
+          "Read-only: how the Football Parent Instagram account's posts have actually performed (from post_metrics, collected by the Phase C insights pipeline). Per post: content type, topic, caption/hook, publish date, reach/views/likes/comments/saves/shares/total_interactions, and for reels the average watch time. IMPORTANT ceiling on retention granularity: Instagram's API does not expose per-second (reel) or per-slide (carousel) drop-off/retention data to any third-party app, including this one - only whole-post/whole-video aggregates exist via the Graph API. For reels this tool derives avgWatchTimePctOfDuration (avg watch time ÷ total reel length) as the closest available proxy for 'how much of the reel people watched on average' - it cannot show WHERE viewers dropped off. Carousels have no retention signal at all via the API, not even an aggregate one. Follows-attributed-to-a-post is also not available via the API and isn't collected. The response's retentionCapabilities field spells out these limits every time so this is never mistaken for granular drop-off data.",
+        inputSchema: {
+          limit: z.number().int().min(1).max(50).optional().describe("Max posts to return after sorting/filtering. Defaults to 10."),
+          days: z.number().int().min(0).optional().describe("Only include posts published in the last N days. Defaults to 90. Pass 0 to disable the window."),
+          format: z.enum(["reel", "carousel"]).optional().describe("Restrict to one post format. Omit for both."),
+          sortBy: z
+            .enum(["recent", "reach", "views", "likes", "comments", "saves", "shares", "total_interactions", "avg_watch_time_sec"])
+            .optional()
+            .describe("What to sort by. Defaults to 'recent' (publish date)."),
+          order: z.enum(["desc", "asc"]).optional().describe("'desc' (default) = best/most-recent first, 'asc' = worst/oldest first."),
+        },
+      },
+      async ({ limit, days, format, sortBy, order }) => {
+        const result = await getInstagramPerformance({ limit, days, format, sortBy, order });
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
   },
   {},
   {
@@ -74,7 +98,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read"] };
   },
   {
     required: true,
