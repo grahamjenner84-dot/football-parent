@@ -91,6 +91,7 @@ const routes = [
   '/parent-guides/futurefit-football-dna-interview-part-1',
   '/parent-guides/what-is-grassroots-football',
   '/parent-guides/how-to-become-a-football-coach',
+  '/parent-guides/futurefit-football-dna-interview-part-2',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -105,6 +105,12 @@ export default function ParentGuidesPage() {
             "Join us for an exclusive interview with FutureFit Football's DNA expert as we explore the science behind player development.",
         },
         {
+          title: "FutureFit Football DNA Interview Part 2",
+          href: "/parent-guides/futurefit-football-dna-interview-part-2",
+          description:
+            "The second part of our exclusive interview about the FutureFit changes with Football's DNA expert as we explore the designed chaos of 3v3 and how it helps development.",
+        },
+        {
           title: "What is Grassroots Football?",
           href: "/parent-guides/what-is-grassroots-football",
           description:
