@@ -106,10 +106,10 @@ export default function FootballDevelopmentPage() {
             "An overview of the new FA youth football format and its impact on young players.",
         },
         {
-          title: "Playing Up an Age Group in Football",
+          title: "Should My Child Play Up an Age Group in Football?",
           href: "/football-development/playing-up-an-age-group-football",
           description:
-            "When and how to support young players who are playing up an age group.",
+            "Should your child play up an age group in football? Learn the FA rules, benefits, risks and signs they are ready to play against older children.",
         },
         {
           title: "What Is Football IQ? A Parent's Guide to Football Intelligence",
