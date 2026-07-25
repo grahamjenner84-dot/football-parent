@@ -112,7 +112,19 @@
   .rating-stars span.on{ color: var(--gold); }
   .goal-desc-list{ margin: 0.3rem 0 0; padding-left: 1.1rem; }
   .goal-desc-list li{ font-size:0.85rem; margin-bottom:2px; }
-  .saved-note{ font-size:0.7rem; color: var(--muted); text-align:center; margin-top: -0.4rem; margin-bottom:0.6rem; }
+  .saved-note{ font-size:0.7rem; color: var(--muted); text-align:right; margin-top:0.45rem; min-height:1em; }
+  .saved-note.saved{ color: var(--gold); }
+  .note-toolbar{ display:flex; gap:0.4rem; margin:0 0 0.35rem; }
+  .note-toolbar button{
+    background:none; border:1px solid var(--border); color:var(--muted); border-radius:5px;
+    padding:0.3rem 0.55rem; font-family:'Inter',sans-serif; font-size:0.72rem; cursor:pointer;
+  }
+  .note-toolbar button:hover, .note-toolbar button:focus{ color:var(--gold); border-color:var(--gold-dim); outline:none; }
+  .note-help{ color:var(--muted); font-size:0.68rem; margin:-0.15rem 0 0.25rem; }
+  .note-content{ font-size:0.92rem; line-height:1.5; overflow-wrap:anywhere; }
+  .note-content p{ margin:0.3rem 0 0.55rem; }
+  .note-content ul, .note-content ol{ margin:0.3rem 0 0.55rem; padding-left:1.35rem; }
+  .note-content li{ margin:0.15rem 0; }
 </style>
 </head>
 <body>
@@ -173,6 +185,13 @@ let matchEntries = [];
 let currentTrainingFilter = 'all';
 let currentMatchFilter = 'all';
 let currentInsightsFilter = 'all';
+
+const TRAINING_DRAFT_KEY = 'football-parent-training-draft-v1';
+const MATCH_DRAFT_KEY = 'football-parent-match-draft-v1';
+let trainingDraftTimer = null;
+let matchDraftTimer = null;
+let flushTrainingDraft = null;
+let flushMatchDraft = null;
 
 const TABS = ['training','matches','insights'];
 
@@ -244,6 +263,7 @@ async function loadAll(){
   }catch(e){ matchEntries = []; }
   renderTraining();
   renderMatches();
+  restoreSavedDrafts();
 }
 
 async function saveTraining(){
@@ -255,37 +275,222 @@ async function saveMatches(){
   catch(e){ console.error('Save failed', e); alert('Could not save. Your browser storage may be full or blocked.'); }
 }
 
+function readDraft(key){
+  try{
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  }catch(e){
+    console.error('Could not read draft', e);
+    return null;
+  }
+}
+
+function removeDraft(key){
+  try{ localStorage.removeItem(key); }
+  catch(e){ console.error('Could not remove draft', e); }
+}
+
+function showDraftStatus(id, text, saved = false){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.textContent = text;
+  el.classList.toggle('saved', saved);
+}
+
+function noteToolbar(targetId){
+  return `
+    <div class="note-toolbar" aria-label="Note formatting">
+      <button type="button" data-note-target="${targetId}" data-note-format="bullet">&#8226; Bullets</button>
+      <button type="button" data-note-target="${targetId}" data-note-format="number">1. Numbering</button>
+    </div>
+    <div class="note-help">Use Enter twice for a new paragraph.</div>
+  `;
+}
+
+function applyListFormatting(textarea, type){
+  const value = textarea.value;
+  const start = textarea.selectionStart;
+  const end = textarea.selectionEnd;
+  const lineStart = value.lastIndexOf('\n', Math.max(0, start - 1)) + 1;
+  const nextBreak = value.indexOf('\n', end);
+  const lineEnd = nextBreak === -1 ? value.length : nextBreak;
+  const block = value.slice(lineStart, lineEnd);
+  const lines = block.split('\n');
+  const bulletPattern = /^\s*[-*•]\s+/;
+  const numberPattern = /^\s*\d+[.)]\s+/;
+  const pattern = type === 'bullet' ? bulletPattern : numberPattern;
+  const allFormatted = lines.every(line => !line.trim() || pattern.test(line));
+
+  let itemNumber = 0;
+  const updated = lines.map(line => {
+    if(!line.trim()) return line;
+    const clean = line.replace(bulletPattern, '').replace(numberPattern, '');
+    if(allFormatted) return clean;
+    itemNumber++;
+    return `${type === 'bullet' ? '- ' : `${itemNumber}. `}${clean}`;
+  }).join('\n');
+
+  textarea.setRangeText(updated, lineStart, lineEnd, 'select');
+  textarea.focus();
+  textarea.dispatchEvent(new Event('input', { bubbles:true }));
+}
+
+function formatNoteText(value){
+  const lines = String(value || '').replace(/\r\n/g, '\n').split('\n');
+  let html = '';
+  let paragraph = [];
+  let listType = null;
+  let listItems = [];
+
+  const flushParagraph = () => {
+    if(!paragraph.length) return;
+    html += `<p>${paragraph.map(escapeHtml).join('<br>')}</p>`;
+    paragraph = [];
+  };
+  const flushList = () => {
+    if(!listType || !listItems.length) return;
+    html += `<${listType}>${listItems.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</${listType}>`;
+    listType = null;
+    listItems = [];
+  };
+
+  lines.forEach(line => {
+    if(!line.trim()){
+      flushParagraph();
+      flushList();
+      return;
+    }
+    const bullet = line.match(/^\s*[-*•]\s+(.+)$/);
+    const numbered = line.match(/^\s*\d+[.)]\s+(.+)$/);
+    if(bullet || numbered){
+      flushParagraph();
+      const nextType = bullet ? 'ul' : 'ol';
+      if(listType && listType !== nextType) flushList();
+      listType = nextType;
+      listItems.push((bullet || numbered)[1]);
+      return;
+    }
+    flushList();
+    paragraph.push(line);
+  });
+  flushParagraph();
+  flushList();
+  return html;
+}
+
+function restoreSavedDrafts(){
+  const trainingDraft = readDraft(TRAINING_DRAFT_KEY);
+  if(trainingDraft){
+    const existing = trainingDraft.editingId ? trainingEntries.find(e => e.id === trainingDraft.editingId) : null;
+    openTrainingForm(existing || null, trainingDraft, { scroll:false, restored:true });
+  }
+
+  const matchDraft = readDraft(MATCH_DRAFT_KEY);
+  if(matchDraft){
+    const existing = matchDraft.editingId ? matchEntries.find(m => m.id === matchDraft.editingId) : null;
+    openMatchForm(existing || null, matchDraft, { scroll:false, restored:true });
+  }
+}
+
+window.addEventListener('pagehide', () => {
+  if(flushTrainingDraft) flushTrainingDraft();
+  if(flushMatchDraft) flushMatchDraft();
+});
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden'){
+    if(flushTrainingDraft) flushTrainingDraft();
+    if(flushMatchDraft) flushMatchDraft();
+  }
+});
+
 /* ---------- TRAINING ---------- */
 
 document.getElementById('btn-add-training').addEventListener('click', () => openTrainingForm(null));
 
-function openTrainingForm(existing){
+function openTrainingForm(existing, draftData = null, options = {}){
   const wrap = document.getElementById('form-training-wrap');
   const isEdit = !!existing;
-  if(!isEdit && wrap.innerHTML){ wrap.innerHTML = ''; return; }
+  if(!isEdit && !draftData && wrap.innerHTML){
+    wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+    return;
+  }
+
+  const initial = draftData || existing || {};
+  const editingId = isEdit ? existing.id : null;
   wrap.innerHTML = `
     <div class="form-card">
       <h3>${isEdit ? 'Edit training note' : 'New training note'}</h3>
       <div class="row">
-        <div><label>Date</label><input type="date" id="tr-date" value="${isEdit ? existing.date : todayStr()}"></div>
-        <div><label>Time (optional)</label><input type="time" id="tr-time" value="${isEdit ? existing.time : ''}"></div>
+        <div><label>Date</label><input type="date" id="tr-date" value="${initial.date || todayStr()}"></div>
+        <div><label>Time (optional)</label><input type="time" id="tr-time" value="${initial.time || ''}"></div>
       </div>
       <label>Team / group</label>
-      <input type="text" id="tr-team" list="team-tags" placeholder="e.g. Crystal Palace DC, Sunday league, 1-2-1 coaching" value="${isEdit ? escapeHtml(existing.team || '') : ''}">
+      <input type="text" id="tr-team" list="team-tags" placeholder="e.g. Crystal Palace DC, Sunday league, 1-2-1 coaching" value="${escapeHtml(initial.team || '')}">
       <label>What he did well</label>
-      <textarea id="tr-well" placeholder="e.g. First touch under pressure was much sharper">${isEdit ? escapeHtml(existing.well) : ''}</textarea>
+      ${noteToolbar('tr-well')}
+      <textarea id="tr-well" placeholder="e.g. First touch under pressure was much sharper">${escapeHtml(initial.well || '')}</textarea>
       <label>What to work on</label>
-      <textarea id="tr-work" placeholder="e.g. Needs to scan more before receiving">${isEdit ? escapeHtml(existing.work) : ''}</textarea>
+      ${noteToolbar('tr-work')}
+      <textarea id="tr-work" placeholder="e.g. Needs to scan more before receiving">${escapeHtml(initial.work || '')}</textarea>
       <label>General notes</label>
-      <textarea id="tr-notes" placeholder="Anything else from the session">${isEdit ? escapeHtml(existing.notes) : ''}</textarea>
+      ${noteToolbar('tr-notes')}
+      <textarea id="tr-notes" placeholder="Anything else from the session">${escapeHtml(initial.notes || '')}</textarea>
+      <div class="saved-note ${options.restored ? 'saved' : ''}" id="tr-draft-status">${options.restored ? 'Draft restored from this device' : 'Autosave is on'}</div>
       <div class="form-actions">
         <button class="ghost" id="tr-cancel">Cancel</button>
         <button class="primary" id="tr-save">${isEdit ? 'Save changes' : 'Save note'}</button>
       </div>
     </div>
   `;
-  wrap.scrollIntoView({ behavior:'smooth', block:'start' });
-  document.getElementById('tr-cancel').addEventListener('click', () => wrap.innerHTML = '');
+
+  if(options.scroll !== false) wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  const saveDraftNow = () => {
+    clearTimeout(trainingDraftTimer);
+    const draft = {
+      version: 1,
+      editingId,
+      date: document.getElementById('tr-date').value,
+      time: document.getElementById('tr-time').value || '',
+      team: document.getElementById('tr-team').value,
+      well: document.getElementById('tr-well').value,
+      work: document.getElementById('tr-work').value,
+      notes: document.getElementById('tr-notes').value,
+      updatedAt: new Date().toISOString()
+    };
+    try{
+      localStorage.setItem(TRAINING_DRAFT_KEY, JSON.stringify(draft));
+      showDraftStatus('tr-draft-status', 'Draft saved on this device', true);
+    }catch(e){
+      console.error('Training draft save failed', e);
+      showDraftStatus('tr-draft-status', 'Draft could not be saved');
+    }
+  };
+
+  const scheduleDraftSave = () => {
+    showDraftStatus('tr-draft-status', 'Saving draft...');
+    clearTimeout(trainingDraftTimer);
+    trainingDraftTimer = setTimeout(saveDraftNow, 250);
+  };
+
+  flushTrainingDraft = saveDraftNow;
+  wrap.addEventListener('input', scheduleDraftSave);
+  wrap.addEventListener('change', scheduleDraftSave);
+
+  wrap.querySelectorAll('[data-note-format]').forEach(button => {
+    button.addEventListener('click', () => {
+      const textarea = document.getElementById(button.dataset.noteTarget);
+      if(textarea) applyListFormatting(textarea, button.dataset.noteFormat);
+    });
+  });
+
+  document.getElementById('tr-cancel').addEventListener('click', () => {
+    clearTimeout(trainingDraftTimer);
+    removeDraft(TRAINING_DRAFT_KEY);
+    flushTrainingDraft = null;
+    wrap.innerHTML = '';
+  });
+
   document.getElementById('tr-save').addEventListener('click', async () => {
     const date = document.getElementById('tr-date').value;
     if(!date){ alert('Add a date for this session.'); return; }
@@ -304,6 +509,9 @@ function openTrainingForm(existing){
       trainingEntries.push({ id: uid(), ...data });
     }
     await saveTraining();
+    clearTimeout(trainingDraftTimer);
+    removeDraft(TRAINING_DRAFT_KEY);
+    flushTrainingDraft = null;
     wrap.innerHTML = '';
     renderTraining();
   });
@@ -331,9 +539,9 @@ function renderTraining(){
           <span class="remove-x" data-id="${e.id}" title="Delete">&times;</span>
         </span>
       </div>
-      ${e.well ? `<p class="label">Went well</p><p>${escapeHtml(e.well)}</p>` : ''}
-      ${e.work ? `<p class="label">To work on</p><p>${escapeHtml(e.work)}</p>` : ''}
-      ${e.notes ? `<p class="label">Notes</p><p>${escapeHtml(e.notes)}</p>` : ''}
+      ${e.well ? `<p class="label">Went well</p><div class="note-content">${formatNoteText(e.well)}</div>` : ''}
+      ${e.work ? `<p class="label">To work on</p><div class="note-content">${formatNoteText(e.work)}</div>` : ''}
+      ${e.notes ? `<p class="label">Notes</p><div class="note-content">${formatNoteText(e.notes)}</div>` : ''}
     </div>
   `).join('');
   list.querySelectorAll('.edit-tr').forEach(btn => btn.addEventListener('click', () => {
@@ -352,28 +560,38 @@ function renderTraining(){
 
 document.getElementById('btn-add-match').addEventListener('click', () => openMatchForm(null));
 
-function openMatchForm(existing){
+function openMatchForm(existing, draftData = null, options = {}){
   const wrap = document.getElementById('form-match-wrap');
   const isEdit = !!existing;
-  if(!isEdit && wrap.innerHTML){ wrap.innerHTML = ''; return; }
-  const defaultNumQ = isEdit && existing.quarters && existing.quarters.length ? existing.quarters.length : 4;
-  const defaultQLen = isEdit && existing.quarters && existing.quarters.length ? (existing.quarters[0].minutes || 10) : 10;
+  if(!isEdit && !draftData && wrap.innerHTML){
+    wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+    return;
+  }
+
+  const initial = draftData || existing || {};
+  const editingId = isEdit ? existing.id : null;
+  const defaultNumQ = initial.quarters && initial.quarters.length ? initial.quarters.length : (initial.numQ || 4);
+  const defaultQLen = initial.quarters && initial.quarters.length
+    ? (initial.quarters[0].scheduledMinutes || initial.quarters[0].minutes || 10)
+    : (initial.qlen || 10);
+  const initialOthers = draftData ? (initial.othersText || '') : compressOthers(initial.others || []);
+
   wrap.innerHTML = `
     <div class="form-card">
       <h3>${isEdit ? 'Edit match' : 'New match'}</h3>
       <div class="row">
-        <div><label>Date</label><input type="date" id="m-date" value="${isEdit ? existing.date : todayStr()}"></div>
-        <div><label>Opponent (optional)</label><input type="text" id="m-opp" placeholder="e.g. Selhurst Colts" value="${isEdit ? escapeHtml(existing.opponent) : ''}"></div>
+        <div><label>Date</label><input type="date" id="m-date" value="${initial.date || todayStr()}"></div>
+        <div><label>Opponent (optional)</label><input type="text" id="m-opp" placeholder="e.g. Selhurst Colts" value="${escapeHtml(initial.opponent || '')}"></div>
       </div>
       <label>Team</label>
-      <input type="text" id="m-team" list="team-tags" placeholder="e.g. Crystal Palace DC, Sunday league" value="${isEdit ? escapeHtml(existing.team || '') : ''}">
+      <input type="text" id="m-team" list="team-tags" placeholder="e.g. Crystal Palace DC, Sunday league" value="${escapeHtml(initial.team || '')}">
       <div class="row">
-        <div><label>Our score</label><input type="number" min="0" id="m-us" value="${isEdit ? existing.ourScore : ''}"></div>
-        <div><label>Their score</label><input type="number" min="0" id="m-them" value="${isEdit ? existing.theirScore : ''}"></div>
+        <div><label>Our score</label><input type="number" min="0" id="m-us" value="${initial.ourScore ?? ''}"></div>
+        <div><label>Their score</label><input type="number" min="0" id="m-them" value="${initial.theirScore ?? ''}"></div>
       </div>
       <label>How he played</label>
       <div class="rating-stars" id="m-rating">
-        ${[1,2,3,4,5].map(n => `<span data-n="${n}" class="${isEdit && existing.rating >= n ? 'on' : ''}">&#9733;</span>`).join('')}
+        ${[1,2,3,4,5].map(n => `<span data-n="${n}" class="${(initial.rating || 0) >= n ? 'on' : ''}">&#9733;</span>`).join('')}
       </div>
 
       <label>Goals scored</label>
@@ -381,7 +599,7 @@ function openMatchForm(existing){
       <button class="link" id="m-add-goal">+ Add a goal</button>
 
       <label>Other goalscorers (comma separated, use (2) for multiple)</label>
-      <input type="text" id="m-others" placeholder="e.g. Jake (2), Oscar, Wilf" value="${isEdit ? escapeHtml(compressOthers(existing.others)) : ''}">
+      <input type="text" id="m-others" placeholder="e.g. Jake (2), Oscar, Wilf" value="${escapeHtml(initialOthers)}">
 
       <hr class="divider">
       <label style="margin-top:0;">Team sheet (optional)</label>
@@ -389,41 +607,101 @@ function openMatchForm(existing){
         <div><label>Quarters/halves played</label><input type="number" id="m-numq" value="${defaultNumQ}" min="1" max="8"></div>
         <div><label>Length each (minutes)</label><input type="number" id="m-qlen" value="${defaultQLen}" min="1"></div>
       </div>
-      <button class="link" id="m-build-quarters">${isEdit && existing.quarters && existing.quarters.length ? 'Rebuild team sheet' : 'Build team sheet'}</button>
+      <button class="link" id="m-build-quarters">${initial.quarters && initial.quarters.length ? 'Rebuild team sheet' : 'Build team sheet'}</button>
       <div id="m-quarters-form"></div>
 
+      <div class="saved-note ${options.restored ? 'saved' : ''}" id="m-draft-status">${options.restored ? 'Draft restored from this device' : 'Autosave is on'}</div>
       <div class="form-actions">
         <button class="ghost" id="m-cancel">Cancel</button>
         <button class="primary" id="m-save">${isEdit ? 'Save changes' : 'Save match'}</button>
       </div>
     </div>
   `;
-  wrap.scrollIntoView({ behavior:'smooth', block:'start' });
+  if(options.scroll !== false) wrap.scrollIntoView({ behavior:'smooth', block:'start' });
 
-  let rating = isEdit ? (existing.rating || 0) : 0;
+  let rating = initial.rating || 0;
+
+  const collectMatchDraft = () => {
+    const qlen = parseInt(document.getElementById('m-qlen').value) || 10;
+    const goals = [...wrap.querySelectorAll('#m-goals .goal-row')].map(row => ({
+      description: row.querySelector('input[type=text]').value,
+      quarter: row.querySelector('select').value ? parseInt(row.querySelector('select').value) : null
+    }));
+    const quarters = [...wrap.querySelectorAll('.q-pos')].map(sel => {
+      const q = sel.dataset.q;
+      const playedBox = wrap.querySelector(`.q-played[data-q="${q}"]`);
+      const played = playedBox ? playedBox.checked : false;
+      return { quarter: parseInt(q), position: sel.value, played, minutes: played ? qlen : 0, scheduledMinutes: qlen };
+    });
+    return {
+      version: 1,
+      editingId,
+      date: document.getElementById('m-date').value,
+      opponent: document.getElementById('m-opp').value,
+      team: document.getElementById('m-team').value,
+      ourScore: document.getElementById('m-us').value,
+      theirScore: document.getElementById('m-them').value,
+      rating,
+      goals,
+      othersText: document.getElementById('m-others').value,
+      numQ: parseInt(document.getElementById('m-numq').value) || 4,
+      qlen,
+      quarters,
+      updatedAt: new Date().toISOString()
+    };
+  };
+
+  const saveMatchDraftNow = () => {
+    clearTimeout(matchDraftTimer);
+    try{
+      localStorage.setItem(MATCH_DRAFT_KEY, JSON.stringify(collectMatchDraft()));
+      showDraftStatus('m-draft-status', 'Draft saved on this device', true);
+    }catch(e){
+      console.error('Match draft save failed', e);
+      showDraftStatus('m-draft-status', 'Draft could not be saved');
+    }
+  };
+
+  const scheduleMatchDraftSave = () => {
+    showDraftStatus('m-draft-status', 'Saving draft...');
+    clearTimeout(matchDraftTimer);
+    matchDraftTimer = setTimeout(saveMatchDraftNow, 250);
+  };
+
+  flushMatchDraft = saveMatchDraftNow;
+  wrap.addEventListener('input', scheduleMatchDraftSave);
+  wrap.addEventListener('change', scheduleMatchDraftSave);
 
   wrap.querySelectorAll('#m-rating span').forEach(s => s.addEventListener('click', () => {
     rating = parseInt(s.dataset.n);
     wrap.querySelectorAll('#m-rating span').forEach(x => x.classList.toggle('on', parseInt(x.dataset.n) <= rating));
+    scheduleMatchDraftSave();
   }));
 
   function addGoalRow(goal){
     const div = document.createElement('div');
     div.className = 'goal-row';
     div.innerHTML = `
-      <input type="text" placeholder="How it went in, e.g. Curled far post from the edge of the box" value="${goal ? escapeHtml(goal.description) : ''}">
+      <input type="text" placeholder="How it went in, e.g. Curled far post from the edge of the box" value="${goal ? escapeHtml(goal.description || '') : ''}">
       <select>
         <option value="">Quarter (if known)</option>
         ${Array.from({length:8}).map((_,i)=>`<option value="${i+1}" ${goal && goal.quarter === i+1 ? 'selected' : ''}>Q${i+1}</option>`).join('')}
       </select>
       <span class="remove-x" title="Remove">&times;</span>
     `;
-    div.querySelector('.remove-x').addEventListener('click', () => div.remove());
+    div.querySelector('.remove-x').addEventListener('click', () => {
+      div.remove();
+      scheduleMatchDraftSave();
+    });
     document.getElementById('m-goals').appendChild(div);
   }
-  document.getElementById('m-add-goal').addEventListener('click', () => addGoalRow(null));
-  if(isEdit && existing.goals && existing.goals.length){
-    existing.goals.forEach(g => addGoalRow(g));
+
+  document.getElementById('m-add-goal').addEventListener('click', () => {
+    addGoalRow(null);
+    scheduleMatchDraftSave();
+  });
+  if(initial.goals && initial.goals.length){
+    initial.goals.forEach(g => addGoalRow(g));
   }
 
   const POSITIONS = ['Goalkeeper', 'Defender', 'Left Midfield', 'Right Midfield', 'Striker'];
@@ -432,7 +710,7 @@ function openMatchForm(existing){
     const qf = document.getElementById('m-quarters-form');
     qf.innerHTML = Array.from({length: numQ}).map((_,i) => {
       const pf = prefillQuarters && prefillQuarters[i];
-      const pfPos = pf ? pf.position : '';
+      const pfPos = pf ? (pf.position || '') : '';
       return `
       <div class="row" style="align-items:center; margin-top:0.4rem;">
         <div style="flex:0 0 50px; font-size:0.8rem; color:var(--muted);">Q${i+1}</div>
@@ -449,31 +727,37 @@ function openMatchForm(existing){
     `;
     }).join('');
   }
+
   document.getElementById('m-build-quarters').addEventListener('click', () => {
     const numQ = parseInt(document.getElementById('m-numq').value) || 4;
     buildQuartersForm(numQ, parseInt(document.getElementById('m-qlen').value) || 10, null);
+    scheduleMatchDraftSave();
   });
-  if(isEdit && existing.quarters && existing.quarters.length){
-    buildQuartersForm(existing.quarters.length, defaultQLen, existing.quarters);
+  if(initial.quarters && initial.quarters.length){
+    buildQuartersForm(initial.quarters.length, defaultQLen, initial.quarters);
   }
 
-  document.getElementById('m-cancel').addEventListener('click', () => wrap.innerHTML = '');
+  document.getElementById('m-cancel').addEventListener('click', () => {
+    clearTimeout(matchDraftTimer);
+    removeDraft(MATCH_DRAFT_KEY);
+    flushMatchDraft = null;
+    wrap.innerHTML = '';
+  });
 
   document.getElementById('m-save').addEventListener('click', async () => {
     const date = document.getElementById('m-date').value;
     if(!date){ alert('Add a date for this match.'); return; }
 
-    const goals = [...document.querySelectorAll('#m-goals .goal-row')].map(row => ({
+    const goals = [...wrap.querySelectorAll('#m-goals .goal-row')].map(row => ({
       description: row.querySelector('input[type=text]').value.trim(),
       quarter: row.querySelector('select').value ? parseInt(row.querySelector('select').value) : null
     })).filter(g => g.description);
 
     const others = parseOtherScorers(document.getElementById('m-others').value);
-
     const qlen = parseInt(document.getElementById('m-qlen').value) || 10;
-    const quarters = [...document.querySelectorAll('.q-pos')].map(sel => {
+    const quarters = [...wrap.querySelectorAll('.q-pos')].map(sel => {
       const q = sel.dataset.q;
-      const played = document.querySelector(`.q-played[data-q="${q}"]`).checked;
+      const played = wrap.querySelector(`.q-played[data-q="${q}"]`).checked;
       return { quarter: parseInt(q), position: sel.value, played, minutes: played ? qlen : 0, scheduledMinutes: qlen };
     });
 
@@ -497,6 +781,9 @@ function openMatchForm(existing){
     }
 
     await saveMatches();
+    clearTimeout(matchDraftTimer);
+    removeDraft(MATCH_DRAFT_KEY);
+    flushMatchDraft = null;
     wrap.innerHTML = '';
     renderMatches();
   });
