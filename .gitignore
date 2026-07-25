@@ -42,3 +42,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local SEO research system (seo-data/reports and seo-data/exports ARE committed)
+seo-data/database/*.db
+seo-data/database/*.db-*
+seo-data/raw/
+seo-data/imports/private/
+credentials.json
+token.json
