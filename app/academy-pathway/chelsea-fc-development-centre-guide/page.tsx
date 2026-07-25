@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Chelsea FC Development Centre Guide | Football Parent",
   description:
-    "A comprehensive guide to understanding Chelsea FC's development centre and how it supports young footballers.",
+    "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining.",
   path: "/academy-pathway/chelsea-fc-development-centre-guide",
 });
 
