@@ -135,6 +135,41 @@ itself is an H2 (e.g. `## Frequently Asked Questions` or `## FAQ: <Topic>`,
 in the `sections` frontmatter array as normal); individual questions inside
 it are H3s and do not get their own `sections` entry or TOC anchor.
 
+## Meta description rules
+
+The frontmatter `description` is the literal `<meta name="description">` tag
+(copied verbatim into `page.tsx` per the SKILL.md template rule) — write it
+to earn a click on a real SERP, not to describe the article to a librarian.
+
+Never self-label the content. Cut any opening like "A [practical/honest/
+clear/realistic/balanced/grounded] guide to...", "A [clear, honest] breakdown
+of...", "A jargon-free explanation of...", "An independent guide to...", "A
+comprehensive guide to...". The reader can see it's a guide from the search
+result context; naming the format wastes the highest-visibility characters
+before Google's ~155-character truncation point on words that don't
+differentiate the page from any other guide on the same topic.
+
+Also cut opener throat-clearing that pads length without adding information:
+"Discover whether...", "Explore the...", "Understand the/how...", "Learn
+about... and how it supports young footballers in their development
+journey" (or similar generic "supports development" tails).
+
+Avoid stacking hedge adverbs — "actually", "genuinely", "realistically",
+"honestly" — more than once per description. One is fine as emphasis;
+two or more reads as filler and is usually the first thing truncated anyway.
+
+Lead with the page's most specific, differentiating fact or number instead:
+a named entity (club, programme, tier name), a concrete stat, or the
+counterintuitive finding the article makes — something Google can bold as an
+exact match for a query and that no other page on the same topic could
+truthfully claim. If two articles in the same cluster (e.g. sibling club
+guides) would otherwise share an opening template with only the proper noun
+swapped, that's a sign the description is generic — find what's actually
+different about this specific page's content instead.
+
+Keep the final string under ~160 characters so the differentiating part
+survives truncation instead of landing after it.
+
 ## Style
 
 - British English throughout.
@@ -159,3 +194,7 @@ it are H3s and do not get their own `sections` entry or TOC anchor.
    Google again?
 6. Are there at least 5 football-specific observations, 3 misconceptions,
    3 practical examples?
+7. Does the meta description pass the meta description rules above (no
+   self-labeling, no throat-clearing openers, hedge adverbs used at most
+   once, under ~160 characters), and is it word-for-word identical between
+   the frontmatter and `page.tsx`?

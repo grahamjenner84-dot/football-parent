@@ -110,7 +110,7 @@ import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
   title: "ARTICLE TITLE | Football Parent",
-  description: "META DESCRIPTION",
+  description: "META DESCRIPTION", // must be word-for-word identical to the mdx frontmatter description
   path: "/category-slug/article-slug",
 });
 
@@ -140,6 +140,14 @@ export default async function Page() {
 Rules:
 - The `generateSEO()` path and the `ArticleLayout path` prop must be
   identical, and must match the live URL exactly.
+- The `generateSEO()` `description` is the literal `<meta name="description">`
+  tag (also used for OpenGraph/Twitter). It must be word-for-word identical
+  to the mdx frontmatter `description` — write the description once, then
+  paste the same string into both files. Never draft a second, differently
+  worded description for `page.tsx`; a past audit found this had drifted on
+  most of the site's existing articles, each page silently shipping generic
+  placeholder text in the actual meta tag while a better description sat
+  unused in the frontmatter.
 - Always use `datePublished={article.frontmatter.date}` — never invent or
   hardcode a `dateModified`.
 - Never pass `relatedArticles` into `ArticleLayout`.
