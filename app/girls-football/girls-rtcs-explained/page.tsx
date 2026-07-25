@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Girls RTCs Explained | Football Parent",
   description:
-    "Understand the differences between Regional Talent Clubs (RTCs) in UK girls football development.",
+    "RTCs in girls football no longer exist. They were replaced by Emerging Talent Centres and Professional Game Academies. What the pathway looks like now.",
   path: "/girls-football/girls-rtcs-explained",
 });
 
