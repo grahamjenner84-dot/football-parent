@@ -169,7 +169,7 @@ async function main() {
     name: "Paul Barry",
     role: "Head of Coaching, Content & Club Support, Football DNA",
     bio: "Paul Barry is Head of Coaching, Content & Club Support. He holds the UEFA A Licence, the FA Advanced Youth Award (U5-11s) and has more than 25 years' experience across grassroots and academy football. During his career he has worked with Southend United, Arsenal and Crystal Palace, where he served as Head of Coaching. He also worked as a Coach and Mentor for The Football Association through the FA Skills Programme.",
-    photoUrl: dataUriForLocalImage(path.join(REPO_ROOT, "public", "images", "people", "paul-football-dna.png")),
+    photoUrl: dataUriForLocalImage(path.join(REPO_ROOT, "public", "images", "people", "paul-football-dna.jpg")),
   };
   const interviewResult = await generateInterviewCarousel(contributor, interviewArticle);
   const interviewQc = await runQcOnGeneratedCopy(interviewResult, interviewArticle);
