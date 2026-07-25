@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Arsenal Development Centre Guide | Football Parent",
   description:
-    "Learn about the Arsenal Development Centre and how it supports young footballers in their development journey.",
+    "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted.",
   path: "/academy-pathway/arsenal-development-centre-guide",
 });
 
