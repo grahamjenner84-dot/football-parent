@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What Do Academy Coaches Look For? | Football Parent",
   description:
-    "Understand the technical, physical and psychological qualities academy coaches look for in young footballers.",
+    "It's rarely goals or pace: academy coaches watch what a player does before the ball arrives. The technical and behavioural traits that get noticed.",
   path: "/academy-trials/what-do-academy-coaches-look-for",
 });
 
