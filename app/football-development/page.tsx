@@ -58,7 +58,7 @@ export default function FootballDevelopmentPage() {
             "A realistic guide to the pathway towards professional football.",
         },
         {
-          title: "Signs Your Child Is Ready for Academy Football",
+          title: "Is My Child Ready for Academy Football?",
           href: "/football-development/signs-your-child-is-ready-for-academy-football",
           description:
             "Key signs that a young player may be ready for a higher-level environment.",
