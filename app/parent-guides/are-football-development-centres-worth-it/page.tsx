@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Are Football Development Centres Worth It? | Football Parent",
   description:
-    "Discover whether football development centres are a worthwhile investment for your child's football journey.",
+    "A development centre is worth it when coaching is structured and your child enjoys it, not when cost or logistics create strain. The red flags to check first.",
   path: "/parent-guides/are-football-development-centres-worth-it",
 });
 
