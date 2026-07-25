@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How Girls Football Academies Work | Football Parent",
   description:
-    "Understand how girls football academies work in the UK, including pathways, trials, development and what parents should expect.",
+    "Girls academy football isn't a copy of the boys' EPPP system: entry comes later, and Emerging Talent Centres have no male equivalent. How the pathway works.",
   path: "/girls-football/how-girls-football-academies-work",
 });
 
