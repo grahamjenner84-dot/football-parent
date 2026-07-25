@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { JWT } from "google-auth-library";
+import { routes as SITEMAP_ROUTES } from "@/app/sitemap";
 
 const REPO_ROOT = process.cwd();
 const CONTENT_DIR = path.join(REPO_ROOT, "app");
@@ -26,6 +27,17 @@ const CURRENT_PERIOD_DAYS = 90;
 const COMPARE_PERIOD_DAYS = 90;
 const DECAY_CURRENT_PERIOD_DAYS = 28;
 const DECAY_COMPARE_PERIOD_DAYS = 28;
+
+// User-selectable trailing-day windows for the striking distance, low CTR
+// and no-impressions tabs. Anything outside this set falls back to the
+// default (CURRENT_PERIOD_DAYS) rather than hitting the GSC API with an
+// arbitrary range.
+const ALLOWED_DAY_WINDOWS = [7, 28, 90];
+
+function clampDayWindow(value: number | undefined, fallback: number): number {
+  if (value !== undefined && ALLOWED_DAY_WINDOWS.includes(value)) return value;
+  return fallback;
+}
 
 // "Gone quiet" - pages with real impressions historically that have gone
 // near-silent recently. Both windows end at currentEnd, which is already
@@ -122,6 +134,15 @@ async function fetchRows(
   }
 
   return rows;
+}
+
+// The GSC property is configured as an sc-domain resource, not a URL-prefix
+// one, so page URLs need reconstructing with a scheme/subdomain - matches
+// the siteUrl convention already hardcoded in lib/seo.ts and app/sitemap.ts.
+function siteOrigin(): string {
+  const siteUrl = process.env.GSC_SITE_URL || "";
+  const domain = siteUrl.startsWith("sc-domain:") ? siteUrl.replace("sc-domain:", "") : new URL(siteUrl).hostname;
+  return `https://www.${domain}`;
 }
 
 function isoDate(d: Date): string {
@@ -416,25 +437,68 @@ function analyseSilence(pageDateRows: GscRow[], currentEnd: Date): SilenceRow[] 
   return results.sort((a, b) => b.baselineImpressions - a.baselineImpressions);
 }
 
+export type NoImpressionsRow = {
+  page: string; // pathname, e.g. "/academy-pathway/..." or "/" for the homepage
+  url: string;
+};
+
+// Every URL in app/sitemap.ts (the source of truth for real routes - see
+// internal-link-audit.mjs) that got zero impressions in the window, whether
+// because it stopped ranking entirely or never picked up any search
+// visibility in the first place. GSC only returns rows for pages with at
+// least one impression, so "not present in pageRows" means zero.
+function analyseNoImpressions(pageRows: GscRow[]): NoImpressionsRow[] {
+  const origin = siteOrigin();
+  const withImpressions = new Set<string>();
+  for (const r of pageRows) {
+    const [page] = r.keys;
+    if (r.impressions > 0) withImpressions.add(page);
+  }
+
+  const results: NoImpressionsRow[] = [];
+  for (const route of SITEMAP_ROUTES) {
+    const url = `${origin}${route}`;
+    if (!withImpressions.has(url)) {
+      results.push({ page: route === "" ? "/" : route, url });
+    }
+  }
+  return results;
+}
+
 // --- main entry point ---------------------------------------------------
+
+export type SeoReportOptions = {
+  // Trailing-day windows for the three tabs with a user-facing period
+  // filter. Each is independent of the others and of the fixed windows
+  // used by decay/cannibalisation/silence/rank tracker.
+  strikingDays?: number;
+  ctrDays?: number;
+  noImpressionsDays?: number;
+};
 
 export type SeoReport = {
   periodStart: string;
   periodEnd: string;
   strikingDistance: StrikingRow[];
+  strikingDays: number;
   lowCtr: LowCtrRow[];
+  ctrDays: number;
   decay: DecayRow[];
   cannibalisation: CannibalRow[];
   silence: SilenceRow[];
   rankTracker: RankRow[];
+  noImpressions: NoImpressionsRow[];
+  noImpressionsDays: number;
 };
 
-export async function getSeoReport(): Promise<SeoReport> {
+export async function getSeoReport(options: SeoReportOptions = {}): Promise<SeoReport> {
+  const strikingDays = clampDayWindow(options.strikingDays, CURRENT_PERIOD_DAYS);
+  const ctrDays = clampDayWindow(options.ctrDays, CURRENT_PERIOD_DAYS);
+  const noImpressionsDays = clampDayWindow(options.noImpressionsDays, CURRENT_PERIOD_DAYS);
+
   const today = new Date();
   const currentEnd = addDays(today, -3); // GSC data lags a couple of days
   const currentStart = addDays(currentEnd, -CURRENT_PERIOD_DAYS);
-  const priorEnd = addDays(currentStart, -1);
-  const priorStart = addDays(priorEnd, -COMPARE_PERIOD_DAYS);
 
   // Decay's own, shorter window - see the constant comments above.
   const decayCurrentStart = addDays(currentEnd, -DECAY_CURRENT_PERIOD_DAYS);
@@ -448,24 +512,45 @@ export async function getSeoReport(): Promise<SeoReport> {
   // boundary through currentEnd.
   const rankTrackerWindowStart = addDays(currentEnd, -(RANK_TRACKER_WINDOW_DAYS - 1 + 7));
 
-  const [queryPageRows, pageRowsCurrent, decayRowsCurrent, decayRowsPrior, pageDateRows, rankTrackerRows] = await Promise.all([
+  const strikingStart = addDays(currentEnd, -strikingDays);
+  const ctrStart = addDays(currentEnd, -ctrDays);
+  const noImpressionsStart = addDays(currentEnd, -noImpressionsDays);
+
+  const [
+    cannibalRows,
+    strikingRows,
+    ctrRows,
+    decayRowsCurrent,
+    decayRowsPrior,
+    pageDateRows,
+    rankTrackerRows,
+    noImpressionsRows,
+  ] = await Promise.all([
+    // Cannibalisation keeps the fixed 90-day window regardless of the
+    // striking-distance filter - the two tabs are independently filterable.
     fetchRows(isoDate(currentStart), isoDate(currentEnd), ["query", "page"]),
-    fetchRows(isoDate(currentStart), isoDate(currentEnd), ["page"]),
+    fetchRows(isoDate(strikingStart), isoDate(currentEnd), ["query", "page"]),
+    fetchRows(isoDate(ctrStart), isoDate(currentEnd), ["page"]),
     fetchRows(isoDate(decayCurrentStart), isoDate(currentEnd), ["page"]),
     fetchRows(isoDate(decayPriorStart), isoDate(decayPriorEnd), ["page"]),
     fetchRows(isoDate(silenceWindowStart), isoDate(currentEnd), ["page", "date"]),
     fetchRows(isoDate(rankTrackerWindowStart), isoDate(currentEnd), ["query", "page", "date"]),
+    fetchRows(isoDate(noImpressionsStart), isoDate(currentEnd), ["page"]),
   ]);
 
   return {
     periodStart: isoDate(currentStart),
     periodEnd: isoDate(currentEnd),
-    strikingDistance: analyseStrikingDistance(queryPageRows),
-    lowCtr: analyseLowCtr(pageRowsCurrent),
+    strikingDistance: analyseStrikingDistance(strikingRows),
+    strikingDays,
+    lowCtr: analyseLowCtr(ctrRows),
+    ctrDays,
     decay: analyseDecay(decayRowsCurrent, decayRowsPrior),
-    cannibalisation: analyseCannibalisation(queryPageRows),
+    cannibalisation: analyseCannibalisation(cannibalRows),
     silence: analyseSilence(pageDateRows, currentEnd),
     rankTracker: analyseRankTracker(rankTrackerRows, currentEnd),
+    noImpressions: analyseNoImpressions(noImpressionsRows),
+    noImpressionsDays,
   };
 }
 
@@ -637,9 +722,7 @@ export async function getPageInspection(pathname: string): Promise<PageInspectio
     }
   })();
 
-  const siteUrl = process.env.GSC_SITE_URL || "";
-  const domain = siteUrl.startsWith("sc-domain:") ? siteUrl.replace("sc-domain:", "") : new URL(siteUrl).hostname;
-  const fullPageUrl = `https://www.${domain}${cleanPath}`;
+  const fullPageUrl = `${siteOrigin()}${cleanPath}`;
 
   const today = new Date();
   const currentEnd = addDays(today, -3);

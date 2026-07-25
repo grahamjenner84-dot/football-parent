@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import type {
   SeoReport,
   StrikingRow,
@@ -9,12 +9,15 @@ import type {
   CannibalRow,
   SilenceRow,
   RankRow,
+  NoImpressionsRow,
 } from "@/lib/gsc";
 
-type Tab = "silence" | "striking" | "ctr" | "decay" | "cannibal" | "rank";
+type Tab = "silence" | "noImpressions" | "striking" | "ctr" | "decay" | "cannibal" | "rank";
+type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "silence", label: "Gone quiet" },
+  { id: "noImpressions", label: "No impressions" },
   { id: "striking", label: "Striking distance" },
   { id: "ctr", label: "Low CTR" },
   { id: "decay", label: "Decay" },
@@ -35,10 +38,26 @@ export default function SeoAdminPage() {
   const [report, setReport] = useState<SeoReport | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [tab, setTab] = useState<Tab>("silence");
+  const [strikingDays, setStrikingDays] = useState<DayWindow>(90);
+  const [ctrDays, setCtrDays] = useState<DayWindow>(90);
+  const [noImpressionsDays, setNoImpressionsDays] = useState<DayWindow>(90);
+  const isFirstFetch = useRef(true);
 
   useEffect(() => {
-    fetch("/api/seo-report")
+    if (isFirstFetch.current) {
+      setLoading(true);
+      isFirstFetch.current = false;
+    } else {
+      setRefreshing(true);
+    }
+    const qs = new URLSearchParams({
+      strikingDays: String(strikingDays),
+      ctrDays: String(ctrDays),
+      noImpressionsDays: String(noImpressionsDays),
+    });
+    fetch(`/api/seo-report?${qs.toString()}`)
       .then(async (res) => {
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
@@ -46,10 +65,16 @@ export default function SeoAdminPage() {
         }
         return res.json();
       })
-      .then((data: SeoReport) => setReport(data))
+      .then((data: SeoReport) => {
+        setReport(data);
+        setError("");
+      })
       .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
+      .finally(() => {
+        setLoading(false);
+        setRefreshing(false);
+      });
+  }, [strikingDays, ctrDays, noImpressionsDays]);
 
   return (
     <div style={styles.page}>
@@ -58,6 +83,7 @@ export default function SeoAdminPage() {
         {report && (
           <p style={styles.subtitle}>
             {report.periodStart} to {report.periodEnd}
+            {refreshing && " - updating..."}
           </p>
         )}
       </header>
@@ -84,8 +110,13 @@ export default function SeoAdminPage() {
         {report && !loading && !error && (
           <>
             {tab === "silence" && <SilenceList rows={report.silence} />}
-            {tab === "striking" && <StrikingList rows={report.strikingDistance} />}
-            {tab === "ctr" && <LowCtrList rows={report.lowCtr} />}
+            {tab === "noImpressions" && (
+              <NoImpressionsList rows={report.noImpressions} days={noImpressionsDays} onDaysChange={setNoImpressionsDays} />
+            )}
+            {tab === "striking" && (
+              <StrikingList rows={report.strikingDistance} days={strikingDays} onDaysChange={setStrikingDays} />
+            )}
+            {tab === "ctr" && <LowCtrList rows={report.lowCtr} days={ctrDays} onDaysChange={setCtrDays} />}
             {tab === "decay" && <DecayList rows={report.decay} />}
             {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
             {tab === "rank" && <RankTrackerList rows={report.rankTracker} />}
@@ -100,6 +131,8 @@ function countFor(report: SeoReport, tab: Tab): number {
   switch (tab) {
     case "silence":
       return report.silence.length;
+    case "noImpressions":
+      return report.noImpressions.length;
     case "striking":
       return report.strikingDistance.length;
     case "ctr":
@@ -111,6 +144,27 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "rank":
       return report.rankTracker.length;
   }
+}
+
+function PeriodFilter({ value, onChange }: { value: DayWindow; onChange: (days: DayWindow) => void }) {
+  const options: { id: DayWindow; label: string }[] = [
+    { id: 7, label: "7 days" },
+    { id: 28, label: "28 days" },
+    { id: 90, label: "3 months" },
+  ];
+  return (
+    <div style={styles.metricToggle}>
+      {options.map((o) => (
+        <button
+          key={o.id}
+          onClick={() => onChange(o.id)}
+          style={{ ...styles.toggleButton, ...(value === o.id ? styles.toggleButtonActive : {}) }}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 function EmptyState({ text }: { text: string }) {
@@ -142,10 +196,19 @@ function SilenceList({ rows }: { rows: SilenceRow[] }) {
   );
 }
 
-function StrikingList({ rows }: { rows: StrikingRow[] }) {
-  if (!rows.length) return <EmptyState text="Nothing on page 2 right now." />;
+function StrikingList({
+  rows,
+  days,
+  onDaysChange,
+}: {
+  rows: StrikingRow[];
+  days: DayWindow;
+  onDaysChange: (d: DayWindow) => void;
+}) {
   return (
     <div style={styles.list}>
+      <PeriodFilter value={days} onChange={onDaysChange} />
+      {!rows.length && <EmptyState text="Nothing on page 2 right now." />}
       {rows.slice(0, 60).map((r, i) => (
         <div key={i} style={styles.card}>
           <div style={styles.cardTop}>
@@ -164,10 +227,19 @@ function StrikingList({ rows }: { rows: StrikingRow[] }) {
   );
 }
 
-function LowCtrList({ rows }: { rows: LowCtrRow[] }) {
-  if (!rows.length) return <EmptyState text="No pages underperforming on CTR." />;
+function LowCtrList({
+  rows,
+  days,
+  onDaysChange,
+}: {
+  rows: LowCtrRow[];
+  days: DayWindow;
+  onDaysChange: (d: DayWindow) => void;
+}) {
   return (
     <div style={styles.list}>
+      <PeriodFilter value={days} onChange={onDaysChange} />
+      {!rows.length && <EmptyState text="No pages underperforming on CTR." />}
       {rows.slice(0, 60).map((r, i) => (
         <div key={i} style={styles.card}>
           <div style={styles.cardTop}>
@@ -179,6 +251,38 @@ function LowCtrList({ rows }: { rows: LowCtrRow[] }) {
             <span>
               {r.actualCtr}% vs {r.expectedCtr}% expected
             </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function NoImpressionsList({
+  rows,
+  days,
+  onDaysChange,
+}: {
+  rows: NoImpressionsRow[];
+  days: DayWindow;
+  onDaysChange: (d: DayWindow) => void;
+}) {
+  return (
+    <div style={styles.list}>
+      <PeriodFilter value={days} onChange={onDaysChange} />
+      <p style={styles.sectionNote}>
+        Every sitemap URL with zero impressions in this window - pages that
+        have either stopped ranking entirely or never picked up any search
+        visibility. Candidates for a rewrite, not just a tweak.
+      </p>
+      {!rows.length && (
+        <EmptyState text="Every sitemap URL picked up at least one impression in this window." />
+      )}
+      {rows.map((r, i) => (
+        <div key={i} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{r.page}</span>
+            <span style={{ ...styles.cardBadge, ...styles.cardBadgeWarn }}>0 impr</span>
           </div>
         </div>
       ))}
@@ -249,16 +353,35 @@ function directionLabel(r: RankRow): string {
 }
 
 function directionStyle(direction: RankRow["direction"]): CSSProperties {
-  if (direction === "up") return { color: "#8fd19e" };
+  if (direction === "up" || direction === "new") return { color: "#8fd19e" };
   if (direction === "down" || direction === "lost") return { color: "#e07856" };
   return { color: "#9c8a72" };
 }
 
+type DirectionFilter = "all" | "improved" | "lost";
+
+function matchesDirectionFilter(direction: RankRow["direction"], filter: DirectionFilter): boolean {
+  if (filter === "improved") return direction === "up" || direction === "new";
+  if (filter === "lost") return direction === "down" || direction === "lost";
+  return true;
+}
+
 function RankTrackerList({ rows }: { rows: RankRow[] }) {
   const [metric, setMetric] = useState<"impressions" | "clicks">("impressions");
+  const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
+
   if (!rows.length) {
     return <EmptyState text="Not enough recent search volume yet to track keyword movement." />;
   }
+
+  const visible = rows
+    .filter((r) => matchesDirectionFilter(r.direction, directionFilter))
+    .sort((a, b) => {
+      const aVal = metric === "impressions" ? a.recentImpressions : a.recentClicks;
+      const bVal = metric === "impressions" ? b.recentImpressions : b.recentClicks;
+      return bVal - aVal;
+    });
+
   return (
     <div style={styles.list}>
       <div style={styles.metricToggle}>
@@ -266,28 +389,50 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
           onClick={() => setMetric("impressions")}
           style={{ ...styles.toggleButton, ...(metric === "impressions" ? styles.toggleButtonActive : {}) }}
         >
-          Impressions
+          Sort: impressions
         </button>
         <button
           onClick={() => setMetric("clicks")}
           style={{ ...styles.toggleButton, ...(metric === "clicks" ? styles.toggleButtonActive : {}) }}
         >
-          Clicks
+          Sort: clicks
+        </button>
+      </div>
+      <div style={styles.metricToggle}>
+        <button
+          onClick={() => setDirectionFilter("all")}
+          style={{ ...styles.toggleButton, ...(directionFilter === "all" ? styles.toggleButtonActive : {}) }}
+        >
+          All
+        </button>
+        <button
+          onClick={() => setDirectionFilter("improved")}
+          style={{ ...styles.toggleButton, ...(directionFilter === "improved" ? styles.toggleButtonActive : {}) }}
+        >
+          Improved
+        </button>
+        <button
+          onClick={() => setDirectionFilter("lost")}
+          style={{ ...styles.toggleButton, ...(directionFilter === "lost" ? styles.toggleButtonActive : {}) }}
+        >
+          Lost
         </button>
       </div>
       <p style={styles.sectionNote}>
         Position today is a 3-day average ending today (GSC data lags a few
         days), compared against the same 3 days one week earlier - a single
-        day is too noisy to trust for most queries.
+        day is too noisy to trust for most queries. New/improved queries are
+        shown in green, lost ones in red.
       </p>
-      {rows.map((r, i) => {
+      {!visible.length && <EmptyState text="Nothing matches this filter." />}
+      {visible.map((r, i) => {
         const recentVal = metric === "impressions" ? r.recentImpressions : r.recentClicks;
         const priorVal = metric === "impressions" ? r.priorImpressions : r.priorClicks;
         const unit = metric === "impressions" ? "impr" : "clicks";
         return (
           <div key={i} style={styles.card}>
             <div style={styles.cardTop}>
-              <span style={styles.cardQuery}>{r.query}</span>
+              <span style={{ ...styles.cardQuery, ...directionStyle(r.direction) }}>{r.query}</span>
               <span style={styles.cardBadge}>{r.recentPosition !== null ? `#${r.recentPosition}` : "-"}</span>
             </div>
             <p style={styles.cardPage}>{shortPage(r.page)}</p>

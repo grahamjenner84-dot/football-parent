@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next'
 
 const siteUrl = 'https://www.footballparent.co.uk'
 
-const routes = [
+export const routes = [
   '',
 
   // Category pages
@@ -60,6 +60,7 @@ const routes = [
   '/football-development/new-fa-youth-football-format',
   '/football-development/what-is-football-iq',
   '/football-development/bio-banding-football',
+  '/football-development/why-isnt-my-child-improving-at-football',
 
   // Football Gear
   '/football-gear/ag-vs-fg-boots',
