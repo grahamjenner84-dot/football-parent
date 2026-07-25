@@ -303,7 +303,7 @@ function noteToolbar(targetId){
       <button type="button" data-note-target="${targetId}" data-note-format="bullet">&#8226; Bullets</button>
       <button type="button" data-note-target="${targetId}" data-note-format="number">1. Numbering</button>
     </div>
-    <div class="note-help">Use Enter twice for a new paragraph.</div>
+    <div class="note-help">Type - or 1. to start a list. Press Enter for the next item and Enter again on an empty item to finish.</div>
   `;
 }
 
@@ -316,23 +316,64 @@ function applyListFormatting(textarea, type){
   const lineEnd = nextBreak === -1 ? value.length : nextBreak;
   const block = value.slice(lineStart, lineEnd);
   const lines = block.split('\n');
-  const bulletPattern = /^\s*[-*•]\s+/;
-  const numberPattern = /^\s*\d+[.)]\s+/;
+  const bulletPattern = /^(\s*)[-*•]\s+/;
+  const numberPattern = /^(\s*)\d+[.)]\s+/;
   const pattern = type === 'bullet' ? bulletPattern : numberPattern;
-  const allFormatted = lines.every(line => !line.trim() || pattern.test(line));
+  const hasContent = lines.some(line => line.trim());
+  const allFormatted = hasContent && lines.filter(line => line.trim()).every(line => pattern.test(line));
 
   let itemNumber = 0;
   const updated = lines.map(line => {
-    if(!line.trim()) return line;
-    const clean = line.replace(bulletPattern, '').replace(numberPattern, '');
+    const existingIndent = (line.match(/^\s*/) || [''])[0];
+    const clean = line.replace(bulletPattern, '$1').replace(numberPattern, '$1');
+
     if(allFormatted) return clean;
+
     itemNumber++;
-    return `${type === 'bullet' ? '- ' : `${itemNumber}. `}${clean}`;
+    if(!line.trim()){
+      return type === 'bullet' ? `${existingIndent}- ` : `${existingIndent}${itemNumber}. `;
+    }
+    return type === 'bullet'
+      ? `${existingIndent}- ${clean.trimStart()}`
+      : `${existingIndent}${itemNumber}. ${clean.trimStart()}`;
   }).join('\n');
 
-  textarea.setRangeText(updated, lineStart, lineEnd, 'select');
+  textarea.setRangeText(updated, lineStart, lineEnd, 'end');
   textarea.focus();
   textarea.dispatchEvent(new Event('input', { bubbles:true }));
+}
+
+function enableSmartListEditing(textarea){
+  textarea.addEventListener('keydown', (event) => {
+    if(event.key !== 'Enter' || event.shiftKey || event.altKey || event.ctrlKey || event.metaKey) return;
+
+    const value = textarea.value;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const lineStart = value.lastIndexOf('\n', Math.max(0, start - 1)) + 1;
+    const lineEndIndex = value.indexOf('\n', start);
+    const lineEnd = lineEndIndex === -1 ? value.length : lineEndIndex;
+    const currentLine = value.slice(lineStart, lineEnd);
+
+    const bullet = currentLine.match(/^(\s*)[-*•]\s+(.*)$/);
+    const numbered = currentLine.match(/^(\s*)(\d+)[.)]\s+(.*)$/);
+    if(!bullet && !numbered) return;
+
+    const itemText = (bullet ? bullet[2] : numbered[3]).trim();
+    event.preventDefault();
+
+    if(!itemText){
+      const replacement = lineEnd < value.length ? '' : '\n';
+      textarea.setRangeText(replacement, lineStart, lineEnd, 'end');
+      textarea.dispatchEvent(new Event('input', { bubbles:true }));
+      return;
+    }
+
+    const indent = bullet ? bullet[1] : numbered[1];
+    const nextPrefix = bullet ? `${indent}- ` : `${indent}${parseInt(numbered[2], 10) + 1}. `;
+    textarea.setRangeText(`\n${nextPrefix}`, start, end, 'end');
+    textarea.dispatchEvent(new Event('input', { bubbles:true }));
+  });
 }
 
 function formatNoteText(value){
@@ -482,6 +523,11 @@ function openTrainingForm(existing, draftData = null, options = {}){
       const textarea = document.getElementById(button.dataset.noteTarget);
       if(textarea) applyListFormatting(textarea, button.dataset.noteFormat);
     });
+  });
+
+  ['tr-well', 'tr-work', 'tr-notes'].forEach(id => {
+    const textarea = document.getElementById(id);
+    if(textarea) enableSmartListEditing(textarea);
   });
 
   document.getElementById('tr-cancel').addEventListener('click', () => {
