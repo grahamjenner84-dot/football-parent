@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "What Is Bio-Banding in Football? A Parent's Guide | Football Parent",
+  title: "What Is Bio-Banding in Football? | Football Parent",
   description:
     "A jargon-free explanation of bio-banding in football: what it means, why academies use it, who it helps, and whether you should be concerned if your child is invited.",
   path: "/football-development/bio-banding-football",
