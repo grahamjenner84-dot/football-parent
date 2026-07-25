@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "How to Become a Football Coach: A Parent's Guide | Football Parent",
+  title: "How to Become a Football Coach | Football Parent",
   description: "Thinking about coaching your child's grassroots football team? Here's exactly what qualifications, checks and time commitment are actually involved.",
   path: "/parent-guides/how-to-become-a-football-coach",
 });
