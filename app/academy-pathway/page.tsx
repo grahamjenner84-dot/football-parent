@@ -81,7 +81,7 @@ export default function AcademyPathwayPage() {
             "A parent-friendly guide to when academy recruitment usually starts.",
         },
         {
-          title: "What Is EPPP? The Elite Player Performance Plan Explained",
+          title: "What Is EPPP? Elite Player Performance Plan",
           href: "/academy-pathway/what-is-eppp",
           description:
             "EPPP stands for Elite Player Performance Plan. What it means for your child's academy journey: categories, coaching hours, catchment rules and player movement.",
