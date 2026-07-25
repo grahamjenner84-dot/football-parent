@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Academy Trials in the UK | Football Parent",
   description:
-    "A comprehensive guide to football academy trials in the UK, including how to find trials, what to expect and how to prepare your child for success.",
+    "Most academy players are found through scouting, not open trials. How genuine football academy trials work in the UK, how to spot scams, and what to expect.",
   path: "/academy-trials/football-academy-trials-uk",
 });
 
