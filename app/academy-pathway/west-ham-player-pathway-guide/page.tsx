@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "West Ham Player Pathway Guide | Football Parent",
   description:
-    "A comprehensive guide to understanding the West Ham United player pathway and how young players can progress through the academy system.",
+    "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join.",
   path: "/academy-pathway/west-ham-player-pathway-guide",
 });
 
