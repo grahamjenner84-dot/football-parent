@@ -23,6 +23,7 @@ export default async function Page() {
       categoryUrl={article.frontmatter.categoryUrl}
       readTime={article.frontmatter.readTime}
       sections={article.frontmatter.sections}
+      content={article.content}
       path="/football-development/why-isnt-my-child-improving-at-football"
       datePublished={article.frontmatter.date}
     >

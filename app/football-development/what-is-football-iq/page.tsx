@@ -23,6 +23,7 @@ export default async function Page() {
       categoryUrl={article.frontmatter.categoryUrl}
       readTime={article.frontmatter.readTime}
       sections={article.frontmatter.sections}
+      content={article.content}
       path="/football-development/what-is-football-iq"
       datePublished={article.frontmatter.date}
     >

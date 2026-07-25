@@ -24,6 +24,7 @@ export default async function Page() {
       categoryUrl={article.frontmatter.categoryUrl}
       readTime={article.frontmatter.readTime}
       sections={article.frontmatter.sections}
+      content={article.content}
       path="/football-gear/veo-camera-alternatives"
       datePublished={article.frontmatter.date}
     >

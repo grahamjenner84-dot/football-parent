@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Script from "next/script";
+import { extractFaqs } from "@/lib/faq";
 
 interface ArticleLayoutProps {
   title: string;
@@ -11,6 +12,7 @@ interface ArticleLayoutProps {
   path?: string;
   datePublished?: string;
   dateModified?: string;
+  content?: string;
   relatedArticles?: {
     href: string;
     title: string;
@@ -66,11 +68,13 @@ export default function ArticleLayout({
   path,
   datePublished,
   dateModified,
+  content,
   children,
 }: ArticleLayoutProps) {
   const articleUrl = path ? createAbsoluteUrl(path) : undefined;
   const categoryAbsoluteUrl = createAbsoluteUrl(categoryUrl);
   const schemaId = createSchemaId(title);
+  const faqs = content ? extractFaqs(content) : [];
 
   const breadcrumbSchema = articleUrl
     ? {
@@ -128,6 +132,22 @@ export default function ArticleLayout({
       }
     : null;
 
+  const faqSchema =
+    faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
+
   return (
     <main className="min-h-screen bg-white">
       {articleSchema && (
@@ -146,6 +166,16 @@ export default function ArticleLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(breadcrumbSchema),
+          }}
+        />
+      )}
+
+      {faqSchema && (
+        <Script
+          id={`faq-schema-${schemaId}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
           }}
         />
       )}
