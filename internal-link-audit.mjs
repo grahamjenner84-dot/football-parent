@@ -453,12 +453,28 @@ const MIN_PARAGRAPH_OVERLAP_WEIGHT = 3;
 // and only falls back to a linked paragraph if no link-free paragraph clears
 // the overlap floor. If nothing clears it anywhere, says so explicitly rather
 // than pointing at a paragraph that doesn't actually relate to the target.
+// Custom-styled JSX blocks (stat cards, comparison grids, callout boxes) use
+// className liberally and nothing else in this codebase does - see
+// extractInternalLinks, inline <Link>/<a> tags here never carry one. A
+// "paragraph" that's really a component wrapper (e.g. `<div className="rounded-2xl
+// border...">`) can still score on stray word overlap (colour names, a lone
+// stat label) even though it's not prose you'd naturally extend with a
+// sentence - inserting a link there either breaks the component or reads as
+// a floating fragment. Filtering these out of *candidacy* here (rather than
+// out of loadPages()'s page.paragraphs) keeps paragraph numbering intact for
+// paragraphNumberForIndex/paragraphExcerpt, which still need to point at an
+// existing link even if that link happens to sit inside one of these blocks.
+function isJsxComponentBlock(text) {
+  return text.startsWith('<') || text.includes('className=');
+}
+
 function findBestParagraph(source, target) {
   const targetWords = targetTopicWords(target);
 
   let best = null; // best among paragraphs with no existing link
   let bestAny = null; // best overall, regardless of existing links (fallback)
   source.paragraphs.forEach((para, idx) => {
+    if (isJsxComponentBlock(para)) return;
     const paraWords = new Set(para.toLowerCase().split(/\W+/).filter((w) => w.length > 3));
     let weight = 0;
     for (const w of paraWords) {
