@@ -57,7 +57,7 @@ export default function AcademyPathwayPage() {
             "A simple explanation of how academy football is structured and what parents need to know.",
         },
         {
-          title: "Category 1, 2, 3 & 4 Football Academies Explained",
+          title: "Category 1, 2, 3 & 4 Football Academies",
           href: "/academy-pathway/academy-categories-explained",
           description:
             "What's the difference between a Category 1 and Category 4 academy? What each level means for training hours, travel, facilities and your child's development.",

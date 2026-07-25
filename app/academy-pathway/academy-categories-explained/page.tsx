@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Category 1, 2, 3 & 4 Football Academies Explained | Football Parent",
+  title: "Category 1, 2, 3 & 4 Football Academies | Football Parent",
   description:
     "What's the difference between a Category 1 and Category 4 academy? What each level means for training hours, travel, facilities and your child's development.",
   path: "/academy-pathway/academy-categories-explained",
