@@ -4,30 +4,29 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "FutureFit Football DNA Interview Part 1 | Football Parent",
+  title: "Football Burnout in Young Footballers | Football Parent",
   description:
-    "Join us for an exclusive interview about the changes in FutureFit with Paul Barry Football's DNA expert as we explore the science behind player development.",
-  path: "/parent-guides/futurefit-football-dna-interview-part-1",
+    "How to recognise football burnout in young players, how it differs from a normal bad patch, and the practical changes that help a child rediscover enjoyment.",
+  path: "/football-development/football-burnout",
 });
 
 export default async function Page() {
   const article = getArticleBySlug(
-    "parent-guides",
-    "futurefit-football-dna-interview-part-1"
+    "football-development",
+    "football-burnout"
   );
 
   return (
     <ArticleLayout
       title={article.frontmatter.title}
-      datePublished={article.frontmatter.date}
-      path="/parent-guides/futurefit-football-dna-interview-part-1"
       description={article.frontmatter.description}
       category={article.frontmatter.category}
       categoryUrl={article.frontmatter.categoryUrl}
       readTime={article.frontmatter.readTime}
       sections={article.frontmatter.sections}
       content={article.content}
-      
+      path="/football-development/football-burnout"
+      datePublished={article.frontmatter.date}
     >
       <MDXContent content={article.content} />
     </ArticleLayout>

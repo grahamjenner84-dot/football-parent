@@ -61,6 +61,7 @@ export const routes = [
   '/football-development/what-is-football-iq',
   '/football-development/bio-banding-football',
   '/football-development/why-isnt-my-child-improving-at-football',
+  '/football-development/football-burnout',
 
   // Football Gear
   '/football-gear/ag-vs-fg-boots',

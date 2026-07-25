@@ -1018,8 +1018,10 @@ function run() {
       }
       if (d.replacement && d.replacement.viaPillarGap) {
         md += `  - Add instead: pillar **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`) — this page doesn't link to it yet, so this also fixes a section 7 gap\n`;
+        md += `    - Copy-paste: \`- [${d.replacement.other.title}](${d.replacement.other.urlPath})\`\n`;
       } else if (d.replacement) {
         md += `  - Add instead: **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`, relevance ${d.replacement.score})\n`;
+        md += `    - Copy-paste: \`- [${d.replacement.other.title}](${d.replacement.other.urlPath})\`\n`;
       } else {
         md += `  - Add instead: no strong alternative found — just cut back to one or two mentions\n`;
       }
@@ -1027,24 +1029,23 @@ function run() {
         md += `    - Paragraph ${d.insertLocation.paragraphIndex}${d.insertLocation.crowded ? ' (already has a link in it — check it still reads cleanly)' : ''}: "${d.insertLocation.nearestSentence}"\n`;
         md += `    - Paste this sentence in: "${d.insertLocation.pasteReadySentence}"\n`;
       }
+      md += `\n`;
     }
-    if (tier1.length) md += `\n`;
 
     md += `### 3b. Medium priority — 2 links, both in the body (${tier2.length})\n\n`;
     md += `_Might be overlinking, but not automatically wrong — e.g. one early mention and one nearer a directly relevant section can both earn their place. Use judgement._\n\n`;
     if (tier2.length === 0) md += `_None found._\n\n`;
     for (const d of tier2) {
-      md += `- **${d.fromTitle}** (\`${d.from}\`) links to **${d.title}** (\`${d.targetPath}\`) twice in the body\n`;
+      md += `- **${d.fromTitle}** (\`${d.from}\`) links to **${d.title}** (\`${d.targetPath}\`) twice in the body\n\n`;
     }
-    if (tier2.length) md += `\n`;
 
     md += `### 3c. Low priority — 1 contextual + 1 Related Articles mention, better related pick available (${tier3.length})\n\n`;
     md += `_Only listed when swapping in the alternative would genuinely improve the related-articles slot. If the duplicated link is already the most relevant thing to put there (e.g. a recruitment article pointing to both trials and what coaches look for, in-body and in Related Articles), it's left alone and won't appear here._\n\n`;
     if (tier3.length === 0) md += `_None found._\n\n`;
     for (const d of tier3) {
       md += `- **${d.fromTitle}** (\`${d.from}\`): Related Articles repeats the in-body link to **${d.title}** (relevance ${d.currentScore}) — swap it for **${d.replacement.other.title}** (\`${d.replacement.other.urlPath}\`, relevance ${d.replacement.score})\n`;
+      md += `  - Copy-paste: \`- [${d.replacement.other.title}](${d.replacement.other.urlPath})\`\n\n`;
     }
-    if (tier3.length) md += `\n`;
   }
 
   md += `\n## 4. Pages with too few outbound links\n\n`;

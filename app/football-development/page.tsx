@@ -135,6 +135,12 @@ export default function FootballDevelopmentPage() {
           description:
             "Why football development plateaus happen, what's normal, and a practical 3 to 6 month plan for parents.",
         },
+        {
+          title: "Football Burnout: Signs, Causes and What Parents Can Do",
+          href: "/football-development/football-burnout",
+          description:
+            "How to recognise football burnout early, tell it apart from a normal bad patch, and help a child rediscover enjoyment.",
+        },
       ]}
       bottomContent={{
         title: "About Football Development",
