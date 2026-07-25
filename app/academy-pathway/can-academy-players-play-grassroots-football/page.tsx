@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Can Academy Players Play Grassroots Football? | Football Parent",
   description:
-    "Discover whether academy players can participate in grassroots football and how it benefits their development.",
+    "Academy players can play grassroots football in the Foundation Phase (U9-U11) with club approval, but it's banned from U12 under the Youth Development Rules.",
   path: "/academy-pathway/can-academy-players-play-grassroots-football",
 });
 
