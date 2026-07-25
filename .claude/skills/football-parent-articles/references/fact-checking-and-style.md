@@ -130,6 +130,11 @@ presents opinion as fact, or presents a trend as universal truth.
 Only include FAQs that add genuinely new information not already covered
 elsewhere in the article. Cut any FAQ that duplicates an earlier section.
 
+Each FAQ question is an `### ` (h3) heading, not bold text. The FAQ section
+itself is an H2 (e.g. `## Frequently Asked Questions` or `## FAQ: <Topic>`,
+in the `sections` frontmatter array as normal); individual questions inside
+it are H3s and do not get their own `sections` entry or TOC anchor.
+
 ## Style
 
 - British English throughout.

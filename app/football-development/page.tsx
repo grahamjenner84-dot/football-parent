@@ -129,6 +129,12 @@ export default function FootballDevelopmentPage() {
           description:
             "A jargon-free explanation of bio-banding: what it means, why academies use it and whether parents should be concerned if their child is invited.",
         },
+        {
+          title: "Why Isn't My Child Improving at Football?",
+          href: "/football-development/why-isnt-my-child-improving-at-football",
+          description:
+            "Why football development plateaus happen, what's normal, and a practical 3 to 6 month plan for parents.",
+        },
       ]}
       bottomContent={{
         title: "About Football Development",
