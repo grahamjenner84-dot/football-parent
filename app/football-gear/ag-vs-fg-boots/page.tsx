@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "AG vs FG Football Boots Explained | Football Parent",
   description:
-    "Understand the difference between AG and FG football boots, which surfaces they are designed for, and what parents should know before buying.",
+    "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose.",
   path: "/football-gear/ag-vs-fg-boots",
 });
 
