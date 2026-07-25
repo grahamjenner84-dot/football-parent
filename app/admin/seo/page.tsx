@@ -366,8 +366,10 @@ function matchesDirectionFilter(direction: RankRow["direction"], filter: Directi
   return true;
 }
 
+type RankSortMetric = "position" | "impressions" | "clicks";
+
 function RankTrackerList({ rows }: { rows: RankRow[] }) {
-  const [metric, setMetric] = useState<"impressions" | "clicks">("impressions");
+  const [metric, setMetric] = useState<RankSortMetric>("impressions");
   const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
 
   if (!rows.length) {
@@ -377,6 +379,10 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
   const visible = rows
     .filter((r) => matchesDirectionFilter(r.direction, directionFilter))
     .sort((a, b) => {
+      if (metric === "position") {
+        // Lower position is better; queries with no current position (lost) sort last.
+        return (a.recentPosition ?? Infinity) - (b.recentPosition ?? Infinity);
+      }
       const aVal = metric === "impressions" ? a.recentImpressions : a.recentClicks;
       const bVal = metric === "impressions" ? b.recentImpressions : b.recentClicks;
       return bVal - aVal;
@@ -385,6 +391,12 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
   return (
     <div style={styles.list}>
       <div style={styles.metricToggle}>
+        <button
+          onClick={() => setMetric("position")}
+          style={{ ...styles.toggleButton, ...(metric === "position" ? styles.toggleButtonActive : {}) }}
+        >
+          Sort: position
+        </button>
         <button
           onClick={() => setMetric("impressions")}
           style={{ ...styles.toggleButton, ...(metric === "impressions" ? styles.toggleButtonActive : {}) }}
@@ -438,9 +450,11 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
             <p style={styles.cardPage}>{shortPage(r.page)}</p>
             <div style={styles.cardStats}>
               <span style={directionStyle(r.direction)}>{directionLabel(r)}</span>
-              <span>
-                {recentVal} {unit} (was {priorVal})
-              </span>
+              {metric !== "position" && (
+                <span>
+                  {recentVal} {unit} (was {priorVal})
+                </span>
+              )}
             </div>
           </div>
         );
