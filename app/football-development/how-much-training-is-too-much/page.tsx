@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How Much Football Training Is Too Much? | Football Parent",
   description:
-    "Understand how much football training may be too much for young players and how parents can balance development, recovery and enjoyment.",
+    "More sessions doesn't always mean more development. Age-by-age training load guidelines, from 1-2 sessions a week at U8-U10, and the real signs of burnout.",
   path: "/football-development/how-much-training-is-too-much",
 });
 
