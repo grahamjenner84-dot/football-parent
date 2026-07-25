@@ -365,6 +365,11 @@
     var leftX = mX, rightInset = mX + mR, maxW = W - leftX - rightInset, centerX = leftX + maxW / 2;
     var anchorX = L.align === 'center' ? centerX : leftX;
     var topY = H * (L.yPct / 100);
+    // Hook/CTA/classic-content slides otherwise ignore the TikTok-safe top
+    // margin entirely (only design2's content branch ever used sT) - this
+    // is what actually makes the "TikTok-safe" toggle push headlines clear
+    // of the platform's top search/tab bar, instead of doing nothing.
+    var safeTopY = Math.max(topY, sT);
     var dy = (1 - alpha) * 42; ctx.globalAlpha = alpha; ctx.textBaseline = 'top'; ctx.textAlign = L.align;
     // copy backdrop — hides any baked-in text on uploaded designs
     if (L.cover && bgImg) {
@@ -372,16 +377,16 @@
       if (slide.kind === 'hook') {
         ctx.font = hw + ' ' + L.headSize + 'px ' + fs;
         var hl = countLines(ctx, String(slide.head || '').toUpperCase(), maxW);
-        bTop = topY - 76 - 18; bBot = topY + hl * (L.headSize * 1.07) + 26 + 46 + 18;
+        bTop = safeTopY - 76 - 18; bBot = safeTopY + hl * (L.headSize * 1.07) + 26 + 46 + 18;
       } else if (slide.kind === 'cta') {
         var cl = String(brand.ctaLines).split('\n').length;
-        bTop = topY - 18; bBot = topY + L.headSize + 44 + cl * 66 + 18;
+        bTop = safeTopY - 18; bBot = safeTopY + L.headSize + 44 + cl * 66 + 18;
       } else {
         ctx.font = hw + ' ' + L.headSize + 'px ' + fs;
         var hl2 = countLines(ctx, String(slide.head || '').toUpperCase(), maxW);
         var bl = 0;
         if (slide.body) { ctx.font = '400 42px ' + fs; bl = countLines(ctx, slide.body, maxW); }
-        bTop = topY - 18; bBot = topY + 84 + 46 + hl2 * (L.headSize * 1.08) + 14 + (bl ? bl * 56 : 0) + 18;
+        bTop = safeTopY - 18; bBot = safeTopY + 84 + 46 + hl2 * (L.headSize * 1.08) + 14 + (bl ? bl * 56 : 0) + 18;
       }
       var bx = L.coverFull ? 0 : Math.max(0, leftX - 34), bw = L.coverFull ? W : (Math.min(W, W - rightInset + 34) - bx);
       var by = Math.max(0, bTop + dy), bh = (bBot - bTop);
@@ -401,9 +406,9 @@
     if (slide.kind === 'hook') {
       if (style === 'design2') {
         ctx.fillStyle = L.accent; setLS(7);
-        fillTextEmojiAware(ctx, String(brand.saveLine || '').toUpperCase(), anchorX, topY - 64 + dy, '600 30px ' + monoFont, L.align);
+        fillTextEmojiAware(ctx, String(brand.saveLine || '').toUpperCase(), anchorX, safeTopY - 64 + dy, '600 30px ' + monoFont, L.align);
         setLS(0);
-        var y1 = drawHeadline(ctx, slide.head, L, fs, hw, anchorX, topY + dy, maxW);
+        var y1 = drawHeadline(ctx, slide.head, L, fs, hw, anchorX, safeTopY + dy, maxW);
         ctx.textAlign = L.align; ctx.fillStyle = L.accent; ctx.font = '600 30px ' + bodyFont; setLS(3);
         var subtitleText = String(brand.hookSubtitle || '').toUpperCase();
         ctx.fillText(subtitleText, anchorX, y1 + 44);
@@ -413,13 +418,13 @@
         setLS(0);
       } else {
         ctx.fillStyle = L.headColor;
-        fillTextEmojiAware(ctx, brand.saveLine, anchorX, topY - 76 + dy, '500 34px ' + fs, L.align);
-        var y2 = drawHeadline(ctx, slide.head, L, fs, hw, anchorX, topY + dy, maxW);
+        fillTextEmojiAware(ctx, brand.saveLine, anchorX, safeTopY - 76 + dy, '500 34px ' + fs, L.align);
+        var y2 = drawHeadline(ctx, slide.head, L, fs, hw, anchorX, safeTopY + dy, maxW);
         ctx.font = '400 46px ' + fs; ctx.fillStyle = L.bodyColor; ctx.fillText(brand.hookSubtitle, anchorX, y2 + 26);
       }
     } else if (slide.kind === 'cta') {
       if (style === 'design2') {
-        var y3 = topY + dy;
+        var y3 = safeTopY + dy;
         ctx.fillStyle = L.accent; ctx.textAlign = L.align; ctx.font = '600 30px ' + monoFont; setLS(7);
         ctx.fillText('FOR EVERY STAGE OF THEIR GAME', anchorX, y3); setLS(0); y3 += 52;
         var cL = Object.assign({}, L, { headColor: '#ffffff' });
@@ -428,8 +433,8 @@
         if (cta1.para) { ctx.fillStyle = L.bodyColor; ctx.textAlign = 'left'; ctx.font = '500 44px ' + bodyFont; y3 = drawML(ctx, cta1.para, leftX, y3, maxW, 60) + 24; }
         if (cta1.items.length) { y3 = drawChecklist(ctx, cta1.items, leftX, y3, maxW, L.accent, L.bodyColor, bodyFont); }
       } else {
-        ctx.fillStyle = L.accent; ctx.font = hw + ' ' + L.headSize + 'px ' + fs; ctx.fillText(brand.ctaUrl, anchorX, topY + dy);
-        var y4 = topY + L.headSize + 44 + dy; var cta2 = parseBody(brand.ctaLines);
+        ctx.fillStyle = L.accent; ctx.font = hw + ' ' + L.headSize + 'px ' + fs; ctx.fillText(brand.ctaUrl, anchorX, safeTopY + dy);
+        var y4 = safeTopY + L.headSize + 44 + dy; var cta2 = parseBody(brand.ctaLines);
         if (cta2.para) { ctx.fillStyle = L.bodyColor; ctx.textAlign = L.align; ctx.font = '400 44px ' + fs; y4 = drawML(ctx, cta2.para, anchorX, y4, maxW, 60) + 18; }
         if (cta2.items.length) { ctx.textAlign = 'left'; y4 = drawChecklist(ctx, cta2.items, leftX, y4, maxW, L.accent, L.bodyColor, fs); }
       }
@@ -474,7 +479,7 @@
           y6 = drawChecklist(ctx, pb.items, leftX, y6 + 8, maxW, L.accent, L.bodyColor, bf);
         } else if (slide.body) { ctx.fillStyle = L.bodyColor; ctx.textAlign = L.align; ctx.font = '400 42px ' + bf; y6 = drawML(ctx, slide.body, anchorX, y6, maxW, 60); }
       } else {
-        var y7 = topY + dy;
+        var y7 = safeTopY + dy;
         ctx.fillStyle = L.accent; ctx.font = hw + ' 66px ' + fs; ctx.fillText(badgeText(slide), anchorX, y7); y7 += 84;
         ctx.fillStyle = L.accent;
         if (L.align === 'center') { ctx.fillRect(centerX - 48, y7, 96, 6); } else { ctx.fillRect(leftX, y7, 96, 6); }
