@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Does the Junior Premier League Lead to Academy Football? | Football Parent",
   description:
-    "Explore the relationship between the Junior Premier League and academy football to understand how they can complement each other in your child's development.",
+    "Playing in the JPL doesn't create an automatic route into an academy - scouts select on ability, not league. What actually gets a child noticed.",
   path: "/parent-guides/jpl-and-academy-football",
 });
 
