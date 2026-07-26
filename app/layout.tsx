@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Football Parent",
   description:
     "Independent guidance for parents navigating UK football development and academy pathways.",
+  metadataBase: new URL("https://www.footballparent.co.uk"),
   icons: {
     icon: "/icon.png",
   },
