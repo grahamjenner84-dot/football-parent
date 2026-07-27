@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Gear | Football Parent",
   description:
-    "Parent-friendly football gear advice including boots, shin pads, footballs and training equipment for young players.",
+    "Boots, shin pads, footballs and training kit for young players: what actually matters for sizing, fit and durability, and what's worth skipping.",
   path: "/football-gear",
   type: "website",
 });
@@ -14,7 +14,7 @@ export default function FootballGearPage() {
     <CategoryPage
       eyebrow="Football gear"
       title="Football Gear"
-      description="Trusted football equipment advice for parents buying boots, shin pads, gloves and training essentials."
+      description="Boots, shin pads, footballs and training kit for young players: what actually matters for sizing, fit and durability, and what's worth skipping."
       intro={[
         "Buying football equipment for a child who is developing quickly is rarely straightforward. Boot technology has outpaced most buying guides, sizing varies between brands, and what works on a 3G surface does not always work on grass. These guides cut through the noise with honest, practical advice on boots, goals, training equipment and kit, written for parents rather than coaches or serious players.",
       ]}
