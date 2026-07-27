@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "When Your Child Is Struggling in Football | Football Parent",
   description:
-    "Practical advice for supporting young footballers emotionally after difficult matches, mistakes or disappointing performances.",
+    "Three or four bad matches in a row is different from one bad match. The warning signs of a genuine confidence dip, what not to do, and when to talk to the coach.",
   path: "/parent-guides/support-child-after-bad-match",
 });
 
