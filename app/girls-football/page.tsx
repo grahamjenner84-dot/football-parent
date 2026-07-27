@@ -90,7 +90,7 @@ export default function GirlsFootballPage() {
           title: "Girls RTCs Explained",
           href: "/girls-football/girls-rtcs-explained",
           description:
-            "A guide to Regional Talent Clubs (RTCs) and how they fit into the girls football development pathway.",
+            "RTCs in girls football no longer exist. They were replaced by Emerging Talent Centres and Professional Game Academies. What the pathway looks like now.",
         },
       ]}
       bottomContent={{
