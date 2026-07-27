@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "New FA Youth Football Format | Football Parent",
   description:
-    "An overview of the new FA youth football format and its impact on young players.",
+    "The FA's FutureFit reforms start in 2026/27 and change match sizes at nearly every age group between Under-7 and Under-14. What's actually changing, and why.",
   path: "/football-development/new-fa-youth-football-format",
 });
 
