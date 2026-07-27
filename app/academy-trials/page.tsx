@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Academy Trials and Scouting | Football Parent",
   description:
-    "Everything football parents need to know about academy trials, scouting and recruitment. What coaches look for, how to prepare, and what really happens on the day.",
+    "Most academy players are found through scouting, not open trials. What coaches actually look for, how recruitment really works, and what happens on trial day.",
   path: "/academy-trials",
   type: "website",
 });
@@ -14,7 +14,7 @@ export default function AcademyTrialsPage() {
     <CategoryPage
       eyebrow="Academy trials"
       title="Football Academy Trials"
-      description="Guidance for football parents on academy trials, scouting and preparing young players for trial environments."
+      description="Most academy players are found through scouting, not open trials. What coaches actually look for, how recruitment really works, and what happens on trial day."
       intro={[
         "Football academy trials are one of the most misunderstood parts of youth football development. Most players will attend at least one trial during their development years, whether that is an open trial at a local club, an invitation to an EPPP academy session, or a development centre assessment. Having been through the process with my own child at Crystal Palace, I know how little honest information there is for parents going in for the first time. The guides below cover what scouts look for, how clubs recruit, and what really happens on the day.",
       ]}
