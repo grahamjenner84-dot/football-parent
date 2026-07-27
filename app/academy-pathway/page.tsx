@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Academy Pathway | Football Parent",
   description:
-    "Learn how football academy pathways work in the UK, including academy recruitment, development centres, academy trials, scholarships, scouting and player development.",
+    "The UK academy pathway runs through EPPP's Category 1-4 system, from development centres and scouting to scholarships and release. What each stage actually involves.",
   path: "/academy-pathway",
   type: "website",
 });
@@ -14,7 +14,7 @@ export default function AcademyPathwayPage() {
     <CategoryPage
       eyebrow="Academy pathway"
       title="Academy Pathway"
-      description="Clear guidance for parents trying to understand football academy pathways in the UK, including academy recruitment, development centres, academy trials, scholarships, scouting and player development."
+      description="The UK academy pathway runs through EPPP's Category 1-4 system, from development centres and scouting to scholarships and release. What each stage actually involves."
       intro={[
         "The football academy system in the UK is structured around the Elite Player Performance Plan, which divides clubs into Category 1 to 4 academies with different levels of resource, coaching, and player commitment. Alongside full academies, most professional clubs also run development centres that are open to a wider range of players. Understanding where your child fits in this pathway, and what each stage actually involves, is what these guides are designed to help with. Written from first-hand experience of Crystal Palace and Chelsea's development programmes in south London.",
       ]}
