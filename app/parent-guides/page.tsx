@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Parent Guides | Football Parent",
   description:
-    "Independent football parenting advice covering academy decisions, the Junior Premier League, player development, confidence, matchday behaviour and supporting young players.",
+    "Academy decisions, the Junior Premier League, matchday behaviour and player development: what UK football parents actually need to weigh up before deciding.",
   path: "/parent-guides",
   type: "website",
 });
@@ -14,7 +14,7 @@ export default function ParentGuidesPage() {
     <CategoryPage
       eyebrow="Parent guides"
       title="Parent Guides"
-      description="Independent, evidence-based advice to help football parents make confident decisions about youth football, player development, academies and the Junior Premier League."
+      description="Academy decisions, the Junior Premier League, matchday behaviour and player development: what UK football parents actually need to weigh up before deciding."
       intro={[
         "Being a football parent involves far more than standing on the touchline. You'll make decisions about clubs, leagues, development centres, academy opportunities and how best to support your child through both successes and setbacks. These guides combine practical football parenting advice with independent explanations of common pathways, helping you make informed decisions without the hype or pressure that often surrounds youth football.",
       ]}
