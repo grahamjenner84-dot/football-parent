@@ -103,7 +103,7 @@ export default function FootballDevelopmentPage() {
           title: "Understanding the New FA Youth Football Format",
           href: "/football-development/new-fa-youth-football-format",
           description:
-            "An overview of the new FA youth football format and its impact on young players.",
+            "The FA's FutureFit reforms start in 2026/27 and change match sizes at nearly every age group between Under-7 and Under-14. What's actually changing, and why.",
         },
         {
           title: "Should My Child Play Up an Age Group in Football?",
@@ -121,7 +121,7 @@ export default function FootballDevelopmentPage() {
           title: "Is Private Football Coaching Worth It?",
           href: "/football-development/is-private-football-coaching-worth-it",
           description:
-            "Understanding look at the pros and cons of private coaching.",
+            "The pros and cons of private football coaching, and when it's worth considering.",
         },
         {
           title: "What Is Bio-Banding in Football?",
