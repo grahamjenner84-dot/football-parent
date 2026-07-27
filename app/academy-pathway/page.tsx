@@ -96,13 +96,13 @@ export default function AcademyPathwayPage() {
           title: "UK Football Development Centres Explained",
           href: "/academy-pathway/uk-football-development-centres-explained",
           description:
-            "Understand how football development centres work in the UK.",
+            "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy.",
         },
         {
           title: "PDC vs PTC vs RTC Explained",
           href: "/academy-pathway/pdc-vs-ptc-vs-rtc-explained",
           description:
-            "Understand the differences between PDC, PTC, and RTC in UK football development.",
+            "What PDC, PTC, RTC and ETC actually mean, and don't mean, for parents navigating youth football pathways where clubs use the terms inconsistently.",
         },
         {
           title: "How Players Progress Through Football Development Centres",
@@ -114,7 +114,7 @@ export default function AcademyPathwayPage() {
           title: "How Chelsea FC's Development Centre Works",
           href: "/academy-pathway/chelsea-fc-development-centre-guide",
           description:
-            "Understand Chelsea FC's development centre and how it supports young footballers.",
+            "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining.",
         },
         {
           title: "Premier League Development Centres",
@@ -133,7 +133,7 @@ export default function AcademyPathwayPage() {
           title: "How Arsenal FC's Development Centre Works",
           href: "/academy-pathway/arsenal-development-centre-guide",
           description:
-            "Understand Arsenal FC's development centre and how it supports young footballers.",
+            "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted.",
         },
         {
           title: "Football Development Centres in London",
@@ -145,7 +145,7 @@ export default function AcademyPathwayPage() {
           title: "How to Find a Football Agent for Your Child",
           href: "/academy-pathway/how-to-find-a-football-agent-for-your-child",
           description:
-            "A guide for parents on how to find a qualified football agent to represent their child's interests.",
+            "FA rules block agents from representing players under 18 outside a first professional contract. When they genuinely become relevant, and warning signs to watch for.",
         },
         {
           title: "How football scholarships work in the UK",
@@ -156,7 +156,7 @@ export default function AcademyPathwayPage() {
           title: "How Crystal Palace's Development Centre Works",
           href: "/academy-pathway/crystal-palace-development-centre-guide",
           description:
-            "A guide to how Crystal Palace's development centre supports young footballers.",
+            "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families.",
         },
         {
           title: "Can Academy Players Play Grassroots Football?",
@@ -180,7 +180,7 @@ export default function AcademyPathwayPage() {
           title: "West Ham Player Pathway Guide",
           href: "/academy-pathway/west-ham-player-pathway-guide",
           description:
-            "A comprehensive guide to understanding the West Ham United player pathway and how young players can progress through the academy system.",
+            "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join.",
         },
       ]}
       bottomContent={{
