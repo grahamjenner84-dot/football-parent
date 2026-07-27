@@ -67,7 +67,7 @@ export default function AcademyTrialsPage() {
           title: "How Football Scouts Identify Players",
           href: "/academy-trials/how-football-scouts-identify-players",
           description:
-            "Understand what scouts actually look for in young footballers.",
+            "Scouts spend more time watching what happens away from the ball than goals or assists: scanning, reactions to mistakes, work rate. What gets noticed, age by age.",
         },
         {
           title: "What Happens at Academy Trials",
@@ -79,7 +79,7 @@ export default function AcademyTrialsPage() {
           title: "How to Get Scouted for Football",
           href: "/academy-trials/how-to-get-scouted-for-football",
           description:
-            "Learn how to increase your chances of getting scouted for football, from technical ability to decision making and attitude.",
+            "Paid showcase events rarely help: scouts assess players through live football, not highlight reels. What genuinely improves your child's chances of being noticed.",
         },
         {
           title: "What Do Academy Coaches Look For?",
