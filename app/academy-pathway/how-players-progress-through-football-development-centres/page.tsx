@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Progress Through Football Development Centres | Football Parent",
   description:
-    "A clear guide to understanding the progression paths for players in UK football development centres.",
+    "How players actually move through development centre pathways, and why progress is rarely as straightforward as families expect.",
   path: "/academy-pathway/how-players-progress-through-football-development-centres",
 });
 
