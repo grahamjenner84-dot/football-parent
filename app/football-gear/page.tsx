@@ -54,7 +54,7 @@ export default function FootballGearPage() {
           title: "AG vs FG Boots",
           href: "/football-gear/ag-vs-fg-boots",
           description:
-            "Understand the difference between AG and FG football boots.",
+            "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose.",
         },
         {
           title: "Best Football Gloves for Winter Training",
