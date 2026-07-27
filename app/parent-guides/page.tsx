@@ -72,7 +72,7 @@ export default function ParentGuidesPage() {
           title: "Does the Junior Premier League Lead to Academy Football?",
           href: "/parent-guides/jpl-and-academy-football",
           description:
-            "Understand the relationship between the Junior Premier League, academy scouting and player development.",
+            "Playing in the JPL doesn't create an automatic route into an academy - scouts select on ability, not league. What actually gets a child noticed.",
         },
         {
           title: "JPL Trials: How to Get Into the JPL",
@@ -96,7 +96,7 @@ export default function ParentGuidesPage() {
           title: "Support Your Child After a Bad Match",
           href: "/parent-guides/support-child-after-bad-match",
           description:
-            "Practical guidance for helping players bounce back positively.",
+            "Three or four bad matches in a row is different from one bad match. The warning signs of a genuine confidence dip, what not to do, and when to talk to the coach.",
         },
         {
           title: "FutureFit Football DNA Interview Part 1",
@@ -120,13 +120,13 @@ export default function ParentGuidesPage() {
           title: "How to become a football coach",
           href: "/parent-guides/how-to-become-a-football-coach",
           description:
-            "A guide for parents interested in getting involved with grassroots football coaching.",
+            "Thinking about coaching your child's grassroots football team? Here's exactly what qualifications, checks and time commitment are actually involved.",
         },
         {
           title: "Biggest Football Parent Mistakes",
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:
-            "Common mistakes football parents make and how to avoid them.",
+            "Sideline coaching, comparing siblings and chasing academy status cause damage parents rarely notice. A grassroots coach's own look at the mistakes he's seen most.",
         },
       ]}
       bottomContent={{
