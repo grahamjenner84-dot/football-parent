@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Development Centres explained | Football Parent",
   description:
-    "A guide to how football development centres work in the UK, including age groups, training, fixtures and what parents should expect.",
+    "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy.",
   path: "/academy-pathway/uk-football-development-centres-explained",
 });
 
