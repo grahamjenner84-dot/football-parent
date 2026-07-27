@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Biggest Football Parent Mistakes | Football Parent",
   description:
-    "Learn the most common football parent mistakes and how to better support young players in healthy long-term development.",
+    "Sideline coaching, comparing siblings and chasing academy status cause damage parents rarely notice. A grassroots coach's own look at the mistakes he's seen most.",
   path: "/parent-guides/biggest-football-parent-mistakes",
 });
 
