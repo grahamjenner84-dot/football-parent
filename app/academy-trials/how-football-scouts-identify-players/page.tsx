@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How Football Scouts Identify Players | Football Parent",
   description:
-    "Learn what football scouts actually look for in young players, from technical ability to decision making and attitude.",
+    "Scouts spend more time watching what happens away from the ball than goals or assists: scanning, reactions to mistakes, work rate. What gets noticed, age by age.",
   path: "/academy-trials/how-football-scouts-identify-players",
 });
 
