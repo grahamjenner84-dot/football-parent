@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Parent | Independent Guidance for Football Parents",
   description:
-    "Independent advice for parents navigating academy football, grassroots football and player development in the UK.",
+    "Academy pathways, grassroots football and player development advice for UK football parents, written by a grassroots coach and football parent based in south London.",
   path: "/",
   type: "website",
 });
