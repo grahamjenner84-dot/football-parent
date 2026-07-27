@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How Academy Football Works | Football Parent",
   description:
-    "A clear guide to how academy football works in the UK, including age groups, training, fixtures and what parents should expect.",
+    "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours.",
   path: "/academy-pathway/how-academy-football-works",
 });
 
