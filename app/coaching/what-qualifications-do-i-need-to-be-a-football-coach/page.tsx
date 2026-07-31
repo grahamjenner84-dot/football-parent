@@ -4,15 +4,15 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "How to Become a Grassroots Football Coach | Football Parent",
-  description: "How to become a grassroots football coach: joining as a volunteer, DBS checks, safeguarding, first aid, time commitment and coaching your own child.",
-  path: "/parent-guides/how-to-become-a-football-coach",
+  title: "What Qualifications Do You Need to Be a Football Coach? | Football Parent",
+  description: "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?",
+  path: "/coaching/what-qualifications-do-i-need-to-be-a-football-coach",
 });
 
 export default async function Page() {
   const article = getArticleBySlug(
-    "parent-guides",
-    "how-to-become-a-football-coach"
+    "coaching",
+    "what-qualifications-do-i-need-to-be-a-football-coach"
   );
 
   return (
@@ -23,8 +23,7 @@ export default async function Page() {
       categoryUrl={article.frontmatter.categoryUrl}
       readTime={article.frontmatter.readTime}
       sections={article.frontmatter.sections}
-      content={article.content}
-      path="/parent-guides/how-to-become-a-football-coach"
+      path="/coaching/what-qualifications-do-i-need-to-be-a-football-coach"
       datePublished={article.frontmatter.date}
     >
       <MDXContent content={article.content} />

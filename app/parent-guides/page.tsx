@@ -117,10 +117,16 @@ export default function ParentGuidesPage() {
             "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football. A clear guide for UK parents.",
         },
         {
-          title: "How to become a football coach",
+          title: "How to Become a Grassroots Football Coach",
           href: "/parent-guides/how-to-become-a-football-coach",
           description:
-            "Thinking about coaching your child's grassroots football team? Here's exactly what qualifications, checks and time commitment are actually involved.",
+            "How to become a grassroots football coach: joining as a volunteer, DBS checks, safeguarding, first aid, time commitment and coaching your own child.",
+        },
+        {
+          title: "What Qualifications Do You Need to Be a Football Coach?",
+          href: "/coaching/what-qualifications-do-i-need-to-be-a-football-coach",
+          description:
+            "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?",
         },
         {
           title: "Biggest Football Parent Mistakes",
