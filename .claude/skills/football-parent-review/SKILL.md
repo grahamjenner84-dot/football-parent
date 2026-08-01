@@ -24,16 +24,25 @@ sourced, copy-pasteable fixes — the user decides what to apply.
    The FA, England Football, Premier League, UEFA, FIFA, NSPCC/CPSU,
    UK Coaching, peer-reviewed sports science/child development research —
    over blogs, forums, opinion pieces, or unsourced claims.
-3. **Work through all 12 sections below, in order, for the article.** If the
+3. **Live-fetch every external URL already cited in the article, and any
+   new one you're about to recommend.** A web search returning a title and
+   snippet for a URL is NOT confirmation the page still resolves — search
+   engines keep serving cached/indexed snippets for a while after a page is
+   taken down, moved, or renamed, and a snippet-only check has previously
+   let a genuinely dead FA link ship. Fetch the actual URL and confirm it
+   returns real content, not a 404/error page, before citing or re-citing
+   it. If a previously-cited source is now dead, find a live replacement
+   that supports the same claim rather than dropping the citation.
+4. **Work through all 12 sections below, in order, for the article.** If the
    user pastes multiple articles, complete all 12 sections for one article
    before moving to the next.
-4. **Every fix must be copy-paste-ready.** Any recommended change to wording
+5. **Every fix must be copy-paste-ready.** Any recommended change to wording
    is given as exact "Current text" → exact MDX-ready "Replace with" text,
    not just a description of the problem. Any internal link recommendation
    must show the exact sentence with the link inserted naturally in MDX,
    plus destination URL and why it helps the reader — check
    `references/valid-urls.md` and never invent a slug.
-5. **Cite a source link for every correction, challenge, or recommended
+6. **Cite a source link for every correction, challenge, or recommended
    update** wherever one exists. If a claim can't be confidently verified,
    say so explicitly rather than guessing.
 
@@ -134,10 +143,13 @@ accuracy, reader trust, parent usefulness, E-E-A-T, SEO value, long-term
 content quality.
 
 ### 11. Source Verification Summary
-Table: Topic | Current Claim | Verified? | Source Link | Better Source
-Needed? | Recommended Source. Flag any claim that can't be confidently
-verified from a reliable football, coaching, safeguarding, or sports science
-source.
+Table: Topic | Current Claim | Verified? | Source Link | Link Live? |
+Better Source Needed? | Recommended Source. "Link Live?" reflects an actual
+fetch of the URL done in this review (step 3 above), not a search-snippet
+assumption. Flag any claim that can't be confidently verified from a
+reliable football, coaching, safeguarding, or sports science source, and
+flag any cited URL that returned a 404/error/redirect-to-unrelated-content
+even if the underlying claim itself is accurate.
 
 ### 12. Top 5 Changes To Make First
 Rank the five highest-impact fixes by: accuracy, reader trust, parent
