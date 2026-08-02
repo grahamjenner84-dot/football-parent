@@ -911,15 +911,23 @@ export async function comparePeriods(
   assertValidDate("startB", startB);
   assertValidDate("endB", endB);
 
-  const [pageRowsA, pageRowsB, queryRowsA, queryRowsB] = await Promise.all([
+  const [totalRowsA, totalRowsB, pageRowsA, pageRowsB, queryRowsA, queryRowsB] = await Promise.all([
+    // Site-wide totals MUST come from an undimensioned query, not from
+    // summing page- or query-dimensioned rows. GSC's page/query breakdowns
+    // don't sum back to the true total (e.g. sitelinks can attribute one
+    // impression to several page URLs), which previously made this total
+    // read ~15% high against the real Search Console UI number - confirmed
+    // by direct comparison against a user-reported figure.
+    fetchRows(startA, endA, []),
+    fetchRows(startB, endB, []),
     fetchRows(startA, endA, ["page"]),
     fetchRows(startB, endB, ["page"]),
     fetchRows(startA, endA, ["query"]),
     fetchRows(startB, endB, ["query"]),
   ]);
 
-  const periodA = totalsFromRows(pageRowsA, startA, endA);
-  const periodB = totalsFromRows(pageRowsB, startB, endB);
+  const periodA = totalsFromRows(totalRowsA, startA, endA);
+  const periodB = totalsFromRows(totalRowsB, startB, endB);
   const pageMovers = buildMovers(pageRowsA, pageRowsB);
   const queryMovers = buildMovers(queryRowsA, queryRowsB);
 
