@@ -1,6 +1,6 @@
 import { createMcpHandler, withMcpAuth } from "mcp-handler";
 import { z } from "zod";
-import { getSeoReport, getPageInspection } from "@/lib/gsc";
+import { getSeoReport, getPageInspection, comparePeriods } from "@/lib/gsc";
 import { addToContentQueue } from "@/lib/supabase/content-queue";
 import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
 
@@ -33,6 +33,25 @@ const handler = createMcpHandler(
       async ({ path }) => {
         const inspection = await getPageInspection(path);
         return { content: [{ type: "text", text: JSON.stringify(inspection) }] };
+      }
+    );
+
+    server.registerTool(
+      "compare_search_console_periods",
+      {
+        title: "Compare two date ranges in Search Console",
+        description:
+          "Ad-hoc site-wide comparison between any two date ranges for footballparent.co.uk - answers 'why was Friday down vs Wednesday' or 'this week vs last week' type questions that get_seo_report and inspect_page can't, since those only cover fixed rolling windows (get_seo_report) or a single page (inspect_page). Returns total impressions/clicks/position for each period, then the specific pages and queries that account for the biggest drops and gains between them. Each period can be a single day (same start/end) or a wider range. Remember GSC data typically lags 2-3 days behind today, so very recent dates may return no data yet.",
+        inputSchema: {
+          startA: z.string().describe("Start date of period A, YYYY-MM-DD. Use the same value as endA for a single day."),
+          endA: z.string().describe("End date of period A, YYYY-MM-DD."),
+          startB: z.string().describe("Start date of period B (the comparison/baseline period), YYYY-MM-DD."),
+          endB: z.string().describe("End date of period B, YYYY-MM-DD."),
+        },
+      },
+      async ({ startA, endA, startB, endB }) => {
+        const comparison = await comparePeriods(startA, endA, startB, endB);
+        return { content: [{ type: "text", text: JSON.stringify(comparison) }] };
       }
     );
 

@@ -772,3 +772,141 @@ export async function getPageInspection(pathname: string): Promise<PageInspectio
     topQueries,
   };
 }
+
+// --- ad-hoc period comparison ---------------------------------------------
+// Answers "why was period A different from period B" for the whole site:
+// total impressions/clicks either side, then which specific pages and
+// queries account for the difference. Unlike getSeoReport (fixed rolling
+// windows, pre-shaped into named tabs) and getPageInspection (locked to one
+// page), this takes any two arbitrary date ranges - a single day each for
+// "why was Friday down vs Wednesday", or wider ranges for "this week vs
+// last week" - and returns raw movers, not a pre-set analysis.
+
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+function assertValidDate(label: string, value: string): void {
+  if (!DATE_RE.test(value)) {
+    throw new Error(`${label} must be an ISO date (YYYY-MM-DD), got "${value}"`);
+  }
+}
+
+export type PeriodTotals = { start: string; end: string; impressions: number; clicks: number; avgPosition: number | null; ctr: number };
+
+export type MoverRow = {
+  key: string; // page URL or query string
+  impressionsA: number;
+  impressionsB: number;
+  delta: number; // A - B; negative = down in period A vs period B
+  clicksA: number;
+  clicksB: number;
+  positionA: number | null;
+  positionB: number | null;
+};
+
+export type PeriodComparison = {
+  periodA: PeriodTotals;
+  periodB: PeriodTotals;
+  totalImpressionsDelta: number;
+  totalClicksDelta: number;
+  topPageDrops: MoverRow[];
+  topPageGains: MoverRow[];
+  topQueryDrops: MoverRow[];
+  topQueryGains: MoverRow[];
+};
+
+function totalsFromRows(rows: GscRow[], start: string, end: string): PeriodTotals {
+  let impressions = 0,
+    clicks = 0,
+    posWeighted = 0;
+  for (const r of rows) {
+    impressions += r.impressions;
+    clicks += r.clicks;
+    posWeighted += r.position * r.impressions;
+  }
+  return {
+    start,
+    end,
+    impressions,
+    clicks,
+    avgPosition: impressions ? Math.round((posWeighted / impressions) * 10) / 10 : null,
+    ctr: impressions ? Math.round((clicks / impressions) * 1000) / 10 : 0,
+  };
+}
+
+function buildMovers(rowsA: GscRow[], rowsB: GscRow[], maxEach = 25): { drops: MoverRow[]; gains: MoverRow[] } {
+  const byKey = new Map<string, { a?: GscRow; b?: GscRow }>();
+  for (const r of rowsA) {
+    const key = r.keys[0];
+    if (!byKey.has(key)) byKey.set(key, {});
+    byKey.get(key)!.a = r;
+  }
+  for (const r of rowsB) {
+    const key = r.keys[0];
+    if (!byKey.has(key)) byKey.set(key, {});
+    byKey.get(key)!.b = r;
+  }
+
+  const rows: MoverRow[] = [];
+  for (const [key, { a, b }] of byKey) {
+    const impressionsA = a?.impressions ?? 0;
+    const impressionsB = b?.impressions ?? 0;
+    // Skip noise: both sides negligible.
+    if (impressionsA < 3 && impressionsB < 3) continue;
+    rows.push({
+      key,
+      impressionsA,
+      impressionsB,
+      delta: impressionsA - impressionsB,
+      clicksA: a?.clicks ?? 0,
+      clicksB: b?.clicks ?? 0,
+      positionA: a ? Math.round(a.position * 10) / 10 : null,
+      positionB: b ? Math.round(b.position * 10) / 10 : null,
+    });
+  }
+
+  const drops = rows
+    .filter((r) => r.delta < 0)
+    .sort((a, b) => a.delta - b.delta)
+    .slice(0, maxEach);
+  const gains = rows
+    .filter((r) => r.delta > 0)
+    .sort((a, b) => b.delta - a.delta)
+    .slice(0, maxEach);
+
+  return { drops, gains };
+}
+
+export async function comparePeriods(
+  startA: string,
+  endA: string,
+  startB: string,
+  endB: string
+): Promise<PeriodComparison> {
+  assertValidDate("startA", startA);
+  assertValidDate("endA", endA);
+  assertValidDate("startB", startB);
+  assertValidDate("endB", endB);
+
+  const [pageRowsA, pageRowsB, queryRowsA, queryRowsB] = await Promise.all([
+    fetchRows(startA, endA, ["page"]),
+    fetchRows(startB, endB, ["page"]),
+    fetchRows(startA, endA, ["query"]),
+    fetchRows(startB, endB, ["query"]),
+  ]);
+
+  const periodA = totalsFromRows(pageRowsA, startA, endA);
+  const periodB = totalsFromRows(pageRowsB, startB, endB);
+  const pageMovers = buildMovers(pageRowsA, pageRowsB);
+  const queryMovers = buildMovers(queryRowsA, queryRowsB);
+
+  return {
+    periodA,
+    periodB,
+    totalImpressionsDelta: periodA.impressions - periodB.impressions,
+    totalClicksDelta: periodA.clicks - periodB.clicks,
+    topPageDrops: pageMovers.drops,
+    topPageGains: pageMovers.gains,
+    topQueryDrops: queryMovers.drops,
+    topQueryGains: queryMovers.gains,
+  };
+}
