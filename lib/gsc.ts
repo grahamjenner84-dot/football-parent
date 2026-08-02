@@ -812,7 +812,31 @@ export type PeriodComparison = {
   topPageGains: MoverRow[];
   topQueryDrops: MoverRow[];
   topQueryGains: MoverRow[];
+  // Non-null whenever either requested range reaches into GSC's own
+  // reporting lag - see GSC_DATA_LAG_DAYS. Surfaced in the response itself,
+  // not just the tool description, so a too-recent date can't quietly be
+  // read as a real drop instead of missing/partial data.
+  dataFreshnessWarning: string | null;
 };
+
+// GSC typically takes 2-3 days to finish processing a given day's data -
+// matches the lag assumption already used in getSeoReport/getPageInspection
+// (addDays(today, -3)).
+const GSC_DATA_LAG_DAYS = 3;
+
+function freshnessWarning(startA: string, endA: string, startB: string, endB: string): string | null {
+  const boundary = isoDate(addDays(new Date(), -GSC_DATA_LAG_DAYS));
+  const affected: string[] = [];
+  if (endA >= boundary) affected.push(`period A (${startA} to ${endA})`);
+  if (endB >= boundary) affected.push(`period B (${startB} to ${endB})`);
+  if (affected.length === 0) return null;
+  return (
+    `Search Console data usually takes ${GSC_DATA_LAG_DAYS} days to finish processing. ` +
+    `${affected.join(" and ")} include dates on or after ${boundary}, so numbers there ` +
+    `may still be partial/incomplete rather than a real change - don't read a drop in ` +
+    `that period as confirmed without rechecking once the lag window has passed.`
+  );
+}
 
 function totalsFromRows(rows: GscRow[], start: string, end: string): PeriodTotals {
   let impressions = 0,
@@ -908,5 +932,6 @@ export async function comparePeriods(
     topPageGains: pageMovers.gains,
     topQueryDrops: queryMovers.drops,
     topQueryGains: queryMovers.gains,
+    dataFreshnessWarning: freshnessWarning(startA, endA, startB, endB),
   };
 }

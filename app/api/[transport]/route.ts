@@ -41,7 +41,7 @@ const handler = createMcpHandler(
       {
         title: "Compare two date ranges in Search Console",
         description:
-          "Ad-hoc site-wide comparison between any two date ranges for footballparent.co.uk - answers 'why was Friday down vs Wednesday' or 'this week vs last week' type questions that get_seo_report and inspect_page can't, since those only cover fixed rolling windows (get_seo_report) or a single page (inspect_page). Returns total impressions/clicks/position for each period, then the specific pages and queries that account for the biggest drops and gains between them. Each period can be a single day (same start/end) or a wider range. Remember GSC data typically lags 2-3 days behind today, so very recent dates may return no data yet.",
+          "Ad-hoc site-wide comparison between any two date ranges for footballparent.co.uk - answers 'why was Friday down vs Wednesday' or 'this week vs last week' type questions that get_seo_report and inspect_page can't, since those only cover fixed rolling windows (get_seo_report) or a single page (inspect_page). Returns total impressions/clicks/position for each period, then the specific pages and queries that account for the biggest drops and gains between them. Each period can be a single day (same start/end) or a wider range. The response's dataFreshnessWarning field is non-null whenever either requested range reaches into GSC's own 2-3 day reporting lag - surface that warning to the user rather than reporting a drop in that period as confirmed.",
         inputSchema: {
           startA: z.string().describe("Start date of period A, YYYY-MM-DD. Use the same value as endA for a single day."),
           endA: z.string().describe("End date of period A, YYYY-MM-DD."),
