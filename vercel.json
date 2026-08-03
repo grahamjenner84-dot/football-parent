@@ -4,5 +4,11 @@
       "path": "/api/cron/insights",
       "schedule": "0 3 * * *"
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/coach-app/:path*",
+      "destination": "https://coach-app-zeta.vercel.app/:path*"
+    }
   ]
 }
