@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "What to Say After Football Matches | Football Parent",
+  title: "What NOT to Say After Football Matches | Football Parent",
   description:
     "Learn what parents should say after football matches to help young players build confidence, resilience and enjoyment.",
   path: "/parent-guides/what-to-say-after-football-matches",
