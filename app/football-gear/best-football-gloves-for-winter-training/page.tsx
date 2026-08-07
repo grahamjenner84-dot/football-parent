@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Best Football Gloves for Winter Training | Football Parent",
   description:
-    "A practical guide to choosing warm football gloves for winter training, including what parents should look for when buying for children.",
+    "Choosing football gloves for winter training: what to look for, what to avoid, and which types work best for younger players in cold and wet conditions.",
   path: "/football-gear/best-football-gloves-for-winter-training",
 });
 

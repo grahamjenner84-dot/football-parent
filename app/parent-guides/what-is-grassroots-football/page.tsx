@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
   title: "What Is Grassroots Football? | Football Parent",
-  description: "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football. A clear guide for UK parents.",
+  description: "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
   path: "/parent-guides/what-is-grassroots-football",
 });
 

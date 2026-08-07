@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How Football Clubs Recruit Young Players | Football Parent",
   description:
-    "Learn how football clubs identify and recruit young talent, and what parents should know about the recruitment process.",
+    "How do professional football clubs actually find and recruit young players? How scouting, development centres, referrals and trials fit together, and what parents should realistically expect.",
   path: "/academy-trials/how-football-clubs-recruit-young-players",
 });
 

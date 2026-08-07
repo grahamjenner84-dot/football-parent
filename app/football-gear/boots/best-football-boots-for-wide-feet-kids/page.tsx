@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Best Football Boots for Wide Feet Kids | Football Parent",
   description:
-    "A parent-friendly guide to choosing comfortable football boots for children with wide feet, including fit, comfort and surface advice.",
+    "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying.",
   path: "/football-gear/boots/best-football-boots-for-wide-feet-kids",
 });
 

@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What Age Do Girls Football Academies Recruit? | Football Parent",
   description:
-    "Find out what age girls football academies usually recruit players and what parents should realistically expect.",
+    "Understanding the recruitment ages and pathway stages within girls academy football in the UK.",
   path: "/girls-football/what-age-do-girls-football-academies-recruit",
 });
 

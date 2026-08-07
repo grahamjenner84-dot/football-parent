@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Girls Football Trials | Football Parent",
   description:
-    "A parent-friendly guide to girls football trials, including what to expect, how to prepare and how academy pathways work.",
+    "What parents and players should expect from girls football academy trials, including preparation, assessment and common misconceptions.",
   path: "/girls-football/girls-football-trials",
 });
 

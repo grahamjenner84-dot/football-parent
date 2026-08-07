@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Emerging Talent Centres Explained | Football Parent",
   description:
-    "Learn about emerging talent centres in girls' football and how they support player development.",
+    "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
   path: "/girls-football/emerging-talent-centres-explained",
 });
 

@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Development Centres vs Academies | Football Parent",
   description:
-    "Learn the difference between football development centres and academies, and what each option means for young players.",
+    "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway.",
   path: "/academy-pathway/development-centres-vs-academies",
 });
 

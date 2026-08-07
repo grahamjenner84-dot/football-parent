@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Understanding Academy Release | Football Parent",
   description:
-    "Practical guidance for parents on academy release, what it means and how to support a young player after being released.",
+    "Being released from a football academy: what happens at a release meeting, emotional support and the next steps.",
   path: "/academy-pathway/understanding-academy-release",
 });
 

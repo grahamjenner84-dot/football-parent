@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Should My Child Play Up an Age Group in Football? | Football Parent",
   description:
-    "Should your child play up an age group in football? Learn the FA rules, benefits, risks and signs they are ready to play against older children.",
+    "Weighing up whether to let a child play up an age group in football: the genuine benefits, the risks, and the questions worth asking first.",
   path: "/football-development/playing-up-an-age-group-football",
 });
 

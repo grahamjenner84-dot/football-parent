@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
   title: "What Is Pre-Academy Football? | Football Parent",
-  description: "What is pre-academy football, what ages does it cover, and is it worth it? A clear guide to pre-academies, trials and how they relate to academy football.",
+  description: "What is pre-academy football, what ages does it cover, and is it worth it? How pre-academies and trials relate to the wider academy pathway.",
   path: "/academy-pathway/pre-academy-football",
 });
 

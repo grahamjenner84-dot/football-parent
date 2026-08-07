@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How to Join a Football Academy | Football Parent",
   description:
-    "A clear guide to the process of joining a football academy in the UK, including eligibility, trials, and what to expect.",
+    "Learn how to join a football academy, how to get into academy football, how clubs recruit young players and what parents can realistically do to improve their child's chances.",
   path: "/academy-pathway/how-to-join-a-football-academy",
 });
 

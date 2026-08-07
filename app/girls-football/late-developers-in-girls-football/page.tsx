@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Late Developers in Girls Football | Football Parent",
   description:
-    "Why late developers in girls football can still progress, and how parents can support confidence and long-term development.",
+    "Why some girls develop later in football and why early selection does not always predict long-term success.",
   path: "/girls-football/late-developers-in-girls-football",
 });
 

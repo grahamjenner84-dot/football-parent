@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Late Developers in Football | Football Parent",
   description:
-    "Why late developers in football can still progress, and how parents can support young players who develop at different speeds.",
+    "Understanding late physical and technical development in football and why early success does not guarantee long-term outcomes.",
   path: "/football-development/late-developers-in-football",
 });
 

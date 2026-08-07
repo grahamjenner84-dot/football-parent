@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Best Shin Pads for Kids Football | Football Parent",
   description:
-    "A practical guide to choosing shin pads for kids football, including fit, comfort, protection and what parents should check before buying.",
+    "How to choose shin pads that balance comfort, protection and fit for young footballers.",
   path: "/football-gear/shin-pads/best-shin-pads-for-kids-football",
 });
 

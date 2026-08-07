@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How to Become a Professional Footballer | Football Parent",
   description:
-    "A realistic guide to becoming a professional footballer, including development pathways, academy football and long-term progression.",
+    "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent.",
   path: "/football-development/how-to-become-a-professional-footballer",
 });
 

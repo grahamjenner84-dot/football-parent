@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What Happens at Academy Trials? | Football Parent",
   description:
-    "A parent-friendly guide to what happens at football academy trials, including drills, matches and what young players should expect.",
+    "What to expect on the day of a football academy trial, and how to prepare a child for trial at an academy or development centre.",
   path: "/academy-trials/what-happens-at-academy-trials",
 });
 

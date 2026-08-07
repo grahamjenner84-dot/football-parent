@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Burnout in Young Footballers | Football Parent",
   description:
-    "How to recognise football burnout in young players, how it differs from a normal bad patch, and the practical changes that help a child rediscover enjoyment.",
+    "How to recognise football burnout in young players, how it differs from a normal bad patch, and the changes that help a child rediscover enjoyment.",
   path: "/football-development/football-burnout",
 });
 

@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Development Centres in London | Football Parent",
   description:
-    "Discover the best football development centres in London and how they support young players in their journey.",
+    "London has more youth football development pathways than anywhere else in England - the options for both boys and girls across the capital.",
   path: "/academy-pathway/football-development-centres-in-london",
 });
 

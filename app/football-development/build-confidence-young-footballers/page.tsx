@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Build Confidence in Young Footballers | Football Parent",
   description:
-    "Practical ways parents can help young footballers build confidence, recover from mistakes and enjoy their development.",
+    "How parents can help young footballers build football confidence without adding pressure or unrealistic expectations.",
   path: "/football-development/build-confidence-young-footballers",
 });
 

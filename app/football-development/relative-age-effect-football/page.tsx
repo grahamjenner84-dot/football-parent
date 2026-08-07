@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "The Relative Age Effect in Football | Football Parent",
   description:
-    "Understanding how relative age can impact a young footballer's development and opportunities in the sport.",
+    "How birth month can influence academy selection, and what it means for your child's development in youth football.",
   path: "/football-development/relative-age-effect-football",
 });
 

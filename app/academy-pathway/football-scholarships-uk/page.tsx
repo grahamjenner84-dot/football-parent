@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Scholarships in the UK | Football Parent",
   description:
-    "Explore football scholarship opportunities in the UK and how they can support young players in their development.",
+    "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18.",
   path: "/academy-pathway/football-scholarships-uk",
 });
 

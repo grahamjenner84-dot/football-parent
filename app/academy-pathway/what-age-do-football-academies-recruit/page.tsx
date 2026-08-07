@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What Age Do Football Academies Recruit? | Football Parent",
   description:
-    "Find out what age football academies usually recruit players in the UK and what parents should realistically expect.",
+    "When do football clubs recruit into academies? Find out which ages clubs target, how recruitment differs by phase, and when it's not too late to join an academy.",
   path: "/academy-pathway/what-age-do-football-academies-recruit",
 });
 

@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "FutureFit Football DNA Interview Part 1 | Football Parent",
   description:
-    "Join us for an exclusive interview about the changes in FutureFit with Paul Barry Football's DNA expert as we explore the science behind player development.",
+    "Football DNA's Paul Barry explains what the FA's FutureFit changes mean for young players, why 3v3 matters and how parents should think about long-term player development.",
   path: "/parent-guides/futurefit-football-dna-interview-part-1",
 });
 

@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Girls Academy or Grassroots Football? | Football Parent",
   description:
-    "Compare girls academy football and grassroots football, including development environment, commitment and player experience.",
+    "Comparing girls academy football and grassroots football environments, commitments and development opportunities.",
   path: "/girls-football/girls-academy-vs-grassroots-football",
 });
 

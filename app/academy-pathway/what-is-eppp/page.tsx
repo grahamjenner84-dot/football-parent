@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What Is EPPP? Elite Player Performance Plan | Football Parent",
   description:
-    "EPPP stands for Elite Player Performance Plan. What it means for your child's academy journey: categories, coaching hours, catchment rules and player movement.",
+    "EPPP stands for Elite Player Performance Plan. Here is what it means in academy football, including categories, coaching hours, player movement and what parents need to know.",
   path: "/academy-pathway/what-is-eppp",
 });
 

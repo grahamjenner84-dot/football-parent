@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How Much Does Academy Football Cost? | Football Parent",
   description:
-    "Learn about the costs associated with academy football and what parents need to know.",
+    "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect.",
   path: "/academy-pathway/how-much-does-academy-football-cost",
 });
 
