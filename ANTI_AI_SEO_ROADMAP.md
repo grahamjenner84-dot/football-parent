@@ -153,36 +153,57 @@ actionable question, a causal statement) rather than a find-replace on the trigg
 - [x] how-to-become-a-professional-footballer *(deleted)*
 - [x] what-is-grassroots-football *(trimmed in place)*
 
-## Phase 3 — Strip "honestly" filler
-Word-level edit; "honestly" used as a filler adverb, 2+ times per article.
-- [ ] what-is-the-junior-premier-league
-- [ ] how-to-join-a-football-academy
-- [ ] girls-academy-vs-grassroots-football
-- [ ] signs-your-child-is-ready-for-academy-football
-- [ ] are-football-development-centres-worth-it
-- [ ] how-much-does-academy-football-cost
-- [ ] development-centres-vs-academies
-- [ ] relative-age-effect-football
-- [ ] biggest-football-parent-mistakes
-- [ ] chelsea-fc-development-centre-guide
+## Phase 3 — Strip "honestly" filler (DONE 2026-08-07)
+Word-level edit; "honestly" used as a filler adverb.
 
-## Phase 4 — Remove reframe / negative-parallelism patterns
+**Data correction on start:** the original list above was built from a combined regex count
+(honestly + badge + other patterns together), not "honestly" alone — `what-is-the-junior-premier-league`
+had zero actual "honestly" instances and shouldn't have been listed; `are-football-development-centres-worth-it`,
+`how-much-does-academy-football-cost`, and `chelsea-fc-development-centre-guide` each had 1, not 2+.
+A clean count found **19 instances across 13 files**. Since each fix is a trivial one-word
+removal either way, all 19 were fixed rather than stopping at the original (wrong) 2+ threshold.
+Mostly plain deletion; a natural substitute word ("directly", "carefully", "realistically", "in
+good faith") was used wherever bare deletion left the sentence flat.
+- [x] signs-your-child-is-ready-for-academy-football (2)
+- [x] development-centres-vs-academies (2)
+- [x] how-to-join-a-football-academy (2)
+- [x] relative-age-effect-football (2)
+- [x] biggest-football-parent-mistakes (2)
+- [x] girls-academy-vs-grassroots-football (2)
+- [x] leave-grassroots-football-for-an-academy (1)
+- [x] are-football-development-centres-worth-it (1)
+- [x] football-development-centres-in-london (1)
+- [x] how-much-does-academy-football-cost (1)
+- [x] football-scholarships-uk (1)
+- [x] chelsea-fc-development-centre-guide (1)
+- [x] why-isnt-my-child-improving-at-football (1)
+
+## Phase 4 — Remove reframe / negative-parallelism patterns (DONE 2026-08-07)
 "It isn't X. It's Y.", "X matters far less than Y", "Focus on Y, not X" and similar fake-depth
 contrast shortcuts.
-- [ ] build-confidence-young-footballers
-- [ ] how-to-become-a-professional-footballer
-- [ ] signs-your-child-is-ready-for-academy-football
-- [ ] is-private-football-coaching-worth-it
-- [ ] how-much-does-academy-football-cost
-- [ ] are-football-development-centres-worth-it
-- [ ] uk-football-development-centres-explained
-- [ ] how-to-get-scouted-for-football
-- [ ] how-girls-football-academies-work
-- [ ] how-to-join-a-football-academy
-- [ ] development-centres-vs-academies
 
-*(Phases 2-4 overlap heavily — do them as one combined pass per article rather than three
-separate file-opens.)*
+**Two items dropped as false positives on re-check:** `development-centres-vs-academies` had no
+matching sentence left in the body (likely already resolved via the Phase 0/1 wording fixes);
+`how-girls-football-academies-work`'s flagged text was only in the meta description, which
+states a plain factual difference rather than performing the banned reject-then-reveal device,
+so it was left alone. **Two items added mid-phase:** `are-football-development-centres-worth-it`
+also still had a literal "badge" mention that Phase 2's search missed (a personal-voice
+paragraph doing double duty as a Phase 4 violation); `football-scholarships-uk` and
+`what-to-say-after-football-matches` were new catches (the "name of the club attached to them" /
+"isn't about X, it's Y" variants respectively) not on the original list. A broad site-wide sweep
+for "matters more/less than" turned up 30+ additional instances, nearly all of which are
+legitimate substantive comparatives, not the banned rhetorical device — those were deliberately
+left alone rather than flattening normal comparison-based writing.
+- [x] build-confidence-young-footballers
+- [x] how-to-become-a-professional-footballer
+- [x] signs-your-child-is-ready-for-academy-football
+- [x] is-private-football-coaching-worth-it
+- [x] are-football-development-centres-worth-it *(also had the missed "badge" mention)*
+- [x] uk-football-development-centres-explained
+- [x] how-to-get-scouted-for-football
+- [x] how-to-join-a-football-academy
+- [x] football-scholarships-uk *(new catch)*
+- [x] what-to-say-after-football-matches *(new catch)*
 
 ## Phase 5 — Add real first-hand voice + sourcing (E-E-A-T)
 The substantive rewrite work: a "Football Parent note" callout, genuine first-hand parent
