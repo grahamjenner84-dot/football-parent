@@ -60,25 +60,25 @@ export default function FootballGearPage() {
           title: "Best Football Gloves for Winter Training",
           href: "/football-gear/best-football-gloves-for-winter-training",
           description:
-            "Warm, practical glove options for winter football sessions.",
+            "Choosing football gloves for winter training: what to look for, what to avoid, and which types work best for younger players in cold and wet conditions.",
         },
         {
           title: "Football Sizes by Age: Best Footballs For Kids",
           href: "/football-gear/best-footballs-by-age",
           description:
-            "Choose the right football size and type for different ages.",
+            "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players.",
         },
         {
           title: "Best Football Boots for Wide Feet Kids",
           href: "/football-gear/boots/best-football-boots-for-wide-feet-kids",
           description:
-            "Comfort-focused football boot options for wider feet.",
+            "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying.",
         },
         {
           title: "Best Shin Pads for Kids Football",
           href: "/football-gear/shin-pads/best-shin-pads-for-kids-football",
           description:
-            "Trusted shin pad options for young footballers.",
+            "How to choose shin pads that balance comfort, protection and fit for young footballers.",
         },
         {
           title: "Veo Camera Alternatives",

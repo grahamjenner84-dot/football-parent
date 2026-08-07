@@ -55,7 +55,7 @@ export default function AcademyTrialsPage() {
           title: "Football Academy Trials in the UK",
           href: "/academy-trials/football-academy-trials-uk",
           description:
-            "A comprehensive guide to football academy trials in the UK.",
+            "Most academy players are found through scouting, not open trials. How genuine football academy trials work in the UK, how to spot scams, and what to expect.",
         },
         {
           title: "Football Trials Near Me",
@@ -73,7 +73,7 @@ export default function AcademyTrialsPage() {
           title: "What Happens at Academy Trials",
           href: "/academy-trials/what-happens-at-academy-trials",
           description:
-            "A parent-friendly guide to what players can expect at trials.",
+            "What to expect on the day of a football academy trial, and how to prepare a child for trial at an academy or development centre.",
         },
         {
           title: "How to Get Scouted for Football",
@@ -85,13 +85,13 @@ export default function AcademyTrialsPage() {
           title: "What Do Academy Coaches Look For?",
           href: "/academy-trials/what-do-academy-coaches-look-for",
           description:
-            "Learn the technical, physical and psychological traits coaches value.",
+            "It's rarely goals or pace: academy coaches watch what a player does before the ball arrives. The technical and behavioural traits that get noticed.",
         },
         {
           title: "How Football Clubs Recruit Young Players",
           href: "/academy-trials/how-football-clubs-recruit-young-players",
           description:
-            "Learn how football clubs identify and recruit young talent, and what parents should know about the recruitment process.",
+            "How do professional football clubs actually find and recruit young players? How scouting, development centres, referrals and trials fit together, and what parents should realistically expect.",
         },
       ]}
       bottomContent={{

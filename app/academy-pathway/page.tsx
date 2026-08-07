@@ -54,7 +54,7 @@ export default function AcademyPathwayPage() {
           title: "How Academy Football Works",
           href: "/academy-pathway/how-academy-football-works",
           description:
-            "A simple explanation of how academy football is structured and what parents need to know.",
+            "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours.",
         },
         {
           title: "Category 1, 2, 3 & 4 Football Academies",
@@ -66,19 +66,19 @@ export default function AcademyPathwayPage() {
           title: "Development Centres vs Academies",
           href: "/academy-pathway/development-centres-vs-academies",
           description:
-            "Learn how development centres differ from full academy environments.",
+            "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway.",
         },
         {
           title: "How to join a Football Academy",
           href: "/academy-pathway/how-to-join-a-football-academy",
           description:
-            "A guide to the process of joining a football academy in the UK.",
+            "Learn how to join a football academy, how to get into academy football, how clubs recruit young players and what parents can realistically do to improve their child's chances.",
         },
         {
           title: "What Age Do Football Academies Recruit?",
           href: "/academy-pathway/what-age-do-football-academies-recruit",
           description:
-            "A parent-friendly guide to when academy recruitment usually starts.",
+            "When do football clubs recruit into academies? Find out which ages clubs target, how recruitment differs by phase, and when it's not too late to join an academy.",
         },
         {
           title: "What Is EPPP? Elite Player Performance Plan",
@@ -90,7 +90,7 @@ export default function AcademyPathwayPage() {
           title: "Understanding Academy Release",
           href: "/academy-pathway/understanding-academy-release",
           description:
-            "Practical support for parents dealing with academy release decisions.",
+            "Being released from a football academy: what happens at a release meeting, emotional support and the next steps.",
         },
         {
           title: "UK Football Development Centres Explained",
@@ -108,7 +108,7 @@ export default function AcademyPathwayPage() {
           title: "How Players Progress Through Football Development Centres",
           href: "/academy-pathway/how-players-progress-through-football-development-centres",
           description:
-            "Understand how young players advance through different stages of football development centres and academies.",
+            "How players actually move through development centre pathways, and why progress is rarely as straightforward as families expect.",
         },
         {
           title: "How Chelsea FC's Development Centre Works",
@@ -120,7 +120,7 @@ export default function AcademyPathwayPage() {
           title: "Premier League Development Centres",
           href: "/academy-pathway/premier-league-development-centres-list",
           description:
-            "How Premier League clubs structure their development programmes, what they involve, and what to consider before pursuing an opportunity.",
+            "Which Premier League clubs run development centres, and what do they actually involve? How club pathways differ, and what families should understand before pursuing an opportunity.",
         },
         {
           title:
@@ -139,7 +139,7 @@ export default function AcademyPathwayPage() {
           title: "Football Development Centres in London",
           href: "/academy-pathway/football-development-centres-in-london",
           description:
-            "A guide to football development centres in London and how they support young players in their journey.",
+            "London has more youth football development pathways than anywhere else in England - the options for both boys and girls across the capital.",
         },
         {
           title: "How to Find a Football Agent for Your Child",
@@ -150,7 +150,8 @@ export default function AcademyPathwayPage() {
         {
           title: "How football scholarships work in the UK",
           href: "/academy-pathway/football-scholarships-uk",
-          description: "A guide to football scholarships in the UK.",
+          description:
+            "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18.",
         },
         {
           title: "How Crystal Palace's Development Centre Works",
@@ -162,19 +163,19 @@ export default function AcademyPathwayPage() {
           title: "Can Academy Players Play Grassroots Football?",
           href: "/academy-pathway/can-academy-players-play-grassroots-football",
           description:
-            "Discover whether academy players can participate in grassroots football and how it benefits their development.",
+            "Academy players can play grassroots football in the Foundation Phase (U9-U11) with club approval, but it's banned from U12 under the Youth Development Rules.",
         },
         {
           title: "What Is Pre-Academy Football?",
           href: "/academy-pathway/pre-academy-football",
           description:
-            "Learn about pre-academy football and how it fits into the wider academy system.",
+            "What is pre-academy football, what ages does it cover, and is it worth it? How pre-academies and trials relate to the wider academy pathway.",
         },
         {
           title: "How Much Does Academy Football Cost?",
           href: "/academy-pathway/how-much-does-academy-football-cost",
           description:
-            "Learn about the costs associated with academy football and what parents need to know.",
+            "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect.",
         },
         {
           title: "West Ham Player Pathway Guide",

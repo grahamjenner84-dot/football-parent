@@ -54,19 +54,19 @@ export default function ParentGuidesPage() {
           title: "Should You Leave Grassroots Football for an Academy?",
           href: "/parent-guides/leave-grassroots-football-for-an-academy",
           description:
-            "Factors parents should consider before making the move from grassroots to academy football.",
+            "Should your child leave grassroots football for an academy? Compare the coaching, commitment, pressure, travel and development benefits before deciding.",
         },
         {
           title: "What is the Junior Premier League?",
           href: "/parent-guides/what-is-the-junior-premier-league",
           description:
-            "A parent-friendly guide to what the Junior Premier League is, how it works and whether it may suit your child.",
+            "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect.",
         },
         {
           title: "JPL vs Grassroots Football",
           href: "/parent-guides/jpl-vs-grassroots-football",
           description:
-            "Compare the Junior Premier League with traditional grassroots football to understand the differences, benefits and trade-offs.",
+            "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared.",
         },
         {
           title: "Does the Junior Premier League Lead to Academy Football?",
@@ -84,13 +84,13 @@ export default function ParentGuidesPage() {
           title: "Are Football Development Centres Worth It?",
           href: "/parent-guides/are-football-development-centres-worth-it",
           description:
-            "Weighing up the pros, cons, costs and expectations of football development centres.",
+            "A development centre is worth it when coaching is structured and your child enjoys it, not when cost or logistics create strain. The red flags to check first.",
         },
         {
           title: "What to Say After Football Matches",
           href: "/parent-guides/what-to-say-after-football-matches",
           description:
-            "Simple ways parents can support players after matches.",
+            "The best conversations to have with a child after football matches, and the mistakes to avoid.",
         },
         {
           title: "Support Your Child After a Bad Match",
@@ -102,19 +102,19 @@ export default function ParentGuidesPage() {
           title: "FutureFit Football DNA Interview Part 1",
           href: "/parent-guides/futurefit-football-dna-interview-part-1",
           description:
-            "Join us for an exclusive interview with FutureFit Football's DNA expert as we explore the science behind player development.",
+            "Football DNA's Paul Barry explains what the FA's FutureFit changes mean for young players, why 3v3 matters and how parents should think about long-term player development.",
         },
         {
           title: "FutureFit Football DNA Interview Part 2",
           href: "/parent-guides/futurefit-football-dna-interview-part-2",
           description:
-            "The second part of our exclusive interview about the FutureFit changes with Football's DNA expert as we explore the designed chaos of 3v3 and how it helps development.",
+            "Football DNA's Paul Barry explains whether 3v3 football is too chaotic, why some clubs are avoiding it, why 11v11 is moving to U14 and what FutureFit could change.",
         },
         {
           title: "What is Grassroots Football?",
           href: "/parent-guides/what-is-grassroots-football",
           description:
-            "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football. A clear guide for UK parents.",
+            "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
         },
         {
           title: "How to Become a Grassroots Football Coach",

@@ -55,49 +55,49 @@ export default function FootballDevelopmentPage() {
           title: "How to Become a Professional Footballer",
           href: "/football-development/how-to-become-a-professional-footballer",
           description:
-            "A realistic guide to the pathway towards professional football.",
+            "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent.",
         },
         {
           title: "Is My Child Ready for Academy Football?",
           href: "/football-development/signs-your-child-is-ready-for-academy-football",
           description:
-            "Key signs that a young player may be ready for a higher-level environment.",
+            "The qualities scouts actually look for, the myths parents commonly believe, and why dominating at grassroots level tells you very little.",
         },
         {
           title: "How Much Training Is Too Much?",
           href: "/football-development/how-much-training-is-too-much",
           description:
-            "Learn how to balance football training, recovery and enjoyment.",
+            "More sessions doesn't always mean more development. Age-by-age training load guidelines, from 1-2 sessions a week at U8-U10, and the real signs of burnout.",
         },
         {
           title: "Build Confidence in Young Footballers",
           href: "/football-development/build-confidence-young-footballers",
           description:
-            "Practical ways to help young players develop football confidence and resilience.",
+            "How parents can help young footballers build football confidence without adding pressure or unrealistic expectations.",
         },
         {
           title: "Improve Football Decision Making",
           href: "/football-development/improve-football-decision-making",
           description:
-            "Help players improve football IQ, awareness, scanning and game understanding.",
+            "Decision making is one of the most important skills in youth football - and one of the hardest to coach. How parents and coaches can help young players think faster and clearer on the pitch.",
         },
         {
           title: "Good Football Development Environment",
           href: "/football-development/good-football-development-environment",
           description:
-            "What parents should look for in a positive development environment.",
+            "Coaching quality, touches on the ball, playing time and enjoyment matter more than league position. What actually predicts whether your child is developing.",
         },
         {
           title: "Late Developers in Football",
           href: "/football-development/late-developers-in-football",
           description:
-            "Why late developers can still thrive in football long term.",
+            "Understanding late physical and technical development in football and why early success does not guarantee long-term outcomes.",
         },
         {
           title: "Relative Age Effect in Football",
           href: "/football-development/relative-age-effect-football",
           description:
-            "How relative age can impact a young footballer's development and opportunities.",
+            "How birth month can influence academy selection, and what it means for your child's development in youth football.",
         },
         {
           title: "Understanding the New FA Youth Football Format",
@@ -115,13 +115,13 @@ export default function FootballDevelopmentPage() {
           title: "What Is Football IQ? A Parent's Guide to Football Intelligence",
           href: "/football-development/what-is-football-iq",
           description:
-            "Understanding the concept of football IQ and how it impacts player development.",
+            "What football IQ actually means, why coaches value it so highly, and how scanning, decision making and match experience help children develop it.",
         },
         {
           title: "Is Private Football Coaching Worth It?",
           href: "/football-development/is-private-football-coaching-worth-it",
           description:
-            "The pros and cons of private football coaching, and when it's worth considering.",
+            "Thinking about private football coaching or 1-to-1 football coaching? When it helps, what it costs, how to choose a coach and whether it's worth it for young players.",
         },
         {
           title: "What Is Bio-Banding in Football?",
@@ -133,7 +133,7 @@ export default function FootballDevelopmentPage() {
           title: "Why Isn't My Child Improving at Football?",
           href: "/football-development/why-isnt-my-child-improving-at-football",
           description:
-            "Why football development plateaus happen, what's normal, and a practical 3 to 6 month plan for parents.",
+            "Why football development plateaus happen, what's normal, and a 3 to 6 month plan for parents.",
         },
         {
           title: "Football Burnout: Signs, Causes and What Parents Can Do",

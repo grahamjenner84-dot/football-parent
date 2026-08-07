@@ -54,37 +54,37 @@ export default function GirlsFootballPage() {
           title: "How Girls Football Academies Work",
           href: "/girls-football/how-girls-football-academies-work",
           description:
-            "Understand how girls academies are structured and how pathways work.",
+            "Girls academy football isn't a copy of the boys' EPPP system: entry comes later, and Emerging Talent Centres have no male equivalent. How the pathway works.",
         },
         {
           title: "Emerging Talent Centres Explained",
           href: "/girls-football/emerging-talent-centres-explained",
           description:
-            "Learn about emerging talent centres in girls' football and how they support player development.",
+            "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
         },
         {
           title: "Girls Football Trials",
           href: "/girls-football/girls-football-trials",
           description:
-            "Learn what to expect from girls football academy trials.",
+            "What parents and players should expect from girls football academy trials, including preparation, assessment and common misconceptions.",
         },
         {
           title: "Girls Academy vs Grassroots Football",
           href: "/girls-football/girls-academy-vs-grassroots-football",
           description:
-            "Compare academy and grassroots environments for girls football.",
+            "Comparing girls academy football and grassroots football environments, commitments and development opportunities.",
         },
         {
           title: "Late Developers in Girls Football",
           href: "/girls-football/late-developers-in-girls-football",
           description:
-            "Why development timelines vary and why patience matters.",
+            "Why some girls develop later in football and why early selection does not always predict long-term success.",
         },
         {
           title: "What Age Do Girls Football Academies Recruit?",
           href: "/girls-football/what-age-do-girls-football-academies-recruit",
           description:
-            "A guide to recruitment ages and development stages.",
+            "Understanding the recruitment ages and pathway stages within girls academy football in the UK.",
         },
         {
           title: "Girls RTCs Explained",
