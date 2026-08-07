@@ -124,28 +124,34 @@ if..." Start Here link caption, both judged not to be the self-congratulatory pa
 - [x] Girls Football Trials
 - [x] Girls Academy vs Grassroots Football
 - [x] Late Developers in Girls Football
-- [ ] What Age Do Girls Football Academies Recruit?
+- [x] What Age Do Girls Football Academies Recruit?
 
 ### Parent Guides
-- [ ] Should You Leave Grassroots Football for an Academy?
-- [ ] What is the Junior Premier League? *(fix "independent guide" in the source description first)*
-- [ ] JPL vs Grassroots Football
-- [ ] Are Football Development Centres Worth It?
-- [ ] What to Say After Football Matches
-- [ ] FutureFit Interview Part 1
-- [ ] FutureFit Interview Part 2
+- [x] Should You Leave Grassroots Football for an Academy?
+- [x] What is the Junior Premier League?
+- [x] JPL vs Grassroots Football
+- [x] Are Football Development Centres Worth It?
+- [x] What to Say After Football Matches
+- [x] FutureFit Interview Part 1
+- [x] FutureFit Interview Part 2
 
-## Phase 2 — Kill the "badge" cliché
-Sentence-level rewrite; each article leans on "it's not about the badge" as a stock device.
-- [ ] how-much-does-academy-football-cost
-- [ ] football-development-centres-near-me
-- [ ] premier-league-development-centres-list
-- [ ] how-to-join-a-football-academy
-- [ ] what-is-the-junior-premier-league
-- [ ] jpl-vs-grassroots-football
-- [ ] girls-academy-vs-grassroots-football
-- [ ] how-to-become-a-professional-footballer
-- [ ] what-is-grassroots-football
+## Phase 2 — Kill the "badge" cliché (DONE 2026-08-07)
+Sentence-level rewrite; each article leaned on "it's not about the badge" as a stock device.
+First attempt just word-swapped "badge" for "name"/"club" while keeping the identical "X matters
+more than Y" comparison skeleton across all nine - rejected as not actually fixing the pattern.
+Redone properly: 7 sentences were pure redundant restatement and got deleted outright rather
+than rewritten (the point was already made in the surrounding sentences); the other 6 carried
+real information and got restructured into genuinely different shapes (a direct instruction, an
+actionable question, a causal statement) rather than a find-replace on the trigger word.
+- [x] how-much-does-academy-football-cost *(deleted)*
+- [x] football-development-centres-near-me *(rewritten)*
+- [x] premier-league-development-centres-list *(rewritten, both instances)*
+- [x] how-to-join-a-football-academy *(deleted)*
+- [x] what-is-the-junior-premier-league *(1 rewritten, 1 deleted, 1 rewritten - 3 instances)*
+- [x] jpl-vs-grassroots-football *(rewritten opener, deleted closer)*
+- [x] girls-academy-vs-grassroots-football *(deleted, both instances)*
+- [x] how-to-become-a-professional-footballer *(deleted)*
+- [x] what-is-grassroots-football *(trimmed in place)*
 
 ## Phase 3 — Strip "honestly" filler
 Word-level edit; "honestly" used as a filler adverb, 2+ times per article.
