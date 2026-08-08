@@ -115,17 +115,21 @@ export function setUnmarkedVoiceCandidates(
 
 // text is the confirmed-genuine passage(s) verbatim from the article (light
 // whitespace cleanup only) - word count is derived, not passed in, so it
-// can't drift from the actual text stored.
+// can't drift from the actual text stored. Pass "" to record a reviewed-
+// and-rejected verdict (candidates checked, nothing genuine found) -
+// confirmed_voice_reviewed_at still gets set so the review is on record,
+// distinct from never having been looked at.
 export function setConfirmedVoice(url: string, text: string, reviewedAt: string = nowIso()): void {
   const normalized = normalizeUrl(url);
   ensurePage(normalized);
-  const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const trimmed = text.trim();
+  const wordCount = trimmed ? trimmed.split(/\s+/).length : 0;
   getDb()
     .prepare(
       `UPDATE pages SET confirmed_voice_word_count = ?, confirmed_voice_sentences = ?,
               confirmed_voice_reviewed_at = ?, updated_at = ? WHERE url = ?`
     )
-    .run(wordCount, JSON.stringify([text.trim()]), reviewedAt, nowIso(), normalized);
+    .run(wordCount, JSON.stringify(trimmed ? [trimmed] : []), reviewedAt, nowIso(), normalized);
 }
 
 export function setVoiceStats(

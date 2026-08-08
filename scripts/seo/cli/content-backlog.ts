@@ -170,6 +170,7 @@ function runExport(argv: string[]): void {
     real_voice_pct: string;
     confirmed_voice_word_count: number;
     confirmed_voice_sentences: string[];
+    confirmed_voice_reviewed_at: string;
     unmarked_voice_word_count: number;
     unmarked_voice_sentence_count: number;
     unmarked_voice_candidates: string[];
@@ -205,7 +206,8 @@ function runExport(argv: string[]): void {
         `SELECT primary_keyword, secondary_keywords, ai_slop_checked_at, fact_checked_at,
                 personal_story_count, expert_quote_count, voice_pct, body_word_count, voice_word_count,
                 unmarked_voice_word_count, unmarked_voice_sentence_count, unmarked_voice_candidates,
-                confirmed_voice_word_count, confirmed_voice_sentences, seo_optimised_at, last_reviewed_at
+                confirmed_voice_word_count, confirmed_voice_sentences, confirmed_voice_reviewed_at,
+                seo_optimised_at, last_reviewed_at
          FROM pages WHERE url = ?`
       )
       .get(url) as any;
@@ -249,6 +251,7 @@ function runExport(argv: string[]): void {
       confirmed_voice_sentences: dbRow.confirmed_voice_sentences
         ? JSON.parse(dbRow.confirmed_voice_sentences)
         : [],
+      confirmed_voice_reviewed_at: dbRow.confirmed_voice_reviewed_at ?? "",
       unmarked_voice_word_count: dbRow.unmarked_voice_word_count ?? 0,
       unmarked_voice_sentence_count: dbRow.unmarked_voice_sentence_count ?? 0,
       unmarked_voice_candidates: dbRow.unmarked_voice_candidates
