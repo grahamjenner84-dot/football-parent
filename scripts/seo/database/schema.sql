@@ -113,6 +113,33 @@ CREATE TABLE IF NOT EXISTS pages (
   voice_word_count INTEGER,
   voice_pct REAL,
   voice_checked_at TEXT,
+  -- Review-status columns (schema v4). ai_slop_checked_at is a separate,
+  -- shallower pass than fact_checked_at: it means the article's been swept
+  -- for the banned-phrase/cliche/reframe patterns in CLAUDE.md's Editorial
+  -- rules and the fact-checking-and-style.md AI-slop-removal section, not
+  -- that claims/sourcing have been verified. last_reviewed_at is bumped by
+  -- any of the three "a human/agent actually looked at this" marks
+  -- (ai-slop, fact-check, seo-optimised) - deliberately separate from the
+  -- generic updated_at, which also bumps on cosmetic notes-only edits.
+  ai_slop_checked_at TEXT,
+  last_reviewed_at TEXT,
+  -- Unmarked-voice candidate columns (schema v5). Populated by
+  -- internal-link-audit.mjs's findUnmarkedFirstPersonSentences() +
+  -- sync-voice-stats.ts, NOT the same thing as voice_pct above: this is a
+  -- naive regex flag ("I", "my son", "we've"...) run outside any
+  -- <ParentNote>/<ExpertOpinion> tag, so it over-flags (FAQ question
+  -- headings, suggested reader scripts, "I cover that in [link]" cross-
+  -- references all match) as well as under-flags (a human hand-check of
+  -- biggest-football-parent-mistakes found 435 genuine words; the regex
+  -- found 604, most of the excess being those false positives). Never
+  -- blend unmarked_voice_word_count into voice_pct automatically - it's a
+  -- worklist for a human to review, not a verified score. Promote a
+  -- confirmed sentence into a real <ParentNote>/<ExpertOpinion> tag (which
+  -- then counts via voice_pct normally) rather than trusting this number.
+  unmarked_voice_word_count INTEGER,
+  unmarked_voice_sentence_count INTEGER,
+  unmarked_voice_candidates TEXT,   -- JSON array of the flagged sentences
+  unmarked_voice_synced_at TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );

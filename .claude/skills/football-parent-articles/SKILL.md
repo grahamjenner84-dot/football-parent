@@ -71,8 +71,9 @@ one after another.
 8. **Write both files directly into the project** (see File output below).
 9. **Update the content-status tracker** for this URL: `npx tsx
    scripts/seo/cli/content-backlog.ts mark --url <path> --fact-checked
-   --personal-story-count <n> --expert-quote-count <n>` (counts from the
-   actual callouts written, `--expert-quote-pending` too if step 5.3
+   --ai-slop-checked --personal-story-count <n> --expert-quote-count <n>`
+   (the AI-slop-removal quality pass in step 6 covers `--ai-slop-checked`;
+   counts from the actual callouts written, `--expert-quote-pending` too if step 5.3
    applied).
 
 ## Article requirements

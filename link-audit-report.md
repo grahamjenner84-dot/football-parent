@@ -1,6 +1,6 @@
 # Internal Link Audit
 
-_Generated 2026-08-08T19:47:17.022Z_
+_Generated 2026-08-08T20:26:14.683Z_
 
 _No Search Console data found (gsc-pages.csv not present) - priorities are based on link structure only._
 

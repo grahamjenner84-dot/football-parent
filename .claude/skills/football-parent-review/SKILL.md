@@ -47,7 +47,9 @@ sourced, copy-pasteable fixes — the user decides what to apply.
    say so explicitly rather than guessing.
 7. **Update the content-status tracker** for the reviewed URL once the
    review is complete: `npx tsx scripts/seo/cli/content-backlog.ts mark
-   --url <path> --fact-checked`.
+   --url <path> --fact-checked --ai-slop-checked` (this review's Section 6
+   is the AI-slop pass, so both flags land together from one review, unlike
+   the article-writer skill which only ever sets `--fact-checked`).
 
 ## The 12 sections (produce all of them, in this order)
 

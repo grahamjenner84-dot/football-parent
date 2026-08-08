@@ -29,16 +29,30 @@ export function markFactChecked(url: string, date: string = nowIso()): void {
   const normalized = normalizeUrl(url);
   ensurePage(normalized);
   getDb()
-    .prepare(`UPDATE pages SET fact_checked_at = ?, updated_at = ? WHERE url = ?`)
-    .run(date, nowIso(), normalized);
+    .prepare(
+      `UPDATE pages SET fact_checked_at = ?, last_reviewed_at = ?, updated_at = ? WHERE url = ?`
+    )
+    .run(date, date, nowIso(), normalized);
 }
 
 export function markSeoOptimised(url: string, date: string = nowIso()): void {
   const normalized = normalizeUrl(url);
   ensurePage(normalized);
   getDb()
-    .prepare(`UPDATE pages SET seo_optimised_at = ?, updated_at = ? WHERE url = ?`)
-    .run(date, nowIso(), normalized);
+    .prepare(
+      `UPDATE pages SET seo_optimised_at = ?, last_reviewed_at = ?, updated_at = ? WHERE url = ?`
+    )
+    .run(date, date, nowIso(), normalized);
+}
+
+export function markAiSlopChecked(url: string, date: string = nowIso()): void {
+  const normalized = normalizeUrl(url);
+  ensurePage(normalized);
+  getDb()
+    .prepare(
+      `UPDATE pages SET ai_slop_checked_at = ?, last_reviewed_at = ?, updated_at = ? WHERE url = ?`
+    )
+    .run(date, date, nowIso(), normalized);
 }
 
 export function setPersonalStoryCount(url: string, count: number): void {
@@ -83,6 +97,22 @@ export function setInboundLinks(url: string, count: number, checkedAt: string = 
     .run(count, checkedAt, nowIso(), normalized);
 }
 
+export function setUnmarkedVoiceCandidates(
+  url: string,
+  wordCount: number,
+  sentences: string[],
+  checkedAt: string = nowIso()
+): void {
+  const normalized = normalizeUrl(url);
+  ensurePage(normalized);
+  getDb()
+    .prepare(
+      `UPDATE pages SET unmarked_voice_word_count = ?, unmarked_voice_sentence_count = ?,
+              unmarked_voice_candidates = ?, unmarked_voice_synced_at = ?, updated_at = ? WHERE url = ?`
+    )
+    .run(wordCount, sentences.length, JSON.stringify(sentences), checkedAt, nowIso(), normalized);
+}
+
 export function setVoiceStats(
   url: string,
   bodyWordCount: number,
@@ -106,6 +136,7 @@ export type ContentBacklogRow = {
   category: string | null;
   primary_keyword: string | null;
   secondary_keywords: string | null;
+  ai_slop_checked_at: string | null;
   fact_checked_at: string | null;
   seo_optimised_at: string | null;
   personal_story_count: number;
@@ -118,6 +149,10 @@ export type ContentBacklogRow = {
   voice_word_count: number | null;
   voice_pct: number | null;
   voice_checked_at: string | null;
+  unmarked_voice_word_count: number | null;
+  unmarked_voice_sentence_count: number | null;
+  unmarked_voice_candidates: string | null;
+  last_reviewed_at: string | null;
   updated_at: string;
 };
 
@@ -125,10 +160,11 @@ export function contentBacklogRows(): ContentBacklogRow[] {
   return getDb()
     .prepare(
       `SELECT url, article, category, primary_keyword, secondary_keywords,
-              fact_checked_at, seo_optimised_at, personal_story_count,
+              ai_slop_checked_at, fact_checked_at, seo_optimised_at, personal_story_count,
               expert_quote_count, expert_quote_pending, inbound_internal_links,
               inbound_links_checked_at, notes, body_word_count, voice_word_count,
-              voice_pct, voice_checked_at, updated_at
+              voice_pct, voice_checked_at, unmarked_voice_word_count,
+              unmarked_voice_sentence_count, unmarked_voice_candidates, last_reviewed_at, updated_at
        FROM pages
        ORDER BY url`
     )

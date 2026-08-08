@@ -294,6 +294,41 @@ function extractCalloutText(content) {
   return blocks.join(' ');
 }
 
+// Standalone "I" (case-sensitive - also matches inside "I've"/"I'm"/"I'd"
+// since the following apostrophe is a \b boundary, but never matches inside
+// a capitalised word like "Instagram" since there's no boundary after the
+// "I" there) plus a handful of first-person-plural/family phrases that show
+// up in this site's real parent material. Deliberately loose: this flags
+// CANDIDATE sentences for a human to verify against the anti-fabrication
+// rule in CLAUDE.md, not confirmed genuine voice - "I cover that in [link]"
+// (an editorial cross-reference, not an anecdote) matches and is expected to
+// be manually rejected, the same way "biggest-football-parent-mistakes"
+// Phase 5B review rejected it while accepting the surrounding paragraphs.
+const FIRST_PERSON_I_RE = /\bI\b/;
+const FIRST_PERSON_PHRASE_RE =
+  /\b(my son|my daughter|our son|our daughter|we've|we have|we're|from my own experience|from experience)\b/i;
+
+// Finds sentences containing first-person markers OUTSIDE any already-tagged
+// <ParentNote>/<ExpertOpinion> block (that content is already counted by
+// extractCalloutText above - flagging it again here would double-count and
+// would also re-surface material that's already been through sign-off).
+// Naive sentence splitter (period/!/? followed by whitespace then a
+// capital/quote/bold-marker) - good enough for this corpus's short,
+// plain-prose paragraphs; not meant to be a general-purpose tokenizer.
+function findUnmarkedFirstPersonSentences(content) {
+  const withoutCallouts = content
+    .replace(/<ParentNote>[\s\S]*?<\/ParentNote>/g, ' ')
+    .replace(/<ExpertOpinion[^>]*>[\s\S]*?<\/ExpertOpinion>/g, ' ')
+    .replace(/```[\s\S]*?```/g, ' ');
+
+  const sentences = withoutCallouts
+    .split(/(?<=[.!?])\s+(?=[A-Z"'*])/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  return sentences.filter((s) => FIRST_PERSON_I_RE.test(s) || FIRST_PERSON_PHRASE_RE.test(s));
+}
+
 // Relevance is judged on full article body content (not just title/description -
 // one sentence rarely has enough distinctive vocabulary to tell two genuinely
 // related articles apart from two that just happen to share a category and some
@@ -1170,14 +1205,25 @@ function run() {
   fs.writeFileSync('link-audit-inbound.json', JSON.stringify(inboundCounts, null, 2));
 
   // ================= WRITE VOICE-DENSITY JSON =================
-  // Flat urlPath -> { bodyWordCount, voiceWordCount } map, for
-  // scripts/seo/cli/sync-voice-stats.ts to upsert into pages.voice_pct etc.
-  // Same plain-node/no-TS-import handoff reason as the inbound JSON above.
+  // Flat urlPath -> { bodyWordCount, voiceWordCount, unmarkedVoiceWordCount,
+  // unmarkedVoiceSentences } map, for scripts/seo/cli/sync-voice-stats.ts to
+  // upsert into pages.voice_pct etc. Same plain-node/no-TS-import handoff
+  // reason as the inbound JSON above. unmarkedVoiceSentences are candidates
+  // only (see findUnmarkedFirstPersonSentences comment) - never auto-trusted
+  // as real voice_pct, kept separate so a human can review and promote them.
   const voiceStats = Object.fromEntries(
-    pages.map((p) => [
-      p.urlPath,
-      { bodyWordCount: countWords(p.content), voiceWordCount: countWords(extractCalloutText(p.content)) },
-    ])
+    pages.map((p) => {
+      const unmarkedSentences = findUnmarkedFirstPersonSentences(p.content);
+      return [
+        p.urlPath,
+        {
+          bodyWordCount: countWords(p.content),
+          voiceWordCount: countWords(extractCalloutText(p.content)),
+          unmarkedVoiceWordCount: countWords(unmarkedSentences.join(' ')),
+          unmarkedVoiceSentences: unmarkedSentences,
+        },
+      ];
+    })
   );
   fs.writeFileSync('link-audit-voice.json', JSON.stringify(voiceStats, null, 2));
 
@@ -1186,6 +1232,8 @@ function run() {
   console.log(`Task list written to link-audit-tasks.csv (${csvRows.length} row(s))`);
   console.log(`Inbound link counts written to link-audit-inbound.json`);
   console.log(`Voice-density word counts written to link-audit-voice.json`);
+  const flaggedCount = Object.values(voiceStats).filter((v) => v.unmarkedVoiceSentences.length > 0).length;
+  console.log(`Unmarked first-person candidate sentences found on ${flaggedCount} page(s) - review before treating as real voice.`);
 }
 
 run();
