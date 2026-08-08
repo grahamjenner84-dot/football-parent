@@ -210,15 +210,61 @@ The substantive rewrite work: a "Football Parent note" callout, genuine first-ha
 detail, or an authoritative FA/NSPCC/UK Coaching-type citation. Sub-ordered by how much other
 work is already stacked on the same file.
 
-### 5A — Already touched in 3+ earlier phases (do first)
-- [ ] how-much-does-academy-football-cost
-- [ ] how-to-join-a-football-academy
-- [ ] signs-your-child-is-ready-for-academy-football
-- [ ] are-football-development-centres-worth-it
-- [ ] football-development-centres-near-me
-- [ ] uk-football-development-centres-explained
-- [ ] how-to-become-a-professional-footballer
-- [ ] what-is-the-junior-premier-league
+### 5A — Already touched in 3+ earlier phases (DONE 2026-08-08)
+Before starting the articles, built the tooling this phase actually needed: new
+`<ParentNote>` (blue) and `<ExpertOpinion>` (amber) MDX components; sourcing-density
+(~2 external citations/1000 words, no source linked twice) and callout-minimum (2
+callouts, or 1 + a logged pending request) rules in the article skill; a reusable
+expert-quote + parent-story library (`expert-quotes.md`) seeded from the FutureFit/Paul
+Barry interview and Graham's own trimmed material; and a SQLite-backed content-status
+tracker (`content-backlog.ts`) measuring `voice_pct` — words inside callout tags as a
+percentage of body word count, computed automatically, not estimated — against a 10%
+floor (explicitly a minimum we intend to raise later, not a ceiling).
+
+Both rules got real judgement carve-outs, not blanket enforcement: an article with
+genuine first-person voice already woven into unmarked body prose doesn't need
+sentences extracted into callout boxes just to hit the count, and experiential/opinion
+articles don't need a citation forced onto a claim that doesn't need one. Every
+external citation was live-fetched and confirmed before use (caught one stale NSPCC
+CPSU URL mid-phase — now fixed in the skill reference). Real quotes/anecdotes were
+verified word-for-word against source before use, and Graham signed off on quote
+reuse and any reframing before it went in the article.
+
+- [x] how-much-does-academy-football-cost — 3 Parent Notes, 2 external citations
+  (Premier League EPPP, Parent Hub). voice_pct 7.7%, left under the 10% floor
+  deliberately rather than padded further.
+- [x] how-to-join-a-football-academy — 1 Expert Opinion (Paul Barry) + 1 pending
+  expert-quote request logged (trials/misconceptions, expert TBD), 3 external
+  citations. voice_pct 5.2%, left under floor pending that request.
+- [x] signs-your-child-is-ready-for-academy-football — 2 Parent Notes + 1 Expert
+  Opinion, 2 external citations (peer-reviewed RAE study, England Football UEFA B
+  licence page). voice_pct 12.1%, over the floor.
+- [x] are-football-development-centres-worth-it — no changes: already had genuine
+  first-person parent voice woven through the body prose (Palace vs Chelsea,
+  coach ratios, curriculum, friendships), so formal callout extraction and forced
+  citations were both deliberately skipped as the exception the new rules allow for.
+- [x] football-development-centres-near-me — directory/listing page (35+ official
+  club links), not a discursive article, so already over-provisioned on sourcing by
+  design. 1 genuine Parent Note added (group consistency between two real
+  development centres). voice_pct 5.6%, structurally handicapped by the non-prose
+  directory format, left under floor as lowest priority to revisit.
+- [x] uk-football-development-centres-explained — 2 Parent Notes (trial/tier
+  process at Chelsea vs Palace; coach rapport + inconsistent FA four-corner
+  feedback forms), 3 external citations (EPPP categories, U9 registration rule,
+  DBS checks). voice_pct 4.6% → 10.3%, over the floor. Also fixed while in the
+  file: 2 orphaned TOC entries with no matching body heading, 1 banned AI-slop
+  phrase ("It's important to remember"), 1 duplicate FAQ that also used the
+  banned reframe pattern.
+- [x] how-to-become-a-professional-footballer — replaced an old pre-component
+  blockquote (used the banned "shouldn't be X, it should be Y" reframe pattern
+  and read as generic advice) with a genuine Parent Note, plus 1 Expert Opinion
+  (2nd reuse of the Paul Barry technique-before-tactics quote) and 1 external
+  citation fixing a previously uncited research claim. voice_pct 8.6%, left under
+  floor deliberately.
+- [x] what-is-the-junior-premier-league — 2 external citations added (England
+  Football youth format guidance, EPPP). Voice deliberately deferred: no personal
+  JPL experience, no Paul Barry quote fits (unrelated topic) — a real JPL
+  interview is coming up and is the genuine source to wait for.
 
 ### 5B — Touched in 1-2 earlier phases
 - [ ] jpl-vs-grassroots-football
