@@ -103,6 +103,16 @@ CREATE TABLE IF NOT EXISTS pages (
   expert_quote_pending INTEGER NOT NULL DEFAULT 0,    -- 1 if questions drafted/sent, answer not yet written in
   inbound_internal_links INTEGER,                     -- from internal-link-audit.mjs
   inbound_links_checked_at TEXT,
+  -- Voice-density columns (schema v3) - computed word counts, not manually
+  -- set. Synced from internal-link-audit.mjs's link-audit-voice.json via
+  -- scripts/seo/cli/sync-voice-stats.ts. voice_pct = words inside
+  -- <ParentNote>/<ExpertOpinion> tags as a percentage of body_word_count -
+  -- the actual "how much of this article is genuine voice" measure, more
+  -- meaningful than the raw personal_story_count/expert_quote_count above.
+  body_word_count INTEGER,
+  voice_word_count INTEGER,
+  voice_pct REAL,
+  voice_checked_at TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );

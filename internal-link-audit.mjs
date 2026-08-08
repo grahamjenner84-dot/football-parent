@@ -265,6 +265,35 @@ function tokenize(text) {
   return text.toLowerCase().split(/\W+/).filter((w) => w.length > 3 && !STOPWORDS.has(w));
 }
 
+// Raw reader-facing word count (unlike tokenize() above, which filters short
+// words/stopwords for relevance scoring) - used for the voice-density
+// tracker (link-audit-voice.json -> pages.voice_pct). Strips code fences,
+// JSX/HTML tags, markdown link syntax (keeping the visible link text) and
+// markdown formatting characters before splitting on whitespace, so it
+// counts what a reader would actually see as words.
+function countWords(text) {
+  const cleaned = text
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[#*_`>]/g, ' ');
+  return cleaned.split(/\s+/).filter(Boolean).length;
+}
+
+// Extracts the inner text of every <ParentNote>/<ExpertOpinion> block in a
+// page's raw MDX content, for the voice-density word count above.
+function extractCalloutText(content) {
+  const patterns = [/<ParentNote>([\s\S]*?)<\/ParentNote>/g, /<ExpertOpinion[^>]*>([\s\S]*?)<\/ExpertOpinion>/g];
+  const blocks = [];
+  for (const re of patterns) {
+    let m;
+    while ((m = re.exec(content))) {
+      blocks.push(m[1]);
+    }
+  }
+  return blocks.join(' ');
+}
+
 // Relevance is judged on full article body content (not just title/description -
 // one sentence rarely has enough distinctive vocabulary to tell two genuinely
 // related articles apart from two that just happen to share a category and some
@@ -1140,10 +1169,23 @@ function run() {
   const inboundCounts = Object.fromEntries(pages.map((p) => [p.urlPath, inboundStats(p.urlPath).total]));
   fs.writeFileSync('link-audit-inbound.json', JSON.stringify(inboundCounts, null, 2));
 
+  // ================= WRITE VOICE-DENSITY JSON =================
+  // Flat urlPath -> { bodyWordCount, voiceWordCount } map, for
+  // scripts/seo/cli/sync-voice-stats.ts to upsert into pages.voice_pct etc.
+  // Same plain-node/no-TS-import handoff reason as the inbound JSON above.
+  const voiceStats = Object.fromEntries(
+    pages.map((p) => [
+      p.urlPath,
+      { bodyWordCount: countWords(p.content), voiceWordCount: countWords(extractCalloutText(p.content)) },
+    ])
+  );
+  fs.writeFileSync('link-audit-voice.json', JSON.stringify(voiceStats, null, 2));
+
   console.log(`Audit complete. ${pages.length} pages scanned.`);
   console.log(`Report written to link-audit-report.md`);
   console.log(`Task list written to link-audit-tasks.csv (${csvRows.length} row(s))`);
   console.log(`Inbound link counts written to link-audit-inbound.json`);
+  console.log(`Voice-density word counts written to link-audit-voice.json`);
 }
 
 run();

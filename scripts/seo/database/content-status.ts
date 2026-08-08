@@ -83,6 +83,23 @@ export function setInboundLinks(url: string, count: number, checkedAt: string = 
     .run(count, checkedAt, nowIso(), normalized);
 }
 
+export function setVoiceStats(
+  url: string,
+  bodyWordCount: number,
+  voiceWordCount: number,
+  checkedAt: string = nowIso()
+): void {
+  const normalized = normalizeUrl(url);
+  ensurePage(normalized);
+  const pct = bodyWordCount > 0 ? Math.round((voiceWordCount / bodyWordCount) * 1000) / 10 : 0;
+  getDb()
+    .prepare(
+      `UPDATE pages SET body_word_count = ?, voice_word_count = ?, voice_pct = ?,
+              voice_checked_at = ?, updated_at = ? WHERE url = ?`
+    )
+    .run(bodyWordCount, voiceWordCount, pct, checkedAt, nowIso(), normalized);
+}
+
 export type ContentBacklogRow = {
   url: string;
   article: string | null;
@@ -97,6 +114,11 @@ export type ContentBacklogRow = {
   inbound_internal_links: number | null;
   inbound_links_checked_at: string | null;
   notes: string | null;
+  body_word_count: number | null;
+  voice_word_count: number | null;
+  voice_pct: number | null;
+  voice_checked_at: string | null;
+  updated_at: string;
 };
 
 export function contentBacklogRows(): ContentBacklogRow[] {
@@ -105,7 +127,8 @@ export function contentBacklogRows(): ContentBacklogRow[] {
       `SELECT url, article, category, primary_keyword, secondary_keywords,
               fact_checked_at, seo_optimised_at, personal_story_count,
               expert_quote_count, expert_quote_pending, inbound_internal_links,
-              inbound_links_checked_at, notes
+              inbound_links_checked_at, notes, body_word_count, voice_word_count,
+              voice_pct, voice_checked_at, updated_at
        FROM pages
        ORDER BY url`
     )

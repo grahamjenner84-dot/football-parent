@@ -175,6 +175,18 @@ is already doing its job unmarked. Note the reasoning against the article's
 tracker row (`--notes`) rather than silently skipping the rule, so a future
 pass doesn't waste time re-litigating the same call.
 
+**Voice density target.** The raw callout count above is a floor, not the
+real measure — a two-sentence callout in a 2,500-word article and the same
+callout in an 800-word article aren't equivalent. `pages.voice_pct` (words
+inside `<ParentNote>`/`<ExpertOpinion>` tags as a percentage of the
+article's total body word count, computed automatically by
+`internal-link-audit.mjs` + `scripts/seo/cli/sync-voice-stats.ts`, not
+manually estimated) is the actual target: **currently a 10% minimum**.
+Treat 10% as a floor we intend to raise over time as more genuine
+voice/sourcing gets built up across the site, not a ceiling to stop at once
+hit — check `content-backlog.ts report` for the current figure on any given
+article rather than assuming this document's number is still current.
+
 When writing up Graham's own answer into a `<ParentNote>`, edit only for
 grammar, tense and trimming filler — fix typos, join fragments into
 sentences, cut repetition. Do not add a metaphor, a summarising "point"

@@ -56,8 +56,19 @@ function runMark(argv: string[]): void {
   console.log(`Updated tracker row for ${url}`);
 }
 
-function runReport(): void {
-  const rows = contentBacklogRows();
+function runReport(argv: string[]): void {
+  const flags = parseFlags(argv);
+  let rows = contentBacklogRows();
+  if (flags["touched"]) {
+    rows = rows.filter(
+      (r) =>
+        r.personal_story_count > 0 ||
+        r.expert_quote_count > 0 ||
+        r.expert_quote_pending ||
+        r.fact_checked_at ||
+        r.notes
+    );
+  }
   if (!rows.length) {
     console.log("No pages tracked yet.");
     return;
@@ -72,8 +83,10 @@ function runReport(): void {
       personal_stories: r.personal_story_count,
       expert_quotes: r.expert_quote_count,
       quote_pending: r.expert_quote_pending ? "yes" : "",
+      voice_pct: r.voice_pct !== null ? `${r.voice_pct}%` : "",
       inbound_links: r.inbound_internal_links ?? "",
       notes: r.notes ?? "",
+      last_updated: r.updated_at,
     }))
   );
 }
@@ -85,14 +98,14 @@ function main(): void {
   if (subcommand === "mark") {
     runMark(rest);
   } else if (subcommand === "report") {
-    runReport();
+    runReport(rest);
   } else {
     console.error("Usage: content-backlog.ts <mark|report> [...flags]");
     console.error("  mark --url <path> [--fact-checked] [--seo-optimised]");
     console.error("       [--personal-story-count N] [--expert-quote-count N]");
     console.error("       [--expert-quote-pending | --expert-quote-pending false]");
     console.error("       [--notes \"free text\"]");
-    console.error("  report");
+    console.error("  report [--touched]  (--touched limits to rows with any Phase 5 activity)");
     process.exitCode = 1;
   }
 }

@@ -5,7 +5,7 @@ import { getDb } from "./db";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SCHEMA_PATH = path.join(__dirname, "schema.sql");
-const SCHEMA_VERSION = "2";
+const SCHEMA_VERSION = "3";
 
 // v2 added 7 content-status-backlog columns to `pages` (fact_checked_at,
 // seo_optimised_at, personal_story_count, expert_quote_count,
@@ -25,6 +25,15 @@ const PAGES_V2_COLUMNS: Array<{ name: string; ddl: string }> = [
   { name: "inbound_links_checked_at", ddl: "TEXT" },
 ];
 
+// v3 added 4 voice-density columns to `pages` - computed word counts synced
+// from internal-link-audit.mjs's link-audit-voice.json, not manually set.
+const PAGES_V3_COLUMNS: Array<{ name: string; ddl: string }> = [
+  { name: "body_word_count", ddl: "INTEGER" },
+  { name: "voice_word_count", ddl: "INTEGER" },
+  { name: "voice_pct", ddl: "REAL" },
+  { name: "voice_checked_at", ddl: "TEXT" },
+];
+
 // schema.sql is otherwise entirely CREATE TABLE/INDEX IF NOT EXISTS, so
 // re-running it is always safe. Bumping SCHEMA_VERSION and appending
 // guarded ALTER TABLE statements (as above) is the path for future
@@ -37,7 +46,7 @@ export function migrate(): { schemaVersion: string; alreadyCurrent: boolean } {
   const existingPagesColumns = new Set(
     (db.prepare("PRAGMA table_info(pages)").all() as { name: string }[]).map((c) => c.name)
   );
-  for (const { name, ddl } of PAGES_V2_COLUMNS) {
+  for (const { name, ddl } of [...PAGES_V2_COLUMNS, ...PAGES_V3_COLUMNS]) {
     if (!existingPagesColumns.has(name)) {
       db.exec(`ALTER TABLE pages ADD COLUMN ${name} ${ddl}`);
     }
