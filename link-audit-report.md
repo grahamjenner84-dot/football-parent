@@ -1,6 +1,6 @@
 # Internal Link Audit
 
-_Generated 2026-08-08T12:00:44.281Z_
+_Generated 2026-08-08T18:12:51.504Z_
 
 _No Search Console data found (gsc-pages.csv not present) - priorities are based on link structure only._
 
@@ -91,14 +91,14 @@ _Might be overlinking, but not automatically wrong — e.g. one early mention an
 
 - **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) links to **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`) twice in the body
 
-### 3c. Low priority — 1 contextual + 1 Related Articles mention, better related pick available (49)
+### 3c. Low priority — 1 contextual + 1 Related Articles mention, better related pick available (50)
 
 _Only listed when swapping in the alternative would genuinely improve the related-articles slot. If the duplicated link is already the most relevant thing to put there (e.g. a recruitment article pointing to both trials and what coaches look for, in-body and in Related Articles), it's left alone and won't appear here._
 
 - **Are Football Development Centres Worth It?** (`/parent-guides/are-football-development-centres-worth-it`): Related Articles repeats the in-body link to **Progress Through Football Development Centres** (relevance 1.09) — swap it for **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`, relevance 2.16)
   - Copy-paste: `- [Should My Child Leave Grassroots Football For An Academy?](/parent-guides/leave-grassroots-football-for-an-academy)`
 
-- **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`): Related Articles repeats the in-body link to **Is My Child Ready for Academy Football?** (relevance 1.88) — swap it for **How To Improve Football Decision Making In Young Players** (`/football-development/improve-football-decision-making`, relevance 2.53)
+- **What Makes A Good Football Development Environment?** (`/football-development/good-football-development-environment`): Related Articles repeats the in-body link to **Is My Child Ready for Academy Football?** (relevance 1.89) — swap it for **How To Improve Football Decision Making In Young Players** (`/football-development/improve-football-decision-making`, relevance 2.53)
   - Copy-paste: `- [How To Improve Football Decision Making In Young Players](/football-development/improve-football-decision-making)`
 
 - **How to Get Scouted for Football** (`/academy-trials/how-to-get-scouted-for-football`): Related Articles repeats the in-body link to **What Happens at Football Academy Trials** (relevance 1.34) — swap it for **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`, relevance 3.34)
@@ -146,13 +146,16 @@ _Only listed when swapping in the alternative would genuinely improve the relate
 - **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`): Related Articles repeats the in-body link to **Football Academy Trials UK: How They Really Work** (relevance 2.42) — swap it for **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`, relevance 2.49)
   - Copy-paste: `- [West Ham United Development Centre: A Parent's Guide](/academy-pathway/west-ham-player-pathway-guide)`
 
+- **What Is Grassroots Football?** (`/parent-guides/what-is-grassroots-football`): Related Articles repeats the in-body link to **Understanding the New FA Youth Football Format Changes** (relevance 1.81) — swap it for **What Is the Junior Premier League (JPL)?** (`/parent-guides/what-is-the-junior-premier-league`, relevance 2.01)
+  - Copy-paste: `- [What Is the Junior Premier League (JPL)?](/parent-guides/what-is-the-junior-premier-league)`
+
 - **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`): Related Articles repeats the in-body link to **Development Centres vs Academies: What's the Difference?** (relevance 1.48) — swap it for **JPL vs Grassroots Football: Which Is Right for Your Child?** (`/parent-guides/jpl-vs-grassroots-football`, relevance 2.23)
   - Copy-paste: `- [JPL vs Grassroots Football: Which Is Right for Your Child?](/parent-guides/jpl-vs-grassroots-football)`
 
 - **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`): Related Articles repeats the in-body link to **Can Academy Players Play Grassroots Football?** (relevance 1.46) — swap it for **Are Football Development Centres Worth It?** (`/parent-guides/are-football-development-centres-worth-it`, relevance 2.16)
   - Copy-paste: `- [Are Football Development Centres Worth It?](/parent-guides/are-football-development-centres-worth-it)`
 
-- **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`): Related Articles repeats the in-body link to **What Is the Junior Premier League (JPL)?** (relevance 2.15) — swap it for **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`, relevance 2.27)
+- **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`): Related Articles repeats the in-body link to **What Is the Junior Premier League (JPL)?** (relevance 2.16) — swap it for **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`, relevance 2.27)
   - Copy-paste: `- [How to Join a Football Academy: A Realistic Guide for Parents](/academy-pathway/how-to-join-a-football-academy)`
 
 - **FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development** (`/parent-guides/futurefit-football-dna-interview-part-1`): Related Articles repeats the in-body link to **What Makes A Good Football Development Environment?** (relevance 1.34) — swap it for **Is My Child Ready for Academy Football?** (`/football-development/signs-your-child-is-ready-for-academy-football`, relevance 2.08)
@@ -209,13 +212,13 @@ _Only listed when swapping in the alternative would genuinely improve the relate
 - **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`): Related Articles repeats the in-body link to **What Age Do Football Academies Recruit?** (relevance 1.26) — swap it for **Chelsea FC Development Centre: A Parent's Guide** (`/academy-pathway/chelsea-fc-development-centre-guide`, relevance 2.46)
   - Copy-paste: `- [Chelsea FC Development Centre: A Parent's Guide](/academy-pathway/chelsea-fc-development-centre-guide)`
 
-- **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`): Related Articles repeats the in-body link to **Progress Through Football Development Centres** (relevance 1.57) — swap it for **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`, relevance 3.99)
+- **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`): Related Articles repeats the in-body link to **Progress Through Football Development Centres** (relevance 1.57) — swap it for **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`, relevance 3.98)
   - Copy-paste: `- [Football Development Centres in London: A Parent's Guide](/academy-pathway/football-development-centres-in-london)`
 
 - **PDC vs PTC vs RTC vs ETC: Football Pathway Terms Explained** (`/academy-pathway/pdc-vs-ptc-vs-rtc-explained`): Related Articles repeats the in-body link to **What Is EPPP? Elite Player Performance Plan** (relevance 1.37) — swap it for **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`, relevance 2.59)
   - Copy-paste: `- [Football Development Centres in London: A Parent's Guide](/academy-pathway/football-development-centres-in-london)`
 
-- **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`): Related Articles repeats the in-body link to **UK Football Development Centres Explained** (relevance 1.89) — swap it for **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`, relevance 3.99)
+- **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`): Related Articles repeats the in-body link to **UK Football Development Centres Explained** (relevance 1.89) — swap it for **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`, relevance 3.98)
   - Copy-paste: `- [Premier League Development Centres](/academy-pathway/premier-league-development-centres-list)`
 
 - **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`): Related Articles repeats the in-body link to **West Ham United Development Centre: A Parent's Guide** (relevance 2.55) — swap it for **PDC vs PTC vs RTC vs ETC: Football Pathway Terms Explained** (`/academy-pathway/pdc-vs-ptc-vs-rtc-explained`, relevance 2.59)
@@ -271,8 +274,8 @@ _Cases where A links to B but B doesn't link back, and the two are clearly relat
 - Add a link from **How to Get Scouted for Football** (`/academy-trials/how-to-get-scouted-for-football`) back to **Does the Junior Premier League Lead to Academy Football?** (`/parent-guides/jpl-and-academy-football`) — relevance 2.5
 - Add a link from **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`) back to **Football Development Centres Near Me** (`/academy-pathway/football-development-centres-near-me`) — relevance 2.49
 - Add a link from **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`) back to **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`) — relevance 2.45
-- Add a link from **Girls RTCs Explained: What They Were and What Replaced Them** (`/girls-football/girls-rtcs-explained`) back to **PDC vs PTC vs RTC vs ETC: Football Pathway Terms Explained** (`/academy-pathway/pdc-vs-ptc-vs-rtc-explained`) — relevance 2.45
 - Add a link from **What Is EPPP? Elite Player Performance Plan** (`/academy-pathway/what-is-eppp`) back to **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`) — relevance 2.44
+- Add a link from **Girls RTCs Explained: What They Were and What Replaced Them** (`/girls-football/girls-rtcs-explained`) back to **PDC vs PTC vs RTC vs ETC: Football Pathway Terms Explained** (`/academy-pathway/pdc-vs-ptc-vs-rtc-explained`) — relevance 2.44
 - Add a link from **Crystal Palace Development Centre Guide for Parents** (`/academy-pathway/crystal-palace-development-centre-guide`) back to **Arsenal FC Development Centre: A Parent's Guide** (`/academy-pathway/arsenal-development-centre-guide`) — relevance 2.39
 - Add a link from **PDC vs PTC vs RTC vs ETC: Football Pathway Terms Explained** (`/academy-pathway/pdc-vs-ptc-vs-rtc-explained`) back to **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`) — relevance 2.36
 - Add a link from **Development Centres vs Academies: What's the Difference?** (`/academy-pathway/development-centres-vs-academies`) back to **What Is EPPP? Elite Player Performance Plan** (`/academy-pathway/what-is-eppp`) — relevance 2.34
@@ -282,7 +285,7 @@ _Cases where A links to B but B doesn't link back, and the two are clearly relat
 - Add a link from **Should My Child Leave Grassroots Football For An Academy?** (`/parent-guides/leave-grassroots-football-for-an-academy`) back to **JPL vs Grassroots Football: Which Is Right for Your Child?** (`/parent-guides/jpl-vs-grassroots-football`) — relevance 2.23
 - Add a link from **Category 1, 2, 3 & 4 Football Academies** (`/academy-pathway/academy-categories-explained`) back to **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) — relevance 2.22
 - Add a link from **How Football Clubs Recruit Young Players** (`/academy-trials/how-football-clubs-recruit-young-players`) back to **How to Join a Football Academy: A Realistic Guide for Parents** (`/academy-pathway/how-to-join-a-football-academy`) — relevance 2.21
-- Add a link from **Category 1, 2, 3 & 4 Football Academies** (`/academy-pathway/academy-categories-explained`) back to **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`) — relevance 2.2
+- Add a link from **Category 1, 2, 3 & 4 Football Academies** (`/academy-pathway/academy-categories-explained`) back to **Premier League Development Centres** (`/academy-pathway/premier-league-development-centres-list`) — relevance 2.19
 - Add a link from **Why Some Kids Develop Later In Football** (`/football-development/late-developers-in-football`) back to **Late Developers In Girls Football** (`/girls-football/late-developers-in-girls-football`) — relevance 2.17
 - Add a link from **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) back to **West Ham United Development Centre: A Parent's Guide** (`/academy-pathway/west-ham-player-pathway-guide`) — relevance 2.14
 - Add a link from **Understanding Academy Release In Football** (`/academy-pathway/understanding-academy-release`) back to **Category 1, 2, 3 & 4 Football Academies** (`/academy-pathway/academy-categories-explained`) — relevance 2.13
@@ -294,6 +297,7 @@ _Cases where A links to B but B doesn't link back, and the two are clearly relat
 - Add a link from **Crystal Palace Development Centre Guide for Parents** (`/academy-pathway/crystal-palace-development-centre-guide`) back to **Football Development Centres in London: A Parent's Guide** (`/academy-pathway/football-development-centres-in-london`) — relevance 2.06
 - Add a link from **What Age Do Football Academies Recruit?** (`/academy-pathway/what-age-do-football-academies-recruit`) back to **Football Trials Near Me: A Realistic Parent's Guide to Academy Recruitment in the UK** (`/academy-trials/football-trials-near-me`) — relevance 2.02
 - Add a link from **UK Football Development Centres Explained** (`/academy-pathway/uk-football-development-centres-explained`) back to **How Much Does Academy Football Cost?** (`/academy-pathway/how-much-does-academy-football-cost`) — relevance 2.02
+- Add a link from **What Is Grassroots Football?** (`/parent-guides/what-is-grassroots-football`) back to **What Is the Junior Premier League (JPL)?** (`/parent-guides/what-is-the-junior-premier-league`) — relevance 2.01
 
 ## 7. Pillar articles and cluster coverage
 
