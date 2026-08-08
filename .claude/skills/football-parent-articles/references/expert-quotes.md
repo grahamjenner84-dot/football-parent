@@ -36,7 +36,8 @@ sitting in a different article's context.
 **Topics:** academy pathway, player development, what coaches look for at
 trials, how to become a professional footballer.
 **Source:** Part 1, "When should tactics be introduced?"
-**Used in:** [how-to-join-a-football-academy](/academy-pathway/how-to-join-a-football-academy) (1/3)
+**Used in:** [how-to-join-a-football-academy](/academy-pathway/how-to-join-a-football-academy) (1/3),
+[how-to-become-a-professional-footballer](/football-development/how-to-become-a-professional-footballer) (2/3)
 
 ### 2. The "Golden Age" of motor learning
 
