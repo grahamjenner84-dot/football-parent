@@ -17,6 +17,7 @@ import {
   setExpertQuoteCount,
   setExpertQuotePending,
   setNotes,
+  setConfirmedVoice,
   contentBacklogRows,
 } from "../database/content-status";
 
@@ -66,8 +67,26 @@ function runMark(argv: string[]): void {
   if (typeof flags["notes"] === "string") {
     setNotes(url, flags["notes"]);
   }
+  if (typeof flags["confirmed-voice-text"] === "string") {
+    setConfirmedVoice(url, flags["confirmed-voice-text"]);
+  }
 
   console.log(`Updated tracker row for ${url}`);
+}
+
+// The metric to actually track against the ~10% target: tagged voice plus
+// confirmed-genuine unmarked prose (deliberately left woven into the body
+// rather than extracted - see the schema.sql comment on confirmed_voice_*).
+// Falls back to voice_pct alone when body_word_count is missing.
+function realVoicePct(r: {
+  body_word_count: number | null;
+  voice_word_count: number | null;
+  confirmed_voice_word_count: number | null;
+  voice_pct: number | null;
+}): string {
+  if (!r.body_word_count) return r.voice_pct !== null ? `${r.voice_pct}%` : "";
+  const combined = (r.voice_word_count ?? 0) + (r.confirmed_voice_word_count ?? 0);
+  return `${Math.round((combined / r.body_word_count) * 1000) / 10}%`;
 }
 
 function runReport(argv: string[]): void {
@@ -100,6 +119,8 @@ function runReport(argv: string[]): void {
       expert_quotes: r.expert_quote_count,
       quote_pending: r.expert_quote_pending ? "yes" : "",
       voice_pct: r.voice_pct !== null ? `${r.voice_pct}%` : "",
+      real_voice_pct: realVoicePct(r),
+      confirmed_voice_words: r.confirmed_voice_word_count ?? "",
       unmarked_voice_words: r.unmarked_voice_word_count ?? "",
       unmarked_voice_sentences: r.unmarked_voice_sentence_count ?? "",
       inbound_links: r.inbound_internal_links ?? "",
@@ -146,6 +167,9 @@ function runExport(argv: string[]): void {
     personal_stories: number;
     expert_quotes: number;
     voice_pct: string;
+    real_voice_pct: string;
+    confirmed_voice_word_count: number;
+    confirmed_voice_sentences: string[];
     unmarked_voice_word_count: number;
     unmarked_voice_sentence_count: number;
     unmarked_voice_candidates: string[];
@@ -179,8 +203,9 @@ function runExport(argv: string[]): void {
     let dbRow = db
       .prepare(
         `SELECT primary_keyword, secondary_keywords, ai_slop_checked_at, fact_checked_at,
-                personal_story_count, expert_quote_count, voice_pct, unmarked_voice_word_count,
-                unmarked_voice_sentence_count, unmarked_voice_candidates, seo_optimised_at, last_reviewed_at
+                personal_story_count, expert_quote_count, voice_pct, body_word_count, voice_word_count,
+                unmarked_voice_word_count, unmarked_voice_sentence_count, unmarked_voice_candidates,
+                confirmed_voice_word_count, confirmed_voice_sentences, seo_optimised_at, last_reviewed_at
          FROM pages WHERE url = ?`
       )
       .get(url) as any;
@@ -219,6 +244,11 @@ function runExport(argv: string[]): void {
       expert_quotes: dbRow.expert_quote_count ?? 0,
       voice_pct:
         dbRow.voice_pct !== null && dbRow.voice_pct !== undefined ? `${dbRow.voice_pct}%` : "",
+      real_voice_pct: realVoicePct(dbRow),
+      confirmed_voice_word_count: dbRow.confirmed_voice_word_count ?? 0,
+      confirmed_voice_sentences: dbRow.confirmed_voice_sentences
+        ? JSON.parse(dbRow.confirmed_voice_sentences)
+        : [],
       unmarked_voice_word_count: dbRow.unmarked_voice_word_count ?? 0,
       unmarked_voice_sentence_count: dbRow.unmarked_voice_sentence_count ?? 0,
       unmarked_voice_candidates: dbRow.unmarked_voice_candidates
@@ -232,14 +262,15 @@ function runExport(argv: string[]): void {
   const reportsDir = path.join(REPO_ROOT, "seo-data", "reports");
   fs.mkdirSync(reportsDir, { recursive: true });
 
-  // CSV can't hold the candidate-sentence array sensibly - drop it there,
-  // keep counts only; the JSON export keeps the full list for review.
+  // CSV can't hold the candidate/confirmed sentence arrays sensibly - drop
+  // them there, keep counts only; the JSON export keeps the full lists.
+  const ARRAY_FIELDS = new Set(["unmarked_voice_candidates", "confirmed_voice_sentences"]);
   const csvHeader = Object.keys(rows[0])
-    .filter((k) => k !== "unmarked_voice_candidates")
+    .filter((k) => !ARRAY_FIELDS.has(k))
     .join(",");
   const csvLines = rows.map((r) =>
     Object.entries(r)
-      .filter(([k]) => k !== "unmarked_voice_candidates")
+      .filter(([k]) => !ARRAY_FIELDS.has(k))
       .map(([, v]) => `"${String(v).replace(/"/g, '""')}"`)
       .join(",")
   );
@@ -266,6 +297,7 @@ function main(): void {
     console.error("       [--personal-story-count N] [--expert-quote-count N]");
     console.error("       [--expert-quote-pending | --expert-quote-pending false]");
     console.error("       [--notes \"free text\"]");
+    console.error("       [--confirmed-voice-text \"verbatim genuine passage(s), reviewed and left as prose\"]");
     console.error("  report [--touched]  (--touched limits to rows with any Phase 5 activity)");
     console.error("  export [--backfill-date YYYY-MM-DD]  (writes seo-data/reports/content-status.csv/.json,");
     console.error("         one row per real article page from app/sitemap.ts)");

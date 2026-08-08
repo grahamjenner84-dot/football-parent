@@ -113,6 +113,21 @@ export function setUnmarkedVoiceCandidates(
     .run(wordCount, sentences.length, JSON.stringify(sentences), checkedAt, nowIso(), normalized);
 }
 
+// text is the confirmed-genuine passage(s) verbatim from the article (light
+// whitespace cleanup only) - word count is derived, not passed in, so it
+// can't drift from the actual text stored.
+export function setConfirmedVoice(url: string, text: string, reviewedAt: string = nowIso()): void {
+  const normalized = normalizeUrl(url);
+  ensurePage(normalized);
+  const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
+  getDb()
+    .prepare(
+      `UPDATE pages SET confirmed_voice_word_count = ?, confirmed_voice_sentences = ?,
+              confirmed_voice_reviewed_at = ?, updated_at = ? WHERE url = ?`
+    )
+    .run(wordCount, JSON.stringify([text.trim()]), reviewedAt, nowIso(), normalized);
+}
+
 export function setVoiceStats(
   url: string,
   bodyWordCount: number,
@@ -152,6 +167,9 @@ export type ContentBacklogRow = {
   unmarked_voice_word_count: number | null;
   unmarked_voice_sentence_count: number | null;
   unmarked_voice_candidates: string | null;
+  confirmed_voice_word_count: number | null;
+  confirmed_voice_sentences: string | null;
+  confirmed_voice_reviewed_at: string | null;
   last_reviewed_at: string | null;
   updated_at: string;
 };
@@ -164,7 +182,9 @@ export function contentBacklogRows(): ContentBacklogRow[] {
               expert_quote_count, expert_quote_pending, inbound_internal_links,
               inbound_links_checked_at, notes, body_word_count, voice_word_count,
               voice_pct, voice_checked_at, unmarked_voice_word_count,
-              unmarked_voice_sentence_count, unmarked_voice_candidates, last_reviewed_at, updated_at
+              unmarked_voice_sentence_count, unmarked_voice_candidates,
+              confirmed_voice_word_count, confirmed_voice_sentences, confirmed_voice_reviewed_at,
+              last_reviewed_at, updated_at
        FROM pages
        ORDER BY url`
     )

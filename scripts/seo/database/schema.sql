@@ -140,6 +140,19 @@ CREATE TABLE IF NOT EXISTS pages (
   unmarked_voice_sentence_count INTEGER,
   unmarked_voice_candidates TEXT,   -- JSON array of the flagged sentences
   unmarked_voice_synced_at TEXT,
+  -- Confirmed-genuine-voice columns (schema v6). A human (Graham or Claude
+  -- reviewing on his behalf) has read the unmarked_voice_candidates above
+  -- and confirmed which are real, and DELIBERATELY chosen to leave them as
+  -- flowing body prose rather than extract into a <ParentNote> tag - see
+  -- 2026-08-08 conversation: the goal is genuine voice reading well
+  -- throughout the article, not maximising the tag-only voice_pct number.
+  -- real_voice_pct (computed at query time, not stored) =
+  -- (voice_word_count + confirmed_voice_word_count) / body_word_count - this
+  -- is the actual metric to track against the ~10% target, not voice_pct
+  -- alone, which only sees tagged content.
+  confirmed_voice_word_count INTEGER,
+  confirmed_voice_sentences TEXT,   -- JSON array of the confirmed-genuine sentences
+  confirmed_voice_reviewed_at TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );

@@ -5,7 +5,7 @@ import { getDb } from "./db";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SCHEMA_PATH = path.join(__dirname, "schema.sql");
-const SCHEMA_VERSION = "5";
+const SCHEMA_VERSION = "6";
 
 // v2 added 7 content-status-backlog columns to `pages` (fact_checked_at,
 // seo_optimised_at, personal_story_count, expert_quote_count,
@@ -52,6 +52,15 @@ const PAGES_V5_COLUMNS: Array<{ name: string; ddl: string }> = [
   { name: "unmarked_voice_synced_at", ddl: "TEXT" },
 ];
 
+// v6 added confirmed-genuine-voice tracking to `pages` - see the comment on
+// these columns in schema.sql for why they're deliberately separate from
+// both voice_pct (tag-only) and the raw unmarked_voice_* candidate columns.
+const PAGES_V6_COLUMNS: Array<{ name: string; ddl: string }> = [
+  { name: "confirmed_voice_word_count", ddl: "INTEGER" },
+  { name: "confirmed_voice_sentences", ddl: "TEXT" },
+  { name: "confirmed_voice_reviewed_at", ddl: "TEXT" },
+];
+
 // schema.sql is otherwise entirely CREATE TABLE/INDEX IF NOT EXISTS, so
 // re-running it is always safe. Bumping SCHEMA_VERSION and appending
 // guarded ALTER TABLE statements (as above) is the path for future
@@ -69,6 +78,7 @@ export function migrate(): { schemaVersion: string; alreadyCurrent: boolean } {
     ...PAGES_V3_COLUMNS,
     ...PAGES_V4_COLUMNS,
     ...PAGES_V5_COLUMNS,
+    ...PAGES_V6_COLUMNS,
   ]) {
     if (!existingPagesColumns.has(name)) {
       db.exec(`ALTER TABLE pages ADD COLUMN ${name} ${ddl}`);
