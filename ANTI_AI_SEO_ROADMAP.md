@@ -266,19 +266,81 @@ reuse and any reframing before it went in the article.
   JPL experience, no Paul Barry quote fits (unrelated topic) — a real JPL
   interview is coming up and is the genuine source to wait for.
 
-### 5B — Touched in 1-2 earlier phases
-- [ ] jpl-vs-grassroots-football
-- [ ] how-football-clubs-recruit-young-players
-- [ ] best-football-boots-for-wide-feet-kids
-- [ ] best-shin-pads-for-kids-football
-- [ ] arsenal-development-centre-guide
-- [ ] how-players-progress-through-football-development-centres
-- [ ] how-to-get-scouted-for-football
-- [ ] how-girls-football-academies-work
-- [ ] build-confidence-young-footballers
-- [ ] is-private-football-coaching-worth-it
-- [ ] biggest-football-parent-mistakes
-- [ ] chelsea-fc-development-centre-guide
+### 5B — Touched in 1-2 earlier phases (DONE 2026-08-08)
+
+Same tooling and rules as 5A. Three articles turned out to already have
+genuine, substantial first-person voice sitting unmarked in body prose
+(`biggest-football-parent-mistakes`, `build-confidence-young-footballers`,
+and partially `chelsea-fc-development-centre-guide`) - per the exception
+carve-out, that voice was left in place rather than force-extracted, and
+formal `<ParentNote>`/`<ExpertOpinion>` callouts were added alongside it as
+new value rather than a re-statement. One quote reuse was proposed and
+rejected: the "technique before tactics" Paul Barry quote for
+`how-to-get-scouted-for-football` was judged too much of a stretch from its
+original context (a general tactics-timing question, not scouting) - left
+unused, voice deferred on that article instead. Three articles had no
+personal material available and no expert quote that genuinely fit
+(`how-to-get-scouted-for-football`, `best-football-boots-for-wide-feet-kids`,
+`best-shin-pads-for-kids-football`), plus `how-girls-football-academies-work`
+(no personal experience of the girls' pathway) and
+`jpl-vs-grassroots-football` (deferred pending a real JPL interview, same
+call as `what-is-the-junior-premier-league` in 5A) - all four left with
+voice deliberately deferred rather than padded. Two pre-existing bugs fixed
+while in the files: `build-confidence-young-footballers` had a broken FAQ
+heading (missing the space after `##`, so it wasn't rendering as a heading
+at all) and a frontmatter `sections` list with a missing entry and a
+duplicate; `best-football-boots-for-wide-feet-kids` was missing its
+`## Related Articles` heading and TOC entry entirely. `npm run build`
+verified clean after all 5B changes.
+
+- [x] jpl-vs-grassroots-football — voice deferred (no personal JPL-vs-
+  grassroots story yet, Graham wants to wait for a real JPL interview).
+  Sourcing already adequate (3 citations from the original write), no
+  changes made.
+- [x] how-football-clubs-recruit-young-players — 1 Parent Note (Graham's
+  real open-day trial experience), 2 external citations (EPPP, Premier
+  League parent-hub scout verification). voice_pct 2.7%, left under floor.
+- [x] best-football-boots-for-wide-feet-kids — no personal material, no
+  expert quote fits gear topics, voice deferred. Fixed missing Related
+  Articles heading/TOC entry.
+- [x] best-shin-pads-for-kids-football — no personal material, voice
+  deferred. Added IFAB Law 4 shin-guard citation for the mandatory-
+  equipment claim.
+- [x] arsenal-development-centre-guide — 1 Parent Note (trimmed, club-
+  agnostic reuse - no Arsenal-specific experience available), 2 external
+  citations (EPPP, player welfare). voice_pct 1.3%, left under floor.
+- [x] how-players-progress-through-football-development-centres — 1 Parent
+  Note (Chelsea/Palace open-trial tiers, 2nd reuse), 1 external citation
+  (Premier League parent-hub review process). voice_pct 8.3%.
+- [x] how-to-get-scouted-for-football — no personal material; declined
+  reusing the technique-before-tactics Paul Barry quote as too much of a
+  stretch. Voice deferred. Added Premier League parent-hub (scout
+  verification) citation.
+- [x] how-girls-football-academies-work — voice deferred, no personal
+  experience of the girls' pathway. Already well sourced (6 citations), no
+  changes needed.
+- [x] build-confidence-young-footballers — replaced a generic un-storied
+  "Football Parent Note" section with Graham's real clenched-fists/self-
+  recognition story, added a Paul Barry "embracing chaos" Expert Opinion,
+  2 peer-reviewed citations plus a Grassroots Code citation. voice_pct
+  4.6% (plus pre-existing unmarked first-person voice in 3 other places,
+  left as-is per the exception rule).
+- [x] is-private-football-coaching-worth-it — 1 Parent Note (Graham's real
+  small-group vs 1-to-1 answer), 1 external citation (FA Youth Development
+  Phase, deliberate practice vs unstructured play). voice_pct 4.1%, left
+  under floor.
+- [x] biggest-football-parent-mistakes — already had extensive genuine
+  unmarked first-person voice throughout the body (exception case, not
+  extracted). Added the "adults find it difficult to relinquish control"
+  Paul Barry Expert Opinion, transparent in the article about its original
+  context (clubs gaming the 3v3 format, not touchline behaviour) per
+  Graham's sign-off, plus a Silent Support Weekend citation. voice_pct
+  measures 2.9% via tags only; the real figure is much higher unmarked.
+- [x] chelsea-fc-development-centre-guide — formalised Graham's existing
+  unmarked PTC/PDC/PPC progression story into a proper Parent Note (kept
+  distinct from the open-trial-tiers story used elsewhere, to avoid
+  duplicating the same real experience across two articles), 2 external
+  citations (EPPP, compensation rules). voice_pct 5.2%.
 
 ### 5C — Not touched by any earlier phase (clean E-E-A-T-only fix)
 - [ ] academy-categories-explained
@@ -304,3 +366,4 @@ reuse and any reframing before it went in the article.
 
 ## Coverage
 42 category cards + 40 of 71 articles touched somewhere in Phases 2-5.
+20 articles remain in Phase 5C (not yet touched by any earlier phase).
