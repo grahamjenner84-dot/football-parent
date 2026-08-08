@@ -42,8 +42,9 @@ one after another.
 5. **Elicit genuine human content.** Every article needs at least 2
    `<ParentNote>`/`<ExpertOpinion>` callouts (or 1 plus a logged pending
    request — see below). Never fabricate either.
-   1. Check `references/expert-quotes.md` for an existing reusable quote
-      on-topic. Cap reuse at 2-3 articles per quote so it doesn't read as
+   1. Check `references/expert-quotes.md` for an existing reusable expert
+      quote or a reusable Graham parent story on-topic (it holds both). Cap
+      reuse at 2-3 articles per quote/story so it doesn't read as
       duplicated content across the site. Before inserting a reused quote,
       show Graham the full original Q&A it came from (not just the pulled
       line) with the intended excerpt highlighted, and get his go-ahead —
@@ -211,6 +212,8 @@ the category, path, and word count when presenting — no long postamble.
   priority order, evidence-attribution rules, safeguarding requirements,
   banned AI-slop phrases, EEAT review, and final style rules. Consult before
   finalising every article.
-- `references/expert-quotes.md` — reusable `<ExpertOpinion>` quotes by
-  topic, plus a log of pending/answered expert-quote requests. Check before
-  asking for a new quote; append new pending requests and reuse counts here.
+- `references/expert-quotes.md` — reusable `<ExpertOpinion>` quotes and
+  reusable `<ParentNote>` material (Graham's own, trimmed from other
+  articles) by topic, plus a log of pending/answered expert-quote requests.
+  Check before asking for a new quote or story; append new pending
+  requests, trimmed-but-reusable material, and reuse counts here.

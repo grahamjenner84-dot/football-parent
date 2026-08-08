@@ -107,6 +107,29 @@ Third-party quote via Paul, not Paul's own words — fine as an occasional
 secondary voice on development-philosophy topics, not a substitute for a
 direct expert relationship.
 
+## Parent stories (Graham's own, reusable)
+
+Real material Graham has given that didn't fit, or was trimmed from, the
+article it was originally gathered for. Check here before asking a fresh
+question if an article's topic overlaps with one of these. Same reuse
+discipline as expert quotes: light house-style edits only when reusing, no
+invented flourish, cap reuse so it doesn't read as duplicated across
+articles.
+
+### Noticing genuine enjoyment vs. going through the motions
+
+Trimmed from `signs-your-child-is-ready-for-academy-football` (kept a
+shorter version there focused on motivation/improvement instead).
+
+> Sometimes when he does something great I see him have a little smile to
+> himself, and sometimes he'll look over to check I saw it. At a tournament
+> recently, when the final whistle went, I saw him clench both fists in
+> celebration to himself that they'd won.
+
+**Topics:** signs of genuine love of the game, competitive instinct,
+enjoyment of pressure, self-motivation vs. parent-driven pressure.
+**Used in:** (none yet)
+
 ## Pending — questions drafted for an expert, not yet sent/answered
 
 ### how-to-join-a-football-academy — TBD, tag: academy trials / misconceptions about getting scouted
