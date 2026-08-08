@@ -81,7 +81,11 @@ Link once to the most relevant of:
 - [England Football Safeguarding](https://www.englandfootball.com/participate/behaviour/safeguarding)
 - [The FA Safeguarding](https://www.thefa.com/football-rules-governance/safeguarding)
 - [NSPCC Keeping Your Child Safe in Sport](https://www.nspcc.org.uk/keeping-children-safe/outside-the-home/sports-clubs/)
-- [NSPCC Child Protection in Sport Unit](https://thecpsu.org.uk/)
+- [NSPCC Child Protection in Sport Unit](https://sport.nspcc.org.uk/) (found
+  2026-08-08: `thecpsu.org.uk` 301-redirects here now - use this URL for any
+  new link; the 5 existing live articles still on the old URL are a
+  separate, unfixed follow-up, not broken since the redirect works, just
+  stale)
 
 Only add more safeguarding links if genuinely useful — don't overuse.
 
