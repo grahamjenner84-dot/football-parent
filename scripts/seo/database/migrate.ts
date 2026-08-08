@@ -5,16 +5,43 @@ import { getDb } from "./db";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SCHEMA_PATH = path.join(__dirname, "schema.sql");
-const SCHEMA_VERSION = "1";
+const SCHEMA_VERSION = "2";
 
-// schema.sql is entirely CREATE TABLE/INDEX IF NOT EXISTS, so re-running it
-// is always safe - this is the one and only migration step for now. Bumping
-// SCHEMA_VERSION and appending ALTER TABLE statements here (guarded by a
-// version check) is the path for future non-additive changes.
+// v2 added 7 content-status-backlog columns to `pages` (fact_checked_at,
+// seo_optimised_at, personal_story_count, expert_quote_count,
+// expert_quote_pending, inbound_internal_links, inbound_links_checked_at).
+// schema.sql's CREATE TABLE IF NOT EXISTS covers a brand-new DB, but is a
+// no-op against an already-existing `pages` table from before v2, so those
+// columns are added explicitly below - keyed off actual column presence
+// (PRAGMA table_info), not the stored version number, so this stays safe to
+// re-run under any prior partial state.
+const PAGES_V2_COLUMNS: Array<{ name: string; ddl: string }> = [
+  { name: "fact_checked_at", ddl: "TEXT" },
+  { name: "seo_optimised_at", ddl: "TEXT" },
+  { name: "personal_story_count", ddl: "INTEGER NOT NULL DEFAULT 0" },
+  { name: "expert_quote_count", ddl: "INTEGER NOT NULL DEFAULT 0" },
+  { name: "expert_quote_pending", ddl: "INTEGER NOT NULL DEFAULT 0" },
+  { name: "inbound_internal_links", ddl: "INTEGER" },
+  { name: "inbound_links_checked_at", ddl: "TEXT" },
+];
+
+// schema.sql is otherwise entirely CREATE TABLE/INDEX IF NOT EXISTS, so
+// re-running it is always safe. Bumping SCHEMA_VERSION and appending
+// guarded ALTER TABLE statements (as above) is the path for future
+// non-additive changes.
 export function migrate(): { schemaVersion: string; alreadyCurrent: boolean } {
   const db = getDb();
   const sql = fs.readFileSync(SCHEMA_PATH, "utf8");
   db.exec(sql);
+
+  const existingPagesColumns = new Set(
+    (db.prepare("PRAGMA table_info(pages)").all() as { name: string }[]).map((c) => c.name)
+  );
+  for (const { name, ddl } of PAGES_V2_COLUMNS) {
+    if (!existingPagesColumns.has(name)) {
+      db.exec(`ALTER TABLE pages ADD COLUMN ${name} ${ddl}`);
+    }
+  }
 
   const row = db.prepare("SELECT value FROM schema_meta WHERE key = 'schema_version'").get() as
     | { value: string }

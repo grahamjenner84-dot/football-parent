@@ -39,12 +39,40 @@ one after another.
    contextual links for the body (same cluster first) plus 3–4 for the
    closing Related Articles section. Never invent a URL.
 4. **Write the MDX article** following the template and rules below.
-5. **Run the quality passes** in `references/fact-checking-and-style.md`
+5. **Elicit genuine human content.** Every article needs at least 2
+   `<ParentNote>`/`<ExpertOpinion>` callouts (or 1 plus a logged pending
+   request — see below). Never fabricate either.
+   1. Check `references/expert-quotes.md` for an existing reusable quote
+      on-topic. Cap reuse at 2-3 articles per quote so it doesn't read as
+      duplicated content across the site. Before inserting a reused quote,
+      show Graham the full original Q&A it came from (not just the pulled
+      line) with the intended excerpt highlighted, and get his go-ahead —
+      never drop an isolated quote into a new article on his say-so alone,
+      since a true statement in one context can misrepresent the expert's
+      view in another.
+   2. If nothing fits and the topic is inside Graham's own experience, ask
+      him directly in the conversation — plain text questions tailored to
+      this article's actual sections, not generic ones — for a real detail
+      or opinion. Write his answer into a `<ParentNote>` in his own words,
+      house-style edits only, no invention.
+   3. If the topic needs outside expertise Graham doesn't have, draft 3-4
+      specific questions for a named expert (e.g. Paul Barry). Don't block
+      publishing on an answer — ship with what's genuinely available (1
+      real callout is acceptable), log the drafted questions in
+      `references/expert-quotes.md`'s pending section and against the
+      article's tracker row (`npx tsx scripts/seo/cli/content-backlog.ts
+      mark --url <path> --expert-quote-pending`).
+6. **Run the quality passes** in `references/fact-checking-and-style.md`
    before finalising: evidence attribution, unsupported-claims check,
    AI-slop removal, EEAT review, originality check, FAQ dedup, final link
-   audit.
-6. **Write the matching `page.tsx`** using the exact template below.
-7. **Write both files directly into the project** (see File output below).
+   audit, sourcing density, callout minimum.
+7. **Write the matching `page.tsx`** using the exact template below.
+8. **Write both files directly into the project** (see File output below).
+9. **Update the content-status tracker** for this URL: `npx tsx
+   scripts/seo/cli/content-backlog.ts mark --url <path> --fact-checked
+   --personal-story-count <n> --expert-quote-count <n>` (counts from the
+   actual callouts written, `--expert-quote-pending` too if step 5.3
+   applied).
 
 ## Article requirements
 
@@ -56,12 +84,16 @@ one after another.
 - Safeguarding section (`## Safeguarding and parent checks` or similar) if
   the topic requires it per the style reference.
 - Every factual claim needing evidence has a source link on it or right
-  after it.
+  after it, at roughly 2 external citation links per 1000 words, never the
+  same source twice.
 - 3–5 contextual internal links in the body + 3–4 in Related Articles, all
   from `references/valid-urls.md` or the current batch.
+- At least 2 `<ParentNote>`/`<ExpertOpinion>` callouts (or 1 plus a logged
+  pending expert-quote request) — genuine material only, see workflow step 5.
 - Never promise academy or professional success.
 - Full rules: `references/fact-checking-and-style.md`.
 - Valid link targets: `references/valid-urls.md`.
+- Reusable expert quotes: `references/expert-quotes.md`.
 
 ## Frontmatter format
 
@@ -179,3 +211,6 @@ the category, path, and word count when presenting — no long postamble.
   priority order, evidence-attribution rules, safeguarding requirements,
   banned AI-slop phrases, EEAT review, and final style rules. Consult before
   finalising every article.
+- `references/expert-quotes.md` — reusable `<ExpertOpinion>` quotes by
+  topic, plus a log of pending/answered expert-quote requests. Check before
+  asking for a new quote; append new pending requests and reuse counts here.

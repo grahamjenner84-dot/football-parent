@@ -1132,9 +1132,18 @@ function run() {
   }
   fs.writeFileSync('link-audit-tasks.csv', csvLines.join('\n'));
 
+  // ================= WRITE INBOUND-LINK JSON =================
+  // Flat urlPath -> inbound total map, for scripts/seo/cli/sync-inbound-links.ts
+  // to upsert into the pages.inbound_internal_links tracker column. This
+  // script runs under plain `node`, not `tsx`, so it can't import the
+  // TypeScript SQLite module directly - the JSON file is the handoff.
+  const inboundCounts = Object.fromEntries(pages.map((p) => [p.urlPath, inboundStats(p.urlPath).total]));
+  fs.writeFileSync('link-audit-inbound.json', JSON.stringify(inboundCounts, null, 2));
+
   console.log(`Audit complete. ${pages.length} pages scanned.`);
   console.log(`Report written to link-audit-report.md`);
   console.log(`Task list written to link-audit-tasks.csv (${csvRows.length} row(s))`);
+  console.log(`Inbound link counts written to link-audit-inbound.json`);
 }
 
 run();

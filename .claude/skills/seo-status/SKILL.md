@@ -36,3 +36,12 @@ blob):
 
 If live raw-response rows are present, call this out explicitly with their
 count and cost so it's never buried in the summary.
+
+## Per-article content/EEAT status backlog
+
+This dashboard is aggregate-only. For a per-article table (last fact-checked
+date, last SEO-optimised date, personal-story/expert-quote counts, pending
+expert-quote requests, inbound internal link count), run:
+```
+npx tsx scripts/seo/cli/content-backlog.ts report
+```

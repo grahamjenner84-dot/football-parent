@@ -45,6 +45,9 @@ sourced, copy-pasteable fixes — the user decides what to apply.
 6. **Cite a source link for every correction, challenge, or recommended
    update** wherever one exists. If a claim can't be confidently verified,
    say so explicitly rather than guessing.
+7. **Update the content-status tracker** for the reviewed URL once the
+   review is complete: `npx tsx scripts/seo/cli/content-backlog.ts mark
+   --url <path> --fact-checked`.
 
 ## The 12 sections (produce all of them, in this order)
 
@@ -83,7 +86,12 @@ section. Be especially critical of: "It is important to remember...",
 "The key thing is...", "There is no one-size-fits-all answer...", "It
 depends...", "Focus on enjoyment...", "Support your child...", "The best
 environment is the one that...", and similar reassurance/motivational filler.
-For each: original sentence/section, why it's weak, what specific parent/
+Also flag "badge" framing clichés and reframe/negative-parallelism
+constructions ("It isn't X. It's Y.", "X matters far less than Y", "Focus on
+Y, not X", and similar reject-then-reveal contrast shortcuts) wherever they
+appear, including inside `<ParentNote>`/`<ExpertOpinion>` callouts — a real
+quote can still be phrased as a fake-depth rhetorical shortcut. For each:
+original sentence/section, why it's weak, what specific parent/
 coaching/UK-football/safeguarding/research insight is missing, and the exact
 MDX replacement text. Also flag sections that feel isolated from the rest of
 the site and identify where a natural internal link to another article would
@@ -100,6 +108,15 @@ viewpoints, parent mistakes/regrets/lessons, and situational detail (match
 days, car journeys, WhatsApp groups, trials, training sessions, tournaments,
 siblings, school pressure, touchline behaviour). Suggest a specific addition
 for each gap found.
+
+**Mechanical check:** count the article's `<ParentNote>`/`<ExpertOpinion>`
+callouts. Flag if the combined count is under 2, and flag more urgently if
+it's 0 with no pending expert-quote request logged (check
+`.claude/skills/football-parent-articles/references/expert-quotes.md` for a
+reusable on-topic quote before recommending a brand new request). Any
+callout content must read as genuine, specific material, not a generic
+statement dressed up in a callout box — flag a callout that fails that bar
+the same as a missing one.
 
 ### 8. SEO & E-E-A-T Review
 Weak expertise/authoritativeness/trust signals, unsupported claims, missing
@@ -121,6 +138,11 @@ Only recommend links that genuinely help the reader — no generic SEO links,
 no invented URLs. Check `references/valid-urls.md` for valid destinations
 and cluster-priority guidance before recommending any link.
 
+**Mechanical check:** estimate external citation links per 1000 words
+(target ~2/1000) and flag if the article is markedly over or under that, and
+flag any external source linked more than once in the article — recommend
+dropping the weaker duplicate rather than adding a third source.
+
 ### 9. Scoring
 Score /10 with a one-line reason for each: Helpfulness, Originality,
 Demonstrates real experience, Trustworthiness, Readability, Depth, E-E-A-T
@@ -128,6 +150,13 @@ signals, Likelihood a parent would bookmark/share/recommend it, Likelihood
 Google would view it as genuinely useful rather than scaled content. Present
 as a markdown table (this is an analytical table the user will read on
 screen, not a site-content table, so a table is fine here). Then give:
+
+**Callout minimum met: Yes/No** — 2+ genuine `<ParentNote>`/`<ExpertOpinion>`
+callouts, or 1 plus a logged pending request (from the Section 7 mechanical
+check).
+
+**Link density met: Yes/No** — roughly 2 external citations per 1000 words,
+no source linked twice (from the Section 8 mechanical check).
 
 **Overall Quality Score: X/10**
 

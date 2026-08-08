@@ -3,10 +3,14 @@ import remarkGfm from "remark-gfm";
 import React from "react";
 import Link from "next/link";
 import InfoTable from "@/app/components/mdx/InfoTable";
+import ParentNote from "@/app/components/mdx/ParentNote";
+import ExpertOpinion from "@/app/components/mdx/ExpertOpinion";
 
 // Custom components for MDX rendering with styling
 const components = {
   InfoTable,
+  ParentNote,
+  ExpertOpinion,
 
   h2: ({ children }: any) => (
     <h2

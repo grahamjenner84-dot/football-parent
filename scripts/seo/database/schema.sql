@@ -93,6 +93,16 @@ CREATE TABLE IF NOT EXISTS pages (
   notes TEXT,                      -- tracker "Notes"
   page_file TEXT,                  -- matched app/<category>/<slug>/page.tsx (repo-relative)
   mdx_file TEXT,                   -- matched content/<category>/<slug>.mdx (repo-relative)
+  -- Content-status backlog columns (schema v2) - written by the
+  -- football-parent-articles/football-parent-review skills via
+  -- scripts/seo/cli/content-backlog.ts, not by the article-tracker import.
+  fact_checked_at TEXT,                             -- last fact-check pass date (ISO)
+  seo_optimised_at TEXT,                             -- last SEO-lever change date (ISO)
+  personal_story_count INTEGER NOT NULL DEFAULT 0,   -- <ParentNote> blocks in the MDX
+  expert_quote_count INTEGER NOT NULL DEFAULT 0,      -- <ExpertOpinion> blocks in the MDX
+  expert_quote_pending INTEGER NOT NULL DEFAULT 0,    -- 1 if questions drafted/sent, answer not yet written in
+  inbound_internal_links INTEGER,                     -- from internal-link-audit.mjs
+  inbound_links_checked_at TEXT,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );

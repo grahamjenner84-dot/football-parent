@@ -20,7 +20,8 @@
     "test": "tsx --test tests/graph-client.test.ts tests/publish-flow.test.ts tests/cron-auth.test.ts tests/insights-pipeline.test.ts tests/insights-flow.test.ts tests/ideation-pipeline.test.ts tests/review-pipeline.test.ts tests/slide-fit.test.ts tests/reel-core-badge.test.ts",
     "test:seo": "tsx --test tests/seo/**/*.test.ts",
     "seo:setup": "tsx scripts/seo/cli/setup.ts",
-    "seo:status": "tsx scripts/seo/cli/status.ts"
+    "seo:status": "tsx scripts/seo/cli/status.ts",
+    "seo:content-backlog": "tsx scripts/seo/cli/content-backlog.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.112.3",

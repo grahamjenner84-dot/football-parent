@@ -106,6 +106,16 @@ everyone", "There is no one-size-fits-all answer", "Trust the process",
 "Focus on the process not the outcome", "Stay positive", "Keep supporting
 them", "Believe in yourself", "Hard work always pays off".
 
+Also banned: "badge" framing clichés (e.g. "it's not about the badge") and
+reframe/negative-parallelism constructions — "It isn't X. It's Y.", "X
+matters far less than Y", "Focus on Y, not X", "It's not a cost you'll see
+on a receipt, but it's real" and similar reject-then-reveal contrast
+shortcuts. State the point directly instead of setting up a straw man to
+knock down. These rules apply equally inside `<ParentNote>`/`<ExpertOpinion>`
+callout text, not just body prose — a real quote or story can still be
+written using a fake-depth rhetorical shortcut, and it's just as much AI-slop
+there as anywhere else.
+
 If a paragraph could be dropped unmodified into a tennis, rugby, cricket or
 swimming article, rewrite it to be football-specific.
 
@@ -116,8 +126,48 @@ misconceptions, and 3 practical football examples — things a parent would be
 unlikely to find in a generic AI article. Draw on: development centre
 realities, academy recruitment realities, coaching observations, common
 parent mistakes, gaps between what parents expect and what actually happens.
-Do not invent personal anecdotes — write with the voice of someone
-experienced around these environments, not a first-person storyteller.
+Real first-person material belongs in a `<ParentNote>` or `<ExpertOpinion>`
+callout (see "Callout minimum" below), sourced live from Graham or a named
+expert. Never invent a personal anecdote and never write one in the
+first-person body text outside those two components — the surrounding prose
+stays in the voice of someone experienced around these environments, not a
+first-person storyteller.
+
+## Sourcing density
+
+Aim for roughly 2 external citation links per 1000 words backing factual
+claims (source priority order above still applies). Never link the same
+external source twice in one article, even if it's the best source for two
+different claims — pick the strongest instance and let the rest of the
+claims stand on the source already cited, or find a second genuinely
+different source. This is a target, not a quota: cut a weak citation rather
+than pad to hit the number, and don't force a citation onto a claim that
+doesn't need one just to reach the ratio. The goal is avoiding both under-
+sourcing and the opposite failure, an article so link-heavy it reads as
+sending readers away rather than informing them.
+
+## Callout minimum
+
+Every article needs at least 2 `<ParentNote>`/`<ExpertOpinion>` callouts
+combined (any mix of the two), or 1 plus a pending expert-quote request
+logged against the article (see the "Elicit genuine human content" workflow
+step in SKILL.md). Both callout types must contain genuine material, never
+a fabricated anecdote or an invented expert view. Check
+`references/expert-quotes.md` first for an existing reusable quote before
+asking for a new one.
+
+When writing up Graham's own answer into a `<ParentNote>`, edit only for
+grammar, tense and trimming filler — fix typos, join fragments into
+sentences, cut repetition. Do not add a metaphor, a summarising "point"
+sentence, or a wrap-up line he didn't say, even one that sounds true to the
+content — that's writing prose in his voice, which is the exact thing this
+callout exists to avoid. Also check the answer doesn't quietly depend on the
+question the reader never sees: an opener like "he's a bit of both" or "yes,
+definitely" only makes sense next to the question it replied to, so cut it
+rather than reconstruct the missing context. If the raw answer doesn't land
+on its own, that's a sign to ask a sharper follow-up question, not to write
+the ending for him.
+When in doubt, cut a sentence rather than add one.
 
 ## EEAT review — before finalising, remove any statement that
 
@@ -198,3 +248,8 @@ survives truncation instead of landing after it.
    self-labeling, no throat-clearing openers, hedge adverbs used at most
    once, under ~160 characters), and is it word-for-word identical between
    the frontmatter and `page.tsx`?
+8. Does sourcing density land around 2 external citation links per 1000
+   words, with no external source linked twice?
+9. Are there at least 2 `<ParentNote>`/`<ExpertOpinion>` callouts (or 1 plus
+   a logged pending expert-quote request), each containing genuine,
+   non-fabricated material?
