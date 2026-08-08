@@ -46,9 +46,14 @@ function runMark(argv: string[]): void {
     return;
   }
 
-  if (flags["fact-checked"]) markFactChecked(url);
-  if (flags["seo-optimised"]) markSeoOptimised(url);
-  if (flags["ai-slop-checked"]) markAiSlopChecked(url);
+  // --date backdates fact-checked/seo-optimised/ai-slop-checked together -
+  // for backfilling historical work (e.g. Phase 5A commits that predated
+  // the --fact-checked flag existing in this skill's workflow), not for
+  // routine use, where the default (now) is correct.
+  const backdate = typeof flags["date"] === "string" ? flags["date"] : undefined;
+  if (flags["fact-checked"]) markFactChecked(url, backdate);
+  if (flags["seo-optimised"]) markSeoOptimised(url, backdate);
+  if (flags["ai-slop-checked"]) markAiSlopChecked(url, backdate);
   if (typeof flags["personal-story-count"] === "string") {
     setPersonalStoryCount(url, parseInt(flags["personal-story-count"], 10) || 0);
   }
@@ -257,6 +262,7 @@ function main(): void {
   } else {
     console.error("Usage: content-backlog.ts <mark|report|export> [...flags]");
     console.error("  mark --url <path> [--fact-checked] [--seo-optimised] [--ai-slop-checked]");
+    console.error("       [--date ISO8601]  (backdates the 3 checked-at flags above; omit for now)");
     console.error("       [--personal-story-count N] [--expert-quote-count N]");
     console.error("       [--expert-quote-pending | --expert-quote-pending false]");
     console.error("       [--notes \"free text\"]");
