@@ -8,6 +8,7 @@ import {
   setPersonalStoryCount,
   setExpertQuoteCount,
   setExpertQuotePending,
+  setNotes,
   contentBacklogRows,
 } from "../database/content-status";
 
@@ -48,6 +49,9 @@ function runMark(argv: string[]): void {
   if ("expert-quote-pending" in flags) {
     setExpertQuotePending(url, flags["expert-quote-pending"] !== "false");
   }
+  if (typeof flags["notes"] === "string") {
+    setNotes(url, flags["notes"]);
+  }
 
   console.log(`Updated tracker row for ${url}`);
 }
@@ -69,6 +73,7 @@ function runReport(): void {
       expert_quotes: r.expert_quote_count,
       quote_pending: r.expert_quote_pending ? "yes" : "",
       inbound_links: r.inbound_internal_links ?? "",
+      notes: r.notes ?? "",
     }))
   );
 }
@@ -86,6 +91,7 @@ function main(): void {
     console.error("  mark --url <path> [--fact-checked] [--seo-optimised]");
     console.error("       [--personal-story-count N] [--expert-quote-count N]");
     console.error("       [--expert-quote-pending | --expert-quote-pending false]");
+    console.error("       [--notes \"free text\"]");
     console.error("  report");
     process.exitCode = 1;
   }

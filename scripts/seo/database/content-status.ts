@@ -65,6 +65,14 @@ export function setExpertQuotePending(url: string, pending: boolean): void {
     .run(pending ? 1 : 0, nowIso(), normalized);
 }
 
+export function setNotes(url: string, notes: string): void {
+  const normalized = normalizeUrl(url);
+  ensurePage(normalized);
+  getDb()
+    .prepare(`UPDATE pages SET notes = ?, updated_at = ? WHERE url = ?`)
+    .run(notes, nowIso(), normalized);
+}
+
 export function setInboundLinks(url: string, count: number, checkedAt: string = nowIso()): void {
   const normalized = normalizeUrl(url);
   ensurePage(normalized);
@@ -88,6 +96,7 @@ export type ContentBacklogRow = {
   expert_quote_pending: number;
   inbound_internal_links: number | null;
   inbound_links_checked_at: string | null;
+  notes: string | null;
 };
 
 export function contentBacklogRows(): ContentBacklogRow[] {
@@ -96,7 +105,7 @@ export function contentBacklogRows(): ContentBacklogRow[] {
       `SELECT url, article, category, primary_keyword, secondary_keywords,
               fact_checked_at, seo_optimised_at, personal_story_count,
               expert_quote_count, expert_quote_pending, inbound_internal_links,
-              inbound_links_checked_at
+              inbound_links_checked_at, notes
        FROM pages
        ORDER BY url`
     )

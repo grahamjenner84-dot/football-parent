@@ -146,6 +146,14 @@ doesn't need one just to reach the ratio. The goal is avoiding both under-
 sourcing and the opposite failure, an article so link-heavy it reads as
 sending readers away rather than informing them.
 
+An article that is primarily experiential/opinion advice (see "When to
+fact-check" above) rather than governing-body facts or research claims may
+genuinely need 0-1 external citations, not 2. A citation added purely to
+demonstrate that research happened, with no claim in the sentence that
+actually needed backing, is padding — skip it. Note the reasoning against
+the article's tracker row (`--notes`) rather than leaving the shortfall
+unexplained.
+
 ## Callout minimum
 
 Every article needs at least 2 `<ParentNote>`/`<ExpertOpinion>` callouts
@@ -155,6 +163,17 @@ step in SKILL.md). Both callout types must contain genuine material, never
 a fabricated anecdote or an invented expert view. Check
 `references/expert-quotes.md` first for an existing reusable quote before
 asking for a new one.
+
+This rule exists to guarantee genuine human material exists somewhere in the
+article, not to mandate a specific visual format. If an article already has
+substantive, genuine first-person parent voice woven directly into the body
+prose (not fabricated, verifiably real), formal callout extraction is
+optional — don't pull a sentence out of a working paragraph into a callout
+box just to hit the count if it doesn't actually improve the article for
+the reader. Extract when it genuinely helps; leave it alone when the voice
+is already doing its job unmarked. Note the reasoning against the article's
+tracker row (`--notes`) rather than silently skipping the rule, so a future
+pass doesn't waste time re-litigating the same call.
 
 When writing up Graham's own answer into a `<ParentNote>`, edit only for
 grammar, tense and trimming filler — fix typos, join fragments into
