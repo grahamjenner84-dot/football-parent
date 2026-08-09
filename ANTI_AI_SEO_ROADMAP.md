@@ -378,17 +378,32 @@ verified clean after all 5B changes.
   deferred, gear topic (Group B, 2026-08-09)
 - [x] veo-camera-alternatives — reviewed, already excellently sourced
   (10+ citations); no changes needed (Group B, 2026-08-09)
-- [ ] academy-categories-explained *(Group C — needs Graham's real material)*
-- [ ] can-academy-players-play-grassroots-football *(Group C)*
-- [ ] pre-academy-football *(Group C)*
-- [ ] what-qualifications-do-i-need-to-be-a-football-coach *(Group C)*
-- [ ] what-age-do-football-academies-recruit *(Group C, weaker fit — may end
-  up citation-only)*
-- [ ] how-football-scouts-identify-players *(Group C — "technique before
-  tactics" reuse declined, fresh expert-quote request logged instead)*
-- [ ] what-do-academy-coaches-look-for *(Group C — same as above)*
-- [ ] bio-banding-football *(voice left deferred — quote fit too weak per
-  Graham's call, 2026-08-09)*
+- [x] academy-categories-explained — reviewed, already adequately sourced (2
+  citations); voice deferred, son was in a development centre not a
+  registered academy, so no personal fit here (Group C, 2026-08-09)
+- [x] can-academy-players-play-grassroots-football — added citation for a
+  direct Youth Development Rules quote that was previously unlinked; voice
+  deferred, same reason as above (Group C, 2026-08-09)
+- [x] pre-academy-football — added citation for the Training Ground Guru
+  statistic (previously unlinked); voice deferred, same reason as above.
+  Flagged separately: the Luton Town 30-40% claim in
+  what-age-do-football-academies-recruit could not be verified - see notes
+  below (Group C, 2026-08-09)
+- [x] what-age-do-football-academies-recruit — no personal experience to draw
+  on, logged as a pending expert-quote backlog request instead (Group C,
+  2026-08-09). **Separate fact-check flag, unresolved:** the article states
+  "The Luton Town pathway research found that 30-40% of their academy
+  cohort joined after Under-14" - searched for this and could not verify it
+  exists. Needs Graham's decision: remove, soften, or confirm source.
+- [x] how-football-scouts-identify-players — "technique before tactics" reuse
+  declined, fresh expert-quote request logged instead (Group A/C,
+  2026-08-09)
+- [x] what-do-academy-coaches-look-for — same as above (Group A/C, 2026-08-09)
+- [x] bio-banding-football — voice left deferred, quote fit too weak per
+  Graham's call (Group A/C, 2026-08-09)
+- [ ] what-qualifications-do-i-need-to-be-a-football-coach *(Group C — Graham
+  coaches his own team and holds Level 2 (UEFA C); pending a Q&A on the
+  confidence/experience angle rather than qualification specifics)*
 
 ## Coverage
 42 category cards + 40 of 71 articles touched somewhere in Phases 2-5.
