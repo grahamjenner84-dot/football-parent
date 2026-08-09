@@ -448,6 +448,35 @@ with no real anecdote; several have nothing.
 - [x] futurefit-football-dna-interview-part-1 — same resolution as Part 2:
   interview format already explicitly attributed to Paul Barry throughout,
   no anecdote needed. Roadmap corrected 2026-08-09.
+- [x] what-to-say-after-football-matches — extensive genuine unmarked
+  first-person voice throughout the body (coaching-mode slip-ups, the "who's
+  best" conversations with his son, the hat-trick meltdown story), real_
+  voice_pct 11.8% - highest of the whole batch. Initially mis-flagged as
+  "needs work" by only grepping for the `<ParentNote>` tag instead of
+  reading the article or checking real_voice_pct; corrected 2026-08-09
+  after Graham caught the error.
+- [x] what-is-grassroots-football — same error, same correction. Extensive
+  genuine unmarked voice throughout (his son starting at 5, his son being
+  U9 in September 2026, direct experience of grassroots club variation),
+  real_voice_pct 5.9%. Corrected 2026-08-09.
+- [x] support-child-after-bad-match — same error, same correction. Has 1
+  tagged ParentNote plus extensive genuine unmarked voice throughout (the
+  dual coach/parent role, a specific over-training mistake admitted, his
+  son settling into a new development centre), real_voice_pct 7%.
+  Corrected 2026-08-09.
+
+**Note on methodology:** these 3 were wrongly assessed by grepping only for
+the `<ParentNote>` tag and the legacy blockquote pattern, which misses
+genuine voice woven directly into body prose (the same exception pattern
+already established in 5A/5B for articles like biggest-football-parent-
+mistakes). The `real_voice_pct` field in the tracker was already correct
+for these 3 (it factors in confirmed unmarked voice from an earlier,
+unlogged review) but wasn't cross-checked before reporting. The remaining
+~20 "rest" articles listed below have NOT yet been read article-by-article
+to the same standard - their `real_voice_pct` numbers came from the tracker
+and are probably directionally right, but given this error, they should be
+read properly rather than taken as final before any further claims are made
+about what they need.
 
 ### Girls football cluster (6) - Graham has no personal experience of the girls' pathway
 Every article either has no ParentNote at all, or a generic advisory
