@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Trials Near Me | Football Parent",
   description:
-    "Looking for football trials near you? How legitimate academy recruitment actually works in the UK, what to avoid, and why grassroots football remains the most realistic pathway.",
+    "How legitimate academy trials work in the UK, the scams to avoid, and why grassroots football remains the most realistic pathway for most children.",
   path: "/academy-trials/football-trials-near-me",
 });
 
