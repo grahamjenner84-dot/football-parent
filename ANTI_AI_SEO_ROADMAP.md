@@ -353,24 +353,42 @@ verified clean after all 5B changes.
   existing "Football Parent perspective" editorial commentary boxes, not missing personal
   anecdote - forcing a Graham anecdote into an expert interview would misattribute voice
   that isn't his. Resolved without changes, 2026-08-09.
-- [ ] academy-categories-explained
-- [ ] can-academy-players-play-grassroots-football
-- [ ] crystal-palace-development-centre-guide
-- [ ] football-scholarships-uk
-- [ ] how-to-find-a-football-agent-for-your-child
-- [ ] pre-academy-football
-- [ ] west-ham-player-pathway-guide
-- [ ] what-age-do-football-academies-recruit
-- [ ] what-is-eppp
-- [ ] football-academy-trials-uk
-- [ ] how-football-scouts-identify-players
-- [ ] what-do-academy-coaches-look-for
-- [ ] bio-banding-football
-- [ ] new-fa-youth-football-format
-- [ ] ag-vs-fg-boots
-- [ ] best-football-gloves-for-winter-training
-- [ ] veo-camera-alternatives
-- [ ] what-qualifications-do-i-need-to-be-a-football-coach
+- [x] crystal-palace-development-centre-guide — trimmed open-trial-tiers ParentNote
+  (3rd/final use) + new Tier 1 workbook ParentNote (Group A, 2026-08-09)
+- [x] west-ham-player-pathway-guide — club-agnostic coaching-quality ParentNote,
+  2nd use of Arsenal's story (Group A, 2026-08-09)
+- [x] football-academy-trials-uk — Chelsea open-day trial ParentNote, 2nd use
+  (Group A, 2026-08-09)
+- [x] new-fa-youth-football-format — Paul Barry ExpertOpinion (bigger pitches =
+  fewer touches), 1st use; trimmed an uncited "in our experience" line
+  (Group A, 2026-08-09)
+- [x] football-scholarships-uk — reviewed, already adequately sourced (3
+  citations); voice deferred, no personal fit at scholarship age 16-18
+  (Group B, 2026-08-09)
+- [x] how-to-find-a-football-agent-for-your-child — added citation for the
+  agent commission cap claim (previously uncited); voice deferred, no
+  personal fit (Group B, 2026-08-09)
+- [x] what-is-eppp — reviewed, already well sourced (4 citations, Useful
+  Sources section); voice deferred (Group B, 2026-08-09)
+- [x] ag-vs-fg-boots — added citation for boot/turf injury risk claim
+  (article had zero external citations); voice deferred, gear topic
+  (Group B, 2026-08-09)
+- [x] best-football-gloves-for-winter-training — added citation for
+  cold-hands/dexterity claim (zero external citations previously); voice
+  deferred, gear topic (Group B, 2026-08-09)
+- [x] veo-camera-alternatives — reviewed, already excellently sourced
+  (10+ citations); no changes needed (Group B, 2026-08-09)
+- [ ] academy-categories-explained *(Group C — needs Graham's real material)*
+- [ ] can-academy-players-play-grassroots-football *(Group C)*
+- [ ] pre-academy-football *(Group C)*
+- [ ] what-qualifications-do-i-need-to-be-a-football-coach *(Group C)*
+- [ ] what-age-do-football-academies-recruit *(Group C, weaker fit — may end
+  up citation-only)*
+- [ ] how-football-scouts-identify-players *(Group C — "technique before
+  tactics" reuse declined, fresh expert-quote request logged instead)*
+- [ ] what-do-academy-coaches-look-for *(Group C — same as above)*
+- [ ] bio-banding-football *(voice left deferred — quote fit too weak per
+  Graham's call, 2026-08-09)*
 
 ## Coverage
 42 category cards + 40 of 71 articles touched somewhere in Phases 2-5.
