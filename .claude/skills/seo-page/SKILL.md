@@ -41,15 +41,35 @@ what to do about each gap. This is "existing article, existing terms" +
    *different* Football Parent page - see the cannibalisation table in
    `lib/gsc.ts`'s `analyseCannibalisation` for the pattern).
 
-4. **Check cached DataForSEO research first.** Query `keywords` /
+4. **Pull AI Overview / People Also Ask / related searches** for the page's
+   primary keyword. `scripts/seo/dataforseo/endpoints/serp.ts`'s
+   `googleOrganicSerp` (same call step 5 below would make anyway) already
+   returns these as item types on the same response; parse them with
+   `scripts/seo/dataforseo/serp-features.ts`'s `extractSerpFeatures` /
+   `citationSummary` rather than re-implementing. This gives three things
+   step 5's Labs-only discovery doesn't: whether footballparent.co.uk is
+   currently cited in the AI Overview (and who is, if not), the PAA
+   question list as candidate FAQ material, and `related_searches` as free
+   extra keyword candidates from the same request. Check each PAA question
+   against the article body the same way `scripts/seo/cli/faq-gap-check.ts`
+   does (`coverageRatio` - a keyword-overlap heuristic, not a real
+   comprehension check, so treat "likely covered" as "probably fine" and
+   "LIKELY GAP" as "worth a human read", not gospel either way). Same live
+   gate as step 5 - sandbox by default, live only with explicit in-session
+   approval; both steps can share one live call if run together.
+
+5. **Check cached DataForSEO research first.** Query `keywords` /
    `discovery_results` for this page's `target_url` or `mapped_article`
    before requesting anything new.
 
-5. **Discover existing, new terms** where the cache is missing or stale
+6. **Discover existing, new terms** where the cache is missing or stale
    (90-day freshness for discovery). Use, in order: `keywordSuggestions`
    then `relatedKeywords` (close variants) from
    `scripts/seo/dataforseo/endpoints/labs.ts`, seeded with the article's
-   primary keyword. Only enrich a shortlist (not the raw firehose) with
+   primary keyword, plus `domain_intersection` seeded with any competitor
+   domain that showed up citing over us in step 4's AI Overview check (the
+   most direct "what are they ranking for that we aren't" signal available).
+   Only enrich a shortlist (not the raw firehose) with
    `bulkKeywordDifficulty`/`keywordOverview`. Environment defaults to
    sandbox; a live call requires the user's explicit approval in this
    session before `confirmLive: true` is ever passed - see `/seo-setup` and
@@ -57,17 +77,19 @@ what to do about each gap. This is "existing article, existing terms" +
    Before requesting, show cached vs missing vs stale (`planRequests` in
    `scripts/seo/dataforseo/cache.ts`) and the proposed request count.
 
-6. **Compare** discoveries against: GSC data from step 3; the article's
-   actual content (does it already cover this?); the `keywords` table;
-   the article tracker (`pages` table); and other Football Parent pages
-   (avoid recommending a term that already belongs to a different page -
-   that's cannibalisation, not a gap).
+7. **Compare** discoveries against: GSC data from step 3; step 4's AI
+   Overview/PAA coverage check; the article's actual content (does it
+   already cover this?); the `keywords` table; the article tracker (`pages`
+   table); and other Football Parent pages (avoid recommending a term that
+   already belongs to a different page - that's cannibalisation, not a gap).
+   Also note, but don't chase, whether a `featured_snippet` item appeared on
+   the same SERP and who holds it - informational only, not an extra lever.
 
-7. **Classify each opportunity**: optimise existing article / add new
+8. **Classify each opportunity**: optimise existing article / add new
    section / add FAQ / secondary keyword / create separate article / ignore
    / potential cannibalisation.
 
-8. **Recommend exact changes** - titles, meta descriptions, headings, FAQ
+9. **Recommend exact changes** - titles, meta descriptions, headings, FAQ
    entries - always showing the *current* text first (read it from the
    file, never guess), per the SEO admin guardrails in `CLAUDE.md`: one
    lever per page per change, never remove existing content, no em dashes,
@@ -77,6 +99,8 @@ what to do about each gap. This is "existing article, existing terms" +
 
 - Concise summary
 - Existing-query findings (clicks/impressions/CTR/position, 28-vs-28 trend)
+- AI Overview citation status (cited / not cited, and who is if not) and PAA
+  coverage (likely covered / partially touched / likely gap per question)
 - Missing-keyword findings
 - Terms to add to this article / terms needing a separate article / terms
   to ignore

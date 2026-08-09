@@ -23,9 +23,15 @@ them by shared intent, rather than ranking a flat list by raw volume.
    request (academy football, trials, development centres, grassroots,
    coaching, confidence, training, girls' football, junior leagues, camps,
    tournaments, equipment, football parents, team management), plus
-   `relatedKeywords` for anything promising. Show the cache plan (cached vs
-   missing vs stale, proposed request count) before requesting; sandbox by
-   default, live only with explicit in-session approval.
+   `relatedKeywords` for anything promising. For the most promising seed
+   terms, also pull `people_also_ask`/`related_searches` via
+   `googleOrganicSerp` + `scripts/seo/dataforseo/serp-features.ts`'s
+   `extractSerpFeatures` (same pattern as `/seo-page` step 4) - real
+   Google-surfaced question phrasing is a useful cross-check against the
+   Labs-only keyword list, and occasionally turns up an adjacent angle Labs
+   doesn't. Show the cache plan (cached vs missing vs stale, proposed
+   request count) before requesting; sandbox by default, live only with
+   explicit in-session approval.
 
 4. **Cluster by shared intent.**
    ```
