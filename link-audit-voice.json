@@ -346,8 +346,8 @@
     ]
   },
   "/football-development/new-fa-youth-football-format": {
-    "bodyWordCount": 2445,
-    "voiceWordCount": 0,
+    "bodyWordCount": 2493,
+    "voiceWordCount": 53,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
@@ -498,8 +498,8 @@
     ]
   },
   "/academy-trials/football-academy-trials-uk": {
-    "bodyWordCount": 3783,
-    "voiceWordCount": 0,
+    "bodyWordCount": 3833,
+    "voiceWordCount": 50,
     "unmarkedVoiceWordCount": 32,
     "unmarkedVoiceSentences": [
       "Before paying for any event, check who is running it, what the fee covers, and whether the club itself is directly involved.\r\n\r\n### How do I get a trial at a football academy?"
@@ -520,8 +520,8 @@
     ]
   },
   "/academy-pathway/west-ham-player-pathway-guide": {
-    "bodyWordCount": 2129,
-    "voiceWordCount": 0,
+    "bodyWordCount": 2278,
+    "voiceWordCount": 149,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
@@ -628,8 +628,8 @@
     ]
   },
   "/academy-pathway/crystal-palace-development-centre-guide": {
-    "bodyWordCount": 2375,
-    "voiceWordCount": 0,
+    "bodyWordCount": 2512,
+    "voiceWordCount": 137,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
@@ -646,8 +646,8 @@
     "unmarkedVoiceSentences": []
   },
   "/academy-pathway/arsenal-development-centre-guide": {
-    "bodyWordCount": 1705,
-    "voiceWordCount": 23,
+    "bodyWordCount": 1831,
+    "voiceWordCount": 149,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
