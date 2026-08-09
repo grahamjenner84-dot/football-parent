@@ -391,20 +391,32 @@ verified clean after all 5B changes.
   below (Group C, 2026-08-09)
 - [x] what-age-do-football-academies-recruit — no personal experience to draw
   on, logged as a pending expert-quote backlog request instead (Group C,
-  2026-08-09). **Separate fact-check flag, unresolved:** the article states
-  "The Luton Town pathway research found that 30-40% of their academy
-  cohort joined after Under-14" - searched for this and could not verify it
-  exists. Needs Graham's decision: remove, soften, or confirm source.
+  2026-08-09). Also removed the unverifiable "Luton Town pathway research
+  found that 30-40% of their academy cohort joined after Under-14" claim -
+  could not confirm it exists after multiple searches, Graham confirmed
+  removal.
 - [x] how-football-scouts-identify-players — "technique before tactics" reuse
   declined, fresh expert-quote request logged instead (Group A/C,
   2026-08-09)
 - [x] what-do-academy-coaches-look-for — same as above (Group A/C, 2026-08-09)
 - [x] bio-banding-football — voice left deferred, quote fit too weak per
   Graham's call (Group A/C, 2026-08-09)
-- [ ] what-qualifications-do-i-need-to-be-a-football-coach *(Group C — Graham
-  coaches his own team and holds Level 2 (UEFA C); pending a Q&A on the
-  confidence/experience angle rather than qualification specifics)*
+- [x] what-qualifications-do-i-need-to-be-a-football-coach — 2 Parent Notes
+  added from Graham's real coaching experience (he coaches his own son's
+  team, holds the UEFA C Diploma/old Level 2), kept to the confidence and
+  ongoing-development angle rather than qualification facts, per his steer
+  (Group C, 2026-08-09)
+
+## Phase 5C complete (2026-08-09)
+All 19 articles resolved: 2 already had genuine voice and just needed the
+checklist corrected (late-developers-in-football, futurefit-part-2), 6
+reused existing library material (Group A), 6 were citation/review passes
+with voice genuinely deferred (Group B), 4 more were citation-only/deferred
+after Graham confirmed no personal-experience fit (development centre, not
+registered academy), and 1 got real new voice from a fresh Q&A
+(qualifications article). 2 new expert-quote backlog requests added
+(coaches/scouts articles), plus a 3rd for recruitment timing. One
+unverifiable statistic found and removed along the way.
 
 ## Coverage
-42 category cards + 40 of 71 articles touched somewhere in Phases 2-5.
-20 articles remain in Phase 5C (not yet touched by any earlier phase).
+42 category cards + 71 of 71 articles touched somewhere in Phases 2-5.
