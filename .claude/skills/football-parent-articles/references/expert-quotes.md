@@ -278,6 +278,22 @@ used with young players.
 
 ## Pending — questions drafted for an expert, not yet sent/answered
 
+### what-age-do-football-academies-recruit — TBD, tag: recruitment timing / late recruitment
+Drafted: 2026-08-09
+No personal experience to draw on here (Graham's son came through a
+development centre, not formal academy registration, so there's no direct
+"recruited at X age" story). Well suited to a scout or academy recruitment
+lead.
+1. Is there an age where you see the most players joining who weren't
+   already known to the club, and why that age specifically?
+2. What's the single biggest misconception parents have about "missing the
+   window" for their child to be recruited?
+3. Have you seen a player recruited well into their teens who went on to do
+   well? What was different about how that came together compared to an
+   Under-9 recruit?
+4. Does being released and later re-recruited by a different club carry any
+   stigma in practice, or is that purely a parent worry?
+
 ### what-do-academy-coaches-look-for — TBD, tag: what coaches prioritise in a young player
 Drafted: 2026-08-09
 The "technique before tactics" quote (quote 1 above) is a strong topical fit
