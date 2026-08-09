@@ -278,6 +278,21 @@ used with young players.
 
 ## Pending — questions drafted for an expert, not yet sent/answered
 
+### bio-banding-football — TBD, tag: physical maturity grouping / relative age effect
+Drafted: 2026-08-09
+No existing library quote was a clean fit (the "Golden Age of motor
+learning" quote is about cognitive/tactical readiness by age, not physical-
+maturity grouping - declined as too much of a stretch). Well suited to a
+sports scientist or academy coach with direct bio-banding experience.
+1. What's the most common misconception parents have when their child is
+   first invited to a bio-banded session?
+2. Have you seen a player's confidence change noticeably, for better or
+   worse, after a bio-banded match compared to their normal age group?
+3. Is there a case where bio-banding data changed how a coach viewed a
+   player they thought they already knew well?
+4. What would you say to a parent whose child is never invited to a
+   bio-banded session - does that mean anything about their development?
+
 ### what-age-do-football-academies-recruit — TBD, tag: recruitment timing / late recruitment
 Drafted: 2026-08-09
 No personal experience to draw on here (Graham's son came through a
