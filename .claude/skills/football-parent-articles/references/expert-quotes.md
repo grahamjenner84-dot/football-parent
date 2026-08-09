@@ -42,6 +42,12 @@ Considered for [how-to-get-scouted-for-football](/academy-trials/how-to-get-scou
 in Phase 5B (2026-08-08) but Graham judged it too much of a stretch from its
 original context (a general tactics-timing question, not scouting) - declined,
 still has 1 remaining allowed use.
+Also considered for [what-do-academy-coaches-look-for](/academy-trials/what-do-academy-coaches-look-for)
+and [how-football-scouts-identify-players](/academy-trials/how-football-scouts-identify-players)
+in Phase 5C (2026-08-09) - both are strong topical fits, but Graham preferred
+to hold the last remaining use rather than pick one, and asked for a fresh
+expert quote to be requested for these two instead. See pending requests
+below.
 
 ### 2. The "Golden Age" of motor learning
 
@@ -54,6 +60,11 @@ still has 1 remaining allowed use.
 development timeline.
 **Source:** Part 1, "When should tactics be introduced?"
 **Used in:** [signs-your-child-is-ready-for-academy-football](/football-development/signs-your-child-is-ready-for-academy-football) (1/3)
+Considered for [bio-banding-football](/football-development/bio-banding-football)
+in Phase 5C (2026-08-09) but the quote is about cognitive/tactical readiness by
+age, not physical-maturity grouping - Graham judged it too much of a stretch,
+same call as the declined reuse on quote 1 above. Declined, still has 2
+remaining allowed uses.
 
 ### 3. Rigid positions suppress young players
 
@@ -104,7 +115,8 @@ Phase 5B (2026-08-08).
 **Topics:** playing up an age group, new FA youth football format, academy
 pathway age-appropriate progression.
 **Source:** Part 2, "Why is 11v11 being delayed until U14?"
-**Used in:** (none yet)
+**Used in:** [new-fa-youth-football-format](/football-development/new-fa-youth-football-format) (1/3) -
+Phase 5C (2026-08-09).
 
 ### Secondary voice (non-Football DNA, use sparingly)
 
@@ -161,6 +173,12 @@ clubs' processes, mixed-age placement as a form of challenge.
 **Used in:** [uk-football-development-centres-explained](/academy-pathway/uk-football-development-centres-explained) (1/3),
 [how-players-progress-through-football-development-centres](/academy-pathway/how-players-progress-through-football-development-centres) (2/3) -
 Phase 5B (2026-08-08).
+Reused a 3rd and final time (cap reached) in
+[crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide)
+- Phase 5C (2026-08-09), trimmed to just the Crystal Palace portion rather
+than pasting the full Chelsea-vs-Palace comparison a third time, since that
+article is specifically about Palace. Do not reuse this story again without
+Graham's explicit go-ahead to raise the cap.
 
 ### Chelsea PTC/PDC/PPC progression
 
@@ -194,7 +212,24 @@ without naming Chelsea or Palace.
 **Topics:** any single-club development-centre guide where Graham has no
 direct experience of that specific club (e.g. Arsenal, West Ham).
 **Used in:** [arsenal-development-centre-guide](/academy-pathway/arsenal-development-centre-guide) (1/3) -
-Phase 5B (2026-08-08).
+Phase 5B (2026-08-08), original single-sentence trim. Expanded in place
+(same article) in Phase 5C (2026-08-09) to the fuller club-agnostic version
+below, per Graham's note that the original was too thin. Also used in
+[west-ham-player-pathway-guide](/academy-pathway/west-ham-player-pathway-guide) (2/3) -
+Phase 5C (2026-08-09), same expanded text.
+
+> The quality of the coaching, and of the centre overall, tended to be more
+> about the individual coaches than which club it was. Some coaches could
+> demand high standards and still keep the kids engaged and make it fun.
+> Others had the high standards without the same rapport with the kids.
+> Having the same coach for a full season seemed to help build that rapport
+> more than anything else. The centres my son attended used player feedback
+> forms based on the FA's four corner model to give a view of his
+> development. Some of it was genuinely good, but other parts didn't feel
+> like they'd properly looked at my child. It wasn't just me disagreeing
+> with the assessment either: two different centres scored him in opposite
+> directions on the same specific area, his weaker foot was rated a major
+> strength at one and below expected standard at the other.
 
 ### Small-group vs 1-to-1 private coaching
 
@@ -220,9 +255,55 @@ Phase 5B (2026-08-08).
 **Topics:** what an open trial/assessment day actually looks like in
 practice, recruitment.
 **Used in:** [how-football-clubs-recruit-young-players](/academy-trials/how-football-clubs-recruit-young-players) (1/3) -
-Phase 5B (2026-08-08).
+Phase 5B (2026-08-08). Also used in
+[football-academy-trials-uk](/academy-trials/football-academy-trials-uk) (2/3) -
+Phase 5C (2026-08-09), verbatim.
+
+### Crystal Palace Tier 1 reflection workbook
+
+First used in `crystal-palace-development-centre-guide` - Phase 5C
+(2026-08-09).
+
+> When my son first started at Crystal Palace, they gave him a workbook.
+> Each week had a different subject, for example getting into space, with a
+> page to fill in about what the session had been about and what he'd
+> learned. He was probably a little young to get the full value from it,
+> but I thought it was a genuinely good way of getting children to think
+> about and reflect on what they'd learned each session.
+
+**Topics:** what a development centre's actual session structure and
+coaching approach looks like in practice, reflective/self-assessment tools
+used with young players.
+**Used in:** [crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide) (1/3)
 
 ## Pending — questions drafted for an expert, not yet sent/answered
+
+### what-do-academy-coaches-look-for — TBD, tag: what coaches prioritise in a young player
+Drafted: 2026-08-09
+The "technique before tactics" quote (quote 1 above) is a strong topical fit
+but is being held rather than stretched to a 3rd use here. Well suited to a
+coach or academy recruitment lead.
+1. When you're assessing a young player, what's the first thing you notice,
+   before anything technical?
+2. Parents assume goals and pace matter most. What do you actually weight
+   more heavily, and why does it surprise parents?
+3. Is there a quality you've seen in a player that made you confident they'd
+   progress, even if their technical level wasn't the highest in the group?
+4. How much does a player's reaction to being corrected mid-session actually
+   tell you about their long-term potential?
+
+### how-football-scouts-identify-players — TBD, tag: what scouts watch for away from the ball
+Drafted: 2026-08-09
+Same reasoning as above - a real quote here would sit better than reusing an
+existing one from a different context.
+1. What do you watch for in the moments before a player receives the ball,
+   rather than what they do with it?
+2. How many times do you typically watch a player before making any contact
+   with the family or their coach?
+3. Is there a common trait among players who get missed at younger ages but
+   turn out to be excellent by their mid-teens?
+4. Does grassroots level genuinely not matter, or is that something scouts
+   say to be kind to parents?
 
 ### how-to-join-a-football-academy — TBD, tag: academy trials / misconceptions about getting scouted
 Drafted: 2026-08-08
