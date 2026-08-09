@@ -189,6 +189,12 @@ export default function AcademyPathwayPage() {
           description:
             "Fulham runs boys' and girls' Player Development Centres for ages 7-16, separate from the Category One academy. How the Pathway and trials actually work.",
         },
+        {
+          title: "Tottenham Development Centres Explained",
+          href: "/academy-pathway/tottenham-development-centres-explained",
+          description:
+            "Tottenham's Academy Development Centres (boys, 10 and under) sit apart from its 15-21 Education Centres. Real ages, and Spurs' own trial scam warning.",
+        },
       ]}
       bottomContent={{
         title: "About the Academy Pathway",

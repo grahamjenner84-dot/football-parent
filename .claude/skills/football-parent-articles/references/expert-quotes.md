@@ -515,6 +515,31 @@ Foundation coach.
 4. What would you tell a parent whose child has just been invited to one of
    these programmes, that isn't obvious from the club's own information?
 
+### tottenham-development-centres-explained — TBD, tag: Tottenham Academy Development Centre / Education Centre, first-hand experience
+Drafted: 2026-08-09
+Graham has no direct experience of Tottenham's programmes (confirmed
+2026-08-09). Unlike Fulham, this article currently has ZERO real callouts,
+not one plus a pending request - the reusable club-agnostic "coaching
+quality" story hit its 3-use cap with Fulham and Graham hasn't raised it,
+and no Paul Barry quote is a strong structural fit for this article's actual
+content (programme disambiguation and the scam warning, not development
+philosophy). Graham asked to see the finished draft first, then answer some
+general development-centre-experience questions (not necessarily
+Tottenham-specific) to see if something genuinely fits - follow up on that
+before treating this article as meeting the callout minimum. Well suited to
+a parent whose child attended a Tottenham Academy Development Centre or
+Education and Football Development Centre, or a Foundation coach.
+1. What's the one thing about Tottenham's Development Centre or Education
+   Centre programme that surprised you compared to what you expected?
+2. How did the actual scouting/invitation process feel from the parent's
+   side - did it match the "business card at the pitch side" process the
+   club describes?
+3. For the Education and Football Development Centre route specifically,
+   how did balancing the football and the academic course actually work
+   day to day?
+4. What would you tell a parent who's just been handed a scout's business
+   card, that isn't obvious from the club's own information?
+
 Format for new entries:
 ```
 ### <Article slug> — <expert name, if known, or "TBD, tag: <topic area>">

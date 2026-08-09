@@ -65,6 +65,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /academy-pathway/how-much-does-academy-football-cost
 - /academy-pathway/football-development-centres-in-london
 - /academy-pathway/fulham-fc-development-centre-guide
+- /academy-pathway/tottenham-development-centres-explained
 - /academy-pathway/pre-academy-football
 
 ## Academy Trials
