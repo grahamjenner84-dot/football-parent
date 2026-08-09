@@ -278,6 +278,64 @@ used with young players.
 
 ## Pending — questions drafted for an expert, not yet sent/answered
 
+### understanding-academy-release — TBD, tag: academy release, player welfare
+Drafted: 2026-08-09
+Found during the full-site voice audit: a sensitive topic with real weight to it
+that would benefit from someone who's actually handled release conversations or
+been through one, rather than staying purely instructional. Well suited to an
+academy welfare officer, sports psychologist working in football, or a former
+academy player.
+1. What's the most common thing players get wrong about why they were released?
+2. Is there a moment in a release conversation that consistently goes badly, that
+   clubs could handle better?
+3. How long does it typically take before a released player wants to play
+   football again, in your experience?
+4. What's one thing you wish more parents understood about supporting a child
+   through release?
+
+### how-much-training-is-too-much — TBD, tag: training load, overuse injury
+Drafted: 2026-08-09
+Found during the full-site voice audit: a sports-science topic that currently
+rests on general guidance rather than a real practitioner's judgement calls.
+Well suited to a sports scientist, physiotherapist or S&C coach working with
+young players.
+1. What's the first physical sign you look for that a young player's training
+   load has tipped from healthy into risky?
+2. Do you see a difference in load tolerance between early and late developers
+   of the same chronological age?
+3. What's the most common mistake parents make when trying to manage their
+   child's training load?
+4. Is there a rule of thumb you actually use in practice, rather than a
+   textbook guideline?
+
+### how-to-find-a-football-agent-for-your-child — TBD, tag: agents, representation
+Drafted: 2026-08-09
+Found during the full-site voice audit. Well suited to a registered FA football
+agent or a sports lawyer.
+1. What's the biggest misconception parents have about when they actually need
+   an agent?
+2. What's a red flag you'd tell parents to watch for that isn't obvious from
+   the outside?
+3. How do you actually decide whether a family's situation is one you can help
+   with, versus one that's premature?
+4. What's changed most since the FA's Football Agent Regulations replaced the
+   old intermediaries system?
+
+### how-girls-football-academies-work — TBD, tag: girls' pathway overview
+Drafted: 2026-08-09
+Found during the full-site voice audit: this is the hub/overview article for the
+entire girls' cluster and currently has zero personal or expert voice despite
+being the page most parents new to the girls' pathway will land on first. Well
+suited to a girls' football coach or someone working within the ETC/PGA system.
+1. What's the single biggest difference parents notice between the girls'
+   pathway and what they might expect from the boys' system?
+2. Is there a stage in the girls' pathway that's more flexible than parents
+   assume, or more rigid than they assume?
+3. What would you say to a parent whose daughter is enjoying grassroots and
+   wondering whether to pursue anything more structured?
+4. What's a genuine success story from someone who came through a route other
+   than early ETC selection?
+
 ### emerging-talent-centres-explained — TBD, tag: girls' ETC pathway, entry-level
 Drafted: 2026-08-09
 Girls' football cluster (Graham has no personal experience of the pathway,
