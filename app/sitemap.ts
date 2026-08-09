@@ -26,6 +26,7 @@ export const routes = [
   '/academy-pathway/how-players-progress-through-football-development-centres',
   '/academy-pathway/chelsea-fc-development-centre-guide',
   '/academy-pathway/arsenal-development-centre-guide',
+  '/academy-pathway/fulham-fc-development-centre-guide',
   '/academy-pathway/crystal-palace-development-centre-guide',
   '/academy-pathway/premier-league-development-centres-list',
   '/academy-pathway/football-scholarships-uk',

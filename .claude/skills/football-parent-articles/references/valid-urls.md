@@ -63,6 +63,9 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /academy-pathway/west-ham-player-pathway-guide
 - /academy-pathway/can-academy-players-play-grassroots-football
 - /academy-pathway/how-much-does-academy-football-cost
+- /academy-pathway/football-development-centres-in-london
+- /academy-pathway/fulham-fc-development-centre-guide
+- /academy-pathway/pre-academy-football
 
 ## Academy Trials
 
@@ -87,6 +90,10 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-development/signs-your-child-is-ready-for-academy-football
 - /football-development/playing-up-an-age-group-football
 - /football-development/new-fa-youth-football-format
+- /football-development/bio-banding-football
+- /football-development/football-burnout
+- /football-development/what-is-football-iq
+- /football-development/why-isnt-my-child-improving-at-football
 
 ## Football Gear
 
@@ -95,6 +102,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-gear/best-footballs-by-age
 - /football-gear/boots/best-football-boots-for-wide-feet-kids
 - /football-gear/shin-pads/best-shin-pads-for-kids-football
+- /football-gear/veo-camera-alternatives
 
 ## Girls Football
 
@@ -105,6 +113,10 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /girls-football/late-developers-in-girls-football
 - /girls-football/what-age-do-girls-football-academies-recruit
 - /girls-football/girls-rtcs-explained
+
+## Coaching
+
+- /coaching/what-qualifications-do-i-need-to-be-a-football-coach
 
 ## Parent Guides
 
@@ -118,6 +130,9 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /parent-guides/jpl-and-academy-football
 - /parent-guides/how-to-get-into-the-jpl
 - /parent-guides/futurefit-football-dna-interview-part-1
+- /parent-guides/futurefit-football-dna-interview-part-2
+- /parent-guides/how-to-become-a-football-coach
+- /parent-guides/what-is-grassroots-football
 
 ## Suggested contextual links by topic
 

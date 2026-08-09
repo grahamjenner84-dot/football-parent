@@ -217,6 +217,14 @@ Phase 5B (2026-08-08), original single-sentence trim. Expanded in place
 below, per Graham's note that the original was too thin. Also used in
 [west-ham-player-pathway-guide](/academy-pathway/west-ham-player-pathway-guide) (2/3) -
 Phase 5C (2026-08-09), same expanded text.
+Reused a 3rd and final time (cap reached) in
+[fulham-fc-development-centre-guide](/academy-pathway/fulham-fc-development-centre-guide)
+- 2026-08-09, trimmed differently from the Arsenal/West Ham version (dropped
+the "some coaches demanded high standards and kept it fun, others didn't
+have the rapport" sentences) so it doesn't read identically across all
+three club guides. Graham reviewed and signed off on the specific trim
+before it was used. Do not reuse this story again without Graham's explicit
+go-ahead to raise the cap.
 
 > The quality of the coaching, and of the centre overall, tended to be more
 > about the individual coaches than which club it was. Some coaches could
@@ -489,6 +497,23 @@ provider).
    how a scout identifies a player, or is that a myth?
 4. What's the biggest mistake you see parents make when trying to help
    their child get scouted, compared to what actually works?
+
+### fulham-fc-development-centre-guide — TBD, tag: Fulham Foundation, first-hand experience
+Drafted: 2026-08-09
+Graham has no direct experience of Fulham's Foundation programmes (confirmed
+2026-08-09) and asked to hold the "technique before tactics" quote rather
+than stretch it here, keeping this article informational until someone with
+genuine Fulham experience can answer. Well suited to a parent whose child
+has actually attended the Player Development Centre or Player Pathway, or a
+Foundation coach.
+1. What's the one thing about Fulham's Player Development Centre or Player
+   Pathway that surprised you compared to what you expected going in?
+2. How did the Player Pathway trial at Three Rivers Academy actually feel
+   for your child - was it more like a trial or more like a normal session?
+3. Is there a noticeable difference in level or coaching style between the
+   Player Development Centre and the Player Pathway?
+4. What would you tell a parent whose child has just been invited to one of
+   these programmes, that isn't obvious from the club's own information?
 
 Format for new entries:
 ```

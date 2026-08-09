@@ -183,6 +183,12 @@ export default function AcademyPathwayPage() {
           description:
             "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join.",
         },
+        {
+          title: "Fulham FC Development Centre Guide",
+          href: "/academy-pathway/fulham-fc-development-centre-guide",
+          description:
+            "Fulham runs boys' and girls' Player Development Centres for ages 7-16, separate from the Category One academy. How the Pathway and trials actually work.",
+        },
       ]}
       bottomContent={{
         title: "About the Academy Pathway",
