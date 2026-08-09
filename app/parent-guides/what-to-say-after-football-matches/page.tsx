@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What NOT to Say After Football Matches | Football Parent",
   description:
-    "The best conversations to have with a child after football matches, and the mistakes to avoid.",
+    "What to actually say to your child after a football match, win or lose: the phrases that help, the ones that do harm, and why the drive home matters most.",
   path: "/parent-guides/what-to-say-after-football-matches",
 });
 
