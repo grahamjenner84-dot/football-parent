@@ -418,5 +418,65 @@ registered academy), and 1 got real new voice from a fresh Q&A
 (coaches/scouts articles), plus a 3rd for recruitment timing. One
 unverifiable statistic found and removed along the way.
 
+## Correction (2026-08-09): "71 of 71 touched" overstated actual E-E-A-T coverage
+The Coverage line below counts articles touched by *any* phase, including the
+mechanical Phase 2-4 slop cleanup (removing "badge" clichés, "honestly"
+filler, reframe patterns). It does not mean Phase 5 (real voice + sourcing)
+reviewed every article. Diffing the full 71-article list against everything
+logged in 5A+5B+5C found **31 articles that never went through a Phase 5
+review at all**. Auditing those 31 directly against the live MDX (not the
+tracker's story/quote counters, which were stale/never filled in for
+articles outside the formal phase process) found a mixed picture: several
+already have genuine first-hand voice from when they were originally
+written, just never logged; several have only generic/advisory blockquotes
+with no real anecdote; several have nothing.
+
+### Already has genuine voice - just needed logging, no new work
+- [x] how-to-become-a-football-coach — 2 rich ParentNotes already present
+  (emotional investment of coaching your own child, treating your own child
+  differently to others). Roadmap corrected 2026-08-09.
+- [x] leave-grassroots-football-for-an-academy — 2 rich ParentNotes already
+  present (son's anxiety presenting as physical complaints, assuming a
+  tougher environment would automatically raise his level - it didn't
+  always). 1 remaining legacy blockquote is generic, left as reasonable
+  framing rather than force-converted. Roadmap corrected 2026-08-09.
+- [x] how-to-get-into-the-jpl — 2 ParentNotes already present (JPL trial
+  timing tip, the two-different-approaches trial-day story). Roadmap
+  corrected 2026-08-09.
+- [x] jpl-and-academy-football — 1 ParentNote already present (environment
+  matters more than league name). Roadmap corrected 2026-08-09.
+- [x] futurefit-football-dna-interview-part-1 — same resolution as Part 2:
+  interview format already explicitly attributed to Paul Barry throughout,
+  no anecdote needed. Roadmap corrected 2026-08-09.
+
+### Girls football cluster (6) - Graham has no personal experience of the girls' pathway
+Every article either has no ParentNote at all, or a generic advisory
+`> **Football Parent note:**` blockquote with no specific anecdote (general
+"your daughter..." reassurance, not a real story) - consistent with there
+being no genuine first-hand material to draw on. Graham's call
+(2026-08-09): route these to a real expert rather than force voice that
+doesn't exist. Questions drafted in `expert-quotes.md` pending section for:
+`emerging-talent-centres-explained`, `girls-academy-vs-grassroots-football`,
+`girls-football-trials`, `girls-rtcs-explained`,
+`late-developers-in-girls-football`,
+`what-age-do-girls-football-academies-recruit`.
+
+### Remaining "rest" - citation/voice audit needed, not yet actioned
+`best-footballs-by-age`, `development-centres-vs-academies`,
+`football-burnout`, `football-development-centres-in-london`,
+`football-trials-near-me`, `good-football-development-environment`,
+`how-academy-football-works`, `how-much-training-is-too-much`,
+`improve-football-decision-making`, `pdc-vs-ptc-vs-rtc-explained`,
+`playing-up-an-age-group-football`, `premier-league-development-centres-list`,
+`relative-age-effect-football`, `understanding-academy-release`,
+`what-happens-at-academy-trials`, `what-is-football-iq`,
+`why-isnt-my-child-improving-at-football`, `what-is-grassroots-football`,
+`what-to-say-after-football-matches`, `support-child-after-bad-match`
+(partial - 1 genuine ParentNote already, could take more).
+See per-article voice/citation numbers pulled 2026-08-09 for the current
+state of each.
+
 ## Coverage
-42 category cards + 71 of 71 articles touched somewhere in Phases 2-5.
+42 category cards + 71 of 71 articles touched somewhere in Phases 2-5, but
+only 40 of 71 have had a genuine Phase 5 (E-E-A-T) review - see correction
+above.

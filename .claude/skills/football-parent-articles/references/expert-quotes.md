@@ -278,6 +278,87 @@ used with young players.
 
 ## Pending — questions drafted for an expert, not yet sent/answered
 
+### emerging-talent-centres-explained — TBD, tag: girls' ETC pathway, entry-level
+Drafted: 2026-08-09
+Girls' football cluster (Graham has no personal experience of the pathway,
+his son plays boys' football - all 6 girls articles below need a real
+expert rather than forced parent voice). Well suited to a girls' football
+coach, ETC coach, or Emerging Talent Centre staff member.
+1. What's the biggest misconception parents have when their daughter is
+   first invited to an ETC?
+2. Is there a noticeable difference in how ETC sessions run compared to a
+   good grassroots session, or is the gap smaller than parents assume?
+3. Since ETCs became free from 2025-26, has that changed who applies, or
+   just removed a barrier for the same players who were already going to
+   try?
+4. What would you say to a parent whose daughter attends an ETC but seems
+   less confident there than she is at her grassroots club?
+
+### girls-academy-vs-grassroots-football — TBD, tag: girls' academy vs grassroots trade-offs
+Drafted: 2026-08-09
+Same reasoning as above.
+1. When a family is deciding whether to move from grassroots into a girls'
+   development programme, what question do you wish more parents asked
+   before committing?
+2. Have you seen a player thrive after moving up, and another who was
+   better off staying in grassroots? What actually made the difference?
+3. Is travel/commitment a bigger factor in girls' football specifically,
+   compared to what you'd expect on the boys' side?
+4. What's something about combining academy and grassroots football that
+   surprises parents once they're actually doing it?
+
+### girls-football-trials — TBD, tag: what happens at a girls' football trial
+Drafted: 2026-08-09
+Same reasoning as above.
+1. What do coaches actually watch for at a girls' trial that parents
+   wouldn't expect?
+2. Does nervousness affect girls differently at trial age than it does
+   boys, in your experience, or is that more of a myth?
+3. What's the most common mistake you see parents make on the touchline at
+   a trial?
+4. If a player doesn't progress, what's the most useful thing a parent can
+   do in the days after?
+
+### girls-rtcs-explained — TBD, tag: RTC to ETC transition, historical context
+Drafted: 2026-08-09
+Same reasoning as above. Well suited to someone who worked within the
+pathway before and after the 2022 restructure, since this article is
+largely historical/structural.
+1. What was actually wrong with the old RTC system on the ground, not just
+   in the FA's official reasoning?
+2. Has the move to ETCs changed the quality of coaching, or mainly the
+   accessibility?
+3. Is there anything the RTC system did better that's been lost in the
+   move to ETCs?
+4. What do you tell parents who are confused by clubs still using the old
+   RTC language?
+
+### late-developers-in-girls-football — TBD, tag: puberty, maturation bias, girls' football
+Drafted: 2026-08-09
+Same reasoning as above. Well suited to a sports scientist or coach with
+direct experience of girls' teams through puberty.
+1. What's a specific, concrete sign that a dip in a girl's performance is
+   about physical maturation rather than a loss of ability?
+2. Have you seen a player nearly give up around 12-13 who came good later?
+   What actually turned it around?
+3. Is the "relational environment" (how coaches communicate, how mistakes
+   are treated) as decisive as the research suggests, in your direct
+   experience?
+4. What's the most unhelpful thing well-meaning parents do during this
+   phase?
+
+### what-age-do-girls-football-academies-recruit — TBD, tag: girls' pathway recruitment timing
+Drafted: 2026-08-09
+Same reasoning as above.
+1. Is there a real difference in how "closed" the door feels at different
+   ages in girls' football, compared to the boys' game?
+2. What's the most common age a parent asks you "is it too late?" - and
+   what do you actually tell them?
+3. Have you seen a player recruited into a PGA in her mid-teens with no
+   prior ETC or club programme experience? What was different about her?
+4. What would you tell a parent whose daughter wasn't picked for an ETC at
+   9 or 10?
+
 ### bio-banding-football — TBD, tag: physical maturity grouping / relative age effect
 Drafted: 2026-08-09
 No existing library quote was a clean fit (the "Golden Age of motor
