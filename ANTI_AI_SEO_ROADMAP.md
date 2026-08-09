@@ -343,6 +343,16 @@ verified clean after all 5B changes.
   citations (EPPP, compensation rules). voice_pct 5.2%.
 
 ### 5C — Not touched by any earlier phase (clean E-E-A-T-only fix)
+- [x] late-developers-in-football — already had two genuine, substantial coaching-experience
+  ParentNotes (the "Modric-esque slight midfielder" story and the "later developers read
+  the game better" note) that predate this checklist and were never logged. real_voice_pct
+  10.9%, over the floor. No changes needed, checklist corrected 2026-08-09.
+- [x] futurefit-football-dna-interview-part-2 — interview Q&A format, not a standard
+  article. Views are already explicitly attributed to Paul Barry throughout plus a
+  dedicated Editor's Note at the bottom. The tracker's "unmarked voice" flags are the
+  existing "Football Parent perspective" editorial commentary boxes, not missing personal
+  anecdote - forcing a Graham anecdote into an expert interview would misattribute voice
+  that isn't his. Resolved without changes, 2026-08-09.
 - [ ] academy-categories-explained
 - [ ] can-academy-players-play-grassroots-football
 - [ ] crystal-palace-development-centre-guide
@@ -360,9 +370,7 @@ verified clean after all 5B changes.
 - [ ] ag-vs-fg-boots
 - [ ] best-football-gloves-for-winter-training
 - [ ] veo-camera-alternatives
-- [ ] futurefit-football-dna-interview-part-2 *(different fix — interview format, may just need an editor framing line rather than a personal anecdote)*
 - [ ] what-qualifications-do-i-need-to-be-a-football-coach
-- [ ] late-developers-in-football
 
 ## Coverage
 42 category cards + 40 of 71 articles touched somewhere in Phases 2-5.
