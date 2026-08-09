@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-07-17T21:09:28.554Z",
+  "generatedAt": "2026-08-09T08:52:31.706Z",
   "guardrails": "## Before touching any of these pages\n\n- One change at a time. Pick a single lever (title, one section, one internal\n  link) per page per edit - not a combined rewrite. If something moves,\n  ranking or CTR, you need to know which change did it.\n- Commit before you edit, on its own commit, so a bad change is a single\n  `git revert` away. Don't bundle an SEO tweak into an unrelated commit.\n- Don't touch the URL/slug of a page that's already ranking or getting\n  clicks, ever, unless that's explicitly the point of the change.\n- Don't remove existing headings, internal links, or content sections.\n  Additive and targeted beats restructuring.\n- After publishing, that page goes on a watch list for 10-14 days before any\n  further changes. If clicks or position drop, revert immediately rather\n  than trying to fix forward.\n- Pages with zero or near-zero current clicks (most striking_distance and\n  cannibalisation entries) carry less risk since there's little to lose -\n  low_ctr and decay entries on pages with real existing clicks carry more,\n  treat those more conservatively.",
   "opportunities": [
     {
       "type": "striking_distance",
       "query": "grassroots football",
       "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football",
-      "position": 14.1,
-      "impressions": 173,
+      "position": 11.7,
+      "impressions": 618,
       "clicks": 1,
-      "ctr": 0.6,
+      "ctr": 0.2,
       "match": {
         "matched": true,
         "pathname": "/parent-guides/what-is-grassroots-football",
@@ -19,10 +19,40 @@
     },
     {
       "type": "striking_distance",
+      "query": "football development",
+      "page": "https://www.footballparent.co.uk/football-development",
+      "position": 18,
+      "impressions": 195,
+      "clicks": 1,
+      "ctr": 0.5,
+      "match": {
+        "matched": true,
+        "pathname": "/football-development",
+        "pageFile": "app\\football-development\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "best shin pads for kids",
+      "page": "https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football",
+      "position": 11.3,
+      "impressions": 141,
+      "clicks": 3,
+      "ctr": 2.1,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+        "pageFile": "app\\football-gear\\shin-pads\\best-shin-pads-for-kids-football\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
       "query": "what does grassroots football mean",
       "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football",
-      "position": 17.5,
-      "impressions": 36,
+      "position": 14,
+      "impressions": 111,
       "clicks": 0,
       "ctr": 0,
       "match": {
@@ -33,13 +63,460 @@
       }
     },
     {
+      "type": "striking_distance",
+      "query": "veo camera price",
+      "page": "https://www.footballparent.co.uk/football-gear/veo-camera-alternatives",
+      "position": 12.3,
+      "impressions": 107,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/veo-camera-alternatives",
+        "pageFile": "app\\football-gear\\veo-camera-alternatives\\page.tsx",
+        "mdxFile": "content\\football-gear\\veo-camera-alternatives.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "wide fit football boots kids",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
+      "position": 12.7,
+      "impressions": 65,
+      "clicks": 1,
+      "ctr": 1.5,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "best football boots for wide feet",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
+      "position": 12.1,
+      "impressions": 62,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "best shin pads",
+      "page": "https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football",
+      "position": 19.4,
+      "impressions": 62,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+        "pageFile": "app\\football-gear\\shin-pads\\best-shin-pads-for-kids-football\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "how to become a footballer without academy",
+      "page": "https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer",
+      "position": 11.1,
+      "impressions": 61,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/how-to-become-a-professional-footballer",
+        "pageFile": "app\\football-development\\how-to-become-a-professional-footballer\\page.tsx",
+        "mdxFile": "content\\football-development\\how-to-become-a-professional-footballer.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "jpl",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league",
+      "position": 14.2,
+      "impressions": 57,
+      "clicks": 1,
+      "ctr": 1.8,
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-the-junior-premier-league",
+        "pageFile": "app\\parent-guides\\what-is-the-junior-premier-league\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-the-junior-premier-league.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "football sizes by age",
+      "page": "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
+      "position": 11.4,
+      "impressions": 53,
+      "clicks": 1,
+      "ctr": 1.9,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/best-footballs-by-age",
+        "pageFile": "app\\football-gear\\best-footballs-by-age\\page.tsx",
+        "mdxFile": "content\\football-gear\\best-footballs-by-age.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "jpl trials",
+      "page": "https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl",
+      "position": 12,
+      "impressions": 53,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/how-to-get-into-the-jpl",
+        "pageFile": "app\\parent-guides\\how-to-get-into-the-jpl\\page.tsx",
+        "mdxFile": "content\\parent-guides\\how-to-get-into-the-jpl.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "academy categories",
+      "page": "https://www.footballparent.co.uk/academy-pathway/academy-categories-explained",
+      "position": 15.8,
+      "impressions": 52,
+      "clicks": 1,
+      "ctr": 1.9,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/academy-categories-explained",
+        "pageFile": "app\\academy-pathway\\academy-categories-explained\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\academy-categories-explained.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "football boots wide feet",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
+      "position": 18.8,
+      "impressions": 52,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "junior premier football league",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league",
+      "position": 11.9,
+      "impressions": 43,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-the-junior-premier-league",
+        "pageFile": "app\\parent-guides\\what-is-the-junior-premier-league\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-the-junior-premier-league.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "definition of grassroots football",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football",
+      "position": 19.3,
+      "impressions": 33,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-grassroots-football",
+        "pageFile": "app\\parent-guides\\what-is-grassroots-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "kids shin pads",
+      "page": "https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football",
+      "position": 11.4,
+      "impressions": 33,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+        "pageFile": "app\\football-gear\\shin-pads\\best-shin-pads-for-kids-football\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "childrens football shin pads",
+      "page": "https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football",
+      "position": 11.7,
+      "impressions": 32,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+        "pageFile": "app\\football-gear\\shin-pads\\best-shin-pads-for-kids-football\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "chelsea development",
+      "page": "https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide",
+      "position": 12.2,
+      "impressions": 30,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/chelsea-fc-development-centre-guide",
+        "pageFile": "app\\academy-pathway\\chelsea-fc-development-centre-guide\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\chelsea-fc-development-centre-guide.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "academy categories",
+      "page": "https://www.footballparent.co.uk/academy-pathway/how-academy-football-works",
+      "position": 15.7,
+      "impressions": 29,
+      "clicks": 1,
+      "ctr": 3.4,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/how-academy-football-works",
+        "pageFile": "app\\academy-pathway\\how-academy-football-works\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\how-academy-football-works.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "what size football for under 7",
+      "page": "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
+      "position": 17.6,
+      "impressions": 26,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/best-footballs-by-age",
+        "pageFile": "app\\football-gear\\best-footballs-by-age\\page.tsx",
+        "mdxFile": "content\\football-gear\\best-footballs-by-age.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "football iq",
+      "page": "https://www.footballparent.co.uk/football-development/what-is-football-iq",
+      "position": 14,
+      "impressions": 25,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/what-is-football-iq",
+        "pageFile": "app\\football-development\\what-is-football-iq\\page.tsx",
+        "mdxFile": "content\\football-development\\what-is-football-iq.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "category 1 academy",
+      "page": "https://www.footballparent.co.uk/academy-pathway/academy-categories-explained",
+      "position": 12.7,
+      "impressions": 24,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/academy-categories-explained",
+        "pageFile": "app\\academy-pathway\\academy-categories-explained\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\academy-categories-explained.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "what size football for under 12",
+      "page": "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
+      "position": 19.9,
+      "impressions": 24,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/best-footballs-by-age",
+        "pageFile": "app\\football-gear\\best-footballs-by-age\\page.tsx",
+        "mdxFile": "content\\football-gear\\best-footballs-by-age.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "private coaching",
+      "page": "https://www.footballparent.co.uk/football-development/is-private-football-coaching-worth-it",
+      "position": 11.8,
+      "impressions": 22,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/is-private-football-coaching-worth-it",
+        "pageFile": "app\\football-development\\is-private-football-coaching-worth-it\\page.tsx",
+        "mdxFile": "content\\football-development\\is-private-football-coaching-worth-it.mdx"
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "wide fitting football boots kids",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
+      "position": 12.1,
+      "impressions": 22,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "wide football boots for kids",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
+      "position": 12,
+      "impressions": 22,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "wide fit kids football boots",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids",
+      "position": 12.3,
+      "impressions": 21,
+      "clicks": 0,
+      "ctr": 0,
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "striking_distance",
+      "query": "academy pathway",
+      "page": "https://www.footballparent.co.uk/academy-pathway",
+      "position": 16.5,
+      "impressions": 20,
+      "clicks": 1,
+      "ctr": 5,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway",
+        "pageFile": "app\\academy-pathway\\page.tsx",
+        "mdxFile": null
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league",
+      "position": 6.9,
+      "impressions": 6694,
+      "clicks": 56,
+      "actualCtr": 0.8,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 3257,
+        "recentClicks": 23,
+        "recentPosition": 6.5,
+        "recentCtr": 0.7,
+        "earlierImpressions": 3437,
+        "earlierPosition": 7.2
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-the-junior-premier-league",
+        "pageFile": "app\\parent-guides\\what-is-the-junior-premier-league\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-the-junior-premier-league.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is the Junior Premier League (JPL)?",
+        "description": "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect.",
+        "found": true,
+        "source": "content\\parent-guides\\what-is-the-junior-premier-league.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/academy-categories-explained",
+      "position": 6.3,
+      "impressions": 5836,
+      "clicks": 118,
+      "actualCtr": 2,
+      "expectedCtr": 5,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 3082,
+        "recentClicks": 73,
+        "recentPosition": 6.4,
+        "recentCtr": 2.4,
+        "earlierImpressions": 2754,
+        "earlierPosition": 6.1
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/academy-categories-explained",
+        "pageFile": "app\\academy-pathway\\academy-categories-explained\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\academy-categories-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Category 1, 2, 3 & 4 Football Academies",
+        "description": "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development.",
+        "found": true,
+        "source": "content\\academy-pathway\\academy-categories-explained.mdx"
+      }
+    },
+    {
       "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/football-gear/best-footballs-by-age",
-      "position": 8.7,
-      "impressions": 1907,
-      "clicks": 15,
-      "actualCtr": 0.8,
+      "position": 8.9,
+      "impressions": 5336,
+      "clicks": 32,
+      "actualCtr": 0.6,
       "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 2602,
+        "recentClicks": 12,
+        "recentPosition": 9.2,
+        "recentCtr": 0.5,
+        "earlierImpressions": 2734,
+        "earlierPosition": 8.5
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/football-gear/best-footballs-by-age",
@@ -55,75 +532,22 @@
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/academy-pathway/what-is-eppp",
-      "position": 6.6,
-      "impressions": 1510,
-      "clicks": 8,
-      "actualCtr": 0.5,
-      "expectedCtr": 4,
-      "match": {
-        "matched": true,
-        "pathname": "/academy-pathway/what-is-eppp",
-        "pageFile": "app\\academy-pathway\\what-is-eppp\\page.tsx",
-        "mdxFile": "content\\academy-pathway\\what-is-eppp.mdx"
-      },
-      "currentMeta": {
-        "title": "What Is EPPP in Football?",
-        "description": "EPPP stands for Elite Player Performance Plan. Here is what it means in academy football, including categories, coaching hours, player movement and what parents need to know.",
-        "found": true,
-        "source": "content\\academy-pathway\\what-is-eppp.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/academy-pathway/academy-categories-explained",
-      "position": 6.1,
-      "impressions": 1434,
-      "clicks": 23,
-      "actualCtr": 1.6,
-      "expectedCtr": 5,
-      "match": {
-        "matched": true,
-        "pathname": "/academy-pathway/academy-categories-explained",
-        "pageFile": "app\\academy-pathway\\academy-categories-explained\\page.tsx",
-        "mdxFile": "content\\academy-pathway\\academy-categories-explained.mdx"
-      },
-      "currentMeta": {
-        "title": "Category 1, 2, 3 and 4 Football Academies Explained",
-        "description": "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development.",
-        "found": true,
-        "source": "content\\academy-pathway\\academy-categories-explained.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league",
-      "position": 7.8,
-      "impressions": 1361,
-      "clicks": 16,
-      "actualCtr": 1.2,
-      "expectedCtr": 3,
-      "match": {
-        "matched": true,
-        "pathname": "/parent-guides/what-is-the-junior-premier-league",
-        "pageFile": "app\\parent-guides\\what-is-the-junior-premier-league\\page.tsx",
-        "mdxFile": "content\\parent-guides\\what-is-the-junior-premier-league.mdx"
-      },
-      "currentMeta": {
-        "title": "What Is the Junior Premier League (JPL)?",
-        "description": "An independent guide to the Junior Premier League: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect.",
-        "found": true,
-        "source": "content\\parent-guides\\what-is-the-junior-premier-league.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football",
-      "position": 10,
-      "impressions": 1225,
-      "clicks": 7,
-      "actualCtr": 0.6,
-      "expectedCtr": 2,
+      "position": 8.7,
+      "impressions": 4616,
+      "clicks": 11,
+      "actualCtr": 0.2,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 2159,
+        "recentClicks": 2,
+        "recentPosition": 8.3,
+        "recentCtr": 0.1,
+        "earlierImpressions": 2457,
+        "earlierPosition": 9.2
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/parent-guides/what-is-grassroots-football",
@@ -132,19 +556,60 @@
       },
       "currentMeta": {
         "title": "What Is Grassroots Football?",
-        "description": "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football. A clear guide for UK parents.",
+        "description": "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
         "found": true,
         "source": "content\\parent-guides\\what-is-grassroots-football.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/academy-pathway/how-academy-football-works",
+      "page": "https://www.footballparent.co.uk/academy-pathway/what-is-eppp",
       "position": 6.7,
-      "impressions": 782,
-      "clicks": 10,
-      "actualCtr": 1.3,
+      "impressions": 2909,
+      "clicks": 25,
+      "actualCtr": 0.9,
       "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 931,
+        "recentClicks": 15,
+        "recentPosition": 6.9,
+        "recentCtr": 1.6,
+        "earlierImpressions": 1978,
+        "earlierPosition": 6.6
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/what-is-eppp",
+        "pageFile": "app\\academy-pathway\\what-is-eppp\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\what-is-eppp.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is EPPP? Elite Player Performance Plan",
+        "description": "EPPP stands for Elite Player Performance Plan. Here is what it means in academy football, including categories, coaching hours, player movement and what parents need to know.",
+        "found": true,
+        "source": "content\\academy-pathway\\what-is-eppp.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/how-academy-football-works",
+      "position": 7.4,
+      "impressions": 2704,
+      "clicks": 25,
+      "actualCtr": 0.9,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 1575,
+        "recentClicks": 8,
+        "recentPosition": 7.8,
+        "recentCtr": 0.5,
+        "earlierImpressions": 1129,
+        "earlierPosition": 6.7
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/academy-pathway/how-academy-football-works",
@@ -153,61 +618,29 @@
       },
       "currentMeta": {
         "title": "How Academy Football Works in the UK",
-        "description": "Learn what a football academy is, how football academies work in England, how children progress through the academy pathway, and what parents should expect at every stage.",
+        "description": "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours.",
         "found": true,
         "source": "content\\academy-pathway\\how-academy-football-works.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost",
-      "position": 6.4,
-      "impressions": 676,
-      "clicks": 12,
-      "actualCtr": 1.8,
-      "expectedCtr": 5,
-      "match": {
-        "matched": true,
-        "pathname": "/academy-pathway/how-much-does-academy-football-cost",
-        "pageFile": "app\\academy-pathway\\how-much-does-academy-football-cost\\page.tsx",
-        "mdxFile": "content\\academy-pathway\\how-much-does-academy-football-cost.mdx"
-      },
-      "currentMeta": {
-        "title": "How Much Does Academy Football Cost?",
-        "description": "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect.",
-        "found": true,
-        "source": "content\\academy-pathway\\how-much-does-academy-football-cost.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football",
-      "position": 5.4,
-      "impressions": 653,
-      "clicks": 17,
-      "actualCtr": 2.6,
-      "expectedCtr": 6,
-      "match": {
-        "matched": true,
-        "pathname": "/parent-guides/jpl-vs-grassroots-football",
-        "pageFile": "app\\parent-guides\\jpl-vs-grassroots-football\\page.tsx",
-        "mdxFile": "content\\parent-guides\\jpl-vs-grassroots-football.mdx"
-      },
-      "currentMeta": {
-        "title": "JPL vs Grassroots Football: Which Is Right for Your Child?",
-        "description": "Is JPL better than grassroots football? A practical parent comparison covering coaching, match standard, playing time, costs, travel, development and family commitment.",
-        "found": true,
-        "source": "content\\parent-guides\\jpl-vs-grassroots-football.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl",
-      "position": 7,
-      "impressions": 637,
-      "clicks": 10,
-      "actualCtr": 1.6,
+      "position": 6.9,
+      "impressions": 2365,
+      "clicks": 27,
+      "actualCtr": 1.1,
       "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 1062,
+        "recentClicks": 9,
+        "recentPosition": 6.9,
+        "recentCtr": 0.8,
+        "earlierImpressions": 1303,
+        "earlierPosition": 6.9
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/parent-guides/how-to-get-into-the-jpl",
@@ -223,12 +656,53 @@
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained",
-      "position": 5.4,
-      "impressions": 594,
-      "clicks": 15,
-      "actualCtr": 2.5,
+      "page": "https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football",
+      "position": 4.8,
+      "impressions": 2071,
+      "clicks": 31,
+      "actualCtr": 1.5,
       "expectedCtr": 6,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 1018,
+        "recentClicks": 9,
+        "recentPosition": 4.5,
+        "recentCtr": 0.9,
+        "earlierImpressions": 1053,
+        "earlierPosition": 5
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/jpl-vs-grassroots-football",
+        "pageFile": "app\\parent-guides\\jpl-vs-grassroots-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\jpl-vs-grassroots-football.mdx"
+      },
+      "currentMeta": {
+        "title": "JPL vs Grassroots Football: Which Is Right for Your Child?",
+        "description": "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared.",
+        "found": true,
+        "source": "content\\parent-guides\\jpl-vs-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained",
+      "position": 5.8,
+      "impressions": 1747,
+      "clicks": 40,
+      "actualCtr": 2.3,
+      "expectedCtr": 5,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 744,
+        "recentClicks": 15,
+        "recentPosition": 5.9,
+        "recentCtr": 2,
+        "earlierImpressions": 1003,
+        "earlierPosition": 5.7
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/girls-football/emerging-talent-centres-explained",
@@ -237,19 +711,308 @@
       },
       "currentMeta": {
         "title": "Emerging Talent Centres (ETCs) Explained",
-        "description": "What are Emerging Talent Centres in girls' football? A clear guide to how ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
         "found": true,
         "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/academy-pathway/understanding-academy-release",
-      "position": 4.9,
-      "impressions": 314,
-      "clicks": 6,
-      "actualCtr": 1.9,
+      "page": "https://www.footballparent.co.uk/academy-pathway/what-age-do-football-academies-recruit",
+      "position": 5.5,
+      "impressions": 1692,
+      "clicks": 14,
+      "actualCtr": 0.8,
       "expectedCtr": 6,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 690,
+        "recentClicks": 4,
+        "recentPosition": 5.4,
+        "recentCtr": 0.6,
+        "earlierImpressions": 1002,
+        "earlierPosition": 5.5
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/what-age-do-football-academies-recruit",
+        "pageFile": "app\\academy-pathway\\what-age-do-football-academies-recruit\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\what-age-do-football-academies-recruit.mdx"
+      },
+      "currentMeta": {
+        "title": "What Age Do Football Academies Recruit?",
+        "description": "When do football clubs recruit into academies? Find out which ages clubs target, how recruitment differs by phase, and when it's not too late to join an academy.",
+        "found": true,
+        "source": "content\\academy-pathway\\what-age-do-football-academies-recruit.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots",
+      "position": 8.9,
+      "impressions": 1584,
+      "clicks": 4,
+      "actualCtr": 0.3,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 746,
+        "recentClicks": 3,
+        "recentPosition": 8.4,
+        "recentCtr": 0.4,
+        "earlierImpressions": 838,
+        "earlierPosition": 9.3
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/ag-vs-fg-boots",
+        "pageFile": "app\\football-gear\\ag-vs-fg-boots\\page.tsx",
+        "mdxFile": "content\\football-gear\\ag-vs-fg-boots.mdx"
+      },
+      "currentMeta": {
+        "title": "FG vs AG Football Boots for Kids: A Practical Parent's Guide",
+        "description": "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose.",
+        "found": true,
+        "source": "content\\football-gear\\ag-vs-fg-boots.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost",
+      "position": 6.3,
+      "impressions": 1512,
+      "clicks": 16,
+      "actualCtr": 1.1,
+      "expectedCtr": 5,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 484,
+        "recentClicks": 2,
+        "recentPosition": 6.4,
+        "recentCtr": 0.4,
+        "earlierImpressions": 1028,
+        "earlierPosition": 6.3
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/how-much-does-academy-football-cost",
+        "pageFile": "app\\academy-pathway\\how-much-does-academy-football-cost\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\how-much-does-academy-football-cost.mdx"
+      },
+      "currentMeta": {
+        "title": "How Much Does Academy Football Cost?",
+        "description": "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect.",
+        "found": true,
+        "source": "content\\academy-pathway\\how-much-does-academy-football-cost.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide",
+      "position": 6.2,
+      "impressions": 1482,
+      "clicks": 38,
+      "actualCtr": 2.6,
+      "expectedCtr": 5,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 1361,
+        "recentClicks": 36,
+        "recentPosition": 6,
+        "recentCtr": 2.6,
+        "earlierImpressions": 121,
+        "earlierPosition": 8.6
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/chelsea-fc-development-centre-guide",
+        "pageFile": "app\\academy-pathway\\chelsea-fc-development-centre-guide\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\chelsea-fc-development-centre-guide.mdx"
+      },
+      "currentMeta": {
+        "title": "Chelsea FC Development Centre: A Parent's Guide",
+        "description": "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining.",
+        "found": true,
+        "source": "content\\academy-pathway\\chelsea-fc-development-centre-guide.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer",
+      "position": 9.2,
+      "impressions": 1459,
+      "clicks": 8,
+      "actualCtr": 0.5,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 493,
+        "recentClicks": 3,
+        "recentPosition": 9.2,
+        "recentCtr": 0.6,
+        "earlierImpressions": 966,
+        "earlierPosition": 9.3
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/how-to-become-a-professional-footballer",
+        "pageFile": "app\\football-development\\how-to-become-a-professional-footballer\\page.tsx",
+        "mdxFile": "content\\football-development\\how-to-become-a-professional-footballer.mdx"
+      },
+      "currentMeta": {
+        "title": "How to Become a Professional Footballer: What Parents Should Actually Know",
+        "description": "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent.",
+        "found": true,
+        "source": "content\\football-development\\how-to-become-a-professional-footballer.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide",
+      "position": 7.2,
+      "impressions": 1411,
+      "clicks": 25,
+      "actualCtr": 1.8,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 1278,
+        "recentClicks": 25,
+        "recentPosition": 6.7,
+        "recentCtr": 2,
+        "earlierImpressions": 133,
+        "earlierPosition": 11.6
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/arsenal-development-centre-guide",
+        "pageFile": "app\\academy-pathway\\arsenal-development-centre-guide\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\arsenal-development-centre-guide.mdx"
+      },
+      "currentMeta": {
+        "title": "Arsenal FC Development Centre: A Parent's Guide",
+        "description": "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted.",
+        "found": true,
+        "source": "content\\academy-pathway\\arsenal-development-centre-guide.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-gear/veo-camera-alternatives",
+      "position": 8.3,
+      "impressions": 1355,
+      "clicks": 22,
+      "actualCtr": 1.6,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 1140,
+        "recentClicks": 17,
+        "recentPosition": 8.1,
+        "recentCtr": 1.5,
+        "earlierImpressions": 215,
+        "earlierPosition": 9.8
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/veo-camera-alternatives",
+        "pageFile": "app\\football-gear\\veo-camera-alternatives\\page.tsx",
+        "mdxFile": "content\\football-gear\\veo-camera-alternatives.mdx"
+      },
+      "currentMeta": {
+        "title": "Veo Camera Alternatives: Cost & Comparisons",
+        "description": "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football.",
+        "found": true,
+        "source": "content\\football-gear\\veo-camera-alternatives.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies",
+      "position": 6.5,
+      "impressions": 1190,
+      "clicks": 26,
+      "actualCtr": 2.2,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 324,
+        "recentClicks": 6,
+        "recentPosition": 7,
+        "recentCtr": 1.9,
+        "earlierImpressions": 866,
+        "earlierPosition": 6.4
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/development-centres-vs-academies",
+        "pageFile": "app\\academy-pathway\\development-centres-vs-academies\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\development-centres-vs-academies.mdx"
+      },
+      "currentMeta": {
+        "title": "Development Centres vs Academies: What's the Difference?",
+        "description": "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway.",
+        "found": true,
+        "source": "content\\academy-pathway\\development-centres-vs-academies.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk",
+      "position": 6.7,
+      "impressions": 786,
+      "clicks": 13,
+      "actualCtr": 1.7,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 462,
+        "recentClicks": 5,
+        "recentPosition": 6.9,
+        "recentCtr": 1.1,
+        "earlierImpressions": 324,
+        "earlierPosition": 6.4
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/football-scholarships-uk",
+        "pageFile": "app\\academy-pathway\\football-scholarships-uk\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\football-scholarships-uk.mdx"
+      },
+      "currentMeta": {
+        "title": "Football Scholarships UK: What Parents Need to Know",
+        "description": "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18.",
+        "found": true,
+        "source": "content\\academy-pathway\\football-scholarships-uk.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-pathway/understanding-academy-release",
+      "position": 5.1,
+      "impressions": 717,
+      "clicks": 13,
+      "actualCtr": 1.8,
+      "expectedCtr": 6,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 323,
+        "recentClicks": 5,
+        "recentPosition": 5.4,
+        "recentCtr": 1.5,
+        "earlierImpressions": 394,
+        "earlierPosition": 4.9
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/academy-pathway/understanding-academy-release",
@@ -258,7 +1021,7 @@
       },
       "currentMeta": {
         "title": "Understanding Academy Release In Football",
-        "description": "A parent guide to being released from a football academy, including what happens at a release meeting, emotional support and practical next steps.",
+        "description": "Being released from a football academy: what happens at a release meeting, emotional support and the next steps.",
         "found": true,
         "source": "content\\academy-pathway\\understanding-academy-release.mdx"
       }
@@ -266,11 +1029,21 @@
     {
       "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/parent-guides/leave-grassroots-football-for-an-academy",
-      "position": 7.2,
-      "impressions": 292,
-      "clicks": 3,
-      "actualCtr": 1,
+      "position": 7.4,
+      "impressions": 678,
+      "clicks": 6,
+      "actualCtr": 0.9,
       "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 271,
+        "recentClicks": 3,
+        "recentPosition": 7.4,
+        "recentCtr": 1.1,
+        "earlierImpressions": 407,
+        "earlierPosition": 7.3
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/parent-guides/leave-grassroots-football-for-an-academy",
@@ -287,11 +1060,21 @@
     {
       "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/academy-pathway/can-academy-players-play-grassroots-football",
-      "position": 5.2,
-      "impressions": 278,
-      "clicks": 8,
-      "actualCtr": 2.9,
+      "position": 5.1,
+      "impressions": 657,
+      "clicks": 14,
+      "actualCtr": 2.1,
       "expectedCtr": 6,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 274,
+        "recentClicks": 3,
+        "recentPosition": 5,
+        "recentCtr": 1.1,
+        "earlierImpressions": 383,
+        "earlierPosition": 5.1
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/academy-pathway/can-academy-players-play-grassroots-football",
@@ -300,82 +1083,246 @@
       },
       "currentMeta": {
         "title": "Can Academy Players Play Grassroots Football?",
-        "description": "Parents often ask whether academy players can continue playing grassroots football. Here's what the rules say, how clubs approach it, and what actually happens in practice.",
+        "description": "Academy players can play grassroots football in the Foundation Phase (U9-U11) with club approval, but it's banned from U12 under the Youth Development Rules.",
         "found": true,
         "source": "content\\academy-pathway\\can-academy-players-play-grassroots-football.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/parent-guides/jpl-and-academy-football",
-      "position": 6.2,
-      "impressions": 204,
-      "clicks": 4,
-      "actualCtr": 2,
+      "page": "https://www.footballparent.co.uk/football-development",
+      "position": 23.3,
+      "impressions": 634,
+      "clicks": 3,
+      "actualCtr": 0.5,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 163,
+        "recentClicks": 0,
+        "recentPosition": 22.2,
+        "recentCtr": 0,
+        "earlierImpressions": 471,
+        "earlierPosition": 23.7
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-development",
+        "pageFile": "app\\football-development\\page.tsx",
+        "mdxFile": null
+      },
+      "currentMeta": {
+        "title": "Football Development for Young Players | Football Parent",
+        "description": "Football confidence, decision making, training load and late development: what actually predicts long-term progress in young players.",
+        "found": true,
+        "source": "app\\football-development\\page.tsx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-trials/what-happens-at-academy-trials",
+      "position": 5.7,
+      "impressions": 623,
+      "clicks": 9,
+      "actualCtr": 1.4,
       "expectedCtr": 5,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 198,
+        "recentClicks": 2,
+        "recentPosition": 5.3,
+        "recentCtr": 1,
+        "earlierImpressions": 425,
+        "earlierPosition": 5.9
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
-        "pathname": "/parent-guides/jpl-and-academy-football",
-        "pageFile": "app\\parent-guides\\jpl-and-academy-football\\page.tsx",
-        "mdxFile": "content\\parent-guides\\jpl-and-academy-football.mdx"
+        "pathname": "/academy-trials/what-happens-at-academy-trials",
+        "pageFile": "app\\academy-trials\\what-happens-at-academy-trials\\page.tsx",
+        "mdxFile": "content\\academy-trials\\what-happens-at-academy-trials.mdx"
       },
       "currentMeta": {
-        "title": "Does the Junior Premier League Lead to Academy Football?",
-        "description": "A realistic guide for parents on whether JPL football helps children get scouted, how academy recruitment works, and what actually matters.",
+        "title": "What Happens at Football Academy Trials",
+        "description": "What to expect on the day of a football academy trial, and how to prepare a child for trial at an academy or development centre.",
         "found": true,
-        "source": "content\\parent-guides\\jpl-and-academy-football.mdx"
+        "source": "content\\academy-trials\\what-happens-at-academy-trials.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/girls-football/what-age-do-girls-football-academies-recruit",
-      "position": 5,
-      "impressions": 165,
-      "clicks": 5,
-      "actualCtr": 3,
-      "expectedCtr": 6,
-      "match": {
-        "matched": true,
-        "pathname": "/girls-football/what-age-do-girls-football-academies-recruit",
-        "pageFile": "app\\girls-football\\what-age-do-girls-football-academies-recruit\\page.tsx",
-        "mdxFile": "content\\girls-football\\what-age-do-girls-football-academies-recruit.mdx"
-      },
-      "currentMeta": {
-        "title": "What Age Do Girls Football Academies Recruit?",
-        "description": "Understanding the recruitment ages and pathway stages within girls academy football in the UK.",
-        "found": true,
-        "source": "content\\girls-football\\what-age-do-girls-football-academies-recruit.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/football-development/improve-football-decision-making",
-      "position": 8.1,
-      "impressions": 162,
-      "clicks": 1,
-      "actualCtr": 0.6,
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#what-ages-are-classed-as-grassroots-football",
+      "position": 8.4,
+      "impressions": 527,
+      "clicks": 0,
+      "actualCtr": 0,
       "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 330,
+        "recentClicks": 0,
+        "recentPosition": 8.7,
+        "recentCtr": 0,
+        "earlierImpressions": 197,
+        "earlierPosition": 8
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
-        "pathname": "/football-development/improve-football-decision-making",
-        "pageFile": "app\\football-development\\improve-football-decision-making\\page.tsx",
-        "mdxFile": "content\\football-development\\improve-football-decision-making.mdx"
+        "pathname": "/parent-guides/what-is-grassroots-football",
+        "pageFile": "app\\parent-guides\\what-is-grassroots-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-grassroots-football.mdx"
       },
       "currentMeta": {
-        "title": "How To Improve Football Decision Making In Young Players",
-        "description": "Decision making is one of the most important skills in youth football - and one of the hardest to coach. Here's how parents and coaches can help young players think faster and clearer on the pitch.",
+        "title": "What Is Grassroots Football?",
+        "description": "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
         "found": true,
-        "source": "content\\football-development\\improve-football-decision-making.mdx"
+        "source": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#who-runs-grassroots-football",
+      "position": 8.4,
+      "impressions": 492,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 310,
+        "recentClicks": 0,
+        "recentPosition": 8.7,
+        "recentCtr": 0,
+        "earlierImpressions": 182,
+        "earlierPosition": 8
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-grassroots-football",
+        "pageFile": "app\\parent-guides\\what-is-grassroots-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is Grassroots Football?",
+        "description": "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
+        "found": true,
+        "source": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#what-is-grassroots-football-grassroots-football-meaning",
+      "position": 8.4,
+      "impressions": 485,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 295,
+        "recentClicks": 0,
+        "recentPosition": 8.7,
+        "recentCtr": 0,
+        "earlierImpressions": 190,
+        "earlierPosition": 7.9
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-grassroots-football",
+        "pageFile": "app\\parent-guides\\what-is-grassroots-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is Grassroots Football?",
+        "description": "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
+        "found": true,
+        "source": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#how-grassroots-football-differs-from-academy-football",
+      "position": 8.5,
+      "impressions": 434,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 277,
+        "recentClicks": 0,
+        "recentPosition": 8.7,
+        "recentCtr": 0,
+        "earlierImpressions": 157,
+        "earlierPosition": 8
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-grassroots-football",
+        "pageFile": "app\\parent-guides\\what-is-grassroots-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is Grassroots Football?",
+        "description": "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
+        "found": true,
+        "source": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#what-level-of-commitment-should-parents-expect",
+      "position": 8.5,
+      "impressions": 430,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 273,
+        "recentClicks": 0,
+        "recentPosition": 8.7,
+        "recentCtr": 0,
+        "earlierImpressions": 157,
+        "earlierPosition": 8
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-is-grassroots-football",
+        "pageFile": "app\\parent-guides\\what-is-grassroots-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-is-grassroots-football.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is Grassroots Football?",
+        "description": "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
+        "found": true,
+        "source": "content\\parent-guides\\what-is-grassroots-football.mdx"
       }
     },
     {
       "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/academy-pathway/how-to-join-a-football-academy",
-      "position": 11,
-      "impressions": 132,
-      "clicks": 0,
-      "actualCtr": 0,
+      "position": 10.7,
+      "impressions": 314,
+      "clicks": 1,
+      "actualCtr": 0.3,
       "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 88,
+        "recentClicks": 1,
+        "recentPosition": 12.5,
+        "recentCtr": 1.1,
+        "earlierImpressions": 226,
+        "earlierPosition": 10.1
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/academy-pathway/how-to-join-a-football-academy",
@@ -391,12 +1338,146 @@
     },
     {
       "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/what-age-do-girls-football-academies-recruit",
+      "position": 4.7,
+      "impressions": 278,
+      "clicks": 9,
+      "actualCtr": 3.2,
+      "expectedCtr": 6,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 40,
+        "recentClicks": 2,
+        "recentPosition": 4.7,
+        "recentCtr": 5,
+        "earlierImpressions": 238,
+        "earlierPosition": 4.7
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/what-age-do-girls-football-academies-recruit",
+        "pageFile": "app\\girls-football\\what-age-do-girls-football-academies-recruit\\page.tsx",
+        "mdxFile": "content\\girls-football\\what-age-do-girls-football-academies-recruit.mdx"
+      },
+      "currentMeta": {
+        "title": "What Age Do Girls Football Academies Recruit?",
+        "description": "Understanding the recruitment ages and pathway stages within girls academy football in the UK.",
+        "found": true,
+        "source": "content\\girls-football\\what-age-do-girls-football-academies-recruit.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/jpl-and-academy-football",
+      "position": 5.7,
+      "impressions": 276,
+      "clicks": 4,
+      "actualCtr": 1.4,
+      "expectedCtr": 5,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 55,
+        "recentClicks": 0,
+        "recentPosition": 4.6,
+        "recentCtr": 0,
+        "earlierImpressions": 221,
+        "earlierPosition": 6
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/jpl-and-academy-football",
+        "pageFile": "app\\parent-guides\\jpl-and-academy-football\\page.tsx",
+        "mdxFile": "content\\parent-guides\\jpl-and-academy-football.mdx"
+      },
+      "currentMeta": {
+        "title": "Does the Junior Premier League Lead to Academy Football?",
+        "description": "Playing in the JPL doesn't create an automatic route into an academy - scouts select on ability, not league. What actually gets a child noticed.",
+        "found": true,
+        "source": "content\\parent-guides\\jpl-and-academy-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-development/improve-football-decision-making",
+      "position": 7.4,
+      "impressions": 264,
+      "clicks": 4,
+      "actualCtr": 1.5,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 24,
+        "recentClicks": 2,
+        "recentPosition": 8.4,
+        "recentCtr": 8.3,
+        "earlierImpressions": 240,
+        "earlierPosition": 7.3
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/improve-football-decision-making",
+        "pageFile": "app\\football-development\\improve-football-decision-making\\page.tsx",
+        "mdxFile": "content\\football-development\\improve-football-decision-making.mdx"
+      },
+      "currentMeta": {
+        "title": "How To Improve Football Decision Making In Young Players",
+        "description": "Decision making is one of the most important skills in youth football - and one of the hardest to coach. Here's how parents and coaches can help young players think faster and clearer on the pitch.",
+        "found": true,
+        "source": "content\\football-development\\improve-football-decision-making.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/how-to-become-a-football-coach",
+      "position": 13.3,
+      "impressions": 181,
+      "clicks": 1,
+      "actualCtr": 0.6,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 60,
+        "recentClicks": 0,
+        "recentPosition": 13.8,
+        "recentCtr": 0,
+        "earlierImpressions": 121,
+        "earlierPosition": 13.1
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/how-to-become-a-football-coach",
+        "pageFile": "app\\parent-guides\\how-to-become-a-football-coach\\page.tsx",
+        "mdxFile": "content\\parent-guides\\how-to-become-a-football-coach.mdx"
+      },
+      "currentMeta": {
+        "title": "How to Become a Grassroots Football Coach",
+        "description": "How to become a grassroots football coach: joining as a volunteer, DBS checks, safeguarding, first aid, time commitment and coaching your own child.",
+        "found": true,
+        "source": "content\\parent-guides\\how-to-become-a-football-coach.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/academy-trials/what-do-academy-coaches-look-for",
-      "position": 5.9,
-      "impressions": 130,
+      "position": 6.6,
+      "impressions": 177,
       "clicks": 0,
       "actualCtr": 0,
-      "expectedCtr": 5,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 20,
+        "recentClicks": 0,
+        "recentPosition": 9.1,
+        "recentCtr": 0,
+        "earlierImpressions": 157,
+        "earlierPosition": 6.3
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/academy-trials/what-do-academy-coaches-look-for",
@@ -405,145 +1486,29 @@
       },
       "currentMeta": {
         "title": "What Do Academy Coaches Look For?",
-        "description": "A breakdown of the technical, physical and behavioural traits academy coaches assess in young players.",
+        "description": "It's rarely goals or pace: academy coaches watch what a player does before the ball arrives. The technical and behavioural traits that get noticed.",
         "found": true,
         "source": "content\\academy-trials\\what-do-academy-coaches-look-for.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk",
-      "position": 5.7,
-      "impressions": 126,
-      "clicks": 3,
-      "actualCtr": 2.4,
-      "expectedCtr": 5,
-      "match": {
-        "matched": true,
-        "pathname": "/academy-pathway/football-scholarships-uk",
-        "pageFile": "app\\academy-pathway\\football-scholarships-uk\\page.tsx",
-        "mdxFile": "content\\academy-pathway\\football-scholarships-uk.mdx"
-      },
-      "currentMeta": {
-        "title": "Football Scholarships UK: What Parents Need to Know",
-        "description": "A clear guide to football scholarships in the UK. Understand the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18.",
-        "found": true,
-        "source": "content\\academy-pathway\\football-scholarships-uk.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/football-development/is-private-football-coaching-worth-it",
-      "position": 9.2,
-      "impressions": 90,
-      "clicks": 1,
-      "actualCtr": 1.1,
-      "expectedCtr": 3,
-      "match": {
-        "matched": true,
-        "pathname": "/football-development/is-private-football-coaching-worth-it",
-        "pageFile": "app\\football-development\\is-private-football-coaching-worth-it\\page.tsx",
-        "mdxFile": "content\\football-development\\is-private-football-coaching-worth-it.mdx"
-      },
-      "currentMeta": {
-        "title": "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?",
-        "description": "Thinking about private football coaching or 1-to-1 football coaching? Learn when it helps, what it costs, how to choose a coach and whether it's worth it for young players.",
-        "found": true,
-        "source": "content\\football-development\\is-private-football-coaching-worth-it.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/parent-guides",
-      "position": 14.8,
-      "impressions": 77,
-      "clicks": 0,
-      "actualCtr": 0,
-      "expectedCtr": 1,
-      "match": {
-        "matched": true,
-        "pathname": "/parent-guides",
-        "pageFile": "app\\parent-guides\\page.tsx",
-        "mdxFile": null
-      },
-      "currentMeta": {
-        "title": "Parent Guides | Football Parent",
-        "description": "Independent football parenting advice covering academy decisions, the Junior Premier League, player development, confidence, matchday behaviour and supporting young players.",
-        "found": true,
-        "source": "app\\parent-guides\\page.tsx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide",
-      "position": 12.4,
-      "impressions": 76,
-      "clicks": 0,
-      "actualCtr": 0,
-      "expectedCtr": 1,
-      "match": {
-        "matched": true,
-        "pathname": "/academy-pathway/arsenal-development-centre-guide",
-        "pageFile": "app\\academy-pathway\\arsenal-development-centre-guide\\page.tsx",
-        "mdxFile": "content\\academy-pathway\\arsenal-development-centre-guide.mdx"
-      },
-      "currentMeta": {
-        "title": "Arsenal FC Development Centre: A Parent's Guide",
-        "description": "What parents should know about Arsenal's youth development pathway - how the programme is structured, the academy's reputation, and what families should realistically expect.",
-        "found": true,
-        "source": "content\\academy-pathway\\arsenal-development-centre-guide.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/girls-football",
-      "position": 11,
-      "impressions": 67,
-      "clicks": 0,
-      "actualCtr": 0,
-      "expectedCtr": 1,
-      "match": {
-        "matched": true,
-        "pathname": "/girls-football",
-        "pageFile": "app\\girls-football\\page.tsx",
-        "mdxFile": null
-      },
-      "currentMeta": {
-        "title": "Girls Football | Football Parent",
-        "description": "Guidance for parents navigating girls football, academy pathways, trials and long-term player development in the UK.",
-        "found": true,
-        "source": "app\\girls-football\\page.tsx"
-      }
-    },
-    {
-      "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/football-development/playing-up-an-age-group-football",
-      "position": 6.7,
-      "impressions": 65,
-      "clicks": 1,
-      "actualCtr": 1.5,
-      "expectedCtr": 4,
-      "match": {
-        "matched": true,
-        "pathname": "/football-development/playing-up-an-age-group-football",
-        "pageFile": "app\\football-development\\playing-up-an-age-group-football\\page.tsx",
-        "mdxFile": "content\\football-development\\playing-up-an-age-group-football.mdx"
-      },
-      "currentMeta": {
-        "title": "Should My Child Play Up an Age Group in Football?",
-        "description": "A balanced guide for parents weighing up whether to let their child play up an age group, covering the genuine benefits, the risks, and the questions worth asking first.",
-        "found": true,
-        "source": "content\\football-development\\playing-up-an-age-group-football.mdx"
-      }
-    },
-    {
-      "type": "low_ctr",
       "page": "https://www.footballparent.co.uk/academy-pathway/football-development-centres-in-london",
-      "position": 10.6,
-      "impressions": 65,
-      "clicks": 0,
-      "actualCtr": 0,
-      "expectedCtr": 1,
+      "position": 9.2,
+      "impressions": 165,
+      "clicks": 2,
+      "actualCtr": 1.2,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 86,
+        "recentClicks": 2,
+        "recentPosition": 8.1,
+        "recentCtr": 2.3,
+        "earlierImpressions": 79,
+        "earlierPosition": 10.3
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/academy-pathway/football-development-centres-in-london",
@@ -552,19 +1517,308 @@
       },
       "currentMeta": {
         "title": "Football Development Centres in London: A Parent's Guide",
-        "description": "London has more youth football development pathways than anywhere else in England. This guide helps parents understand the options - for both boys and girls - across the capital.",
+        "description": "London has more youth football development pathways than anywhere else in England - the options for both boys and girls across the capital.",
         "found": true,
         "source": "content\\academy-pathway\\football-development-centres-in-london.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/football-development/build-confidence-young-footballers",
-      "position": 9.3,
-      "impressions": 52,
+      "page": "https://www.footballparent.co.uk/academy-pathway/pre-academy-football",
+      "position": 4,
+      "impressions": 161,
+      "clicks": 6,
+      "actualCtr": 3.7,
+      "expectedCtr": 8,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 74,
+        "recentClicks": 1,
+        "recentPosition": 3.1,
+        "recentCtr": 1.4,
+        "earlierImpressions": 87,
+        "earlierPosition": 4.8
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/pre-academy-football",
+        "pageFile": "app\\academy-pathway\\pre-academy-football\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\pre-academy-football.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is Pre-Academy Football?",
+        "description": "What is pre-academy football, what ages does it cover, and is it worth it? How pre-academies and trials relate to the wider academy pathway.",
+        "found": true,
+        "source": "content\\academy-pathway\\pre-academy-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-development/how-much-training-is-too-much",
+      "position": 5.5,
+      "impressions": 157,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 5,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 71,
+        "recentClicks": 0,
+        "recentPosition": 4.9,
+        "recentCtr": 0,
+        "earlierImpressions": 86,
+        "earlierPosition": 6
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/how-much-training-is-too-much",
+        "pageFile": "app\\football-development\\how-much-training-is-too-much\\page.tsx",
+        "mdxFile": "content\\football-development\\how-much-training-is-too-much.mdx"
+      },
+      "currentMeta": {
+        "title": "How Much Training Is Too Much For Young Footballers?",
+        "description": "More sessions doesn't always mean more development. Age-by-age training load guidelines, from 1-2 sessions a week at U8-U10, and the real signs of burnout.",
+        "found": true,
+        "source": "content\\football-development\\how-much-training-is-too-much.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-development/what-is-football-iq",
+      "position": 7.3,
+      "impressions": 132,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 45,
+        "recentClicks": 0,
+        "recentPosition": 5.6,
+        "recentCtr": 0,
+        "earlierImpressions": 87,
+        "earlierPosition": 8.2
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/what-is-football-iq",
+        "pageFile": "app\\football-development\\what-is-football-iq\\page.tsx",
+        "mdxFile": "content\\football-development\\what-is-football-iq.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is Football IQ? Football Intelligence Explained",
+        "description": "What football IQ actually means, why coaches value it so highly, and how scanning, decision making and match experience help children develop it.",
+        "found": true,
+        "source": "content\\football-development\\what-is-football-iq.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-trials/how-football-clubs-recruit-young-players",
+      "position": 9.6,
+      "impressions": 117,
+      "clicks": 1,
+      "actualCtr": 0.9,
+      "expectedCtr": 2,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 83,
+        "recentClicks": 1,
+        "recentPosition": 9,
+        "recentCtr": 1.2,
+        "earlierImpressions": 34,
+        "earlierPosition": 11
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-trials/how-football-clubs-recruit-young-players",
+        "pageFile": "app\\academy-trials\\how-football-clubs-recruit-young-players\\page.tsx",
+        "mdxFile": "content\\academy-trials\\how-football-clubs-recruit-young-players.mdx"
+      },
+      "currentMeta": {
+        "title": "How Football Clubs Recruit Young Players",
+        "description": "How do professional football clubs actually find and recruit young players? How scouting, development centres, referrals and trials fit together, and what parents should realistically expect.",
+        "found": true,
+        "source": "content\\academy-trials\\how-football-clubs-recruit-young-players.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/coaching/what-qualifications-do-i-need-to-be-a-football-coach",
+      "position": 20.3,
+      "impressions": 117,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 117,
+        "recentClicks": 0,
+        "recentPosition": 20.3,
+        "recentCtr": 0,
+        "earlierImpressions": 0,
+        "earlierPosition": null
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/coaching/what-qualifications-do-i-need-to-be-a-football-coach",
+        "pageFile": "app\\coaching\\what-qualifications-do-i-need-to-be-a-football-coach\\page.tsx",
+        "mdxFile": "content\\coaching\\what-qualifications-do-i-need-to-be-a-football-coach.mdx"
+      },
+      "currentMeta": {
+        "title": "What Qualifications Do You Need to Be a Football Coach?",
+        "description": "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?",
+        "found": true,
+        "source": "content\\coaching\\what-qualifications-do-i-need-to-be-a-football-coach.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#cost-and-accessibility",
+      "position": 7.7,
+      "impressions": 117,
       "clicks": 0,
       "actualCtr": 0,
       "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 112,
+        "recentClicks": 0,
+        "recentPosition": 7.6,
+        "recentCtr": 0,
+        "earlierImpressions": 5,
+        "earlierPosition": 9
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/emerging-talent-centres-explained",
+        "pageFile": "app\\girls-football\\emerging-talent-centres-explained\\page.tsx",
+        "mdxFile": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Emerging Talent Centres (ETCs) Explained",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "found": true,
+        "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#how-the-etc-pathway-works",
+      "position": 7.7,
+      "impressions": 117,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 112,
+        "recentClicks": 0,
+        "recentPosition": 7.6,
+        "recentCtr": 0,
+        "earlierImpressions": 5,
+        "earlierPosition": 9
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/emerging-talent-centres-explained",
+        "pageFile": "app\\girls-football\\emerging-talent-centres-explained\\page.tsx",
+        "mdxFile": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Emerging Talent Centres (ETCs) Explained",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "found": true,
+        "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-are-emerging-talent-centres",
+      "position": 7.6,
+      "impressions": 114,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 109,
+        "recentClicks": 0,
+        "recentPosition": 7.6,
+        "recentCtr": 0,
+        "earlierImpressions": 5,
+        "earlierPosition": 9
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/emerging-talent-centres-explained",
+        "pageFile": "app\\girls-football\\emerging-talent-centres-explained\\page.tsx",
+        "mdxFile": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Emerging Talent Centres (ETCs) Explained",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "found": true,
+        "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-to-say-after-football-matches",
+      "position": 7.1,
+      "impressions": 113,
+      "clicks": 1,
+      "actualCtr": 0.9,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 22,
+        "recentClicks": 1,
+        "recentPosition": 6.4,
+        "recentCtr": 4.5,
+        "earlierImpressions": 91,
+        "earlierPosition": 7.3
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-to-say-after-football-matches",
+        "pageFile": "app\\parent-guides\\what-to-say-after-football-matches\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-to-say-after-football-matches.mdx"
+      },
+      "currentMeta": {
+        "title": "What Should Parents Say After Football Matches?",
+        "description": "What to actually say to your child after a football match, win or lose: the phrases that help, the ones that do harm, and why the drive home matters most.",
+        "found": true,
+        "source": "content\\parent-guides\\what-to-say-after-football-matches.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-development/build-confidence-young-footballers",
+      "position": 9.8,
+      "impressions": 106,
+      "clicks": 1,
+      "actualCtr": 0.9,
+      "expectedCtr": 2,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 20,
+        "recentClicks": 1,
+        "recentPosition": 12,
+        "recentCtr": 5,
+        "earlierImpressions": 86,
+        "earlierPosition": 9.2
+      },
+      "status": "confirmed",
       "match": {
         "matched": true,
         "pathname": "/football-development/build-confidence-young-footballers",
@@ -573,19 +1827,370 @@
       },
       "currentMeta": {
         "title": "How To Build Confidence In Young Footballers",
-        "description": "Practical ways parents can help young footballers build football confidence without adding pressure or unrealistic expectations.",
+        "description": "How parents can help young footballers build football confidence without adding pressure or unrealistic expectations.",
         "found": true,
         "source": "content\\football-development\\build-confidence-young-footballers.mdx"
       }
     },
     {
       "type": "low_ctr",
-      "page": "https://www.footballparent.co.uk/girls-football/girls-rtcs-explained",
-      "position": 7.6,
-      "impressions": 50,
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#etc-vs-pro-game-academy",
+      "position": 7.5,
+      "impressions": 102,
       "clicks": 0,
       "actualCtr": 0,
       "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 98,
+        "recentClicks": 0,
+        "recentPosition": 7.4,
+        "recentCtr": 0,
+        "earlierImpressions": 4,
+        "earlierPosition": 9.5
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/emerging-talent-centres-explained",
+        "pageFile": "app\\girls-football\\emerging-talent-centres-explained\\page.tsx",
+        "mdxFile": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Emerging Talent Centres (ETCs) Explained",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "found": true,
+        "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#how-recruitment-works",
+      "position": 7.5,
+      "impressions": 100,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 96,
+        "recentClicks": 0,
+        "recentPosition": 7.4,
+        "recentCtr": 0,
+        "earlierImpressions": 4,
+        "earlierPosition": 9.5
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/emerging-talent-centres-explained",
+        "pageFile": "app\\girls-football\\emerging-talent-centres-explained\\page.tsx",
+        "mdxFile": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Emerging Talent Centres (ETCs) Explained",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "found": true,
+        "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet",
+      "position": 11,
+      "impressions": 95,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 95,
+        "recentClicks": 0,
+        "recentPosition": 11,
+        "recentCtr": 0,
+        "earlierImpressions": 0,
+        "earlierPosition": null
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      },
+      "currentMeta": {
+        "title": "Best Football Boots for Wide Feet Kids | Football Parent",
+        "description": "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying.",
+        "found": true,
+        "source": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#where-etcs-fit-in-the-full-pathway",
+      "position": 7.5,
+      "impressions": 95,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 91,
+        "recentClicks": 0,
+        "recentPosition": 7.4,
+        "recentCtr": 0,
+        "earlierImpressions": 4,
+        "earlierPosition": 9.5
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/emerging-talent-centres-explained",
+        "pageFile": "app\\girls-football\\emerging-talent-centres-explained\\page.tsx",
+        "mdxFile": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Emerging Talent Centres (ETCs) Explained",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "found": true,
+        "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types",
+      "position": 11.1,
+      "impressions": 93,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 93,
+        "recentClicks": 0,
+        "recentPosition": 11.1,
+        "recentCtr": 0,
+        "earlierImpressions": 0,
+        "earlierPosition": null
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      },
+      "currentMeta": {
+        "title": "Best Football Boots for Wide Feet Kids | Football Parent",
+        "description": "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying.",
+        "found": true,
+        "source": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters",
+      "position": 11.1,
+      "impressions": 88,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 88,
+        "recentClicks": 0,
+        "recentPosition": 11.1,
+        "recentCtr": 0,
+        "earlierImpressions": 0,
+        "earlierPosition": null
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      },
+      "currentMeta": {
+        "title": "Best Football Boots for Wide Feet Kids | Football Parent",
+        "description": "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying.",
+        "found": true,
+        "source": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow",
+      "position": 11,
+      "impressions": 87,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 87,
+        "recentClicks": 0,
+        "recentPosition": 11,
+        "recentCtr": 0,
+        "earlierImpressions": 0,
+        "earlierPosition": null
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+        "pageFile": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx",
+        "mdxFile": null
+      },
+      "currentMeta": {
+        "title": "Best Football Boots for Wide Feet Kids | Football Parent",
+        "description": "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying.",
+        "found": true,
+        "source": "app\\football-gear\\boots\\best-football-boots-for-wide-feet-kids\\page.tsx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football",
+      "position": 15.5,
+      "impressions": 81,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 7,
+        "recentClicks": 0,
+        "recentPosition": 52,
+        "recentCtr": 0,
+        "earlierImpressions": 74,
+        "earlierPosition": 12
+      },
+      "status": "insufficient_recent_data",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football",
+        "pageFile": "app\\girls-football\\page.tsx",
+        "mdxFile": null
+      },
+      "currentMeta": {
+        "title": "Girls Football | Football Parent",
+        "description": "Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway actually works for UK families.",
+        "found": true,
+        "source": "app\\girls-football\\page.tsx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/academy-trials/how-to-get-scouted-for-football",
+      "position": 10.8,
+      "impressions": 74,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 1,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 38,
+        "recentClicks": 0,
+        "recentPosition": 12.1,
+        "recentCtr": 0,
+        "earlierImpressions": 36,
+        "earlierPosition": 9.5
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/academy-trials/how-to-get-scouted-for-football",
+        "pageFile": "app\\academy-trials\\how-to-get-scouted-for-football\\page.tsx",
+        "mdxFile": "content\\academy-trials\\how-to-get-scouted-for-football.mdx"
+      },
+      "currentMeta": {
+        "title": "How to Get Scouted for Football",
+        "description": "Paid showcase events rarely help: scouts assess players through live football, not highlight reels. What genuinely improves your child's chances of being noticed.",
+        "found": true,
+        "source": "content\\academy-trials\\how-to-get-scouted-for-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-etc-selection-really-means",
+      "position": 6.8,
+      "impressions": 69,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 69,
+        "recentClicks": 0,
+        "recentPosition": 6.8,
+        "recentCtr": 0,
+        "earlierImpressions": 0,
+        "earlierPosition": null
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/emerging-talent-centres-explained",
+        "pageFile": "app\\girls-football\\emerging-talent-centres-explained\\page.tsx",
+        "mdxFile": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      },
+      "currentMeta": {
+        "title": "Emerging Talent Centres (ETCs) Explained",
+        "description": "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs.",
+        "found": true,
+        "source": "content\\girls-football\\emerging-talent-centres-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/football-development/relative-age-effect-football",
+      "position": 7.1,
+      "impressions": 67,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 23,
+        "recentClicks": 0,
+        "recentPosition": 7.5,
+        "recentCtr": 0,
+        "earlierImpressions": 44,
+        "earlierPosition": 6.8
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/relative-age-effect-football",
+        "pageFile": "app\\football-development\\relative-age-effect-football\\page.tsx",
+        "mdxFile": "content\\football-development\\relative-age-effect-football.mdx"
+      },
+      "currentMeta": {
+        "title": "What Is the Relative Age Effect in Youth Football?",
+        "description": "How birth month can influence academy selection, and what it means for your child's development in youth football.",
+        "found": true,
+        "source": "content\\football-development\\relative-age-effect-football.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/girls-rtcs-explained",
+      "position": 7.1,
+      "impressions": 65,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 4,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 12,
+        "recentClicks": 0,
+        "recentPosition": 5.7,
+        "recentCtr": 0,
+        "earlierImpressions": 53,
+        "earlierPosition": 7.4
+      },
+      "status": "insufficient_recent_data",
       "match": {
         "matched": true,
         "pathname": "/girls-football/girls-rtcs-explained",
@@ -594,9 +2199,184 @@
       },
       "currentMeta": {
         "title": "Girls RTCs Explained: What They Were and What Replaced Them",
-        "description": "RTCs in girls football no longer exist. This guide explains what Regional Talent Centres were, why they changed, and what the current pathway looks like for talented girls today.",
+        "description": "RTCs in girls football no longer exist. They were replaced by Emerging Talent Centres and Professional Game Academies. What the pathway looks like now.",
         "found": true,
         "source": "content\\girls-football\\girls-rtcs-explained.mdx"
+      }
+    },
+    {
+      "type": "low_ctr",
+      "page": "https://www.footballparent.co.uk/girls-football/girls-academy-vs-grassroots-football",
+      "position": 8.8,
+      "impressions": 51,
+      "clicks": 0,
+      "actualCtr": 0,
+      "expectedCtr": 3,
+      "recentTrend": {
+        "windowDays": 14,
+        "recentImpressions": 26,
+        "recentClicks": 0,
+        "recentPosition": 10,
+        "recentCtr": 0,
+        "earlierImpressions": 25,
+        "earlierPosition": 7.5
+      },
+      "status": "confirmed",
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/girls-academy-vs-grassroots-football",
+        "pageFile": "app\\girls-football\\girls-academy-vs-grassroots-football\\page.tsx",
+        "mdxFile": "content\\girls-football\\girls-academy-vs-grassroots-football.mdx"
+      },
+      "currentMeta": {
+        "title": "Girls Academy Football vs Grassroots Football",
+        "description": "Comparing girls academy football and grassroots football environments, commitments and development opportunities.",
+        "found": true,
+        "source": "content\\girls-football\\girls-academy-vs-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/parent-guides/what-to-say-after-football-matches",
+      "baselineImpressions": 113,
+      "baselineClicks": 1,
+      "baselineDays": 21,
+      "recentImpressions": 0,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/parent-guides/what-to-say-after-football-matches",
+        "pageFile": "app\\parent-guides\\what-to-say-after-football-matches\\page.tsx",
+        "mdxFile": "content\\parent-guides\\what-to-say-after-football-matches.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/football-development/late-developers-in-football",
+      "baselineImpressions": 109,
+      "baselineClicks": 4,
+      "baselineDays": 21,
+      "recentImpressions": 0,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/football-development/late-developers-in-football",
+        "pageFile": "app\\football-development\\late-developers-in-football\\page.tsx",
+        "mdxFile": "content\\football-development\\late-developers-in-football.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/academy-trials/football-trials-near-me",
+      "baselineImpressions": 79,
+      "baselineClicks": 1,
+      "baselineDays": 21,
+      "recentImpressions": 1,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-trials/football-trials-near-me",
+        "pageFile": "app\\academy-trials\\football-trials-near-me\\page.tsx",
+        "mdxFile": "content\\academy-trials\\football-trials-near-me.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/girls-football/girls-academy-vs-grassroots-football",
+      "baselineImpressions": 50,
+      "baselineClicks": 0,
+      "baselineDays": 21,
+      "recentImpressions": 1,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/girls-academy-vs-grassroots-football",
+        "pageFile": "app\\girls-football\\girls-academy-vs-grassroots-football\\page.tsx",
+        "mdxFile": "content\\girls-football\\girls-academy-vs-grassroots-football.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/girls-football/late-developers-in-girls-football",
+      "baselineImpressions": 39,
+      "baselineClicks": 0,
+      "baselineDays": 21,
+      "recentImpressions": 1,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/girls-football/late-developers-in-girls-football",
+        "pageFile": "app\\girls-football\\late-developers-in-girls-football\\page.tsx",
+        "mdxFile": "content\\girls-football\\late-developers-in-girls-football.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/academy-pathway/what-is-eppp#eppp-at-a-glance",
+      "baselineImpressions": 36,
+      "baselineClicks": 0,
+      "baselineDays": 21,
+      "recentImpressions": 0,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/what-is-eppp",
+        "pageFile": "app\\academy-pathway\\what-is-eppp\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\what-is-eppp.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/academy-pathway/what-is-eppp#why-the-eppp-was-introduced",
+      "baselineImpressions": 36,
+      "baselineClicks": 0,
+      "baselineDays": 21,
+      "recentImpressions": 0,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/what-is-eppp",
+        "pageFile": "app\\academy-pathway\\what-is-eppp\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\what-is-eppp.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/academy-pathway/what-is-eppp#contact-hours-by-phase",
+      "baselineImpressions": 32,
+      "baselineClicks": 0,
+      "baselineDays": 21,
+      "recentImpressions": 0,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/what-is-eppp",
+        "pageFile": "app\\academy-pathway\\what-is-eppp\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\what-is-eppp.mdx"
+      }
+    },
+    {
+      "type": "silence",
+      "page": "https://www.footballparent.co.uk/academy-pathway/what-is-eppp#why-this-matters-for-you-as-a-parent",
+      "baselineImpressions": 30,
+      "baselineClicks": 0,
+      "baselineDays": 21,
+      "recentImpressions": 0,
+      "recentClicks": 0,
+      "recentDays": 7,
+      "match": {
+        "matched": true,
+        "pathname": "/academy-pathway/what-is-eppp",
+        "pageFile": "app\\academy-pathway\\what-is-eppp\\page.tsx",
+        "mdxFile": "content\\academy-pathway\\what-is-eppp.mdx"
       }
     }
   ]
