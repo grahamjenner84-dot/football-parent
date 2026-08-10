@@ -29,7 +29,26 @@ function isStale(consent: Consent): boolean {
   return !Number.isFinite(age) || age > MAX_CONSENT_AGE_MS;
 }
 
-function writeConsent(analytics: boolean) {
+type ConsentAction = "accept_all" | "reject_all" | "save_preferences";
+
+function logConsentEvent(action: ConsentAction, analytics: boolean) {
+  // Fire-and-forget to our own backend - not gated on the analytics choice
+  // itself (it's an anonymous aggregate count, not a tracking cookie). Use
+  // keepalive so the request survives if the banner click also navigates
+  // away or closes the tab.
+  try {
+    fetch("/api/cookie-consent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action, analyticsGranted: analytics }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // ignore - logging the choice should never block applying it
+  }
+}
+
+function writeConsent(analytics: boolean, action: ConsentAction) {
   try {
     localStorage.setItem(
       STORAGE_KEY,
@@ -47,6 +66,8 @@ function writeConsent(analytics: boolean) {
   w.gtag?.("consent", "update", {
     analytics_storage: analytics ? "granted" : "denied",
   });
+
+  logConsentEvent(action, analytics);
 }
 
 export default function CookieConsent() {
@@ -73,19 +94,19 @@ export default function CookieConsent() {
   if (!visible) return null;
 
   const acceptAll = () => {
-    writeConsent(true);
+    writeConsent(true, "accept_all");
     setVisible(false);
     setManaging(false);
   };
 
   const rejectAll = () => {
-    writeConsent(false);
+    writeConsent(false, "reject_all");
     setVisible(false);
     setManaging(false);
   };
 
   const savePreferences = () => {
-    writeConsent(analyticsChoice);
+    writeConsent(analyticsChoice, "save_preferences");
     setVisible(false);
     setManaging(false);
   };
