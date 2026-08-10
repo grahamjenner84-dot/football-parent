@@ -31,6 +31,10 @@ export default function Footer() {
             Cookie Policy
           </Link>
 
+          <Link href="/terms-and-conditions" className="hover:text-black">
+            Terms &amp; Conditions
+          </Link>
+
           <button
             type="button"
             onClick={() =>
