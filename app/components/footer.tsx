@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 export default function Footer() {
@@ -20,6 +22,24 @@ export default function Footer() {
           <Link href="/editorial-policy" className="hover:text-black">
             Editorial Policy
           </Link>
+
+          <Link href="/privacy-policy" className="hover:text-black">
+            Privacy Policy
+          </Link>
+
+          <Link href="/cookie-policy" className="hover:text-black">
+            Cookie Policy
+          </Link>
+
+          <button
+            type="button"
+            onClick={() =>
+              window.dispatchEvent(new Event("fp:open-cookie-settings"))
+            }
+            className="hover:text-black"
+          >
+            Cookie Settings
+          </button>
 
           <a
             href="mailto:footballparentuk@gmail.com"

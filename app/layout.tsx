@@ -2,6 +2,7 @@ import Script from "next/script";
 import type { Metadata } from "next";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import CookieConsent from "./components/CookieConsent";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -64,11 +65,46 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
+        {/* Google Consent Mode v2: must run before any GA script executes,
+            so this stays beforeInteractive. Reads the same "fp-cookie-consent"
+            localStorage key that app/components/CookieConsent.tsx writes to -
+            keep the key name, and the 12-month max-age, in sync if either
+            side changes. */}
+        <Script id="consent-default" strategy="beforeInteractive">
+          {`
+            (function () {
+              window.dataLayer = window.dataLayer || [];
+              function gtag() { window.dataLayer.push(arguments); }
+              window.gtag = window.gtag || gtag;
+
+              var MAX_CONSENT_AGE_MS = 365 * 24 * 60 * 60 * 1000;
+              var consent = null;
+              try {
+                var stored = localStorage.getItem('fp-cookie-consent');
+                if (stored) consent = JSON.parse(stored);
+              } catch (e) {}
+
+              var age = consent ? Date.now() - new Date(consent.timestamp).getTime() : Infinity;
+              var isFresh = consent && age <= MAX_CONSENT_AGE_MS;
+
+              window.gtag('consent', 'default', {
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                analytics_storage: isFresh && consent.analytics ? 'granted' : 'denied',
+                wait_for_update: 500,
+              });
+            })();
+          `}
+        </Script>
+
         <Header />
 
         <main className="flex-1">{children}</main>
 
         <Footer />
+
+        <CookieConsent />
 
         <Script
           id="organization-schema"

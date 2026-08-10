@@ -97,6 +97,10 @@ export const routes = [
   '/parent-guides/how-to-become-a-football-coach',
   '/parent-guides/futurefit-football-dna-interview-part-2',
   '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
+
+  // Legal
+  '/privacy-policy',
+  '/cookie-policy',
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {
