@@ -30,15 +30,11 @@ export default function PrivacyPolicyPage() {
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
         <div className="space-y-6 text-gray-700 text-lg leading-8">
-          {/* TODO before publishing: replace "Football Parent" below and in
-              "Contact us" with the correct legal entity - e.g. "Football
-              Parent Ltd" once incorporated, or "[Your name], trading as
-              Football Parent" if operating as a sole trader in the meantime. */}
           <p>
-            Football Parent (&quot;we&quot;, &quot;us&quot;) operates
-            footballparent.co.uk and the Coach App. This policy explains what
-            personal data we collect across both, why, and what rights you
-            have over it.
+            Graham Jenner, trading as Football Parent (&quot;we&quot;,
+            &quot;us&quot;), operates footballparent.co.uk and the Coach App.
+            This policy explains what personal data we collect across both,
+            why, and what rights you have over it.
           </p>
 
           <p>
@@ -346,7 +342,7 @@ export default function PrivacyPolicyPage() {
           </h2>
 
           <p>
-            Football Parent
+            Graham Jenner, trading as Football Parent
             <br />
             Email:{" "}
             <a
