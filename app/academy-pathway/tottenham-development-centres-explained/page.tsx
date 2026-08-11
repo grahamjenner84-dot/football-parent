@@ -26,6 +26,7 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       path="/academy-pathway/tottenham-development-centres-explained"
       datePublished={article.frontmatter.date}
+      content={article.content}
     >
       <MDXContent content={article.content} />
     </ArticleLayout>

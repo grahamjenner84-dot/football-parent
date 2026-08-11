@@ -164,6 +164,7 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       path="/category-slug/article-slug"
       datePublished={article.frontmatter.date}
+      content={article.content}
     >
       <MDXContent content={article.content} />
     </ArticleLayout>
@@ -185,6 +186,13 @@ Rules:
 - Always use `datePublished={article.frontmatter.date}` — never invent or
   hardcode a `dateModified`.
 - Never pass `relatedArticles` into `ArticleLayout`.
+- Always pass `content={article.content}` to `ArticleLayout` itself (not just
+  to the `<MDXContent>` child) — `ArticleLayout` calls `extractFaqs()` on
+  this prop to build FAQPage JSON-LD schema, so omitting it silently drops
+  FAQ schema with no visible error. Found 2026-08-11: this line was missing
+  from this template for an unknown period and had already shipped on the
+  Fulham and Tottenham guides (fixed then, both re-checked against a real
+  page render, not just `npm run build`, which does not catch this).
 - Only ever generate a file named `page.tsx` — never `new-page.tsx`,
   `article-page.tsx`, or similar.
 

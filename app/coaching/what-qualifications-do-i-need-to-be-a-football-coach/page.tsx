@@ -25,6 +25,7 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       path="/coaching/what-qualifications-do-i-need-to-be-a-football-coach"
       datePublished={article.frontmatter.date}
+      content={article.content}
     >
       <MDXContent content={article.content} />
     </ArticleLayout>
