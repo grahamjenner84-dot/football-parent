@@ -10,9 +10,6 @@ export const metadata: Metadata = {
   description:
     "Independent guidance for parents navigating UK football development and academy pathways.",
   metadataBase: new URL("https://www.footballparent.co.uk"),
-  icons: {
-    icon: "/icon.png",
-  },
   verification: {
     other: {
       "p:domain_verify": "c030c42167a4aaea03d1fedd0e8264c2",
