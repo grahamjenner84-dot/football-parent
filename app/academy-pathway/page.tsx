@@ -195,6 +195,12 @@ export default function AcademyPathwayPage() {
           description:
             "Tottenham's Academy Development Centres (boys, 10 and under) sit apart from its 15-21 Education Centres. Real ages, and Spurs' own trial scam warning.",
         },
+        {
+          title: "Leeds United Development Centre Guide",
+          href: "/academy-pathway/leeds-united-development-centre-guide",
+          description:
+            "Leeds United's academy became Category One in 2020, above a Skills Centre to Technical Centre pathway. Real ages, costs and how trials actually work.",
+        },
       ]}
       bottomContent={{
         title: "About the Academy Pathway",
