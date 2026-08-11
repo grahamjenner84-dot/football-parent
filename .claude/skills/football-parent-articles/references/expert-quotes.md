@@ -217,14 +217,21 @@ Phase 5B (2026-08-08), original single-sentence trim. Expanded in place
 below, per Graham's note that the original was too thin. Also used in
 [west-ham-player-pathway-guide](/academy-pathway/west-ham-player-pathway-guide) (2/3) -
 Phase 5C (2026-08-09), same expanded text.
-Reused a 3rd and final time (cap reached) in
+Reused a 3rd time in
 [fulham-fc-development-centre-guide](/academy-pathway/fulham-fc-development-centre-guide)
 - 2026-08-09, trimmed differently from the Arsenal/West Ham version (dropped
 the "some coaches demanded high standards and kept it fun, others didn't
 have the rapport" sentences) so it doesn't read identically across all
 three club guides. Graham reviewed and signed off on the specific trim
-before it was used. Do not reuse this story again without Graham's explicit
-go-ahead to raise the cap.
+before it was used.
+Cap explicitly raised to 4 by Graham (2026-08-11, in-session) for
+[leeds-united-development-centre-guide](/academy-pathway/leeds-united-development-centre-guide)
+since no Leeds-specific voice was available (no direct experience, see
+pending request below) - trimmed a third way (kept the "some coaches
+demanded high standards... rapport" sentences that Fulham's trim dropped,
+but cut the "weaker foot rated opposite ways" example that Fulham kept) so
+all four uses read differently. Do not reuse this story a 5th time without
+Graham's explicit go-ahead to raise the cap again.
 
 > The quality of the coaching, and of the centre overall, tended to be more
 > about the individual coaches than which club it was. Some coaches could
@@ -539,6 +546,23 @@ Education and Football Development Centre, or a Foundation coach.
    day to day?
 4. What would you tell a parent who's just been handed a scout's business
    card, that isn't obvious from the club's own information?
+
+### leeds-united-development-centre-guide — TBD, tag: Leeds United Foundation Skills/Technical Centre, first-hand experience
+Drafted: 2026-08-11
+Graham has no direct experience of Leeds United's Foundation programmes
+(confirmed 2026-08-11, in-session). Same situation as Fulham/Tottenham -
+shipped with the club-agnostic "coaching quality" story (cap raised to a
+4th use, see above) as the one genuine callout, plus this pending request.
+Well suited to a parent whose child has attended a Leeds United Skills
+Centre or Technical Centre, or a Foundation coach.
+1. What's the one thing about Leeds United's Skills Centre or Technical
+   Centre that surprised you compared to what you expected going in?
+2. How did the move from Skills Centre to Technical Centre actually happen
+   for your child, was it obvious at the time it was a step up?
+3. Is there a noticeable difference in level or coaching style between the
+   Skills Centre and the Technical Centre?
+4. What would you tell a parent whose child has just been invited to the
+   Technical Centre, that isn't obvious from the club's own information?
 
 Format for new entries:
 ```
