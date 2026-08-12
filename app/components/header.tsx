@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import SearchPanel from "./search-panel";
 
 const navItems = [
   { label: "Academy Pathway", href: "/academy-pathway" },
@@ -41,15 +42,19 @@ export default function Header() {
           ))}
         </nav>
 
-        <button
-          type="button"
-          className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-900 md:hidden"
-          onClick={() => setOpen((current) => !current)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          {open ? "Close" : "Menu"}
-        </button>
+        <div className="flex items-center gap-3">
+          <SearchPanel />
+
+          <button
+            type="button"
+            className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-900 md:hidden"
+            onClick={() => setOpen((current) => !current)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
       </div>
 
       {open && (

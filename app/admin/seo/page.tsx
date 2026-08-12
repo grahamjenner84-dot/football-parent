@@ -11,8 +11,9 @@ import type {
   RankRow,
   NoImpressionsRow,
 } from "@/lib/gsc";
+import type { TopSearchRow } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 
-type Tab = "silence" | "noImpressions" | "striking" | "ctr" | "decay" | "cannibal" | "rank";
+type Tab = "silence" | "noImpressions" | "striking" | "ctr" | "decay" | "cannibal" | "rank" | "searches";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
@@ -23,6 +24,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "decay", label: "Decay" },
   { id: "cannibal", label: "Cannibalisation" },
   { id: "rank", label: "Rank tracker" },
+  { id: "searches", label: "Top searches" },
 ];
 
 function shortPage(page: string): string {
@@ -43,7 +45,25 @@ export default function SeoAdminPage() {
   const [strikingDays, setStrikingDays] = useState<DayWindow>(90);
   const [ctrDays, setCtrDays] = useState<DayWindow>(90);
   const [noImpressionsDays, setNoImpressionsDays] = useState<DayWindow>(90);
+  const [searchRows, setSearchRows] = useState<TopSearchRow[] | null>(null);
+  const [searchError, setSearchError] = useState("");
   const isFirstFetch = useRef(true);
+
+  useEffect(() => {
+    fetch("/api/search-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load search report");
+        }
+        return res.json();
+      })
+      .then((data: { rows: TopSearchRow[] }) => {
+        setSearchRows(data.rows);
+        setSearchError("");
+      })
+      .catch((err) => setSearchError(err.message));
+  }, []);
 
   useEffect(() => {
     if (isFirstFetch.current) {
@@ -99,27 +119,42 @@ export default function SeoAdminPage() {
             }}
           >
             {t.label}
-            {report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
+            {t.id === "searches" && searchRows && (
+              <span style={styles.tabCount}>{searchRows.length}</span>
+            )}
+            {t.id !== "searches" && report && (
+              <span style={styles.tabCount}>{countFor(report, t.id)}</span>
+            )}
           </button>
         ))}
       </nav>
 
       <main style={styles.content}>
-        {loading && <p style={styles.muted}>Loading report...</p>}
-        {error && <p style={styles.error}>{error}</p>}
-        {report && !loading && !error && (
+        {tab === "searches" ? (
           <>
-            {tab === "silence" && <SilenceList rows={report.silence} />}
-            {tab === "noImpressions" && (
-              <NoImpressionsList rows={report.noImpressions} days={noImpressionsDays} onDaysChange={setNoImpressionsDays} />
+            {!searchRows && !searchError && <p style={styles.muted}>Loading search report...</p>}
+            {searchError && <p style={styles.error}>{searchError}</p>}
+            {searchRows && <SearchesList rows={searchRows} />}
+          </>
+        ) : (
+          <>
+            {loading && <p style={styles.muted}>Loading report...</p>}
+            {error && <p style={styles.error}>{error}</p>}
+            {report && !loading && !error && (
+              <>
+                {tab === "silence" && <SilenceList rows={report.silence} />}
+                {tab === "noImpressions" && (
+                  <NoImpressionsList rows={report.noImpressions} days={noImpressionsDays} onDaysChange={setNoImpressionsDays} />
+                )}
+                {tab === "striking" && (
+                  <StrikingList rows={report.strikingDistance} days={strikingDays} onDaysChange={setStrikingDays} />
+                )}
+                {tab === "ctr" && <LowCtrList rows={report.lowCtr} days={ctrDays} onDaysChange={setCtrDays} />}
+                {tab === "decay" && <DecayList rows={report.decay} />}
+                {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
+                {tab === "rank" && <RankTrackerList rows={report.rankTracker} />}
+              </>
             )}
-            {tab === "striking" && (
-              <StrikingList rows={report.strikingDistance} days={strikingDays} onDaysChange={setStrikingDays} />
-            )}
-            {tab === "ctr" && <LowCtrList rows={report.lowCtr} days={ctrDays} onDaysChange={setCtrDays} />}
-            {tab === "decay" && <DecayList rows={report.decay} />}
-            {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
-            {tab === "rank" && <RankTrackerList rows={report.rankTracker} />}
           </>
         )}
       </main>
@@ -143,6 +178,8 @@ function countFor(report: SeoReport, tab: Tab): number {
       return report.cannibalisation.length;
     case "rank":
       return report.rankTracker.length;
+    case "searches":
+      return 0;
   }
 }
 
@@ -459,6 +496,37 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+function SearchesList({ rows }: { rows: TopSearchRow[] }) {
+  if (!rows.length) {
+    return <EmptyState text="No searches logged yet in this window." />;
+  }
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        What visitors typed into on-site search over the last 30 days.
+        Queries flagged &ldquo;0 results&rdquo; are the clearest content-gap
+        signal - people looking for something we don&rsquo;t have an article
+        for yet.
+      </p>
+      {rows.slice(0, 100).map((r, i) => (
+        <div key={i} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{r.query}</span>
+            <span style={styles.cardBadge}>{r.count}x</span>
+          </div>
+          {r.zeroResultCount > 0 && (
+            <div style={styles.cardStats}>
+              <span style={{ ...styles.cardBadge, ...styles.cardBadgeWarn }}>
+                {r.zeroResultCount} with 0 results
+              </span>
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
