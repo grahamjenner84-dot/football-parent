@@ -117,6 +117,12 @@ export default function ParentGuidesPage() {
             "What grassroots football actually means, what ages it covers, who runs it and how it differs from academy football.",
         },
         {
+          title: "JPL Interview: Martin Brock on the Junior Premier League",
+          href: "/parent-guides/jpl-martin-brock-interview-part-1",
+          description:
+            "JPL chief executive Martin Brock explains why the league was created, how it differs from grassroots football, and what parents should expect from trials, standards and commitment.",
+        },
+        {
           title: "How to Become a Grassroots Football Coach",
           href: "/parent-guides/how-to-become-a-football-coach",
           description:

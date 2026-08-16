@@ -97,6 +97,7 @@ export const routes = [
   '/parent-guides/what-is-grassroots-football',
   '/parent-guides/how-to-become-a-football-coach',
   '/parent-guides/futurefit-football-dna-interview-part-2',
+  '/parent-guides/jpl-martin-brock-interview-part-1',
   '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
 
   // Legal
