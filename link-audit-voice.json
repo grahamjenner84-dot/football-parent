@@ -24,8 +24,8 @@
     ]
   },
   "/parent-guides/what-is-the-junior-premier-league": {
-    "bodyWordCount": 1817,
-    "voiceWordCount": 0,
+    "bodyWordCount": 1879,
+    "voiceWordCount": 61,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
@@ -79,13 +79,31 @@
     ]
   },
   "/parent-guides/jpl-vs-grassroots-football": {
-    "bodyWordCount": 2582,
-    "voiceWordCount": 0,
+    "bodyWordCount": 2707,
+    "voiceWordCount": 47,
     "unmarkedVoiceWordCount": 71,
     "unmarkedVoiceSentences": [
       "From experience, it's always better to be at a team where the coaches are genuinely excited to have your child, because they are more likely to want to help them develop and give them opportunities to play.",
       "We've all seen children who looked outstanding locally lose confidence after moving too quickly into a more demanding environment.",
       "We've also seen others thrive because they finally faced opponents who challenged them every week."
+    ]
+  },
+  "/parent-guides/jpl-martin-brock-interview-part-1": {
+    "bodyWordCount": 1828,
+    "voiceWordCount": 0,
+    "unmarkedVoiceWordCount": 343,
+    "unmarkedVoiceSentences": [
+      "Today we're one of the largest organisations of our kind, operating nationally and increasingly abroad, alongside JPL Warriors, our fast-growing girls' game.",
+      "The simplest way I'd put it: grassroots is where most children should start and many should happily stay.",
+      "But I'll be candid, because it matters: maintaining a consistently high standard across a large, growing organisation is the biggest challenge in what we do, and it's the thing we're most focused on right now.",
+      "As the JPL has grown, we've been honest with ourselves that the standard hasn't always been uniform, and our own clubs have told us the same.",
+      "So we're moving toward a clearer, tiered structure with defined entry criteria for each level, so a family always knows exactly what they're getting and the standard of competition is protected.",
+      "I'd rather tell you that straight than pretend every fixture, everywhere, is already perfect.",
+      "We're not all the way there yet, and we're working hard to get there.\n\n## What Type of Player Is JPL Football Designed For?\n\n<div className=\"mb-8 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5\">\n\n<p className=\"mb-3 text-sm font-semibold text-blue-700\">\nFootball Parent asks\n</p>\n\n<p className=\"m-0 text-slate-700\">\nWhat type of player is JPL football designed for, and how can parents judge whether their child is ready?\n</p>\n\n</div>\n\n<p className=\"mb-5 text-xs font-semibold uppercase tracking-[0.15em] text-slate-500\">\nMartin Brock • JPL\n</p>\n\nThe JPL is designed for the ambitious player, the child who loves the game, wants to be challenged, and is ready to commit to getting better.",
+      "Notice I said ambitious, not necessarily elite.",
+      "On readiness, I'd point parents at three honest questions.",
+      "If it's mainly you wanting it for them, I'd pause and think carefully.\n\n<div className=\"my-8 rounded-2xl border border-blue-200 bg-blue-50 p-6\">\n\n### Football Parent takeaway\n\nMartin's third question, whether the whole family is ready for the commitment, is easy to skip past when a child is excited about trialling.",
+      "Our guide to [JPL trials and how to get into the Junior Premier League](/parent-guides/how-to-get-into-the-jpl) covers how to find and prepare for trials in more detail.\n\n</div>\n\n## What Should Parents Expect in Training, Travel and Cost?\n\n<div className=\"mb-8 rounded-2xl border border-slate-200 bg-slate-50 px-6 py-5\">\n\n<p className=\"mb-3 text-sm font-semibold text-blue-700\">\nFootball Parent asks\n</p>\n\n<p className=\"m-0 text-slate-700\">\nWhat should parents realistically expect in terms of training, travel, costs and commitment?\n</p>\n\n</div>\n\n<p className=\"mb-5 text-xs font-semibold uppercase tracking-[0.15em] text-slate-500\">\nMartin Brock • JPL\n</p>\n\nI'll give you the straight version, because families deserve to plan properly."
     ]
   },
   "/parent-guides/jpl-and-academy-football": {
@@ -98,8 +116,8 @@
     ]
   },
   "/parent-guides/how-to-get-into-the-jpl": {
-    "bodyWordCount": 2739,
-    "voiceWordCount": 139,
+    "bodyWordCount": 2776,
+    "voiceWordCount": 176,
     "unmarkedVoiceWordCount": 27,
     "unmarkedVoiceSentences": [
       "I have also seen some clubs run longer assessment periods, where trialists train with the existing team over several weeks rather than being judged from one session."
@@ -267,16 +285,16 @@
     "unmarkedVoiceSentences": []
   },
   "/football-gear/best-footballs-by-age": {
-    "bodyWordCount": 1725,
+    "bodyWordCount": 1780,
     "voiceWordCount": 0,
-    "unmarkedVoiceWordCount": 159,
+    "unmarkedVoiceWordCount": 135,
     "unmarkedVoiceSentences": [
       "From experience coaching young players, it is usually better to help children focus on clean technique rather than simply trying to hit the ball harder.",
       "From experience, a ball that feels slightly softer and easier to strike can make a real difference for younger children.",
       "When children first move up to a size 5, I often get them to shoot from closer range at first.",
       "At home, we have a few spare training balls because low garden fences can turn shooting practice into a long retrieval exercise.",
-      "Check with your league before buying.\n\n### How often should I replace my child's football?",
-      "For training, I would still say you are better getting a recognised brand as often the quality of the ball and durability can be quite mixed. \n\n---\n\n## Related Articles\n\n- [Best Football Gloves For Winter Training](/football-gear/best-football-gloves-for-winter-training)\n- [FG vs AG Boots For Kids](/football-gear/ag-vs-fg-boots)\n- [Best Football Boots For Wide Feet Kids](/football-gear/boots/best-football-boots-for-wide-feet-kids)\n- [Best Shin Pads For Kids Football](/football-gear/shin-pads/best-shin-pads-for-kids-football)"
+      "Check with your league before buying.\r\n\r\n### How often should I replace my child's football?",
+      "For training, I would still say you are better getting a recognised brand as often the quality of the ball and durability can be quite mixed. \r\n\r\n### Is a normal football size 4 or 5?"
     ]
   },
   "/football-gear/best-football-gloves-for-winter-training": {
@@ -520,7 +538,7 @@
     ]
   },
   "/academy-pathway/west-ham-player-pathway-guide": {
-    "bodyWordCount": 2278,
+    "bodyWordCount": 2289,
     "voiceWordCount": 149,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
@@ -541,8 +559,16 @@
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
+  "/academy-pathway/tottenham-development-centres-explained": {
+    "bodyWordCount": 1664,
+    "voiceWordCount": 0,
+    "unmarkedVoiceWordCount": 40,
+    "unmarkedVoiceSentences": [
+      "Ask the specific programme directly for current costs before committing, and treat the Education Centres separately since they're tied to enrolling on a course with a partner college.\n\n---\n\n### How do I know if a Tottenham trial invitation is genuine?"
+    ]
+  },
   "/academy-pathway/premier-league-development-centres-list": {
-    "bodyWordCount": 2426,
+    "bodyWordCount": 2479,
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 30,
     "unmarkedVoiceSentences": [
@@ -560,6 +586,14 @@
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
+  },
+  "/academy-pathway/leeds-united-development-centre-guide": {
+    "bodyWordCount": 2048,
+    "voiceWordCount": 100,
+    "unmarkedVoiceWordCount": 23,
+    "unmarkedVoiceSentences": [
+      "We couldn't find a reliable published source specifically covering pay for players below scholarship age, so we're not stating a figure either way."
+    ]
   },
   "/academy-pathway/how-to-join-a-football-academy": {
     "bodyWordCount": 2524,
@@ -591,19 +625,30 @@
     "unmarkedVoiceSentences": []
   },
   "/academy-pathway/how-academy-football-works": {
-    "bodyWordCount": 2391,
+    "bodyWordCount": 2612,
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
+  "/academy-pathway/fulham-fc-development-centre-guide": {
+    "bodyWordCount": 1797,
+    "voiceWordCount": 121,
+    "unmarkedVoiceWordCount": 82,
+    "unmarkedVoiceSentences": [
+      "But as I said earlier in the piece it can come down to the coach.",
+      "My son found some coaches too demanding without it being fun and that started to impact his enjoyment and willigness to attend.",
+      "I also think its worth considering the travel and the time when you are weighing up the decision.",
+      "The Player Pathway covers a similar U7 to U16 range for players with some existing football experience.\r\n\r\n---\r\n\r\n### Are Fulham's development programmes invitation-only, or can I apply?"
+    ]
+  },
   "/academy-pathway/football-scholarships-uk": {
-    "bodyWordCount": 2143,
+    "bodyWordCount": 2316,
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
   "/academy-pathway/football-development-centres-near-me": {
-    "bodyWordCount": 1744,
+    "bodyWordCount": 1750,
     "voiceWordCount": 98,
     "unmarkedVoiceWordCount": 57,
     "unmarkedVoiceSentences": [
@@ -612,7 +657,7 @@
     ]
   },
   "/academy-pathway/football-development-centres-in-london": {
-    "bodyWordCount": 1508,
+    "bodyWordCount": 1703,
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
@@ -634,7 +679,7 @@
     "unmarkedVoiceSentences": []
   },
   "/academy-pathway/chelsea-fc-development-centre-guide": {
-    "bodyWordCount": 1697,
+    "bodyWordCount": 1856,
     "voiceWordCount": 89,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
@@ -646,13 +691,13 @@
     "unmarkedVoiceSentences": []
   },
   "/academy-pathway/arsenal-development-centre-guide": {
-    "bodyWordCount": 1831,
+    "bodyWordCount": 1847,
     "voiceWordCount": 149,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
   "/academy-pathway/academy-categories-explained": {
-    "bodyWordCount": 1724,
+    "bodyWordCount": 1859,
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []

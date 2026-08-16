@@ -118,6 +118,77 @@ pathway age-appropriate progression.
 **Used in:** [new-fa-youth-football-format](/football-development/new-fa-youth-football-format) (1/3) -
 Phase 5C (2026-08-09).
 
+## Martin Brock (JPL) quotes
+
+Attribution for every Martin Brock quote below (use verbatim in
+`<ExpertOpinion name="..." role="...">`):
+
+```
+name="Martin Brock"
+role="Chief Executive, Junior Premier League"
+```
+
+Source: [Martin Brock on the Junior Premier League: What It Is and Who It's For (Part 1)](/parent-guides/jpl-martin-brock-interview-part-1).
+
+### 7. Standards haven't always been uniform
+
+> "As the JPL has grown, we've been honest with ourselves that the standard
+> hasn't always been uniform, and our own clubs have told us the same."
+
+**Topics:** JPL club standards, what to check before joining a club, the
+league's move to a tiered structure.
+**Source:** Part 1, "What standards must clubs meet to compete in the JPL?"
+**Used in:** [what-is-the-junior-premier-league](/parent-guides/what-is-the-junior-premier-league) (1/3) -
+2026-08-16, "Standard of football" section.
+
+### 8. Grassroots and JPL are for different children
+
+> "Grassroots is where most children should start and many should happily
+> stay. The JPL is for the ones who've outgrown it and want to test
+> themselves. Neither is better than the other. They're built for different
+> children, at different stages."
+
+**Topics:** JPL vs grassroots, whether to move a child up, what the JPL is
+for.
+**Source:** Part 1, "How does JPL football differ from traditional
+grassroots league football?"
+**Used in:** [jpl-vs-grassroots-football](/parent-guides/jpl-vs-grassroots-football) (1/3) -
+2026-08-16, "Understanding the choice" section.
+
+### 9. Don't wait to be found
+
+> "Contact the JPL clubs in your area directly and ask how and when they
+> recruit. Don't wait to be found, the most proactive families tend to find
+> the best fit."
+
+**Topics:** JPL trials, how to find and approach clubs, proactive parent
+advice.
+**Source:** Part 1, "How do players usually join a JPL club?"
+**Used in:** [how-to-get-into-the-jpl](/parent-guides/how-to-get-into-the-jpl) (1/3) -
+2026-08-16, "How JPL recruitment works" section.
+
+### 10. Readiness is three honest questions (not yet used)
+
+> "Is your child genuinely hungry for tougher competition, or content where
+> they are? ... Are they resilient? ... Is the family ready for the
+> commitment: the training, the travel, the time?"
+
+**Topics:** whether a child is ready for JPL football, family commitment,
+readiness checklist.
+**Source:** Part 1, "What type of player is JPL football designed for?"
+**Used in:** (none yet)
+
+### 11. Transparency on cost (not yet used)
+
+> "Any reputable club sets these out transparently before you commit, and
+> if they won't, that tells you something."
+
+**Topics:** JPL costs, what a trustworthy club looks like, red flags before
+committing.
+**Source:** Part 1, "What should parents realistically expect in terms of
+training, travel, costs and commitment?"
+**Used in:** (none yet)
+
 ### Secondary voice (non-Football DNA, use sparingly)
 
 > "We need to think like children, not like adults." — Ronny Zimmermann,
