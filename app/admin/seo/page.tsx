@@ -12,8 +12,9 @@ import type {
   NoImpressionsRow,
 } from "@/lib/gsc";
 import type { TopSearchRow } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
+import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 
-type Tab = "silence" | "noImpressions" | "striking" | "ctr" | "decay" | "cannibal" | "rank" | "searches";
+type Tab = "silence" | "noImpressions" | "striking" | "ctr" | "decay" | "cannibal" | "rank" | "searches" | "cookies";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
@@ -25,6 +26,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "cannibal", label: "Cannibalisation" },
   { id: "rank", label: "Rank tracker" },
   { id: "searches", label: "Top searches" },
+  { id: "cookies", label: "Cookie consent" },
 ];
 
 function shortPage(page: string): string {
@@ -47,6 +49,8 @@ export default function SeoAdminPage() {
   const [noImpressionsDays, setNoImpressionsDays] = useState<DayWindow>(90);
   const [searchRows, setSearchRows] = useState<TopSearchRow[] | null>(null);
   const [searchError, setSearchError] = useState("");
+  const [consentStats, setConsentStats] = useState<ConsentStats | null>(null);
+  const [consentError, setConsentError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -63,6 +67,22 @@ export default function SeoAdminPage() {
         setSearchError("");
       })
       .catch((err) => setSearchError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/cookie-consent-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load cookie consent report");
+        }
+        return res.json();
+      })
+      .then((data: ConsentStats) => {
+        setConsentStats(data);
+        setConsentError("");
+      })
+      .catch((err) => setConsentError(err.message));
   }, []);
 
   useEffect(() => {
@@ -122,7 +142,10 @@ export default function SeoAdminPage() {
             {t.id === "searches" && searchRows && (
               <span style={styles.tabCount}>{searchRows.length}</span>
             )}
-            {t.id !== "searches" && report && (
+            {t.id === "cookies" && consentStats && (
+              <span style={styles.tabCount}>{consentStats.totalDecisions}</span>
+            )}
+            {t.id !== "searches" && t.id !== "cookies" && report && (
               <span style={styles.tabCount}>{countFor(report, t.id)}</span>
             )}
           </button>
@@ -135,6 +158,14 @@ export default function SeoAdminPage() {
             {!searchRows && !searchError && <p style={styles.muted}>Loading search report...</p>}
             {searchError && <p style={styles.error}>{searchError}</p>}
             {searchRows && <SearchesList rows={searchRows} />}
+          </>
+        ) : tab === "cookies" ? (
+          <>
+            {!consentStats && !consentError && (
+              <p style={styles.muted}>Loading cookie consent report...</p>
+            )}
+            {consentError && <p style={styles.error}>{consentError}</p>}
+            {consentStats && <CookieConsentReport stats={consentStats} />}
           </>
         ) : (
           <>
@@ -179,6 +210,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "rank":
       return report.rankTracker.length;
     case "searches":
+      return 0;
+    case "cookies":
       return 0;
   }
 }
@@ -527,6 +560,63 @@ function SearchesList({ rows }: { rows: TopSearchRow[] }) {
           )}
         </div>
       ))}
+    </div>
+  );
+}
+
+function pct(n: number): string {
+  return `${(n * 100).toFixed(1)}%`;
+}
+
+function CookieConsentReport({ stats }: { stats: ConsentStats }) {
+  const decisions = stats.acceptAll + stats.rejectAll;
+  const acceptRate = decisions > 0 ? stats.acceptAll / decisions : null;
+  const reachRate =
+    stats.bannerShown > 0 ? stats.totalDecisions / stats.bannerShown : null;
+
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        Last 30 days. Banner shows and accept/reject/manage decisions are
+        logged anonymously regardless of the choice itself, so this stays
+        readable even though GA can now only see consenting visitors. If a
+        GA4 pageview dip tracks the reject rate below, that&rsquo;s consent
+        gating working as intended, not a traffic problem.
+      </p>
+
+      <div style={styles.cardStats}>
+        <span>Shown: {stats.bannerShown}</span>
+        <span>Accept: {stats.acceptAll}</span>
+        <span>Reject: {stats.rejectAll}</span>
+        <span>Manage &amp; save: {stats.savePreferences}</span>
+      </div>
+      <div style={styles.cardStats}>
+        <span>Accept rate: {acceptRate === null ? "-" : pct(acceptRate)}</span>
+        <span>
+          Analytics granted: {pct(stats.analyticsGrantedRate)} of decisions
+        </span>
+        <span>
+          Shown &rarr; decided: {reachRate === null ? "-" : pct(reachRate)}
+        </span>
+      </div>
+
+      {stats.byDay.length === 0 ? (
+        <EmptyState text="No consent events recorded yet." />
+      ) : (
+        stats.byDay.map((row) => (
+          <div key={row.date} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{row.date}</span>
+              <span style={styles.cardBadge}>{row.bannerShown} shown</span>
+            </div>
+            <div style={styles.cardStats}>
+              <span>Accept: {row.acceptAll}</span>
+              <span>Reject: {row.rejectAll}</span>
+              <span>Manage: {row.savePreferences}</span>
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 }
