@@ -14,6 +14,7 @@ import type {
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 import type { PeriodComparison } from "@/lib/gsc";
+import type { PageViewStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 
 type Tab =
   | "silence"
@@ -25,7 +26,8 @@ type Tab =
   | "rank"
   | "searches"
   | "cookies"
-  | "compare";
+  | "compare"
+  | "pageviews";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
@@ -39,6 +41,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "searches", label: "Top searches" },
   { id: "cookies", label: "Cookie consent" },
   { id: "compare", label: "Compare days" },
+  { id: "pageviews", label: "Page views" },
 ];
 
 function shortPage(page: string): string {
@@ -63,6 +66,8 @@ export default function SeoAdminPage() {
   const [searchError, setSearchError] = useState("");
   const [consentStats, setConsentStats] = useState<ConsentStats | null>(null);
   const [consentError, setConsentError] = useState("");
+  const [pageViewStats, setPageViewStats] = useState<PageViewStats | null>(null);
+  const [pageViewError, setPageViewError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -95,6 +100,22 @@ export default function SeoAdminPage() {
         setConsentError("");
       })
       .catch((err) => setConsentError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/page-view-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load page view report");
+        }
+        return res.json();
+      })
+      .then((data: PageViewStats) => {
+        setPageViewStats(data);
+        setPageViewError("");
+      })
+      .catch((err) => setPageViewError(err.message));
   }, []);
 
   useEffect(() => {
@@ -157,9 +178,14 @@ export default function SeoAdminPage() {
             {t.id === "cookies" && consentStats && (
               <span style={styles.tabCount}>{consentStats.totalDecisions}</span>
             )}
-            {t.id !== "searches" && t.id !== "cookies" && t.id !== "compare" && report && (
-              <span style={styles.tabCount}>{countFor(report, t.id)}</span>
+            {t.id === "pageviews" && pageViewStats && (
+              <span style={styles.tabCount}>{pageViewStats.totalViews}</span>
             )}
+            {t.id !== "searches" &&
+              t.id !== "cookies" &&
+              t.id !== "compare" &&
+              t.id !== "pageviews" &&
+              report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
           </button>
         ))}
       </nav>
@@ -181,6 +207,14 @@ export default function SeoAdminPage() {
           </>
         ) : tab === "compare" ? (
           <CompareDays />
+        ) : tab === "pageviews" ? (
+          <>
+            {!pageViewStats && !pageViewError && (
+              <p style={styles.muted}>Loading page view report...</p>
+            )}
+            {pageViewError && <p style={styles.error}>{pageViewError}</p>}
+            {pageViewStats && <PageViewsReport stats={pageViewStats} />}
+          </>
         ) : (
           <>
             {loading && <p style={styles.muted}>Loading report...</p>}
@@ -228,6 +262,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "cookies":
       return 0;
     case "compare":
+      return 0;
+    case "pageviews":
       return 0;
   }
 }
@@ -642,6 +678,58 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
             </div>
           </div>
         ))
+      )}
+    </div>
+  );
+}
+
+function PageViewsReport({ stats }: { stats: PageViewStats }) {
+  const daysCovered = stats.byDay.length;
+  const avgPerDay = daysCovered > 0 ? Math.round(stats.totalViews / daysCovered) : 0;
+
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        Last 30 days. Fires on every page load regardless of cookie consent
+        or whether the banner has ever been shown to that visitor - unlike
+        the Cookie consent tab, a returning visitor who already accepted or
+        rejected still counts here. This is the number to check against GA
+        sessions: if GA is well below this, that gap is consent-mode
+        visibility; if this number is also low, traffic genuinely dropped.
+      </p>
+
+      <div style={styles.cardStats}>
+        <span>Total views: {stats.totalViews}</span>
+        <span>Average per day: {avgPerDay}</span>
+      </div>
+
+      {stats.byDay.length === 0 ? (
+        <EmptyState text="No page views recorded yet." />
+      ) : (
+        stats.byDay.map((row) => (
+          <div key={row.date} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{row.date}</span>
+              <span style={styles.cardBadge}>{row.count} views</span>
+            </div>
+          </div>
+        ))
+      )}
+
+      {stats.topPaths.length > 0 && (
+        <>
+          <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
+            Top pages
+          </h3>
+          {stats.topPaths.slice(0, 20).map((p, i) => (
+            <div key={i} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{p.path}</span>
+                <span style={styles.cardBadge}>{p.count}x</span>
+              </div>
+            </div>
+          ))}
+        </>
       )}
     </div>
   );

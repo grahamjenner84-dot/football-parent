@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import CookieConsent from "./components/CookieConsent";
+import PageViewPing from "./components/PageViewPing";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -105,6 +106,7 @@ export default function RootLayout({
         <Footer />
 
         <CookieConsent />
+        <PageViewPing />
 
         <Script
           id="organization-schema"
