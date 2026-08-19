@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
 import type { SearchIndexEntry } from "@/lib/search-index";
+import { logSearchOnce } from "@/lib/search-log-client";
 
 const MAX_LIVE_RESULTS = 6;
+const LOG_DEBOUNCE_MS = 600;
 
 export default function SearchPanel() {
   const [open, setOpen] = useState(false);
@@ -56,9 +58,25 @@ export default function SearchPanel() {
     ? fuseRef.current.search(query.trim(), { limit: MAX_LIVE_RESULTS }).map((r) => r.item)
     : [];
 
+  // Most searches are satisfied straight from this dropdown (type, see a
+  // match, click it) without ever hitting the /search page - previously
+  // that meant only zero-result / submitted searches got logged at all,
+  // skewing the report toward "no result" queries. Debounce so we log the
+  // settled query once, not every keystroke.
+  useEffect(() => {
+    const trimmed = query.trim();
+    if (!trimmed || !fuseRef.current) return;
+    const fuse = fuseRef.current;
+    const timer = setTimeout(() => {
+      logSearchOnce(trimmed, fuse.search(trimmed).length);
+    }, LOG_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [query, index]);
+
   function goToResultsPage() {
     const trimmed = query.trim();
     if (!trimmed) return;
+    logSearchOnce(trimmed, results.length);
     setOpen(false);
     router.push(`/search?q=${encodeURIComponent(trimmed)}`);
   }
@@ -117,7 +135,10 @@ export default function SearchPanel() {
                 <Link
                   key={result.url}
                   href={result.url}
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    logSearchOnce(query.trim(), results.length);
+                    setOpen(false);
+                  }}
                   className="block rounded-lg px-2 py-2 no-underline transition hover:bg-slate-50"
                 >
                   <p className="text-sm font-semibold text-slate-900">{result.title}</p>

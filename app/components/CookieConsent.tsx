@@ -29,7 +29,11 @@ function isStale(consent: Consent): boolean {
   return !Number.isFinite(age) || age > MAX_CONSENT_AGE_MS;
 }
 
-type ConsentAction = "accept_all" | "reject_all" | "save_preferences";
+type ConsentAction =
+  | "banner_shown"
+  | "accept_all"
+  | "reject_all"
+  | "save_preferences";
 
 function logConsentEvent(action: ConsentAction, analytics: boolean) {
   // Fire-and-forget to our own backend - not gated on the analytics choice
@@ -79,6 +83,7 @@ export default function CookieConsent() {
     const existing = readConsent();
     if (!existing || isStale(existing)) {
       setVisible(true);
+      logConsentEvent("banner_shown", false);
     }
 
     const openSettings = () => {

@@ -12,7 +12,11 @@ function adminClient() {
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
-export type ConsentAction = "accept_all" | "reject_all" | "save_preferences";
+export type ConsentAction =
+  | "banner_shown"
+  | "accept_all"
+  | "reject_all"
+  | "save_preferences";
 
 export async function logConsentEvent(
   action: ConsentAction,
@@ -29,13 +33,20 @@ export async function logConsentEvent(
 }
 
 export interface ConsentStats {
-  totalEvents: number;
+  bannerShown: number;
+  totalDecisions: number;
   acceptAll: number;
   rejectAll: number;
   savePreferences: number;
   analyticsGrantedCount: number;
-  analyticsGrantedRate: number; // 0-1, share of all events that ended up granted
-  byDay: { date: string; acceptAll: number; rejectAll: number; savePreferences: number }[];
+  analyticsGrantedRate: number; // 0-1, share of decisions (not shows) that ended up granted
+  byDay: {
+    date: string;
+    bannerShown: number;
+    acceptAll: number;
+    rejectAll: number;
+    savePreferences: number;
+  }[];
 }
 
 export async function getConsentStats(days: number = 30): Promise<ConsentStats> {
@@ -55,9 +66,10 @@ export async function getConsentStats(days: number = 30): Promise<ConsentStats> 
   const rows = data ?? [];
   const byDayMap = new Map<
     string,
-    { acceptAll: number; rejectAll: number; savePreferences: number }
+    { bannerShown: number; acceptAll: number; rejectAll: number; savePreferences: number }
   >();
 
+  let bannerShown = 0;
   let acceptAll = 0;
   let rejectAll = 0;
   let savePreferences = 0;
@@ -66,35 +78,42 @@ export async function getConsentStats(days: number = 30): Promise<ConsentStats> 
   for (const row of rows) {
     const day = row.created_at.slice(0, 10);
     const bucket = byDayMap.get(day) ?? {
+      bannerShown: 0,
       acceptAll: 0,
       rejectAll: 0,
       savePreferences: 0,
     };
 
-    if (row.action === "accept_all") {
+    if (row.action === "banner_shown") {
+      bannerShown += 1;
+      bucket.bannerShown += 1;
+    } else if (row.action === "accept_all") {
       acceptAll += 1;
       bucket.acceptAll += 1;
+      if (row.analytics_granted) analyticsGrantedCount += 1;
     } else if (row.action === "reject_all") {
       rejectAll += 1;
       bucket.rejectAll += 1;
+      if (row.analytics_granted) analyticsGrantedCount += 1;
     } else {
       savePreferences += 1;
       bucket.savePreferences += 1;
+      if (row.analytics_granted) analyticsGrantedCount += 1;
     }
 
-    if (row.analytics_granted) analyticsGrantedCount += 1;
     byDayMap.set(day, bucket);
   }
 
-  const totalEvents = rows.length;
+  const totalDecisions = acceptAll + rejectAll + savePreferences;
 
   return {
-    totalEvents,
+    bannerShown,
+    totalDecisions,
     acceptAll,
     rejectAll,
     savePreferences,
     analyticsGrantedCount,
-    analyticsGrantedRate: totalEvents > 0 ? analyticsGrantedCount / totalEvents : 0,
+    analyticsGrantedRate: totalDecisions > 0 ? analyticsGrantedCount / totalDecisions : 0,
     byDay: Array.from(byDayMap.entries())
       .map(([date, counts]) => ({ date, ...counts }))
       .sort((a, b) => b.date.localeCompare(a.date)),

@@ -4,7 +4,12 @@ import { logConsentEvent, type ConsentAction } from "@/lib/supabase/cookie-conse
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const VALID_ACTIONS: ConsentAction[] = ["accept_all", "reject_all", "save_preferences"];
+const VALID_ACTIONS: ConsentAction[] = [
+  "banner_shown",
+  "accept_all",
+  "reject_all",
+  "save_preferences",
+];
 
 // Public endpoint, called from the cookie banner on every page. Not gated by
 // proxy.ts admin auth - it only ever writes an anonymous action+boolean, see

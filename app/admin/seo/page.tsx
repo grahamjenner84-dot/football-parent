@@ -11,9 +11,21 @@ import type {
   RankRow,
   NoImpressionsRow,
 } from "@/lib/gsc";
-import type { TopSearchRow } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
+import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
+import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
+import type { PeriodComparison, MoverRow } from "@/lib/gsc";
 
-type Tab = "silence" | "noImpressions" | "striking" | "ctr" | "decay" | "cannibal" | "rank" | "searches";
+type Tab =
+  | "silence"
+  | "noImpressions"
+  | "striking"
+  | "ctr"
+  | "decay"
+  | "cannibal"
+  | "rank"
+  | "searches"
+  | "cookies"
+  | "compare";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
@@ -25,6 +37,8 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "cannibal", label: "Cannibalisation" },
   { id: "rank", label: "Rank tracker" },
   { id: "searches", label: "Top searches" },
+  { id: "cookies", label: "Cookie consent" },
+  { id: "compare", label: "Compare days" },
 ];
 
 function shortPage(page: string): string {
@@ -45,8 +59,10 @@ export default function SeoAdminPage() {
   const [strikingDays, setStrikingDays] = useState<DayWindow>(90);
   const [ctrDays, setCtrDays] = useState<DayWindow>(90);
   const [noImpressionsDays, setNoImpressionsDays] = useState<DayWindow>(90);
-  const [searchRows, setSearchRows] = useState<TopSearchRow[] | null>(null);
+  const [searchStats, setSearchStats] = useState<SearchLogStats | null>(null);
   const [searchError, setSearchError] = useState("");
+  const [consentStats, setConsentStats] = useState<ConsentStats | null>(null);
+  const [consentError, setConsentError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -58,11 +74,27 @@ export default function SeoAdminPage() {
         }
         return res.json();
       })
-      .then((data: { rows: TopSearchRow[] }) => {
-        setSearchRows(data.rows);
+      .then((data: SearchLogStats) => {
+        setSearchStats(data);
         setSearchError("");
       })
       .catch((err) => setSearchError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/cookie-consent-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load cookie consent report");
+        }
+        return res.json();
+      })
+      .then((data: ConsentStats) => {
+        setConsentStats(data);
+        setConsentError("");
+      })
+      .catch((err) => setConsentError(err.message));
   }, []);
 
   useEffect(() => {
@@ -119,10 +151,13 @@ export default function SeoAdminPage() {
             }}
           >
             {t.label}
-            {t.id === "searches" && searchRows && (
-              <span style={styles.tabCount}>{searchRows.length}</span>
+            {t.id === "searches" && searchStats && (
+              <span style={styles.tabCount}>{searchStats.totalSearches}</span>
             )}
-            {t.id !== "searches" && report && (
+            {t.id === "cookies" && consentStats && (
+              <span style={styles.tabCount}>{consentStats.totalDecisions}</span>
+            )}
+            {t.id !== "searches" && t.id !== "cookies" && t.id !== "compare" && report && (
               <span style={styles.tabCount}>{countFor(report, t.id)}</span>
             )}
           </button>
@@ -132,10 +167,20 @@ export default function SeoAdminPage() {
       <main style={styles.content}>
         {tab === "searches" ? (
           <>
-            {!searchRows && !searchError && <p style={styles.muted}>Loading search report...</p>}
+            {!searchStats && !searchError && <p style={styles.muted}>Loading search report...</p>}
             {searchError && <p style={styles.error}>{searchError}</p>}
-            {searchRows && <SearchesList rows={searchRows} />}
+            {searchStats && <SearchesList stats={searchStats} />}
           </>
+        ) : tab === "cookies" ? (
+          <>
+            {!consentStats && !consentError && (
+              <p style={styles.muted}>Loading cookie consent report...</p>
+            )}
+            {consentError && <p style={styles.error}>{consentError}</p>}
+            {consentStats && <CookieConsentReport stats={consentStats} />}
+          </>
+        ) : tab === "compare" ? (
+          <CompareDays />
         ) : (
           <>
             {loading && <p style={styles.muted}>Loading report...</p>}
@@ -179,6 +224,10 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "rank":
       return report.rankTracker.length;
     case "searches":
+      return 0;
+    case "cookies":
+      return 0;
+    case "compare":
       return 0;
   }
 }
@@ -500,33 +549,277 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
   );
 }
 
-function SearchesList({ rows }: { rows: TopSearchRow[] }) {
-  if (!rows.length) {
+function SearchesList({ stats }: { stats: SearchLogStats }) {
+  if (!stats.rows.length) {
     return <EmptyState text="No searches logged yet in this window." />;
   }
   return (
     <div style={styles.list}>
       <p style={styles.sectionNote}>
-        What visitors typed into on-site search over the last 30 days.
-        Queries flagged &ldquo;0 results&rdquo; are the clearest content-gap
-        signal - people looking for something we don&rsquo;t have an article
-        for yet.
+        What visitors typed into on-site search over the last 30 days,
+        including the header dropdown search (not just the /search results
+        page). Queries flagged &ldquo;0 results&rdquo; are the clearest
+        content-gap signal - people looking for something we don&rsquo;t
+        have an article for yet.
       </p>
-      {rows.slice(0, 100).map((r, i) => (
+
+      <div style={styles.cardStats}>
+        <span>Searches: {stats.totalSearches}</span>
+        <span>Found something: {stats.successfulSearches}</span>
+        <span>No results: {stats.zeroResultSearches}</span>
+        <span>Success rate: {pct(stats.successRate)}</span>
+      </div>
+
+      {stats.rows.slice(0, 100).map((r, i) => (
         <div key={i} style={styles.card}>
           <div style={styles.cardTop}>
             <span style={styles.cardQuery}>{r.query}</span>
             <span style={styles.cardBadge}>{r.count}x</span>
           </div>
-          {r.zeroResultCount > 0 && (
-            <div style={styles.cardStats}>
+          <div style={styles.cardStats}>
+            {r.successCount > 0 && <span>{r.successCount} found results</span>}
+            {r.zeroResultCount > 0 && (
               <span style={{ ...styles.cardBadge, ...styles.cardBadgeWarn }}>
                 {r.zeroResultCount} with 0 results
               </span>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function pct(n: number): string {
+  return `${(n * 100).toFixed(1)}%`;
+}
+
+function CookieConsentReport({ stats }: { stats: ConsentStats }) {
+  const decisions = stats.acceptAll + stats.rejectAll;
+  const acceptRate = decisions > 0 ? stats.acceptAll / decisions : null;
+  const reachRate =
+    stats.bannerShown > 0 ? stats.totalDecisions / stats.bannerShown : null;
+
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        Last 30 days. Banner shows and accept/reject/manage decisions are
+        logged anonymously regardless of the choice itself, so this stays
+        readable even though GA can now only see consenting visitors. If a
+        GA4 pageview dip tracks the reject rate below, that&rsquo;s consent
+        gating working as intended, not a traffic problem.
+      </p>
+
+      <div style={styles.cardStats}>
+        <span>Shown: {stats.bannerShown}</span>
+        <span>Accept: {stats.acceptAll}</span>
+        <span>Reject: {stats.rejectAll}</span>
+        <span>Manage &amp; save: {stats.savePreferences}</span>
+      </div>
+      <div style={styles.cardStats}>
+        <span>Accept rate: {acceptRate === null ? "-" : pct(acceptRate)}</span>
+        <span>
+          Analytics granted: {pct(stats.analyticsGrantedRate)} of decisions
+        </span>
+        <span>
+          Shown &rarr; decided: {reachRate === null ? "-" : pct(reachRate)}
+        </span>
+      </div>
+
+      {stats.byDay.length === 0 ? (
+        <EmptyState text="No consent events recorded yet." />
+      ) : (
+        stats.byDay.map((row) => (
+          <div key={row.date} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{row.date}</span>
+              <span style={styles.cardBadge}>{row.bannerShown} shown</span>
+            </div>
+            <div style={styles.cardStats}>
+              <span>Accept: {row.acceptAll}</span>
+              <span>Reject: {row.rejectAll}</span>
+              <span>Manage: {row.savePreferences}</span>
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
+function isoDate(d: Date): string {
+  return d.toISOString().slice(0, 10);
+}
+
+function daysAgo(n: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() - n);
+  return isoDate(d);
+}
+
+function deltaStyle(delta: number): CSSProperties {
+  if (delta > 0) return { color: "#8fd19e" };
+  if (delta < 0) return { color: "#e07856" };
+  return { color: "#9c8a72" };
+}
+
+function MoverSection({
+  title,
+  rows,
+  isPage,
+}: {
+  title: string;
+  rows: MoverRow[];
+  isPage?: boolean;
+}) {
+  if (!rows.length) return null;
+  return (
+    <>
+      <h3 style={styles.compareSectionTitle}>{title}</h3>
+      <div style={styles.list}>
+        {rows.slice(0, 15).map((r, i) => (
+          <div key={i} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{isPage ? shortPage(r.key) : r.key}</span>
+              <span style={{ ...styles.cardBadge, ...deltaStyle(r.delta) }}>
+                {r.delta >= 0 ? "+" : ""}
+                {r.delta} impr
+              </span>
+            </div>
+            <div style={styles.cardStats}>
+              <span>
+                clicks: {r.clicksA} (was {r.clicksB})
+              </span>
+              <span>
+                pos: {r.positionA ?? "-"} (was {r.positionB ?? "-"})
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+// "4 days ago" keeps Day A safely clear of GSC's ~3-day processing lag by
+// default - see freshnessWarning() in lib/gsc.ts, which also flags this
+// directly in the response if the user picks a more recent date anyway.
+function CompareDays() {
+  const [dateA, setDateA] = useState(daysAgo(4));
+  const [dateB, setDateB] = useState(daysAgo(11));
+  const [result, setResult] = useState<PeriodComparison | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const hasRun = useRef(false);
+
+  function runCompare(a: string, b: string) {
+    setLoading(true);
+    setError("");
+    const qs = new URLSearchParams({ startA: a, endA: a, startB: b, endB: b });
+    fetch(`/api/compare-report?${qs.toString()}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load comparison");
+        }
+        return res.json();
+      })
+      .then((data: PeriodComparison) => setResult(data))
+      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load comparison"))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
+    runCompare(dateA, dateB);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        Pick the day you noticed the spike (Day A) and a day to compare it
+        against (Day B - defaults to the same weekday a week earlier). Shows
+        site-wide totals for each day, then the specific pages and search
+        queries that account for the biggest gains and drops between them.
+      </p>
+
+      <div style={styles.compareRow}>
+        <label style={styles.compareLabel}>
+          Day A
+          <input
+            type="date"
+            value={dateA}
+            onChange={(e) => setDateA(e.target.value)}
+            style={styles.dateInput}
+          />
+        </label>
+        <label style={styles.compareLabel}>
+          Day B
+          <input
+            type="date"
+            value={dateB}
+            onChange={(e) => setDateB(e.target.value)}
+            style={styles.dateInput}
+          />
+        </label>
+        <button
+          type="button"
+          onClick={() => runCompare(dateA, dateB)}
+          disabled={loading}
+          style={{ ...styles.toggleButton, ...styles.toggleButtonActive }}
+        >
+          {loading ? "Comparing..." : "Compare"}
+        </button>
+      </div>
+
+      {error && <p style={styles.error}>{error}</p>}
+
+      {result && (
+        <>
+          {result.dataFreshnessWarning && (
+            <p style={{ ...styles.sectionNote, color: "#e07856" }}>
+              {result.dataFreshnessWarning}
+            </p>
+          )}
+
+          <div style={styles.cardStats}>
+            <span>
+              {result.periodA.start}: {result.periodA.clicks} clicks,{" "}
+              {result.periodA.impressions} impressions, avg pos {result.periodA.avgPosition ?? "-"}
+            </span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>
+              {result.periodB.start}: {result.periodB.clicks} clicks,{" "}
+              {result.periodB.impressions} impressions, avg pos {result.periodB.avgPosition ?? "-"}
+            </span>
+          </div>
+          <div style={styles.cardStats}>
+            <span style={deltaStyle(result.totalClicksDelta)}>
+              {result.totalClicksDelta >= 0 ? "+" : ""}
+              {result.totalClicksDelta} clicks
+            </span>
+            <span style={deltaStyle(result.totalImpressionsDelta)}>
+              {result.totalImpressionsDelta >= 0 ? "+" : ""}
+              {result.totalImpressionsDelta} impressions
+            </span>
+          </div>
+
+          <MoverSection title="Pages: biggest gains" rows={result.topPageGains} isPage />
+          <MoverSection title="Pages: biggest drops" rows={result.topPageDrops} isPage />
+          <MoverSection title="Queries: biggest gains" rows={result.topQueryGains} />
+          <MoverSection title="Queries: biggest drops" rows={result.topQueryDrops} />
+
+          {!result.topPageGains.length &&
+            !result.topPageDrops.length &&
+            !result.topQueryGains.length &&
+            !result.topQueryDrops.length && (
+              <EmptyState text="No page or query moved enough to clear the noise threshold between these two days." />
+            )}
+        </>
+      )}
     </div>
   );
 }
@@ -682,5 +975,33 @@ const styles: Record<string, CSSProperties> = {
   error: {
     color: "#e07856",
     fontSize: 14,
+  },
+  compareRow: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "flex-end",
+    gap: 10,
+    marginBottom: 4,
+  },
+  compareLabel: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 4,
+    fontSize: 12,
+    color: "#9c8a72",
+  },
+  dateInput: {
+    background: "#241b14",
+    border: "1px solid #3a2c1d",
+    borderRadius: 8,
+    padding: "6px 8px",
+    color: "#f0e6d2",
+    fontSize: 13,
+  },
+  compareSectionTitle: {
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#e8b04b",
+    margin: "10px 0 2px",
   },
 };

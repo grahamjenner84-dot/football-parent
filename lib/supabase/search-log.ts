@@ -26,10 +26,19 @@ export async function logSearchQuery(query: string, resultCount: number): Promis
 export interface TopSearchRow {
   query: string;
   count: number;
+  successCount: number;
   zeroResultCount: number;
 }
 
-export async function getTopSearches(days: number = 30): Promise<TopSearchRow[]> {
+export interface SearchLogStats {
+  totalSearches: number;
+  successfulSearches: number;
+  zeroResultSearches: number;
+  successRate: number; // 0-1
+  rows: TopSearchRow[];
+}
+
+export async function getTopSearches(days: number = 30): Promise<SearchLogStats> {
   const supabase = adminClient();
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
@@ -44,15 +53,30 @@ export async function getTopSearches(days: number = 30): Promise<TopSearchRow[]>
 
   const rows = data ?? [];
   const byQuery = new Map<string, TopSearchRow>();
+  let successfulSearches = 0;
 
   for (const row of rows) {
     const key = row.query.trim().toLowerCase();
     if (!key) continue;
-    const bucket = byQuery.get(key) ?? { query: key, count: 0, zeroResultCount: 0 };
+    const bucket =
+      byQuery.get(key) ?? { query: key, count: 0, successCount: 0, zeroResultCount: 0 };
     bucket.count += 1;
-    if (row.result_count === 0) bucket.zeroResultCount += 1;
+    if (row.result_count > 0) {
+      bucket.successCount += 1;
+      successfulSearches += 1;
+    } else {
+      bucket.zeroResultCount += 1;
+    }
     byQuery.set(key, bucket);
   }
 
-  return Array.from(byQuery.values()).sort((a, b) => b.count - a.count);
+  const totalSearches = rows.length;
+
+  return {
+    totalSearches,
+    successfulSearches,
+    zeroResultSearches: totalSearches - successfulSearches,
+    successRate: totalSearches > 0 ? successfulSearches / totalSearches : 0,
+    rows: Array.from(byQuery.values()).sort((a, b) => b.count - a.count),
+  };
 }

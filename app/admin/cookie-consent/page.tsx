@@ -19,7 +19,13 @@ export default async function CookieConsentAdminPage() {
         </h1>
         <p className="text-sm text-gray-500 mb-8">Last 30 days</p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-10">
+          <div className="bg-white border border-gray-200 rounded-lg p-4">
+            <p className="text-xs font-semibold text-gray-500 uppercase">
+              Banner shown
+            </p>
+            <p className="text-2xl font-bold text-gray-900">{stats.bannerShown}</p>
+          </div>
           <div className="bg-white border border-gray-200 rounded-lg p-4">
             <p className="text-xs font-semibold text-gray-500 uppercase">
               Accept all
@@ -58,11 +64,24 @@ export default async function CookieConsentAdminPage() {
             <span className="font-semibold">
               {pct(stats.analyticsGrantedRate)}
             </span>{" "}
-            of all {stats.totalEvents} banner interactions ended with
+            of all {stats.totalDecisions} banner decisions ended with
             analytics cookies granted (includes Accept all and any Manage
             &amp; save where the analytics toggle was left on). This is
             roughly the share of visitors GA can now see, down from ~100%
             before consent gating went live.
+            {stats.bannerShown > 0 && (
+              <>
+                {" "}
+                Of {stats.bannerShown} banner shows, {stats.totalDecisions} ended
+                in a decision (
+                {pct(
+                  stats.totalDecisions > 0 ? stats.totalDecisions / stats.bannerShown : 0
+                )}
+                ) — the rest saw the banner but left without clicking
+                Accept/Reject/Save, which also means GA doesn&apos;t see
+                them.
+              </>
+            )}
           </p>
         </div>
 
@@ -72,6 +91,7 @@ export default async function CookieConsentAdminPage() {
             <thead>
               <tr className="border-b border-gray-200 text-left">
                 <th className="p-3 font-semibold text-gray-600">Date</th>
+                <th className="p-3 font-semibold text-gray-600">Shown</th>
                 <th className="p-3 font-semibold text-gray-600">Accept all</th>
                 <th className="p-3 font-semibold text-gray-600">Reject</th>
                 <th className="p-3 font-semibold text-gray-600">Manage &amp; save</th>
@@ -80,7 +100,7 @@ export default async function CookieConsentAdminPage() {
             <tbody>
               {stats.byDay.length === 0 ? (
                 <tr>
-                  <td className="p-3 text-gray-400" colSpan={4}>
+                  <td className="p-3 text-gray-400" colSpan={5}>
                     No consent events recorded yet.
                   </td>
                 </tr>
@@ -88,6 +108,7 @@ export default async function CookieConsentAdminPage() {
                 stats.byDay.map((row) => (
                   <tr key={row.date} className="border-b border-gray-100 last:border-0">
                     <td className="p-3 text-gray-700">{row.date}</td>
+                    <td className="p-3 text-gray-700">{row.bannerShown}</td>
                     <td className="p-3 text-gray-700">{row.acceptAll}</td>
                     <td className="p-3 text-gray-700">{row.rejectAll}</td>
                     <td className="p-3 text-gray-700">{row.savePreferences}</td>
