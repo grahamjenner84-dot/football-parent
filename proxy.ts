@@ -28,7 +28,8 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith("/api/seo-report") ||
     pathname.startsWith("/api/instagram") ||
     pathname.startsWith("/api/search-report") ||
-    pathname.startsWith("/api/cookie-consent-report");
+    pathname.startsWith("/api/cookie-consent-report") ||
+    pathname.startsWith("/api/compare-report");
 
   if (!isProtected) return NextResponse.next();
 
@@ -55,5 +56,6 @@ export const config = {
     "/api/instagram/:path*",
     "/api/search-report",
     "/api/cookie-consent-report",
+    "/api/compare-report",
   ],
 };

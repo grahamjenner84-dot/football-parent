@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
 import type { SearchIndexEntry } from "@/lib/search-index";
+import { logSearchOnce } from "@/lib/search-log-client";
 
 export default function SearchClient() {
   const searchParams = useSearchParams();
@@ -14,7 +15,6 @@ export default function SearchClient() {
   const [inputValue, setInputValue] = useState(initialQuery);
   const [index, setIndex] = useState<SearchIndexEntry[] | null>(null);
   const fuseRef = useRef<Fuse<SearchIndexEntry> | null>(null);
-  const loggedQueries = useRef(new Set<string>());
 
   useEffect(() => {
     fetch("/api/search-index")
@@ -41,13 +41,8 @@ export default function SearchClient() {
 
   useEffect(() => {
     const trimmed = activeQuery.trim();
-    if (!trimmed || !fuseRef.current || loggedQueries.current.has(trimmed.toLowerCase())) return;
-    loggedQueries.current.add(trimmed.toLowerCase());
-    fetch("/api/log-search", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: trimmed, resultCount: results.length }),
-    }).catch(() => {});
+    if (!trimmed || !fuseRef.current) return;
+    logSearchOnce(trimmed, results.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeQuery, index]);
 

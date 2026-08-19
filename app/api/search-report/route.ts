@@ -9,8 +9,8 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const daysParam = Number(searchParams.get("days"));
     const days = Number.isFinite(daysParam) && daysParam > 0 ? daysParam : 30;
-    const rows = await getTopSearches(days);
-    return NextResponse.json({ rows });
+    const stats = await getTopSearches(days);
+    return NextResponse.json(stats);
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
