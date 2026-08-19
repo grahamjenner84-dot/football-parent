@@ -13,7 +13,7 @@ import type {
 } from "@/lib/gsc";
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
-import type { PeriodComparison, MoverRow } from "@/lib/gsc";
+import type { PeriodComparison } from "@/lib/gsc";
 
 type Tab =
   | "silence"
@@ -663,43 +663,8 @@ function deltaStyle(delta: number): CSSProperties {
   return { color: "#9c8a72" };
 }
 
-function MoverSection({
-  title,
-  rows,
-  isPage,
-}: {
-  title: string;
-  rows: MoverRow[];
-  isPage?: boolean;
-}) {
-  if (!rows.length) return null;
-  return (
-    <>
-      <h3 style={styles.compareSectionTitle}>{title}</h3>
-      <div style={styles.list}>
-        {rows.slice(0, 15).map((r, i) => (
-          <div key={i} style={styles.card}>
-            <div style={styles.cardTop}>
-              <span style={styles.cardQuery}>{isPage ? shortPage(r.key) : r.key}</span>
-              <span style={{ ...styles.cardBadge, ...deltaStyle(r.delta) }}>
-                {r.delta >= 0 ? "+" : ""}
-                {r.delta} impr
-              </span>
-            </div>
-            <div style={styles.cardStats}>
-              <span>
-                clicks: {r.clicksA} (was {r.clicksB})
-              </span>
-              <span>
-                pos: {r.positionA ?? "-"} (was {r.positionB ?? "-"})
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
+type CompareAxis = "pages" | "terms";
+type CompareDirection = "gains" | "losses";
 
 // "4 days ago" keeps Day A safely clear of GSC's ~3-day processing lag by
 // default - see freshnessWarning() in lib/gsc.ts, which also flags this
@@ -710,6 +675,8 @@ function CompareDays() {
   const [result, setResult] = useState<PeriodComparison | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [axis, setAxis] = useState<CompareAxis>("pages");
+  const [direction, setDirection] = useState<CompareDirection>("losses");
   const hasRun = useRef(false);
 
   function runCompare(a: string, b: string) {
@@ -807,19 +774,87 @@ function CompareDays() {
             </span>
           </div>
 
-          <MoverSection title="Pages: biggest gains" rows={result.topPageGains} isPage />
-          <MoverSection title="Pages: biggest drops" rows={result.topPageDrops} isPage />
-          <MoverSection title="Queries: biggest gains" rows={result.topQueryGains} />
-          <MoverSection title="Queries: biggest drops" rows={result.topQueryDrops} />
+          <div style={styles.compareRow}>
+            <div style={styles.metricToggle}>
+              {(["pages", "terms"] as CompareAxis[]).map((a) => (
+                <button
+                  key={a}
+                  type="button"
+                  onClick={() => setAxis(a)}
+                  style={{ ...styles.toggleButton, ...(axis === a ? styles.toggleButtonActive : {}) }}
+                >
+                  {a === "pages" ? "Pages" : "Terms"}
+                </button>
+              ))}
+            </div>
+            <div style={styles.metricToggle}>
+              {(["gains", "losses"] as CompareDirection[]).map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => setDirection(d)}
+                  style={{ ...styles.toggleButton, ...(direction === d ? styles.toggleButtonActive : {}) }}
+                >
+                  {d === "gains" ? "Gains" : "Losses"}
+                </button>
+              ))}
+            </div>
+          </div>
 
-          {!result.topPageGains.length &&
-            !result.topPageDrops.length &&
-            !result.topQueryGains.length &&
-            !result.topQueryDrops.length && (
-              <EmptyState text="No page or query moved enough to clear the noise threshold between these two days." />
-            )}
+          <CompareMoverList result={result} axis={axis} direction={direction} />
         </>
       )}
+    </div>
+  );
+}
+
+function CompareMoverList({
+  result,
+  axis,
+  direction,
+}: {
+  result: PeriodComparison;
+  axis: CompareAxis;
+  direction: CompareDirection;
+}) {
+  const rows =
+    axis === "pages"
+      ? direction === "gains"
+        ? result.topPageGains
+        : result.topPageDrops
+      : direction === "gains"
+        ? result.topQueryGains
+        : result.topQueryDrops;
+
+  if (!rows.length) {
+    return (
+      <EmptyState
+        text={`No ${axis === "pages" ? "page" : "term"} ${direction} cleared the noise threshold between these two days.`}
+      />
+    );
+  }
+
+  return (
+    <div style={styles.list}>
+      {rows.slice(0, 25).map((r, i) => (
+        <div key={i} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{axis === "pages" ? shortPage(r.key) : r.key}</span>
+            <span style={{ ...styles.cardBadge, ...deltaStyle(r.delta) }}>
+              {r.delta >= 0 ? "+" : ""}
+              {r.delta} impr
+            </span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>
+              clicks: {r.clicksA} (was {r.clicksB})
+            </span>
+            <span>
+              pos: {r.positionA ?? "-"} (was {r.positionB ?? "-"})
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -997,11 +1032,5 @@ const styles: Record<string, CSSProperties> = {
     padding: "6px 8px",
     color: "#f0e6d2",
     fontSize: 13,
-  },
-  compareSectionTitle: {
-    fontSize: 13,
-    fontWeight: 600,
-    color: "#e8b04b",
-    margin: "10px 0 2px",
   },
 };
