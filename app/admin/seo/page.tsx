@@ -686,16 +686,23 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
 function PageViewsReport({ stats }: { stats: PageViewStats }) {
   const daysCovered = stats.byDay.length;
   const avgPerDay = daysCovered > 0 ? Math.round(stats.totalViews / daysCovered) : 0;
+  const [selectedDate, setSelectedDate] = useState<string>("");
+
+  const selectedDay = stats.byDay.find((d) => d.date === selectedDate) ?? null;
+  const shownPaths = selectedDay ? selectedDay.topPaths : stats.topPaths;
+  const shownTitle = selectedDay ? `Top pages on ${selectedDay.date}` : "Top pages (last 30 days)";
 
   return (
     <div style={styles.list}>
       <p style={styles.sectionNote}>
-        Last 30 days. Fires on every page load regardless of cookie consent
-        or whether the banner has ever been shown to that visitor - unlike
-        the Cookie consent tab, a returning visitor who already accepted or
-        rejected still counts here. This is the number to check against GA
-        sessions: if GA is well below this, that gap is consent-mode
-        visibility; if this number is also low, traffic genuinely dropped.
+        Last 30 days, excluding /admin/* (that&rsquo;s you checking the
+        dashboard, not a visitor). Fires on every page load regardless of
+        cookie consent or whether the banner has ever been shown to that
+        visitor - unlike the Cookie consent tab, a returning visitor who
+        already accepted or rejected still counts here. This is the number
+        to check against GA sessions: if GA is well below this, that gap is
+        consent-mode visibility; if this number is also low, traffic
+        genuinely dropped.
       </p>
 
       <div style={styles.cardStats}>
@@ -703,25 +710,62 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
         <span>Average per day: {avgPerDay}</span>
       </div>
 
+      {stats.byDay.length > 0 && (
+        <label style={styles.compareLabel}>
+          Pick a date to see its top pages
+          <select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            style={styles.dateInput}
+          >
+            <option value="">All (last 30 days)</option>
+            {stats.byDay.map((d) => (
+              <option key={d.date} value={d.date}>
+                {d.date} ({d.count} views)
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+
       {stats.byDay.length === 0 ? (
         <EmptyState text="No page views recorded yet." />
       ) : (
         stats.byDay.map((row) => (
-          <div key={row.date} style={styles.card}>
+          <div
+            key={row.date}
+            style={{ ...styles.card, cursor: "pointer" }}
+            onClick={() => setSelectedDate(row.date === selectedDate ? "" : row.date)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setSelectedDate(row.date === selectedDate ? "" : row.date);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+          >
             <div style={styles.cardTop}>
-              <span style={styles.cardQuery}>{row.date}</span>
+              <span
+                style={{
+                  ...styles.cardQuery,
+                  ...(row.date === selectedDate ? { color: "#e8b04b" } : {}),
+                }}
+              >
+                {row.date}
+              </span>
               <span style={styles.cardBadge}>{row.count} views</span>
             </div>
           </div>
         ))
       )}
 
-      {stats.topPaths.length > 0 && (
+      {shownPaths.length > 0 && (
         <>
           <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
-            Top pages
+            {shownTitle}
           </h3>
-          {stats.topPaths.slice(0, 20).map((p, i) => (
+          {shownPaths.map((p, i) => (
             <div key={i} style={styles.card}>
               <div style={styles.cardTop}>
                 <span style={styles.cardQuery}>{p.path}</span>
