@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Football Parent | Football Parent",
@@ -33,13 +32,7 @@ export default function AboutFootballParentPage() {
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
         <div className="space-y-6 text-gray-700 text-lg leading-8">
-          <p>
-            This is a website for football parents: the people dropping their
-            children at training in the dark, sitting in the car outside
-            development centres hoping for the best, trying to work out what a
-            trial actually means, or wondering whether to keep pushing or let
-            their child find their own way.
-          </p>
+          
 
           <p>
             It is independent, practical, and written by someone who has been
@@ -69,13 +62,7 @@ export default function AboutFootballParentPage() {
             guidance is written for coaches, not families.
           </p>
 
-          <p>
-            What parents actually need is someone who has been through it,
-            explains it clearly, and tells them what they actually need to know
-            - including the uncomfortable parts.
-          </p>
-
-          <p>That is what Football Parent tries to be.</p>
+          
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             Who this is for
@@ -219,87 +206,13 @@ export default function AboutFootballParentPage() {
             clearly disclosed.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            The founder&apos;s journey
-          </h2>
-
-          <p>
-            Football Parent was created by{" "}
-            <Link
-              href="/author/graham-jenner"
-              className="font-semibold text-blue-700 hover:text-blue-900"
-            >
-              Graham Jenner
-            </Link>
-            , whose son has attended Crystal Palace&apos;s Development Centre,
-            Chelsea&apos;s Player Training Centre, and Chelsea&apos;s Player
-            Development Centre.
-          </p>
-
-          <p>
-            Each of those experiences shaped how this site is written.
-            Attending a development centre for the first time is a significant
-            moment for any family. The excitement is real, but so is the
-            uncertainty. What do the coaches want to see? How should you behave
-            on the touchline? What does it mean if your child is retained - or
-            not? Those are questions Graham had no clean answers to when he
-            started, and they are the questions this site tries to address.
-          </p>
-
-          <p>
-            Alongside being a football parent, Graham coaches at grassroots
-            level and holds an FA Level 2 qualification. That background informs
-            the player development content without pretending to insider
-            knowledge of the professional game.
-          </p>
-
-          <p>
-            The site&apos;s authority comes from lived experience, careful
-            research, and a commitment to being honest - including about what is
-            not known.
-          </p>
-
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            The philosophy here
-          </h2>
-
-          <p>A few things guide how this site is written:</p>
-
-          <p>
-            <strong>Honesty over reassurance.</strong> If something in the youth
-            football system is difficult, unfair, or uncertain, this site says
-            so. Parents are better served by accurate information than by being
-            told what they want to hear.
-          </p>
-
-          <p>
-            <strong>Experience over speculation.</strong> Content draws on
-            first-hand experience where it is relevant and flags when it does
-            not. When research from the FA or other organisations is cited, it
-            is linked.
-          </p>
-
-          <p>
-            <strong>Realism over hype.</strong> The vast majority of children in
-            development centres and academies will not become professional
-            footballers. That is not a failure. Helping families navigate that
-            reality is just as important as covering what good development looks
-            like.
-          </p>
-
-          <p>
-            <strong>Parents, not scouts.</strong> This site is written for
-            families, not for people trying to identify talent or evaluate
-            players. The perspective is always from the family side of the
-            fence.
-          </p>
-
+                    
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             A note on the content
           </h2>
 
           <p>
-            Football Parent currently covers around 50 topics across the areas
+            Football Parent currently covers around 75 topics across the areas
             described above. The site is updated as things change - the youth
             football pathway evolves, and outdated information does more harm
             than no information at all.
