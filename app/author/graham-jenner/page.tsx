@@ -32,12 +32,7 @@ export default function GrahamJennerAuthorPage() {
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
         <div className="space-y-6 text-gray-700 text-lg leading-8">
-          <p>
-            I didn&apos;t start this website because I had all the answers. I
-            started it because I had too many questions and nowhere useful to
-            look for them.
-          </p>
-
+          
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             How this started
           </h2>
@@ -51,10 +46,9 @@ export default function GrahamJennerAuthorPage() {
           </p>
 
           <p>
-            As my son loved football and begun to get better I started to wonder whether I should push him to a higher level.He began attending a development centre, I
+            As my son loved football and begun to get better I started to wonder whether I should push him to a higher level. He began attending a development centre, I
             genuinely didn&apos;t know what to expect. What would sessions
-            involve? What were the coaches looking for? How should we approach
-            it as a family? What happened next if things went well - or if they
+            involve? What were the coaches looking for? What happened next if things went well - or if they
             didn&apos;t? But over time it has also helped me reflect on how I can support him and keep football enjoyable for him, whatever level he plays at.
           </p>
 
@@ -74,15 +68,14 @@ export default function GrahamJennerAuthorPage() {
             My son attended Crystal Palace&apos;s Development Centre, as well as
             both Chelsea&apos;s Player Training Centre and their Player
             Development Centre. Each environment was different, with its own
-            expectations, culture and impact on him - and on us as a family.
+            expectations, culture and impact on him.
           </p>
 
           <p>
             Alongside being a parent, I&apos;ve also coached. I took my
             son&apos;s grassroots team from under-6s and found it
-            one of the most rewarding and challenging things I&apos;ve done. Having coached youth football before, nothing quite prepares you for the difference, emotionally, coaching your own son's team. I also hold an FA
-            Level 2 coaching qualification, but the real education has come from
-            the pitchside and from being a parent in the system.
+            one of the most rewarding and challenging things I&apos;ve done. Having coached youth football before having children, nothing quite prepares you for the difference, emotionally, coaching your own child's team. I also hold an FA
+            Level 2 coaching qualification from my time coaching before becoming a parent coach.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
@@ -91,7 +84,7 @@ export default function GrahamJennerAuthorPage() {
 
           <p>
             Football Parent is focused on the journey that football families go
-            through - the parts that are not always explained clearly.
+            through, the parts that are not always explained clearly.
           </p>
 
           <ul className="list-disc pl-6 space-y-2">
@@ -116,28 +109,18 @@ export default function GrahamJennerAuthorPage() {
           <p>
             What I do have is first-hand experience, a willingness to research
             carefully, and a commitment to being honest about what I know and
-            what I don&apos;t. Where things vary between clubs, I say so. I
-            would rather acknowledge the complexity than give parents false
-            confidence.
+            what I don&apos;t. Where possible, I use interviews with experts to help give you further guidance and knowledge from those who work in the game. I also make sure to link to official sources so you can read for yourself.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             Who I&apos;m writing for
           </h2>
 
-          <p>
-            Football Parent is written for the parent on the touchline who wants
-            to support their child without getting in the way. The family who
-            has just had a letter about a development centre and is not sure
-            what it means. The parent whose child is disappointed after a trial
-            or release and needs honest perspective rather than empty
-            reassurance.
-          </p>
-
+          
           <p>
             I&apos;m not here to sell coaching programmes or tell you your child
             is destined for greatness. I&apos;m here to help you understand the
-            system, make informed decisions, and keep football enjoyable for
+            system, avoid mistakes i've made and make informed decisions. Ultimately, I want to help you keep football enjoyable for
             your family - whatever level your child plays at.
           </p>
 

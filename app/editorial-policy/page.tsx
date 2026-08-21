@@ -32,25 +32,14 @@ export default function EditorialPolicyPage() {
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
         <div className="space-y-6 text-gray-700 text-lg leading-8">
-          <p>
-            Football Parent is an independent website. The guidance here is
-            shaped by one question: what does a football parent actually need to
-            know?
-          </p>
-
-          <p>
-            This page explains how content is researched, written, reviewed and
-            maintained - and what our commitment to independence means in
-            practice.
-          </p>
+          
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             Mission
           </h2>
 
           <p>
-            Football Parent exists to give UK football families clear, honest,
-            independent guidance on navigating the youth football pathway.
+            Football Parent exists to give UK football families clear, independent guidance on navigating the youth football pathway.
           </p>
 
           <p>
@@ -77,6 +66,10 @@ export default function EditorialPolicyPage() {
             attended development centres run by Crystal Palace and Chelsea.
             Where content draws on that experience directly, it is written as
             such.
+          </p>
+
+          <p>
+            <strong>Experts.</strong> Where possible we interview experts in youth football or the relevant topic area. These can act both as a standalone interview but also within articles to provide further context and insight. Experts are selected based on their experience, knowledge and credibility in the field.
           </p>
 
           <p>
@@ -228,16 +221,7 @@ export default function EditorialPolicyPage() {
             changes.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            Independence statement
-          </h2>
-
-          <p>
-            Football Parent is not affiliated with, sponsored by or editorially
-            influenced by any football club, academy, coaching company, agency
-            or commercial organisation in the football industry.
-          </p>
-
+        
           <p>
             Content is not written in exchange for access to clubs or academies,
             and we do not accept payment to produce or modify editorial content.
@@ -262,8 +246,7 @@ export default function EditorialPolicyPage() {
 
           <p>
             Affiliate relationships do not extend to clubs, academies, coaching
-            providers or any football organisation. No editorial content is
-            written in exchange for commission or referral income.
+            providers or any football organisation. 
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
@@ -283,7 +266,7 @@ in touch at:{" "}
           </p>
 
           <p className="pt-6 italic text-gray-600">
-            Last reviewed: June 2026
+            Last reviewed: August 2026
           </p>
         </div>
       </section>
