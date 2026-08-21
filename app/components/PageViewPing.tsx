@@ -14,7 +14,9 @@ export default function PageViewPing() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!pathname) return;
+    // Skip /admin/* - that's Graham checking the dashboard, not a real
+    // visitor, and would otherwise inflate the count it's meant to report.
+    if (!pathname || pathname.startsWith("/admin")) return;
     fetch("/api/page-view", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

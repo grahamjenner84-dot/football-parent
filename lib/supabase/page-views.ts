@@ -21,9 +21,15 @@ export async function logPageView(path: string): Promise<void> {
   }
 }
 
+export interface PageViewDay {
+  date: string;
+  count: number;
+  topPaths: { path: string; count: number }[];
+}
+
 export interface PageViewStats {
   totalViews: number;
-  byDay: { date: string; count: number }[];
+  byDay: PageViewDay[];
   topPaths: { path: string; count: number }[];
 }
 
@@ -41,20 +47,31 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
   }
 
   const rows = data ?? [];
-  const byDayMap = new Map<string, number>();
+  const byDayPathMap = new Map<string, Map<string, number>>();
   const byPathMap = new Map<string, number>();
 
   for (const row of rows) {
     const day = row.created_at.slice(0, 10);
-    byDayMap.set(day, (byDayMap.get(day) ?? 0) + 1);
+    const dayBucket = byDayPathMap.get(day) ?? new Map<string, number>();
+    dayBucket.set(row.path, (dayBucket.get(row.path) ?? 0) + 1);
+    byDayPathMap.set(day, dayBucket);
+
     byPathMap.set(row.path, (byPathMap.get(row.path) ?? 0) + 1);
   }
 
+  const byDay: PageViewDay[] = Array.from(byDayPathMap.entries())
+    .map(([date, pathCounts]) => {
+      const topPaths = Array.from(pathCounts.entries())
+        .map(([path, count]) => ({ path, count }))
+        .sort((a, b) => b.count - a.count);
+      const count = topPaths.reduce((sum, p) => sum + p.count, 0);
+      return { date, count, topPaths: topPaths.slice(0, 20) };
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
+
   return {
     totalViews: rows.length,
-    byDay: Array.from(byDayMap.entries())
-      .map(([date, count]) => ({ date, count }))
-      .sort((a, b) => b.date.localeCompare(a.date)),
+    byDay,
     topPaths: Array.from(byPathMap.entries())
       .map(([path, count]) => ({ path, count }))
       .sort((a, b) => b.count - a.count)
