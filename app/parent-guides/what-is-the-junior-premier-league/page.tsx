@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What Is the Junior Premier League (JPL)? | Football Parent",
   description:
-  "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect.",
+  "The Junior Premier League (JPL): who runs it, the age groups and clubs involved, typical costs, travel demands, and the standard of football to expect.",
   path: "/parent-guides/what-is-the-junior-premier-league",
 });
 
