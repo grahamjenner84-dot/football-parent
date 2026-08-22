@@ -60,7 +60,7 @@ export default function SeoAdminPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [tab, setTab] = useState<Tab>("silence");
+  const [tab, setTab] = useState<Tab>("pageviews");
   const [strikingDays, setStrikingDays] = useState<DayWindow>(90);
   const [ctrDays, setCtrDays] = useState<DayWindow>(90);
   const [noImpressionsDays, setNoImpressionsDays] = useState<DayWindow>(90);
