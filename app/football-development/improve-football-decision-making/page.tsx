@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Improve Football Decision Making | Football Parent",
   description:
-    "Decision making is one of the most important skills in youth football - and one of the hardest to coach. Here's how parents and coaches can help young players think faster and clearer on the pitch.",
+    "Decision making is one of the hardest skills to coach in youth football. How parents and coaches can help players think faster and clearer on the pitch.",
   path: "/football-development/improve-football-decision-making",
 });
 
