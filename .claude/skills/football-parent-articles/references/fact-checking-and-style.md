@@ -123,6 +123,46 @@ there as anywhere else.
 If a paragraph could be dropped unmodified into a tennis, rugby, cricket or
 swimming article, rewrite it to be football-specific.
 
+## Club development-centre guide cluster - check for template sentences
+
+This site now has a growing cluster of single-club "development centre" /
+"player pathway" guides (Arsenal, Chelsea, Crystal Palace, Fulham, Leeds,
+West Ham, Brentford, more to follow). Writing one from a brief that's
+essentially "do the same thing for [Club]" makes it easy to reuse the same
+sentence shape across articles with only the club name swapped, even
+without copying text directly. A cluster review (2026-08-22) found this
+had already happened in several places:
+
+- The same "an invitation to [programme] is the start of an observation
+  process, not a signal/sign that academy interest/registration is
+  coming/close" sentence, reused near-verbatim across 5 of 7 club guides.
+- Its paired follow-on, "most children/boys who attend will stay at that
+  level, and that's a normal outcome," reused in 3 of 7.
+- A fully copy-pasted `<ParentNote>` (the reusable "coaching quality
+  depends on the coach, not the club" story - see `expert-quotes.md`) that
+  ended up word-for-word identical across two different articles, rather
+  than distinctly trimmed like the other reuses of that same quote.
+- Matching Summary-paragraph phrasing ("highly competitive and
+  geographically specific") and identical H2s ("Realistic Recruitment
+  Expectations") across articles that otherwise cover different clubs.
+- A leftover "a" from template find-replace ("Is my child **a** Arsenal
+  academy player...") - a small thing, but a visible tell of templating.
+
+**Before finalising a new club guide, or editing an existing one:** grep
+the other articles in this cluster for the sentence you're about to write,
+especially any sentence that explains what an invitation/trial means, what
+happens to most children who attend, or closes out the article's summary.
+If a similar sentence already exists elsewhere in the cluster, write this
+club's version to make a different point, or ground it in something
+genuinely specific to this club (a real structural detail, not just a
+different proper noun in the same sentence frame) rather than reusing the
+frame with the club name swapped. The underlying fact is almost always
+genuinely different per club, so there's no need to reuse the same
+sentence shape to say it. Any reused `<ParentNote>`/`<ExpertOpinion>` quote
+must be trimmed differently from every other article already using it (see
+the reuse log in `expert-quotes.md`) - never let two articles carry the
+exact same trimmed text.
+
 ## Originality requirement
 
 Every article needs 5 football-specific observations, 3 parent

@@ -201,6 +201,12 @@ export default function AcademyPathwayPage() {
           description:
             "Leeds United's academy became Category One in 2020, above a Skills Centre to Technical Centre pathway. Real ages, costs and how trials actually work.",
         },
+        {
+          title: "Brentford FC Development Centre Guide",
+          href: "/academy-pathway/brentford-development-centre-guide",
+          description:
+            "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in.",
+        },
       ]}
       bottomContent={{
         title: "About the Academy Pathway",

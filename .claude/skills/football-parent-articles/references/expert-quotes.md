@@ -285,9 +285,15 @@ direct experience of that specific club (e.g. Arsenal, West Ham).
 **Used in:** [arsenal-development-centre-guide](/academy-pathway/arsenal-development-centre-guide) (1/3) -
 Phase 5B (2026-08-08), original single-sentence trim. Expanded in place
 (same article) in Phase 5C (2026-08-09) to the fuller club-agnostic version
-below, per Graham's note that the original was too thin. Also used in
+below (this is the only article still using the full version verbatim -
+keep it that way, don't re-add the full text elsewhere). Also used in
 [west-ham-player-pathway-guide](/academy-pathway/west-ham-player-pathway-guide) (2/3) -
-Phase 5C (2026-08-09), same expanded text.
+originally the same expanded text as Arsenal (word-for-word identical, a
+scaled-content risk caught in a cluster review 2026-08-22), re-trimmed
+2026-08-22 to a 4th distinct shape: keeps the opening line and the
+"some coaches...rapport" sentences, but cuts the feedback-forms/four-corner-
+model/weaker-foot material entirely (the other 3 versions all keep some of
+that ending) - ends after "more than anything else."
 Reused a 3rd time in
 [fulham-fc-development-centre-guide](/academy-pathway/fulham-fc-development-centre-guide)
 - 2026-08-09, trimmed differently from the Arsenal/West Ham version (dropped
@@ -634,6 +640,24 @@ Centre or Technical Centre, or a Foundation coach.
    Skills Centre and the Technical Centre?
 4. What would you tell a parent whose child has just been invited to the
    Technical Centre, that isn't obvious from the club's own information?
+
+### brentford-development-centre-guide — TBD, tag: Brentford FDC / B team academy, first-hand experience
+Drafted: 2026-08-22
+Graham has no direct experience of Brentford's Trust Development Centre or academy
+(confirmed 2026-08-22, in-session). Declined to raise the club-agnostic "coaching
+quality" story's reuse cap past its 4th use (Leeds) without a fresh explicit
+go-ahead, so this article shipped informational, with zero formal callouts,
+same as Tottenham's initial state. Well suited to a parent whose child has
+attended the Trust's Football Development Centre, or a Trust/academy coach.
+1. What's the one thing about Brentford's Football Development Centre that
+   surprised you compared to what you expected going in?
+2. Brentford's academy closed in 2016 and only reopened in 2022. Did that
+   history come up at all when you were looking into the FDC, or does it feel
+   completely separate in practice?
+3. How did the FDC trial itself actually run, and did it feel more like an
+   assessment or a normal coaching session?
+4. What would you tell a parent whose child has just been invited to the FDC,
+   that isn't obvious from the club's own information?
 
 Format for new entries:
 ```

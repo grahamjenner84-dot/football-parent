@@ -253,6 +253,13 @@ The case for (and against) coaching your own child · The relationship risk · B
 
 ## 6. Ball Mastery Drills for 7 and 8 Year Olds: A Parent's At-Home Guide
 
+**Status: PUBLISHED** (see `seo-data/exports/article-tracker.csv`). Title
+shortened 2026-08-23 (85 → 59 char meta title, was truncating in SERPs;
+subtitle dropped). 4 internal links added 2026-08-22 from
+`how-much-training-is-too-much`, `is-private-football-coaching-worth-it`,
+`why-isnt-my-child-improving-at-football` and
+`good-football-development-environment`, all pointing to this article.
+
 **Slug:** `/football-development/football-drills-for-7-and-8-year-olds`
 **Origin:** split out of Article 4 - see the callout at the top of this document. This is the single highest-confidence article in the whole batch: real volume, zero competition.
 
@@ -308,7 +315,7 @@ Combined ~350/mo at KD 0 is a genuinely strong opportunity for a site this size 
 | 3 | Practise Football at Home | 150-400 | **0 measured, real intent via PAA** | n/a | Write for the question-shaped long tail, not head terms |
 | 4 | Football Drills for Kids (broad overview) | 1,500-3,000 | **~0** (real-volume terms moved to article 6) | n/a | Broad companion piece to article 6, not a standalone volume driver |
 | 5 | Coach Your Own Child | 100-300 | **0 measured, real intent via PAA** | n/a | Strong citable sources found despite zero volume |
-| 6 | Ball Mastery Drills for 7-8 Year Olds (new) | not in original plan | **350** | **0** | **Highest-confidence article in the batch - real volume, zero competition** |
+| 6 | Ball Mastery Drills for 7-8 Year Olds (new) | not in original plan | **350** | **0** | **PUBLISHED - highest-confidence article in the batch, real volume, zero competition** |
 
 **Housekeeping done this research pass:**
 - Added ~70 confirmed off-topic terms to `scripts/seo/shared/keyword-suppressions.json` from this batch's `keyword_ideas` fallback noise.

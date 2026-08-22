@@ -35,6 +35,7 @@ export const routes = [
   '/academy-pathway/football-development-centres-near-me',
   '/academy-pathway/how-to-find-a-football-agent-for-your-child',
   '/academy-pathway/west-ham-player-pathway-guide',
+  '/academy-pathway/brentford-development-centre-guide',
   '/academy-pathway/can-academy-players-play-grassroots-football',
   '/academy-pathway/how-much-does-academy-football-cost',
   '/academy-pathway/football-development-centres-in-london',

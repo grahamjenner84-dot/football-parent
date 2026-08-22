@@ -68,6 +68,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /academy-pathway/tottenham-development-centres-explained
 - /academy-pathway/leeds-united-development-centre-guide
 - /academy-pathway/pre-academy-football
+- /academy-pathway/brentford-development-centre-guide
 
 ## Academy Trials
 
