@@ -81,3 +81,34 @@ Followed up on the 93-page confirmed low-CTR list (section 5 above isn't in this
 3. The 9 Aug batch (grassroots, JPL, academy categories, scholarships, etc.) is now past the 10-14 day watch window — decide whether a second round of targeted FAQ additions is worth it there, now that the first round's results are confirmed.
 4. **JPL cannibalisation check**: confirm via `inspect_page` on both `what-is-the-junior-premier-league` and `jpl-vs-grassroots-football` whether the explainer page is now consistently the one showing for "what is jpl football" (was 249 vs 20 impr split before the fix). If it's consolidated, re-run the competing-titles live check for that query against the explainer page specifically, since today's check was confounded by the comparison page ranking instead - that's the point where a title change would have real evidence behind it, not before.
 5. Check whether the explainer page's 0% CTR on "what is jpl football" has moved at all now that ranking should be more consistent, before concluding a title/meta change is needed there.
+
+## 7. Title-length cleanup (Screaming Frog audit: 13 pages over 60 chars)
+
+Screaming Frog flagged 13 indexable pages with titles over 60 characters/561px. `ball-mastery-drills` (was 85 chars) turned out to already be fixed by an earlier same-day commit, leaving 12 live. Split by current GSC traffic per the risk-scale rule above:
+
+**Left untouched — real, live traffic, not worth the risk:**
+
+| Page | 28d impressions | Position | CTR |
+|---|---|---|---|
+| `football-gear/best-footballs-by-age` | 8,630 | 9.1 | 0.5% |
+| `football-gear/veo-camera-alternatives` | 3,751 (up from 147) | 7.5 | 1.1% |
+| `academy-pathway/what-is-eppp` | 2,290 | 6.7 | 1.2% |
+
+**Also left untouched — moderate/growing traffic, low priority:**
+
+`academy-pathway/can-academy-players-play-grassroots-football` (881 impr), `football-development/playing-up-an-age-group-football` (829 impr, up from 18), `parent-guides/leave-grassroots-football-for-an-academy` (467 impr).
+
+**Research before changing the remaining 6:** live PAA/FAQ-gap check (`faq-gap-check.ts`) plus DataForSEO search-volume + discovery calls (`page-keyword-research.ts`) for each — total cost **~$0.56**. Findings: PAA already "likely covered" or the SERP had no PAA box at all on every page except the coaching-qualifications one, so **no FAQ additions made** — the data didn't support any. Keyword volume came back null on nearly every candidate phrase for JPL/girls-academy-age/agent/development-centre-progress (genuinely thin-demand topics, confirms low GSC impressions aren't a title problem there). One real find: "FA Level 1 coaching football" gets 90/mo search volume, higher than the generic head term (70/mo) the coaching-qualifications page was titled around, and its PAA box was dominated by professional-career-intent questions (GCSEs, salary, demand) that don't match this grassroots-parent-focused article.
+
+**Titles changed (title tag only, H1s/headings untouched):**
+
+| Page | Before | After | Commit |
+|---|---|---|---|
+| `coaching/what-qualifications-do-i-need-to-be-a-football-coach` | "What Qualifications Do You Need to Be a Football Coach?" (73 chars) — pos 15.6, 0 clicks/240 impr; only 3 weeks old, position volatile | "Grassroots Football Coach Qualifications" (58 chars) | `f4619cb` |
+| `parent-guides/jpl-and-academy-football` | "Does the Junior Premier League Lead to Academy Football?" (74 chars) — pos 4.5, 166 impr (down from 216) | "Does JPL Lead to Academy Football?" (53 chars) | `b2221a6` |
+| `academy-pathway/how-to-find-a-football-agent-for-your-child` | "How to Find a Football Agent for Your Child" (61 chars) — pos 5.7, 169 impr, 3% CTR | "Finding a Football Agent for Your Child" (58 chars) | `4f4478f` |
+| `girls-football/what-age-do-girls-football-academies-recruit` | "What Age Do Girls Football Academies Recruit?" (63 chars) — pos 6.6, 90 impr (down from 238) | "What Age Do Girls Academies Recruit?" (55 chars) | `327fc17` |
+| `academy-pathway/how-players-progress-through-football-development-centres` | "Progress Through Football Development Centres" (63 chars) — pos 4.9, 26 impr | "Football Development Centre Progression" (58 chars) | `bc1467d` |
+| `parent-guides/jpl-martin-brock-interview-part-1` | "JPL Interview: Martin Brock on the Junior Premier League" (74 chars) — pos 4.8, 18 impr, brand new | "Martin Brock on the Junior Premier League" (59 chars) | `2827c5e` |
+
+All 6 now on the 10-14 day watch list (~2-5 Sept 2026 depending on publish date) before any further change. Next check-in: pull `inspect_page` for each, confirm ranking/CTR held or improved, nothing regressed.
