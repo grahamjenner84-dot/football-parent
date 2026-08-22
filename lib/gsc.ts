@@ -61,7 +61,6 @@ const RANK_TRACKER_WINDOW_DAYS = 3;
 // all - filters out the long tail of one-off searches that would otherwise
 // dominate the table with meaningless swings.
 const RANK_TRACKER_MIN_COMBINED_IMPRESSIONS = 4;
-const RANK_TRACKER_MAX_ROWS = 150;
 
 // Rough expected CTR by position - industry ballpark, used only to rank
 // opportunities relative to each other, not as an absolute target.
@@ -414,9 +413,9 @@ function analyseRankTracker(rows: GscRow[], currentEnd: Date): RankRow[] {
     });
   }
 
-  return results
-    .sort((a, b) => b.recentImpressions + b.priorImpressions - (a.recentImpressions + a.priorImpressions))
-    .slice(0, RANK_TRACKER_MAX_ROWS);
+  return results.sort(
+    (a, b) => b.recentImpressions + b.priorImpressions - (a.recentImpressions + a.priorImpressions)
+  );
 }
 
 export type SilenceRow = {
