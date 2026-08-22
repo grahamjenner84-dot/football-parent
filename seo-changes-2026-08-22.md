@@ -70,7 +70,7 @@ Followed up on the 93-page confirmed low-CTR list (section 5 above isn't in this
 | Page | Change | Commit |
 |---|---|---|
 | `parent-guides/what-is-the-junior-premier-league` | Meta description expanded 141 -> 151 chars, into the 150-165 target range (no title change - see above) | `0fe31c0` |
-| `parent-guides/jpl-vs-grassroots-football` | Trimmed the redundant "what is JPL" definitional sentences from the "Understanding the choice" section down to a link-out, to stop splitting ranking signal with the explainer page on "what is jpl football" | *(pending commit)* |
+| `parent-guides/jpl-vs-grassroots-football` | Trimmed the redundant "what is JPL" definitional sentences from the "Understanding the choice" section down to a link-out, to stop splitting ranking signal with the explainer page on "what is jpl football" | `1326110` |
 
 **Open question flagged to Graham, not yet resolved:** removing the cannibalisation doesn't by itself explain *why* the explainer page has 0% CTR on 249 impressions even at its own stronger position (6.8) - that's a real, separate CTR gap. The plan is to let the cannibalisation fix bed in first (so the explainer page ranks consistently, not intermittently), then re-run the competing-titles check specifically for the explainer page once its ranking is stable - the same check couldn't be done cleanly today because the comparison page was the one showing at the time.
 
