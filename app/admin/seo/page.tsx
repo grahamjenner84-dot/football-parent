@@ -322,6 +322,76 @@ function SilenceList({ rows }: { rows: SilenceRow[] }) {
   );
 }
 
+type StrikingPageGroup = {
+  page: string;
+  queries: StrikingRow[];
+  totalImpressions: number;
+  totalClicks: number;
+  avgPosition: number;
+  bestPosition: number;
+};
+
+// Multiple queries in striking distance on the same page is a stronger
+// signal than any one of them alone - one push (a section, an internal
+// link, a title tweak) can move several terms at once. Sorted by term
+// count first so those pages surface before any single-query outlier
+// with high impressions.
+function groupStrikingByPage(rows: StrikingRow[]): StrikingPageGroup[] {
+  const byPage = new Map<string, StrikingRow[]>();
+  for (const r of rows) {
+    if (!byPage.has(r.page)) byPage.set(r.page, []);
+    byPage.get(r.page)!.push(r);
+  }
+  return [...byPage.entries()]
+    .map(([page, queries]) => {
+      const sortedQueries = [...queries].sort((a, b) => a.position - b.position);
+      const totalImpressions = queries.reduce((sum, q) => sum + q.impressions, 0);
+      const totalClicks = queries.reduce((sum, q) => sum + q.clicks, 0);
+      const avgPosition = Math.round((queries.reduce((sum, q) => sum + q.position, 0) / queries.length) * 10) / 10;
+      return {
+        page,
+        queries: sortedQueries,
+        totalImpressions,
+        totalClicks,
+        avgPosition,
+        bestPosition: sortedQueries[0].position,
+      };
+    })
+    .sort((a, b) => b.queries.length - a.queries.length || b.totalImpressions - a.totalImpressions);
+}
+
+function StrikingByPageList({ groups }: { groups: StrikingPageGroup[] }) {
+  if (!groups.length) return <EmptyState text="Nothing on page 2 right now." />;
+  return (
+    <>
+      {groups.map((g) => (
+        <div key={g.page} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{shortPage(g.page)}</span>
+            <span style={styles.cardBadge}>{g.queries.length} term{g.queries.length === 1 ? "" : "s"}</span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>avg pos {g.avgPosition}</span>
+            <span>best #{g.bestPosition}</span>
+            <span>{g.totalImpressions} impr total</span>
+            <span>{g.totalClicks} clicks total</span>
+          </div>
+          {g.queries.map((q, j) => (
+            <div key={j} style={styles.cannibalRow}>
+              <span style={styles.cardPage}>{q.query}</span>
+              <span style={styles.cardStatsInline}>
+                #{q.position} - {q.impressions} impr
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+}
+
+type StrikingGroupBy = "query" | "page";
+
 function StrikingList({
   rows,
   days,
@@ -331,24 +401,42 @@ function StrikingList({
   days: DayWindow;
   onDaysChange: (d: DayWindow) => void;
 }) {
+  const [groupBy, setGroupBy] = useState<StrikingGroupBy>("query");
+
   return (
     <div style={styles.list}>
       <PeriodFilter value={days} onChange={onDaysChange} />
+      <div style={styles.metricToggle}>
+        <button
+          onClick={() => setGroupBy("query")}
+          style={{ ...styles.toggleButton, ...(groupBy === "query" ? styles.toggleButtonActive : {}) }}
+        >
+          By query
+        </button>
+        <button
+          onClick={() => setGroupBy("page")}
+          style={{ ...styles.toggleButton, ...(groupBy === "page" ? styles.toggleButtonActive : {}) }}
+        >
+          By page
+        </button>
+      </div>
       {!rows.length && <EmptyState text="Nothing on page 2 right now." />}
-      {rows.slice(0, 60).map((r, i) => (
-        <div key={i} style={styles.card}>
-          <div style={styles.cardTop}>
-            <span style={styles.cardQuery}>{r.query}</span>
-            <span style={styles.cardBadge}>#{r.position}</span>
+      {groupBy === "query" &&
+        rows.map((r, i) => (
+          <div key={i} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{r.query}</span>
+              <span style={styles.cardBadge}>#{r.position}</span>
+            </div>
+            <p style={styles.cardPage}>{shortPage(r.page)}</p>
+            <div style={styles.cardStats}>
+              <span>{r.impressions} impr</span>
+              <span>{r.clicks} clicks</span>
+              <span>{r.ctr}% CTR</span>
+            </div>
           </div>
-          <p style={styles.cardPage}>{shortPage(r.page)}</p>
-          <div style={styles.cardStats}>
-            <span>{r.impressions} impr</span>
-            <span>{r.clicks} clicks</span>
-            <span>{r.ctr}% CTR</span>
-          </div>
-        </div>
-      ))}
+        ))}
+      {groupBy === "page" && <StrikingByPageList groups={groupStrikingByPage(rows)} />}
     </div>
   );
 }
