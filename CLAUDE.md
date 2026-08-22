@@ -79,6 +79,7 @@ There are **two separate Supabase projects** in this org. They must never share 
 ## Editorial rules
 - Never use em dashes (—) — use commas, colons, or restructure the sentence
 - Never use "badge" framing clichés (e.g. "without the badge") — reads as AI filler
+- Never use "name/brand on the box/side" framing clichés (e.g. "matters more than which name is on the box") — reads as AI filler
 - Internal link suggestions must be paste-ready MDX: full surrounding sentence with [Anchor Text](/url) embedded, not bare links
 
 ## Skills
