@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "What Age Do Girls Football Academies Recruit? | Football Parent",
+  title: "What Age Do Girls Academies Recruit? | Football Parent",
   description:
     "Understanding the recruitment ages and pathway stages within girls academy football in the UK.",
   path: "/girls-football/what-age-do-girls-football-academies-recruit",
