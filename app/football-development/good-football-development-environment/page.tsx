@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Good Football Development Environment | Football Parent",
   description:
-    "Coaching quality, touches on the ball, playing time and enjoyment matter more than league position. What actually predicts whether your child is developing.",
+    "Coaching quality, touches on the ball, playing time and enjoyment matter more than league position. What actually predicts whether a child is developing.",
   path: "/football-development/good-football-development-environment",
 });
 
