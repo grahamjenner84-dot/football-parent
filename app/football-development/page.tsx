@@ -141,6 +141,12 @@ export default function FootballDevelopmentPage() {
           description:
             "How to recognise football burnout early, tell it apart from a normal bad patch, and help a child rediscover enjoyment.",
         },
+        {
+          title: "Ball Mastery Drills for 7 and 8 Year Olds",
+          href: "/coaching/football-drills-for-7-and-8-year-olds",
+          description:
+            "Cone circuits, 1v1 games and passing routines for 7 and 8 year olds, plus how long a ball mastery session should actually last.",
+        },
       ]}
       bottomContent={{
         title: "About Football Development",
