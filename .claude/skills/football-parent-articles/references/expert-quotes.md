@@ -241,9 +241,18 @@ First used in `uk-football-development-centres-explained`.
 
 **Topics:** progression through development centre tiers, comparing two
 clubs' processes, mixed-age placement as a form of challenge.
-**Used in:** [uk-football-development-centres-explained](/academy-pathway/uk-football-development-centres-explained) (1/3),
+**Used in:** [uk-football-development-centres-explained](/academy-pathway/uk-football-development-centres-explained) (1/3) -
+Phase 5B (2026-08-08), full version (all 6 sentences, Chelsea tiers + Palace
+trial-then-commit + mixed-age placement) - keep this as the one article
+carrying the complete story.
 [how-players-progress-through-football-development-centres](/academy-pathway/how-players-progress-through-football-development-centres) (2/3) -
-Phase 5B (2026-08-08).
+originally the same full text as the above (word-for-word identical, a
+scaled-content risk caught in a cluster review 2026-08-22), re-trimmed
+2026-08-22: kept the 3 Chelsea tier-progression sentences plus the closing
+Palace mixed-age sentence, cut the "they let him try a session before he
+committed" and "regular check-ins" sentences (those are about entry/trial
+process, already covered elsewhere in that article, and this article's
+context is specifically progression over time).
 Reused a 3rd and final time (cap reached) in
 [crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide)
 - Phase 5C (2026-08-09), trimmed to just the Crystal Palace portion rather
