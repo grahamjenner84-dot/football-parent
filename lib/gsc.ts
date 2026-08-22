@@ -1030,6 +1030,96 @@ function buildMovers(rowsA: GscRow[], rowsB: GscRow[], maxEach = 25): { drops: M
   return { drops, gains };
 }
 
+export type PageQueryMover = {
+  query: string;
+  impressionsA: number;
+  impressionsB: number;
+  clicksA: number;
+  clicksB: number;
+  positionA: number | null;
+  positionB: number | null;
+  positionDelta: number | null; // positionB - positionA; positive = improved (better position in A than B)
+  // Position-based, not impressions-based (unlike MoverRow's delta/gains-vs-drops
+  // split) - matches the rank tracker's up/down/new/lost vocabulary, since this
+  // is answering "which terms moved" for one page, not "which terms drove the
+  // impressions swing".
+  direction: "up" | "down" | "new" | "lost" | "same";
+};
+
+// Drill-down for one page from a period comparison: every query that page
+// had impressions for in either period, with position A vs B and a
+// direction - lets "this page gained/lost impressions" be followed with
+// "because of which specific terms". Deliberately a separate, on-demand
+// call (filtered to one page via GSC's page dimension filter) rather than
+// baked into comparePeriods' response, which already returns keyed by page
+// - fetching every page's full query breakdown up front would be wasted
+// work for the (usual) case where only one or two pages get drilled into.
+export async function comparePageQueries(
+  page: string,
+  startA: string,
+  endA: string,
+  startB: string,
+  endB: string
+): Promise<PageQueryMover[]> {
+  assertValidDate("startA", startA);
+  assertValidDate("endA", endA);
+  assertValidDate("startB", startB);
+  assertValidDate("endB", endB);
+
+  // Same includingRegex + optional #fragment tail as getPageInspection's
+  // pageFilter - a plain "equals" filter would miss this page's own
+  // in-SERP jump-link rows (see consolidateFragmentRows above).
+  const pageFilter: GscFilter[] = [
+    { dimension: "page", operator: "includingRegex", expression: `^${escapeRegex(page)}(#.*)?$` },
+  ];
+
+  const [rowsA, rowsB] = await Promise.all([
+    fetchRows(startA, endA, ["query"], pageFilter),
+    fetchRows(startB, endB, ["query"], pageFilter),
+  ]);
+
+  const byQuery = new Map<string, { a?: GscRow; b?: GscRow }>();
+  for (const r of rowsA) {
+    const key = r.keys[0];
+    if (!byQuery.has(key)) byQuery.set(key, {});
+    byQuery.get(key)!.a = r;
+  }
+  for (const r of rowsB) {
+    const key = r.keys[0];
+    if (!byQuery.has(key)) byQuery.set(key, {});
+    byQuery.get(key)!.b = r;
+  }
+
+  const movers: PageQueryMover[] = [];
+  for (const [query, { a, b }] of byQuery) {
+    const positionA = a ? Math.round(a.position * 10) / 10 : null;
+    const positionB = b ? Math.round(b.position * 10) / 10 : null;
+
+    let direction: PageQueryMover["direction"] = "same";
+    let positionDelta: number | null = null;
+    if (positionA !== null && positionB === null) direction = "new";
+    else if (positionA === null && positionB !== null) direction = "lost";
+    else if (positionA !== null && positionB !== null) {
+      positionDelta = Math.round((positionB - positionA) * 10) / 10;
+      direction = positionDelta > 0.1 ? "up" : positionDelta < -0.1 ? "down" : "same";
+    }
+
+    movers.push({
+      query,
+      impressionsA: a?.impressions ?? 0,
+      impressionsB: b?.impressions ?? 0,
+      clicksA: a?.clicks ?? 0,
+      clicksB: b?.clicks ?? 0,
+      positionA,
+      positionB,
+      positionDelta,
+      direction,
+    });
+  }
+
+  return movers.sort((x, y) => y.impressionsA + y.impressionsB - (x.impressionsA + x.impressionsB));
+}
+
 export async function comparePeriods(
   startA: string,
   endA: string,
