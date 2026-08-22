@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "How to Find a Football Agent for Your Child | Football Parent",
+  title: "Finding a Football Agent for Your Child | Football Parent",
   description:
     "FA rules block agents from representing players under 18 outside a first professional contract. When they genuinely become relevant, and warning signs to watch for.",
   path: "/academy-pathway/how-to-find-a-football-agent-for-your-child",
