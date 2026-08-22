@@ -234,10 +234,7 @@ export default function SeoAdminPage() {
                 {tab === "decay" && <DecayList rows={report.decay} />}
                 {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
                 {tab === "rank" && (
-                  <>
-                    <RankTrackerSummaryView summary={report.rankTrackerSummary} />
-                    <RankTrackerList rows={report.rankTracker} />
-                  </>
+                  <RankTrackerSection rows={report.rankTracker} summary={report.rankTrackerSummary} />
                 )}
               </>
             )}
@@ -507,35 +504,107 @@ function deltaColor(change: number): CSSProperties {
   return { color: "#9c8a72" };
 }
 
-function RankSummaryTile({ label, bucket }: { label: string; bucket: RankSummaryBucket }) {
+function RankSummaryTile({
+  bucket,
+  active,
+  onSelect,
+}: {
+  bucket: RankSummaryBucket;
+  active: boolean;
+  onSelect: (bucket: RankSummaryBucket) => void;
+}) {
+  // Bands starting at position 1 (total, top3) have nothing to run a
+  // cumulative total against - the band count already is the cumulative one.
+  const showCumulative = bucket.minPos > 1;
   return (
-    <div style={styles.card}>
-      <p style={styles.cardPage}>{label}</p>
+    <button
+      onClick={() => onSelect(bucket)}
+      style={{
+        ...styles.card,
+        ...styles.summaryTileButton,
+        ...(active ? styles.summaryTileButtonActive : {}),
+      }}
+    >
+      <p style={styles.cardPage}>{bucket.label}</p>
       <div style={styles.cardTop}>
         <span style={{ ...styles.cardQuery, fontSize: 20 }}>{bucket.current}</span>
         <span style={{ ...styles.cardBadge, ...deltaColor(bucket.change) }}>{deltaLabel(bucket.change)}</span>
       </div>
-      <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>was {bucket.prior} a week ago</p>
-    </div>
+      {showCumulative && (
+        <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>
+          {bucket.cumulativeCurrent} in top {bucket.maxPos} overall ({deltaLabel(bucket.cumulativeChange)})
+        </p>
+      )}
+      <p style={{ ...styles.cardStatsInline, marginTop: showCumulative ? 2 : 4 }}>was {bucket.prior} a week ago</p>
+    </button>
   );
 }
 
-function RankTrackerSummaryView({ summary }: { summary: RankTrackerSummaryData }) {
+function RankTrackerSummaryView({
+  summary,
+  selected,
+  onSelect,
+}: {
+  summary: RankTrackerSummaryData;
+  selected: RankSummaryBucket | null;
+  onSelect: (bucket: RankSummaryBucket) => void;
+}) {
+  const tiles = [summary.total, summary.top3, summary.top10, summary.top20, summary.top100];
   return (
     <div style={{ ...styles.list, marginBottom: 16 }}>
       <p style={styles.sectionNote}>
         Keywords tracked and where they rank right now, compared to the same
         window a week ago - the same 3-day-average positions as the table
-        below, just bucketed like a rank tracker overview.
+        below. Each tile counts only the keywords actually sitting in that
+        band (top 10 excludes the ones already in top 3), with the
+        traditional cumulative &ldquo;top N&rdquo; total shown underneath.
+        Click a tile to see which queries and pages are in it.
       </p>
       <div style={styles.summaryGrid}>
-        <RankSummaryTile label="Total tracked" bucket={summary.total} />
-        <RankSummaryTile label="Top 3" bucket={summary.top3} />
-        <RankSummaryTile label="Top 10" bucket={summary.top10} />
-        <RankSummaryTile label="Top 20" bucket={summary.top20} />
-        <RankSummaryTile label="Top 100" bucket={summary.top100} />
+        {tiles.map((bucket) => (
+          <RankSummaryTile
+            key={bucket.label}
+            bucket={bucket}
+            active={selected?.label === bucket.label}
+            onSelect={onSelect}
+          />
+        ))}
       </div>
     </div>
+  );
+}
+
+function RankTrackerSection({ rows, summary }: { rows: RankRow[]; summary: RankTrackerSummaryData }) {
+  const [selected, setSelected] = useState<RankSummaryBucket | null>(null);
+
+  const handleSelect = (bucket: RankSummaryBucket) => {
+    setSelected((current) => (current?.label === bucket.label ? null : bucket));
+  };
+
+  const visibleRows = selected
+    ? rows.filter(
+        (r) =>
+          r.recentPosition !== null &&
+          r.recentPosition >= selected.minPos &&
+          (selected.maxPos === null || r.recentPosition <= selected.maxPos)
+      )
+    : rows;
+
+  return (
+    <>
+      <RankTrackerSummaryView summary={summary} selected={selected} onSelect={handleSelect} />
+      {selected && (
+        <div style={styles.metricToggle}>
+          <span style={styles.sectionNote}>
+            Showing {selected.label.toLowerCase()} - {visibleRows.length} quer{visibleRows.length === 1 ? "y" : "ies"}
+          </span>
+          <button style={styles.toggleButton} onClick={() => setSelected(null)}>
+            Clear
+          </button>
+        </div>
+      )}
+      <RankTrackerList rows={visibleRows} />
+    </>
   );
 }
 
@@ -1155,6 +1224,16 @@ const styles: Record<string, CSSProperties> = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
     gap: 10,
+  },
+  summaryTileButton: {
+    textAlign: "left",
+    cursor: "pointer",
+    width: "100%",
+    font: "inherit",
+  },
+  summaryTileButtonActive: {
+    borderColor: "#e8b04b",
+    background: "#2e2313",
   },
   cannibalRow: {
     display: "flex",
