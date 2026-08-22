@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Development Centres Near Me | Football Parent",
   description:
-    "Looking for a football development centre near you? Browse verified development centres run by Premier League and EFL clubs across England, organised by region with links to official programmes.",
+    "Looking for a football development centre near you? Browse verified centres run by Premier League and EFL clubs, organised by region with programme links.",
   path: "/academy-pathway/football-development-centres-near-me",
 });
 
