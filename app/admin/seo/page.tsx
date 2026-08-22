@@ -15,7 +15,7 @@ import type {
 } from "@/lib/gsc";
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
-import type { PeriodComparison } from "@/lib/gsc";
+import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import type { PageViewStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 
 type Tab =
@@ -1250,6 +1250,89 @@ function CompareDays() {
   );
 }
 
+function pageQueryDirectionLabel(q: PageQueryMover): string {
+  switch (q.direction) {
+    case "up":
+      return `up ${q.positionDelta}`;
+    case "down":
+      return `down ${Math.abs(q.positionDelta ?? 0)}`;
+    case "new":
+      return "new in period A";
+    case "lost":
+      return "no longer ranking in period A";
+    default:
+      return "no change";
+  }
+}
+
+function PageQueryDrilldown({
+  page,
+  periodA,
+  periodB,
+}: {
+  page: string;
+  periodA: PeriodTotals;
+  periodB: PeriodTotals;
+}) {
+  const [queries, setQueries] = useState<PageQueryMover[] | null>(null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const hasRun = useRef(false);
+
+  function loadQueries() {
+    setLoading(true);
+    setError("");
+    const qs = new URLSearchParams({
+      page,
+      startA: periodA.start,
+      endA: periodA.end,
+      startB: periodB.start,
+      endB: periodB.end,
+    });
+    fetch(`/api/compare-page-queries?${qs.toString()}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load page queries");
+        }
+        return res.json();
+      })
+      .then((data: { queries: PageQueryMover[] }) => setQueries(data.queries))
+      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load page queries"))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
+    // The parent keys this component by page+period, so a different page
+    // or a re-run comparison remounts a fresh instance (and a fresh
+    // hasRun) rather than updating these props in place.
+    loadQueries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div style={styles.drilldown}>
+      {loading && <p style={styles.muted}>Loading terms...</p>}
+      {error && <p style={styles.error}>{error}</p>}
+      {queries && queries.length === 0 && (
+        <EmptyState text="No queries recorded for this page in either period." />
+      )}
+      {queries &&
+        queries.map((q, i) => (
+          <div key={i} style={styles.cannibalRow}>
+            <span style={{ ...styles.cardPage, ...directionStyle(q.direction) }}>{q.query}</span>
+            <span style={styles.cardStatsInline}>
+              {q.positionA !== null ? `#${q.positionA}` : "-"} (was {q.positionB !== null ? `#${q.positionB}` : "-"}
+              , {pageQueryDirectionLabel(q)}) - {q.impressionsA} impr (was {q.impressionsB})
+            </span>
+          </div>
+        ))}
+    </div>
+  );
+}
+
 function CompareMoverList({
   result,
   axis,
@@ -1259,6 +1342,8 @@ function CompareMoverList({
   axis: CompareAxis;
   direction: CompareDirection;
 }) {
+  const [selectedPage, setSelectedPage] = useState<string | null>(null);
+
   const rows =
     axis === "pages"
       ? direction === "gains"
@@ -1278,25 +1363,59 @@ function CompareMoverList({
 
   return (
     <div style={styles.list}>
-      {rows.slice(0, 25).map((r, i) => (
-        <div key={i} style={styles.card}>
-          <div style={styles.cardTop}>
-            <span style={styles.cardQuery}>{axis === "pages" ? shortPage(r.key) : r.key}</span>
-            <span style={{ ...styles.cardBadge, ...deltaStyle(r.delta) }}>
-              {r.delta >= 0 ? "+" : ""}
-              {r.delta} impr
-            </span>
+      {axis === "pages" && (
+        <p style={styles.sectionNote}>Click a page to see every term behind it, and which moved up, down, or dropped off.</p>
+      )}
+      {rows.slice(0, 25).map((r, i) => {
+        const isPageRow = axis === "pages";
+        const isSelected = isPageRow && selectedPage === r.key;
+        return (
+          <div key={i}>
+            <div
+              style={{ ...styles.card, ...(isPageRow ? { cursor: "pointer" } : {}) }}
+              onClick={isPageRow ? () => setSelectedPage(isSelected ? null : r.key) : undefined}
+              onKeyDown={
+                isPageRow
+                  ? (e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setSelectedPage(isSelected ? null : r.key);
+                      }
+                    }
+                  : undefined
+              }
+              role={isPageRow ? "button" : undefined}
+              tabIndex={isPageRow ? 0 : undefined}
+            >
+              <div style={styles.cardTop}>
+                <span style={{ ...styles.cardQuery, ...(isSelected ? { color: "#e8b04b" } : {}) }}>
+                  {axis === "pages" ? shortPage(r.key) : r.key}
+                </span>
+                <span style={{ ...styles.cardBadge, ...deltaStyle(r.delta) }}>
+                  {r.delta >= 0 ? "+" : ""}
+                  {r.delta} impr
+                </span>
+              </div>
+              <div style={styles.cardStats}>
+                <span>
+                  clicks: {r.clicksA} (was {r.clicksB})
+                </span>
+                <span>
+                  pos: {r.positionA ?? "-"} (was {r.positionB ?? "-"})
+                </span>
+              </div>
+            </div>
+            {isSelected && (
+              <PageQueryDrilldown
+                key={`${r.key}|${result.periodA.start}|${result.periodA.end}|${result.periodB.start}|${result.periodB.end}`}
+                page={r.key}
+                periodA={result.periodA}
+                periodB={result.periodB}
+              />
+            )}
           </div>
-          <div style={styles.cardStats}>
-            <span>
-              clicks: {r.clicksA} (was {r.clicksB})
-            </span>
-            <span>
-              pos: {r.positionA ?? "-"} (was {r.positionB ?? "-"})
-            </span>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -1431,6 +1550,15 @@ const styles: Record<string, CSSProperties> = {
     gap: 8,
     padding: "6px 0",
     borderTop: "1px solid #3a2c1d",
+  },
+  drilldown: {
+    background: "#1f170f",
+    border: "1px solid #3a2c1d",
+    borderTop: "none",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    padding: "0 12px 8px",
+    marginTop: -10,
   },
   muted: {
     color: "#9c8a72",

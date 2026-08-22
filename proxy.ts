@@ -30,6 +30,7 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith("/api/search-report") ||
     pathname.startsWith("/api/cookie-consent-report") ||
     pathname.startsWith("/api/compare-report") ||
+    pathname.startsWith("/api/compare-page-queries") ||
     pathname.startsWith("/api/page-view-report");
 
   if (!isProtected) return NextResponse.next();
@@ -58,6 +59,7 @@ export const config = {
     "/api/search-report",
     "/api/cookie-consent-report",
     "/api/compare-report",
+    "/api/compare-page-queries",
     "/api/page-view-report",
   ],
 };
