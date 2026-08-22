@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
   title: "Why Isn't My Child Improving at Football? | Football Parent",
-  description: "If your child's football progress has stalled, you're not alone. Here's why football development plateaus happen, what's normal, and a plan for the next few months.",
+  description: "If your child's football progress has stalled, you're not alone. Why development plateaus happen, what's normal, and a plan for the next few months.",
   path: "/football-development/why-isnt-my-child-improving-at-football",
 });
 
