@@ -601,9 +601,9 @@ function RankSummaryTile({
   active: boolean;
   onSelect: (bucket: RankSummaryBucket) => void;
 }) {
-  // Bands starting at position 1 (total, top3) have nothing to run a
+  // Bands starting at position 0 (total, top3) have nothing to run a
   // cumulative total against - the band count already is the cumulative one.
-  const showCumulative = bucket.minPos > 1;
+  const showCumulative = bucket.minExclusive > 0;
   return (
     <button
       onClick={() => onSelect(bucket)}
@@ -620,7 +620,7 @@ function RankSummaryTile({
       </div>
       {showCumulative && (
         <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>
-          {bucket.cumulativeCurrent} in top {bucket.maxPos} overall ({deltaLabel(bucket.cumulativeChange)})
+          {bucket.cumulativeCurrent} in top {bucket.maxInclusive} overall ({deltaLabel(bucket.cumulativeChange)})
         </p>
       )}
       <p style={{ ...styles.cardStatsInline, marginTop: showCumulative ? 2 : 4 }}>was {bucket.prior} a week ago</p>
@@ -673,8 +673,8 @@ function RankTrackerSection({ rows, summary }: { rows: RankRow[]; summary: RankT
     ? rows.filter(
         (r) =>
           r.recentPosition !== null &&
-          r.recentPosition >= selected.minPos &&
-          (selected.maxPos === null || r.recentPosition <= selected.maxPos)
+          r.recentPosition > selected.minExclusive &&
+          (selected.maxInclusive === null || r.recentPosition <= selected.maxInclusive)
       )
     : rows;
 
@@ -697,49 +697,146 @@ function RankTrackerSection({ rows, summary }: { rows: RankRow[]; summary: RankT
 }
 
 type RankSortMetric = "position" | "impressions" | "clicks";
+type RankGroupBy = "query" | "page";
+
+type RankPageGroup = {
+  page: string;
+  queries: RankRow[];
+  totalImpressions: number;
+  totalClicks: number;
+  avgPosition: number | null;
+  bestPosition: number | null;
+  improved: number;
+  declined: number;
+};
+
+// Mirrors the striking-distance "by page" view: a page ranking for several
+// terms at once is a stronger prioritisation signal than any one term in
+// isolation, and this is also how you spot every term a given page ranks
+// for (rather than hunting one query at a time in the flat list).
+function groupRankByPage(rows: RankRow[]): RankPageGroup[] {
+  const byPage = new Map<string, RankRow[]>();
+  for (const r of rows) {
+    if (!byPage.has(r.page)) byPage.set(r.page, []);
+    byPage.get(r.page)!.push(r);
+  }
+  return [...byPage.entries()]
+    .map(([page, queries]) => {
+      const ranking = queries.filter((q) => q.recentPosition !== null);
+      const sortedQueries = [...queries].sort(
+        (a, b) => (a.recentPosition ?? Infinity) - (b.recentPosition ?? Infinity)
+      );
+      const totalImpressions = queries.reduce((sum, q) => sum + q.recentImpressions, 0);
+      const totalClicks = queries.reduce((sum, q) => sum + q.recentClicks, 0);
+      const avgPosition = ranking.length
+        ? Math.round((ranking.reduce((sum, q) => sum + (q.recentPosition ?? 0), 0) / ranking.length) * 10) / 10
+        : null;
+      const bestPosition = ranking.length ? Math.min(...ranking.map((q) => q.recentPosition!)) : null;
+      const improved = queries.filter((q) => q.direction === "up" || q.direction === "new").length;
+      const declined = queries.filter((q) => q.direction === "down" || q.direction === "lost").length;
+      return {
+        page,
+        queries: sortedQueries,
+        totalImpressions,
+        totalClicks,
+        avgPosition,
+        bestPosition,
+        improved,
+        declined,
+      };
+    })
+    .sort((a, b) => b.queries.length - a.queries.length || b.totalImpressions - a.totalImpressions);
+}
+
+function RankByPageList({ groups }: { groups: RankPageGroup[] }) {
+  if (!groups.length) return <EmptyState text="Nothing matches this filter." />;
+  return (
+    <>
+      {groups.map((g) => (
+        <div key={g.page} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{shortPage(g.page)}</span>
+            <span style={styles.cardBadge}>{g.queries.length} term{g.queries.length === 1 ? "" : "s"}</span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>avg pos {g.avgPosition ?? "-"}</span>
+            <span>best #{g.bestPosition ?? "-"}</span>
+            <span>{g.totalImpressions} impr</span>
+            <span style={{ color: "#8fd19e" }}>{g.improved} up</span>
+            <span style={{ color: "#e07856" }}>{g.declined} down</span>
+          </div>
+          {g.queries.map((q, j) => (
+            <div key={j} style={styles.cannibalRow}>
+              <span style={{ ...styles.cardPage, ...directionStyle(q.direction) }}>{q.query}</span>
+              <span style={styles.cardStatsInline}>
+                {q.recentPosition !== null ? `#${q.recentPosition}` : "-"} - {directionLabel(q)}
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+}
 
 function RankTrackerList({ rows }: { rows: RankRow[] }) {
   const [metric, setMetric] = useState<RankSortMetric>("impressions");
   const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
+  const [groupBy, setGroupBy] = useState<RankGroupBy>("query");
 
   if (!rows.length) {
     return <EmptyState text="Not enough recent search volume yet to track keyword movement." />;
   }
 
-  const visible = rows
-    .filter((r) => matchesDirectionFilter(r.direction, directionFilter))
-    .sort((a, b) => {
-      if (metric === "position") {
-        // Lower position is better; queries with no current position (lost) sort last.
-        return (a.recentPosition ?? Infinity) - (b.recentPosition ?? Infinity);
-      }
-      const aVal = metric === "impressions" ? a.recentImpressions : a.recentClicks;
-      const bVal = metric === "impressions" ? b.recentImpressions : b.recentClicks;
-      return bVal - aVal;
-    });
+  const filtered = rows.filter((r) => matchesDirectionFilter(r.direction, directionFilter));
+  const visible = [...filtered].sort((a, b) => {
+    if (metric === "position") {
+      // Lower position is better; queries with no current position (lost) sort last.
+      return (a.recentPosition ?? Infinity) - (b.recentPosition ?? Infinity);
+    }
+    const aVal = metric === "impressions" ? a.recentImpressions : a.recentClicks;
+    const bVal = metric === "impressions" ? b.recentImpressions : b.recentClicks;
+    return bVal - aVal;
+  });
 
   return (
     <div style={styles.list}>
       <div style={styles.metricToggle}>
         <button
-          onClick={() => setMetric("position")}
-          style={{ ...styles.toggleButton, ...(metric === "position" ? styles.toggleButtonActive : {}) }}
+          onClick={() => setGroupBy("query")}
+          style={{ ...styles.toggleButton, ...(groupBy === "query" ? styles.toggleButtonActive : {}) }}
         >
-          Sort: position
+          By query
         </button>
         <button
-          onClick={() => setMetric("impressions")}
-          style={{ ...styles.toggleButton, ...(metric === "impressions" ? styles.toggleButtonActive : {}) }}
+          onClick={() => setGroupBy("page")}
+          style={{ ...styles.toggleButton, ...(groupBy === "page" ? styles.toggleButtonActive : {}) }}
         >
-          Sort: impressions
-        </button>
-        <button
-          onClick={() => setMetric("clicks")}
-          style={{ ...styles.toggleButton, ...(metric === "clicks" ? styles.toggleButtonActive : {}) }}
-        >
-          Sort: clicks
+          By page
         </button>
       </div>
+      {groupBy === "query" && (
+        <div style={styles.metricToggle}>
+          <button
+            onClick={() => setMetric("position")}
+            style={{ ...styles.toggleButton, ...(metric === "position" ? styles.toggleButtonActive : {}) }}
+          >
+            Sort: position
+          </button>
+          <button
+            onClick={() => setMetric("impressions")}
+            style={{ ...styles.toggleButton, ...(metric === "impressions" ? styles.toggleButtonActive : {}) }}
+          >
+            Sort: impressions
+          </button>
+          <button
+            onClick={() => setMetric("clicks")}
+            style={{ ...styles.toggleButton, ...(metric === "clicks" ? styles.toggleButtonActive : {}) }}
+          >
+            Sort: clicks
+          </button>
+        </div>
+      )}
       <div style={styles.metricToggle}>
         <button
           onClick={() => setDirectionFilter("all")}
@@ -766,29 +863,34 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
         day is too noisy to trust for most queries. New/improved queries are
         shown in green, lost ones in red.
       </p>
-      {!visible.length && <EmptyState text="Nothing matches this filter." />}
-      {visible.map((r, i) => {
-        const recentVal = metric === "impressions" ? r.recentImpressions : r.recentClicks;
-        const priorVal = metric === "impressions" ? r.priorImpressions : r.priorClicks;
-        const unit = metric === "impressions" ? "impr" : "clicks";
-        return (
-          <div key={i} style={styles.card}>
-            <div style={styles.cardTop}>
-              <span style={{ ...styles.cardQuery, ...directionStyle(r.direction) }}>{r.query}</span>
-              <span style={styles.cardBadge}>{r.recentPosition !== null ? `#${r.recentPosition}` : "-"}</span>
-            </div>
-            <p style={styles.cardPage}>{shortPage(r.page)}</p>
-            <div style={styles.cardStats}>
-              <span style={directionStyle(r.direction)}>{directionLabel(r)}</span>
-              {metric !== "position" && (
-                <span>
-                  {recentVal} {unit} (was {priorVal})
-                </span>
-              )}
-            </div>
-          </div>
-        );
-      })}
+      {groupBy === "page" && <RankByPageList groups={groupRankByPage(filtered)} />}
+      {groupBy === "query" && (
+        <>
+          {!visible.length && <EmptyState text="Nothing matches this filter." />}
+          {visible.map((r, i) => {
+            const recentVal = metric === "impressions" ? r.recentImpressions : r.recentClicks;
+            const priorVal = metric === "impressions" ? r.priorImpressions : r.priorClicks;
+            const unit = metric === "impressions" ? "impr" : "clicks";
+            return (
+              <div key={i} style={styles.card}>
+                <div style={styles.cardTop}>
+                  <span style={{ ...styles.cardQuery, ...directionStyle(r.direction) }}>{r.query}</span>
+                  <span style={styles.cardBadge}>{r.recentPosition !== null ? `#${r.recentPosition}` : "-"}</span>
+                </div>
+                <p style={styles.cardPage}>{shortPage(r.page)}</p>
+                <div style={styles.cardStats}>
+                  <span style={directionStyle(r.direction)}>{directionLabel(r)}</span>
+                  {metric !== "position" && (
+                    <span>
+                      {recentVal} {unit} (was {priorVal})
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }
