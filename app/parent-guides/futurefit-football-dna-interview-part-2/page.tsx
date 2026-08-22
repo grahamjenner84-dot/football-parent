@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "FutureFit Football DNA Interview Part 2 | Football Parent",
   description:
-    "Football DNA's Paul Barry explains whether 3v3 football is too chaotic, why some clubs are avoiding it, why 11v11 is moving to U14 and what FutureFit could change.",
+    "Football DNA's Paul Barry on whether 3v3 football is too chaotic, why some clubs avoid it, why 11v11 is moving to U14, and what FutureFit could change.",
   path: "/parent-guides/futurefit-football-dna-interview-part-2",
 });
 
