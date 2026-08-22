@@ -1001,6 +1001,10 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
   const selectedDay = stats.byDay.find((d) => d.date === selectedDate) ?? null;
   const shownPaths = selectedDay ? selectedDay.topPaths : stats.topPaths;
   const shownTitle = selectedDay ? `Top pages on ${selectedDay.date}` : "Top pages (last 30 days)";
+  const shownSourceGroups = selectedDay ? selectedDay.sourceGroups : stats.sourceGroups;
+  const sourceGroupsTitle = selectedDay
+    ? `Traffic sources on ${selectedDay.date}`
+    : `Traffic sources (last ${daysCovered} days, excludes on-site navigation)`;
 
   return (
     <div style={styles.list}>
@@ -1023,7 +1027,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
       {stats.sourceGroups.length > 0 && (
         <>
           <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
-            Traffic sources (last {daysCovered} days, excludes on-site navigation)
+            {sourceGroupsTitle}
           </h3>
           <p style={{ ...styles.sectionNote, marginTop: 0 }}>
             Based on the referrer header, not a cookie - unaffected by
@@ -1034,7 +1038,10 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             chat share a hostname and can&rsquo;t be told apart; same for
             Grok and X/Twitter.
           </p>
-          {stats.sourceGroups.map((g) => (
+          {shownSourceGroups.length === 0 && (
+            <EmptyState text="No external-referrer traffic on this date - everything was Direct or on-site navigation." />
+          )}
+          {shownSourceGroups.map((g) => (
             <div key={g.group} style={styles.card}>
               <div style={styles.cardTop}>
                 <span style={styles.cardQuery}>{g.group}</span>

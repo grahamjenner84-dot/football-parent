@@ -22,12 +22,6 @@ export async function logPageView(path: string, referrerHost: string | null = nu
   }
 }
 
-export interface PageViewDay {
-  date: string;
-  count: number;
-  topPaths: { path: string; count: number }[];
-}
-
 export interface SourceCount {
   label: string;
   count: number;
@@ -39,14 +33,33 @@ export interface SourceGroupCount {
   topSources: SourceCount[];
 }
 
-export interface PageViewStats {
-  totalViews: number;
-  byDay: PageViewDay[];
+export interface PageViewDay {
+  date: string;
+  count: number;
   topPaths: { path: string; count: number }[];
   // Excludes rows classified "Internal" (on-site navigation, not a new
   // visit) - see the classifyReferrerHost comment on why that's a valid
   // proxy for "visits from this source" without needing a session id.
   sourceGroups: SourceGroupCount[];
+}
+
+export interface PageViewStats {
+  totalViews: number;
+  byDay: PageViewDay[];
+  topPaths: { path: string; count: number }[];
+  sourceGroups: SourceGroupCount[];
+}
+
+function buildSourceGroups(groupMap: Map<SourceGroup, Map<string, number>>): SourceGroupCount[] {
+  return Array.from(groupMap.entries())
+    .map(([group, labelCounts]) => {
+      const topSources = Array.from(labelCounts.entries())
+        .map(([label, count]) => ({ label, count }))
+        .sort((a, b) => b.count - a.count);
+      const count = topSources.reduce((sum, s) => sum + s.count, 0);
+      return { group, count, topSources };
+    })
+    .sort((a, b) => b.count - a.count);
 }
 
 export async function getPageViewStats(days: number = 30): Promise<PageViewStats> {
@@ -66,6 +79,7 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
   const byDayPathMap = new Map<string, Map<string, number>>();
   const byPathMap = new Map<string, number>();
   const groupMap = new Map<SourceGroup, Map<string, number>>();
+  const byDayGroupMap = new Map<string, Map<SourceGroup, Map<string, number>>>();
 
   for (const row of rows) {
     const day = row.created_at.slice(0, 10);
@@ -77,9 +91,16 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
 
     const { group, label } = classifyReferrerHost(row.referrer_host);
     if (group === "Internal") continue;
+
     const labelBucket = groupMap.get(group) ?? new Map<string, number>();
     labelBucket.set(label, (labelBucket.get(label) ?? 0) + 1);
     groupMap.set(group, labelBucket);
+
+    const dayGroupMap = byDayGroupMap.get(day) ?? new Map<SourceGroup, Map<string, number>>();
+    const dayLabelBucket = dayGroupMap.get(group) ?? new Map<string, number>();
+    dayLabelBucket.set(label, (dayLabelBucket.get(label) ?? 0) + 1);
+    dayGroupMap.set(group, dayLabelBucket);
+    byDayGroupMap.set(day, dayGroupMap);
   }
 
   const byDay: PageViewDay[] = Array.from(byDayPathMap.entries())
@@ -88,19 +109,10 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
         .map(([path, count]) => ({ path, count }))
         .sort((a, b) => b.count - a.count);
       const count = topPaths.reduce((sum, p) => sum + p.count, 0);
-      return { date, count, topPaths: topPaths.slice(0, 20) };
+      const sourceGroups = buildSourceGroups(byDayGroupMap.get(date) ?? new Map());
+      return { date, count, topPaths: topPaths.slice(0, 20), sourceGroups };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
-
-  const sourceGroups: SourceGroupCount[] = Array.from(groupMap.entries())
-    .map(([group, labelCounts]) => {
-      const topSources = Array.from(labelCounts.entries())
-        .map(([label, count]) => ({ label, count }))
-        .sort((a, b) => b.count - a.count);
-      const count = topSources.reduce((sum, s) => sum + s.count, 0);
-      return { group, count, topSources };
-    })
-    .sort((a, b) => b.count - a.count);
 
   return {
     totalViews: rows.length,
@@ -109,6 +121,6 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
       .map(([path, count]) => ({ path, count }))
       .sort((a, b) => b.count - a.count)
       .slice(0, 50),
-    sourceGroups,
+    sourceGroups: buildSourceGroups(groupMap),
   };
 }
