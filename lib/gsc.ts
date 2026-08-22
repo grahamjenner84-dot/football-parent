@@ -418,6 +418,41 @@ function analyseRankTracker(rows: GscRow[], currentEnd: Date): RankRow[] {
   );
 }
 
+export type RankSummaryBucket = {
+  current: number;
+  prior: number;
+  change: number; // current - prior; positive = more keywords in this bucket than a week ago
+};
+
+export type RankTrackerSummary = {
+  total: RankSummaryBucket;
+  top3: RankSummaryBucket;
+  top10: RankSummaryBucket;
+  top20: RankSummaryBucket;
+  top100: RankSummaryBucket;
+};
+
+// SEMrush-style overview: how many tracked keywords currently sit in each
+// position band, and how that count has moved since the prior window. Built
+// from the same rows/windows as the rank tracker table itself, so it reflects
+// exactly what's listed there, not a separate live SERP check.
+function summariseRankTracker(rows: RankRow[]): RankTrackerSummary {
+  const bucket = (maxPos: number | null): RankSummaryBucket => {
+    const inBand = (pos: number | null) => pos !== null && (maxPos === null || pos <= maxPos);
+    const current = rows.filter((r) => inBand(r.recentPosition)).length;
+    const prior = rows.filter((r) => inBand(r.priorPosition)).length;
+    return { current, prior, change: current - prior };
+  };
+
+  return {
+    total: bucket(null),
+    top3: bucket(3),
+    top10: bucket(10),
+    top20: bucket(20),
+    top100: bucket(100),
+  };
+}
+
 export type SilenceRow = {
   page: string;
   baselineImpressions: number;
@@ -531,6 +566,7 @@ export type SeoReport = {
   cannibalisation: CannibalRow[];
   silence: SilenceRow[];
   rankTracker: RankRow[];
+  rankTrackerSummary: RankTrackerSummary;
   noImpressions: NoImpressionsRow[];
   noImpressionsDays: number;
 };
@@ -582,6 +618,8 @@ export async function getSeoReport(options: SeoReportOptions = {}): Promise<SeoR
     fetchRows(isoDate(noImpressionsStart), isoDate(currentEnd), ["page"]),
   ]);
 
+  const rankTracker = analyseRankTracker(rankTrackerRows, currentEnd);
+
   return {
     periodStart: isoDate(currentStart),
     periodEnd: isoDate(currentEnd),
@@ -592,7 +630,8 @@ export async function getSeoReport(options: SeoReportOptions = {}): Promise<SeoR
     decay: analyseDecay(decayRowsCurrent, decayRowsPrior),
     cannibalisation: analyseCannibalisation(cannibalRows),
     silence: analyseSilence(pageDateRows, currentEnd),
-    rankTracker: analyseRankTracker(rankTrackerRows, currentEnd),
+    rankTracker,
+    rankTrackerSummary: summariseRankTracker(rankTracker),
     noImpressions: analyseNoImpressions(noImpressionsRows),
     noImpressionsDays,
   };

@@ -9,6 +9,8 @@ import type {
   CannibalRow,
   SilenceRow,
   RankRow,
+  RankTrackerSummary as RankTrackerSummaryData,
+  RankSummaryBucket,
   NoImpressionsRow,
 } from "@/lib/gsc";
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
@@ -231,7 +233,12 @@ export default function SeoAdminPage() {
                 {tab === "ctr" && <LowCtrList rows={report.lowCtr} days={ctrDays} onDaysChange={setCtrDays} />}
                 {tab === "decay" && <DecayList rows={report.decay} />}
                 {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
-                {tab === "rank" && <RankTrackerList rows={report.rankTracker} />}
+                {tab === "rank" && (
+                  <>
+                    <RankTrackerSummaryView summary={report.rankTrackerSummary} />
+                    <RankTrackerList rows={report.rankTracker} />
+                  </>
+                )}
               </>
             )}
           </>
@@ -486,6 +493,50 @@ function matchesDirectionFilter(direction: RankRow["direction"], filter: Directi
   if (filter === "improved") return direction === "up" || direction === "new";
   if (filter === "lost") return direction === "down" || direction === "lost";
   return true;
+}
+
+function deltaLabel(change: number): string {
+  if (change > 0) return `▲ +${change}`;
+  if (change < 0) return `▼ ${change}`;
+  return "no change";
+}
+
+function deltaColor(change: number): CSSProperties {
+  if (change > 0) return { color: "#8fd19e" };
+  if (change < 0) return { color: "#e07856" };
+  return { color: "#9c8a72" };
+}
+
+function RankSummaryTile({ label, bucket }: { label: string; bucket: RankSummaryBucket }) {
+  return (
+    <div style={styles.card}>
+      <p style={styles.cardPage}>{label}</p>
+      <div style={styles.cardTop}>
+        <span style={{ ...styles.cardQuery, fontSize: 20 }}>{bucket.current}</span>
+        <span style={{ ...styles.cardBadge, ...deltaColor(bucket.change) }}>{deltaLabel(bucket.change)}</span>
+      </div>
+      <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>was {bucket.prior} a week ago</p>
+    </div>
+  );
+}
+
+function RankTrackerSummaryView({ summary }: { summary: RankTrackerSummaryData }) {
+  return (
+    <div style={{ ...styles.list, marginBottom: 16 }}>
+      <p style={styles.sectionNote}>
+        Keywords tracked and where they rank right now, compared to the same
+        window a week ago - the same 3-day-average positions as the table
+        below, just bucketed like a rank tracker overview.
+      </p>
+      <div style={styles.summaryGrid}>
+        <RankSummaryTile label="Total tracked" bucket={summary.total} />
+        <RankSummaryTile label="Top 3" bucket={summary.top3} />
+        <RankSummaryTile label="Top 10" bucket={summary.top10} />
+        <RankSummaryTile label="Top 20" bucket={summary.top20} />
+        <RankSummaryTile label="Top 100" bucket={summary.top100} />
+      </div>
+    </div>
+  );
 }
 
 type RankSortMetric = "position" | "impressions" | "clicks";
@@ -1099,6 +1150,11 @@ const styles: Record<string, CSSProperties> = {
   cardStatsInline: {
     fontSize: 12,
     color: "#9c8a72",
+  },
+  summaryGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
+    gap: 10,
   },
   cannibalRow: {
     display: "flex",
