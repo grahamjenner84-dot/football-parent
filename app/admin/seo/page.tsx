@@ -234,10 +234,7 @@ export default function SeoAdminPage() {
                 {tab === "decay" && <DecayList rows={report.decay} />}
                 {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
                 {tab === "rank" && (
-                  <>
-                    <RankTrackerSummaryView summary={report.rankTrackerSummary} />
-                    <RankTrackerList rows={report.rankTracker} />
-                  </>
+                  <RankTrackerSection rows={report.rankTracker} summary={report.rankTrackerSummary} />
                 )}
               </>
             )}
@@ -325,6 +322,76 @@ function SilenceList({ rows }: { rows: SilenceRow[] }) {
   );
 }
 
+type StrikingPageGroup = {
+  page: string;
+  queries: StrikingRow[];
+  totalImpressions: number;
+  totalClicks: number;
+  avgPosition: number;
+  bestPosition: number;
+};
+
+// Multiple queries in striking distance on the same page is a stronger
+// signal than any one of them alone - one push (a section, an internal
+// link, a title tweak) can move several terms at once. Sorted by term
+// count first so those pages surface before any single-query outlier
+// with high impressions.
+function groupStrikingByPage(rows: StrikingRow[]): StrikingPageGroup[] {
+  const byPage = new Map<string, StrikingRow[]>();
+  for (const r of rows) {
+    if (!byPage.has(r.page)) byPage.set(r.page, []);
+    byPage.get(r.page)!.push(r);
+  }
+  return [...byPage.entries()]
+    .map(([page, queries]) => {
+      const sortedQueries = [...queries].sort((a, b) => a.position - b.position);
+      const totalImpressions = queries.reduce((sum, q) => sum + q.impressions, 0);
+      const totalClicks = queries.reduce((sum, q) => sum + q.clicks, 0);
+      const avgPosition = Math.round((queries.reduce((sum, q) => sum + q.position, 0) / queries.length) * 10) / 10;
+      return {
+        page,
+        queries: sortedQueries,
+        totalImpressions,
+        totalClicks,
+        avgPosition,
+        bestPosition: sortedQueries[0].position,
+      };
+    })
+    .sort((a, b) => b.queries.length - a.queries.length || b.totalImpressions - a.totalImpressions);
+}
+
+function StrikingByPageList({ groups }: { groups: StrikingPageGroup[] }) {
+  if (!groups.length) return <EmptyState text="Nothing on page 2 right now." />;
+  return (
+    <>
+      {groups.map((g) => (
+        <div key={g.page} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{shortPage(g.page)}</span>
+            <span style={styles.cardBadge}>{g.queries.length} term{g.queries.length === 1 ? "" : "s"}</span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>avg pos {g.avgPosition}</span>
+            <span>best #{g.bestPosition}</span>
+            <span>{g.totalImpressions} impr total</span>
+            <span>{g.totalClicks} clicks total</span>
+          </div>
+          {g.queries.map((q, j) => (
+            <div key={j} style={styles.cannibalRow}>
+              <span style={styles.cardPage}>{q.query}</span>
+              <span style={styles.cardStatsInline}>
+                #{q.position} - {q.impressions} impr
+              </span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+}
+
+type StrikingGroupBy = "query" | "page";
+
 function StrikingList({
   rows,
   days,
@@ -334,24 +401,42 @@ function StrikingList({
   days: DayWindow;
   onDaysChange: (d: DayWindow) => void;
 }) {
+  const [groupBy, setGroupBy] = useState<StrikingGroupBy>("query");
+
   return (
     <div style={styles.list}>
       <PeriodFilter value={days} onChange={onDaysChange} />
+      <div style={styles.metricToggle}>
+        <button
+          onClick={() => setGroupBy("query")}
+          style={{ ...styles.toggleButton, ...(groupBy === "query" ? styles.toggleButtonActive : {}) }}
+        >
+          By query
+        </button>
+        <button
+          onClick={() => setGroupBy("page")}
+          style={{ ...styles.toggleButton, ...(groupBy === "page" ? styles.toggleButtonActive : {}) }}
+        >
+          By page
+        </button>
+      </div>
       {!rows.length && <EmptyState text="Nothing on page 2 right now." />}
-      {rows.slice(0, 60).map((r, i) => (
-        <div key={i} style={styles.card}>
-          <div style={styles.cardTop}>
-            <span style={styles.cardQuery}>{r.query}</span>
-            <span style={styles.cardBadge}>#{r.position}</span>
+      {groupBy === "query" &&
+        rows.map((r, i) => (
+          <div key={i} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{r.query}</span>
+              <span style={styles.cardBadge}>#{r.position}</span>
+            </div>
+            <p style={styles.cardPage}>{shortPage(r.page)}</p>
+            <div style={styles.cardStats}>
+              <span>{r.impressions} impr</span>
+              <span>{r.clicks} clicks</span>
+              <span>{r.ctr}% CTR</span>
+            </div>
           </div>
-          <p style={styles.cardPage}>{shortPage(r.page)}</p>
-          <div style={styles.cardStats}>
-            <span>{r.impressions} impr</span>
-            <span>{r.clicks} clicks</span>
-            <span>{r.ctr}% CTR</span>
-          </div>
-        </div>
-      ))}
+        ))}
+      {groupBy === "page" && <StrikingByPageList groups={groupStrikingByPage(rows)} />}
     </div>
   );
 }
@@ -507,35 +592,107 @@ function deltaColor(change: number): CSSProperties {
   return { color: "#9c8a72" };
 }
 
-function RankSummaryTile({ label, bucket }: { label: string; bucket: RankSummaryBucket }) {
+function RankSummaryTile({
+  bucket,
+  active,
+  onSelect,
+}: {
+  bucket: RankSummaryBucket;
+  active: boolean;
+  onSelect: (bucket: RankSummaryBucket) => void;
+}) {
+  // Bands starting at position 1 (total, top3) have nothing to run a
+  // cumulative total against - the band count already is the cumulative one.
+  const showCumulative = bucket.minPos > 1;
   return (
-    <div style={styles.card}>
-      <p style={styles.cardPage}>{label}</p>
+    <button
+      onClick={() => onSelect(bucket)}
+      style={{
+        ...styles.card,
+        ...styles.summaryTileButton,
+        ...(active ? styles.summaryTileButtonActive : {}),
+      }}
+    >
+      <p style={styles.cardPage}>{bucket.label}</p>
       <div style={styles.cardTop}>
         <span style={{ ...styles.cardQuery, fontSize: 20 }}>{bucket.current}</span>
         <span style={{ ...styles.cardBadge, ...deltaColor(bucket.change) }}>{deltaLabel(bucket.change)}</span>
       </div>
-      <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>was {bucket.prior} a week ago</p>
-    </div>
+      {showCumulative && (
+        <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>
+          {bucket.cumulativeCurrent} in top {bucket.maxPos} overall ({deltaLabel(bucket.cumulativeChange)})
+        </p>
+      )}
+      <p style={{ ...styles.cardStatsInline, marginTop: showCumulative ? 2 : 4 }}>was {bucket.prior} a week ago</p>
+    </button>
   );
 }
 
-function RankTrackerSummaryView({ summary }: { summary: RankTrackerSummaryData }) {
+function RankTrackerSummaryView({
+  summary,
+  selected,
+  onSelect,
+}: {
+  summary: RankTrackerSummaryData;
+  selected: RankSummaryBucket | null;
+  onSelect: (bucket: RankSummaryBucket) => void;
+}) {
+  const tiles = [summary.total, summary.top3, summary.top10, summary.top20, summary.top100];
   return (
     <div style={{ ...styles.list, marginBottom: 16 }}>
       <p style={styles.sectionNote}>
         Keywords tracked and where they rank right now, compared to the same
         window a week ago - the same 3-day-average positions as the table
-        below, just bucketed like a rank tracker overview.
+        below. Each tile counts only the keywords actually sitting in that
+        band (top 10 excludes the ones already in top 3), with the
+        traditional cumulative &ldquo;top N&rdquo; total shown underneath.
+        Click a tile to see which queries and pages are in it.
       </p>
       <div style={styles.summaryGrid}>
-        <RankSummaryTile label="Total tracked" bucket={summary.total} />
-        <RankSummaryTile label="Top 3" bucket={summary.top3} />
-        <RankSummaryTile label="Top 10" bucket={summary.top10} />
-        <RankSummaryTile label="Top 20" bucket={summary.top20} />
-        <RankSummaryTile label="Top 100" bucket={summary.top100} />
+        {tiles.map((bucket) => (
+          <RankSummaryTile
+            key={bucket.label}
+            bucket={bucket}
+            active={selected?.label === bucket.label}
+            onSelect={onSelect}
+          />
+        ))}
       </div>
     </div>
+  );
+}
+
+function RankTrackerSection({ rows, summary }: { rows: RankRow[]; summary: RankTrackerSummaryData }) {
+  const [selected, setSelected] = useState<RankSummaryBucket | null>(null);
+
+  const handleSelect = (bucket: RankSummaryBucket) => {
+    setSelected((current) => (current?.label === bucket.label ? null : bucket));
+  };
+
+  const visibleRows = selected
+    ? rows.filter(
+        (r) =>
+          r.recentPosition !== null &&
+          r.recentPosition >= selected.minPos &&
+          (selected.maxPos === null || r.recentPosition <= selected.maxPos)
+      )
+    : rows;
+
+  return (
+    <>
+      <RankTrackerSummaryView summary={summary} selected={selected} onSelect={handleSelect} />
+      {selected && (
+        <div style={styles.metricToggle}>
+          <span style={styles.sectionNote}>
+            Showing {selected.label.toLowerCase()} - {visibleRows.length} quer{visibleRows.length === 1 ? "y" : "ies"}
+          </span>
+          <button style={styles.toggleButton} onClick={() => setSelected(null)}>
+            Clear
+          </button>
+        </div>
+      )}
+      <RankTrackerList rows={visibleRows} />
+    </>
   );
 }
 
@@ -1155,6 +1312,16 @@ const styles: Record<string, CSSProperties> = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))",
     gap: 10,
+  },
+  summaryTileButton: {
+    textAlign: "left",
+    cursor: "pointer",
+    width: "100%",
+    font: "inherit",
+  },
+  summaryTileButtonActive: {
+    borderColor: "#e8b04b",
+    background: "#2e2313",
   },
   cannibalRow: {
     display: "flex",
