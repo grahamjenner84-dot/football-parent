@@ -125,3 +125,15 @@ Same audit, second issue type. Found 37 in the actual codebase (close match). Tr
 No paid research needed for this batch (unlike section 7's titles) — GSC top-query data already on hand was enough to draft copy, meta description isn't a ranking signal so there was no keyword-targeting decision to make, just a length/clarity edit. `girls-football` and `parent-guides` index pages reuse the same string as visible on-page intro copy via `CategoryPage`, so both occurrences were edited to keep them in sync, not just the meta tag.
 
 **Expectation set going in:** this is a low-traffic batch (several pages at single-digit to low-hundred impressions), so treat this as a compliance/cleanup pass with a small possible CTR upside, not a traffic-driving change. Google also rewrites the served snippet a large share of the time regardless of what's in the tag. All 17 now on the 10-14 day watch list.
+
+## 9. H1 cleanup (Screaming Frog audit: 3 pages over 70 chars)
+
+Third issue type from the same audit. Only 3 pages, found by frontmatter `title` length (the field `ArticleLayout` renders as H1 and uses as the JSON-LD `headline` - separate from each page's `<title>` tag, which is set independently in `page.tsx`). Lower risk than sections 7-8 by nature: an H1-only edit doesn't touch the SERP snippet at all, so no CTR/ranking exposure the way a title-tag change has.
+
+| Page | Before (chars) | After (chars) | 28d traffic | Commit |
+|---|---|---|---|---|
+| `academy-trials/football-trials-near-me` | "Football Trials Near Me: A Realistic Parent's Guide to Academy Recruitment in the UK" (84) | "Football Trials Near Me: A Realistic Guide to Academy Recruitment" (65) | 78 impr, pos 11.9 | `c26f4a9` |
+| `football-development/how-to-become-a-professional-footballer` | "How to Become a Professional Footballer: What Parents Should Actually Know" (74) | "How to Become a Professional Footballer: What Parents Should Know" (65) | 938 impr, pos 8.6 | `9e010c0` |
+| `parent-guides/futurefit-football-dna-interview-part-1` | "FutureFit Explained: Football DNA on 3v3, More Touches and Youth Development" (76) | "FutureFit Explained: Football DNA on 3v3 and Youth Development" (62) | 4 impr, pos 14.3 (declining) | `29845fb` |
+
+Both the professional-footballer and FutureFit-part-1 titles were used verbatim as internal-link anchor text elsewhere (`how-academy-football-works.mdx`; and `how-to-join-a-football-academy.mdx`, the professional-footballer article itself, `signs-your-child-is-ready-for-academy-football.mdx`, and FutureFit part 2's Related Articles, respectively) - all updated in the same commit to match the renamed H1, rather than left stale. The `football-trials-near-me` links elsewhere already used the short form "Football Trials Near Me", so nothing else needed changing there. Category-page card labels for all three were already independent, shorter, hardcoded strings, not pulled from frontmatter - unaffected.
