@@ -420,19 +420,26 @@ function analyseRankTracker(rows: GscRow[], currentEnd: Date): RankRow[] {
 
 export type RankSummaryBucket = {
   label: string;
-  // Position band this bucket covers - minPos/maxPos are inclusive, maxPos
-  // null means unbounded (the "total tracked" bucket). Exposed so the UI can
-  // filter the rank tracker table to exactly the rows a tile represents.
-  minPos: number;
-  maxPos: number | null;
-  // Count of keywords whose position falls in [minPos, maxPos] specifically
-  // - i.e. not double-counted against a lower band (top10's count excludes
-  // the ones already in top3).
+  // Position band this bucket covers, as (minExclusive, maxInclusive] - e.g.
+  // top10 is (3, 10]: greater than 3, up to and including 10. maxInclusive
+  // null means unbounded (the "total tracked" bucket). GSC positions are
+  // floats (10.3, 10.7...), not just whole numbers, so bands are defined
+  // this way - contiguous on the real number line - rather than as
+  // "min/max inclusive" integer pairs, which leaves a gap between e.g. 10
+  // and 11 that silently drops any keyword sitting at a position like 10.4
+  // from every band while it still counts in "Total tracked". Exposed so
+  // the UI can filter the rank tracker table to exactly the rows a tile
+  // represents.
+  minExclusive: number;
+  maxInclusive: number | null;
+  // Count of keywords whose position falls in this band specifically - i.e.
+  // not double-counted against a lower band (top10's count excludes the
+  // ones already in top3).
   current: number;
   prior: number;
   change: number; // current - prior; positive = more keywords in this band than a week ago
-  // Running total from position 1 through maxPos (equal to current for
-  // bands starting at position 1: total and top3).
+  // Running total from position 1 through maxInclusive (equal to current
+  // for bands starting at position 0: total and top3).
   cumulativeCurrent: number;
   cumulativePrior: number;
   cumulativeChange: number;
@@ -450,22 +457,24 @@ export type RankTrackerSummary = {
 // position band, and how that count has moved since the prior window. Built
 // from the same rows/windows as the rank tracker table itself, so it reflects
 // exactly what's listed there, not a separate live SERP check. Bands are
-// exclusive of each other (top10 covers positions 4-10, not 1-10) so the
-// tiles sum to the total instead of double-counting; each also reports the
-// traditional cumulative "top N" count alongside it.
+// exclusive of each other (top10 covers positions >3 through 10, not 1-10)
+// so the tiles sum to the total instead of double-counting; each also
+// reports the traditional cumulative "top N" count alongside it.
 function summariseRankTracker(rows: RankRow[]): RankTrackerSummary {
-  const countInRange = (pos: number | null, minPos: number, maxPos: number | null) =>
-    pos !== null && pos >= minPos && (maxPos === null || pos <= maxPos);
+  const inBand = (pos: number | null, minExclusive: number, maxInclusive: number | null) =>
+    pos !== null && pos > minExclusive && (maxInclusive === null || pos <= maxInclusive);
+  const inCumulative = (pos: number | null, maxInclusive: number | null) =>
+    pos !== null && (maxInclusive === null || pos <= maxInclusive);
 
-  const bucket = (label: string, minPos: number, maxPos: number | null): RankSummaryBucket => {
-    const current = rows.filter((r) => countInRange(r.recentPosition, minPos, maxPos)).length;
-    const prior = rows.filter((r) => countInRange(r.priorPosition, minPos, maxPos)).length;
-    const cumulativeCurrent = rows.filter((r) => countInRange(r.recentPosition, 1, maxPos)).length;
-    const cumulativePrior = rows.filter((r) => countInRange(r.priorPosition, 1, maxPos)).length;
+  const bucket = (label: string, minExclusive: number, maxInclusive: number | null): RankSummaryBucket => {
+    const current = rows.filter((r) => inBand(r.recentPosition, minExclusive, maxInclusive)).length;
+    const prior = rows.filter((r) => inBand(r.priorPosition, minExclusive, maxInclusive)).length;
+    const cumulativeCurrent = rows.filter((r) => inCumulative(r.recentPosition, maxInclusive)).length;
+    const cumulativePrior = rows.filter((r) => inCumulative(r.priorPosition, maxInclusive)).length;
     return {
       label,
-      minPos,
-      maxPos,
+      minExclusive,
+      maxInclusive,
       current,
       prior,
       change: current - prior,
@@ -476,11 +485,11 @@ function summariseRankTracker(rows: RankRow[]): RankTrackerSummary {
   };
 
   return {
-    total: bucket("Total tracked", 1, null),
-    top3: bucket("Top 3", 1, 3),
-    top10: bucket("Top 10", 4, 10),
-    top20: bucket("Top 20", 11, 20),
-    top100: bucket("Top 100", 21, 100),
+    total: bucket("Total tracked", 0, null),
+    top3: bucket("Top 3", 0, 3),
+    top10: bucket("Top 10", 3, 10),
+    top20: bucket("Top 20", 10, 20),
+    top100: bucket("Top 100", 20, 100),
   };
 }
 
