@@ -33,17 +33,17 @@ type Tab =
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
+  { id: "pageviews", label: "Page views" },
+  { id: "compare", label: "Compare days" },
+  { id: "rank", label: "Rank tracker" },
+  { id: "searches", label: "Top searches" },
   { id: "silence", label: "Gone quiet" },
   { id: "noImpressions", label: "No impressions" },
   { id: "striking", label: "Striking distance" },
   { id: "ctr", label: "Low CTR" },
   { id: "decay", label: "Decay" },
   { id: "cannibal", label: "Cannibalisation" },
-  { id: "rank", label: "Rank tracker" },
-  { id: "searches", label: "Top searches" },
   { id: "cookies", label: "Cookie consent" },
-  { id: "compare", label: "Compare days" },
-  { id: "pageviews", label: "Page views" },
 ];
 
 function shortPage(page: string): string {
