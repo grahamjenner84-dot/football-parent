@@ -139,3 +139,14 @@ Third issue type from the same audit. Only 3 pages, found by frontmatter `title`
 The first draft of the trials-page H1 kept "A Realistic Guide to" from the original - caught after the fact as the same self-praising "[adjective] guide" framing as the banned "honest guide" pattern, just a different adjective. Fixed in a follow-up commit (`1f9d9a7`) to drop the framing entirely rather than just trim its length.
 
 Both the professional-footballer and FutureFit-part-1 titles were used verbatim as internal-link anchor text elsewhere (`how-academy-football-works.mdx`; and `how-to-join-a-football-academy.mdx`, the professional-footballer article itself, `signs-your-child-is-ready-for-academy-football.mdx`, and FutureFit part 2's Related Articles, respectively) - all updated in the same commit to match the renamed H1, rather than left stale. The `football-trials-near-me` links elsewhere already used the short form "Football Trials Near Me", so nothing else needed changing there. Category-page card labels for all three were already independent, shorter, hardcoded strings, not pulled from frontmatter - unaffected.
+
+## 10. IndexNow setup (audit tool flagged "17 pages to submit")
+
+Not a content or ranking change - infrastructure only, logged for traceability since it touches how pages get discovered. IndexNow (Bing/Yandex only, Google doesn't support it) lets the site push "this URL changed" directly instead of waiting for a crawl. No prior integration existed.
+
+Added: `public/b5ca026b56fd32a037caf1ef9a4c876f.txt` (ownership key file, content = filename, not secret) and `scripts/submit-indexnow.mjs` (`npm run indexnow -- <path> [<path> ...]` or `-- --all` for every route in `app/sitemap.ts`). Not yet committed or run live - awaiting go-ahead to submit the current route list.
+
+Investigated whether Bing traffic can be measured on `/admin/seo`: no, that page is GSC (Google-only); there's no Bing Webmaster Tools integration in the codebase. GA4 (already wired into `app/layout.tsx`) does passively capture Bing organic sessions under source/medium `bing/organic` in its own UI - no code change needed to check that today. A dedicated Bing dashboard section would need a separate Bing Webmaster Tools API integration, not built.
+
+Submitted the full route list (`app/sitemap.ts`, 86 URLs) live via `npm run indexnow -- --all`.
+
