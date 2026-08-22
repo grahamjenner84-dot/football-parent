@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "JPL Interview: Martin Brock on the Junior Premier League | Football Parent",
+  title: "Martin Brock on the Junior Premier League | Football Parent",
   description:
     "JPL chief executive Martin Brock on why the league was created, how it differs from grassroots football, and what trials, training and costs involve.",
   path: "/parent-guides/jpl-martin-brock-interview-part-1",
