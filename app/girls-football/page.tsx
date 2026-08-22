@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Girls Football | Football Parent",
   description:
-    "Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway actually works for UK families.",
+    "Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway works for UK families.",
   path: "/girls-football",
   type: "website",
 });
@@ -14,7 +14,7 @@ export default function GirlsFootballPage() {
     <CategoryPage
       eyebrow="Girls football"
       title="Girls Football"
-      description="Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway actually works for UK families."
+      description="Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway works for UK families."
       intro={[
         "Girls football in the UK has changed significantly in recent years, but the pathway from grassroots to academy level remains poorly understood by most parents. Whether your daughter is playing for a local club and wondering about the next step, or you have heard about Emerging Talent Centres and Regional Talent Clubs and want to know what they actually involve, these guides explain how the girls football development system works and what to realistically expect at each stage.",
       ]}
