@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Progress Through Football Development Centres | Football Parent",
+  title: "Football Development Centre Progression | Football Parent",
   description:
     "How players actually move through development centre pathways, and why progress is rarely as straightforward as families expect.",
   path: "/academy-pathway/how-players-progress-through-football-development-centres",
