@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "What Qualifications Do You Need to Be a Football Coach? | Football Parent",
+  title: "Grassroots Football Coach Qualifications | Football Parent",
   description: "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?",
   path: "/coaching/what-qualifications-do-i-need-to-be-a-football-coach",
 });
