@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Is Private Football Coaching Worth It? | Football Parent",
   description:
-    "Thinking about private football coaching or 1-to-1 football coaching? Learn when it helps, what it costs, how to choose a coach and whether it's worth it for young players.",
+    "Thinking about private 1-to-1 football coaching? When it helps, what it costs, how to choose a coach, and whether it's worth it for young players.",
   path: "/football-development/is-private-football-coaching-worth-it",
 });
 
