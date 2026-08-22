@@ -1020,6 +1020,38 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
         <span>Average per day: {avgPerDay}</span>
       </div>
 
+      {stats.sourceGroups.length > 0 && (
+        <>
+          <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
+            Traffic sources (last {daysCovered} days, excludes on-site navigation)
+          </h3>
+          <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+            Based on the referrer header, not a cookie - unaffected by
+            consent choice. &ldquo;Direct&rdquo; is a mix of genuine direct/
+            bookmark visits and any case where the browser or an in-app
+            browser (Instagram, TikTok) blocked the referrer, so it will
+            run higher than the true number. Bing search and Bing/Copilot
+            chat share a hostname and can&rsquo;t be told apart; same for
+            Grok and X/Twitter.
+          </p>
+          {stats.sourceGroups.map((g) => (
+            <div key={g.group} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{g.group}</span>
+                <span style={styles.cardBadge}>{g.count}</span>
+              </div>
+              <div style={styles.cardStats}>
+                {g.topSources.map((s) => (
+                  <span key={s.label}>
+                    {s.label}: {s.count}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
       {stats.byDay.length > 0 && (
         <label style={styles.compareLabel}>
           Pick a date to see its top pages

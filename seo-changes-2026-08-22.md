@@ -150,3 +150,12 @@ Investigated whether Bing traffic can be measured on `/admin/seo`: no, that page
 
 Submitted the full route list (`app/sitemap.ts`, 86 URLs) live via `npm run indexnow -- --all`.
 
+## 11. Traffic-source breakdown on the Page views tab (GA4 undercounts due to consent gating)
+
+Not a ranking/content change - dashboard tooling, logged for traceability. Graham flagged that GA4 only fires post-consent, and a meaningful share of visitors never make a choice on the cookie banner (leave it up, navigate away), so GA4 undercounts real traffic - already the known reason `PageViewPing.tsx`'s consent-independent pageview log exists (see `20260819120000_page_views.sql`). That log only tracked `path`, not source, so it couldn't answer "where did visitors come from" the way GA4 normally would.
+
+Added `referrer_host` to `page_views` (migration `20260822180000_page_views_referrer.sql` - hostname only, never the full referrer URL, same anonymous/no-PII posture as the rest of the table) and a classifier (`lib/referrer-sources.ts`) grouping into Search (Google/Bing/DuckDuckGo/Yahoo/Ecosia/Brave/Yandex/Baidu), Social (Facebook/Instagram/TikTok/YouTube/Pinterest/X/Reddit/LinkedIn/Threads), AI (ChatGPT/Perplexity/Claude/Gemini/Meta AI/You.com/DeepSeek/Poe/Copilot), Direct, and Internal (on-site navigation - excluded from the breakdown entirely, which is what lets a referrer captured per-pageview approximate "visits from this source" without needing a session id: only the true entry pageview of a visit carries an external referrer).
+
+Known, disclosed-in-UI limitations: Bing search and Bing/Copilot chat share the `bing.com` hostname and can't be split apart; same for Grok and X/Twitter on `x.com`. In-app browsers (Instagram, TikTok) frequently blank the referrer, so those sources will undercount into "Direct" - a known industry-wide gap, not specific to this implementation. Historical rows from before this change have `referrer_host = null` and will show as Direct.
+
+Verified live: inserted temporary test rows covering every group, confirmed the new "Traffic sources" section on the Page views tab (`app/admin/seo/page.tsx`) correctly grouped and excluded Internal, then deleted the test rows before finishing.
