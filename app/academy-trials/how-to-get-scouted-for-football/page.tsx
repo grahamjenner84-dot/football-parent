@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "How to Get Scouted for Football | Football Parent",
   description:
-    "Paid showcase events rarely help: scouts assess players through live football, not highlight reels. What genuinely improves your child's chances of being noticed.",
+    "Paid showcase events rarely help: scouts assess players through live football, not highlight reels. What improves a child's chances of being noticed.",
   path: "/academy-trials/how-to-get-scouted-for-football",
 });
 
