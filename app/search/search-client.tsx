@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
 import type { SearchIndexEntry } from "@/lib/search-index";
 import { logSearchOnce } from "@/lib/search-log-client";
+import { searchArticles } from "@/lib/site-search";
 
 export default function SearchClient() {
   const searchParams = useSearchParams();
@@ -35,8 +36,8 @@ export default function SearchClient() {
 
   const activeQuery = searchParams.get("q") ?? "";
   const results =
-    fuseRef.current && activeQuery.trim()
-      ? fuseRef.current.search(activeQuery.trim()).map((r) => r.item)
+    fuseRef.current && index && activeQuery.trim()
+      ? searchArticles(fuseRef.current, index, activeQuery)
       : [];
 
   useEffect(() => {

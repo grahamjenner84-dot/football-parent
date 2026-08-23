@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getSeoReport, getPageInspection, comparePeriods } from "@/lib/gsc";
 import { addToContentQueue } from "@/lib/supabase/content-queue";
 import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
+import { getPageViewStats } from "@/lib/supabase/page-views";
 
 const handler = createMcpHandler(
   (server) => {
@@ -104,6 +105,22 @@ const handler = createMcpHandler(
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );
+
+    server.registerTool(
+      "get_page_view_stats",
+      {
+        title: "Get first-party page view stats",
+        description:
+          "Actual page views for footballparent.co.uk from our own first-party tracking (the page_views Supabase table, football-parent-social project), not Search Console. Fires on every page load regardless of cookie consent state or traffic source, so unlike get_seo_report/inspect_page this includes direct, social and referral visits, not just Google search clicks. Returns total views for the window, a per-day breakdown (each with its own top paths and traffic-source groups), overall top paths, and overall source groups. Logging only started 2026-08-19, so a wide 'days' value won't return more history than that, it'll just come back thin for the earlier days in the window.",
+        inputSchema: {
+          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. Logging started 2026-08-19, so there's no data before that regardless of this value."),
+        },
+      },
+      async ({ days }) => {
+        const result = await getPageViewStats(days ?? 30);
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
   },
   {},
   {
@@ -117,7 +134,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read"] };
   },
   {
     required: true,

@@ -159,3 +159,11 @@ Added `referrer_host` to `page_views` (migration `20260822180000_page_views_refe
 Known, disclosed-in-UI limitations: Bing search and Bing/Copilot chat share the `bing.com` hostname and can't be split apart; same for Grok and X/Twitter on `x.com`. In-app browsers (Instagram, TikTok) frequently blank the referrer, so those sources will undercount into "Direct" - a known industry-wide gap, not specific to this implementation. Historical rows from before this change have `referrer_host = null` and will show as Direct.
 
 Verified live: inserted temporary test rows covering every group, confirmed the new "Traffic sources" section on the Page views tab (`app/admin/seo/page.tsx`) correctly grouped and excluded Internal, then deleted the test rows before finishing.
+
+## 12. XbotGo partnership outreach sent (backlink/product-review prospect) — 23 Aug 2026
+
+Not a site change, logged for traceability so a future referral-traffic bump, backlink, or response can be traced back to this instead of reconstructed later. Graham submitted XbotGo's partnership form (`xbotgo.com/pages/partnership`, "Media / content collaboration" category) on 23 August, pitching a hands-on review of the XbotGo Falcon on `/football-gear/veo-camera-alternatives` in exchange for a gifted unit, explicitly proposed outside their affiliate program (5% commission, poor fit for research-stage traffic).
+
+Data cited in the form, sourced from this page's GSC history at time of writing: page-one rankings on Google UK for "veo alternatives uk" and "xbotgo falcon vs veo 3" among others, site-wide traffic currently 200+ sessions/day and growing, with a forward-looking note on the trajectory (not a current-state claim) and the in-progress coach app as the audience-growth story. No specific position numbers, impression counts, or analytics screenshots were shared, deliberately, per the position-shouldn't-be-quoted-externally call made in-session.
+
+**Watch for:** any reply from XbotGo, a backlink to `veo-camera-alternatives` from xbotgo.com if they follow up on the page, and referral traffic from xbotgo.com on the Page views tab's traffic-source breakdown (section 11 above) if that happens. No article content has changed as a result of this outreach; if/when a review unit is received and a review is written, that will be its own dated log entry.
