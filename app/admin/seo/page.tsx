@@ -1008,6 +1008,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
   const shownTitle = selectedDay ? `Top pages on ${selectedDay.date}` : "Top pages (last 30 days)";
   const shownSourceGroups = selectedDay ? selectedDay.sourceGroups : stats.sourceGroups;
   const shownEstimatedVisits = selectedDay ? selectedDay.estimatedVisits : stats.estimatedVisits;
+  const shownInternalViews = selectedDay ? selectedDay.internalViews : stats.internalViews;
   const sourceGroupsTitle = selectedDay
     ? `Traffic sources on ${selectedDay.date}`
     : `Traffic sources (last ${daysCovered} days, excludes on-site navigation)`;
@@ -1046,14 +1047,19 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
           </p>
           <div style={styles.cardStats}>
             <span>Estimated visits: {shownEstimatedVisits}</span>
+            <span>Internal (browsed to another page): {shownInternalViews}</span>
           </div>
           <p style={{ ...styles.sectionNote, marginTop: 0 }}>
-            Pageviews where the referrer wasn&rsquo;t this site itself - only
-            a visit&rsquo;s first page qualifies, since every later page in
-            the same visit is reached by clicking a link on the site. A real
-            proxy for distinct visits without a session id or cookie, but
-            not exact: a browser that strips the referrer mid-visit, or two
-            tabs opened from the same link, can inflate it slightly.
+            Estimated visits counts pageviews where the referrer wasn&rsquo;t
+            this site itself - only a visit&rsquo;s first page qualifies,
+            since every later page in the same visit is reached by clicking
+            a link on the site. Internal is the rest: pageviews reached by
+            clicking through from another page here, i.e. people who kept
+            browsing rather than bouncing after the first page. The two
+            always add up to that period&rsquo;s total pageviews (shown per
+            day in the picker below). Not exact - a browser that strips the
+            referrer mid-visit, or two tabs opened from the same link, can
+            inflate Estimated visits slightly.
           </p>
           {shownSourceGroups.length === 0 && (
             <EmptyState text="No external-referrer traffic on this date - everything was Direct or on-site navigation." />

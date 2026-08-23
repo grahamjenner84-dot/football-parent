@@ -46,6 +46,10 @@ export interface PageViewDay {
   // this site itself. A proxy for "distinct visits" without a session id
   // or cookie - see the note on getPageViewStats for its limits.
   estimatedVisits: number;
+  // Rows classified "Internal" - a visitor clicking to a second, third...
+  // page in the same visit. count - internalViews should equal
+  // estimatedVisits.
+  internalViews: number;
 }
 
 export interface PageViewStats {
@@ -54,6 +58,7 @@ export interface PageViewStats {
   topPaths: { path: string; count: number }[];
   sourceGroups: SourceGroupCount[];
   estimatedVisits: number;
+  internalViews: number;
 }
 
 // estimatedVisits approximates "distinct visits" from raw pageview rows,
@@ -96,7 +101,9 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
   const groupMap = new Map<SourceGroup, Map<string, number>>();
   const byDayGroupMap = new Map<string, Map<SourceGroup, Map<string, number>>>();
   const byDayEstimatedVisits = new Map<string, number>();
+  const byDayInternalViews = new Map<string, number>();
   let estimatedVisitsTotal = 0;
+  let internalViewsTotal = 0;
 
   for (const row of rows) {
     const day = row.created_at.slice(0, 10);
@@ -107,7 +114,11 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
     byPathMap.set(row.path, (byPathMap.get(row.path) ?? 0) + 1);
 
     const { group, label } = classifyReferrerHost(row.referrer_host);
-    if (group === "Internal") continue;
+    if (group === "Internal") {
+      internalViewsTotal += 1;
+      byDayInternalViews.set(day, (byDayInternalViews.get(day) ?? 0) + 1);
+      continue;
+    }
 
     estimatedVisitsTotal += 1;
     byDayEstimatedVisits.set(day, (byDayEstimatedVisits.get(day) ?? 0) + 1);
@@ -131,7 +142,8 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
       const count = topPaths.reduce((sum, p) => sum + p.count, 0);
       const sourceGroups = buildSourceGroups(byDayGroupMap.get(date) ?? new Map());
       const estimatedVisits = byDayEstimatedVisits.get(date) ?? 0;
-      return { date, count, topPaths: topPaths.slice(0, 20), sourceGroups, estimatedVisits };
+      const internalViews = byDayInternalViews.get(date) ?? 0;
+      return { date, count, topPaths: topPaths.slice(0, 20), sourceGroups, estimatedVisits, internalViews };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
 
@@ -144,5 +156,6 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
       .slice(0, 50),
     sourceGroups: buildSourceGroups(groupMap),
     estimatedVisits: estimatedVisitsTotal,
+    internalViews: internalViewsTotal,
   };
 }
