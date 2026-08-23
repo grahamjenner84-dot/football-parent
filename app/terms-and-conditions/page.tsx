@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms & Conditions | Football Parent",
   description:
-    "The terms governing your use of the Coach App, provided by Football Parent - accounts, the free trial and paid tier, billing and cancellation, and your data.",
+    "The terms governing your use of the Coach App, provided by Football Parent - accounts and roles, teams and transfers, the free trial and paid tier, billing and cancellation, deletion and your data.",
   alternates: {
     canonical: "https://www.footballparent.co.uk/terms-and-conditions",
   },
@@ -23,7 +23,7 @@ export default function TermsAndConditionsPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 10 August 2026
+            Last updated: 23 August 2026
           </p>
         </div>
       </section>
@@ -76,16 +76,46 @@ export default function TermsAndConditionsPage() {
           <p>
             You need an account (via Google sign-in or a magic-link email) to
             use the app. You&apos;re responsible for keeping your sign-in
-            secure and for the accuracy of the team, squad and match data you
-            enter - it&apos;s your data, entered and managed by you for your
-            own team&apos;s purposes. Don&apos;t share your account with
-            people outside your coaching role, and don&apos;t use the app to
-            store or manage data for a team you&apos;re not authorised to
-            manage.
+            secure and for the accuracy of the data you enter. Don&apos;t
+            share your account: if another coach helps you run a team, they
+            should have their own account and be added to the team as an
+            assistant (see section 3), rather than logging in as you.
+            Don&apos;t use the app to store or manage data for a team
+            you&apos;re not authorised to manage.
+          </p>
+
+          <p>
+            You have one account, and your role depends on the team. On a
+            team you created, you&apos;re the account holder. On a team
+            someone else created and added you to, you&apos;re an assistant.
+            The same account can be an account holder on one team and an
+            assistant on another.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            3. Free features and the paid tier
+            3. Teams, ownership and transfers
+          </h2>
+
+          <p>
+            Each team belongs to the account that created it, the account
+            holder. Other coaches can be added to a team as assistants.
+            Assistants can view and work with the team, but they don&apos;t
+            own it, and a paid subscription is always held by the account
+            holder. To take over paying for or managing a team, an assistant
+            must first be made the account holder through a transfer.
+          </p>
+
+          <p>
+            An account holder can transfer a team to an assistant on that
+            team. On transfer, the assistant becomes the new account holder,
+            takes on responsibility for the team and its player data, and the
+            previous holder becomes an assistant unless they choose to leave.
+            Payment doesn&apos;t carry across a transfer: the new account
+            holder subscribes on their own account.
+          </p>
+
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+            4. Free features and the paid tier
           </h2>
 
           <p>
@@ -98,7 +128,7 @@ export default function TermsAndConditionsPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            4. Subscription, billing and cancellation
+            5. Subscription, billing and cancellation
           </h2>
 
           <p>
@@ -113,7 +143,10 @@ export default function TermsAndConditionsPage() {
             back for the month you&apos;re currently in - you keep access for
             the rest of the month you&apos;ve already paid for, then the
             account reverts to the free tier at the end of it (your data
-            isn&apos;t deleted, see our Privacy Policy on retention).
+            isn&apos;t deleted, see our Privacy Policy on retention). If
+            you&apos;re stepping away for good rather than pausing, you can
+            transfer your team to an assistant instead (see section 3), so
+            they can carry it on.
           </p>
 
           <p>
@@ -139,26 +172,40 @@ export default function TermsAndConditionsPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            5. Your data
+            6. Your data
           </h2>
 
           <p>
-            You keep ownership of the team, squad and match data you enter.
-            You&apos;re giving us permission to store and process it purely
-            to provide you the service - we don&apos;t use it for anything
-            else, and we don&apos;t sell it. See our Privacy Policy for the
-            full detail on what we collect, how long we keep it, and your
-            rights over it.
+            The team, squad and match data you enter stays yours.
+            You&apos;re giving us permission to store and process it purely to
+            provide the service, we don&apos;t use it for anything else, and
+            we don&apos;t sell it. See our Privacy Policy for the full detail
+            on what we collect, how long we keep it, and your rights over it.
           </p>
 
           <p>
-            You&apos;re responsible for having a proper basis (through your
-            coaching role at your club) to enter information about players in
-            the app.
+            Whether you&apos;re an account holder or an assistant, you can
+            always download or delete your own account information, such as
+            your name and email. Team and player data is different: it
+            belongs to the team and is held by the account holder. Only the
+            account holder can export or delete a team and its players. As an
+            assistant you can view and work with a team&apos;s data while
+            you&apos;re on that team, but you can&apos;t export or delete the
+            team itself.
+          </p>
+
+          <p>
+            When you add a player to a team, you confirm you&apos;re allowed
+            to record their information. Where a player is a child, you
+            confirm you&apos;ve made their parent or guardian aware that the
+            player&apos;s name and match data will be recorded in Football
+            Parent. If a parent or guardian asks to see or delete a
+            child&apos;s data, you agree to pass that request on to us, or to
+            action it yourself.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            6. Acceptable use
+            7. Acceptable use
           </h2>
 
           <p>Use the app for coaching your own team. Don&apos;t:</p>
@@ -180,7 +227,7 @@ export default function TermsAndConditionsPage() {
           </ul>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            7. Availability and changes to the app
+            8. Availability and changes to the app
           </h2>
 
           <p>
@@ -193,7 +240,7 @@ export default function TermsAndConditionsPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            8. Liability
+            9. Liability
           </h2>
 
           <p>
@@ -216,19 +263,42 @@ export default function TermsAndConditionsPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            9. Ending your account
+            10. Ending your account
           </h2>
 
           <p>
-            You can delete your account at any time from Settings. We can
-            suspend or end your access if you seriously or repeatedly breach
-            these terms, or if we reasonably believe your account is being
-            used to harm the service or other users - we&apos;ll aim to tell
-            you why if we do.
+            You can delete your account at any time from Settings. Deleting
+            is permanent and removes your teams, players and match data.
+            Access ends immediately, and you have 7 days to restore your
+            account by logging back in before the data is erased for good.
+            Download your data first if you want to keep it.
+          </p>
+
+          <p>
+            If you own a team that has assistants, you&apos;ll be offered the
+            chance to transfer it to an assistant before you delete. If you
+            decline, the team is scheduled for deletion and its assistants
+            are notified, so they can ask you to transfer it to them instead.
+            If no transfer happens, the team is erased after the 7-day period
+            along with your account.
+          </p>
+
+          <p>
+            If an account has no active subscription and isn&apos;t used for
+            an extended period, we may deactivate it and, after a further
+            period, delete it. We&apos;ll email you before this happens so you
+            can keep the account active if you want to.
+          </p>
+
+          <p>
+            We can suspend or end your access if you seriously or repeatedly
+            breach these terms, or if we reasonably believe your account is
+            being used to harm the service or other users - we&apos;ll aim to
+            tell you why if we do.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            10. Changes to these terms
+            11. Changes to these terms
           </h2>
 
           <p>
@@ -239,7 +309,7 @@ export default function TermsAndConditionsPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            11. Governing law
+            12. Governing law
           </h2>
 
           <p>
@@ -248,7 +318,7 @@ export default function TermsAndConditionsPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            12. Contact us
+            13. Contact us
           </h2>
 
           <p>

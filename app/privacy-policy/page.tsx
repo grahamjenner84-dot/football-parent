@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 5 August 2026
+            Last updated: 23 August 2026
           </p>
         </div>
       </section>
@@ -99,13 +99,17 @@ export default function PrivacyPolicyPage() {
 
           <p>
             <strong>Cookies and advertising.</strong> The website may use
-            cookies for analytics and, in future, for advertising and
-            retargeting (for example, showing a Football Parent ad to
-            someone who previously visited our site, via services like
-            Google Ads or Meta). Cookies that aren&apos;t strictly necessary
-            for the site to function will only be set with your consent,
-            which we&apos;ll ask for via a cookie banner. You can withdraw
-            that consent at any time through your browser or the{" "}
+            cookies and similar technologies for analytics and for
+            advertising. This includes conversion tracking and retargeting
+            through advertising platforms such as Google Ads, Meta (Facebook
+            and Instagram) and TikTok - for example, measuring whether an ad
+            led to a signup, or showing a Football Parent ad to someone who
+            previously visited our site. These platforms may set their own
+            cookies or use pixels on our site for this purpose. Cookies that
+            aren&apos;t strictly necessary for the site to function will only
+            be set with your consent, which we&apos;ll ask for via a cookie
+            banner. You can withdraw that consent at any time through your
+            browser or the{" "}
             <a
               href="/cookie-policy"
               className="font-semibold text-blue-700 hover:text-blue-900"
@@ -157,6 +161,17 @@ export default function PrivacyPolicyPage() {
                 </tr>
                 <tr className="[&:nth-child(even)]:bg-gray-50">
                   <td className="border border-gray-300 p-3">
+                    Billing records
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    To meet our tax and accounting obligations
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Legal obligation
+                  </td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
                     Service update emails (e.g. new features)
                   </td>
                   <td className="border border-gray-300 p-3">
@@ -189,7 +204,7 @@ export default function PrivacyPolicyPage() {
                 </tr>
                 <tr className="[&:nth-child(even)]:bg-gray-50">
                   <td className="border border-gray-300 p-3">
-                    Advertising/retargeting cookies
+                    Advertising and retargeting cookies
                   </td>
                   <td className="border border-gray-300 p-3">
                     To show relevant ads and measure their performance
@@ -278,10 +293,47 @@ export default function PrivacyPolicyPage() {
           </h2>
 
           <p>
-            We keep your account and team data for as long as your account
-            is active. If you delete your account, we&apos;ll delete your
-            personal data within a reasonable period, except where we need
-            to keep limited records for legal or security reasons.
+            We keep personal data only for as long as we need it, or for as
+            long as the law requires.
+          </p>
+
+          <p>
+            While your account is active, we keep your account details and
+            the data you enter (teams, players and match statistics) so the
+            service works and your records carry across seasons.
+          </p>
+
+          <p>
+            If you cancel your subscription, your account isn&apos;t deleted.
+            It reverts to the free tier and your data is kept, so you can
+            subscribe again later, for example for a new season, without
+            losing your history.
+          </p>
+
+          <p>
+            If you delete your account, access ends immediately and your data
+            is erased 7 days later. During those 7 days you can restore your
+            account by logging back in.
+          </p>
+
+          <p>
+            If an account has no active subscription and isn&apos;t used for
+            6 months, we deactivate it. If it stays inactive for a further 6
+            months after that, we delete it. We&apos;ll email you before
+            deleting.
+          </p>
+
+          <p>
+            Where you&apos;ve paid, we keep basic transaction records (date,
+            amount and invoice) for 6 years for tax and accounting purposes.
+            These records don&apos;t include your team or player data.
+          </p>
+
+          <p>
+            Deleted data may remain in secure backups for a short period
+            until those backups are overwritten on their normal cycle, after
+            which it&apos;s gone. We don&apos;t restore deleted data into the
+            live service.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
@@ -315,7 +367,19 @@ export default function PrivacyPolicyPage() {
           </ul>
 
           <p>
-            To exercise any of these, email{" "}
+            You can download a copy of your own data at any time from your
+            account settings, and you can edit the information you&apos;ve
+            entered directly in the app. If you&apos;re an account holder,
+            your download includes the teams and players you manage; if
+            you&apos;re an assistant on someone else&apos;s team, it includes
+            your own account details, since the team&apos;s data belongs to
+            the account holder.
+          </p>
+
+          <p>
+            To exercise any other right - including deleting a child&apos;s
+            data, objecting to or restricting processing, or withdrawing
+            consent - email{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
               className="font-semibold text-blue-700 hover:text-blue-900"
