@@ -8,6 +8,14 @@ import type { SearchIndexEntry } from "@/lib/search-index";
 // match first, position-independent, guarantees "does this word appear on
 // the page" always works, then fuzzy search fills in the typo-tolerant
 // results around it.
+//
+// The substring check has no word-boundary awareness, so below this length
+// it starts matching fragments inside unrelated words (e.g. "us" inside
+// "guide") - confirmed against the real index (1 match via fuzzy alone vs
+// 9 via substring). Below the threshold, skip straight to fuzzy, which is
+// already reasonable at short lengths.
+const MIN_EXACT_MATCH_LENGTH = 3;
+
 export function searchArticles(
   fuse: Fuse<SearchIndexEntry>,
   index: SearchIndexEntry[],
@@ -17,12 +25,15 @@ export function searchArticles(
   if (!trimmed) return [];
 
   const needle = trimmed.toLowerCase();
-  const exact = index.filter(
-    (entry) =>
-      entry.title.toLowerCase().includes(needle) ||
-      entry.description.toLowerCase().includes(needle) ||
-      entry.category.toLowerCase().includes(needle)
-  );
+  const exact =
+    needle.length < MIN_EXACT_MATCH_LENGTH
+      ? []
+      : index.filter(
+          (entry) =>
+            entry.title.toLowerCase().includes(needle) ||
+            entry.description.toLowerCase().includes(needle) ||
+            entry.category.toLowerCase().includes(needle)
+        );
 
   const seen = new Set(exact.map((entry) => entry.url));
   const fuzzy = fuse.search(trimmed).map((result) => result.item);
