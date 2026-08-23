@@ -31,7 +31,7 @@ export default function RootLayout({
     "@type": "Organization",
     name: "Football Parent",
     url: "https://www.footballparent.co.uk",
-    logo: "https://www.footballparent.co.uk/logo.webp",
+    logo: "https://www.footballparent.co.uk/parent/icon/parent-icon-512.png",
   };
 
   const websiteSchema = {

@@ -22,10 +22,10 @@ export default function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <Link href="/" scroll={true} className="flex items-center no-underline">
           <Image
-            src="/logo.webp"
+            src="/parent/horizontal/parent-horizontal-ink-600.png"
             alt="Football Parent"
-            width={220}
-            height={60}
+            width={210}
+            height={62}
           />
         </Link>
 

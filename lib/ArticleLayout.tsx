@@ -120,7 +120,7 @@ export default function ArticleLayout({
           url: "https://www.footballparent.co.uk",
           logo: {
             "@type": "ImageObject",
-            url: "https://www.footballparent.co.uk/logo.webp",
+            url: "https://www.footballparent.co.uk/parent/icon/parent-icon-512.png",
           },
         },
         ...(datePublished ? { datePublished } : {}),
@@ -279,7 +279,7 @@ export default function ArticleLayout({
               <div className="flex gap-6 mb-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-white border border-gray-200">
                   <img
-                    src="/logo.webp"
+                    src="/parent/icon/parent-icon-256.png"
                     alt="Football Parent"
                     className="w-full h-full object-cover"
                   />
