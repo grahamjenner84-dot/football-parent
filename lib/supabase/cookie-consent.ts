@@ -53,17 +53,28 @@ export async function getConsentStats(days: number = 30): Promise<ConsentStats> 
   const supabase = adminClient();
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
-  const { data, error } = await supabase
-    .from("cookie_consent_events")
-    .select("action, analytics_granted, created_at")
-    .gte("created_at", since)
-    .order("created_at", { ascending: true });
+  // PostgREST caps a single request at its configured max-rows (1000 by
+  // default), silently truncating rather than erroring. Page through with
+  // .range() instead, ordered by id (monotonic, unique) so pages don't
+  // skip/duplicate rows.
+  const rows: { action: string; analytics_granted: boolean; created_at: string }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("cookie_consent_events")
+      .select("action, analytics_granted, created_at")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
 
-  if (error) {
-    throw new Error("Failed to read cookie_consent_events: " + error.message);
+    if (error) {
+      throw new Error("Failed to read cookie_consent_events: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
   }
-
-  const rows = data ?? [];
   const byDayMap = new Map<
     string,
     { bannerShown: number; acceptAll: number; rejectAll: number; savePreferences: number }

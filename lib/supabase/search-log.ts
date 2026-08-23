@@ -42,16 +42,28 @@ export async function getTopSearches(days: number = 30): Promise<SearchLogStats>
   const supabase = adminClient();
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
-  const { data, error } = await supabase
-    .from("search_queries")
-    .select("query, result_count, created_at")
-    .gte("created_at", since);
+  // PostgREST caps a single request at its configured max-rows (1000 by
+  // default), silently truncating rather than erroring. Page through with
+  // .range() instead, ordered by id (monotonic, unique) so pages don't
+  // skip/duplicate rows.
+  const rows: { query: string; result_count: number; created_at: string }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("search_queries")
+      .select("query, result_count, created_at")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
 
-  if (error) {
-    throw new Error("Failed to read search_queries: " + error.message);
+    if (error) {
+      throw new Error("Failed to read search_queries: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
   }
-
-  const rows = data ?? [];
   const byQuery = new Map<string, TopSearchRow>();
   let successfulSearches = 0;
 

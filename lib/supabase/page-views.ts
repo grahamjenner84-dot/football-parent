@@ -37,16 +37,29 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
   const supabase = adminClient();
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
-  const { data, error } = await supabase
-    .from("page_views")
-    .select("path, created_at")
-    .gte("created_at", since);
+  // PostgREST caps a single request at its configured max-rows (1000 by
+  // default), silently truncating rather than erroring - a plain unbounded
+  // select() here would quietly under-report totalViews/byDay once a busy
+  // day pushes past that cap. Page through with .range() instead, ordered
+  // by id (monotonic, unique) so pages don't skip/duplicate rows.
+  const rows: { path: string; created_at: string }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("path, created_at")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
 
-  if (error) {
-    throw new Error("Failed to read page_views: " + error.message);
+    if (error) {
+      throw new Error("Failed to read page_views: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
   }
-
-  const rows = data ?? [];
   const byDayPathMap = new Map<string, Map<string, number>>();
   const byPathMap = new Map<string, number>();
 
