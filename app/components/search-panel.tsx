@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
 import type { SearchIndexEntry } from "@/lib/search-index";
 import { logSearchOnce } from "@/lib/search-log-client";
+import { searchArticles } from "@/lib/site-search";
 
 const MAX_LIVE_RESULTS = 6;
 const LOG_DEBOUNCE_MS = 600;
@@ -54,8 +55,8 @@ export default function SearchPanel() {
     };
   }, []);
 
-  const results = fuseRef.current && query.trim()
-    ? fuseRef.current.search(query.trim(), { limit: MAX_LIVE_RESULTS }).map((r) => r.item)
+  const results = fuseRef.current && index && query.trim()
+    ? searchArticles(fuseRef.current, index, query).slice(0, MAX_LIVE_RESULTS)
     : [];
 
   // Most searches are satisfied straight from this dropdown (type, see a
@@ -65,10 +66,10 @@ export default function SearchPanel() {
   // settled query once, not every keystroke.
   useEffect(() => {
     const trimmed = query.trim();
-    if (!trimmed || !fuseRef.current) return;
+    if (!trimmed || !fuseRef.current || !index) return;
     const fuse = fuseRef.current;
     const timer = setTimeout(() => {
-      logSearchOnce(trimmed, fuse.search(trimmed).length);
+      logSearchOnce(trimmed, searchArticles(fuse, index, trimmed).length);
     }, LOG_DEBOUNCE_MS);
     return () => clearTimeout(timer);
   }, [query, index]);
