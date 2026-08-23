@@ -41,6 +41,11 @@ export interface PageViewDay {
   // visit) - see the classifyReferrerHost comment on why that's a valid
   // proxy for "visits from this source" without needing a session id.
   sourceGroups: SourceGroupCount[];
+  // Rows NOT classified "Internal" - i.e. every visit's first pageview,
+  // since only the first page of a visit carries a referrer other than
+  // this site itself. A proxy for "distinct visits" without a session id
+  // or cookie - see the note on getPageViewStats for its limits.
+  estimatedVisits: number;
 }
 
 export interface PageViewStats {
@@ -48,8 +53,18 @@ export interface PageViewStats {
   byDay: PageViewDay[];
   topPaths: { path: string; count: number }[];
   sourceGroups: SourceGroupCount[];
+  estimatedVisits: number;
 }
 
+// estimatedVisits approximates "distinct visits" from raw pageview rows,
+// without a session id or cookie: only the first page of a visit carries a
+// referrer other than this site itself (every later page in that same
+// visit is reached by clicking a link on the site, so its referrer is the
+// site). Counting non-Internal rows therefore counts visits, not
+// pageviews. Not exact - it can overcount (a browser/extension that strips
+// the referrer mid-visit makes page 2 look like a fresh Direct entry;
+// someone opening two tabs from the same search result), but it's a real
+// proxy without adding session tracking.
 function buildSourceGroups(groupMap: Map<SourceGroup, Map<string, number>>): SourceGroupCount[] {
   return Array.from(groupMap.entries())
     .map(([group, labelCounts]) => {
@@ -80,6 +95,8 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
   const byPathMap = new Map<string, number>();
   const groupMap = new Map<SourceGroup, Map<string, number>>();
   const byDayGroupMap = new Map<string, Map<SourceGroup, Map<string, number>>>();
+  const byDayEstimatedVisits = new Map<string, number>();
+  let estimatedVisitsTotal = 0;
 
   for (const row of rows) {
     const day = row.created_at.slice(0, 10);
@@ -91,6 +108,9 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
 
     const { group, label } = classifyReferrerHost(row.referrer_host);
     if (group === "Internal") continue;
+
+    estimatedVisitsTotal += 1;
+    byDayEstimatedVisits.set(day, (byDayEstimatedVisits.get(day) ?? 0) + 1);
 
     const labelBucket = groupMap.get(group) ?? new Map<string, number>();
     labelBucket.set(label, (labelBucket.get(label) ?? 0) + 1);
@@ -110,7 +130,8 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
         .sort((a, b) => b.count - a.count);
       const count = topPaths.reduce((sum, p) => sum + p.count, 0);
       const sourceGroups = buildSourceGroups(byDayGroupMap.get(date) ?? new Map());
-      return { date, count, topPaths: topPaths.slice(0, 20), sourceGroups };
+      const estimatedVisits = byDayEstimatedVisits.get(date) ?? 0;
+      return { date, count, topPaths: topPaths.slice(0, 20), sourceGroups, estimatedVisits };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
 
@@ -122,5 +143,6 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
       .sort((a, b) => b.count - a.count)
       .slice(0, 50),
     sourceGroups: buildSourceGroups(groupMap),
+    estimatedVisits: estimatedVisitsTotal,
   };
 }

@@ -1002,6 +1002,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
   const shownPaths = selectedDay ? selectedDay.topPaths : stats.topPaths;
   const shownTitle = selectedDay ? `Top pages on ${selectedDay.date}` : "Top pages (last 30 days)";
   const shownSourceGroups = selectedDay ? selectedDay.sourceGroups : stats.sourceGroups;
+  const shownEstimatedVisits = selectedDay ? selectedDay.estimatedVisits : stats.estimatedVisits;
   const sourceGroupsTitle = selectedDay
     ? `Traffic sources on ${selectedDay.date}`
     : `Traffic sources (last ${daysCovered} days, excludes on-site navigation)`;
@@ -1037,6 +1038,17 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             run higher than the true number. Bing search and Bing/Copilot
             chat share a hostname and can&rsquo;t be told apart; same for
             Grok and X/Twitter.
+          </p>
+          <div style={styles.cardStats}>
+            <span>Estimated visits: {shownEstimatedVisits}</span>
+          </div>
+          <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+            Pageviews where the referrer wasn&rsquo;t this site itself - only
+            a visit&rsquo;s first page qualifies, since every later page in
+            the same visit is reached by clicking a link on the site. A real
+            proxy for distinct visits without a session id or cookie, but
+            not exact: a browser that strips the referrer mid-visit, or two
+            tabs opened from the same link, can inflate it slightly.
           </p>
           {shownSourceGroups.length === 0 && (
             <EmptyState text="No external-referrer traffic on this date - everything was Direct or on-site navigation." />
