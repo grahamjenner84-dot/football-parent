@@ -260,7 +260,12 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "cannibal":
       return report.cannibalisation.length;
     case "rank":
-      return report.rankTracker.length;
+      // Not rankTracker.length - that includes rows with a null
+      // recentPosition (had impressions in the prior window but none in
+      // the current one, so GSC has no position for them right now), which
+      // would make the tab badge disagree with the "Total tracked" tile
+      // shown inside the tab itself. This matches that tile exactly.
+      return report.rankTrackerSummary.total.current;
     case "searches":
       return 0;
     case "cookies":
