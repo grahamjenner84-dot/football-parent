@@ -973,6 +973,9 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
           Analytics granted: {pct(stats.analyticsGrantedRate)} of decisions
         </span>
         <span>
+          Advertising granted: {pct(stats.advertisingGrantedRate)} of decisions
+        </span>
+        <span>
           Shown &rarr; decided: {reachRate === null ? "-" : pct(reachRate)}
         </span>
       </div>

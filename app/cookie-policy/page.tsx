@@ -136,6 +136,33 @@ export default function CookiePolicyPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+            Advertising cookies
+          </h2>
+
+          <p>
+            We don&apos;t currently set any advertising cookies. Our cookie
+            banner already asks for a separate advertising consent choice, so
+            it&apos;s ready for if we add conversion tracking or retargeting
+            through platforms such as Google Ads, Meta (Facebook and
+            Instagram) or TikTok, as described in our{" "}
+            <a
+              href="/privacy-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              Privacy Policy
+            </a>
+            . These would only be set if you consent via the banner or{" "}
+            <a
+              href="/cookie-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              cookie settings
+            </a>
+            . If we turn any of these on, this page will be updated with the
+            specific cookies, their purpose and duration.
+          </p>
+
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             Changing your preferences
           </h2>
 

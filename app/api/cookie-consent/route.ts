@@ -16,25 +16,26 @@ const VALID_ACTIONS: ConsentAction[] = [
 // the comment on the cookie_consent_events migration for why that's fine to
 // log independently of the analytics consent choice itself.
 export async function POST(req: NextRequest) {
-  let body: { action?: unknown; analyticsGranted?: unknown };
+  let body: { action?: unknown; analyticsGranted?: unknown; advertisingGranted?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Bad request" }, { status: 400 });
   }
 
-  const { action, analyticsGranted } = body;
+  const { action, analyticsGranted, advertisingGranted } = body;
 
   if (
     typeof action !== "string" ||
     !VALID_ACTIONS.includes(action as ConsentAction) ||
-    typeof analyticsGranted !== "boolean"
+    typeof analyticsGranted !== "boolean" ||
+    typeof advertisingGranted !== "boolean"
   ) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
   try {
-    await logConsentEvent(action as ConsentAction, analyticsGranted);
+    await logConsentEvent(action as ConsentAction, analyticsGranted, advertisingGranted);
     return NextResponse.json({ ok: true });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";

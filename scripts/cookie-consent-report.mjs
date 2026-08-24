@@ -63,7 +63,7 @@ const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
 const { data, error } = await supabase
   .from("cookie_consent_events")
-  .select("action, analytics_granted, created_at")
+  .select("action, analytics_granted, advertising_granted, created_at")
   .gte("created_at", since)
   .order("created_at", { ascending: true });
 

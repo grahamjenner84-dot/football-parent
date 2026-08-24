@@ -88,10 +88,12 @@ export default function RootLayout({
               var age = consent ? Date.now() - new Date(consent.timestamp).getTime() : Infinity;
               var isFresh = consent && age <= MAX_CONSENT_AGE_MS;
 
+              var adGranted = isFresh && consent.advertising ? 'granted' : 'denied';
+
               window.gtag('consent', 'default', {
-                ad_storage: 'denied',
-                ad_user_data: 'denied',
-                ad_personalization: 'denied',
+                ad_storage: adGranted,
+                ad_user_data: adGranted,
+                ad_personalization: adGranted,
                 analytics_storage: isFresh && consent.analytics ? 'granted' : 'denied',
                 wait_for_update: 500,
               });

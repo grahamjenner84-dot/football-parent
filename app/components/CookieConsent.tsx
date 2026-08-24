@@ -11,6 +11,7 @@ const MAX_CONSENT_AGE_MS = 365 * 24 * 60 * 60 * 1000;
 
 type Consent = {
   analytics: boolean;
+  advertising: boolean;
   timestamp: string;
 };
 
@@ -35,16 +36,20 @@ type ConsentAction =
   | "reject_all"
   | "save_preferences";
 
-function logConsentEvent(action: ConsentAction, analytics: boolean) {
-  // Fire-and-forget to our own backend - not gated on the analytics choice
-  // itself (it's an anonymous aggregate count, not a tracking cookie). Use
+function logConsentEvent(action: ConsentAction, analytics: boolean, advertising: boolean) {
+  // Fire-and-forget to our own backend - not gated on the choices themselves
+  // (it's an anonymous aggregate count, not a tracking cookie). Use
   // keepalive so the request survives if the banner click also navigates
   // away or closes the tab.
   try {
     fetch("/api/cookie-consent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action, analyticsGranted: analytics }),
+      body: JSON.stringify({
+        action,
+        analyticsGranted: analytics,
+        advertisingGranted: advertising,
+      }),
       keepalive: true,
     }).catch(() => {});
   } catch {
@@ -52,42 +57,55 @@ function logConsentEvent(action: ConsentAction, analytics: boolean) {
   }
 }
 
-function writeConsent(analytics: boolean, action: ConsentAction) {
+function writeConsent(analytics: boolean, advertising: boolean, action: ConsentAction) {
   try {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ analytics, timestamp: new Date().toISOString() })
+      JSON.stringify({ analytics, advertising, timestamp: new Date().toISOString() })
     );
   } catch {
     // localStorage unavailable (e.g. blocked) - consent choice won't persist
-    // across visits, but the in-session gtag update below still applies.
+    // across visits, but the in-session gtag/fbq updates below still apply.
   }
 
   const w = window as typeof window & {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   };
 
   w.gtag?.("consent", "update", {
     analytics_storage: analytics ? "granted" : "denied",
+    ad_storage: advertising ? "granted" : "denied",
+    ad_user_data: advertising ? "granted" : "denied",
+    ad_personalization: advertising ? "granted" : "denied",
   });
 
-  logConsentEvent(action, analytics);
+  // Scaffolding for Meta Pixel, which isn't installed yet - a no-op today
+  // (fbq is undefined), but ready to gate the pixel's own tracking the
+  // moment it's added, per the "Cookies and advertising" section in
+  // /privacy-policy (Google Ads, Meta, TikTok).
+  w.fbq?.("consent", advertising ? "grant" : "revoke");
+
+  logConsentEvent(action, analytics, advertising);
 }
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
   const [managing, setManaging] = useState(false);
   const [analyticsChoice, setAnalyticsChoice] = useState(false);
+  const [advertisingChoice, setAdvertisingChoice] = useState(false);
 
   useEffect(() => {
     const existing = readConsent();
     if (!existing || isStale(existing)) {
       setVisible(true);
-      logConsentEvent("banner_shown", false);
+      logConsentEvent("banner_shown", false, false);
     }
 
     const openSettings = () => {
-      setAnalyticsChoice(readConsent()?.analytics ?? false);
+      const existing = readConsent();
+      setAnalyticsChoice(existing?.analytics ?? false);
+      setAdvertisingChoice(existing?.advertising ?? false);
       setManaging(true);
       setVisible(true);
     };
@@ -99,19 +117,19 @@ export default function CookieConsent() {
   if (!visible) return null;
 
   const acceptAll = () => {
-    writeConsent(true, "accept_all");
+    writeConsent(true, true, "accept_all");
     setVisible(false);
     setManaging(false);
   };
 
   const rejectAll = () => {
-    writeConsent(false, "reject_all");
+    writeConsent(false, false, "reject_all");
     setVisible(false);
     setManaging(false);
   };
 
   const savePreferences = () => {
-    writeConsent(analyticsChoice, "save_preferences");
+    writeConsent(analyticsChoice, advertisingChoice, "save_preferences");
     setVisible(false);
     setManaging(false);
   };
@@ -127,8 +145,9 @@ export default function CookieConsent() {
         {!managing ? (
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm leading-relaxed text-slate-700">
-              We use cookies to understand how visitors use Football Parent.
-              Analytics cookies are only set with your consent. See our{" "}
+              We use cookies to understand how visitors use Football Parent
+              and, if you consent, for advertising. Analytics and
+              advertising cookies are only set with your consent. See our{" "}
               <a
                 href="/cookie-policy"
                 className="font-semibold text-blue-700 hover:text-blue-900"
@@ -149,7 +168,9 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={() => {
-                  setAnalyticsChoice(readConsent()?.analytics ?? false);
+                  const existing = readConsent();
+                  setAnalyticsChoice(existing?.analytics ?? false);
+                  setAdvertisingChoice(existing?.advertising ?? false);
                   setManaging(true);
                 }}
                 className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
@@ -182,8 +203,7 @@ export default function CookieConsent() {
               </p>
               <p className="mt-1 text-sm text-slate-600">
                 Strictly necessary cookies are always on. Choose whether we
-                can also set analytics cookies to help us understand site
-                usage.
+                can also set analytics or advertising cookies.
               </p>
             </div>
 
@@ -232,6 +252,43 @@ export default function CookieConsent() {
                 <span
                   className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${
                     analyticsChoice ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 rounded-lg border border-slate-200 px-4 py-3">
+              <div>
+                <p className="text-sm font-semibold text-slate-900">
+                  Advertising
+                </p>
+                <p className="text-sm text-slate-600">
+                  Conversion tracking and retargeting cookies for advertising
+                  platforms such as Google Ads and Meta (Facebook and
+                  Instagram). See the{" "}
+                  <a
+                    href="/cookie-policy"
+                    className="font-semibold text-blue-700 hover:text-blue-900"
+                  >
+                    Cookie Policy
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <button
+                type="button"
+                role="switch"
+                aria-checked={advertisingChoice}
+                aria-label="Advertising cookies"
+                onClick={() => setAdvertisingChoice((current) => !current)}
+                className={`relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition ${
+                  advertisingChoice ? "bg-slate-900" : "bg-slate-300"
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${
+                    advertisingChoice ? "translate-x-6" : "translate-x-1"
                   }`}
                 />
               </button>

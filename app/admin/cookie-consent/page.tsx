@@ -65,8 +65,12 @@ export default async function CookieConsentAdminPage() {
               {pct(stats.analyticsGrantedRate)}
             </span>{" "}
             of all {stats.totalDecisions} banner decisions ended with
-            analytics cookies granted (includes Accept all and any Manage
-            &amp; save where the analytics toggle was left on). This is
+            analytics cookies granted, and{" "}
+            <span className="font-semibold">
+              {pct(stats.advertisingGrantedRate)}
+            </span>{" "}
+            with advertising cookies granted (includes Accept all and any
+            Manage &amp; save where the toggle was left on). Analytics is
             roughly the share of visitors GA can now see, down from ~100%
             before consent gating went live.
             {stats.bannerShown > 0 && (
