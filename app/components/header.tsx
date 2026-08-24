@@ -20,11 +20,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white text-slate-950 shadow-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <Link href="/" scroll={true} className="flex items-center no-underline">
+        <Link href="/" scroll={true} className="flex items-center gap-1.5 no-underline">
           <Image
-            src="/parent/horizontal/parent-horizontal-ink-600.png"
+            src="/parent/icon/parent-circle-512.png"
+            alt=""
+            width={58}
+            height={58}
+          />
+          <Image
+            src="/parent/horizontal/parent-wordmark-text-424.png"
             alt="Football Parent"
-            width={210}
+            width={148}
             height={62}
           />
         </Link>
