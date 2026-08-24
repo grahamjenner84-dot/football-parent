@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 23 August 2026
+            Last updated: 24 August 2026
           </p>
         </div>
       </section>
@@ -249,10 +249,29 @@ export default function PrivacyPolicyPage() {
           <p>
             Some links on footballparent.co.uk may be affiliate links,
             meaning we may earn a commission if you make a purchase after
-            clicking through - this doesn&apos;t cost you anything extra.
-            Similarly, the Coach App may show sponsored banners to coaches on
-            our free plan. These are just visual placements; clicking
-            through doesn&apos;t share any of your data with the advertiser.
+            clicking through - this doesn&apos;t cost you anything extra. We
+            use Skimlinks to manage this: it automatically turns eligible
+            outbound links to retailers into affiliate links, and sets a
+            tracking cookie to attribute any resulting commission. Like our
+            other non-essential cookies, this only runs if you consent via
+            our cookie banner or{" "}
+            <a
+              href="/cookie-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              cookie settings
+            </a>{" "}
+            - see our{" "}
+            <a
+              href="/cookie-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              Cookie Policy
+            </a>{" "}
+            for detail. Similarly, the Coach App may show sponsored banners
+            to coaches on our free plan. These are just visual placements;
+            clicking through doesn&apos;t share any of your data with the
+            advertiser.
           </p>
 
           <p>

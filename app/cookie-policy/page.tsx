@@ -23,7 +23,7 @@ export default function CookiePolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 5 August 2026
+            Last updated: 24 August 2026
           </p>
         </div>
       </section>
@@ -136,30 +136,50 @@ export default function CookiePolicyPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            Advertising cookies
+            Advertising &amp; affiliate cookies
           </h2>
 
           <p>
-            We don&apos;t currently set any advertising cookies. Our cookie
-            banner already asks for a separate advertising consent choice, so
-            it&apos;s ready for if we add conversion tracking or retargeting
-            through platforms such as Google Ads, Meta (Facebook and
-            Instagram) or TikTok, as described in our{" "}
+            We use Skimlinks to automatically turn eligible outbound links to
+            retailers into affiliate links, so we can earn a commission if
+            you go on to make a purchase, at no extra cost to you - see{" "}
             <a
               href="/privacy-policy"
               className="font-semibold text-blue-700 hover:text-blue-900"
             >
+              &quot;Affiliate links and sponsored content&quot; in our
               Privacy Policy
             </a>
-            . These would only be set if you consent via the banner or{" "}
+            . Skimlinks sets its own tracking cookie to attribute that
+            commission, and may pick up a further cookie from the retailer or
+            its affiliate network during the click-through. These are only
+            set if you consent to advertising &amp; affiliate cookies via our
+            cookie banner or{" "}
             <a
               href="/cookie-policy"
               className="font-semibold text-blue-700 hover:text-blue-900"
             >
               cookie settings
             </a>
-            . If we turn any of these on, this page will be updated with the
-            specific cookies, their purpose and duration.
+            ; if you reject or don&apos;t respond, the Skimlinks script never
+            loads and links behave as ordinary links.
+          </p>
+
+          <p>
+            We don&apos;t currently run any conversion tracking or
+            retargeting through advertising platforms such as Google Ads,
+            Meta (Facebook and Instagram) or TikTok, as described in our{" "}
+            <a
+              href="/privacy-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              Privacy Policy
+            </a>
+            . The same advertising &amp; affiliate consent choice already
+            covers these too, so they&apos;re ready to switch on without a
+            further change to the banner. If we turn any of these on, this
+            page will be updated with the specific cookies, their purpose and
+            duration.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">

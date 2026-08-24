@@ -1,34 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  CONSENT_CHANGED_EVENT,
+  CONSENT_STORAGE_KEY,
+  hasFreshConsent,
+  readConsent,
+} from "@/lib/cookieConsentClient";
 
-const STORAGE_KEY = "fp-cookie-consent";
 const OPEN_EVENT = "fp:open-cookie-settings";
-// ICO guidance recommends refreshing cookie consent roughly annually rather
-// than treating it as a one-time, permanent choice. Keep in sync with the
-// matching constant in the beforeInteractive script in app/layout.tsx.
-const MAX_CONSENT_AGE_MS = 365 * 24 * 60 * 60 * 1000;
-
-type Consent = {
-  analytics: boolean;
-  advertising: boolean;
-  timestamp: string;
-};
-
-function readConsent(): Consent | null {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    return JSON.parse(raw) as Consent;
-  } catch {
-    return null;
-  }
-}
-
-function isStale(consent: Consent): boolean {
-  const age = Date.now() - new Date(consent.timestamp).getTime();
-  return !Number.isFinite(age) || age > MAX_CONSENT_AGE_MS;
-}
 
 type ConsentAction =
   | "banner_shown"
@@ -60,7 +40,7 @@ function logConsentEvent(action: ConsentAction, analytics: boolean, advertising:
 function writeConsent(analytics: boolean, advertising: boolean, action: ConsentAction) {
   try {
     localStorage.setItem(
-      STORAGE_KEY,
+      CONSENT_STORAGE_KEY,
       JSON.stringify({ analytics, advertising, timestamp: new Date().toISOString() })
     );
   } catch {
@@ -87,6 +67,13 @@ function writeConsent(analytics: boolean, advertising: boolean, action: ConsentA
   w.fbq?.("consent", advertising ? "grant" : "revoke");
 
   logConsentEvent(action, analytics, advertising);
+
+  // Let other client components (e.g. AffiliateLinks.tsx, which injects the
+  // Skimlinks script only once advertising consent is granted) react to the
+  // choice immediately, without needing a page reload.
+  window.dispatchEvent(
+    new CustomEvent(CONSENT_CHANGED_EVENT, { detail: { analytics, advertising } })
+  );
 }
 
 export default function CookieConsent() {
@@ -97,7 +84,7 @@ export default function CookieConsent() {
 
   useEffect(() => {
     const existing = readConsent();
-    if (!existing || isStale(existing)) {
+    if (!hasFreshConsent(existing)) {
       setVisible(true);
       logConsentEvent("banner_shown", false, false);
     }
@@ -260,12 +247,14 @@ export default function CookieConsent() {
             <div className="flex items-center justify-between gap-4 rounded-lg border border-slate-200 px-4 py-3">
               <div>
                 <p className="text-sm font-semibold text-slate-900">
-                  Advertising
+                  Advertising &amp; affiliate links
                 </p>
                 <p className="text-sm text-slate-600">
                   Conversion tracking and retargeting cookies for advertising
                   platforms such as Google Ads and Meta (Facebook and
-                  Instagram). See the{" "}
+                  Instagram), and affiliate tracking (via Skimlinks) that
+                  attributes commission when you click through to a
+                  retailer. See the{" "}
                   <a
                     href="/cookie-policy"
                     className="font-semibold text-blue-700 hover:text-blue-900"
@@ -280,7 +269,7 @@ export default function CookieConsent() {
                 type="button"
                 role="switch"
                 aria-checked={advertisingChoice}
-                aria-label="Advertising cookies"
+                aria-label="Advertising and affiliate cookies"
                 onClick={() => setAdvertisingChoice((current) => !current)}
                 className={`relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition ${
                   advertisingChoice ? "bg-slate-900" : "bg-slate-300"

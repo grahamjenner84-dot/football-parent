@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import CookieConsent from "./components/CookieConsent";
+import AffiliateLinks from "./components/AffiliateLinks";
 import PageViewPing from "./components/PageViewPing";
 import "./globals.css";
 
@@ -108,6 +109,7 @@ export default function RootLayout({
         <Footer />
 
         <CookieConsent />
+        <AffiliateLinks />
         <PageViewPing />
 
         <Script
