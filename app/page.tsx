@@ -2,7 +2,7 @@
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Parent | Independent Guidance for Football Parents",
+  title: "Football Parent | UK Academy Pathways & Youth Football Advice",
   description:
     "Academy pathways, grassroots football and player development advice for UK football parents, written by a grassroots coach based in south London.",
   path: "/",

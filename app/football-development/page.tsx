@@ -112,7 +112,7 @@ export default function FootballDevelopmentPage() {
             "Should your child play up an age group in football? Learn the FA rules, benefits, risks and signs they are ready to play against older children.",
         },
         {
-          title: "What Is Football IQ? A Parent's Guide to Football Intelligence",
+          title: "What Is Football IQ? Football Intelligence Explained",
           href: "/football-development/what-is-football-iq",
           description:
             "What football IQ actually means, why coaches value it so highly, and how scanning, decision making and match experience help children develop it.",
