@@ -4,9 +4,9 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "What Is Bio-Banding in Football? | Football Parent",
+  title: "Bio Banding in Football Explained | Football Parent",
   description:
-    "A jargon-free explanation of bio-banding in football: what it means, why academies use it, who it helps, and whether to worry if your child is invited.",
+    "Bio-banding groups young players by physical development, not birth date. What it means, why academies use it, and whether to worry if your child is invited.",
   path: "/football-development/bio-banding-football",
 });
 
