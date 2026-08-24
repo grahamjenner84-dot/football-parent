@@ -58,9 +58,49 @@ function cleanTitle(title: string): string {
     .trim();
 }
 
+// app/sitemap.ts is the repo's established source of truth for real URLs
+// (internal-link-audit.mjs already uses it the same way) - `categoryUrl +
+// slug` is only a guess and is wrong wherever a page's actual route nests
+// under a subcategory folder that frontmatter doesn't reflect (confirmed
+// live case: best-football-boots-for-wide-feet-kids and
+// best-shin-pads-for-kids-football actually live under
+// /football-gear/boots/... and /football-gear/shin-pads/..., not flat
+// /football-gear/... - categoryUrl stays "/football-gear" there on purpose
+// since that's still the correct breadcrumb target, a shared flat category
+// index page). Prefer the sitemap route when one uniquely matches.
+function loadSitemapRoutes(): string[] | null {
+  const sitemapFile = path.join(REPO_ROOT, "app", "sitemap.ts");
+  if (!fs.existsSync(sitemapFile)) return null;
+  const raw = fs.readFileSync(sitemapFile, "utf8");
+  const arrayMatch = raw.match(/const\s+routes\s*=\s*\[([\s\S]*?)\]/);
+  if (!arrayMatch) return null;
+  const routes: string[] = [];
+  const strRe = /'([^']*)'|"([^"]*)"/g;
+  let m: RegExpExecArray | null;
+  while ((m = strRe.exec(arrayMatch[1]))) {
+    let r = (m[1] ?? m[2]).trim();
+    if (r === "") continue;
+    if (!r.startsWith("/")) r = "/" + r;
+    routes.push(r);
+  }
+  return routes;
+}
+
 export function getSiteArticleKeywords(): SiteArticleKeyword[] {
   const files = glob.sync("content/**/*.mdx", { cwd: REPO_ROOT });
   const out: SiteArticleKeyword[] = [];
+
+  const sitemapRoutes = loadSitemapRoutes();
+  const slugToRoutes = new Map<string, string[]>();
+  if (sitemapRoutes) {
+    for (const r of sitemapRoutes) {
+      const slug = r.split("/").filter(Boolean).pop();
+      if (!slug) continue;
+      const list = slugToRoutes.get(slug) ?? [];
+      list.push(r);
+      slugToRoutes.set(slug, list);
+    }
+  }
 
   for (const f of files) {
     const raw = fs.readFileSync(path.join(REPO_ROOT, f), "utf8");
@@ -69,7 +109,17 @@ export function getSiteArticleKeywords(): SiteArticleKeyword[] {
 
     const slug = path.basename(f, ".mdx");
     const category = String(data.categoryUrl).replace(/^\//, "");
-    const url = `${SITE_ORIGIN}${data.categoryUrl}/${slug}`;
+    const guessedUrlPath = `${data.categoryUrl}/${slug}`;
+
+    let urlPath = guessedUrlPath;
+    const categoryFolder = f.replace(/\\/g, "/").replace(/^content\//, "").split("/")[0];
+    const candidates = (slugToRoutes.get(slug) ?? []).filter((r) => r.startsWith(`/${categoryFolder}/`));
+    if (candidates.length === 1) {
+      urlPath = candidates[0];
+    }
+    // 0 or >1 candidates: keep the categoryUrl-based guess, same as before.
+
+    const url = `${SITE_ORIGIN}${urlPath}`;
 
     out.push({
       keyword: cleanTitle(String(data.title)),
