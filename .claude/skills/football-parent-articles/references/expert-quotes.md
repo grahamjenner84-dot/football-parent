@@ -668,6 +668,49 @@ attended the Trust's Football Development Centre, or a Trust/academy coach.
 4. What would you tell a parent whose child has just been invited to the FDC,
    that isn't obvious from the club's own information?
 
+### Elevation academy interview — Crystal Palace academy coach, tag: academy scouting/coaching, U6-U8 development, 1v1/ball mastery, Crystal Palace insider, private coaching crossover, bio-banding
+Drafted: 2026-08-25
+Graham knows a coach who works at Crystal Palace's academy and separately runs
+his own 1v1/ball-mastery training business. Covers several open gaps at once:
+`what-do-academy-coaches-look-for` and `how-football-scouts-identify-players`
+(both currently zero voice, pre-drafted questions below reuse/extend those),
+a brand-new U6-U8 development article (no dedicated piece exists yet - this
+was Graham's own idea), `crystal-palace-development-centre-guide` (real
+insider detail beyond the existing parent-side Parent Note), a private-
+coaching crossover angle for `is-private-football-coaching-worth-it`, and
+`bio-banding-football` (currently zero voice, no expert quote has fit so far).
+
+Academy scouting/coaching:
+1. When you're watching a young player, what's the first thing you notice
+   before anything technical?
+2. Parents assume goals and pace matter most at that age. What do you
+   actually weight more heavily, and why does it surprise them?
+3. What do you watch for in the moments before a player receives the ball,
+   rather than what they do with it?
+4. How much does a player's reaction to being corrected mid-session tell
+   you about their long-term potential?
+
+U6-U8 development:
+5. What's the biggest misconception parents of 6-8 year olds have about
+   what actually needs coaching at that age?
+6. At U6-U8, how much does 1v1 ability actually predict anything long-
+   term, versus it just being about confidence and enjoyment right now?
+7. What does he do differently in a 1v1/ball-mastery session at that age
+   compared to a normal team training session?
+
+Crystal Palace specifically:
+8. Is there anything about how Palace's development centre actually runs
+   day-to-day that would surprise a parent looking in from outside?
+
+Crossover / private coaching:
+9. Do you see a real difference in academy trials/sessions between kids
+   who've done extra 1v1 or ball-mastery work outside their club and kids
+   who haven't, or is that overstated by parents paying for it?
+
+Bio-banding:
+10. Has bio-banding ever changed how you or a colleague viewed a player you
+    thought you already had figured out?
+
 Format for new entries:
 ```
 ### <Article slug> — <expert name, if known, or "TBD, tag: <topic area>">
