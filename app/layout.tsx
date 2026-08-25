@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import CookieConsent from "./components/CookieConsent";
-import AffiliateLinks from "./components/AffiliateLinks";
 import PageViewPing from "./components/PageViewPing";
 import "./globals.css";
 
@@ -109,7 +108,6 @@ export default function RootLayout({
         <Footer />
 
         <CookieConsent />
-        <AffiliateLinks />
         <PageViewPing />
 
         <Script
@@ -153,6 +151,18 @@ export default function RootLayout({
             });
           `}
         </Script>
+
+        {/* Skimlinks: auto-converts outbound retailer links into affiliate
+            links. Not gated by the cookie banner - it only does anything
+            when a visitor clicks a link to leave the site for a retailer,
+            same as a manually-built affiliate link would, rather than
+            tracking behaviour on this site the way GA/ad pixels do. See
+            "Affiliate links and sponsored content" in /privacy-policy and
+            /cookie-policy. */}
+        <Script
+          src="https://s.skimresources.com/js/308096X1796393.skimlinks.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

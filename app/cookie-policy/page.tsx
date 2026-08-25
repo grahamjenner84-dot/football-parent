@@ -136,7 +136,7 @@ export default function CookiePolicyPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            Advertising &amp; affiliate cookies
+            Affiliate link cookies
           </h2>
 
           <p>
@@ -150,36 +150,41 @@ export default function CookiePolicyPage() {
               &quot;Affiliate links and sponsored content&quot; in our
               Privacy Policy
             </a>
-            . Skimlinks sets its own tracking cookie to attribute that
-            commission, and may pick up a further cookie from the retailer or
-            its affiliate network during the click-through. These are only
-            set if you consent to advertising &amp; affiliate cookies via our
-            cookie banner or{" "}
-            <a
-              href="/cookie-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
-            >
-              cookie settings
-            </a>
-            ; if you reject or don&apos;t respond, the Skimlinks script never
-            loads and links behave as ordinary links.
+            . Clicking a link like this routes you via Skimlinks (and
+            possibly the retailer&apos;s own affiliate network) on the way to
+            the retailer, and a tracking cookie may be set during that
+            click-through to attribute the commission. This only happens as
+            a result of you actively clicking a link to leave the site, in
+            the same way a plain link to a retailer would - it doesn&apos;t
+            track anything while you&apos;re browsing footballparent.co.uk
+            itself, so it isn&apos;t part of our cookie consent banner.
           </p>
 
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+            Advertising cookies
+          </h2>
+
           <p>
-            We don&apos;t currently run any conversion tracking or
-            retargeting through advertising platforms such as Google Ads,
-            Meta (Facebook and Instagram) or TikTok, as described in our{" "}
+            We don&apos;t currently set any advertising cookies. Our cookie
+            banner already asks for a separate advertising consent choice, so
+            it&apos;s ready for if we add conversion tracking or retargeting
+            through platforms such as Google Ads, Meta (Facebook and
+            Instagram) or TikTok, as described in our{" "}
             <a
               href="/privacy-policy"
               className="font-semibold text-blue-700 hover:text-blue-900"
             >
               Privacy Policy
             </a>
-            . The same advertising &amp; affiliate consent choice already
-            covers these too, so they&apos;re ready to switch on without a
-            further change to the banner. If we turn any of these on, this
-            page will be updated with the specific cookies, their purpose and
-            duration.
+            . These would only be set if you consent via the banner or{" "}
+            <a
+              href="/cookie-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              cookie settings
+            </a>
+            . If we turn any of these on, this page will be updated with the
+            specific cookies, their purpose and duration.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">

@@ -251,17 +251,10 @@ export default function PrivacyPolicyPage() {
             meaning we may earn a commission if you make a purchase after
             clicking through - this doesn&apos;t cost you anything extra. We
             use Skimlinks to manage this: it automatically turns eligible
-            outbound links to retailers into affiliate links, and sets a
-            tracking cookie to attribute any resulting commission. Like our
-            other non-essential cookies, this only runs if you consent via
-            our cookie banner or{" "}
-            <a
-              href="/cookie-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
-            >
-              cookie settings
-            </a>{" "}
-            - see our{" "}
+            outbound links to retailers into affiliate links. Clicking one
+            routes you via Skimlinks (and possibly the retailer&apos;s own
+            affiliate network) on the way to the retailer, which may set a
+            tracking cookie to attribute any resulting commission - see our{" "}
             <a
               href="/cookie-policy"
               className="font-semibold text-blue-700 hover:text-blue-900"
