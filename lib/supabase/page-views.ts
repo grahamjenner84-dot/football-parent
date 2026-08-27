@@ -13,9 +13,61 @@ function adminClient() {
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
-export async function logPageView(path: string, referrerHost: string | null = null): Promise<void> {
+export interface LogPageViewOptions {
+  referrerHost?: string | null;
+  userAgent?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  gclid?: string | null;
+  fbclid?: string | null;
+}
+
+const FLOOD_WINDOW_MS = 60_000;
+// Set from the 2026-08-26 incident (226 views on one path in 8 minutes,
+// ~28-51/minute) - real single-page traffic essentially never sustains
+// anywhere near this pace, so 30/minute gives headroom above genuine
+// spikes while cutting a scripted flood off quickly.
+const FLOOD_THRESHOLD = 30;
+
+// True if `path` has already logged >= FLOOD_THRESHOLD views in the last
+// minute. Silent drop rather than a 429: the client fetch in
+// PageViewPing.tsx already ignores the response, and not signalling
+// "you're being throttled" back to whatever is hammering the endpoint is
+// simplest.
+async function pathRecentlyFlooded(
+  supabase: ReturnType<typeof adminClient>,
+  path: string
+): Promise<boolean> {
+  const since = new Date(Date.now() - FLOOD_WINDOW_MS).toISOString();
+  const { count, error } = await supabase
+    .from("page_views")
+    .select("id", { count: "exact", head: true })
+    .eq("path", path)
+    .gte("created_at", since);
+
+  if (error) {
+    throw new Error("Failed to check page_views flood window: " + error.message);
+  }
+
+  return (count ?? 0) >= FLOOD_THRESHOLD;
+}
+
+export async function logPageView(path: string, options: LogPageViewOptions = {}): Promise<void> {
   const supabase = adminClient();
-  const { error } = await supabase.from("page_views").insert({ path, referrer_host: referrerHost });
+
+  if (await pathRecentlyFlooded(supabase, path)) return;
+
+  const { error } = await supabase.from("page_views").insert({
+    path,
+    referrer_host: options.referrerHost ?? null,
+    user_agent: options.userAgent ?? null,
+    utm_source: options.utmSource ?? null,
+    utm_medium: options.utmMedium ?? null,
+    utm_campaign: options.utmCampaign ?? null,
+    gclid: options.gclid ?? null,
+    fbclid: options.fbclid ?? null,
+  });
 
   if (error) {
     throw new Error("Failed to insert page_views row: " + error.message);

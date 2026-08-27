@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 // True total page-view count, deliberately decoupled from CookieConsent.tsx
 // entirely - fires on every route regardless of consent state, so it
@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 // sessions to tell a real traffic drop from a consent-visibility artifact.
 export default function PageViewPing() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     // Skip /admin/* - that's Graham checking the dashboard, not a real
@@ -32,13 +33,24 @@ export default function PageViewPing() {
       referrerHost = null;
     }
 
+    // Captured so a future traffic spike can be told apart from a script
+    // hammering /api/page-view directly: real ad-network traffic often
+    // strips the referrer header too, but carries these in the URL.
     fetch("/api/page-view", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ path: pathname, referrerHost }),
+      body: JSON.stringify({
+        path: pathname,
+        referrerHost,
+        utmSource: searchParams.get("utm_source"),
+        utmMedium: searchParams.get("utm_medium"),
+        utmCampaign: searchParams.get("utm_campaign"),
+        gclid: searchParams.get("gclid"),
+        fbclid: searchParams.get("fbclid"),
+      }),
       keepalive: true,
     }).catch(() => {});
-  }, [pathname]);
+  }, [pathname, searchParams]);
 
   return null;
 }

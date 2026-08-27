@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Script from "next/script";
 import type { Metadata } from "next";
 import Header from "./components/header";
@@ -106,7 +107,9 @@ export default function RootLayout({
         <Footer />
 
         <CookieConsent />
-        <PageViewPing />
+        <Suspense fallback={null}>
+          <PageViewPing />
+        </Suspense>
 
         <Script
           id="organization-schema"
