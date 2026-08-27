@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 23 August 2026
+            Last updated: 27 August 2026
           </p>
         </div>
       </section>
@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
         <div className="space-y-6 text-gray-700 text-lg leading-8">
           <p>
-            Graham Jenner, trading as Football Parent (&quot;we&quot;,
+            Jenneral Trading Ltd, trading as Football Parent (&quot;we&quot;,
             &quot;us&quot;), operates footballparent.co.uk and the Coach App.
             This policy explains what personal data we collect across both,
             why, and what rights you have over it.
@@ -406,7 +406,12 @@ export default function PrivacyPolicyPage() {
           </h2>
 
           <p>
-            Graham Jenner, trading as Football Parent
+            Jenneral Trading Ltd, trading as Football Parent
+            <br />
+            Company number: 17418718
+            <br />
+            Registered office: 71-75 Shelton Street, Covent Garden, London,
+            WC2H 9JQ
             <br />
             Email:{" "}
             <a

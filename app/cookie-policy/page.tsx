@@ -23,7 +23,7 @@ export default function CookiePolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 5 August 2026
+            Last updated: 27 August 2026
           </p>
         </div>
       </section>
@@ -31,9 +31,10 @@ export default function CookiePolicyPage() {
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
         <div className="space-y-6 text-gray-700 text-lg leading-8">
           <p>
-            This page explains the cookies footballparent.co.uk sets, what
-            they&apos;re for, and how long they last. For how we handle
-            personal data more broadly, see our{" "}
+            footballparent.co.uk is operated by Jenneral Trading Ltd,
+            trading as Football Parent. This page explains the cookies we
+            set, what they&apos;re for, and how long they last. For how we
+            handle personal data more broadly, see our{" "}
             <a
               href="/privacy-policy"
               className="font-semibold text-blue-700 hover:text-blue-900"

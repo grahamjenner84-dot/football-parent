@@ -23,7 +23,7 @@ export default function TermsAndConditionsPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 23 August 2026
+            Last updated: 27 August 2026
           </p>
         </div>
       </section>
@@ -32,9 +32,9 @@ export default function TermsAndConditionsPage() {
         <div className="space-y-6 text-gray-700 text-lg leading-8">
           <p>
             These terms govern your use of the Coach App, provided by
-            Football Parent (&quot;we&quot;, &quot;us&quot;). By creating an
-            account you agree to them. If you have any questions, email us
-            at{" "}
+            Jenneral Trading Ltd, trading as Football Parent (&quot;we&quot;,
+            &quot;us&quot;). By creating an account you agree to them. If you
+            have any questions, email us at{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
               className="font-semibold text-blue-700 hover:text-blue-900"
@@ -322,7 +322,12 @@ export default function TermsAndConditionsPage() {
           </h2>
 
           <p>
-            Football Parent
+            Jenneral Trading Ltd, trading as Football Parent
+            <br />
+            Company number: 17418718
+            <br />
+            Registered office: 71-75 Shelton Street, Covent Garden, London,
+            WC2H 9JQ
             <br />
             Email:{" "}
             <a
