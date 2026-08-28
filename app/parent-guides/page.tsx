@@ -135,6 +135,12 @@ export default function ParentGuidesPage() {
             "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?",
         },
         {
+          title: "Equal Playing Time in Grassroots Football",
+          href: "/coaching/equal-playing-time-in-grassroots-football",
+          description:
+            "A working formula for fair playing time, the real difference between equal minutes and equal position time, and what rolling substitutions actually allow.",
+        },
+        {
           title: "Biggest Football Parent Mistakes",
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:
