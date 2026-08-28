@@ -101,6 +101,7 @@ export const routes = [
   '/parent-guides/jpl-martin-brock-interview-part-1',
   '/coaching/football-drills-for-7-and-8-year-olds',
   '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
+  '/coaching/equal-playing-time-in-grassroots-football',
 
   // Legal
   '/privacy-policy',
