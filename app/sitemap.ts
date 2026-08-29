@@ -5,6 +5,9 @@ const siteUrl = 'https://www.footballparent.co.uk'
 export const routes = [
   '',
 
+  // Coach App
+  '/coach-app',
+
   // Category pages
   '/academy-pathway',
   '/academy-trials',
