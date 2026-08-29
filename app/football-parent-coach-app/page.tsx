@@ -22,6 +22,11 @@ const features = [
       "Team and individual stats, goals, assists, minutes and playing time by position, calculated automatically from the games you log.",
   },
   {
+    title: "Availability, sorted before kickoff",
+    description:
+      "Mark who's in for training and who's available for Saturday's match, so your squad list is accurate before you ever get to team selection.",
+  },
+  {
     title: "Run the game live",
     description:
       "Score, cards, substitutions and a match commentary feed, all logged in real time from the touchline. Full time locks the result and can prompt Man of the Match.",
@@ -32,9 +37,14 @@ const features = [
       "Upcoming matches, played results and a full match history per player, so parents asking 'how did we get on' get an instant answer.",
   },
   {
+    title: "Built for tournament days",
+    description:
+      "Tag matches as League, Cup, Tournament or Friendly and see results, goals, assists and playing time broken down by competition, so a weekend tournament doesn't get lost inside the season stats.",
+  },
+  {
     title: "Training, kept simple",
     description:
-      "Check who's available for the next session and keep your plan in a simple notepad, nothing complicated to wrestle with before training even starts.",
+      "Keep your session plan in a simple notepad, nothing complicated to wrestle with before training even starts.",
   },
 ];
 
