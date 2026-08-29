@@ -6,7 +6,7 @@ export const routes = [
   '',
 
   // Coach App
-  '/coach-app',
+  '/football-parent-coach-app',
 
   // Category pages
   '/academy-pathway',

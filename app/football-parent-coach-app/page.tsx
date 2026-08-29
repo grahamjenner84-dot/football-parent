@@ -6,7 +6,7 @@ export const metadata = generateSEO({
   title: "Coach App | Team Sheets, Live Matchday and Equal Playing Time",
   description:
     "The grassroots football coach app that handles team selection, equal playing time rotation, live matchday scoring and a training board, so you can run the team from your phone.",
-  path: "/coach-app",
+  path: "/football-parent-coach-app",
   type: "website",
 });
 
@@ -68,7 +68,7 @@ export default function CoachAppLandingPage() {
           </p>
 
           <Link
-            href="/coach-app/app"
+            href="/coach-app"
             className="inline-block bg-white text-gray-900 font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors"
           >
             Open Coach App
@@ -118,7 +118,7 @@ export default function CoachAppLandingPage() {
             with no install or update to manage.
           </p>
           <Link
-            href="/coach-app/app"
+            href="/coach-app"
             className="inline-block bg-gray-900 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-800 transition-colors"
           >
             Open Coach App
