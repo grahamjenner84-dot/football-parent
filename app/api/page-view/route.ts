@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { logPageView } from "@/lib/supabase/page-views";
+import { isKnownBot } from "@/lib/user-agent-bots";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,15 +31,24 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "path is required" }, { status: 400 });
     }
 
-    await logPageView(path.slice(0, MAX_PATH_LENGTH), {
-      referrerHost: cleanString(body.referrerHost, MAX_HOST_LENGTH),
-      userAgent: cleanString(req.headers.get("user-agent"), MAX_UA_LENGTH),
-      utmSource: cleanString(body.utmSource, MAX_UTM_LENGTH),
-      utmMedium: cleanString(body.utmMedium, MAX_UTM_LENGTH),
-      utmCampaign: cleanString(body.utmCampaign, MAX_UTM_LENGTH),
-      gclid: cleanString(body.gclid, MAX_CLICK_ID_LENGTH),
-      fbclid: cleanString(body.fbclid, MAX_CLICK_ID_LENGTH),
-    });
+    const userAgent = cleanString(req.headers.get("user-agent"), MAX_UA_LENGTH);
+
+    // Self-declared bots (Googlebot, Bytespider, curl, headless browsers...)
+    // don't get logged at all - see lib/user-agent-bots.ts. Silent no-op,
+    // same reasoning as the flood guard: nothing here signals back to the
+    // caller that it was filtered.
+    if (!isKnownBot(userAgent)) {
+      await logPageView(path.slice(0, MAX_PATH_LENGTH), {
+        referrerHost: cleanString(body.referrerHost, MAX_HOST_LENGTH),
+        userAgent,
+        utmSource: cleanString(body.utmSource, MAX_UTM_LENGTH),
+        utmMedium: cleanString(body.utmMedium, MAX_UTM_LENGTH),
+        utmCampaign: cleanString(body.utmCampaign, MAX_UTM_LENGTH),
+        gclid: cleanString(body.gclid, MAX_CLICK_ID_LENGTH),
+        fbclid: cleanString(body.fbclid, MAX_CLICK_ID_LENGTH),
+      });
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
