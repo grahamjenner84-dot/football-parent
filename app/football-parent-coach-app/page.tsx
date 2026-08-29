@@ -69,7 +69,7 @@ export default function CoachAppLandingPage() {
 
           <Link
             href="/coach-app"
-            className="inline-block bg-white text-gray-900 font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors"
+            className="inline-block bg-white text-gray-900! font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-100 transition-colors"
           >
             Open Coach App
           </Link>
@@ -119,7 +119,7 @@ export default function CoachAppLandingPage() {
           </p>
           <Link
             href="/coach-app"
-            className="inline-block bg-gray-900 text-white font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-800 transition-colors"
+            className="inline-block bg-gray-900 text-white! font-semibold px-8 py-4 rounded-lg text-lg hover:bg-gray-800 transition-colors"
           >
             Open Coach App
           </Link>
