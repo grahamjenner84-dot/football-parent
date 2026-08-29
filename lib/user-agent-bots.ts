@@ -33,7 +33,20 @@ const BOT_UA_PATTERNS = [
   /scrapy/i,
 ];
 
+// Live write-time check (app/api/page-view/route.ts): a missing UA header
+// counts as a bot, since a real browser always sends one - only a script
+// omitting it deliberately would have none.
 export function isKnownBot(userAgent: string | null): boolean {
-  if (!userAgent) return true; // real browsers always send a UA header
+  if (!userAgent) return true;
+  return BOT_UA_PATTERNS.some((pattern) => pattern.test(userAgent));
+}
+
+// Just the signature match, with no opinion on a missing UA - for
+// retroactive analysis of historical page_views rows (lib/supabase/
+// page-views.ts), where user_agent is null on every row from before
+// 2026-08-27 because the column didn't exist yet, not because no UA was
+// sent. Using isKnownBot there would wrongly flag all pre-2026-08-27
+// traffic as bot.
+export function matchesKnownBotPattern(userAgent: string): boolean {
   return BOT_UA_PATTERNS.some((pattern) => pattern.test(userAgent));
 }

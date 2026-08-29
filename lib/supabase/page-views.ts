@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
+import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/cookie-consent.ts - this must never be imported from client
@@ -87,6 +88,9 @@ export interface SourceGroupCount {
 
 export interface PageViewDay {
   date: string;
+  // Bot rows (see botViews below) are excluded from count/topPaths/
+  // sourceGroups/estimatedVisits/internalViews - these are "true" human
+  // numbers, not raw row counts.
   count: number;
   topPaths: { path: string; count: number }[];
   // Excludes rows classified "Internal" (on-site navigation, not a new
@@ -102,6 +106,10 @@ export interface PageViewDay {
   // page in the same visit. count - internalViews should equal
   // estimatedVisits.
   internalViews: number;
+  // Rows excluded as bot traffic - see isBotRow. Reported rather than
+  // silently vanishing, so a day's "true" count is still auditable against
+  // its raw total (count + botViews).
+  botViews: number;
 }
 
 export interface PageViewStats {
@@ -111,6 +119,35 @@ export interface PageViewStats {
   sourceGroups: SourceGroupCount[];
   estimatedVisits: number;
   internalViews: number;
+  botViews: number;
+}
+
+// Specific known bot incidents that predate user_agent capture (added
+// 2026-08-27), identified from the raw timing/referrer pattern instead -
+// see the 2026-08-26 what-is-eppp incident: 226 rows in an 8-minute window,
+// all referrer_host null, at a near-uniform ~1 every 2 seconds. Nothing
+// generalisable to extract from rows this old since they carry no
+// user_agent - hardcoded as a one-off historical correction.
+const KNOWN_BOT_INCIDENTS: { path: string; from: string; to: string }[] = [
+  { path: "/academy-pathway/what-is-eppp", from: "2026-08-26T21:56:00Z", to: "2026-08-26T22:06:00Z" },
+];
+
+// A single user_agent hitting the same single path this many times in one
+// day is scripted, not a real reader - see the 2026-08-29
+// academy-categories-explained incident, where the largest chunk (225 of
+// 405 rows) shared one identical, years-out-of-date iPhone UA. Doesn't
+// catch a bot that varies its UA per request; only catches this specific
+// "one browser, one page, dozens of times" shape - see FLOOD_THRESHOLD
+// above for the live per-path defense against a fast flood regardless of
+// UA.
+const DUPLICATE_UA_SAME_PATH_THRESHOLD = 8;
+
+function isKnownBotIncident(path: string, createdAt: string): boolean {
+  const ts = new Date(createdAt).getTime();
+  return KNOWN_BOT_INCIDENTS.some(
+    (incident) =>
+      incident.path === path && ts >= new Date(incident.from).getTime() && ts <= new Date(incident.to).getTime()
+  );
 }
 
 // estimatedVisits approximates "distinct visits" from raw pageview rows,
@@ -143,12 +180,12 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
   // select() here would quietly under-report totalViews/byDay once a busy
   // day pushes past that cap. Page through with .range() instead, ordered
   // by id (monotonic, unique) so pages don't skip/duplicate rows.
-  const rows: { path: string; created_at: string; referrer_host: string | null }[] = [];
+  const rows: { path: string; created_at: string; referrer_host: string | null; user_agent: string | null }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, created_at, referrer_host")
+      .select("path, created_at, referrer_host, user_agent")
       .gte("created_at", since)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
@@ -161,17 +198,51 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
     rows.push(...batch);
     if (batch.length < pageSize) break;
   }
+
+  // First pass: count (day, path, user_agent) combos so the duplicate-UA
+  // check below can tell "one browser hit this page 30 times today" from a
+  // normal spread of distinct visitors. Only counts rows with a captured
+  // user_agent - historical rows from before 2026-08-27 all have a null
+  // user_agent, and grouping those together would flag huge swathes of
+  // genuine old traffic as one giant "duplicate UA" combo.
+  const dayPathUaCounts = new Map<string, number>();
+  for (const row of rows) {
+    if (!row.user_agent) continue;
+    const day = row.created_at.slice(0, 10);
+    const key = `${day}|${row.path}|${row.user_agent}`;
+    dayPathUaCounts.set(key, (dayPathUaCounts.get(key) ?? 0) + 1);
+  }
+
+  function isBotRow(row: (typeof rows)[number], day: string): boolean {
+    if (isKnownBotIncident(row.path, row.created_at)) return true;
+    if (row.user_agent) {
+      if (matchesKnownBotPattern(row.user_agent)) return true;
+      const key = `${day}|${row.path}|${row.user_agent}`;
+      if ((dayPathUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
+    }
+    return false;
+  }
+
   const byDayPathMap = new Map<string, Map<string, number>>();
   const byPathMap = new Map<string, number>();
   const groupMap = new Map<SourceGroup, Map<string, number>>();
   const byDayGroupMap = new Map<string, Map<SourceGroup, Map<string, number>>>();
   const byDayEstimatedVisits = new Map<string, number>();
   const byDayInternalViews = new Map<string, number>();
+  const byDayBotViews = new Map<string, number>();
   let estimatedVisitsTotal = 0;
   let internalViewsTotal = 0;
+  let botViewsTotal = 0;
 
   for (const row of rows) {
     const day = row.created_at.slice(0, 10);
+
+    if (isBotRow(row, day)) {
+      botViewsTotal += 1;
+      byDayBotViews.set(day, (byDayBotViews.get(day) ?? 0) + 1);
+      continue;
+    }
+
     const dayBucket = byDayPathMap.get(day) ?? new Map<string, number>();
     dayBucket.set(row.path, (dayBucket.get(row.path) ?? 0) + 1);
     byDayPathMap.set(day, dayBucket);
@@ -199,8 +270,14 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
     byDayGroupMap.set(day, dayGroupMap);
   }
 
-  const byDay: PageViewDay[] = Array.from(byDayPathMap.entries())
-    .map(([date, pathCounts]) => {
+  // Union of days with any surviving row or any excluded bot row, so a day
+  // that was pure bot traffic (e.g. 2026-08-26) still appears with count: 0
+  // rather than disappearing from byDay entirely.
+  const allDays = new Set<string>([...byDayPathMap.keys(), ...byDayBotViews.keys()]);
+
+  const byDay: PageViewDay[] = Array.from(allDays)
+    .map((date) => {
+      const pathCounts = byDayPathMap.get(date) ?? new Map<string, number>();
       const topPaths = Array.from(pathCounts.entries())
         .map(([path, count]) => ({ path, count }))
         .sort((a, b) => b.count - a.count);
@@ -208,12 +285,21 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
       const sourceGroups = buildSourceGroups(byDayGroupMap.get(date) ?? new Map());
       const estimatedVisits = byDayEstimatedVisits.get(date) ?? 0;
       const internalViews = byDayInternalViews.get(date) ?? 0;
-      return { date, count, topPaths: topPaths.slice(0, 20), sourceGroups, estimatedVisits, internalViews };
+      const botViews = byDayBotViews.get(date) ?? 0;
+      return {
+        date,
+        count,
+        topPaths: topPaths.slice(0, 20),
+        sourceGroups,
+        estimatedVisits,
+        internalViews,
+        botViews,
+      };
     })
     .sort((a, b) => b.date.localeCompare(a.date));
 
   return {
-    totalViews: rows.length,
+    totalViews: rows.length - botViewsTotal,
     byDay,
     topPaths: Array.from(byPathMap.entries())
       .map(([path, count]) => ({ path, count }))
@@ -222,5 +308,6 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
     sourceGroups: buildSourceGroups(groupMap),
     estimatedVisits: estimatedVisitsTotal,
     internalViews: internalViewsTotal,
+    botViews: botViewsTotal,
   };
 }

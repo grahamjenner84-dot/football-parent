@@ -1009,6 +1009,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
   const shownSourceGroups = selectedDay ? selectedDay.sourceGroups : stats.sourceGroups;
   const shownEstimatedVisits = selectedDay ? selectedDay.estimatedVisits : stats.estimatedVisits;
   const shownInternalViews = selectedDay ? selectedDay.internalViews : stats.internalViews;
+  const shownBotViews = selectedDay ? selectedDay.botViews : stats.botViews;
   const sourceGroupsTitle = selectedDay
     ? `Traffic sources on ${selectedDay.date}`
     : `Traffic sources (last ${daysCovered} days, excludes on-site navigation)`;
@@ -1023,12 +1024,15 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
         already accepted or rejected still counts here. This is the number
         to check against GA sessions: if GA is well below this, that gap is
         consent-mode visibility; if this number is also low, traffic
-        genuinely dropped.
+        genuinely dropped. Self-declared bots/crawlers and known scripted
+        spikes are excluded from every number below - see &ldquo;Bot views
+        excluded&rdquo;.
       </p>
 
       <div style={styles.cardStats}>
         <span>Total views: {stats.totalViews}</span>
         <span>Average per day: {avgPerDay}</span>
+        <span>Bot views excluded: {shownBotViews}</span>
       </div>
 
       {stats.sourceGroups.length > 0 && (
