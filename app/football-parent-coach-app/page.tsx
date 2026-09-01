@@ -52,16 +52,22 @@ export default function CoachAppPage() {
             What It Does
           </h2>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
             Squad Management
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+              Free
+            </span>
           </h3>
           <p>
             Keep your full squad in one place, with an active/inactive flag
             for players who&apos;ve stepped away without losing their history.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
             Scheduling &amp; Availability
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+              Free
+            </span>
           </h3>
           <p>
             Set up matches and training as one-off or weekly recurring
@@ -69,8 +75,11 @@ export default function CoachAppPage() {
             what&apos;s next.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
             Team Selector &amp; Lineups
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+              Free
+            </span>
           </h3>
           <p>
             Build a fixed lineup or switch on equal-time rotation, with
@@ -78,16 +87,22 @@ export default function CoachAppPage() {
             doing the maths in your head.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
             Live Match Tracker
+            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
+              Paid plan
+            </span>
           </h3>
           <p>
             Log goals, cards and substitutions as they happen, with a live
             feed your team can follow along to.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
             Real Stats
+            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
+              Paid plan
+            </span>
           </h3>
           <p>
             Appearances, goals, assists and cards, calculated from what
@@ -95,16 +110,22 @@ export default function CoachAppPage() {
             fact.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
             Tournament Day
+            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
+              Paid plan
+            </span>
           </h3>
           <p>
             A dedicated flow for tournament formats, from lineup through to a
             live summary.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
             Share With Your Team
+            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+              Free
+            </span>
           </h3>
           <p>
             Send parents, assistant coaches and team managers a link to join
@@ -126,6 +147,16 @@ export default function CoachAppPage() {
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             Frequently Asked Questions
           </h2>
+
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+            Is the Coach App free to use?
+          </h3>
+          <p>
+            Squad management, scheduling, team selection (including
+            equal-time rotation and fair playing-time tracking) and
+            organising a live match are free. Logging live match stats, full
+            season stats and tournament mode are part of a paid plan.
+          </p>
 
           <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
             Do parents and assistant coaches need to install anything?
