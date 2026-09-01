@@ -123,6 +123,28 @@ export default function CoachAppPage() {
             operation.
           </p>
 
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+            Frequently Asked Questions
+          </h2>
+
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+            Do parents and assistant coaches need to install anything?
+          </h3>
+          <p>
+            No. Parents, assistant coaches and team managers you invite get a
+            link to see fixtures, results and availability without
+            installing anything or creating an account of their own.
+          </p>
+
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+            Does it work for tournaments, not just weekly matches?
+          </h3>
+          <p>
+            Yes. There&apos;s a dedicated tournament day flow, from your squad
+            and formation through to a live summary as group games move into
+            knockouts.
+          </p>
+
           <div className="pt-6">
             <a
               href="/coach-app"
