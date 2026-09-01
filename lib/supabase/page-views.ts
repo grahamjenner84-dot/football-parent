@@ -179,7 +179,21 @@ function buildSourceGroups(groupMap: Map<SourceGroup, Map<string, number>>): Sou
     .sort((a, b) => b.count - a.count);
 }
 
-export async function getPageViewStats(days: number = 30): Promise<PageViewStats> {
+export interface GetPageViewStatsOptions {
+  // Restricts to rows whose path equals, or starts with "<prefix>/", one of
+  // these - e.g. ["/football-parent-coach-app", "/coach-app"] for the Coach
+  // App tab. Omit for site-wide stats.
+  pathPrefixes?: string[];
+}
+
+function matchesPathPrefixes(path: string, prefixes: string[]): boolean {
+  return prefixes.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
+}
+
+export async function getPageViewStats(
+  days: number = 30,
+  options: GetPageViewStatsOptions = {}
+): Promise<PageViewStats> {
   const supabase = adminClient();
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
@@ -188,7 +202,7 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
   // select() here would quietly under-report totalViews/byDay once a busy
   // day pushes past that cap. Page through with .range() instead, ordered
   // by id (monotonic, unique) so pages don't skip/duplicate rows.
-  const rows: { path: string; created_at: string; referrer_host: string | null; user_agent: string | null }[] = [];
+  let rows: { path: string; created_at: string; referrer_host: string | null; user_agent: string | null }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
@@ -205,6 +219,11 @@ export async function getPageViewStats(days: number = 30): Promise<PageViewStats
     const batch = data ?? [];
     rows.push(...batch);
     if (batch.length < pageSize) break;
+  }
+
+  if (options.pathPrefixes) {
+    const prefixes = options.pathPrefixes;
+    rows = rows.filter((row) => matchesPathPrefixes(row.path, prefixes));
   }
 
   // First pass: count (day, path, user_agent) combos so the duplicate-UA

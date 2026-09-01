@@ -29,11 +29,13 @@ type Tab =
   | "searches"
   | "cookies"
   | "compare"
-  | "pageviews";
+  | "pageviews"
+  | "coachApp";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "pageviews", label: "Page views" },
+  { id: "coachApp", label: "Coach App" },
   { id: "compare", label: "Compare days" },
   { id: "rank", label: "Rank tracker" },
   { id: "searches", label: "Top searches" },
@@ -70,6 +72,8 @@ export default function SeoAdminPage() {
   const [consentError, setConsentError] = useState("");
   const [pageViewStats, setPageViewStats] = useState<PageViewStats | null>(null);
   const [pageViewError, setPageViewError] = useState("");
+  const [coachAppViewStats, setCoachAppViewStats] = useState<PageViewStats | null>(null);
+  const [coachAppViewError, setCoachAppViewError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -118,6 +122,22 @@ export default function SeoAdminPage() {
         setPageViewError("");
       })
       .catch((err) => setPageViewError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/coach-app-view-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load Coach App view report");
+        }
+        return res.json();
+      })
+      .then((data: PageViewStats) => {
+        setCoachAppViewStats(data);
+        setCoachAppViewError("");
+      })
+      .catch((err) => setCoachAppViewError(err.message));
   }, []);
 
   useEffect(() => {
@@ -183,10 +203,14 @@ export default function SeoAdminPage() {
             {t.id === "pageviews" && pageViewStats && (
               <span style={styles.tabCount}>{pageViewStats.totalViews}</span>
             )}
+            {t.id === "coachApp" && coachAppViewStats && (
+              <span style={styles.tabCount}>{coachAppViewStats.totalViews}</span>
+            )}
             {t.id !== "searches" &&
               t.id !== "cookies" &&
               t.id !== "compare" &&
               t.id !== "pageviews" &&
+              t.id !== "coachApp" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
           </button>
         ))}
@@ -216,6 +240,22 @@ export default function SeoAdminPage() {
             )}
             {pageViewError && <p style={styles.error}>{pageViewError}</p>}
             {pageViewStats && <PageViewsReport stats={pageViewStats} />}
+          </>
+        ) : tab === "coachApp" ? (
+          <>
+            <p style={styles.sectionNote}>
+              Scoped to /football-parent-coach-app (the marketing landing
+              page) and /coach-app (the app itself) - both routes on this
+              same footballparent.co.uk Next app, same page_views table as
+              the Page views tab above, just filtered. Note: /coach-app has
+              no route or redirect wired up yet (next.config.ts), so this
+              will read near-zero until that&rsquo;s live.
+            </p>
+            {!coachAppViewStats && !coachAppViewError && (
+              <p style={styles.muted}>Loading Coach App view report...</p>
+            )}
+            {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
+            {coachAppViewStats && <PageViewsReport stats={coachAppViewStats} />}
           </>
         ) : (
           <>
@@ -273,6 +313,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "compare":
       return 0;
     case "pageviews":
+      return 0;
+    case "coachApp":
       return 0;
   }
 }
