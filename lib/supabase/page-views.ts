@@ -140,7 +140,15 @@ const KNOWN_BOT_INCIDENTS: { path: string; from: string; to: string }[] = [
 // "one browser, one page, dozens of times" shape - see FLOOD_THRESHOLD
 // above for the live per-path defense against a fast flood regardless of
 // UA.
-const DUPLICATE_UA_SAME_PATH_THRESHOLD = 8;
+//
+// Set high (not the original 8) after a false positive on 2026-08-30: 15
+// homepage requests shared one user_agent that was simply the current,
+// completely unremarkable default iPhone Safari string (iOS 18, Safari
+// 26.x) - almost certainly 15 different real visitors on a common device
+// configuration, not one bot. A UA being widely shared is normal; only
+// genuinely extreme repetition on one path is worth flagging without a
+// second corroborating signal.
+const DUPLICATE_UA_SAME_PATH_THRESHOLD = 50;
 
 function isKnownBotIncident(path: string, createdAt: string): boolean {
   const ts = new Date(createdAt).getTime();
