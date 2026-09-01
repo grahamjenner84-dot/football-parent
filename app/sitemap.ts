@@ -103,6 +103,9 @@ export const routes = [
   '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
   '/coaching/equal-playing-time-in-grassroots-football',
 
+  // Coach App
+  '/football-parent-coach-app',
+
   // Legal
   '/privacy-policy',
   '/cookie-policy',
