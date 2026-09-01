@@ -38,7 +38,7 @@ export default function CoachAppPage() {
           <div className="mt-8">
             <a
               href="/coach-app"
-              className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+              className="inline-block bg-blue-700 hover:bg-blue-800 text-white! font-semibold px-8 py-3 rounded-lg transition-colors"
             >
               Try the Coach App
             </a>
@@ -126,7 +126,7 @@ export default function CoachAppPage() {
           <div className="pt-6">
             <a
               href="/coach-app"
-              className="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+              className="inline-block bg-blue-700 hover:bg-blue-800 text-white! font-semibold px-8 py-3 rounded-lg transition-colors"
             >
               Try the Coach App
             </a>
