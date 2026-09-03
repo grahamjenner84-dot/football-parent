@@ -141,6 +141,12 @@ export default function ParentGuidesPage() {
             "A working formula for fair playing time, the real difference between equal minutes and equal position time, and what rolling substitutions actually allow.",
         },
         {
+          title: "Best Football Formations by Age Group",
+          href: "/coaching/best-football-formations-by-age-group",
+          description:
+            "7v7 now starts at U10 and 9v9 at U12 under the FA's 2026/27 format changes. Pitch sizes, rules and suggested formations for both explained.",
+        },
+        {
           title: "Biggest Football Parent Mistakes",
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:
