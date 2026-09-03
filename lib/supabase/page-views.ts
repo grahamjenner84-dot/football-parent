@@ -301,24 +301,30 @@ export interface PageViewDailyCount {
   count: number;
 }
 
-// Daily view counts for one exact path over the last `days` days, with
-// zero-count days included (unlike PageViewDay.topPaths, which only lists a
-// path for a day it actually received a view) - for the "one page over
-// time" tab. Same bot exclusions as getPageViewStats.
-export async function getPageViewsForPath(path: string, days: number = 30): Promise<PageViewDailyCount[]> {
+// Daily view counts for one exact path, zero-filled on days with no views
+// (unlike PageViewDay.topPaths, which only lists a path for a day it
+// actually received a view) - for the "one page over time" tab. With `days`
+// omitted, covers the page's full history: from its first recorded page
+// view (the closest available proxy for "day it was published" - the table
+// doesn't track actual publish dates) through today. Pass `days` to instead
+// start from N days ago. Same bot exclusions as getPageViewStats.
+export async function getPageViewsForPath(path: string, days?: number): Promise<PageViewDailyCount[]> {
   const supabase = adminClient();
-  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+  const since = days ? new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString() : null;
 
   const rows: { created_at: string; user_agent: string | null }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
-    const { data, error } = await supabase
+    let query = supabase
       .from("page_views")
       .select("created_at, user_agent")
       .eq("path", path)
-      .gte("created_at", since)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
+    if (since) {
+      query = query.gte("created_at", since);
+    }
+    const { data, error } = await query;
 
     if (error) {
       throw new Error("Failed to read page_views: " + error.message);
@@ -354,12 +360,20 @@ export async function getPageViewsForPath(path: string, days: number = 30): Prom
     counts.set(day, (counts.get(day) ?? 0) + 1);
   }
 
+  const today = new Date().toISOString().slice(0, 10);
+  // Earliest surviving (non-bot) day, not the earliest raw row - so a bot
+  // incident that predates real traffic on this path doesn't push the
+  // "published" proxy date artificially early.
+  const earliestDay = Array.from(counts.keys()).sort()[0] ?? null;
+  const startDate = since ? since.slice(0, 10) : (earliestDay ?? today);
+
   const result: PageViewDailyCount[] = [];
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date();
-    d.setUTCDate(d.getUTCDate() - i);
-    const date = d.toISOString().slice(0, 10);
+  const cursor = new Date(`${startDate}T00:00:00.000Z`);
+  const end = new Date(`${today}T00:00:00.000Z`);
+  while (cursor <= end) {
+    const date = cursor.toISOString().slice(0, 10);
     result.push({ date, count: counts.get(date) ?? 0 });
+    cursor.setUTCDate(cursor.getUTCDate() + 1);
   }
   return result;
 }

@@ -1370,26 +1370,35 @@ function ComparePageViews() {
 
 interface PageViewByPathResponse {
   path: string;
-  days: number;
   byDay: PageViewDailyCount[];
 }
 
+type TrendWindow = "7" | "30" | "all";
+
+const MAX_SUGGESTIONS = 12;
+
 // pathOptions comes from the parent's already-loaded pageViewStats.topPaths
-// (top 50 over the last 30 days) so this doesn't need its own list-of-paths
-// fetch - it's a <datalist> suggestion list, not a hard restriction, since
-// the free-text input still accepts any path.
+// (top 50 over the last 30 days) - a suggestion list to search against, not
+// a hard restriction: typing a full path that isn't in it and pressing
+// Enter still works.
 function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
-  const [path, setPath] = useState(pathOptions[0] ?? "");
+  const [query, setQuery] = useState("");
+  const [selectedPath, setSelectedPath] = useState("");
+  const [suggestionsOpen, setSuggestionsOpen] = useState(false);
   const [result, setResult] = useState<PageViewByPathResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const hasRun = useRef(false);
+  const [windowFilter, setWindowFilter] = useState<TrendWindow>("all");
+
+  const suggestions =
+    query.trim().length > 0
+      ? pathOptions.filter((p) => p.toLowerCase().includes(query.trim().toLowerCase())).slice(0, MAX_SUGGESTIONS)
+      : [];
 
   function runLookup(p: string) {
-    if (!p.trim()) return;
     setLoading(true);
     setError("");
-    const qs = new URLSearchParams({ path: p.trim(), days: "30" });
+    const qs = new URLSearchParams({ path: p });
     fetch(`/api/page-view-by-path?${qs.toString()}`)
       .then(async (res) => {
         if (!res.ok) {
@@ -1403,67 +1412,127 @@ function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
       .finally(() => setLoading(false));
   }
 
-  useEffect(() => {
-    if (hasRun.current || !path) return;
-    hasRun.current = true;
-    runLookup(path);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [path]);
+  // Fetch is triggered directly from selection (click a suggestion, or
+  // Enter) rather than from an effect watching selectedPath - avoids an
+  // effect-driven fetch and keeps "pick it and it loads immediately" a
+  // single, obvious code path.
+  function selectPath(p: string) {
+    setQuery(p);
+    setSelectedPath(p);
+    setSuggestionsOpen(false);
+    runLookup(p);
+  }
 
-  const total = result ? result.byDay.reduce((sum, d) => sum + d.count, 0) : 0;
-  const avg = result && result.byDay.length > 0 ? Math.round((total / result.byDay.length) * 10) / 10 : 0;
-  const maxCount = result ? Math.max(1, ...result.byDay.map((d) => d.count)) : 1;
+  function clearSelection() {
+    setQuery("");
+    setSelectedPath("");
+    setResult(null);
+    setError("");
+    setSuggestionsOpen(false);
+  }
+
+  const windowedByDay = result
+    ? windowFilter === "all"
+      ? result.byDay
+      : result.byDay.slice(-Number(windowFilter))
+    : [];
+  const total = windowedByDay.reduce((sum, d) => sum + d.count, 0);
+  const avg = windowedByDay.length > 0 ? Math.round((total / windowedByDay.length) * 10) / 10 : 0;
+  const maxCount = Math.max(1, ...windowedByDay.map((d) => d.count));
 
   return (
     <div style={styles.list}>
       <p style={styles.sectionNote}>
         Same page_views data as the Page views tab above (bot rows already
-        excluded). Pick a page to see its daily view count for the last 30
-        days, including days with zero views. The picker suggests the top 50
-        pages from the last 30 days, but any path can be typed in.
+        excluded). Search for a page below and pick it from the list to see
+        its daily view count, including days with zero views. Defaults to
+        the page&rsquo;s full history, starting from its first recorded page
+        view - the closest available proxy for &ldquo;since it was
+        published&rdquo;, since publish dates aren&rsquo;t tracked here.
       </p>
 
       <div style={styles.compareRow}>
-        <label style={styles.compareLabel}>
+        <label style={{ ...styles.compareLabel, position: "relative" }}>
           Page
           <input
-            list="page-trend-options"
-            value={path}
-            onChange={(e) => setPath(e.target.value)}
-            placeholder="/academy-pathway/..."
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSuggestionsOpen(true);
+              if (selectedPath && e.target.value !== selectedPath) {
+                setSelectedPath("");
+                setResult(null);
+              }
+            }}
+            onFocus={() => setSuggestionsOpen(true)}
+            onBlur={() => setSuggestionsOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (suggestions.length > 0) selectPath(suggestions[0]);
+                else if (query.trim()) selectPath(query.trim());
+              } else if (e.key === "Escape") {
+                setSuggestionsOpen(false);
+              }
+            }}
+            placeholder="Search e.g. veo, boots, academy..."
             style={styles.pathInput}
           />
-          <datalist id="page-trend-options">
-            {pathOptions.map((p) => (
-              <option key={p} value={p} />
-            ))}
-          </datalist>
+          {suggestionsOpen && suggestions.length > 0 && (
+            <div style={styles.suggestionList}>
+              {suggestions.map((p) => (
+                <div
+                  key={p}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => selectPath(p)}
+                  style={styles.suggestionItem}
+                >
+                  {p}
+                </div>
+              ))}
+            </div>
+          )}
         </label>
-        <button
-          type="button"
-          onClick={() => runLookup(path)}
-          disabled={loading || !path.trim()}
-          style={{ ...styles.toggleButton, ...styles.toggleButtonActive }}
-        >
-          {loading ? "Loading..." : "Show"}
-        </button>
+        {(query || selectedPath) && (
+          <button type="button" onClick={clearSelection} style={styles.toggleButton}>
+            Clear
+          </button>
+        )}
       </div>
 
+      {loading && <p style={styles.muted}>Loading...</p>}
       {error && <p style={styles.error}>{error}</p>}
+
+      {!selectedPath && !loading && (
+        <EmptyState text="Search for a page above and pick it from the list." />
+      )}
 
       {result && (
         <>
+          <div style={styles.metricToggle}>
+            {(["7", "30", "all"] as TrendWindow[]).map((w) => (
+              <button
+                key={w}
+                type="button"
+                onClick={() => setWindowFilter(w)}
+                style={{ ...styles.toggleButton, ...(windowFilter === w ? styles.toggleButtonActive : {}) }}
+              >
+                {w === "all" ? "Full history" : `${w} days`}
+              </button>
+            ))}
+          </div>
+
           <div style={styles.cardStats}>
             <span>{result.path}</span>
-            <span>Total (30 days): {total}</span>
+            <span>Total: {total}</span>
             <span>Average per day: {avg}</span>
           </div>
 
-          {result.byDay.every((d) => d.count === 0) && (
-            <EmptyState text="No views recorded for this page in the last 30 days." />
+          {windowedByDay.every((d) => d.count === 0) && (
+            <EmptyState text="No views recorded for this page in this window." />
           )}
 
-          {result.byDay.map((d) => (
+          {windowedByDay.map((d) => (
             <div key={d.date} style={styles.card}>
               <div style={styles.cardTop}>
                 <span style={styles.cardQuery}>{d.date}</span>
@@ -2001,6 +2070,26 @@ const styles: Record<string, CSSProperties> = {
     color: "#f0e6d2",
     fontSize: 13,
     minWidth: 320,
+  },
+  suggestionList: {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    marginTop: 2,
+    background: "#241b14",
+    border: "1px solid #3a2c1d",
+    borderRadius: 8,
+    maxHeight: 260,
+    overflowY: "auto",
+  },
+  suggestionItem: {
+    padding: "8px 10px",
+    fontSize: 13,
+    color: "#f0e6d2",
+    cursor: "pointer",
+    borderBottom: "1px solid #3a2c1d",
   },
   barTrack: {
     background: "#3a2c1d",
