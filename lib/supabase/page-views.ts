@@ -305,8 +305,10 @@ export interface PageViewDailyCount {
 // (unlike PageViewDay.topPaths, which only lists a path for a day it
 // actually received a view) - for the "one page over time" tab. With `days`
 // omitted, covers the page's full history: from its first recorded page
-// view (the closest available proxy for "day it was published" - the table
-// doesn't track actual publish dates) through today. Pass `days` to instead
+// view through today. NOT the same as the page's actual publish date - the
+// page_views table only exists from 2026-08-19 (when view tracking was
+// added), so any page published before then will show a truncated history
+// starting there instead of its real publish date. Pass `days` to instead
 // start from N days ago. Same bot exclusions as getPageViewStats.
 export async function getPageViewsForPath(path: string, days?: number): Promise<PageViewDailyCount[]> {
   const supabase = adminClient();

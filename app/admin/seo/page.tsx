@@ -37,11 +37,11 @@ type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "pageviews", label: "Page views" },
+  { id: "rank", label: "Rank tracker" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
   { id: "coachApp", label: "Coach App" },
   { id: "compare", label: "Compare days" },
-  { id: "rank", label: "Rank tracker" },
   { id: "searches", label: "Top searches" },
   { id: "silence", label: "Gone quiet" },
   { id: "noImpressions", label: "No impressions" },
@@ -844,13 +844,42 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
   const [metric, setMetric] = useState<RankSortMetric>("impressions");
   const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
   const [groupBy, setGroupBy] = useState<RankGroupBy>("query");
+  const [pageQuery, setPageQuery] = useState("");
+  const [selectedPage, setSelectedPage] = useState("");
+  const [pageSuggestionsOpen, setPageSuggestionsOpen] = useState(false);
 
   if (!rows.length) {
     return <EmptyState text="Not enough recent search volume yet to track keyword movement." />;
   }
 
+  // Suggestions come from pages that actually appear in the rank tracker
+  // (not the page_views path list Page trend uses) so every suggestion is
+  // guaranteed to have ranking data.
+  const pageOptions = Array.from(new Set(rows.map((r) => r.page))).sort((a, b) =>
+    shortPage(a).localeCompare(shortPage(b))
+  );
+  const pageSuggestions =
+    pageQuery.trim().length > 0
+      ? pageOptions
+          .filter((p) => shortPage(p).toLowerCase().includes(pageQuery.trim().toLowerCase()))
+          .slice(0, MAX_SUGGESTIONS)
+      : [];
+
+  function selectPage(p: string) {
+    setPageQuery(shortPage(p));
+    setSelectedPage(p);
+    setPageSuggestionsOpen(false);
+  }
+
+  function clearPageFilter() {
+    setPageQuery("");
+    setSelectedPage("");
+    setPageSuggestionsOpen(false);
+  }
+
   const filtered = rows.filter((r) => matchesDirectionFilter(r.direction, directionFilter));
-  const visible = [...filtered].sort((a, b) => {
+  const pageFiltered = selectedPage ? filtered.filter((r) => r.page === selectedPage) : filtered;
+  const visible = [...pageFiltered].sort((a, b) => {
     if (metric === "position") {
       // Lower position is better; queries with no current position (lost) sort last.
       return (a.recentPosition ?? Infinity) - (b.recentPosition ?? Infinity);
@@ -862,94 +891,154 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
 
   return (
     <div style={styles.list}>
-      <div style={styles.metricToggle}>
-        <button
-          onClick={() => setGroupBy("query")}
-          style={{ ...styles.toggleButton, ...(groupBy === "query" ? styles.toggleButtonActive : {}) }}
-        >
-          By query
-        </button>
-        <button
-          onClick={() => setGroupBy("page")}
-          style={{ ...styles.toggleButton, ...(groupBy === "page" ? styles.toggleButtonActive : {}) }}
-        >
-          By page
-        </button>
+      <div style={styles.compareRow}>
+        <label style={{ ...styles.compareLabel, position: "relative" }}>
+          Search for a page to see all its terms
+          <input
+            value={pageQuery}
+            onChange={(e) => {
+              setPageQuery(e.target.value);
+              setPageSuggestionsOpen(true);
+              if (selectedPage && e.target.value !== shortPage(selectedPage)) {
+                setSelectedPage("");
+              }
+            }}
+            onFocus={() => setPageSuggestionsOpen(true)}
+            onBlur={() => setPageSuggestionsOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                if (pageSuggestions.length > 0) selectPage(pageSuggestions[0]);
+              } else if (e.key === "Escape") {
+                setPageSuggestionsOpen(false);
+              }
+            }}
+            placeholder="Search e.g. veo, boots, academy..."
+            style={styles.pathInput}
+          />
+          {pageSuggestionsOpen && pageSuggestions.length > 0 && (
+            <div style={styles.suggestionList}>
+              {pageSuggestions.map((p) => (
+                <div
+                  key={p}
+                  onMouseDown={(e) => e.preventDefault()}
+                  onClick={() => selectPage(p)}
+                  style={styles.suggestionItem}
+                >
+                  {shortPage(p)}
+                </div>
+              ))}
+            </div>
+          )}
+        </label>
+        {(pageQuery || selectedPage) && (
+          <button type="button" onClick={clearPageFilter} style={styles.toggleButton}>
+            Clear
+          </button>
+        )}
       </div>
-      {groupBy === "query" && (
-        <div style={styles.metricToggle}>
-          <button
-            onClick={() => setMetric("position")}
-            style={{ ...styles.toggleButton, ...(metric === "position" ? styles.toggleButtonActive : {}) }}
-          >
-            Sort: position
-          </button>
-          <button
-            onClick={() => setMetric("impressions")}
-            style={{ ...styles.toggleButton, ...(metric === "impressions" ? styles.toggleButtonActive : {}) }}
-          >
-            Sort: impressions
-          </button>
-          <button
-            onClick={() => setMetric("clicks")}
-            style={{ ...styles.toggleButton, ...(metric === "clicks" ? styles.toggleButtonActive : {}) }}
-          >
-            Sort: clicks
-          </button>
-        </div>
-      )}
-      <div style={styles.metricToggle}>
-        <button
-          onClick={() => setDirectionFilter("all")}
-          style={{ ...styles.toggleButton, ...(directionFilter === "all" ? styles.toggleButtonActive : {}) }}
-        >
-          All
-        </button>
-        <button
-          onClick={() => setDirectionFilter("improved")}
-          style={{ ...styles.toggleButton, ...(directionFilter === "improved" ? styles.toggleButtonActive : {}) }}
-        >
-          Improved
-        </button>
-        <button
-          onClick={() => setDirectionFilter("lost")}
-          style={{ ...styles.toggleButton, ...(directionFilter === "lost" ? styles.toggleButtonActive : {}) }}
-        >
-          Lost
-        </button>
-      </div>
-      <p style={styles.sectionNote}>
-        Position today is a 3-day average ending today (GSC data lags a few
-        days), compared against the same 3 days one week earlier - a single
-        day is too noisy to trust for most queries. New/improved queries are
-        shown in green, lost ones in red.
-      </p>
-      {groupBy === "page" && <RankByPageList groups={groupRankByPage(filtered)} />}
-      {groupBy === "query" && (
+
+      {selectedPage ? (
         <>
-          {!visible.length && <EmptyState text="Nothing matches this filter." />}
-          {visible.map((r, i) => {
-            const recentVal = metric === "impressions" ? r.recentImpressions : r.recentClicks;
-            const priorVal = metric === "impressions" ? r.priorImpressions : r.priorClicks;
-            const unit = metric === "impressions" ? "impr" : "clicks";
-            return (
-              <div key={i} style={styles.card}>
-                <div style={styles.cardTop}>
-                  <span style={{ ...styles.cardQuery, ...directionStyle(r.direction) }}>{r.query}</span>
-                  <span style={styles.cardBadge}>{r.recentPosition !== null ? `#${r.recentPosition}` : "-"}</span>
-                </div>
-                <p style={styles.cardPage}>{shortPage(r.page)}</p>
-                <div style={styles.cardStats}>
-                  <span style={directionStyle(r.direction)}>{directionLabel(r)}</span>
-                  {metric !== "position" && (
-                    <span>
-                      {recentVal} {unit} (was {priorVal})
-                    </span>
-                  )}
-                </div>
-              </div>
-            );
-          })}
+          <p style={styles.sectionNote}>
+            Every tracked query for this page, sorted by current position.
+          </p>
+          <RankByPageList groups={groupRankByPage(pageFiltered)} />
+        </>
+      ) : (
+        <>
+          <div style={styles.metricToggle}>
+            <button
+              onClick={() => setGroupBy("query")}
+              style={{ ...styles.toggleButton, ...(groupBy === "query" ? styles.toggleButtonActive : {}) }}
+            >
+              By query
+            </button>
+            <button
+              onClick={() => setGroupBy("page")}
+              style={{ ...styles.toggleButton, ...(groupBy === "page" ? styles.toggleButtonActive : {}) }}
+            >
+              By page
+            </button>
+          </div>
+          {groupBy === "query" && (
+            <div style={styles.metricToggle}>
+              <button
+                onClick={() => setMetric("position")}
+                style={{ ...styles.toggleButton, ...(metric === "position" ? styles.toggleButtonActive : {}) }}
+              >
+                Sort: position
+              </button>
+              <button
+                onClick={() => setMetric("impressions")}
+                style={{ ...styles.toggleButton, ...(metric === "impressions" ? styles.toggleButtonActive : {}) }}
+              >
+                Sort: impressions
+              </button>
+              <button
+                onClick={() => setMetric("clicks")}
+                style={{ ...styles.toggleButton, ...(metric === "clicks" ? styles.toggleButtonActive : {}) }}
+              >
+                Sort: clicks
+              </button>
+            </div>
+          )}
+          <div style={styles.metricToggle}>
+            <button
+              onClick={() => setDirectionFilter("all")}
+              style={{ ...styles.toggleButton, ...(directionFilter === "all" ? styles.toggleButtonActive : {}) }}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setDirectionFilter("improved")}
+              style={{ ...styles.toggleButton, ...(directionFilter === "improved" ? styles.toggleButtonActive : {}) }}
+            >
+              Improved
+            </button>
+            <button
+              onClick={() => setDirectionFilter("lost")}
+              style={{ ...styles.toggleButton, ...(directionFilter === "lost" ? styles.toggleButtonActive : {}) }}
+            >
+              Lost
+            </button>
+          </div>
+          <p style={styles.sectionNote}>
+            Position today is a 3-day average ending today (GSC data lags a
+            few days), compared against the same 3 days one week earlier - a
+            single day is too noisy to trust for most queries. New/improved
+            queries are shown in green, lost ones in red.
+          </p>
+          {groupBy === "page" && <RankByPageList groups={groupRankByPage(pageFiltered)} />}
+          {groupBy === "query" && (
+            <>
+              {!visible.length && <EmptyState text="Nothing matches this filter." />}
+              {visible.map((r, i) => {
+                const recentVal = metric === "impressions" ? r.recentImpressions : r.recentClicks;
+                const priorVal = metric === "impressions" ? r.priorImpressions : r.priorClicks;
+                const unit = metric === "impressions" ? "impr" : "clicks";
+                return (
+                  <div key={i} style={styles.card}>
+                    <div style={styles.cardTop}>
+                      <span style={{ ...styles.cardQuery, ...directionStyle(r.direction) }}>{r.query}</span>
+                      <span style={styles.cardBadge}>
+                        {r.recentPosition !== null ? `#${r.recentPosition}` : "-"}
+                      </span>
+                    </div>
+                    <p style={styles.cardPage}>{shortPage(r.page)}</p>
+                    <div style={styles.cardStats}>
+                      <span style={directionStyle(r.direction)}>{directionLabel(r)}</span>
+                      {metric !== "position" && (
+                        <span>
+                          {recentVal} {unit} (was {priorVal})
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </>
       )}
     </div>
@@ -1447,8 +1536,9 @@ function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
         excluded). Search for a page below and pick it from the list to see
         its daily view count, including days with zero views. Defaults to
         the page&rsquo;s full history, starting from its first recorded page
-        view - the closest available proxy for &ldquo;since it was
-        published&rdquo;, since publish dates aren&rsquo;t tracked here.
+        view - not its actual publish date, since view tracking only began
+        2026-08-19. A page published before then will show a gap: its real
+        history runs further back than this can show.
       </p>
 
       <div style={styles.compareRow}>
