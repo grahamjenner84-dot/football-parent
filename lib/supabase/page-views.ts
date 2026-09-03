@@ -190,6 +190,180 @@ function matchesPathPrefixes(path: string, prefixes: string[]): boolean {
   return prefixes.some((prefix) => path === prefix || path.startsWith(`${prefix}/`));
 }
 
+export interface PageViewCompareRow {
+  path: string;
+  countA: number;
+  countB: number;
+  delta: number;
+}
+
+export interface PageViewDayComparison {
+  dateA: string;
+  dateB: string;
+  totalA: number;
+  totalB: number;
+  totalDelta: number;
+  // Every path seen on either day - unlike PageViewDay.topPaths (capped to
+  // 20 for the day-picker view above), so gains/losses sorting doesn't
+  // silently miss a page that fell outside a top-20 cutoff on one day.
+  pages: PageViewCompareRow[];
+}
+
+// Compares page views broken down by path between two single UTC calendar
+// days (same "day" bucketing as getPageViewStats: created_at.slice(0, 10)).
+// Applies the same bot exclusions as getPageViewStats, scoped to just the
+// rows in [min(dateA, dateB), max(dateA, dateB)] so the duplicate-UA check
+// isn't diluted by unrelated days.
+export async function comparePageViewsByDay(dateA: string, dateB: string): Promise<PageViewDayComparison> {
+  const supabase = adminClient();
+  const earliest = dateA < dateB ? dateA : dateB;
+  const latest = dateA < dateB ? dateB : dateA;
+  const sinceISO = `${earliest}T00:00:00.000Z`;
+  const untilISO = new Date(new Date(`${latest}T00:00:00.000Z`).getTime() + 24 * 60 * 60 * 1000).toISOString();
+
+  const rows: { path: string; created_at: string; user_agent: string | null }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("path, created_at, user_agent")
+      .gte("created_at", sinceISO)
+      .lt("created_at", untilISO)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      throw new Error("Failed to read page_views: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  const dayPathUaCounts = new Map<string, number>();
+  for (const row of rows) {
+    if (!row.user_agent) continue;
+    const day = row.created_at.slice(0, 10);
+    const key = `${day}|${row.path}|${row.user_agent}`;
+    dayPathUaCounts.set(key, (dayPathUaCounts.get(key) ?? 0) + 1);
+  }
+
+  function isBotRow(row: (typeof rows)[number], day: string): boolean {
+    if (isKnownBotIncident(row.path, row.created_at)) return true;
+    if (row.user_agent) {
+      if (matchesKnownBotPattern(row.user_agent)) return true;
+      const key = `${day}|${row.path}|${row.user_agent}`;
+      if ((dayPathUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
+    }
+    return false;
+  }
+
+  const countsA = new Map<string, number>();
+  const countsB = new Map<string, number>();
+  let totalA = 0;
+  let totalB = 0;
+
+  for (const row of rows) {
+    const day = row.created_at.slice(0, 10);
+    if (day !== dateA && day !== dateB) continue;
+    if (isBotRow(row, day)) continue;
+
+    if (day === dateA) {
+      countsA.set(row.path, (countsA.get(row.path) ?? 0) + 1);
+      totalA += 1;
+    }
+    if (day === dateB) {
+      countsB.set(row.path, (countsB.get(row.path) ?? 0) + 1);
+      totalB += 1;
+    }
+  }
+
+  const allPaths = new Set<string>([...countsA.keys(), ...countsB.keys()]);
+  const pages: PageViewCompareRow[] = Array.from(allPaths).map((path) => {
+    const countA = countsA.get(path) ?? 0;
+    const countB = countsB.get(path) ?? 0;
+    return { path, countA, countB, delta: countA - countB };
+  });
+
+  return {
+    dateA,
+    dateB,
+    totalA,
+    totalB,
+    totalDelta: totalA - totalB,
+    pages,
+  };
+}
+
+export interface PageViewDailyCount {
+  date: string;
+  count: number;
+}
+
+// Daily view counts for one exact path over the last `days` days, with
+// zero-count days included (unlike PageViewDay.topPaths, which only lists a
+// path for a day it actually received a view) - for the "one page over
+// time" tab. Same bot exclusions as getPageViewStats.
+export async function getPageViewsForPath(path: string, days: number = 30): Promise<PageViewDailyCount[]> {
+  const supabase = adminClient();
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+  const rows: { created_at: string; user_agent: string | null }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("created_at, user_agent")
+      .eq("path", path)
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      throw new Error("Failed to read page_views: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  const dayUaCounts = new Map<string, number>();
+  for (const row of rows) {
+    if (!row.user_agent) continue;
+    const day = row.created_at.slice(0, 10);
+    const key = `${day}|${row.user_agent}`;
+    dayUaCounts.set(key, (dayUaCounts.get(key) ?? 0) + 1);
+  }
+
+  function isBotRow(row: (typeof rows)[number], day: string): boolean {
+    if (isKnownBotIncident(path, row.created_at)) return true;
+    if (row.user_agent) {
+      if (matchesKnownBotPattern(row.user_agent)) return true;
+      const key = `${day}|${row.user_agent}`;
+      if ((dayUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
+    }
+    return false;
+  }
+
+  const counts = new Map<string, number>();
+  for (const row of rows) {
+    const day = row.created_at.slice(0, 10);
+    if (isBotRow(row, day)) continue;
+    counts.set(day, (counts.get(day) ?? 0) + 1);
+  }
+
+  const result: PageViewDailyCount[] = [];
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date();
+    d.setUTCDate(d.getUTCDate() - i);
+    const date = d.toISOString().slice(0, 10);
+    result.push({ date, count: counts.get(date) ?? 0 });
+  }
+  return result;
+}
+
 export async function getPageViewStats(
   days: number = 30,
   options: GetPageViewStatsOptions = {}

@@ -16,7 +16,7 @@ import type {
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
-import type { PageViewStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
+import type { PageViewStats, PageViewDayComparison, PageViewDailyCount } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 
 type Tab =
   | "silence"
@@ -30,11 +30,15 @@ type Tab =
   | "cookies"
   | "compare"
   | "pageviews"
+  | "pageviewsCompare"
+  | "pageviewsTrend"
   | "coachApp";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "pageviews", label: "Page views" },
+  { id: "pageviewsCompare", label: "Compare page views" },
+  { id: "pageviewsTrend", label: "Page trend" },
   { id: "coachApp", label: "Coach App" },
   { id: "compare", label: "Compare days" },
   { id: "rank", label: "Rank tracker" },
@@ -210,6 +214,8 @@ export default function SeoAdminPage() {
               t.id !== "cookies" &&
               t.id !== "compare" &&
               t.id !== "pageviews" &&
+              t.id !== "pageviewsCompare" &&
+              t.id !== "pageviewsTrend" &&
               t.id !== "coachApp" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
           </button>
@@ -241,6 +247,10 @@ export default function SeoAdminPage() {
             {pageViewError && <p style={styles.error}>{pageViewError}</p>}
             {pageViewStats && <PageViewsReport stats={pageViewStats} />}
           </>
+        ) : tab === "pageviewsCompare" ? (
+          <ComparePageViews />
+        ) : tab === "pageviewsTrend" ? (
+          <PageViewTrend pathOptions={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
         ) : tab === "coachApp" ? (
           <>
             <p style={styles.sectionNote}>
@@ -313,6 +323,10 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "compare":
       return 0;
     case "pageviews":
+      return 0;
+    case "pageviewsCompare":
+      return 0;
+    case "pageviewsTrend":
       return 0;
     case "coachApp":
       return 0;
@@ -1213,6 +1227,259 @@ function deltaStyle(delta: number): CSSProperties {
   return { color: "#9c8a72" };
 }
 
+type PageViewCompareDirection = "gains" | "losses";
+
+// Defaults to yesterday vs the day before - unlike the GSC CompareDays tab
+// below, page_views has no processing lag to work around, so "yesterday" is
+// safe as a default here.
+function ComparePageViews() {
+  const [dateA, setDateA] = useState(daysAgo(1));
+  const [dateB, setDateB] = useState(daysAgo(2));
+  const [result, setResult] = useState<PageViewDayComparison | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [direction, setDirection] = useState<PageViewCompareDirection>("losses");
+  const hasRun = useRef(false);
+
+  function runCompare(a: string, b: string) {
+    setLoading(true);
+    setError("");
+    const qs = new URLSearchParams({ dateA: a, dateB: b });
+    fetch(`/api/page-view-compare?${qs.toString()}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load comparison");
+        }
+        return res.json();
+      })
+      .then((data: PageViewDayComparison) => setResult(data))
+      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load comparison"))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
+    runCompare(dateA, dateB);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const sortedPages = result
+    ? [...result.pages]
+        .filter((p) => p.delta !== 0)
+        .sort((p1, p2) => (direction === "gains" ? p2.delta - p1.delta : p1.delta - p2.delta))
+    : [];
+
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        Same page_views data as the Page views tab above (bot rows already
+        excluded), broken down by page for two specific days so you can see
+        exactly which pages gained or lost views day over day. Defaults to
+        yesterday vs the day before - pick any two dates and hit Compare.
+      </p>
+
+      <div style={styles.compareRow}>
+        <label style={styles.compareLabel}>
+          Day A
+          <input
+            type="date"
+            value={dateA}
+            onChange={(e) => setDateA(e.target.value)}
+            style={styles.dateInput}
+          />
+        </label>
+        <label style={styles.compareLabel}>
+          Day B
+          <input
+            type="date"
+            value={dateB}
+            onChange={(e) => setDateB(e.target.value)}
+            style={styles.dateInput}
+          />
+        </label>
+        <button
+          type="button"
+          onClick={() => runCompare(dateA, dateB)}
+          disabled={loading}
+          style={{ ...styles.toggleButton, ...styles.toggleButtonActive }}
+        >
+          {loading ? "Comparing..." : "Compare"}
+        </button>
+      </div>
+
+      {error && <p style={styles.error}>{error}</p>}
+
+      {result && (
+        <>
+          <div style={styles.cardStats}>
+            <span>
+              {result.dateA}: {result.totalA} views
+            </span>
+            <span>
+              {result.dateB}: {result.totalB} views
+            </span>
+            <span style={deltaStyle(result.totalDelta)}>
+              {result.totalDelta >= 0 ? "+" : ""}
+              {result.totalDelta}
+            </span>
+          </div>
+
+          <div style={styles.metricToggle}>
+            {(["gains", "losses"] as PageViewCompareDirection[]).map((d) => (
+              <button
+                key={d}
+                type="button"
+                onClick={() => setDirection(d)}
+                style={{ ...styles.toggleButton, ...(direction === d ? styles.toggleButtonActive : {}) }}
+              >
+                {d === "gains" ? "Gains" : "Losses"}
+              </button>
+            ))}
+          </div>
+
+          {sortedPages.length === 0 ? (
+            <EmptyState text="No page-level differences between these two days." />
+          ) : (
+            sortedPages.map((p) => (
+              <div key={p.path} style={styles.card}>
+                <div style={styles.cardTop}>
+                  <span style={styles.cardQuery}>{p.path}</span>
+                  <span style={{ ...styles.cardBadge, ...deltaStyle(p.delta) }}>
+                    {p.delta >= 0 ? "+" : ""}
+                    {p.delta}
+                  </span>
+                </div>
+                <div style={styles.cardStats}>
+                  <span>
+                    {result.dateA}: {p.countA}
+                  </span>
+                  <span>
+                    {result.dateB}: {p.countB}
+                  </span>
+                </div>
+              </div>
+            ))
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+interface PageViewByPathResponse {
+  path: string;
+  days: number;
+  byDay: PageViewDailyCount[];
+}
+
+// pathOptions comes from the parent's already-loaded pageViewStats.topPaths
+// (top 50 over the last 30 days) so this doesn't need its own list-of-paths
+// fetch - it's a <datalist> suggestion list, not a hard restriction, since
+// the free-text input still accepts any path.
+function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
+  const [path, setPath] = useState(pathOptions[0] ?? "");
+  const [result, setResult] = useState<PageViewByPathResponse | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const hasRun = useRef(false);
+
+  function runLookup(p: string) {
+    if (!p.trim()) return;
+    setLoading(true);
+    setError("");
+    const qs = new URLSearchParams({ path: p.trim(), days: "30" });
+    fetch(`/api/page-view-by-path?${qs.toString()}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load page trend");
+        }
+        return res.json();
+      })
+      .then((data: PageViewByPathResponse) => setResult(data))
+      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load page trend"))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => {
+    if (hasRun.current || !path) return;
+    hasRun.current = true;
+    runLookup(path);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [path]);
+
+  const total = result ? result.byDay.reduce((sum, d) => sum + d.count, 0) : 0;
+  const avg = result && result.byDay.length > 0 ? Math.round((total / result.byDay.length) * 10) / 10 : 0;
+  const maxCount = result ? Math.max(1, ...result.byDay.map((d) => d.count)) : 1;
+
+  return (
+    <div style={styles.list}>
+      <p style={styles.sectionNote}>
+        Same page_views data as the Page views tab above (bot rows already
+        excluded). Pick a page to see its daily view count for the last 30
+        days, including days with zero views. The picker suggests the top 50
+        pages from the last 30 days, but any path can be typed in.
+      </p>
+
+      <div style={styles.compareRow}>
+        <label style={styles.compareLabel}>
+          Page
+          <input
+            list="page-trend-options"
+            value={path}
+            onChange={(e) => setPath(e.target.value)}
+            placeholder="/academy-pathway/..."
+            style={styles.pathInput}
+          />
+          <datalist id="page-trend-options">
+            {pathOptions.map((p) => (
+              <option key={p} value={p} />
+            ))}
+          </datalist>
+        </label>
+        <button
+          type="button"
+          onClick={() => runLookup(path)}
+          disabled={loading || !path.trim()}
+          style={{ ...styles.toggleButton, ...styles.toggleButtonActive }}
+        >
+          {loading ? "Loading..." : "Show"}
+        </button>
+      </div>
+
+      {error && <p style={styles.error}>{error}</p>}
+
+      {result && (
+        <>
+          <div style={styles.cardStats}>
+            <span>{result.path}</span>
+            <span>Total (30 days): {total}</span>
+            <span>Average per day: {avg}</span>
+          </div>
+
+          {result.byDay.every((d) => d.count === 0) && (
+            <EmptyState text="No views recorded for this page in the last 30 days." />
+          )}
+
+          {result.byDay.map((d) => (
+            <div key={d.date} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{d.date}</span>
+                <span style={styles.cardBadge}>{d.count}</span>
+              </div>
+              <div style={styles.barTrack}>
+                <div style={{ ...styles.barFill, width: `${(d.count / maxCount) * 100}%` }} />
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+    </div>
+  );
+}
+
 type CompareAxis = "pages" | "terms";
 type CompareDirection = "gains" | "losses";
 
@@ -1725,5 +1992,26 @@ const styles: Record<string, CSSProperties> = {
     padding: "6px 8px",
     color: "#f0e6d2",
     fontSize: 13,
+  },
+  pathInput: {
+    background: "#241b14",
+    border: "1px solid #3a2c1d",
+    borderRadius: 8,
+    padding: "6px 8px",
+    color: "#f0e6d2",
+    fontSize: 13,
+    minWidth: 320,
+  },
+  barTrack: {
+    background: "#3a2c1d",
+    borderRadius: 4,
+    height: 6,
+    marginTop: 8,
+    overflow: "hidden",
+  },
+  barFill: {
+    background: "#e8b04b",
+    height: "100%",
+    borderRadius: 4,
   },
 };
