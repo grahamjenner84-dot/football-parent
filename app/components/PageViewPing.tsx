@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
+import { isPageViewOptedOut } from "@/lib/page-view-optout";
 
 // True total page-view count, deliberately decoupled from CookieConsent.tsx
 // entirely - fires on every route regardless of consent state, so it
@@ -18,6 +19,12 @@ export default function PageViewPing() {
     // Skip /admin/* - that's Graham checking the dashboard, not a real
     // visitor, and would otherwise inflate the count it's meant to report.
     if (!pathname || pathname.startsWith("/admin")) return;
+
+    // Same reasoning as the /admin skip above, extended to the public site:
+    // Graham's own browsing isn't visitor traffic, and at this volume it
+    // swings the Coach App banner A/B. Toggled from the SEO admin page - see
+    // lib/page-view-optout.ts.
+    if (isPageViewOptedOut()) return;
 
     // document.referrer is only the immediately preceding page, not the
     // original session entry point - so on-site navigation (page 2, 3...
