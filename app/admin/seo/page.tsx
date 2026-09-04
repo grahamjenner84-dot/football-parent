@@ -16,8 +16,10 @@ import type {
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
-import type { PageViewStats, PageViewDayComparison, PageViewDailyCount } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
+import type { PageViewStats, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import { routes as siteRoutes } from "@/app/sitemap"; // plain string array, no server-only deps - safe from a client component
+
+type CoachAppViewStats = PageViewStats & { bannerVariants?: BannerVariantStats };
 
 type Tab =
   | "silence"
@@ -113,7 +115,7 @@ export default function SeoAdminPage() {
   const [consentError, setConsentError] = useState("");
   const [pageViewStats, setPageViewStats] = useState<PageViewStats | null>(null);
   const [pageViewError, setPageViewError] = useState("");
-  const [coachAppViewStats, setCoachAppViewStats] = useState<PageViewStats | null>(null);
+  const [coachAppViewStats, setCoachAppViewStats] = useState<CoachAppViewStats | null>(null);
   const [coachAppViewError, setCoachAppViewError] = useState("");
   const isFirstFetch = useRef(true);
 
@@ -174,7 +176,7 @@ export default function SeoAdminPage() {
         }
         return res.json();
       })
-      .then((data: PageViewStats) => {
+      .then((data: CoachAppViewStats) => {
         setCoachAppViewStats(data);
         setCoachAppViewError("");
       })
@@ -292,16 +294,19 @@ export default function SeoAdminPage() {
           <>
             <p style={styles.sectionNote}>
               Scoped to /football-parent-coach-app (the marketing landing
-              page) and /coach-app (the app itself) - both routes on this
-              same footballparent.co.uk Next app, same page_views table as
-              the Page views tab above, just filtered. Note: /coach-app has
-              no route or redirect wired up yet (next.config.ts), so this
-              will read near-zero until that&rsquo;s live.
+              page) and /coach-app (the app itself), same page_views table as
+              the Page views tab above, just filtered. /coach-app is served
+              by the rewrite in vercel.json to the separate Coach App
+              deployment, which pings the same /api/page-view endpoint, so
+              both sides land in one table.
             </p>
             {!coachAppViewStats && !coachAppViewError && (
               <p style={styles.muted}>Loading Coach App view report...</p>
             )}
             {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
+            {coachAppViewStats?.bannerVariants && (
+              <BannerVariantsReport stats={coachAppViewStats.bannerVariants} />
+            )}
             {coachAppViewStats && <PageViewsReport stats={coachAppViewStats} />}
           </>
         ) : (
@@ -1208,6 +1213,99 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
 // visited yourself sitting one row below the cut looked like the report had
 // lost it, which is why the rest is now expandable rather than gone.
 const TOP_PATHS_PAGE_SIZE = 20;
+
+function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
+  const byStyle = ["dark", "light"].map((style) => {
+    const rows = stats.rows.filter((r) => r.style === style);
+    const clicks = rows.reduce((sum, r) => sum + r.clicks, 0);
+    const impressions = rows.reduce((sum, r) => sum + r.impressions, 0);
+    return {
+      style,
+      clicks,
+      impressions,
+      ctr: impressions > 0 ? clicks / impressions : 0,
+    };
+  });
+
+  const [dark, light] = byStyle;
+  const leader =
+    dark.ctr === light.ctr ? null : dark.ctr > light.ctr ? dark : light;
+  const lift =
+    leader && Math.min(dark.ctr, light.ctr) > 0
+      ? Math.max(dark.ctr, light.ctr) / Math.min(dark.ctr, light.ctr)
+      : null;
+
+  return (
+    <div style={styles.list}>
+      <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
+        Banner creative test (last {stats.days} days)
+      </h3>
+
+      <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+        Articles are split between the two Coach App banner creatives by a
+        hash of their slug, so both run at the same time. Clicks are landings
+        on /football-parent-coach-app carrying that creative&rsquo;s ?b=
+        param; impressions are views of the pages serving it. Compare the
+        CTR column, not the click column: each arm is shown on a different
+        set of articles, so raw clicks mostly reflect which arm drew the
+        busier pages.
+      </p>
+
+      {!stats.enoughData && (
+        <p style={styles.sectionNote}>
+          Not enough data yet to call it. Both arms need at least a few
+          hundred impressions before a CTR gap means anything.
+        </p>
+      )}
+
+      {stats.enoughData && leader && (
+        <p style={styles.sectionNote}>
+          Leading: the {leader.style} creative, at{" "}
+          {(leader.ctr * 100).toFixed(2)}% CTR
+          {lift ? ` (${lift.toFixed(2)}x the other)` : ""}.
+        </p>
+      )}
+
+      {byStyle.map((row) => (
+        <div
+          key={row.style}
+          style={{
+            ...styles.card,
+            borderColor: leader?.style === row.style ? "#e8b04b" : "#3a2c1d",
+          }}
+        >
+          <div style={{ fontWeight: 600, fontSize: 13 }}>
+            {row.style} creative, all placements
+          </div>
+          <div style={styles.cardStats}>
+            <span>Impressions: {row.impressions}</span>
+            <span>Clicks: {row.clicks}</span>
+            <span>CTR: {(row.ctr * 100).toFixed(2)}%</span>
+          </div>
+        </div>
+      ))}
+
+      <h4 style={{ fontSize: 12, fontWeight: 600, color: "#9c8a72", margin: "8px 0 0" }}>
+        Split by audience and placement
+      </h4>
+
+      {stats.rows.length === 0 && (
+        <p style={styles.muted}>No banner impressions or clicks recorded yet.</p>
+      )}
+
+      {stats.rows.map((row) => (
+        <div key={row.variant} style={styles.card}>
+          <div style={{ fontWeight: 600, fontSize: 13 }}>{row.variant}</div>
+          <div style={styles.cardStats}>
+            <span>Impressions: {row.impressions}</span>
+            <span>Clicks: {row.clicks}</span>
+            <span>CTR: {(row.ctr * 100).toFixed(2)}%</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function PageViewsReport({ stats }: { stats: PageViewStats }) {
   const daysCovered = stats.byDay.length;

@@ -10,6 +10,7 @@ const MAX_HOST_LENGTH = 255;
 const MAX_UA_LENGTH = 500;
 const MAX_UTM_LENGTH = 255;
 const MAX_CLICK_ID_LENGTH = 255;
+const MAX_BANNER_VARIANT_LENGTH = 64;
 
 function cleanString(value: unknown, maxLength: number): string | null {
   return typeof value === "string" && value.trim() ? value.trim().slice(0, maxLength) : null;
@@ -46,6 +47,7 @@ export async function POST(req: Request) {
         utmCampaign: cleanString(body.utmCampaign, MAX_UTM_LENGTH),
         gclid: cleanString(body.gclid, MAX_CLICK_ID_LENGTH),
         fbclid: cleanString(body.fbclid, MAX_CLICK_ID_LENGTH),
+        bannerVariant: cleanString(body.bannerVariant, MAX_BANNER_VARIANT_LENGTH),
       });
     }
 

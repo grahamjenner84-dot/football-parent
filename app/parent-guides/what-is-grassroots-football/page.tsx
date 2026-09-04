@@ -27,7 +27,7 @@ export default async function Page() {
       path="/parent-guides/what-is-grassroots-football"
       datePublished={article.frontmatter.date}
     >
-      <MDXContent content={article.content} />
+      <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
   );
 }

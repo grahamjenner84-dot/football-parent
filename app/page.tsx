@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { generateSEO } from "@/lib/seo";
+import CoachAppBanner from "@/app/components/CoachAppBanner";
 
 export const metadata = generateSEO({
   title: "Football Parent | UK Academy Pathways & Youth Football Advice",
@@ -100,6 +101,11 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-12 md:pb-16">
+        <CoachAppBanner audience="parent" placement="home" />
+      </section>
+
       <section className="border-t border-slate-200 bg-white">
   <div className="mx-auto max-w-4xl px-5 py-12 md:py-16">
     <h2 className="text-3xl font-bold text-slate-950 mb-6">

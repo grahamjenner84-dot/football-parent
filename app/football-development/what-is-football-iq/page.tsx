@@ -27,7 +27,7 @@ export default async function Page() {
       path="/football-development/what-is-football-iq"
       datePublished={article.frontmatter.date}
     >
-      <MDXContent content={article.content} />
+      <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
   );
 }

@@ -28,7 +28,7 @@ export default async function Page() {
       path="/football-development/football-burnout"
       datePublished={article.frontmatter.date}
     >
-      <MDXContent content={article.content} />
+      <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
   );
 }

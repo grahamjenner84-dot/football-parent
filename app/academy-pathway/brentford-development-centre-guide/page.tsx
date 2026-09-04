@@ -28,7 +28,7 @@ export default async function Page() {
       datePublished={article.frontmatter.date}
       content={article.content}
     >
-      <MDXContent content={article.content} />
+      <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
   );
 }
