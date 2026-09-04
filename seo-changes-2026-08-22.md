@@ -319,6 +319,8 @@ Rebuilt and re-verified in the prerendered DOM: 4 affiliate anchors, all carryin
 
 ## 19. App screenshot carousel added to `/football-parent-coach-app` — 4 September 2026
 
+Commit `ce1d28b` on branch `claude/coach-app-landing-carousel`.
+
 Added a five-card horizontal screenshot carousel to the Coach App SEO landing page, sitting between the hero and the "What It Does" section. It replicates the carousel already running on the app's own sign-in landing screen (`coach-app` repo, `src/ui/pages/AuthGate.tsx`), using the same five features in the same order and the same `public/marketing/*.webp` screenshots, copied into this repo at `public/coach-app-screens/`.
 
 **Additive only.** No existing heading, section, internal link, title or meta description on this page was touched. The URL is unchanged. This is a purely additive block on a page published 1 September (entry 15), so it is still young enough that there is little ranking to protect, but the caution applies anyway: nothing that was already there was restructured.
