@@ -328,3 +328,23 @@ The fix is to wrap those resets in an explicit `@layer base { ... }` in `globals
 **Affiliate disclosure cut right back, at Graham's request.** The bordered callout plus in-box header block was too heavy for what it needs to be. `AffiliateDisclosure` is now a single quiet line, `*Football Parent may earn a commission on recommended products.`, in small italic grey, sitting directly underneath the picks box rather than above the links inside it. Still satisfies the editorial policy's requirement for disclosure within the content, and is still visible with the links, just not shouting. The `/editorial-policy` link was dropped from it to keep it to one line; the policy page remains linked from the footer.
 
 `npm run build` passes, lint unchanged at 59 problems (the two `CoachAppBanner` findings are pre-existing `<img>` warnings, not from the className change). Page still renders 4 affiliate anchors, all with `rel="sponsored nofollow noopener noreferrer"`, one picks box, one disclosure line.
+
+## 20. App screenshot carousel added to `/football-parent-coach-app` — 4 September 2026
+
+Commit `ce1d28b` on branch `claude/coach-app-landing-carousel`.
+
+Added a five-card horizontal screenshot carousel to the Coach App SEO landing page, sitting between the hero and the "What It Does" section. It replicates the carousel already running on the app's own sign-in landing screen (`coach-app` repo, `src/ui/pages/AuthGate.tsx`), using the same five features in the same order and the same `public/marketing/*.webp` screenshots, copied into this repo at `public/coach-app-screens/`.
+
+**Additive only.** No existing heading, section, internal link, title or meta description on this page was touched. The URL is unchanged. This is a purely additive block on a page published 1 September (entry 15), so it is still young enough that there is little ranking to protect, but the caution applies anyway: nothing that was already there was restructured.
+
+Why the copy came across verbatim rather than being rewritten: the two pages should describe the same product in the same words. A visitor who lands on the SEO page and then taps through to the app should recognise the same five features, not a second set of marketing claims that could drift out of sync with what the app actually does.
+
+**Implementation notes worth keeping:**
+- Screenshots live at `public/coach-app-screens/`, deliberately *not* `public/coach-app/`, because `vercel.json` rewrites `/coach-app/:path*` to the separate `coach-app-zeta.vercel.app` deployment, so anything under that path would never be served from this repo.
+- The images are copies, not a live reference. If the app's UI changes, `public/marketing/*.webp` in the `coach-app` repo is the source and these five files go stale silently. Same class of problem as the Coach App PWA's service-worker precache list.
+- Cards stretch to a common height and the image is pushed to the bottom of each card, so every screenshot starts at the same vertical position regardless of how many lines a title wraps to. The app's own version uses a hardcoded `min-height` for this; the landing page uses flex alignment so it survives different card widths.
+- Dot count is derived from how many cards can actually be scrolled to the left edge, not from the number of cards: three cards fit side by side at `max-w-4xl`, so desktop renders 3 dots and mobile renders 4. Dots that scroll nowhere would be worse than no dots.
+
+`npm run build` passes. Lint reports only the same pre-existing `@next/next/no-img-element` warning the page's existing logo `<img>` already produces; no new findings.
+
+**No watch window needed in the sense used elsewhere in this log:** there is no title, meta or on-page text change to attribute a ranking movement to. The thing to watch is page-view depth and the click-through rate to `/coach-app`, not position.
