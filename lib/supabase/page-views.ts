@@ -92,7 +92,11 @@ export interface PageViewDay {
   // sourceGroups/estimatedVisits/internalViews - these are "true" human
   // numbers, not raw row counts.
   count: number;
+  // Capped at TOP_PATHS_PER_DAY - totalPathCount below is the uncapped
+  // number of distinct paths viewed that day, so the UI can say how much
+  // of the list it is actually showing instead of truncating silently.
   topPaths: { path: string; count: number }[];
+  totalPathCount: number;
   // Excludes rows classified "Internal" (on-site navigation, not a new
   // visit) - see the classifyReferrerHost comment on why that's a valid
   // proxy for "visits from this source" without needing a session id.
@@ -115,7 +119,11 @@ export interface PageViewDay {
 export interface PageViewStats {
   totalViews: number;
   byDay: PageViewDay[];
+  // Capped at TOP_PATHS_OVERALL; totalPathCount is the uncapped number of
+  // distinct paths viewed in the whole window - same reasoning as
+  // PageViewDay.topPaths above.
   topPaths: { path: string; count: number }[];
+  totalPathCount: number;
   sourceGroups: SourceGroupCount[];
   estimatedVisits: number;
   internalViews: number;
@@ -149,6 +157,14 @@ const KNOWN_BOT_INCIDENTS: { path: string; from: string; to: string }[] = [
 // genuinely extreme repetition on one path is worth flagging without a
 // second corroborating signal.
 const DUPLICATE_UA_SAME_PATH_THRESHOLD = 50;
+
+// How many paths the report returns, per day and for the whole window. The
+// site has ~120 routes, so these are effectively "all of them" rather than a
+// leaderboard cut - the admin UI pages through the list 20 at a time. Kept as
+// a cap at all only so a junk-path flood (404s, query-string variants) can't
+// blow the response up. Where a cap does bite, totalPathCount says so.
+const TOP_PATHS_PER_DAY = 100;
+const TOP_PATHS_OVERALL = 200;
 
 function isKnownBotIncident(path: string, createdAt: string): boolean {
   const ts = new Date(createdAt).getTime();
@@ -204,8 +220,8 @@ export interface PageViewDayComparison {
   totalB: number;
   totalDelta: number;
   // Every path seen on either day - unlike PageViewDay.topPaths (capped to
-  // 20 for the day-picker view above), so gains/losses sorting doesn't
-  // silently miss a page that fell outside a top-20 cutoff on one day.
+  // TOP_PATHS_PER_DAY for the day-picker view above), so gains/losses
+  // sorting doesn't silently miss a page that fell outside that cutoff.
   pages: PageViewCompareRow[];
 }
 
@@ -506,7 +522,8 @@ export async function getPageViewStats(
       return {
         date,
         count,
-        topPaths: topPaths.slice(0, 20),
+        topPaths: topPaths.slice(0, TOP_PATHS_PER_DAY),
+        totalPathCount: topPaths.length,
         sourceGroups,
         estimatedVisits,
         internalViews,
@@ -521,7 +538,8 @@ export async function getPageViewStats(
     topPaths: Array.from(byPathMap.entries())
       .map(([path, count]) => ({ path, count }))
       .sort((a, b) => b.count - a.count)
-      .slice(0, 50),
+      .slice(0, TOP_PATHS_OVERALL),
+    totalPathCount: byPathMap.size,
     sourceGroups: buildSourceGroups(groupMap),
     estimatedVisits: estimatedVisitsTotal,
     internalViews: internalViewsTotal,

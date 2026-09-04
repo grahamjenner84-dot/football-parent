@@ -1203,13 +1203,31 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
   );
 }
 
+// How many pages the top-pages list shows before you ask for more. The list
+// is a leaderboard, so the long tail is normally noise - but a page you just
+// visited yourself sitting one row below the cut looked like the report had
+// lost it, which is why the rest is now expandable rather than gone.
+const TOP_PATHS_PAGE_SIZE = 20;
+
 function PageViewsReport({ stats }: { stats: PageViewStats }) {
   const daysCovered = stats.byDay.length;
   const avgPerDay = daysCovered > 0 ? Math.round(stats.totalViews / daysCovered) : 0;
   const [selectedDate, setSelectedDate] = useState<string>("");
+  const [visiblePathCount, setVisiblePathCount] = useState(TOP_PATHS_PAGE_SIZE);
+
+  // Switching between a specific day and the whole window swaps the top-pages
+  // list out from under the "show more" state, so every date change collapses
+  // it back to the first page. Done here rather than in an effect watching
+  // selectedDate: one obvious code path, no extra render.
+  function selectDate(date: string) {
+    setSelectedDate(date);
+    setVisiblePathCount(TOP_PATHS_PAGE_SIZE);
+  }
 
   const selectedDay = stats.byDay.find((d) => d.date === selectedDate) ?? null;
   const shownPaths = selectedDay ? selectedDay.topPaths : stats.topPaths;
+  const totalPathCount = selectedDay ? selectedDay.totalPathCount : stats.totalPathCount;
+  const visiblePaths = shownPaths.slice(0, visiblePathCount);
   const shownTitle = selectedDay ? `Top pages on ${selectedDay.date}` : "Top pages (last 30 days)";
   const shownSourceGroups = selectedDay ? selectedDay.sourceGroups : stats.sourceGroups;
   const shownEstimatedVisits = selectedDay ? selectedDay.estimatedVisits : stats.estimatedVisits;
@@ -1296,7 +1314,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
           Pick a date to see its top pages
           <select
             value={selectedDate}
-            onChange={(e) => setSelectedDate(e.target.value)}
+            onChange={(e) => selectDate(e.target.value)}
             style={styles.dateInput}
           >
             <option value="">All (last 30 days)</option>
@@ -1316,11 +1334,11 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
           <div
             key={row.date}
             style={{ ...styles.card, cursor: "pointer" }}
-            onClick={() => setSelectedDate(row.date === selectedDate ? "" : row.date)}
+            onClick={() => selectDate(row.date === selectedDate ? "" : row.date)}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
-                setSelectedDate(row.date === selectedDate ? "" : row.date);
+                selectDate(row.date === selectedDate ? "" : row.date);
               }
             }}
             role="button"
@@ -1346,7 +1364,17 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
           <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
             {shownTitle}
           </h3>
-          {shownPaths.map((p, i) => (
+          <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+            Showing {visiblePaths.length} of {totalPathCount} page
+            {totalPathCount === 1 ? "" : "s"} with at least one view
+            {totalPathCount > shownPaths.length
+              ? ` (this list is capped at ${shownPaths.length})`
+              : ""}
+            . A page you visited yourself is often a single view sitting well
+            down this list - use the Page trend tab to check one specific page
+            instead of hunting for it here.
+          </p>
+          {visiblePaths.map((p, i) => (
             <div key={i} style={styles.card}>
               <div style={styles.cardTop}>
                 <span style={styles.cardQuery}>{p.path}</span>
@@ -1354,6 +1382,39 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
               </div>
             </div>
           ))}
+          {(visiblePathCount < shownPaths.length || visiblePathCount > TOP_PATHS_PAGE_SIZE) && (
+            <div style={styles.metricToggle}>
+              {visiblePathCount < shownPaths.length && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setVisiblePathCount((n) => Math.min(n + TOP_PATHS_PAGE_SIZE, shownPaths.length))
+                  }
+                  style={styles.toggleButton}
+                >
+                  Show {Math.min(TOP_PATHS_PAGE_SIZE, shownPaths.length - visiblePathCount)} more
+                </button>
+              )}
+              {visiblePathCount < shownPaths.length && (
+                <button
+                  type="button"
+                  onClick={() => setVisiblePathCount(shownPaths.length)}
+                  style={styles.toggleButton}
+                >
+                  Show all {shownPaths.length}
+                </button>
+              )}
+              {visiblePathCount > TOP_PATHS_PAGE_SIZE && (
+                <button
+                  type="button"
+                  onClick={() => setVisiblePathCount(TOP_PATHS_PAGE_SIZE)}
+                  style={styles.toggleButton}
+                >
+                  Show fewer
+                </button>
+              )}
+            </div>
+          )}
         </>
       )}
     </div>
