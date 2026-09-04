@@ -25,6 +25,17 @@ export type CoachAppAudience = "parent" | "coach";
 export type CoachAppBannerStyle = "dark" | "light";
 
 export const AB_TEST_ENABLED = true;
+
+// When the banners actually went live in production (commit 6c418af deployed
+// 2026-09-04). The variant report clamps its window to this, because the
+// impression side is counted from pageviews of the pages carrying each
+// banner - and those pages have months of history from before any banner
+// existed. Without the clamp a 30-day window reports thousands of
+// impressions against a handful of clicks and the CTR is meaningless until
+// the old traffic ages out. Also excludes the two localhost verification
+// hits logged shortly before the deploy. Update this only if the test is
+// restarted from scratch.
+export const BANNER_TEST_STARTED_AT = "2026-09-04T20:30:00Z";
 export const ACTIVE_BANNER_STYLE: CoachAppBannerStyle = "dark";
 
 const DESTINATION = "/football-parent-coach-app";

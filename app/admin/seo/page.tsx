@@ -1238,7 +1238,7 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
   return (
     <div style={styles.list}>
       <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
-        Banner creative test (last {stats.days} days)
+        Banner creative test (since {new Date(stats.since).toLocaleString("en-GB")})
       </h3>
 
       <p style={{ ...styles.sectionNote, marginTop: 0 }}>
@@ -1249,6 +1249,15 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
         CTR column, not the click column: each arm is shown on a different
         set of articles, so raw clicks mostly reflect which arm drew the
         busier pages.
+        {stats.clampedToTestStart && (
+          <>
+            {" "}
+            Window is pinned to when the banners went live rather than the
+            last {stats.days} days, because these pages have months of traffic
+            from before any banner existed and counting that as impressions
+            would understate CTR badly.
+          </>
+        )}
       </p>
 
       {!stats.enoughData && (
