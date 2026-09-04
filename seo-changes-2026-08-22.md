@@ -316,3 +316,21 @@ Rebuilt and re-verified in the prerendered DOM: 4 affiliate anchors, all carryin
 **Published to production 4 September 2026** by merging `claude/affiliate-links-ball-review-1s8bkt` into `main`. Note that all price and availability facts in this entry come from Graham directly, not from the listings: `amzn.to` was blocked by the sandbox's egress proxy throughout, so no listing was ever read by the tooling. If either listing changes variant or size coverage, the box copy is the thing that goes stale first.
 
 **Watch window starts today.** The metric that matters is not affiliate clicks, it is whether position and CTR hold on the size-by-age query set (`what size football for 6/7/8/9/10 year old`, ~2,400 impressions combined at position ~10). Baseline at publish: 17,364 impressions / 58 clicks / avg position 9.0 over the trailing 28 days. Do not make another edit to this page before roughly 18 September. If rankings degrade, the affiliate commits on this branch are the single thing to revert.
+
+## 19. App screenshot carousel added to `/football-parent-coach-app` — 4 September 2026
+
+Added a five-card horizontal screenshot carousel to the Coach App SEO landing page, sitting between the hero and the "What It Does" section. It replicates the carousel already running on the app's own sign-in landing screen (`coach-app` repo, `src/ui/pages/AuthGate.tsx`), using the same five features in the same order and the same `public/marketing/*.webp` screenshots, copied into this repo at `public/coach-app-screens/`.
+
+**Additive only.** No existing heading, section, internal link, title or meta description on this page was touched. The URL is unchanged. This is a purely additive block on a page published 1 September (entry 15), so it is still young enough that there is little ranking to protect, but the caution applies anyway: nothing that was already there was restructured.
+
+Why the copy came across verbatim rather than being rewritten: the two pages should describe the same product in the same words. A visitor who lands on the SEO page and then taps through to the app should recognise the same five features, not a second set of marketing claims that could drift out of sync with what the app actually does.
+
+**Implementation notes worth keeping:**
+- Screenshots live at `public/coach-app-screens/`, deliberately *not* `public/coach-app/`, because `vercel.json` rewrites `/coach-app/:path*` to the separate `coach-app-zeta.vercel.app` deployment, so anything under that path would never be served from this repo.
+- The images are copies, not a live reference. If the app's UI changes, `public/marketing/*.webp` in the `coach-app` repo is the source and these five files go stale silently. Same class of problem as the Coach App PWA's service-worker precache list.
+- Cards stretch to a common height and the image is pushed to the bottom of each card, so every screenshot starts at the same vertical position regardless of how many lines a title wraps to. The app's own version uses a hardcoded `min-height` for this; the landing page uses flex alignment so it survives different card widths.
+- Dot count is derived from how many cards can actually be scrolled to the left edge, not from the number of cards: three cards fit side by side at `max-w-4xl`, so desktop renders 3 dots and mobile renders 4. Dots that scroll nowhere would be worse than no dots.
+
+`npm run build` passes. Lint reports only the same pre-existing `@next/next/no-img-element` warning the page's existing logo `<img>` already produces; no new findings.
+
+**No watch window needed in the sense used elsewhere in this log:** there is no title, meta or on-page text change to attribute a ranking movement to. The thing to watch is page-view depth and the click-through rate to `/coach-app`, not position.
