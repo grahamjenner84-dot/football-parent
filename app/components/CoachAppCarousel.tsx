@@ -41,38 +41,34 @@ const FEATURES = [
 
 export default function CoachAppCarousel() {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-  // How many cards can actually be scrolled to the left edge. Three cards fit
-  // side by side on desktop, so the last few are never a distinct position
-  // there and shouldn't get a dot that does nothing.
-  const [pages, setPages] = useState(FEATURES.length);
+  // One dot per screenshot, and a dot is lit when its screenshot is on
+  // screen. Three cards fit side by side on desktop, so three dots light at
+  // once there and one on mobile. Anything cleverer (a dot per scroll
+  // position) ends up showing fewer dots than there are images, which just
+  // reads as a bug.
+  const [visible, setVisible] = useState<boolean[]>(() =>
+    FEATURES.map((_, i) => i === 0),
+  );
 
   const measure = useCallback(() => {
     const scroller = scrollerRef.current;
     if (!scroller) return;
     const cards = Array.from(scroller.children) as HTMLElement[];
     if (!cards.length) return;
-    // offsetLeft includes the scroller's own left padding, so the first card
-    // is the baseline rather than assuming a padding value.
-    const base = cards[0].offsetLeft;
-    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
-    const reachable = Math.max(
-      1,
-      cards.filter((card) => card.offsetLeft - base <= maxScroll + 1).length,
+
+    const viewStart = scroller.scrollLeft;
+    const viewEnd = viewStart + scroller.clientWidth;
+    setVisible(
+      cards.map((card) => {
+        const cardStart = card.offsetLeft;
+        const cardEnd = cardStart + card.offsetWidth;
+        const overlap =
+          Math.min(cardEnd, viewEnd) - Math.max(cardStart, viewStart);
+        // A card barely peeking in from the edge is not "on screen" for this
+        // purpose, or the trailing dot would light the moment you nudged.
+        return overlap / card.offsetWidth >= 0.6;
+      }),
     );
-
-    let nearest = 0;
-    let smallest = Infinity;
-    cards.forEach((card, i) => {
-      const distance = Math.abs(card.offsetLeft - base - scroller.scrollLeft);
-      if (distance < smallest) {
-        smallest = distance;
-        nearest = i;
-      }
-    });
-
-    setPages(reachable);
-    setActive(Math.min(nearest, reachable - 1));
   }, []);
 
   useEffect(() => {
@@ -137,15 +133,17 @@ export default function CoachAppCarousel() {
       </div>
 
       <div className="flex items-center justify-center gap-2 mt-6">
-        {FEATURES.slice(0, pages).map((feature, i) => (
+        {FEATURES.map((feature, i) => (
           <button
             key={feature.image}
             type="button"
             onClick={() => scrollToCard(i)}
-            aria-label={`Show screenshot ${i + 1}: ${feature.title}`}
-            aria-current={i === active}
+            aria-label={`Show screenshot ${i + 1} of ${FEATURES.length}: ${feature.title}`}
+            // Several dots can be lit at once, but only the leading one is
+            // "current" for assistive tech, where a range would be noise.
+            aria-current={i === visible.indexOf(true)}
             className={`h-2 w-2 rounded-full transition-colors ${
-              i === active ? "bg-gray-900" : "bg-gray-300 hover:bg-gray-400"
+              visible[i] ? "bg-gray-900" : "bg-gray-300 hover:bg-gray-400"
             }`}
           />
         ))}
