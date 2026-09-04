@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getAllArticleSlugs } from "@/lib/content";
-import { bannerStyleForKey } from "@/app/components/CoachAppBanner";
+import { BANNER_TEST_STARTED_AT, bannerStyleForKey } from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/cookie-consent.ts - this must never be imported from client
@@ -568,6 +568,10 @@ export interface BannerVariantRow {
 
 export interface BannerVariantStats {
   days: number;
+  // The window actually used, which is the later of `days` ago and the test
+  // start - see BANNER_TEST_STARTED_AT.
+  since: string;
+  clampedToTestStart: boolean;
   totalClicks: number;
   // True once both creatives have enough impressions for the difference to
   // mean anything. Set deliberately low as a "don't read the tea leaves yet"
@@ -614,7 +618,16 @@ function bannerOnPath(
 // /admin/seo.
 export async function getBannerVariantStats(days: number = 30): Promise<BannerVariantStats> {
   const supabase = adminClient();
-  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+  // Never look further back than the test start. Impressions are derived from
+  // pageviews of the pages serving each banner, and those pages existed long
+  // before the banners did, so an unclamped window counts historical traffic
+  // as impressions against clicks that can only have happened since launch.
+  const requestedSince = Date.now() - days * 24 * 60 * 60 * 1000;
+  const testStart = new Date(BANNER_TEST_STARTED_AT).getTime();
+  const clampedToTestStart = testStart > requestedSince;
+  const since = new Date(Math.max(requestedSince, testStart)).toISOString();
+
   const articleSlugs = getAllArticleSlugs();
 
   // Paged the same way as getPageViewStats, and for the same reason:
@@ -681,6 +694,8 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
 
   return {
     days,
+    since,
+    clampedToTestStart,
     totalClicks: Array.from(clicks.values()).reduce((sum, n) => sum + n, 0),
     enoughData:
       (impressionsByStyle.get("dark") ?? 0) >= MIN_IMPRESSIONS_PER_ARM &&
