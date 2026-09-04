@@ -1,6 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
+import { getAllArticleSlugs } from "@/lib/content";
+import { BANNER_TEST_STARTED_AT, bannerStyleForKey } from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/cookie-consent.ts - this must never be imported from client
@@ -22,6 +24,7 @@ export interface LogPageViewOptions {
   utmCampaign?: string | null;
   gclid?: string | null;
   fbclid?: string | null;
+  bannerVariant?: string | null;
 }
 
 const FLOOD_WINDOW_MS = 60_000;
@@ -68,6 +71,7 @@ export async function logPageView(path: string, options: LogPageViewOptions = {}
     utm_campaign: options.utmCampaign ?? null,
     gclid: options.gclid ?? null,
     fbclid: options.fbclid ?? null,
+    banner_variant: options.bannerVariant ?? null,
   });
 
   if (error) {
@@ -544,5 +548,158 @@ export async function getPageViewStats(
     estimatedVisits: estimatedVisitsTotal,
     internalViews: internalViewsTotal,
     botViews: botViewsTotal,
+  };
+}
+
+export interface BannerVariantRow {
+  variant: string;
+  style: string;
+  audience: string;
+  placement: string;
+  // Landings on /football-parent-coach-app carrying this variant's ?b= param.
+  clicks: number;
+  // Views of the pages that serve this variant. Without this the comparison
+  // is meaningless: the A/B splits by article, so each creative is shown on a
+  // different set of pages with different traffic, and raw click counts would
+  // mostly measure which bucket happened to get the busier articles.
+  impressions: number;
+  ctr: number;
+}
+
+export interface BannerVariantStats {
+  days: number;
+  // The window actually used, which is the later of `days` ago and the test
+  // start - see BANNER_TEST_STARTED_AT.
+  since: string;
+  clampedToTestStart: boolean;
+  totalClicks: number;
+  // True once both creatives have enough impressions for the difference to
+  // mean anything. Set deliberately low as a "don't read the tea leaves yet"
+  // guard, not as a significance test.
+  enoughData: boolean;
+  rows: BannerVariantRow[];
+}
+
+const MIN_IMPRESSIONS_PER_ARM = 300;
+
+// Mirrors the routing in app/components/CoachAppBanner.tsx: /coaching/* gets
+// the coach copy, every other article the parent copy.
+function audienceForPath(path: string): "parent" | "coach" {
+  return path.startsWith("/coaching/") ? "coach" : "parent";
+}
+
+// Which banner creative (if any) a given logged pageview path would have
+// shown. Returns null for pages with no banner: category indexes, the
+// landing page itself, /search, policy pages and so on.
+function bannerOnPath(
+  path: string,
+  articleSlugs: Set<string>
+): { style: string; audience: string; placement: string } | null {
+  if (path === "/") {
+    return {
+      style: bannerStyleForKey(undefined),
+      audience: "parent",
+      placement: "home",
+    };
+  }
+
+  const lastSegment = path.split("/").filter(Boolean).pop();
+  if (!lastSegment || !articleSlugs.has(lastSegment)) return null;
+
+  return {
+    style: bannerStyleForKey(lastSegment),
+    audience: audienceForPath(path),
+    placement: "article",
+  };
+}
+
+// Clicks per banner creative, over the last `days`, against the impressions
+// each creative actually got. Backs the breakdown on the Coach App tab of
+// /admin/seo.
+export async function getBannerVariantStats(days: number = 30): Promise<BannerVariantStats> {
+  const supabase = adminClient();
+
+  // Never look further back than the test start. Impressions are derived from
+  // pageviews of the pages serving each banner, and those pages existed long
+  // before the banners did, so an unclamped window counts historical traffic
+  // as impressions against clicks that can only have happened since launch.
+  const requestedSince = Date.now() - days * 24 * 60 * 60 * 1000;
+  const testStart = new Date(BANNER_TEST_STARTED_AT).getTime();
+  const clampedToTestStart = testStart > requestedSince;
+  const since = new Date(Math.max(requestedSince, testStart)).toISOString();
+
+  const articleSlugs = getAllArticleSlugs();
+
+  // Paged the same way as getPageViewStats, and for the same reason:
+  // PostgREST silently truncates an unbounded select at its max-rows cap.
+  const rows: { path: string; user_agent: string | null; banner_variant: string | null }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("path, user_agent, banner_variant")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      throw new Error("Failed to read page_views for banner variants: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  const clicks = new Map<string, number>();
+  const impressions = new Map<string, number>();
+
+  for (const row of rows) {
+    if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
+
+    if (row.banner_variant) {
+      clicks.set(row.banner_variant, (clicks.get(row.banner_variant) ?? 0) + 1);
+    }
+
+    const banner = bannerOnPath(row.path, articleSlugs);
+    if (banner) {
+      const key = `${banner.style}-${banner.audience}-${banner.placement}`;
+      impressions.set(key, (impressions.get(key) ?? 0) + 1);
+    }
+  }
+
+  const variants = new Set([...clicks.keys(), ...impressions.keys()]);
+
+  const result: BannerVariantRow[] = Array.from(variants)
+    .map((variant) => {
+      const [style = "", audience = "", placement = ""] = variant.split("-");
+      const clickCount = clicks.get(variant) ?? 0;
+      const impressionCount = impressions.get(variant) ?? 0;
+      return {
+        variant,
+        style,
+        audience,
+        placement,
+        clicks: clickCount,
+        impressions: impressionCount,
+        ctr: impressionCount > 0 ? clickCount / impressionCount : 0,
+      };
+    })
+    .sort((a, b) => b.ctr - a.ctr || b.clicks - a.clicks);
+
+  const impressionsByStyle = new Map<string, number>();
+  for (const row of result) {
+    impressionsByStyle.set(row.style, (impressionsByStyle.get(row.style) ?? 0) + row.impressions);
+  }
+
+  return {
+    days,
+    since,
+    clampedToTestStart,
+    totalClicks: Array.from(clicks.values()).reduce((sum, n) => sum + n, 0),
+    enoughData:
+      (impressionsByStyle.get("dark") ?? 0) >= MIN_IMPRESSIONS_PER_ARM &&
+      (impressionsByStyle.get("light") ?? 0) >= MIN_IMPRESSIONS_PER_ARM,
+    rows: result,
   };
 }

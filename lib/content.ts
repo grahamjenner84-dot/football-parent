@@ -62,3 +62,26 @@ export function getAllArticles(): Article[] {
 
   return articles;
 }
+
+// Every article slug across all categories, as a Set for O(1) lookup.
+//
+// Used by the banner-variant report (lib/supabase/page-views.ts) to decide
+// whether a logged pageview path is an article page, and therefore carried a
+// Coach App banner. Keyed on the slug rather than the full route because
+// routes aren't uniformly /<category>/<slug> - some football-gear articles
+// sit a level deeper (e.g. /football-gear/boots/<slug>) while their MDX
+// still lives flat in content/football-gear.
+export function getAllArticleSlugs(): Set<string> {
+  const slugs = new Set<string>();
+
+  for (const category of fs.readdirSync(contentDirectory)) {
+    const categoryPath = path.join(contentDirectory, category);
+    if (!fs.statSync(categoryPath).isDirectory()) continue;
+
+    for (const file of fs.readdirSync(categoryPath)) {
+      if (file.endsWith(".mdx")) slugs.add(file.replace(".mdx", ""));
+    }
+  }
+
+  return slugs;
+}

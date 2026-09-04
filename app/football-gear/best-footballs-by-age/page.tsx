@@ -26,7 +26,7 @@ export default async function Page() {
       content={article.content}
       
     >
-      <MDXContent content={article.content} />
+      <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
   );
 }

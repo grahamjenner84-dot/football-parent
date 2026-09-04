@@ -47,6 +47,11 @@ export default function PageViewPing() {
         utmCampaign: searchParams.get("utm_campaign"),
         gclid: searchParams.get("gclid"),
         fbclid: searchParams.get("fbclid"),
+        // Which Coach App banner creative sent them here, from the ?b=
+        // param on the banner links - see app/components/CoachAppBanner.tsx.
+        // A private param rather than utm_source deliberately: utm_* on an
+        // internal link would re-attribute the GA4 session.
+        bannerVariant: searchParams.get("b"),
       }),
       keepalive: true,
     }).catch(() => {});

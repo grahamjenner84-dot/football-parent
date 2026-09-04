@@ -27,7 +27,7 @@ export default async function Page() {
       path="/parent-guides/how-to-become-a-football-coach"
       datePublished={article.frontmatter.date}
     >
-      <MDXContent content={article.content} />
+      <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
   );
 }
