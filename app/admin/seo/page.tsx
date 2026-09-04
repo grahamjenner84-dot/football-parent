@@ -1236,6 +1236,12 @@ function PageViewOptOutToggle() {
   // rendering a definite state before checking would flash the wrong one.
   const [optedOut, setOptedOut] = useState<boolean | null>(null);
 
+  // react-hooks/set-state-in-effect wants state derived during render, but
+  // localStorage isn't readable on the server and reading it in a lazy
+  // initialiser would render a different tree than the one hydrated. Reading
+  // once after mount is the correct pattern here, so the rule is off for
+  // this line rather than the component reshaped around it.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setOptedOut(isPageViewOptedOut()), []);
 
   if (optedOut === null) return null;
