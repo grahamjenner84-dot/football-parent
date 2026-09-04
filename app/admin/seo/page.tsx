@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type {
   SeoReport,
   StrikingRow,
@@ -52,6 +52,21 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "cannibal", label: "Cannibalisation" },
   { id: "cookies", label: "Cookie consent" },
 ];
+
+// The long "how this is measured" copy is genuinely useful the first time you
+// read a tab and pure noise every time after, and there was enough of it to
+// push the actual data below the fold. Native <details> keeps it one click
+// away, collapsed by default, with no JS state to manage. Short status lines
+// ("showing 20 of 87", a freshness warning) stay visible - only the standing
+// explainers are folded away.
+function SectionNote({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <details style={styles.noteDetails}>
+      <summary style={styles.noteSummary}>{label}</summary>
+      <div style={{ ...styles.sectionNote, marginTop: 6 }}>{children}</div>
+    </details>
+  );
+}
 
 function shortPage(page: string): string {
   try {
@@ -290,14 +305,14 @@ export default function SeoAdminPage() {
           <PageViewTrend observedPaths={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
         ) : tab === "coachApp" ? (
           <>
-            <p style={styles.sectionNote}>
+            <SectionNote label="What's included in these numbers">
               Scoped to /football-parent-coach-app (the marketing landing
               page) and /coach-app (the app itself) - both routes on this
               same footballparent.co.uk Next app, same page_views table as
               the Page views tab above, just filtered. Note: /coach-app has
               no route or redirect wired up yet (next.config.ts), so this
               will read near-zero until that&rsquo;s live.
-            </p>
+            </SectionNote>
             {!coachAppViewStats && !coachAppViewError && (
               <p style={styles.muted}>Loading Coach App view report...</p>
             )}
@@ -399,11 +414,11 @@ function SilenceList({ rows }: { rows: SilenceRow[] }) {
   if (!rows.length) return <EmptyState text="Nothing has gone quiet - all pages with real prior traffic still have recent impressions." />;
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to read this">
         Real prior traffic, near-zero in the recent window. Usually technical
         (deindexing, noindex, canonical, a bad deploy), not a content issue.
         Check URL Inspection / Test Live URL before editing anything.
-      </p>
+      </SectionNote>
       {rows.map((r, i) => (
         <div key={i} style={styles.card}>
           <div style={styles.cardTop}>
@@ -582,11 +597,11 @@ function NoImpressionsList({
   return (
     <div style={styles.list}>
       <PeriodFilter value={days} onChange={onDaysChange} />
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to read this">
         Every sitemap URL with zero impressions in this window - pages that
         have either stopped ranking entirely or never picked up any search
         visibility. Candidates for a rewrite, not just a tweak.
-      </p>
+      </SectionNote>
       {!rows.length && (
         <EmptyState text="Every sitemap URL picked up at least one impression in this window." />
       )}
@@ -738,14 +753,14 @@ function RankTrackerSummaryView({
   const tiles = [summary.total, summary.top3, summary.top10, summary.top20, summary.top100];
   return (
     <div style={{ ...styles.list, marginBottom: 16 }}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How the tiles are counted">
         Keywords tracked and where they rank right now, compared to the same
         window a week ago - the same 3-day-average positions as the table
         below. Each tile counts only the keywords actually sitting in that
         band (top 10 excludes the ones already in top 3), with the
         traditional cumulative &ldquo;top N&rdquo; total shown underneath.
         Click a tile to see which queries and pages are in it.
-      </p>
+      </SectionNote>
       <div style={styles.summaryGrid}>
         {tiles.map((bucket) => (
           <RankSummaryTile
@@ -1063,12 +1078,12 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
               Lost
             </button>
           </div>
-          <p style={styles.sectionNote}>
+          <SectionNote label="How position and direction are worked out">
             Position today is a 3-day average ending today (GSC data lags a
             few days), compared against the same 3 days one week earlier - a
             single day is too noisy to trust for most queries. New/improved
             queries are shown in green, lost ones in red.
-          </p>
+          </SectionNote>
           {groupBy === "page" && <RankByPageList groups={groupRankByPage(pageFiltered)} />}
           {groupBy === "query" && (
             <>
@@ -1111,13 +1126,13 @@ function SearchesList({ stats }: { stats: SearchLogStats }) {
   }
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="What's counted here">
         What visitors typed into on-site search over the last 30 days,
         including the header dropdown search (not just the /search results
         page). Queries flagged &ldquo;0 results&rdquo; are the clearest
         content-gap signal - people looking for something we don&rsquo;t
         have an article for yet.
-      </p>
+      </SectionNote>
 
       <div style={styles.cardStats}>
         <span>Searches: {stats.totalSearches}</span>
@@ -1158,13 +1173,13 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to read this">
         Last 30 days. Banner shows and accept/reject/manage decisions are
         logged anonymously regardless of the choice itself, so this stays
         readable even though GA can now only see consenting visitors. If a
         GA4 pageview dip tracks the reject rate below, that&rsquo;s consent
         gating working as intended, not a traffic problem.
-      </p>
+      </SectionNote>
 
       <div style={styles.cardStats}>
         <span>Shown: {stats.bannerShown}</span>
@@ -1239,7 +1254,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="What counts as a view">
         Last 30 days, excluding /admin/* (that&rsquo;s you checking the
         dashboard, not a visitor). Fires on every page load regardless of
         cookie consent or whether the banner has ever been shown to that
@@ -1249,8 +1264,10 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
         consent-mode visibility; if this number is also low, traffic
         genuinely dropped. Self-declared bots/crawlers and known scripted
         spikes are excluded from every number below - see &ldquo;Bot views
-        excluded&rdquo;.
-      </p>
+        excluded&rdquo;. Top pages is a leaderboard: a page you visited
+        yourself is often a single view well down that list, so use the Page
+        trend tab to check one specific page rather than hunting for it here.
+      </SectionNote>
 
       <div style={styles.cardStats}>
         <span>Total views: {stats.totalViews}</span>
@@ -1263,7 +1280,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
           <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
             {sourceGroupsTitle}
           </h3>
-          <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+          <SectionNote label="How sources are worked out">
             Based on the referrer header, not a cookie - unaffected by
             consent choice. &ldquo;Direct&rdquo; is a mix of genuine direct/
             bookmark visits and any case where the browser or an in-app
@@ -1271,12 +1288,12 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             run higher than the true number. Bing search and Bing/Copilot
             chat share a hostname and can&rsquo;t be told apart; same for
             Grok and X/Twitter.
-          </p>
+          </SectionNote>
           <div style={styles.cardStats}>
             <span>Estimated visits: {shownEstimatedVisits}</span>
             <span>Internal (browsed to another page): {shownInternalViews}</span>
           </div>
-          <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+          <SectionNote label="Estimated visits vs internal">
             Estimated visits counts pageviews where the referrer wasn&rsquo;t
             this site itself - only a visit&rsquo;s first page qualifies,
             since every later page in the same visit is reached by clicking
@@ -1287,7 +1304,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             day in the picker below). Not exact - a browser that strips the
             referrer mid-visit, or two tabs opened from the same link, can
             inflate Estimated visits slightly.
-          </p>
+          </SectionNote>
           {shownSourceGroups.length === 0 && (
             <EmptyState text="No external-referrer traffic on this date - everything was Direct or on-site navigation." />
           )}
@@ -1370,9 +1387,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             {totalPathCount > shownPaths.length
               ? ` (this list is capped at ${shownPaths.length})`
               : ""}
-            . A page you visited yourself is often a single view sitting well
-            down this list - use the Page trend tab to check one specific page
-            instead of hunting for it here.
+            .
           </p>
           {visiblePaths.map((p, i) => (
             <div key={i} style={styles.card}>
@@ -1483,12 +1498,12 @@ function ComparePageViews() {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="What this compares">
         Same page_views data as the Page views tab above (bot rows already
         excluded), broken down by page for two specific days so you can see
         exactly which pages gained or lost views day over day. Defaults to
         yesterday vs the day before - pick any two dates and hit Compare.
-      </p>
+      </SectionNote>
 
       <div style={styles.compareRow}>
         <label style={styles.compareLabel}>
@@ -1651,7 +1666,7 @@ function PageViewTrend({ observedPaths }: { observedPaths: string[] }) {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How the search and history work">
         Same page_views data as the Page views tab above (bot rows already
         excluded). Every page on the site is searchable here, whether or not
         it has any views yet - type any word from the URL (&ldquo;parent
@@ -1662,7 +1677,7 @@ function PageViewTrend({ observedPaths }: { observedPaths: string[] }) {
         view - not its actual publish date, since view tracking only began
         2026-08-19. A page published before then will show a gap: its real
         history runs further back than this can show.
-      </p>
+      </SectionNote>
 
       <div style={styles.compareRow}>
         <label style={{ ...styles.compareLabel, position: "relative" }}>
@@ -1821,12 +1836,12 @@ function CompareDays() {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to use this">
         Pick the day you noticed the spike (Day A) and a day to compare it
         against (Day B - defaults to the same weekday a week earlier). Shows
         site-wide totals for each day, then the specific pages and search
         queries that account for the biggest gains and drops between them.
-      </p>
+      </SectionNote>
 
       <div style={styles.compareRow}>
         <label style={styles.compareLabel}>
@@ -2320,6 +2335,20 @@ const styles: Record<string, CSSProperties> = {
     color: "#f0e6d2",
     cursor: "pointer",
     borderBottom: "1px solid #3a2c1d",
+  },
+  noteDetails: {
+    background: "#2a1f14",
+    border: "1px solid #3a2c1d",
+    borderRadius: 6,
+    padding: "6px 10px",
+    margin: "8px 0",
+  },
+  noteSummary: {
+    cursor: "pointer",
+    fontSize: 12,
+    fontWeight: 600,
+    color: "#b8a68c",
+    listStyle: "revert",
   },
   suggestionTag: {
     marginLeft: 8,
