@@ -5,16 +5,33 @@ import Link from "next/link";
 import InfoTable from "@/app/components/mdx/InfoTable";
 import ParentNote from "@/app/components/mdx/ParentNote";
 import ExpertOpinion from "@/app/components/mdx/ExpertOpinion";
+import AffiliateDisclosure from "@/app/components/mdx/AffiliateDisclosure";
 import CoachAppBanner, {
   bannerStyleForKey,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 
 // Custom components for MDX rendering with styling
+// Hosts whose links are monetised. Links to these get rel="sponsored nofollow"
+// so search engines don't read them as editorial endorsements, which both
+// Google's link-qualifier guidance and the Amazon Associates terms require.
+const AFFILIATE_HOSTS = ["amzn.to", "amazon.co.uk", "amazon.com"];
+
+function isAffiliateLink(href: string): boolean {
+  let host: string;
+  try {
+    host = new URL(href).hostname.toLowerCase();
+  } catch {
+    return false;
+  }
+  return AFFILIATE_HOSTS.some((h) => host === h || host.endsWith(`.${h}`));
+}
+
 const components = {
   InfoTable,
   ParentNote,
   ExpertOpinion,
+  AffiliateDisclosure,
 
   h2: ({ children }: any) => (
     <h2
@@ -72,14 +89,25 @@ const components = {
     <em className="italic">{children}</em>
   ),
 
-  a: ({ children, href }: any) => (
-    <a
-      href={href}
-      className="font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
-    >
-      {children}
-    </a>
-  ),
+  a: ({ children, href }: any) => {
+    const url = typeof href === "string" ? href : "";
+    const affiliate = isAffiliateLink(url);
+
+    return (
+      <a
+        href={url}
+        className="font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
+        {...(affiliate
+          ? {
+              rel: "sponsored nofollow noopener noreferrer",
+              target: "_blank",
+            }
+          : {})}
+      >
+        {children}
+      </a>
+    );
+  },
 
   table: ({ children }: any) => (
     <div className="overflow-x-auto mb-6">
