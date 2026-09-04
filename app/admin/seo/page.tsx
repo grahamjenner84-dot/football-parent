@@ -16,6 +16,7 @@ import type {
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
+import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import { routes as siteRoutes } from "@/app/sitemap"; // plain string array, no server-only deps - safe from a client component
 
@@ -224,6 +225,7 @@ export default function SeoAdminPage() {
             {refreshing && " - updating..."}
           </p>
         )}
+        <PageViewOptOutToggle />
       </header>
 
       <nav style={styles.tabBar}>
@@ -1213,6 +1215,42 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
 // visited yourself sitting one row below the cut looked like the report had
 // lost it, which is why the rest is now expandable rather than gone.
 const TOP_PATHS_PAGE_SIZE = 20;
+
+function PageViewOptOutToggle() {
+  // null until the effect runs: localStorage isn't readable during SSR, and
+  // rendering a definite state before checking would flash the wrong one.
+  const [optedOut, setOptedOut] = useState<boolean | null>(null);
+
+  useEffect(() => setOptedOut(isPageViewOptedOut()), []);
+
+  if (optedOut === null) return null;
+
+  return (
+    <label
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        fontSize: 12,
+        color: optedOut ? "#7bb661" : "#9c8a72",
+        cursor: "pointer",
+        marginTop: 8,
+      }}
+    >
+      <input
+        type="checkbox"
+        checked={optedOut}
+        onChange={(e) => {
+          setPageViewOptOut(e.target.checked);
+          setOptedOut(isPageViewOptedOut());
+        }}
+      />
+      {optedOut
+        ? "This browser is excluded from page view logging"
+        : "Exclude this browser from page view logging"}
+    </label>
+  );
+}
 
 function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
   const byStyle = ["dark", "light"].map((style) => {
