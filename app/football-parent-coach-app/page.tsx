@@ -1,3 +1,4 @@
+import CoachAppCarousel from "@/app/components/CoachAppCarousel";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -45,6 +46,8 @@ export default function CoachAppPage() {
           </div>
         </div>
       </section>
+
+      <CoachAppCarousel />
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
         <div className="space-y-6 text-gray-700 text-lg leading-8">
