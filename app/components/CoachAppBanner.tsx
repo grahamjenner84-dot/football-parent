@@ -114,13 +114,23 @@ export default function CoachAppBanner({
     return (
       <Link
         href={href}
-        className={`group block rounded-2xl bg-slate-950 px-6 py-6 text-white transition-colors hover:bg-slate-800 sm:px-8 ${spacing}`}
+        // bg-black, not a near-black like slate-950: the white wordmark PNG
+        // has a solid #000 box baked in behind the icon rather than a
+        // transparent one, so any off-black background shows it as a visible
+        // rectangle. For the same reason the hover state changes a ring
+        // rather than the background, which would bring the box back.
+        className={`group block rounded-2xl bg-black px-6 py-6 text-white transition hover:ring-1 hover:ring-white/25 sm:px-8 ${spacing}`}
       >
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
+          {/* self-start is load-bearing: the mobile layout is flex-col, so the
+              cross axis is horizontal and the default align-items:stretch
+              pulls a width:auto image out to the full column width, squashing
+              a 3.41:1 wordmark to 8.7:1. sm:items-center masks it from 640px
+              up, so this only ever showed on phones. */}
           <img
             src="/logo-horizontal-coach-white.png"
             alt="Football Parent Coach App"
-            className="h-8 w-auto flex-shrink-0 sm:h-9"
+            className="h-8 w-auto flex-shrink-0 self-start sm:h-9 sm:self-auto"
           />
 
           <p className="flex-1 text-lg font-semibold leading-snug text-white sm:text-xl">
