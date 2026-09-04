@@ -165,7 +165,7 @@ export default function CoachAppBanner({
 
           <Link
             href={href}
-            className="inline-block rounded-lg bg-blue-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-800"
+            className="inline-block rounded-lg bg-blue-700 px-6 py-3 text-sm font-semibold text-white! transition-colors hover:bg-blue-800"
           >
             See the Coach App
           </Link>
