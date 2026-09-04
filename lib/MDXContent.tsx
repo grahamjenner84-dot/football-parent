@@ -5,6 +5,9 @@ import Link from "next/link";
 import InfoTable from "@/app/components/mdx/InfoTable";
 import ParentNote from "@/app/components/mdx/ParentNote";
 import ExpertOpinion from "@/app/components/mdx/ExpertOpinion";
+import AffiliateDisclosure from "@/app/components/mdx/AffiliateDisclosure";
+import GearPicks from "@/app/components/mdx/GearPicks";
+import { affiliateLinkProps } from "@/lib/affiliate";
 import CoachAppBanner, {
   bannerStyleForKey,
   type CoachAppAudience,
@@ -15,6 +18,8 @@ const components = {
   InfoTable,
   ParentNote,
   ExpertOpinion,
+  AffiliateDisclosure,
+  GearPicks,
 
   h2: ({ children }: any) => (
     <h2
@@ -72,14 +77,19 @@ const components = {
     <em className="italic">{children}</em>
   ),
 
-  a: ({ children, href }: any) => (
-    <a
-      href={href}
-      className="font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
-    >
-      {children}
-    </a>
-  ),
+  a: ({ children, href }: any) => {
+    const url = typeof href === "string" ? href : "";
+
+    return (
+      <a
+        href={url}
+        className="font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
+        {...affiliateLinkProps(url)}
+      >
+        {children}
+      </a>
+    );
+  },
 
   table: ({ children }: any) => (
     <div className="overflow-x-auto mb-6">
