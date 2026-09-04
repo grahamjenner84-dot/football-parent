@@ -17,6 +17,7 @@ import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only im
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import type { PageViewStats, PageViewDayComparison, PageViewDailyCount } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
+import { routes as siteRoutes } from "@/app/sitemap"; // plain string array, no server-only deps - safe from a client component
 
 type Tab =
   | "silence"
@@ -59,6 +60,42 @@ function shortPage(page: string): string {
   } catch {
     return page;
   }
+}
+
+// Every page on the site, from the sitemap's manually maintained route list
+// - so the page search boxes below can offer pages that have no page_views
+// and no ranking data yet. Restricting the suggestion list to pages that
+// already have data is what made the search look broken: a real page you
+// could see impressions for simply never appeared.
+const ALL_SITE_PATHS: string[] = siteRoutes.map((r) => (r === "" ? "/" : r));
+
+// Merges the site's own route list with whatever paths the data actually
+// contains (redirects, /coach-app, anything published but not yet added to
+// app/sitemap.ts), de-duplicated and sorted.
+function allPagePaths(observed: string[] = []): string[] {
+  return Array.from(new Set([...ALL_SITE_PATHS, ...observed])).sort((a, b) => a.localeCompare(b));
+}
+
+// Search matching is word-based, not raw substring: both sides are lowercased
+// and every non-alphanumeric character (hyphens, slashes) becomes a space, then
+// each typed word has to appear somewhere in the path. That is what makes
+// "parent mistake" find /parent-guides/biggest-football-parent-mistakes -
+// a plain `includes()` never matched because of the hyphens and the plural.
+function normaliseForSearch(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function matchesPageSearch(candidate: string, query: string): boolean {
+  const terms = normaliseForSearch(query).split(" ").filter(Boolean);
+  if (!terms.length) return false;
+  const haystack = normaliseForSearch(candidate);
+  return terms.every(
+    (term) => haystack.includes(term) || (term.endsWith("s") && haystack.includes(term.slice(0, -1)))
+  );
+}
+
+function searchPaths(paths: string[], query: string, limit: number): string[] {
+  return paths.filter((p) => matchesPageSearch(p, query)).slice(0, limit);
 }
 
 export default function SeoAdminPage() {
@@ -250,7 +287,7 @@ export default function SeoAdminPage() {
         ) : tab === "pageviewsCompare" ? (
           <ComparePageViews />
         ) : tab === "pageviewsTrend" ? (
-          <PageViewTrend pathOptions={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
+          <PageViewTrend observedPaths={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
         ) : tab === "coachApp" ? (
           <>
             <p style={styles.sectionNote}>
@@ -752,7 +789,7 @@ function RankTrackerSection({ rows, summary }: { rows: RankRow[]; summary: RankT
           </button>
         </div>
       )}
-      <RankTrackerList rows={visibleRows} />
+      <RankTrackerList rows={visibleRows} allRows={rows} />
     </>
   );
 }
@@ -840,7 +877,10 @@ function RankByPageList({ groups }: { groups: RankPageGroup[] }) {
   );
 }
 
-function RankTrackerList({ rows }: { rows: RankRow[] }) {
+// allRows is the unfiltered tracker (rows may already be narrowed by a
+// position-band tile) - used only to tell "this page ranks for nothing at all"
+// apart from "this page's queries are filtered out of the current view".
+function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[] }) {
   const [metric, setMetric] = useState<RankSortMetric>("impressions");
   const [directionFilter, setDirectionFilter] = useState<DirectionFilter>("all");
   const [groupBy, setGroupBy] = useState<RankGroupBy>("query");
@@ -852,21 +892,20 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
     return <EmptyState text="Not enough recent search volume yet to track keyword movement." />;
   }
 
-  // Suggestions come from pages that actually appear in the rank tracker
-  // (not the page_views path list Page trend uses) so every suggestion is
-  // guaranteed to have ranking data.
-  const pageOptions = Array.from(new Set(rows.map((r) => r.page))).sort((a, b) =>
-    shortPage(a).localeCompare(shortPage(b))
-  );
+  // Suggestions are every page on the site, not just the pages that already
+  // have tracked queries - a page ranking for nothing is exactly the case you
+  // want to be able to look up and see stated, rather than an empty search box
+  // that leaves you wondering whether the report is broken. Matching is done in
+  // path space (shortPage) so the sitemap route list and GSC's full URLs line up.
+  const rankedPaths = allRows.map((r) => shortPage(r.page));
+  const pageOptions = allPagePaths(rankedPaths);
+  const pageMatchCount =
+    pageQuery.trim().length > 0 ? pageOptions.filter((p) => matchesPageSearch(p, pageQuery)).length : 0;
   const pageSuggestions =
-    pageQuery.trim().length > 0
-      ? pageOptions
-          .filter((p) => shortPage(p).toLowerCase().includes(pageQuery.trim().toLowerCase()))
-          .slice(0, MAX_SUGGESTIONS)
-      : [];
+    pageQuery.trim().length > 0 ? searchPaths(pageOptions, pageQuery, MAX_SUGGESTIONS) : [];
 
   function selectPage(p: string) {
-    setPageQuery(shortPage(p));
+    setPageQuery(p);
     setSelectedPage(p);
     setPageSuggestionsOpen(false);
   }
@@ -878,7 +917,7 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
   }
 
   const filtered = rows.filter((r) => matchesDirectionFilter(r.direction, directionFilter));
-  const pageFiltered = selectedPage ? filtered.filter((r) => r.page === selectedPage) : filtered;
+  const pageFiltered = selectedPage ? filtered.filter((r) => shortPage(r.page) === selectedPage) : filtered;
   const visible = [...pageFiltered].sort((a, b) => {
     if (metric === "position") {
       // Lower position is better; queries with no current position (lost) sort last.
@@ -899,7 +938,7 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
             onChange={(e) => {
               setPageQuery(e.target.value);
               setPageSuggestionsOpen(true);
-              if (selectedPage && e.target.value !== shortPage(selectedPage)) {
+              if (selectedPage && e.target.value !== selectedPage) {
                 setSelectedPage("");
               }
             }}
@@ -916,7 +955,7 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
             placeholder="Search e.g. veo, boots, academy..."
             style={styles.pathInput}
           />
-          {pageSuggestionsOpen && pageSuggestions.length > 0 && (
+          {pageSuggestionsOpen && pageQuery.trim().length > 0 && (
             <div style={styles.suggestionList}>
               {pageSuggestions.map((p) => (
                 <div
@@ -925,9 +964,20 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
                   onClick={() => selectPage(p)}
                   style={styles.suggestionItem}
                 >
-                  {shortPage(p)}
+                  {p}
+                  {!rankedPaths.includes(p) && <span style={styles.suggestionTag}>no tracked queries</span>}
                 </div>
               ))}
+              {pageSuggestions.length === 0 && (
+                <div style={styles.suggestionEmpty}>
+                  No page on the site matches &ldquo;{pageQuery.trim()}&rdquo;.
+                </div>
+              )}
+              {pageMatchCount > pageSuggestions.length && (
+                <div style={styles.suggestionEmpty}>
+                  +{pageMatchCount - pageSuggestions.length} more - keep typing to narrow it down.
+                </div>
+              )}
             </div>
           )}
         </label>
@@ -941,9 +991,19 @@ function RankTrackerList({ rows }: { rows: RankRow[] }) {
       {selectedPage ? (
         <>
           <p style={styles.sectionNote}>
-            Every tracked query for this page, sorted by current position.
+            Every tracked query for {selectedPage}, sorted by current position.
           </p>
-          <RankByPageList groups={groupRankByPage(pageFiltered)} />
+          {pageFiltered.length === 0 ? (
+            <EmptyState
+              text={
+                rankedPaths.includes(selectedPage)
+                  ? `${selectedPage} has tracked queries, but none of them match the filters currently applied - clear the position-band tile above and set direction back to All.`
+                  : `${selectedPage} has no query in the rank tracker right now. That is a real answer rather than a failed search: the tracker only lists a query once it has 4+ impressions across the two 3-day windows it compares (the last 3 days, and the same 3 days a week earlier), so a page picking up a couple of impressions a week won't appear here even though Search Console shows them. Use Compare days, or inspect the page, for the longer view.`
+              }
+            />
+          ) : (
+            <RankByPageList groups={groupRankByPage(pageFiltered)} />
+          )}
         </>
       ) : (
         <>
@@ -1464,13 +1524,14 @@ interface PageViewByPathResponse {
 
 type TrendWindow = "7" | "30" | "all";
 
-const MAX_SUGGESTIONS = 12;
+const MAX_SUGGESTIONS = 20;
 
-// pathOptions comes from the parent's already-loaded pageViewStats.topPaths
-// (top 50 over the last 30 days) - a suggestion list to search against, not
-// a hard restriction: typing a full path that isn't in it and pressing
-// Enter still works.
-function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
+// Suggestions are every page on the site (sitemap route list) merged with any
+// path seen in page_views - not just the top 50 by recent views, which is what
+// previously hid perfectly real pages from this search. Typing a full path that
+// is in neither list and pressing Enter still works.
+function PageViewTrend({ observedPaths }: { observedPaths: string[] }) {
+  const pathOptions = allPagePaths(observedPaths);
   const [query, setQuery] = useState("");
   const [selectedPath, setSelectedPath] = useState("");
   const [suggestionsOpen, setSuggestionsOpen] = useState(false);
@@ -1479,10 +1540,8 @@ function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
   const [error, setError] = useState("");
   const [windowFilter, setWindowFilter] = useState<TrendWindow>("all");
 
-  const suggestions =
-    query.trim().length > 0
-      ? pathOptions.filter((p) => p.toLowerCase().includes(query.trim().toLowerCase())).slice(0, MAX_SUGGESTIONS)
-      : [];
+  const matchCount = query.trim().length > 0 ? pathOptions.filter((p) => matchesPageSearch(p, query)).length : 0;
+  const suggestions = query.trim().length > 0 ? searchPaths(pathOptions, query, MAX_SUGGESTIONS) : [];
 
   function runLookup(p: string) {
     setLoading(true);
@@ -1533,8 +1592,11 @@ function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
     <div style={styles.list}>
       <p style={styles.sectionNote}>
         Same page_views data as the Page views tab above (bot rows already
-        excluded). Search for a page below and pick it from the list to see
-        its daily view count, including days with zero views. Defaults to
+        excluded). Every page on the site is searchable here, whether or not
+        it has any views yet - type any word from the URL (&ldquo;parent
+        mistake&rdquo; finds /parent-guides/biggest-football-parent-mistakes)
+        and pick it from the list to see its daily view count, including days
+        with zero views. Defaults to
         the page&rsquo;s full history, starting from its first recorded page
         view - not its actual publish date, since view tracking only began
         2026-08-19. A page published before then will show a gap: its real
@@ -1568,7 +1630,7 @@ function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
             placeholder="Search e.g. veo, boots, academy..."
             style={styles.pathInput}
           />
-          {suggestionsOpen && suggestions.length > 0 && (
+          {suggestionsOpen && query.trim().length > 0 && (
             <div style={styles.suggestionList}>
               {suggestions.map((p) => (
                 <div
@@ -1580,6 +1642,17 @@ function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
                   {p}
                 </div>
               ))}
+              {suggestions.length === 0 && (
+                <div style={styles.suggestionEmpty}>
+                  No page on the site matches &ldquo;{query.trim()}&rdquo;. Press Enter to look
+                  up what you typed as an exact path anyway.
+                </div>
+              )}
+              {matchCount > suggestions.length && (
+                <div style={styles.suggestionEmpty}>
+                  +{matchCount - suggestions.length} more - keep typing to narrow it down.
+                </div>
+              )}
             </div>
           )}
         </label>
@@ -1619,7 +1692,13 @@ function PageViewTrend({ pathOptions }: { pathOptions: string[] }) {
           </div>
 
           {windowedByDay.every((d) => d.count === 0) && (
-            <EmptyState text="No views recorded for this page in this window." />
+            <EmptyState
+              text={
+                result.byDay.some((d) => d.count > 0)
+                  ? "No views recorded for this page in this window."
+                  : "No page views have ever been recorded for this path. That is a real answer, not a broken search: the page exists, it just has no tracked visits (check the path if you expected some, and remember view tracking only started 2026-08-19)."
+              }
+            />
           )}
 
           {windowedByDay.map((d) => (
@@ -2179,6 +2258,17 @@ const styles: Record<string, CSSProperties> = {
     fontSize: 13,
     color: "#f0e6d2",
     cursor: "pointer",
+    borderBottom: "1px solid #3a2c1d",
+  },
+  suggestionTag: {
+    marginLeft: 8,
+    fontSize: 11,
+    color: "#b8a68c",
+  },
+  suggestionEmpty: {
+    padding: "8px 10px",
+    fontSize: 12,
+    color: "#b8a68c",
     borderBottom: "1px solid #3a2c1d",
   },
   barTrack: {
