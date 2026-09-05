@@ -364,3 +364,30 @@ Not a ranking/content change - dashboard tooling only (`/admin/seo`), logged for
 **Rank tracker gained a "New" filter** alongside All / Improved / Lost, with the count on the button. "Improved" mixes queries that moved up with queries that appeared from nothing; "New" is just the latter, i.e. terms with no position at all in the same 3-day window a week earlier. Works in both the by-query and by-page views.
 
 `npm run build` passes. Lint reports nothing new on either changed file (the 35 errors it reports are all pre-existing, in `scripts/`).
+
+## 22. XbotGo Falcon affiliate link added to the Veo alternatives article — 5 September 2026
+
+Page: `/football-gear/veo-camera-alternatives` (`content/football-gear/veo-camera-alternatives.mdx`). One lever: outbound affiliate links only. No title, meta description, heading, section or internal link changed, and no existing content was removed.
+
+Three text links to `https://amzn.to/4gBPZGS` on the XbotGo Falcon name:
+1. First mention in "Veo vs XbotGo" ("the closer like-for-like competitor to Veo is the XbotGo Falcon").
+2. The "AI tracking camera (XbotGo Chameleon or Falcon)" bullet under "Cheaper Alternatives to a Veo Camera".
+3. The "XbotGo Falcon (standalone camera, no subscription)" entry under "Cost and Features at a Glance".
+
+The XbotGo product-page citation in the same paragraph is left as-is: it is the source for the £659 price and the no-subscription claim, and is not an affiliate link.
+
+`amzn.to` is already in `AFFILIATE_HOSTS` (`lib/affiliate.ts`), so the MDX link renderer tags all three with `rel="sponsored nofollow noopener noreferrer"` and `target="_blank"` automatically. This page had no affiliate links before, so an `<AffiliateDisclosure />` line was added directly under the paragraph carrying the first one, matching what `GearPicks` renders on the footballs guide.
+
+`npm run build` passes.
+
+**Chameleon links added the same day, same lever.** Three matching text links to `https://amzn.to/46Hg7dy` on the XbotGo Chameleon name, in the same three places as the Falcon links: the "Veo vs XbotGo" paragraph, the cheaper-alternatives bullet, and the cost-at-a-glance entry. Six affiliate links on the page in total, all rendered with `rel="sponsored nofollow"` by the shared MDX link renderer, one disclosure line.
+
+**One accuracy note that came with the Falcon link.** The link points at the Falcon Kit listing, which bundles a T4 tripod, while the comparison table row says the Falcon takes a "standard tripod, not included as standard". That table row is about the bare camera on XbotGo's own product page and is still correct, so it was left alone, and the at-a-glance Setup line now says XbotGo sells the camera on its own and as a kit with a tripod included. No price was added for the kit: the £659 figure in the article is XbotGo's own list price for the camera, and the Amazon kit price was not verified.
+
+**Falcon price corrected to £759, same day.** Graham checked and XbotGo has put the Falcon up from £659 to £759 for the camera itself. All four figures on the page changed together: the "Veo vs XbotGo" paragraph, the Price row of the Veo Cam 3 vs Falcon table, the cheaper-alternatives bullet, and the at-a-glance Cost line. Nothing else about the comparison moves: the Falcon is still well under Veo's hardware cost and still has no subscription, so the "no recurring fee" framing that the page argues from is unaffected.
+
+The price came from Graham, not from a check of my own: `xbotgo.com` and `amzn.to` are both blocked by this session's egress proxy, so neither the product page nor the Amazon listing could be read to confirm it. The paragraph still attributes the figure to XbotGo's product page, which is where the price lives.
+
+Worth knowing for next time: `ArticleLayout` supports a `dateModified` frontmatter field that renders an "Updated <date>" line and adds `dateModified` to the BlogPosting JSON-LD, and no article uses it yet. A price correction on a gear page is the obvious first candidate, but adding it changes what the page renders, so it was left out of this change rather than introduced as a side effect.
+
+**`dateModified` used for the first time, on this page.** `dateModified: "2026-09-05"` added to the Veo article's frontmatter, the optional field added to `ArticleFrontmatter` in `lib/content.ts`, and the prop passed through in `app/football-gear/veo-camera-alternatives/page.tsx` (the page wires each prop explicitly rather than spreading frontmatter, so the field alone would have done nothing). The page now shows "Updated 5 September 2026" next to the published date and carries `dateModified` in its BlogPosting JSON-LD, both verified in the built HTML. Every other article is unchanged: the field is optional and the layout already skipped it when absent.

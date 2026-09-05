@@ -27,6 +27,7 @@ export default async function Page() {
       content={article.content}
       path="/football-gear/veo-camera-alternatives"
       datePublished={article.frontmatter.date}
+      dateModified={article.frontmatter.dateModified}
     >
       <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
