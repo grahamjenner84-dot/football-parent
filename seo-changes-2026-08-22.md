@@ -379,3 +379,7 @@ The XbotGo product-page citation in the same paragraph is left as-is: it is the 
 `amzn.to` is already in `AFFILIATE_HOSTS` (`lib/affiliate.ts`), so the MDX link renderer tags all three with `rel="sponsored nofollow noopener noreferrer"` and `target="_blank"` automatically. This page had no affiliate links before, so an `<AffiliateDisclosure />` line was added directly under the paragraph carrying the first one, matching what `GearPicks` renders on the footballs guide.
 
 `npm run build` passes.
+
+**Chameleon links added the same day, same lever.** Three matching text links to `https://amzn.to/46Hg7dy` on the XbotGo Chameleon name, in the same three places as the Falcon links: the "Veo vs XbotGo" paragraph, the cheaper-alternatives bullet, and the cost-at-a-glance entry. Six affiliate links on the page in total, all rendered with `rel="sponsored nofollow"` by the shared MDX link renderer, one disclosure line.
+
+**One accuracy note that came with the Falcon link.** The link points at the Falcon Kit listing, which bundles a T4 tripod, while the comparison table row says the Falcon takes a "standard tripod, not included as standard". That table row is about the bare camera on XbotGo's own product page and is still correct, so it was left alone, and the at-a-glance Setup line now says XbotGo sells the camera on its own and as a kit with a tripod included. No price was added for the kit: the £659 figure in the article is XbotGo's own list price for the camera, and the Amazon kit price was not verified.
