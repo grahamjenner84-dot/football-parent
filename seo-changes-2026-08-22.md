@@ -364,3 +364,18 @@ Not a ranking/content change - dashboard tooling only (`/admin/seo`), logged for
 **Rank tracker gained a "New" filter** alongside All / Improved / Lost, with the count on the button. "Improved" mixes queries that moved up with queries that appeared from nothing; "New" is just the latter, i.e. terms with no position at all in the same 3-day window a week earlier. Works in both the by-query and by-page views.
 
 `npm run build` passes. Lint reports nothing new on either changed file (the 35 errors it reports are all pre-existing, in `scripts/`).
+
+## 22. XbotGo Falcon affiliate link added to the Veo alternatives article — 5 September 2026
+
+Page: `/football-gear/veo-camera-alternatives` (`content/football-gear/veo-camera-alternatives.mdx`). One lever: outbound affiliate links only. No title, meta description, heading, section or internal link changed, and no existing content was removed.
+
+Three text links to `https://amzn.to/4gBPZGS` on the XbotGo Falcon name:
+1. First mention in "Veo vs XbotGo" ("the closer like-for-like competitor to Veo is the XbotGo Falcon").
+2. The "AI tracking camera (XbotGo Chameleon or Falcon)" bullet under "Cheaper Alternatives to a Veo Camera".
+3. The "XbotGo Falcon (standalone camera, no subscription)" entry under "Cost and Features at a Glance".
+
+The XbotGo product-page citation in the same paragraph is left as-is: it is the source for the £659 price and the no-subscription claim, and is not an affiliate link.
+
+`amzn.to` is already in `AFFILIATE_HOSTS` (`lib/affiliate.ts`), so the MDX link renderer tags all three with `rel="sponsored nofollow noopener noreferrer"` and `target="_blank"` automatically. This page had no affiliate links before, so an `<AffiliateDisclosure />` line was added directly under the paragraph carrying the first one, matching what `GearPicks` renders on the footballs guide.
+
+`npm run build` passes.
