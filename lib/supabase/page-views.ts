@@ -566,6 +566,16 @@ export interface BannerVariantRow {
   ctr: number;
 }
 
+// One UTC calendar day of the same split test, bucketed by
+// created_at.slice(0, 10) exactly like PageViewDay - so picking a date on
+// the Coach App tab lines the banner numbers up with that day's page views.
+export interface BannerVariantDay {
+  date: string;
+  totalClicks: number;
+  totalImpressions: number;
+  rows: BannerVariantRow[];
+}
+
 export interface BannerVariantStats {
   days: number;
   // The window actually used, which is the later of `days` ago and the test
@@ -578,6 +588,10 @@ export interface BannerVariantStats {
   // guard, not as a significance test.
   enoughData: boolean;
   rows: BannerVariantRow[];
+  // Newest first, same ordering as PageViewStats.byDay. A single day is far
+  // too small to call the test on (see MIN_IMPRESSIONS_PER_ARM) - this is
+  // for reading a specific day's traffic, not for deciding a winner.
+  byDay: BannerVariantDay[];
 }
 
 const MIN_IMPRESSIONS_PER_ARM = 300;
@@ -613,6 +627,33 @@ function bannerOnPath(
   };
 }
 
+// Turns a pair of variant -> count maps into the sorted per-variant rows.
+// Shared by the whole-window totals and each day of the byDay breakdown so
+// the two can never drift apart in how a variant key is split or CTR is
+// worked out.
+function buildBannerRows(
+  clicks: Map<string, number>,
+  impressions: Map<string, number>
+): BannerVariantRow[] {
+  const variants = new Set([...clicks.keys(), ...impressions.keys()]);
+  return Array.from(variants)
+    .map((variant) => {
+      const [style = "", audience = "", placement = ""] = variant.split("-");
+      const clickCount = clicks.get(variant) ?? 0;
+      const impressionCount = impressions.get(variant) ?? 0;
+      return {
+        variant,
+        style,
+        audience,
+        placement,
+        clicks: clickCount,
+        impressions: impressionCount,
+        ctr: impressionCount > 0 ? clickCount / impressionCount : 0,
+      };
+    })
+    .sort((a, b) => b.ctr - a.ctr || b.clicks - a.clicks);
+}
+
 // Clicks per banner creative, over the last `days`, against the impressions
 // each creative actually got. Backs the breakdown on the Coach App tab of
 // /admin/seo.
@@ -632,12 +673,17 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
 
   // Paged the same way as getPageViewStats, and for the same reason:
   // PostgREST silently truncates an unbounded select at its max-rows cap.
-  const rows: { path: string; user_agent: string | null; banner_variant: string | null }[] = [];
+  const rows: {
+    path: string;
+    created_at: string;
+    user_agent: string | null;
+    banner_variant: string | null;
+  }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, user_agent, banner_variant")
+      .select("path, created_at, user_agent, banner_variant")
       .gte("created_at", since)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
@@ -653,39 +699,50 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
 
   const clicks = new Map<string, number>();
   const impressions = new Map<string, number>();
+  // date -> variant -> count, for the per-day breakdown.
+  const clicksByDay = new Map<string, Map<string, number>>();
+  const impressionsByDay = new Map<string, Map<string, number>>();
+
+  function bump(byDay: Map<string, Map<string, number>>, date: string, variant: string) {
+    const bucket = byDay.get(date) ?? new Map<string, number>();
+    bucket.set(variant, (bucket.get(variant) ?? 0) + 1);
+    byDay.set(date, bucket);
+  }
 
   for (const row of rows) {
     if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
 
+    const day = row.created_at.slice(0, 10);
+
     if (row.banner_variant) {
       clicks.set(row.banner_variant, (clicks.get(row.banner_variant) ?? 0) + 1);
+      bump(clicksByDay, day, row.banner_variant);
     }
 
     const banner = bannerOnPath(row.path, articleSlugs);
     if (banner) {
       const key = `${banner.style}-${banner.audience}-${banner.placement}`;
       impressions.set(key, (impressions.get(key) ?? 0) + 1);
+      bump(impressionsByDay, day, key);
     }
   }
 
-  const variants = new Set([...clicks.keys(), ...impressions.keys()]);
+  const result = buildBannerRows(clicks, impressions);
 
-  const result: BannerVariantRow[] = Array.from(variants)
-    .map((variant) => {
-      const [style = "", audience = "", placement = ""] = variant.split("-");
-      const clickCount = clicks.get(variant) ?? 0;
-      const impressionCount = impressions.get(variant) ?? 0;
+  const dates = new Set([...clicksByDay.keys(), ...impressionsByDay.keys()]);
+  const byDay: BannerVariantDay[] = Array.from(dates)
+    .map((date) => {
+      const dayClicks = clicksByDay.get(date) ?? new Map<string, number>();
+      const dayImpressions = impressionsByDay.get(date) ?? new Map<string, number>();
+      const dayRows = buildBannerRows(dayClicks, dayImpressions);
       return {
-        variant,
-        style,
-        audience,
-        placement,
-        clicks: clickCount,
-        impressions: impressionCount,
-        ctr: impressionCount > 0 ? clickCount / impressionCount : 0,
+        date,
+        totalClicks: dayRows.reduce((sum, r) => sum + r.clicks, 0),
+        totalImpressions: dayRows.reduce((sum, r) => sum + r.impressions, 0),
+        rows: dayRows,
       };
     })
-    .sort((a, b) => b.ctr - a.ctr || b.clicks - a.clicks);
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   const impressionsByStyle = new Map<string, number>();
   for (const row of result) {
@@ -701,5 +758,6 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
       (impressionsByStyle.get("dark") ?? 0) >= MIN_IMPRESSIONS_PER_ARM &&
       (impressionsByStyle.get("light") ?? 0) >= MIN_IMPRESSIONS_PER_ARM,
     rows: result,
+    byDay,
   };
 }

@@ -350,3 +350,17 @@ Why the copy came across verbatim rather than being rewritten: the two pages sho
 **No watch window needed in the sense used elsewhere in this log:** there is no title, meta or on-page text change to attribute a ranking movement to. The thing to watch is page-view depth and the click-through rate to `/coach-app`, not position.
 
 **Dot behaviour corrected same day, after Graham flagged it.** The first version derived the dot count from how many cards could be scrolled to the left edge, so five screenshots gave three dots on desktop and four on mobile. That described the scroll positions accurately and read as a bug, which is the wrong trade. There is now one dot per screenshot, always five, and a dot is lit while its screenshot is on screen (at least 60% visible): three light at once on desktop, one on mobile. Clicking any dot, the last included, scrolls that screenshot into view and lights it, which the old version could not do for the trailing cards. Verified at 1000px (start lights 1-3, end lights 3-5) and 375px (start lights 1, end lights 5).
+
+## 21. Admin dashboard: Coach App tab third, per-day banner test, "New" rank filter — 5 September 2026
+
+Not a ranking/content change - dashboard tooling only (`/admin/seo`), logged for traceability. Nothing on the live site changed. Commit `4d8c399`.
+
+**Coach App is now the third tab**, after Page views and Rank tracker, moved up from fifth. Tab order is the hand-written `TABS` array in `app/admin/seo/page.tsx`.
+
+**The Coach App tab's date picker now drives the banner split test, not just the page list.** Previously the banner creative test always showed the whole window while the day picker underneath it only re-cut the top-pages list, so there was no way to ask "how did the banners do on Tuesday". `getBannerVariantStats()` in `lib/supabase/page-views.ts` now returns a `byDay` breakdown, bucketed by `created_at.slice(0, 10)` exactly like `PageViewDay`, so both sides of the tab agree on what a day is. The picker moved to the top of the tab, above the banner numbers - left where it was, picking a date would have changed those numbers off-screen. Its date list is the union of Coach App page-view days and banner days, because banner impressions are views of the articles carrying each banner (spread across the whole site) rather than of the two Coach App paths: a day can have real banner traffic and no Coach App landing at all.
+
+**With a date selected, the test deliberately refuses to name a winner:** the "Leading: the X creative" line and the gold border on the winning arm are both suppressed and replaced by a note saying so. A single day's impressions are nowhere near `MIN_IMPRESSIONS_PER_ARM` (300 per arm), and the whole point of the CTR-not-clicks framing already in that panel is not to read a result out of too little data. Per-day numbers are for seeing what happened on a day, not for calling the test.
+
+**Rank tracker gained a "New" filter** alongside All / Improved / Lost, with the count on the button. "Improved" mixes queries that moved up with queries that appeared from nothing; "New" is just the latter, i.e. terms with no position at all in the same 3-day window a week earlier. Works in both the by-query and by-page views.
+
+`npm run build` passes. Lint reports nothing new on either changed file (the 35 errors it reports are all pre-existing, in `scripts/`).

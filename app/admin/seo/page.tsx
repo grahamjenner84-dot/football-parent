@@ -42,9 +42,9 @@ type DayWindow = 7 | 28 | 90;
 const TABS: { id: Tab; label: string }[] = [
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
+  { id: "coachApp", label: "Coach App" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
-  { id: "coachApp", label: "Coach App" },
   { id: "compare", label: "Compare days" },
   { id: "searches", label: "Top searches" },
   { id: "silence", label: "Gone quiet" },
@@ -309,22 +309,11 @@ export default function SeoAdminPage() {
           <PageViewTrend observedPaths={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
         ) : tab === "coachApp" ? (
           <>
-            <SectionNote label="What's included in these numbers">
-              Scoped to /football-parent-coach-app (the marketing landing
-              page) and /coach-app (the app itself), same page_views table as
-              the Page views tab above, just filtered. /coach-app is served
-              by the rewrite in vercel.json to the separate Coach App
-              deployment, which pings the same /api/page-view endpoint, so
-              both sides land in one table.
-            </SectionNote>
             {!coachAppViewStats && !coachAppViewError && (
               <p style={styles.muted}>Loading Coach App view report...</p>
             )}
             {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
-            {coachAppViewStats?.bannerVariants && (
-              <BannerVariantsReport stats={coachAppViewStats.bannerVariants} />
-            )}
-            {coachAppViewStats && <PageViewsReport stats={coachAppViewStats} />}
+            {coachAppViewStats && <CoachAppTab stats={coachAppViewStats} />}
           </>
         ) : (
           <>
@@ -692,10 +681,14 @@ function directionStyle(direction: RankRow["direction"]): CSSProperties {
   return { color: "#9c8a72" };
 }
 
-type DirectionFilter = "all" | "improved" | "lost";
+type DirectionFilter = "all" | "improved" | "new" | "lost";
 
 function matchesDirectionFilter(direction: RankRow["direction"], filter: DirectionFilter): boolean {
   if (filter === "improved") return direction === "up" || direction === "new";
+  // "new" is deliberately a subset of "improved" rather than a separate
+  // bucket: queries that weren't ranking at all a week ago, on their own,
+  // without the ones that merely moved up mixed in.
+  if (filter === "new") return direction === "new";
   if (filter === "lost") return direction === "down" || direction === "lost";
   return true;
 }
@@ -938,6 +931,9 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
     setPageSuggestionsOpen(false);
   }
 
+  // Counted off the tile-narrowed rows, not the post-filter list, so the
+  // button says how many it would show rather than how many it is showing.
+  const newCount = rows.filter((r) => r.direction === "new").length;
   const filtered = rows.filter((r) => matchesDirectionFilter(r.direction, directionFilter));
   const pageFiltered = selectedPage ? filtered.filter((r) => shortPage(r.page) === selectedPage) : filtered;
   const visible = [...pageFiltered].sort((a, b) => {
@@ -1079,6 +1075,12 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
               Improved
             </button>
             <button
+              onClick={() => setDirectionFilter("new")}
+              style={{ ...styles.toggleButton, ...(directionFilter === "new" ? styles.toggleButtonActive : {}) }}
+            >
+              New ({newCount})
+            </button>
+            <button
               onClick={() => setDirectionFilter("lost")}
               style={{ ...styles.toggleButton, ...(directionFilter === "lost" ? styles.toggleButtonActive : {}) }}
             >
@@ -1089,7 +1091,9 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
             Position today is a 3-day average ending today (GSC data lags a
             few days), compared against the same 3 days one week earlier - a
             single day is too noisy to trust for most queries. New/improved
-            queries are shown in green, lost ones in red.
+            queries are shown in green, lost ones in red. Improved covers
+            both queries that moved up and ones that are new; New narrows it
+            to just the queries that had no position at all a week ago.
           </SectionNote>
           {groupBy === "page" && <RankByPageList groups={groupRankByPage(pageFiltered)} />}
           {groupBy === "query" && (
@@ -1273,9 +1277,74 @@ function PageViewOptOutToggle() {
   );
 }
 
-function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
+// The banner split test and the Coach App page views share one chosen date,
+// so picking a day re-reads both rather than only the page list underneath.
+// The picker lives here, above the banner numbers, because those numbers sit
+// at the top of the tab - a picker further down would change them off-screen.
+function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
+  const [selectedDate, setSelectedDate] = useState("");
+
+  // Dates come from both sides. Coach App page views only cover the two
+  // Coach App paths, while the banner test's impressions are views of the
+  // articles carrying each banner, spread across the whole site - so a day
+  // can have banner traffic and no Coach App landing at all, and that day
+  // still has numbers worth reading.
+  const viewsByDate = new Map(stats.byDay.map((d) => [d.date, d.count]));
+  const dateOptions = Array.from(
+    new Set([...viewsByDate.keys(), ...(stats.bannerVariants?.byDay ?? []).map((d) => d.date)])
+  ).sort((a, b) => b.localeCompare(a));
+
+  return (
+    <>
+      <SectionNote label="What's included in these numbers">
+        Scoped to /football-parent-coach-app (the marketing landing page) and
+        /coach-app (the app itself), same page_views table as the Page views
+        tab, just filtered. /coach-app is served by the rewrite in
+        vercel.json to the separate Coach App deployment, which pings the
+        same /api/page-view endpoint, so both sides land in one table.
+      </SectionNote>
+
+      {dateOptions.length > 0 && (
+        <label style={styles.compareLabel}>
+          Pick a date to see that day&rsquo;s banner test and top pages
+          <select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            style={styles.dateInput}
+          >
+            <option value="">All (last 30 days)</option>
+            {dateOptions.map((date) => (
+              <option key={date} value={date}>
+                {date} ({viewsByDate.get(date) ?? 0} views)
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      {stats.bannerVariants && (
+        <BannerVariantsReport stats={stats.bannerVariants} selectedDate={selectedDate} />
+      )}
+      <PageViewsReport stats={stats} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+    </>
+  );
+}
+
+function BannerVariantsReport({
+  stats,
+  selectedDate,
+}: {
+  stats: BannerVariantStats;
+  selectedDate?: string;
+}) {
+  const selectedDay = selectedDate ? stats.byDay.find((d) => d.date === selectedDate) ?? null : null;
+  // A date with page views but no banner impression or click at all is a
+  // real zero, not a missing day - fall back to an empty row set rather than
+  // quietly showing the whole window's numbers under a single date heading.
+  const activeRows = selectedDate ? selectedDay?.rows ?? [] : stats.rows;
+
   const byStyle = ["dark", "light"].map((style) => {
-    const rows = stats.rows.filter((r) => r.style === style);
+    const rows = activeRows.filter((r) => r.style === style);
     const clicks = rows.reduce((sum, r) => sum + r.clicks, 0);
     const impressions = rows.reduce((sum, r) => sum + r.impressions, 0);
     return {
@@ -1297,7 +1366,8 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
   return (
     <div style={styles.list}>
       <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
-        Banner creative test (since {new Date(stats.since).toLocaleString("en-GB")})
+        Banner creative test{" "}
+        {selectedDate ? `on ${selectedDate}` : `(since ${new Date(stats.since).toLocaleString("en-GB")})`}
       </h3>
 
       <SectionNote label="How the split test is measured">
@@ -1307,8 +1377,10 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
         param; impressions are views of the pages serving it. Compare the
         CTR column, not the click column: each arm is shown on a different
         set of articles, so raw clicks mostly reflect which arm drew the
-        busier pages.
-        {stats.clampedToTestStart && (
+        busier pages. Picking a date below narrows every number here to that
+        one UTC day, bucketed exactly like the page view days it sits next
+        to.
+        {!selectedDate && stats.clampedToTestStart && (
           <>
             {" "}
             Window is pinned to when the banners went live rather than the
@@ -1319,14 +1391,29 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
         )}
       </SectionNote>
 
-      {!stats.enoughData && (
+      {selectedDate && (
+        <p style={styles.sectionNote}>
+          One day on its own can never call the test - a day&rsquo;s worth of
+          impressions is far below what a CTR gap needs to mean anything.
+          Clear the date to read the result; use a single day only to see
+          what actually happened on it.
+        </p>
+      )}
+
+      {selectedDate && !selectedDay && (
+        <p style={styles.sectionNote}>
+          No banner impressions or clicks recorded on {selectedDate}.
+        </p>
+      )}
+
+      {!selectedDate && !stats.enoughData && (
         <p style={styles.sectionNote}>
           Not enough data yet to call it. Both arms need at least a few
           hundred impressions before a CTR gap means anything.
         </p>
       )}
 
-      {stats.enoughData && leader && (
+      {!selectedDate && stats.enoughData && leader && (
         <p style={styles.sectionNote}>
           Leading: the {leader.style} creative, at{" "}
           {(leader.ctr * 100).toFixed(2)}% CTR
@@ -1339,7 +1426,7 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
           key={row.style}
           style={{
             ...styles.card,
-            borderColor: leader?.style === row.style ? "#e8b04b" : "#3a2c1d",
+            borderColor: !selectedDate && leader?.style === row.style ? "#e8b04b" : "#3a2c1d",
           }}
         >
           <div style={{ fontWeight: 600, fontSize: 13 }}>
@@ -1357,11 +1444,13 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
         Split by audience and placement
       </h4>
 
-      {stats.rows.length === 0 && (
-        <p style={styles.muted}>No banner impressions or clicks recorded yet.</p>
+      {activeRows.length === 0 && (
+        <p style={styles.muted}>
+          No banner impressions or clicks recorded{selectedDate ? ` on ${selectedDate}` : " yet"}.
+        </p>
       )}
 
-      {stats.rows.map((row) => (
+      {activeRows.map((row) => (
         <div key={row.variant} style={styles.card}>
           <div style={{ fontWeight: 600, fontSize: 13 }}>{row.variant}</div>
           <div style={styles.cardStats}>
@@ -1375,18 +1464,33 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
   );
 }
 
-function PageViewsReport({ stats }: { stats: PageViewStats }) {
+// selectedDate/onSelectDate are optional: passed together, the parent owns
+// the chosen day (the Coach App tab does this so the banner test above reads
+// the same date) and renders the picker itself; omitted, this component keeps
+// its own date state and its own picker, as the Page views tab needs.
+function PageViewsReport({
+  stats,
+  selectedDate: controlledDate,
+  onSelectDate,
+}: {
+  stats: PageViewStats;
+  selectedDate?: string;
+  onSelectDate?: (date: string) => void;
+}) {
   const daysCovered = stats.byDay.length;
   const avgPerDay = daysCovered > 0 ? Math.round(stats.totalViews / daysCovered) : 0;
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [internalDate, setInternalDate] = useState<string>("");
   const [visiblePathCount, setVisiblePathCount] = useState(TOP_PATHS_PAGE_SIZE);
+  const controlled = onSelectDate !== undefined;
+  const selectedDate = controlled ? controlledDate ?? "" : internalDate;
 
   // Switching between a specific day and the whole window swaps the top-pages
   // list out from under the "show more" state, so every date change collapses
   // it back to the first page. Done here rather than in an effect watching
   // selectedDate: one obvious code path, no extra render.
   function selectDate(date: string) {
-    setSelectedDate(date);
+    if (onSelectDate) onSelectDate(date);
+    else setInternalDate(date);
     setVisiblePathCount(TOP_PATHS_PAGE_SIZE);
   }
 
@@ -1477,7 +1581,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
         </>
       )}
 
-      {stats.byDay.length > 0 && (
+      {stats.byDay.length > 0 && !controlled && (
         <label style={styles.compareLabel}>
           Pick a date to see its top pages
           <select
