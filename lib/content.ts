@@ -6,6 +6,7 @@ export interface ArticleFrontmatter {
   title: string;
   description: string;
   date: string;
+  dateModified?: string;
   category: string;
   categoryUrl: string;
   readTime: number;
