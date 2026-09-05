@@ -391,3 +391,15 @@ The price came from Graham, not from a check of my own: `xbotgo.com` and `amzn.t
 Worth knowing for next time: `ArticleLayout` supports a `dateModified` frontmatter field that renders an "Updated <date>" line and adds `dateModified` to the BlogPosting JSON-LD, and no article uses it yet. A price correction on a gear page is the obvious first candidate, but adding it changes what the page renders, so it was left out of this change rather than introduced as a side effect.
 
 **`dateModified` used for the first time, on this page.** `dateModified: "2026-09-05"` added to the Veo article's frontmatter, the optional field added to `ArticleFrontmatter` in `lib/content.ts`, and the prop passed through in `app/football-gear/veo-camera-alternatives/page.tsx` (the page wires each prop explicitly rather than spreading frontmatter, so the field alone would have done nothing). The page now shows "Updated 5 September 2026" next to the published date and carries `dateModified` in its BlogPosting JSON-LD, both verified in the built HTML. Every other article is unchanged: the field is optional and the layout already skipped it when absent.
+
+## 22. Rank tracker: strict "Lost" filter, old "Lost" renamed "Declined" — 5 September 2026
+
+Not a ranking/content change - dashboard tooling only (`/admin/seo`), logged for traceability. Follow-up to section 21. Commit `610498c`.
+
+Graham read the Total tracked tile's `▲ +29` as "29 new" and asked why the New button said 63. Both were right: `change` on that tile is `current - prior`, which nets arrivals against departures. Confirmed against the live report the same day - 395 tracked queries, 150 up / 125 down / 63 new / 34 lost / 23 same, and 63 − 34 = 29 exactly. Not a bug, but the tile shows a delta with two opposing flows netted invisibly inside it, which is what made it misread.
+
+**Added a strict "Lost" filter and renamed the old one.** "Lost" already existed and meant "down **or** lost", so it could not also be the strict filter without one label meaning two things. It is now **Declined** (the mirror of Improved, which covers up plus new), and **Lost** means only `direction === "lost"`: queries not ranking at all any more. New and Lost are strict subsets sitting inside Improved and Declined, so the five counts deliberately do not sum to All - the explainer note now says that, since the same netting is what made the tile confusing in the first place.
+
+Counts now appear on all five buttons rather than New alone, rendered from one `DIRECTION_FILTERS` array instead of five hand-written buttons.
+
+`npm run build` passes, lint clean on the changed file.

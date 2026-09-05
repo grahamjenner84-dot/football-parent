@@ -681,15 +681,26 @@ function directionStyle(direction: RankRow["direction"]): CSSProperties {
   return { color: "#9c8a72" };
 }
 
-type DirectionFilter = "all" | "improved" | "new" | "lost";
+type DirectionFilter = "all" | "improved" | "new" | "declined" | "lost";
+
+// Improved and Declined are the wide buckets; New and Lost are the strict
+// subsets sitting inside each - queries that weren't ranking at all a week
+// ago, and queries that stopped ranking altogether, without the ones that
+// merely moved up or down mixed in. Declined was called "Lost" before the
+// strict Lost filter existed, which made one label mean two things.
+const DIRECTION_FILTERS: { id: DirectionFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "improved", label: "Improved" },
+  { id: "new", label: "New" },
+  { id: "declined", label: "Declined" },
+  { id: "lost", label: "Lost" },
+];
 
 function matchesDirectionFilter(direction: RankRow["direction"], filter: DirectionFilter): boolean {
   if (filter === "improved") return direction === "up" || direction === "new";
-  // "new" is deliberately a subset of "improved" rather than a separate
-  // bucket: queries that weren't ranking at all a week ago, on their own,
-  // without the ones that merely moved up mixed in.
   if (filter === "new") return direction === "new";
-  if (filter === "lost") return direction === "down" || direction === "lost";
+  if (filter === "declined") return direction === "down" || direction === "lost";
+  if (filter === "lost") return direction === "lost";
   return true;
 }
 
@@ -931,9 +942,12 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
     setPageSuggestionsOpen(false);
   }
 
-  // Counted off the tile-narrowed rows, not the post-filter list, so the
-  // button says how many it would show rather than how many it is showing.
-  const newCount = rows.filter((r) => r.direction === "new").length;
+  // Counted off the tile-narrowed rows, not the post-filter list, so each
+  // button says how many it would show rather than how many is on screen.
+  // Improved and Declined overlap New and Lost by design, so these
+  // deliberately do not sum to the All count.
+  const directionCount = (filter: DirectionFilter) =>
+    rows.filter((r) => matchesDirectionFilter(r.direction, filter)).length;
   const filtered = rows.filter((r) => matchesDirectionFilter(r.direction, directionFilter));
   const pageFiltered = selectedPage ? filtered.filter((r) => shortPage(r.page) === selectedPage) : filtered;
   const visible = [...pageFiltered].sort((a, b) => {
@@ -1062,38 +1076,30 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
             </div>
           )}
           <div style={styles.metricToggle}>
-            <button
-              onClick={() => setDirectionFilter("all")}
-              style={{ ...styles.toggleButton, ...(directionFilter === "all" ? styles.toggleButtonActive : {}) }}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setDirectionFilter("improved")}
-              style={{ ...styles.toggleButton, ...(directionFilter === "improved" ? styles.toggleButtonActive : {}) }}
-            >
-              Improved
-            </button>
-            <button
-              onClick={() => setDirectionFilter("new")}
-              style={{ ...styles.toggleButton, ...(directionFilter === "new" ? styles.toggleButtonActive : {}) }}
-            >
-              New ({newCount})
-            </button>
-            <button
-              onClick={() => setDirectionFilter("lost")}
-              style={{ ...styles.toggleButton, ...(directionFilter === "lost" ? styles.toggleButtonActive : {}) }}
-            >
-              Lost
-            </button>
+            {DIRECTION_FILTERS.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => setDirectionFilter(f.id)}
+                style={{
+                  ...styles.toggleButton,
+                  ...(directionFilter === f.id ? styles.toggleButtonActive : {}),
+                }}
+              >
+                {f.label} ({directionCount(f.id)})
+              </button>
+            ))}
           </div>
           <SectionNote label="How position and direction are worked out">
             Position today is a 3-day average ending today (GSC data lags a
             few days), compared against the same 3 days one week earlier - a
             single day is too noisy to trust for most queries. New/improved
             queries are shown in green, lost ones in red. Improved covers
-            both queries that moved up and ones that are new; New narrows it
-            to just the queries that had no position at all a week ago.
+            queries that moved up plus ones that are new, and Declined covers
+            ones that moved down plus ones that stopped ranking; New and Lost
+            narrow each to just the queries that had no position a week ago,
+            and that have none now. New and Lost therefore sit inside
+            Improved and Declined rather than beside them, so the five counts
+            do not sum to the total.
           </SectionNote>
           {groupBy === "page" && <RankByPageList groups={groupRankByPage(pageFiltered)} />}
           {groupBy === "query" && (
