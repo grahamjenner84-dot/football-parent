@@ -88,14 +88,20 @@ export default function RootLayout({
 
               var age = consent ? Date.now() - new Date(consent.timestamp).getTime() : Infinity;
               var isFresh = consent && age <= MAX_CONSENT_AGE_MS;
+              var marketingGranted = isFresh && consent.marketing;
 
               window.gtag('consent', 'default', {
-                ad_storage: 'denied',
-                ad_user_data: 'denied',
-                ad_personalization: 'denied',
+                ad_storage: marketingGranted ? 'granted' : 'denied',
+                ad_user_data: marketingGranted ? 'granted' : 'denied',
+                ad_personalization: marketingGranted ? 'granted' : 'denied',
                 analytics_storage: isFresh && consent.analytics ? 'granted' : 'denied',
                 wait_for_update: 500,
               });
+
+              // Meta Pixel consent gate (its own API, separate from Google
+              // Consent Mode above) - read here so the fbevents.js loader
+              // below can call fbq('consent', ...) before fbq('init', ...).
+              window.__fpMarketingConsent = !!marketingGranted;
             })();
           `}
         </Script>
@@ -150,6 +156,33 @@ export default function RootLayout({
             gtag('config', 'G-2206W12H84', {
               page_path: window.location.pathname,
             });
+
+            // Google Ads conversion/remarketing tag - shares the gtag.js
+            // runtime and Consent Mode signals set above with GA, so no
+            // separate consent wiring needed here. Swap in the real
+            // conversion ID from Google Ads > Tools > Conversions.
+            gtag('config', 'AW-PLACEHOLDER_CONVERSION_ID');
+          `}
+        </Script>
+
+        {/* Meta Pixel (Facebook + Instagram ads share one pixel/Ads Manager).
+            Consent-gated via fbq('consent', ...), independent of Google
+            Consent Mode above. Swap in the real pixel ID from Meta Events
+            Manager. See lib/ads-tracking.ts for firing conversion events. */}
+        <Script id="meta-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('consent', window.__fpMarketingConsent ? 'grant' : 'revoke');
+            fbq('init', 'PLACEHOLDER_PIXEL_ID');
+            fbq('track', 'PageView');
           `}
         </Script>
       </body>

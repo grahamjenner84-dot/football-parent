@@ -10,7 +10,7 @@ export type SerpItem = {
   type: string;
   text?: string;
   references?: Array<{ url?: string; domain?: string; title?: string }>;
-  items?: SerpItem[]; // people_also_ask nests one sub-item per question; related_searches nests plain strings/objects
+  items?: Array<SerpItem | string>; // people_also_ask nests one sub-item per question; related_searches nests plain strings (observed) or objects
   title?: string; // people_also_ask sub-item question text
   keyword?: string; // related_searches sub-item text, when present as an object
   expanded_element?: SerpItem[]; // people_also_ask_ai_overview_expanded_element lives here
@@ -45,17 +45,18 @@ export function extractSerpFeatures(items: SerpItem[]): SerpFeatures {
   const aiOverview = items.find((it) => it.type === "ai_overview");
 
   const paa = items.find((it) => it.type === "people_also_ask");
-  const paaQuestions = (paa?.items ?? []).map((q) => q.title).filter((t): t is string => !!t);
+  const paaSubItems = (paa?.items ?? []).filter((q): q is SerpItem => typeof q !== "string");
+  const paaQuestions = paaSubItems.map((q) => q.title).filter((t): t is string => !!t);
 
   const paaExpandedOverviews: Array<{ question: string; item: SerpItem }> = [];
-  for (const q of paa?.items ?? []) {
+  for (const q of paaSubItems) {
     const expanded = (q.expanded_element ?? []).find((e) => e.type === "people_also_ask_ai_overview_expanded_element");
     if (expanded && q.title) paaExpandedOverviews.push({ question: q.title, item: expanded });
   }
 
   const relatedBlock = items.find((it) => it.type === "related_searches");
   const relatedSearches = (relatedBlock?.items ?? [])
-    .map((r) => r.keyword ?? r.title)
+    .map((r) => (typeof r === "string" ? r : (r.keyword ?? r.title)))
     .filter((t): t is string => !!t);
 
   return { aiOverview, paaQuestions, paaExpandedOverviews, relatedSearches };

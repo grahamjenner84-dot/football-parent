@@ -160,6 +160,54 @@ export function keywordOverview(keywords: string[], opts: LabsCommonOptions): Pr
   });
 }
 
+// Aggregated organic/paid traffic overview for a whole domain (total ranked
+// keyword count, estimated traffic value "etv", SERP position distribution)
+// - one cheap call per domain, used for "how much total search traffic does
+// this competitor domain get" scale comparisons rather than pulling every
+// individual ranked keyword.
+export function domainRankOverview(target: string, opts: LabsCommonOptions): Promise<DataForSeoResult> {
+  const endpoint = "dataforseo_labs/google/domain_rank_overview/live";
+  const body = baseBody(opts, { target });
+  return dataForSeoRequest({
+    workflow: opts.workflow,
+    apiFamily: API_FAMILY,
+    cacheFamily: "competitor_rankings",
+    endpoint,
+    body,
+    environment: opts.environment,
+    confirmLive: opts.confirmLive,
+    seedTerms: [target],
+    locationCode: body.location_code,
+    languageCode: body.language_code,
+  });
+}
+
+// Discovers domains that rank for the same keywords as a target site
+// (organic keyword overlap), not a curated/guessed list - the actual "who
+// else competes in this niche" tool. excludeTopDomains filters out huge
+// generic sites (Wikipedia, YouTube, etc.) that technically share a handful
+// of keywords but aren't real niche competitors.
+export function competitorsDomain(
+  target: string,
+  opts: LabsCommonOptions & { excludeTopDomains?: boolean }
+): Promise<DataForSeoResult> {
+  const endpoint = "dataforseo_labs/google/competitors_domain/live";
+  const body = baseBody(opts, { target, exclude_top_domains: opts.excludeTopDomains ?? true });
+  return dataForSeoRequest({
+    workflow: opts.workflow,
+    apiFamily: API_FAMILY,
+    cacheFamily: "competitor_rankings",
+    endpoint,
+    body,
+    environment: opts.environment,
+    confirmLive: opts.confirmLive,
+    seedTerms: [target],
+    locationCode: body.location_code,
+    languageCode: body.language_code,
+    limit: body.limit,
+  });
+}
+
 // Competitor's ranked keywords - used for backlink-target discovery and
 // competitor content-gap analysis. cacheFamily is caller-supplied because
 // the same endpoint serves two different freshness purposes.

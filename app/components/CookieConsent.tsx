@@ -11,6 +11,7 @@ const MAX_CONSENT_AGE_MS = 365 * 24 * 60 * 60 * 1000;
 
 type Consent = {
   analytics: boolean;
+  marketing: boolean;
   timestamp: string;
 };
 
@@ -52,25 +53,41 @@ function logConsentEvent(action: ConsentAction, analytics: boolean) {
   }
 }
 
-function writeConsent(analytics: boolean, action: ConsentAction) {
+function writeConsent(
+  analytics: boolean,
+  marketing: boolean,
+  action: ConsentAction
+) {
   try {
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ analytics, timestamp: new Date().toISOString() })
+      JSON.stringify({
+        analytics,
+        marketing,
+        timestamp: new Date().toISOString(),
+      })
     );
   } catch {
     // localStorage unavailable (e.g. blocked) - consent choice won't persist
-    // across visits, but the in-session gtag update below still applies.
+    // across visits, but the in-session gtag/fbq updates below still apply.
   }
 
   const w = window as typeof window & {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   };
 
   w.gtag?.("consent", "update", {
     analytics_storage: analytics ? "granted" : "denied",
+    ad_storage: marketing ? "granted" : "denied",
+    ad_user_data: marketing ? "granted" : "denied",
+    ad_personalization: marketing ? "granted" : "denied",
   });
 
+  w.fbq?.("consent", marketing ? "grant" : "revoke");
+
+  // analyticsGranted is what the consent-events table/dashboard tracks today;
+  // marketing isn't logged there yet (see cookie-consent.ts).
   logConsentEvent(action, analytics);
 }
 
@@ -78,6 +95,7 @@ export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
   const [managing, setManaging] = useState(false);
   const [analyticsChoice, setAnalyticsChoice] = useState(false);
+  const [marketingChoice, setMarketingChoice] = useState(false);
 
   useEffect(() => {
     const existing = readConsent();
@@ -87,7 +105,9 @@ export default function CookieConsent() {
     }
 
     const openSettings = () => {
-      setAnalyticsChoice(readConsent()?.analytics ?? false);
+      const current = readConsent();
+      setAnalyticsChoice(current?.analytics ?? false);
+      setMarketingChoice(current?.marketing ?? false);
       setManaging(true);
       setVisible(true);
     };
@@ -99,19 +119,19 @@ export default function CookieConsent() {
   if (!visible) return null;
 
   const acceptAll = () => {
-    writeConsent(true, "accept_all");
+    writeConsent(true, true, "accept_all");
     setVisible(false);
     setManaging(false);
   };
 
   const rejectAll = () => {
-    writeConsent(false, "reject_all");
+    writeConsent(false, false, "reject_all");
     setVisible(false);
     setManaging(false);
   };
 
   const savePreferences = () => {
-    writeConsent(analyticsChoice, "save_preferences");
+    writeConsent(analyticsChoice, marketingChoice, "save_preferences");
     setVisible(false);
     setManaging(false);
   };
@@ -127,8 +147,9 @@ export default function CookieConsent() {
         {!managing ? (
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm leading-relaxed text-slate-700">
-              We use cookies to understand how visitors use Football Parent.
-              Analytics cookies are only set with your consent. See our{" "}
+              We use cookies to understand how visitors use Football Parent,
+              and for advertising. These cookies are only set with your
+              consent. See our{" "}
               <a
                 href="/cookie-policy"
                 className="font-semibold text-blue-700 hover:text-blue-900"
@@ -232,6 +253,42 @@ export default function CookieConsent() {
                 <span
                   className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${
                     analyticsChoice ? "translate-x-6" : "translate-x-1"
+                  }`}
+                />
+              </button>
+            </div>
+
+            <div className="flex items-center justify-between gap-4 rounded-lg border border-slate-200 px-4 py-3">
+              <div>
+                <p className="text-sm font-semibold text-slate-900">
+                  Advertising and retargeting
+                </p>
+                <p className="text-sm text-slate-600">
+                  Cookies set by advertising platforms (Google Ads, Meta) to
+                  measure ad performance and show relevant ads. See the{" "}
+                  <a
+                    href="/cookie-policy"
+                    className="font-semibold text-blue-700 hover:text-blue-900"
+                  >
+                    Cookie Policy
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <button
+                type="button"
+                role="switch"
+                aria-checked={marketingChoice}
+                aria-label="Advertising and retargeting cookies"
+                onClick={() => setMarketingChoice((current) => !current)}
+                className={`relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition ${
+                  marketingChoice ? "bg-slate-900" : "bg-slate-300"
+                }`}
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition ${
+                    marketingChoice ? "translate-x-6" : "translate-x-1"
                   }`}
                 />
               </button>
