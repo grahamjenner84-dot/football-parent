@@ -125,6 +125,16 @@ Four `<ExpertOpinion>` quotes added, each linking to Part 2, no headings/structu
 
 All four logged in `expert-quotes.md` (quotes 12-15, each 1/3 reuse) and the content tracker (`expert-quote-count` incremented per page, `MSYS_NO_PATHCONV=1` used throughout to avoid the recurring path-mangling bug this time). `npm run build` passes, all four routes generate. Not yet committed.
 
+## New article: Football Team Spreadsheet
+
+Published `/coaching/football-team-spreadsheet` (Coaching, ~1,557 words, commit `2385d35`). Replaces the previously-planned "how to track stats for a grassroots football team" angle (pages.id 4539, never published, now marked `superseded`, its research history merged into the new row 5211) after this session's proper keyword research (discover -> shortlist -> canonical volume + live SERP + difficulty, per the seo-page skill pattern) found that phrasing has null search volume in every variant tested, while "football team spreadsheet" / "soccer team spreadsheet" (320/mo each, KD 0) has real, low-competition demand - surfaced via a competitor ranked-keyword pull on Spond/Mingle/the FA's Matchday app, where mingle.sport ranked for "soccer team spreadsheet".
+
+Live SERP for both primary terms confirmed a weak field (Etsy, Pinterest, OpenOffice/Vertex42 template galleries, spreadsheet hobbyist blogs, YouTube, Reddit, mingle.sport) with no SaaS/app competitors - a much easier field than the "team management app" phrasing. No PAA surfaced on either term; FAQ content was built from the consistent related-searches modifiers (template, free, excel, pdf) instead.
+
+Covers what to track and how to structure a spreadsheet (lineup by period, goals/assists, a season master table), cross-links to `equal-playing-time-in-grassroots-football` for the rotation-fairness angle, and pivots to the Coach App as the upgrade once manual tracking becomes the bottleneck, linking directly to `/coach-app`. Two genuine `<ParentNote>` callouts from Graham's own spreadsheet (sourced live this session), voice_pct exactly 10.0%. 1 external citation (FA Standard Code of Rules) - deliberately light sourcing, practical/DIY topic with no governing-body facts needing heavier citation density, per the style guide's explicit exception.
+
+Added to `app/sitemap.ts`. Open follow-up, not yet decided: whether to build a real downloadable spreadsheet/Google Sheets template as a linked asset, since "template"/"free download" is real, strong intent the current prose-only version doesn't fully match.
+
 ## Still on watch, not yet due
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.
