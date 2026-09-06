@@ -1,0 +1,121 @@
+---
+title: "Football Team Spreadsheet: Tracking Goals, Assists and Playing Time"
+description: "A football team spreadsheet for tracking goals, assists and playing time by quarter, and when it's worth switching to an app instead."
+date: "2026-09-06"
+category: "Coaching"
+categoryUrl: "/coaching"
+readTime: 9
+sections:
+  - id: "what-to-track-on-a-football-team-spreadsheet"
+    title: "What to Track on a Football Team Spreadsheet"
+  - id: "setting-up-the-spreadsheet"
+    title: "Setting Up the Spreadsheet"
+  - id: "tracking-goals-and-assists-during-a-match"
+    title: "Tracking Goals and Assists During a Match"
+  - id: "tracking-playing-time-alongside-stats"
+    title: "Tracking Playing Time Alongside Stats"
+  - id: "excel-or-google-sheets"
+    title: "Excel or Google Sheets?"
+  - id: "where-a-spreadsheet-starts-to-break-down"
+    title: "Where a Spreadsheet Starts to Break Down"
+  - id: "when-to-move-from-a-spreadsheet-to-an-app"
+    title: "When to Move From a Spreadsheet to an App"
+  - id: "frequently-asked-questions"
+    title: "Frequently Asked Questions"
+---
+
+If you're coaching or managing a grassroots team, a spreadsheet is usually the first thing you reach for once "who played what last week" stops being something you can hold in your head. It's free and flexible, and for a single season with one team, it works well. This covers what to put on it, a simple structure to start from, and the point where it starts working against you instead of for you.
+
+## What to Track on a Football Team Spreadsheet
+
+Most football team spreadsheets fail before they're useful because they copy a generic sports-tracking template built for season standings and results, not what a grassroots coach needs match to match. The useful version tracks the player, not the scoreline.
+
+At minimum, that means:
+
+- Who was on the pitch, and in which position, broken down by period (quarters, halves, or however your format splits the match)
+- Who was on the bench or substituted at each of those points
+- Goals and assists, attributed to the player and the period they happened in
+- Appearances and minutes across the season, not just the current match
+
+That last point matters more than it sounds: a single match sheet tells you what happened today, but a running season total is what lets you answer "has this child had a fair share of minutes" or "who's played the most games", rather than guessing from memory.
+
+## Setting Up the Spreadsheet
+
+A workable structure has two layers: a per-match sheet, and a season-long master table that pulls from it.
+
+The per-match sheet is the simplest part: one row per player, one column per period, with the position they played. A separate small table on the same sheet logs goals by period and scorer, since that's easier to read at a glance than cramming it into the same grid as positions.
+
+<ParentNote>
+Our spreadsheet tracked the lineup quarter by quarter, and the goalscorers each quarter, which fed into a master table showing the percentage of time each player had in every position, and as a substitute. That let us make sure everyone got equal game time, and it also tracked who'd scored the most goals and played the most games across the season.
+</ParentNote>
+
+The master table is what turns single-match data into something useful: it pulls the per-match figures into one running view per player, total minutes, percentage of time by position, appearances, and season goals. Building it as a formula-driven summary rather than something you re-type by hand is the difference between a spreadsheet you're still using in November and one you've abandoned by October.
+
+If your format uses rolling substitutions, where a player can come off and back on more than once, your per-match sheet needs to allow for that rather than assuming one row equals one continuous spell. The FA's [Standard Code of Rules for Youth Competitions](https://www.thefa.com/~/media/Files/TheFAPortal/governance-docs/rules-of-the-association/standard-code-of-rules-for-youth-competitions.ashx) allows roll-on, roll-off substitutions across most youth formats, so this is normal, not an edge case.
+
+## Tracking Goals and Assists During a Match
+
+Recording a goal while you're also running the match is what actually trips coaches up, not the spreadsheet's design. Most coaches end up either jotting goals on paper or a phone note during the game and transferring them afterwards, or asking an assistant to update the sheet live from the touchline.
+
+Assists are the harder half of this. Knowing who scored is usually obvious in the moment; knowing who made the final pass, and remembering it accurately by the time you update anything, is much easier to get wrong or skip, especially with several changes of possession between the pass and the goal.
+
+A simple fix that works for most teams: keep the in-match capture basic (scorer and rough time only), then fill in position, minutes and assists afterwards, while the match is still fresh. Trying to capture everything live, mid-match, is usually where accuracy breaks down.
+
+## Tracking Playing Time Alongside Stats
+
+If part of the reason you're tracking stats is to keep playing time fair, build that into the same spreadsheet rather than running a second system. Our guide to [equal playing time in grassroots football](/coaching/equal-playing-time-in-grassroots-football) covers the formula for a fair target per player, the number your master table's minutes column should be checked against.
+
+Position matters too, not just minutes. A child who plays 30 minutes at right-back every week is getting a different experience to one playing the same 30 minutes across midfield, defence and attack, and if you're already tracking position by period for the stats side, you have what you need to check it. Our guide to [7-a-side and 9-a-side formations](/coaching/best-football-formations-by-age-group) covers picking a shape that still rotates players through different positions.
+
+## Excel or Google Sheets?
+
+Either works, and the choice mostly comes down to how you'll use it on matchday rather than which is more powerful.
+
+Google Sheets is easier if more than one person needs to update it: an assistant or parent can edit the same live sheet from their own phone, and you're not relying on one person's laptop being the only copy.
+
+Excel is easier for more complex master-table formulas, handles bigger sheets a little more smoothly, and doesn't need a signal or data connection pitch-side if you've saved a copy to the device.
+
+For a single grassroots team, either is genuinely fine. The bigger factor is usually who else needs to see or update it, not which spreadsheet program you pick.
+
+## Where a Spreadsheet Starts to Break Down
+
+<ParentNote>
+A few times we wouldn't notice a player was down on the pitch twice, or that they'd played the same position several times in a row, since nothing flagged it if we'd made a mistake. Assists were the other gap: they were genuinely hard to capture properly on a spreadsheet, so we just didn't track them well. That's part of why the Coach App works differently: you tap a button to log the goal, with the option to add which foot and who assisted if you want to, without it being extra admin mid-match.
+</ParentNote>
+
+This is the pattern most coaches eventually hit: a spreadsheet doesn't know your team's own rules, so it can't warn you that you've put the same player down for two positions in one period, or that one child has played three matches running at centre-back while another hasn't had a game there all season. You only find out by checking manually, which is exactly the admin a spreadsheet was supposed to remove.
+
+A spreadsheet is still a reasonable choice to start with. Its specific failure mode is that it holds the data you type in perfectly well, but it doesn't understand what that data means well enough to catch your own mistakes.
+
+## When to Move From a Spreadsheet to an App
+
+The clearest signal is how much of your own time goes into checking the spreadsheet rather than using it, not squad size. If you're regularly cross-checking who's played where to keep rotation fair, or reconstructing goals and assists from memory days after a match because live capture didn't happen, that's the admin an app is built to remove.
+
+The [Coach App](/coach-app) applies the same target-minutes and rotation logic a spreadsheet uses, but automatically: it flags a broken rotation rule as you pick the team rather than after the fact, and lets you log a goal (and who assisted, if you want) with a tap during the match instead of reconstructing it afterwards. Squad management, team selection and equal-time rotation are free; live match logging and full season stats sit on a paid plan.
+
+That's a genuine trade-off against a free spreadsheet. For a single season with a small squad, a well-set-up spreadsheet is a perfectly reasonable way to run things, and the app earns its place once the manual checking becomes the actual bottleneck.
+
+## Frequently Asked Questions
+
+### What's the minimum I should track if I don't want a complicated spreadsheet?
+
+Player name, appearances and goals is enough to start with. Add minutes, position and assists once that basic version is being kept up, rather than building the full structure before you've used it once.
+
+### Can two coaches update the same spreadsheet during a match?
+
+Yes, with Google Sheets: both can have it open on their own phone and edit at the same time, useful if one person is watching the match while another handles admin. A standard Excel file saved locally on one device doesn't allow this.
+
+### Do I need a new spreadsheet each season, or can I keep one going?
+
+Either works. A single sheet with a new tab per season keeps career-to-date totals in one place, useful if the squad mostly stays together year to year. Starting fresh each season is simpler if your squad changes a lot, or you'd rather not carry old formulas forward.
+
+### Can I print or share it with other parents?
+
+Yes. Both Excel and Google Sheets let you export a page as a PDF, which is a reasonable way to share season totals with parents without giving them edit access to the working sheet itself.
+
+## Related Articles
+
+- [How to Become a Football Coach](/parent-guides/how-to-become-a-football-coach)
+- [What Qualifications Do I Need to Be a Football Coach?](/coaching/what-qualifications-do-i-need-to-be-a-football-coach)
+- [Ball Mastery Drills for 7 and 8 Year Olds](/coaching/football-drills-for-7-and-8-year-olds)
+- [Building Confidence in Young Footballers](/football-development/build-confidence-young-footballers)

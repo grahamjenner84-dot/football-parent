@@ -105,6 +105,7 @@ export const routes = [
   '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
   '/coaching/equal-playing-time-in-grassroots-football',
   '/coaching/best-football-formations-by-age-group',
+  '/coaching/football-team-spreadsheet',
 
   // Coach App
   '/football-parent-coach-app',
