@@ -72,6 +72,32 @@ The review also flagged that both articles cited `tottenhamhotspur.com/teams/men
 - `academy-pathway/aston-villa-development-centre-guide.mdx`: new article shipped without the claim from the start (caught pre-publish-settle in review)
 - `academy-pathway/tottenham-development-centres-explained.mdx`: live article, safeguarding section edited to drop the named-operator paragraph only - no other content, structure or meta touched
 
+## New article: Martin Brock JPL interview, Part 2
+
+Published `/parent-guides/jpl-martin-brock-interview-part-2` (Parent Guides, ~2,025 words). Second half of the JPL CEO interview (questions 7-11, real Q&A supplied directly by Graham from his own interview with Martin Brock): balancing results with development, the JPL's relationship to scouts/academies, common parent misconceptions, matchday conduct, and how families should think about grassroots vs JPL.
+
+Added to `app/sitemap.ts`. Part 1 (`jpl-martin-brock-interview-part-1`) updated: its "Part 2 will follow separately" placeholder line now links forward to Part 2, and Part 2 added to Part 1's Related Articles. Part 2 links back to Part 1, plus cross-links to `jpl-vs-grassroots-football`, `jpl-and-academy-football`, `how-football-scouts-identify-players`, `how-to-get-into-the-jpl` and `what-to-say-after-football-matches`.
+
+Content tracker `mark` run hit the known Git-Bash leading-slash path-mangling bug again (same one noted earlier in this log for the coaching-cluster audit) — corrupted a fresh row's URL to a `C:/Program Files/Git/...` path. Re-ran with `MSYS_NO_PATHCONV=1` to mark the real row correctly, then deleted the corrupted stray row (id 5197) directly from `seo-data/database/seo.db`.
+
+## `equal-playing-time-in-grassroots-football` - "game time" phrasing added, overturning this morning's "no change" call
+
+Graham asked to analyse playingtimecalculator.com, which he's aware is ranking #2 for "equal game time football" (~300 searches/month). Live SERP check confirmed footballparent.co.uk isn't in the top 99 organic results for that exact query at all yet (page is 9 days old). Competitor is a thin, single-purpose multi-sport calculator site (7 total ranked keywords, domain rank 147, 94 referring domains but spam score 43 - mostly junk directory links) - not a strong moat, but our own backlink profile is essentially nonexistent by comparison (domain rank 0, 10 backlinks total site-wide, first indexed July 2026).
+
+Labs `ranked_keywords` on the competitor showed real volume on shorter variants ("game time football" 320/mo at their #1, "playing time calculator" 260, "equal playing time calculator" 210) that directly contradicted this morning's "Coaching cluster keyword audit" entry above (8 phrasings checked via the canonical Google Ads volume endpoint, all null, "no change" concluded). **Re-ran the same canonical `keywords_data/google_ads/search_volume` check Graham pointed out we normally use, specifically on the shorter phrases** - confirms all three as real (320/260/210), while "equal game time football" itself stays null. Reconciled: this morning's audit tested only the longer 4-word phrase; it never tested the shorter phrases that actually carry the volume. Same tool both times, different keyword strings - not a data-source discrepancy.
+
+**Change made** (additive only, one lever): added "(often called equal game time)" to the intro paragraph, plus one new FAQ entry ("Is 'game time' the same as 'playing time' in football?") clarifying the terms are interchangeable. No headings, links, or existing content removed. `npm run build` passes. Committed separately: `502ed89`.
+
+Title/meta not changed - per the paste-ready-alternatives rule, options need putting to Graham directly rather than auto-applied.
+
+**Not actioned (flagged for a separate decision, not this change):** the SERP is dominated by literal calculator tools at the top positions (#2, #11 mention, #18, #36, #38 among the first 40 results). An embedded interactive calculator would target the tool-intent side of this query directly but is real dev scope - deferred as a distinct follow-up, not bundled into this content edit.
+
+Also hit the known Git-Bash leading-slash path-mangling bug a third time on `page-keyword-research.ts` (same bug as the two entries above) - left `discovery_runs` id 34 orphaned with `page_id NULL`. Re-ran with `MSYS_NO_PATHCONV=1` (cache hit, no extra cost) to persist correctly under page 4535, then deleted the empty orphaned row.
+
+Live cost this session: SERP + Labs domain/backlink checks ~$0.10, plus two `page-keyword-research.ts` search-volume/keyword-ideas runs ~$0.11 (second was a free cache hit). ~$0.20 total.
+
+**Watch:** don't make a second content change to this page before ~20 September (10-14 day watch window from today), and don't reintroduce a title/meta change here without putting explicit before/after alternatives to Graham first.
+
 ## Still on watch, not yet due
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.
