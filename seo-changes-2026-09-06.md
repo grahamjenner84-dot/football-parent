@@ -135,6 +135,15 @@ Covers what to track and how to structure a spreadsheet (lineup by period, goals
 
 Added to `app/sitemap.ts`. Open follow-up, not yet decided: whether to build a real downloadable spreadsheet/Google Sheets template as a linked asset, since "template"/"free download" is real, strong intent the current prose-only version doesn't fully match.
 
+## Football Team Spreadsheet: remaining internal links + Parent Guides listing
+
+Graham asked to finish the internal-linking work: link from `equal-playing-time-in-grassroots-football` despite that page's watch-window note above, and list the new article under `/parent-guides` since there's no `/coaching` category page yet (confirmed one doesn't exist - the existing `equal-playing-time`, `best-football-formations` and `what-qualifications` coaching articles are already surfaced this same way, so this matches established practice, not a new pattern).
+
+- `equal-playing-time-in-grassroots-football.mdx`: added the link on "a spreadsheet" in the matchday-admin section. This is a 3rd same-day content edit to this specific page (phrasing, Coach App positioning, now this) - explicit exception to the one-lever/watch-window guidance, done on Graham's direct instruction rather than my own judgement call.
+- `app/parent-guides/page.tsx`: added to the `articles` array, matching the existing entries for the other unreleased-category coaching pages.
+
+Also fixed the two zero-inbound-link gaps flagged in the previous session turn: a body link from `best-football-formations-by-age-group.mdx` and one from `football-parent-coach-app/page.tsx`'s Real Stats feature description, plus swapped the new article's weakest Related Articles entry for a link to `/football-parent-coach-app` as requested. `npm run build` passes throughout. Commits: `5da13c9`, `dfffbe6`.
+
 ## Still on watch, not yet due
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.
