@@ -668,6 +668,23 @@ attended the Trust's Football Development Centre, or a Trust/academy coach.
 4. What would you tell a parent whose child has just been invited to the FDC,
    that isn't obvious from the club's own information?
 
+### aston-villa-development-centre-guide — TBD, tag: Aston Villa Foundation Coaching Centres, first-hand experience
+Drafted: 2026-09-06
+Graham has no direct experience of Aston Villa's Foundation programmes or academy
+(confirmed 2026-09-06, in-session). Same situation as Tottenham/Brentford/Leeds -
+shipped informational with zero formal callouts, pending request logged instead.
+Well suited to a parent whose child has attended a Foundation Skills or Coaching
+Centre, or a Foundation coach.
+1. What's the one thing about Aston Villa's Foundation Coaching Centre that
+   surprised you compared to what you expected going in?
+2. The Foundation runs across five different sites (Aston, Harborne, Solihull,
+   Sutton Coldfield, Aldridge) - did travel or choice of site end up mattering
+   more than you expected?
+3. How did the move from a Skills Centre to a Coaching Centre actually happen
+   for your child, and did it feel like a genuine step up?
+4. What would you tell a parent whose child has just been invited to a further
+   look from Foundation level, that isn't obvious from the club's own information?
+
 ### Elevation academy interview — Crystal Palace academy coach, tag: academy scouting/coaching, U6-U8 development, 1v1/ball mastery, Crystal Palace insider, private coaching crossover, bio-banding
 Drafted: 2026-08-25
 Graham knows a coach who works at Crystal Palace's academy and separately runs

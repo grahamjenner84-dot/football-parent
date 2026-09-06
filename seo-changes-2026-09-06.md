@@ -57,6 +57,21 @@ Graham asked whether the equal-playing-time article is optimised for the right t
 
 **No change made to the article or its title/meta** — the audit confirms it's already well-aligned to real query language for a page in a genuinely low/no-measurable-volume topic, and reinforces the original "topical authority, not a traffic play" framing rather than overturning it.
 
+## New article: Aston Villa Development Centre Guide
+
+Published `/academy-pathway/aston-villa-development-centre-guide` (Academy Pathway, ~1,800 words). Covers the Foundation's six age-banded Coaching/Skills Centres vs the Category One academy at Bodymoor Heath (held since 2014), the Girls Academy's FP/YDP/PDP structure, and the Under-12 national-recruitment rule. Next in the club dev-centre cluster after Brentford (highest remaining unwritten volume, ~280/mo per the 11 Aug opportunity scan). No direct Graham experience of Villa - pending expert-quote request logged in `expert-quotes.md`, zero real callouts, same precedent as Tottenham/Brentford/Leeds.
+
+Added to `app/sitemap.ts` and the `/academy-pathway` category page. Cross-linked from the `premier-league-development-centres-list` pillar and, following the same inbound-linking pattern used for Brentford, from `academy-categories-explained`, `development-centres-vs-academies` and `what-is-eppp`.
+
+**Caught during a football-parent-review audit before publish settled:** the article's first draft claimed Category One clubs recruit nationally "from age 14" - wrong, corrected to the accurate Under-12 rule already documented (and now independently corroborated) in `academy-categories-explained.mdx`. Fixed everywhere it appeared (body, FAQ, summary) before this was committed anywhere.
+
+## Safeguarding citation removed from Aston Villa and Tottenham articles - couldn't verify live
+
+The review also flagged that both articles cited `tottenhamhotspur.com/teams/men-u18/academy-info/trials/` for a specific named-scam-operator claim ("Tony's Soccer School" / "Go Pro"). Tried 3 current URL variants on that domain; all resolved to a generic U18 team-news hub with no scam-warning content. Couldn't confirm the claim is still live on that exact page, so removed the named-operator detail from both articles rather than keep an unverifiable accusation against a specific named business. Kept the general "verify before paying, don't hand over your child's details" safeguarding advice in both, which doesn't depend on that one citation. Graham's call, not a unilateral edit.
+
+- `academy-pathway/aston-villa-development-centre-guide.mdx`: new article shipped without the claim from the start (caught pre-publish-settle in review)
+- `academy-pathway/tottenham-development-centres-explained.mdx`: live article, safeguarding section edited to drop the named-operator paragraph only - no other content, structure or meta touched
+
 ## Still on watch, not yet due
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.

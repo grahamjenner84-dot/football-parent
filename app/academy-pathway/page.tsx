@@ -207,6 +207,12 @@ export default function AcademyPathwayPage() {
           description:
             "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in.",
         },
+        {
+          title: "Aston Villa Development Centre Guide",
+          href: "/academy-pathway/aston-villa-development-centre-guide",
+          description:
+            "Aston Villa's academy has held Category One status since 2014 and won the FA Youth Cup in 2025. How the Foundation's six age-banded centres feed into it.",
+        },
       ]}
       bottomContent={{
         title: "About the Academy Pathway",
