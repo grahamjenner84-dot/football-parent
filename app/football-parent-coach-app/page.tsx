@@ -110,7 +110,11 @@ export default function CoachAppPage() {
           <p>
             Appearances, goals, assists and cards, calculated from what
             actually happened in your matches, not hand-counted after the
-            fact.
+            fact. If you&apos;re currently doing this on a{" "}
+            <a href="/coaching/football-team-spreadsheet" className="text-blue-700 underline">
+              football team spreadsheet
+            </a>
+            , this is what it looks like once it&apos;s automatic.
           </p>
 
           <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
