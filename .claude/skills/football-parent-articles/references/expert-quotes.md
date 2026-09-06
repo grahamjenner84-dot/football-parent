@@ -409,17 +409,20 @@ young players.
 4. Is there a rule of thumb you actually use in practice, rather than a
    textbook guideline?
 
-### how-to-find-a-football-agent-for-your-child — TBD, tag: agents, representation
-Drafted: 2026-08-09
-Found during the full-site voice audit. Well suited to a registered FA football
-agent or a sports lawyer.
+### how-to-find-a-football-agent-for-your-child — Adam Sells, tag: agents, representation
+Drafted: 2026-08-09. Reassigned 2026-09-06: Adam Sells is an FA-registered
+intermediary (see his full entry below under "Pending" for bio) - a much
+stronger fit than the original TBD generic agent/lawyer ask, since he
+actively works this exact role. Messaged 2026-09-06, awaiting reply.
 1. What's the biggest misconception parents have about when they actually need
-   an agent?
-2. What's a red flag you'd tell parents to watch for that isn't obvious from
+   an agent or intermediary?
+2. What age, or what stage of a child's development, is it actually sensible
+   for a family to start thinking about representation, rather than premature?
+3. What's a red flag you'd tell parents to watch for that isn't obvious from
    the outside?
-3. How do you actually decide whether a family's situation is one you can help
+4. How do you actually decide whether a family's situation is one you can help
    with, versus one that's premature?
-4. What's changed most since the FA's Football Agent Regulations replaced the
+5. What's changed most since the FA's Football Agent Regulations replaced the
    old intermediaries system?
 
 ### how-girls-football-academies-work — TBD, tag: girls' pathway overview
@@ -727,6 +730,101 @@ Crossover / private coaching:
 Bio-banding:
 10. Has bio-banding ever changed how you or a colleague viewed a player you
     thought you already had figured out?
+
+### Paul Barry — round 2, tag: talent ID, inside the academy system, release
+Drafted: 2026-09-06. Messaged 2026-09-06, awaiting reply.
+Follow-up to the FutureFit interview, this time drawing on his Head of
+Coaching/Talent ID roles across Southend, Watford, Arsenal and Crystal
+Palace rather than the Football DNA development-philosophy angle. Covers
+several currently-zero-voice articles at once: `what-do-academy-coaches-
+look-for`, `how-football-scouts-identify-players`, `what-happens-at-
+academy-trials`, `how-to-get-scouted-for-football`, `what-age-do-football-
+academies-recruit`, `academy-categories-explained`, `how-academy-football-
+works`, `pdc-vs-ptc-vs-rtc-explained`, `can-academy-players-play-grassroots-
+football`, `pre-academy-football`, `development-centres-vs-academies`,
+`understanding-academy-release`.
+
+Talent ID and trials:
+1. When you're assessing a young player, what's the first thing you
+   notice, before anything technical?
+2. Parents assume goals and pace matter most. What do you actually weight
+   more heavily, and why does that surprise them?
+3. What's the biggest misconception parents have about "missing the
+   window" for their child to be recruited?
+4. What's the best way for a child to actually get spotted by academy
+   scouts?
+
+What the academy system is actually like from the inside:
+5. Having worked at clubs across different levels, from Southend up to
+   Arsenal and Crystal Palace, what's the biggest difference in how
+   families are treated at a smaller academy versus a Category 1 academy?
+6. Is getting into a Category 1 academy always the best move, or are
+   there situations where a lower category, or a different pathway
+   altogether, actually serves a player better?
+7. Have you seen a family successfully juggle grassroots and academy
+   football at the same time? What actually made that work?
+8. Having worked across foundation-phase programmes at more than one
+   club, are development centres a genuine route into the academy
+   proper, or are they mostly a separate system that rarely feeds into
+   it? Does that differ much club to club?
+9. In the foundation years, what would you focus on as a parent to give
+   your child the best chance of opportunities as they get older?
+
+Supporting a child through release:
+10. What's one thing you wish more parents understood about supporting a
+    child through release?
+
+### Adam Sells, tag: goalkeeper academy pathway, goalkeeper coaching
+Drafted: 2026-09-06. Messaged 2026-09-06, awaiting reply.
+Bio: schoolboy academy goalkeeper at Chelsea, Crystal Palace and Brentford
+before a non-League playing career. Coached goalkeepers in Charlton's
+youth system in the late 1990s, then in Crystal Palace's academy setup
+through to 2013, always goalkeeper-specific. For the last 20 years has run
+Sells Goalkeeper Products, an elite goalkeeper glove/gear brand worn by
+Premier League and La Liga keepers (clients include Dean Henderson, Nick
+Pope, Vicente Guaita, Karl Darlow; has also supplied Victor Valdes and
+Keylor Navas). Also an FA-registered intermediary, working as a
+goalkeeper-specific "fixer" moving players between clubs - see his separate
+entry above under `how-to-find-a-football-agent-for-your-child`, which
+this same contact now covers.
+No dedicated goalkeeper article exists on the site yet - this is a new
+article, not filling a gap in an existing one. There's also no goalkeeper
+glove guide in `content/football-gear/` (only a general winter-gloves
+piece for outfield players) - worth a short second Q&A reusing this same
+contact if he's up for it, flagged but not drafted below yet.
+
+His own path (schoolboy keeper at three big clubs):
+1. What's the biggest difference between playing outfield and playing in
+   goal as a young academy player, that parents watching from outside
+   wouldn't clock?
+2. Looking back at trialling for three different clubs as a schoolboy,
+   what actually made the difference between the clubs that kept you and
+   the ones that didn't?
+
+What academies actually look for in a young goalkeeper:
+3. Coaching goalkeepers specifically in Palace's academy, what did you
+   weight most heavily in a young keeper that a parent wouldn't expect?
+4. Is there an age where goalkeeper-specific coaching should really
+   start, or is it too early to specialise before a certain point?
+5. What's the most common mistake you see parents or coaches make with a
+   promising young goalkeeper?
+
+The pathway onward, from where he sits now as an intermediary:
+6. From where you sit now, moving goalkeepers between clubs, what tends
+   to separate the ones who make it as a pro keeper from the ones who
+   don't, once they're already inside an academy?
+7. Is there a stage where a goalkeeper's development can stall that's
+   specific to the position, that outfield players don't really face?
+
+### The physio (Instagram) — TBD, tag: injury prevention/workouts, embedded video
+Drafted: 2026-09-06. Messaged via Instagram DM 2026-09-06, awaiting reply.
+Contact and exact focus still TBD - Graham messaged directly rather than
+by email. Plan is to pair the Q&A with 1-2 embedded Instagram Reels of
+their suggested workouts (new `InstagramEmbed` MDX component built
+2026-09-06, see `app/components/mdx/InstagramEmbed.tsx`), crediting and
+linking back to their Instagram profile. Questions not drafted yet -
+depends on his specialty once confirmed and which article(s) this ends up
+supporting.
 
 Format for new entries:
 ```
