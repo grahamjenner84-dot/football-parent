@@ -7,6 +7,7 @@ import ParentNote from "@/app/components/mdx/ParentNote";
 import ExpertOpinion from "@/app/components/mdx/ExpertOpinion";
 import AffiliateDisclosure from "@/app/components/mdx/AffiliateDisclosure";
 import GearPicks from "@/app/components/mdx/GearPicks";
+import InstagramEmbed from "@/app/components/mdx/InstagramEmbed";
 import { affiliateLinkProps } from "@/lib/affiliate";
 import CoachAppBanner, {
   bannerStyleForKey,
@@ -20,6 +21,7 @@ const components = {
   ExpertOpinion,
   AffiliateDisclosure,
   GearPicks,
+  InstagramEmbed,
 
   h2: ({ children }: any) => (
     <h2
