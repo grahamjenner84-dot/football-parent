@@ -137,6 +137,98 @@ export default function CookiePolicyPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+            Advertising and retargeting cookies
+          </h2>
+
+          <p>
+            We use Google Ads and Meta (Facebook and Instagram) to run ads
+            for Football Parent and the Coach App, and to measure whether
+            they work - for example, whether someone who clicked an ad went
+            on to sign up. These cookies are only set if you accept them via
+            our cookie banner or{" "}
+            <a
+              href="/cookie-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              cookie settings
+            </a>
+            . If you reject or don&apos;t respond, none of the cookies below
+            are set.
+          </p>
+
+          <div className="overflow-x-auto mb-6">
+            <table className="w-full border-collapse border border-gray-300">
+              <thead>
+                <tr>
+                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                    Cookie
+                  </th>
+                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                    Purpose
+                  </th>
+                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                    Duration
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    <code>_gcl_au</code>
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Set by Google Ads to measure ad conversions.
+                  </td>
+                  <td className="border border-gray-300 p-3">90 days</td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    <code>_fbp</code>
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Set by the Meta Pixel to identify browsers for ad
+                    delivery and measurement.
+                  </td>
+                  <td className="border border-gray-300 p-3">90 days</td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    <code>_fbc</code>
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Set by the Meta Pixel to record that a visit came from a
+                    Meta ad click.
+                  </td>
+                  <td className="border border-gray-300 p-3">90 days</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Google and Meta are the third parties that ultimately control
+            these cookies. See{" "}
+            <a
+              href="https://policies.google.com/technologies/cookies"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google&apos;s cookie policy
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://www.facebook.com/privacy/policies/cookies/"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Meta&apos;s cookie policy
+            </a>{" "}
+            for more detail.
+          </p>
+
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
             Changing your preferences
           </h2>
 
