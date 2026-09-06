@@ -336,3 +336,21 @@ Why the copy came across verbatim rather than being rewritten: the two pages sho
 `npm run build` passes. Lint reports only the same pre-existing `@next/next/no-img-element` warning the page's existing logo `<img>` already produces; no new findings.
 
 **No watch window needed in the sense used elsewhere in this log:** there is no title, meta or on-page text change to attribute a ranking movement to. The thing to watch is page-view depth and the click-through rate to `/coach-app`, not position.
+
+## 20. Check-in — 6 September 2026 (closes this file)
+
+This was the target check-in date set in this file's own header (~5 Sept). Site-wide, 22 Aug batch: **41,163 → 50,035 impressions (+22%), 597 → 720 clicks (+21%)** over the same 10-day-either-side window methodology, no `dataFreshnessWarning`.
+
+**JPL cannibalisation fix (section 6): consolidation held, CTR problem confirmed real.** `what-is-the-junior-premier-league` is now consistently the page showing for "what is jpl football" (372 impr / pos 6.4 vs the comparison page's 33 impr / pos 8.0 — was 249 vs 20 before the fix). Still shows in `get_seo_report`'s cannibalisation list because the comparison page hasn't dropped off the query entirely, but the split is now more lopsided in the explainer's favour, not less. However: the explainer page's CTR on that query is still **0% on 372 impressions**, and the page is now confirmed in the site's `low_ctr` list (18,167 impr/90d, 0.8% actual vs 4% expected at position 6.8). Per the plan set on 22 Aug, ranking is now stable enough to run a live competing-titles SERP check and consider a title/meta change on this specific page — not yet done, needs a small DataForSEO spend, awaiting go-ahead.
+
+**Title-length cleanup (section 7): 5 of 6 pages flat-to-up.** `coaching/what-qualifications-do-i-need-to-be-a-football-coach` (pos 20.3→8.0), `jpl-and-academy-football` (impr 82→174, clicks 0→3), `how-to-find-a-football-agent-for-your-child` (roughly flat), `how-players-progress-through-football-development-centres` (tiny volume, slightly up), `jpl-martin-brock-interview-part-1` (new page, ramping normally). One exception: `what-age-do-girls-football-academies-recruit` shows impressions and position both down in the rolling comparison — but this page was already declining before the edit (238→90 impr noted in the original entry) and the comparison window straddles the 27 Aug change date (~17 days pre, ~10 post), so this isn't a clean before/after. Not treated as a regression; needs a tighter window next time rather than action now.
+
+**Gear FAQ pages (sections 4/13): both up ~7x on impressions** (boots 1,697→12,983 trailing-28d; shin pads 1,026→12,094), far outpacing the site-wide +22%. Likely mostly September back-to-school seasonality rather than a pure FAQ effect — can't cleanly separate the two from GSC alone. The planned AI Overview citation recheck for "football boots for wide feet" / "best shin pads" / "best shin pads for football" / "best shin pads for kids" / "wide fit football boots kids" has **not** been run yet — needs a live check, awaiting go-ahead.
+
+**Meta description cleanup (section 8) and bio-banding title (section 13):** `get_seo_report`'s `decay` list is currently empty — no site-wide regressions. Did not pull all 17 meta-description pages individually this round (low-traffic compliance batch by design, not a traffic play) — can do a full per-page pass if wanted. Bio-banding's position move (7.6→6.0) isn't meaningful at 7-30 impressions.
+
+**New, not part of any prior watch list — flagged for follow-up, not yet actioned:**
+- 3 pages newly gone quiet (7-day vs 21-day baseline): `what-to-say-after-football-matches` (142→2 impr), `girls-academy-vs-grassroots-football` (55→0), `premier-league-development-centres` (32→0). Per the standing rule, these need a technical check (URL Inspection, recent deploy/proxy change, robots/noindex) before any content action.
+- `support-child-after-bad-match` is still 0 impressions since 26 May launch, still un-investigated despite being flagged on 9 Aug and 22 Aug. Needs the Search Console URL Inspection that's been deferred twice now.
+
+**This file is now closed as the record for 22 Aug – 6 Sept.** New entries continue in `seo-changes-2026-09-06.md`.
