@@ -96,7 +96,21 @@ Also hit the known Git-Bash leading-slash path-mangling bug a third time on `pag
 
 Live cost this session: SERP + Labs domain/backlink checks ~$0.10, plus two `page-keyword-research.ts` search-volume/keyword-ideas runs ~$0.11 (second was a free cache hit). ~$0.20 total.
 
-**Watch:** don't make a second content change to this page before ~20 September (10-14 day watch window from today), and don't reintroduce a title/meta change here without putting explicit before/after alternatives to Graham first.
+**Watch:** don't reintroduce a title/meta change here without putting explicit before/after alternatives to Graham first.
+
+## Same page, same day: proper keyword discovery + Coach App calculator positioning (deliberate exception to the watch-window rule above)
+
+Graham asked for the keyword research redone properly (discover -> shortlist -> canonical volume, per the seo-content skill's sequence, rather than guessing phrasings), and separately asked whether the Coach App could be positioned as the "calculator" this SERP rewards, since it's genuinely a season-long equal-game-time tool rather than a one-off.
+
+**Discovery corrected the picture further:** `keyword_ideas` (5 seeds) + `related_keywords` (2 seeds) surfaced "football lineup builder" (1,900/mo) and "football lineup maker" (720/mo) as tempting high-volume adjacents - checked their live SERPs before acting on them and both are entirely fan-facing formation/graphic tools (lineup-builder.co.uk, fotmob, buildlineup.com, chosen11.com), not real matchday squad management. Discarded - same kind of check that was skipped this morning, done properly this time. Real cluster confirmed via the canonical `google_ads_search_volume` endpoint: "game time football" 320/mo, "playing time calculator" 260/mo, "equal playing time calculator" 210/mo, all LOW competition; "game time football today" (170) excluded as likely kickoff-time-lookup intent, not equal-time rotation.
+
+**Change made:** added a paragraph after the worked example in "How to Calculate Fair Playing Time" distinguishing a one-off calculation (the formula already given is enough) from tracking it automatically across a full season (the Coach App). Also repointed both existing Coach App links on this page from `/football-parent-coach-app` (the marketing/SEO page) straight to `/coach-app` (the live app itself) - confirmed via the coach-app repo's `vercel.json` that `/coach-app` is a real reverse-proxied deployment, not a dead link, and that the marketing page's own CTA just forwards to the same place, so this removes a redundant hop for a reader already sold on the idea. `npm run build` passes. Committed separately: `a2c16fb`.
+
+**Deliberate rule exception, logged explicitly per the CLAUDE.md guardrail:** this is a second content change to this page today, on top of the "game time" phrasing edit above (`502ed89`). Graham explicitly chose to bundle both today rather than wait out the usual watch window, aware this makes it harder to attribute any ranking movement over the next 2 weeks to one specific cause. Not treating this as a precedent for skipping the rule elsewhere.
+
+Live cost this addition: ~$0.18 (keyword_ideas + 2x related_keywords + canonical search_volume + search_intent, the last of which returned no usable rows - shape mismatch, not worth a retry at this cost) + ~$0.004 for 2 SERP sanity checks on the lineup-builder terms.
+
+**Watch:** page now carries two same-day changes (phrasing + Coach App positioning). Don't touch it again before ~20 September.
 
 ## Still on watch, not yet due
 
