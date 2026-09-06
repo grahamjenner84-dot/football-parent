@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Team Spreadsheet: Tracking Stats | Football Parent",
+  title: "Football Team Spreadsheet: Tracking Team Stats | Football Parent",
   description:
     "A football team spreadsheet for tracking goals, assists and playing time by quarter, and when it's worth switching to an app instead.",
   path: "/coaching/football-team-spreadsheet",
