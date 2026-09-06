@@ -17,13 +17,7 @@ reviewable prospect list only.
 2. Start with overlap, not a full unfiltered export:
    ```
    scripts/seo/dataforseo/endpoints/backlinks.ts
-     -> domainIntersection(competitorTargets, { ...opts, excludeTargets: ["footballparent.co.uk"] })
-        // domains linking to competitors but not FP - confirmed against the
-        // real API: domainIntersection(targets, opts) WITHOUT excludeTargets
-        // returns the true intersection (domains linking to ALL of targets,
-        // i.e. linking to both the competitor AND us already) - a small,
-        // different, much-less-useful list. excludeTargets is required to
-        // get the actual opportunity list.
+     -> domainIntersection(targets, opts)   // domains linking to competitors but not FP
      -> pageIntersection(targetPages, opts) // once a specific competitor page is a known link magnet
    ```
 
