@@ -123,6 +123,12 @@ export default function ParentGuidesPage() {
             "JPL chief executive Martin Brock explains why the league was created, how it differs from grassroots football, and what parents should expect from trials, standards and commitment.",
         },
         {
+          title: "JPL Interview Part 2: Scouts, Misconceptions and Matchday Behaviour",
+          href: "/parent-guides/jpl-martin-brock-interview-part-2",
+          description:
+            "JPL chief executive Martin Brock on development vs results, whether the JPL leads to scouts and academies, common parent misconceptions, and matchday conduct.",
+        },
+        {
           title: "How to Become a Grassroots Football Coach",
           href: "/parent-guides/how-to-become-a-football-coach",
           description:
