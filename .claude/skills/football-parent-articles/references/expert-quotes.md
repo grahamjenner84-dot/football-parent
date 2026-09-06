@@ -189,6 +189,68 @@ committing.
 training, travel, costs and commitment?"
 **Used in:** (none yet)
 
+Source for quotes 12-15: [Martin Brock on the JPL Part 2: Scouts, Misconceptions and Matchday Behaviour](/parent-guides/jpl-martin-brock-interview-part-2).
+
+### 12. Minimum game-time rule (66%/50%)
+
+> "At U11s and below, we run a 66% minimum game-time rule; at U12s and above,
+> a 50% minimum. No child is there to warm a bench, they're there to play,
+> thrive and develop."
+
+**Topics:** JPL playing-time policy, how it compares to grassroots, what a
+minimum game-time rule actually guarantees.
+**Source:** Part 2, "How does the JPL encourage clubs to balance
+competitive results with long-term development?"
+**Used in:** [jpl-vs-grassroots-football](/parent-guides/jpl-vs-grassroots-football) (1/3) -
+2026-09-06, "Playing time" section (also tightened the section's own vague
+"at least 50%" claim to the correct tiered 66%/50% figures).
+
+### 13. We are not a scouting agency
+
+> "We are not a scouting agency, and we would never guarantee any individual
+> child exposure or an academy place, anyone who promises that is
+> misleading you. What we offer is the environment where development and
+> visibility become possible. Scouts do watch JPL football. But the right
+> reason to join is to become a better player in better games."
+
+**Topics:** JPL and academy scouting, exposure vs selection, realistic
+expectations about being noticed.
+**Source:** Part 2, "What is the relationship between the JPL, professional
+academies and scouts?"
+**Used in:** [jpl-and-academy-football](/parent-guides/jpl-and-academy-football) (1/3) -
+2026-09-06, "Exposure vs selection" section. Closes a gap logged 2026-08-08
+("voice still deliberately deferred pending a real JPL interview").
+
+### 14. Not just for future stars
+
+> "The JPL is only for future stars and there's no point unless your child
+> is exceptional. Not true, it's for ambitious players who want to be
+> stretched, whatever their ultimate ceiling. If your child wants better
+> football and is ready to commit, there's a place in the JPL worth
+> exploring."
+
+**Topics:** JPL misconceptions, whether a child needs to be exceptional to
+join, who the JPL is actually for.
+**Source:** Part 2, "What are the most common misconceptions parents have
+about the JPL?"
+**Used in:** [how-to-get-into-the-jpl](/parent-guides/how-to-get-into-the-jpl) (1/3) -
+2026-09-06, new "Misconception 5" under "Common misconceptions about
+joining".
+
+### 15. More than half still play grassroots too (not yet used elsewhere)
+
+> "More than half of JPL players still play for their local grassroots team
+> as well, because playing alongside their friends matters, and we'd never
+> want to take that away. For a lot of children, the JPL is extra football,
+> not a replacement."
+
+**Topics:** grassroots vs JPL as an either/or choice, whether joining the
+JPL means giving up a local club.
+**Source:** Part 2, "What advice would you give a family deciding between
+grassroots and a JPL opportunity?"
+**Used in:** [jpl-vs-grassroots-football](/parent-guides/jpl-vs-grassroots-football) (1/3) -
+2026-09-06, "Which children suit each pathway?" section.
+
 ### Secondary voice (non-Football DNA, use sparingly)
 
 > "We need to think like children, not like adults." — Ronny Zimmermann,

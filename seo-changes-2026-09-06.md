@@ -112,6 +112,19 @@ Live cost this addition: ~$0.18 (keyword_ideas + 2x related_keywords + canonical
 
 **Watch:** page now carries two same-day changes (phrasing + Coach App positioning). Don't touch it again before ~20 September.
 
+## JPL cluster: four Martin Brock Part 2 quotes added to close a logged EEAT gap
+
+Graham asked whether any Part 2 answers could fill JPL-cluster gaps where he has no personal experience (i.e. insider/structural facts, not parent-voice territory). Cross-checked the content tracker and found `jpl-and-academy-football` had a note from 2026-08-08 explicitly reading "voice still deliberately deferred pending a real JPL interview" - a documented gap this interview now closes.
+
+Four `<ExpertOpinion>` quotes added, each linking to Part 2, no headings/structure/existing links removed:
+
+- `jpl-and-academy-football.mdx`, "Exposure vs selection" section: quote 13 ("we are not a scouting agency... development and visibility become possible") - closes the logged 8 Aug gap, first Martin Brock quote this page has ever had.
+- `jpl-vs-grassroots-football.mdx`, "Playing time" section: quote 12 (66%/50% tiered minimum game-time rule). Also **tightened the section's own pre-existing claim** ("at least 50% of each league match... where appropriate") to the correct tiered 66%/U11-and-below, 50%/U12-and-above figures now confirmed directly by JPL's own CEO - the old text was a vaguer, less accurate version of the same claim, not a different one.
+- `jpl-vs-grassroots-football.mdx`, "Which children suit each pathway?" section: quote 15 (more than half of JPL players also still play grassroots).
+- `how-to-get-into-the-jpl.mdx`, new "Misconception 5" under "Common misconceptions about joining": quote 14 (JPL isn't only for future stars).
+
+All four logged in `expert-quotes.md` (quotes 12-15, each 1/3 reuse) and the content tracker (`expert-quote-count` incremented per page, `MSYS_NO_PATHCONV=1` used throughout to avoid the recurring path-mangling bug this time). `npm run build` passes, all four routes generate. Not yet committed.
+
 ## Still on watch, not yet due
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.
