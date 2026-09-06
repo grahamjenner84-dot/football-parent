@@ -317,7 +317,19 @@ Rebuilt and re-verified in the prerendered DOM: 4 affiliate anchors, all carryin
 
 **Watch window starts today.** The metric that matters is not affiliate clicks, it is whether position and CTR hold on the size-by-age query set (`what size football for 6/7/8/9/10 year old`, ~2,400 impressions combined at position ~10). Baseline at publish: 17,364 impressions / 58 clicks / avg position 9.0 over the trailing 28 days. Do not make another edit to this page before roughly 18 September. If rankings degrade, the affiliate commits on this branch are the single thing to revert.
 
-## 19. App screenshot carousel added to `/football-parent-coach-app` — 4 September 2026
+## 19. Root-caused the recurring dark-text-on-blue button bug, plus lighter affiliate disclosure — 4 September 2026
+
+**The button bug is fixed at source this time, not per button.** Graham reported the picks-box CTAs rendering dark blue on blue, "the same issue we have had a few times". It is the bug commit `78a6ba2` (1 Sept) diagnosed correctly but treated symptomatically: Turbopack emits `app/globals.css`'s element resets a second time, unlayered, after `@layer utilities` closes, and unlayered CSS beats layered CSS regardless of specificity, so the stray `a { color: inherit }` overrode `.text-white` on every anchor and buttons inherited the body's dark navy `--foreground: #0f172a`. Verified in the built chunk before the fix: the reset sat at offset 40703, outside every layer, with `@layer utilities` closing at 40117.
+
+The fix is to wrap those resets in an explicit `@layer base { ... }` in `globals.css`, so the duplicated copy carries the layer too. Verified after: the reset now sits at offset 12954 inside `@layer base` [9092..13034], with `utilities` [13052..40294] after it, and there is exactly one copy. **This fixes every white-on-colour anchor sitewide**, which `78a6ba2` explicitly flagged as unresolved ("may affect other white-text-on-color elements sitewide"). A comment in `globals.css` explains why the wrapper is load-bearing so nobody unwraps it.
+
+**This had been quietly biasing the Coach App banner A/B test.** The light variant's CTA in `app/components/CoachAppBanner.tsx` puts its text directly inside the `<Link>`, so it was rendering dark navy on blue-700 since the banners went live on 4 Sept. The dark variant escaped, because its visible text sits in `<p>`/`<span>` children that are not anchors and therefore kept their own `text-white`. So the light arm has been running with a hard-to-read button and the dark arm with a clean one, and any CTR gap measured so far is partly a legibility artefact rather than a creative preference. **Graham confirmed the banners had only been live around 10 minutes when this shipped, so in practice there is almost no contaminated data to discard and the test effectively starts clean from here.** Recording it anyway because the mechanism is the point: a legibility fault that hits one arm and not the other is invisible in the CTR numbers, and had this gone unnoticed for a fortnight the test would have produced a confident and wrong answer. Kept `text-white!` on that button and on the picks-box CTA as belt-and-braces, matching the convention `78a6ba2` established, even though the layer fix alone should now be sufficient.
+
+**Affiliate disclosure cut right back, at Graham's request.** The bordered callout plus in-box header block was too heavy for what it needs to be. `AffiliateDisclosure` is now a single quiet line, `*Football Parent may earn a commission on recommended products.`, in small italic grey, sitting directly underneath the picks box rather than above the links inside it. Still satisfies the editorial policy's requirement for disclosure within the content, and is still visible with the links, just not shouting. The `/editorial-policy` link was dropped from it to keep it to one line; the policy page remains linked from the footer.
+
+`npm run build` passes, lint unchanged at 59 problems (the two `CoachAppBanner` findings are pre-existing `<img>` warnings, not from the className change). Page still renders 4 affiliate anchors, all with `rel="sponsored nofollow noopener noreferrer"`, one picks box, one disclosure line.
+
+## 20. App screenshot carousel added to `/football-parent-coach-app` — 4 September 2026
 
 Commit `ce1d28b` on branch `claude/coach-app-landing-carousel`.
 
@@ -337,7 +349,68 @@ Why the copy came across verbatim rather than being rewritten: the two pages sho
 
 **No watch window needed in the sense used elsewhere in this log:** there is no title, meta or on-page text change to attribute a ranking movement to. The thing to watch is page-view depth and the click-through rate to `/coach-app`, not position.
 
-## 20. Check-in — 6 September 2026 (closes this file)
+**Dot behaviour corrected same day, after Graham flagged it.** The first version derived the dot count from how many cards could be scrolled to the left edge, so five screenshots gave three dots on desktop and four on mobile. That described the scroll positions accurately and read as a bug, which is the wrong trade. There is now one dot per screenshot, always five, and a dot is lit while its screenshot is on screen (at least 60% visible): three light at once on desktop, one on mobile. Clicking any dot, the last included, scrolls that screenshot into view and lights it, which the old version could not do for the trailing cards. Verified at 1000px (start lights 1-3, end lights 3-5) and 375px (start lights 1, end lights 5).
+
+## 21. Admin dashboard: Coach App tab third, per-day banner test, "New" rank filter — 5 September 2026
+
+Not a ranking/content change - dashboard tooling only (`/admin/seo`), logged for traceability. Nothing on the live site changed. Commit `4d8c399`.
+
+**Coach App is now the third tab**, after Page views and Rank tracker, moved up from fifth. Tab order is the hand-written `TABS` array in `app/admin/seo/page.tsx`.
+
+**The Coach App tab's date picker now drives the banner split test, not just the page list.** Previously the banner creative test always showed the whole window while the day picker underneath it only re-cut the top-pages list, so there was no way to ask "how did the banners do on Tuesday". `getBannerVariantStats()` in `lib/supabase/page-views.ts` now returns a `byDay` breakdown, bucketed by `created_at.slice(0, 10)` exactly like `PageViewDay`, so both sides of the tab agree on what a day is. The picker moved to the top of the tab, above the banner numbers - left where it was, picking a date would have changed those numbers off-screen. Its date list is the union of Coach App page-view days and banner days, because banner impressions are views of the articles carrying each banner (spread across the whole site) rather than of the two Coach App paths: a day can have real banner traffic and no Coach App landing at all.
+
+**With a date selected, the test deliberately refuses to name a winner:** the "Leading: the X creative" line and the gold border on the winning arm are both suppressed and replaced by a note saying so. A single day's impressions are nowhere near `MIN_IMPRESSIONS_PER_ARM` (300 per arm), and the whole point of the CTR-not-clicks framing already in that panel is not to read a result out of too little data. Per-day numbers are for seeing what happened on a day, not for calling the test.
+
+**Rank tracker gained a "New" filter** alongside All / Improved / Lost, with the count on the button. "Improved" mixes queries that moved up with queries that appeared from nothing; "New" is just the latter, i.e. terms with no position at all in the same 3-day window a week earlier. Works in both the by-query and by-page views.
+
+`npm run build` passes. Lint reports nothing new on either changed file (the 35 errors it reports are all pre-existing, in `scripts/`).
+
+## 22. XbotGo Falcon affiliate link added to the Veo alternatives article — 5 September 2026
+
+Page: `/football-gear/veo-camera-alternatives` (`content/football-gear/veo-camera-alternatives.mdx`). One lever: outbound affiliate links only. No title, meta description, heading, section or internal link changed, and no existing content was removed.
+
+Three text links to `https://amzn.to/4gBPZGS` on the XbotGo Falcon name:
+1. First mention in "Veo vs XbotGo" ("the closer like-for-like competitor to Veo is the XbotGo Falcon").
+2. The "AI tracking camera (XbotGo Chameleon or Falcon)" bullet under "Cheaper Alternatives to a Veo Camera".
+3. The "XbotGo Falcon (standalone camera, no subscription)" entry under "Cost and Features at a Glance".
+
+The XbotGo product-page citation in the same paragraph is left as-is: it is the source for the £659 price and the no-subscription claim, and is not an affiliate link.
+
+`amzn.to` is already in `AFFILIATE_HOSTS` (`lib/affiliate.ts`), so the MDX link renderer tags all three with `rel="sponsored nofollow noopener noreferrer"` and `target="_blank"` automatically. This page had no affiliate links before, so an `<AffiliateDisclosure />` line was added directly under the paragraph carrying the first one, matching what `GearPicks` renders on the footballs guide.
+
+`npm run build` passes.
+
+**Chameleon links added the same day, same lever.** Three matching text links to `https://amzn.to/46Hg7dy` on the XbotGo Chameleon name, in the same three places as the Falcon links: the "Veo vs XbotGo" paragraph, the cheaper-alternatives bullet, and the cost-at-a-glance entry. Six affiliate links on the page in total, all rendered with `rel="sponsored nofollow"` by the shared MDX link renderer, one disclosure line.
+
+**One accuracy note that came with the Falcon link.** The link points at the Falcon Kit listing, which bundles a T4 tripod, while the comparison table row says the Falcon takes a "standard tripod, not included as standard". That table row is about the bare camera on XbotGo's own product page and is still correct, so it was left alone, and the at-a-glance Setup line now says XbotGo sells the camera on its own and as a kit with a tripod included. No price was added for the kit: the £659 figure in the article is XbotGo's own list price for the camera, and the Amazon kit price was not verified.
+
+**Falcon price corrected to £759, same day.** Graham checked and XbotGo has put the Falcon up from £659 to £759 for the camera itself. All four figures on the page changed together: the "Veo vs XbotGo" paragraph, the Price row of the Veo Cam 3 vs Falcon table, the cheaper-alternatives bullet, and the at-a-glance Cost line. Nothing else about the comparison moves: the Falcon is still well under Veo's hardware cost and still has no subscription, so the "no recurring fee" framing that the page argues from is unaffected.
+
+The price came from Graham, not from a check of my own: `xbotgo.com` and `amzn.to` are both blocked by this session's egress proxy, so neither the product page nor the Amazon listing could be read to confirm it. The paragraph still attributes the figure to XbotGo's product page, which is where the price lives.
+
+Worth knowing for next time: `ArticleLayout` supports a `dateModified` frontmatter field that renders an "Updated <date>" line and adds `dateModified` to the BlogPosting JSON-LD, and no article uses it yet. A price correction on a gear page is the obvious first candidate, but adding it changes what the page renders, so it was left out of this change rather than introduced as a side effect.
+
+**`dateModified` used for the first time, on this page.** `dateModified: "2026-09-05"` added to the Veo article's frontmatter, the optional field added to `ArticleFrontmatter` in `lib/content.ts`, and the prop passed through in `app/football-gear/veo-camera-alternatives/page.tsx` (the page wires each prop explicitly rather than spreading frontmatter, so the field alone would have done nothing). The page now shows "Updated 5 September 2026" next to the published date and carries `dateModified` in its BlogPosting JSON-LD, both verified in the built HTML. Every other article is unchanged: the field is optional and the layout already skipped it when absent.
+
+**Both xbotgo.com outbound links removed — 6 September 2026.** Graham's call: one of them is now a dead page, and with the Amazon links in place they send buying-intent traffic to the manufacturer's own shop instead of through our links. The two removed were the Chameleon UK buying guide (on "confirms no subscription is required") and the Falcon product page (on "XbotGo's own product page"), both in the "Veo vs XbotGo" section, and they were the only xbotgo.com links anywhere in the repo.
+
+Only the link markup came out; the sentences are otherwise untouched, so the page still says in text where the £320, £759 and no-subscription claims come from. Worth being aware of the trade: those two figures now have no clickable source, which is a small E-E-A-T cost on a page whose whole argument is a price comparison. Every other outbound citation is untouched (Veo product and pricing pages, Trace, Pixellot, The FA, NSPCC CPSU, England Football).
+
+`dateModified` deliberately left at 2026-09-05: removing two citation links is not a substantive content update, and churning the visible "Updated" date on link housekeeping is the wrong signal.
+
+## 23. Rank tracker: strict "Lost" filter, old "Lost" renamed "Declined" — 5 September 2026
+
+Not a ranking/content change - dashboard tooling only (`/admin/seo`), logged for traceability. Follow-up to section 21. Commit `610498c`.
+
+Graham read the Total tracked tile's `▲ +29` as "29 new" and asked why the New button said 63. Both were right: `change` on that tile is `current - prior`, which nets arrivals against departures. Confirmed against the live report the same day - 395 tracked queries, 150 up / 125 down / 63 new / 34 lost / 23 same, and 63 − 34 = 29 exactly. Not a bug, but the tile shows a delta with two opposing flows netted invisibly inside it, which is what made it misread.
+
+**Added a strict "Lost" filter and renamed the old one.** "Lost" already existed and meant "down **or** lost", so it could not also be the strict filter without one label meaning two things. It is now **Declined** (the mirror of Improved, which covers up plus new), and **Lost** means only `direction === "lost"`: queries not ranking at all any more. New and Lost are strict subsets sitting inside Improved and Declined, so the five counts deliberately do not sum to All - the explainer note now says that, since the same netting is what made the tile confusing in the first place.
+
+Counts now appear on all five buttons rather than New alone, rendered from one `DIRECTION_FILTERS` array instead of five hand-written buttons.
+
+`npm run build` passes, lint clean on the changed file.
+
+## 24. Check-in — 6 September 2026 (closes this file)
 
 This was the target check-in date set in this file's own header (~5 Sept). Site-wide, 22 Aug batch: **41,163 → 50,035 impressions (+22%), 597 → 720 clicks (+21%)** over the same 10-day-either-side window methodology, no `dataFreshnessWarning`.
 

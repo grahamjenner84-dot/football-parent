@@ -27,32 +27,45 @@
   }
 }
 
-* {
-  box-sizing: border-box;
-}
+/* These element resets are wrapped in @layer base deliberately. Turbopack
+   emits this file's rules a second time, unlayered, after @layer utilities
+   closes, and unlayered CSS beats layered CSS regardless of specificity. Left
+   bare, the `a` rule below therefore overrode every Tailwind text-colour
+   utility on an anchor, so `text-white` buttons inherited the dark navy body
+   colour instead (dark blue on blue). Wrapping them here means the duplicated
+   copy carries the layer too, so utilities win as intended.
 
-html {
-  scroll-behavior: smooth;
-}
+   If a white-on-colour anchor ever goes dark again, check whether this file's
+   rules are still landing inside a layer in the built CSS chunk before
+   patching the button. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  line-height: 1.6;
-  background-attachment: fixed;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+    background-attachment: fixed;
+  }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
 }

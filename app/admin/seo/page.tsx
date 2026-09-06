@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type {
   SeoReport,
   StrikingRow,
@@ -42,9 +42,9 @@ type DayWindow = 7 | 28 | 90;
 const TABS: { id: Tab; label: string }[] = [
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
+  { id: "coachApp", label: "Coach App" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
-  { id: "coachApp", label: "Coach App" },
   { id: "compare", label: "Compare days" },
   { id: "searches", label: "Top searches" },
   { id: "silence", label: "Gone quiet" },
@@ -55,6 +55,21 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "cannibal", label: "Cannibalisation" },
   { id: "cookies", label: "Cookie consent" },
 ];
+
+// The long "how this is measured" copy is genuinely useful the first time you
+// read a tab and pure noise every time after, and there was enough of it to
+// push the actual data below the fold. Native <details> keeps it one click
+// away, collapsed by default, with no JS state to manage. Short status lines
+// ("showing 20 of 87", a freshness warning) stay visible - only the standing
+// explainers are folded away.
+function SectionNote({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <details style={styles.noteDetails}>
+      <summary style={styles.noteSummary}>{label}</summary>
+      <div style={{ ...styles.sectionNote, marginTop: 6 }}>{children}</div>
+    </details>
+  );
+}
 
 function shortPage(page: string): string {
   try {
@@ -294,22 +309,11 @@ export default function SeoAdminPage() {
           <PageViewTrend observedPaths={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
         ) : tab === "coachApp" ? (
           <>
-            <p style={styles.sectionNote}>
-              Scoped to /football-parent-coach-app (the marketing landing
-              page) and /coach-app (the app itself), same page_views table as
-              the Page views tab above, just filtered. /coach-app is served
-              by the rewrite in vercel.json to the separate Coach App
-              deployment, which pings the same /api/page-view endpoint, so
-              both sides land in one table.
-            </p>
             {!coachAppViewStats && !coachAppViewError && (
               <p style={styles.muted}>Loading Coach App view report...</p>
             )}
             {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
-            {coachAppViewStats?.bannerVariants && (
-              <BannerVariantsReport stats={coachAppViewStats.bannerVariants} />
-            )}
-            {coachAppViewStats && <PageViewsReport stats={coachAppViewStats} />}
+            {coachAppViewStats && <CoachAppTab stats={coachAppViewStats} />}
           </>
         ) : (
           <>
@@ -406,11 +410,11 @@ function SilenceList({ rows }: { rows: SilenceRow[] }) {
   if (!rows.length) return <EmptyState text="Nothing has gone quiet - all pages with real prior traffic still have recent impressions." />;
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to read this">
         Real prior traffic, near-zero in the recent window. Usually technical
         (deindexing, noindex, canonical, a bad deploy), not a content issue.
         Check URL Inspection / Test Live URL before editing anything.
-      </p>
+      </SectionNote>
       {rows.map((r, i) => (
         <div key={i} style={styles.card}>
           <div style={styles.cardTop}>
@@ -589,11 +593,11 @@ function NoImpressionsList({
   return (
     <div style={styles.list}>
       <PeriodFilter value={days} onChange={onDaysChange} />
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to read this">
         Every sitemap URL with zero impressions in this window - pages that
         have either stopped ranking entirely or never picked up any search
         visibility. Candidates for a rewrite, not just a tweak.
-      </p>
+      </SectionNote>
       {!rows.length && (
         <EmptyState text="Every sitemap URL picked up at least one impression in this window." />
       )}
@@ -677,11 +681,26 @@ function directionStyle(direction: RankRow["direction"]): CSSProperties {
   return { color: "#9c8a72" };
 }
 
-type DirectionFilter = "all" | "improved" | "lost";
+type DirectionFilter = "all" | "improved" | "new" | "declined" | "lost";
+
+// Improved and Declined are the wide buckets; New and Lost are the strict
+// subsets sitting inside each - queries that weren't ranking at all a week
+// ago, and queries that stopped ranking altogether, without the ones that
+// merely moved up or down mixed in. Declined was called "Lost" before the
+// strict Lost filter existed, which made one label mean two things.
+const DIRECTION_FILTERS: { id: DirectionFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "improved", label: "Improved" },
+  { id: "new", label: "New" },
+  { id: "declined", label: "Declined" },
+  { id: "lost", label: "Lost" },
+];
 
 function matchesDirectionFilter(direction: RankRow["direction"], filter: DirectionFilter): boolean {
   if (filter === "improved") return direction === "up" || direction === "new";
-  if (filter === "lost") return direction === "down" || direction === "lost";
+  if (filter === "new") return direction === "new";
+  if (filter === "declined") return direction === "down" || direction === "lost";
+  if (filter === "lost") return direction === "lost";
   return true;
 }
 
@@ -745,14 +764,14 @@ function RankTrackerSummaryView({
   const tiles = [summary.total, summary.top3, summary.top10, summary.top20, summary.top100];
   return (
     <div style={{ ...styles.list, marginBottom: 16 }}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How the tiles are counted">
         Keywords tracked and where they rank right now, compared to the same
         window a week ago - the same 3-day-average positions as the table
         below. Each tile counts only the keywords actually sitting in that
         band (top 10 excludes the ones already in top 3), with the
         traditional cumulative &ldquo;top N&rdquo; total shown underneath.
         Click a tile to see which queries and pages are in it.
-      </p>
+      </SectionNote>
       <div style={styles.summaryGrid}>
         {tiles.map((bucket) => (
           <RankSummaryTile
@@ -923,6 +942,12 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
     setPageSuggestionsOpen(false);
   }
 
+  // Counted off the tile-narrowed rows, not the post-filter list, so each
+  // button says how many it would show rather than how many is on screen.
+  // Improved and Declined overlap New and Lost by design, so these
+  // deliberately do not sum to the All count.
+  const directionCount = (filter: DirectionFilter) =>
+    rows.filter((r) => matchesDirectionFilter(r.direction, filter)).length;
   const filtered = rows.filter((r) => matchesDirectionFilter(r.direction, directionFilter));
   const pageFiltered = selectedPage ? filtered.filter((r) => shortPage(r.page) === selectedPage) : filtered;
   const visible = [...pageFiltered].sort((a, b) => {
@@ -1051,31 +1076,31 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
             </div>
           )}
           <div style={styles.metricToggle}>
-            <button
-              onClick={() => setDirectionFilter("all")}
-              style={{ ...styles.toggleButton, ...(directionFilter === "all" ? styles.toggleButtonActive : {}) }}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setDirectionFilter("improved")}
-              style={{ ...styles.toggleButton, ...(directionFilter === "improved" ? styles.toggleButtonActive : {}) }}
-            >
-              Improved
-            </button>
-            <button
-              onClick={() => setDirectionFilter("lost")}
-              style={{ ...styles.toggleButton, ...(directionFilter === "lost" ? styles.toggleButtonActive : {}) }}
-            >
-              Lost
-            </button>
+            {DIRECTION_FILTERS.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => setDirectionFilter(f.id)}
+                style={{
+                  ...styles.toggleButton,
+                  ...(directionFilter === f.id ? styles.toggleButtonActive : {}),
+                }}
+              >
+                {f.label} ({directionCount(f.id)})
+              </button>
+            ))}
           </div>
-          <p style={styles.sectionNote}>
+          <SectionNote label="How position and direction are worked out">
             Position today is a 3-day average ending today (GSC data lags a
             few days), compared against the same 3 days one week earlier - a
             single day is too noisy to trust for most queries. New/improved
-            queries are shown in green, lost ones in red.
-          </p>
+            queries are shown in green, lost ones in red. Improved covers
+            queries that moved up plus ones that are new, and Declined covers
+            ones that moved down plus ones that stopped ranking; New and Lost
+            narrow each to just the queries that had no position a week ago,
+            and that have none now. New and Lost therefore sit inside
+            Improved and Declined rather than beside them, so the five counts
+            do not sum to the total.
+          </SectionNote>
           {groupBy === "page" && <RankByPageList groups={groupRankByPage(pageFiltered)} />}
           {groupBy === "query" && (
             <>
@@ -1118,13 +1143,13 @@ function SearchesList({ stats }: { stats: SearchLogStats }) {
   }
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="What's counted here">
         What visitors typed into on-site search over the last 30 days,
         including the header dropdown search (not just the /search results
         page). Queries flagged &ldquo;0 results&rdquo; are the clearest
         content-gap signal - people looking for something we don&rsquo;t
         have an article for yet.
-      </p>
+      </SectionNote>
 
       <div style={styles.cardStats}>
         <span>Searches: {stats.totalSearches}</span>
@@ -1165,13 +1190,13 @@ function CookieConsentReport({ stats }: { stats: ConsentStats }) {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to read this">
         Last 30 days. Banner shows and accept/reject/manage decisions are
         logged anonymously regardless of the choice itself, so this stays
         readable even though GA can now only see consenting visitors. If a
         GA4 pageview dip tracks the reject rate below, that&rsquo;s consent
         gating working as intended, not a traffic problem.
-      </p>
+      </SectionNote>
 
       <div style={styles.cardStats}>
         <span>Shown: {stats.bannerShown}</span>
@@ -1221,6 +1246,12 @@ function PageViewOptOutToggle() {
   // rendering a definite state before checking would flash the wrong one.
   const [optedOut, setOptedOut] = useState<boolean | null>(null);
 
+  // react-hooks/set-state-in-effect wants state derived during render, but
+  // localStorage isn't readable on the server and reading it in a lazy
+  // initialiser would render a different tree than the one hydrated. Reading
+  // once after mount is the correct pattern here, so the rule is off for
+  // this line rather than the component reshaped around it.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setOptedOut(isPageViewOptedOut()), []);
 
   if (optedOut === null) return null;
@@ -1252,9 +1283,74 @@ function PageViewOptOutToggle() {
   );
 }
 
-function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
+// The banner split test and the Coach App page views share one chosen date,
+// so picking a day re-reads both rather than only the page list underneath.
+// The picker lives here, above the banner numbers, because those numbers sit
+// at the top of the tab - a picker further down would change them off-screen.
+function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
+  const [selectedDate, setSelectedDate] = useState("");
+
+  // Dates come from both sides. Coach App page views only cover the two
+  // Coach App paths, while the banner test's impressions are views of the
+  // articles carrying each banner, spread across the whole site - so a day
+  // can have banner traffic and no Coach App landing at all, and that day
+  // still has numbers worth reading.
+  const viewsByDate = new Map(stats.byDay.map((d) => [d.date, d.count]));
+  const dateOptions = Array.from(
+    new Set([...viewsByDate.keys(), ...(stats.bannerVariants?.byDay ?? []).map((d) => d.date)])
+  ).sort((a, b) => b.localeCompare(a));
+
+  return (
+    <>
+      <SectionNote label="What's included in these numbers">
+        Scoped to /football-parent-coach-app (the marketing landing page) and
+        /coach-app (the app itself), same page_views table as the Page views
+        tab, just filtered. /coach-app is served by the rewrite in
+        vercel.json to the separate Coach App deployment, which pings the
+        same /api/page-view endpoint, so both sides land in one table.
+      </SectionNote>
+
+      {dateOptions.length > 0 && (
+        <label style={styles.compareLabel}>
+          Pick a date to see that day&rsquo;s banner test and top pages
+          <select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            style={styles.dateInput}
+          >
+            <option value="">All (last 30 days)</option>
+            {dateOptions.map((date) => (
+              <option key={date} value={date}>
+                {date} ({viewsByDate.get(date) ?? 0} views)
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
+
+      {stats.bannerVariants && (
+        <BannerVariantsReport stats={stats.bannerVariants} selectedDate={selectedDate} />
+      )}
+      <PageViewsReport stats={stats} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+    </>
+  );
+}
+
+function BannerVariantsReport({
+  stats,
+  selectedDate,
+}: {
+  stats: BannerVariantStats;
+  selectedDate?: string;
+}) {
+  const selectedDay = selectedDate ? stats.byDay.find((d) => d.date === selectedDate) ?? null : null;
+  // A date with page views but no banner impression or click at all is a
+  // real zero, not a missing day - fall back to an empty row set rather than
+  // quietly showing the whole window's numbers under a single date heading.
+  const activeRows = selectedDate ? selectedDay?.rows ?? [] : stats.rows;
+
   const byStyle = ["dark", "light"].map((style) => {
-    const rows = stats.rows.filter((r) => r.style === style);
+    const rows = activeRows.filter((r) => r.style === style);
     const clicks = rows.reduce((sum, r) => sum + r.clicks, 0);
     const impressions = rows.reduce((sum, r) => sum + r.impressions, 0);
     return {
@@ -1276,18 +1372,21 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
   return (
     <div style={styles.list}>
       <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
-        Banner creative test (since {new Date(stats.since).toLocaleString("en-GB")})
+        Banner creative test{" "}
+        {selectedDate ? `on ${selectedDate}` : `(since ${new Date(stats.since).toLocaleString("en-GB")})`}
       </h3>
 
-      <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+      <SectionNote label="How the split test is measured">
         Articles are split between the two Coach App banner creatives by a
         hash of their slug, so both run at the same time. Clicks are landings
         on /football-parent-coach-app carrying that creative&rsquo;s ?b=
         param; impressions are views of the pages serving it. Compare the
         CTR column, not the click column: each arm is shown on a different
         set of articles, so raw clicks mostly reflect which arm drew the
-        busier pages.
-        {stats.clampedToTestStart && (
+        busier pages. Picking a date below narrows every number here to that
+        one UTC day, bucketed exactly like the page view days it sits next
+        to.
+        {!selectedDate && stats.clampedToTestStart && (
           <>
             {" "}
             Window is pinned to when the banners went live rather than the
@@ -1296,16 +1395,31 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
             would understate CTR badly.
           </>
         )}
-      </p>
+      </SectionNote>
 
-      {!stats.enoughData && (
+      {selectedDate && (
+        <p style={styles.sectionNote}>
+          One day on its own can never call the test - a day&rsquo;s worth of
+          impressions is far below what a CTR gap needs to mean anything.
+          Clear the date to read the result; use a single day only to see
+          what actually happened on it.
+        </p>
+      )}
+
+      {selectedDate && !selectedDay && (
+        <p style={styles.sectionNote}>
+          No banner impressions or clicks recorded on {selectedDate}.
+        </p>
+      )}
+
+      {!selectedDate && !stats.enoughData && (
         <p style={styles.sectionNote}>
           Not enough data yet to call it. Both arms need at least a few
           hundred impressions before a CTR gap means anything.
         </p>
       )}
 
-      {stats.enoughData && leader && (
+      {!selectedDate && stats.enoughData && leader && (
         <p style={styles.sectionNote}>
           Leading: the {leader.style} creative, at{" "}
           {(leader.ctr * 100).toFixed(2)}% CTR
@@ -1318,7 +1432,7 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
           key={row.style}
           style={{
             ...styles.card,
-            borderColor: leader?.style === row.style ? "#e8b04b" : "#3a2c1d",
+            borderColor: !selectedDate && leader?.style === row.style ? "#e8b04b" : "#3a2c1d",
           }}
         >
           <div style={{ fontWeight: 600, fontSize: 13 }}>
@@ -1336,11 +1450,13 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
         Split by audience and placement
       </h4>
 
-      {stats.rows.length === 0 && (
-        <p style={styles.muted}>No banner impressions or clicks recorded yet.</p>
+      {activeRows.length === 0 && (
+        <p style={styles.muted}>
+          No banner impressions or clicks recorded{selectedDate ? ` on ${selectedDate}` : " yet"}.
+        </p>
       )}
 
-      {stats.rows.map((row) => (
+      {activeRows.map((row) => (
         <div key={row.variant} style={styles.card}>
           <div style={{ fontWeight: 600, fontSize: 13 }}>{row.variant}</div>
           <div style={styles.cardStats}>
@@ -1354,18 +1470,33 @@ function BannerVariantsReport({ stats }: { stats: BannerVariantStats }) {
   );
 }
 
-function PageViewsReport({ stats }: { stats: PageViewStats }) {
+// selectedDate/onSelectDate are optional: passed together, the parent owns
+// the chosen day (the Coach App tab does this so the banner test above reads
+// the same date) and renders the picker itself; omitted, this component keeps
+// its own date state and its own picker, as the Page views tab needs.
+function PageViewsReport({
+  stats,
+  selectedDate: controlledDate,
+  onSelectDate,
+}: {
+  stats: PageViewStats;
+  selectedDate?: string;
+  onSelectDate?: (date: string) => void;
+}) {
   const daysCovered = stats.byDay.length;
   const avgPerDay = daysCovered > 0 ? Math.round(stats.totalViews / daysCovered) : 0;
-  const [selectedDate, setSelectedDate] = useState<string>("");
+  const [internalDate, setInternalDate] = useState<string>("");
   const [visiblePathCount, setVisiblePathCount] = useState(TOP_PATHS_PAGE_SIZE);
+  const controlled = onSelectDate !== undefined;
+  const selectedDate = controlled ? controlledDate ?? "" : internalDate;
 
   // Switching between a specific day and the whole window swaps the top-pages
   // list out from under the "show more" state, so every date change collapses
   // it back to the first page. Done here rather than in an effect watching
   // selectedDate: one obvious code path, no extra render.
   function selectDate(date: string) {
-    setSelectedDate(date);
+    if (onSelectDate) onSelectDate(date);
+    else setInternalDate(date);
     setVisiblePathCount(TOP_PATHS_PAGE_SIZE);
   }
 
@@ -1384,7 +1515,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="What counts as a view">
         Last 30 days, excluding /admin/* (that&rsquo;s you checking the
         dashboard, not a visitor). Fires on every page load regardless of
         cookie consent or whether the banner has ever been shown to that
@@ -1394,8 +1525,10 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
         consent-mode visibility; if this number is also low, traffic
         genuinely dropped. Self-declared bots/crawlers and known scripted
         spikes are excluded from every number below - see &ldquo;Bot views
-        excluded&rdquo;.
-      </p>
+        excluded&rdquo;. Top pages is a leaderboard: a page you visited
+        yourself is often a single view well down that list, so use the Page
+        trend tab to check one specific page rather than hunting for it here.
+      </SectionNote>
 
       <div style={styles.cardStats}>
         <span>Total views: {stats.totalViews}</span>
@@ -1408,7 +1541,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
           <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
             {sourceGroupsTitle}
           </h3>
-          <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+          <SectionNote label="How sources are worked out">
             Based on the referrer header, not a cookie - unaffected by
             consent choice. &ldquo;Direct&rdquo; is a mix of genuine direct/
             bookmark visits and any case where the browser or an in-app
@@ -1416,12 +1549,12 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             run higher than the true number. Bing search and Bing/Copilot
             chat share a hostname and can&rsquo;t be told apart; same for
             Grok and X/Twitter.
-          </p>
+          </SectionNote>
           <div style={styles.cardStats}>
             <span>Estimated visits: {shownEstimatedVisits}</span>
             <span>Internal (browsed to another page): {shownInternalViews}</span>
           </div>
-          <p style={{ ...styles.sectionNote, marginTop: 0 }}>
+          <SectionNote label="Estimated visits vs internal">
             Estimated visits counts pageviews where the referrer wasn&rsquo;t
             this site itself - only a visit&rsquo;s first page qualifies,
             since every later page in the same visit is reached by clicking
@@ -1432,7 +1565,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             day in the picker below). Not exact - a browser that strips the
             referrer mid-visit, or two tabs opened from the same link, can
             inflate Estimated visits slightly.
-          </p>
+          </SectionNote>
           {shownSourceGroups.length === 0 && (
             <EmptyState text="No external-referrer traffic on this date - everything was Direct or on-site navigation." />
           )}
@@ -1454,7 +1587,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
         </>
       )}
 
-      {stats.byDay.length > 0 && (
+      {stats.byDay.length > 0 && !controlled && (
         <label style={styles.compareLabel}>
           Pick a date to see its top pages
           <select
@@ -1515,9 +1648,7 @@ function PageViewsReport({ stats }: { stats: PageViewStats }) {
             {totalPathCount > shownPaths.length
               ? ` (this list is capped at ${shownPaths.length})`
               : ""}
-            . A page you visited yourself is often a single view sitting well
-            down this list - use the Page trend tab to check one specific page
-            instead of hunting for it here.
+            .
           </p>
           {visiblePaths.map((p, i) => (
             <div key={i} style={styles.card}>
@@ -1628,12 +1759,12 @@ function ComparePageViews() {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="What this compares">
         Same page_views data as the Page views tab above (bot rows already
         excluded), broken down by page for two specific days so you can see
         exactly which pages gained or lost views day over day. Defaults to
         yesterday vs the day before - pick any two dates and hit Compare.
-      </p>
+      </SectionNote>
 
       <div style={styles.compareRow}>
         <label style={styles.compareLabel}>
@@ -1796,7 +1927,7 @@ function PageViewTrend({ observedPaths }: { observedPaths: string[] }) {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How the search and history work">
         Same page_views data as the Page views tab above (bot rows already
         excluded). Every page on the site is searchable here, whether or not
         it has any views yet - type any word from the URL (&ldquo;parent
@@ -1807,7 +1938,7 @@ function PageViewTrend({ observedPaths }: { observedPaths: string[] }) {
         view - not its actual publish date, since view tracking only began
         2026-08-19. A page published before then will show a gap: its real
         history runs further back than this can show.
-      </p>
+      </SectionNote>
 
       <div style={styles.compareRow}>
         <label style={{ ...styles.compareLabel, position: "relative" }}>
@@ -1966,12 +2097,12 @@ function CompareDays() {
 
   return (
     <div style={styles.list}>
-      <p style={styles.sectionNote}>
+      <SectionNote label="How to use this">
         Pick the day you noticed the spike (Day A) and a day to compare it
         against (Day B - defaults to the same weekday a week earlier). Shows
         site-wide totals for each day, then the specific pages and search
         queries that account for the biggest gains and drops between them.
-      </p>
+      </SectionNote>
 
       <div style={styles.compareRow}>
         <label style={styles.compareLabel}>
@@ -2465,6 +2596,20 @@ const styles: Record<string, CSSProperties> = {
     color: "#f0e6d2",
     cursor: "pointer",
     borderBottom: "1px solid #3a2c1d",
+  },
+  noteDetails: {
+    background: "#2a1f14",
+    border: "1px solid #3a2c1d",
+    borderRadius: 6,
+    padding: "6px 10px",
+    margin: "8px 0",
+  },
+  noteSummary: {
+    cursor: "pointer",
+    fontSize: 12,
+    fontWeight: 600,
+    color: "#b8a68c",
+    listStyle: "revert",
   },
   suggestionTag: {
     marginLeft: 8,
