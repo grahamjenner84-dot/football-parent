@@ -1,4 +1,5 @@
 import CoachAppCarousel from "@/app/components/CoachAppCarousel";
+import CoachSignUpForm from "@/app/components/CoachSignUpForm";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -36,13 +37,11 @@ export default function CoachAppPage() {
             can focus on the session and the match.
           </p>
 
+          {/* The form itself, not a link onward. Above the fold on purpose:
+              this is the page ads land on, so the coach should be able to
+              act without a second navigation. */}
           <div className="mt-8">
-            <a
-              href="/coach-app"
-              className="inline-block bg-blue-700 hover:bg-blue-800 text-white! font-semibold px-8 py-3 rounded-lg transition-colors"
-            >
-              Try the Coach App
-            </a>
+            <CoachSignUpForm ctaLabel="Start free with Google" />
           </div>
         </div>
       </section>
@@ -183,13 +182,11 @@ export default function CoachAppPage() {
             knockouts.
           </p>
 
+          {/* Repeat CTA for anyone who read the whole page rather than
+              converting off the hero. Same component, so there is one form
+              to maintain and both instances behave identically. */}
           <div className="pt-6">
-            <a
-              href="/coach-app"
-              className="inline-block bg-blue-700 hover:bg-blue-800 text-white! font-semibold px-8 py-3 rounded-lg transition-colors"
-            >
-              Try the Coach App
-            </a>
+            <CoachSignUpForm ctaLabel="Start free with Google" />
           </div>
         </div>
       </section>
