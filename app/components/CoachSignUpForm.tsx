@@ -7,6 +7,7 @@ import {
   signInWithEmail,
   signInWithGoogle,
 } from "@/lib/coach-app-auth";
+import { stashLandingHandoff } from "@/lib/coach-app-handoff";
 
 // The sign-up form itself, embedded directly on the Coach App landing page so
 // a visitor converts on the page they arrived at. Before this existed the CTA
@@ -40,6 +41,10 @@ export default function CoachSignUpForm({
 
   async function handleGoogle() {
     setError(null);
+    // Written at the moment of intent, not on page load: this is the page
+    // the coach actually acted on, and a passive visit shouldn't claim
+    // credit for a signup that happens from somewhere else later.
+    stashLandingHandoff();
     const { error } = await signInWithGoogle();
     if (error) {
       console.error("Coach App Google sign-in failed:", error);
@@ -52,6 +57,7 @@ export default function CoachSignUpForm({
     if (!email.trim()) return;
     setStatus("sending");
     setError(null);
+    stashLandingHandoff();
 
     const { error } = await signInWithEmail(email.trim());
     if (error) {
