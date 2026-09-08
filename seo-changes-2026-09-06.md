@@ -179,3 +179,35 @@ Worth knowing but not changed: `enoughData` sums impressions by style across all
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.
 - Mitre Impel / Nike Academy affiliate links on `best-footballs-by-age` — hold until ~18 September before any further edit.
+
+## New PPC landing variant: equal playing time calculator (8 Sept)
+
+`content/landing/equal-playing-time-calculator.mdx`, served at
+`/football-parent-coach-app/equal-playing-time-calculator`. Built for a Google
+Ads ad group, not for organic: `index: false`, so it is noindex/follow, carries
+no canonical, and is deliberately absent from `lib/routes.ts` and the sitemap.
+
+H1 is "Equal playing time calculator for grassroots coaches", containing the
+target keyword verbatim for ad-to-page message match and Quality Score. Keyword
+chosen over "equal game time calculator" because it is the only term in the
+cluster with corroborated volume: 210/mo UK in DataForSEO against a 100-1K
+Keyword Planner band, where "equal game time calculator" appears only in the
+coarse Planner band. Close variants match the game-time queries into the same
+ad group regardless.
+
+Page gives the Sheffield FA target-minutes formula and a worked example on the
+page rather than gating it, then positions the app at the season-long gap.
+Consistent with the framing already published in
+`content/coaching/equal-playing-time-in-grassroots-football`, which likewise
+concedes that one-off online calculators do the single-match job fine. One
+internal link out, to that article.
+
+No change to any existing page. `npm run build` passes, all four landing
+variants prerender.
+
+**Not yet live in ads.** Two things to settle first, both recorded here so the
+result is readable later: the Google Ads conversion action may not be firing
+(`AW-18192816393` is configured in `app/layout.tsx` but not in the Coach App's
+own `index.html`, where the conversion event actually fires), and the campaign
+economics only clear at roughly £0.10-0.50 a click against a £2.99/month
+product, which rules out the `football coaching app` head term at £1.37.
