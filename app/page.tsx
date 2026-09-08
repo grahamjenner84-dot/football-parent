@@ -40,6 +40,13 @@ const categories = [
       "Practical advice for football parents navigating youth football pathways.",
   },
   {
+    href: "/coaching",
+    label: "Grassroots coaching",
+    title: "Coaching",
+    description:
+      "Qualifications, formations, session drills and fair playing time for volunteer coaches.",
+  },
+  {
     href: "/girls-football",
     label: "Girls football",
     title: "Girls Football",

@@ -135,30 +135,6 @@ export default function ParentGuidesPage() {
             "How to become a grassroots football coach: joining as a volunteer, DBS checks, safeguarding, first aid, time commitment and coaching your own child.",
         },
         {
-          title: "What Qualifications Do You Need to Be a Football Coach?",
-          href: "/coaching/what-qualifications-do-i-need-to-be-a-football-coach",
-          description:
-            "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?",
-        },
-        {
-          title: "Equal Playing Time in Grassroots Football",
-          href: "/coaching/equal-playing-time-in-grassroots-football",
-          description:
-            "A working formula for fair playing time, the real difference between equal minutes and equal position time, and what rolling substitutions actually allow.",
-        },
-        {
-          title: "Best Football Formations by Age Group",
-          href: "/coaching/best-football-formations-by-age-group",
-          description:
-            "7v7 now starts at U10 and 9v9 at U12 under the FA's 2026/27 format changes. Pitch sizes, rules and suggested formations for both explained.",
-        },
-        {
-          title: "Football Team Spreadsheet",
-          href: "/coaching/football-team-spreadsheet",
-          description:
-            "What to track on a football team spreadsheet, a simple structure for goals, assists and playing time, and when it's worth moving to an app instead.",
-        },
-        {
           title: "Biggest Football Parent Mistakes",
           href: "/parent-guides/biggest-football-parent-mistakes",
           description:

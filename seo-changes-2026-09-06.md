@@ -144,6 +144,19 @@ Graham asked to finish the internal-linking work: link from `equal-playing-time-
 
 Also fixed the two zero-inbound-link gaps flagged in the previous session turn: a body link from `best-football-formations-by-age-group.mdx` and one from `football-parent-coach-app/page.tsx`'s Real Stats feature description, plus swapped the new article's weakest Related Articles entry for a link to `/football-parent-coach-app` as requested. `npm run build` passes throughout. Commits: `5da13c9`, `dfffbe6`.
 
+## New /coaching category page; coaching articles moved out of Parent Guides and Football Development
+
+Graham asked for a proper Coaching category now that there are enough articles for one. The five `/coaching/*` articles already lived at those URLs; what was missing was the category index, and they were being surfaced as cards on other categories' index pages instead.
+
+**No URLs changed.** All five article slugs are untouched, so nothing indexed moved.
+
+- New `app/coaching/page.tsx` (index page, `/coaching`), listing all five coaching articles with a Start Here block and category copy. Added `/coaching` to the category-pages section of `app/sitemap.ts`.
+- Frontmatter `category`/`categoryUrl` corrected on the four articles that still said Parent Guides or Football Development: `what-qualifications-do-i-need-to-be-a-football-coach`, `equal-playing-time-in-grassroots-football`, `best-football-formations-by-age-group`, `football-drills-for-7-and-8-year-olds`. This drives the breadcrumb, the breadcrumb JSON-LD and the site search index. Note the search index built URLs as `categoryUrl + slug`, so those four articles were previously producing dead `/parent-guides/...` and `/football-development/...` links in site search; that is now fixed as a side effect.
+- Removed the four coaching cards from `app/parent-guides/page.tsx` and the one from `app/football-development/page.tsx` (cards only, no other content, headings or links touched on either page).
+- Added "Coaching" to the header nav (`app/components/header.tsx`, after Parent Guides) and to the homepage category grid (`app/page.tsx`, before Girls Football).
+
+Reverses the 6 Sept decision above to list `football-team-spreadsheet` under Parent Guides, which was explicitly a stopgap because no `/coaching` category existed. `npm run build` passes; all 6 `/coaching` routes prerender.
+
 ## Still on watch, not yet due
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.

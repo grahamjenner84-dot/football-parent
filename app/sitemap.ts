@@ -8,6 +8,7 @@ export const routes = [
   // Category pages
   '/academy-pathway',
   '/academy-trials',
+  '/coaching',
   '/football-development',
   '/football-gear',
   '/girls-football',

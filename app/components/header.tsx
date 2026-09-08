@@ -11,6 +11,7 @@ const navItems = [
   { label: "Academy Trials", href: "/academy-trials" },
   { label: "Girls Football", href: "/girls-football" },
   { label: "Parent Guides", href: "/parent-guides" },
+  { label: "Coaching", href: "/coaching" },
   { label: "Football Gear", href: "/football-gear" },
 ];
 
