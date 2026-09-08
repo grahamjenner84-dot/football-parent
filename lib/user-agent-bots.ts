@@ -31,6 +31,15 @@ const BOT_UA_PATTERNS = [
   /curl\//i,
   /wget/i,
   /scrapy/i,
+  // Coding-agent browsers. The Claude desktop app's browser pane sends a
+  // "Claude/<version>" UA, and a session spent checking a page renders it a
+  // dozen times. Real work, but not a visitor.
+  /claude\//i,
+  // Google's own landing-page checker, which hits ad destination URLs
+  // repeatedly once a campaign is live - i.e. exactly the pages whose view
+  // counts we care about. AdsBot-* is already caught by /bot/; this is the
+  // variant that carries no "bot" in its name.
+  /google-adwords/i,
 ];
 
 // Live write-time check (app/api/page-view/route.ts): a missing UA header

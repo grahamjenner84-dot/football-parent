@@ -26,6 +26,26 @@ export default function PageViewPing() {
     // lib/page-view-optout.ts.
     if (isPageViewOptedOut()) return;
 
+    // Never log from local development. This component runs identically under
+    // `npm run dev` as in production, so every page opened on localhost while
+    // building something wrote a real row into the production page_views
+    // table. On 8 Sept that was 15 of the 24 rows on the new PPC landing
+    // page, on the day it launched - the exact page whose numbers were meant
+    // to mean something.
+    //
+    // Hostname rather than NODE_ENV: `npm run build && npm run start` is a
+    // production build served from localhost, which is precisely the case a
+    // NODE_ENV check would let through.
+    const host = window.location.hostname;
+    if (
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host === "[::1]" ||
+      host.endsWith(".local")
+    ) {
+      return;
+    }
+
     // document.referrer is only the immediately preceding page, not the
     // original session entry point - so on-site navigation (page 2, 3...
     // of the same visit) reports our own hostname here. That's classified
