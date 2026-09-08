@@ -384,8 +384,29 @@ function walkRoutes(dir, routePrefix, map) {
           map.set(route + "::mdx", path.relative(REPO_ROOT, mdxPath));
         }
       }
+      // Coach App landing pages are the exception: one directory regardless
+      // of URL, because they are a route group rather than a content
+      // category, so the rule above never finds them.
+      const landingMdx = resolveLandingMdx(segments);
+      if (landingMdx) map.set(route + "::mdx", landingMdx);
     }
   }
+}
+
+/** Maps a Coach App landing URL to its content file.
+ *
+ * /football-parent-coach-app          -> content/landing/main.mdx
+ * /football-parent-coach-app/<slug>   -> content/landing/<slug>.mdx
+ *
+ * Kept in sync with the identical helpers in lib/gsc.ts and
+ * scripts/inspect-page.mjs; change one, change all three.
+ */
+function resolveLandingMdx(segments) {
+  if (segments[0] !== "football-parent-coach-app") return null;
+  if (segments.length > 2) return null;
+  const slug = segments.length === 1 ? "main" : segments[1];
+  const p = path.join(MDX_CONTENT_DIR, "landing", `${slug}.mdx`);
+  return fs.existsSync(p) ? path.relative(REPO_ROOT, p) : null;
 }
 
 function buildRouteMap() {
@@ -448,8 +469,13 @@ function getCurrentMeta(match) {
     if (fs.existsSync(fullPath)) {
       const content = fs.readFileSync(fullPath, "utf8");
       const fm = extractFrontmatter(content);
-      if (fm.title) { title = fm.title; source = match.mdxFile; }
-      if (fm.description) { description = fm.description; source = match.mdxFile; }
+      // Landing pages name these seoTitle/seoDescription and fall back to
+      // the on-page h1/subhead, mirroring what their page.tsx passes to
+      // generateSEO. Articles use title/description.
+      const fmTitle = fm.title ?? fm.seoTitle ?? fm.h1;
+      const fmDesc = fm.description ?? fm.seoDescription ?? fm.subhead;
+      if (fmTitle) { title = fmTitle; source = match.mdxFile; }
+      if (fmDesc) { description = fmDesc; source = match.mdxFile; }
     }
   }
 
