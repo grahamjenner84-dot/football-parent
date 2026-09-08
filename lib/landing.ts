@@ -22,8 +22,12 @@ export interface LandingFrontmatter {
   h1: string;
   /** One or two sentences under the headline, above the form. */
   subhead: string;
-  /** Button text on the sign-up form. */
-  ctaLabel: string;
+  /** Heading above the sign-up form, so a variant can echo its ad's promise.
+   *
+   * Deliberately not button text. The buttons name what they do ("Sign up
+   * with Google"), because a button carrying an ad promise hides the fact
+   * that it opens Google OAuth. */
+  formHeading: string;
   /** <title> and meta description. Fall back to h1/subhead when omitted. */
   seoTitle?: string;
   seoDescription?: string;

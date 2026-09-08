@@ -15,6 +15,13 @@ import { stashLandingHandoff } from "@/lib/coach-app-handoff";
 // marketing page (hero, feature carousel, trust badges) before any form. PPC
 // traffic was therefore pitched twice before being asked to do anything.
 //
+// The Google button's label is fixed and says "Google" on purpose. It was
+// briefly driven by the variant's ctaLabel, so an ad group could put its own
+// promise on it - which meant the calculator page shipped a button reading
+// "Manage equal game time" that in fact opened Google OAuth. Anyone without a
+// Google account clicked a benefit and hit a wall. A button has to name what
+// it does; the variant's promise now sits on the heading above it instead.
+//
 // Google sign-in still navigates away, which is inherent to OAuth. What
 // changes is that the coach commits on this page first, and the navigation
 // they experience lands them in the product rather than on more marketing.
@@ -23,13 +30,14 @@ import { stashLandingHandoff } from "@/lib/coach-app-handoff";
 // app, and why the redirect target is hardcoded rather than "current page".
 
 type Props = {
-  /** Overridden per landing page variant so the button can echo the ad's
-   * promise ("Start tracking game time") rather than a generic label. */
-  ctaLabel?: string;
+  /** Overridden per landing page variant so the form can echo the ad's
+   * promise. Sits on the heading above the buttons, never on the buttons
+   * themselves - see the Google button below for why. */
+  heading?: string;
 };
 
 export default function CoachSignUpForm({
-  ctaLabel = "Start free with Google",
+  heading = "Set your team up in a couple of minutes",
 }: Props) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
@@ -86,9 +94,7 @@ export default function CoachSignUpForm({
 
   return (
     <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm max-w-md">
-      <p className="text-sm font-semibold text-gray-900 mb-4">
-        Set your team up in a couple of minutes
-      </p>
+      <p className="text-sm font-semibold text-gray-900 mb-4">{heading}</p>
 
       {status === "sent" ? (
         <p className="text-gray-700" role="status">
@@ -103,7 +109,7 @@ export default function CoachSignUpForm({
             onClick={() => void handleGoogle()}
             className="w-full bg-blue-700 hover:bg-blue-800 text-white! font-semibold px-6 py-3 rounded-lg transition-colors"
           >
-            {ctaLabel}
+            Sign up with Google
           </button>
 
           <div className="flex items-center gap-3 my-4" aria-hidden="true">
@@ -114,7 +120,7 @@ export default function CoachSignUpForm({
 
           <form onSubmit={(e) => void handleEmail(e)} className="flex flex-col gap-2">
             <label htmlFor="coach-signup-email" className="text-sm text-gray-700">
-              Sign in with an email link
+              Sign up with an email link
             </label>
             <input
               id="coach-signup-email"

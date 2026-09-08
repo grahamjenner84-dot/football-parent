@@ -263,3 +263,13 @@ reporting only, so page_views keeps the honest raw record, and kept separate
 from the bot filter so these rows are not miscounted as bot traffic. Verified:
 both coach-app paths now report 0, an unrelated control page is unchanged at
 225 views over 21 days. The campaign's own numbers therefore start clean.
+
+**Sign-up button now names what it does (8 Sept).** The landing variants'
+`ctaLabel` was rendered directly on the Google OAuth button, so the calculator
+page shipped a primary button reading "Manage equal game time" that opened
+Google sign-in. Anyone without a Google account clicked a benefit and hit a
+wall. All five variants had the same shape ("Build your first lineup free",
+"Start tracking your season free" and so on). The button is now fixed at "Sign
+up with Google" and the field, renamed `formHeading`, drives the heading above
+the form instead, so a variant can still echo its ad without disguising what
+the button does. Commit below.

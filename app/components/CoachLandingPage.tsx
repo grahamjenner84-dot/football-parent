@@ -139,7 +139,7 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
           </p>
 
           <div className="mt-8">
-            <CoachSignUpForm ctaLabel={frontmatter.ctaLabel} />
+            <CoachSignUpForm heading={frontmatter.formHeading} />
           </div>
 
           {/* Carried over from the app's own sign-in screen, where these sat
@@ -167,7 +167,7 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
         </div>
 
         <div className="pt-10">
-          <CoachSignUpForm ctaLabel={frontmatter.ctaLabel} />
+          <CoachSignUpForm heading={frontmatter.formHeading} />
         </div>
       </section>
     </main>
