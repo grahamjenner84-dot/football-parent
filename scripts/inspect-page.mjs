@@ -125,7 +125,30 @@ function findFiles(pathname) {
     const p = path.join(MDX_CONTENT_DIR, category, `${slug}.mdx`);
     if (fs.existsSync(p)) mdxFile = path.relative(REPO_ROOT, p);
   }
+  if (!mdxFile) {
+    const landing = resolveLandingMdx(segments);
+    if (landing) mdxFile = landing;
+  }
   return { pageFile, mdxFile };
+}
+
+/** Maps a Coach App landing URL to its content file.
+ *
+ * /football-parent-coach-app          -> content/landing/main.mdx
+ * /football-parent-coach-app/<slug>   -> content/landing/<slug>.mdx
+ *
+ * These live in one directory regardless of URL, because they are a route
+ * group rather than a content category - so the category/slug convention
+ * above never finds them. Kept in sync with the identical helpers in
+ * lib/gsc.ts and scripts/generate-seo-opportunities.mjs; change one, change
+ * all three.
+ */
+function resolveLandingMdx(segments) {
+  if (segments[0] !== "football-parent-coach-app") return null;
+  if (segments.length > 2) return null;
+  const slug = segments.length === 1 ? "main" : segments[1];
+  const p = path.join(MDX_CONTENT_DIR, "landing", `${slug}.mdx`);
+  return fs.existsSync(p) ? path.relative(REPO_ROOT, p) : null;
 }
 
 function extractFrontmatter(content) {
@@ -149,8 +172,11 @@ function getCurrentMeta(files) {
   let title = null, description = null;
   if (files.mdxFile) {
     const fm = extractFrontmatter(fs.readFileSync(path.join(REPO_ROOT, files.mdxFile), "utf8"));
-    if (fm.title) title = fm.title;
-    if (fm.description) description = fm.description;
+    // Landing pages name these seoTitle/seoDescription and fall back to the
+    // on-page h1/subhead, mirroring what their page.tsx passes to
+    // generateSEO. Articles use title/description.
+    title = fm.title ?? fm.seoTitle ?? fm.h1 ?? null;
+    description = fm.description ?? fm.seoDescription ?? fm.subhead ?? null;
   }
   if ((!title || !description) && files.pageFile) {
     const meta = extractMetaFromTsx(fs.readFileSync(path.join(REPO_ROOT, files.pageFile), "utf8"));

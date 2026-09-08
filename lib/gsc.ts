@@ -704,10 +704,41 @@ function findContentFiles(pathname: string): { pageFile: string | null; mdxFile:
     const p = path.join(MDX_CONTENT_DIR, category, `${slug}.mdx`);
     if (fs.existsSync(p)) mdxFile = path.relative(REPO_ROOT, p);
   }
+  // Coach App landing pages break the category/slug convention: they all live
+  // in content/landing/ regardless of their URL, because they are one route
+  // group rather than a content category. Without this the page that matters
+  // most commercially reports no content file and no title, which is exactly
+  // backwards - see resolveLandingMdx.
+  if (!mdxFile) {
+    const landing = resolveLandingMdx(segments);
+    if (landing) mdxFile = landing;
+  }
   return { pageFile, mdxFile };
 }
 
-function extractFrontmatterMeta(content: string): { title?: string; description?: string } {
+/** Maps a Coach App landing URL to its content file.
+ *
+ * /football-parent-coach-app          -> content/landing/main.mdx
+ * /football-parent-coach-app/<slug>   -> content/landing/<slug>.mdx
+ *
+ * Kept in sync with the identical helpers in scripts/inspect-page.mjs and
+ * scripts/generate-seo-opportunities.mjs. This resolution is triplicated
+ * across the TS app and the two standalone node scripts; there is no shared
+ * module because they sit either side of the build boundary. Change one,
+ * change all three.
+ */
+function resolveLandingMdx(segments: string[]): string | null {
+  if (segments[0] !== "football-parent-coach-app") return null;
+  if (segments.length > 2) return null;
+  const slug = segments.length === 1 ? "main" : segments[1];
+  const p = path.join(MDX_CONTENT_DIR, "landing", `${slug}.mdx`);
+  return fs.existsSync(p) ? path.relative(REPO_ROOT, p) : null;
+}
+
+// Returns every frontmatter key, not just title/description: articles use
+// those two, landing pages use seoTitle/seoDescription with h1/subhead as a
+// fallback, and the caller decides which apply.
+function extractFrontmatterMeta(content: string): Record<string, string | undefined> {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!match) return {};
   const fm: Record<string, string> = {};
@@ -732,8 +763,12 @@ function getPageCurrentMeta(files: { pageFile: string | null; mdxFile: string | 
   let description: string | null = null;
   if (files.mdxFile) {
     const fm = extractFrontmatterMeta(fs.readFileSync(path.join(REPO_ROOT, files.mdxFile), "utf8"));
-    if (fm.title) title = fm.title;
-    if (fm.description) description = fm.description;
+    // Landing pages name these seoTitle/seoDescription and fall back to the
+    // on-page h1/subhead, mirroring what their page.tsx actually passes to
+    // generateSEO. Articles use title/description.
+    if (fm.title ?? fm.seoTitle ?? fm.h1) title = fm.title ?? fm.seoTitle ?? fm.h1 ?? null;
+    if (fm.description ?? fm.seoDescription ?? fm.subhead)
+      description = fm.description ?? fm.seoDescription ?? fm.subhead ?? null;
   }
   if ((!title || !description) && files.pageFile) {
     const meta = extractTsxMeta(fs.readFileSync(path.join(REPO_ROOT, files.pageFile), "utf8"));
