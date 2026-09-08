@@ -240,3 +240,14 @@ page, articles and the homepage. Commit `401a4d8`.
 Net effect on the calculator variant at 375x812: primary CTA now fully visible
 without scrolling, email fallback and legal links reachable by scrolling,
 nothing permanently obscured.
+
+**Calculator variant copy revised (8 Sept).** CTA changed from "Work out your
+first lineup free" to "Manage equal game time": the old one described effort
+the coach has to put in, the new one describes what they get. Subhead rewritten
+to lead with what the app does rather than announcing that the formula below is
+free, which undercut the product before the form. Sheffield FA attribution and
+link removed, and the internal link to the equal-playing-time article removed:
+this is a join page, and outbound links are exits from a page bought by the
+click. Also cut the line conceding that free calculators exist online, which
+was pointing paid traffic at competitors. Page body now has zero outbound
+links. Commit below.
