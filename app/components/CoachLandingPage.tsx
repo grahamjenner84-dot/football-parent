@@ -1,6 +1,8 @@
+import Script from "next/script";
 import CoachAppCarousel from "@/app/components/CoachAppCarousel";
 import CoachSignUpForm from "@/app/components/CoachSignUpForm";
 import { MDXContent } from "@/lib/MDXContent";
+import { extractFaqs } from "@/lib/faq";
 import type { LandingPage } from "@/lib/landing";
 
 // Shared shell for every Coach App landing page, so a variant differs from
@@ -40,8 +42,72 @@ function CheckIcon() {
 export default function CoachLandingPage({ page }: { page: LandingPage }) {
   const { frontmatter, content, slug } = page;
 
+  // Only on the indexable page. A noindex variant cannot earn a rich result,
+  // so schema there is markup nobody will ever read.
+  const indexable = frontmatter.index === true;
+
+  // Same extractFaqs + FAQPage shape ArticleLayout already uses, so the FAQ
+  // on this page is described to Google the way every article's is. It was
+  // simply never wired up here.
+  const faqs = indexable ? extractFaqs(content) : [];
+  const faqSchema =
+    faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: { "@type": "Answer", text: faq.answer },
+          })),
+        }
+      : null;
+
+  // Deliberately no aggregateRating: there are no reviews to aggregate, and
+  // inventing one is both a Google penalty and a lie. Offers describes what
+  // the page itself states - a free tier and a 2.99/month paid tier.
+  const appSchema = indexable
+    ? {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: "Football Parent Coach App",
+        applicationCategory: "SportsApplication",
+        operatingSystem: "Web, iOS, Android",
+        url: "https://www.footballparent.co.uk/football-parent-coach-app",
+        description: frontmatter.seoDescription ?? frontmatter.subhead,
+        offers: [
+          {
+            "@type": "Offer",
+            name: "Free",
+            price: "0",
+            priceCurrency: "GBP",
+          },
+          {
+            "@type": "Offer",
+            name: "Paid",
+            price: "2.99",
+            priceCurrency: "GBP",
+          },
+        ],
+      }
+    : null;
+
   return (
     <main className="min-h-screen bg-white">
+      {faqSchema && (
+        <Script
+          id={`landing-faq-schema-${slug}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+      {appSchema && (
+        <Script
+          id={`landing-app-schema-${slug}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+        />
+      )}
       <section className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
           {/* The horizontal lockup rather than the square icon: the icon
