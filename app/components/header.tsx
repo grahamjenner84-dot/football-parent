@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import SearchPanel from "./search-panel";
 
@@ -17,6 +18,25 @@ const navItems = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // The PPC landing variants under /football-parent-coach-app/<variant> drop
+  // the site nav entirely. They exist to convert one ad click, and the seven
+  // category links are seven ways to leave a page we paid to land someone on.
+  // The hero carries the Coach App wordmark, so the page is not left
+  // unbranded, and the footer stays for the privacy/terms links that Google
+  // Ads policy expects to be reachable.
+  //
+  // Deliberately not the parent /football-parent-coach-app page: that one is
+  // the only indexable page in the set, and stripping its internal links
+  // would cost it the crawl paths it is supposed to have.
+  //
+  // usePathname is safe to branch on here despite the page being prerendered:
+  // the docs' hydration-mismatch warning applies to pages reached *through* a
+  // rewrite, and the only rewrite in this project (/coach-app/:path* in
+  // vercel.json) points at a separate deployment that never renders this
+  // component.
+  if (/^\/football-parent-coach-app\/[^/]+$/.test(pathname ?? "")) return null;
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white text-slate-950 shadow-sm">
