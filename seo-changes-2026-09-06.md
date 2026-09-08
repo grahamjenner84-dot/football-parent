@@ -211,3 +211,32 @@ result is readable later: the Google Ads conversion action may not be firing
 own `index.html`, where the conversion event actually fires), and the campaign
 economics only clear at roughly £0.10-0.50 a click against a £2.99/month
 product, which rules out the `football coaching app` head term at £1.37.
+
+## Cookie banner overlap fix, and nav stripped from the ad variants (8 Sept)
+
+Both found while checking the new calculator landing page for Google Ads
+landing-page experience, both measured in the browser at 375x812 rather than
+eyeballed.
+
+**1. The cookie banner was covering the page.** `fixed inset-x-0 bottom-0`,
+186px tall on a phone, top edge at y=626. The Coach App sign-up form's primary
+button sat at y=614-664, so 38 of its 50px were behind the banner; the email
+fallback and the terms/privacy line were fully hidden. Every ad click is a
+first-time visitor, so this hit 100% of paid traffic, and it applied to every
+page on the site carrying a form or a CTA low in the viewport, not just the
+landing pages. `app/components/CookieConsent.tsx` now reserves the banner's
+measured height as `padding-bottom` on `<body>` while it is shown. Commit
+`6e14809`.
+
+**2. Site nav removed from `/football-parent-coach-app/<variant>` only.**
+Seven category links plus search on a page bought at roughly £0.30-1.40 a
+click. Footer deliberately kept: Ads expects privacy and terms to be
+reachable, and stripping trust links is not the same win as stripping exits.
+The parent `/football-parent-coach-app` page is untouched and keeps its nav,
+being the only indexable page in the set. Verified in served HTML that the
+header is absent server-side on both variants and still present on the parent
+page, articles and the homepage. Commit `401a4d8`.
+
+Net effect on the calculator variant at 375x812: primary CTA now fully visible
+without scrolling, email fallback and legal links reachable by scrolling,
+nothing permanently obscured.
