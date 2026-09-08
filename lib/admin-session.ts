@@ -11,6 +11,11 @@ const AUTH_MESSAGE = "fp-admin-authed";
 
 export { SESSION_COOKIE as ADMIN_SESSION_COOKIE };
 
+/** Long-lived (1 year) marker set alongside the session cookie on admin
+ * login, read only by the page-view endpoint. Exists so a device stays out of
+ * page_views even after its 30-day admin session lapses. */
+export const NO_TRACK_COOKIE = "fp_no_track";
+
 /** True when the request carries a valid admin session cookie.
  *
  * Used to recognise the site owner's own devices. The cookie is httpOnly with

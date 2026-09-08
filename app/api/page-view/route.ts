@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { logPageView } from "@/lib/supabase/page-views";
 import { isKnownBot } from "@/lib/user-agent-bots";
-import { ADMIN_SESSION_COOKIE, hasAdminSession } from "@/lib/admin-session";
+import { ADMIN_SESSION_COOKIE, NO_TRACK_COOKIE, hasAdminSession } from "@/lib/admin-session";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -48,7 +48,16 @@ export async function POST(req: Request) {
       .find((part) => part.startsWith(`${ADMIN_SESSION_COOKIE}=`))
       ?.slice(ADMIN_SESSION_COOKIE.length + 1);
 
-    if (hasAdminSession(sessionValue)) {
+    // fp_no_track outlives the 30-day session cookie by design: a device
+    // that has not opened the dashboard in a month would otherwise quietly
+    // start counting its owner as a visitor again, which is the same silent
+    // failure the localStorage flag had.
+    const noTrack = cookieHeader
+      .split(";")
+      .map((part) => part.trim())
+      .some((part) => part === `${NO_TRACK_COOKIE}=1`);
+
+    if (noTrack || hasAdminSession(sessionValue)) {
       return NextResponse.json({ ok: true });
     }
 
