@@ -1,195 +1,30 @@
-import CoachAppCarousel from "@/app/components/CoachAppCarousel";
-import CoachSignUpForm from "@/app/components/CoachSignUpForm";
+import { notFound } from "next/navigation";
+import CoachLandingPage from "@/app/components/CoachLandingPage";
+import { getLandingPage, MAIN_LANDING_SLUG } from "@/lib/landing";
 import { generateSEO } from "@/lib/seo";
 
+// The main Coach App page. Its content lives in content/landing/main.mdx,
+// the same system the ad variants use, so the page that actually ranks can
+// be edited without touching code — previously it was the other way round:
+// the throwaway variants were editable and the one page worth tuning was
+// hardcoded.
+//
+// Still its own route rather than a [variant] slug, because it is the only
+// indexable page in the set and needs the full generateSEO treatment
+// (canonical, OpenGraph, Twitter) that the noindex variants deliberately
+// skip. lib/landing.ts keeps its slug out of generateStaticParams so the
+// same content can't also appear at /football-parent-coach-app/main.
+
+const page = getLandingPage(MAIN_LANDING_SLUG);
+
 export const metadata = generateSEO({
-  title: "Football Parent Coach App: Team Selector & Match Tracker",
-  description:
-    "Football Parent's Coach App: build your lineup, track live matches and get fair playing-time rotation for your grassroots football team, all in one place.",
+  title: page?.frontmatter.seoTitle ?? page?.frontmatter.h1 ?? "Football Parent Coach App",
+  description: page?.frontmatter.seoDescription ?? page?.frontmatter.subhead ?? "",
   path: "/football-parent-coach-app",
   type: "website",
 });
 
 export default function CoachAppPage() {
-  return (
-    <main className="min-h-screen bg-white">
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
-          <img
-            src="/logo-icon-coach.png"
-            alt="Football Parent Coach App"
-            className="h-14 w-14 mb-6"
-          />
-
-          <p className="text-sm font-semibold text-blue-700 mb-4">
-            Football Parent Coach App
-          </p>
-
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Run Your Grassroots Team Without the Sunday-Morning Spreadsheet
-          </h1>
-
-          <p className="text-lg text-gray-700 leading-relaxed">
-            If you&apos;re coaching or managing a grassroots team, most of the
-            admin isn&apos;t coaching at all: working out who played what last
-            week, chasing parents for availability, totting up who&apos;s had
-            a fair share of game time. The Coach App handles that side so you
-            can focus on the session and the match.
-          </p>
-
-          {/* The form itself, not a link onward. Above the fold on purpose:
-              this is the page ads land on, so the coach should be able to
-              act without a second navigation. */}
-          <div className="mt-8">
-            <CoachSignUpForm ctaLabel="Start free with Google" />
-          </div>
-        </div>
-      </section>
-
-      <CoachAppCarousel />
-
-      <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
-        <div className="space-y-6 text-gray-700 text-lg leading-8">
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">
-            What It Does
-          </h2>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
-            Squad Management
-            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-              Free
-            </span>
-          </h3>
-          <p>
-            Keep your full squad in one place, with an active/inactive flag
-            for players who&apos;ve stepped away without losing their history.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
-            Scheduling &amp; Availability
-            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-              Free
-            </span>
-          </h3>
-          <p>
-            Set up matches and training as one-off or weekly recurring
-            fixtures, with location and notes, so the team always knows
-            what&apos;s next.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
-            Team Selector &amp; Lineups
-            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-              Free
-            </span>
-          </h3>
-          <p>
-            Build a fixed lineup or switch on equal-time rotation, with
-            drag-and-drop formations, so playing time stays fair without you
-            doing the maths in your head.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
-            Live Match Tracker
-            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
-              Paid plan
-            </span>
-          </h3>
-          <p>
-            Log goals, cards and substitutions as they happen, with a live
-            feed your team can follow along to.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
-            Real Stats
-            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
-              Paid plan
-            </span>
-          </h3>
-          <p>
-            Appearances, goals, assists and cards, calculated from what
-            actually happened in your matches, not hand-counted after the
-            fact. If you&apos;re currently doing this on a{" "}
-            <a href="/coaching/football-team-spreadsheet" className="text-blue-700 underline">
-              football team spreadsheet
-            </a>
-            , this is what it looks like once it&apos;s automatic.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
-            Tournament Day
-            <span className="text-xs font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">
-              Paid plan
-            </span>
-          </h3>
-          <p>
-            A dedicated flow for tournament formats, from lineup through to a
-            live summary.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4 flex items-center gap-2">
-            Share With Your Team
-            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
-              Free
-            </span>
-          </h3>
-          <p>
-            Send parents, assistant coaches and team managers a link to join
-            in and see the same fixtures and results you do.
-          </p>
-
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            Built for Grassroots
-          </h2>
-
-          <p>
-            This isn&apos;t a club-wide platform for academies or leagues to
-            run their whole operation. It&apos;s built for the person actually
-            stood on the touchline: a head coach, assistant coach or team
-            manager running one grassroots team, not a whole club&apos;s
-            operation.
-          </p>
-
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            Frequently Asked Questions
-          </h2>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
-            Is the Coach App free to use?
-          </h3>
-          <p>
-            Squad management, scheduling, team selection (including
-            equal-time rotation and fair playing-time tracking) and
-            organising a live match are free. Logging live match stats, full
-            season stats and tournament mode are part of a paid plan.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
-            Do parents and assistant coaches need to install anything?
-          </h3>
-          <p>
-            No. Parents, assistant coaches and team managers you invite get a
-            link to see fixtures, results and availability without
-            installing anything or creating an account of their own.
-          </p>
-
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
-            Does it work for tournaments, not just weekly matches?
-          </h3>
-          <p>
-            Yes. There&apos;s a dedicated tournament day flow, from your squad
-            and formation through to a live summary as group games move into
-            knockouts.
-          </p>
-
-          {/* Repeat CTA for anyone who read the whole page rather than
-              converting off the hero. Same component, so there is one form
-              to maintain and both instances behave identically. */}
-          <div className="pt-6">
-            <CoachSignUpForm ctaLabel="Start free with Google" />
-          </div>
-        </div>
-      </section>
-    </main>
-  );
+  if (!page) notFound();
+  return <CoachLandingPage page={page} />;
 }
