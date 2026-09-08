@@ -144,8 +144,13 @@ export default function CoachSignUpForm({
         </p>
       )}
 
+      {/* "No card required" because the page raises the question itself: it
+          shows a price and says "cancel any time", which invites "am I
+          signing up to something that charges me". Accurate as written -
+          Stripe is only reached from the upgrade flow inside the app, never
+          at sign-up. */}
       <p className="text-xs text-gray-500 mt-4">
-        Free to get started. By continuing you agree to our{" "}
+        Free to get started, no card required. By continuing you agree to our{" "}
         <a href="/terms-and-conditions" className="underline">
           Terms &amp; Conditions
         </a>{" "}
