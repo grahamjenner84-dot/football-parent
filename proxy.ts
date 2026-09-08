@@ -3,6 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 const SESSION_COOKIE = "fp_admin_session";
 const AUTH_MESSAGE = "fp-admin-authed";
 
+// Kept out of page_views by app/api/page-view/route.ts. Name duplicated from
+// lib/admin-session.ts rather than imported, for the same reason the HMAC
+// below is: this file runs on the edge runtime and that module pulls in node's
+// crypto.
+const NO_TRACK_COOKIE = "fp_no_track";
+const NO_TRACK_MAX_AGE = 60 * 60 * 24 * 365; // 1 year
+
 async function expectedSessionValue(): Promise<string> {
   const secret = process.env.ADMIN_SESSION_SECRET || "";
   const enc = new TextEncoder();
@@ -42,7 +49,21 @@ export async function proxy(req: NextRequest) {
   const expected = await expectedSessionValue();
 
   if (cookie && cookie === expected) {
-    return NextResponse.next();
+    // Refresh the tracking exclusion on every authenticated admin request,
+    // not just at login. There is no sign-out in this app, so a device that
+    // signed in once would otherwise never be handed the cookie at all, and
+    // waiting for the 30-day session to lapse just to get it is backwards.
+    // Opening the dashboard is the thing Graham actually does, so hang it on
+    // that: each visit pushes the exclusion out another year.
+    const res = NextResponse.next();
+    res.cookies.set(NO_TRACK_COOKIE, "1", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "lax",
+      path: "/",
+      maxAge: NO_TRACK_MAX_AGE,
+    });
+    return res;
   }
 
   if (pathname.startsWith("/api/")) {
