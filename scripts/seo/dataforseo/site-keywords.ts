@@ -58,7 +58,7 @@ function cleanTitle(title: string): string {
     .trim();
 }
 
-// app/sitemap.ts is the repo's established source of truth for real URLs
+// lib/routes.ts is the repo's established source of truth for real URLs
 // (internal-link-audit.mjs already uses it the same way) - `categoryUrl +
 // slug` is only a guess and is wrong wherever a page's actual route nests
 // under a subcategory folder that frontmatter doesn't reflect (confirmed

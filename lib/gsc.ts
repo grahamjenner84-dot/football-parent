@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { JWT } from "google-auth-library";
-import { routes as SITEMAP_ROUTES } from "@/app/sitemap";
+import { routes as SITEMAP_ROUTES } from "@/lib/routes";
 
 const REPO_ROOT = process.cwd();
 const CONTENT_DIR = path.join(REPO_ROOT, "app");
@@ -561,7 +561,7 @@ export type NoImpressionsRow = {
   url: string;
 };
 
-// Every URL in app/sitemap.ts (the source of truth for real routes - see
+// Every URL in lib/routes.ts (the source of truth for real routes - see
 // internal-link-audit.mjs) that got zero impressions in the window, whether
 // because it stopped ranking entirely or never picked up any search
 // visibility in the first place. GSC only returns rows for pages with at

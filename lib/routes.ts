@@ -1,0 +1,126 @@
+// The flat, manually maintained list of every real route on the site.
+//
+// Lives here rather than in app/sitemap.ts because it has consumers that
+// must not pull in server-only code: app/admin/seo/page.tsx is a "use
+// client" component, and app/sitemap.ts now reads the filesystem to derive
+// lastmod. Importing the list from the sitemap module would drag `fs` into
+// the client bundle and fail the build.
+//
+// internal-link-audit.mjs text-parses this file for `const routes = [`, so
+// keep the declaration on one line in that form.
+//
+// New or changed routes must be added here.
+export const routes = [
+
+  '',
+
+  // Category pages
+  '/academy-pathway',
+  '/academy-trials',
+  '/coaching',
+  '/football-development',
+  '/football-gear',
+  '/girls-football',
+  '/parent-guides',
+
+  // Academy Pathway
+  '/academy-pathway/academy-categories-explained',
+  '/academy-pathway/development-centres-vs-academies',
+  '/academy-pathway/how-academy-football-works',
+  '/academy-pathway/understanding-academy-release',
+  '/academy-pathway/how-to-join-a-football-academy',
+  '/academy-pathway/what-age-do-football-academies-recruit',
+  '/academy-pathway/what-is-eppp',
+  '/academy-pathway/uk-football-development-centres-explained',
+  '/academy-pathway/pdc-vs-ptc-vs-rtc-explained',
+  '/academy-pathway/how-players-progress-through-football-development-centres',
+  '/academy-pathway/chelsea-fc-development-centre-guide',
+  '/academy-pathway/arsenal-development-centre-guide',
+  '/academy-pathway/fulham-fc-development-centre-guide',
+  '/academy-pathway/tottenham-development-centres-explained',
+  '/academy-pathway/leeds-united-development-centre-guide',
+  '/academy-pathway/crystal-palace-development-centre-guide',
+  '/academy-pathway/premier-league-development-centres-list',
+  '/academy-pathway/football-scholarships-uk',
+  '/academy-pathway/football-development-centres-near-me',
+  '/academy-pathway/how-to-find-a-football-agent-for-your-child',
+  '/academy-pathway/west-ham-player-pathway-guide',
+  '/academy-pathway/brentford-development-centre-guide',
+  '/academy-pathway/aston-villa-development-centre-guide',
+  '/academy-pathway/can-academy-players-play-grassroots-football',
+  '/academy-pathway/how-much-does-academy-football-cost',
+  '/academy-pathway/football-development-centres-in-london',
+  '/academy-pathway/pre-academy-football',
+
+  // Academy Trials
+  '/academy-trials/football-academy-trials-uk',
+  '/academy-trials/football-trials-near-me',
+  '/academy-trials/how-football-scouts-identify-players',
+  '/academy-trials/what-do-academy-coaches-look-for',
+  '/academy-trials/what-happens-at-academy-trials',
+  '/academy-trials/how-to-get-scouted-for-football',
+  '/academy-trials/how-football-clubs-recruit-young-players',
+
+  // Football Development
+  '/football-development/build-confidence-young-footballers',
+  '/football-development/good-football-development-environment',
+  '/football-development/how-much-training-is-too-much',
+  '/football-development/how-to-become-a-professional-footballer',
+  '/football-development/improve-football-decision-making',
+  '/football-development/is-private-football-coaching-worth-it',
+  '/football-development/late-developers-in-football',
+  '/football-development/relative-age-effect-football',
+  '/football-development/signs-your-child-is-ready-for-academy-football',
+  '/football-development/playing-up-an-age-group-football',
+  '/football-development/new-fa-youth-football-format',
+  '/football-development/what-is-football-iq',
+  '/football-development/bio-banding-football',
+  '/football-development/why-isnt-my-child-improving-at-football',
+  '/football-development/football-burnout',
+
+  // Football Gear
+  '/football-gear/ag-vs-fg-boots',
+  '/football-gear/best-football-gloves-for-winter-training',
+  '/football-gear/best-footballs-by-age',
+  '/football-gear/boots/best-football-boots-for-wide-feet-kids',
+  '/football-gear/shin-pads/best-shin-pads-for-kids-football',
+  '/football-gear/veo-camera-alternatives',
+
+  // Girls Football
+  '/girls-football/girls-academy-vs-grassroots-football',
+  '/girls-football/emerging-talent-centres-explained',
+  '/girls-football/girls-football-trials',
+  '/girls-football/how-girls-football-academies-work',
+  '/girls-football/late-developers-in-girls-football',
+  '/girls-football/what-age-do-girls-football-academies-recruit',
+  '/girls-football/girls-rtcs-explained',
+
+  // Parent Guides
+  '/parent-guides/biggest-football-parent-mistakes',
+  '/parent-guides/leave-grassroots-football-for-an-academy',
+  '/parent-guides/support-child-after-bad-match',
+  '/parent-guides/what-to-say-after-football-matches',
+  '/parent-guides/are-football-development-centres-worth-it',
+  '/parent-guides/what-is-the-junior-premier-league',
+  '/parent-guides/jpl-vs-grassroots-football',
+  '/parent-guides/jpl-and-academy-football',
+  '/parent-guides/how-to-get-into-the-jpl',
+  '/parent-guides/futurefit-football-dna-interview-part-1',
+  '/parent-guides/what-is-grassroots-football',
+  '/parent-guides/how-to-become-a-football-coach',
+  '/parent-guides/futurefit-football-dna-interview-part-2',
+  '/parent-guides/jpl-martin-brock-interview-part-1',
+  '/parent-guides/jpl-martin-brock-interview-part-2',
+  '/coaching/football-drills-for-7-and-8-year-olds',
+  '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
+  '/coaching/equal-playing-time-in-grassroots-football',
+  '/coaching/best-football-formations-by-age-group',
+  '/coaching/football-team-spreadsheet',
+
+  // Coach App
+  '/football-parent-coach-app',
+
+  // Legal
+  '/privacy-policy',
+  '/cookie-policy',
+]

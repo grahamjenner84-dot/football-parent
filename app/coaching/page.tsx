@@ -1,4 +1,5 @@
 import CategoryPage from "../components/category-page";
+import CoachAppBanner from "@/app/components/CoachAppBanner";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -50,6 +51,13 @@ export default function CoachingPage() {
           },
         ],
       }}
+      // The coach-audience creative, deliberately: its copy (fair game time,
+      // lineups, match stats, the Sunday-morning spreadsheet) answers the
+      // same problems the intro and closing copy on this page raise - who
+      // starts, how minutes get shared out, and the admin that eats the
+      // week. Pinned to the dark style rather than entering the article A/B
+      // test, which splits by article slug and has nothing to split on here.
+      promo={<CoachAppBanner audience="coach" style="dark" placement="category" />}
       articles={[
         {
           title: "What Qualifications Do You Need to Be a Football Coach?",

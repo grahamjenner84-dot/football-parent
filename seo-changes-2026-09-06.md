@@ -157,6 +157,24 @@ Graham asked for a proper Coaching category now that there are enough articles f
 
 Reverses the 6 Sept decision above to list `football-team-spreadsheet` under Parent Guides, which was explicitly a stopgap because no `/coaching` category existed. `npm run build` passes; all 6 `/coaching` routes prerender.
 
+## Sitemap lastmod made real; Coach App promo on /coaching; landing page link leak closed
+
+Three changes, all off the back of the /coaching category work above.
+
+**1. Sitemap `lastmod` now derived from content, not the clock.** `app/sitemap.ts` was emitting `lastModified: new Date()` for every route, so all ~93 URLs claimed to have changed on every deploy. Google discards lastmod it can tell is untrustworthy, which made the field dead weight: a genuinely edited page had no way to stand out. Now an article's lastmod is its own `dateModified ?? date` frontmatter, and the 11 routes with no backing MDX (home, the six category indexes, legal pages, /search, the Coach App landing) omit lastmod entirely rather than asserting a date we invented. Verified in the build output: 82 URLs with a real date, 11 without.
+
+Required extracting the route list from `app/sitemap.ts` to a new `lib/routes.ts`. `app/admin/seo/page.tsx` is a `"use client"` component that imports the list, so once the sitemap module read the filesystem, `fs` landed in the client bundle and the build failed. `lib/routes.ts` is now the manually maintained list; consumers updated (`app/sitemap.ts`, `app/admin/seo/page.tsx`, `lib/gsc.ts`, `scripts/seo/cli/content-backlog.ts`, `internal-link-audit.mjs`). CLAUDE.md updated to point at the new location.
+
+**2. Coach App promo banner on `/coaching`, above the guide grid.** New optional `promo` slot on `app/components/category-page.tsx`; `/coaching` passes the dark coach-audience creative. Its copy (fair game time, lineups, match stats, the Sunday-morning spreadsheet) answers the same problems the category's intro and closing copy raise, which is why that creative rather than the parent one.
+
+Deliberately pinned to the dark style rather than entering the article A/B test: the test splits by article slug and a single category page has nothing to split on. `bannerOnPath()` in `lib/supabase/page-views.ts` was taught about the new `category` placement, which was necessary rather than optional: clicks are counted from the `?b=` parameter on any path, but impressions only for paths the report recognises as carrying a banner, and it explicitly returned null for category indexes. Left unfixed it would have reported this banner's clicks against zero impressions and inflated the CTR. Tracks as `dark-coach-category`.
+
+Worth knowing but not changed: `enoughData` sums impressions by style across all placements, so the homepage (also pinned dark) and now this page both feed the dark arm only. That asymmetry predates this change; not touched mid-test.
+
+**3. Removed the only internal link out of the Coach App landing page.** `content/landing/main.mdx` linked "football team spreadsheet" to `/coaching/football-team-spreadsheet`. Unlinked, sentence and keyword mention kept. The landing page's main content now has zero internal outbound links, confirmed in the rendered DOM.
+
+`npm run build` passes; no new lint issues. Commit: see below.
+
 ## Still on watch, not yet due
 
 - Coach App banner A/B test (started 4 Sept) — needs both arms to clear 300 impressions before the CTR comparison is meaningful.

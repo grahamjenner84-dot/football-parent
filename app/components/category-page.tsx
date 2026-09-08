@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
 
 type Article = {
@@ -32,6 +33,9 @@ type CategoryPageProps = {
   startHere?: StartHereSection;
   articlesHeading?: string;
   bottomContent?: BottomContentSection;
+  // Section-level promo rendered directly above the guide grid. Optional:
+  // most categories don't have one.
+  promo?: ReactNode;
 };
 
 export default function CategoryPage({
@@ -43,6 +47,7 @@ export default function CategoryPage({
   startHere,
   articlesHeading = "All Guides",
   bottomContent,
+  promo,
 }: CategoryPageProps) {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -105,6 +110,8 @@ export default function CategoryPage({
       )}
 
       <section className="mx-auto max-w-6xl px-5 py-12 md:py-16">
+        {promo && <div className="mb-12">{promo}</div>}
+
         <h2 className="mb-6 text-2xl font-bold tracking-tight text-slate-950">
           {articlesHeading}
         </h2>

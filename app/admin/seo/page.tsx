@@ -18,7 +18,7 @@ import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only 
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
-import { routes as siteRoutes } from "@/app/sitemap"; // plain string array, no server-only deps - safe from a client component
+import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & { bannerVariants?: BannerVariantStats };
 
@@ -89,7 +89,7 @@ const ALL_SITE_PATHS: string[] = siteRoutes.map((r) => (r === "" ? "/" : r));
 
 // Merges the site's own route list with whatever paths the data actually
 // contains (redirects, /coach-app, anything published but not yet added to
-// app/sitemap.ts), de-duplicated and sorted.
+// lib/routes.ts), de-duplicated and sorted.
 function allPagePaths(observed: string[] = []): string[] {
   return Array.from(new Set([...ALL_SITE_PATHS, ...observed])).sort((a, b) => a.localeCompare(b));
 }

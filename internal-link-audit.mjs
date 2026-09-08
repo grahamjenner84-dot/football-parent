@@ -18,7 +18,7 @@ const RECIPROCAL_LIMIT = 50;       // cap on reciprocal-link-opportunity rows in
 // if the content set changes a lot.
 const RECIPROCAL_MIN_SCORE = 2;
 const GSC_CSV_PATH = 'gsc-pages.csv';
-const SITEMAP_FILE = 'app/sitemap.ts'; // used as the source of truth for real URLs where possible
+const SITEMAP_FILE = 'lib/routes.ts'; // used as the source of truth for real URLs where possible
 
 // Flat list of pillar/hub article URL paths. A cluster (folder) can have more
 // than one pillar - each is checked independently against the other pages in

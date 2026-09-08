@@ -24,6 +24,21 @@ import Link from "next/link";
 export type CoachAppAudience = "parent" | "coach";
 export type CoachAppBannerStyle = "dark" | "light";
 
+// Where a banner sits. "article" is the in-body placement the A/B test runs
+// on; "home" is the homepage; "category" is the section-level promo above a
+// category page's guide grid.
+//
+// Any new placement must also be taught to bannerOnPath() in
+// lib/supabase/page-views.ts, which decides whether a logged pageview counts
+// as a banner impression. Clicks are counted from the ?b= parameter on any
+// path, so a placement the report doesn't recognise contributes clicks with
+// no matching impressions and reports an inflated CTR.
+export type CoachAppPlacement = "article" | "home" | "category";
+
+// Category index pages carrying the section-level banner, as route paths.
+// Shared with the pageview report so impressions and clicks stay in step.
+export const CATEGORY_BANNER_PATHS = new Set(["/coaching"]);
+
 export const AB_TEST_ENABLED = true;
 
 // When the banners actually went live in production (commit 6c418af deployed
@@ -105,7 +120,7 @@ export default function CoachAppBanner({
 }: {
   audience?: CoachAppAudience;
   style?: CoachAppBannerStyle;
-  placement?: "article" | "home";
+  placement?: CoachAppPlacement;
 }) {
   const spacing = placement === "article" ? "my-10" : "";
   const href = `${DESTINATION}?b=${style}-${audience}-${placement}`;

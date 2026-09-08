@@ -8,7 +8,7 @@ import matter from "gray-matter";
 import { migrate } from "../database/migrate";
 import { getDb } from "../database/db";
 import { REPO_ROOT } from "../shared/env";
-import { routes } from "../../../app/sitemap";
+import { routes } from "../../../lib/routes";
 import {
   markFactChecked,
   markSeoOptimised,
@@ -131,7 +131,7 @@ function runReport(argv: string[]): void {
   );
 }
 
-// One row per real article page (from app/sitemap.ts's route list, matched
+// One row per real article page (from lib/routes.ts's route list, matched
 // to its content/<category>/<slug>.mdx), joined against the tracker. Writes
 // seo-data/reports/content-status.csv + .json (both committed, unlike
 // seo-data/database/*.db) and backfills ai_slop_checked_at from the Phase
@@ -303,7 +303,7 @@ function main(): void {
     console.error("       [--confirmed-voice-text \"verbatim genuine passage(s), reviewed and left as prose\"]");
     console.error("  report [--touched]  (--touched limits to rows with any Phase 5 activity)");
     console.error("  export [--backfill-date YYYY-MM-DD]  (writes seo-data/reports/content-status.csv/.json,");
-    console.error("         one row per real article page from app/sitemap.ts)");
+    console.error("         one row per real article page from lib/routes.ts)");
     process.exitCode = 1;
   }
 }

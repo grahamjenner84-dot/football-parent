@@ -2,7 +2,11 @@ import { createClient } from "@supabase/supabase-js";
 import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getAllArticleSlugs } from "@/lib/content";
-import { BANNER_TEST_STARTED_AT, bannerStyleForKey } from "@/app/components/CoachAppBanner";
+import {
+  BANNER_TEST_STARTED_AT,
+  CATEGORY_BANNER_PATHS,
+  bannerStyleForKey,
+} from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/cookie-consent.ts - this must never be imported from client
@@ -603,8 +607,8 @@ function audienceForPath(path: string): "parent" | "coach" {
 }
 
 // Which banner creative (if any) a given logged pageview path would have
-// shown. Returns null for pages with no banner: category indexes, the
-// landing page itself, /search, policy pages and so on.
+// shown. Returns null for pages with no banner: category indexes without a
+// section promo, the landing page itself, /search, policy pages and so on.
 function bannerOnPath(
   path: string,
   articleSlugs: Set<string>
@@ -614,6 +618,22 @@ function bannerOnPath(
       style: bannerStyleForKey(undefined),
       audience: "parent",
       placement: "home",
+    };
+  }
+
+  // Category pages carrying the section-level promo. Checked before the
+  // article lookup because a category path's last segment ("coaching") is
+  // not an article slug and would otherwise fall through to null - counting
+  // the banner's clicks while attributing it no impressions at all.
+  //
+  // Pinned to ACTIVE_BANNER_STYLE via bannerStyleForKey(undefined), the same
+  // way the homepage is: the A/B test splits by article slug, and a single
+  // category page has no meaningful slug to split on.
+  if (CATEGORY_BANNER_PATHS.has(path)) {
+    return {
+      style: bannerStyleForKey(undefined),
+      audience: "coach",
+      placement: "category",
     };
   }
 
