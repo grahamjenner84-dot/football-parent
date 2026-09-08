@@ -251,3 +251,15 @@ this is a join page, and outbound links are exits from a page bought by the
 click. Also cut the line conceding that free calculators exist online, which
 was pointing paid traffic at competitors. Page body now has zero outbound
 links. Commit below.
+
+**Coach App page views start recording 9 Sept (8 Sept).** The landing pages
+were built, rewritten and previewed repeatedly through early September, so
+their view counts to date are mostly setup traffic rather than visitors: on
+8 Sept the calculator page held 24 rows, 13 of them an agent's and most of the
+rest Graham checking the deploy. `RECORDING_STARTS` in
+`lib/supabase/page-views.ts` now excludes everything under
+`/football-parent-coach-app` before 2026-09-09 from the SEO report. Excluded in
+reporting only, so page_views keeps the honest raw record, and kept separate
+from the bot filter so these rows are not miscounted as bot traffic. Verified:
+both coach-app paths now report 0, an unrelated control page is unchanged at
+225 views over 21 days. The campaign's own numbers therefore start clean.

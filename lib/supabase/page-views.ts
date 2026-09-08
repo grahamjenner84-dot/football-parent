@@ -174,6 +174,33 @@ const DUPLICATE_UA_SAME_PATH_THRESHOLD = 50;
 const TOP_PATHS_PER_DAY = 100;
 const TOP_PATHS_OVERALL = 200;
 
+// Pages whose recorded history predates their being worth measuring.
+//
+// The Coach App landing pages were built, rewritten and previewed repeatedly
+// through early September, by Graham and by an agent driving a browser, and
+// the PPC variants only became real ad destinations on 9 September. Their
+// earlier rows are overwhelmingly setup traffic: on 8 September the calculator
+// page held 24 rows, 13 of them the agent's, and most of the remainder Graham
+// checking the deploy.
+//
+// Excluded in reporting rather than deleted, so page_views stays the honest
+// raw record and this stays one editable line. Deliberately separate from
+// isBotRow: these rows are not bots and must not be counted as such in the
+// "excluded as bot traffic" figure the reports publish. They are simply from
+// before the page started meaning anything.
+const RECORDING_STARTS: { pathPrefix: string; from: string }[] = [
+  { pathPrefix: "/football-parent-coach-app", from: "2026-09-09T00:00:00Z" },
+];
+
+function isBeforeRecordingStart(path: string, createdAt: string): boolean {
+  const ts = new Date(createdAt).getTime();
+  return RECORDING_STARTS.some(
+    (rule) =>
+      (path === rule.pathPrefix || path.startsWith(`${rule.pathPrefix}/`)) &&
+      ts < new Date(rule.from).getTime()
+  );
+}
+
 function isKnownBotIncident(path: string, createdAt: string): boolean {
   const ts = new Date(createdAt).getTime();
   return KNOWN_BOT_INCIDENTS.some(
@@ -245,7 +272,7 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
   const sinceISO = `${earliest}T00:00:00.000Z`;
   const untilISO = new Date(new Date(`${latest}T00:00:00.000Z`).getTime() + 24 * 60 * 60 * 1000).toISOString();
 
-  const rows: { path: string; created_at: string; user_agent: string | null }[] = [];
+  let rows: { path: string; created_at: string; user_agent: string | null }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
@@ -264,6 +291,8 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
     rows.push(...batch);
     if (batch.length < pageSize) break;
   }
+
+  rows = rows.filter((row) => !isBeforeRecordingStart(row.path, row.created_at));
 
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
@@ -338,7 +367,7 @@ export async function getPageViewsForPath(path: string, days?: number): Promise<
   const supabase = adminClient();
   const since = days ? new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString() : null;
 
-  const rows: { created_at: string; user_agent: string | null }[] = [];
+  let rows: { created_at: string; user_agent: string | null }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     let query = supabase
@@ -360,6 +389,8 @@ export async function getPageViewsForPath(path: string, days?: number): Promise<
     rows.push(...batch);
     if (batch.length < pageSize) break;
   }
+
+  rows = rows.filter((row) => !isBeforeRecordingStart(path, row.created_at));
 
   const dayUaCounts = new Map<string, number>();
   for (const row of rows) {
@@ -446,6 +477,8 @@ export async function getPageViewStats(
   // user_agent - historical rows from before 2026-08-27 all have a null
   // user_agent, and grouping those together would flag huge swathes of
   // genuine old traffic as one giant "duplicate UA" combo.
+  rows = rows.filter((row) => !isBeforeRecordingStart(row.path, row.created_at));
+
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
     if (!row.user_agent) continue;
