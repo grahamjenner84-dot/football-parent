@@ -12,6 +12,31 @@ import type { LandingPage } from "@/lib/landing";
 // banner pointing at the Coach App page, which on the Coach App page itself
 // would be a CTA competing with the actual sign-up form.
 
+const TRUST_SIGNALS = [
+  "Free to get started",
+  "Add to your home screen",
+  "Built by grassroots coaches",
+];
+
+function CheckIcon() {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="shrink-0 text-emerald-600"
+      aria-hidden="true"
+    >
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
 export default function CoachLandingPage({ page }: { page: LandingPage }) {
   const { frontmatter, content, slug } = page;
 
@@ -43,6 +68,21 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
           <div className="mt-8">
             <CoachSignUpForm ctaLabel={frontmatter.ctaLabel} />
           </div>
+
+          {/* Carried over from the app's own sign-in screen, where these sat
+              under the form. Reassurance rather than message: the same three
+              on every variant, so what a variant is actually testing stays
+              the headline and not the framing around it. Only under the hero
+              form, not the repeat CTA further down - twice on one page reads
+              as a slogan rather than a fact. */}
+          <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-gray-600 list-none p-0">
+            {TRUST_SIGNALS.map((signal) => (
+              <li key={signal} className="flex items-center gap-1.5">
+                <CheckIcon />
+                {signal}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
