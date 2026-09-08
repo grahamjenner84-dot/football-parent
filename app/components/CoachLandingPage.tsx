@@ -44,18 +44,25 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
     <main className="min-h-screen bg-white">
       <section className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
+          {/* The horizontal lockup rather than the square icon: the icon
+              alone read as an app tile dropped into a page, and it sat
+              directly above a line of text repeating the words the wordmark
+              already carries. That eyebrow goes with it.
+
+              Transparent PNG, so it sits on the grey hero without a plate
+              behind it. 1000x293 rendered at 48px high, well above the
+              density it needs, and the intrinsic size is declared so the
+              hero does not reflow as it loads. */}
           {/* eslint-disable-next-line @next/next/no-img-element -- matches
-              the sibling page; a 56px logo is not worth next/image's
+              the sibling pages; one small logo is not worth next/image's
               runtime cost or its provider billing. */}
           <img
-            src="/logo-icon-coach.png"
-            alt="Football Parent Coach App"
-            className="h-14 w-14 mb-6"
+            src="/logo-horizontal-coach.png"
+            alt="Football Parent Coach"
+            width={1000}
+            height={293}
+            className="h-12 w-auto mb-6"
           />
-
-          <p className="text-sm font-semibold text-blue-700 mb-4">
-            Football Parent Coach App
-          </p>
 
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             {frontmatter.h1}
