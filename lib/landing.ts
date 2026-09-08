@@ -47,12 +47,26 @@ export interface LandingPage {
 
 const landingDirectory = path.join(process.cwd(), "content", "landing");
 
+/** The main, indexable Coach App page — /football-parent-coach-app itself,
+ * rendered by that route's own page.tsx rather than by the [variant] route.
+ *
+ * It lives here with the variants so the page that actually ranks is editable
+ * the same way they are, which was the point of the whole exercise: the one
+ * page worth tuning shouldn't be the one that needs a developer. */
+export const MAIN_LANDING_SLUG = "main";
+
+/** Variants only. The main page is excluded deliberately: it already has a
+ * route of its own, and letting it through here would publish the identical
+ * page a second time at /football-parent-coach-app/main — a duplicate of the
+ * one page on this site that is supposed to rank, which is the last place
+ * you want one. */
 export function getLandingSlugs(): string[] {
   if (!fs.existsSync(landingDirectory)) return [];
   return fs
     .readdirSync(landingDirectory)
     .filter((file) => file.endsWith(".mdx"))
-    .map((file) => file.replace(/\.mdx$/, ""));
+    .map((file) => file.replace(/\.mdx$/, ""))
+    .filter((slug) => slug !== MAIN_LANDING_SLUG);
 }
 
 export function getLandingPage(slug: string): LandingPage | null {
