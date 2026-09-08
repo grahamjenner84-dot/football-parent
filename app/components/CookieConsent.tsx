@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const STORAGE_KEY = "fp-cookie-consent";
 const OPEN_EVENT = "fp:open-cookie-settings";
@@ -116,6 +116,37 @@ export default function CookieConsent() {
     return () => window.removeEventListener(OPEN_EVENT, openSettings);
   }, []);
 
+  const panelRef = useRef<HTMLDivElement | null>(null);
+
+  // The banner is fixed to the bottom of the viewport, so it covers whatever
+  // sits underneath it. On a 375x812 phone that is 186px, which was enough to
+  // bury all but a 12px sliver of the Coach App sign-up form's primary button
+  // on the landing pages, and hide the email fallback entirely. Every ad click
+  // is a first-time visitor, so every one of them met that.
+  //
+  // Reserving the height as real padding on <body> means the banner stops
+  // overlapping anything: the page simply ends above it. Measured rather than
+  // hardcoded because the copy wraps to different heights across breakpoints,
+  // and observed because "Manage" expands the panel to roughly twice the size
+  // a mount-time measurement would have captured.
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!visible || !panel) return;
+
+    const apply = () => {
+      document.body.style.paddingBottom = `${panel.offsetHeight}px`;
+    };
+    apply();
+
+    const observer = new ResizeObserver(apply);
+    observer.observe(panel);
+
+    return () => {
+      observer.disconnect();
+      document.body.style.paddingBottom = "";
+    };
+  }, [visible]);
+
   if (!visible) return null;
 
   const acceptAll = () => {
@@ -138,6 +169,7 @@ export default function CookieConsent() {
 
   return (
     <div
+      ref={panelRef}
       role="dialog"
       aria-live="polite"
       aria-label="Cookie consent"
