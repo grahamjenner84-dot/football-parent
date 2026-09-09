@@ -18,6 +18,7 @@ import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only 
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
+import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & { bannerVariants?: BannerVariantStats };
@@ -36,13 +37,15 @@ type Tab =
   | "pageviews"
   | "pageviewsCompare"
   | "pageviewsTrend"
-  | "coachApp";
+  | "coachApp"
+  | "affiliate";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
   { id: "coachApp", label: "Coach App" },
+  { id: "affiliate", label: "Amazon clicks" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
   { id: "compare", label: "Compare days" },
@@ -133,6 +136,8 @@ export default function SeoAdminPage() {
   const [pageViewError, setPageViewError] = useState("");
   const [coachAppViewStats, setCoachAppViewStats] = useState<CoachAppViewStats | null>(null);
   const [coachAppViewError, setCoachAppViewError] = useState("");
+  const [affiliateStats, setAffiliateStats] = useState<AffiliateClickStats | null>(null);
+  const [affiliateError, setAffiliateError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -197,6 +202,22 @@ export default function SeoAdminPage() {
         setCoachAppViewError("");
       })
       .catch((err) => setCoachAppViewError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/affiliate-click-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load affiliate click report");
+        }
+        return res.json();
+      })
+      .then((data: AffiliateClickStats) => {
+        setAffiliateStats(data);
+        setAffiliateError("");
+      })
+      .catch((err) => setAffiliateError(err.message));
   }, []);
 
   useEffect(() => {
@@ -266,6 +287,9 @@ export default function SeoAdminPage() {
             {t.id === "coachApp" && coachAppViewStats && (
               <span style={styles.tabCount}>{coachAppViewStats.totalViews}</span>
             )}
+            {t.id === "affiliate" && affiliateStats && (
+              <span style={styles.tabCount}>{affiliateStats.totalClicks}</span>
+            )}
             {t.id !== "searches" &&
               t.id !== "cookies" &&
               t.id !== "compare" &&
@@ -273,6 +297,7 @@ export default function SeoAdminPage() {
               t.id !== "pageviewsCompare" &&
               t.id !== "pageviewsTrend" &&
               t.id !== "coachApp" &&
+              t.id !== "affiliate" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
           </button>
         ))}
@@ -314,6 +339,14 @@ export default function SeoAdminPage() {
             )}
             {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
             {coachAppViewStats && <CoachAppTab stats={coachAppViewStats} />}
+          </>
+        ) : tab === "affiliate" ? (
+          <>
+            {!affiliateStats && !affiliateError && (
+              <p style={styles.muted}>Loading affiliate click report...</p>
+            )}
+            {affiliateError && <p style={styles.error}>{affiliateError}</p>}
+            {affiliateStats && <AffiliateClicksReport stats={affiliateStats} />}
           </>
         ) : (
           <>
@@ -367,6 +400,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "searches":
       return 0;
     case "cookies":
+      return 0;
+    case "affiliate":
       return 0;
     case "compare":
       return 0;
@@ -1180,6 +1215,93 @@ function SearchesList({ stats }: { stats: SearchLogStats }) {
 
 function pct(n: number): string {
   return `${(n * 100).toFixed(1)}%`;
+}
+
+function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
+  const pagesWithViews = stats.byPage.filter((p) => p.pageViews !== null);
+  const totalViews = pagesWithViews.reduce((sum, p) => sum + (p.pageViews ?? 0), 0);
+  const totalPageClicks = pagesWithViews.reduce((sum, p) => sum + p.clicks, 0);
+  const overallRate = totalViews > 0 ? totalPageClicks / totalViews : null;
+
+  const gearPicks = stats.byPlacement.find((p) => p.placement === "gear-picks")?.clicks ?? 0;
+  const inline = stats.byPlacement.find((p) => p.placement === "inline")?.clicks ?? 0;
+
+  return (
+    <div style={styles.list}>
+      <SectionNote label="What this measures, and what it doesn't">
+        Every click on a link to an Amazon domain, last {stats.days} days,
+        logged first-party from the click itself rather than read back out of
+        Associates reporting. That is the point: Amazon reports per tracking
+        id from the moment a click reaches Amazon, so it cannot tell you which
+        article the click came from, and it shows nothing at all on a day with
+        no orders. This can. What it cannot see is the other side of the
+        link: whether the click became an order and what it earned. That
+        number only exists in Associates. Read the two together - this one
+        for which page and which product pull, Associates for what the
+        traffic was worth.
+        {stats.botClicks > 0 && (
+          <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
+        )}
+      </SectionNote>
+
+      <div style={styles.cardStats}>
+        <span>Clicks: {stats.totalClicks}</span>
+        <span>Click-out rate: {overallRate === null ? "-" : pct(overallRate)}</span>
+        <span>Quick picks: {gearPicks}</span>
+        <span>Inline links: {inline}</span>
+      </div>
+
+      {stats.totalClicks === 0 ? (
+        <EmptyState text="No affiliate clicks recorded yet. The tracker went live on 9 September 2026 - before that nothing was measured, so an empty window here is not the same as no clicks." />
+      ) : (
+        <>
+          <h3 style={styles.affiliateHeading}>By page</h3>
+          {stats.byPage.map((row) => (
+            <div key={row.path} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.path}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+              <div style={styles.cardStats}>
+                <span>Views: {row.pageViews ?? "-"}</span>
+                <span>
+                  Click-out rate: {row.clickRate === null ? "-" : pct(row.clickRate)}
+                </span>
+              </div>
+            </div>
+          ))}
+
+          <h3 style={styles.affiliateHeading}>By product</h3>
+          {stats.byProduct.map((row) => (
+            <div key={row.href} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.linkText}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+              <div style={styles.cardStats}>
+                <span>{row.merchant}</span>
+                <span style={{ wordBreak: "break-all" }}>{row.href}</span>
+              </div>
+            </div>
+          ))}
+
+          <h3 style={styles.affiliateHeading}>By day</h3>
+          {stats.byDay
+            .filter((d) => d.clicks > 0)
+            .slice()
+            .reverse()
+            .map((row) => (
+              <div key={row.date} style={styles.card}>
+                <div style={styles.cardTop}>
+                  <span style={styles.cardQuery}>{row.date}</span>
+                  <span style={styles.cardBadge}>{row.clicks} clicks</span>
+                </div>
+              </div>
+            ))}
+        </>
+      )}
+    </div>
+  );
 }
 
 function CookieConsentReport({ stats }: { stats: ConsentStats }) {
@@ -2457,6 +2579,12 @@ const styles: Record<string, CSSProperties> = {
     borderRadius: 6,
     padding: "2px 6px",
     flexShrink: 0,
+  },
+  affiliateHeading: {
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#e8b04b",
+    margin: "10px 0 2px",
   },
   cardBadgeWarn: {
     color: "#e07856",
