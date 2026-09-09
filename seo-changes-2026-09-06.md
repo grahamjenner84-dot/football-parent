@@ -434,3 +434,20 @@ built. Converts a pasted Amazon URL into
 judgement rules: check size coverage before committing to a pick, treat a
 SiteStripe high-return-rate refusal as a reason to choose something else,
 prefer deeply stocked categories over boots.
+
+## Site-wide E-E-A-T audit, and 2 unused Martin Brock quotes placed on the JPL hub page, 9 September 2026
+
+Graham asked for a list of articles with low/no voice-density, to find gaps like the 3 academy-trials ones just fixed. `internal-link-audit.mjs`'s voice-density counter only recognised `<ParentNote>`/`<ExpertOpinion>` blocks, so it scored the new `<ExpertQA>` sections as 0% - fixed by adding `<ExpertQA>` to both the extraction regex and the unmarked-first-person exclusion, then re-ran the audit to refresh the checked-in report/JSON.
+
+Produced a full site ranking by voice_pct (voiceWordCount/bodyWordCount from `link-audit-voice.json`, landing pages and interview-format articles excluded as not applicable to this metric): 33 articles at 0%, 21 more under 6%.
+
+**Graham flagged `what-is-the-junior-premier-league` (3.2%) as surprisingly low** given two full Martin Brock interviews exist. Checked `expert-quotes.md`'s Martin Brock quote list against this specific article and found the actual cause: quotes 10 ("readiness is three honest questions") and 11 ("transparency on cost") had never been placed anywhere at all, despite being strong exact-topic fits for this exact hub page, and quote 13 ("we are not a scouting agency") was sitting at 1/3 reuse while this page's own "Scouting and academy links" section made the identical point in unattributed prose.
+
+**Change made**, all three as `<ExpertOpinion>` blocks, no headings/structure/existing content removed:
+- Quote 10 (readiness questions) - new, placed in the intro section after the "neither choice is automatically better" paragraph
+- Quote 11 (cost transparency) - new, placed in "Costs and travel"
+- Quote 13 (not a scouting agency) - reused (2/3), placed in "Scouting and academy links"
+
+**Result:** voice_pct for this page went from 3.2% (61/1879 words) to 11.5% (236/2054 words). `expert-quotes.md` updated to log all three placements. `npm run build` passes, rendered HTML confirms all three quotes present.
+
+Not yet actioned: the other 2 JPL cluster articles under 6% (`jpl-and-academy-football` 5.0%, `jpl-vs-grassroots-football` 5.0%) already each carry one distinct, well-fitted Brock quote - every other Brock quote in the library is already in use somewhere, so raising their % further would mean reusing quotes without as clean a topical fit as this page had. Flagged for Graham's call rather than done unprompted.
