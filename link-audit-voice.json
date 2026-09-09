@@ -242,6 +242,12 @@
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
+  "/landing/equal-playing-time-calculator": {
+    "bodyWordCount": 449,
+    "voiceWordCount": 0,
+    "unmarkedVoiceWordCount": 0,
+    "unmarkedVoiceSentences": []
+  },
   "/landing/equal-game-time": {
     "bodyWordCount": 226,
     "voiceWordCount": 0,
@@ -317,7 +323,7 @@
     "unmarkedVoiceSentences": []
   },
   "/football-gear/shin-pads/best-shin-pads-for-kids-football": {
-    "bodyWordCount": 1657,
+    "bodyWordCount": 2101,
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
@@ -342,7 +348,7 @@
     "unmarkedVoiceSentences": []
   },
   "/football-gear/boots/best-football-boots-for-wide-feet-kids": {
-    "bodyWordCount": 1761,
+    "bodyWordCount": 1760,
     "voiceWordCount": 0,
     "unmarkedVoiceWordCount": 8,
     "unmarkedVoiceSentences": [
@@ -553,20 +559,20 @@
     ]
   },
   "/academy-trials/what-do-academy-coaches-look-for": {
-    "bodyWordCount": 2005,
-    "voiceWordCount": 0,
+    "bodyWordCount": 2256,
+    "voiceWordCount": 218,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
   "/academy-trials/how-to-get-scouted-for-football": {
-    "bodyWordCount": 2390,
-    "voiceWordCount": 0,
+    "bodyWordCount": 2571,
+    "voiceWordCount": 151,
     "unmarkedVoiceWordCount": 0,
     "unmarkedVoiceSentences": []
   },
   "/academy-trials/how-football-scouts-identify-players": {
-    "bodyWordCount": 1311,
-    "voiceWordCount": 0,
+    "bodyWordCount": 1513,
+    "voiceWordCount": 169,
     "unmarkedVoiceWordCount": 16,
     "unmarkedVoiceSentences": [
       "Most serious assessments involve multiple in-person viewings.\n\n### Can I contact a club directly about my child?"
