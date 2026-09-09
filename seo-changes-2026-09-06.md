@@ -319,3 +319,13 @@ No data was deleted or altered: this is a reporting window change only, `affilia
 - `next.config.ts` redirects the colon URL to the real article, 308. The colon is escaped because `:` starts a route parameter in Next's matcher. Known gap: a percent-encoded `%3A` still 404s and an explicit rule for that form does not match either. The logged hits carry a literal colon, and an encoded one now lands on the proper 404 page rather than being counted.
 
 **Effect on historical data:** none, nothing was deleted. Days before this fix still contain 404 rows in `page_views`, so any past day where a dead URL ranked high in the report was measuring the same artefact. Worth remembering when comparing against pre-9-September days.
+
+### Per-page source and user-agent breakdown added to the Page trend tab, 9 September 2026
+
+Follow-up to the 404 finding above. Answering "where did this page's traffic come from" needed a hand-written Supabase query, which is what identified the 25 hits on the mistyped grassroots URL as one client rotating user agents inside 34 seconds (16 claiming iOS 13.2.3, released December 2019, plus nine more across six different Chrome majors).
+
+`/admin/seo` → Page trend now shows, under the daily chart for whichever page is selected: traffic sources grouped as on the Page views tab, and behind a toggle, every user agent that hit that page with hit count and first/last seen. Covers the page's full recorded history rather than the 7/30-day window chosen for the chart, which the tab states.
+
+New `getPageViewSourcesForPath` in `lib/supabase/page-views.ts`, returned from the existing `/api/page-view-by-path`. The per-path bot rules were extracted into a shared `isBotRowForPath` used by both this and the trend chart, so the two can never disagree about which rows are real. No change to what either counts.
+
+Admin-only, no public-facing change, no change to what is logged.

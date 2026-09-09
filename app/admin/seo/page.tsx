@@ -19,6 +19,7 @@ import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
+import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & { bannerVariants?: BannerVariantStats };
@@ -1995,6 +1996,10 @@ function ComparePageViews() {
 interface PageViewByPathResponse {
   path: string;
   byDay: PageViewDailyCount[];
+  sources: SourceGroupCount[];
+  userAgents: PathSourceUserAgent[];
+  botViews: number;
+  totalViews: number;
 }
 
 type TrendWindow = "7" | "30" | "all";
@@ -2187,9 +2192,108 @@ function PageViewTrend({ observedPaths }: { observedPaths: string[] }) {
               </div>
             </div>
           ))}
+
+          <PathSourceBreakdown result={result} />
         </>
       )}
     </div>
+  );
+}
+
+// Where one page's views came from, and what was behind them. Sits under the
+// trend chart on the Page trend tab.
+//
+// Exists because the aggregate source split on the Page views tab is per day
+// across the whole site, so answering "where did the traffic to this one page
+// come from" meant querying Supabase by hand. On 9 September that hand query
+// is what showed 25 views of a mistyped URL were one client rotating user
+// agents inside 34 seconds, not 25 readers.
+function PathSourceBreakdown({ result }: { result: PageViewByPathResponse }) {
+  const [showUserAgents, setShowUserAgents] = useState(false);
+
+  if (result.totalViews === 0 && result.botViews === 0) return null;
+
+  return (
+    <>
+      <h3 style={styles.affiliateHeading}>Where this page&rsquo;s views came from</h3>
+
+      <SectionNote label="What this covers, and what it can't tell you">
+        This page&rsquo;s full recorded history, not the 7/30-day window
+        selected above, so these totals will be higher than the chart when a
+        shorter window is picked. Source comes from the referrer host only:
+        no full URLs, so it names the site a visit came from, never the
+        specific page or post. &ldquo;Direct&rdquo; is a mix of genuine
+        direct visits and every case where the referrer was stripped, which
+        in-app browsers and most AI tools do routinely, so it is never
+        proof of anything on its own.
+        {result.botViews > 0 && (
+          <> {result.botViews} row{result.botViews === 1 ? " was" : "s were"} excluded
+          as bot traffic and {result.botViews === 1 ? "is" : "are"} not counted below.</>
+        )}
+      </SectionNote>
+
+      {result.sources.length === 0 ? (
+        <EmptyState text="No sources recorded for this page." />
+      ) : (
+        result.sources.map((group) => (
+          <div key={group.group} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{group.group}</span>
+              <span style={styles.cardBadge}>{group.count}</span>
+            </div>
+            <div style={styles.cardStats}>
+              {group.topSources.map((src) => (
+                <span key={src.label}>
+                  {src.label}: {src.count}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      )}
+
+      {result.userAgents.length > 0 && (
+        <>
+          <button
+            type="button"
+            onClick={() => setShowUserAgents((v) => !v)}
+            style={styles.toggleButton}
+          >
+            {showUserAgents ? "Hide" : "Show"} user agents ({result.userAgents.length})
+          </button>
+
+          {showUserAgents && (
+            <>
+              <SectionNote label="How to read the user agent list">
+                Raw strings, busiest first, with the first and last time each
+                was seen. Two shapes are worth looking for. One string
+                repeating dozens of times on a single page is a script rather
+                than a reader. Several different browser versions arriving
+                within seconds of each other is one client rotating its user
+                agent, which is the same thing wearing a disguise. A widely
+                shared, current browser string on a busy page is just normal
+                traffic.
+              </SectionNote>
+
+              {result.userAgents.map((ua) => (
+                <div key={ua.userAgent} style={styles.card}>
+                  <div style={styles.cardTop}>
+                    <span style={{ ...styles.cardQuery, wordBreak: "break-all" }}>
+                      {ua.userAgent}
+                    </span>
+                    <span style={styles.cardBadge}>{ua.hits}</span>
+                  </div>
+                  <div style={styles.cardStats}>
+                    <span>First: {new Date(ua.firstSeen).toLocaleString("en-GB")}</span>
+                    <span>Last: {new Date(ua.lastSeen).toLocaleString("en-GB")}</span>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+        </>
+      )}
+    </>
   );
 }
 
