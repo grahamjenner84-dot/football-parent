@@ -302,3 +302,20 @@ First reading of the new tab was "206 views, 1 click", which is not a 0.5% click
 Fixed by clamping both sides of the ratio to `AFFILIATE_TRACKING_STARTED_AT` (`2026-09-09T08:13:00Z`, the merge to main; the deploy finished two or three minutes later), the same approach `BANNER_TEST_STARTED_AT` already uses on the Coach App banner test and for the same reason. The Page views tab still reports the full 30 days, so the two tabs are meant to disagree on view counts for these pages, and the tab now says so.
 
 No data was deleted or altered: this is a reporting window change only, `affiliate_clicks` and `page_views` are untouched.
+
+## 404s were being counted as page views, and a mistyped inbound link, 9 September 2026
+
+**Found via the page view report:** `/parent-guides/what-is-grassroots-football:` (trailing colon) was the top page of 9 September with 25 of the day's 81 views, about 31%, for a URL that does not exist. It appears on no earlier day. `botViews` was 0, so whatever is sending them presents an ordinary browser user agent, and 25 spread over a morning never reaches the 30-per-minute flood guard.
+
+**Root cause, two separate things:**
+
+1. **Next renders the not-found page inside the root layout**, where `PageViewPing` is mounted, so every 404 logged itself as a page view of its own dead URL. Confirmed on a local production build: the 404 response carries the full header, footer and Organization schema, so all layout-level scripts run. This was inflating the report site-wide, not just for this URL.
+2. **A mistyped inbound link.** Nothing in the repo links to that URL with a colon, so it is external, most likely a citation or post that wrote the URL followed by ": Title" and had the auto-linker swallow the colon.
+
+**Fixes:**
+
+- `app/not-found.tsx` added (there was none, so Next's default was in use). Renders a real 404 with category links and site search, sets `robots: noindex`, and carries a `data-fp-not-found` marker.
+- `app/components/PageViewPing.tsx` skips logging when that marker is in the DOM. Detected from the DOM rather than from a route list because the list would need hand-syncing and would wrongly drop `/coach-app/*` views, which come from the separate Coach App deployment through the `vercel.json` rewrite and so are not in `lib/routes.ts`. Verified in headless Chromium: the marker is in the rendered DOM on a 404 and not on a real page (it appears in the RSC flight payload of every page, but inside a `<script>`, which `querySelector` never matches).
+- `next.config.ts` redirects the colon URL to the real article, 308. The colon is escaped because `:` starts a route parameter in Next's matcher. Known gap: a percent-encoded `%3A` still 404s and an explicit rule for that form does not match either. The logged hits carry a literal colon, and an encoded one now lands on the proper 404 page rather than being counted.
+
+**Effect on historical data:** none, nothing was deleted. Days before this fix still contain 404 rows in `page_views`, so any past day where a dead URL ranked high in the report was measuring the same artefact. Worth remembering when comparing against pre-9-September days.
