@@ -167,7 +167,7 @@ advice.
 **Used in:** [how-to-get-into-the-jpl](/parent-guides/how-to-get-into-the-jpl) (1/3) -
 2026-08-16, "How JPL recruitment works" section.
 
-### 10. Readiness is three honest questions (not yet used)
+### 10. Readiness is three honest questions
 
 > "Is your child genuinely hungry for tougher competition, or content where
 > they are? ... Are they resilient? ... Is the family ready for the
@@ -176,9 +176,13 @@ advice.
 **Topics:** whether a child is ready for JPL football, family commitment,
 readiness checklist.
 **Source:** Part 1, "What type of player is JPL football designed for?"
-**Used in:** (none yet)
+**Used in:** [what-is-the-junior-premier-league](/parent-guides/what-is-the-junior-premier-league) (1/3) -
+2026-09-09, intro section, right after the "neither choice is automatically
+better" framing. Found while auditing why this hub article's voice-density
+score (3.2%) was surprisingly low given two Brock interviews exist - this
+quote had never been placed anywhere.
 
-### 11. Transparency on cost (not yet used)
+### 11. Transparency on cost
 
 > "Any reputable club sets these out transparently before you commit, and
 > if they won't, that tells you something."
@@ -187,7 +191,9 @@ readiness checklist.
 committing.
 **Source:** Part 1, "What should parents realistically expect in terms of
 training, travel, costs and commitment?"
-**Used in:** (none yet)
+**Used in:** [what-is-the-junior-premier-league](/parent-guides/what-is-the-junior-premier-league) (1/3) -
+2026-09-09, "Costs and travel" section - an exact topical fit that had been
+sitting unused, same audit as quote 10 above.
 
 Source for quotes 12-15: [Martin Brock on the JPL Part 2: Scouts, Misconceptions and Matchday Behaviour](/parent-guides/jpl-martin-brock-interview-part-2).
 
@@ -220,6 +226,10 @@ academies and scouts?"
 **Used in:** [jpl-and-academy-football](/parent-guides/jpl-and-academy-football) (1/3) -
 2026-09-06, "Exposure vs selection" section. Closes a gap logged 2026-08-08
 ("voice still deliberately deferred pending a real JPL interview").
+Reused (2/3) in [what-is-the-junior-premier-league](/parent-guides/what-is-the-junior-premier-league) -
+2026-09-09, "Scouting and academy links" section, which made the identical
+point in our own unattributed words - direct exact-topic fit, 1 remaining
+allowed use.
 
 ### 14. Not just for future stars
 

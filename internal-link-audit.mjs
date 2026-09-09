@@ -280,10 +280,14 @@ function countWords(text) {
   return cleaned.split(/\s+/).filter(Boolean).length;
 }
 
-// Extracts the inner text of every <ParentNote>/<ExpertOpinion> block in a
-// page's raw MDX content, for the voice-density word count above.
+// Extracts the inner text of every <ParentNote>/<ExpertOpinion>/<ExpertQA>
+// block in a page's raw MDX content, for the voice-density word count above.
 function extractCalloutText(content) {
-  const patterns = [/<ParentNote>([\s\S]*?)<\/ParentNote>/g, /<ExpertOpinion[^>]*>([\s\S]*?)<\/ExpertOpinion>/g];
+  const patterns = [
+    /<ParentNote>([\s\S]*?)<\/ParentNote>/g,
+    /<ExpertOpinion[^>]*>([\s\S]*?)<\/ExpertOpinion>/g,
+    /<ExpertQA[^>]*>([\s\S]*?)<\/ExpertQA>/g,
+  ];
   const blocks = [];
   for (const re of patterns) {
     let m;
@@ -309,8 +313,8 @@ const FIRST_PERSON_PHRASE_RE =
   /\b(my son|my daughter|our son|our daughter|we've|we have|we're|from my own experience|from experience)\b/i;
 
 // Finds sentences containing first-person markers OUTSIDE any already-tagged
-// <ParentNote>/<ExpertOpinion> block (that content is already counted by
-// extractCalloutText above - flagging it again here would double-count and
+// <ParentNote>/<ExpertOpinion>/<ExpertQA> block (that content is already
+// counted by extractCalloutText above - flagging it again here would double-count and
 // would also re-surface material that's already been through sign-off).
 // Naive sentence splitter (period/!/? followed by whitespace then a
 // capital/quote/bold-marker) - good enough for this corpus's short,
@@ -319,6 +323,7 @@ function findUnmarkedFirstPersonSentences(content) {
   const withoutCallouts = content
     .replace(/<ParentNote>[\s\S]*?<\/ParentNote>/g, ' ')
     .replace(/<ExpertOpinion[^>]*>[\s\S]*?<\/ExpertOpinion>/g, ' ')
+    .replace(/<ExpertQA[^>]*>[\s\S]*?<\/ExpertQA>/g, ' ')
     .replace(/```[\s\S]*?```/g, ' ');
 
   const sentences = withoutCallouts
