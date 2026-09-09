@@ -1,7 +1,19 @@
-type ExpertQAItem = {
+import React from "react";
+
+type ExpertQAItemProps = {
   q: string;
-  a: string;
+  children?: React.ReactNode;
 };
+
+// Pure data holder: read by the parent ExpertQA via React.Children, never
+// rendered on its own. Kept as a real component (not a plain object) so the
+// Q&A content can be authored as normal nested MDX/JSX rather than a JSON
+// string - next-mdx-remote strips `attr={jsExpression}` values by default
+// (the `blockJS` security setting in its `serialize()`), which silently
+// emptied an earlier JSON-string-prop version of this component.
+export function ExpertQAItem(_props: ExpertQAItemProps) {
+  return null;
+}
 
 type ExpertQAProps = {
   name: string;
@@ -9,9 +21,7 @@ type ExpertQAProps = {
   // One or two sentences of background/career context, shown under the
   // name and role, e.g. clubs worked at or years of experience.
   bio?: string;
-  // JSON string, matching the GearPicks/InfoTable convention so the Q&A
-  // stays authored in the MDX rather than hardcoded in the component.
-  data?: string;
+  children?: React.ReactNode;
   sourceHref?: string;
   sourceLabel?: string;
 };
@@ -20,19 +30,14 @@ export default function ExpertQA({
   name,
   role,
   bio,
-  data = "[]",
+  children,
   sourceHref,
   sourceLabel,
 }: ExpertQAProps) {
-  let items: ExpertQAItem[] = [];
-
-  try {
-    items = JSON.parse(data);
-  } catch {
-    items = [];
-  }
-
-  items = items.filter((item) => item && item.q && item.a);
+  const items = React.Children.toArray(children).filter(
+    (child): child is React.ReactElement<ExpertQAItemProps> =>
+      React.isValidElement(child) && Boolean((child.props as ExpertQAItemProps)?.q)
+  );
 
   if (!items.length) return null;
 
@@ -56,11 +61,11 @@ export default function ExpertQA({
           <div key={index} className="p-4">
             <div className="mb-2 flex gap-2 font-semibold text-gray-900">
               <span className="shrink-0 text-amber-700">Q.</span>
-              <span>{item.q}</span>
+              <span>{item.props.q}</span>
             </div>
             <div className="flex gap-2 leading-8 text-gray-700">
               <span className="shrink-0 font-semibold text-amber-700">A.</span>
-              <span>{item.a}</span>
+              <span>{item.props.children}</span>
             </div>
           </div>
         ))}
