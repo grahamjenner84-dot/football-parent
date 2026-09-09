@@ -273,3 +273,24 @@ wall. All five variants had the same shape ("Build your first lineup free",
 up with Google" and the field, renamed `formHeading`, drives the heading above
 the form instead, so a variant can still echo its ad without disguising what
 the button does. Commit below.
+
+## Amazon affiliate click-out tracking added, 9 September 2026
+
+Not an SEO edit: no content, title, meta, heading or internal link on any page was touched. Logged here because it is a site-wide change that ships on every page, so it needs to be datable if anything moves.
+
+**Problem.** Amazon Associates reporting only starts at the moment a click lands on Amazon, is aggregated per tracking id rather than per page, and shows nothing at all on a day with no orders. It cannot answer the question worth asking: which article sends people to Amazon, and what share of that article's readers click.
+
+**What was built.** First-party click logging, mirroring the existing `page_views` system rather than inventing a second pattern:
+
+- `affiliate_clicks` table in the `football-parent-social` Supabase project (`supabase/migrations/20260909130000_affiliate_clicks.sql`): path, destination href, merchant host, anchor text, placement, user agent, timestamp. Anonymous, same posture as `page_views`: no IP, no session id, no cookie.
+- `app/components/AffiliateClickTracker.tsx`, mounted once in `app/layout.tsx`. One delegated listener on the document, matching clicked anchors against `lib/affiliate.ts`'s existing `AFFILIATE_HOSTS`, so it covers inline MDX links and the `GearPicks` buttons alike with nothing to wire up per link. Beacons `/api/affiliate-click`. Same exclusions as `PageViewPing`: `/admin`, the localStorage opt-out, the admin/no-track cookies, localhost, and self-declared bots.
+- A `affiliate_click` gtag event fires alongside it, so the data is in GA4 too. GA4 is consent-gated and only sees the accepting share of visitors, so the Supabase table is the number to trust.
+- New "Amazon clicks" tab at `/admin/seo` (`/api/affiliate-click-report`, admin-only via `proxy.ts`): clicks by page with `page_views` for the same page and window as the denominator, giving a click-out rate per article; clicks by product; quick-picks vs inline placement; clicks by day.
+
+**Currently measurable pages** (the two carrying Amazon links today): `/football-gear/best-footballs-by-age` and `/football-gear/veo-camera-alternatives`.
+
+**Reading the numbers.** Baseline starts 9 September 2026. An empty window before that date is "not measured", not "no clicks". This still cannot see conversion or earnings, which exist only in Associates: read the two together, this for which page and product pull, Associates for what the traffic was worth.
+
+**Deploy step:** the migration has to be pushed to Supabase (`supabase db push`, after confirming `supabase/.temp/linked-project.json` still points at `jwlwzoklgrzharqvazeg`) or the logging endpoint will error on every click. The click handler swallows the failure, so a missed migration shows up as an empty report, not a broken page.
+
+`npm run build` passes, all routes generated. Commit `b22df32`.

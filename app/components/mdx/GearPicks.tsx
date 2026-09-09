@@ -62,9 +62,15 @@ export default function GearPicks({
               ) : null}
             </div>
 
+            {/* data-affiliate-placement is read by
+                app/components/AffiliateClickTracker.tsx, so clicks on the
+                quick-picks buttons can be told apart from clicks on ordinary
+                inline links in the prose - which is the whole point of this
+                component existing. */}
             <a
               href={item.href}
               {...affiliateLinkProps(item.href)}
+              data-affiliate-placement="gear-picks"
               className="shrink-0 self-start rounded-lg bg-blue-700 px-4 py-2 text-center text-sm font-semibold text-white! hover:bg-blue-800 transition sm:self-auto"
             >
               {cta}
