@@ -390,11 +390,16 @@ silently dropping rows.
 **Watch list:** until 23 September. No further changes to this page before
 then, including the title change noted above.
 
-**Open caveat:** brand size charts (nike.com, adidas, vfootball) are all
-unreachable from the sandbox, so the Nike height bands came from US
-retailer listings. Worth confirming the UK chart matches. The adidas Tiro
-note deliberately points at the listing chart rather than stating a band,
-because that one could not be verified at all.
+**Size chart resolved (commit `06d190c`):** Graham supplied Nike's own chart,
+which confirmed the copy and improved on it. Kids L and Adult XS are both
+55 to 59in, the same range under two labels, and Nike puts that band at age
+10 to 12. The hedged "roughly 140cm" was replaced with the real bands as an
+InfoTable, cited to Nike. Folded into this change rather than made a second
+edit, since nothing had deployed and the watch window had not started.
+
+**Remaining caveat:** the adidas Tiro note still points at the listing chart
+rather than stating a band, because adidas's chart is unreachable from the
+sandbox. Tighten it alongside the title change next round.
 
 ### Editorial fixes in the gear articles, 9 September 2026
 
