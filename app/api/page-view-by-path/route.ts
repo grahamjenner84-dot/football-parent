@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getPageViewsForPath } from "@/lib/supabase/page-views";
+import { getPageViewSourcesForPath, getPageViewsForPath } from "@/lib/supabase/page-views";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,8 +20,13 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "path is required" }, { status: 400 });
     }
 
-    const byDay = await getPageViewsForPath(path, days);
-    return NextResponse.json({ path, byDay });
+    // Both over the same window, so the trend chart and the source
+    // breakdown next to it are counting the same rows.
+    const [byDay, sources] = await Promise.all([
+      getPageViewsForPath(path, days),
+      getPageViewSourcesForPath(path, days),
+    ]);
+    return NextResponse.json({ path, byDay, ...sources });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });

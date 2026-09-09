@@ -349,6 +349,34 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
   };
 }
 
+// The per-path bot rules, shared by the trend chart (getPageViewsForPath)
+// and the per-path source breakdown (getPageViewSourcesForPath) so the two
+// can never disagree about which rows are real. Returns a predicate rather
+// than a filtered array because the duplicate-UA rule needs the whole set
+// counted first.
+function isBotRowForPath<T extends { created_at: string; user_agent: string | null }>(
+  path: string,
+  rows: T[]
+): (row: T) => boolean {
+  const dayUaCounts = new Map<string, number>();
+  for (const row of rows) {
+    if (!row.user_agent) continue;
+    const day = row.created_at.slice(0, 10);
+    const key = `${day}|${row.user_agent}`;
+    dayUaCounts.set(key, (dayUaCounts.get(key) ?? 0) + 1);
+  }
+
+  return (row: T) => {
+    if (isKnownBotIncident(path, row.created_at)) return true;
+    if (row.user_agent) {
+      if (matchesKnownBotPattern(row.user_agent)) return true;
+      const key = `${row.created_at.slice(0, 10)}|${row.user_agent}`;
+      if ((dayUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
+    }
+    return false;
+  };
+}
+
 export interface PageViewDailyCount {
   date: string;
   count: number;
@@ -392,28 +420,12 @@ export async function getPageViewsForPath(path: string, days?: number): Promise<
 
   rows = rows.filter((row) => !isBeforeRecordingStart(path, row.created_at));
 
-  const dayUaCounts = new Map<string, number>();
-  for (const row of rows) {
-    if (!row.user_agent) continue;
-    const day = row.created_at.slice(0, 10);
-    const key = `${day}|${row.user_agent}`;
-    dayUaCounts.set(key, (dayUaCounts.get(key) ?? 0) + 1);
-  }
-
-  function isBotRow(row: (typeof rows)[number], day: string): boolean {
-    if (isKnownBotIncident(path, row.created_at)) return true;
-    if (row.user_agent) {
-      if (matchesKnownBotPattern(row.user_agent)) return true;
-      const key = `${day}|${row.user_agent}`;
-      if ((dayUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
-    }
-    return false;
-  }
+  const isBotRow = isBotRowForPath(path, rows);
 
   const counts = new Map<string, number>();
   for (const row of rows) {
+    if (isBotRow(row)) continue;
     const day = row.created_at.slice(0, 10);
-    if (isBotRow(row, day)) continue;
     counts.set(day, (counts.get(day) ?? 0) + 1);
   }
 
@@ -433,6 +445,116 @@ export async function getPageViewsForPath(path: string, days?: number): Promise<
     cursor.setUTCDate(cursor.getUTCDate() + 1);
   }
   return result;
+}
+
+export interface PathSourceUserAgent {
+  userAgent: string;
+  hits: number;
+  firstSeen: string;
+  lastSeen: string;
+}
+
+export interface PageViewSourcesForPath {
+  sources: SourceGroupCount[];
+  // Every user agent that hit this path, busiest first. Raw strings rather
+  // than parsed browser names on purpose: what identifies a scripted burst
+  // is the exact string repeating, or an implausible one, and parsing throws
+  // that away. On 9 September this is what identified the traffic to
+  // /parent-guides/what-is-grassroots-football: as a single client rotating
+  // user agents - 16 hits claiming iOS 13.2.3 (released December 2019) and
+  // nine more across six different Chrome majors, all inside 34 seconds.
+  userAgents: PathSourceUserAgent[];
+  // Rows excluded by the same bot rules the trend chart uses, reported
+  // rather than silently dropped so the two numbers reconcile.
+  botViews: number;
+  // Rows counted, i.e. everything the source and user-agent lists above are
+  // built from.
+  totalViews: number;
+}
+
+// How many distinct user agents the report returns. A real page sees a long
+// tail of one-hit browser strings; the interesting ones are always at the
+// top, and the cap only stops a UA-rotating flood from returning hundreds
+// of rows.
+const TOP_USER_AGENTS = 40;
+
+// Where the views on one exact path came from: traffic sources (from
+// referrer_host) and the raw user agents behind them. Backs the per-path
+// breakdown on the Page trend tab.
+//
+// Deliberately a second query rather than folded into getPageViewsForPath:
+// that one returns a daily count array consumed elsewhere (the affiliate
+// click-out denominator, among others) and is not worth reshaping to carry
+// this. Both apply the same bot rules through isBotRowForPath, so the
+// counts here reconcile with the trend chart next to them.
+export async function getPageViewSourcesForPath(
+  path: string,
+  days?: number
+): Promise<PageViewSourcesForPath> {
+  const supabase = adminClient();
+  const since = days ? new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString() : null;
+
+  let rows: { created_at: string; user_agent: string | null; referrer_host: string | null }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    let query = supabase
+      .from("page_views")
+      .select("created_at, user_agent, referrer_host")
+      .eq("path", path)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (since) {
+      query = query.gte("created_at", since);
+    }
+    const { data, error } = await query;
+
+    if (error) {
+      throw new Error("Failed to read page_views: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  rows = rows.filter((row) => !isBeforeRecordingStart(path, row.created_at));
+
+  const isBot = isBotRowForPath(path, rows);
+  const humanRows = rows.filter((row) => !isBot(row));
+
+  const groupMap = new Map<SourceGroup, Map<string, number>>();
+  const uaMap = new Map<string, PathSourceUserAgent>();
+
+  for (const row of humanRows) {
+    const { group, label } = classifyReferrerHost(row.referrer_host);
+    const labels = groupMap.get(group) ?? new Map<string, number>();
+    labels.set(label, (labels.get(label) ?? 0) + 1);
+    groupMap.set(group, labels);
+
+    const ua = row.user_agent ?? "(no user agent)";
+    const existing = uaMap.get(ua);
+    if (existing) {
+      existing.hits += 1;
+      if (row.created_at < existing.firstSeen) existing.firstSeen = row.created_at;
+      if (row.created_at > existing.lastSeen) existing.lastSeen = row.created_at;
+    } else {
+      uaMap.set(ua, {
+        userAgent: ua,
+        hits: 1,
+        firstSeen: row.created_at,
+        lastSeen: row.created_at,
+      });
+    }
+  }
+
+  return {
+    sources: buildSourceGroups(groupMap),
+    userAgents: Array.from(uaMap.values())
+      .sort((a, b) => b.hits - a.hits)
+      .slice(0, TOP_USER_AGENTS),
+    botViews: rows.length - humanRows.length,
+    totalViews: humanRows.length,
+  };
 }
 
 export async function getPageViewStats(
