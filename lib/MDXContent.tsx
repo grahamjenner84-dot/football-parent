@@ -5,6 +5,7 @@ import Link from "next/link";
 import InfoTable from "@/app/components/mdx/InfoTable";
 import ParentNote from "@/app/components/mdx/ParentNote";
 import ExpertOpinion from "@/app/components/mdx/ExpertOpinion";
+import ExpertQA from "@/app/components/mdx/ExpertQA";
 import AffiliateDisclosure from "@/app/components/mdx/AffiliateDisclosure";
 import GearPicks from "@/app/components/mdx/GearPicks";
 import InstagramEmbed from "@/app/components/mdx/InstagramEmbed";
@@ -19,6 +20,7 @@ const components = {
   InfoTable,
   ParentNote,
   ExpertOpinion,
+  ExpertQA,
   AffiliateDisclosure,
   GearPicks,
   InstagramEmbed,
