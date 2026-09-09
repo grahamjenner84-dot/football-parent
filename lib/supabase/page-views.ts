@@ -32,11 +32,22 @@ export interface LogPageViewOptions {
 }
 
 const FLOOD_WINDOW_MS = 60_000;
-// Set from the 2026-08-26 incident (226 views on one path in 8 minutes,
-// ~28-51/minute) - real single-page traffic essentially never sustains
-// anywhere near this pace, so 30/minute gives headroom above genuine
-// spikes while cutting a scripted flood off quickly.
-const FLOOD_THRESHOLD = 30;
+// Originally 30, set from the 2026-08-26 incident (226 views on one path in
+// 8 minutes, ~28-51/minute). Lowered to 12 on 9 September, when a burst sat
+// deliberately under that ceiling: 25 views of one URL in 34 seconds, from
+// a single client rotating seven user agents (16 of them claiming iOS
+// 13.2.3, released December 2019). At ~44/minute it would have tripped the
+// old threshold had it run for a full minute, and it stopped at 25.
+//
+// 12/minute on ONE path is still far above anything genuine here. The whole
+// site runs 250-350 views a day across every page, and the busiest single
+// page managed 55 across three days, so 12 in a minute on one URL is two
+// orders of magnitude above its normal rate.
+//
+// This matters more since the 9 September redirect: that URL now 308s to
+// the real article, so an unblocked repeat burst would inflate a live
+// page's numbers rather than a dead one's.
+const FLOOD_THRESHOLD = 12;
 
 // True if `path` has already logged >= FLOOD_THRESHOLD views in the last
 // minute. Silent drop rather than a 429: the client fetch in

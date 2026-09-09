@@ -329,3 +329,13 @@ Follow-up to the 404 finding above. Answering "where did this page's traffic com
 New `getPageViewSourcesForPath` in `lib/supabase/page-views.ts`, returned from the existing `/api/page-view-by-path`. The per-path bot rules were extracted into a shared `isBotRowForPath` used by both this and the trend chart, so the two can never disagree about which rows are real. No change to what either counts.
 
 Admin-only, no public-facing change, no change to what is logged.
+
+### Per-path page view flood threshold lowered 30 → 12 per minute, 9 September 2026
+
+The 9 September burst on the mistyped grassroots URL sat deliberately under the existing guard: 25 views in 34 seconds, roughly 44/minute, but it stopped at 25 so the 30-in-a-rolling-minute check never fired.
+
+Lowered to 12. The whole site runs 250-350 views a day across every page and the busiest single page managed 55 across three days, so 12 in one minute on one URL is still two orders of magnitude above anything genuine.
+
+More urgent since the same-day redirect: that URL now 308s to the real article, so an unblocked repeat would inflate a live page's numbers rather than a dead one's.
+
+Applies to `page_views` inserts only (`FLOOD_THRESHOLD` in `lib/supabase/page-views.ts`). The affiliate click guard was already 10 and is unchanged. Drops are silent and not counted anywhere, same as before, so a genuine spike above 12/minute on a single page would be lost rather than flagged.
