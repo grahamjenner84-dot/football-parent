@@ -294,3 +294,11 @@ Not an SEO edit: no content, title, meta, heading or internal link on any page w
 **Deploy step:** the migration has to be pushed to Supabase (`supabase db push`, after confirming `supabase/.temp/linked-project.json` still points at `jwlwzoklgrzharqvazeg`) or the logging endpoint will error on every click. The click handler swallows the failure, so a missed migration shows up as an empty report, not a broken page.
 
 `npm run build` passes, all routes generated. Commit `b22df32`.
+
+### Follow-up: click-out rate denominator clamped to when tracking went live, 9 September 2026
+
+First reading of the new tab was "206 views, 1 click", which is not a 0.5% click-out rate: the clicks covered about an hour, the views covered 30 days. 205 of those views happened before the tracker existed.
+
+Fixed by clamping both sides of the ratio to `AFFILIATE_TRACKING_STARTED_AT` (`2026-09-09T08:13:00Z`, the merge to main; the deploy finished two or three minutes later), the same approach `BANNER_TEST_STARTED_AT` already uses on the Coach App banner test and for the same reason. The Page views tab still reports the full 30 days, so the two tabs are meant to disagree on view counts for these pages, and the tab now says so.
+
+No data was deleted or altered: this is a reporting window change only, `affiliate_clicks` and `page_views` are untouched.

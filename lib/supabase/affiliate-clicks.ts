@@ -96,6 +96,10 @@ export interface AffiliateClickProduct {
 
 export interface AffiliateClickStats {
   days: number;
+  // The window actually used, which is the later of `days` ago and the point
+  // click logging went live - see AFFILIATE_TRACKING_STARTED_AT.
+  since: string;
+  clampedToTrackingStart: boolean;
   totalClicks: number;
   byDay: AffiliateClickDay[];
   byPage: AffiliateClickPage[];
@@ -113,9 +117,36 @@ export interface AffiliateClickStats {
 // if a link ever ends up in a shared component on every page.
 const MAX_PAGES_WITH_VIEWS = 25;
 
+// When click logging actually started running in production (the merge of
+// the tracker to main; the deploy completed two or three minutes later).
+//
+// The report clamps its window to this, for exactly the reason the banner
+// test does - see BANNER_TEST_STARTED_AT in app/components/CoachAppBanner.tsx.
+// The click-out rate divides clicks by page_views of the same article, and
+// those articles have months of view history from before any click could be
+// recorded. Unclamped, the first 30 days report a handful of clicks against
+// thousands of views and the rate is meaningless until the old traffic ages
+// out: the first reading was 1 click against 206 views, where 205 of those
+// views happened before the tracker existed.
+//
+// Anchored to the merge rather than the deploy finishing, so no real click
+// can fall outside the window. It slightly overstates the denominator, by
+// the two or three minutes of views between the two, which at this traffic
+// is a view or none at all.
+//
+// Update this only if click tracking is torn out and restarted.
+export const AFFILIATE_TRACKING_STARTED_AT = "2026-09-09T08:13:00Z";
+
 export async function getAffiliateClickStats(days: number = 30): Promise<AffiliateClickStats> {
   const supabase = adminClient();
-  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+  // Never look further back than the point click logging went live, on both
+  // sides of the ratio - see AFFILIATE_TRACKING_STARTED_AT.
+  const requestedSince = Date.now() - days * 24 * 60 * 60 * 1000;
+  const trackingStart = new Date(AFFILIATE_TRACKING_STARTED_AT).getTime();
+  const clampedToTrackingStart = trackingStart > requestedSince;
+  const sinceMs = Math.max(requestedSince, trackingStart);
+  const since = new Date(sinceMs).toISOString();
 
   const rows: {
     path: string;
@@ -203,9 +234,14 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
       }
 
       // Reuses page_views' own bot exclusions and recording-start rules
-      // rather than counting rows here, so the denominator is exactly the
-      // number the Page views tab reports for the same page and window.
-      const daily = await getPageViewsForPath(path, days).catch(() => []);
+      // rather than counting rows here, so the denominator is counted
+      // exactly as the Page views tab counts it.
+      //
+      // Fractional days on purpose: getPageViewsForPath takes a number of
+      // days back, and the window here is usually a partial day since
+      // tracking went live rather than a whole number of them.
+      const windowDays = (Date.now() - sinceMs) / (24 * 60 * 60 * 1000);
+      const daily = await getPageViewsForPath(path, windowDays).catch(() => []);
       const pageViews = daily.reduce((sum, d) => sum + d.count, 0);
 
       return {
@@ -219,6 +255,8 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
 
   return {
     days,
+    since,
+    clampedToTrackingStart,
     totalClicks: humanRows.length,
     byDay,
     byPage,
