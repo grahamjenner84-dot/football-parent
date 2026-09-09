@@ -917,7 +917,14 @@ A: <answer, verbatim>
 
 Answers below are placed via the new `<ExpertQA>` component (full question +
 answer shown, not a trimmed single quote) rather than `<ExpertOpinion>`. See
-`app/components/mdx/ExpertQA.tsx`.
+`app/components/mdx/ExpertQA.tsx`. Authored in MDX as nested children -
+`<ExpertQAItem q="...">answer text</ExpertQAItem>` inside `<ExpertQA>` -
+not a JSON prop: an earlier JSON-string-prop version silently rendered
+nothing on the live site, because next-mdx-remote strips `attr={jsExpr}`
+values by default (its `blockJS` security setting) with no error. Because
+`q="..."` is itself a double-quoted JSX attribute, a question cannot
+contain a literal `"..."` inside it - see Q3 below, where the original
+quote marks around "missing the window" had to be dropped for this reason.
 
 ### Paul Barry — round 2 (questions 1-4)
 Answered: 2026-09-09
@@ -939,7 +946,7 @@ A1: Personality is key when observing a young player, away from their technical 
 Q2: Parents assume goals and pace matter most. What do you actually weight more heavily, and why does that surprise them?
 A2: Parents can get very caught up in tangible metrics such as goals scored, assists, clean sheets and games won, lost etc. The ongoing educational piece is to try and reframe what development and ultimately 'winning' should look like in youth development (grassroots and academy levels). Players that mature and develop a growth mindset, to embrace challenge and adversity are true hallmarks of individual 'winning'. High levels of effort and a positive attitude to learning will put a young player in a great position to develop in all areas over the long-term. Are they actually improving in all areas of their game? Away from statistics, are they contributing more to each training session and game? Are their technical characteristics progressing and how is their game insight improving throughout each season? These are the true indicators of progress that parents should be looking for, and appreciate within their child.
 
-Q3: What's the biggest misconception parents have about "missing the window" for their child to be recruited?
+Q3: What's the biggest misconception parents have about "missing the window" for their child to be recruited? (published as: What's the biggest misconception parents have about missing the window for their child to be recruited? - quote marks dropped, see note above)
 A3: This 'fear of missing out' attitude is a dangerous mindset for parents to have in modern day youth football. Each individual player's journey is different from the next and parents should not compare their child to anyone else. Young people mature, learn and develop at very different rates. For example, an August born Q4, under-maturated child gives away almost a whole year to class and team-mates born in Q1 of the academic year (September - November). This is a huge discrepancy for them to make up as they get older, but can also prove to be a game changer in terms of decision making and problem solving. The Q4 under-maturated player has to find and create different ways to be effective as they probably won't be able to rely on physicality (strength, speed, power). This actually places them in a great position when they do experience maturation and related growth spurts, to then have athleticism and physical traits which accompany their technical and tactical foundational base.
 
 Q4: What's the best way for a child to actually get spotted by academy scouts?
