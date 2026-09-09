@@ -22,6 +22,16 @@ npm run lint      # eslint (eslint-config-next core-web-vitals + typescript)
 
 There is no test suite/framework configured. **`npm run build` is the primary verification step** — it runs the TypeScript check and statically generates every route, which is how broken frontmatter, bad MDX, or mismatched `getArticleBySlug()` params get caught (all article pages are static/SSG).
 
+## Shipping: "put live" means live on the site
+
+The site deploys from `main` on Vercel. A feature branch that is pushed, and a PR that is open, are both still invisible on footballparent.co.uk.
+
+**When Graham says "put it live", "ship it", or "yep put live", that means merged to `main` and deployed, not pushed to a branch.** Do the merge, confirm the deploy, and say so. Do not stop at a pushed branch or an open PR and describe that as live: that has cost a round trip more than once, most recently on the affiliate click tracking, where the Supabase table was created by hand against code that was not actually deployed.
+
+A PR is still the right vehicle where one is wanted, but the job is not finished until it is merged. If something genuinely blocks the merge (a failing check, a conflict, a decision that is Graham's to make), say what is blocking it rather than leaving it open silently.
+
+This does not extend to pushing straight to `main` without being asked. It applies once he has said to put it live.
+
 ## Architecture: the content system
 
 Full docs already in the repo — read these before adding/editing articles rather than re-deriving the pattern:
