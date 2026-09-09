@@ -794,7 +794,9 @@ Bio-banding:
     thought you already had figured out?
 
 ### Paul Barry — round 2, tag: talent ID, inside the academy system, release
-Drafted: 2026-09-06. Messaged 2026-09-06, awaiting reply.
+Drafted: 2026-09-06. Messaged 2026-09-06. Questions 1-4 answered
+2026-09-09 - see "Answered" section below. Questions 5-10 still awaiting
+reply.
 Follow-up to the FutureFit interview, this time drawing on his Head of
 Coaching/Talent ID roles across Southend, Watford, Arsenal and Crystal
 Palace rather than the Football DNA development-philosophy angle. Covers
@@ -899,7 +901,9 @@ Drafted: <date>
 
 ## Answered — captured, not yet placed in an article
 
-(none yet)
+(none currently pending placement — see "Placed in articles" below for the
+4 Paul Barry round 2 answers, which went straight into 3 live articles via
+the new `<ExpertQA>` component rather than sitting in this section first.)
 
 Format for new entries:
 ```
@@ -908,3 +912,43 @@ Answered: <date>
 Q: <question>
 A: <answer, verbatim>
 ```
+
+## Placed in articles — full Q&A, via `<ExpertQA>`
+
+Answers below are placed via the new `<ExpertQA>` component (full question +
+answer shown, not a trimmed single quote) rather than `<ExpertOpinion>`. See
+`app/components/mdx/ExpertQA.tsx`.
+
+### Paul Barry — round 2 (questions 1-4)
+Answered: 2026-09-09
+Attribution used: name="Paul Barry", role="Head of Coaching, Content & Club
+Support, Football DNA", bio="Before Football DNA, Paul held Head of
+Coaching and talent identification roles at Southend United, Watford,
+Arsenal and Crystal Palace."
+
+Q1 and Q2 placed in [what-do-academy-coaches-look-for](/academy-trials/what-do-academy-coaches-look-for),
+new "Football Parent Asks The Expert" section.
+Q3 placed in [how-football-scouts-identify-players](/academy-trials/how-football-scouts-identify-players),
+new "Football Parent Asks The Expert" section.
+Q4 placed in [how-to-get-scouted-for-football](/academy-trials/how-to-get-scouted-for-football),
+new "Football Parent Asks The Expert" section.
+
+Q1: When you're assessing a young player, what's the first thing you notice, before anything technical?
+A1: Personality is key when observing a young player, away from their technical and tactical attributes. How do they respond during challenging and difficult moments? What's their mindset when they, or a team-mate makes a mistake? Not to say, that if there's a negative reaction, that's not necessarily a bad thing. It's just a key observation to make, in order to gauge their playing personality and how their mindset works.
+
+Q2: Parents assume goals and pace matter most. What do you actually weight more heavily, and why does that surprise them?
+A2: Parents can get very caught up in tangible metrics such as goals scored, assists, clean sheets and games won, lost etc. The ongoing educational piece is to try and reframe what development and ultimately 'winning' should look like in youth development (grassroots and academy levels). Players that mature and develop a growth mindset, to embrace challenge and adversity are true hallmarks of individual 'winning'. High levels of effort and a positive attitude to learning will put a young player in a great position to develop in all areas over the long-term. Are they actually improving in all areas of their game? Away from statistics, are they contributing more to each training session and game? Are their technical characteristics progressing and how is their game insight improving throughout each season? These are the true indicators of progress that parents should be looking for, and appreciate within their child.
+
+Q3: What's the biggest misconception parents have about "missing the window" for their child to be recruited?
+A3: This 'fear of missing out' attitude is a dangerous mindset for parents to have in modern day youth football. Each individual player's journey is different from the next and parents should not compare their child to anyone else. Young people mature, learn and develop at very different rates. For example, an August born Q4, under-maturated child gives away almost a whole year to class and team-mates born in Q1 of the academic year (September - November). This is a huge discrepancy for them to make up as they get older, but can also prove to be a game changer in terms of decision making and problem solving. The Q4 under-maturated player has to find and create different ways to be effective as they probably won't be able to rely on physicality (strength, speed, power). This actually places them in a great position when they do experience maturation and related growth spurts, to then have athleticism and physical traits which accompany their technical and tactical foundational base.
+
+Q4: What's the best way for a child to actually get spotted by academy scouts?
+A4: There is no hard and fast rule here as all scouts have a different recruitment lens and often look for different attributes within young players. Those that visually stand out for on the pitch moments such as dribbling, passing range, goal-scoring along with defending actions such as tackling, intercepting and pressing will naturally catch the eye of a scout. However, what are often referred to as the 'whispering talent' are the ones that go under the radar somewhat, with super consistent performances, positive mindsets along with brave and courageous playing personalities. These are the players that also stand a real chance of progressing in the game. Of course, some good fortune is needed along the way with being in the right place at the right time, but modern scouts tend to watch players over the course of several weeks now to ensure they're observed them in varying environments against a range of different level opposition teams.
+
+(Note: the versions actually published in the articles have light copy-edits
+- a fixed "are there contributing" -> "are they contributing" typo in A2,
+and the em dash in A3's "(September - November)" changed to "(September to
+November)" per the site's no-em-dash rule - wording otherwise unchanged.)
+
+Questions 5-10 from this round (inside-the-academy-system and release
+questions) are still awaiting reply, unused.

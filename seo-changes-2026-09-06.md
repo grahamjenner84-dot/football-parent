@@ -408,6 +408,22 @@ clean single revert. An em dash in the shin pads guide, and a FAQ answer in
 the wide feet guide that ended on "the brand on the side", which is the
 banned name-on-the-box framing. Wording only.
 
+## New component: ExpertQA, and Paul Barry round 2 answers added to 3 academy-trials articles
+
+Graham supplied real answers to 4 of the "Paul Barry - round 2" pending questions logged in `expert-quotes.md`. Closes a documented E-E-A-T gap: `what-do-academy-coaches-look-for.mdx` and `how-football-scouts-identify-players.mdx` both had zero named-expert voice before this (confirmed by reading both files - only generic unattributed "Football Parent note" callouts existed).
+
+**New component:** `app/components/mdx/ExpertQA.tsx`, registered in `lib/MDXContent.tsx`. Deliberately different from the existing single-quote `<ExpertOpinion>`: shows the full question alongside the answer (`Q.`/`A.` labelled), an optional `bio` line under the expert's name/role for career background, and takes its Q&A pairs as a JSON `data` prop (same convention as `GearPicks`). Intended as the reusable "Football Parent asks the expert" pattern Graham wants to use more going forward, not a one-off for this article.
+
+**Where used**, each as a new `## Football Parent Asks The Expert` H2 section (added to frontmatter `sections` too), attributed to Paul Barry (Head of Coaching, Content & Club Support, Football DNA), with a `bio` line noting his prior Head of Coaching/talent-ID roles at Southend United, Watford, Arsenal and Crystal Palace:
+
+- `academy-trials/what-do-academy-coaches-look-for.mdx`: Q1 (first thing noticed before anything technical - personality/mindset) + Q2 (parents overweight goals/pace; growth mindset and consistent improvement weighted more heavily). Placed after "Physical Development", before FAQ.
+- `academy-trials/how-football-scouts-identify-players.mdx`: Q3 (biggest misconception about "missing the window" - relative age effect, Q4 under-maturated players catching up post-puberty). Placed after "Three Common Scouting Myths", before FAQ.
+- `academy-trials/how-to-get-scouted-for-football.mdx`: Q4 (best way to actually get spotted - "whispering talent" who go under the radar vs visually obvious players; scouts watch over several weeks now). Placed after "How to Improve Your Chances of Being Noticed", before "Common Myths About Football Scouting".
+
+Answers used near-verbatim; only obvious transcription typos and one stray em dash (per the site's no-em-dash editorial rule) corrected, no rephrasing. `expert-quotes.md` needs updating next to move this from "Pending" to "Answered" and log reuse - not yet done in this session.
+
+`npm run build` passes, all three routes prerender. Not yet committed.
+
 ### Skill added: football-parent-affiliate-link
 
 Not an SEO change, recorded because it governs how future product links get
