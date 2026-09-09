@@ -339,3 +339,80 @@ Lowered to 12. The whole site runs 250-350 views a day across every page and the
 More urgent since the same-day redirect: that URL now 308s to the real article, so an unblocked repeat would inflate a live page's numbers rather than a dead one's.
 
 Applies to `page_views` inserts only (`FLOOD_THRESHOLD` in `lib/supabase/page-views.ts`). The affiliate click guard was already 10 and is unchanged. Drops are silent and not counted anywhere, same as before, so a genuine spike above 12/minute on a single page would be lost rather than flagged.
+
+## Product picks added to the kids shin pads guide, 9 September 2026
+
+**Page:** `/football-gear/shin-pads/best-shin-pads-for-kids-football`
+**Commit:** `e36c213`
+**Lever:** product recommendations. Title and meta deliberately unchanged.
+
+**Why:** the page went from 681 impressions in July to 14,807 over the last
+28 days, averaging position 8.7, but converts at 0.7% against an expected
+3%. It ranks on commercial queries while naming no products, so the click
+goes to a retailer. Gear as a whole runs 0.56% CTR against 1.23% for the
+rest of the site, and 64 of the site's 98 striking-distance queries are
+gear pages.
+
+**What changed:** three H2 sections added after the existing types
+explanation, each with a `GearPicks` block. Nothing removed, slug
+unchanged.
+
+- Best Slip-In Shin Pads: adidas Tiro
+- Best Shin Pads With Ankle Protection: Nike Charge, both colour listings
+- Best Shin Pad Sleeves And Sock Shin Pads: Nike Mercurial Lite, JOGA Youth
+
+**Terms targeted:** the sleeve and sock pad cluster is the main one, six
+queries totalling ~357 impressions sitting at positions 9 to 12.4 off a
+single passing sentence. Also the age band queries, which already rank but
+do not convert: "best shin pads for 10 year old" (424 impressions, position
+8.7, zero clicks), 7 year old (146), 8 year old (144).
+
+**Held back deliberately:** the generic "best shin pads" block (~2,100
+impressions at 0.1-0.2% CTR, mostly adult intent) is a title and intent
+mismatch, not a content gap. Fixing it means changing the title, which is a
+separate lever and would make this change unattributable. Next round.
+
+**Two original findings**, both from checking listings rather than
+marketing copy, and not present in any competing guide:
+
+- Nike runs two size systems in one range. The Charge uses youth sizes, the
+  Mercurial Lite uses adult XS to XL, and that XS starts around 140cm. A
+  parent buying XS for an Under-8 gets a pad sized for an average 11 year
+  old. This is the direct answer to the 10 year old query above.
+- Nike splits youth sizes across colourway listings, so Youth S and Youth M
+  sit on different pages of the same pad.
+
+**Verification:** `npm run build` passes. Rendered HTML confirms all five
+links carry `rel="sponsored nofollow noopener noreferrer"` and
+`data-affiliate-placement="gear-picks"`, so a malformed data prop is not
+silently dropping rows.
+
+**Watch list:** until 23 September. No further changes to this page before
+then, including the title change noted above.
+
+**Size chart resolved (commit `06d190c`):** Graham supplied Nike's own chart,
+which confirmed the copy and improved on it. Kids L and Adult XS are both
+55 to 59in, the same range under two labels, and Nike puts that band at age
+10 to 12. The hedged "roughly 140cm" was replaced with the real bands as an
+InfoTable, cited to Nike. Folded into this change rather than made a second
+edit, since nothing had deployed and the watch window had not started.
+
+**Remaining caveat:** the adidas Tiro note still points at the listing chart
+rather than stating a band, because adidas's chart is unreachable from the
+sandbox. Tighten it alongside the title change next round.
+
+### Editorial fixes in the gear articles, 9 September 2026
+
+**Commit:** `9320ef4`. Separate from the above so the product change stays a
+clean single revert. An em dash in the shin pads guide, and a FAQ answer in
+the wide feet guide that ended on "the brand on the side", which is the
+banned name-on-the-box framing. Wording only.
+
+### Skill added: football-parent-affiliate-link
+
+Not an SEO change, recorded because it governs how future product links get
+built. Converts a pasted Amazon URL into
+`amazon.co.uk/dp/<ASIN>?tag=footballpar09-21`, and carries the product
+judgement rules: check size coverage before committing to a pick, treat a
+SiteStripe high-return-rate refusal as a reason to choose something else,
+prefer deeply stocked categories over boots.
