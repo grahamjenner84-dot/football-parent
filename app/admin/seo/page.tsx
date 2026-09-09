@@ -1229,20 +1229,36 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
   return (
     <div style={styles.list}>
       <SectionNote label="What this measures, and what it doesn't">
-        Every click on a link to an Amazon domain, last {stats.days} days,
-        logged first-party from the click itself rather than read back out of
-        Associates reporting. That is the point: Amazon reports per tracking
-        id from the moment a click reaches Amazon, so it cannot tell you which
-        article the click came from, and it shows nothing at all on a day with
-        no orders. This can. What it cannot see is the other side of the
-        link: whether the click became an order and what it earned. That
-        number only exists in Associates. Read the two together - this one
-        for which page and which product pull, Associates for what the
-        traffic was worth.
+        Every click on a link to an Amazon domain, logged first-party from the
+        click itself rather than read back out of Associates reporting. That
+        is the point: Amazon reports per tracking id from the moment a click
+        reaches Amazon, so it cannot tell you which article the click came
+        from, and it shows nothing at all on a day with no orders. This can.
+        What it cannot see is the other side of the link: whether the click
+        became an order and what it earned. That number only exists in
+        Associates. Read the two together - this one for which page and which
+        product pull, Associates for what the traffic was worth.
         {stats.botClicks > 0 && (
           <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
         )}
       </SectionNote>
+
+      <SectionNote label="Why the view counts here are lower than the Page views tab">
+        Views are counted over the same window as the clicks, starting when
+        click logging went live, not over the last {stats.days} days. These
+        articles have months of view history from before any click could be
+        recorded, so counting all of it would divide a few clicks by
+        thousands of views and call the result a click-out rate. The first
+        reading did exactly that: 1 click against 206 views, 205 of which
+        happened before the tracker existed. The Page views tab still shows
+        the full 30 days, so the two numbers are meant to differ.
+      </SectionNote>
+
+      <p style={styles.muted}>
+        {stats.clampedToTrackingStart
+          ? `Clicks and views both counted since ${new Date(stats.since).toLocaleString("en-GB")}, when click logging went live.`
+          : `Clicks and views both counted over the last ${stats.days} days.`}
+      </p>
 
       <div style={styles.cardStats}>
         <span>Clicks: {stats.totalClicks}</span>
