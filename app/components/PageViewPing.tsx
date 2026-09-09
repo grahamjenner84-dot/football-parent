@@ -46,6 +46,22 @@ export default function PageViewPing() {
       return;
     }
 
+    // Never log a 404. Next renders the not-found page inside the root
+    // layout, so this component runs on it exactly as it does on a real
+    // article, and every dead URL was being counted as a page view of
+    // itself. On 9 September one mistyped inbound link,
+    // /parent-guides/what-is-grassroots-football with a trailing colon,
+    // took 25 of the day's 81 views and topped the report, for a page that
+    // does not exist.
+    //
+    // Detected from the DOM marker app/not-found.tsx renders rather than
+    // from a route list: the list would have to be kept in sync by hand,
+    // and it would wrongly drop /coach-app/* views, which come from the
+    // separate Coach App deployment through the vercel.json rewrite and so
+    // are not in lib/routes.ts. The marker is committed to the DOM before
+    // any effect runs, so it is reliably visible here.
+    if (document.querySelector("[data-fp-not-found]")) return;
+
     // document.referrer is only the immediately preceding page, not the
     // original session entry point - so on-site navigation (page 2, 3...
     // of the same visit) reports our own hostname here. That's classified
