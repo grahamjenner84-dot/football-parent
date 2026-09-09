@@ -293,4 +293,4 @@ Not an SEO edit: no content, title, meta, heading or internal link on any page w
 
 **Deploy step:** the migration has to be pushed to Supabase (`supabase db push`, after confirming `supabase/.temp/linked-project.json` still points at `jwlwzoklgrzharqvazeg`) or the logging endpoint will error on every click. The click handler swallows the failure, so a missed migration shows up as an empty report, not a broken page.
 
-`npm run build` passes, all routes generated. Commit: see below.
+`npm run build` passes, all routes generated. Commit `b22df32`.
