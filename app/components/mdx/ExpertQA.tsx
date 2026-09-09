@@ -21,6 +21,10 @@ type ExpertQAProps = {
   // One or two sentences of background/career context, shown under the
   // name and role, e.g. clubs worked at or years of experience.
   bio?: string;
+  // Path to a small headshot, e.g. "/experts/paul-barry.jpg". Optional -
+  // the header lays out fine without one.
+  photoSrc?: string;
+  photoAlt?: string;
   children?: React.ReactNode;
   sourceHref?: string;
   sourceLabel?: string;
@@ -30,6 +34,8 @@ export default function ExpertQA({
   name,
   role,
   bio,
+  photoSrc,
+  photoAlt,
   children,
   sourceHref,
   sourceLabel,
@@ -43,17 +49,29 @@ export default function ExpertQA({
 
   return (
     <div className="my-6 overflow-hidden rounded-xl border border-amber-200">
-      <div className="border-b border-amber-200 bg-amber-100 px-4 py-3">
-        <div className="text-xs font-semibold uppercase tracking-wide text-amber-800">
-          Football Parent asks the expert
-        </div>
-        <div className="font-semibold text-gray-900">
-          {name}
-          {role ? `, ${role}` : ""}
-        </div>
-        {bio ? (
-          <div className="mt-1 text-sm text-amber-900/80">{bio}</div>
+      <div className="flex gap-3 border-b border-amber-200 bg-amber-100 px-4 py-3">
+        {photoSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={photoSrc}
+            alt={photoAlt ?? name}
+            width={56}
+            height={56}
+            className="h-14 w-14 shrink-0 rounded-full object-cover"
+          />
         ) : null}
+        <div>
+          <div className="text-xs font-semibold uppercase tracking-wide text-amber-800">
+            Football Parent asks the expert
+          </div>
+          <div className="font-semibold text-gray-900">
+            {name}
+            {role ? `, ${role}` : ""}
+          </div>
+          {bio ? (
+            <div className="mt-1 text-sm text-amber-900/80">{bio}</div>
+          ) : null}
+        </div>
       </div>
 
       <div className="divide-y divide-amber-200 bg-amber-50">

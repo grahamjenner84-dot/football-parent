@@ -929,9 +929,19 @@ quote marks around "missing the window" had to be dropped for this reason.
 ### Paul Barry — round 2 (questions 1-4)
 Answered: 2026-09-09
 Attribution used: name="Paul Barry", role="Head of Coaching, Content & Club
-Support, Football DNA", bio="Before Football DNA, Paul held Head of
-Coaching and talent identification roles at Southend United, Watford,
-Arsenal and Crystal Palace."
+Support, Football DNA", bio="Before Football DNA, Paul coached in the
+academy system at Southend United, Watford and Arsenal, most recently as
+Crystal Palace's Head of Coaching for the Foundation Phase."
+
+Bio corrected 2026-09-09 (Graham flagged it against Paul's actual LinkedIn
+history): the original bio said "Head of Coaching and talent identification
+roles" at all four clubs, which overclaimed - "Head of Coaching" only
+applies to Crystal Palace (Jan 2022-, Foundation Phase). His other roles
+were coaching titles, not talent ID: Age Group Academy Coach then Foundation
+Phase Lead Coach at Southend United (2012-2017), Academy Phase Coach at
+Watford (2021), Academy Phase Lead Coach at Arsenal (2017-2021, U9s/U10s).
+No "talent identification" job title appears anywhere in his history -
+don't reintroduce that framing without a specific sourced reason to.
 
 Q1 and Q2 placed in [what-do-academy-coaches-look-for](/academy-trials/what-do-academy-coaches-look-for),
 new "Football Parent Asks The Expert" section.
