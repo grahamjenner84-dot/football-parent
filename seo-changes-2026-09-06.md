@@ -471,3 +471,26 @@ Added to `lib/routes.ts` (sitemap picks it up automatically). `npm run build` pa
 `npm run build` re-verified clean after all of the above.
 
 **On watch:** new page, no baseline yet. Per the 10-14 day rule, no further edits to this page before ~25 September without a specific reason.
+
+## SEO edit: Veo camera alternatives (conversion), 11 September 2026
+
+Page: `/football-gear/veo-camera-alternatives` (`content/football-gear/veo-camera-alternatives.mdx`). Commit `6026658`.
+
+**Why:** GSC shows the page ranking page 1 for most Veo cost/comparison terms but converting affiliate clicks poorly vs other gear pages. Working theory: the XbotGo alternatives were not obvious enough and the comparison sat too far down the page.
+
+**What changed (single-page conversion + accuracy edit, not a striking-distance/decay content play):**
+- Moved the existing "Cost and Features at a Glance" H2 up to directly after the intro, before "What Is a Veo Camera", so the XbotGo alternatives are visible above the fold rather than near the bottom. `sections` frontmatter reordered to match. Heading text and anchor id unchanged, so no URL/anchor breakage.
+- Replaced vague/hedged pricing with figures sourced from Veo's own checkout at time of writing: £1,199 camera, £229 carbon tripod, Starter subscription from £499/year on a 12-month minimum, £1,927 due at checkout in year one (excl. tax). The £1,927 figure now reads identically in the comparison section, "What a Veo Camera Costs Over a Season", the InfoTable, and FAQ 4.
+- Added bolded click-out CTAs ("Check the current Falcon/Chameleon price →") under the Falcon (amzn.to/4gBPZGS) and Chameleon (amzn.to/46Hg7dy) entries, so the affiliate links read as actions, not just citations. This is the primary conversion lever.
+- Chameleon entry switched to the £471.71 Amazon UK Field Bundle (camera, 13ft tripod, carrying case) per Graham's confirmation, since it was ambiguous which SKU the ~£320 buying-guide figure and the Field Bundle screenshot referred to. The two other ~£320 Chameleon mentions elsewhere in the body are the phone-only Standard Bundle (a different SKU) and were left as-is.
+- Removed both veo.com/pricing hedge-and-redirect links; kept the single veo.com/product/veo-cam-3 spec link (sources the 180-degree/1.25kg/6.5hr claims). Exactly one veo.com outbound link now remains.
+- Dropped the unsourced "£34 a month" Starter figure (conflicted with the £499/year checkout figure) in favour of the sourced annual number.
+- Added four FAQs targeting page 1-2 keywords and AI Overview extraction: "Is there a cheaper alternative to Veo?", "Does XbotGo need a subscription?", "XbotGo Falcon vs Veo: what's the difference?", "Chameleon or Falcon: which should I pick?". Updated the existing cost FAQ to £1,927.
+
+**Keywords targeted (already ranking, worked in naturally, no exact-match forcing):** veo camera price, cheaper alternative to veo camera, xbotgo alternatives, xbotgo falcon alternative, veo subscription cost uk, xbotgo falcon vs veo, is there a cheaper alternative to veo.
+
+**Schema:** confirmed the page already emits FAQPage JSON-LD (ArticleLayout runs `extractFaqs` on the content and renders a FAQPage script; page.tsx passes `content`). No schema code change needed; the four new FAQs are automatically eligible for FAQ rich results / AI Overview citation.
+
+**Verification:** `npm run build` passes, page prerenders static. H2 order matches `sections` frontmatter, no em dashes, no markdown pipe tables, all money figures consistent.
+
+**On watch:** live-traffic page. Per the 10-14 day rule, no further edits before ~25 September without a specific reason; watch affiliate click-out rate for this URL vs baseline at `/admin/seo` "Amazon clicks" tab.
