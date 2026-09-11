@@ -1,10 +1,27 @@
 import { getAllArticles } from "@/lib/content";
+import { getLandingPage, MAIN_LANDING_SLUG } from "@/lib/landing";
 
 export interface SearchIndexEntry {
   title: string;
   description: string;
   category: string;
   url: string;
+}
+
+// The Coach App's own indexable page (/football-parent-coach-app) is content
+// from content/landing/main.mdx, not content/ - see the filter below. Pulled
+// in here explicitly, by name, rather than by loosening that filter, so the
+// noindex ad variants stay out of site search the same way they stay out of
+// Google.
+function getCoachAppEntry(): SearchIndexEntry | null {
+  const page = getLandingPage(MAIN_LANDING_SLUG);
+  if (!page) return null;
+  return {
+    title: page.frontmatter.h1,
+    description: page.frontmatter.seoDescription ?? page.frontmatter.subhead,
+    category: "Coach App",
+    url: "/football-parent-coach-app",
+  };
 }
 
 export function getSearchIndex(): SearchIndexEntry[] {
@@ -14,7 +31,7 @@ export function getSearchIndex(): SearchIndexEntry[] {
   // are marked index: false. Skip anything missing the article fields so
   // the site search index (and searchArticles()'s unconditional
   // .toLowerCase() calls) never sees an undefined field.
-  return getAllArticles()
+  const articles = getAllArticles()
     .filter(
       (article) =>
         article.frontmatter.title &&
@@ -28,4 +45,7 @@ export function getSearchIndex(): SearchIndexEntry[] {
       category: article.frontmatter.category,
       url: `${article.frontmatter.categoryUrl}/${article.slug}`,
     }));
+
+  const coachApp = getCoachAppEntry();
+  return coachApp ? [coachApp, ...articles] : articles;
 }
