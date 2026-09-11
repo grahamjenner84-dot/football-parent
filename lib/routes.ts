@@ -116,6 +116,7 @@ export const routes = [
   '/coaching/equal-playing-time-in-grassroots-football',
   '/coaching/best-football-formations-by-age-group',
   '/coaching/football-team-spreadsheet',
+  '/coaching/best-grassroots-football-apps',
 
   // Coach App
   '/football-parent-coach-app',

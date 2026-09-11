@@ -89,6 +89,12 @@ export default function CoachingPage() {
           description:
             "What to track on a football team spreadsheet, a simple structure for goals, assists and playing time, and when it's worth moving to an app instead.",
         },
+        {
+          title: "The Best Football Coaching Apps for Grassroots Coaches",
+          href: "/coaching/best-grassroots-football-apps",
+          description:
+            "FootballDNA for drills, Spond for payments, and where our own Coach App fits: one coach's picks for the best football coaching apps in 2026.",
+        },
       ]}
       bottomContent={{
         title: "About Grassroots Coaching",
