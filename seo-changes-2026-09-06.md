@@ -542,3 +542,13 @@ Graham asked whether the Spond link in the apps article should be nofollow, to a
 **Implementation:** new `lib/externalLinks.ts` (`COMPETITOR_HOSTS` list + `competitorLinkProps()`), same host-matching pattern as the existing `lib/affiliate.ts`, but `rel="nofollow noopener noreferrer"` rather than `sponsored` since there's no commercial/Associates relationship. Wired into the shared `a` override in `lib/MDXContent.tsx` alongside `affiliateLinkProps`, so it applies to any plain-markdown link to these hosts across all articles, not just this one. `GearPicks.tsx` untouched (affiliate-only component, never links competitors).
 
 Verified in the built static HTML: Spond, TeamStats and Pitchero links all carry `rel="nofollow noopener noreferrer" target="_blank"`; FootballDNA's two links are unchanged (no rel attribute). `npm run build` passes.
+
+## Spond, TeamStats and Pitchero links removed entirely (unlinked, mention kept), 11 September 2026
+
+Graham asked to go further than nofollow: remove the links to all three outright. Context that came out mid-edit: Graham wrote a guest post for TeamStats a while back, got a link back for it, and TeamStats nofollowed that link a month or two later. He doesn't want a live link from footballparent.co.uk to teamstats.net to read as a tit-for-tat retaliation, especially since the Coach App didn't exist yet at the time of that history and the optics wouldn't reflect that.
+
+Unlinking (rather than just nofollowing) is the more complete fix for that specific risk: a nofollow link still shows up in a competitor's own backlink monitoring (Ahrefs/SEMrush/Moz all report nofollow links), whereas no link at all doesn't. Asked Graham directly how far this should go (unlink-only vs drop the TeamStats mention vs drop the whole comparison section) - he chose unlink-only, keeping the plain-text mentions of all three. Flagged as a residual, smaller risk: a plain-text brand mention (no link) can still surface via mention-monitoring tools like Google Alerts, just not via backlink tools.
+
+**Change:** `[Spond](https://www.spond.com/)`, `[TeamStats](https://www.teamstats.net/pricing)` and `[Pitchero](https://www.pitchero.com/pricing)` in `content/coaching/best-grassroots-football-apps.mdx` all changed to plain text, first-mention only (the rest of each name's mentions in the article were already unlinked plain text). No other content changed. The `lib/externalLinks.ts` / `competitorLinkProps` nofollow infrastructure added earlier today is left in place, unused by this article now but still live for any future mention of these three hosts anywhere else on the site.
+
+`npm run build` passes.
