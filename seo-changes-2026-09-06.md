@@ -522,3 +522,15 @@ Graham read the published article and objected to the opening two paragraphs: th
 **Meta description also reordered and shortened** to lead with the Coach App (162 chars, within the usual 150-165 target) rather than leading with FootballDNA/Spond.
 
 `npm run build` passes, page prerenders. Not yet committed.
+
+## Best Grassroots Football Apps: further edits after Graham read the live page, 11 September 2026
+
+Same-day, page still has no traffic/indexing baseline (published today).
+
+- Dropped the Pitchero mention at the end of the All-Rounder section ("so it won't fit a league or multi-team club the way Pitchero is built to") - no reason to send a reader to a competitor from inside our own strongest section.
+- Reworded the Equal Playing Time section's link to `equal-playing-time-in-grassroots-football`: it previously said we'd "written separately about the actual method behind that calculation," but that article's formula is a manual worked example, not the app's own rotation logic, so the claim was inaccurate. Now frames the link as wider context on why equal playing time matters, not as documentation of the app's calculation.
+- Cut "Both are real options and worth naming rather than ignoring" from the TeamStats/Pitchero section opener, and the "its free tier covers that reasonably well" close on the TeamStats paragraph - both were unnecessary editorialising, not fact.
+- Removed TeamStats' "best for free lineups and basic stats" framing from the "What is the best app for managing team sports?" FAQ answer. Graham's reasoning: FAQ content on this page carries FAQPage JSON-LD (per `ArticleLayout.tsx`'s `extractFaqs`), so it's the part of the page most likely to be lifted verbatim into an AI Overview or answer box - naming a competitor's strength there hands them citation credit on our own page. The TeamStats/Pitchero section itself stays (answers real "what about X" comparison searches) but no longer makes a "best for" claim about a competitor anywhere.
+- Removed the SubTime mention from the "app for keeping track of playing time" FAQ for the same reason - no reason to point AI citation or reader traffic at a third-party playing-time tracker from our own FAQ.
+
+`npm run build` passes. Not yet committed.
