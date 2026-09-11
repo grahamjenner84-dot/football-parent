@@ -494,3 +494,11 @@ Page: `/football-gear/veo-camera-alternatives` (`content/football-gear/veo-camer
 **Verification:** `npm run build` passes, page prerenders static. H2 order matches `sections` frontmatter, no em dashes, no markdown pipe tables, all money figures consistent.
 
 **On watch:** live-traffic page. Per the 10-14 day rule, no further edits before ~25 September without a specific reason; watch affiliate click-out rate for this URL vs baseline at `/admin/seo` "Amazon clicks" tab.
+
+## Affiliate update: Veo alternatives Chameleon pick, 11 September 2026
+
+Page: `/football-gear/veo-camera-alternatives`. Commit `634b928`.
+
+Graham confirmed the XbotGo Chameleon camera is available on its own at £279.99 on Amazon UK and supplied the listing (ASIN `B0DG2DYQD8`). Switched the comparison-box Chameleon entry and the "Cheaper Alternatives" bullet from the £471.71 Field Bundle to the standalone camera at £279.99 (prose "around £280"), pointing both at the canonical tagged link `https://www.amazon.co.uk/dp/B0DG2DYQD8?tag=footballpar09-21` (UK Associates tag footballpar09-21; `AFFILIATE_HOSTS` already covers amazon.co.uk, so rel/target and first-party click tracking apply automatically). The box CTA ("Check the current Chameleon price →") uses the same link.
+
+Left the explicitly-labelled "Chameleon Standard Bundle from around £320" sourced claim (XbotGo's own UK buying guide) and its existing `amzn.to/46Hg7dy` short link in the "Veo vs XbotGo" section untouched: it is a genuinely different SKU with its own click history, so each stated price now sits next to a link for that same product (bare camera ~£280 on the tagged link, Standard Bundle ~£320 on the existing short link). `npm run build` passes; page prerenders static.
