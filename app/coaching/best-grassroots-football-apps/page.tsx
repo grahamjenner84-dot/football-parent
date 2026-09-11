@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "The Best Football Coaching Apps for Grassroots Coaches (2026) | Football Parent",
   description:
-    "FootballDNA for drills, Spond for payments, and where our own Coach App fits: one coach's picks for the best football coaching apps in 2026.",
+    "Football Parent Coach App for playing time and stats, FootballDNA for drills, Spond for payments: one coach's picks for the best grassroots football apps in 2026.",
   path: "/coaching/best-grassroots-football-apps",
 });
 
