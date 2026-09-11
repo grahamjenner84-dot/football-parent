@@ -502,3 +502,9 @@ Page: `/football-gear/veo-camera-alternatives`. Commit `634b928`.
 Graham confirmed the XbotGo Chameleon camera is available on its own at £279.99 on Amazon UK and supplied the listing (ASIN `B0DG2DYQD8`). Switched the comparison-box Chameleon entry and the "Cheaper Alternatives" bullet from the £471.71 Field Bundle to the standalone camera at £279.99 (prose "around £280"), pointing both at the canonical tagged link `https://www.amazon.co.uk/dp/B0DG2DYQD8?tag=footballpar09-21` (UK Associates tag footballpar09-21; `AFFILIATE_HOSTS` already covers amazon.co.uk, so rel/target and first-party click tracking apply automatically). The box CTA ("Check the current Chameleon price →") uses the same link.
 
 Left the explicitly-labelled "Chameleon Standard Bundle from around £320" sourced claim (XbotGo's own UK buying guide) and its existing `amzn.to/46Hg7dy` short link in the "Veo vs XbotGo" section untouched: it is a genuinely different SKU with its own click history, so each stated price now sits next to a link for that same product (bare camera ~£280 on the tagged link, Standard Bundle ~£320 on the existing short link). `npm run build` passes; page prerenders static.
+
+## Affiliate fix: Veo alternatives Falcon links, 11 September 2026
+
+Page: `/football-gear/veo-camera-alternatives`. Commit `202af65`.
+
+Graham spotted the Falcon affiliate links pointed at the tripod-bundle listing (£882) while the copy quoted the £759 standalone. Repointed the three standalone-price Falcon mentions (comparison box heading + CTA, "Veo vs XbotGo", "Cheaper Alternatives") at the standalone camera via the canonical tagged link `https://www.amazon.co.uk/dp/B0H8D49N68?tag=footballpar09-21` (ASIN B0H8D49N68). Kept the existing `amzn.to/4gBPZGS` short link as the tripod-bundle link in the comparison box, now labelled £882, so the box offers both the standalone (£759) and the tripod bundle (£882) each next to the correct link. `npm run build` passes.
