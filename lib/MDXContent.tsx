@@ -10,6 +10,7 @@ import AffiliateDisclosure from "@/app/components/mdx/AffiliateDisclosure";
 import GearPicks from "@/app/components/mdx/GearPicks";
 import InstagramEmbed from "@/app/components/mdx/InstagramEmbed";
 import { affiliateLinkProps } from "@/lib/affiliate";
+import { competitorLinkProps } from "@/lib/externalLinks";
 import CoachAppBanner, {
   bannerStyleForKey,
   type CoachAppAudience,
@@ -90,6 +91,7 @@ const components = {
         href={url}
         className="font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
         {...affiliateLinkProps(url)}
+        {...competitorLinkProps(url)}
       >
         {children}
       </a>

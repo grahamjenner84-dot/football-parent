@@ -534,3 +534,11 @@ Same-day, page still has no traffic/indexing baseline (published today).
 - Removed the SubTime mention from the "app for keeping track of playing time" FAQ for the same reason - no reason to point AI citation or reader traffic at a third-party playing-time tracker from our own FAQ.
 
 `npm run build` passes. Not yet committed.
+
+## Competitor links nofollow'd site-wide (spond.com, teamstats.net, pitchero.com), 11 September 2026
+
+Graham asked whether the Spond link in the apps article should be nofollow, to avoid passing link equity to a direct competitor while still keeping it as a citation for the reader. Agreed, and extended the same treatment to TeamStats and Pitchero for the same reason (both are also direct competitor products named in the same article) - confirmed via grep that these three domains are currently linked nowhere else on the site, so this is scoped to the one article today but applies automatically anywhere they're linked in future. FootballDNA stays a normal followed link: not a competitor (different job, drills/sessions not team admin), and Paul Barry (FootballDNA's Head of Coaching) has supplied real expert quotes used elsewhere on the site, so there's a genuine reciprocal relationship worth the followed link.
+
+**Implementation:** new `lib/externalLinks.ts` (`COMPETITOR_HOSTS` list + `competitorLinkProps()`), same host-matching pattern as the existing `lib/affiliate.ts`, but `rel="nofollow noopener noreferrer"` rather than `sponsored` since there's no commercial/Associates relationship. Wired into the shared `a` override in `lib/MDXContent.tsx` alongside `affiliateLinkProps`, so it applies to any plain-markdown link to these hosts across all articles, not just this one. `GearPicks.tsx` untouched (affiliate-only component, never links competitors).
+
+Verified in the built static HTML: Spond, TeamStats and Pitchero links all carry `rel="nofollow noopener noreferrer" target="_blank"`; FootballDNA's two links are unchanged (no rel attribute). `npm run build` passes.
