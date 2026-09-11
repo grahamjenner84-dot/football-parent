@@ -508,3 +508,17 @@ Left the explicitly-labelled "Chameleon Standard Bundle from around £320" sourc
 Page: `/football-gear/veo-camera-alternatives`. Commit `202af65`.
 
 Graham spotted the Falcon affiliate links pointed at the tripod-bundle listing (£882) while the copy quoted the £759 standalone. Repointed the three standalone-price Falcon mentions (comparison box heading + CTA, "Veo vs XbotGo", "Cheaper Alternatives") at the standalone camera via the canonical tagged link `https://www.amazon.co.uk/dp/B0H8D49N68?tag=footballpar09-21` (ASIN B0H8D49N68). Kept the existing `amzn.to/4gBPZGS` short link as the tripod-bundle link in the comparison box, now labelled £882, so the box offers both the standalone (£759) and the tripod bundle (£882) each next to the correct link. `npm run build` passes.
+
+## Best Grassroots Football Apps: intro rewritten, Coach App picks moved first, 11 September 2026
+
+Same-day edit to the article published above, made before any real traffic or indexing baseline exists (published within the last few hours), not a violation of the watch-window rule.
+
+Graham read the published article and objected to the opening two paragraphs: they framed the piece around other sites' "best grassroots app" roundups being self-serving, which read as bitter about a comparison the reader has likely never seen, rather than being useful on its own terms.
+
+**Intro rewritten.** Dropped the "search 'best grassroots football app' and you'll find a list from Spond that includes Spond..." framing entirely. Replaced with a plainer premise: there are a fair few grassroots coaching apps, each solving a different job, and this is our own shortlist of the ones actually found useful, including our own. Disclosure sentence ("built because two of those four jobs... weren't being solved well enough") kept, just no longer positioned as a dig at how competitors write their own comparisons.
+
+**Section order changed for AI-citation (GEO) purposes, at Graham's explicit request.** The two Football Parent Coach App sections (Best All-Rounder, Best for Equal Playing Time) now come first, ahead of FootballDNA and Spond, on the reasoning that AI answer engines and SERP snippet extraction weight earlier content in a page more heavily when choosing what to cite or summarise. The "at a glance" bullet list, frontmatter `sections` TOC order, and the two FAQ answers that named picks in order ("What is the best app for managing team sports?", "Is there a free coaching app available?") were all reordered to match, so the Coach App is named first throughout rather than only in the reordered headings. No claims changed, no competitor pick demoted in substance, honest comparison content unchanged.
+
+**Meta description also reordered and shortened** to lead with the Coach App (162 chars, within the usual 150-165 target) rather than leading with FootballDNA/Spond.
+
+`npm run build` passes, page prerenders. Not yet committed.
