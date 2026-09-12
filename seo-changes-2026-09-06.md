@@ -564,3 +564,20 @@ Graham asked for a last check that the page is optimised for the target terms an
 - Renamed the FAQ question "What is the best app for managing team sports?" to "What is the best football coaching app?" - this is the primary keyword this article actually targets (70/mo UK, KD 13, per this morning's research), and FAQ questions are what most directly get matched against a searcher's literal query by AI answer engines. Same answer content, still names the Coach App first. Verified in the built HTML that the FAQPage JSON-LD entity list carries the new question text.
 
 `npm run build` passes; verified via the static HTML output (not just build exit code) that title, meta description, JSON-LD headline/description and all four FAQPage entities are current and correct.
+
+## GEO pass on page 2/3 opportunities: three FAQ additions for AI Overview citation gaps, 12 September 2026
+
+Regenerated `seo-opportunities.json`/`.md` (stale since 22 Aug) and ran a fresh page-level GSC aggregation across position 8-30 to find page-1-bottom/page-2/3 candidates. Cross-checked against `seo-data/exports/ai-citation-deep-dive.json` (run 11 Sept) to find genuine AI Overview citation gaps, then ran a new live batch (16 keywords, $0.064 actual) on the page 2/3 candidate set: veo camera, wide-fit boots, football scholarships, JPL, EPPP, football sizes.
+
+**Findings kept for reference:** wide-fit boots and football-sizes-by-age queries are already cited; "football boots wide fitting" and bare "jpl" carry no AI Overview at all (not GEO targets). Real gaps found on "football scholarships" (generic, vs the "uk" variant which is cited), "jpl trials"/"jpl registration" (AIO present, not cited, despite organic pos ~9), and "eppp academy" (AIO present, cited sources are premierleague/noblescouting/efl/JGH, not us, while "what is the eppp in football" already cites us).
+
+**Changes made, one additive FAQ entry per page, no headings/structure/existing content touched:**
+- `content/academy-pathway/football-scholarships-uk.mdx`: added "How hard is it to get a football scholarship?" FAQ. Commit `2b62901`.
+- `content/parent-guides/how-to-get-into-the-jpl.mdx`: added "How do I register a player for the JPL?" FAQ to the existing "JPL trials FAQs" section. Commit `e8a2afd`.
+- `content/academy-pathway/what-is-eppp.mdx`: added "What is an EPPP academy?" FAQ to "FAQ: EPPP Explained". Commit `8c309db`.
+
+`npm run build` passes, all three routes prerender.
+
+**On watch:** all three are live-traffic pages carrying an existing FAQPage schema (via `ArticleLayout.tsx`'s `extractFaqs`), so the new FAQs are automatically eligible for citation without further schema work. Per the 10-14 day rule, no further edits to these three pages before ~26 September. Re-check AI Overview citation status on "football scholarships", "jpl trials", "jpl registration" and "eppp academy" after that window to see whether the FAQ additions moved anything - same pattern as the JPL/grassroots FAQ trial and the gear FAQ recheck logged above, both of which found no citation movement after 2 weeks, so a null result here would not be a surprise.
+
+**Not yet actioned from this pass:** the huge-impression, near-zero-CTR pages (`best-footballs-by-age` 24,240 impr/0.4% CTR, `what-is-the-junior-premier-league` 21,934/0.7%, `academy-categories-explained` 17,595/2.3%, `what-is-grassroots-football` 13,282/0.4%) - flagged to Graham as the single biggest lever site-wide, but deliberately not touched yet since AI Overviews plausibly explain part of the CTR gap on at least the academy-categories and grassroots-football queries, and title/meta rewrites on live-traffic pages this size need an AIO check first, not an assumption. Also not actioned: "football academy system" (AIO present, not cited, but organic pos 23.9 is too weak for citation to be realistic before the ranking itself improves).
