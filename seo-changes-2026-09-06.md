@@ -593,3 +593,16 @@ Graham asked for a repeatable way to monitor AI Overview/PAA status across best-
 **First baseline run:** 40 keywords, $0.160 actual, all "first check" (no prior history to diff against). Notable gaps surfaced that hadn't been checked before, including on already-strong pages: **"best shin pads for kids"** (best_performing, our pos 8.1) has an AI Overview and we're **not** cited, despite this being the shin-pads page's main ranking term - a bigger gap than the narrower shin-pad phrasings already known about. Also new: **"veo alternatives uk"** (pos 4.9, not cited), **"arsenal academy age groups"** (pos 7.1, not cited), **"chelsea development"** (page 2/3, pos 12.2, not cited). Confirmed-working citations on this run: "what is grassroots football" (#4), "academy categories" (#1), "elite player performance plan" (#3), "crystal palace development centre" (#2), "how to join crystal palace football academy" (#3), "chelsea player development programme" (#3), plus the wide-fit-boots variants already known.
 
 Not yet actioned - this run was to establish the tool and baseline, not to make content edits. Flagged to Graham for a decision on which new gaps (if any) to act on next.
+
+## GEO fixes for the 4 gaps found in the first watchlist baseline, 12 September 2026
+
+Graham asked to fix all four. One additive FAQ per page, matching the exact PAA phrasing DataForSEO returned for each keyword, no headings/structure/existing content touched:
+
+- `content/football-gear/best-shin-pads-for-kids-football.mdx`: added "What shin pads do professionals use?" - targets "best shin pads for kids" (pos 8.1, 769 impr/mo, this page's dominant term). Commit `0dfb692`.
+- `content/football-gear/veo-camera-alternatives.mdx`: added "Is Trace better than Veo?" - targets "veo alternatives uk" (pos 4.9). The page already compared Trace in the existing "Veo vs Trace and Pixellot" H2, just never as a direct Q&A. Commit `47857ea`.
+- `content/academy-pathway/arsenal-development-centre-guide.mdx`: added "What are the age groups in the Premier League Academy?" - targets "arsenal academy age groups" (pos 7.1). Reused the page's existing Foundation/Youth Development/Professional Development phase breakdown, just restated as a direct answer. Commit `e940c34`.
+- `content/academy-pathway/chelsea-fc-development-centre-guide.mdx`: added "What is the Chelsea Development Programme?" - targets "chelsea development" (pos 12.2, page 2/3). Double-checked the PTC/PDC/PPC acronym expansions against the page's own "Chelsea PTC, PDC and PPC Explained" section before writing the answer (first draft got PTC wrong as "Player Talent Centre" instead of the page's own "Player Training Centre" - caught and fixed before committing).
+
+`npm run build` passes, all four routes prerender. Pushed to main.
+
+**On watch:** all four are live-traffic pages. Per the 10-14 day rule, no further edits to these four before ~26 September. Next `geo-watchlist-check` run (or a manual recheck of these specific keywords) after that window will show whether any of the FAQ additions moved citation status - same honest caveat as the earlier scholarships/JPL/EPPP batch: the JPL/grassroots and gear FAQ trials both came back null after 2 weeks, so a null result here again wouldn't be a surprise.
