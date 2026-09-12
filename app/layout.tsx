@@ -68,6 +68,17 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
+        {/* Impact.com site verification. Rendered as a literal tag (React 19
+            hoists it into <head>) rather than via Next's metadata.verification
+            because Impact requires the `value` attribute, and the metadata API
+            only emits `content`. React's meta typings don't include `value`,
+            hence the cast. */}
+        <meta
+          {...({
+            name: "impact-site-verification",
+            value: "fe065489-0cb8-4258-8fd7-3be97170b1f2",
+          } as React.JSX.IntrinsicElements["meta"])}
+        />
         {/* Google Consent Mode v2: must run before any GA script executes,
             so this stays beforeInteractive. Reads the same "fp-cookie-consent"
             localStorage key that app/components/CookieConsent.tsx writes to -
