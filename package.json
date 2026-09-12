@@ -22,7 +22,9 @@
     "test:seo": "tsx --test tests/seo/**/*.test.ts",
     "seo:setup": "tsx scripts/seo/cli/setup.ts",
     "seo:status": "tsx scripts/seo/cli/status.ts",
-    "seo:content-backlog": "tsx scripts/seo/cli/content-backlog.ts"
+    "seo:content-backlog": "tsx scripts/seo/cli/content-backlog.ts",
+    "seo:geo-watchlist-build": "tsx scripts/seo/cli/geo-watchlist-build.ts",
+    "seo:geo-watchlist-check": "tsx scripts/seo/cli/geo-watchlist-check.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.112.3",
