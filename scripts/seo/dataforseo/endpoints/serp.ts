@@ -18,6 +18,12 @@ export type SerpOptions = {
   depth?: number;
   environment?: DataForSeoEnvironment;
   confirmLive?: boolean;
+  // competitor_rankings' 30-day cache freshness window is right for most
+  // rank-check callers, but wrong for anything re-checking the same
+  // keyword specifically to detect week-to-week/fortnight-to-fortnight
+  // change (e.g. geo-watchlist-check.ts) - a cache hit there would silently
+  // return a stale snapshot and report it as a fresh result.
+  forceRefresh?: boolean;
 };
 
 export function googleOrganicSerp(keyword: string, opts: SerpOptions): Promise<DataForSeoResult> {
@@ -37,6 +43,7 @@ export function googleOrganicSerp(keyword: string, opts: SerpOptions): Promise<D
     body,
     environment: opts.environment,
     confirmLive: opts.confirmLive,
+    forceRefresh: opts.forceRefresh,
     seedTerms: [keyword],
     locationCode: body.location_code,
     languageCode: body.language_code,

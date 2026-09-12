@@ -178,6 +178,12 @@ async function main() {
       environment: "live",
       confirmLive: true,
       depth: 20,
+      // The whole point of this tool is detecting change since the last
+      // check - the shared client's 30-day cache freshness window would
+      // otherwise silently hand back a month-old snapshot and report it as
+      // today's result (caught the hard way: the first baseline run on 12
+      // Sept reused a 22 Aug cached response for one keyword).
+      forceRefresh: true,
     });
     totalCost += result.cost ?? 0;
 
