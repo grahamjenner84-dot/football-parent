@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getPageViewsForPath } from "@/lib/supabase/page-views";
+import { getAffiliateProductNames, normalizeAffiliateHref } from "@/lib/affiliate-products";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/page-views.ts - this must never be imported from client code.
@@ -69,9 +70,20 @@ export async function logAffiliateClick(
   }
 }
 
+export interface AffiliateClickPageCount {
+  path: string;
+  clicks: number;
+}
+
 export interface AffiliateClickDay {
   date: string;
   clicks: number;
+  // Per-day breakdowns so the report can filter to a single day. No page-view
+  // denominator here on purpose: a click-out rate for one day divides a
+  // handful of clicks by one day's views and is too noisy to mean anything -
+  // the rate lives on the whole-window byPage below.
+  byPage: AffiliateClickPageCount[];
+  byProduct: AffiliateClickProduct[];
 }
 
 export interface AffiliateClickPage {
@@ -87,11 +99,35 @@ export interface AffiliateClickPage {
   clickRate: number | null;
 }
 
-export interface AffiliateClickProduct {
-  linkText: string;
+// One physical link that points at a product: a specific URL, in a specific
+// placement, on a specific page. The same product can have several (a quick-
+// picks button near the top and an inline mention lower down, or a full
+// amazon.co.uk link in one article and an amzn.to short link in another) - so
+// this is what answers "which link is actually pulling the clicks", e.g.
+// whether the links at the top of the shin-pads article beat the inline ones.
+export interface AffiliateClickProductLink {
   href: string;
+  // The raw anchor text as logged, kept for reference.
+  linkText: string;
+  // gear-picks | inline | unknown - which component rendered it.
+  placement: string;
+  // The article the click came from.
+  path: string;
+  clicks: number;
+}
+
+export interface AffiliateClickProduct {
+  // The name to show: the product's real name resolved from the content
+  // (getAffiliateProductNames), falling back to the anchor text logged at
+  // click time, falling back to the URL. This is what stops the table reading
+  // "View on Amazon" for every GearPicks button. Clicks for a product are
+  // summed across every link/placement/page below, so this is one row per
+  // product, not per URL.
+  name: string;
   merchant: string;
   clicks: number;
+  // Breakdown of the clicks by individual link, busiest first.
+  links: AffiliateClickProductLink[];
 }
 
 export interface AffiliateClickStats {
@@ -137,6 +173,80 @@ const MAX_PAGES_WITH_VIEWS = 25;
 // Update this only if click tracking is torn out and restarted.
 export const AFFILIATE_TRACKING_STARTED_AT = "2026-09-09T08:13:00Z";
 
+type ClickRow = {
+  path: string;
+  href: string;
+  merchant: string;
+  link_text: string | null;
+  placement: string | null;
+  user_agent: string | null;
+  created_at: string;
+};
+
+// A generic anchor text that names the CTA, not the product - the GearPicks
+// button says this on every product, so it must never be shown as a product
+// name when the content has a real one.
+function isGenericLinkText(text: string | null): boolean {
+  if (!text) return true;
+  const t = text.trim().toLowerCase();
+  return t === "" || t === "view on amazon" || t === "buy on amazon" || t.startsWith("http");
+}
+
+// Clicks grouped into one row per product (by resolved name), with a
+// per-link breakdown underneath so a product linked from more than one place
+// still shows where its clicks came from.
+function buildProducts(rows: ClickRow[], nameMap: Map<string, string>): AffiliateClickProduct[] {
+  const byName = new Map<
+    string,
+    { name: string; merchant: string; clicks: number; links: Map<string, AffiliateClickProductLink> }
+  >();
+
+  for (const row of rows) {
+    const resolved = nameMap.get(normalizeAffiliateHref(row.href));
+    const name = resolved ?? (isGenericLinkText(row.link_text) ? row.href : row.link_text!);
+
+    let product = byName.get(name);
+    if (!product) {
+      product = { name, merchant: row.merchant, clicks: 0, links: new Map() };
+      byName.set(name, product);
+    }
+    product.clicks += 1;
+
+    const placement = row.placement ?? "unknown";
+    const linkKey = `${row.path}|${placement}|${row.href}`;
+    const link = product.links.get(linkKey);
+    if (link) {
+      link.clicks += 1;
+    } else {
+      product.links.set(linkKey, {
+        href: row.href,
+        linkText: row.link_text ?? row.href,
+        placement,
+        path: row.path,
+        clicks: 1,
+      });
+    }
+  }
+
+  return Array.from(byName.values())
+    .map((p) => ({
+      name: p.name,
+      merchant: p.merchant,
+      clicks: p.clicks,
+      links: Array.from(p.links.values()).sort((a, b) => b.clicks - a.clicks),
+    }))
+    .sort((a, b) => b.clicks - a.clicks);
+}
+
+// Click count per article path, no page-view denominator (see AffiliateClickDay).
+function buildPageCounts(rows: ClickRow[]): AffiliateClickPageCount[] {
+  const byPath = new Map<string, number>();
+  for (const row of rows) byPath.set(row.path, (byPath.get(row.path) ?? 0) + 1);
+  return Array.from(byPath.entries())
+    .map(([path, clicks]) => ({ path, clicks }))
+    .sort((a, b) => b.clicks - a.clicks);
+}
+
 export async function getAffiliateClickStats(days: number = 30): Promise<AffiliateClickStats> {
   const supabase = adminClient();
 
@@ -148,15 +258,7 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
   const sinceMs = Math.max(requestedSince, trackingStart);
   const since = new Date(sinceMs).toISOString();
 
-  const rows: {
-    path: string;
-    href: string;
-    merchant: string;
-    link_text: string | null;
-    placement: string | null;
-    user_agent: string | null;
-    created_at: string;
-  }[] = [];
+  const rows: ClickRow[] = [];
 
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
@@ -184,44 +286,44 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
   );
   const botClicks = rows.length - humanRows.length;
 
-  const dayCounts = new Map<string, number>();
+  // Product names live only in the content (GearPicks name / inline anchor
+  // text), never in the Amazon URL - so resolve them here rather than trusting
+  // the anchor text logged at click time, which for a GearPicks button is the
+  // shared "View on Amazon" CTA. See lib/affiliate-products.ts.
+  const nameMap = getAffiliateProductNames();
+
+  const rowsByDate = new Map<string, ClickRow[]>();
   const pathCounts = new Map<string, number>();
-  const productCounts = new Map<string, AffiliateClickProduct>();
   const placementCounts = new Map<string, number>();
 
   for (const row of humanRows) {
     const date = row.created_at.slice(0, 10);
-    dayCounts.set(date, (dayCounts.get(date) ?? 0) + 1);
+    if (!rowsByDate.has(date)) rowsByDate.set(date, []);
+    rowsByDate.get(date)!.push(row);
+
     pathCounts.set(row.path, (pathCounts.get(row.path) ?? 0) + 1);
 
     const placement = row.placement ?? "unknown";
     placementCounts.set(placement, (placementCounts.get(placement) ?? 0) + 1);
-
-    // Keyed on href, not on link text: the same product is linked with
-    // different wording in different places ("Mitre Impel", "the ball we
-    // actually use"), and it is the destination that earns the commission.
-    const existing = productCounts.get(row.href);
-    if (existing) {
-      existing.clicks += 1;
-    } else {
-      productCounts.set(row.href, {
-        linkText: row.link_text ?? row.href,
-        href: row.href,
-        merchant: row.merchant,
-        clicks: 1,
-      });
-    }
   }
 
   // Zero-filled, so a day with no clicks reads as a real zero rather than
-  // vanishing from the chart - same convention as getPageViewsForPath.
+  // vanishing from the chart - same convention as getPageViewsForPath. Each
+  // day carries its own by-page and by-product breakdown so the report can
+  // filter to a single day without a second request.
   const byDay: AffiliateClickDay[] = [];
   const today = new Date().toISOString().slice(0, 10);
   const cursor = new Date(`${since.slice(0, 10)}T00:00:00.000Z`);
   const end = new Date(`${today}T00:00:00.000Z`);
   while (cursor <= end) {
     const date = cursor.toISOString().slice(0, 10);
-    byDay.push({ date, clicks: dayCounts.get(date) ?? 0 });
+    const dayRows = rowsByDate.get(date) ?? [];
+    byDay.push({
+      date,
+      clicks: dayRows.length,
+      byPage: buildPageCounts(dayRows),
+      byProduct: buildProducts(dayRows, nameMap),
+    });
     cursor.setUTCDate(cursor.getUTCDate() + 1);
   }
 
@@ -260,7 +362,7 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
     totalClicks: humanRows.length,
     byDay,
     byPage,
-    byProduct: Array.from(productCounts.values()).sort((a, b) => b.clicks - a.clicks),
+    byProduct: buildProducts(humanRows, nameMap),
     byPlacement: Array.from(placementCounts.entries())
       .map(([placement, clicks]) => ({ placement, clicks }))
       .sort((a, b) => b.clicks - a.clicks),

@@ -17,7 +17,7 @@ import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only im
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
-import type { PageViewStats, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
+import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
@@ -25,6 +25,7 @@ import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no s
 type CoachAppViewStats = PageViewStats & { bannerVariants?: BannerVariantStats };
 
 type Tab =
+  | "dashboard"
   | "silence"
   | "noImpressions"
   | "striking"
@@ -43,6 +44,7 @@ type Tab =
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
+  { id: "dashboard", label: "Dashboard" },
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
   { id: "coachApp", label: "Coach App" },
@@ -125,7 +127,7 @@ export default function SeoAdminPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [tab, setTab] = useState<Tab>("pageviews");
+  const [tab, setTab] = useState<Tab>("dashboard");
   const [strikingDays, setStrikingDays] = useState<DayWindow>(90);
   const [ctrDays, setCtrDays] = useState<DayWindow>(90);
   const [noImpressionsDays, setNoImpressionsDays] = useState<DayWindow>(90);
@@ -291,7 +293,8 @@ export default function SeoAdminPage() {
             {t.id === "affiliate" && affiliateStats && (
               <span style={styles.tabCount}>{affiliateStats.totalClicks}</span>
             )}
-            {t.id !== "searches" &&
+            {t.id !== "dashboard" &&
+              t.id !== "searches" &&
               t.id !== "cookies" &&
               t.id !== "compare" &&
               t.id !== "pageviews" &&
@@ -305,7 +308,14 @@ export default function SeoAdminPage() {
       </nav>
 
       <main style={styles.content}>
-        {tab === "searches" ? (
+        {tab === "dashboard" ? (
+          <Dashboard
+            pageViewStats={pageViewStats}
+            coachAppViewStats={coachAppViewStats}
+            affiliateStats={affiliateStats}
+            pageViewError={pageViewError}
+          />
+        ) : tab === "searches" ? (
           <>
             {!searchStats && !searchError && <p style={styles.muted}>Loading search report...</p>}
             {searchError && <p style={styles.error}>{searchError}</p>}
@@ -413,6 +423,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "pageviewsTrend":
       return 0;
     case "coachApp":
+      return 0;
+    case "dashboard":
       return 0;
   }
 }
@@ -1218,7 +1230,274 @@ function pct(n: number): string {
   return `${(n * 100).toFixed(1)}%`;
 }
 
+function friendlyGroup(group: string): string {
+  return group === "Ads" ? "Google Ads" : group;
+}
+
+function placementLabel(placement: string): string {
+  if (placement === "gear-picks") return "Quick picks";
+  if (placement === "inline") return "Inline";
+  return placement;
+}
+
+// The per-link breakdown under a product row: where each of its clicks came
+// from (page + placement), so "the links at the top of the shin-pads article
+// are working better" is something you can read off rather than guess. The
+// href line only appears when a product has more than one distinct URL - the
+// case that used to show as duplicate rows before products were collapsed by
+// name.
+function ProductLinkBreakdown({
+  links,
+}: {
+  links: { href: string; placement: string; path: string; clicks: number }[];
+}) {
+  const multipleHrefs = new Set(links.map((l) => l.href)).size > 1;
+  return (
+    <>
+      {links.map((l) => (
+        <div key={`${l.path}|${l.placement}|${l.href}`} style={styles.cannibalRow}>
+          <span style={styles.cardPage}>
+            {shortPage(l.path)} · {placementLabel(l.placement)}
+            {multipleHrefs && (
+              <span style={{ display: "block", ...styles.cardStatsInline, wordBreak: "break-all" }}>{l.href}</span>
+            )}
+          </span>
+          <span style={styles.cardStatsInline}>{l.clicks} clicks</span>
+        </div>
+      ))}
+    </>
+  );
+}
+
+// Source breakdown for one day, folding Internal (excluded from sourceGroups
+// because it's on-site navigation, not a new visit) back in as its own line -
+// for the Coach App section especially, internal traffic from the article
+// banners is the number that matters.
+function daySourceRows(day: PageViewDay): { label: string; count: number }[] {
+  const rows = day.sourceGroups.map((g) => ({ label: friendlyGroup(g.group), count: g.count }));
+  if (day.internalViews > 0) rows.push({ label: "Internal", count: day.internalViews });
+  return rows.sort((a, b) => b.count - a.count);
+}
+
+function windowSourceRows(stats: PageViewStats): { label: string; count: number }[] {
+  const rows = stats.sourceGroups.map((g) => ({ label: friendlyGroup(g.group), count: g.count }));
+  if (stats.internalViews > 0) rows.push({ label: "Internal", count: stats.internalViews });
+  return rows.sort((a, b) => b.count - a.count);
+}
+
+function previousDay(date: string): string {
+  const d = new Date(`${date}T00:00:00.000Z`);
+  d.setUTCDate(d.getUTCDate() - 1);
+  return d.toISOString().slice(0, 10);
+}
+
+function SourceLine({ rows }: { rows: { label: string; count: number }[] }) {
+  if (!rows.length) return <span style={styles.muted}>No external-referrer traffic.</span>;
+  return (
+    <div style={styles.cardStats}>
+      {rows.map((r) => (
+        <span key={r.label}>
+          {r.label}: {r.count}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+// A headline number with its day-over-day change. prior is null in whole-window
+// mode, where there's nothing to compare against.
+function DashboardStat({
+  label,
+  current,
+  prior,
+}: {
+  label: string;
+  current: number;
+  prior: number | null;
+}) {
+  return (
+    <div style={styles.cardTop}>
+      <span style={{ ...styles.cardQuery, fontSize: 22 }}>
+        {current.toLocaleString("en-GB")} <span style={{ fontSize: 13, fontWeight: 400 }}>{label}</span>
+      </span>
+      {prior !== null && (
+        <span style={{ ...styles.cardBadge, ...deltaColor(current - prior) }}>
+          {deltaLabel(current - prior)} vs prev day
+        </span>
+      )}
+    </div>
+  );
+}
+
+function Dashboard({
+  pageViewStats,
+  coachAppViewStats,
+  affiliateStats,
+  pageViewError,
+}: {
+  pageViewStats: PageViewStats | null;
+  coachAppViewStats: CoachAppViewStats | null;
+  affiliateStats: AffiliateClickStats | null;
+  pageViewError: string;
+}) {
+  const [selectedDate, setSelectedDate] = useState("");
+  const [visiblePathCount, setVisiblePathCount] = useState(TOP_PATHS_PAGE_SIZE);
+
+  if (pageViewError) return <p style={styles.error}>{pageViewError}</p>;
+  if (!pageViewStats) return <p style={styles.muted}>Loading dashboard...</p>;
+
+  // Dates come from the site-wide page views (the most complete coverage).
+  // Newest first already, so the first entry is the default: today.
+  const dateOptions = pageViewStats.byDay.map((d) => d.date);
+  const latest = dateOptions[0] ?? "";
+  const today = new Date().toISOString().slice(0, 10);
+  // "" means "use the latest day"; "all" means the whole 30-day window.
+  const effective = selectedDate || latest;
+  const isWindow = effective === "all";
+  const viewsByDate = new Map(pageViewStats.byDay.map((d) => [d.date, d.count]));
+
+  function selectDate(date: string) {
+    setSelectedDate(date);
+    setVisiblePathCount(TOP_PATHS_PAGE_SIZE);
+  }
+
+  // Site-wide page views for the chosen scope.
+  const pvDay = isWindow ? null : pageViewStats.byDay.find((d) => d.date === effective) ?? null;
+  const pvPrior = isWindow ? null : pageViewStats.byDay.find((d) => d.date === previousDay(effective)) ?? null;
+  const pvTotal = isWindow ? pageViewStats.totalViews : pvDay?.count ?? 0;
+  const pvPriorTotal = isWindow ? null : pvPrior?.count ?? 0;
+  const pvSources = isWindow ? windowSourceRows(pageViewStats) : pvDay ? daySourceRows(pvDay) : [];
+
+  // Coach App views for the chosen scope.
+  const caDay =
+    isWindow || !coachAppViewStats ? null : coachAppViewStats.byDay.find((d) => d.date === effective) ?? null;
+  const caPrior =
+    isWindow || !coachAppViewStats
+      ? null
+      : coachAppViewStats.byDay.find((d) => d.date === previousDay(effective)) ?? null;
+  const caTotal = coachAppViewStats ? (isWindow ? coachAppViewStats.totalViews : caDay?.count ?? 0) : 0;
+  const caPriorTotal = isWindow || !coachAppViewStats ? null : caPrior?.count ?? 0;
+  const caSources = coachAppViewStats
+    ? isWindow
+      ? windowSourceRows(coachAppViewStats)
+      : caDay
+      ? daySourceRows(caDay)
+      : []
+    : [];
+
+  // Amazon clicks for the chosen scope.
+  const afDay =
+    isWindow || !affiliateStats ? null : affiliateStats.byDay.find((d) => d.date === effective) ?? null;
+  const afPrior =
+    isWindow || !affiliateStats
+      ? null
+      : affiliateStats.byDay.find((d) => d.date === previousDay(effective)) ?? null;
+  const afTotal = affiliateStats ? (isWindow ? affiliateStats.totalClicks : afDay?.clicks ?? 0) : 0;
+  const afPriorTotal = isWindow || !affiliateStats ? null : afPrior?.clicks ?? 0;
+  const afProducts = affiliateStats ? (isWindow ? affiliateStats.byProduct : afDay?.byProduct ?? []) : [];
+
+  // All pages and their views, in order, for the chosen scope.
+  const allPaths = isWindow ? pageViewStats.topPaths : pvDay?.topPaths ?? [];
+  const totalPathCount = isWindow ? pageViewStats.totalPathCount : pvDay?.totalPathCount ?? 0;
+  const visiblePaths = allPaths.slice(0, visiblePathCount);
+
+  return (
+    <div style={styles.list}>
+      <label style={styles.compareLabel}>
+        Date
+        <select value={effective} onChange={(e) => selectDate(e.target.value)} style={styles.dateInput}>
+          {dateOptions.map((d, i) => (
+            <option key={d} value={d}>
+              {d}
+              {i === 0 ? " (today)" : ""} ({viewsByDate.get(d) ?? 0} views)
+            </option>
+          ))}
+          <option value="all">All (last 30 days)</option>
+        </select>
+      </label>
+
+      {!isWindow && effective === today && (
+        <p style={styles.sectionNote}>
+          Today is still in progress, so its numbers are partial and the
+          &ldquo;vs prev day&rdquo; change compares a part-day against a full
+          one. Pick yesterday for the last complete day.
+        </p>
+      )}
+
+      <h3 style={styles.affiliateHeading}>Page views (whole site)</h3>
+      <div style={styles.card}>
+        <DashboardStat label="page views" current={pvTotal} prior={pvPriorTotal} />
+        <SourceLine rows={pvSources} />
+      </div>
+
+      <h3 style={styles.affiliateHeading}>Coach App views</h3>
+      {!coachAppViewStats ? (
+        <p style={styles.muted}>Loading Coach App views...</p>
+      ) : (
+        <div style={styles.card}>
+          <DashboardStat label="Coach App views" current={caTotal} prior={caPriorTotal} />
+          <SourceLine rows={caSources} />
+        </div>
+      )}
+
+      <h3 style={styles.affiliateHeading}>Amazon link clicks</h3>
+      {!affiliateStats ? (
+        <p style={styles.muted}>Loading Amazon clicks...</p>
+      ) : (
+        <>
+          <div style={styles.card}>
+            <DashboardStat label="Amazon clicks" current={afTotal} prior={afPriorTotal} />
+          </div>
+          {afProducts.length === 0 ? (
+            <p style={styles.muted}>No Amazon clicks in this window.</p>
+          ) : (
+            afProducts.map((row) => (
+              <div key={row.name} style={styles.card}>
+                <div style={styles.cardTop}>
+                  <span style={styles.cardQuery}>{row.name}</span>
+                  <span style={styles.cardBadge}>{row.clicks} clicks</span>
+                </div>
+                <div style={styles.cardStats}>
+                  <span>{row.merchant}</span>
+                </div>
+              </div>
+            ))
+          )}
+        </>
+      )}
+
+      <h3 style={styles.affiliateHeading}>
+        All pages by views {isWindow ? "(last 30 days)" : `on ${effective}`}
+      </h3>
+      {allPaths.length === 0 ? (
+        <EmptyState text="No page views in this window." />
+      ) : (
+        <>
+          {visiblePaths.map((row) => (
+            <div key={row.path} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.path}</span>
+                <span style={styles.cardBadge}>{row.count} views</span>
+              </div>
+            </div>
+          ))}
+          {allPaths.length > visiblePathCount && (
+            <button
+              onClick={() => setVisiblePathCount((n) => n + TOP_PATHS_PAGE_SIZE)}
+              style={styles.toggleButton}
+            >
+              Show more ({allPaths.length - visiblePathCount} of {totalPathCount} left)
+            </button>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
 function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
+  const [selectedDate, setSelectedDate] = useState("");
+
   const pagesWithViews = stats.byPage.filter((p) => p.pageViews !== null);
   const totalViews = pagesWithViews.reduce((sum, p) => sum + (p.pageViews ?? 0), 0);
   const totalPageClicks = pagesWithViews.reduce((sum, p) => sum + p.clicks, 0);
@@ -1226,6 +1505,11 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
 
   const gearPicks = stats.byPlacement.find((p) => p.placement === "gear-picks")?.clicks ?? 0;
   const inline = stats.byPlacement.find((p) => p.placement === "inline")?.clicks ?? 0;
+
+  // Only days that actually saw a click are worth offering in the picker - the
+  // window is zero-filled, so most entries are empty days.
+  const dayOptions = stats.byDay.filter((d) => d.clicks > 0);
+  const selectedDay = selectedDate ? stats.byDay.find((d) => d.date === selectedDate) ?? null : null;
 
   return (
     <div style={styles.list}>
@@ -1261,17 +1545,72 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
           : `Clicks and views both counted over the last ${stats.days} days.`}
       </p>
 
-      <div style={styles.cardStats}>
-        <span>Clicks: {stats.totalClicks}</span>
-        <span>Click-out rate: {overallRate === null ? "-" : pct(overallRate)}</span>
-        <span>Quick picks: {gearPicks}</span>
-        <span>Inline links: {inline}</span>
-      </div>
+      {dayOptions.length > 0 && (
+        <label style={styles.compareLabel}>
+          Pick a date to see that day&rsquo;s clicks by page and product
+          <select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            style={styles.dateInput}
+          >
+            <option value="">All (whole window)</option>
+            {dayOptions
+              .slice()
+              .reverse()
+              .map((d) => (
+                <option key={d.date} value={d.date}>
+                  {d.date} ({d.clicks} click{d.clicks === 1 ? "" : "s"})
+                </option>
+              ))}
+          </select>
+        </label>
+      )}
 
       {stats.totalClicks === 0 ? (
         <EmptyState text="No affiliate clicks recorded yet. The tracker went live on 9 September 2026 - before that nothing was measured, so an empty window here is not the same as no clicks." />
+      ) : selectedDay ? (
+        <>
+          <p style={styles.sectionNote}>
+            {selectedDay.date} only - {selectedDay.clicks} click
+            {selectedDay.clicks === 1 ? "" : "s"}. A single day is a small
+            sample; clear the date for the click-out rate, which needs the
+            whole window to mean anything.
+          </p>
+
+          <h3 style={styles.affiliateHeading}>By page on {selectedDay.date}</h3>
+          {selectedDay.byPage.length === 0 && <EmptyState text="No clicks on this day." />}
+          {selectedDay.byPage.map((row) => (
+            <div key={row.path} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.path}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+            </div>
+          ))}
+
+          <h3 style={styles.affiliateHeading}>By product on {selectedDay.date}</h3>
+          {selectedDay.byProduct.map((row) => (
+            <div key={row.name} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.name}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+              <div style={styles.cardStats}>
+                <span>{row.merchant}</span>
+              </div>
+              <ProductLinkBreakdown links={row.links} />
+            </div>
+          ))}
+        </>
       ) : (
         <>
+          <div style={styles.cardStats}>
+            <span>Clicks: {stats.totalClicks}</span>
+            <span>Click-out rate: {overallRate === null ? "-" : pct(overallRate)}</span>
+            <span>Quick picks: {gearPicks}</span>
+            <span>Inline links: {inline}</span>
+          </div>
+
           <h3 style={styles.affiliateHeading}>By page</h3>
           {stats.byPage.map((row) => (
             <div key={row.path} style={styles.card}>
@@ -1290,25 +1629,37 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
 
           <h3 style={styles.affiliateHeading}>By product</h3>
           {stats.byProduct.map((row) => (
-            <div key={row.href} style={styles.card}>
+            <div key={row.name} style={styles.card}>
               <div style={styles.cardTop}>
-                <span style={styles.cardQuery}>{row.linkText}</span>
+                <span style={styles.cardQuery}>{row.name}</span>
                 <span style={styles.cardBadge}>{row.clicks} clicks</span>
               </div>
               <div style={styles.cardStats}>
                 <span>{row.merchant}</span>
-                <span style={{ wordBreak: "break-all" }}>{row.href}</span>
               </div>
+              <ProductLinkBreakdown links={row.links} />
             </div>
           ))}
 
           <h3 style={styles.affiliateHeading}>By day</h3>
-          {stats.byDay
-            .filter((d) => d.clicks > 0)
+          <p style={styles.sectionNote}>Click a day to see its pages and products.</p>
+          {dayOptions
             .slice()
             .reverse()
             .map((row) => (
-              <div key={row.date} style={styles.card}>
+              <div
+                key={row.date}
+                style={{ ...styles.card, cursor: "pointer" }}
+                onClick={() => setSelectedDate(row.date)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setSelectedDate(row.date);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+              >
                 <div style={styles.cardTop}>
                   <span style={styles.cardQuery}>{row.date}</span>
                   <span style={styles.cardBadge}>{row.clicks} clicks</span>
@@ -1423,9 +1774,10 @@ function PageViewOptOutToggle() {
 }
 
 // The banner split test and the Coach App page views share one chosen date,
-// so picking a day re-reads both rather than only the page list underneath.
-// The picker lives here, above the banner numbers, because those numbers sit
-// at the top of the tab - a picker further down would change them off-screen.
+// so picking a day re-reads both. The picker sits at the very top of the tab
+// so it's the first thing you set; the page views come next, and the split
+// test result sits at the bottom (it's the slowest-moving number - it needs
+// weeks of impressions to call - so it belongs below the day-to-day traffic).
 function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -1467,10 +1819,10 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
         </label>
       )}
 
+      <PageViewsReport stats={stats} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       {stats.bannerVariants && (
         <BannerVariantsReport stats={stats.bannerVariants} selectedDate={selectedDate} />
       )}
-      <PageViewsReport stats={stats} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
     </>
   );
 }

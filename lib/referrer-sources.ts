@@ -15,7 +15,11 @@
 // - "Direct" is therefore a mix of genuine direct/bookmark/typed-URL visits
 //   plus every case where the browser or an extension blocked the referrer.
 
-export type SourceGroup = "Search" | "Social" | "AI" | "Direct" | "Internal" | "Other";
+// "Ads" is not derivable from the referrer host (a Google Ads click still
+// arrives referred from google.com, indistinguishable from organic search on
+// hostname alone). It's assigned in getPageViewStats from the gclid column
+// Google auto-tags onto every ad landing URL - see the classification there.
+export type SourceGroup = "Search" | "Social" | "AI" | "Ads" | "Direct" | "Internal" | "Other";
 
 export interface ClassifiedSource {
   group: SourceGroup;

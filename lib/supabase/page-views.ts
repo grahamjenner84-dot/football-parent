@@ -580,12 +580,18 @@ export async function getPageViewStats(
   // select() here would quietly under-report totalViews/byDay once a busy
   // day pushes past that cap. Page through with .range() instead, ordered
   // by id (monotonic, unique) so pages don't skip/duplicate rows.
-  let rows: { path: string; created_at: string; referrer_host: string | null; user_agent: string | null }[] = [];
+  let rows: {
+    path: string;
+    created_at: string;
+    referrer_host: string | null;
+    user_agent: string | null;
+    gclid: string | null;
+  }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, created_at, referrer_host, user_agent")
+      .select("path, created_at, referrer_host, user_agent, gclid")
       .gte("created_at", since)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
@@ -656,7 +662,15 @@ export async function getPageViewStats(
 
     byPathMap.set(row.path, (byPathMap.get(row.path) ?? 0) + 1);
 
-    const { group, label } = classifyReferrerHost(row.referrer_host);
+    // gclid is Google's auto-tag on every ad-click landing URL, so its
+    // presence is the one reliable "this was a paid click" signal - the
+    // referrer alone can't tell a Google Ads click from an organic Google
+    // result. Takes precedence over the host classification (which would
+    // otherwise file it under Search/Google) so paid traffic is visible as
+    // its own source rather than inflating organic search.
+    const { group, label } = row.gclid
+      ? ({ group: "Ads", label: "Google Ads" } as const)
+      : classifyReferrerHost(row.referrer_host);
     if (group === "Internal") {
       internalViewsTotal += 1;
       byDayInternalViews.set(day, (byDayInternalViews.get(day) ?? 0) + 1);
