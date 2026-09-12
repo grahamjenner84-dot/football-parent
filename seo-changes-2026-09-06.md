@@ -606,3 +606,24 @@ Graham asked to fix all four. One additive FAQ per page, matching the exact PAA 
 `npm run build` passes, all four routes prerender. Pushed to main.
 
 **On watch:** all four are live-traffic pages. Per the 10-14 day rule, no further edits to these four before ~26 September. Next `geo-watchlist-check` run (or a manual recheck of these specific keywords) after that window will show whether any of the FAQ additions moved citation status - same honest caveat as the earlier scholarships/JPL/EPPP batch: the JPL/grassroots and gear FAQ trials both came back null after 2 weeks, so a null result here again wouldn't be a surprise.
+
+## Shin pads FAQ reverted; stale-cache bug found and fixed in geo-watchlist-check.ts, 12 September 2026
+
+Graham questioned the shin pads fix directly: "how does 'what shin pads do professionals use' target 'best shin pads for kids'? It's a completely different search term." Correct challenge, and it led to a second, bigger finding.
+
+**Two separate problems, not one:**
+
+1. **The PAA question was a genuine tangent, not a paraphrase.** Unlike the other three fixes (Chelsea's and Arsenal's PAA questions are near-restatements of their target queries), "what shin pads do professionals use" doesn't answer "best shin pads for kids" at all - it's just a question Google's PAA box happened to show on that SERP. Answering it gives the AI Overview no new reason to cite us for the actual query.
+
+2. **The underlying "not cited" data was stale.** Traced the raw response `geo-watchlist-check.ts` actually used for this keyword back to its cached file - dated **22 August**, not 12 September. `googleOrganicSerp`'s shared client caches SERP calls under the `competitor_rankings` family with a 30-day freshness window (`scripts/seo/shared/types.ts`), which is the right default for most rank-check callers but wrong for a tool whose entire purpose is detecting change since the last check - a cache hit inside that window silently returns a month-old snapshot and reports it as today's result. A genuinely fresh, cache-bypassed recheck (`forceRefresh: true`) shows **footballparent.co.uk is already cited (#3)** for "best shin pads for kids" right now. There was no gap to fix.
+
+**Fixed:**
+- `content/football-gear/best-shin-pads-for-kids-football.mdx`: reverted the FAQ addition. Commit `6701d42`.
+- `scripts/seo/dataforseo/endpoints/serp.ts`: added a `forceRefresh` passthrough to `SerpOptions`/`googleOrganicSerp` (additive, no effect on existing callers that don't pass it).
+- `scripts/seo/cli/geo-watchlist-check.ts`: sets `forceRefresh: true` on every check, so this tool can no longer silently serve a stale cached snapshot. Commit `f23c09d`.
+- `seo-data/exports/geo-watchlist-history.jsonl`: corrected the "best shin pads for kids" record in place (was `cited: false` from the stale data, now `cited: true, position: 3` from the fresh recheck, with a note explaining the correction) so a future diff compares against the truth rather than a false baseline.
+- `ai-citation-log.csv`: appended a corrected row for the same keyword with an explicit note, rather than editing the earlier stale rows out of an append-only log.
+
+`npm run build` passes. The three other fixes (Chelsea, Arsenal, Veo/Trace) were checked and are unaffected - their raw responses were genuinely fetched this morning (confirmed via file timestamps), not cache hits.
+
+**Worth remembering for any future work on this tool:** the printed "actual cost" on a cache hit reflects the *original* recorded cost of that cached response, not new spend, so a run's total-cost line doesn't distinguish "N fresh calls, all paid" from "some of these were free reuses of old data" - something to watch if that number is ever used to sanity-check spend.
