@@ -627,3 +627,19 @@ Graham questioned the shin pads fix directly: "how does 'what shin pads do profe
 `npm run build` passes. The three other fixes (Chelsea, Arsenal, Veo/Trace) were checked and are unaffected - their raw responses were genuinely fetched this morning (confirmed via file timestamps), not cache hits.
 
 **Worth remembering for any future work on this tool:** the printed "actual cost" on a cache hit reflects the *original* recorded cost of that cached response, not new spend, so a run's total-cost line doesn't distinguish "N fresh calls, all paid" from "some of these were free reuses of old data" - something to watch if that number is ever used to sanity-check spend.
+
+## Veo/Arsenal/Chelsea GEO fixes re-verified, then fact-checked before push, 12 September 2026
+
+Graham asked whether the other three GEO fixes were genuinely good (same scrutiny as the shin-pads one) before pushing anything live.
+
+**Re-verification (not just trusting file timestamps this time):** forced a fresh, cache-bypassed recheck on all three keywords. All came back `cacheStatus: miss` (genuinely fresh, not the stale-cache bug above) and all still show an AI Overview present with no citation - real, current gaps, unlike shin pads. Also checked each FAQ's actual PAA question was used verbatim and is genuinely on-topic for its target query (Trace is literally a Veo alternative; Arsenal's page already states its pathway follows the PL/EPPP structure; "Chelsea Development Program" is near-verbatim the query itself) - none are the shin-pads tangent pattern.
+
+**Then ran a scoped fact-check/AI-slop pass (via the football-parent-review skill, restricted to just the three new FAQ additions rather than a full 12-section article review) before pushing, per Graham's request.** Found two real inconsistencies, both fixed:
+
+- `content/academy-pathway/arsenal-development-centre-guide.mdx`: the new FAQ said the Youth Development Phase is "tactically demanding," but the article's own "How Arsenal Structure Their Youth Pathway" section says "technically demanding." Corrected to match. Commit `587b2cc`.
+- `content/academy-pathway/chelsea-fc-development-centre-guide.mdx`: the new FAQ claimed each PTC/PDC/PPC level is "a step up in coaching," but the article's own `<ParentNote>` directly says coaching quality "may not have been drastically different between the groups, more the level of player" - a real first-hand source contradicting the claim. Reworded to "a step up in player standard and how closely players are assessed," dropping the coaching claim entirely. Commit `a49ef44`.
+- `content/football-gear/veo-camera-alternatives.mdx`: checked clean, no changes needed - consistent with the article's existing Trace/Pixellot section, no banned phrases or em dashes.
+
+All three marked `--fact-checked --ai-slop-checked` in the content tracker, with notes making clear this was a scoped review of the new FAQ only, not a full article re-audit.
+
+`npm run build` passes. Pushed to main.
