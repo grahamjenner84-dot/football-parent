@@ -643,3 +643,15 @@ Graham asked whether the other three GEO fixes were genuinely good (same scrutin
 All three marked `--fact-checked --ai-slop-checked` in the content tracker, with notes making clear this was a scoped review of the new FAQ only, not a full article re-audit.
 
 `npm run build` passes. Pushed to main.
+
+## New article published: Best Football Boots for Kids (2026 Buying Guide), 13 September 2026
+
+Published `/football-gear/best-football-boots-for-kids` (category: Football Gear). Prioritised from the Google Trends seasonality research run 2026-09-12/13 (see the same file's earlier "kids football goals" thread for the related-queries methodology): "kids football boots" hit a 12-month search high this September, driven by new-season kit buying, and no general boots roundup existed on the site (only the FG-vs-AG deep dive and the wide-feet piece).
+
+General buying-guide hub covering FG/AG/SG/moulded sole types at a high level, fit vs brand, budget vs premium, boots by age/stage (cross-linked to the FA youth format article for the 3v3/5v5/7v7/9v9/11v11 bands rather than re-deriving them), replacement frequency, and common buying mistakes. Deliberately not a deep dive on any one sole type - cross-links `ag-vs-fg-boots` and `best-football-boots-for-wide-feet-kids` instead of duplicating either, and is meant to sit above the still-unwritten soft-ground-specific article in the tracker.
+
+3 genuine `<ParentNote>` callouts from Graham: fastening/closure difficulty for a 7-year-old in laced boots vs velcro (with a Nike Jr Vapor Club velcro affiliate pick, tag `footballpar09-21`, one commission-disclosed inline link), replacement frequency and budget (two pairs a season, growth plus five-times-a-week usage, avoid premium boots while feet are still growing fast), and a coach's real suggestion to move to AG/moulded boots for a 1v1-focused session on 3G. 2 external citations (FA's Law 4 players' equipment page for stud safety/referee inspection, Royal College of Podiatry for fit-check frequency) - kept light deliberately since this is primarily practical/experiential buying advice, not governing-body or research-heavy content.
+
+Also corrected 5 stale tracker rows found while reviewing the pending-articles backlog for this session: `brentford-development-centre-guide`, `aston-villa-development-centre-guide`, `fulham-fc-development-centre-guide`, `equal-playing-time-in-grassroots-football` and `best-football-formations-by-age-group` were all still marked `status='planned'` despite being live on the site with real routes and MDX for some time - all 5 moved to `status='published'`. Also registered 4 further gear-content gaps from the same Trends research as `status='planned'` for future work: soft-ground-vs-firm-ground boots (target: live by early-mid Oct, ahead of SG's November peak), a garden football goals buying guide (same Oct deadline, ahead of the Nov-Dec Christmas peak), a Christmas football gifts guide (same Oct deadline), and a lower-priority training cones article (demand too flat/thin to prioritise now).
+
+`npm run build` passes. Not yet committed.
