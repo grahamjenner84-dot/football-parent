@@ -681,3 +681,13 @@ Ran the full 12-section football-parent-review audit. Live-fetched both external
 This is a useful general lesson: a brand-new page's own outbound links don't make it discoverable - it also needs inbound links from siblings and a category-page listing, and both were missed on first publish.
 
 `npm run build` passes on all touched pages. Pushed to main.
+
+## Boots hub: additional cross-links from wide-feet, gloves and AG-vs-FG articles
+
+Graham noticed `best-football-boots-for-wide-feet-kids.mdx` only got an in-body link to the new hub, not a Related Articles entry (Related Articles was at its 4-link convention cap, so I'd used a body mention instead) - added it to Related Articles there too rather than leaving it less visible than the other siblings. Also added a link (in-body + Related Articles) from `best-football-gloves-for-winter-training.mdx`, which had no boots-hub link at all, per Graham's request.
+
+Also added a `GearPicks` block to `ag-vs-fg-boots.mdx`'s "When Are FG Boots Still Fine?" section, reusing the same two real Amazon links already used on the boots hub (Nike Jr Mercurial Vapor 16, adidas Predator Club Fold-Over Tongue, both tag `footballpar09-21`) rather than sourcing new ones, since both are genuinely FG/MG products and this article is specifically about FG choice. Confirmed both links carry the tracking tag when asked.
+
+**Note on cadence:** this is the second edit to `ag-vs-fg-boots.mdx` in this session (first was the Related Articles inbound link a few hours earlier) - flagged to Graham before making it, since it brushes against the 10-14 day between-changes rule, but both are additive linking/pick changes rather than ranking-motivated rewrites, and this one was explicitly requested.
+
+`npm run build` passes on all touched pages (JSON validity manually re-verified for the new GearPicks block). Pushed to main.
