@@ -669,3 +669,15 @@ Real finding from this research: dedicated AG-specific kids boots are genuinely 
 Word count moved from ~1850 to ~2165 (still inside the 1200-2200 target), `readTime` updated 9 to 11.
 
 `npm run build` passes. Not yet committed.
+
+## Best Football Boots for Kids: full review pass, navigation gaps fixed, pushed live
+
+Ran the full 12-section football-parent-review audit. Live-fetched both external citations (FA Law 4, Royal College of Podiatry footwear PDF) - both genuinely resolve and support their claims. Found one real overclaim: the RCPod paraphrase added "more often during a growth spurt," which the source doesn't actually say - corrected to the source's real intervals (8 weeks under 4, 3 months from 4) plus its actual check-triggers (difficulty getting shoes on, wear marks, rubbing). Also fixed a grammatically unclear MG sentence and cut a templated "that's a useful X" restatement sentence. Quality 7.5/10, Risk 2/10.
+
+**Navigation gaps found and fixed, prompted by Graham asking whether the page had internal links and was on the sitemap/category page:**
+- The article was in `lib/routes.ts` (so already in the sitemap) but missing entirely from `app/football-gear/page.tsx` - added to both the "Start Here" list and the main articles grid.
+- No sibling article linked to the new hub. Added it to `ag-vs-fg-boots.mdx` and `best-shin-pads-for-kids-football.mdx`'s Related Articles (both had room under the 3-4 cap), and as an in-body link from `best-football-boots-for-wide-feet-kids.mdx` (already at its 4-link cap, so used a body mention instead of extending Related Articles).
+
+This is a useful general lesson: a brand-new page's own outbound links don't make it discoverable - it also needs inbound links from siblings and a category-page listing, and both were missed on first publish.
+
+`npm run build` passes on all touched pages. Pushed to main.

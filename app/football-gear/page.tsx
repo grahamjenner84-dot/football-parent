@@ -24,6 +24,12 @@ export default function FootballGearPage() {
           "These guides help parents choose suitable football kit and equipment for young players.",
         links: [
           {
+            title: "Best Football Boots for Kids",
+            href: "/football-gear/best-football-boots-for-kids",
+            description:
+              "the general starting point for choosing a sole type, fit and budget.",
+          },
+          {
             title: "Football Sizes by Age: Best Footballs For Kids",
             href: "/football-gear/best-footballs-by-age",
             description:
@@ -50,6 +56,12 @@ export default function FootballGearPage() {
         ],
       }}
       articles={[
+        {
+          title: "Best Football Boots for Kids",
+          href: "/football-gear/best-football-boots-for-kids",
+          description:
+            "A general buying guide covering sole types (FG, AG, SG, moulded), fit, budget and how boot priorities change as your child gets older.",
+        },
         {
           title: "AG vs FG Boots",
           href: "/football-gear/ag-vs-fg-boots",
