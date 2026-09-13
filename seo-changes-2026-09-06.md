@@ -655,3 +655,17 @@ General buying-guide hub covering FG/AG/SG/moulded sole types at a high level, f
 Also corrected 5 stale tracker rows found while reviewing the pending-articles backlog for this session: `brentford-development-centre-guide`, `aston-villa-development-centre-guide`, `fulham-fc-development-centre-guide`, `equal-playing-time-in-grassroots-football` and `best-football-formations-by-age-group` were all still marked `status='planned'` despite being live on the site with real routes and MDX for some time - all 5 moved to `status='published'`. Also registered 4 further gear-content gaps from the same Trends research as `status='planned'` for future work: soft-ground-vs-firm-ground boots (target: live by early-mid Oct, ahead of SG's November peak), a garden football goals buying guide (same Oct deadline, ahead of the Nov-Dec Christmas peak), a Christmas football gifts guide (same Oct deadline), and a lower-priority training cones article (demand too flat/thin to prioritise now).
 
 `npm run build` passes. Not yet committed.
+
+## Best Football Boots for Kids: added quick-picks table and GearPicks, matching the shin-pads format
+
+Graham flagged after initial publish that the article was missing two things the shin-pads article (the site's highest Amazon-click gear page) has: real keyword coverage of the secondary terms, and an early quick-picks table with `GearPicks` blocks rather than one buried inline link.
+
+**Keyword fix:** `kids football boots`, `junior football boots` and `best kids football` had 0 occurrences in the body despite being the article's own listed secondary keywords - only the exact primary phrase appeared, once, in the title. Added a leading H2 matching the primary keyword (mirroring `best-shin-pads-for-kids-football.mdx`'s own pattern), a natural mention in the age/stage section, and a new FAQ entry, without stuffing.
+
+**Picks restructure:** added a 3-row "quick picks at a glance" table right after the intro, linking to two new dedicated sections: "Easy-Fasten Boots for Younger Players" (Nike Jr Vapor Club, velcro) and "Best FG/Multi-Ground Boots for Older Kids" (Nike Jr Mercurial Vapor 16, and adidas Predator Club Fold-Over Tongue as a second, roomier-fitting option). All 3 Amazon links and ASINs were supplied directly by Graham from his own Amazon account (B0GFGQYKZJ, B0DPHMCDL1, B0F1WYXFZ6) rather than reconstructed from search results, per the affiliate-link skill's rule against guessing ASINs.
+
+Real finding from this research: dedicated AG-specific kids boots are genuinely thin on stock on Amazon right now (Graham checked directly and could not find one for the Mercurial line). Rather than mislabel an MG boot as AG, added an honest paragraph to the Boot Types section explaining MG as a hybrid alternative, and both FG/MG picks are labelled accurately as FG/MG, not AG.
+
+Word count moved from ~1850 to ~2165 (still inside the 1200-2200 target), `readTime` updated 9 to 11.
+
+`npm run build` passes. Not yet committed.
