@@ -1329,6 +1329,44 @@ function DashboardStat({
   );
 }
 
+// Friendly names for the site's top-level sections, keyed by the first path
+// segment. Anything not listed (legal pages, one-off routes) falls back to a
+// title-cased version of its own segment, and the bare "/" is Home.
+const CATEGORY_LABELS: Record<string, string> = {
+  "academy-pathway": "Academy pathway",
+  "academy-trials": "Academy trials",
+  coaching: "Coaching",
+  "football-development": "Football development",
+  "football-gear": "Gear",
+  "girls-football": "Girls' football",
+  "parent-guides": "Parent guides",
+  "football-parent-coach-app": "Coach App",
+  "coach-app": "Coach App",
+};
+
+// The category a page belongs to is its first path segment, so a category
+// index (/coaching) and every article under it (/coaching/...) roll up
+// together. Root and single-segment pages become their own labelled row.
+function categoryForPath(path: string): string {
+  const seg = path.split(/[?#]/)[0].split("/").filter(Boolean)[0];
+  if (!seg) return "Home";
+  return CATEGORY_LABELS[seg] ?? seg.charAt(0).toUpperCase() + seg.slice(1).replace(/-/g, " ");
+}
+
+// Rolls a page-by-page view list up into per-category totals, biggest first.
+// It sums exactly the paths handed in (the same capped topPaths list that
+// feeds the page-by-page breakdown), so the two always reconcile.
+function categoryTotals(paths: { path: string; count: number }[]): { label: string; count: number }[] {
+  const totals = new Map<string, number>();
+  for (const { path, count } of paths) {
+    const label = categoryForPath(path);
+    totals.set(label, (totals.get(label) ?? 0) + count);
+  }
+  return [...totals.entries()]
+    .map(([label, count]) => ({ label, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
 function Dashboard({
   pageViewStats,
   coachAppViewStats,
@@ -1401,6 +1439,12 @@ function Dashboard({
   const totalPathCount = isWindow ? pageViewStats.totalPathCount : pvDay?.totalPathCount ?? 0;
   const visiblePaths = allPaths.slice(0, visiblePathCount);
 
+  // Per-category rollup of the same page list shown below, so you can read
+  // "which sections are pulling the traffic" without adding it up by hand.
+  const categorySummary = categoryTotals(allPaths);
+  const categoryViewTotal = categorySummary.reduce((sum, c) => sum + c.count, 0);
+  const maxCategoryViews = categorySummary[0]?.count ?? 0;
+
   return (
     <div style={styles.list}>
       <label style={styles.compareLabel}>
@@ -1464,6 +1508,28 @@ function Dashboard({
             ))
           )}
         </>
+      )}
+
+      <h3 style={styles.affiliateHeading}>
+        Views by category {isWindow ? "(last 30 days)" : `on ${effective}`}
+      </h3>
+      {categorySummary.length === 0 ? (
+        <EmptyState text="No page views in this window." />
+      ) : (
+        categorySummary.map((c) => (
+          <div key={c.label} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{c.label}</span>
+              <span style={styles.cardBadge}>{c.count.toLocaleString("en-GB")} views</span>
+            </div>
+            <div style={styles.cardStats}>
+              <span>{categoryViewTotal > 0 ? Math.round((c.count / categoryViewTotal) * 100) : 0}% of listed views</span>
+            </div>
+            <div style={styles.barTrack}>
+              <div style={{ ...styles.barFill, width: `${maxCategoryViews > 0 ? (c.count / maxCategoryViews) * 100 : 0}%` }} />
+            </div>
+          </div>
+        ))
       )}
 
       <h3 style={styles.affiliateHeading}>
