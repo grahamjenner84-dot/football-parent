@@ -47,11 +47,19 @@ can land on a different product.
    `_encoding`. Rebuild from the ASIN rather than editing the pasted string
    - it is shorter, and you can see at a glance which product it points at.
 
-3. **Handle short links honestly.** `amzn.to` and `amazon.co.uk` are both
-   blocked by the sandbox proxy, so a short link cannot be resolved or
-   verified from here. Ask for the ASIN, or for SiteStripe's **Full Link**
-   option instead of Short Link. Existing `amzn.to` links already in the
-   repo work fine and carry real click history - leave them alone.
+3. **Never place a short link; always use the full tagged link.** An
+   `amzn.to` short link hides the tracking id inside a redirect, so the tag
+   is not visible in the page source. Amazon's Associates compliance review
+   reads the page statically, sees no tag, and flags "not using tracking IDs
+   ... unable to determine the source of traffic". This rejected the account
+   once already (Sept 2026) despite sales attributing fine off the tag, so
+   short links are a real liability, not a neutral convenience. Always place
+   the full `amazon.co.uk/dp/<ASIN>?tag=footballpar09-21` form so the tag is
+   visible in the HTML. Ask for the ASIN, or for SiteStripe's **Full Link**
+   option (not Short Link); `amzn.to` and `amazon.co.uk` are both blocked by
+   the sandbox proxy, so a short link cannot be resolved or verified from
+   here. If you find existing `amzn.to` links in the repo, convert them to
+   full tagged links rather than leaving them.
 
    Never reconstruct an ASIN from a product name or a web search result.
    Nothing is verifiable from this environment, and a wrong ASIN sends a
@@ -105,11 +113,15 @@ fails silently, rendering nothing at all. Rewrite the phrase, or use
 Do not hand-write any of this - it is applied automatically, and duplicating
 it by hand is how the two rendering paths drift apart:
 
-- `rel="sponsored nofollow noopener noreferrer"` and `target="_blank"` come
-  from `lib/affiliate.ts`, applied both by the `a` override in
-  `lib/MDXContent.tsx` and by `GearPicks`. `AFFILIATE_HOSTS` already covers
-  `amzn.to`, `amazon.co.uk` and `amazon.com`, so long-form tagged links are
-  treated identically to short ones.
+- `rel="sponsored nofollow noopener"` and `target="_blank"` come from
+  `lib/affiliate.ts`, applied both by the `a` override in `lib/MDXContent.tsx`
+  and by `GearPicks`. It is deliberately **not** `noreferrer`: affiliate links
+  must send the referrer so Amazon can confirm the traffic came from our site.
+  A `noreferrer` here contributed to an Associates rejection ("unable to
+  determine the source of traffic"), so do not add it back. `AFFILIATE_HOSTS`
+  still covers `amzn.to` as well as `amazon.co.uk` and `amazon.com`, so any
+  legacy short link is tagged and tracked identically, but author full links
+  only (see step 3).
 - `GearPicks` renders its own `AffiliateDisclosure` line. A section that
   recommends products only through inline prose links does not, so add the
   disclosure there yourself - CMA/ASA guidance expects it visible where the
