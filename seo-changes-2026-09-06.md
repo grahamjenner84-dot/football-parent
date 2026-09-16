@@ -691,3 +691,17 @@ Also added a `GearPicks` block to `ag-vs-fg-boots.mdx`'s "When Are FG Boots Stil
 **Note on cadence:** this is the second edit to `ag-vs-fg-boots.mdx` in this session (first was the Related Articles inbound link a few hours earlier) - flagged to Graham before making it, since it brushes against the 10-14 day between-changes rule, but both are additive linking/pick changes rather than ranking-motivated rewrites, and this one was explicitly requested.
 
 `npm run build` passes on all touched pages (JSON validity manually re-verified for the new GearPicks block). Pushed to main.
+
+## Affiliate links: converted all 8 `amzn.to` short links to full tagged `amazon.co.uk` links
+
+Prompted by an Amazon Associates rejection email ("not using tracking IDs associated with your store in any of the Amazon Special Links... unable to determine the source of traffic"), addressed to account `footballpar09-21`. Diagnosis: every full `amazon.co.uk/dp/...` link on the site already carried `?tag=footballpar09-21` correctly (and sales were attributing), but eight links were `amzn.to` short links, which hide the tag inside a redirect. Amazon's compliance crawler reads page source statically and sees no visible tag on a short link, hence the flag, even though the redirect does carry the tag. Fix: replace all short links with full links so the tracking ID is visible in the HTML on every affiliate link. Not a ranking change; done for Associates compliance.
+
+Short link → full link (all `tag=footballpar09-21`), destinations supplied by Graham from SiteStripe:
+- `best-football-boots-for-wide-feet-kids.mdx`: Nike Jr Tiempo Legend 10 `amzn.to/4iXxNZK` → `/s?k=nike+jr+tiempo+legend+10+academy` (search link, Graham's chosen form; matches the boot's churning size/variant availability); adidas Copa Pure Junior `amzn.to/3UJ0y2p` → `/dp/B0FVF47BPW`.
+- `best-footballs-by-age.mdx` (each appears twice): Mitre Impel `amzn.to/4yjfDGn` → `/dp/B093THVMZ7`; Nike Academy `amzn.to/4zV6d5t` → `/dp/B08QVPQJ1R`.
+- `best-shin-pads-for-kids-football.mdx`: Nike Mercurial Lite `amzn.to/4h4MGqS` → `/dp/B0B5HBWL23`; JOGA Shin Pad Sleeves Youth `amzn.to/46aql66` → `/dp/B0G9DVZW4K`.
+- `veo-camera-alternatives.mdx`: XbotGo Falcon tripod bundle `amzn.to/4gBPZGS` → `/dp/B0HFCK1WDG`; XbotGo Chameleon `amzn.to/46Hg7dy` → `/dp/B0GRVCFRX8` (field bundle).
+
+Open follow-up flagged to Graham: line 109 anchor "XbotGo Chameleon" now points at the field bundle `B0GRVCFRX8`, but the adjacent sentence still cites "Chameleon Standard Bundle from around £320" from XbotGo's buying guide. Awaiting the field bundle's price / whether to relabel before touching that wording. Prices on all new links unverified from here (`amazon.co.uk`/`amzn.to` egress-blocked in the sandbox); ASINs are exactly as Graham supplied.
+
+`npm run build` passes; all pages prerender static. No `amzn.to` links remain in `content/`.
