@@ -713,3 +713,11 @@ Follow-up to the short-link conversion above. In the earlier swap, the "Veo vs X
 Fix (Graham chose "Option A"): the "XbotGo Chameleon" anchor now points at the standalone `B0DG2DYQD8` at £279.99, consistent with the comparison block higher up the page. Dropped the unsupported "£320 Standard Bundle" figure. Added, at Graham's request, that a tripod is needed to film with it and that the field bundle packages a tripod in, linking `B0GRVCFRX8` at ~£471.71 for that. Deliberately did not claim the bundle is "cheaper than buying separately": on the raw prices it is ~£192 more than the camera alone, so that only holds if a comparable tripod costs more than that, unverifiable from the sandbox (Amazon egress-blocked). Non-price product claims (UK stock, no import charges, free cloud storage, livestreaming) kept, still attributed to XbotGo's UK buying guide.
 
 `npm run build` passes; page prerenders static.
+
+## Affiliate links: removed `noreferrer` so Amazon can see the traffic source
+
+Reconsidered the Associates rejection after Graham pointed out it landed *after* sales had already tracked, which means the tag was reaching Amazon fine and "unable to determine the source of traffic" must mean something other than a missing tag. Root cause found: every affiliate link was rendered `rel="sponsored nofollow noopener noreferrer"` (set in `lib/affiliate.ts`, used by both `lib/MDXContent.tsx` and `GearPicks.tsx`). The `noreferrer` strips the Referer header on click-out, so Amazon received tagged clicks with no indication they came from footballparent.co.uk, matching their wording while sales still attributed off the `?tag=`.
+
+Fix: dropped `noreferrer`, now `rel="sponsored nofollow noopener"`. `noopener` keeps the tab-nabbing protection without stripping the referrer, so the browser sends our origin to Amazon on the click. `sponsored nofollow` still satisfies Google's link-qualifier guidance and the Associates disclosure requirement. This is likely the more relevant of the two fixes (the short-link conversion was still worth doing for visible-tag auditability). Verified the prerendered HTML now emits `rel="sponsored nofollow noopener"`. Note: `noreferrer` was included in the original affiliate-link commit (2026-08-22) as part of the conventional `noopener noreferrer` pairing; it should not have been on monetised links.
+
+`npm run build` passes.

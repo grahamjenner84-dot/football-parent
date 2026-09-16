@@ -19,8 +19,15 @@ export function isAffiliateLink(href: string): boolean {
 
 // Attributes to spread onto an anchor. Non-affiliate links get nothing, so
 // ordinary citation links keep rendering exactly as they always have.
+//
+// Deliberately NOT "noreferrer": Amazon Associates needs to see the referrer
+// to confirm the traffic source is our registered site (their compliance
+// review flags "unable to determine the source of traffic" otherwise, even
+// while sales still attribute off the ?tag= in the URL). "noopener" alone
+// keeps the tab-nabbing protection without stripping the Referer header, so
+// the browser still sends our origin to Amazon on the click.
 export function affiliateLinkProps(href: string) {
   return isAffiliateLink(href)
-    ? { rel: "sponsored nofollow noopener noreferrer", target: "_blank" }
+    ? { rel: "sponsored nofollow noopener", target: "_blank" }
     : {};
 }
