@@ -705,3 +705,11 @@ Short link → full link (all `tag=footballpar09-21`), destinations supplied by 
 Open follow-up flagged to Graham: line 109 anchor "XbotGo Chameleon" now points at the field bundle `B0GRVCFRX8`, but the adjacent sentence still cites "Chameleon Standard Bundle from around £320" from XbotGo's buying guide. Awaiting the field bundle's price / whether to relabel before touching that wording. Prices on all new links unverified from here (`amazon.co.uk`/`amzn.to` egress-blocked in the sandbox); ASINs are exactly as Graham supplied.
 
 `npm run build` passes; all pages prerender static. No `amzn.to` links remain in `content/`.
+
+## veo article: Chameleon paragraph corrected to standalone camera + field-bundle tripod option
+
+Follow-up to the short-link conversion above. In the earlier swap, the "Veo vs XbotGo" paragraph's "XbotGo Chameleon" anchor was pointed at the field bundle (`B0GRVCFRX8`, £471.71) while the sentence still cited the old "Standard Bundle from around £320" figure, which matched neither the field bundle nor the standalone. Prices confirmed by Graham: standalone Chameleon `B0DG2DYQD8` £279.99, field bundle `B0GRVCFRX8` £471.71.
+
+Fix (Graham chose "Option A"): the "XbotGo Chameleon" anchor now points at the standalone `B0DG2DYQD8` at £279.99, consistent with the comparison block higher up the page. Dropped the unsupported "£320 Standard Bundle" figure. Added, at Graham's request, that a tripod is needed to film with it and that the field bundle packages a tripod in, linking `B0GRVCFRX8` at ~£471.71 for that. Deliberately did not claim the bundle is "cheaper than buying separately": on the raw prices it is ~£192 more than the camera alone, so that only holds if a comparable tripod costs more than that, unverifiable from the sandbox (Amazon egress-blocked). Non-price product claims (UK stock, no import charges, free cloud storage, livestreaming) kept, still attributed to XbotGo's UK buying guide.
+
+`npm run build` passes; page prerenders static.
