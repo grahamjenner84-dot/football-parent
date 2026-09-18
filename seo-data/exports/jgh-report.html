@@ -1,0 +1,1077 @@
+<title>Sizing Up Junior Grassroots Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+
+<style>
+  /* ---- Light palette: the complete token set lives on bare :root ---- */
+  :root {
+    --paper:      #F5F7F9;
+    --card:       #FFFFFF;
+    --ink:        #141A22;
+    --ink-2:      #46525F;
+    --ink-3:      #6E7B89;
+    --rule:       #DCE2E8;
+    --rule-soft:  #E9EDF1;
+    --grid:       #EEF1F4;
+
+    /* Categorical series, fixed order, validated light (surface #fcfcfb):
+       lightness band PASS, chroma PASS, CVD worst adjacent dE 17.8, contrast PASS */
+    --s-us:       #0090A8;
+    --s-jgh:      #B85520;
+    --s-ts:       #6A54B0;
+    --s-other:    #8A94A0;
+
+    --good:       #1F7A4D;
+    --warn:       #8A5A12;
+    --crit:       #A93322;
+
+    --wash-us:    rgba(0,144,168,.10);
+    --wash-jgh:   rgba(184,85,32,.10);
+    --shadow:     0 1px 2px rgba(20,26,34,.05), 0 6px 20px -12px rgba(20,26,34,.18);
+  }
+
+  /* Un-stamped document following a dark OS; an explicit light choice still wins */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper:     #0F1318;
+      --card:      #161B22;
+      --ink:       #E3E8ED;
+      --ink-2:     #A6B2BF;
+      --ink-3:     #7C8896;
+      --rule:      #262D36;
+      --rule-soft: #1E242B;
+      --grid:      #1C222A;
+
+      /* Re-stepped for the dark surface (#151A22), not inverted:
+         band PASS, chroma PASS, CVD worst adjacent dE 17.0, contrast PASS */
+      --s-us:      #22A0B6;
+      --s-jgh:     #D2733A;
+      --s-ts:      #9079D4;
+      --s-other:   #7C8896;
+
+      --good:      #46A578;
+      --warn:      #C08B3A;
+      --crit:      #D9705E;
+
+      --wash-us:   rgba(34,160,182,.14);
+      --wash-jgh:  rgba(210,115,58,.14);
+      --shadow:    0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+    }
+  }
+
+  /* Explicit dark choice wins over a light OS */
+  :root[data-theme="dark"] {
+    --paper:     #0F1318;
+    --card:      #161B22;
+    --ink:       #E3E8ED;
+    --ink-2:     #A6B2BF;
+    --ink-3:     #7C8896;
+    --rule:      #262D36;
+    --rule-soft: #1E242B;
+    --grid:      #1C222A;
+
+    --s-us:      #22A0B6;
+    --s-jgh:     #D2733A;
+    --s-ts:      #9079D4;
+    --s-other:   #7C8896;
+
+    --good:      #46A578;
+    --warn:      #C08B3A;
+    --crit:      #D9705E;
+
+    --wash-us:   rgba(34,160,182,.14);
+    --wash-jgh:  rgba(210,115,58,.14);
+    --shadow:    0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16.5px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0 20px 96px;
+  }
+
+  .wrap { max-width: 940px; margin: 0 auto; }
+  .measure { max-width: 68ch; }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    padding: 52px 0 26px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 8px;
+  }
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: Bitter, Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5.4vw, 3.05rem);
+    line-height: 1.08;
+    letter-spacing: -.018em;
+    text-wrap: balance;
+    margin: 0 0 16px;
+  }
+  .standfirst {
+    font-size: 1.09rem;
+    color: var(--ink-2);
+    max-width: 60ch;
+    margin: 0;
+  }
+  .dateline {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    padding: 12px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+  }
+
+  /* ---------- sections ---------- */
+  section { padding-top: 54px; }
+  h2 {
+    font-family: Bitter, Georgia, serif;
+    font-weight: 600;
+    font-size: 1.44rem;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0 0 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: Bitter, Georgia, serif;
+    font-weight: 600;
+    font-size: 1.06rem;
+    margin: 34px 0 10px;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 15px; }
+  a { color: var(--s-us); text-underline-offset: 2px; }
+  a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--s-us);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  strong { font-weight: 600; }
+  .lede { font-size: 1.04rem; color: var(--ink-2); margin-top: 14px; }
+
+  /* ---------- verdict panel ---------- */
+  .verdict {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--s-jgh);
+    border-radius: 3px;
+    padding: 22px 24px;
+    margin: 26px 0 0;
+    box-shadow: var(--shadow);
+  }
+  .verdict p:last-child { margin-bottom: 0; }
+  .verdict-label {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 10px;
+  }
+
+  /* ---------- scoreboard ---------- */
+  .scoreboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 24px 0 6px;
+  }
+  .tile {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--tile-hue, var(--s-other));
+    border-radius: 3px;
+    padding: 17px 18px 16px;
+    box-shadow: var(--shadow);
+  }
+  .tile-name {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    word-break: break-word;
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .swatch {
+    width: 9px; height: 9px; border-radius: 2px;
+    background: var(--tile-hue, var(--s-other));
+    flex: none;
+  }
+  .tile-fig {
+    font-family: Bitter, Georgia, serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+    margin: 0;
+  }
+  .tile-unit { font-size: .8rem; color: var(--ink-3); margin: 6px 0 0; }
+  .tile-sub {
+    margin: 13px 0 0;
+    padding-top: 11px;
+    border-top: 1px solid var(--rule-soft);
+    font-size: .82rem;
+    color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- bar chart ---------- */
+  figure { margin: 26px 0 0; }
+  figcaption {
+    font-size: .84rem;
+    color: var(--ink-3);
+    margin-top: 14px;
+    padding-top: 11px;
+    border-top: 1px solid var(--rule-soft);
+    max-width: 66ch;
+  }
+  .chart-title {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0 0 16px;
+  }
+  .bars { display: flex; flex-direction: column; gap: 15px; }
+  .bar-row { display: grid; gap: 5px; }
+  .bar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-size: .87rem;
+  }
+  .bar-label { display: flex; align-items: center; gap: 8px; color: var(--ink); }
+  .bar-label code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .82rem;
+    background: none;
+  }
+  .bar-val {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .bar-track {
+    background: var(--grid);
+    border-radius: 4px;
+    height: 15px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 0 4px 4px 0;
+    transition: filter .15s ease;
+  }
+  .bar-row:hover .bar-fill { filter: brightness(1.08) saturate(1.06); }
+  @media (prefers-reduced-motion: reduce) {
+    .bar-fill { transition: none; }
+  }
+
+  /* composition bar: one site, one hue, magnitude by share */
+  .comp { display: flex; flex-direction: column; gap: 9px; }
+  .comp-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 58px;
+    align-items: center;
+    gap: 12px;
+    font-size: .85rem;
+  }
+  .comp-row code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: .82rem;
+    color: var(--ink-2);
+  }
+  .comp-track { background: var(--grid); border-radius: 3px; height: 12px; overflow: hidden; }
+  .comp-fill { height: 100%; border-radius: 0 3px 3px 0; background: var(--s-jgh); }
+  .comp-pct {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--ink);
+  }
+  @media (max-width: 520px) {
+    .comp-row { grid-template-columns: 108px 1fr 50px; gap: 9px; font-size: .8rem; }
+  }
+
+  /* ---------- tables ---------- */
+  .scroll { overflow-x: auto; margin: 22px 0 0; border: 1px solid var(--rule); border-radius: 3px; background: var(--card); }
+  table { border-collapse: collapse; width: 100%; font-size: .875rem; }
+  caption {
+    text-align: left;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  th, td { padding: 9px 16px; text-align: left; border-bottom: 1px solid var(--rule-soft); }
+  thead th {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    font-weight: 500;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--rule);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .num {
+    text-align: right;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .kw { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: .83rem; }
+  .dim { color: var(--ink-3); }
+  tbody tr:hover { background: var(--rule-soft); }
+
+  .pill {
+    display: inline-block;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: .05em;
+    padding: 2px 7px;
+    border-radius: 3px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .pill-good { color: var(--good); }
+  .pill-warn { color: var(--warn); }
+  .pill-crit { color: var(--crit); }
+  .pill-none { color: var(--ink-3); }
+
+  /* ---------- misc ---------- */
+  ul.notes { padding-left: 0; list-style: none; margin: 16px 0; display: flex; flex-direction: column; gap: 11px; }
+  ul.notes li { padding-left: 18px; position: relative; color: var(--ink-2); max-width: 66ch; }
+  ul.notes li::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: 6px; height: 2px; background: var(--ink-3);
+  }
+  ul.notes li strong { color: var(--ink); }
+
+  details {
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    background: var(--card);
+    padding: 0;
+    margin: 22px 0 0;
+  }
+  summary {
+    cursor: pointer;
+    padding: 13px 16px;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  details[open] summary { border-bottom: 1px solid var(--rule); }
+  .details-body { padding: 16px; }
+  .details-body p:last-child { margin-bottom: 0; }
+  .details-body table { font-size: .84rem; }
+
+  footer {
+    margin-top: 64px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--ink-3);
+    line-height: 1.75;
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Advertising due diligence</p>
+    <h1>Sizing Up Junior Grassroots Hub</h1>
+    <p class="standfirst">How big Junior Grassroots Hub actually is next to footballparent.co.uk, what they rank for, and whether AI assistants know they exist. TeamStats measured alongside for reference.</p>
+    <div class="dateline">
+      <span>11 September 2026 &middot; revised</span>
+      <span>DataForSEO Labs &middot; Google SERP &middot; Search Console</span>
+      <span>API spend $1.26</span>
+    </div>
+  </header>
+
+  <section id="verdict">
+    <h2>The short answer</h2>
+    <p class="lede measure">They are bigger than us, but nothing like 64&times; bigger, which is what a naive tool comparison would tell you. On real Search Console numbers from both sides, Junior Grassroots Hub gets roughly <strong>5&times; our impressions and somewhere between 10&times; and 20&times; our clicks</strong>.</p>
+
+    <div class="verdict">
+      <p class="verdict-label">What you would actually be buying</p>
+      <p>Almost none of their search traffic touches the pages a partner listing lives on. <strong>88% of it lands on league tables and club directory pages</strong>, and the <code>/partners</code>, <code>/supporters</code>, <code>/guides</code> and <code>/coaches</code> sections together pull about <strong>2%</strong>. A listing there is close to invisible in search.</p>
+      <p>That does not make it worthless, it changes what it is. The value is their <strong>social audience</strong> (115K Facebook, 57K Instagram, self-reported) and a link from a 65-referring-domain site with a cleaner backlink profile than ours. I checked the raw HTML of a live partner page: the outbound link carries <code>rel="noopener noreferrer"</code> and <strong>no <code>nofollow</code> or <code>sponsored</code></strong>, so it is followed today. Read the caveat on that below before pricing it in.</p>
+      <p>Judge it as a <strong>mentions-and-social buy</strong>. That framing matters more than it sounds: the research below shows the thing actually holding us back with AI assistants is third-party mentions, and a partner listing is exactly that kind of page.</p>
+    </div>
+  </section>
+
+  <section id="scale">
+    <h2>Scale, on one measuring stick</h2>
+    <p class="measure">Every number in this block comes from the same source (DataForSEO Labs, UK, September 2026) so the three sites are directly comparable to each other. Read the next section before you take the ratios literally.</p>
+
+    <div class="scoreboard">
+      <div class="tile" style="--tile-hue: var(--s-us);">
+        <p class="tile-name"><span class="swatch"></span>footballparent.co.uk</p>
+        <p class="tile-fig">157</p>
+        <p class="tile-unit">ranked keywords</p>
+        <p class="tile-sub">355 est. clicks/mo &middot; 0 first places &middot; 10 referring domains</p>
+      </div>
+      <div class="tile" style="--tile-hue: var(--s-jgh);">
+        <p class="tile-name"><span class="swatch"></span>juniorgrassrootshub.com</p>
+        <p class="tile-fig">7,739</p>
+        <p class="tile-unit">ranked keywords</p>
+        <p class="tile-sub">22,555 est. clicks/mo &middot; 17 first places &middot; 65 referring domains</p>
+      </div>
+      <div class="tile" style="--tile-hue: var(--s-ts);">
+        <p class="tile-name"><span class="swatch"></span>teamstats.net</p>
+        <p class="tile-fig">16,941</p>
+        <p class="tile-unit">ranked keywords</p>
+        <p class="tile-sub">89,914 est. clicks/mo &middot; 6 first places &middot; 910 referring domains</p>
+      </div>
+    </div>
+
+    <figure>
+      <p class="chart-title">Estimated monthly organic clicks</p>
+      <div class="bars">
+        <div class="bar-row" title="teamstats.net — 89,914 estimated monthly organic clicks">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-ts);"></span><code>teamstats.net</code></span>
+            <span class="bar-val">89,914</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%; background: var(--s-ts);"></div></div>
+        </div>
+        <div class="bar-row" title="juniorgrassrootshub.com — 22,555 estimated monthly organic clicks">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-jgh);"></span><code>juniorgrassrootshub.com</code></span>
+            <span class="bar-val">22,555</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:25.1%; background: var(--s-jgh);"></div></div>
+        </div>
+        <div class="bar-row" title="footballparent.co.uk — 355 estimated monthly organic clicks">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-us);"></span><code>footballparent.co.uk</code></span>
+            <span class="bar-val">355</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:0.4%; background: var(--s-us);"></div></div>
+        </div>
+      </div>
+      <figcaption>DataForSEO <code>domain_rank_overview</code>, UK location, September 2026. Each bar is direct-labelled; colour carries identity only.</figcaption>
+    </figure>
+
+    <div class="scroll">
+      <table>
+        <caption>Full domain comparison</caption>
+        <thead>
+          <tr>
+            <th scope="col">Metric</th>
+            <th scope="col" class="num">footballparent</th>
+            <th scope="col" class="num">juniorgrassrootshub</th>
+            <th scope="col" class="num">teamstats</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Ranked keywords</td><td class="num">157</td><td class="num">7,739</td><td class="num">16,941</td></tr>
+          <tr><td>Est. monthly organic clicks</td><td class="num">355</td><td class="num">22,555</td><td class="num">89,914</td></tr>
+          <tr><td>Position #1</td><td class="num">0</td><td class="num">17</td><td class="num">6</td></tr>
+          <tr><td>Positions 2&ndash;3</td><td class="num">1</td><td class="num">66</td><td class="num">204</td></tr>
+          <tr><td>Positions 4&ndash;10</td><td class="num">34</td><td class="num">1,793</td><td class="num">3,669</td></tr>
+          <tr><td>Referring domains</td><td class="num">10</td><td class="num">65</td><td class="num">910</td></tr>
+          <tr><td>DataForSEO domain rank</td><td class="num">0</td><td class="num">162</td><td class="num">440</td></tr>
+          <tr><td>Backlink spam score <span class="dim">(lower better)</span></td><td class="num">56</td><td class="num">14</td><td class="num">36</td></tr>
+          <tr><td>Keywords gained / lost <span class="dim">(rolling)</span></td><td class="num">156 / 1</td><td class="num">6,569 / 2,218</td><td class="num">9,267 / 8,287</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure" style="margin-top:16px;">Two things stand out in that table. Their backlink profile is <em>cleaner</em> than ours (spam score 14 against our 56) which is why a link from them is worth having. And TeamStats is churning violently, gaining 9,267 keywords while losing 8,287, whereas Junior Grassroots Hub is growing on balance.</p>
+  </section>
+
+  <section id="calibration">
+    <h2>Why the 64&times; figure is wrong</h2>
+    <p class="measure">DataForSEO credits us with 355 clicks a month. Search Console says we got <strong>2,135 clicks in the last 28 days</strong>, about 2,290 a month. The tool is undercounting us by roughly 6.5&times;, and the reason is visible in the query counts: GSC records <strong>3,874 distinct queries</strong> bringing us impressions, and DataForSEO's index knows about 157 of them.</p>
+    <p class="measure">That is what a young, long-tail informational site looks like to a third-party keyword tool. Junior Grassroots Hub has the opposite shape. Their traffic sits on a few hundred high-volume, well-indexed league names, which these tools cover accurately, and their own published figures line up with the estimate within about 2&times;.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Estimate against ground truth</caption>
+        <thead>
+          <tr>
+            <th scope="col">Source</th>
+            <th scope="col" class="num">footballparent.co.uk</th>
+            <th scope="col" class="num">juniorgrassrootshub.com</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>DataForSEO estimate</td><td class="num">355 clicks/mo</td><td class="num">22,555 clicks/mo</td></tr>
+          <tr><td>Real Search Console</td><td class="num">~2,290 clicks/mo</td><td class="num">~43,000 clicks/mo <span class="dim">(their figure)</span></td></tr>
+          <tr><td>Real impressions</td><td class="num">144,263 / 28 days</td><td class="num">695,000 / 30 days <span class="dim">(their figure)</span></td></tr>
+          <tr><td>Click-through rate</td><td class="num">1.48%</td><td class="num">~6.2%</td></tr>
+          <tr><td>Average position</td><td class="num">7.1</td><td class="num">&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="notes">
+      <li><strong>Impressions: they are about 5&times; us.</strong> Their 695K a month against our 144K per 28 days.</li>
+      <li><strong>Clicks: they are 10&times; to 20&times; us.</strong> The range depends on whether you trust their self-reported 130K click-throughs per 90 days or DataForSEO's more conservative estimate.</li>
+      <li><strong>Their CTR is four times ours, and that is structural, not quality.</strong> Someone searching "tandridge league" wants exactly that page and clicks it. Someone searching "what is grassroots football" often gets their answer from the AI Overview and never clicks anyone.</li>
+      <li><strong>We are growing quickly.</strong> 2,135 clicks in the last 28 days against 852 in the 28 before, from 61K impressions to 144K. This gap is closing, not widening.</li>
+    </ul>
+
+    <div class="verdict" style="border-left-color: var(--warn);">
+      <p class="verdict-label">Where each number comes from</p>
+      <p>Our figures are from <strong>our own Search Console</strong>, verified property, full query and page detail. <strong>I have no access to theirs</strong>, and there is no way to get it. Every Junior Grassroots Hub impression and click figure in this report is <strong>self-reported</strong> from their public <code>/partners</code> page, where they attribute it to their Search Console.</p>
+      <p>What can be done is a cross-check, and it passes: DataForSEO independently estimates them at 22,555 clicks a month, their own claim works out at roughly 43,000, and the implied 6.2% click-through rate is normal for navigational league-name queries at positions 4&ndash;6. The claims look honest rather than inflated, but treat them as their numbers, not measured ones.</p>
+    </div>
+  </section>
+
+  <section id="composition">
+    <h2>Where their traffic actually lands</h2>
+    <p class="measure">This is the part that matters for an advertising decision. Their top 1,000 keywords account for about 78% of their estimated traffic, and it is overwhelmingly directory lookups.</p>
+
+    <figure>
+      <p class="chart-title">Share of Junior Grassroots Hub search traffic, by site section</p>
+      <div class="comp">
+        <div class="comp-row"><code>/leagues</code><div class="comp-track"><div class="comp-fill" style="width:100%"></div></div><span class="comp-pct">75.4%</span></div>
+        <div class="comp-row"><code>/clubs</code><div class="comp-track"><div class="comp-fill" style="width:15.8%"></div></div><span class="comp-pct">11.9%</span></div>
+        <div class="comp-row"><code>/academies</code><div class="comp-track"><div class="comp-fill" style="width:9.3%"></div></div><span class="comp-pct">7.0%</span></div>
+        <div class="comp-row"><code>/tournaments</code><div class="comp-track"><div class="comp-fill" style="width:3.8%"></div></div><span class="comp-pct">2.9%</span></div>
+        <div class="comp-row"><code>/supporters</code><div class="comp-track"><div class="comp-fill" style="width:0.9%"></div></div><span class="comp-pct">0.7%</span></div>
+        <div class="comp-row"><code>/coaches</code><div class="comp-track"><div class="comp-fill" style="width:0.9%"></div></div><span class="comp-pct">0.7%</span></div>
+        <div class="comp-row"><code>/guides</code><div class="comp-track"><div class="comp-fill" style="width:0.5%"></div></div><span class="comp-pct">0.4%</span></div>
+        <div class="comp-row"><code>/news</code><div class="comp-track"><div class="comp-fill" style="width:0.4%"></div></div><span class="comp-pct">0.3%</span></div>
+        <div class="comp-row"><code>/partners</code><div class="comp-track"><div class="comp-fill" style="width:0.3%"></div></div><span class="comp-pct">0.2%</span></div>
+      </div>
+      <figcaption>Bars scale to the largest section, not to 100%. Single series, so one hue. Estimated traffic summed per URL path across their top 1,000 ranked keywords.</figcaption>
+    </figure>
+
+    <p class="measure" style="margin-top:24px;">The visitor profile that follows: a parent or coach checking a fixture or a league table, mid-season, probably on a phone, probably a repeat visit to the same page. High intent for that page, very low browsing intent. They are not there to read anything.</p>
+    <p class="measure">TeamStats is the same business model, more so: <code>/league</code> pages are 85.3% of their traffic, and their blog is 0.8%.</p>
+  </section>
+
+  <section id="keywords">
+    <h2>What they rank for</h2>
+    <p class="measure">Ordered by search volume, as requested. The pattern is identical all the way down: a league name, sometimes an abbreviation, ranked 4th to 7th. Nothing editorial, nothing commercial.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Junior Grassroots Hub &mdash; top keywords by monthly volume</caption>
+        <thead>
+          <tr><th scope="col">Keyword</th><th scope="col" class="num">Volume</th><th scope="col" class="num">Position</th><th scope="col" class="num">Est. clicks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kw">tandridge league</td><td class="num">12,100</td><td class="num">4</td><td class="num">1,177</td></tr>
+          <tr><td class="kw">central warwickshire youth football league</td><td class="num">12,100</td><td class="num">5</td><td class="num">568</td></tr>
+          <tr><td class="kw">central warwickshire youth league</td><td class="num">12,100</td><td class="num">5</td><td class="num">568</td></tr>
+          <tr><td class="kw">central warwickshire football</td><td class="num">12,100</td><td class="num">5</td><td class="num">568</td></tr>
+          <tr><td class="kw">central warwickshire league</td><td class="num">12,100</td><td class="num">6</td><td class="num">409</td></tr>
+          <tr><td class="kw">echo league</td><td class="num">6,600</td><td class="num">5</td><td class="num">642</td></tr>
+          <tr><td class="kw">avon youth league</td><td class="num">5,400</td><td class="num">4</td><td class="num">356</td></tr>
+          <tr><td class="kw">warrington junior football leagues</td><td class="num">5,400</td><td class="num">7</td><td class="num">138</td></tr>
+          <tr><td class="kw">mid cheshire league</td><td class="num">4,400</td><td class="num">7</td><td class="num">113</td></tr>
+          <tr><td class="kw">weetabix league</td><td class="num">3,600</td><td class="num">4</td><td class="num">237</td></tr>
+          <tr><td class="kw">mid solent youth league</td><td class="num">3,600</td><td class="num">5</td><td class="num">169</td></tr>
+          <tr><td class="kw">norfolk combined youth league</td><td class="num">3,600</td><td class="num">7</td><td class="num">92</td></tr>
+          <tr><td class="kw">bolton and bury league</td><td class="num">3,600</td><td class="num">9</td><td class="num">71</td></tr>
+          <tr><td class="kw">garforth junior football league</td><td class="num">2,900</td><td class="num">7</td><td class="num">74</td></tr>
+          <tr><td class="kw">russell foster youth league</td><td class="num">2,900</td><td class="num">7</td><td class="num">74</td></tr>
+          <tr><td class="kw">academies near me</td><td class="num">1,900</td><td class="num">10</td><td class="num">89</td></tr>
+          <tr><td class="kw">colchester and district youth league</td><td class="num">1,900</td><td class="num">5</td><td class="num">89</td></tr>
+          <tr><td class="kw">eastham league</td><td class="num">1,900</td><td class="num">5</td><td class="num">89</td></tr>
+          <tr><td class="kw">blackwater and dengie league</td><td class="num">1,900</td><td class="num">6</td><td class="num">64</td></tr>
+          <tr><td class="kw">portsmouth youth league</td><td class="num">1,900</td><td class="num">7</td><td class="num">49</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Their single biggest page</h3>
+    <p class="measure">Seven keyword variants of "central warwickshire" all point at one URL, which together make it their highest-traffic page at roughly 3,338 estimated clicks a month. Tandridge is second at 1,354. If a placement is ever offered on specific pages rather than site-wide, those are the two to ask for.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>TeamStats &mdash; top keywords by monthly volume</caption>
+        <thead>
+          <tr><th scope="col">Keyword</th><th scope="col" class="num">Volume</th><th scope="col" class="num">Position</th><th scope="col" class="num">Est. clicks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kw">selkent</td><td class="num">12,100</td><td class="num">6</td><td class="num">568</td></tr>
+          <tr><td class="kw">tandridge league</td><td class="num">12,100</td><td class="num">6</td><td class="num">568</td></tr>
+          <tr><td class="kw">portadown football club</td><td class="num">9,900</td><td class="num">6</td><td class="num">652</td></tr>
+          <tr><td class="kw">selkent league</td><td class="num">9,900</td><td class="num">5</td><td class="num">464</td></tr>
+          <tr><td class="kw">adjfa</td><td class="num">5,400</td><td class="num">3</td><td class="num">525</td></tr>
+          <tr><td class="kw">zimbabwe football teams</td><td class="num">5,400</td><td class="num">6</td><td class="num">356</td></tr>
+          <tr><td class="kw">ddyfa</td><td class="num">5,400</td><td class="num">7</td><td class="num">253</td></tr>
+          <tr><td class="kw">warrington junior football league</td><td class="num">5,400</td><td class="num">5</td><td class="num">253</td></tr>
+          <tr><td class="kw">pjdyfl</td><td class="num">4,400</td><td class="num">3</td><td class="num">428</td></tr>
+          <tr><td class="kw">watford friendly league</td><td class="num">4,400</td><td class="num">4</td><td class="num">290</td></tr>
+          <tr><td class="kw">west herts youth league</td><td class="num">4,400</td><td class="num">5</td><td class="num">206</td></tr>
+          <tr><td class="kw">yel saturday</td><td class="num">4,400</td><td class="num">5</td><td class="num">206</td></tr>
+          <tr><td class="kw">rotherham and district sunday football league</td><td class="num">3,600</td><td class="num">3</td><td class="num">350</td></tr>
+          <tr><td class="kw">clyfa</td><td class="num">3,600</td><td class="num">4</td><td class="num">237</td></tr>
+          <tr><td class="kw">yel sunday</td><td class="num">3,600</td><td class="num">5</td><td class="num">169</td></tr>
+          <tr><td class="kw">mid herts league</td><td class="num">2,400</td><td class="num">5</td><td class="num">113</td></tr>
+          <tr><td class="kw">rfyl</td><td class="num">2,400</td><td class="num">5</td><td class="num">113</td></tr>
+          <tr><td class="kw">ayrshire afa</td><td class="num">2,400</td><td class="num">6</td><td class="num">81</td></tr>
+          <tr><td class="kw">combination league leeds</td><td class="num">1,900</td><td class="num">3</td><td class="num">185</td></tr>
+          <tr><td class="kw">bradford sunday alliance</td><td class="num">1,900</td><td class="num">4</td><td class="num">125</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure" style="margin-top:16px;">They overlap each other on 132 keywords in the sample, mostly the same league names, trading positions 3&ndash;8. Neither owns the space; the actual league websites and FA Full-Time sit above both.</p>
+
+    <details>
+      <summary>Full keyword exports</summary>
+      <div class="details-body">
+        <p>Complete ranked-keyword lists, sorted by volume, with position, estimated clicks, CPC, intent and landing URL for every row:</p>
+        <ul class="notes">
+          <li><code>seo-data/exports/juniorgrassrootshub-ranked-keywords.csv</code> &mdash; 1,000 rows</li>
+          <li><code>seo-data/exports/teamstats-ranked-keywords.csv</code> &mdash; 1,000 rows</li>
+          <li><code>seo-data/exports/footballparent-ranked-keywords.csv</code> &mdash; 177 rows</li>
+        </ul>
+        <p class="dim">1,000 is the API's per-call ceiling. It captures 78% of Junior Grassroots Hub's estimated traffic and 26% of TeamStats', because TeamStats has a far longer tail.</p>
+      </div>
+    </details>
+  </section>
+
+  <section id="headtohead">
+    <h2>The academy head-to-head, corrected</h2>
+    <div class="verdict" style="border-left-color: var(--crit);">
+      <p class="verdict-label">Correction to the first version of this report</p>
+      <p>I originally reported that they beat us on all 27 shared academy keywords, with us at positions 13&ndash;28. <strong>That was wrong.</strong> It came from DataForSEO's position data, which is stale for our site. Our own Search Console has the same queries at <strong>5.3 to 8.8</strong>, and live SERP checks put us <strong>higher still</strong>. The real picture is a clean split, not a defeat.</p>
+    </div>
+
+    <p class="measure">Checked against live Google results rather than a third-party index, the cluster divides by intent. Where the query asks <em>what the categories are</em>, we win. Where it asks <em>which clubs are in one</em>, they win.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Live Google positions, 11 September 2026</caption>
+        <thead>
+          <tr><th scope="col">Query</th><th scope="col">Intent</th><th scope="col" class="num">Us</th><th scope="col" class="num">Them</th><th scope="col">Winner</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kw">football academy categories</td><td class="dim">explainer</td><td class="num">1</td><td class="num">3</td><td><span class="pill pill-good">us</span></td></tr>
+          <tr><td class="kw">english football academy categories</td><td class="dim">explainer</td><td class="num">1</td><td class="num">4</td><td><span class="pill pill-good">us</span></td></tr>
+          <tr><td class="kw">academy categories</td><td class="dim">explainer</td><td class="num">2</td><td class="num">3</td><td><span class="pill pill-good">us</span></td></tr>
+          <tr><td class="kw">cat 3 academies</td><td class="dim">mixed</td><td class="num">2</td><td class="num">1</td><td><span class="pill pill-warn">them, just</span></td></tr>
+          <tr><td class="kw">cat 4 academy</td><td class="dim">list</td><td class="num">5</td><td class="num">2</td><td><span class="pill pill-crit">them</span></td></tr>
+          <tr><td class="kw">category 1 academies</td><td class="dim">list</td><td class="num">6</td><td class="num">2</td><td><span class="pill pill-crit">them</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="measure" style="margin-top:18px;">So your instinct was right on both counts. We are not being beaten across the cluster, and the page is performing: <strong>253 clicks in the last 28 days</strong>, average position improving from 6.3 to 5.7.</p>
+
+    <h3>The list-intent gap is real, but not what I first said</h3>
+    <div class="verdict" style="border-left-color: var(--crit);">
+      <p class="verdict-label">Second correction</p>
+      <p>I wrote that our page "names zero clubs". That is true of <code>academy-categories-explained</code>, but false about the site. <code>premier-league-development-centres-list</code> <strong>names 16 clubs and labels them "Category 1 academy" 18 times</strong>. I grepped one file and generalised from it.</p>
+    </div>
+
+    <p class="measure">Checking what Google actually does with that page changes the recommendation rather than cancelling it. Over 90 days it received <strong>42 impressions, 33 queries and 1 click</strong>. Google does not connect it to academy-category queries at all: it is titled and framed as a development-centre guide, so the club names on it are invisible to the intent they could serve.</p>
+
+    <p class="measure">Meanwhile every single list-intent query Google shows us for goes to the explainer page, and we already rank well on them:</p>
+
+    <div class="scroll">
+      <table>
+        <caption>List-intent queries, 90 days, all served by academy-categories-explained</caption>
+        <thead>
+          <tr><th scope="col">Query</th><th scope="col" class="num">Position</th><th scope="col" class="num">Impressions</th><th scope="col" class="num">Clicks</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kw">category 1 academy list</td><td class="num">1.0</td><td class="num">11</td><td class="num">0</td></tr>
+          <tr><td class="kw">category 2 football academies list</td><td class="num">1.0</td><td class="num">9</td><td class="num">0</td></tr>
+          <tr><td class="kw">cat 1 academies list</td><td class="num">1.0</td><td class="num">3</td><td class="num">0</td></tr>
+          <tr><td class="kw">list of cat 1 academies in england</td><td class="num">1.0</td><td class="num">4</td><td class="num">0</td></tr>
+          <tr><td class="kw">cat 4 academies list</td><td class="num">1.6</td><td class="num">5</td><td class="num">0</td></tr>
+          <tr><td class="kw">which clubs have category 1 academy</td><td class="num">1.6</td><td class="num">5</td><td class="num">0</td></tr>
+          <tr><td class="kw">cat 1 academy list</td><td class="num">2.0</td><td class="num">12</td><td class="num">0</td></tr>
+          <tr><td class="kw">category 4 academy list</td><td class="num">3.5</td><td class="num">6</td><td class="num">0</td></tr>
+          <tr><td class="kw">cat 2 academies list</td><td class="num">4.5</td><td class="num">4</td><td class="num">0</td></tr>
+          <tr><td class="kw">cat 3 academies list</td><td class="num">11.7</td><td class="num">14</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="notes">
+      <li><strong>We are already #1 or #2 for most of these.</strong> The ranking problem I described does not exist. Junior Grassroots Hub outranks us on the broad variants, not on the explicit "list" phrasings.</li>
+      <li><strong>The whole cluster is about 120 impressions and 1 click in 90 days.</strong> It is genuinely small. DataForSEO puts "cat 3 academies list" at 260 searches a month; we see 14 impressions in a quarter. Do not size this as a big opportunity.</li>
+      <li><strong>The failure is conversion, not position.</strong> Roughly 1 click from 120 impressions at an average position better than 4. People see us, and go elsewhere, because the page does not deliver what the query asked for.</li>
+    </ul>
+
+    <h3>What that argues for</h3>
+    <p class="measure">Not four new category pages. That was my earlier advice and the data does not support it: we would be splitting authority away from a page that already ranks #1 for those queries, and building for a cluster worth ~120 impressions a quarter.</p>
+    <p class="measure">The cheaper and lower-risk move is to <strong>add the club lists to the page Google already ranks</strong>. It is purely additive, it does not touch the URL or the existing headings, and it serves an intent we are demonstrably already being shown for and failing to convert. The raw material partly exists on <code>premier-league-development-centres-list</code>, though that covers only Premier League clubs, and Category 1 also includes EFL academies such as Southampton, Norwich, Stoke, Sunderland and Nottingham Forest.</p>
+    <p class="measure dim">Caveat worth stating plainly: this page is our single biggest click earner at 253 clicks in 28 days and is climbing. Any edit is a live-traffic edit, so it should be one additive change, its own commit, and then left alone on the 10 to 14 day watch.</p>
+  </section>
+
+  <section id="devcentres">
+    <h2>Development centres are a different question</h2>
+    <p class="measure">You asked whether the academy traffic is really development-centre traffic. Partly, and it splits cleanly in two.</p>
+    <ul class="notes">
+      <li><strong>Club-specific development centre queries are ours.</strong> "chelsea development centre": we are <strong>#3 organic and cited #4 in the AI Overview</strong>. "arsenal development centre": <strong>#5 organic, cited #4 in the AI Overview</strong>. Junior Grassroots Hub does not appear in the top 20 for either. They are not competing with us here at all.</li>
+      <li><strong>Generic development centre queries are nobody's, and not ours.</strong> "football development centres" is owned end to end by club community trusts &mdash; Brentford, Fulham, Ipswich, Peterborough, Arsenal, Birmingham. We are not in the top 20. The AI Overview on that query cites <em>no sources at all</em>.</li>
+    </ul>
+    <p class="measure">Those unattributed AI Overviews came up repeatedly: "football development centres", "development centre football", "football academy categories explained" and "academies near me" all generate an answer box citing nothing. There is no citation to win on those queries, by anyone.</p>
+  </section>
+
+  <section id="headroom">
+    <h2>Is Category 3 the opportunity? No</h2>
+    <p class="measure">The reasoning was: we sit at 2.0 for "cat 1 academy list" and 11.7 for "cat 3 academies list", so pushing Category 3 up should multiply its impressions. Four things in the data say otherwise.</p>
+
+    <ul class="notes">
+      <li><strong>There is no Category 3 weakness.</strong> Grouping every category query by the number it names, impression-weighted positions are <strong>7.5 for Cat 1, 7.8 for Cat 2, 8.5 for Cat 3 and 6.2 for Cat 4</strong>. Flat. Cat 4 is our strongest, not Cat 1.</li>
+      <li><strong>The impression logic runs the other way.</strong> "cat 3 academies list" took <strong>14 impressions at position 11.7</strong>; "cat 1 academy list" took <strong>12 at position 1.0</strong>. More impressions from the worse position. Those two rows were long-tail noise, not a pattern.</li>
+      <li><strong>Cat 3 already out-earns Cat 2 and Cat 4.</strong> 345 impressions over 90 days against 197 and 204.</li>
+      <li><strong>One page ranks for all of it.</strong> <code>academy-categories-explained</code> serves every category query, so there is no separate Cat 3 page to improve. It is the same lever whichever category you aim at.</li>
+    </ul>
+
+    <div class="verdict" style="border-left-color: var(--good);">
+      <p class="verdict-label">And it is fixing itself</p>
+      <p>Across the whole category cluster, comparing the last 28 days against the 28 before: weighted position <strong>9.43 to 6.89</strong>, impressions <strong>494 to 906</strong>, clicks <strong>8 to 19</strong>, CTR <strong>1.62% to 2.10%</strong>. Every Cat 3 query improved by 2.3 to 3.9 places in a single month, unaided.</p>
+      <p>This is the case the change guardrails exist for. Editing a page mid-climb makes the climb unreadable, and if the metric then dips you cannot tell whether it was you. <strong>Leave it and re-measure in two to three weeks.</strong></p>
+    </div>
+
+    <h3>Where the headroom actually is, ranked</h3>
+    <p class="measure">Every query we received in the last 28 days, grouped into clusters and ranked by clicks left on the table. The academy cluster comes <strong>seventh</strong>.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Clusters by estimated clicks available, 28 days</caption>
+        <thead>
+          <tr><th scope="col">Cluster</th><th scope="col" class="num">Impressions</th><th scope="col" class="num">Clicks</th><th scope="col" class="num">CTR</th><th scope="col" class="num">Position</th><th scope="col">Convertible?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>JPL / Junior Premier League</td><td class="num">5,998</td><td class="num">30</td><td class="num">0.50%</td><td class="num">7.3</td><td><span class="pill pill-crit">no, navigational</span></td></tr>
+          <tr><td>Grassroots football (generic)</td><td class="num">3,223</td><td class="num">11</td><td class="num">0.34%</td><td class="num">9.5</td><td><span class="pill pill-crit">no, institutional</span></td></tr>
+          <tr><td>Football / ball sizes</td><td class="num">3,322</td><td class="num">4</td><td class="num">0.12%</td><td class="num">10.6</td><td><span class="pill pill-crit">no, AI Overview</span></td></tr>
+          <tr><td>Shin pads</td><td class="num">2,647</td><td class="num">47</td><td class="num">1.78%</td><td class="num">8.9</td><td><span class="pill pill-good">yes</span></td></tr>
+          <tr><td>Veo / cameras</td><td class="num">2,261</td><td class="num">22</td><td class="num">0.97%</td><td class="num">7.8</td><td><span class="pill pill-warn">partly</span></td></tr>
+          <tr><td>Wide fit boots</td><td class="num">1,536</td><td class="num">7</td><td class="num">0.46%</td><td class="num">13.2</td><td><span class="pill pill-good">yes, page 2</span></td></tr>
+          <tr><td>Academy categories</td><td class="num">906</td><td class="num">19</td><td class="num">2.10%</td><td class="num">6.9</td><td><span class="pill pill-good">already best</span></td></tr>
+          <tr><td>Development centres</td><td class="num">530</td><td class="num">20</td><td class="num">3.77%</td><td class="num">8.7</td><td><span class="pill pill-good">already best</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="measure" style="margin-top:18px;">The academy cluster has the <strong>second-best click-through rate on the site</strong>, behind only development centres. It is not the underperformer.</p>
+
+    <h3>Why the biggest numbers are not opportunities</h3>
+    <p class="measure">I checked the live SERPs before believing the headroom estimate, and two of the three largest clusters are unwinnable for structural reasons a title change cannot touch.</p>
+    <ul class="notes">
+      <li><strong>JPL is a navigational query, and we are on the wrong side of it.</strong> The "jpl league" results are: the official <code>juniorpremierleague.com</code> at #1, then Facebook, Instagram, JPL Warriors, and FA Full-Time fixtures. We are #6 with an explainer. There is <em>no</em> AI Overview, so nothing is stealing the click &mdash; people simply want the league's own site. 2,243 impressions and 6 clicks on that one query is intent mismatch, not a CTR problem. This is exactly what Junior Grassroots Hub wins at, seen from the losing side.</li>
+      <li><strong>Ball sizes is AI Overview absorption.</strong> On "what size football for 10 year old" we are #7 organic <em>and cited as source #5 in the AI Overview</em>. We get the citation and not the click. 0.12% CTR across 3,322 impressions is what that looks like.</li>
+      <li><strong>Generic grassroots is institutional.</strong> The FA, England Football, UEFA and the Football Foundation hold that SERP. We are cited #5 in its AI Overview but outside the organic top 10.</li>
+    </ul>
+
+    <h3>What that leaves worth doing</h3>
+    <p class="measure">Checked against the change log and the live SERPs, both gear opportunities turn out to be watch items rather than targets, and one of them contains a live bug worth more than either lever.</p>
+
+    <div class="verdict" style="border-left-color: var(--crit);">
+      <p class="verdict-label">Live bug: the strongest recommendation on the boots page links nowhere</p>
+      <p>The wide-feet boots guide names <strong>New Balance Kids' 442 v2 Academy Jnr</strong> as its first and best pick, on the grounds that it is "sold in a genuine Wide (W) width, not just a 'runs wider' reputation like most of the boots on this page". Its link is <code>#affiliate-link-pending</code>, a dead in-page anchor. <strong>Confirmed live in the production HTML.</strong></p>
+      <p>It dates from the 24 August draft (<code>09ebdfa</code>, "placeholder affiliate links"); today's <code>c08d770</code> filled in the Nike and adidas links and missed this one. So for roughly three weeks the page's own strongest pick, on a commercial query, has sent parents nowhere. It is the only such placeholder left in <code>content/</code>.</p>
+      <p>This is monetisation, not a ranking lever, so it is safe to fix inside a watch window without making anything unattributable.</p>
+    </div>
+
+    <h3>Shin pads: watch, and the pre-registered lever now looks wrong</h3>
+    <ul class="notes">
+      <li><strong>Four commits in three days</strong> &mdash; product picks (<code>e36c213</code>), Nike size chart (<code>06d190c</code>), at-a-glance pick table (<code>b30ab29</code>), table rework (<code>dcc2576</code>). Watch until roughly 25 September.</li>
+      <li><strong>It is page one across the cluster, not just one query.</strong> Positions 7.0 to 8.5 on "best shin pads for kids", "best kids shin pads", "best shin pads for kids football", "best shin guards for kids", "best kids shin pads uk", "best football shin pads for kids" and "best shin pads for 10 year old", and 4.6 on "best shin pads for 6 year old".</li>
+      <li><strong>The change log pre-registered the next lever as fixing the generic "best shin pads" title mismatch. Today's SERP argues against pulling it.</strong> We are already <strong>#4 live on "best shin pads" with no AI Overview at all</strong>, and that traffic is adult intent. Re-titling to capture it would make the page worse for the parents who actually convert: 3.13% CTR on "best shin pads for kids" against near zero on the generic term. Better to leave the title kid-specific and accept those impressions do not convert.</li>
+    </ul>
+
+    <h3>Boots: half the headroom I quoted is the JPL trap again</h3>
+    <p class="measure">Correcting my own number. The boots page's queries split into two groups that need opposite treatment:</p>
+    <div class="scroll">
+      <table>
+        <caption>Wide-feet boot queries, 90 days</caption>
+        <thead>
+          <tr><th scope="col">Group</th><th scope="col" class="num">Impressions</th><th scope="col" class="num">Position</th><th scope="col">Live SERP is</th><th scope="col">Chase?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Kids-qualified <span class="dim">("wide fit football boots kids", "wide football boots for kids"&hellip;)</span></td><td class="num">~946</td><td class="num">~10</td><td>parent-facing guides, we are cited #5 in the AI Overview</td><td><span class="pill pill-good">yes</span></td></tr>
+          <tr><td>Unqualified <span class="dim">("wide fit football boots", "football boots for wide feet"&hellip;)</span></td><td class="num">~834</td><td class="num">~21</td><td>New Balance men's, Skechers men's, widefitshoes.co.uk men's</td><td><span class="pill pill-crit">no, adult intent</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measure" style="margin-top:16px;">So the real prize is about <strong>946 impressions, not the 1,536 I quoted</strong>. We are not in the top 20 for either unqualified term, and that is correct behaviour for a kids page.</p>
+    <p class="measure">On the kids cluster the two pages beating us share a shape: <code>footballboots.co.uk</code> with "Best Football Boots for Wide Feet UK | Tested Fit Guide 2026" (#3 on the kids query, #4 on both adult ones) and <code>juniorstriker.com</code> with "Wide Fit Kids' Football Boots &mdash; Buying Guide" (#4, and AI Overview source #3). Both are framed as tested buying guides carrying a freshness signal.</p>
+    <p class="measure">And <strong>New Balance is the #1 organic result on all three wide-feet queries.</strong> Our page says New Balance runs wider than Nike or adidas, and our single New Balance recommendation is the dead link above. Fixing that link is therefore most of the lever as well as the revenue fix.</p>
+
+    <h3>Order I would do them in</h3>
+    <ul class="notes">
+      <li><strong>Now:</strong> replace <code>#affiliate-link-pending</code> with a real tagged link for the New Balance 442 v2. Its own commit. Needs the Amazon URL.</li>
+      <li><strong>Now:</strong> nothing else. Both gear pages and the academy page are inside watch windows and all three are climbing unaided.</li>
+      <li><strong>After ~25 September:</strong> re-measure. On boots, the lever is broadening the named-pick list on the kids cluster. On shin pads, my recommendation is to skip the pre-registered title change for the reason above. On academy categories, the additive club lists if the climb has stalled above position 4.</li>
+    </ul>
+  </section>
+
+  <section id="ai">
+    <h2>AI mentions</h2>
+    <p class="measure">Two different surfaces, measured separately, because they do not move together: Google's AI Overviews, and what ChatGPT says when a parent asks it a question.</p>
+
+    <h3>Google AI Overviews</h3>
+    <div class="verdict" style="border-left-color: var(--good);">
+      <p class="verdict-label">Correction, and it is in our favour</p>
+      <p>My first pass tested only two academy queries, and both happened to be the list-intent ones we lose. Widening it to 15 queries reverses the finding. Across those AI Overviews, <strong>footballparent.co.uk is the single most-cited domain</strong> &mdash; 9 citations, ahead of Junior Grassroots Hub's 6, and ahead of the EFL, the PFSA and FourFourTwo.</p>
+    </div>
+
+    <figure>
+      <p class="chart-title">Citations across 15 AI Overviews checked</p>
+      <div class="bars">
+        <div class="bar-row" title="footballparent.co.uk — 9 AI Overview citations">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-us);"></span><code>footballparent.co.uk</code></span>
+            <span class="bar-val">9</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%; background: var(--s-us);"></div></div>
+        </div>
+        <div class="bar-row" title="juniorgrassrootshub.com — 6 AI Overview citations">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-jgh);"></span><code>juniorgrassrootshub.com</code></span>
+            <span class="bar-val">6</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:66.7%; background: var(--s-jgh);"></div></div>
+        </div>
+        <div class="bar-row" title="pbsfootball.com — 5 AI Overview citations">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-other);"></span><code>pbsfootball.com</code></span>
+            <span class="bar-val">5</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:55.6%; background: var(--s-other);"></div></div>
+        </div>
+        <div class="bar-row" title="thepfsa.co.uk — 4 AI Overview citations">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-other);"></span><code>thepfsa.co.uk</code></span>
+            <span class="bar-val">4</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:44.4%; background: var(--s-other);"></div></div>
+        </div>
+        <div class="bar-row" title="efl.com — 4 AI Overview citations">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-other);"></span><code>efl.com</code></span>
+            <span class="bar-val">4</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:44.4%; background: var(--s-other);"></div></div>
+        </div>
+        <div class="bar-row" title="fourfourtwo.com — 3 AI Overview citations">
+          <div class="bar-head">
+            <span class="bar-label"><span class="swatch" style="--tile-hue: var(--s-other);"></span><code>fourfourtwo.com</code></span>
+            <span class="bar-val">3</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:33.3%; background: var(--s-other);"></div></div>
+        </div>
+      </div>
+      <figcaption>Academy category, development centre and shin pad queries, live UK desktop SERPs, 11 September 2026. YouTube (5) and Google Shopping (4) excluded as they are not editorial sources.</figcaption>
+    </figure>
+
+    <p class="measure" style="margin-top:24px;">Where we are cited, we are cited high: <strong>source #1 of 7</strong> on "academy categories", <strong>#2 of 11</strong> on "football academy categories", <strong>#2 of 6</strong> on "cat 3 academies", <strong>#1 of 5</strong> on "best shin pads for kids football".</p>
+
+    <p class="measure">Separately, <strong>their traffic-driving pages are not exposed to AI Overviews at all</strong>. Not one of their top five league queries triggers one. Google does not generate an answer box for a navigational lookup like "tandridge league", so the 88% of their traffic that is directory lookups is insulated from AI in a way our informational content is not.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>AI Overview citations, live SERP check</caption>
+        <thead>
+          <tr><th scope="col">Query</th><th scope="col">AI Overview</th><th scope="col">Junior Grassroots Hub</th><th scope="col">Us</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kw">tandridge league</td><td><span class="pill pill-none">none</span></td><td class="dim">&mdash;</td><td class="dim">&mdash;</td></tr>
+          <tr><td class="kw">central warwickshire youth football league</td><td><span class="pill pill-none">none</span></td><td class="dim">&mdash;</td><td class="dim">&mdash;</td></tr>
+          <tr><td class="kw">echo junior league</td><td><span class="pill pill-none">none</span></td><td class="dim">&mdash;</td><td class="dim">&mdash;</td></tr>
+          <tr><td class="kw">avon youth league</td><td><span class="pill pill-none">none</span></td><td class="dim">&mdash;</td><td class="dim">&mdash;</td></tr>
+          <tr><td class="kw">warrington junior football league</td><td><span class="pill pill-none">none</span></td><td class="dim">&mdash;</td><td class="dim">&mdash;</td></tr>
+          <tr><td class="kw">category 3 academies list</td><td><span class="pill pill-warn">present</span></td><td><span class="pill pill-good">cited #1</span></td><td class="dim">not cited</td></tr>
+          <tr><td class="kw">cat 1 academy</td><td><span class="pill pill-warn">present</span></td><td><span class="pill pill-good">cited #2</span></td><td class="dim">not cited</td></tr>
+          <tr><td class="kw">academies near me</td><td><span class="pill pill-warn">present</span></td><td class="dim">no sources</td><td class="dim">no sources</td></tr>
+          <tr><td class="kw">what is grassroots football</td><td><span class="pill pill-warn">present</span></td><td class="dim">not cited</td><td><span class="pill pill-good">cited #4</span></td></tr>
+          <tr><td class="kw">how to join a grassroots football team</td><td><span class="pill pill-warn">present</span></td><td class="dim">not cited</td><td class="dim">not cited</td></tr>
+          <tr><td class="kw">best shin pads for kids</td><td><span class="pill pill-warn">present</span></td><td class="dim">not cited</td><td class="dim">not cited</td></tr>
+          <tr><td class="kw">football academy categories explained</td><td><span class="pill pill-warn">present</span></td><td class="dim">no sources</td><td class="dim">no sources</td></tr>
+          <tr><td class="kw">football team management app</td><td><span class="pill pill-none">none</span></td><td class="dim">&mdash;</td><td class="dim">&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Shin pads: we are there, on one of the two queries</h3>
+    <p class="measure">You were right to expect a citation, and there is one. The gap is narrower and more specific than "AI ignores us".</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Shin pad queries, live SERP</caption>
+        <thead>
+          <tr><th scope="col">Query</th><th scope="col">AI Overview</th><th scope="col" class="num">Our organic</th><th scope="col">Our citation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kw">best shin pads for kids football</td><td><span class="pill pill-warn">present</span></td><td class="num">5</td><td><span class="pill pill-good">cited #1 of 5</span></td></tr>
+          <tr><td class="kw">best shin pads for kids</td><td><span class="pill pill-warn">present</span></td><td class="num">13</td><td><span class="pill pill-crit">not cited</span></td></tr>
+          <tr><td class="kw">best shin pads for 6 year old</td><td><span class="pill pill-warn">present</span></td><td class="num">6</td><td><span class="pill pill-crit">not cited</span></td></tr>
+          <tr><td class="kw">best kids shin pads</td><td><span class="pill pill-none">none</span></td><td class="num">5</td><td class="dim">n/a</td></tr>
+          <tr><td class="kw">best shin guards for kids</td><td><span class="pill pill-none">none</span></td><td class="num">7</td><td class="dim">n/a</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="notes">
+      <li><strong>On the one shin pad query we are cited, we are cited first</strong>, ahead of FourFourTwo.</li>
+      <li><strong>On "best shin pads for kids" we sit at #13.</strong> That is the biggest of the set at 748 impressions in 90 days, and the AI Overview drew every editorial source from the organic top five. Thirteenth was never going to be picked.</li>
+      <li><strong>Two of the five have no AI Overview at all.</strong> Google has not decided this whole category is an answer-box topic.</li>
+      <li><strong>Search Console says the page is climbing fast</strong>, from average position 13 in July to 7.3 in September, 112 clicks in the last 28 days against 23 in the prior 28.</li>
+    </ul>
+
+    <h3>ChatGPT</h3>
+    <p class="measure">Eight parent-style questions put through GPT-5.5 with web search on, which is close to what a parent typing into ChatGPT today would get.</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Mentions across 8 parent prompts</caption>
+        <thead>
+          <tr><th scope="col">Site</th><th scope="col" class="num">Named in answer</th><th scope="col" class="num">Cited as source</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="kw">juniorgrassrootshub.com</td><td class="num">2 / 8</td><td class="num">2 / 8</td></tr>
+          <tr><td class="kw">footballparent.co.uk</td><td class="num">0 / 8</td><td class="num">0 / 8</td></tr>
+          <tr><td class="kw">teamstats.net</td><td class="num">0 / 8</td><td class="num">0 / 8</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="measure" style="margin-top:18px;">The two prompts they appeared on, and how they were described:</p>
+    <ul class="notes">
+      <li><strong>"What are the best websites for UK grassroots junior football parents?"</strong> &mdash; listed as <em>"Junior Grassroots Hub &mdash; best for plain-English safeguarding advice for parents."</em> Notably that is not what their traffic says they are for.</li>
+      <li><strong>"Where can I find a directory of junior football leagues and clubs in England?"</strong> &mdash; <em>"A directory of junior and youth football leagues across the UK, including England, with clubs listed under many leagues."</em> That one is accurate.</li>
+    </ul>
+    <p class="measure">On the other six, including academy trials, finding a club for an 8-year-old, and ball and shin pad sizing, the assistant cited England Football, The FA, Premier League and the county FAs. Governing bodies dominate this answer space, and neither of us is in it.</p>
+
+    <h3>Why the lookalike gets picked and we do not</h3>
+    <p class="measure">Asked "which UK websites explain football academy categories 1 to 4?", ChatGPT cited <code>thefootballparent.co.uk</code> twice, as two separate recommended sources. It has <strong>40 ranked keywords and about 52 estimated clicks a month</strong> against our 157 and 355. I read both pages. It is not that theirs is better:</p>
+
+    <div class="scroll">
+      <table>
+        <caption>Their academy page against ours</caption>
+        <thead>
+          <tr><th scope="col"></th><th scope="col">thefootballparent.co.uk</th><th scope="col">footballparent.co.uk (us)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Body length</td><td>~600&ndash;700 words</td><td>2,378 words</td></tr>
+          <tr><td>Named author</td><td><span class="pill pill-crit">none</span></td><td><span class="pill pill-good">yes</span></td></tr>
+          <tr><td>FAQ block</td><td><span class="pill pill-crit">none</span></td><td><span class="pill pill-good">7 questions + FAQPage schema</span></td></tr>
+          <tr><td>Sources cited</td><td><span class="pill pill-crit">none</span></td><td><span class="pill pill-good">yes</span></td></tr>
+          <tr><td>Comparison table</td><td><span class="pill pill-crit">none</span></td><td><span class="pill pill-good">yes</span></td></tr>
+          <tr><td>Named club lists</td><td><span class="pill pill-good">separate page per category</span></td><td><span class="pill pill-crit">zero clubs named</span></td></tr>
+          <tr><td>URL structure</td><td>explainer + <code>/category-1-football-clubs</code> + <code>/category-2-football-clubs</code></td><td>one page for all four</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="measure" style="margin-top:18px;">They lose on every quality signal and win on the two that mattered here. ChatGPT quoted <em>both</em> of their URLs, one as the explainer and one as the club list, because the site gives it two separate things to point at. The same structural pattern as Junior Grassroots Hub.</p>
+    <p class="measure">The name is a real factor too. When an assistant is assembling "websites for football parents", a site literally called The Football Parent is an easy pick, and we are competing for our own name against it.</p>
+  </section>
+
+  <section id="howto">
+    <h2>How to actually get picked up by AI</h2>
+    <p class="measure">The two surfaces reward completely different things, and conflating them is why "AI optimisation" advice is usually useless. What the data here supports:</p>
+
+    <h3>For Google AI Overviews: rank top five, nothing else moves it</h3>
+    <p class="measure">Across all 15 checks, every editorial source in every AI Overview came from the organic top eight, and almost all from the top five. We are cited on every academy and development-centre query where we rank top five, and on none where we do not. "best shin pads for kids" at #13 is the clearest case.</p>
+    <ul class="notes">
+      <li><strong>There is no separate AI lever here.</strong> Ranking work is the AI work. The queries worth targeting are the ones where we are #6&ndash;13 with an AI Overview present, because moving up a few places flips the citation on.</li>
+      <li><strong>Do not chase unattributed answer boxes.</strong> Four of the queries generate an AI Overview citing nobody. There is no prize on those.</li>
+    </ul>
+
+    <h3>For ChatGPT: rank is close to irrelevant, mentions are everything</h3>
+    <p class="measure">This is the part worth internalising. A 40-keyword site got recommended twice for a topic we rank #1 on. Assistant answers are assembled from what the open web <em>says about you</em>, not from where you sit in Google.</p>
+    <ul class="notes">
+      <li><strong>Get named on the pages assistants actually retrieve.</strong> In our tests those were: governing bodies (England Football, The FA, county FAs), established magazines (FourFourTwo), Reddit threads, and roundup or directory pages of the "best websites for football parents" kind. Being <em>listed on</em> those pages is the mechanism, not outranking them.</li>
+      <li><strong>Concretely, that means:</strong> getting into "best UK football parent websites" roundups; answering in the Reddit and Facebook grassroots parenting threads that appeared in these SERPs; a county FA or league site linking to a guide; and being listed in directories. A Junior Grassroots Hub partner listing is literally one of these pages, which is the strongest argument in its favour.</li>
+      <li><strong>Make the brand name unambiguous in your own copy.</strong> Every page should state "Football Parent (footballparent.co.uk)" somewhere an extractor will read it, so an assistant summarising us has the domain attached to the name and cannot merge us with the lookalike.</li>
+      <li><strong>Give assistants a thing to point at per question.</strong> Both sites that beat us have one URL per narrow intent. That helps in ChatGPT for the same reason it helps in Google: a page whose whole subject is the question is easier to cite than a section inside a longer page.</li>
+    </ul>
+
+    <h3>The one content change the data actually supports</h3>
+    <p class="measure">Add named club lists per category <em>to the existing explainer</em>, rather than as new pages. See the corrected reasoning above: we already rank #1 for the list queries and convert almost none of them, so this is a conversion fix on a page that is already winning the ranking, not a new-page play.</p>
+    <p class="measure">It is also the only gap that shows up on all three surfaces at once: the list queries we rank for and do not convert, the AI Overviews on those same queries where Junior Grassroots Hub is cited and we are not, and the ChatGPT citations that went to a 40-keyword site with a club list.</p>
+    <p class="measure dim">Sized honestly, the direct search prize is small, about 120 impressions a quarter. The reason to do it anyway is the AI Overview citation on the list queries and the credibility of being the page that actually answers, not the traffic.</p>
+    <p class="measure"><strong>But not yet.</strong> The cluster is mid-climb, +2.5 positions in a month. See the headroom section: this edit should wait two to three weeks so the climb stays readable, and it ranks seventh on the site's opportunity list regardless.</p>
+  </section>
+
+  <section id="decision">
+    <h2>Reading this as an advertising decision</h2>
+
+    <h3>What is genuinely good about them</h3>
+    <ul class="notes">
+      <li><strong>The audience is exactly ours.</strong> UK grassroots junior football parents and coaches, no overlap wasted on adult Sunday league the way TeamStats has.</li>
+      <li><strong>The link is followed, today.</strong> I pulled the raw HTML of their Precision Pass partner page: the outbound link is <code>rel="noopener noreferrer"</code>, with no <code>nofollow</code> and no <code>sponsored</code>. Their profile is 65 referring domains at spam score 14, against our 10 domains at spam score 56.</li>
+      <li><strong>A partner listing is the kind of page AI assistants retrieve.</strong> On the evidence above, that may be worth more than the link.</li>
+      <li><strong>They are growing.</strong> 6,569 keywords gained against 2,218 lost, and 17 first-place rankings.</li>
+      <li><strong>Entry price is low.</strong> £99 for three months. Small enough to treat as a test rather than a commitment.</li>
+    </ul>
+
+    <div class="verdict" style="border-left-color: var(--warn);">
+      <p class="verdict-label">The caveat on that followed link</p>
+      <p>An unmarked paid link is contrary to Google's own link-spam guidance, which says paid placements should carry <code>rel="sponsored"</code> or <code>nofollow</code>. Three consequences worth pricing in: Google's algorithms may already discount a site-wide pattern of paid partner links regardless of markup; Junior Grassroots Hub could add the attribute at any time, without telling you; and strictly speaking both sides are outside the guidelines.</p>
+      <p><strong>So do not buy this for the link equity.</strong> Buy it for the mention and the social reach, and treat the followed link as a bonus that may not last. That is the right way round even though the link is real today.</p>
+    </div>
+
+    <h3>What to be sceptical about</h3>
+    <ul class="notes">
+      <li><strong>"300K+ parents, coaches and club volunteers" is a reach claim, not a traffic claim.</strong> It leans on 115K Facebook and 57K Instagram. Their search traffic is around 695K impressions a month, and impressions are not people.</li>
+      <li><strong>A partner listing sits on the 2% of the site nobody arrives at.</strong> <code>/partners</code> takes 0.2% of their search traffic. Search will not deliver anyone to your listing; only their internal linking and their social posts will.</li>
+      <li><strong>Their visitors are not in a browsing mood.</strong> Checking a league table is a ten-second, single-purpose visit. This is a poor environment for anything needing consideration, which is most of what we publish.</li>
+      <li><strong>They outrank us on the academy cluster and are cited by AI on it.</strong> Not a reason to avoid them, but be clear you would be paying a site that competes with us on one topic.</li>
+    </ul>
+
+    <h3>What I would ask them before paying</h3>
+    <ul class="notes">
+      <li>Can the placement go <strong>on league pages</strong> rather than a partner directory entry? That is where 75% of their traffic is. Central Warwickshire and Tandridge alone are roughly 4,700 estimated clicks a month.</li>
+      <li>Is the link <strong>followed</strong>, and does it survive if you stop paying? A <code>rel="sponsored"</code> link is honest and fine, but it changes the SEO value to roughly zero, which changes what the £99 buys.</li>
+      <li>What does a partner post to <strong>115K Facebook followers</strong> actually look like, and how many did the last few get? Social reach is the real product here, so ask for the last three partners' numbers.</li>
+      <li>Can you have <strong>referral numbers from an existing partner</strong>? They list Veo and XbotGo. Those are directly comparable advertisers.</li>
+    </ul>
+
+    <p class="measure" style="margin-top:26px;">The honest summary: they are a real site with a real audience about five times our size on impressions, their self-reported numbers survive a cross-check, and their link profile is cleaner than ours. But the search traffic in the pitch lands nowhere near where a partner listing sits, so it is not a traffic buy.</p>
+    <p class="measure">At £99 for three months it is cheap enough to test, and the strongest argument for it is the one that only emerged from the AI research: a partner listing is exactly the sort of third-party page assistants retrieve when a parent asks them which websites to trust. That is the gap we actually have. Ask the four questions above, and if the answers are reasonable, it is a defensible £99.</p>
+  </section>
+
+  <footer>
+    <p><strong>Provenance.</strong> Junior Grassroots Hub scale, ranked keywords and backlinks: DataForSEO Labs and Backlinks APIs, UK, 11 September 2026. Their impression and click figures: self-reported on their public <code>/partners</code> page, not independently measurable.<br>
+    footballparent.co.uk performance: our own Google Search Console, 12 August to 8 September 2026, against 15 July to 11 August 2026. Per-page query positions: 90-day Search Console history.<br>
+    Live positions and AI Overview citations: <code>serp/google/organic/live/advanced</code>, desktop, UK, depth 20, 11 September 2026. ChatGPT: GPT-5.5 with web search, 8 prompts.<br>
+    Partner link <code>rel</code> attribute: raw HTML of <code>/partners/precision-pass</code>, fetched 11 September 2026.<br>
+    Scripts: <code>scripts/seo/cli/jgh-advertising-research.ts</code>, <code>jgh-ai-mentions.ts</code>, <code>jgh-llm-mentions.ts</code>, <code>thefootballparent-scale-check.ts</code>, <code>ai-citation-deep-dive.ts</code>.</p>
+    <p><strong>Revised 11 September 2026</strong> after challenges to the first version. Three findings were overturned. The academy head-to-head: DataForSEO's positions for our site were stale, and Search Console plus live SERPs disagree with it. AI Overview visibility: the original two-query sample was unrepresentative, and across 15 queries we are the most-cited domain. The club-list gap: we do already name clubs with category labels, on <code>premier-league-development-centres-list</code>, and we already rank #1 for most list queries &mdash; the real problem is conversion, not position, which changed the recommendation from new pages to an additive edit.</p>
+    <p>Query-to-page mapping for the list-intent analysis: Search Console <code>query</code> &times; <code>page</code> dimensions, 11 June to 8 September 2026. Per-category grouping and the 28-day trend: Search Console <code>query</code> dimension, category number parsed from the query string. Cluster headroom estimate: all 3,874 queries from the last 28 days, scored against a generic position-to-CTR curve, so the figures rank opportunities against each other rather than predicting clicks. Intent checks on the JPL, ball-size and grassroots SERPs: live Google results, 11 September 2026.</p>
+    <p><strong>API spend across all research in this report: $1.26.</strong> DataForSEO calls are cached locally, so re-running any of the scripts is free.</p>
+  </footer>
+
+</div>

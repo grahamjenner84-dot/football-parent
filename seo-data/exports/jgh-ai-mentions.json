@@ -1,0 +1,236 @@
+{
+  "records": [
+    {
+      "group": "A. JGH's actual traffic drivers (league-name navigational)",
+      "keyword": "tandridge league",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    },
+    {
+      "group": "A. JGH's actual traffic drivers (league-name navigational)",
+      "keyword": "central warwickshire youth football league",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    },
+    {
+      "group": "A. JGH's actual traffic drivers (league-name navigational)",
+      "keyword": "echo junior league",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    },
+    {
+      "group": "A. JGH's actual traffic drivers (league-name navigational)",
+      "keyword": "avon youth league",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    },
+    {
+      "group": "A. JGH's actual traffic drivers (league-name navigational)",
+      "keyword": "warrington junior football league",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    },
+    {
+      "group": "B. JGH's academy directory pages (overlaps our academy content)",
+      "keyword": "academies near me",
+      "aiOverview": true,
+      "citedDomains": [],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 0
+    },
+    {
+      "group": "B. JGH's academy directory pages (overlaps our academy content)",
+      "keyword": "category 3 academies list",
+      "aiOverview": true,
+      "citedDomains": [
+        "juniorgrassrootshub.com",
+        "youtube.com",
+        "totalfootballanalysis.com",
+        "efl.com",
+        "thepfsa.co.uk",
+        "pbsfootball.com"
+      ],
+      "watchCited": {
+        "juniorgrassrootshub.com": 1,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 6
+    },
+    {
+      "group": "B. JGH's academy directory pages (overlaps our academy content)",
+      "keyword": "cat 1 academy",
+      "aiOverview": true,
+      "citedDomains": [
+        "jobsinfootball.com",
+        "juniorgrassrootshub.com",
+        "pbsfootball.com"
+      ],
+      "watchCited": {
+        "juniorgrassrootshub.com": 2,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 3
+    },
+    {
+      "group": "C. Parent-intent questions an AI would answer with a directory",
+      "keyword": "how to find a grassroots football team for my child",
+      "aiOverview": true,
+      "citedDomains": [],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 0
+    },
+    {
+      "group": "C. Parent-intent questions an AI would answer with a directory",
+      "keyword": "grassroots football leagues uk",
+      "aiOverview": true,
+      "citedDomains": [],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 0
+    },
+    {
+      "group": "C. Parent-intent questions an AI would answer with a directory",
+      "keyword": "how to join a grassroots football team",
+      "aiOverview": true,
+      "citedDomains": [
+        "englandfootball.com",
+        "mynextfootballteam.com",
+        "teamgrassroots.co.uk",
+        "kentfa.com",
+        "essexfa.com",
+        "alicantefootballacademy.com",
+        "ripeinsurance.co.uk"
+      ],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 7
+    },
+    {
+      "group": "D. Our own head terms (control)",
+      "keyword": "what is grassroots football",
+      "aiOverview": true,
+      "citedDomains": [
+        "uefa.com",
+        "thefa.com",
+        "ballrz.co.uk",
+        "footballparent.co.uk",
+        "sports-tours.co.uk"
+      ],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": 4
+      },
+      "refCount": 5
+    },
+    {
+      "group": "D. Our own head terms (control)",
+      "keyword": "best shin pads for kids",
+      "aiOverview": true,
+      "citedDomains": [
+        "fourfourtwo.com",
+        "soccer.com",
+        "forza.com",
+        "adidas.co.uk",
+        "youtube.com",
+        "google.com"
+      ],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 8
+    },
+    {
+      "group": "D. Our own head terms (control)",
+      "keyword": "football academy categories explained",
+      "aiOverview": true,
+      "citedDomains": [],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 0
+    },
+    {
+      "group": "D. Our own head terms (control)",
+      "keyword": "football development centres explained",
+      "aiOverview": true,
+      "citedDomains": [],
+      "watchCited": {
+        "juniorgrassrootshub.com": null,
+        "teamstats.net": null,
+        "footballparent.co.uk": null
+      },
+      "refCount": 0
+    },
+    {
+      "group": "E. TeamStats' product territory",
+      "keyword": "football team management app",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    },
+    {
+      "group": "E. TeamStats' product territory",
+      "keyword": "sunday league football stats app",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    },
+    {
+      "group": "E. TeamStats' product territory",
+      "keyword": "grassroots football app",
+      "aiOverview": false,
+      "citedDomains": [],
+      "watchCited": {}
+    }
+  ],
+  "probeResults": [
+    {
+      "label": "ai_optimization/chat_gpt/llm_responses/live",
+      "endpoint": "ai_optimization/chat_gpt/llm_responses/live",
+      "body": {
+        "user_prompt": "What are the best websites for UK grassroots junior football parents?",
+        "model_name": "gpt-4o-mini",
+        "web_search": true
+      },
+      "ok": true,
+      "detail": "HTTP 200 :: {\"version\":\"0.1.20260902\",\"status_code\":20000,\"status_message\":\"Ok.\",\"time\":\"3.5229 sec.\",\"cost\":0.000865,\"tasks_count\":1,\"tasks_error\":0,\"tasks\":[{\"id\":\"09111241-2155-0612-0000-f1c1337d0415\",\"status_code\":20000,\"status_message\":\"Ok.\",\"time\":\"3.5105 sec.\",\"cost\":0.000865,\"result_count\":1,\"path\":[\"v3\",\"ai_optimization\",\"chat_gpt\",\"llm_responses\",\"live\"],\"data\":{\"api\":\"ai_optimization\",\"function\":\"llm_responses\",\"se\":\"chat_gpt\",\"user_prompt\":\"What are the best websites for UK grassroots junior football parents?\",\"model_name\":\"gpt-4o-mini\",\"web_search\":true},\"result\":[{\"model_name\":\"gpt-4o-mini-2"
+    },
+    {
+      "label": "ai_optimization/ai_keyword_data/keywords_search_volume/live",
+      "endpoint": "ai_optimization/ai_keyword_data/keywords_search_volume/live",
+      "body": {
+        "keywords": [
+          "grassroots football leagues uk"
+        ]
+      },
+      "ok": true,
+      "detail": "HTTP 200 :: {\"version\":\"0.1.20260902\",\"status_code\":20000,\"status_message\":\"Ok.\",\"time\":\"0.0084 sec.\",\"cost\":0,\"tasks_count\":1,\"tasks_error\":1,\"tasks\":[{\"id\":\"09111241-2155-0619-0000-d004718aad27\",\"status_code\":40501,\"status_message\":\"Invalid Field: 'location_name'.\",\"time\":\"0 sec.\",\"cost\":0,\"result_count\":0,\"path\":[\"v3\",\"ai_optimization\",\"ai_keyword_data\",\"keywords_search_volume\",\"live\"],\"data\":{\"api\":\"ai_optimization\",\"function\":\"keywords_search_volume\",\"keywords\":[\"grassroots football leagues uk\"]},\"result\":null}]}"
+    }
+  ]
+}

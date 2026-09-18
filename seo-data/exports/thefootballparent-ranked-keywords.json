@@ -1,0 +1,308 @@
+{
+  "overview": {
+    "pos_1": 0,
+    "pos_2_3": 0,
+    "pos_4_10": 13,
+    "pos_11_20": 10,
+    "pos_21_30": 6,
+    "pos_31_40": 3,
+    "pos_41_50": 2,
+    "pos_51_60": 3,
+    "pos_61_70": 0,
+    "pos_71_80": 1,
+    "pos_81_90": 1,
+    "pos_91_100": 1,
+    "etv": 51.60900039970875,
+    "count": 40,
+    "estimated_paid_traffic_cost": 15.948280304670334,
+    "is_new": 38,
+    "is_up": 2,
+    "is_down": 0,
+    "is_lost": 12,
+    "clickstream_etv": null,
+    "clickstream_gender_distribution": null,
+    "clickstream_age_distribution": null
+  },
+  "rows": [
+    {
+      "keyword": "list of category 1 academies",
+      "volume": 70,
+      "position": 6,
+      "etv": 4.61299991607666,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "category 1 academy list",
+      "volume": 70,
+      "position": 9,
+      "etv": 2.365999937057495,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "cat 1 football academies",
+      "volume": 110,
+      "position": 10,
+      "etv": 2.815999984741211,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "category 1 academies list",
+      "volume": 70,
+      "position": 10,
+      "etv": 1.7920000553131104,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "category 2 football academies list",
+      "volume": 170,
+      "position": 10,
+      "etv": 4.3520002365112305,
+      "url": "https://www.thefootballparent.co.uk/category-2-football-clubs"
+    },
+    {
+      "keyword": "childrens football umbrella",
+      "volume": 70,
+      "position": 9,
+      "etv": 1.7920000553131104,
+      "url": "https://www.thefootballparent.co.uk/blank-5"
+    },
+    {
+      "keyword": "football umbrellas",
+      "volume": 260,
+      "position": 7,
+      "etv": 6.656000137329102,
+      "url": "https://www.thefootballparent.co.uk/blank-5"
+    },
+    {
+      "keyword": "yd8 form football",
+      "volume": 70,
+      "position": 9,
+      "etv": 1.7920000553131104,
+      "url": "https://www.thefootballparent.co.uk/academy-trial-process"
+    },
+    {
+      "keyword": "cat 1 football academy",
+      "volume": 110,
+      "position": 11,
+      "etv": 2.1670000553131104,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "category 1 academies",
+      "volume": 90,
+      "position": 11,
+      "etv": 1.7730000019073486,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "list of category 1 football academies",
+      "volume": 170,
+      "position": 10,
+      "etv": 3.3489999771118164,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "academy category 1",
+      "volume": 90,
+      "position": 13,
+      "etv": 1.350000023841858,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "category 1 academy",
+      "volume": 90,
+      "position": 13,
+      "etv": 1.350000023841858,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "category 2 academy list",
+      "volume": 50,
+      "position": 14,
+      "etv": 0.375,
+      "url": "https://www.thefootballparent.co.uk/category-2-football-clubs"
+    },
+    {
+      "keyword": "football parent",
+      "volume": 110,
+      "position": 17,
+      "etv": 0.824999988079071,
+      "url": "https://www.thefootballparent.co.uk/"
+    },
+    {
+      "keyword": "cat 2 academies list",
+      "volume": 70,
+      "position": 17,
+      "etv": 0.3919999897480011,
+      "url": "https://www.thefootballparent.co.uk/category-2-football-clubs"
+    },
+    {
+      "keyword": "category 3 football academy list",
+      "volume": 140,
+      "position": 17,
+      "etv": 0.7839999794960022,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "parents football",
+      "volume": 110,
+      "position": 20,
+      "etv": 0.6159999966621399,
+      "url": "https://www.thefootballparent.co.uk/"
+    },
+    {
+      "keyword": "category 2 academies list",
+      "volume": 50,
+      "position": 17,
+      "etv": 0.2549999952316284,
+      "url": "https://www.thefootballparent.co.uk/category-2-football-clubs"
+    },
+    {
+      "keyword": "category 3 football academies list",
+      "volume": 140,
+      "position": 19,
+      "etv": 0.7139999866485596,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "academy trials",
+      "volume": 880,
+      "position": 19,
+      "etv": 3.7839999198913574,
+      "url": "https://www.thefootballparent.co.uk/academy-trial-process"
+    },
+    {
+      "keyword": "cat 3 football academy list",
+      "volume": 140,
+      "position": 20,
+      "etv": 0.6019999980926514,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "cat 1 academy list",
+      "volume": 110,
+      "position": 23,
+      "etv": 0.296999990940094,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "cat 1 academy",
+      "volume": 260,
+      "position": 27,
+      "etv": 0.5979999899864197,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "grassroots clubs",
+      "volume": 90,
+      "position": 25,
+      "etv": 0.2070000022649765,
+      "url": "https://www.thefootballparent.co.uk/how-to-find-a-grassroots-football-club"
+    },
+    {
+      "keyword": "professional football size",
+      "volume": 70,
+      "position": 35,
+      "etv": 0.15399999916553497,
+      "url": "https://www.thefootballparent.co.uk/post/football-ball-size-guide-2026-27-the-complete-guide-to-choosing-the-right-football-for-every-age"
+    },
+    {
+      "keyword": "category 3 football academies",
+      "volume": 110,
+      "position": 31,
+      "etv": 0.23100000619888306,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "when does grassroots football season start 25/26",
+      "volume": 30,
+      "position": 32,
+      "etv": 0.06300000101327896,
+      "url": "https://www.thefootballparent.co.uk/futurefit"
+    },
+    {
+      "keyword": "cat 3 football academies",
+      "volume": 110,
+      "position": 36,
+      "etv": 0.23100000619888306,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "pathway football",
+      "volume": 110,
+      "position": 38,
+      "etv": 0.23100000619888306,
+      "url": "https://www.thefootballparent.co.uk/blank-18"
+    },
+    {
+      "keyword": "category 3 football academy",
+      "volume": 110,
+      "position": 38,
+      "etv": 0.23100000619888306,
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs"
+    },
+    {
+      "keyword": "new fa rules for grassroots football 26 27 pdf",
+      "volume": 110,
+      "position": 42,
+      "etv": 0.23100000619888306,
+      "url": "https://www.thefootballparent.co.uk/futurefit"
+    },
+    {
+      "keyword": "what size is a football",
+      "volume": 390,
+      "position": 55,
+      "etv": 0.8190000057220459,
+      "url": "https://www.thefootballparent.co.uk/post/football-ball-size-guide-2026-27-the-complete-guide-to-choosing-the-right-football-for-every-age"
+    },
+    {
+      "keyword": "what size is a normal football",
+      "volume": 480,
+      "position": 55,
+      "etv": 1.0080000162124634,
+      "url": "https://www.thefootballparent.co.uk/post/football-ball-size-guide-2026-27-the-complete-guide-to-choosing-the-right-football-for-every-age"
+    },
+    {
+      "keyword": "football academy trials",
+      "volume": 880,
+      "position": 62,
+      "etv": 1.8480000495910645,
+      "url": "https://www.thefootballparent.co.uk/post/how-football-academy-trials-work-a-parent-s-guide-to-the-process"
+    },
+    {
+      "keyword": "grassroots football meaning",
+      "volume": 70,
+      "position": 61,
+      "etv": 0.1469999998807907,
+      "url": "https://www.thefootballparent.co.uk/post/grassroots-football-explained-everything-parents-need-to-know"
+    },
+    {
+      "keyword": "development in football",
+      "volume": 140,
+      "position": 67,
+      "etv": 0.2939999997615814,
+      "url": "https://www.thefootballparent.co.uk/post/supporting-young-players-in-academy-football-development"
+    },
+    {
+      "keyword": "grassroots club",
+      "volume": 90,
+      "position": 91,
+      "etv": 0.1889999955892563,
+      "url": "https://www.thefootballparent.co.uk/how-to-find-a-grassroots-football-club"
+    },
+    {
+      "keyword": "parents player",
+      "volume": 40,
+      "position": 90,
+      "etv": 0.08399999886751175,
+      "url": "https://www.thefootballparent.co.uk/blog"
+    },
+    {
+      "keyword": "new fa rules for grassroots football 26/27 pdf",
+      "volume": 110,
+      "position": 102,
+      "etv": 0.23100000619888306,
+      "url": "https://www.thefootballparent.co.uk/futurefit"
+    }
+  ]
+}
