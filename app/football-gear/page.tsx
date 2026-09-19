@@ -36,6 +36,12 @@ export default function FootballGearPage() {
               "explains which football size is right for different age groups.",
           },
           {
+            title: "Best Football Goals for Kids",
+            href: "/football-gear/best-football-goals-for-kids",
+            description:
+              "covers goal sizing by age, anchoring safely and pop-up vs folding goals.",
+          },
+          {
             title: "AG vs FG Boots",
             href: "/football-gear/ag-vs-fg-boots",
             description:
@@ -79,6 +85,12 @@ export default function FootballGearPage() {
           href: "/football-gear/best-footballs-by-age",
           description:
             "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players.",
+        },
+        {
+          title: "Best Football Goals for Kids",
+          href: "/football-gear/best-football-goals-for-kids",
+          description:
+            "Goal sizes by age and format, pop-up vs folding goals, and how to anchor one safely in a garden.",
         },
         {
           title: "Best Football Boots for Wide Feet Kids",
