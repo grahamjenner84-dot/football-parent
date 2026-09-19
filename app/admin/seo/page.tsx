@@ -48,7 +48,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
   { id: "coachApp", label: "Coach App" },
-  { id: "affiliate", label: "Amazon clicks" },
+  { id: "affiliate", label: "Affiliate clicks" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
   { id: "compare", label: "Compare days" },
@@ -1423,7 +1423,7 @@ function Dashboard({
       : []
     : [];
 
-  // Amazon clicks for the chosen scope.
+  // Affiliate clicks for the chosen scope.
   const afDay =
     isWindow || !affiliateStats ? null : affiliateStats.byDay.find((d) => d.date === effective) ?? null;
   const afPrior =
@@ -1484,16 +1484,16 @@ function Dashboard({
         </div>
       )}
 
-      <h3 style={styles.affiliateHeading}>Amazon link clicks</h3>
+      <h3 style={styles.affiliateHeading}>Affiliate link clicks</h3>
       {!affiliateStats ? (
-        <p style={styles.muted}>Loading Amazon clicks...</p>
+        <p style={styles.muted}>Loading affiliate clicks...</p>
       ) : (
         <>
           <div style={styles.card}>
-            <DashboardStat label="Amazon clicks" current={afTotal} prior={afPriorTotal} />
+            <DashboardStat label="Affiliate clicks" current={afTotal} prior={afPriorTotal} />
           </div>
           {afProducts.length === 0 ? (
-            <p style={styles.muted}>No Amazon clicks in this window.</p>
+            <p style={styles.muted}>No affiliate clicks in this window.</p>
           ) : (
             afProducts.map((row) => (
               <div key={row.name} style={styles.card}>
@@ -1580,15 +1580,19 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
   return (
     <div style={styles.list}>
       <SectionNote label="What this measures, and what it doesn't">
-        Every click on a link to an Amazon domain, logged first-party from the
-        click itself rather than read back out of Associates reporting. That
-        is the point: Amazon reports per tracking id from the moment a click
-        reaches Amazon, so it cannot tell you which article the click came
-        from, and it shows nothing at all on a day with no orders. This can.
-        What it cannot see is the other side of the link: whether the click
-        became an order and what it earned. That number only exists in
-        Associates. Read the two together - this one for which page and which
-        product pull, Associates for what the traffic was worth.
+        Every click on a link to an affiliate destination (Amazon, QuickPlay
+        and any other affiliate programme in use on the site), logged
+        first-party from the click itself rather than read back out of each
+        merchant's own reporting. That is the point: Amazon Associates
+        reports per tracking id from the moment a click reaches Amazon, so it
+        cannot tell you which article the click came from, and it shows
+        nothing at all on a day with no orders - other direct programmes have
+        their own version of the same blind spot. This can. What it cannot
+        see is the other side of the link: whether the click became an order
+        and what it earned. That number only exists in each programme's own
+        reporting. Read the two together - this one for which page and which
+        product pull, the merchant's own dashboard for what the traffic was
+        worth.
         {stats.botClicks > 0 && (
           <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
         )}
