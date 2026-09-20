@@ -813,3 +813,12 @@ Also added a `profileHref`/`profileLabel` prop pair to the `ExpertQA` component 
 `npm run build` passes; spot-checked rendered HTML on all 8 touched pages to confirm the interview-article and Football DNA links render as real `<a>` tags, not literal markdown text. Content-status tracker rows updated for all 5 newly-edited articles (`--expert-quote-count 1`).
 
 Note while running the tracker `mark` command: Git Bash on this machine auto-converts a leading `/academy-pathway/...` style `--url` argument into a Windows filesystem path before it reaches the script, silently corrupting the row (caught and fixed for the standalone article publish above; prefix `MSYS_NO_PATHCONV=1` on the command to avoid it). A second, unrelated bad row from a prior session (`best-football-goals-for-kids`) was also spotted in the same table but not fixed, since it predates this session.
+
+## Filled the remaining Q9/Q10 gap: how-academy-football-works and understanding-academy-release
+
+Graham asked whether Q9-10 had an EEAT home yet - they did not. Added:
+
+- **Q9** (foundation-years focus) to `how-academy-football-works`, "Foundation Phase: Under-9 to Under-11" section. This article now carries two separate Paul Barry `<ExpertOpinion>` callouts in different sections (Q5 and Q9), which is intentional, not a duplicate-quote issue.
+- **Q10** (release) to `understanding-academy-release` itself, directly under the existing "release is a structural reality, not a personal verdict" note. This was the real fix: the article had been logged as answered via the new interview's cross-link only, not actually given its own embedded quote, which is why it still showed up as zero-voice in the tracker.
+
+Both link back to the interview and to Football DNA, same pattern as the other 5. `npm run build` passes; confirmed both quotes render in the built HTML. Tracker updated (`how-academy-football-works` now expert-quote-count 2, `understanding-academy-release` now 1).

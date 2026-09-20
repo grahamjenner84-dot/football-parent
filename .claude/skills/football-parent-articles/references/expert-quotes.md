@@ -1039,6 +1039,21 @@ for either to force one in; revisit if a future EEAT audit flags them
 specifically. `what-do-academy-coaches-look-for` already has its own Q1/Q2
 `<ExpertQA>` block from the earlier placement, unchanged here.
 
+Follow-up 2026-09-20 (later same day, Graham asked directly whether Q9/Q10
+had a home): they didn't yet - fixed.
+- Q9 (foundation-years focus) added to `how-academy-football-works`,
+  "Foundation Phase: Under-9 to Under-11" section - this article now
+  carries two separate Paul Barry `<ExpertOpinion>` callouts (Q5 in
+  "Academy Categories Explained" further down, Q9 here), which is fine
+  since they're in clearly distinct sections answering different
+  questions, not the same quote reused twice.
+- Q10 (release) added to `understanding-academy-release` itself, right
+  after the existing "release is a structural reality, not a personal
+  verdict" Football Parent note in "Academy Release Is the Norm, Not the
+  Exception" - this closes the standalone pending request logged above
+  for real (previously only cross-linked from the new interview, not
+  actually embedded here - that was the gap Graham caught).
+
 Also on 2026-09-20: added a `profileHref`/`profileLabel` prop pair to
 `ExpertQA` (`app/components/mdx/ExpertQA.tsx`) so the profile header can
 link out to the expert's own site - the existing `bio` prop is a plain
