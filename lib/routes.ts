@@ -24,6 +24,7 @@ export const routes = [
   '/parent-guides',
 
   // Academy Pathway
+  '/academy-pathway/academy-life-paul-barry-interview',
   '/academy-pathway/academy-categories-explained',
   '/academy-pathway/development-centres-vs-academies',
   '/academy-pathway/how-academy-football-works',

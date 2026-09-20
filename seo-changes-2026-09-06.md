@@ -782,3 +782,34 @@ Overall Risk Score 4/10 pre-fix (one real standard mis-citation, one factual dat
 **Same-session follow-up:** Graham felt 3 in-body internal links was still low against the 3-5 target. Added 2 more natural ones: `improve-football-decision-making` (in the "One Big Goal or Two Small Ones" section, alongside the small-sided-game/touches point) and `best-football-boots-for-kids` (in the Christmas gift section, "wider kit refresh" framing). Final body link count: 5. `npm run build` passes.
 
 Still open on the roadmap from the same Trends research batch: Soft Ground vs Firm Ground Boots (needs a standalone-vs-extend-existing-article decision before writing), Christmas Football Gifts for Kids, both High priority with the same early-mid-October deadline, and the lower-priority Training Cones piece.
+
+## New article published: Academy Life, Paul Barry interview (Q5-10 of round 2)
+
+Published `/academy-pathway/academy-life-paul-barry-interview` (2026-09-20), commit TBD. Standalone interview article built from Questions 5-10 of the Paul Barry "round 2" batch logged in `.claude/skills/football-parent-articles/references/expert-quotes.md` (Q1-4 were answered 2026-09-09 and distributed as `<ExpertQA>` blocks into existing articles instead; Graham asked for Q5-10 to become a standalone piece, same FutureFit-interview template/format as the Football DNA 3v3 interviews, rather than following the original per-question distribution plan).
+
+Covers: family treatment at Category 1 vs lower-category academies, whether Category 1 is always the best move, juggling grassroots and academy football together, whether development centres are a genuine route into the academy, what to focus on in the foundation years, and supporting a child through release. Q10 also closes the standalone `understanding-academy-release` pending expert-quote request logged separately in the same reference file (identical question, one answer covers both).
+
+Added to `lib/routes.ts` and `app/sitemap.ts`-derived route list. Internal links added from the new article to `academy-categories-explained`, `can-academy-players-play-grassroots-football`, `understanding-academy-release`, `development-centres-vs-academies`, `how-academy-football-works` and `playing-up-an-age-group-football`; Related Articles links to the first four. `npm run build` passes.
+
+Bio corrected from the original FutureFit-interview bio per the 2026-09-09 LinkedIn-verified correction already on file (Head of Coaching title applies only to Crystal Palace, not all four clubs; added Watford, which the original bio omitted).
+
+Note: distinct from the original per-question EEAT-gap-filling plan for this batch - `academy-categories-explained`, `how-academy-football-works`, `can-academy-players-play-grassroots-football` and `development-centres-vs-academies` each now get a contextual link to this interview but did not receive their own embedded `<ExpertQA>`/`<ExpertOpinion>` callout from these answers. Flagged in the reference file as a candidate for a future EEAT pass if any of those articles still score low on voice density.
+
+## Distributed Paul Barry Q5-10 answers into existing articles as ExpertOpinion callouts, plus Football DNA profile links
+
+Follow-up to the standalone interview publish above. Graham asked for the same Q5-10 answers to also fill the EEAT/voice gaps in the specific existing articles originally earmarked for them, and to add a link to Football DNA in Paul Barry's profile everywhere he appears.
+
+Added trimmed `<ExpertOpinion>` callouts (quote + "read his full answer in [Academy Life...]" link + Football DNA link) to:
+- `academy-categories-explained` (Q6, "What Category Actually Means for Your Child's Development")
+- `how-academy-football-works` (Q5, "Academy Categories Explained")
+- `can-academy-players-play-grassroots-football` (Q7, end of "Why some players continue playing grassroots football")
+- `development-centres-vs-academies` (Q8, trimmed one way, "The Pathway Question")
+- `how-players-progress-through-football-development-centres` (Q8, trimmed a different way to avoid duplicate content, "Movement Between Pathway Levels")
+
+`pdc-vs-ptc-vs-rtc-explained` and `pre-academy-football` were on the original candidate list but got no callout - no answer was a strong enough topical fit to force one in.
+
+Also added a `profileHref`/`profileLabel` prop pair to the `ExpertQA` component (`app/components/mdx/ExpertQA.tsx`) so its header can link to the expert's own site - the existing `bio` prop is a plain string prop and cannot carry a markdown/JSX link itself (same `blockJS` attr-stripping behaviour documented in the component's own comments). Wired `https://footballdna.co.uk` into all 3 existing Paul Barry `<ExpertQA>` placements from the Q1-4 round (`what-do-academy-coaches-look-for`, `how-football-scouts-identify-players`, `how-to-get-scouted-for-football`), and into the new standalone article's own bio block and `<ExpertOpinion>` callouts (those needed no component change since their content is normal MDX).
+
+`npm run build` passes; spot-checked rendered HTML on all 8 touched pages to confirm the interview-article and Football DNA links render as real `<a>` tags, not literal markdown text. Content-status tracker rows updated for all 5 newly-edited articles (`--expert-quote-count 1`).
+
+Note while running the tracker `mark` command: Git Bash on this machine auto-converts a leading `/academy-pathway/...` style `--url` argument into a Windows filesystem path before it reaches the script, silently corrupting the row (caught and fixed for the standalone article publish above; prefix `MSYS_NO_PATHCONV=1` on the command to avoid it). A second, unrelated bad row from a prior session (`best-football-goals-for-kids`) was also spotted in the same table but not fixed, since it predates this session.

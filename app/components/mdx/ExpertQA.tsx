@@ -28,6 +28,11 @@ type ExpertQAProps = {
   children?: React.ReactNode;
   sourceHref?: string;
   sourceLabel?: string;
+  // Link shown under the name/role line, e.g. to the expert's own site
+  // (Football DNA) - separate from sourceHref, which points back to the
+  // Football Parent interview article this Q&A is drawn from.
+  profileHref?: string;
+  profileLabel?: string;
 };
 
 export default function ExpertQA({
@@ -39,6 +44,8 @@ export default function ExpertQA({
   children,
   sourceHref,
   sourceLabel,
+  profileHref,
+  profileLabel,
 }: ExpertQAProps) {
   const items = React.Children.toArray(children).filter(
     (child): child is React.ReactElement<ExpertQAItemProps> =>
@@ -70,6 +77,16 @@ export default function ExpertQA({
           </div>
           {bio ? (
             <div className="mt-1 text-sm text-amber-900/80">{bio}</div>
+          ) : null}
+          {profileHref ? (
+            <a
+              href={profileHref}
+              target="_blank"
+              rel="noopener"
+              className="mt-1 inline-block text-xs font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
+            >
+              {profileLabel ?? profileHref}
+            </a>
           ) : null}
         </div>
       </div>

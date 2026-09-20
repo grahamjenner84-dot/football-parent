@@ -451,20 +451,22 @@ used with young players.
 
 ## Pending — questions drafted for an expert, not yet sent/answered
 
-### understanding-academy-release — TBD, tag: academy release, player welfare
+### understanding-academy-release — answered 2026-09-20 via Paul Barry round 2, Q10
 Drafted: 2026-08-09
-Found during the full-site voice audit: a sensitive topic with real weight to it
-that would benefit from someone who's actually handled release conversations or
-been through one, rather than staying purely instructional. Well suited to an
-academy welfare officer, sports psychologist working in football, or a former
-academy player.
+Question 4 below ("What's one thing you wish more parents understood about
+supporting a child through release?") duplicated Q10 of the Paul Barry
+round 2 batch and was answered by the same reply - see that Q&A under
+"Placed in articles" below, now live in [Academy Life: Paul Barry on
+Categories, Development Centres and Release](/academy-pathway/academy-life-paul-barry-interview).
+Questions 1-3 below are still open and would need a separate contact
+(academy welfare officer, sports psychologist, or former academy player)
+if `understanding-academy-release` needs further first-hand voice beyond
+Paul's Q10 answer.
 1. What's the most common thing players get wrong about why they were released?
 2. Is there a moment in a release conversation that consistently goes badly, that
    clubs could handle better?
 3. How long does it typically take before a released player wants to play
    football again, in your experience?
-4. What's one thing you wish more parents understood about supporting a child
-   through release?
 
 ### how-much-training-is-too-much — TBD, tag: training load, overuse injury
 Drafted: 2026-08-09
@@ -978,4 +980,75 @@ and the em dash in A3's "(September - November)" changed to "(September to
 November)" per the site's no-em-dash rule - wording otherwise unchanged.)
 
 Questions 5-10 from this round (inside-the-academy-system and release
-questions) are still awaiting reply, unused.
+questions) were answered 2026-09-20. Unlike Q1-4, Graham asked for these to
+become a standalone interview article rather than being distributed as
+`<ExpertQA>` blocks into the existing articles originally listed above -
+see [Academy Life: Paul Barry on Categories, Development Centres and
+Release](/academy-pathway/academy-life-paul-barry-interview) (published
+2026-09-20). Each answer also appears there as a full "Football Parent
+asks" Q&A with a "Football Parent perspective/takeaway" callout, in the
+FutureFit interview format, not the `<ExpertQA>` component.
+
+Q5: Having worked at clubs across different levels, from Southend up to Arsenal and Crystal Palace, what's the biggest difference in how families are treated at a smaller academy versus a Category 1 academy?
+A5: The sheer difference in staff numbers and therefore departmental provision, allows Category 1 academies a greater scope to support parents and families compared to lower Category clubs. Player Care has become a very prominent role in Academies with some clubs even having age-phase related staff responsible for different age groups within a programme. With more staff, more care and attention can be provided, as Player Care staff work alongside coaching and safeguarding colleagues to address issues when, or before they arise, conduct parent meetings whenever needed and both guide and educate families to firstly understand the academy journey, and hopefully enjoy it (despite the challenges faced) along the way.
+
+Q6: Is getting into a Category 1 academy always the best move, or are there situations where a lower category, or a different pathway altogether, actually serves a player better?
+A6: From my experience, every player's journey is different and therefore it's not a "one size fits all" development approach. Some players embrace the pressure and challenges posed by a Premier League Category 1 academy and others struggle initially, before developing the confidence (on and off the pitch) and personality to manage their emotions and deal with the competitive nature of the environment. Sometimes, registering for a lower Category club develops more humility, resilience and greater inner drive and motivation. This may be because the club are considered "under-dogs" without the financial backing and support. This often means that staff have to fulfil more than one role, develop a greater sense of unity and work hard together to ensure that players enjoy the experience, develop every season and maintain motivation to represent the club.
+
+Q7: Have you seen a family successfully juggle grassroots and academy football at the same time? What actually made that work?
+A7: I have witnessed this in terms of 2 or more siblings where 1 may have registered for an academy, with their brothers and/or sisters playing grassroots football. The Premier League allows boys in Academies from the age of U9s, U10s and U11s, to play grassroots at the same time as Academy football. This initiative was created to give the youngest players opportunities to retain friendships, be the "better" player where the level is not as high or competitive and continue playing the game for social reasons. However, there are hardly any parents that I've seen take up this opportunity, probably through fear of "losing face" and their son missing out or being considered inferior to their team-mates at the Academy.
+
+Q8: Having worked across foundation-phase programmes at more than one club, are development centres a genuine route into the academy proper, or are they mostly a separate system that rarely feeds into it? Does that differ much club to club?
+A8: Both Southend United and Crystal Palace had/have very productive Development Centres (called Shadow Squads or Showcase) which genuinely gave boys opportunities to trial throughout each season. Fixtures were often arranged between Dev Centre teams and Academy age groups, and quite often, these games were competitive. Of course, this differs from club to club with other programmes potentially being more in place as a mandatory element through either the EFL or Premier League.
+
+Q9: In the foundation years, what would you focus on as a parent to give your child the best chance of opportunities as they get older?
+A9: It's important that parents and guardians try to embrace every aspect of the Academy journey. There are likely to be far more challenging and difficult moments compared to relative successes, so they need to be there emotionally for their child, give encouragement and positive reinforcement and importantly, leave the coaching to the club's coaches! Ongoing education for parents is vital as it is easy to agree with an Academy's code of conduct and values at the start of the U9s season (the first registration year) but by the time they reach U10s and U11s, to have lost sight of what is most important. We all know that the probabilities of boys in Academies being retained through every age group each season, gaining a scholarship and progressing forwards with a first team contract, are extremely slim. Therefore, parents need to understand and appreciate every opportunity their son experiences. They'll play against some of the best teams, visit amazing training grounds, play in competitive tournaments and possibly even travel abroad on tours. The life lessons formed through these experiences should be where parents focus rather than constantly comparing their child with others, and questioning the club's opinions and direction; all of which can have a major detrimental affect on their child in the long-term.
+
+Q10: What's one thing you wish more parents understood about supporting a child through release?
+A10: That every decision made comes after months of collective deliberation involving multiple staff members, including coaches, sports scientists, player care, safeguarding, recruitment and senior staff. The decision to release a player is a club one, not an individual one, and is made with their best interests at heart. Parents need to accept and respect the club's decision and most importantly, be there emotionally for their child. This isn't a time to criticise the club (especially in front of their child) but instead, it's an opportunity to act with maturity, self awareness and high level emotional intelligence. I've known many boys that have been released, listened to the club's feedback and gone on to trial elsewhere, sign at other clubs and strive in an environment that clearly suited them more appropriately. Therefore, a release shouldn't be thought of as the final moment in a young player's journey, but instead, a crucial learning moment that can actually deliver a vital life lesson, allow them an opportunity to self-reflect and eventually help them find an environment that aligns with their level and future ambitions.
+
+Note: Q10's answer also directly answers the standalone pending request
+logged above under "understanding-academy-release" ("What's one thing you
+wish more parents understood about supporting a child through release?" -
+same question, asked twice across the two drafted rounds). That standalone
+request can be considered answered too, via this article.
+
+Follow-up 2026-09-20 (same day, Graham's request): rather than leaving the
+gap only partially closed via cross-links, added trimmed `<ExpertOpinion>`
+callouts using these same Q5-10 answers directly into 5 of the originally-
+listed articles, each with a "read his full answer" link back to the new
+interview article and a link to [Football DNA](https://footballdna.co.uk):
+
+- `academy-categories-explained` - Q6 (Category 1 not always best), in
+  "What Category Actually Means for Your Child's Development"
+- `how-academy-football-works` - Q5 (family treatment/Player Care staffing
+  by category), in "Academy Categories Explained"
+- `can-academy-players-play-grassroots-football` - Q7 (juggling grassroots
+  and academy), end of "Why some players continue playing grassroots
+  football"
+- `development-centres-vs-academies` - Q8, trimmed one way, in "The
+  Pathway Question"
+- `how-players-progress-through-football-development-centres` - Q8,
+  trimmed a different way (different sentences kept, same duplicate-
+  content discipline as the reused parent-story trims above), in
+  "Movement Between Pathway Levels"
+
+`pdc-vs-ptc-vs-rtc-explained` and `pre-academy-football` still have no
+callout from this round - no answer above was a strong enough topical fit
+for either to force one in; revisit if a future EEAT audit flags them
+specifically. `what-do-academy-coaches-look-for` already has its own Q1/Q2
+`<ExpertQA>` block from the earlier placement, unchanged here.
+
+Also on 2026-09-20: added a `profileHref`/`profileLabel` prop pair to
+`ExpertQA` (`app/components/mdx/ExpertQA.tsx`) so the profile header can
+link out to the expert's own site - the existing `bio` prop is a plain
+string and can't carry a markdown/JSX link itself (same `blockJS`
+attr-stripping issue noted above for JSON props). Wired
+`profileHref="https://footballdna.co.uk" profileLabel="Football DNA"` into
+all 3 existing Paul Barry `<ExpertQA>` placements (Q1/Q2 in
+`what-do-academy-coaches-look-for`, Q3 in
+`how-football-scouts-identify-players`, Q4 in
+`how-to-get-scouted-for-football`). `ExpertOpinion` needed no component
+change - its `children` are normal MDX content, so a markdown link to
+Football DNA could just be added inline in the trailing context sentence,
+same as the pre-existing `[FutureFit Part 2...]` link pattern.
