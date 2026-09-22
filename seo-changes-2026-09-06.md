@@ -822,3 +822,20 @@ Graham asked whether Q9-10 had an EEAT home yet - they did not. Added:
 - **Q10** (release) to `understanding-academy-release` itself, directly under the existing "release is a structural reality, not a personal verdict" note. This was the real fix: the article had been logged as answered via the new interview's cross-link only, not actually given its own embedded quote, which is why it still showed up as zero-voice in the tracker.
 
 Both link back to the interview and to Football DNA, same pattern as the other 5. `npm run build` passes; confirmed both quotes render in the built HTML. Tracker updated (`how-academy-football-works` now expert-quote-count 2, `understanding-academy-release` now 1).
+
+## AI Overview recheck on the three flagged low-CTR pages — all found cited, confirms suppression not a title/meta problem, 22 September 2026
+
+Follow-up to the 22 September weekly check-in, which queued three overdue AI Overview checks: `what-is-the-junior-premier-league` (0% CTR on "what is jpl football", 521 impr), `best-footballs-by-age` and `what-is-grassroots-football` (both flagged 12 Sept as the site's biggest low-CTR levers but deliberately held pending this check). Ran live, on the pages' actual highest-volume queries per `inspect_page`, not just title keywords (6 keywords, $0.024 actual):
+
+| Page | Query (28d impr) | AI Overview | footballparent.co.uk cited |
+|---|---|---|---|
+| `what-is-the-junior-premier-league` | "what is jpl football" (521) | Present | **Yes, source #5** (also: facebook.com, juniorpremierleague.com, refchat.co.uk, uk.linkedin.com) |
+| `what-is-the-junior-premier-league` | "jpl football" (817) | None | n/a |
+| `best-footballs-by-age` | "what size football for 10 year old" (1,112) | Present | **Yes, source #5** |
+| `best-footballs-by-age` | "football sizes by age" (839) | Present | **Yes, source #5** |
+| `what-is-grassroots-football` | "what is grassroots football" (3,942) | Present | **Yes, source #4** |
+| `what-is-grassroots-football` | "grassroots football" (5,566, page's single largest query) | Present | **Yes, source #5** |
+
+**No title/meta change made on any of the three.** All three pages are already cited in the AI Overview on their highest-volume query, yet all three still convert at 0.2-0.5% CTR. Being cited doesn't drive the click the way ranking normally would, since a reader who gets the answer in the overview has less reason to click through, so this is consistent with AI Overview presence being the actual explanation for the low CTR, not a weak title/meta — the same pattern already established for the JPL league query on 22 Aug, now confirmed across three more pages that were flagged purely on aggregate low-CTR numbers before this check had been run. A rewrite would not be expected to move these numbers. Logged 30 rows (main + PAA sub-rows per query) to `ai-citation-log.csv`.
+
+**Not revisiting** unless a SERP's composition changes (the AI Overview drops, or the citation is lost) — same standing rule as the existing JPL entry.
