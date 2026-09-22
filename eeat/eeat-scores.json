@@ -1,0 +1,1615 @@
+{
+  "generated": "2026-09-22",
+  "method": "eeat/score-eeat.mjs (mechanical signal parse) + semantic voice/slop read per article",
+  "note": "mechanical scores exist for all articles; semantic (voice/slop/bucket) done for the 8-article proof batch only. Extend by running the semantic read on the rest and filling the semantic field.",
+  "buckets": {
+    "A": "citations only (voice already fine)",
+    "B": "needs Graham voice or an expert quote",
+    "C": "already personal; leave voice, cite/tidy only"
+  },
+  "corpusMechanicalAverages": {
+    "overall": 70,
+    "experience": 56,
+    "expertise": 98,
+    "authoritativeness": 44,
+    "trust": 82
+  },
+  "articles": [
+    {
+      "slug": "pdc-vs-ptc-vs-rtc-explained",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/pdc-vs-ptc-vs-rtc-explained",
+      "words": 1566,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 39,
+        "experience": 15,
+        "expertise": 84,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-happens-at-academy-trials",
+      "category": "academy-trials",
+      "url": "/academy-trials/what-happens-at-academy-trials",
+      "words": 1146,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 39,
+        "experience": 15,
+        "expertise": 84,
+        "authoritativeness": 0
+      },
+      "semantic": {
+        "voice": 25,
+        "slop": 60,
+        "bucket": "B",
+        "expert": "scout/academy-coach",
+        "reviewed": "2026-09-22"
+      }
+    },
+    {
+      "slug": "are-football-development-centres-worth-it",
+      "category": "parent-guides",
+      "url": "/parent-guides/are-football-development-centres-worth-it",
+      "words": 2155,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 15,
+      "mechanical": {
+        "overall": 39,
+        "experience": 15,
+        "expertise": 85,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "football-trials-near-me",
+      "category": "academy-trials",
+      "url": "/academy-trials/football-trials-near-me",
+      "words": 1333,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 11,
+      "mechanical": {
+        "overall": 40,
+        "experience": 15,
+        "expertise": 91,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-age-do-football-academies-recruit",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/what-age-do-football-academies-recruit",
+      "words": 1542,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 19,
+      "mechanical": {
+        "overall": 42,
+        "experience": 15,
+        "expertise": 98,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "girls-academy-vs-grassroots-football",
+      "category": "girls-football",
+      "url": "/girls-football/girls-academy-vs-grassroots-football",
+      "words": 1515,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 42,
+        "experience": 15,
+        "expertise": 97,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "girls-football-trials",
+      "category": "girls-football",
+      "url": "/girls-football/girls-football-trials",
+      "words": 1584,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 42,
+        "experience": 15,
+        "expertise": 99,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-much-training-is-too-much",
+      "category": "football-development",
+      "url": "/football-development/how-much-training-is-too-much",
+      "words": 2125,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 15,
+      "mechanical": {
+        "overall": 43,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-football-boots-for-wide-feet-kids",
+      "category": "football-gear",
+      "url": "/football-gear/best-football-boots-for-wide-feet-kids",
+      "words": 1789,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 8,
+      "mechanical": {
+        "overall": 43,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-footballs-by-age",
+      "category": "football-gear",
+      "url": "/football-gear/best-footballs-by-age",
+      "words": 1848,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 8,
+      "mechanical": {
+        "overall": 43,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "late-developers-in-girls-football",
+      "category": "girls-football",
+      "url": "/girls-football/late-developers-in-girls-football",
+      "words": 1741,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 43,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-age-do-girls-football-academies-recruit",
+      "category": "girls-football",
+      "url": "/girls-football/what-age-do-girls-football-academies-recruit",
+      "words": 1614,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 43,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "good-football-development-environment",
+      "category": "football-development",
+      "url": "/football-development/good-football-development-environment",
+      "words": 2506,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 18,
+      "mechanical": {
+        "overall": 53,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "ag-vs-fg-boots",
+      "category": "football-gear",
+      "url": "/football-gear/ag-vs-fg-boots",
+      "words": 1390,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.72,
+      "internalLinks": 6,
+      "mechanical": {
+        "overall": 55,
+        "experience": 15,
+        "expertise": 93,
+        "authoritativeness": 20
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-football-gloves-for-winter-training",
+      "category": "football-gear",
+      "url": "/football-gear/best-football-gloves-for-winter-training",
+      "words": 1330,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.75,
+      "internalLinks": 6,
+      "mechanical": {
+        "overall": 57,
+        "experience": 15,
+        "expertise": 91,
+        "authoritativeness": 32
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-football-scouts-identify-players",
+      "category": "academy-trials",
+      "url": "/academy-trials/how-football-scouts-identify-players",
+      "words": 1487,
+      "callouts": 2,
+      "isInterview": true,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 60,
+        "experience": 90,
+        "expertise": 96,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "improve-football-decision-making",
+      "category": "football-development",
+      "url": "/football-development/improve-football-decision-making",
+      "words": 2120,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 60,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "late-developers-in-football",
+      "category": "football-development",
+      "url": "/football-development/late-developers-in-football",
+      "words": 2347,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 15,
+      "mechanical": {
+        "overall": 60,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-to-become-a-football-coach",
+      "category": "parent-guides",
+      "url": "/parent-guides/how-to-become-a-football-coach",
+      "words": 2312,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 16,
+      "mechanical": {
+        "overall": 60,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "leave-grassroots-football-for-an-academy",
+      "category": "parent-guides",
+      "url": "/parent-guides/leave-grassroots-football-for-an-academy",
+      "words": 3126,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 13,
+      "mechanical": {
+        "overall": 60,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-to-say-after-football-matches",
+      "category": "parent-guides",
+      "url": "/parent-guides/what-to-say-after-football-matches",
+      "words": 1975,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.01,
+      "internalLinks": 7,
+      "mechanical": {
+        "overall": 61,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 39
+      },
+      "semantic": {
+        "voice": 88,
+        "slop": 26,
+        "bucket": "C",
+        "expert": "sports-psychologist(optional)",
+        "reviewed": "2026-09-22"
+      }
+    },
+    {
+      "slug": "football-development-centres-in-london",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/football-development-centres-in-london",
+      "words": 1678,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.19,
+      "internalLinks": 22,
+      "mechanical": {
+        "overall": 62,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 44
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-shin-pads-for-kids-football",
+      "category": "football-gear",
+      "url": "/football-gear/best-shin-pads-for-kids-football",
+      "words": 2027,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.48,
+      "internalLinks": 6,
+      "mechanical": {
+        "overall": 62,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 41
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-is-grassroots-football",
+      "category": "parent-guides",
+      "url": "/parent-guides/what-is-grassroots-football",
+      "words": 2709,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 0.74,
+      "internalLinks": 15,
+      "mechanical": {
+        "overall": 62,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 43
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-do-academy-coaches-look-for",
+      "category": "academy-trials",
+      "url": "/academy-trials/what-do-academy-coaches-look-for",
+      "words": 2234,
+      "callouts": 3,
+      "isInterview": true,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 64,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": null
+    },
+    {
+      "slug": "football-scholarships-uk",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/football-scholarships-uk",
+      "words": 2373,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.26,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 66,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 57
+      },
+      "semantic": null
+    },
+    {
+      "slug": "playing-up-an-age-group-football",
+      "category": "football-development",
+      "url": "/football-development/playing-up-an-age-group-football",
+      "words": 2708,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.11,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 67,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 64
+      },
+      "semantic": {
+        "voice": 25,
+        "slop": 60,
+        "bucket": "B",
+        "expert": "academy-coach/graham",
+        "reviewed": "2026-09-22"
+      }
+    },
+    {
+      "slug": "biggest-football-parent-mistakes",
+      "category": "parent-guides",
+      "url": "/parent-guides/biggest-football-parent-mistakes",
+      "words": 2713,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.37,
+      "internalLinks": 11,
+      "mechanical": {
+        "overall": 67,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 21
+      },
+      "semantic": {
+        "voice": 92,
+        "slop": 24,
+        "bucket": "C",
+        "expert": "scout(optional)",
+        "reviewed": "2026-09-22"
+      }
+    },
+    {
+      "slug": "brentford-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/brentford-development-centre-guide",
+      "words": 1821,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 5,
+      "citationsPer1000": 2.75,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 68,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 66
+      },
+      "semantic": null
+    },
+    {
+      "slug": "pre-academy-football",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/pre-academy-football",
+      "words": 1840,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.63,
+      "internalLinks": 11,
+      "mechanical": {
+        "overall": 68,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 67
+      },
+      "semantic": null
+    },
+    {
+      "slug": "premier-league-development-centres-list",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/premier-league-development-centres-list",
+      "words": 2461,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 1.63,
+      "internalLinks": 23,
+      "mechanical": {
+        "overall": 68,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 67
+      },
+      "semantic": null
+    },
+    {
+      "slug": "is-private-football-coaching-worth-it",
+      "category": "football-development",
+      "url": "/football-development/is-private-football-coaching-worth-it",
+      "words": 2043,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.49,
+      "internalLinks": 18,
+      "mechanical": {
+        "overall": 68,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 25
+      },
+      "semantic": null
+    },
+    {
+      "slug": "futurefit-football-dna-interview-part-2",
+      "category": "parent-guides",
+      "url": "/parent-guides/futurefit-football-dna-interview-part-2",
+      "words": 2853,
+      "callouts": 0,
+      "isInterview": true,
+      "citations": 1,
+      "citationsPer1000": 0.35,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 69,
+        "experience": 90,
+        "expertise": 85,
+        "authoritativeness": 10
+      },
+      "semantic": null
+    },
+    {
+      "slug": "aston-villa-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/aston-villa-development-centre-guide",
+      "words": 1734,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 6,
+      "citationsPer1000": 3.46,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 71,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": {
+        "voice": 8,
+        "slop": 62,
+        "bucket": "B",
+        "expert": "scout(reusable across club guides)",
+        "reviewed": "2026-09-22"
+      }
+    },
+    {
+      "slug": "chelsea-fc-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/chelsea-fc-development-centre-guide",
+      "words": 1919,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.04,
+      "internalLinks": 17,
+      "mechanical": {
+        "overall": 71,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 40
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-to-find-a-football-agent-for-your-child",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/how-to-find-a-football-agent-for-your-child",
+      "words": 2247,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 9,
+      "citationsPer1000": 4.01,
+      "internalLinks": 8,
+      "mechanical": {
+        "overall": 71,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": null
+    },
+    {
+      "slug": "tottenham-development-centres-explained",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/tottenham-development-centres-explained",
+      "words": 1612,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 2.48,
+      "internalLinks": 13,
+      "mechanical": {
+        "overall": 71,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": null
+    },
+    {
+      "slug": "girls-rtcs-explained",
+      "category": "girls-football",
+      "url": "/girls-football/girls-rtcs-explained",
+      "words": 1887,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 6,
+      "citationsPer1000": 3.18,
+      "internalLinks": 6,
+      "mechanical": {
+        "overall": 71,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-girls-football-academies-work",
+      "category": "girls-football",
+      "url": "/girls-football/how-girls-football-academies-work",
+      "words": 1691,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 8,
+      "citationsPer1000": 4.73,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 71,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": {
+        "voice": 18,
+        "slop": 66,
+        "bucket": "B",
+        "expert": "girls-pathway-coach",
+        "reviewed": "2026-09-22"
+      }
+    },
+    {
+      "slug": "arsenal-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/arsenal-development-centre-guide",
+      "words": 1871,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.07,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 72,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 41
+      },
+      "semantic": null
+    },
+    {
+      "slug": "can-academy-players-play-grassroots-football",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/can-academy-players-play-grassroots-football",
+      "words": 2647,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.13,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 72,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 42
+      },
+      "semantic": null
+    },
+    {
+      "slug": "development-centres-vs-academies",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/development-centres-vs-academies",
+      "words": 2049,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.49,
+      "internalLinks": 16,
+      "mechanical": {
+        "overall": 72,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 13
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-football-clubs-recruit-young-players",
+      "category": "academy-trials",
+      "url": "/academy-trials/how-football-clubs-recruit-young-players",
+      "words": 1797,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.11,
+      "internalLinks": 16,
+      "mechanical": {
+        "overall": 72,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 42
+      },
+      "semantic": null
+    },
+    {
+      "slug": "support-child-after-bad-match",
+      "category": "parent-guides",
+      "url": "/parent-guides/support-child-after-bad-match",
+      "words": 2653,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 0.75,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 72,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 43
+      },
+      "semantic": null
+    },
+    {
+      "slug": "academy-categories-explained",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/academy-categories-explained",
+      "words": 2024,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.48,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 74,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 52
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-academy-football-works",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/how-academy-football-works",
+      "words": 2759,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 0.72,
+      "internalLinks": 26,
+      "mechanical": {
+        "overall": 74,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 20
+      },
+      "semantic": null
+    },
+    {
+      "slug": "jpl-and-academy-football",
+      "category": "parent-guides",
+      "url": "/parent-guides/jpl-and-academy-football",
+      "words": 2455,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.41,
+      "internalLinks": 18,
+      "mechanical": {
+        "overall": 74,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 22
+      },
+      "semantic": null
+    },
+    {
+      "slug": "football-development-centres-near-me",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/football-development-centres-near-me",
+      "words": 1829,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 40,
+      "citationsPer1000": 21.87,
+      "internalLinks": 20,
+      "mechanical": {
+        "overall": 75,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 55
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-to-become-a-professional-footballer",
+      "category": "football-development",
+      "url": "/football-development/how-to-become-a-professional-footballer",
+      "words": 1989,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.5,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 75,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 25
+      },
+      "semantic": null
+    },
+    {
+      "slug": "veo-camera-alternatives",
+      "category": "football-gear",
+      "url": "/football-gear/veo-camera-alternatives",
+      "words": 3269,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 6,
+      "citationsPer1000": 1.84,
+      "internalLinks": 7,
+      "mechanical": {
+        "overall": 75,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 84
+      },
+      "semantic": null
+    },
+    {
+      "slug": "futurefit-football-dna-interview-part-1",
+      "category": "parent-guides",
+      "url": "/parent-guides/futurefit-football-dna-interview-part-1",
+      "words": 2343,
+      "callouts": 0,
+      "isInterview": true,
+      "citations": 3,
+      "citationsPer1000": 1.28,
+      "internalLinks": 8,
+      "mechanical": {
+        "overall": 75,
+        "experience": 90,
+        "expertise": 85,
+        "authoritativeness": 35
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-players-progress-through-football-development-centres",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/how-players-progress-through-football-development-centres",
+      "words": 1633,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.22,
+      "internalLinks": 15,
+      "mechanical": {
+        "overall": 76,
+        "experience": 85,
+        "expertise": 85,
+        "authoritativeness": 45
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-is-eppp",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/what-is-eppp",
+      "words": 1659,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 2.41,
+      "internalLinks": 13,
+      "mechanical": {
+        "overall": 76,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 100
+      },
+      "semantic": {
+        "voice": 8,
+        "slop": 42,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
+    },
+    {
+      "slug": "football-team-spreadsheet",
+      "category": "coaching",
+      "url": "/coaching/football-team-spreadsheet",
+      "words": 1563,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.64,
+      "internalLinks": 8,
+      "mechanical": {
+        "overall": 76,
+        "experience": 85,
+        "expertise": 99,
+        "authoritativeness": 29
+      },
+      "semantic": null
+    },
+    {
+      "slug": "bio-banding-football",
+      "category": "football-development",
+      "url": "/football-development/bio-banding-football",
+      "words": 1942,
+      "callouts": 0,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 2.06,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 76,
+        "experience": 15,
+        "expertise": 100,
+        "authoritativeness": 100
+      },
+      "semantic": null
+    },
+    {
+      "slug": "why-isnt-my-child-improving-at-football",
+      "category": "football-development",
+      "url": "/football-development/why-isnt-my-child-improving-at-football",
+      "words": 2841,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 0.7,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 77,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 31
+      },
+      "semantic": null
+    },
+    {
+      "slug": "jpl-martin-brock-interview-part-1",
+      "category": "parent-guides",
+      "url": "/parent-guides/jpl-martin-brock-interview-part-1",
+      "words": 1847,
+      "callouts": 0,
+      "isInterview": true,
+      "citations": 2,
+      "citationsPer1000": 1.08,
+      "internalLinks": 13,
+      "mechanical": {
+        "overall": 77,
+        "experience": 90,
+        "expertise": 85,
+        "authoritativeness": 41
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-to-join-a-football-academy",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/how-to-join-a-football-academy",
+      "words": 2500,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.2,
+      "internalLinks": 18,
+      "mechanical": {
+        "overall": 78,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 67
+      },
+      "semantic": null
+    },
+    {
+      "slug": "new-fa-youth-football-format",
+      "category": "football-development",
+      "url": "/football-development/new-fa-youth-football-format",
+      "words": 2491,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 1.61,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 78,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 67
+      },
+      "semantic": null
+    },
+    {
+      "slug": "emerging-talent-centres-explained",
+      "category": "girls-football",
+      "url": "/girls-football/emerging-talent-centres-explained",
+      "words": 2423,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 1.65,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 78,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 68
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-to-get-into-the-jpl",
+      "category": "parent-guides",
+      "url": "/parent-guides/how-to-get-into-the-jpl",
+      "words": 2887,
+      "callouts": 4,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.35,
+      "internalLinks": 13,
+      "mechanical": {
+        "overall": 78,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 21
+      },
+      "semantic": null
+    },
+    {
+      "slug": "jpl-martin-brock-interview-part-2",
+      "category": "parent-guides",
+      "url": "/parent-guides/jpl-martin-brock-interview-part-2",
+      "words": 1615,
+      "callouts": 0,
+      "isInterview": true,
+      "citations": 2,
+      "citationsPer1000": 1.24,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 78,
+        "experience": 90,
+        "expertise": 85,
+        "authoritativeness": 45
+      },
+      "semantic": null
+    },
+    {
+      "slug": "fulham-fc-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/fulham-fc-development-centre-guide",
+      "words": 1773,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.69,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 79,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 69
+      },
+      "semantic": null
+    },
+    {
+      "slug": "football-drills-for-7-and-8-year-olds",
+      "category": "coaching",
+      "url": "/coaching/football-drills-for-7-and-8-year-olds",
+      "words": 2140,
+      "callouts": 4,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.47,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 79,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 24
+      },
+      "semantic": null
+    },
+    {
+      "slug": "academy-life-paul-barry-interview",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/academy-life-paul-barry-interview",
+      "words": 1535,
+      "callouts": 0,
+      "isInterview": true,
+      "citations": 4,
+      "citationsPer1000": 2.61,
+      "internalLinks": 8,
+      "mechanical": {
+        "overall": 80,
+        "experience": 90,
+        "expertise": 83,
+        "authoritativeness": 55
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-much-does-academy-football-cost",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/how-much-does-academy-football-cost",
+      "words": 2531,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 0.79,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 81,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 33
+      },
+      "semantic": null
+    },
+    {
+      "slug": "leeds-united-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/leeds-united-development-centre-guide",
+      "words": 2024,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 7,
+      "citationsPer1000": 3.46,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 81,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": null
+    },
+    {
+      "slug": "how-to-get-scouted-for-football",
+      "category": "academy-trials",
+      "url": "/academy-trials/how-to-get-scouted-for-football",
+      "words": 2561,
+      "callouts": 2,
+      "isInterview": true,
+      "citations": 2,
+      "citationsPer1000": 0.78,
+      "internalLinks": 13,
+      "mechanical": {
+        "overall": 81,
+        "experience": 90,
+        "expertise": 100,
+        "authoritativeness": 44
+      },
+      "semantic": null
+    },
+    {
+      "slug": "uk-football-development-centres-explained",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/uk-football-development-centres-explained",
+      "words": 2873,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.04,
+      "internalLinks": 25,
+      "mechanical": {
+        "overall": 82,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 51
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-football-boots-for-kids",
+      "category": "football-gear",
+      "url": "/football-gear/best-football-boots-for-kids",
+      "words": 1973,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.01,
+      "internalLinks": 11,
+      "mechanical": {
+        "overall": 82,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 39
+      },
+      "semantic": null
+    },
+    {
+      "slug": "build-confidence-young-footballers",
+      "category": "football-development",
+      "url": "/football-development/build-confidence-young-footballers",
+      "words": 2569,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.17,
+      "internalLinks": 18,
+      "mechanical": {
+        "overall": 83,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 55
+      },
+      "semantic": null
+    },
+    {
+      "slug": "signs-your-child-is-ready-for-academy-football",
+      "category": "football-development",
+      "url": "/football-development/signs-your-child-is-ready-for-academy-football",
+      "words": 1835,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.09,
+      "internalLinks": 11,
+      "mechanical": {
+        "overall": 83,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 41
+      },
+      "semantic": null
+    },
+    {
+      "slug": "understanding-academy-release",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/understanding-academy-release",
+      "words": 2242,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 7,
+      "citationsPer1000": 3.12,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 84,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 89
+      },
+      "semantic": null
+    },
+    {
+      "slug": "west-ham-player-pathway-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/west-ham-player-pathway-guide",
+      "words": 2193,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 5,
+      "citationsPer1000": 2.28,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 84,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 89
+      },
+      "semantic": null
+    },
+    {
+      "slug": "football-academy-trials-uk",
+      "category": "academy-trials",
+      "url": "/academy-trials/football-academy-trials-uk",
+      "words": 3792,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 6,
+      "citationsPer1000": 1.58,
+      "internalLinks": 36,
+      "mechanical": {
+        "overall": 84,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 89
+      },
+      "semantic": null
+    },
+    {
+      "slug": "relative-age-effect-football",
+      "category": "football-development",
+      "url": "/football-development/relative-age-effect-football",
+      "words": 2090,
+      "callouts": 1,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 1.91,
+      "internalLinks": 11,
+      "mechanical": {
+        "overall": 86,
+        "experience": 55,
+        "expertise": 100,
+        "authoritativeness": 98
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-football-goals-for-kids",
+      "category": "football-gear",
+      "url": "/football-gear/best-football-goals-for-kids",
+      "words": 1771,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 2,
+      "citationsPer1000": 1.13,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 86,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 54
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-grassroots-football-apps",
+      "category": "coaching",
+      "url": "/coaching/best-grassroots-football-apps",
+      "words": 1360,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 2.21,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 87,
+        "experience": 100,
+        "expertise": 92,
+        "authoritativeness": 66
+      },
+      "semantic": null
+    },
+    {
+      "slug": "crystal-palace-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/crystal-palace-development-centre-guide",
+      "words": 2490,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 6,
+      "citationsPer1000": 2.41,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 88,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-qualifications-do-i-need-to-be-a-football-coach",
+      "category": "coaching",
+      "url": "/coaching/what-qualifications-do-i-need-to-be-a-football-coach",
+      "words": 1550,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 6,
+      "citationsPer1000": 3.87,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 88,
+        "experience": 85,
+        "expertise": 98,
+        "authoritativeness": 78
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-is-football-iq",
+      "category": "football-development",
+      "url": "/football-development/what-is-football-iq",
+      "words": 1843,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 2.17,
+      "internalLinks": 11,
+      "mechanical": {
+        "overall": 88,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 78
+      },
+      "semantic": null
+    },
+    {
+      "slug": "jpl-vs-grassroots-football",
+      "category": "parent-guides",
+      "url": "/parent-guides/jpl-vs-grassroots-football",
+      "words": 2779,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.08,
+      "internalLinks": 19,
+      "mechanical": {
+        "overall": 88,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 63
+      },
+      "semantic": null
+    },
+    {
+      "slug": "what-is-the-junior-premier-league",
+      "category": "parent-guides",
+      "url": "/parent-guides/what-is-the-junior-premier-league",
+      "words": 2026,
+      "callouts": 4,
+      "isInterview": false,
+      "citations": 3,
+      "citationsPer1000": 1.48,
+      "internalLinks": 17,
+      "mechanical": {
+        "overall": 91,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 74
+      },
+      "semantic": null
+    },
+    {
+      "slug": "best-football-formations-by-age-group",
+      "category": "coaching",
+      "url": "/coaching/best-football-formations-by-age-group",
+      "words": 1447,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 5,
+      "citationsPer1000": 3.46,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 93,
+        "experience": 85,
+        "expertise": 95,
+        "authoritativeness": 100
+      },
+      "semantic": null
+    },
+    {
+      "slug": "equal-playing-time-in-grassroots-football",
+      "category": "coaching",
+      "url": "/coaching/equal-playing-time-in-grassroots-football",
+      "words": 2346,
+      "callouts": 4,
+      "isInterview": false,
+      "citations": 6,
+      "citationsPer1000": 2.56,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 95,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 89
+      },
+      "semantic": null
+    },
+    {
+      "slug": "football-burnout",
+      "category": "football-development",
+      "url": "/football-development/football-burnout",
+      "words": 2615,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 5,
+      "citationsPer1000": 1.91,
+      "internalLinks": 12,
+      "mechanical": {
+        "overall": 97,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 98
+      },
+      "semantic": {
+        "voice": 90,
+        "slop": 22,
+        "bucket": "C",
+        "expert": "sports-psychologist(optional)",
+        "reviewed": "2026-09-22"
+      }
+    }
+  ]
+}
