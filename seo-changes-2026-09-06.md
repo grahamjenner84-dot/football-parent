@@ -822,3 +822,20 @@ Graham asked whether Q9-10 had an EEAT home yet - they did not. Added:
 - **Q10** (release) to `understanding-academy-release` itself, directly under the existing "release is a structural reality, not a personal verdict" note. This was the real fix: the article had been logged as answered via the new interview's cross-link only, not actually given its own embedded quote, which is why it still showed up as zero-voice in the tracker.
 
 Both link back to the interview and to Football DNA, same pattern as the other 5. `npm run build` passes; confirmed both quotes render in the built HTML. Tracker updated (`how-academy-football-works` now expert-quote-count 2, `understanding-academy-release` now 1).
+
+## Bucket C slop-tidy: em dashes and reframe clichés removed from 9 articles (E-E-A-T deslopify)
+
+Part of the E-E-A-T deslopify programme (see `eeat/`). Conservative copy-only tidy of high-slop Bucket C articles (genuine first-hand voice preserved, no headings/links/sections changed, no meta descriptions or slugs touched). Removed banned em dashes (house rule) and the most blatant "it isn't X, it's Y" / "X matters more than Y" reframe clichés, rewording each to a plain statement with identical meaning. `npm run build` passes (all routes statically generated). One combined commit (single lever, one `git revert` away; each page's change is isolated to its own file).
+
+Articles and what changed:
+- `parent-guides/jpl-vs-grassroots-football` - 1 reframe cliché reworded ("league isn't the deciding factor, timing is").
+- `academy-trials/what-do-academy-coaches-look-for` - 13 em dashes removed + 1 reframe reworded (Paul Barry ExpertQA left untouched). Proposed meta-description change deliberately NOT made (separate SEO lever).
+- `football-development/how-to-become-a-professional-footballer` - 2 em dashes + 2 reframes.
+- `football-development/improve-football-decision-making` - 2 em dashes + 1 reframe.
+- `parent-guides/what-is-grassroots-football` - 2 reframe clichés.
+- `parent-guides/what-is-the-junior-premier-league` - 2 reframe clichés (Martin Brock quotes untouched).
+- `football-development/build-confidence-young-footballers` - 2 reframe clichés.
+- `football-development/good-football-development-environment` - 2 em dashes + fixed an accidental duplicated sentence.
+- `academy-pathway/how-players-progress-through-football-development-centres` - 1 em dash.
+
+Note: not an SEO-metric-targeting edit; it is a house-style/originality consistency fix, so no per-page watch window applies, but logged here for traceability. Commit hash recorded on commit below.
