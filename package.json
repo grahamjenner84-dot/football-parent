@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "indexnow": "node scripts/submit-indexnow.mjs",
+    "broken-link-finder": "node scripts/broken-link-finder/run.mjs",
     "render": "tsx scripts/render-batch.ts",
     "render:status": "tsx scripts/render-status.ts",
     "render:seed-test": "tsx scripts/render-seed-test.ts",

@@ -50,3 +50,14 @@ seo-data/raw/
 seo-data/imports/private/
 credentials.json
 token.json
+
+# broken-link-finder: raw DataForSEO cache and full run state, not the CSV outputs
+scripts/broken-link-finder/cache/
+scripts/broken-link-finder/output/run-state.json
+
+# One-off scratch scripts and their dumped output, never committed
+scripts/tmp-*
+
+# Stale broken-link-finder root outputs, regenerated on demand
+external-links.json
+external-links-checked.json
