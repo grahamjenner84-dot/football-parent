@@ -854,3 +854,7 @@ Follow-up to the first slop-tidy. Reworded 6 residual "isn't X, it's Y" / "not X
 - `academy-pathway/how-players-progress-through-football-development-centres` - "one data point, not the whole story" reworded.
 
 Deliberately left: "honest" instances (Graham's genuine voice, or inside real expert quotes) and the reframe section HEADING in how-to-become-a-professional-footballer ("Education Is Not a Backup Plan, It's Part of the Plan"), because changing heading text changes its TOC anchor slug and needs a matching frontmatter update, which is not a light change. `npm run build` passes. Commit hash on commit below.
+
+## Reword reframe section heading in how-to-become-a-professional-footballer
+
+The last residual reframe from the Bucket C slop-tidy. Section heading "Education Is Not a Backup Plan - It's Part of the Plan" reworded to the plain "Education Is Part of the Plan". Updated the frontmatter `sections` entry (id + title) to match the new heading text so the sidebar TOC anchor stays consistent (id now "education-is-part-of-the-plan"). Page URL/slug unchanged; no internal links referenced the old anchor. Body prose unchanged. `npm run build` passes. Commit hash on commit below.
