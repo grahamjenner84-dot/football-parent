@@ -320,14 +320,14 @@
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 75,
-        "slop": 24,
+        "voice": 76,
+        "slop": 22,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-09-22",
         "preTidySlop": 30,
         "preTidyVoice": 74,
-        "tidied": "2026-09-22"
+        "tidied": "2026-09-22 (2 passes)"
       }
     },
     {
@@ -419,14 +419,14 @@
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 62,
-        "slop": 29,
+        "voice": 63,
+        "slop": 27,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-09-22",
         "preTidySlop": 42,
         "preTidyVoice": 58,
-        "tidied": "2026-09-22"
+        "tidied": "2026-09-22 (2 passes)"
       }
     },
     {
@@ -590,14 +590,14 @@
         "authoritativeness": 43
       },
       "semantic": {
-        "voice": 73,
-        "slop": 23,
+        "voice": 74,
+        "slop": 21,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-09-22",
         "preTidySlop": 38,
         "preTidyVoice": 68,
-        "tidied": "2026-09-22"
+        "tidied": "2026-09-22 (2 passes)"
       }
     },
     {
@@ -1271,14 +1271,14 @@
         "authoritativeness": 45
       },
       "semantic": {
-        "voice": 53,
-        "slop": 31,
+        "voice": 54,
+        "slop": 30,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-09-22",
         "preTidySlop": 38,
         "preTidyVoice": 52,
-        "tidied": "2026-09-22"
+        "tidied": "2026-09-22 (2 passes)"
       }
     },
     {
@@ -1730,14 +1730,14 @@
         "authoritativeness": 55
       },
       "semantic": {
-        "voice": 66,
-        "slop": 33,
+        "voice": 67,
+        "slop": 31,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-09-22",
         "preTidySlop": 46,
         "preTidyVoice": 63,
-        "tidied": "2026-09-22"
+        "tidied": "2026-09-22 (2 passes)"
       }
     },
     {
@@ -2130,7 +2130,7 @@
       "articles": 9,
       "avgSlopBefore": 42,
       "avgSlopAfter": 31,
-      "note": "Bucket C slop-tidy: em dashes + reframe cliches removed, voice preserved. Live on main (commit 2e7de41)."
+      "note": "Bucket C slop-tidy (2 passes): em dashes + reveal cliches removed, voice preserved. The 9 tidied articles dropped from ~42 to ~29 avg slop. Live on main (4fccef3). Deeper reveal-cadence remains but further removal needs heavier rewriting of ranking pages, diminishing returns."
     }
   }
 }
