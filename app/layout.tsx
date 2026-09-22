@@ -6,6 +6,7 @@ import Footer from "./components/footer";
 import CookieConsent from "./components/CookieConsent";
 import PageViewPing from "./components/PageViewPing";
 import AffiliateClickTracker from "./components/AffiliateClickTracker";
+import PartnerClickTracker from "./components/PartnerClickTracker";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -129,6 +130,7 @@ export default function RootLayout({
           <PageViewPing />
         </Suspense>
         <AffiliateClickTracker />
+        <PartnerClickTracker />
 
         <Script
           id="organization-schema"

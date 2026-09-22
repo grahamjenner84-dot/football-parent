@@ -19,6 +19,7 @@ import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
+import type { PartnerClickStats } from "@/lib/supabase/partner-clicks"; // type-only, same reasoning as the page-views import above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
@@ -40,7 +41,8 @@ type Tab =
   | "pageviewsCompare"
   | "pageviewsTrend"
   | "coachApp"
-  | "affiliate";
+  | "affiliate"
+  | "partnerClicks";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
@@ -49,6 +51,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "rank", label: "Rank tracker" },
   { id: "coachApp", label: "Coach App" },
   { id: "affiliate", label: "Affiliate clicks" },
+  { id: "partnerClicks", label: "Football DNA clicks" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
   { id: "compare", label: "Compare days" },
@@ -141,6 +144,8 @@ export default function SeoAdminPage() {
   const [coachAppViewError, setCoachAppViewError] = useState("");
   const [affiliateStats, setAffiliateStats] = useState<AffiliateClickStats | null>(null);
   const [affiliateError, setAffiliateError] = useState("");
+  const [partnerStats, setPartnerStats] = useState<PartnerClickStats | null>(null);
+  const [partnerError, setPartnerError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -224,6 +229,22 @@ export default function SeoAdminPage() {
   }, []);
 
   useEffect(() => {
+    fetch("/api/partner-click-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load partner click report");
+        }
+        return res.json();
+      })
+      .then((data: PartnerClickStats) => {
+        setPartnerStats(data);
+        setPartnerError("");
+      })
+      .catch((err) => setPartnerError(err.message));
+  }, []);
+
+  useEffect(() => {
     if (isFirstFetch.current) {
       setLoading(true);
       isFirstFetch.current = false;
@@ -293,6 +314,9 @@ export default function SeoAdminPage() {
             {t.id === "affiliate" && affiliateStats && (
               <span style={styles.tabCount}>{affiliateStats.totalClicks}</span>
             )}
+            {t.id === "partnerClicks" && partnerStats && (
+              <span style={styles.tabCount}>{partnerStats.totalClicks}</span>
+            )}
             {t.id !== "dashboard" &&
               t.id !== "searches" &&
               t.id !== "cookies" &&
@@ -302,6 +326,7 @@ export default function SeoAdminPage() {
               t.id !== "pageviewsTrend" &&
               t.id !== "coachApp" &&
               t.id !== "affiliate" &&
+              t.id !== "partnerClicks" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
           </button>
         ))}
@@ -359,6 +384,14 @@ export default function SeoAdminPage() {
             {affiliateError && <p style={styles.error}>{affiliateError}</p>}
             {affiliateStats && <AffiliateClicksReport stats={affiliateStats} />}
           </>
+        ) : tab === "partnerClicks" ? (
+          <>
+            {!partnerStats && !partnerError && (
+              <p style={styles.muted}>Loading Football DNA click report...</p>
+            )}
+            {partnerError && <p style={styles.error}>{partnerError}</p>}
+            {partnerStats && <PartnerClicksReport stats={partnerStats} />}
+          </>
         ) : (
           <>
             {loading && <p style={styles.muted}>Loading report...</p>}
@@ -413,6 +446,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "cookies":
       return 0;
     case "affiliate":
+      return 0;
+    case "partnerClicks":
       return 0;
     case "compare":
       return 0;
@@ -1736,6 +1771,137 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
                 </div>
               </div>
             ))}
+        </>
+      )}
+    </div>
+  );
+}
+
+function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const pagesWithViews = stats.byPage.filter((p) => p.pageViews !== null);
+  const totalViews = pagesWithViews.reduce((sum, p) => sum + (p.pageViews ?? 0), 0);
+  const totalPageClicks = pagesWithViews.reduce((sum, p) => sum + p.clicks, 0);
+  const overallRate = totalViews > 0 ? totalPageClicks / totalViews : null;
+
+  // Only days that actually saw a click are worth offering - the window is
+  // zero-filled, so most entries are empty days.
+  const dayOptions = stats.byDay.filter((d) => d.clicks > 0);
+  const selectedDay = selectedDate ? stats.byDay.find((d) => d.date === selectedDate) ?? null : null;
+
+  return (
+    <div style={styles.list}>
+      <SectionNote label="What this measures, and what it doesn't">
+        Every click on an outbound link to an editorial partner (Football DNA
+        today), logged first-party from the click itself. This is the number a
+        partner asks for and the one that justifies a sponsorship: how much
+        traffic we actually send them, and what share of a page&rsquo;s readers
+        click through. It is measured on our side of the link, so it keeps
+        counting the ~90% of visitors who never make a cookie-consent choice
+        and are invisible to Google Analytics. What it cannot see is the other
+        side of the link: what those visitors did once they reached the
+        partner&rsquo;s site.
+        {stats.botClicks > 0 && (
+          <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
+        )}
+      </SectionNote>
+
+      <SectionNote label="Why the view counts here are lower than the Page views tab">
+        Views are counted over the same window as the clicks, starting when
+        partner click logging went live, not over the last {stats.days} days.
+        These articles have months of view history from before any click could
+        be recorded, so counting all of it would divide a few clicks by
+        thousands of views and call the result a click-through rate. The Page
+        views tab still shows the full 30 days, so the two numbers are meant to
+        differ.
+      </SectionNote>
+
+      <p style={styles.muted}>
+        {stats.clampedToTrackingStart
+          ? `Clicks and views both counted since ${new Date(stats.since).toLocaleString("en-GB")}, when partner click logging went live.`
+          : `Clicks and views both counted over the last ${stats.days} days.`}
+      </p>
+
+      {dayOptions.length > 0 && (
+        <label style={styles.compareLabel}>
+          Pick a date to see that day&rsquo;s clicks by page
+          <select
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            style={styles.dateInput}
+          >
+            <option value="">All (whole window)</option>
+            {dayOptions
+              .slice()
+              .reverse()
+              .map((d) => (
+                <option key={d.date} value={d.date}>
+                  {d.date} ({d.clicks} click{d.clicks === 1 ? "" : "s"})
+                </option>
+              ))}
+          </select>
+        </label>
+      )}
+
+      {stats.totalClicks === 0 ? (
+        <EmptyState text="No Football DNA clicks recorded yet. Tracking went live on 22 September 2026 - before that nothing was measured, so an empty window here is not the same as no clicks." />
+      ) : selectedDay ? (
+        <>
+          <p style={styles.sectionNote}>
+            {selectedDay.date} only - {selectedDay.clicks} click
+            {selectedDay.clicks === 1 ? "" : "s"}. A single day is a small
+            sample; clear the date for the click-through rate, which needs the
+            whole window to mean anything.
+          </p>
+
+          <h3 style={styles.affiliateHeading}>By page on {selectedDay.date}</h3>
+          {selectedDay.byPage.length === 0 && <EmptyState text="No clicks on this day." />}
+          {selectedDay.byPage.map((row) => (
+            <div key={row.path} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.path}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+            </div>
+          ))}
+        </>
+      ) : (
+        <>
+          <div style={styles.cardStats}>
+            <span>Clicks: {stats.totalClicks}</span>
+            <span>Click-through rate: {overallRate === null ? "-" : pct(overallRate)}</span>
+          </div>
+
+          {stats.byPartner.length > 1 && (
+            <>
+              <h3 style={styles.affiliateHeading}>By partner</h3>
+              {stats.byPartner.map((row) => (
+                <div key={row.slug} style={styles.card}>
+                  <div style={styles.cardTop}>
+                    <span style={styles.cardQuery}>{row.label}</span>
+                    <span style={styles.cardBadge}>{row.clicks} clicks</span>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+
+          <h3 style={styles.affiliateHeading}>By page</h3>
+          {stats.byPage.map((row) => (
+            <div key={row.path} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.path}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+              <div style={styles.cardStats}>
+                <span>Views: {row.pageViews ?? "-"}</span>
+                <span>
+                  Click-through rate: {row.clickRate === null ? "-" : pct(row.clickRate)}
+                </span>
+              </div>
+            </div>
+          ))}
         </>
       )}
     </div>
