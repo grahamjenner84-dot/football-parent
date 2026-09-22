@@ -849,3 +849,15 @@ Ran the URL Inspection API directly (`urlInspection.index:inspect`, same one-off
 **Reframed:** not an indexing problem. The 377 recent-28-day impressions are spread across many distinct long-tail queries, only two of which clear the 3-impression floor to show in `topQueries` (10 impressions between them) — consistent with a 3-week-old page still inside Google's normal post-launch ranking-volatility window, where a fresh-content bump settles before the page finds its stable query set, not a technical or content problem. Position hasn't moved, which is the more informative signal here than the impression count on its own.
 
 **No action taken.** Watching rather than editing — too early to read a real trend from 3 weekly data points on a brand-new page, and the one clear fact (clean index status, stable position) doesn't support a content fix.
+
+## `football-team-spreadsheet` near-zero impressions — checked, technically clean but unexplained
+
+Same 22 September check-in flagged this page as a new, unexplained silence entry (136 impr/21d baseline → 1 impr/7d recent). Ran the same URL Inspection check as above.
+
+**Technically clean:** verdict PASS, "Submitted and indexed", robots allowed, correct canonical, listed in `sitemap.xml`, **last crawled `2026-09-21T18:45:14Z`** (yesterday) — this is being recrawled regularly, not stuck.
+
+**But the collapse is real and sharper than the formations page's:** week of 6 Sept had 135 impressions / 14 clicks / position 4.9 / 10.4% CTR (a strong debut week). Week of 13 Sept: 1 impression, 0 clicks. `topQueries` now returns nothing (falls below the 3-impression/90-day floor). Position on the single remaining impression reads 3.0, but that's a sample of one, not a real position read.
+
+**No technical cause found, so per the standing rule this isn't being treated as a content problem.** Two most likely explanations, neither confirmed: (a) the same fresh-content evaluation bump seen on `best-football-formations-by-age-group`, just steeper here — Google trials a new URL at a visible position for a short window, then re-settles it, which can look like a cliff rather than a taper if the true post-settling position is well outside page 1; or (b) a genuine ranking loss for "football team spreadsheet"/"soccer team spreadsheet" not yet visible in any technical signal. The strong week-1 CTR (10.4%) argues against an engagement-quality explanation.
+
+**No action taken.** Watching only — recrawl is current, so another read once a full post-recrawl week of data exists (~29 Sept) should show whether this recovers on its own or is a real, lasting drop worth a live SERP check at that point.
