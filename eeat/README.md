@@ -11,9 +11,13 @@ time.
   `content/**/*.mdx` for measurable signals and scores each article 0-100 on
   the four pillars. Run from repo root: `node eeat/score-eeat.mjs` (writes
   `eeat-scores-raw.json`).
-- `eeat-scores.json` — the curated record: mechanical scores for all 86
-  articles, plus semantic `voice` / `slop` / `bucket` fields for the articles
-  that have had a semantic read. **This is the file to read first next time.**
+- `eeat-scores.json` — the curated record: mechanical scores plus semantic
+  `voice` / `slop` / `bucket` / `expert` fields for **all 86 articles**
+  (full pass completed 2026-09-22), and a `semanticSummary` block. **This is
+  the file to read first next time.**
+- `bucket-b-worklist.md` — the 36 Bucket-B articles that need voice or an
+  expert, each with the section to strengthen and a draft interview question,
+  grouped by expert archetype. The actionable "what to do next" list.
 - `eeat-scores-raw.json` — raw output of the scorer (regenerated, not edited).
 - Live dashboards (private artifacts):
   - Per-article scores: https://claude.ai/artifact/HaX31yQkNzDcwwjPBQkDhi
@@ -58,6 +62,32 @@ a read; the mechanical score only decides which articles to read.
 Averages: Overall 70, Experience 56, Expertise 98, Authoritativeness 44,
 Trust 82. Depth is near-universal; the movement is all in **Experience** and
 **Authoritativeness**.
+
+## Full semantic pass result (2026-09-22, all 86 articles)
+
+Averages: **voice 46/100, slop 40/100**. Buckets: **A = 8, B = 36, C = 42**.
+So nearly half the site (42 articles) already carries genuine first-hand
+voice and just needs protecting; 36 need voice or an expert; only 8 are a
+pure citations job.
+
+**Bucket-B expert demand** (how many B articles each archetype would fix) —
+this is the real recruit priority, with counts:
+
+| Expert | B articles |
+|---|---|
+| Scout / recruitment lead | 11 |
+| Academy coach / manager | 9 |
+| Girls-pathway coach (ETC/RTC) | 7 |
+| Graham first-person (no expert) | 3 |
+| Sports scientist / physio | 2 |
+| Podiatrist / boot-fit | 2 |
+| Registered agent | 1 |
+| Sports psychologist | 1 |
+
+The regex was confirmed a **false negative on 8 articles** (mechanical
+Experience <=55 but real voice >=60), incl. what-to-say (15->88),
+are-development-centres-worth-it (15->88), support-child-after-bad-match
+(55->88). It also over-rated impersonal-but-cited pages. Trust the bucket.
 
 ## The buckets (the deslopify plan)
 
@@ -106,9 +136,9 @@ don't cover.
 
 1. `node eeat/score-eeat.mjs` to refresh mechanical scores after new/edited
    articles.
-2. For any article you're about to touch, do a semantic voice/slop read and
-   record `voice` / `slop` / `bucket` / `expert` in `eeat-scores.json` so the
-   record grows. Only 8 of 86 carry semantic fields so far.
+2. All 86 carry semantic fields as of 2026-09-22. Re-read an article's voice/
+   slop and update its `semantic` block in `eeat-scores.json` after you edit
+   it, so the record tracks the change (bump `reviewed` to the new date).
 3. Act by bucket: A = Claude adds citations; B = collect a Graham story or an
    expert answer from the question bank; C = strip slop and cite, never
    rewrite the voice.

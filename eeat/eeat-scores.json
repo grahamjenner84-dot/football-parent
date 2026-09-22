@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-22",
   "method": "eeat/score-eeat.mjs (mechanical signal parse) + semantic voice/slop read per article",
-  "note": "mechanical scores exist for all articles; semantic (voice/slop/bucket) done for the 8-article proof batch only. Extend by running the semantic read on the rest and filling the semantic field.",
+  "note": "mechanical scores + full semantic (voice/slop/bucket) read for all 86 articles as of 2026-09-22.",
   "buckets": {
     "A": "citations only (voice already fine)",
     "B": "needs Graham voice or an expert quote",
@@ -31,7 +31,13 @@
         "expertise": 84,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 6,
+        "slop": 62,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-happens-at-academy-trials",
@@ -53,7 +59,7 @@
         "voice": 25,
         "slop": 60,
         "bucket": "B",
-        "expert": "scout/academy-coach",
+        "expert": "scout",
         "reviewed": "2026-09-22"
       }
     },
@@ -73,7 +79,13 @@
         "expertise": 85,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 88,
+        "slop": 28,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "football-trials-near-me",
@@ -91,7 +103,13 @@
         "expertise": 91,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 10,
+        "slop": 48,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-age-do-football-academies-recruit",
@@ -109,7 +127,13 @@
         "expertise": 98,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 8,
+        "slop": 50,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "girls-academy-vs-grassroots-football",
@@ -127,7 +151,13 @@
         "expertise": 97,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 10,
+        "slop": 60,
+        "bucket": "B",
+        "expert": "girls-pathway-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "girls-football-trials",
@@ -145,7 +175,13 @@
         "expertise": 99,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 12,
+        "slop": 50,
+        "bucket": "B",
+        "expert": "girls-pathway-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-much-training-is-too-much",
@@ -163,7 +199,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 12,
+        "slop": 66,
+        "bucket": "B",
+        "expert": "sports-scientist",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-football-boots-for-wide-feet-kids",
@@ -181,7 +223,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 8,
+        "slop": 54,
+        "bucket": "B",
+        "expert": "podiatrist",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-footballs-by-age",
@@ -199,7 +247,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 58,
+        "slop": 28,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "late-developers-in-girls-football",
@@ -217,7 +271,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 10,
+        "slop": 62,
+        "bucket": "B",
+        "expert": "girls-pathway-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-age-do-girls-football-academies-recruit",
@@ -235,7 +295,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 8,
+        "slop": 60,
+        "bucket": "B",
+        "expert": "girls-pathway-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "good-football-development-environment",
@@ -253,7 +319,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 74,
+        "slop": 30,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "ag-vs-fg-boots",
@@ -271,7 +343,13 @@
         "expertise": 93,
         "authoritativeness": 20
       },
-      "semantic": null
+      "semantic": {
+        "voice": 15,
+        "slop": 45,
+        "bucket": "B",
+        "expert": "podiatrist",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-football-gloves-for-winter-training",
@@ -289,7 +367,13 @@
         "expertise": 91,
         "authoritativeness": 32
       },
-      "semantic": null
+      "semantic": {
+        "voice": 16,
+        "slop": 50,
+        "bucket": "B",
+        "expert": "graham",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-football-scouts-identify-players",
@@ -307,7 +391,13 @@
         "expertise": 96,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 55,
+        "slop": 28,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "improve-football-decision-making",
@@ -325,7 +415,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 58,
+        "slop": 42,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "late-developers-in-football",
@@ -343,7 +439,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 72,
+        "slop": 38,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-to-become-a-football-coach",
@@ -361,7 +463,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 66,
+        "slop": 32,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "leave-grassroots-football-for-an-academy",
@@ -379,7 +487,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 80,
+        "slop": 42,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-to-say-after-football-matches",
@@ -401,7 +515,7 @@
         "voice": 88,
         "slop": 26,
         "bucket": "C",
-        "expert": "sports-psychologist(optional)",
+        "expert": "none",
         "reviewed": "2026-09-22"
       }
     },
@@ -421,7 +535,13 @@
         "expertise": 100,
         "authoritativeness": 44
       },
-      "semantic": null
+      "semantic": {
+        "voice": 8,
+        "slop": 45,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-shin-pads-for-kids-football",
@@ -439,7 +559,13 @@
         "expertise": 100,
         "authoritativeness": 41
       },
-      "semantic": null
+      "semantic": {
+        "voice": 42,
+        "slop": 30,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-is-grassroots-football",
@@ -457,7 +583,13 @@
         "expertise": 100,
         "authoritativeness": 43
       },
-      "semantic": null
+      "semantic": {
+        "voice": 68,
+        "slop": 38,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-do-academy-coaches-look-for",
@@ -475,7 +607,13 @@
         "expertise": 100,
         "authoritativeness": 0
       },
-      "semantic": null
+      "semantic": {
+        "voice": 64,
+        "slop": 40,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "football-scholarships-uk",
@@ -493,7 +631,13 @@
         "expertise": 100,
         "authoritativeness": 57
       },
-      "semantic": null
+      "semantic": {
+        "voice": 5,
+        "slop": 40,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "playing-up-an-age-group-football",
@@ -515,7 +659,7 @@
         "voice": 25,
         "slop": 60,
         "bucket": "B",
-        "expert": "academy-coach/graham",
+        "expert": "academy-coach",
         "reviewed": "2026-09-22"
       }
     },
@@ -539,7 +683,7 @@
         "voice": 92,
         "slop": 24,
         "bucket": "C",
-        "expert": "scout(optional)",
+        "expert": "scout",
         "reviewed": "2026-09-22"
       }
     },
@@ -559,7 +703,13 @@
         "expertise": 100,
         "authoritativeness": 66
       },
-      "semantic": null
+      "semantic": {
+        "voice": 12,
+        "slop": 55,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "pre-academy-football",
@@ -577,7 +727,13 @@
         "expertise": 100,
         "authoritativeness": 67
       },
-      "semantic": null
+      "semantic": {
+        "voice": 8,
+        "slop": 52,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "premier-league-development-centres-list",
@@ -595,7 +751,13 @@
         "expertise": 100,
         "authoritativeness": 67
       },
-      "semantic": null
+      "semantic": {
+        "voice": 8,
+        "slop": 50,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "is-private-football-coaching-worth-it",
@@ -613,7 +775,13 @@
         "expertise": 100,
         "authoritativeness": 25
       },
-      "semantic": null
+      "semantic": {
+        "voice": 52,
+        "slop": 46,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "futurefit-football-dna-interview-part-2",
@@ -631,7 +799,13 @@
         "expertise": 85,
         "authoritativeness": 10
       },
-      "semantic": null
+      "semantic": {
+        "voice": 92,
+        "slop": 24,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "aston-villa-development-centre-guide",
@@ -653,7 +827,7 @@
         "voice": 8,
         "slop": 62,
         "bucket": "B",
-        "expert": "scout(reusable across club guides)",
+        "expert": "scout",
         "reviewed": "2026-09-22"
       }
     },
@@ -673,7 +847,13 @@
         "expertise": 100,
         "authoritativeness": 40
       },
-      "semantic": null
+      "semantic": {
+        "voice": 46,
+        "slop": 44,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-to-find-a-football-agent-for-your-child",
@@ -691,7 +871,13 @@
         "expertise": 100,
         "authoritativeness": 78
       },
-      "semantic": null
+      "semantic": {
+        "voice": 8,
+        "slop": 38,
+        "bucket": "B",
+        "expert": "agent",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "tottenham-development-centres-explained",
@@ -709,7 +895,13 @@
         "expertise": 100,
         "authoritativeness": 78
       },
-      "semantic": null
+      "semantic": {
+        "voice": 7,
+        "slop": 34,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "girls-rtcs-explained",
@@ -727,7 +919,13 @@
         "expertise": 100,
         "authoritativeness": 78
       },
-      "semantic": null
+      "semantic": {
+        "voice": 7,
+        "slop": 44,
+        "bucket": "B",
+        "expert": "girls-pathway-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-girls-football-academies-work",
@@ -769,7 +967,13 @@
         "expertise": 100,
         "authoritativeness": 41
       },
-      "semantic": null
+      "semantic": {
+        "voice": 45,
+        "slop": 30,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "can-academy-players-play-grassroots-football",
@@ -787,7 +991,13 @@
         "expertise": 100,
         "authoritativeness": 42
       },
-      "semantic": null
+      "semantic": {
+        "voice": 42,
+        "slop": 28,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "development-centres-vs-academies",
@@ -805,7 +1015,13 @@
         "expertise": 100,
         "authoritativeness": 13
       },
-      "semantic": null
+      "semantic": {
+        "voice": 62,
+        "slop": 25,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-football-clubs-recruit-young-players",
@@ -823,7 +1039,13 @@
         "expertise": 100,
         "authoritativeness": 42
       },
-      "semantic": null
+      "semantic": {
+        "voice": 28,
+        "slop": 48,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "support-child-after-bad-match",
@@ -841,7 +1063,13 @@
         "expertise": 100,
         "authoritativeness": 43
       },
-      "semantic": null
+      "semantic": {
+        "voice": 88,
+        "slop": 26,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "academy-categories-explained",
@@ -859,7 +1087,13 @@
         "expertise": 100,
         "authoritativeness": 52
       },
-      "semantic": null
+      "semantic": {
+        "voice": 52,
+        "slop": 42,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-academy-football-works",
@@ -877,7 +1111,13 @@
         "expertise": 100,
         "authoritativeness": 20
       },
-      "semantic": null
+      "semantic": {
+        "voice": 50,
+        "slop": 40,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "jpl-and-academy-football",
@@ -895,7 +1135,13 @@
         "expertise": 100,
         "authoritativeness": 22
       },
-      "semantic": null
+      "semantic": {
+        "voice": 58,
+        "slop": 50,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "football-development-centres-near-me",
@@ -913,7 +1159,13 @@
         "expertise": 100,
         "authoritativeness": 55
       },
-      "semantic": null
+      "semantic": {
+        "voice": 40,
+        "slop": 34,
+        "bucket": "A",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-to-become-a-professional-footballer",
@@ -931,7 +1183,13 @@
         "expertise": 100,
         "authoritativeness": 25
       },
-      "semantic": null
+      "semantic": {
+        "voice": 48,
+        "slop": 45,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "veo-camera-alternatives",
@@ -949,7 +1207,13 @@
         "expertise": 100,
         "authoritativeness": 84
       },
-      "semantic": null
+      "semantic": {
+        "voice": 10,
+        "slop": 55,
+        "bucket": "B",
+        "expert": "graham",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "futurefit-football-dna-interview-part-1",
@@ -967,7 +1231,13 @@
         "expertise": 85,
         "authoritativeness": 35
       },
-      "semantic": null
+      "semantic": {
+        "voice": 82,
+        "slop": 30,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-players-progress-through-football-development-centres",
@@ -985,7 +1255,13 @@
         "expertise": 85,
         "authoritativeness": 45
       },
-      "semantic": null
+      "semantic": {
+        "voice": 52,
+        "slop": 38,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-is-eppp",
@@ -1027,7 +1303,13 @@
         "expertise": 99,
         "authoritativeness": 29
       },
-      "semantic": null
+      "semantic": {
+        "voice": 62,
+        "slop": 35,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "bio-banding-football",
@@ -1045,7 +1327,13 @@
         "expertise": 100,
         "authoritativeness": 100
       },
-      "semantic": null
+      "semantic": {
+        "voice": 12,
+        "slop": 42,
+        "bucket": "B",
+        "expert": "sports-scientist",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "why-isnt-my-child-improving-at-football",
@@ -1063,7 +1351,13 @@
         "expertise": 100,
         "authoritativeness": 31
       },
-      "semantic": null
+      "semantic": {
+        "voice": 70,
+        "slop": 34,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "jpl-martin-brock-interview-part-1",
@@ -1081,7 +1375,13 @@
         "expertise": 85,
         "authoritativeness": 41
       },
-      "semantic": null
+      "semantic": {
+        "voice": 78,
+        "slop": 46,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-to-join-a-football-academy",
@@ -1099,7 +1399,13 @@
         "expertise": 100,
         "authoritativeness": 67
       },
-      "semantic": null
+      "semantic": {
+        "voice": 22,
+        "slop": 28,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "new-fa-youth-football-format",
@@ -1117,7 +1423,13 @@
         "expertise": 100,
         "authoritativeness": 67
       },
-      "semantic": null
+      "semantic": {
+        "voice": 26,
+        "slop": 34,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "emerging-talent-centres-explained",
@@ -1135,7 +1447,13 @@
         "expertise": 100,
         "authoritativeness": 68
       },
-      "semantic": null
+      "semantic": {
+        "voice": 28,
+        "slop": 26,
+        "bucket": "B",
+        "expert": "girls-pathway-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-to-get-into-the-jpl",
@@ -1153,7 +1471,13 @@
         "expertise": 100,
         "authoritativeness": 21
       },
-      "semantic": null
+      "semantic": {
+        "voice": 66,
+        "slop": 30,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "jpl-martin-brock-interview-part-2",
@@ -1171,7 +1495,13 @@
         "expertise": 85,
         "authoritativeness": 45
       },
-      "semantic": null
+      "semantic": {
+        "voice": 82,
+        "slop": 42,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "fulham-fc-development-centre-guide",
@@ -1189,7 +1519,13 @@
         "expertise": 100,
         "authoritativeness": 69
       },
-      "semantic": null
+      "semantic": {
+        "voice": 60,
+        "slop": 34,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "football-drills-for-7-and-8-year-olds",
@@ -1207,7 +1543,13 @@
         "expertise": 100,
         "authoritativeness": 24
       },
-      "semantic": null
+      "semantic": {
+        "voice": 88,
+        "slop": 18,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "academy-life-paul-barry-interview",
@@ -1225,7 +1567,13 @@
         "expertise": 83,
         "authoritativeness": 55
       },
-      "semantic": null
+      "semantic": {
+        "voice": 82,
+        "slop": 36,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-much-does-academy-football-cost",
@@ -1243,7 +1591,13 @@
         "expertise": 100,
         "authoritativeness": 33
       },
-      "semantic": null
+      "semantic": {
+        "voice": 48,
+        "slop": 50,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "leeds-united-development-centre-guide",
@@ -1261,7 +1615,13 @@
         "expertise": 100,
         "authoritativeness": 78
       },
-      "semantic": null
+      "semantic": {
+        "voice": 35,
+        "slop": 30,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "how-to-get-scouted-for-football",
@@ -1279,7 +1639,13 @@
         "expertise": 100,
         "authoritativeness": 44
       },
-      "semantic": null
+      "semantic": {
+        "voice": 52,
+        "slop": 38,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "uk-football-development-centres-explained",
@@ -1297,7 +1663,13 @@
         "expertise": 100,
         "authoritativeness": 51
       },
-      "semantic": null
+      "semantic": {
+        "voice": 70,
+        "slop": 32,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-football-boots-for-kids",
@@ -1315,7 +1687,13 @@
         "expertise": 100,
         "authoritativeness": 39
       },
-      "semantic": null
+      "semantic": {
+        "voice": 66,
+        "slop": 28,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "build-confidence-young-footballers",
@@ -1333,7 +1711,13 @@
         "expertise": 100,
         "authoritativeness": 55
       },
-      "semantic": null
+      "semantic": {
+        "voice": 63,
+        "slop": 46,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "signs-your-child-is-ready-for-academy-football",
@@ -1351,7 +1735,13 @@
         "expertise": 100,
         "authoritativeness": 41
       },
-      "semantic": null
+      "semantic": {
+        "voice": 60,
+        "slop": 35,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "understanding-academy-release",
@@ -1369,7 +1759,13 @@
         "expertise": 100,
         "authoritativeness": 89
       },
-      "semantic": null
+      "semantic": {
+        "voice": 42,
+        "slop": 44,
+        "bucket": "B",
+        "expert": "sports-psychologist",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "west-ham-player-pathway-guide",
@@ -1387,7 +1783,13 @@
         "expertise": 100,
         "authoritativeness": 89
       },
-      "semantic": null
+      "semantic": {
+        "voice": 18,
+        "slop": 56,
+        "bucket": "B",
+        "expert": "graham",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "football-academy-trials-uk",
@@ -1405,7 +1807,13 @@
         "expertise": 100,
         "authoritativeness": 89
       },
-      "semantic": null
+      "semantic": {
+        "voice": 28,
+        "slop": 50,
+        "bucket": "B",
+        "expert": "scout",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "relative-age-effect-football",
@@ -1423,7 +1831,13 @@
         "expertise": 100,
         "authoritativeness": 98
       },
-      "semantic": null
+      "semantic": {
+        "voice": 70,
+        "slop": 28,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-football-goals-for-kids",
@@ -1441,7 +1855,13 @@
         "expertise": 100,
         "authoritativeness": 54
       },
-      "semantic": null
+      "semantic": {
+        "voice": 76,
+        "slop": 24,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-grassroots-football-apps",
@@ -1459,7 +1879,13 @@
         "expertise": 92,
         "authoritativeness": 66
       },
-      "semantic": null
+      "semantic": {
+        "voice": 76,
+        "slop": 20,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "crystal-palace-development-centre-guide",
@@ -1477,7 +1903,13 @@
         "expertise": 100,
         "authoritativeness": 78
       },
-      "semantic": null
+      "semantic": {
+        "voice": 50,
+        "slop": 40,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-qualifications-do-i-need-to-be-a-football-coach",
@@ -1495,7 +1927,13 @@
         "expertise": 98,
         "authoritativeness": 78
       },
-      "semantic": null
+      "semantic": {
+        "voice": 68,
+        "slop": 22,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-is-football-iq",
@@ -1513,7 +1951,13 @@
         "expertise": 100,
         "authoritativeness": 78
       },
-      "semantic": null
+      "semantic": {
+        "voice": 47,
+        "slop": 54,
+        "bucket": "B",
+        "expert": "academy-coach",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "jpl-vs-grassroots-football",
@@ -1531,7 +1975,13 @@
         "expertise": 100,
         "authoritativeness": 63
       },
-      "semantic": null
+      "semantic": {
+        "voice": 62,
+        "slop": 58,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "what-is-the-junior-premier-league",
@@ -1549,7 +1999,13 @@
         "expertise": 100,
         "authoritativeness": 74
       },
-      "semantic": null
+      "semantic": {
+        "voice": 55,
+        "slop": 44,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "best-football-formations-by-age-group",
@@ -1567,7 +2023,13 @@
         "expertise": 95,
         "authoritativeness": 100
       },
-      "semantic": null
+      "semantic": {
+        "voice": 70,
+        "slop": 19,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "equal-playing-time-in-grassroots-football",
@@ -1585,7 +2047,13 @@
         "expertise": 100,
         "authoritativeness": 89
       },
-      "semantic": null
+      "semantic": {
+        "voice": 82,
+        "slop": 27,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-22"
+      }
     },
     {
       "slug": "football-burnout",
@@ -1607,9 +2075,29 @@
         "voice": 90,
         "slop": 22,
         "bucket": "C",
-        "expert": "sports-psychologist(optional)",
+        "expert": "sports-psychologist",
         "reviewed": "2026-09-22"
       }
     }
-  ]
+  ],
+  "semanticSummary": {
+    "reviewed": 86,
+    "avgVoice": 46,
+    "avgSlop": 40,
+    "buckets": {
+      "A": 8,
+      "B": 36,
+      "C": 42
+    },
+    "expertDemand": {
+      "academy-coach": 9,
+      "scout": 11,
+      "girls-pathway-coach": 7,
+      "sports-scientist": 2,
+      "podiatrist": 2,
+      "graham": 3,
+      "agent": 1,
+      "sports-psychologist": 1
+    }
+  }
 }
