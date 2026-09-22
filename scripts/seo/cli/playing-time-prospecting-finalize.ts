@@ -134,7 +134,7 @@ async function main() {
     s.domainRank, s.urlAuthority, s.spamScore, s.httpStatus, s.outreachType, s.notes,
   ])];
 
-  const csvPath = path.join(REPO_ROOT, "playing-time-app-backlink-prospects-2026-09-19.csv");
+  const csvPath = path.join(REPO_ROOT, "seo-data", "exports", "playing-time-app-backlink-prospects-2026-09-19.csv");
   fs.writeFileSync(csvPath, writeCsv(csvRows));
   console.log(`Wrote ${scored.length} scored rows to ${csvPath}`);
 
