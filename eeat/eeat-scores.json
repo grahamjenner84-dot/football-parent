@@ -320,11 +320,14 @@
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 74,
-        "slop": 30,
+        "voice": 75,
+        "slop": 24,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 30,
+        "preTidyVoice": 74,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -416,11 +419,14 @@
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 58,
-        "slop": 42,
+        "voice": 62,
+        "slop": 29,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 42,
+        "preTidyVoice": 58,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -584,11 +590,14 @@
         "authoritativeness": 43
       },
       "semantic": {
-        "voice": 68,
-        "slop": 38,
+        "voice": 73,
+        "slop": 23,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 38,
+        "preTidyVoice": 68,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -608,11 +617,14 @@
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 64,
-        "slop": 40,
+        "voice": 67,
+        "slop": 30,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 40,
+        "preTidyVoice": 64,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -1184,11 +1196,14 @@
         "authoritativeness": 25
       },
       "semantic": {
-        "voice": 48,
-        "slop": 45,
+        "voice": 58,
+        "slop": 38,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 45,
+        "preTidyVoice": 48,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -1256,11 +1271,14 @@
         "authoritativeness": 45
       },
       "semantic": {
-        "voice": 52,
-        "slop": 38,
+        "voice": 53,
+        "slop": 31,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 38,
+        "preTidyVoice": 52,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -1712,11 +1730,14 @@
         "authoritativeness": 55
       },
       "semantic": {
-        "voice": 63,
-        "slop": 46,
+        "voice": 66,
+        "slop": 33,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 46,
+        "preTidyVoice": 63,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -1976,11 +1997,14 @@
         "authoritativeness": 63
       },
       "semantic": {
-        "voice": 62,
-        "slop": 58,
+        "voice": 66,
+        "slop": 34,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 58,
+        "preTidyVoice": 62,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -2000,11 +2024,14 @@
         "authoritativeness": 74
       },
       "semantic": {
-        "voice": 55,
-        "slop": 44,
+        "voice": 57,
+        "slop": 35,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-22",
+        "preTidySlop": 44,
+        "preTidyVoice": 55,
+        "tidied": "2026-09-22"
       }
     },
     {
@@ -2083,7 +2110,7 @@
   "semanticSummary": {
     "reviewed": 86,
     "avgVoice": 46,
-    "avgSlop": 40,
+    "avgSlop": 39,
     "buckets": {
       "A": 8,
       "B": 36,
@@ -2098,6 +2125,12 @@
       "graham": 3,
       "agent": 1,
       "sports-psychologist": 1
+    },
+    "tidied2026_09_22": {
+      "articles": 9,
+      "avgSlopBefore": 42,
+      "avgSlopAfter": 31,
+      "note": "Bucket C slop-tidy: em dashes + reframe cliches removed, voice preserved. Live on main (commit 2e7de41)."
     }
   }
 }

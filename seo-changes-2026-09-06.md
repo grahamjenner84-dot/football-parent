@@ -839,3 +839,7 @@ Articles and what changed:
 - `academy-pathway/how-players-progress-through-football-development-centres` - 1 em dash.
 
 Note: not an SEO-metric-targeting edit; it is a house-style/originality consistency fix, so no per-page watch window applies, but logged here for traceability. Commit hash recorded on commit below.
+
+## Fix pre-existing broken sentence in how-players-progress-through-football-development-centres
+
+Spotted during the post-slop-tidy re-score: line 37 read "work like a ladder  you join, you impress" (double space, missing punctuation, a pre-existing run-on, NOT introduced by the slop-tidy commit 2e7de41). Fixed to "work like a ladder: you join, you impress" (colon). Copy correctness fix on a live page.

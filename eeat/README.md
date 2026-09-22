@@ -94,6 +94,12 @@ are-development-centres-worth-it (15->88), support-child-after-bad-match
 - **A — citations only.** Voice already fine; just under-sourced. Claude can
   do these directly: add ~2 authoritative citations per 1000 words (FA,
   Premier League, UEFA, NCBI, gov.uk). Low risk, factual.
+  **Exception: gear/product articles (`content/football-gear/*`) are exempt
+  from external citations** (Graham's rule, 2026-09-22, now in CLAUDE.md):
+  they are conversion pages and outbound links pull readers away from the
+  affiliate click, so their low external-citation count is by design, not a
+  gap. `best-shin-pads-for-kids-football`, though scored Bucket A, needs no
+  citation work. Internal links to other Football Parent articles are fine.
 - **B — needs Graham's voice or an expert quote.** Well-structured but
   impersonal or templated; citations won't fix them. These need a first-hand
   story or a named-expert quote. This is the hard-to-copy moat.

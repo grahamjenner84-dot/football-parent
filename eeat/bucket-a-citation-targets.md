@@ -121,3 +121,15 @@ domain. Add only 2 to reach target.
    (Category 1, Cobham base, Soccer Schools programme) would be better on
    official Chelsea pages, to add on fetch if they verify.
 
+
+---
+
+## Gear articles are EXEMPT from external citations (2026-09-22)
+
+Graham's rule (now in CLAUDE.md editorial rules): gear/product articles
+(`content/football-gear/*`) are conversion pages and must not get external
+citations, because outbound links pull readers away from the affiliate
+click-out. So `best-shin-pads-for-kids-football` (scored Bucket A) is dropped
+from this citation work: leave it as-is. None of the 5 priority articles above
+are gear, so this list is unaffected; the note is here so a future citation
+pass does not "fix" a gear page's citation count.
