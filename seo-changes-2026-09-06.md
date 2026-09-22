@@ -843,3 +843,14 @@ Note: not an SEO-metric-targeting edit; it is a house-style/originality consiste
 ## Fix pre-existing broken sentence in how-players-progress-through-football-development-centres
 
 Spotted during the post-slop-tidy re-score: line 37 read "work like a ladder  you join, you impress" (double space, missing punctuation, a pre-existing run-on, NOT introduced by the slop-tidy commit 2e7de41). Fixed to "work like a ladder: you join, you impress" (colon). Copy correctness fix on a live page.
+
+## Bucket C slop-tidy, second light pass: residual reframe cliches
+
+Follow-up to the first slop-tidy. Reworded 6 residual "isn't X, it's Y" / "not X, but Y" reveal cliches the re-score flagged, across 5 articles, meaning and voice preserved:
+- `football-development/improve-football-decision-making` - "Scanning isn't just a habit; it's a skill" merged into a plain statement.
+- `parent-guides/what-is-grassroots-football` - "not a stepping stone. It's a genuinely good place" reordered to lead with the positive (Graham's following first-person lines untouched).
+- `football-development/build-confidence-young-footballers` - 2 fragment reframes ("Not as a mantra...but", "It's not performing...it's").
+- `football-development/good-football-development-environment` - "Enjoyment is not the opposite of development, it's the engine" simplified to a plain positive.
+- `academy-pathway/how-players-progress-through-football-development-centres` - "one data point, not the whole story" reworded.
+
+Deliberately left: "honest" instances (Graham's genuine voice, or inside real expert quotes) and the reframe section HEADING in how-to-become-a-professional-footballer ("Education Is Not a Backup Plan, It's Part of the Plan"), because changing heading text changes its TOC anchor slug and needs a matching frontmatter update, which is not a light change. `npm run build` passes. Commit hash on commit below.
