@@ -489,12 +489,11 @@ supersedes this generic draft.
 
 ### Matt (The Elite Mind Coach) — youth athlete mindset coach, tag: mindset, parent support, confidence
 Drafted 2026-09-23. Replied to interview request 2026-09-22. Details received
-2026-09-23 (his about-me page). SURNAME STILL NEEDED for a full byline, or
-confirm he is happy to be credited as first name + brand.
+2026-09-23 (his about-me page + name confirmed by Graham).
 Attribution scaffold for `<ExpertQA>` / `<ExpertOpinion>` (confirm/adjust on
 answers):
 ```
-name="Matt"   (add surname once known)
+name="Matt Baxter"
 role="Youth Athlete Mindset Coach, The Elite Mind Coach"
 bio="A youth athlete mindset coach and parent who works one to one with young athletes aged 8 to 18, across football and other sports and from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
 profileHref="https://theelitemindcoach.com"
@@ -503,9 +502,8 @@ profileLabel="The Elite Mind Coach"
 Fit note from his about-me: excellent match for confidence, pressure, mistakes,
 enjoyment and quitting (Q2-Q8). His focus is helping current athletes thrive IN
 their sport, so Q1 (academy-release "who am I now" identity rebuild) is his only
-stretch: it is about exiting the game, not performing in it. Keep it and see
-what he says, or hold Q1 for an academy welfare officer / former released
-player instead.
+stretch: it is about exiting the game, not performing in it. Graham's call
+(2026-09-23): keep Q1 in for Matt.
 Fills the parent-support cluster (all Bucket C with strong Graham voice
 already, so these land as C+ authority upgrades in genuine `<ExpertOpinion>`
 callouts) plus the emotional/identity dimension of academy release, which is a
