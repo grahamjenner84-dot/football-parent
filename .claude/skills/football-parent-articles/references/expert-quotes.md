@@ -545,11 +545,17 @@ Attribution scaffold for `<ExpertQA>` / `<ExpertOpinion>` (confirm/adjust on
 answers):
 ```
 name="Alfonso Carter"
-role="Physiotherapist (MCSP, HCPC-registered) and former professional footballer"
-bio="A HCPC-registered physiotherapist and former professional footballer of 15+ years who has worked as a first-team physio in professional football, with additional qualifications in strength and conditioning. Founder of Resilient Physio."
+role="First-team physiotherapist at Forest Green Rovers and former professional footballer"
+bio="Alfonso Carter is a HCPC-registered physiotherapist (MCSP) and former professional footballer of 15+ years, currently first-team physiotherapist at Forest Green Rovers, with additional qualifications in strength and conditioning. Founder of Resilient Physio."
 profileHref="https://www.resilientphysiotherapy.co.uk"
 profileLabel="Resilient Physio"
 ```
+Credential note (Graham, 2026-09-23): Alfonso ("Alfie") is currently first-team
+physio at Forest Green Rovers, a named professional club, which is a much
+stronger E-E-A-T signal than a generic "works in professional football". Before
+publishing, confirm with him: (a) that the Forest Green role and its wording are
+current and he is happy for the club to be named, and (b) whether he wants the
+byline as "Alfonso" or "Alfie" Carter.
 Note: his strength & conditioning background means he can credibly field the
 growth-spurt and training-load/maturation angle, which softens the earlier
 "bio-banding needs a dedicated sports scientist" caveat: pure biological-
