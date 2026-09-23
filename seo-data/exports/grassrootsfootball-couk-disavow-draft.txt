@@ -1,0 +1,167 @@
+# Draft disavow file for grassrootsfootball.co.uk - generated 2026-09-23
+# Source: seo-data/exports/grassrootsfootball-couk-backlinks-2026-09-23.csv (DataForSEO, status all).
+# Rule: referring domain with a backlink spam score of 40+ or an obvious directory, link-farm,
+# URL-shortener or gambling name, and not on the keep list in grassrootsfootball-couk-acquisition-plan.md.
+# Upload in Search Console (Disavow links tool) against the grassrootsfootball.co.uk property,
+# AFTER the domain is verified there. Never upload this against footballparent.co.uk.
+# Regenerate from a fresh redirect-map run before uploading: the spam blast is ongoing.
+# Google's format allows comments only on their own lines, so each entry is preceded by
+# its max spam score, link count and first-seen date.
+# spam 65, links 1, first seen 2026-09-18
+domain:99backlinksbuy.com
+# spam 40, links 1, first seen 2026-03-10
+domain:allistingdirectory.com
+# spam 50, links 2, first seen 2026-02-02
+domain:anchorurl.cloud
+# spam 70, links 1, first seen 2026-09-18
+domain:apsoz.com
+# spam 60, links 1, first seen 2026-08-25
+domain:archive-hu.com
+# spam 55, links 1, first seen 2024-05-27
+domain:articlement.com
+# spam 40, links 1, first seen 2025-09-22
+domain:authorityprodirectory.com
+# spam 50, links 1, first seen 2025-08-15
+domain:backlinkboostdirectory.com
+# spam 60, links 1, first seen 2026-01-25
+domain:backlinks-seorank.com
+# spam 60, links 1, first seen 2025-05-28
+domain:backlinktime.com
+# spam 70, links 1, first seen 2026-08-26
+domain:bestnz-poker-casinoslot.com
+# spam 60, links 1, first seen 2026-08-14
+domain:betulcrime.com
+# spam 70, links 1, first seen 2026-08-19
+domain:betwinnermirror.com
+# spam 50, links 1, first seen 2026-03-04
+domain:businesslistingportal.com
+# spam 50, links 1, first seen 2026-03-09
+domain:buzzshrink.website
+# spam 50, links 3, first seen 2024-12-22
+domain:bye.fyi
+# spam 60, links 1, first seen 2026-08-28
+domain:clifflisting.com
+# spam 60, links 1, first seen 2026-08-28
+domain:cmocheatsheets.com
+# spam 60, links 1, first seen 2026-09-20
+domain:cvillico.com
+# spam 25, links 1, first seen 2023-10-14
+domain:daisye.pages.dev
+# spam 70, links 1, first seen 2026-09-19
+domain:dotpim.com
+# spam 50, links 1, first seen 2026-01-01
+domain:drjack.world
+# spam 60, links 1, first seen 2026-09-10
+domain:dupurgeniefr.com
+# spam 50, links 1, first seen 2026-06-18
+domain:eliterankdirectory.com
+# spam 50, links 1, first seen 2026-03-22
+domain:enterprisedirectoryhub.com
+# spam 70, links 1, first seen 2026-08-28
+domain:fashionclothingnews.com
+# spam 65, links 1, first seen 2025-12-19
+domain:fastrankdirectory.com
+# spam 70, links 1, first seen 2026-09-18
+domain:faucre.com
+# spam 60, links 1, first seen 2026-08-29
+domain:forbesstories.com
+# spam 60, links 1, first seen 2026-08-03
+domain:ggmap.us.com
+# spam 35, links 1, first seen 2026-03-18
+domain:global-rank.pages.dev
+# spam 35, links 1, first seen 2023-11-13
+domain:global-ranks.pages.dev
+# spam 35, links 2, first seen 2023-11-13
+domain:global-website.pages.dev
+# spam 35, links 1, first seen 2023-11-30
+domain:global-websites.pages.dev
+# spam 40, links 1, first seen 2025-09-08
+domain:globalrankdirectory.com
+# spam 85, links 2, first seen 2024-08-10
+domain:heavenarticle.com
+# spam 70, links 1, first seen 2026-08-13
+domain:homesforsaleoldgreenwichct.com
+# spam 70, links 1, first seen 2026-09-18
+domain:hotfri.com
+# spam 70, links 1, first seen 2026-09-23
+domain:kernelpanicpodcast.com
+# spam 40, links 1, first seen 2025-09-07
+domain:linkboostdirectory.com
+# spam 65, links 1, first seen 2026-01-06
+domain:linkpointdirectory.com
+# spam 75, links 1, first seen 2026-07-08
+domain:m98ufa.com
+# spam 40, links 1, first seen 2025-04-10
+domain:mailbat.com
+# spam 70, links 1, first seen 2026-09-18
+domain:mantaw.com
+# spam 60, links 1, first seen 2026-09-01
+domain:mediaboooster.com
+# spam 70, links 1, first seen 2026-07-08
+domain:plumeriamarketing.com
+# spam 60, links 1, first seen 2026-08-26
+domain:plurio.shop
+# spam 50, links 1, first seen 2025-10-14
+domain:powerlinkdirectory.com
+# spam 50, links 1, first seen 2026-03-15
+domain:primecompanydirectory.com
+# spam 50, links 2, first seen 2026-05-31
+domain:quero.party
+# spam 60, links 1, first seen 2026-08-22
+domain:quotesblom.com
+# spam 50, links 2, first seen 2026-01-29
+domain:ready.pro
+# spam 80, links 1, first seen 2026-08-20
+domain:seo-expert-service.com
+# spam 50, links 1, first seen 2025-09-13
+domain:seobacklinkdirectory.com
+# spam 30, links 1, first seen 2025-12-22
+domain:seodirectorypro.com
+# spam 40, links 1, first seen 2025-09-07
+domain:seotrafficdirectory.com
+# spam 50, links 2, first seen 2026-01-22
+domain:shortenurls.eu
+# spam 40, links 1, first seen 2025-11-23
+domain:sitecatalog.ru
+# spam 50, links 1, first seen 2026-09-23
+domain:jake.eu
+# spam 50, links 1, first seen 2026-05-13
+domain:skylinkseo.site
+# spam 60, links 1, first seen 2026-09-01
+domain:techbumppy.com
+# spam 60, links 1, first seen 2026-08-23
+domain:thedocmag.com
+# spam 60, links 1, first seen 2026-08-20
+domain:theforbestimes.com
+# spam 50, links 1, first seen 2025-09-04
+domain:topsiterankdirectory.com
+# spam 40, links 1, first seen 2025-09-07
+domain:traffichubdirectory.com
+# spam 60, links 1, first seen 2026-08-22
+domain:ufabettererm4.com
+# spam 60, links 1, first seen 2026-08-24
+domain:uncledspizza.com
+# spam 50, links 2, first seen 2026-01-05
+domain:urls-shortener.eu
+# spam 40, links 1, first seen 2025-09-04
+domain:usaseodirectory.com
+# spam 55, links 2, first seen 2026-01-14
+domain:usprwire.com
+# spam 65, links 1, first seen 2025-11-11
+domain:wayranks.com
+# spam 80, links 1, first seen 2026-09-18
+domain:webranksdirectory.com
+# spam 55, links 1, first seen 2025-06-22
+domain:webscountry.com
+# spam 40, links 1, first seen 2025-09-07
+domain:worldseodirectory.com
+# spam 70, links 1, first seen 2026-09-21
+domain:yelpad.com
+# spam 30, links 1, first seen 2025-09-03
+domain:yelpdirectory.com
+# spam 70, links 1, first seen 2026-09-19
+domain:ylutag.com
+# spam 70, links 1, first seen 2026-09-18
+domain:zlutag.com
+# spam 70, links 1, first seen 2026-09-18
+domain:zomatt.com
