@@ -823,6 +823,45 @@ Graham asked whether Q9-10 had an EEAT home yet - they did not. Added:
 
 Both link back to the interview and to Football DNA, same pattern as the other 5. `npm run build` passes; confirmed both quotes render in the built HTML. Tracker updated (`how-academy-football-works` now expert-quote-count 2, `understanding-academy-release` now 1).
 
+## AI Overview recheck on the three flagged low-CTR pages — all found cited, confirms suppression not a title/meta problem, 22 September 2026
+
+Follow-up to the 22 September weekly check-in, which queued three overdue AI Overview checks: `what-is-the-junior-premier-league` (0% CTR on "what is jpl football", 521 impr), `best-footballs-by-age` and `what-is-grassroots-football` (both flagged 12 Sept as the site's biggest low-CTR levers but deliberately held pending this check). Ran live, on the pages' actual highest-volume queries per `inspect_page`, not just title keywords (6 keywords, $0.024 actual):
+
+| Page | Query (28d impr) | AI Overview | footballparent.co.uk cited |
+|---|---|---|---|
+| `what-is-the-junior-premier-league` | "what is jpl football" (521) | Present | **Yes, source #5** (also: facebook.com, juniorpremierleague.com, refchat.co.uk, uk.linkedin.com) |
+| `what-is-the-junior-premier-league` | "jpl football" (817) | None | n/a |
+| `best-footballs-by-age` | "what size football for 10 year old" (1,112) | Present | **Yes, source #5** |
+| `best-footballs-by-age` | "football sizes by age" (839) | Present | **Yes, source #5** |
+| `what-is-grassroots-football` | "what is grassroots football" (3,942) | Present | **Yes, source #4** |
+| `what-is-grassroots-football` | "grassroots football" (5,566, page's single largest query) | Present | **Yes, source #5** |
+
+**No title/meta change made on any of the three.** All three pages are already cited in the AI Overview on their highest-volume query, yet all three still convert at 0.2-0.5% CTR. Being cited doesn't drive the click the way ranking normally would, since a reader who gets the answer in the overview has less reason to click through, so this is consistent with AI Overview presence being the actual explanation for the low CTR, not a weak title/meta — the same pattern already established for the JPL league query on 22 Aug, now confirmed across three more pages that were flagged purely on aggregate low-CTR numbers before this check had been run. A rewrite would not be expected to move these numbers. Logged 30 rows (main + PAA sub-rows per query) to `ai-citation-log.csv`.
+
+**Not revisiting** unless a SERP's composition changes (the AI Overview drops, or the citation is lost) — same standing rule as the existing JPL entry.
+
+## `best-football-formations-by-age-group` impression decline — checked, indexing confirmed clean, not a crawl problem
+
+The 22 September weekly check-in flagged this page's post-launch pattern (impressions spiking then falling steadily since publish, ~310→248→58/wk in the fork's read, 145→96→56/wk per `inspect_page`'s own weekly buckets, while position held steady ~6.5-6.8) as looking more like an indexing issue than a ranking one, and recommended a URL Inspection check before assuming it needs content work. Graham separately confirmed the page was crawled 4 September.
+
+Ran the URL Inspection API directly (`urlInspection.index:inspect`, same one-off script pattern as the 6 Sept `support-child-after-bad-match` check, `webmasters.readonly` scope, no DataForSEO cost, script deleted after use): **verdict PASS, "Submitted and indexed", last crawl `2026-09-04T00:19:12Z`, robots allowed, correct canonical (`/coaching/best-football-formations-by-age-group` on both sides, matching post-6-Sept-recategorization), page fetch successful.** No technical fault.
+
+**Reframed:** not an indexing problem. The 377 recent-28-day impressions are spread across many distinct long-tail queries, only two of which clear the 3-impression floor to show in `topQueries` (10 impressions between them) — consistent with a 3-week-old page still inside Google's normal post-launch ranking-volatility window, where a fresh-content bump settles before the page finds its stable query set, not a technical or content problem. Position hasn't moved, which is the more informative signal here than the impression count on its own.
+
+**No action taken.** Watching rather than editing — too early to read a real trend from 3 weekly data points on a brand-new page, and the one clear fact (clean index status, stable position) doesn't support a content fix.
+
+## `football-team-spreadsheet` near-zero impressions — checked, technically clean but unexplained
+
+Same 22 September check-in flagged this page as a new, unexplained silence entry (136 impr/21d baseline → 1 impr/7d recent). Ran the same URL Inspection check as above.
+
+**Technically clean:** verdict PASS, "Submitted and indexed", robots allowed, correct canonical, listed in `sitemap.xml`, **last crawled `2026-09-21T18:45:14Z`** (yesterday) — this is being recrawled regularly, not stuck.
+
+**But the collapse is real and sharper than the formations page's:** week of 6 Sept had 135 impressions / 14 clicks / position 4.9 / 10.4% CTR (a strong debut week). Week of 13 Sept: 1 impression, 0 clicks. `topQueries` now returns nothing (falls below the 3-impression/90-day floor). Position on the single remaining impression reads 3.0, but that's a sample of one, not a real position read.
+
+**No technical cause found, so per the standing rule this isn't being treated as a content problem.** Two most likely explanations, neither confirmed: (a) the same fresh-content evaluation bump seen on `best-football-formations-by-age-group`, just steeper here — Google trials a new URL at a visible position for a short window, then re-settles it, which can look like a cliff rather than a taper if the true post-settling position is well outside page 1; or (b) a genuine ranking loss for "football team spreadsheet"/"soccer team spreadsheet" not yet visible in any technical signal. The strong week-1 CTR (10.4%) argues against an engagement-quality explanation.
+
+**No action taken.** Watching only — recrawl is current, so another read once a full post-recrawl week of data exists (~29 Sept) should show whether this recovers on its own or is a real, lasting drop worth a live SERP check at that point.
+
 ## Bucket C slop-tidy: em dashes and reframe clichés removed from 9 articles (E-E-A-T deslopify)
 
 Part of the E-E-A-T deslopify programme (see `eeat/`). Conservative copy-only tidy of high-slop Bucket C articles (genuine first-hand voice preserved, no headings/links/sections changed, no meta descriptions or slugs touched). Removed banned em dashes (house rule) and the most blatant "it isn't X, it's Y" / "X matters more than Y" reframe clichés, rewording each to a plain statement with identical meaning. `npm run build` passes (all routes statically generated). One combined commit (single lever, one `git revert` away; each page's change is isolated to its own file).
