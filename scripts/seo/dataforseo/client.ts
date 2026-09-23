@@ -300,7 +300,10 @@ export async function dataForSeoRequest(opts: DataForSeoRequestOptions): Promise
         }
         const task = data.tasks?.[0];
         if (task && task.status_code !== undefined && task.status_code !== 20000) {
-          status = "partial";
+          // A task-level failure (e.g. 40101 "Internal SE Server Error") carries
+          // no result. It must not be cached, or the next 30 days of lookups
+          // for this request would be served an empty "hit" (2026-09-23).
+          status = "error";
           errorMessage = `task ${task.status_code}: ${task.status_message ?? "unknown task error"}`;
         }
       }
