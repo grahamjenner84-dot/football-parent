@@ -487,9 +487,25 @@ an interview request and is a confirmed fit for this. See the "Resilient
 Physiotherapy" entry below, which carries the fuller question set that
 supersedes this generic draft.
 
-### The Elite Mind Coach — sports psychologist, tag: mindset, parent support, confidence, release
-Drafted 2026-09-23. Replied to interview request 2026-09-22. Awaiting the
-individual's name and one-line credential from Graham before attribution.
+### Matt (The Elite Mind Coach) — youth athlete mindset coach, tag: mindset, parent support, confidence
+Drafted 2026-09-23. Replied to interview request 2026-09-22. Details received
+2026-09-23 (his about-me page). SURNAME STILL NEEDED for a full byline, or
+confirm he is happy to be credited as first name + brand.
+Attribution scaffold for `<ExpertQA>` / `<ExpertOpinion>` (confirm/adjust on
+answers):
+```
+name="Matt"   (add surname once known)
+role="Youth Athlete Mindset Coach, The Elite Mind Coach"
+bio="A youth athlete mindset coach and parent who works one to one with young athletes aged 8 to 18, across football and other sports and from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
+profileHref="https://theelitemindcoach.com"
+profileLabel="The Elite Mind Coach"
+```
+Fit note from his about-me: excellent match for confidence, pressure, mistakes,
+enjoyment and quitting (Q2-Q8). His focus is helping current athletes thrive IN
+their sport, so Q1 (academy-release "who am I now" identity rebuild) is his only
+stretch: it is about exiting the game, not performing in it. Keep it and see
+what he says, or hold Q1 for an academy welfare officer / former released
+player instead.
 Fills the parent-support cluster (all Bucket C with strong Graham voice
 already, so these land as C+ authority upgrades in genuine `<ExpertOpinion>`
 callouts) plus the emotional/identity dimension of academy release, which is a
@@ -520,9 +536,29 @@ deeper cut than Paul Barry's Q10 (that covered release structurally, not the
    line between healthy encouragement and pressure that backfires, and what does
    it look like when a parent is pushing their own ambition onto a child?
 
-### Resilient Physiotherapy — physiotherapist, tag: training load, overuse injury, physical development
-Drafted 2026-09-23. Replied to interview request 2026-09-22. Awaiting the
-individual's name and one-line credential from Graham before attribution.
+### Alfonso Carter (Resilient Physio) — physiotherapist and former pro footballer, tag: training load, overuse injury, physical development
+Drafted 2026-09-23. Replied to interview request 2026-09-22. Details received
+2026-09-23 (his about-me page). Strong credentials: former professional
+footballer of 15+ years, BSc (Hons) Physiotherapy (Salford, 2023), first-team
+physio in professional football, plus sports massage and strength &
+conditioning qualifications, DBS checked, registered with the Chartered Society
+of Physiotherapy and the HCPC.
+Attribution scaffold for `<ExpertQA>` / `<ExpertOpinion>` (confirm/adjust on
+answers):
+```
+name="Alfonso Carter"
+role="Physiotherapist (MCSP, HCPC-registered) and former professional footballer"
+bio="A HCPC-registered physiotherapist and former professional footballer of 15+ years who has worked as a first-team physio in professional football, with additional qualifications in strength and conditioning. Founder of Resilient Physio."
+profileHref="https://www.resilientphysiotherapy.co.uk"
+profileLabel="Resilient Physio"
+```
+Note: his strength & conditioning background means he can credibly field the
+growth-spurt and training-load/maturation angle, which softens the earlier
+"bio-banding needs a dedicated sports scientist" caveat: pure biological-
+maturity *assessment* is still niche, but the load/injury-during-maturation
+side is well within his scope. His "former pro footballer" lived experience is
+also a strong asset for the physical-demands angle of how-to-become-a-
+professional-footballer if we want to extend his brief later.
 Confirmed fit for the generic how-much-training draft above, which it
 supersedes. Also has Instagram exercise-demo reels that can embed via the
 site's `<InstagramEmbed>` component. Fills Bucket B on
