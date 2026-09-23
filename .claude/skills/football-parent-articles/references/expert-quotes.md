@@ -595,6 +595,51 @@ actually assessed and measured in practice) is a sports-scientist / S&C
 question more than a physiotherapist one, so it may stay open unless this
 physio also does maturity assessment.
 
+### David Hobson (PFSA) — scout / scouting educator, tag: scouting, recruitment, trials, development centres
+Drafted 2026-09-23. Graham emailed David Hobson, founder of the PFSA
+(Professional Football Scouts Association), 2026-09-23. Awaiting reply.
+HIGHEST-LEVERAGE recruit: one scout interview strengthens ~10 articles,
+including the reusable club-agnostic quote (Q5) that deslopifies the whole club
+development-centre series (Aston Villa, Brentford, Tottenham, West Ham, Leeds,
+Premier League list, etc.). As PFSA founder he speaks to the discipline of
+scouting broadly, which suits these articles and is less bound by one club's
+confidentiality.
+Attribution scaffold (confirm exact title, URL and any extra background with
+him before publishing; no web access this session to verify):
+```
+name="David Hobson"
+role="Founder of the Professional Football Scouts Association (PFSA)"
+bio="David Hobson is the founder of the Professional Football Scouts Association (PFSA), which trains and qualifies football scouts. [confirm further background/years with him]"
+profileHref="https://www.thepfsa.co.uk"   [CONFIRM exact URL]
+profileLabel="PFSA"
+```
+Send around 8 (each tagged with the article it feeds; Q5 is the reusable one):
+1. [what-happens-at-academy-trials, football-academy-trials-uk] Walk me through a
+   real trial day from arrival to leaving: how are the kids grouped, how long do
+   you actually watch each one, and what's the moment you make your mind up?
+2. [what-do-academy-coaches-look-for] When you watch a player for the first time,
+   what do you notice in the first five minutes, and what do parents most often
+   wrongly assume you are looking at?
+3. [how-football-clubs-recruit-young-players, how-to-join-a-football-academy] When
+   you are watching an under-10 Sunday game, what specifically makes you write a
+   player's name down rather than move on, and what happens next after you do?
+4. [tottenham and the other club development-centre guides] When you have spotted a
+   boy at a grassroots pitch, what happens step by step after you hand the parent
+   your card?
+5. [REUSABLE across all club development-centre guides] What separates a player
+   genuinely worth flagging from one who is just keen and fit at a development-
+   centre session, and why is a foundation-centre invite not the same as being on
+   the academy's books?
+6. [what-age-do-football-academies-recruit] At what age are you really making
+   decisions that stick, and how much should a parent read into a child being
+   spotted early versus late?
+7. [biggest-football-parent-mistakes, understanding-academy-release] How common is
+   it for a boy released at 11 or 12 to get picked back up later, and what did the
+   ones who came back tend to do in between?
+8. [football-trials-near-me, how-to-get-scouted-for-football] If a genuinely good
+   grassroots player is nowhere near a scout, what actually gets them seen, and
+   which paid "trials" or "showcases" are a waste of a family's money?
+
 ### how-to-find-a-football-agent-for-your-child — Adam Sells, tag: agents, representation
 Drafted: 2026-08-09. Reassigned 2026-09-06: Adam Sells is an FA-registered
 intermediary (see his full entry below under "Pending" for bio) - a much
