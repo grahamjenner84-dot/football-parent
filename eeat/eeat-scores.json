@@ -1196,14 +1196,14 @@
         "authoritativeness": 25
       },
       "semantic": {
-        "voice": 58,
-        "slop": 38,
+        "voice": 60,
+        "slop": 35,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-09-22",
         "preTidySlop": 45,
         "preTidyVoice": 48,
-        "tidied": "2026-09-22"
+        "tidied": "2026-09-22 (2 passes + heading)"
       }
     },
     {
