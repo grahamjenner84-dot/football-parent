@@ -1,0 +1,818 @@
+{
+  "date": "2026-09-23",
+  "footballparent.co.uk": {
+    "summary": {
+      "rank": 0,
+      "backlinks": 13,
+      "referring_domains": 13,
+      "referring_main_domains": 13,
+      "backlinks_spam_score": 57,
+      "first_seen": "2026-07-08 01:20:23 +00:00"
+    },
+    "referringDomains": [
+      {
+        "domain": "mediaboooster.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-09-03"
+      },
+      {
+        "domain": "fashionclothingnews.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 70,
+        "first_seen": "2026-08-31"
+      },
+      {
+        "domain": "fittyfoody.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-29"
+      },
+      {
+        "domain": "quotesblom.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-26"
+      },
+      {
+        "domain": "uncledspizza.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-25"
+      },
+      {
+        "domain": "betwinnermirror.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 70,
+        "first_seen": "2026-08-21"
+      },
+      {
+        "domain": "theforbestimes.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-20"
+      },
+      {
+        "domain": "betulcrime.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-14"
+      },
+      {
+        "domain": "homesforsaleoldgreenwichct.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 70,
+        "first_seen": "2026-08-13"
+      },
+      {
+        "domain": "hostprinter.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-07"
+      },
+      {
+        "domain": "bazerdaily.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-05"
+      },
+      {
+        "domain": "ggmap.us.com",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 60,
+        "first_seen": "2026-08-02"
+      },
+      {
+        "domain": "teamstats.net",
+        "rank": 0,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2026-07-08"
+      }
+    ]
+  },
+  "teamstats.net": {
+    "summary": {
+      "rank": 440,
+      "backlinks": 5485,
+      "referring_domains": 910,
+      "referring_main_domains": 892,
+      "backlinks_spam_score": 36,
+      "first_seen": "2019-01-20 12:42:12 +00:00"
+    },
+    "referringDomains": [
+      {
+        "domain": "grassrootsfootball.co.uk",
+        "rank": 426,
+        "backlinks": 13,
+        "spam": 0,
+        "first_seen": "2019-03-26"
+      },
+      {
+        "domain": "google.com",
+        "rank": 385,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2025-06-03"
+      },
+      {
+        "domain": "redhillanddistrictfootballleague.co.uk",
+        "rank": 252,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2023-12-16"
+      },
+      {
+        "domain": "odp.org",
+        "rank": 167,
+        "backlinks": 113,
+        "spam": 40,
+        "first_seen": "2019-02-19"
+      },
+      {
+        "domain": "aberdeenshireafa.com",
+        "rank": 165,
+        "backlinks": 367,
+        "spam": 1,
+        "first_seen": "2026-04-20"
+      },
+      {
+        "domain": "onlinesoccermanager.net",
+        "rank": 147,
+        "backlinks": 3,
+        "spam": 0,
+        "first_seen": "2019-04-24"
+      },
+      {
+        "domain": "bishton.org.uk",
+        "rank": 144,
+        "backlinks": 52,
+        "spam": 7,
+        "first_seen": "2024-08-24"
+      },
+      {
+        "domain": "nomoz.org",
+        "rank": 139,
+        "backlinks": 80,
+        "spam": 50,
+        "first_seen": "2021-09-29"
+      },
+      {
+        "domain": "girlsinfootball.co.uk",
+        "rank": 136,
+        "backlinks": 3,
+        "spam": 0,
+        "first_seen": "2021-12-03"
+      },
+      {
+        "domain": "canterburymariners.football",
+        "rank": 128,
+        "backlinks": 158,
+        "spam": 0,
+        "first_seen": "2025-06-25"
+      },
+      {
+        "domain": "vmlogic.net",
+        "rank": 100,
+        "backlinks": 190,
+        "spam": 33,
+        "first_seen": "2021-10-03"
+      },
+      {
+        "domain": "sljfc.co.uk",
+        "rank": 95,
+        "backlinks": 18,
+        "spam": 0,
+        "first_seen": "2025-03-13"
+      },
+      {
+        "domain": "scottishyouthfa.co.uk",
+        "rank": 90,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2025-12-07"
+      },
+      {
+        "domain": "leamsundayfootball.co.uk",
+        "rank": 89,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2019-05-23"
+      },
+      {
+        "domain": "southwalesfaseniorleague.co.uk",
+        "rank": 84,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2021-05-06"
+      },
+      {
+        "domain": "magicmagyar.online",
+        "rank": 79,
+        "backlinks": 18,
+        "spam": 38,
+        "first_seen": "2023-11-14"
+      },
+      {
+        "domain": "grokipedia.com",
+        "rank": 77,
+        "backlinks": 127,
+        "spam": 16,
+        "first_seen": "2025-11-09"
+      },
+      {
+        "domain": "footyapps.com",
+        "rank": 57,
+        "backlinks": 41,
+        "spam": 2,
+        "first_seen": "2026-03-14"
+      },
+      {
+        "domain": "excelsiorblackpool.com",
+        "rank": 54,
+        "backlinks": 6,
+        "spam": 21,
+        "first_seen": "2019-07-17"
+      },
+      {
+        "domain": "clientsbee.com",
+        "rank": 51,
+        "backlinks": 1,
+        "spam": 15,
+        "first_seen": "2026-02-01"
+      },
+      {
+        "domain": "tudeks.com.tr",
+        "rank": 51,
+        "backlinks": 1,
+        "spam": 35,
+        "first_seen": "2025-12-31"
+      },
+      {
+        "domain": "tortilladepatataslomejordelagastronomia.com",
+        "rank": 51,
+        "backlinks": 2,
+        "spam": 45,
+        "first_seen": "2025-10-27"
+      },
+      {
+        "domain": "intelereps.com",
+        "rank": 51,
+        "backlinks": 1,
+        "spam": 10,
+        "first_seen": "2025-10-11"
+      },
+      {
+        "domain": "vrtlproheadshotsatlanta.com",
+        "rank": 51,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2025-09-06"
+      },
+      {
+        "domain": "smyte.com",
+        "rank": 51,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2025-07-30"
+      },
+      {
+        "domain": "soccersgoal.com",
+        "rank": 51,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2024-07-10"
+      },
+      {
+        "domain": "futball.com.ng",
+        "rank": 51,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2023-10-03"
+      },
+      {
+        "domain": "marktforschung.ch",
+        "rank": 47,
+        "backlinks": 18,
+        "spam": 10,
+        "first_seen": "2025-09-14"
+      },
+      {
+        "domain": "islwynyouthleague.co.uk",
+        "rank": 47,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2021-09-29"
+      },
+      {
+        "domain": "grassrootsfootball.org.uk",
+        "rank": 44,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2021-11-14"
+      },
+      {
+        "domain": "operationalsurgical.com",
+        "rank": 40,
+        "backlinks": 2,
+        "spam": 35,
+        "first_seen": "2026-02-05"
+      },
+      {
+        "domain": "ipfs.io",
+        "rank": 40,
+        "backlinks": 17,
+        "spam": 23,
+        "first_seen": "2022-01-20"
+      },
+      {
+        "domain": "lowestoftsundayleague.com",
+        "rank": 39,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2019-05-24"
+      },
+      {
+        "domain": "omegavirginhair.net",
+        "rank": 35,
+        "backlinks": 2,
+        "spam": 20,
+        "first_seen": "2026-02-05"
+      },
+      {
+        "domain": "bigfootpodiatry.com.au",
+        "rank": 35,
+        "backlinks": 2,
+        "spam": 30,
+        "first_seen": "2026-02-05"
+      },
+      {
+        "domain": "svyfl.org.uk",
+        "rank": 34,
+        "backlinks": 12,
+        "spam": 0,
+        "first_seen": "2023-10-04"
+      },
+      {
+        "domain": "home.blog",
+        "rank": 32,
+        "backlinks": 8,
+        "spam": 13,
+        "first_seen": "2019-11-14"
+      },
+      {
+        "domain": "vantasports.ai",
+        "rank": 31,
+        "backlinks": 10,
+        "spam": 0,
+        "first_seen": "2026-05-14"
+      },
+      {
+        "domain": "playfootballmanager.com",
+        "rank": 29,
+        "backlinks": 4,
+        "spam": 0,
+        "first_seen": "2025-11-10"
+      },
+      {
+        "domain": "mingle.sport",
+        "rank": 28,
+        "backlinks": 4,
+        "spam": 5,
+        "first_seen": "2026-06-18"
+      },
+      {
+        "domain": "winsfordjunction.uk",
+        "rank": 27,
+        "backlinks": 5,
+        "spam": 0,
+        "first_seen": "2023-11-15"
+      },
+      {
+        "domain": "podda.app",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 5,
+        "first_seen": "2026-09-21"
+      },
+      {
+        "domain": "globmedindia.com",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 5,
+        "first_seen": "2026-09-10"
+      },
+      {
+        "domain": "hexagonemusique.com",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 5,
+        "first_seen": "2026-08-20"
+      },
+      {
+        "domain": "soccerwares.com",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2025-11-06"
+      },
+      {
+        "domain": "notifyninja.com",
+        "rank": 23,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2025-09-09"
+      },
+      {
+        "domain": "mddesign07.com",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 5,
+        "first_seen": "2025-09-03"
+      },
+      {
+        "domain": "plasko-lite.com",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2024-10-27"
+      },
+      {
+        "domain": "bgonline.org",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 15,
+        "first_seen": "2023-07-26"
+      },
+      {
+        "domain": "sussexcountyinterscholasticleague.com",
+        "rank": 23,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2022-12-16"
+      },
+      {
+        "domain": "mycprtutor.com",
+        "rank": 23,
+        "backlinks": 1,
+        "spam": 35,
+        "first_seen": "2021-12-27"
+      },
+      {
+        "domain": "curlie.org",
+        "rank": 22,
+        "backlinks": 13,
+        "spam": 13,
+        "first_seen": "2021-12-07"
+      },
+      {
+        "domain": "wikiwand.com",
+        "rank": 17,
+        "backlinks": 14,
+        "spam": 0,
+        "first_seen": "2026-03-16"
+      },
+      {
+        "domain": "brightforge.com.ph",
+        "rank": 15,
+        "backlinks": 3,
+        "spam": 0,
+        "first_seen": "2026-09-11"
+      },
+      {
+        "domain": "marlvel.ai",
+        "rank": 14,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2026-05-20"
+      },
+      {
+        "domain": "footballcoachonline.com",
+        "rank": 14,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2020-08-13"
+      },
+      {
+        "domain": "recocompressedair.com",
+        "rank": 13,
+        "backlinks": 10,
+        "spam": 30,
+        "first_seen": "2024-06-05"
+      },
+      {
+        "domain": "wikisort.org",
+        "rank": 11,
+        "backlinks": 11,
+        "spam": 2,
+        "first_seen": "2025-01-28"
+      },
+      {
+        "domain": "cbinsights.com",
+        "rank": 10,
+        "backlinks": 2,
+        "spam": 0,
+        "first_seen": "2023-05-22"
+      },
+      {
+        "domain": "happenstance.ai",
+        "rank": 9,
+        "backlinks": 3,
+        "spam": 12,
+        "first_seen": "2026-05-18"
+      },
+      {
+        "domain": "robuta.com",
+        "rank": 7,
+        "backlinks": 7,
+        "spam": 23,
+        "first_seen": "2026-06-22"
+      },
+      {
+        "domain": "dp3communityfoundation.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 10,
+        "first_seen": "2026-02-04"
+      },
+      {
+        "domain": "vatizon.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-27"
+      },
+      {
+        "domain": "momo-blog-parts.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-27"
+      },
+      {
+        "domain": "downazridaz.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-27"
+      },
+      {
+        "domain": "doiguocmoc.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-27"
+      },
+      {
+        "domain": "andwecode.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-27"
+      },
+      {
+        "domain": "urbanrivals.info",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-26"
+      },
+      {
+        "domain": "cs-forever.net",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-26"
+      },
+      {
+        "domain": "plugin-rose.info",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-25"
+      },
+      {
+        "domain": "hewawkward.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-25"
+      },
+      {
+        "domain": "ddlone.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-25"
+      },
+      {
+        "domain": "thammybaoan.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-25"
+      },
+      {
+        "domain": "cufcw.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-25"
+      },
+      {
+        "domain": "giftcardstool.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-24"
+      },
+      {
+        "domain": "twittesr.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-24"
+      },
+      {
+        "domain": "hot-value.info",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-24"
+      },
+      {
+        "domain": "mihanwebads.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-24"
+      },
+      {
+        "domain": "views4earn.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-23"
+      },
+      {
+        "domain": "cntt-k3.org",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-22"
+      },
+      {
+        "domain": "cocopmandera.org",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 0,
+        "first_seen": "2025-11-22"
+      },
+      {
+        "domain": "widgetsmonster.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-22"
+      },
+      {
+        "domain": "tqnyah.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-22"
+      },
+      {
+        "domain": "gvm4u.info",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-22"
+      },
+      {
+        "domain": "devappstor.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-22"
+      },
+      {
+        "domain": "chemi-clean.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-21"
+      },
+      {
+        "domain": "blog-freeparts.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-21"
+      },
+      {
+        "domain": "dfile.net",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-21"
+      },
+      {
+        "domain": "luxverify.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-21"
+      },
+      {
+        "domain": "echo3.net",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-21"
+      },
+      {
+        "domain": "adhexer.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-21"
+      },
+      {
+        "domain": "skolske-knjige.net",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-20"
+      },
+      {
+        "domain": "quotbook.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-19"
+      },
+      {
+        "domain": "craiggarner.net",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-19"
+      },
+      {
+        "domain": "articlewish.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-19"
+      },
+      {
+        "domain": "shia-tools.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-19"
+      },
+      {
+        "domain": "clientcentral.info",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-19"
+      },
+      {
+        "domain": "kunoichi.info",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-18"
+      },
+      {
+        "domain": "jabbify.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-18"
+      },
+      {
+        "domain": "whoispresent.com",
+        "rank": 7,
+        "backlinks": 1,
+        "spam": 45,
+        "first_seen": "2025-11-18"
+      }
+    ]
+  }
+}
