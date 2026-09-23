@@ -482,6 +482,163 @@ young players.
    child's training load?
 4. Is there a rule of thumb you actually use in practice, rather than a
    textbook guideline?
+Update 2026-09-23: a real physiotherapist (Resilient Physiotherapy) replied to
+an interview request and is a confirmed fit for this. See the "Resilient
+Physiotherapy" entry below, which carries the fuller question set that
+supersedes this generic draft.
+
+### Matt (The Elite Mind Coach) — youth athlete mindset coach, tag: mindset, parent support, confidence
+Drafted 2026-09-23. Replied to interview request 2026-09-22. Details received
+2026-09-23 (his about-me page + name confirmed by Graham).
+Attribution scaffold for `<ExpertQA>` / `<ExpertOpinion>` (confirm/adjust on
+answers):
+```
+name="Matt Baxter"
+role="Youth Athlete Mindset Coach, The Elite Mind Coach"
+bio="A youth athlete mindset coach and parent who works one to one with young athletes aged 8 to 18, across football and other sports and from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
+profileHref="https://theelitemindcoach.com"
+profileLabel="The Elite Mind Coach"
+```
+Fit note from his about-me: excellent match for confidence, pressure, mistakes,
+enjoyment and quitting (Q2-Q8). His focus is helping current athletes thrive IN
+their sport, so Q1 (academy-release "who am I now" identity rebuild) is his only
+stretch: it is about exiting the game, not performing in it. Graham's call
+(2026-09-23): keep Q1 in for Matt.
+Fills the parent-support cluster (all Bucket C with strong Graham voice
+already, so these land as C+ authority upgrades in genuine `<ExpertOpinion>`
+callouts) plus the emotional/identity dimension of academy release, which is a
+deeper cut than Paul Barry's Q10 (that covered release structurally, not the
+"who am I now" rebuild). Send around 6:
+1. [understanding-academy-release] When a released player says "if I'm not a
+   footballer, who am I?", what have you seen help a child rebuild their sense
+   of self in the first few weeks?
+2. [what-to-say-after-football-matches] When a child comes off the pitch upset
+   after a bad game, what is really happening emotionally in those first ten
+   minutes, and why does naming the feeling work better than trying to fix or
+   cheer them up?
+3. [support-child-after-bad-match] What separates a child who bounces back from
+   a bad game from one who spirals, and what can a parent on the touchline
+   actually influence?
+4. [build-confidence-young-footballers] Where does real confidence in a young
+   player come from, and what well-meaning parent behaviour quietly undermines
+   it?
+5. [why-isnt-my-child-improving-at-football] When a child hits a plateau and
+   gets frustrated, how much of that is mindset versus ability, and what
+   actually helps them through it?
+6. [football-burnout] What are the early mental signs a young player is heading
+   for burnout rather than just a dip, and what should a parent do first?
+7. [biggest-football-parent-mistakes / jpl-vs-grassroots-football] When a child
+   starts talking about wanting to quit, how should a parent respond, and how
+   do you tell a passing wobble from a real sign they have had enough?
+8. [biggest-football-parent-mistakes / jpl-vs-grassroots-football] Where is the
+   line between healthy encouragement and pressure that backfires, and what does
+   it look like when a parent is pushing their own ambition onto a child?
+
+### Alfonso Carter (Resilient Physio) — physiotherapist and former pro footballer, tag: training load, overuse injury, physical development
+Drafted 2026-09-23. Replied to interview request 2026-09-22. Details received
+2026-09-23 (his about-me page). Strong credentials: former professional
+footballer of 15+ years, BSc (Hons) Physiotherapy (Salford, 2023), first-team
+physio in professional football, plus sports massage and strength &
+conditioning qualifications, DBS checked, registered with the Chartered Society
+of Physiotherapy and the HCPC.
+Attribution scaffold for `<ExpertQA>` / `<ExpertOpinion>` (confirm/adjust on
+answers):
+```
+name="Alfonso Carter"
+role="First-team physiotherapist at Forest Green Rovers and former professional footballer"
+bio="Alfonso Carter is a HCPC-registered physiotherapist (MCSP) and former professional footballer of 15+ years, currently first-team physiotherapist at Forest Green Rovers, with additional qualifications in strength and conditioning. Founder of Resilient Physio."
+profileHref="https://www.resilientphysiotherapy.co.uk"
+profileLabel="Resilient Physio"
+```
+Credential note (Graham, 2026-09-23): Alfonso ("Alfie") is currently first-team
+physio at Forest Green Rovers, a named professional club, which is a much
+stronger E-E-A-T signal than a generic "works in professional football". Before
+publishing, confirm with him: (a) that the Forest Green role and its wording are
+current and he is happy for the club to be named, and (b) whether he wants the
+byline as "Alfonso" or "Alfie" Carter.
+Note: his strength & conditioning background means he can credibly field the
+growth-spurt and training-load/maturation angle, which softens the earlier
+"bio-banding needs a dedicated sports scientist" caveat: pure biological-
+maturity *assessment* is still niche, but the load/injury-during-maturation
+side is well within his scope. His "former pro footballer" lived experience is
+also a strong asset for the physical-demands angle of how-to-become-a-
+professional-footballer if we want to extend his brief later.
+Confirmed fit for the generic how-much-training draft above, which it
+supersedes. Also has Instagram exercise-demo reels that can embed via the
+site's `<InstagramEmbed>` component. Fills Bucket B on
+how-much-training-is-too-much and playing-up-an-age-group; strengthens the
+late-developer/growth-spurt injury angle; the exercise-plan pair could enrich
+how-much-training or anchor a new physical-development article. Send around 6:
+1. [how-much-training-is-too-much] Which growth-related overuse injuries do you
+   actually see spike during adolescent growth spurts, and what early load
+   signs precede them?
+2. [how-much-training-is-too-much] Is there a defensible amount of structured
+   football for a 9- or 10-year-old in a week, and what are the first physical
+   signs a child is doing too much?
+3. [playing-up-an-age-group-football] When a younger child plays up physically,
+   what injury and load risks should a parent watch for, and how do you tell
+   healthy adaptation from strain?
+4. [late-developers-in-football / bio-banding-football] For a late-maturing
+   player, how does the timing of the growth spurt change injury risk and what
+   they should or should not be doing in training?
+5. [exercise plan, foundation phase, ages ~5-11] What would a good,
+   age-appropriate physical/exercise plan look like for a foundation-phase
+   player? What should it include, and what should it avoid at that age?
+6. [follow-up, youth development phase, ages ~12-16] How does that plan change
+   as they move into the youth development phase, particularly around the
+   growth spurt?
+Plus: ask for a couple of short Instagram clips demonstrating the exercises, to
+embed via `<InstagramEmbed>`. That gives a named physio quote AND video demos,
+which is very hard for scaled-content sites to replicate.
+Note: bio-banding-football's core Bucket B question (how biological maturity is
+actually assessed and measured in practice) is a sports-scientist / S&C
+question more than a physiotherapist one, so it may stay open unless this
+physio also does maturity assessment.
+
+### David Hobson (PFSA) — scout / scouting educator, tag: scouting, recruitment, trials, development centres
+Drafted 2026-09-23. Graham emailed David Hobson, founder of the PFSA
+(Professional Football Scouts Association), 2026-09-23. Awaiting reply.
+HIGHEST-LEVERAGE recruit: one scout interview strengthens ~10 articles,
+including the reusable club-agnostic quote (Q5) that deslopifies the whole club
+development-centre series (Aston Villa, Brentford, Tottenham, West Ham, Leeds,
+Premier League list, etc.). As PFSA founder he speaks to the discipline of
+scouting broadly, which suits these articles and is less bound by one club's
+confidentiality.
+Attribution scaffold (confirm exact title, URL and any extra background with
+him before publishing; no web access this session to verify):
+```
+name="David Hobson"
+role="Founder of the Professional Football Scouts Association (PFSA)"
+bio="David Hobson is the founder of the Professional Football Scouts Association (PFSA), which trains and qualifies football scouts. [confirm further background/years with him]"
+profileHref="https://www.thepfsa.co.uk"   [CONFIRM exact URL]
+profileLabel="PFSA"
+```
+Send around 8 (each tagged with the article it feeds; Q5 is the reusable one):
+1. [what-happens-at-academy-trials, football-academy-trials-uk] Walk me through a
+   real trial day from arrival to leaving: how are the kids grouped, how long do
+   you actually watch each one, and what's the moment you make your mind up?
+2. [what-do-academy-coaches-look-for] When you watch a player for the first time,
+   what do you notice in the first five minutes, and what do parents most often
+   wrongly assume you are looking at?
+3. [how-football-clubs-recruit-young-players, how-to-join-a-football-academy] When
+   you are watching an under-10 Sunday game, what specifically makes you write a
+   player's name down rather than move on, and what happens next after you do?
+4. [tottenham and the other club development-centre guides] When you have spotted a
+   boy at a grassroots pitch, what happens step by step after you hand the parent
+   your card?
+5. [REUSABLE across all club development-centre guides] What separates a player
+   genuinely worth flagging from one who is just keen and fit at a development-
+   centre session, and why is a foundation-centre invite not the same as being on
+   the academy's books?
+6. [what-age-do-football-academies-recruit] At what age are you really making
+   decisions that stick, and how much should a parent read into a child being
+   spotted early versus late?
+7. [biggest-football-parent-mistakes, understanding-academy-release] How common is
+   it for a boy released at 11 or 12 to get picked back up later, and what did the
+   ones who came back tend to do in between?
+8. [football-trials-near-me, how-to-get-scouted-for-football] If a genuinely good
+   grassroots player is nowhere near a scout, what actually gets them seen, and
+   which paid "trials" or "showcases" are a waste of a family's money?
 
 ### how-to-find-a-football-agent-for-your-child — Adam Sells, tag: agents, representation
 Drafted: 2026-08-09. Reassigned 2026-09-06: Adam Sells is an FA-registered

@@ -861,3 +861,39 @@ Same 22 September check-in flagged this page as a new, unexplained silence entry
 **No technical cause found, so per the standing rule this isn't being treated as a content problem.** Two most likely explanations, neither confirmed: (a) the same fresh-content evaluation bump seen on `best-football-formations-by-age-group`, just steeper here — Google trials a new URL at a visible position for a short window, then re-settles it, which can look like a cliff rather than a taper if the true post-settling position is well outside page 1; or (b) a genuine ranking loss for "football team spreadsheet"/"soccer team spreadsheet" not yet visible in any technical signal. The strong week-1 CTR (10.4%) argues against an engagement-quality explanation.
 
 **No action taken.** Watching only — recrawl is current, so another read once a full post-recrawl week of data exists (~29 Sept) should show whether this recovers on its own or is a real, lasting drop worth a live SERP check at that point.
+
+## Bucket C slop-tidy: em dashes and reframe clichés removed from 9 articles (E-E-A-T deslopify)
+
+Part of the E-E-A-T deslopify programme (see `eeat/`). Conservative copy-only tidy of high-slop Bucket C articles (genuine first-hand voice preserved, no headings/links/sections changed, no meta descriptions or slugs touched). Removed banned em dashes (house rule) and the most blatant "it isn't X, it's Y" / "X matters more than Y" reframe clichés, rewording each to a plain statement with identical meaning. `npm run build` passes (all routes statically generated). One combined commit (single lever, one `git revert` away; each page's change is isolated to its own file).
+
+Articles and what changed:
+- `parent-guides/jpl-vs-grassroots-football` - 1 reframe cliché reworded ("league isn't the deciding factor, timing is").
+- `academy-trials/what-do-academy-coaches-look-for` - 13 em dashes removed + 1 reframe reworded (Paul Barry ExpertQA left untouched). Proposed meta-description change deliberately NOT made (separate SEO lever).
+- `football-development/how-to-become-a-professional-footballer` - 2 em dashes + 2 reframes.
+- `football-development/improve-football-decision-making` - 2 em dashes + 1 reframe.
+- `parent-guides/what-is-grassroots-football` - 2 reframe clichés.
+- `parent-guides/what-is-the-junior-premier-league` - 2 reframe clichés (Martin Brock quotes untouched).
+- `football-development/build-confidence-young-footballers` - 2 reframe clichés.
+- `football-development/good-football-development-environment` - 2 em dashes + fixed an accidental duplicated sentence.
+- `academy-pathway/how-players-progress-through-football-development-centres` - 1 em dash.
+
+Note: not an SEO-metric-targeting edit; it is a house-style/originality consistency fix, so no per-page watch window applies, but logged here for traceability. Commit hash recorded on commit below.
+
+## Fix pre-existing broken sentence in how-players-progress-through-football-development-centres
+
+Spotted during the post-slop-tidy re-score: line 37 read "work like a ladder  you join, you impress" (double space, missing punctuation, a pre-existing run-on, NOT introduced by the slop-tidy commit 2e7de41). Fixed to "work like a ladder: you join, you impress" (colon). Copy correctness fix on a live page.
+
+## Bucket C slop-tidy, second light pass: residual reframe cliches
+
+Follow-up to the first slop-tidy. Reworded 6 residual "isn't X, it's Y" / "not X, but Y" reveal cliches the re-score flagged, across 5 articles, meaning and voice preserved:
+- `football-development/improve-football-decision-making` - "Scanning isn't just a habit; it's a skill" merged into a plain statement.
+- `parent-guides/what-is-grassroots-football` - "not a stepping stone. It's a genuinely good place" reordered to lead with the positive (Graham's following first-person lines untouched).
+- `football-development/build-confidence-young-footballers` - 2 fragment reframes ("Not as a mantra...but", "It's not performing...it's").
+- `football-development/good-football-development-environment` - "Enjoyment is not the opposite of development, it's the engine" simplified to a plain positive.
+- `academy-pathway/how-players-progress-through-football-development-centres` - "one data point, not the whole story" reworded.
+
+Deliberately left: "honest" instances (Graham's genuine voice, or inside real expert quotes) and the reframe section HEADING in how-to-become-a-professional-footballer ("Education Is Not a Backup Plan, It's Part of the Plan"), because changing heading text changes its TOC anchor slug and needs a matching frontmatter update, which is not a light change. `npm run build` passes. Commit hash on commit below.
+
+## Reword reframe section heading in how-to-become-a-professional-footballer
+
+The last residual reframe from the Bucket C slop-tidy. Section heading "Education Is Not a Backup Plan - It's Part of the Plan" reworded to the plain "Education Is Part of the Plan". Updated the frontmatter `sections` entry (id + title) to match the new heading text so the sidebar TOC anchor stays consistent (id now "education-is-part-of-the-plan"). Page URL/slug unchanged; no internal links referenced the old anchor. Body prose unchanged. `npm run build` passes. Commit hash on commit below.

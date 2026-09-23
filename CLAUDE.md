@@ -102,6 +102,7 @@ Why a session created here works in the app: `/coach-app` is a Vercel *rewrite* 
 - Never use "badge" framing clichés (e.g. "without the badge") — reads as AI filler
 - Never use "name/brand on the box/side" framing clichés (e.g. "matters more than which name is on the box") — reads as AI filler
 - Internal link suggestions must be paste-ready MDX: full surrounding sentence with [Anchor Text](/url) embedded, not bare links
+- Gear/product articles (`content/football-gear/*`) are conversion pages: do not add external citations to them. Outbound authoritative links (FA, sports science, standards bodies) pull readers away from the affiliate click-out, which is the page's whole job. Their E-E-A-T comes from first-hand testing detail, specific product knowledge and the affiliate links themselves, not outbound references. An E-E-A-T audit should treat the low external-citation count on gear pages as by design, not a gap. (Internal links to other Football Parent articles are fine and encouraged; the rule is specifically about outbound links off-site.)
 
 ## Skills
 - Use the football-parent-articles skill (`.claude/skills/football-parent-articles/SKILL.md`) for any new article
