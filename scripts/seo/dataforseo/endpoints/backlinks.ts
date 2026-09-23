@@ -81,7 +81,7 @@ export function pageIntersection(
 // requires an external source (e.g. Wayback Machine snapshots of url_from).
 export function backlinksList(
   target: string,
-  opts: BacklinksOptions & { filters?: unknown[]; backlinksStatusType?: "all" | "live" | "lost" }
+  opts: BacklinksOptions & { filters?: unknown[]; backlinksStatusType?: "all" | "live" | "lost"; offset?: number }
 ): Promise<DataForSeoResult> {
   const endpoint = "backlinks/backlinks/live";
   const body: Record<string, unknown> = {
@@ -91,6 +91,10 @@ export function backlinksList(
     backlinks_status_type: opts.backlinksStatusType ?? "live",
   };
   if (opts.filters) body.filters = opts.filters;
+  // Pagination for pulls larger than one page (max 1000 rows per call). The
+  // offset is part of the request body and therefore part of the cache
+  // hash, so each page caches separately.
+  if (opts.offset) body.offset = opts.offset;
   return dataForSeoRequest({
     workflow: opts.workflow,
     apiFamily: API_FAMILY,
@@ -123,9 +127,16 @@ export function backlinksSummary(target: string, opts: BacklinksOptions): Promis
   });
 }
 
-export function referringDomains(target: string, opts: BacklinksOptions): Promise<DataForSeoResult> {
+export function referringDomains(
+  target: string,
+  opts: BacklinksOptions & { backlinksStatusType?: "all" | "live" | "lost" }
+): Promise<DataForSeoResult> {
   const endpoint = "backlinks/referring_domains/live";
-  const body = { target, limit: opts.limit ?? 100 };
+  // Default stays "live" (DataForSEO's own default). "all" is needed when
+  // auditing a domain that has been redirecting for a while: links the
+  // index has stopped re-confirming are flagged lost and drop out of "live".
+  const body: Record<string, unknown> = { target, limit: opts.limit ?? 100 };
+  if (opts.backlinksStatusType) body.backlinks_status_type = opts.backlinksStatusType;
   return dataForSeoRequest({
     workflow: opts.workflow,
     apiFamily: API_FAMILY,
@@ -135,7 +146,7 @@ export function referringDomains(target: string, opts: BacklinksOptions): Promis
     environment: opts.environment,
     confirmLive: opts.confirmLive,
     seedTerms: [target],
-    limit: body.limit,
+    limit: opts.limit ?? 100,
   });
 }
 
