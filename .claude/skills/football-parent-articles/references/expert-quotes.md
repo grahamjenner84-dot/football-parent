@@ -482,6 +482,75 @@ young players.
    child's training load?
 4. Is there a rule of thumb you actually use in practice, rather than a
    textbook guideline?
+Update 2026-09-23: a real physiotherapist (Resilient Physiotherapy) replied to
+an interview request and is a confirmed fit for this. See the "Resilient
+Physiotherapy" entry below, which carries the fuller question set that
+supersedes this generic draft.
+
+### The Elite Mind Coach — sports psychologist, tag: mindset, parent support, confidence, release
+Drafted 2026-09-23. Replied to interview request 2026-09-22. Awaiting the
+individual's name and one-line credential from Graham before attribution.
+Fills the parent-support cluster (all Bucket C with strong Graham voice
+already, so these land as C+ authority upgrades in genuine `<ExpertOpinion>`
+callouts) plus the emotional/identity dimension of academy release, which is a
+deeper cut than Paul Barry's Q10 (that covered release structurally, not the
+"who am I now" rebuild). Send around 6:
+1. [understanding-academy-release] When a released player says "if I'm not a
+   footballer, who am I?", what have you seen help a child rebuild their sense
+   of self in the first few weeks?
+2. [what-to-say-after-football-matches] When a child comes off the pitch upset
+   after a bad game, what is really happening emotionally in those first ten
+   minutes, and why does naming the feeling work better than trying to fix or
+   cheer them up?
+3. [support-child-after-bad-match] What separates a child who bounces back from
+   a bad game from one who spirals, and what can a parent on the touchline
+   actually influence?
+4. [build-confidence-young-footballers] Where does real confidence in a young
+   player come from, and what well-meaning parent behaviour quietly undermines
+   it?
+5. [why-isnt-my-child-improving-at-football] When a child hits a plateau and
+   gets frustrated, how much of that is mindset versus ability, and what
+   actually helps them through it?
+6. [football-burnout] What are the early mental signs a young player is heading
+   for burnout rather than just a dip, and what should a parent do first?
+Optional extra if generous: handling a child who talks about quitting, and
+managing parental pressure/ambition (also feeds the pressure section of
+jpl-vs-grassroots-football and biggest-football-parent-mistakes).
+
+### Resilient Physiotherapy — physiotherapist, tag: training load, overuse injury, physical development
+Drafted 2026-09-23. Replied to interview request 2026-09-22. Awaiting the
+individual's name and one-line credential from Graham before attribution.
+Confirmed fit for the generic how-much-training draft above, which it
+supersedes. Also has Instagram exercise-demo reels that can embed via the
+site's `<InstagramEmbed>` component. Fills Bucket B on
+how-much-training-is-too-much and playing-up-an-age-group; strengthens the
+late-developer/growth-spurt injury angle; the exercise-plan pair could enrich
+how-much-training or anchor a new physical-development article. Send around 6:
+1. [how-much-training-is-too-much] Which growth-related overuse injuries do you
+   actually see spike during adolescent growth spurts, and what early load
+   signs precede them?
+2. [how-much-training-is-too-much] Is there a defensible amount of structured
+   football for a 9- or 10-year-old in a week, and what are the first physical
+   signs a child is doing too much?
+3. [playing-up-an-age-group-football] When a younger child plays up physically,
+   what injury and load risks should a parent watch for, and how do you tell
+   healthy adaptation from strain?
+4. [late-developers-in-football / bio-banding-football] For a late-maturing
+   player, how does the timing of the growth spurt change injury risk and what
+   they should or should not be doing in training?
+5. [exercise plan, foundation phase, ages ~5-11] What would a good,
+   age-appropriate physical/exercise plan look like for a foundation-phase
+   player? What should it include, and what should it avoid at that age?
+6. [follow-up, youth development phase, ages ~12-16] How does that plan change
+   as they move into the youth development phase, particularly around the
+   growth spurt?
+Plus: ask for a couple of short Instagram clips demonstrating the exercises, to
+embed via `<InstagramEmbed>`. That gives a named physio quote AND video demos,
+which is very hard for scaled-content sites to replicate.
+Note: bio-banding-football's core Bucket B question (how biological maturity is
+actually assessed and measured in practice) is a sports-scientist / S&C
+question more than a physiotherapist one, so it may stay open unless this
+physio also does maturity assessment.
 
 ### how-to-find-a-football-agent-for-your-child — Adam Sells, tag: agents, representation
 Drafted: 2026-08-09. Reassigned 2026-09-06: Adam Sells is an FA-registered
