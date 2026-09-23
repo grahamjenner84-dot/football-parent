@@ -50,12 +50,18 @@ any ranking gain as a bonus. Do not build a second site on the domain.
 
 ## If the offer is accepted: order of work
 
-1. **Transfer in.** Move the domain to the registrar you already use for
-   footballparent.co.uk. Do not put any DNS on it until the redirects are
-   ready; a parked page invites another wave of directory scrapers.
+1. **Keep it in GoDaddy.** footballparent.co.uk is already registered
+   there, so the purchase lands in the same account and no transfer is
+   needed. Turn on auto-renew and two-factor authentication, decline the
+   Domain Protection and privacy add-ons (Nominet already hides an
+   individual registrant's name on .co.uk, and the transfer lock is not
+   needed). Leave the DNS untouched until the redirects are ready; a parked
+   page invites another wave of directory scrapers.
 2. **Add the domain to the Vercel project** (both `grassrootsfootball.co.uk`
    and `www.grassrootsfootball.co.uk`) so it serves the same deployment as
-   the main site. Vercel issues the certificate.
+   the main site, then point it at Vercel in GoDaddy DNS the same way
+   footballparent.co.uk is (copy that domain's A and CNAME records, or its
+   nameservers if it uses Vercel's). Vercel issues the certificate.
 3. **Ship the redirects** (below) in one commit, in its own commit, logged to
    the current `seo-changes-*.md` with the hash. Then test every row of the
    redirect map with `curl -I` against the live domain.
@@ -69,7 +75,8 @@ any ranking gain as a bonus. Do not build a second site on the domain.
    the old domain, and GSC impressions on `/coaching` and
    `/coaching/best-grassroots-football-apps`. Do not touch those pages for
    other reasons in the same window, so any movement is attributable.
-7. **Renew for multiple years** once it is in. The point is that nobody else
+7. **Renew for multiple years** once it is in, on the same card and
+   auto-renew setting as footballparent.co.uk. The point is that nobody else
    ever gets it.
 
 ## Where the redirects go
