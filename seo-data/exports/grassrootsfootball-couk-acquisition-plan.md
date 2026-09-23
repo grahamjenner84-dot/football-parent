@@ -10,6 +10,10 @@ Written 2026-09-23. Companion to the same-day exports in this folder:
 
 Offer the £200 GoDaddy minimum. Walk away above £300.
 
+**Offer made 2026-09-23: $300 through GoDaddy, roughly £225 at the time.** GoDaddy
+lists in US dollars. The ceiling in sterling stays £300, which is about $400.
+If the seller counters above that, decline.
+
 Why that range and not more: the domain's own link profile is thin. Of 110
 third-party referring domains, about a dozen are genuine (FourFourTwo with 35
 dofollow links, the Mirror and Birmingham Mail as nofollow, Sportsister,
