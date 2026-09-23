@@ -1,0 +1,2787 @@
+{
+  "target": "footballxg.com",
+  "date": "2026-09-23",
+  "summary": {
+    "target": "footballxg.com",
+    "first_seen": "2021-08-05 17:34:59 +00:00",
+    "lost_date": null,
+    "rank": 127,
+    "backlinks": 746,
+    "backlinks_spam_score": 44,
+    "crawled_pages": 395,
+    "info": {
+      "server": "LiteSpeed",
+      "cms": "wordpress",
+      "platform_type": [
+        "cms",
+        "blogs",
+        "organization"
+      ],
+      "ip_address": "69.57.162.237",
+      "country": "GB",
+      "is_ip": false,
+      "target_spam_score": 0
+    },
+    "internal_links_count": 9146,
+    "external_links_count": 1399,
+    "broken_backlinks": 0,
+    "broken_pages": 0,
+    "referring_domains": 518,
+    "referring_domains_nofollow": 444,
+    "referring_main_domains": 460,
+    "referring_main_domains_nofollow": 390,
+    "referring_ips": 297,
+    "referring_subnets": 233,
+    "referring_pages": 734,
+    "referring_pages_nofollow": 628,
+    "referring_links_tld": {
+      "online": 181,
+      "com": 156,
+      "xyz": 118,
+      "space": 28,
+      "website": 24,
+      "site": 23,
+      "in": 22,
+      "net": 20,
+      "org": 19,
+      "co.uk": 17
+    },
+    "referring_links_types": {
+      "anchor": 731,
+      "image": 3
+    },
+    "referring_links_attributes": {
+      "nofollow": 628,
+      "noopener": 57,
+      "noreferrer": 25,
+      "external": 18,
+      "ugc": 10
+    },
+    "referring_links_platform_types": {
+      "unknown": 547,
+      "cms": 140,
+      "blogs": 136,
+      "organization": 69,
+      "news": 19,
+      "ecommerce": 3
+    },
+    "referring_links_semantic_locations": {
+      "": 441,
+      "main": 122,
+      "article": 107,
+      "section": 40,
+      "nav": 13,
+      "details": 7,
+      "header": 2,
+      "figcaption": 1,
+      "aside": 1
+    },
+    "referring_links_countries": {
+      "": 522,
+      "IN": 62,
+      "GB": 32,
+      "US": 26,
+      "WW": 20,
+      "DE": 11,
+      "RU": 10,
+      "RE": 4,
+      "GR": 4,
+      "SE": 3
+    }
+  },
+  "referringDomains": [
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "capgemini.com",
+      "rank": 72,
+      "backlinks": 23,
+      "first_seen": "2025-08-23 09:51:41 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 14,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 2,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 2,
+      "referring_subnets": 1,
+      "referring_pages": 23,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 23
+      },
+      "referring_links_types": {
+        "anchor": 23
+      },
+      "referring_links_attributes": {
+        "noopener": 14,
+        "noreferrer": 14
+      },
+      "referring_links_platform_types": {
+        "blogs": 14,
+        "cms": 14,
+        "unknown": 7,
+        "organization": 5,
+        "news": 3
+      },
+      "referring_links_semantic_locations": {
+        "section": 23
+      },
+      "referring_links_countries": {
+        "IN": 14,
+        "US": 8,
+        "WW": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "smartsportstrader.com",
+      "rank": 54,
+      "backlinks": 4,
+      "first_seen": "2025-12-18 01:15:37 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 15,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 4,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 4
+      },
+      "referring_links_types": {
+        "anchor": 4
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 4
+      },
+      "referring_links_semantic_locations": {
+        "article": 4
+      },
+      "referring_links_countries": {
+        "GB": 4
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "hmfckickback.co.uk",
+      "rank": 23,
+      "backlinks": 1,
+      "first_seen": "2025-10-11 02:08:04 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "co.uk": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "external": 1
+      },
+      "referring_links_platform_types": {
+        "organization": 1
+      },
+      "referring_links_semantic_locations": {
+        "article": 1
+      },
+      "referring_links_countries": {
+        "GB": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "therealefl.co.uk",
+      "rank": 14,
+      "backlinks": 2,
+      "first_seen": "2025-04-01 15:18:34 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "co.uk": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "noopener": 2
+      },
+      "referring_links_platform_types": {
+        "blogs": 2,
+        "cms": 2,
+        "news": 2,
+        "organization": 2
+      },
+      "referring_links_semantic_locations": {
+        "article": 2
+      },
+      "referring_links_countries": {
+        "GB": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "twtd.co.uk",
+      "rank": 8,
+      "backlinks": 5,
+      "first_seen": "2023-06-19 17:18:54 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 30,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 3,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "co.uk": 3
+      },
+      "referring_links_types": {
+        "anchor": 3
+      },
+      "referring_links_attributes": {
+        "noopener": 2,
+        "noreferrer": 2
+      },
+      "referring_links_platform_types": {
+        "unknown": 3
+      },
+      "referring_links_semantic_locations": {
+        "": 3
+      },
+      "referring_links_countries": {
+        "GB": 3
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "backlinkgenerator.org",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-23 13:40:43 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 55,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "org": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-185.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-23 03:44:56 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "1seoservices.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-23 03:09:32 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "freesimpleseo.link",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-22 06:45:22 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "link": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "imperiousseo.link",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-21 10:13:26 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "link": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "digitseotools.info",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-20 13:49:11 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "backlinksboost.info",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-19 02:34:04 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "backlinkmaker.link",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-18 20:54:50 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "link": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-187.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-10 09:31:30 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "mediaboooster.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-03 00:23:55 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "fashionclothingnews.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-31 21:03:12 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "fittyfoody.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-29 19:02:55 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "quotesblom.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-26 18:36:03 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "US": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "uncledspizza.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-25 21:59:18 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "seo-anomaly-shanghai.online",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-24 22:21:01 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "online": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "ted.al",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-08-24 10:14:09 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 30,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 2,
+      "referring_links_tld": {
+        "al": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "nofollow": 2
+      },
+      "referring_links_platform_types": {
+        "blogs": 2,
+        "cms": 2
+      },
+      "referring_links_semantic_locations": {
+        "nav": 2
+      },
+      "referring_links_countries": {
+        "AL": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-174.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-24 09:26:44 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "betwinnermirror.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-21 08:36:52 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "theforbestimes.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-20 19:35:45 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-190.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-17 07:05:54 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-186.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-14 21:16:20 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-183.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-14 21:08:21 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-180.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-14 21:06:18 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-181.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-14 20:55:18 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-184.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-14 20:47:29 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "betulcrime.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-14 07:37:22 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "homesforsaleoldgreenwichct.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-13 21:54:41 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-188.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-10 17:50:07 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "hostprinter.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-07 12:06:11 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "bazerdaily.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-05 23:36:34 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "ggmap.us.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-02 07:58:10 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "us.com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-176.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-01 18:09:35 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-179.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-31 23:36:58 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-172.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-28 09:13:33 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 75,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "kerincare.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-28 06:57:54 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1,
+        "organization": 1
+      },
+      "referring_links_semantic_locations": {
+        "nav": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "link-legion-178.xyz",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-25 13:39:30 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 75,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "xyz": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "seo-anomaly-beijing.online",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-22 08:36:45 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "online": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "screenshots.wiki",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-07-18 06:38:58 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 2,
+      "referring_links_tld": {
+        "wiki": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "nofollow": 2
+      },
+      "referring_links_platform_types": {
+        "unknown": 2
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "motforum.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-15 07:27:36 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "organization": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "GB": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "seo-anomaly-beijing.site",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-06-30 14:29:41 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "site": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "robuta.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-06-27 11:38:35 +00:00",
+      "lost_date": "2026-09-20 05:37:59 +00:00",
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "urls-shortener.eu",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-06-24 10:41:32 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 2,
+      "referring_links_tld": {
+        "eu": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "nofollow": 2
+      },
+      "referring_links_platform_types": {
+        "unknown": 2
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "DE": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "get.ind.in",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-06-23 17:00:30 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "ind.in": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "IN": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "ready.pro",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-06-21 01:38:03 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 25,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 2,
+      "referring_links_tld": {
+        "pro": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "read.org.in",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-06-14 22:14:45 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "org.in": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "IN": 1
+      }
+    }
+  ],
+  "organic": {
+    "pos_1": 4,
+    "pos_2_3": 17,
+    "pos_4_10": 28,
+    "pos_11_20": 18,
+    "pos_21_30": 13,
+    "pos_31_40": 11,
+    "pos_41_50": 6,
+    "pos_51_60": 4,
+    "pos_61_70": 2,
+    "pos_71_80": 0,
+    "pos_81_90": 0,
+    "pos_91_100": 0,
+    "etv": 1845.078035093844,
+    "count": 103,
+    "estimated_paid_traffic_cost": 96.70924961566925,
+    "is_new": 22,
+    "is_up": 32,
+    "is_down": 29,
+    "is_lost": 24,
+    "clickstream_etv": null,
+    "clickstream_gender_distribution": null,
+    "clickstream_age_distribution": null
+  },
+  "rows": [
+    {
+      "keyword": "football xg",
+      "volume": 260,
+      "position": 2,
+      "etv": 79.04000091552734,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "footballxg",
+      "volume": 260,
+      "position": 1,
+      "etv": 79.04000091552734,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "x g football",
+      "volume": 1300,
+      "position": 2,
+      "etv": 395.20001220703125,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg football",
+      "volume": 1300,
+      "position": 2,
+      "etv": 395.20001220703125,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "league 1 xg table",
+      "volume": 70,
+      "position": 2,
+      "etv": 11.34000015258789,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg tables",
+      "volume": 1000,
+      "position": 2,
+      "etv": 16.200000762939453,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "championship xg",
+      "volume": 110,
+      "position": 3,
+      "etv": 10.70300006866455,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "championship xg table",
+      "volume": 480,
+      "position": 3,
+      "etv": 46.70399856567383,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "league 2 xg table",
+      "volume": 70,
+      "position": 3,
+      "etv": 6.810999870300293,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what is an xg in football",
+      "volume": 30,
+      "position": 5,
+      "etv": 2.9190001487731934,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what is football xg",
+      "volume": 40,
+      "position": 5,
+      "etv": 3.8919999599456787,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what is xg football",
+      "volume": 50,
+      "position": 5,
+      "etv": 4.864999771118164,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what is xg in football",
+      "volume": 2400,
+      "position": 5,
+      "etv": 233.52000427246094,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg championship",
+      "volume": 50,
+      "position": 3,
+      "etv": 4.864999771118164,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg championship table",
+      "volume": 50,
+      "position": 3,
+      "etv": 4.864999771118164,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg football stats",
+      "volume": 70,
+      "position": 3,
+      "etv": 6.810999870300293,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg in football",
+      "volume": 720,
+      "position": 5,
+      "etv": 70.05599975585938,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg league table",
+      "volume": 140,
+      "position": 3,
+      "etv": 13.621999740600586,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg stats football",
+      "volume": 70,
+      "position": 3,
+      "etv": 6.810999870300293,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg table",
+      "volume": 1000,
+      "position": 3,
+      "etv": 97.30000305175781,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg table championship",
+      "volume": 110,
+      "position": 3,
+      "etv": 10.70300006866455,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "championship expected points table",
+      "volume": 70,
+      "position": 4,
+      "etv": 4.61299991607666,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "league one xg table",
+      "volume": 70,
+      "position": 4,
+      "etv": 4.61299991607666,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what is xg in football stats",
+      "volume": 170,
+      "position": 6,
+      "etv": 11.20300006866455,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg meaning football",
+      "volume": 140,
+      "position": 7,
+      "etv": 9.22599983215332,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg meaning in football",
+      "volume": 390,
+      "position": 7,
+      "etv": 25.701000213623047,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg prediction",
+      "volume": 170,
+      "position": 5,
+      "etv": 11.20300006866455,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg predictions",
+      "volume": 170,
+      "position": 4,
+      "etv": 11.20300006866455,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg predictor",
+      "volume": 170,
+      "position": 4,
+      "etv": 11.20300006866455,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg table premier league",
+      "volume": 720,
+      "position": 4,
+      "etv": 47.448001861572266,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football table predictor",
+      "volume": 70,
+      "position": 5,
+      "etv": 3.2829999923706055,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football team spreadsheet",
+      "volume": 320,
+      "position": 7,
+      "etv": 15.008000373840332,
+      "url": "https://footballxg.com/2020/05/24/stats-spreadsheet-guide/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football xg meaning",
+      "volume": 140,
+      "position": 7,
+      "etv": 6.565999984741211,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "league one xg",
+      "volume": 40,
+      "position": 5,
+      "etv": 1.875999927520752,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "premier league table xg",
+      "volume": 50,
+      "position": 6,
+      "etv": 2.3450000286102295,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "premier league xg table",
+      "volume": 1300,
+      "position": 5,
+      "etv": 60.970001220703125,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football table predictions",
+      "volume": 70,
+      "position": 6,
+      "etv": 2.365999937057495,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "goals league tables",
+      "volume": 70,
+      "position": 6,
+      "etv": 2.365999937057495,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "expected goals",
+      "volume": 590,
+      "position": 9,
+      "etv": 15.104000091552734,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "goals statistics",
+      "volume": 70,
+      "position": 9,
+      "etv": 1.7920000553131104,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "x g stats",
+      "volume": 390,
+      "position": 7,
+      "etv": 9.984000205993652,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg stats",
+      "volume": 390,
+      "position": 7,
+      "etv": 9.984000205993652,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "epl xg table",
+      "volume": 110,
+      "position": 9,
+      "etv": 2.1670000553131104,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "prediction table",
+      "volume": 30,
+      "position": 8,
+      "etv": 0.5910000205039978,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg premier league table",
+      "volume": 320,
+      "position": 8,
+      "etv": 6.303999900817871,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "premier league xg table 25 26",
+      "volume": 50,
+      "position": 10,
+      "etv": 0.75,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg football meaning",
+      "volume": 260,
+      "position": 13,
+      "etv": 3.9000000953674316,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football predictor table",
+      "volume": 70,
+      "position": 10,
+      "etv": 0.7910000085830688,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "goals league table",
+      "volume": 70,
+      "position": 10,
+      "etv": 0.7910000085830688,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "how is xg calculated in football",
+      "volume": 260,
+      "position": 16,
+      "etv": 1.9500000476837158,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what does expected goals mean",
+      "volume": 70,
+      "position": 15,
+      "etv": 0.5249999761581421,
+      "url": "https://footballxg.com/what_are_expected_goals/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "epl xg",
+      "volume": 170,
+      "position": 16,
+      "etv": 1.003000020980835,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "expected points table premier league",
+      "volume": 90,
+      "position": 15,
+      "etv": 0.531000018119812,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "how is expected goals calculated",
+      "volume": 140,
+      "position": 18,
+      "etv": 0.8259999752044678,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "premier league expected points table",
+      "volume": 170,
+      "position": 15,
+      "etv": 1.003000020980835,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "expected points premier league",
+      "volume": 170,
+      "position": 17,
+      "etv": 0.8669999837875366,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg philosophy",
+      "volume": 1600,
+      "position": 18,
+      "etv": 8.15999984741211,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg scores",
+      "volume": 70,
+      "position": 17,
+      "etv": 0.3569999933242798,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what does xg mean in football stats",
+      "volume": 90,
+      "position": 21,
+      "etv": 0.3869999945163727,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "the xg philosophy",
+      "volume": 110,
+      "position": 23,
+      "etv": 0.3630000054836273,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg premier league",
+      "volume": 1300,
+      "position": 20,
+      "etv": 4.289999961853027,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg premier league 25 26",
+      "volume": 90,
+      "position": 20,
+      "etv": 0.296999990940094,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "opta expected points table",
+      "volume": 70,
+      "position": 21,
+      "etv": 0.1889999955892563,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg calculation",
+      "volume": 90,
+      "position": 25,
+      "etv": 0.24300000071525574,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg epl",
+      "volume": 70,
+      "position": 21,
+      "etv": 0.1889999955892563,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg score",
+      "volume": 70,
+      "position": 22,
+      "etv": 0.1889999955892563,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xgc premier league",
+      "volume": 90,
+      "position": 22,
+      "etv": 0.2160000056028366,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "premier league xg",
+      "volume": 1300,
+      "position": 24,
+      "etv": 2.8600001335144043,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "premier league xg stats",
+      "volume": 170,
+      "position": 25,
+      "etv": 0.37400001287460327,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "soccer team spreadsheet",
+      "volume": 10,
+      "position": 26,
+      "etv": 0.02199999988079071,
+      "url": "https://footballxg.com/2020/05/24/stats-spreadsheet-guide/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xga premier league",
+      "volume": 50,
+      "position": 25,
+      "etv": 0.10999999940395355,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "expected goals calculation",
+      "volume": 70,
+      "position": 28,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "predictor table",
+      "volume": 210,
+      "position": 27,
+      "etv": 0.4410000145435333,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "premier league expected goals",
+      "volume": 140,
+      "position": 27,
+      "etv": 0.2939999997615814,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xpts",
+      "volume": 260,
+      "position": 29,
+      "etv": 0.5460000038146973,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg calculator",
+      "volume": 90,
+      "position": 30,
+      "etv": 0.1889999955892563,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xg stats premier league",
+      "volume": 170,
+      "position": 27,
+      "etv": 0.3569999933242798,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "league table predictor",
+      "volume": 70,
+      "position": 32,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "npxg",
+      "volume": 40,
+      "position": 31,
+      "etv": 0.08399999886751175,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "expected goals premier league",
+      "volume": 260,
+      "position": 32,
+      "etv": 0.5460000038146973,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football league predictor",
+      "volume": 50,
+      "position": 34,
+      "etv": 0.10499999672174454,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xga",
+      "volume": 260,
+      "position": 36,
+      "etv": 0.5460000038146973,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "league table prediction",
+      "volume": 70,
+      "position": 37,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football xl",
+      "volume": 90,
+      "position": 37,
+      "etv": 0.1889999955892563,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "power scores",
+      "volume": 210,
+      "position": 40,
+      "etv": 0.4410000145435333,
+      "url": "https://footballxg.com/2020/12/22/create-your-own-power-ratings/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "table predictor",
+      "volume": 170,
+      "position": 37,
+      "etv": 0.3569999933242798,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what does xg mean in soccer",
+      "volume": 40,
+      "position": 40,
+      "etv": 0.08399999886751175,
+      "url": "https://footballxg.com/what_are_expected_goals/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "league table predictions",
+      "volume": 70,
+      "position": 39,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "penalty xg",
+      "volume": 70,
+      "position": 41,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xvalue",
+      "volume": 260,
+      "position": 42,
+      "etv": 0.5460000038146973,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football excel",
+      "volume": 110,
+      "position": 50,
+      "etv": 0.23100000619888306,
+      "url": "https://footballxg.com/2020/05/24/stats-spreadsheet-guide/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "infogol",
+      "volume": 110,
+      "position": 49,
+      "etv": 0.23100000619888306,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "expected goals calculator",
+      "volume": 70,
+      "position": 49,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "pl table prediction",
+      "volume": 6600,
+      "position": 53,
+      "etv": 13.859999656677246,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xgi",
+      "volume": 70,
+      "position": 57,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "predict epl table",
+      "volume": 6600,
+      "position": 54,
+      "etv": 13.859999656677246,
+      "url": "https://footballxg.com/leaguetablepredictions/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xa football",
+      "volume": 70,
+      "position": 60,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "liverpool league position graph 24/25",
+      "volume": 50,
+      "position": 56,
+      "etv": 0.10499999672174454,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xgot",
+      "volume": 320,
+      "position": 59,
+      "etv": 0.671999990940094,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "xgc",
+      "volume": 90,
+      "position": 63,
+      "etv": 0.1889999955892563,
+      "url": "https://footballxg.com/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what is expected goals",
+      "volume": 70,
+      "position": 65,
+      "etv": 0.1469999998807907,
+      "url": "https://footballxg.com/what_are_expected_goals/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football form",
+      "volume": 480,
+      "position": 82,
+      "etv": 1.0080000162124634,
+      "url": "https://footballxg.com/xgform/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "pinpoint football league tables",
+      "volume": 50,
+      "position": 78,
+      "etv": 0.10499999672174454,
+      "url": "https://footballxg.com/xg-league-tables/",
+      "weAlsoRank": false
+    }
+  ]
+}

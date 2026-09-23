@@ -1,0 +1,2725 @@
+{
+  "target": "eachgameasitcomes.com",
+  "date": "2026-09-23",
+  "summary": {
+    "target": "eachgameasitcomes.com",
+    "first_seen": "2021-09-16 22:25:31 +00:00",
+    "lost_date": null,
+    "rank": 57,
+    "backlinks": 110,
+    "backlinks_spam_score": 32,
+    "crawled_pages": 7,
+    "info": {
+      "server": "nginx",
+      "cms": null,
+      "platform_type": null,
+      "ip_address": "185.151.30.185",
+      "country": "GB",
+      "is_ip": false,
+      "target_spam_score": 0
+    },
+    "internal_links_count": 0,
+    "external_links_count": 0,
+    "broken_backlinks": 77,
+    "broken_pages": 5,
+    "referring_domains": 76,
+    "referring_domains_nofollow": 21,
+    "referring_main_domains": 72,
+    "referring_main_domains_nofollow": 21,
+    "referring_ips": 54,
+    "referring_subnets": 47,
+    "referring_pages": 110,
+    "referring_pages_nofollow": 44,
+    "referring_links_tld": {
+      "com": 29,
+      "blogspot.com": 23,
+      "org": 22,
+      "info": 7,
+      "pages.dev": 3,
+      "org.in": 2,
+      "eu": 2,
+      "link": 2,
+      "fyi": 2,
+      "pro": 2
+    },
+    "referring_links_types": {
+      "anchor": 85,
+      "image": 25
+    },
+    "referring_links_attributes": {
+      "nofollow": 44,
+      "external": 22,
+      "noopener": 19,
+      "noreferrer": 6,
+      "ugc": 3
+    },
+    "referring_links_platform_types": {
+      "unknown": 64,
+      "blogs": 42,
+      "cms": 19,
+      "organization": 15,
+      "message-boards": 1,
+      "news": 1
+    },
+    "referring_links_semantic_locations": {
+      "": 81,
+      "article": 9,
+      "details": 6,
+      "main": 6,
+      "aside": 4,
+      "section": 2,
+      "header": 1,
+      "footer": 1
+    },
+    "referring_links_countries": {
+      "": 74,
+      "WW": 20,
+      "US": 7,
+      "IN": 4,
+      "GB": 2,
+      "BR": 1,
+      "DE": 1,
+      "SE": 1
+    }
+  },
+  "referringDomains": [
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "timscoachingblog.com",
+      "rank": 7,
+      "backlinks": 1,
+      "first_seen": "2024-01-11 19:37:45 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "WW": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "boost-traffic.info",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-23 09:13:52 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 35,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "kernelpanicpodcast.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-21 15:54:31 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "onvaxs.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-21 13:22:29 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "backlinksboost.info",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-19 22:49:46 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 35,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "1seoservices.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-18 17:58:22 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 35,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "digitseotools.info",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-18 17:16:23 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 35,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "freesimpleseo.link",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-11 14:52:34 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 35,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "link": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "goldbacklinks.link",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-11 10:39:45 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 35,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "link": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "details": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "fashionclothingnews.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-09-01 05:02:25 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "jake.eu",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-31 13:47:50 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "eu": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "fittyfoody.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-29 04:02:05 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "uncledspizza.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-27 04:38:28 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "theforbestimes.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-25 21:37:29 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "quotesblom.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-24 19:28:22 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "US": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "betwinnermirror.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-20 03:22:11 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "betulcrime.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-17 11:47:40 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "quero.party",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-08-16 02:25:31 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 25,
+      "broken_backlinks": 2,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "party": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 2
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "homesforsaleoldgreenwichct.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-14 20:09:28 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "thetwounfortunates.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-10 16:53:34 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 5,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "external": 1,
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "bazerdaily.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-04 23:38:51 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "ggmap.us.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-04 19:18:56 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "us.com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "five.co.in",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-08-01 18:15:53 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 30,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "co.in": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "IN": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "ready.pro",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-26 07:27:50 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "pro": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "buzzshrink.website",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-07-25 22:23:26 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "website": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "bye.fyi",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-07-19 00:49:03 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 2,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 2,
+      "referring_links_tld": {
+        "fyi": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "nofollow": 2
+      },
+      "referring_links_platform_types": {
+        "unknown": 2
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "screenshots.wiki",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-06-22 19:01:57 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "wiki": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "ycm.info",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-06-09 23:37:30 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "read.org.in",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-05-03 13:49:31 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 2,
+      "broken_pages": 1,
+      "referring_domains": 2,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "org.in": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 2,
+        "cms": 2
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "IN": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "australianwebdirectory.shop",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-03-06 05:06:30 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "shop": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "musweb.org",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-02-12 21:07:26 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "org": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "shortenurls.eu",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-02-07 16:25:38 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "eu": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "booksreadr.org",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-02-04 20:05:01 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "org": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "anchorurl.cloud",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-02-02 18:32:56 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 25,
+      "broken_backlinks": 2,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "cloud": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 2
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "way2check.cv",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-01-26 01:48:37 +00:00",
+      "lost_date": "2026-06-16 07:22:26 +00:00",
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "cv": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "alljobs.info",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2026-01-25 19:15:21 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 50,
+      "broken_backlinks": 2,
+      "broken_pages": 1,
+      "referring_domains": 2,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 2,
+        "cms": 2
+      },
+      "referring_links_semantic_locations": {
+        "": 2
+      },
+      "referring_links_countries": {
+        "": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "globalecommerce.org",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-01-22 05:35:07 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "org": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "urls-shortener.eu",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2026-01-20 07:37:37 +00:00",
+      "lost_date": "2026-06-21 06:51:35 +00:00",
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "eu": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "getwebsiteworth.com",
+      "rank": 0,
+      "backlinks": 3,
+      "first_seen": "2025-12-25 18:16:18 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 3,
+      "broken_pages": 1,
+      "referring_domains": 3,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 3,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 3
+      },
+      "referring_links_types": {
+        "anchor": 3
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 3,
+        "cms": 3
+      },
+      "referring_links_semantic_locations": {
+        "": 3
+      },
+      "referring_links_countries": {
+        "": 3
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "smartwebdirectory.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-12-01 20:20:31 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 65,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 1,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 1,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 1,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "nofollow": 1
+      },
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "grokipedia.com",
+      "rank": 0,
+      "backlinks": 2,
+      "first_seen": "2025-11-23 00:50:36 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 25,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 2,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 2
+      },
+      "referring_links_types": {
+        "anchor": 2
+      },
+      "referring_links_attributes": {
+        "noopener": 2,
+        "noreferrer": 2
+      },
+      "referring_links_platform_types": {
+        "organization": 2
+      },
+      "referring_links_semantic_locations": {
+        "article": 2
+      },
+      "referring_links_countries": {
+        "US": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "drjack.world",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-11-15 01:44:48 +00:00",
+      "lost_date": "2025-12-09 01:45:57 +00:00",
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "world": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "controldetierra.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-09-19 17:29:13 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 5,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "article": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "roberts-esther-i3944.firebaseapp.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-08-07 17:34:51 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 45,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "firebaseapp.com": 1
+      },
+      "referring_links_types": {
+        "image": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "main": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "australianwebdirectory.pro",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-08-07 04:53:35 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 70,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "pro": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "6300theme.blogspot.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-08-05 09:16:07 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 5,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "blogspot.com": 1
+      },
+      "referring_links_types": {
+        "image": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1
+      },
+      "referring_links_semantic_locations": {
+        "aside": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "leqfort.com.br",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-08-01 19:17:38 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 25,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com.br": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "unknown": 1
+      },
+      "referring_links_semantic_locations": {
+        "article": 1
+      },
+      "referring_links_countries": {
+        "BR": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "siteprice.org",
+      "rank": 0,
+      "backlinks": 29,
+      "first_seen": "2025-07-12 23:12:11 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 6,
+      "broken_backlinks": 29,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 29,
+      "referring_pages_nofollow": 20,
+      "referring_links_tld": {
+        "org": 29
+      },
+      "referring_links_types": {
+        "anchor": 29
+      },
+      "referring_links_attributes": {
+        "external": 19,
+        "nofollow": 19
+      },
+      "referring_links_platform_types": {
+        "unknown": 28
+      },
+      "referring_links_semantic_locations": {
+        "": 29
+      },
+      "referring_links_countries": {
+        "WW": 17,
+        "": 10,
+        "US": 2
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "coquitlamfc.com",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-02-16 15:31:43 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 0,
+      "broken_backlinks": 0,
+      "broken_pages": 0,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "com": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": {
+        "noopener": 1,
+        "noreferrer": 1
+      },
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "article": 1
+      },
+      "referring_links_countries": {
+        "US": 1
+      }
+    },
+    {
+      "type": "backlinks_referring_domain",
+      "domain": "sergechel.info",
+      "rank": 0,
+      "backlinks": 1,
+      "first_seen": "2025-02-06 19:41:21 +00:00",
+      "lost_date": null,
+      "backlinks_spam_score": 60,
+      "broken_backlinks": 1,
+      "broken_pages": 1,
+      "referring_domains": 1,
+      "referring_domains_nofollow": 0,
+      "referring_main_domains": 1,
+      "referring_main_domains_nofollow": 0,
+      "referring_ips": 1,
+      "referring_subnets": 1,
+      "referring_pages": 1,
+      "referring_pages_nofollow": 0,
+      "referring_links_tld": {
+        "info": 1
+      },
+      "referring_links_types": {
+        "anchor": 1
+      },
+      "referring_links_attributes": null,
+      "referring_links_platform_types": {
+        "blogs": 1,
+        "cms": 1
+      },
+      "referring_links_semantic_locations": {
+        "": 1
+      },
+      "referring_links_countries": {
+        "": 1
+      }
+    }
+  ],
+  "organic": {
+    "pos_1": 0,
+    "pos_2_3": 0,
+    "pos_4_10": 7,
+    "pos_11_20": 15,
+    "pos_21_30": 48,
+    "pos_31_40": 7,
+    "pos_41_50": 9,
+    "pos_51_60": 6,
+    "pos_61_70": 4,
+    "pos_71_80": 1,
+    "pos_81_90": 1,
+    "pos_91_100": 1,
+    "etv": 154.52600066363811,
+    "count": 99,
+    "estimated_paid_traffic_cost": 292.0108000189066,
+    "is_new": 39,
+    "is_up": 33,
+    "is_down": 21,
+    "is_lost": 22,
+    "clickstream_etv": null,
+    "clickstream_gender_distribution": null,
+    "clickstream_age_distribution": null
+  },
+  "rows": [
+    {
+      "keyword": "nowhere men book",
+      "volume": 50,
+      "position": 6,
+      "etv": 2.3450000286102295,
+      "url": "https://eachgameasitcomes.com/nowhere-men-michael-calvin/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 diamond formation",
+      "volume": 170,
+      "position": 9,
+      "etv": 5.745999813079834,
+      "url": "https://www.eachgameasitcomes.com/wp-content/uploads/2015/02/4-4-2_Diamond_Training_Sessions.pdf",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "442 diamond formation",
+      "volume": 170,
+      "position": 10,
+      "etv": 5.745999813079834,
+      "url": "https://www.eachgameasitcomes.com/wp-content/uploads/2015/02/4-4-2_Diamond_Training_Sessions.pdf",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4 4 2 diamond formation",
+      "volume": 170,
+      "position": 11,
+      "etv": 4.3520002365112305,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "442 diamond",
+      "volume": 320,
+      "position": 11,
+      "etv": 8.192000389099121,
+      "url": "https://www.eachgameasitcomes.com/wp-content/uploads/2015/02/4-4-2_Diamond_Training_Sessions.pdf",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "box to",
+      "volume": 110,
+      "position": 11,
+      "etv": 1.649999976158142,
+      "url": "https://eachgameasitcomes.com/box-to-box-app-review/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "what is sam allardyce doing now",
+      "volume": 70,
+      "position": 14,
+      "etv": 0.7910000085830688,
+      "url": "https://eachgameasitcomes.com/sam-allardyce-and-the-england-job-where-now/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4 4 2 diamond",
+      "volume": 320,
+      "position": 17,
+      "etv": 2.9119999408721924,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "box to box game",
+      "volume": 50,
+      "position": 13,
+      "etv": 0.45500001311302185,
+      "url": "https://eachgameasitcomes.com/box-to-box-app-review/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "diamond formation",
+      "volume": 210,
+      "position": 16,
+      "etv": 1.9110000133514404,
+      "url": "https://www.eachgameasitcomes.com/wp-content/uploads/2015/02/4-4-2_Diamond_Training_Sessions.pdf",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "diamond formation in football",
+      "volume": 210,
+      "position": 17,
+      "etv": 1.9110000133514404,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "senseball",
+      "volume": 50,
+      "position": 17,
+      "etv": 0.45500001311302185,
+      "url": "https://eachgameasitcomes.com/an-introduction-to-senseball/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "the nowhere men",
+      "volume": 1000,
+      "position": 17,
+      "etv": 5.900000095367432,
+      "url": "https://eachgameasitcomes.com/nowhere-men-michael-calvin/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 diamond",
+      "volume": 320,
+      "position": 18,
+      "etv": 1.7920000553131104,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football diamond formation",
+      "volume": 210,
+      "position": 20,
+      "etv": 1.0709999799728394,
+      "url": "https://www.eachgameasitcomes.com/wp-content/uploads/2015/02/4-4-2_Diamond_Training_Sessions.pdf",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "eric steele goalkeeper coach",
+      "volume": 70,
+      "position": 22,
+      "etv": 0.3009999990463257,
+      "url": "https://eachgameasitcomes.com/eric-steele-goalkeeping-coaching-session-shot-stopping-modern-trends/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "nowhere men",
+      "volume": 8100,
+      "position": 24,
+      "etv": 26.729999542236328,
+      "url": "https://eachgameasitcomes.com/nowhere-men-michael-calvin/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "barry quin",
+      "volume": 260,
+      "position": 21,
+      "etv": 0.7020000219345093,
+      "url": "https://eachgameasitcomes.com/tag/barry-quin/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "bobby moore wife death",
+      "volume": 210,
+      "position": 24,
+      "etv": 0.5669999718666077,
+      "url": "https://eachgameasitcomes.com/bobby-moore-by-the-person-who-knew-him-best-tina-moore/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "eric steele goalkeeper",
+      "volume": 70,
+      "position": 24,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/eric-steele-goalkeeping-coaching-session-shot-stopping-modern-trends/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b coaching",
+      "volume": 70,
+      "position": 21,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b cost",
+      "volume": 260,
+      "position": 24,
+      "etv": 0.6240000128746033,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 formation in football",
+      "volume": 1600,
+      "position": 26,
+      "etv": 3.680000066757202,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa pro licence price",
+      "volume": 110,
+      "position": 25,
+      "etv": 0.2529999911785126,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football formations 3 5 2",
+      "volume": 1000,
+      "position": 29,
+      "etv": 2.0999999046325684,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b",
+      "volume": 1600,
+      "position": 27,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b coach",
+      "volume": 70,
+      "position": 27,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa coaching courses",
+      "volume": 70,
+      "position": 26,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa pro license cost",
+      "volume": 110,
+      "position": 27,
+      "etv": 0.23100000619888306,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 formation",
+      "volume": 1600,
+      "position": 29,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 soccer formation",
+      "volume": 1600,
+      "position": 29,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "leeds united 3-5-2 formation",
+      "volume": 70,
+      "position": 28,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa a courses",
+      "volume": 70,
+      "position": 28,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa a diploma",
+      "volume": 70,
+      "position": 28,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa coaching course",
+      "volume": 70,
+      "position": 28,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa courses",
+      "volume": 70,
+      "position": 27,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa football coaching",
+      "volume": 90,
+      "position": 27,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "3 5 2 football formation",
+      "volume": 1300,
+      "position": 33,
+      "etv": 2.7300000190734863,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "3 5 2 formation",
+      "volume": 1000,
+      "position": 32,
+      "etv": 2.0999999046325684,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "5-2-3 formation",
+      "volume": 390,
+      "position": 30,
+      "etv": 0.8190000057220459,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football formation 3-5-2",
+      "volume": 1300,
+      "position": 30,
+      "etv": 2.7300000190734863,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football respect",
+      "volume": 90,
+      "position": 36,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/7-ways-to-win-the-respect-of-your-football-players/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "soccer formation 4-4-2",
+      "volume": 1600,
+      "position": 30,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa a licence cost",
+      "volume": 140,
+      "position": 29,
+      "etv": 0.2939999997615814,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b coaching license",
+      "volume": 90,
+      "position": 29,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b course",
+      "volume": 170,
+      "position": 29,
+      "etv": 0.3569999933242798,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa pro licence cost",
+      "volume": 110,
+      "position": 29,
+      "etv": 0.23100000619888306,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "diamond football formation",
+      "volume": 210,
+      "position": 35,
+      "etv": 0.4410000145435333,
+      "url": "https://www.eachgameasitcomes.com/wp-content/uploads/2015/02/4-4-2_Diamond_Training_Sessions.pdf",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "is tina moore still alive",
+      "volume": 320,
+      "position": 30,
+      "etv": 0.671999990940094,
+      "url": "https://eachgameasitcomes.com/bobby-moore-by-the-person-who-knew-him-best-tina-moore/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "tina moore bobby moore wife still alive",
+      "volume": 140,
+      "position": 30,
+      "etv": 0.2939999997615814,
+      "url": "https://eachgameasitcomes.com/bobby-moore-by-the-person-who-knew-him-best-tina-moore/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa license b",
+      "volume": 1600,
+      "position": 30,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "3 5 2 formation soccer",
+      "volume": 1000,
+      "position": 36,
+      "etv": 2.0999999046325684,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "3/5 2",
+      "volume": 590,
+      "position": 32,
+      "etv": 1.2389999628067017,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "diamond formation football",
+      "volume": 210,
+      "position": 36,
+      "etv": 0.4410000145435333,
+      "url": "https://www.eachgameasitcomes.com/wp-content/uploads/2015/02/4-4-2_Diamond_Training_Sessions.pdf",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "did tina moore go to bobby's funeral",
+      "volume": 210,
+      "position": 30,
+      "etv": 0.4410000145435333,
+      "url": "https://eachgameasitcomes.com/bobby-moore-by-the-person-who-knew-him-best-tina-moore/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa a coach",
+      "volume": 90,
+      "position": 31,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b courses",
+      "volume": 170,
+      "position": 31,
+      "etv": 0.3569999933242798,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b licence",
+      "volume": 1600,
+      "position": 31,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa coaching license b",
+      "volume": 90,
+      "position": 31,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "3-5-2 formation",
+      "volume": 1000,
+      "position": 33,
+      "etv": 2.0999999046325684,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "attack vs defence football drills",
+      "volume": 70,
+      "position": 32,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/five-advantages-of-practising-attack-v-defence/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football coach courses",
+      "volume": 1300,
+      "position": 32,
+      "etv": 2.7300000190734863,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football formation 3 5 2",
+      "volume": 1300,
+      "position": 36,
+      "etv": 2.7300000190734863,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b diploma",
+      "volume": 140,
+      "position": 32,
+      "etv": 0.2939999997615814,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "3-5-2 formation soccer",
+      "volume": 1000,
+      "position": 35,
+      "etv": 2.0999999046325684,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 formation soccer",
+      "volume": 1600,
+      "position": 36,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "eric steele",
+      "volume": 590,
+      "position": 39,
+      "etv": 1.2389999628067017,
+      "url": "https://eachgameasitcomes.com/eric-steele-goalkeeping-coaching-session-shot-stopping-modern-trends/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "respect in football",
+      "volume": 90,
+      "position": 38,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/7-ways-to-win-the-respect-of-your-football-players/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa b license cost",
+      "volume": 260,
+      "position": 35,
+      "etv": 0.5460000038146973,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa coaching badges",
+      "volume": 320,
+      "position": 33,
+      "etv": 0.671999990940094,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "3-5-2 formation football",
+      "volume": 1300,
+      "position": 37,
+      "etv": 2.7300000190734863,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa coach",
+      "volume": 90,
+      "position": 38,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football formations 3-5-2",
+      "volume": 1000,
+      "position": 39,
+      "etv": 2.0999999046325684,
+      "url": "https://eachgameasitcomes.com/coaching-3-5-2-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "uefa badges",
+      "volume": 170,
+      "position": 39,
+      "etv": 0.3569999933242798,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "attack vs defence soccer drills",
+      "volume": 70,
+      "position": 40,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/five-advantages-of-practising-attack-v-defence/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best attacking formation in soccer",
+      "volume": 50,
+      "position": 45,
+      "etv": 0.10499999672174454,
+      "url": "https://eachgameasitcomes.com/best-soccer-formations-to-score-goals/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football manager course",
+      "volume": 140,
+      "position": 46,
+      "etv": 0.2939999997615814,
+      "url": "https://eachgameasitcomes.com/best-courses-for-football-coaches/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football drills for 11 year olds",
+      "volume": 90,
+      "position": 49,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/soccer-drills-coaches-can-use-for-youth-players/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best football coach app",
+      "volume": 70,
+      "position": 49,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best soccer formations",
+      "volume": 390,
+      "position": 50,
+      "etv": 0.8190000057220459,
+      "url": "https://eachgameasitcomes.com/best-soccer-formations-to-score-goals/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football coaching apps",
+      "volume": 140,
+      "position": 48,
+      "etv": 0.2939999997615814,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best football coach apps",
+      "volume": 70,
+      "position": 51,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "small sided games in soccer",
+      "volume": 210,
+      "position": 55,
+      "etv": 0.4410000145435333,
+      "url": "https://eachgameasitcomes.com/the-benefits-of-small-sided-games-for-youth-development/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "dean austin",
+      "volume": 480,
+      "position": 56,
+      "etv": 1.0080000162124634,
+      "url": "https://eachgameasitcomes.com/dean-austin-coaching-session-defending/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best football coaching apps",
+      "volume": 70,
+      "position": 54,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "how to get coaching badges",
+      "volume": 90,
+      "position": 57,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best football coaching app",
+      "volume": 70,
+      "position": 59,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "dean austin coventry",
+      "volume": 90,
+      "position": 62,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/dean-austin-coaching-session-defending/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best app for football coaches",
+      "volume": 70,
+      "position": 61,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "roberta moore age",
+      "volume": 210,
+      "position": 64,
+      "etv": 0.4410000145435333,
+      "url": "https://eachgameasitcomes.com/bobby-moore-by-the-person-who-knew-him-best-tina-moore/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "best apps for football coaches",
+      "volume": 70,
+      "position": 63,
+      "etv": 0.1469999998807907,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "football training session plan pdf",
+      "volume": 90,
+      "position": 69,
+      "etv": 0.1889999955892563,
+      "url": "https://eachgameasitcomes.com/resources/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "coaching badges",
+      "volume": 480,
+      "position": 74,
+      "etv": 1.0080000162124634,
+      "url": "https://eachgameasitcomes.com/completing-the-uefa-b-coaching-badge/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "soccer team management apps",
+      "volume": 50,
+      "position": 74,
+      "etv": 0.10499999672174454,
+      "url": "https://eachgameasitcomes.com/top-ten-apps-software-for-coaching-soccer/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 formation football",
+      "volume": 1600,
+      "position": 77,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "soccer formation 4-1-2-1-2",
+      "volume": 390,
+      "position": 79,
+      "etv": 0.8190000057220459,
+      "url": "https://eachgameasitcomes.com/best-soccer-formations-to-score-goals/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-4-2 football formation",
+      "volume": 1600,
+      "position": 91,
+      "etv": 3.3600001335144043,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "soccer formation 4-5-1",
+      "volume": 170,
+      "position": 102,
+      "etv": 0.3569999933242798,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    },
+    {
+      "keyword": "4-5-1 formation soccer",
+      "volume": 320,
+      "position": 107,
+      "etv": 0.671999990940094,
+      "url": "https://eachgameasitcomes.com/coaching-4-4-2-diamond-formation/",
+      "weAlsoRank": false
+    }
+  ]
+}
