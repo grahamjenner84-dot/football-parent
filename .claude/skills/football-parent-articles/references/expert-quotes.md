@@ -513,9 +513,12 @@ deeper cut than Paul Barry's Q10 (that covered release structurally, not the
    actually helps them through it?
 6. [football-burnout] What are the early mental signs a young player is heading
    for burnout rather than just a dip, and what should a parent do first?
-Optional extra if generous: handling a child who talks about quitting, and
-managing parental pressure/ambition (also feeds the pressure section of
-jpl-vs-grassroots-football and biggest-football-parent-mistakes).
+7. [biggest-football-parent-mistakes / jpl-vs-grassroots-football] When a child
+   starts talking about wanting to quit, how should a parent respond, and how
+   do you tell a passing wobble from a real sign they have had enough?
+8. [biggest-football-parent-mistakes / jpl-vs-grassroots-football] Where is the
+   line between healthy encouragement and pressure that backfires, and what does
+   it look like when a parent is pushing their own ambition onto a child?
 
 ### Resilient Physiotherapy — physiotherapist, tag: training load, overuse injury, physical development
 Drafted 2026-09-23. Replied to interview request 2026-09-22. Awaiting the
