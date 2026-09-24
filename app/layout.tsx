@@ -7,6 +7,7 @@ import CookieConsent from "./components/CookieConsent";
 import PageViewPing from "./components/PageViewPing";
 import AffiliateClickTracker from "./components/AffiliateClickTracker";
 import PartnerClickTracker from "./components/PartnerClickTracker";
+import { BRAND_IMAGE } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,6 +17,19 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.footballparent.co.uk"),
   icons: {
     icon: "/icon.png",
+  },
+  // Default link preview for the pages that write their own metadata instead
+  // of calling generateSEO (about, author, policy pages). Article and category
+  // pages override the whole openGraph/twitter block via generateSEO.
+  openGraph: {
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "website",
+    images: [{ ...BRAND_IMAGE.og, type: "image/png", alt: "Football Parent" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ ...BRAND_IMAGE.og, type: "image/png", alt: "Football Parent" }],
   },
   verification: {
     other: {
