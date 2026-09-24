@@ -167,6 +167,11 @@ const GENERIC_SPORTS = /\b(youth[\s-]sports?|kids'?[\s-]sports?|children'?s[\s-]
 // exist) but these are.
 const US_SIGNALS = /\b(ymca|recreational soccer|club soccer|travel soccer|rec league|middle school|high school|varsity)\b/i;
 
+// Place names that settle the country when the domain doesn't (a .com club
+// site in Perth, WA got through the first run). Deliberately excludes names
+// that are also UK places (Perth, Victoria, Wellington, Richmond...).
+const NON_UK_SIGNALS = /\b(australia|australian|new south wales|nsw|queensland|western australia|south australia|tasmania|new zealand|canada|canadian|ontario|british columbia|alberta|usa|united states|u\.s\. soccer|us youth soccer|south africa)\b/i;
+
 const NON_UK_TLDS = [".ca", ".com.au", ".au", ".us", ".co.nz", ".nz", ".ie", ".za", ".in", ".de", ".nl", ".fr", ".es"];
 const UK_TLDS = [".co.uk", ".org.uk", ".uk", ".scot", ".wales", ".cymru"];
 
@@ -245,11 +250,18 @@ export function assessProspect(c: ProspectCandidate): QualityResult {
     return reject("shop product page");
   }
 
-  if (OTHER_SPORTS.test(text) && !FOOTBALL_SIGNAL.test(text)) return reject("about another sport, not football");
+  // Another sport in the page's own address or title is decisive. In the
+  // surrounding context it isn't: a girls' coaching guide that mentions
+  // "Women in Sport" or netball crossover was wrongly rejected in the first
+  // run, so that only earns a check-it note.
+  const ownText = [c.url, c.title ?? ""].join(" ");
+  if (OTHER_SPORTS.test(ownText) && !FOOTBALL_SIGNAL.test(text)) return reject("about another sport, not football");
+  if (OTHER_SPORTS.test(text) && !FOOTBALL_SIGNAL.test(text)) reasons.push("mentions another sport: check the page is about football");
   if (GENERIC_SPORTS.test(text) && !FOOTBALL_SIGNAL.test(text)) return reject("general youth-sports page with no football angle");
 
   if (isUk === false) return reject(`outside the UK (${c.country?.trim() || host})`);
   if (isUk === null && US_SIGNALS.test(text)) return reject("US youth-soccer page");
+  if (isUk === null && NON_UK_SIGNALS.test(text)) return reject(`outside the UK (${text.match(NON_UK_SIGNALS)![0]})`);
 
   if (type === "governing_body") return park("governing body: links go to partners and sponsors, so this needs a partnership, not a cold pitch");
   if (type === "media") return park("national media: needs a press angle or journalist request, not a link request");

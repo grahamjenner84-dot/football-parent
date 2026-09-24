@@ -73,6 +73,20 @@ one line, before starting.
 that file looks stale (pages we've published since are missing), use
 `--refresh` once.
 
+## Before searching: load the sites already on the list
+
+If `cli.ts stats` works, run `npx tsx scripts/outreach/cli.ts known-domains`
+first. It lists every site already on the list: prospects in the backlog,
+sites Graham has emailed (including his own history imported from his
+sheet), and wins. **Skip any candidate whose domain is on that list, before
+spending a `read` on it.** A second page on a site he's already emailed is
+still the same site. `cli.ts add` enforces this too, and reports those
+candidates as `domain_known`.
+
+In build mode, if the tables aren't reachable, say that you couldn't check
+against his history, so the review file may include sites he's already
+approached.
+
 ## Finding prospects: six routes
 
 No single route is the main one. Use all of them, spread the effort, and

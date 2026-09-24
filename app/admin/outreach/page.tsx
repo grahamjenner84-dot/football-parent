@@ -195,10 +195,13 @@ export default function OutreachAdminPage() {
         {tab === "backlog" && (
           <>
             <AddProspect onAdded={load} />
+            <ImportHistory onImported={load} />
             {groups.backlog.map((p) => (
               <div key={p.id} style={styles.card}>
                 <CardHead p={p} />
+                {p.angle && <p style={styles.meta}>Angle: {p.angle}</p>}
                 {p.fit_note && <p style={styles.meta}>{p.fit_note}</p>}
+                {p.notes && <p style={styles.meta}>{p.notes}</p>}
                 <p style={styles.reasons}>{p.score_reasons}</p>
                 <div style={styles.actions}>
                   <Btn onClick={() => act(p.id, "skip")} disabled={busy === p.id} subtle>Skip</Btn>
@@ -385,13 +388,22 @@ function WonButton({ onWon, disabled }: { onWon: (url: string) => void; disabled
 function AddProspect({ onAdded }: { onAdded: () => void }) {
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
+  const [angle, setAngle] = useState("");
+  const [fpPage, setFpPage] = useState("");
+  const [domainScore, setDomainScore] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
 
   const add = async () => {
     const res = await fetch("/api/outreach", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ url, contact_email: email || undefined }),
+      body: JSON.stringify({
+        url,
+        contact_email: email || undefined,
+        angle: angle || undefined,
+        fp_page: fpPage || undefined,
+        domain_score: domainScore || undefined,
+      }),
     });
     const json = await res.json();
     if (!res.ok) return setMsg(json.error);
@@ -400,12 +412,13 @@ function AddProspect({ onAdded }: { onAdded: () => void }) {
         ? json.status === "backlog"
           ? "Added to the backlog."
           : `Added as ${json.status}: ${(json.reasons ?? []).join("; ")}`
-        : json.outcome === "duplicate"
-          ? "Already in the list."
-          : "Already in conversation with that site."
+        : `Already on the list: ${describeKnown(json.existing)}`
     );
     setUrl("");
     setEmail("");
+    setAngle("");
+    setFpPage("");
+    setDomainScore("");
     onAdded();
   };
 
@@ -414,10 +427,218 @@ function AddProspect({ onAdded }: { onAdded: () => void }) {
       <p style={styles.meta}>Add a prospect by hand (same quality checks as the weekly run).</p>
       <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://page-you-want-a-link-from" style={styles.input} />
       <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="contact email (optional)" style={styles.input} />
+      <textarea
+        value={angle}
+        onChange={(e) => setAngle(e.target.value)}
+        placeholder="Angle / notes (optional): why they'd link, who you know there, what to offer"
+        style={styles.textarea}
+        rows={3}
+      />
+      <input value={fpPage} onChange={(e) => setFpPage(e.target.value)} placeholder="Our page to pitch (optional), e.g. /coaching/equal-playing-time-in-grassroots-football" style={styles.input} />
+      <input
+        value={domainScore}
+        onChange={(e) => setDomainScore(e.target.value)}
+        placeholder="Domain score, DA or DR 0-100 (optional)"
+        inputMode="numeric"
+        style={styles.input}
+      />
       <div style={styles.actions}>
         <Btn onClick={add} disabled={!url}>Add</Btn>
       </div>
       {msg && <p style={styles.meta}>{msg}</p>}
+    </div>
+  );
+}
+
+interface Known {
+  domain: string;
+  status: OutreachStatus;
+  sent_at: string | null;
+}
+
+const STATUS_LABEL: Partial<Record<OutreachStatus, string>> = {
+  backlog: "in the backlog",
+  drafted: "drafted, not sent yet",
+  sent: "waiting for a reply",
+  chase_1: "chased once",
+  chase_2: "chased twice",
+  replied: "replied",
+  won: "link won",
+  lost: "said no",
+  no_reply: "no reply",
+  skipped: "skipped",
+  parked: "parked",
+};
+
+function describeKnown(k: Known | null | undefined): string {
+  if (!k) return "that site";
+  const when = k.sent_at ? `, emailed ${fmtDate(k.sent_at)}` : "";
+  return `${k.domain} (${STATUS_LABEL[k.status] ?? k.status}${when})`;
+}
+
+const COLUMN_LABEL: Record<string, string> = {
+  url: "web address",
+  title: "site name",
+  emailedAt: "date emailed",
+  domainScore: "domain score",
+  contactEmail: "contact email",
+  angle: "what you pitched",
+  status: "status",
+  notes: "notes",
+  wonUrl: "live link",
+};
+
+interface PreviewRow {
+  line: number;
+  url: string;
+  title: string | null;
+  domain: string;
+  emailedAt: string | null;
+  domainScore: number | null;
+  contactEmail: string | null;
+  angle: string | null;
+  notes: string | null;
+  resolved: { status: OutreachStatus };
+  existing: Known | null;
+}
+
+// Paste straight from the spreadsheet (select the cells including the header
+// row, copy, paste) or pick a CSV. Preview first, nothing is written until
+// "Import".
+function ImportHistory({ onImported }: { onImported: () => void }) {
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [preview, setPreview] = useState<{ rows: PreviewRow[]; errors: string[]; columns: Record<string, string | null> } | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [working, setWorking] = useState(false);
+
+  const send = async (isPreview: boolean) => {
+    setWorking(true);
+    setMsg(null);
+    try {
+      const res = await fetch("/api/outreach/import", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ text, preview: isPreview }),
+      });
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.error || res.statusText);
+      if (isPreview) {
+        setPreview(json);
+      } else {
+        const r = json.results as { outcome: string }[];
+        const n = (o: string) => r.filter((x) => x.outcome === o).length;
+        setMsg(`Imported: ${n("added")} new, ${n("updated")} updated from the backlog, ${n("already_contacted")} already on the list and left alone.`);
+        setPreview(null);
+        setText("");
+        onImported();
+      }
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : String(err));
+    } finally {
+      setWorking(false);
+    }
+  };
+
+  if (!open) {
+    return (
+      <div style={styles.card}>
+        <p style={styles.meta}>Already emailed sites elsewhere? Import them so nothing gets pitched twice.</p>
+        <div style={styles.actions}>
+          <Btn onClick={() => setOpen(true)}>Import past outreach</Btn>
+        </div>
+        {msg && <p style={styles.meta}>{msg}</p>}
+      </div>
+    );
+  }
+
+  const willImport = preview ? preview.rows.filter((r) => !r.existing || ["backlog", "drafted", "parked", "skipped"].includes(r.existing.status)) : [];
+
+  return (
+    <div style={styles.card}>
+      <p style={styles.meta}>
+        Copy the rows from your sheet <strong>including the header row</strong> and paste them here, or choose a CSV. It needs a URL column. It
+        also reads: site name, email, date contacted (14/06 or 14/06/2026), what you pitched, domain score (DA/DR) and status (e.g. replied,
+        no reply, said no, linked).
+      </p>
+      <textarea
+        value={text}
+        onChange={(e) => {
+          setText(e.target.value);
+          setPreview(null);
+        }}
+        placeholder={"Site\temail\tWhen contacted\tWhat pitched\tDomain Auth\tURL"}
+        style={styles.textarea}
+        rows={6}
+      />
+      <input
+        type="file"
+        accept=".csv,.tsv,.txt"
+        style={{ ...styles.meta, marginTop: 8 }}
+        onChange={async (e) => {
+          const f = e.target.files?.[0];
+          if (f) {
+            setText(await f.text());
+            setPreview(null);
+          }
+        }}
+      />
+      <div style={styles.actions}>
+        <Btn onClick={() => send(true)} disabled={!text.trim() || working}>
+          Preview
+        </Btn>
+        {preview && willImport.length > 0 && (
+          <Btn onClick={() => send(false)} disabled={working}>
+            Import {willImport.length} site{willImport.length === 1 ? "" : "s"}
+          </Btn>
+        )}
+        <Btn
+          subtle
+          onClick={() => {
+            setOpen(false);
+            setPreview(null);
+          }}
+        >
+          Close
+        </Btn>
+      </div>
+      {msg && <p style={styles.meta}>{msg}</p>}
+      {preview && (
+        <>
+          <p style={styles.reasons}>
+            Columns read:{" "}
+            {Object.entries(preview.columns)
+              .filter(([, v]) => v)
+              .map(([k, v]) => `${v} → ${COLUMN_LABEL[k] ?? k}`)
+              .join(", ")}
+          </p>
+          {preview.errors.map((e) => (
+            <p key={e} style={styles.error}>
+              {e}
+            </p>
+          ))}
+          {preview.rows.map((r) => {
+            const skip = r.existing && !["backlog", "drafted", "parked", "skipped"].includes(r.existing.status);
+            return (
+              <div key={r.line} style={{ borderTop: "1px solid #3a2c1d", padding: "8px 0", opacity: skip ? 0.55 : 1 }}>
+                <div style={styles.cardTop}>
+                  <span style={styles.domain}>{r.title || r.domain}</span>
+                  <span style={styles.pill}>{skip ? "already on list" : (STATUS_LABEL[r.resolved.status] ?? r.resolved.status)}</span>
+                </div>
+                <p style={styles.reasons}>
+                  {r.domain}
+                  {r.emailedAt ? ` · emailed ${fmtDate(r.emailedAt)}` : " · no date"}
+                  {r.domainScore != null ? ` · DA ${r.domainScore}` : ""}
+                  {r.contactEmail ? ` · ${r.contactEmail}` : ""}
+                </p>
+                {r.angle && <p style={styles.reasons}>Pitched: {r.angle}</p>}
+                {r.notes && <p style={styles.reasons}>{r.notes}</p>}
+                {r.existing && <p style={styles.reasons}>{skip ? "Left alone: " : "Will update: "}{describeKnown(r.existing)}</p>}
+              </div>
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }

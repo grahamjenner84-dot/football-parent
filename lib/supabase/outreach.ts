@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { assessProspect, hostOf, type ProspectCandidate, type ProspectType } from "@/lib/outreach/quality";
 import { scoreProspect } from "@/lib/outreach/score";
+import { resolveImportedStatus, type HistoryRow } from "@/lib/outreach/import";
 import { applyAction, MONTHLY_LINK_TARGET, type OutreachAction, type OutreachStatus } from "@/lib/outreach/lifecycle";
 
 // Server-only client using the service role key, same pattern as
@@ -65,14 +66,49 @@ export interface NewProspect extends ProspectCandidate {
 
 export interface AddResult {
   url: string;
-  outcome: "added" | "duplicate" | "domain_active";
+  outcome: "added" | "duplicate" | "domain_known";
+  // For duplicate / domain_known: what's already on the list for that site,
+  // so the admin page can say "emailed 3 Mar, no reply" rather than just no.
+  existing?: KnownDomain;
   status?: OutreachStatus;
   reasons?: string[];
 }
 
-// Statuses that mean we're already talking to (or about to talk to) a
-// domain, so a second page on the same site must not get its own email.
-const ACTIVE: OutreachStatus[] = ["drafted", "sent", "chase_1", "chase_2", "replied"];
+export interface KnownDomain {
+  id: number;
+  url: string;
+  domain: string;
+  status: OutreachStatus;
+  sent_at: string | null;
+}
+
+// Every site already on the list, whatever its status, except pages the gate
+// rejected (a PDF on a club's site says nothing about the club's real
+// pages). One entry per domain, preferring the most advanced status, so a
+// site emailed in March is never re-proposed as new.
+const STATUS_RANK: OutreachStatus[] = ["won", "replied", "chase_2", "chase_1", "sent", "lost", "no_reply", "drafted", "backlog", "parked", "skipped"];
+
+function pickMostAdvanced(rows: KnownDomain[]): KnownDomain {
+  return [...rows].sort((a, b) => STATUS_RANK.indexOf(a.status) - STATUS_RANK.indexOf(b.status))[0];
+}
+
+export async function findKnownDomain(domain: string): Promise<KnownDomain | null> {
+  const supabase = adminClient();
+  const { data, error } = await supabase
+    .from("outreach_prospects")
+    .select("id, url, domain, status, sent_at")
+    .eq("domain", domain)
+    .neq("status", "rejected");
+  if (error) throw new Error(error.message);
+  return data?.length ? pickMostAdvanced(data as KnownDomain[]) : null;
+}
+
+export async function listKnownDomains(): Promise<KnownDomain[]> {
+  const all = (await listProspects(undefined, 10000)).filter((p) => p.status !== "rejected");
+  const byDomain = new Map<string, KnownDomain[]>();
+  for (const p of all) byDomain.set(p.domain, [...(byDomain.get(p.domain) ?? []), p]);
+  return [...byDomain.values()].map(pickMostAdvanced).map(({ id, url, domain, status, sent_at }) => ({ id, url, domain, status, sent_at }));
+}
 
 // Runs the quality gate and stores the result either way: a rejected row is
 // kept (status 'rejected') so discovery never proposes the same page again.
@@ -81,9 +117,9 @@ export async function addProspects(items: NewProspect[]): Promise<AddResult[]> {
   const results: AddResult[] = [];
 
   for (const item of items) {
-    const { data: existing } = await supabase.from("outreach_prospects").select("id").eq("url", item.url).maybeSingle();
+    const { data: existing } = await supabase.from("outreach_prospects").select("id, url, domain, status, sent_at").eq("url", item.url).maybeSingle();
     if (existing) {
-      results.push({ url: item.url, outcome: "duplicate" });
+      results.push({ url: item.url, outcome: "duplicate", existing: existing as KnownDomain });
       continue;
     }
 
@@ -91,14 +127,10 @@ export async function addProspects(items: NewProspect[]): Promise<AddResult[]> {
     const status: OutreachStatus = q.verdict === "ok" ? "backlog" : q.verdict === "parked" ? "parked" : "rejected";
     const reasons = [...q.reasons];
 
-    if (status === "backlog") {
-      const { count } = await supabase
-        .from("outreach_prospects")
-        .select("id", { count: "exact", head: true })
-        .eq("domain", q.domain)
-        .in("status", ACTIVE);
-      if ((count ?? 0) > 0) {
-        results.push({ url: item.url, outcome: "domain_active" });
+    if (status !== "rejected") {
+      const known = await findKnownDomain(q.domain);
+      if (known) {
+        results.push({ url: item.url, outcome: "domain_known", existing: known });
         continue;
       }
     }
@@ -304,4 +336,89 @@ export async function getStats(now = new Date()): Promise<OutreachStats> {
     monthlyTarget: MONTHLY_LINK_TARGET,
     backlog: backlog ?? 0,
   };
+}
+
+export interface ImportResult {
+  line: number;
+  url: string;
+  outcome: "added" | "updated" | "already_contacted";
+  status?: OutreachStatus;
+  existing?: KnownDomain;
+}
+
+// Past outreach from Graham's own records. Not run through the quality gate:
+// these already happened, and the point is to remember them, not to judge
+// them. The gate's type/UK read is still stored for the scoreboard.
+//
+// Per domain:
+//   - already contacted on the list -> left alone, reported
+//   - on the list but never contacted (backlog/drafted/parked) -> that row
+//     is updated with the real history, so it can't be emailed twice
+//   - not on the list -> inserted
+export async function importHistory(rows: HistoryRow[], now = new Date()): Promise<ImportResult[]> {
+  const supabase = adminClient();
+  const results: ImportResult[] = [];
+  const seenInFile = new Set<string>();
+
+  for (const row of rows) {
+    if (seenInFile.has(row.domain)) continue;
+    seenInFile.add(row.domain);
+
+    const r = resolveImportedStatus(row, now);
+    const history = {
+      status: r.status,
+      sent_at: r.sent_at,
+      last_contact_at: r.last_contact_at,
+      next_action_at: r.next_action_at,
+      chase_count: r.chase_count,
+      won_link_url: row.wonUrl,
+    };
+    const scoreNote = row.domainScore != null ? `Domain score ${row.domainScore} (entered by hand)` : null;
+    const notes = [row.notes, scoreNote, "Imported from outreach history"].filter(Boolean).join("\n");
+
+    const known = await findKnownDomain(row.domain);
+    if (known && !["backlog", "drafted", "parked", "skipped"].includes(known.status)) {
+      results.push({ line: row.line, url: row.url, outcome: "already_contacted", existing: known });
+      continue;
+    }
+
+    let id: number;
+    if (known) {
+      id = known.id;
+      await updateProspectFields(id, {
+        ...history,
+        contact_email: row.contactEmail ?? undefined,
+        angle: row.angle ?? undefined,
+        title: row.title ?? undefined,
+        authority: row.domainScore != null ? Math.round(row.domainScore * 10) : undefined,
+        notes,
+      } as Partial<OutreachProspect>);
+      results.push({ line: row.line, url: row.url, outcome: "updated", status: r.status });
+    } else {
+      const q = assessProspect({ url: row.url });
+      const { data, error } = await supabase
+        .from("outreach_prospects")
+        .insert({
+          url: row.url,
+          domain: row.domain,
+          title: row.title,
+          prospect_type: q.type,
+          is_uk: q.isUk,
+          source: "import:history",
+          authority: row.domainScore != null ? Math.round(row.domainScore * 10) : null,
+          contact_email: row.contactEmail,
+          angle: row.angle,
+          notes,
+          ...history,
+        })
+        .select("id")
+        .single();
+      if (error) throw new Error(`row ${row.line} (${row.url}): ${error.message}`);
+      id = (data as { id: number }).id;
+      results.push({ line: row.line, url: row.url, outcome: "added", status: r.status });
+    }
+    // Its own event kind: history must not count towards "sent this week".
+    await logEvent(id, "imported", r.status);
+  }
+  return results;
 }
