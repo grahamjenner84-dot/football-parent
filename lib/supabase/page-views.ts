@@ -29,6 +29,9 @@ export interface LogPageViewOptions {
   gclid?: string | null;
   fbclid?: string | null;
   bannerVariant?: string | null;
+  // ISO 3166-1 alpha-2 from Vercel's geolocation header, see
+  // app/api/page-view/route.ts.
+  country?: string | null;
 }
 
 const FLOOD_WINDOW_MS = 60_000;
@@ -77,7 +80,7 @@ export async function logPageView(path: string, options: LogPageViewOptions = {}
 
   if (await pathRecentlyFlooded(supabase, path)) return;
 
-  const { error } = await supabase.from("page_views").insert({
+  const row = {
     path,
     referrer_host: options.referrerHost ?? null,
     user_agent: options.userAgent ?? null,
@@ -87,11 +90,232 @@ export async function logPageView(path: string, options: LogPageViewOptions = {}
     gclid: options.gclid ?? null,
     fbclid: options.fbclid ?? null,
     banner_variant: options.bannerVariant ?? null,
-  });
+  };
+
+  const { error } = await supabase.from("page_views").insert({ ...row, country: options.country ?? null });
+
+  // 42703 is Postgres "undefined column": the code has deployed before the
+  // 20260924120000_page_views_country migration was applied. Losing the
+  // country is fine; losing every page view until the migration runs is
+  // not, so fall back to the pre-country insert rather than fail.
+  if (error && error.code === "42703") {
+    const retry = await supabase.from("page_views").insert(row);
+    if (!retry.error) return;
+    throw new Error("Failed to insert page_views row: " + retry.error.message);
+  }
 
   if (error) {
     throw new Error("Failed to insert page_views row: " + error.message);
   }
+}
+
+export interface CountryViewRow {
+  // ISO 3166-1 alpha-2, or "Unknown" for rows logged before the country
+  // column existed (and the odd request Vercel could not geolocate).
+  country: string;
+  views: number;
+  // Non-Internal rows, same proxy for distinct visits as PageViewStats.
+  estimatedVisits: number;
+  share: number; // of totalViews, 0-1
+}
+
+export interface HourOfDayRow {
+  // 0-23, in UK local time (Europe/London), not UTC - the question this
+  // answers is "what was happening before I woke up", which is a UK clock
+  // question.
+  hour: number;
+  views: number;
+  uk: number;
+  overseas: number;
+  unknown: number;
+}
+
+export interface PageViewCountryStats {
+  days: number;
+  totalViews: number;
+  botViews: number;
+  // Views with a country recorded. While this is well below totalViews the
+  // country split is only describing recent traffic - the column was added
+  // on 2026-09-24 and older rows are all "Unknown".
+  knownCountryViews: number;
+  countries: CountryViewRow[];
+  byHour: HourOfDayRow[];
+  // Views landing between midnight and 06:30 UK time, the window that
+  // looked out of place for a UK audience.
+  earlyMorning: {
+    views: number;
+    share: number; // of totalViews, 0-1
+    countries: CountryViewRow[]; // share here is of earlyMorning.views
+    topPaths: { path: string; count: number }[];
+  };
+  // What the non-UK traffic is reading, since "overseas" splits into real
+  // expat/international readers (spread across the same guides UK parents
+  // read) and something scripted (piled onto one or two URLs).
+  overseasTopPaths: { path: string; count: number }[];
+}
+
+const EARLY_MORNING_END_MINUTES = 6 * 60 + 30;
+const TOP_PATHS_COUNTRY = 15;
+
+const ukClock = new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Europe/London",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+// Minutes since midnight in UK local time for an ISO timestamp.
+function ukMinutesOfDay(createdAt: string): number {
+  const parts = ukClock.formatToParts(new Date(createdAt));
+  const hour = Number(parts.find((p) => p.type === "hour")?.value ?? 0);
+  const minute = Number(parts.find((p) => p.type === "minute")?.value ?? 0);
+  return hour * 60 + minute;
+}
+
+function countryRows(
+  views: Map<string, number>,
+  visits: Map<string, number>,
+  denominator: number
+): CountryViewRow[] {
+  return Array.from(views.entries())
+    .map(([country, count]) => ({
+      country,
+      views: count,
+      estimatedVisits: visits.get(country) ?? 0,
+      share: denominator > 0 ? count / denominator : 0,
+    }))
+    .sort((a, b) => b.views - a.views);
+}
+
+function topPathRows(counts: Map<string, number>, limit: number): { path: string; count: number }[] {
+  return Array.from(counts.entries())
+    .map(([path, count]) => ({ path, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit);
+}
+
+// Where the site's readers are, and when in the UK day they arrive. Same
+// bot exclusions and recording-start rules as getPageViewStats so the totals
+// here reconcile with the Page views tab.
+export async function getPageViewCountryStats(days: number = 30): Promise<PageViewCountryStats> {
+  const supabase = adminClient();
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+
+  let rows: {
+    path: string;
+    created_at: string;
+    referrer_host: string | null;
+    user_agent: string | null;
+    country: string | null;
+  }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("path, created_at, referrer_host, user_agent, country")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+
+    if (error) {
+      if (error.code === "42703") {
+        throw new Error(
+          "page_views has no country column yet - apply supabase/migrations/20260924120000_page_views_country.sql to the football-parent-social project."
+        );
+      }
+      throw new Error("Failed to read page_views: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  rows = rows.filter((row) => !isBeforeRecordingStart(row.path, row.created_at));
+
+  const dayPathUaCounts = new Map<string, number>();
+  for (const row of rows) {
+    if (!row.user_agent) continue;
+    const day = row.created_at.slice(0, 10);
+    const key = `${day}|${row.path}|${row.user_agent}`;
+    dayPathUaCounts.set(key, (dayPathUaCounts.get(key) ?? 0) + 1);
+  }
+
+  function isBotRow(row: (typeof rows)[number]): boolean {
+    if (isKnownBotIncident(row.path, row.created_at)) return true;
+    if (row.user_agent) {
+      if (matchesKnownBotPattern(row.user_agent)) return true;
+      const key = `${row.created_at.slice(0, 10)}|${row.path}|${row.user_agent}`;
+      if ((dayPathUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
+    }
+    return false;
+  }
+
+  const viewsByCountry = new Map<string, number>();
+  const visitsByCountry = new Map<string, number>();
+  const earlyViewsByCountry = new Map<string, number>();
+  const earlyVisitsByCountry = new Map<string, number>();
+  const earlyPaths = new Map<string, number>();
+  const overseasPaths = new Map<string, number>();
+  const byHour: HourOfDayRow[] = Array.from({ length: 24 }, (_, hour) => ({
+    hour,
+    views: 0,
+    uk: 0,
+    overseas: 0,
+    unknown: 0,
+  }));
+  let totalViews = 0;
+  let botViews = 0;
+  let knownCountryViews = 0;
+  let earlyViews = 0;
+
+  for (const row of rows) {
+    if (isBotRow(row)) {
+      botViews += 1;
+      continue;
+    }
+    totalViews += 1;
+
+    const country = row.country ?? "Unknown";
+    if (row.country) knownCountryViews += 1;
+    const isVisit = classifyReferrerHost(row.referrer_host).group !== "Internal";
+
+    viewsByCountry.set(country, (viewsByCountry.get(country) ?? 0) + 1);
+    if (isVisit) visitsByCountry.set(country, (visitsByCountry.get(country) ?? 0) + 1);
+
+    const minutes = ukMinutesOfDay(row.created_at);
+    const hourRow = byHour[Math.floor(minutes / 60)];
+    hourRow.views += 1;
+    if (country === "GB") hourRow.uk += 1;
+    else if (country === "Unknown") hourRow.unknown += 1;
+    else {
+      hourRow.overseas += 1;
+      overseasPaths.set(row.path, (overseasPaths.get(row.path) ?? 0) + 1);
+    }
+
+    if (minutes < EARLY_MORNING_END_MINUTES) {
+      earlyViews += 1;
+      earlyViewsByCountry.set(country, (earlyViewsByCountry.get(country) ?? 0) + 1);
+      if (isVisit) earlyVisitsByCountry.set(country, (earlyVisitsByCountry.get(country) ?? 0) + 1);
+      earlyPaths.set(row.path, (earlyPaths.get(row.path) ?? 0) + 1);
+    }
+  }
+
+  return {
+    days,
+    totalViews,
+    botViews,
+    knownCountryViews,
+    countries: countryRows(viewsByCountry, visitsByCountry, totalViews),
+    byHour,
+    earlyMorning: {
+      views: earlyViews,
+      share: totalViews > 0 ? earlyViews / totalViews : 0,
+      countries: countryRows(earlyViewsByCountry, earlyVisitsByCountry, earlyViews),
+      topPaths: topPathRows(earlyPaths, TOP_PATHS_COUNTRY),
+    },
+    overseasTopPaths: topPathRows(overseasPaths, TOP_PATHS_COUNTRY),
+  };
 }
 
 export interface SourceCount {
