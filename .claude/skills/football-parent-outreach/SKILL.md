@@ -130,8 +130,9 @@ enough to bring the drafted pile up to 15. For each one:
      page"). Offer the resource. Don't "ask for a backlink".
    - **Credibility:** one line on who Graham is (a grassroots football
      parent and coach who runs Football Parent) only if it helps.
-   - **Close:** `If this isn't relevant, just say and I won't follow up.`
-     then `Thanks,` / `Graham` / `Football Parent`.
+   - **Close:** `Thanks,` / `Graham` / `Football Parent`. No opt-out or
+     unsubscribe line: these are individual, personal emails, not a
+     marketing send, and a footer like that makes them read as bulk.
    - **Length:** 70 to 130 words in total, plain text, no links other than
      the one page being pitched.
    - Follow the CLAUDE.md editorial rules: UK English, **no em dashes**, no

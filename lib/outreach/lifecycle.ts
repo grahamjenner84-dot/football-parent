@@ -119,11 +119,6 @@ export function chaseBody(opts: { firstName?: string | null; n: 1 | 2; personal?
   return `${hi}\n\nLast nudge from me on this, I know how busy club and site inboxes get. If it's not a fit, no problem at all and I won't follow up again.${personal}\n\nThanks,\nGraham\nFootball Parent`;
 }
 
-// Opt-out line appended to every first-touch email. Keeps cold email to club
-// volunteers (often personal addresses) on the right side of PECR and reads
-// as courteous rather than salesy.
-export const OPT_OUT_LINE = "If this isn't relevant, just say and I won't follow up.";
-
 export function gmailComposeUrl(opts: { to?: string | null; subject: string; body: string }): string {
   const p = new URLSearchParams({ view: "cm", fs: "1", su: opts.subject, body: opts.body });
   if (opts.to) p.set("to", opts.to);
