@@ -295,7 +295,12 @@ export default function SeoAdminPage() {
   return (
     <div style={styles.page}>
       <header style={styles.header}>
-        <h1 style={styles.title}>SEO optimisation report</h1>
+        <div style={styles.titleRow}>
+          <h1 style={styles.title}>SEO optimisation report</h1>
+          <a href="/admin/outreach" style={styles.navLink}>
+            Link outreach
+          </a>
+        </div>
         {report && (
           <p style={styles.subtitle}>
             {report.periodStart} to {report.periodEnd}
@@ -3456,6 +3461,22 @@ const styles: Record<string, CSSProperties> = {
     margin: 0,
     fontSize: 19,
     color: "#e8b04b",
+  },
+  titleRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 12,
+  },
+  // Same button as the "SEO dashboard" link on /admin/outreach.
+  navLink: {
+    color: "#c9b896",
+    fontSize: 13,
+    textDecoration: "none",
+    border: "1px solid #3a2c1d",
+    borderRadius: 8,
+    padding: "8px 12px",
+    whiteSpace: "nowrap",
   },
   subtitle: {
     margin: "4px 0 0",

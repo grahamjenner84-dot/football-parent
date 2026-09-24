@@ -35,10 +35,34 @@ export async function GET() {
 // Goes through the same quality gate as discovery.
 export async function POST(req: NextRequest) {
   try {
-    const body = (await req.json()) as { url?: string; notes?: string; contact_email?: string; fp_page?: string };
+    const body = (await req.json()) as {
+      url?: string;
+      notes?: string;
+      contact_email?: string;
+      fp_page?: string;
+      angle?: string;
+      domain_score?: number | string;
+    };
     if (!body.url) return fail("url is required", 400);
+
+    // Hand-entered domain score is DA/DR style (0-100). The backlog scoring
+    // in lib/outreach/score.ts uses DataForSEO's 0-1000 domain rank, so scale
+    // it to that range. The two metrics aren't identical, but for ranking
+    // the backlog this is close enough, and the note keeps the original.
+    const raw = body.domain_score === undefined || body.domain_score === "" ? null : Number(body.domain_score);
+    if (raw !== null && (!Number.isFinite(raw) || raw < 0 || raw > 100)) return fail("domain score must be 0-100", 400);
+    const scoreNote = raw !== null ? `Domain score ${raw} (entered by hand)` : null;
+
     const [res] = await addProspects([
-      { url: body.url, source: "manual", notes: body.notes ?? null, contact_email: body.contact_email ?? null, fp_page: body.fp_page ?? null },
+      {
+        url: body.url,
+        source: "manual",
+        notes: [body.notes, scoreNote].filter(Boolean).join("\n") || null,
+        contact_email: body.contact_email || null,
+        fp_page: body.fp_page || null,
+        angle: body.angle || null,
+        authority: raw !== null ? Math.round(raw * 10) : null,
+      },
     ]);
     return NextResponse.json(res);
   } catch (err) {

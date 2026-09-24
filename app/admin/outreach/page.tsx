@@ -198,7 +198,9 @@ export default function OutreachAdminPage() {
             {groups.backlog.map((p) => (
               <div key={p.id} style={styles.card}>
                 <CardHead p={p} />
+                {p.angle && <p style={styles.meta}>Angle: {p.angle}</p>}
                 {p.fit_note && <p style={styles.meta}>{p.fit_note}</p>}
+                {p.notes && <p style={styles.meta}>{p.notes}</p>}
                 <p style={styles.reasons}>{p.score_reasons}</p>
                 <div style={styles.actions}>
                   <Btn onClick={() => act(p.id, "skip")} disabled={busy === p.id} subtle>Skip</Btn>
@@ -385,13 +387,22 @@ function WonButton({ onWon, disabled }: { onWon: (url: string) => void; disabled
 function AddProspect({ onAdded }: { onAdded: () => void }) {
   const [url, setUrl] = useState("");
   const [email, setEmail] = useState("");
+  const [angle, setAngle] = useState("");
+  const [fpPage, setFpPage] = useState("");
+  const [domainScore, setDomainScore] = useState("");
   const [msg, setMsg] = useState<string | null>(null);
 
   const add = async () => {
     const res = await fetch("/api/outreach", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ url, contact_email: email || undefined }),
+      body: JSON.stringify({
+        url,
+        contact_email: email || undefined,
+        angle: angle || undefined,
+        fp_page: fpPage || undefined,
+        domain_score: domainScore || undefined,
+      }),
     });
     const json = await res.json();
     if (!res.ok) return setMsg(json.error);
@@ -406,6 +417,9 @@ function AddProspect({ onAdded }: { onAdded: () => void }) {
     );
     setUrl("");
     setEmail("");
+    setAngle("");
+    setFpPage("");
+    setDomainScore("");
     onAdded();
   };
 
@@ -414,6 +428,21 @@ function AddProspect({ onAdded }: { onAdded: () => void }) {
       <p style={styles.meta}>Add a prospect by hand (same quality checks as the weekly run).</p>
       <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://page-you-want-a-link-from" style={styles.input} />
       <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="contact email (optional)" style={styles.input} />
+      <textarea
+        value={angle}
+        onChange={(e) => setAngle(e.target.value)}
+        placeholder="Angle / notes (optional): why they'd link, who you know there, what to offer"
+        style={styles.textarea}
+        rows={3}
+      />
+      <input value={fpPage} onChange={(e) => setFpPage(e.target.value)} placeholder="Our page to pitch (optional), e.g. /coaching/equal-playing-time-in-grassroots-football" style={styles.input} />
+      <input
+        value={domainScore}
+        onChange={(e) => setDomainScore(e.target.value)}
+        placeholder="Domain score, DA or DR 0-100 (optional)"
+        inputMode="numeric"
+        style={styles.input}
+      />
       <div style={styles.actions}>
         <Btn onClick={add} disabled={!url}>Add</Btn>
       </div>
