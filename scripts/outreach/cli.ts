@@ -10,6 +10,9 @@
  *                                 through the quality gate. --dry-run needs no
  *                                 Supabase and writes a review report instead.
  *   check <url> [title]           Run the quality gate on one URL (no writes).
+ *   review <file.json>            Re-run the gate over a backlog file in the
+ *                                 `add` format and write <file>.md beside it
+ *                                 for Graham to review (no Supabase).
  *   add <file.json>               Add prospects: [{url, source, title?, context?,
  *                                 country?, authority?, fit?, fit_note?, fp_page?,
  *                                 angle?, contact_*?}]. Rejected ones are stored
@@ -91,7 +94,7 @@ function existingProspects(): NewProspect[] {
   return out.filter((p) => p.url);
 }
 
-function dryRunReport(items: NewProspect[]): string {
+function dryRunReport(items: NewProspect[], label = "The old prospect lists"): string {
   const assessed: { p: NewProspect; q: QualityResult }[] = items.map((p) => ({ p, q: assessProspect(p) }));
   const by = (v: string) => assessed.filter((a) => a.q.verdict === v);
   const ok = by("ok");
@@ -104,14 +107,17 @@ function dryRunReport(items: NewProspect[]): string {
     reasonCounts.set(key, (reasonCounts.get(key) ?? 0) + 1);
   }
 
+  const cell = (v: unknown) => String(v ?? "").replace(/\|/g, "/").replace(/\s+/g, " ").trim() || "-";
+  const short = (u: string) => (u.length > 90 ? u.slice(0, 87) + "..." : u);
   const line = (a: { p: NewProspect; q: QualityResult }) =>
-    `| ${a.q.domain} | ${a.q.type} | ${a.p.url.length > 90 ? a.p.url.slice(0, 87) + "..." : a.p.url} | ${a.q.reasons.join("; ") || "-"} |`;
-  const table = (rows: typeof assessed) => ["| Domain | Type | Page | Notes |", "| --- | --- | --- | --- |", ...rows.map(line)].join("\n");
+    `| ${cell(a.q.domain)} | ${cell(a.q.type)} | ${cell(short(a.p.url))} | ${cell(a.p.fit)} | ${cell(a.p.fp_page)} | ${cell(a.p.contact_email ?? a.p.contact_url)} | ${cell([a.p.fit_note, ...a.q.reasons].filter(Boolean).join("; "))} |`;
+  const table = (rows: typeof assessed) =>
+    ["| Domain | Type | Page | Fit | Pitch | Contact | Notes |", "| --- | --- | --- | --- | --- | --- | --- |", ...rows.map(line)].join("\n");
 
   return [
-    `# Outreach import review (${new Date().toISOString().slice(0, 10)})`,
+    `# Outreach prospect review (${new Date().toISOString().slice(0, 10)})`,
     "",
-    `The old prospect lists (${items.length} rows) through the new quality gate in \`lib/outreach/quality.ts\`.`,
+    `${label} (${items.length} rows) through the quality gate in \`lib/outreach/quality.ts\`.`,
     "",
     `- **Kept for outreach:** ${ok.length}`,
     `- **Parked** (real relationship, needs a partnership conversation rather than a cold pitch): ${parked.length}`,
@@ -141,6 +147,16 @@ async function main() {
 
   if (cmd === "check") {
     console.log(JSON.stringify(assessProspect({ url: args[0], title: args[1] ?? null }), null, 2));
+    return;
+  }
+
+  if (cmd === "review") {
+    const file = path.resolve(args[0]);
+    const report = dryRunReport(readJson<NewProspect[]>(file), path.basename(file));
+    const out = file.replace(/\.json$/, "") + ".md";
+    fs.writeFileSync(out, report);
+    console.log(report.split("\n").slice(0, 16).join("\n"));
+    console.log(`\nFull report: ${path.relative(REPO_ROOT, out)}`);
     return;
   }
 

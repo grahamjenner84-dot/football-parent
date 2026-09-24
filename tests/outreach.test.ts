@@ -71,3 +71,51 @@ test("chase copy and Gmail links", () => {
   assert.match(url, /authuser=footballparentuk%40gmail\.com/);
   assert.match(url, /to=sec%40club\.co\.uk/);
 });
+
+test("page digest pulls text, outbound links, contacts and emails from a content_parsing result", async () => {
+  const { digestContentParsing } = await import("../lib/outreach/page-digest");
+  const result = [
+    {
+      crawl_progress: "finished",
+      items_count: 1,
+      items: [
+        {
+          type: "content_parsing_element",
+          fetch_time: "2026-09-25 09:00:00 +00:00",
+          status_code: 200,
+          page_content: {
+            header: { primary_content: [{ text: "Launton FC", url: "https://www.launtonfc.co.uk/committee", urls: [{ url: "https://www.launtonfc.co.uk/committee", anchor_text: "Committee" }] }] },
+            main_topic: [
+              {
+                h_title: "Equal and fair playing time",
+                level: 1,
+                primary_content: [
+                  { text: "Every player gets equal minutes across the season.", urls: null },
+                  { text: "Read the FA Respect guidance.", urls: [{ url: "https://www.englandfootball.com/respect", anchor_text: "FA Respect guidance" }] },
+                  { text: "Questions? Email the secretary at secretary@launtonfc.co.uk", urls: [{ url: "mailto:Welfare@LauntonFC.co.uk", anchor_text: "Welfare officer" }] },
+                  { text: "Useful guide", urls: [{ url: "https://www.footballparent.co.uk/coaching/equal-playing-time-in-grassroots-football", anchor_text: "Football Parent" }] },
+                ],
+              },
+            ],
+            footer: { primary_content: [{ text: "Logo", urls: [{ url: "https://cdn.example.com/logo@2x.png", anchor_text: "" }] }] },
+          },
+        },
+      ],
+    },
+  ];
+  const d = digestContentParsing("https://www.launtonfc.co.uk/equal-fair-playing-time", result);
+  assert.equal(d.ok, true);
+  assert.equal(d.title, "Equal and fair playing time");
+  assert.match(d.text, /equal minutes/);
+  assert.deepEqual(d.emails.sort(), ["secretary@launtonfc.co.uk", "welfare@launtonfc.co.uk"]);
+  assert.ok(d.externalLinks.some((l) => l.url.includes("englandfootball.com")));
+  assert.equal(d.linksToUs.length, 1);
+  assert.ok(d.contactPages.some((l) => l.url.endsWith("/committee")));
+});
+
+test("page digest reports problems instead of guessing", async () => {
+  const { digestContentParsing } = await import("../lib/outreach/page-digest");
+  assert.equal(digestContentParsing("https://x.co.uk/a", undefined).ok, false);
+  assert.match(digestContentParsing("https://x.co.uk/a", [{ items: [{ status_code: 404 }] }]).problem ?? "", /404/);
+  assert.match(digestContentParsing("https://x.co.uk/a", [{ items: [{ status_code: 200, page_content: {} }] }]).problem ?? "", /no readable text/);
+});
