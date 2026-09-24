@@ -924,3 +924,7 @@ Admin tooling only, no article or metadata change, logged so a shift in the numb
 - Countries: new tab. `page_views.country` (ISO code from Vercel's `x-vercel-ip-country` header, no IP stored) via migration `20260924120000_page_views_country.sql`, which must be applied to the football-parent-social project. Shows views by country, the share landing before 06:30 UK time and which countries and pages that is, and views by hour in UK time. Rows before the migration report as Unknown. Prompted by mornings with ~25% of the day's views before 06:30.
 
 Commit hashes on commit below.
+
+## Fix: page views stopped logging after the Countries deploy (2026-09-24, 17:44 to fix)
+
+The country insert fell back to the old row shape only on Postgres code 42703, but PostgREST reports an unknown insert column as PGRST204, so with the `country` migration not yet applied every `/api/page-view` insert failed and the dashboard sat at 207 views. Fallback now covers both codes. Views in that gap are lost, not recoverable; treat 24 September's total as under-counted by roughly the length of the gap. Commit hash on commit below.

@@ -75,6 +75,11 @@ async function pathRecentlyFlooded(
   return (count ?? 0) >= FLOOD_THRESHOLD;
 }
 
+function isMissingColumnError(error: { code?: string; message?: string }): boolean {
+  if (error.code === "PGRST204" || error.code === "42703") return true;
+  return /column/i.test(error.message ?? "") && /country/i.test(error.message ?? "");
+}
+
 export async function logPageView(path: string, options: LogPageViewOptions = {}): Promise<void> {
   const supabase = adminClient();
 
@@ -94,11 +99,16 @@ export async function logPageView(path: string, options: LogPageViewOptions = {}
 
   const { error } = await supabase.from("page_views").insert({ ...row, country: options.country ?? null });
 
-  // 42703 is Postgres "undefined column": the code has deployed before the
-  // 20260924120000_page_views_country migration was applied. Losing the
-  // country is fine; losing every page view until the migration runs is
-  // not, so fall back to the pre-country insert rather than fail.
-  if (error && error.code === "42703") {
+  // The code has deployed before the 20260924120000_page_views_country
+  // migration was applied. PostgREST reports an unknown insert column as
+  // PGRST204 ("Could not find the 'country' column ... in the schema
+  // cache"), and 42703 is the Postgres "undefined column" code that comes
+  // through when the cache is fresh but the column still is not there.
+  // Losing the country is fine; losing every page view until the migration
+  // runs is not (that happened for the 40 minutes after the first deploy
+  // on 2026-09-24, which only handled 42703), so fall back to the
+  // pre-country insert rather than fail.
+  if (error && isMissingColumnError(error)) {
     const retry = await supabase.from("page_views").insert(row);
     if (!retry.error) return;
     throw new Error("Failed to insert page_views row: " + retry.error.message);
@@ -218,7 +228,7 @@ export async function getPageViewCountryStats(days: number = 30): Promise<PageVi
       .range(from, from + pageSize - 1);
 
     if (error) {
-      if (error.code === "42703") {
+      if (isMissingColumnError(error)) {
         throw new Error(
           "page_views has no country column yet - apply supabase/migrations/20260924120000_page_views_country.sql to the football-parent-social project."
         );
