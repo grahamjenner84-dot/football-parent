@@ -134,7 +134,15 @@ export default function SeoAdminPage() {
   const [strikingDays, setStrikingDays] = useState<DayWindow>(90);
   const [ctrDays, setCtrDays] = useState<DayWindow>(90);
   const [noImpressionsDays, setNoImpressionsDays] = useState<DayWindow>(90);
-  const [searchStats, setSearchStats] = useState<SearchLogStats | null>(null);
+  const [searchDays, setSearchDays] = useState<DayWindow>(28);
+  // A specific day (YYYY-MM-DD) overrides the rolling window; "" means off.
+  const [searchDate, setSearchDate] = useState("");
+  // Stats are stored with the window they were fetched for, so switching
+  // window shows "Loading" rather than the previous window's numbers under
+  // the new label while the fetch is in flight.
+  const searchWindowKey = searchDate ? `date=${searchDate}` : `days=${searchDays}`;
+  const [searchFetched, setSearchFetched] = useState<{ key: string; data: SearchLogStats } | null>(null);
+  const searchStats = searchFetched?.key === searchWindowKey ? searchFetched.data : null;
   const [searchError, setSearchError] = useState("");
   const [consentStats, setConsentStats] = useState<ConsentStats | null>(null);
   const [consentError, setConsentError] = useState("");
@@ -149,7 +157,8 @@ export default function SeoAdminPage() {
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
-    fetch("/api/search-report?days=30")
+    let cancelled = false;
+    fetch(`/api/search-report?${searchWindowKey}`)
       .then(async (res) => {
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
@@ -158,11 +167,17 @@ export default function SeoAdminPage() {
         return res.json();
       })
       .then((data: SearchLogStats) => {
-        setSearchStats(data);
+        if (cancelled) return;
+        setSearchFetched({ key: searchWindowKey, data });
         setSearchError("");
       })
-      .catch((err) => setSearchError(err.message));
-  }, []);
+      .catch((err) => {
+        if (!cancelled) setSearchError(err.message);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [searchWindowKey]);
 
   useEffect(() => {
     fetch("/api/cookie-consent-report?days=30")
@@ -341,11 +356,17 @@ export default function SeoAdminPage() {
             pageViewError={pageViewError}
           />
         ) : tab === "searches" ? (
-          <>
-            {!searchStats && !searchError && <p style={styles.muted}>Loading search report...</p>}
-            {searchError && <p style={styles.error}>{searchError}</p>}
-            {searchStats && <SearchesList stats={searchStats} />}
-          </>
+          <SearchesList
+            stats={searchStats}
+            error={searchError}
+            days={searchDays}
+            onDaysChange={(d) => {
+              setSearchDate("");
+              setSearchDays(d);
+            }}
+            date={searchDate}
+            onDateChange={setSearchDate}
+          />
         ) : tab === "cookies" ? (
           <>
             {!consentStats && !consentError && (
@@ -464,7 +485,9 @@ function countFor(report: SeoReport, tab: Tab): number {
   }
 }
 
-function PeriodFilter({ value, onChange }: { value: DayWindow; onChange: (days: DayWindow) => void }) {
+// `value` is null when something else (a specific-day picker) is overriding
+// the rolling window, so no window button shows as selected.
+function PeriodFilter({ value, onChange }: { value: DayWindow | null; onChange: (days: DayWindow) => void }) {
   const options: { id: DayWindow; label: string }[] = [
     { id: 7, label: "7 days" },
     { id: 28, label: "28 days" },
@@ -1220,43 +1243,92 @@ function RankTrackerList({ rows, allRows }: { rows: RankRow[]; allRows: RankRow[
   );
 }
 
-function SearchesList({ stats }: { stats: SearchLogStats }) {
-  if (!stats.rows.length) {
-    return <EmptyState text="No searches logged yet in this window." />;
-  }
+function SearchesList({
+  stats,
+  error,
+  days,
+  onDaysChange,
+  date,
+  onDateChange,
+}: {
+  stats: SearchLogStats | null;
+  error: string;
+  days: DayWindow;
+  onDaysChange: (d: DayWindow) => void;
+  date: string;
+  onDateChange: (date: string) => void;
+}) {
+  const windowLabel = date ? `on ${date}` : days === 7 ? "over the last 7 days" : days === 28 ? "over the last 28 days" : "over the last 3 months";
   return (
     <div style={styles.list}>
       <SectionNote label="What's counted here">
-        What visitors typed into on-site search over the last 30 days,
-        including the header dropdown search (not just the /search results
-        page). Queries flagged &ldquo;0 results&rdquo; are the clearest
-        content-gap signal - people looking for something we don&rsquo;t
-        have an article for yet.
+        What visitors typed into on-site search {windowLabel}, including the
+        header dropdown search (not just the /search results page). Queries
+        flagged &ldquo;0 results&rdquo; are the clearest content-gap signal -
+        people looking for something we don&rsquo;t have an article for yet.
+        Part-typed queries (a shorter search followed within two minutes by a
+        longer one that starts with it) are folded into the search the
+        visitor finished typing, rather than each counting as its own
+        0-result search.
       </SectionNote>
 
-      <div style={styles.cardStats}>
-        <span>Searches: {stats.totalSearches}</span>
-        <span>Found something: {stats.successfulSearches}</span>
-        <span>No results: {stats.zeroResultSearches}</span>
-        <span>Success rate: {pct(stats.successRate)}</span>
+      <div style={styles.compareRow}>
+        <PeriodFilter value={date ? null : days} onChange={onDaysChange} />
+        <label style={styles.compareLabel}>
+          Or one day
+          <input
+            type="date"
+            value={date}
+            max={new Date().toISOString().slice(0, 10)}
+            onChange={(e) => onDateChange(e.target.value)}
+            style={styles.dateInput}
+          />
+        </label>
+        {date && (
+          <button type="button" onClick={() => onDateChange("")} style={styles.toggleButton}>
+            Clear day
+          </button>
+        )}
       </div>
 
-      {stats.rows.slice(0, 100).map((r, i) => (
-        <div key={i} style={styles.card}>
-          <div style={styles.cardTop}>
-            <span style={styles.cardQuery}>{r.query}</span>
-            <span style={styles.cardBadge}>{r.count}x</span>
-          </div>
+      {error && <p style={styles.error}>{error}</p>}
+      {!stats && !error && <p style={styles.muted}>Loading search report...</p>}
+
+      {stats && (
+        <>
           <div style={styles.cardStats}>
-            {r.successCount > 0 && <span>{r.successCount} found results</span>}
-            {r.zeroResultCount > 0 && (
-              <span style={{ ...styles.cardBadge, ...styles.cardBadgeWarn }}>
-                {r.zeroResultCount} with 0 results
+            <span>Searches: {stats.totalSearches}</span>
+            <span>Found something: {stats.successfulSearches}</span>
+            <span>No results: {stats.zeroResultSearches}</span>
+            <span>Success rate: {pct(stats.successRate)}</span>
+            {stats.collapsedFragments > 0 && (
+              <span style={styles.cardStatsInline}>
+                {stats.collapsedFragments} part-typed fragments folded in
               </span>
             )}
           </div>
-        </div>
-      ))}
+
+          {!stats.rows.length && <EmptyState text="No searches logged in this window." />}
+
+          {stats.rows.slice(0, 100).map((r) => (
+            <div key={r.query} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{r.query}</span>
+                <span style={styles.cardBadge}>{r.count}x</span>
+              </div>
+              <div style={styles.cardStats}>
+                {r.successCount > 0 && <span>{r.successCount} found results</span>}
+                {r.zeroResultCount > 0 && (
+                  <span style={{ ...styles.cardBadge, ...styles.cardBadgeWarn }}>
+                    {r.zeroResultCount} with 0 results
+                  </span>
+                )}
+                {!date && <span style={styles.cardStatsInline}>last {r.lastSeen}</span>}
+              </div>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 }
