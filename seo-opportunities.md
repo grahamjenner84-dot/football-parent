@@ -1,4 +1,4 @@
-# SEO opportunities - 2026-09-12
+# SEO opportunities - 2026-09-23
 
 ## Before touching any of these pages
 
@@ -23,448 +23,332 @@
 
 Pages with real impressions historically that have gone near-silent in the last 7 days. This is usually technical (deindexing, a noindex tag, a broken canonical, a bad deploy) rather than a content problem - **investigate via Search Console's URL Inspection / Test Live URL first, don't edit content as a first response.** Note: GSC data lags 2-3 days, these windows already end before that lag, so a page shown here has been quiet for its whole recent window, not just the last day or two.
 
-- **https://www.footballparent.co.uk/coaching/equal-playing-time-in-grassroots-football**
-  - last 21d before that: 244 impressions, 6 clicks
-  - last 7d: 2 impressions, 0 clicks
-  - file: `app\coaching\equal-playing-time-in-grassroots-football\page.tsx`
-  - content: `content\coaching\equal-playing-time-in-grassroots-football.mdx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#proper-fit**
+  - last 21d before that: 1919 impressions, 0 clicks
+  - last 7d: 0 impressions, 0 clicks
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
 - **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#is-academy-football-free**
-  - last 21d before that: 141 impressions, 0 clicks
+  - last 21d before that: 48 impressions, 0 clicks
   - last 7d: 0 impressions, 0 clicks
   - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
   - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#practical-buying-guidance-for-parents**
-  - last 21d before that: 31 impressions, 0 clicks
-  - last 7d: 2 impressions, 0 clicks
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#soleplate-comparison**
-  - last 21d before that: 31 impressions, 0 clicks
-  - last 7d: 2 impressions, 0 clicks
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#the-grassroots-reality-most-kids-are-playing-on-3g**
-  - last 21d before that: 31 impressions, 0 clicks
-  - last 7d: 2 impressions, 0 clicks
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#what-about-moulded-boots**
-  - last 21d before that: 31 impressions, 0 clicks
-  - last 7d: 2 impressions, 0 clicks
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
 
 ## striking distance
 
 - **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives**
-  - query: veo camera price, position: 11.4
-  - impressions: 444, clicks: 1
+  - query: veo camera price, position: 11.1
+  - impressions: 599, clicks: 2
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: wide fit football boots kids, position: 11.6
-  - impressions: 440, clicks: 2
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide fit football boots kids, position: 11.8
-  - impressions: 380, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide fit football boots kids, position: 11.8
-  - impressions: 380, clicks: 0
+  - query: wide fit football boots kids, position: 11.1
+  - impressions: 505, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide fit football boots kids, position: 11.8
-  - impressions: 380, clicks: 0
+  - query: wide fit football boots kids, position: 11.1
+  - impressions: 505, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
+  - query: wide fit football boots kids, position: 11.1
+  - impressions: 501, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide fit football boots kids, position: 11.8
-  - impressions: 367, clicks: 0
+  - query: wide fit football boots kids, position: 11.1
+  - impressions: 488, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
+  - query: best shin pads, position: 11.2
+  - impressions: 473, clicks: 2
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
 - **https://www.footballparent.co.uk/football-development**
-  - query: football development, position: 15.5
-  - impressions: 337, clicks: 1
+  - query: football development, position: 14.5
+  - impressions: 375, clicks: 0
   - file: `app\football-development\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: best shin pads, position: 12.5
-  - impressions: 333, clicks: 1
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: best shin pads for football, position: 11.2
-  - impressions: 267, clicks: 2
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: what does grassroots football mean, position: 11.6
-  - impressions: 221, clicks: 2
-  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
-  - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide**
-  - query: chelsea development, position: 12.2
-  - impressions: 128, clicks: 1
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
 - **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
-  - query: football scholarships, position: 13.6
-  - impressions: 123, clicks: 1
+  - query: football scholarships, position: 12.3
+  - impressions: 190, clicks: 1
   - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
   - content: `content\academy-pathway\football-scholarships-uk.mdx`
 - **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: kids shin pads football, position: 15.3
-  - impressions: 108, clicks: 0
+  - query: shin pads for 5 year old, position: 11.1
+  - impressions: 176, clicks: 0
   - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: kids wide football boots, position: 11.8
-  - impressions: 93, clicks: 1
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
+  - query: kids shin pads football, position: 13.5
+  - impressions: 171, clicks: 0
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
+  - query: kids wide football boots, position: 11.1
+  - impressions: 110, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
+  - query: kids wide football boots, position: 11.1
+  - impressions: 110, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
+  - query: kids wide football boots, position: 11.1
+  - impressions: 107, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
+  - query: kids wide football boots, position: 11
+  - impressions: 105, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained**
-  - query: academy categories, position: 12.6
-  - impressions: 90, clicks: 3
+  - query: academy categories, position: 11.3
+  - impressions: 102, clicks: 4
   - file: `app\academy-pathway\academy-categories-explained\page.tsx`
   - content: `content\academy-pathway\academy-categories-explained.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: wide fitting football boots kids, position: 11.3
-  - impressions: 87, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: kids football boots wide fit, position: 11.6
-  - impressions: 81, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: wide kids football boots, position: 11.3
-  - impressions: 81, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: kids wide football boots, position: 12.1
-  - impressions: 80, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: kids wide football boots, position: 12.1
-  - impressions: 80, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: kids wide football boots, position: 12.1
-  - impressions: 80, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: kids wide football boots, position: 12.1
-  - impressions: 78, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: childrens football shin pads, position: 11.4
-  - impressions: 77, clicks: 0
+  - query: kids sock shin pads, position: 11.8
+  - impressions: 101, clicks: 0
   - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide fit kids football boots, position: 11.4
-  - impressions: 76, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide fit kids football boots, position: 11.4
-  - impressions: 76, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide fit kids football boots, position: 11.4
-  - impressions: 76, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
+  - query: fg football boots on turf, position: 12.3
+  - impressions: 95, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grassroots football uk, position: 15.8
-  - impressions: 73, clicks: 1
+  - query: grassroots football uk, position: 14.9
+  - impressions: 94, clicks: 1
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide fit kids football boots, position: 11.5
-  - impressions: 72, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide fitting football boots kids, position: 11.5
-  - impressions: 72, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide fitting football boots kids, position: 11.5
-  - impressions: 72, clicks: 0
+  - query: kids football boots wide fit, position: 11.7
+  - impressions: 94, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide fitting football boots kids, position: 11.5
-  - impressions: 72, clicks: 0
+  - query: kids football boots wide fit, position: 11.7
+  - impressions: 94, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: what size football for 9 year old, position: 11.2
+  - impressions: 94, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
+  - query: kids football boots wide fit, position: 11.7
+  - impressions: 92, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
+  - query: kids football boots wide fit, position: 11.7
+  - impressions: 91, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer**
+  - query: how to become a professional footballer, position: 15.2
+  - impressions: 83, clicks: 0
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: what size football for under 7, position: 14
+  - impressions: 81, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
+  - query: shin pads for kids, position: 11.1
+  - impressions: 77, clicks: 0
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: what size football for under 12, position: 14.4
+  - impressions: 73, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
 - **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
-  - query: fg football boots on turf, position: 12.7
-  - impressions: 71, clicks: 0
+  - query: difference between soft ground and hard ground boots, position: 16.6
+  - impressions: 72, clicks: 0
   - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
   - content: `content\football-gear\ag-vs-fg-boots.mdx`
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: football boots wide feet, position: 19.4
-  - impressions: 71, clicks: 0
+  - query: football boots wide feet, position: 19.3
+  - impressions: 72, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league**
   - query: junior premier football league, position: 12
   - impressions: 69, clicks: 0
   - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
   - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: kids football boots wide fit, position: 12
-  - impressions: 68, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: kids football boots wide fit, position: 12
-  - impressions: 68, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: kids football boots wide fit, position: 12
-  - impressions: 68, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: kids football boots wide fit, position: 12
-  - impressions: 67, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide**
-  - query: hale end academy, position: 11.3
-  - impressions: 66, clicks: 0
-  - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide kids football boots, position: 11.9
-  - impressions: 66, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide kids football boots, position: 11.9
-  - impressions: 66, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide kids football boots, position: 11.9
-  - impressions: 66, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: what size football for under 12, position: 15
-  - impressions: 65, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide kids football boots, position: 11.9
-  - impressions: 64, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: kids sock shin pads, position: 12
-  - impressions: 63, clicks: 0
+  - query: kids football shin pads, position: 11.8
+  - impressions: 65, clicks: 1
   - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: sock shin pads kids, position: 11.1
-  - impressions: 63, clicks: 0
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: what size football for under 7, position: 14.7
-  - impressions: 62, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide fitting football boots kids, position: 11.6
-  - impressions: 61, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: wide foot football boots kids, position: 11.2
-  - impressions: 61, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
-  - query: difference between soft ground and hard ground boots, position: 16.5
-  - impressions: 60, clicks: 0
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: what size football for 9 year old, position: 12.4
-  - impressions: 60, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: definition of grassroots football, position: 15.5
-  - impressions: 57, clicks: 0
+  - query: grassroots football club, position: 11.6
+  - impressions: 63, clicks: 1
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer**
-  - query: how to become a professional footballer, position: 17.3
-  - impressions: 55, clicks: 0
-  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
-  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
+  - query: definition of grassroots football, position: 14.8
+  - impressions: 62, clicks: 0
+  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
+  - content: `content\parent-guides\what-is-grassroots-football.mdx`
 - **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained**
-  - query: football development centre, position: 11.1
-  - impressions: 53, clicks: 0
+  - query: football development centres, position: 11.8
+  - impressions: 58, clicks: 0
   - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
   - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: kids football boots for wide feet, position: 11.1
-  - impressions: 50, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: kids football boots for wide feet, position: 11.1
-  - impressions: 50, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: kids football boots for wide feet, position: 11.1
-  - impressions: 50, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: size 5 football age, position: 11.9
+  - impressions: 58, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: football grassroots, position: 11.1
-  - impressions: 49, clicks: 0
+  - query: grassroots football england, position: 11.2
+  - impressions: 55, clicks: 0
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide foot football boots kids, position: 11.4
-  - impressions: 49, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide foot football boots kids, position: 11.4
-  - impressions: 49, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide foot football boots kids, position: 11.4
-  - impressions: 49, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide foot football boots kids, position: 11.4
-  - impressions: 49, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
+  - query: grassroots soccer, position: 17.8
+  - impressions: 54, clicks: 0
+  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
+  - content: `content\parent-guides\what-is-grassroots-football.mdx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
+  - query: what are fg football boots, position: 12.1
+  - impressions: 53, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
 - **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide**
-  - query: crystal palace tuition centre, position: 15.9
-  - impressions: 48, clicks: 0
+  - query: crystal palace tuition centre, position: 15.8
+  - impressions: 52, clicks: 0
   - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grassroots football club, position: 12.7
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: football for 10 year olds, position: 14
   - impressions: 48, clicks: 0
-  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
-  - content: `content\parent-guides\what-is-grassroots-football.mdx`
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: what size football for 5 year old, position: 11.1
+  - impressions: 48, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-development**
+  - query: development in football, position: 16.6
+  - impressions: 47, clicks: 0
+  - file: `app\football-development\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
   - query: firm ground football boots meaning, position: 12
   - impressions: 47, clicks: 0
   - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
   - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
-  - query: how does a football academy work, position: 11.2
+- **https://www.footballparent.co.uk/academy-trials/how-football-clubs-recruit-young-players**
+  - query: how to recruit players for grassroots football, position: 13.7
   - impressions: 47, clicks: 0
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained**
-  - query: category 1 academy, position: 11
-  - impressions: 46, clicks: 0
-  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
-  - content: `content\academy-pathway\academy-categories-explained.mdx`
-- **https://www.footballparent.co.uk/football-development**
-  - query: development in football, position: 19.1
-  - impressions: 46, clicks: 0
-  - file: `app\football-development\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: size 5 football age, position: 12.2
-  - impressions: 46, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
+  - file: `app\academy-trials\how-football-clubs-recruit-young-players\page.tsx`
+  - content: `content\academy-trials\how-football-clubs-recruit-young-players.mdx`
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: wide football boots kids, position: 11.2
-  - impressions: 46, clicks: 0
+  - query: boys wide fit football boots, position: 12.2
+  - impressions: 44, clicks: 1
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
+  - query: toddler shin pads, position: 11.7
+  - impressions: 44, clicks: 1
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
+  - query: what are ag boots, position: 11.2
+  - impressions: 43, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
+  - query: best schools for football scholarships, position: 17.7
+  - impressions: 41, clicks: 0
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
+  - query: grassroots game, position: 17.4
+  - impressions: 41, clicks: 0
+  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
+  - content: `content\parent-guides\what-is-grassroots-football.mdx`
+- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
+  - query: grassroots fc, position: 11.9
+  - impressions: 40, clicks: 0
+  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
+  - content: `content\parent-guides\what-is-grassroots-football.mdx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
+  - query: what are fg boots, position: 11
+  - impressions: 39, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
 - **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained**
-  - query: football development centres, position: 11.9
-  - impressions: 45, clicks: 0
+  - query: development centre, position: 13.6
+  - impressions: 38, clicks: 0
   - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
   - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: football size for 8 year old, position: 11.7
-  - impressions: 44, clicks: 0
+  - query: football size for 5 year old, position: 11.6
+  - impressions: 38, clicks: 0
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grassroots football england, position: 11.9
-  - impressions: 44, clicks: 0
-  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
-  - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
-  - query: what are fg football boots, position: 12.3
-  - impressions: 44, clicks: 0
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: kids football boots for wide feet, position: 11.4
-  - impressions: 43, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide football boots kids, position: 11.8
-  - impressions: 42, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide football boots kids, position: 11.8
-  - impressions: 42, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide football boots kids, position: 11.8
-  - impressions: 42, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide fitting kids football boots, position: 11.6
-  - impressions: 41, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide fitting kids football boots, position: 11.6
-  - impressions: 41, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide fitting kids football boots, position: 11.6
-  - impressions: 41, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/academy-trials/how-football-clubs-recruit-young-players**
-  - query: how to recruit players for grassroots football, position: 13.8
-  - impressions: 40, clicks: 0
-  - file: `app\academy-trials\how-football-clubs-recruit-young-players\page.tsx`
-  - content: `content\academy-trials\how-football-clubs-recruit-young-players.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide football boots kids, position: 11.8
-  - impressions: 39, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grassroots soccer, position: 19.3
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
+  - query: how to run a football academy, position: 19.6
   - impressions: 38, clicks: 0
-  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
-  - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
-  - query: what are ag boots, position: 11.1
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
+  - query: how to start football academy, position: 18.2
   - impressions: 38, clicks: 0
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives**
-  - query: xbotgo alternatives, position: 11.5
-  - impressions: 38, clicks: 0
-  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
-  - content: `content\football-gear\veo-camera-alternatives.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide fitting kids football boots, position: 11.8
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+- **https://www.footballparent.co.uk/about**
+  - query: football parent, position: 14.9
+  - impressions: 37, clicks: 1
+  - file: `app\about\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#what-are-ag-boots**
+  - query: fg football boots on turf, position: 11.5
   - impressions: 37, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
-  - query: how to run a football academy, position: 19.9
-  - impressions: 36, clicks: 0
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
-  - query: academy categories, position: 17.6
-  - impressions: 34, clicks: 1
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#what-are-fg-boots**
+  - query: fg football boots on turf, position: 11.5
+  - impressions: 37, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#when-are-fg-boots-still-fine**
+  - query: fg football boots on turf, position: 11.5
+  - impressions: 37, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
 - **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
-  - query: best schools for football scholarships, position: 18.2
-  - impressions: 34, clicks: 0
+  - query: football scholarship, position: 15.4
+  - impressions: 37, clicks: 0
   - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
   - content: `content\academy-pathway\football-scholarships-uk.mdx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: shin pad socks kids, position: 12.4
-  - impressions: 34, clicks: 0
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#best-shin-pads-for-kids-football**
+  - query: best shin pad sleeves for kids, position: 11
+  - impressions: 36, clicks: 0
   - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: wide foot kids football boots, position: 11.4
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#types-of-shin-pads**
+  - query: best shin pad sleeves for kids, position: 11
+  - impressions: 36, clicks: 0
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#why-shin-pads-matter**
+  - query: best shin pad sleeves for kids, position: 11
+  - impressions: 36, clicks: 0
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
+  - query: best shinpads, position: 12.3
+  - impressions: 36, clicks: 0
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
+  - query: academy categories, position: 18.2
+  - impressions: 35, clicks: 1
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
+  - query: shin pad socks kids, position: 12.2
+  - impressions: 35, clicks: 0
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#football-sizes-by-age-quick-reference**
+  - query: best football size 5, position: 11.4
   - impressions: 34, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: boys wide fit football boots, position: 12.9
-  - impressions: 33, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-5-footballs-under-14s-and-above**
+  - query: best football size 5, position: 11.4
+  - impressions: 34, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: football for 10 year olds, position: 15.7
-  - impressions: 33, clicks: 0
+  - query: what size football for under 10, position: 14.6
+  - impressions: 34, clicks: 0
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
 - **https://www.footballparent.co.uk/football-development/is-private-football-coaching-worth-it**
@@ -472,51 +356,27 @@ Pages with real impressions historically that have gone near-silent in the last 
   - impressions: 33, clicks: 0
   - file: `app\football-development\is-private-football-coaching-worth-it\page.tsx`
   - content: `content\football-development\is-private-football-coaching-worth-it.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - query: wide foot kids football boots, position: 11.5
-  - impressions: 33, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - query: wide foot kids football boots, position: 11.5
-  - impressions: 33, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - query: wide foot kids football boots, position: 11.5
-  - impressions: 33, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - query: wide foot kids football boots, position: 11.5
-  - impressions: 33, clicks: 0
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-- **https://www.footballparent.co.uk/about**
-  - query: football parent, position: 16.5
-  - impressions: 32, clicks: 1
-  - file: `app\about\page.tsx`
-- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer**
-  - query: how to become a footballer, position: 11.4
+- **https://www.footballparent.co.uk/coaching/best-grassroots-football-apps**
+  - query: football coach apps, position: 19.6
   - impressions: 32, clicks: 0
-  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
-  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
-  - query: how to start football academy, position: 17.8
-  - impressions: 32, clicks: 0
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: kids football shin pads, position: 12
-  - impressions: 31, clicks: 1
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - file: `app\coaching\best-grassroots-football-apps\page.tsx`
+  - content: `content\coaching\best-grassroots-football-apps.mdx`
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: what size football for 5 year old, position: 11.6
+  - query: best football for training, position: 17.4
   - impressions: 31, clicks: 0
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/what-age-do-football-academies-recruit**
+  - query: maximum age to join football academy, position: 12.5
+  - impressions: 31, clicks: 0
+  - file: `app\academy-pathway\what-age-do-football-academies-recruit\page.tsx`
+  - content: `content\academy-pathway\what-age-do-football-academies-recruit.mdx`
 - **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: best shin pad sleeves for kids, position: 12.2
+  - query: childrens football shin guards, position: 13.5
   - impressions: 30, clicks: 0
   - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
 - **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
-  - query: what are fg boots, position: 11.2
+  - query: what are ag football boots, position: 12.2
   - impressions: 30, clicks: 0
   - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
   - content: `content\football-gear\ag-vs-fg-boots.mdx`
@@ -525,159 +385,224 @@ Pages with real impressions historically that have gone near-silent in the last 
   - impressions: 29, clicks: 2
   - file: `app\academy-trials\football-trials-near-me\page.tsx`
   - content: `content\academy-trials\football-trials-near-me.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
+  - query: football academy england how grades are reported to parents, position: 15
+  - impressions: 29, clicks: 0
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-3-footballs-under-7s-to-under-11s**
+  - query: football size for 7 year old, position: 11.2
+  - impressions: 29, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-4-footballs-under-12s-and-under-13s**
+  - query: football size for 7 year old, position: 11.2
+  - impressions: 29, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#training-balls-vs-match-balls-do-you-need-both**
+  - query: football size for 7 year old, position: 11.2
+  - impressions: 29, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#why-ball-size-matters-for-young-players**
+  - query: football size for 7 year old, position: 11.2
+  - impressions: 29, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grassroots fc, position: 12.1
+  - query: grassroots football for kids, position: 13.3
   - impressions: 29, clicks: 0
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#do-development-centres-lead-to-academy-contracts**
-  - query: football development centre, position: 11.1
-  - impressions: 28, clicks: 0
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#how-development-centres-fit-into-academy-pathways**
-  - query: football development centre, position: 11.1
-  - impressions: 28, clicks: 0
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#what-is-a-football-development-centre**
-  - query: football development centre, position: 11.1
-  - impressions: 28, clicks: 0
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer**
+  - query: pathway to professional football, position: 17.5
+  - impressions: 29, clicks: 0
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: what size football for under 10, position: 15
-  - impressions: 28, clicks: 0
+  - query: what size football for under 11, position: 15.2
+  - impressions: 29, clicks: 0
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#best-shin-pads-for-kids-football**
-  - query: best shin pad sleeves for kids, position: 12.2
-  - impressions: 27, clicks: 0
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#types-of-shin-pads**
-  - query: best shin pad sleeves for kids, position: 12.2
-  - impressions: 27, clicks: 0
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#why-shin-pads-matter**
-  - query: best shin pad sleeves for kids, position: 12.2
-  - impressions: 27, clicks: 0
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
+  - query: maximum age to join football academy, position: 14.6
+  - impressions: 28, clicks: 0
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
 - **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
   - query: fg boots meaning, position: 12.5
   - impressions: 27, clicks: 0
   - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
   - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: football size for 5 year old, position: 11.2
-  - impressions: 27, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grassroots game, position: 19.1
-  - impressions: 27, clicks: 0
-  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
-  - content: `content\parent-guides\what-is-grassroots-football.mdx`
 - **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
   - query: how do academy players get paid, position: 16.5
   - impressions: 27, clicks: 0
   - file: `app\academy-pathway\how-academy-football-works\page.tsx`
   - content: `content\academy-pathway\how-academy-football-works.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
-  - query: maximum age to join football academy, position: 15.1
+- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives**
+  - query: veo camera for sale, position: 11.3
   - impressions: 27, clicks: 0
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
+  - content: `content\football-gear\veo-camera-alternatives.mdx`
 - **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#proper-fit**
   - query: best shin pad sleeves for kids, position: 12.1
   - impressions: 26, clicks: 0
   - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
-  - query: football scholarship, position: 18.4
+- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained**
+  - query: category 1 football academy, position: 12.4
   - impressions: 26, clicks: 0
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: football sizes for kids, position: 11.5
+  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
+  - content: `content\academy-pathway\academy-categories-explained.mdx`
+- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
+  - query: grassroots football development, position: 12.7
   - impressions: 26, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
-  - query: football academy england how grades are reported to parents, position: 14.5
-  - impressions: 25, clicks: 0
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
+  - content: `content\parent-guides\what-is-grassroots-football.mdx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
+  - query: what does ag mean in football boots, position: 12.1
+  - impressions: 26, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
 - **https://www.footballparent.co.uk/football-development/what-is-football-iq**
   - query: football iq, position: 14
   - impressions: 25, clicks: 0
   - file: `app\football-development\what-is-football-iq\page.tsx`
   - content: `content\football-development\what-is-football-iq.mdx`
-- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives**
-  - query: veo camera for sale, position: 11.4
-  - impressions: 25, clicks: 0
-  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
-  - content: `content\football-gear\veo-camera-alternatives.mdx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: what size football for under 11, position: 15.7
-  - impressions: 25, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
-  - query: what does ag mean in football boots, position: 12.3
+- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
+  - query: kids grassroots football, position: 12.9
   - impressions: 24, clicks: 0
-  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
-  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
+  - content: `content\parent-guides\what-is-grassroots-football.mdx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
+  - query: boys football boots wide fitting, position: 11.2
+  - impressions: 23, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
+  - query: boys football boots wide fitting, position: 11.5
+  - impressions: 23, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
+  - query: boys football boots wide fitting, position: 11.5
+  - impressions: 23, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
+  - query: boys football boots wide fitting, position: 11.5
+  - impressions: 23, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
+  - query: football scholarship programme, position: 19
+  - impressions: 23, clicks: 0
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: best football for training, position: 16.8
+  - query: what size football for under 9, position: 17.4
   - impressions: 23, clicks: 0
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: best shinpads, position: 14.8
-  - impressions: 23, clicks: 0
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained**
-  - query: category 1 football academy, position: 13
-  - impressions: 23, clicks: 0
-  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
-  - content: `content\academy-pathway\academy-categories-explained.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained**
-  - query: development centre, position: 14.7
-  - impressions: 23, clicks: 0
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids**
-  - query: wide fit childrens football boots, position: 11
-  - impressions: 22, clicks: 1
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
+  - query: boys football boots wide fitting, position: 11.5
+  - impressions: 22, clicks: 0
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: football size by age group, position: 11.8
+  - impressions: 22, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer**
+  - query: how to become a pro footballer, position: 16
+  - impressions: 22, clicks: 0
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
 - **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
-  - query: best football shin pads, position: 13.2
+  - query: kids football socks with shin pads, position: 11.2
   - impressions: 22, clicks: 0
   - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league**
+  - query: premier league junior, position: 14
+  - impressions: 22, clicks: 0
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: size football for 5 year old, position: 12.2
+  - impressions: 22, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
 - **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
   - query: what does firm ground football boots mean, position: 11.1
   - impressions: 22, clicks: 0
   - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
   - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#football-sizes-by-age-quick-reference**
-  - query: best football size 5, position: 11.9
+- **https://www.footballparent.co.uk/academy-pathway**
+  - query: academy pathway, position: 15
+  - impressions: 21, clicks: 1
+  - file: `app\academy-pathway\page.tsx`
+- **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide**
+  - query: arsenal fc academy, position: 11.4
+  - impressions: 21, clicks: 0
+  - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
+  - query: boys wide fit football boots, position: 13.8
+  - impressions: 21, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
+  - query: boys wide fit football boots, position: 13.8
+  - impressions: 21, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
+  - query: boys wide fit football boots, position: 13.8
+  - impressions: 21, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football**
+  - query: football shin pads kids, position: 12.2
+  - impressions: 21, clicks: 0
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
+  - query: honest level assessment football academy, position: 15
+  - impressions: 21, clicks: 0
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives**
+  - query: veo go price, position: 12.3
+  - impressions: 21, clicks: 0
+  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
+  - content: `content\football-gear\veo-camera-alternatives.mdx`
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
+  - query: what is fg football boots, position: 13
+  - impressions: 21, clicks: 0
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: what size football for under 8, position: 17.8
   - impressions: 21, clicks: 0
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-5-footballs-under-14s-and-above**
-  - query: best football size 5, position: 11.9
-  - impressions: 21, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grass routes football, position: 11
-  - impressions: 21, clicks: 0
-  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
-  - content: `content\parent-guides\what-is-grassroots-football.mdx`
-- **https://www.footballparent.co.uk/academy-pathway/can-academy-players-play-grassroots-football**
-  - query: academy players grassroots football, position: 12.4
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-3-footballs-under-7s-to-under-11s**
+  - query: best football size 5, position: 11.5
   - impressions: 20, clicks: 0
-  - file: `app\academy-pathway\can-academy-players-play-grassroots-football\page.tsx`
-  - content: `content\academy-pathway\can-academy-players-play-grassroots-football.mdx`
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-4-footballs-under-12s-and-under-13s**
+  - query: best football size 5, position: 11.5
+  - impressions: 20, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#training-balls-vs-match-balls-do-you-need-both**
+  - query: best football size 5, position: 11.5
+  - impressions: 20, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#why-ball-size-matters-for-young-players**
+  - query: best football size 5, position: 11.5
+  - impressions: 20, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained**
+  - query: development centres, position: 19.2
+  - impressions: 20, clicks: 0
+  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
+  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
 - **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
   - query: fg football boots meaning, position: 12.8
   - impressions: 20, clicks: 0
@@ -688,16 +613,49 @@ Pages with real impressions historically that have gone near-silent in the last 
   - impressions: 20, clicks: 0
   - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
   - content: `content\football-gear\ag-vs-fg-boots.mdx`
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - query: football size by age group, position: 12.1
+- **https://www.footballparent.co.uk/academy-trials/football-trials-near-me**
+  - query: football academy trials, position: 18.7
   - impressions: 20, clicks: 0
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
+  - file: `app\academy-trials\football-trials-near-me\page.tsx`
+  - content: `content\academy-trials\football-trials-near-me.mdx`
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - query: grassroots football for kids, position: 14.6
+  - query: grassroots clubs, position: 12.1
   - impressions: 20, clicks: 0
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer**
+  - query: how do you become a professional footballer, position: 14.9
+  - impressions: 20, clicks: 0
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
+  - query: scholarship football, position: 16.3
+  - impressions: 20, clicks: 0
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide**
+  - query: the arsenal football club youth academy, position: 12.2
+  - impressions: 20, clicks: 0
+  - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
+  - query: uk boarding school football scholarship, position: 15.6
+  - impressions: 20, clicks: 0
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
+  - query: what size football for under 6, position: 15.8
+  - impressions: 20, clicks: 0
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
+  - query: wide fit boys football boots, position: 11.2
+  - impressions: 20, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
+  - query: wide fit boys football boots, position: 11.2
+  - impressions: 20, clicks: 0
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
 
 ## low ctr
 
@@ -706,1121 +664,1458 @@ Aggregate 90-day CTR can be misleading for pages that only recently started rank
 ### Confirmed - still a real gap on recent data
 
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age**
-  - aggregate (90d): position 8.7, 24240 impr, 0.4% CTR vs 3% expected
-  - last 14d: position 8.6, 8855 impr, 0.4% CTR (was position 8.8 earlier in the period)
+  - aggregate (90d): position 8.6, 31492 impr, 0.4% CTR vs 3% expected
+  - last 14d: position 8.2, 8428 impr, 0.3% CTR (was position 8.8 earlier in the period)
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
   - current title: "Football Sizes by Age: Best Footballs For Kids"
   - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
 - **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league**
-  - aggregate (90d): position 6.8, 21934 impr, 0.7% CTR vs 4% expected
-  - last 14d: position 6.7, 7611 impr, 0.6% CTR (was position 6.8 earlier in the period)
+  - aggregate (90d): position 6.8, 28331 impr, 0.7% CTR vs 4% expected
+  - last 14d: position 6.8, 7300 impr, 0.5% CTR (was position 6.8 earlier in the period)
   - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
   - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
   - current title: "What Is the Junior Premier League (JPL)?"
   - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
 - **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained**
-  - aggregate (90d): position 5.9, 17595 impr, 2.3% CTR vs 5% expected
-  - last 14d: position 5.5, 4716 impr, 2.4% CTR (was position 6.1 earlier in the period)
+  - aggregate (90d): position 5.8, 21922 impr, 2.4% CTR vs 5% expected
+  - last 14d: position 5.3, 5052 impr, 2.6% CTR (was position 6 earlier in the period)
   - file: `app\academy-pathway\academy-categories-explained\page.tsx`
   - content: `content\academy-pathway\academy-categories-explained.mdx`
   - current title: "Category 1, 2, 3 & 4 Football Academies"
   - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football**
-  - aggregate (90d): position 8.1, 13282 impr, 0.4% CTR vs 3% expected
-  - last 14d: position 7.3, 4214 impr, 0.5% CTR (was position 8.4 earlier in the period)
+  - aggregate (90d): position 7.9, 16855 impr, 0.4% CTR vs 3% expected
+  - last 14d: position 7, 4310 impr, 0.5% CTR (was position 8.2 earlier in the period)
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
   - current title: "What Is Grassroots Football?"
   - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
-  - aggregate (90d): position 7.4, 10337 impr, 0.8% CTR vs 4% expected
-  - last 14d: position 6.9, 3539 impr, 0.6% CTR (was position 7.7 earlier in the period)
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-  - current title: "How Academy Football Works in the UK"
-  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
 - **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives**
-  - aggregate (90d): position 7.2, 9084 impr, 1.6% CTR vs 4% expected
-  - last 14d: position 6.9, 3779 impr, 1.9% CTR (was position 7.4 earlier in the period)
+  - aggregate (90d): position 7, 13393 impr, 1.7% CTR vs 4% expected
+  - last 14d: position 6.6, 4988 impr, 1.9% CTR (was position 7.2 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works**
+  - aggregate (90d): position 7.2, 13124 impr, 0.8% CTR vs 4% expected
+  - last 14d: position 6.4, 3284 impr, 0.9% CTR (was position 7.5 earlier in the period)
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - current title: "How Academy Football Works in the UK"
+  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
 - **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots**
-  - aggregate (90d): position 8.6, 8923 impr, 0.3% CTR vs 3% expected
-  - last 14d: position 8.5, 2811 impr, 0.3% CTR (was position 8.6 earlier in the period)
+  - aggregate (90d): position 8.5, 12046 impr, 0.3% CTR vs 3% expected
+  - last 14d: position 8.1, 3485 impr, 0.3% CTR (was position 8.6 earlier in the period)
   - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
   - content: `content\football-gear\ag-vs-fg-boots.mdx`
   - current title: "FG vs AG Football Boots for Kids"
   - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
 - **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide**
-  - aggregate (90d): position 7, 7741 impr, 1.6% CTR vs 4% expected
-  - last 14d: position 7, 2813 impr, 1.6% CTR (was position 6.9 earlier in the period)
+  - aggregate (90d): position 6.9, 11425 impr, 1.7% CTR vs 4% expected
+  - last 14d: position 6.7, 4211 impr, 1.6% CTR (was position 6.9 earlier in the period)
   - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
   - current title: "Arsenal FC Development Centre: A Parent's Guide"
   - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
 - **https://www.footballparent.co.uk/academy-pathway/what-age-do-football-academies-recruit**
-  - aggregate (90d): position 5.7, 6774 impr, 0.7% CTR vs 5% expected
-  - last 14d: position 5.7, 2779 impr, 0.7% CTR (was position 5.7 earlier in the period)
+  - aggregate (90d): position 5.6, 10215 impr, 0.7% CTR vs 5% expected
+  - last 14d: position 5.4, 3982 impr, 0.7% CTR (was position 5.7 earlier in the period)
   - file: `app\academy-pathway\what-age-do-football-academies-recruit\page.tsx`
   - content: `content\academy-pathway\what-age-do-football-academies-recruit.mdx`
   - current title: "What Age Do Football Academies Recruit?"
   - current meta description: "When do football clubs recruit into academies? Find out which ages clubs target, how recruitment differs by phase, and when it's not too late to join an academy."
 - **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk**
-  - aggregate (90d): position 6.6, 6755 impr, 1.6% CTR vs 4% expected
-  - last 14d: position 6.3, 2679 impr, 1.6% CTR (was position 6.7 earlier in the period)
+  - aggregate (90d): position 6.3, 9662 impr, 1.7% CTR vs 5% expected
+  - last 14d: position 5.6, 3453 impr, 1.8% CTR (was position 6.6 earlier in the period)
   - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
   - content: `content\academy-pathway\football-scholarships-uk.mdx`
   - current title: "Football Scholarships UK: What Parents Need to Know"
   - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide**
+  - aggregate (90d): position 5.4, 9382 impr, 3% CTR vs 6% expected
+  - last 14d: position 5, 3251 impr, 3% CTR (was position 5.6 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/football-development/new-fa-youth-football-format**
+  - aggregate (90d): position 5.1, 8261 impr, 1.8% CTR vs 6% expected
+  - last 14d: position 4.7, 3588 impr, 1.4% CTR (was position 5.4 earlier in the period)
+  - file: `app\football-development\new-fa-youth-football-format\page.tsx`
+  - content: `content\football-development\new-fa-youth-football-format.mdx`
+  - current title: "Understanding the New FA Youth Football Format Changes"
+  - current meta description: "The FA's FutureFit reforms start in 2026/27 and change match sizes at nearly every age group between Under-7 and Under-14. What's actually changing, and why."
 - **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide**
-  - aggregate (90d): position 6.2, 6087 impr, 2.7% CTR vs 5% expected
-  - last 14d: position 6, 1779 impr, 2.6% CTR (was position 6.4 earlier in the period)
+  - aggregate (90d): position 6.2, 7602 impr, 2.8% CTR vs 5% expected
+  - last 14d: position 6.2, 1783 impr, 3.1% CTR (was position 6.2 earlier in the period)
   - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
   - current title: "Crystal Palace Development Centre"
   - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
+- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost**
+  - aggregate (90d): position 5.5, 6890 impr, 1.2% CTR vs 5% expected
+  - last 14d: position 5.2, 2371 impr, 1.6% CTR (was position 5.7 earlier in the period)
+  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
+  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
+  - current title: "How Much Does Academy Football Cost?"
+  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
 - **https://www.footballparent.co.uk/academy-pathway/what-is-eppp**
-  - aggregate (90d): position 6.3, 5691 impr, 1.1% CTR vs 5% expected
-  - last 14d: position 5.5, 1020 impr, 1.1% CTR (was position 6.5 earlier in the period)
+  - aggregate (90d): position 6.2, 6774 impr, 1.1% CTR vs 5% expected
+  - last 14d: position 5.5, 1285 impr, 1.2% CTR (was position 6.4 earlier in the period)
   - file: `app\academy-pathway\what-is-eppp\page.tsx`
   - content: `content\academy-pathway\what-is-eppp.mdx`
   - current title: "What Is EPPP? Elite Player Performance Plan"
   - current meta description: "EPPP stands for Elite Player Performance Plan. Here is what it means in academy football, including categories, coaching hours, player movement and what parents need to know."
 - **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl**
-  - aggregate (90d): position 6.5, 5652 impr, 1.2% CTR vs 4% expected
-  - last 14d: position 6.3, 1425 impr, 1.1% CTR (was position 6.6 earlier in the period)
+  - aggregate (90d): position 6.5, 6609 impr, 1.3% CTR vs 5% expected
+  - last 14d: position 6, 1134 impr, 1.8% CTR (was position 6.5 earlier in the period)
   - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
   - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
   - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
   - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
 - **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football**
-  - aggregate (90d): position 4.8, 5290 impr, 1.4% CTR vs 6% expected
-  - last 14d: position 4.8, 1532 impr, 1.6% CTR (was position 4.8 earlier in the period)
+  - aggregate (90d): position 4.9, 6377 impr, 1.5% CTR vs 6% expected
+  - last 14d: position 5.2, 1300 impr, 1.5% CTR (was position 4.8 earlier in the period)
   - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
   - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
   - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
   - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
-- **https://www.footballparent.co.uk/football-development/new-fa-youth-football-format**
-  - aggregate (90d): position 5.4, 5170 impr, 2.1% CTR vs 6% expected
-  - last 14d: position 4.9, 3370 impr, 2.1% CTR (was position 6.3 earlier in the period)
-  - file: `app\football-development\new-fa-youth-football-format\page.tsx`
-  - content: `content\football-development\new-fa-youth-football-format.mdx`
-  - current title: "Understanding the New FA Youth Football Format Changes"
-  - current meta description: "The FA's FutureFit reforms start in 2026/27 and change match sizes at nearly every age group between Under-7 and Under-14. What's actually changing, and why."
-- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost**
-  - aggregate (90d): position 5.7, 4924 impr, 1.1% CTR vs 5% expected
-  - last 14d: position 5.2, 2503 impr, 1% CTR (was position 6.1 earlier in the period)
-  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
-  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
-  - current title: "How Much Does Academy Football Cost?"
-  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained**
-  - aggregate (90d): position 5.4, 4272 impr, 2.6% CTR vs 6% expected
-  - last 14d: position 4.9, 1245 impr, 2% CTR (was position 5.6 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide**
+  - aggregate (90d): position 6.5, 6138 impr, 2.5% CTR vs 5% expected
+  - last 14d: position 6.1, 1719 impr, 2.2% CTR (was position 6.6 earlier in the period)
+  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
+  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
+  - current title: "West Ham United Development Centre: A Parent's Guide"
+  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
 - **https://www.footballparent.co.uk/academy-pathway/can-academy-players-play-grassroots-football**
-  - aggregate (90d): position 5.1, 4135 impr, 1.7% CTR vs 6% expected
-  - last 14d: position 5, 2027 impr, 1.8% CTR (was position 5.2 earlier in the period)
+  - aggregate (90d): position 5.1, 5971 impr, 1.7% CTR vs 6% expected
+  - last 14d: position 5, 2171 impr, 1.7% CTR (was position 5.1 earlier in the period)
   - file: `app\academy-pathway\can-academy-players-play-grassroots-football\page.tsx`
   - content: `content\academy-pathway\can-academy-players-play-grassroots-football.mdx`
   - current title: "Can Academy Players Play Grassroots Football?"
   - current meta description: "Academy players can play grassroots football in the Foundation Phase (U9-U11) with club approval, but it's banned from U12 under the Youth Development Rules."
 - **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer**
-  - aggregate (90d): position 8.4, 4111 impr, 0.7% CTR vs 3% expected
-  - last 14d: position 7.9, 1602 impr, 0.9% CTR (was position 8.7 earlier in the period)
+  - aggregate (90d): position 8.2, 5883 impr, 0.7% CTR vs 3% expected
+  - last 14d: position 7.7, 2078 impr, 0.9% CTR (was position 8.4 earlier in the period)
   - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
   - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
   - current title: "How to Become a Professional Footballer: What Parents Should Know"
   - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained**
+  - aggregate (90d): position 5.2, 5389 impr, 2.4% CTR vs 6% expected
+  - last 14d: position 4.6, 1376 impr, 2.3% CTR (was position 5.4 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#best-shin-pads-for-kids-football**
+  - aggregate (90d): position 7.8, 4847 impr, 0% CTR vs 3% expected
+  - last 14d: position 6.3, 2044 impr, 0% CTR (was position 8.8 earlier in the period)
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-football-boots-for-wide-feet**
-  - aggregate (90d): position 10.7, 3356 impr, 0% CTR vs 1% expected
-  - last 14d: position 10.4, 1811 impr, 0% CTR (was position 11.1 earlier in the period)
+  - aggregate (90d): position 10, 4780 impr, 0% CTR vs 2% expected
+  - last 14d: position 8.6, 1686 impr, 0% CTR (was position 10.8 earlier in the period)
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
   - current title: "Best Football Boots for Wide Feet Kids | Football Parent"
   - current meta description: "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#types-of-shin-pads**
+  - aggregate (90d): position 7.8, 4679 impr, 0% CTR vs 3% expected
+  - last 14d: position 6.4, 1876 impr, 0% CTR (was position 8.8 earlier in the period)
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#best-boot-types**
-  - aggregate (90d): position 10.7, 3315 impr, 0% CTR vs 1% expected
-  - last 14d: position 10.4, 1787 impr, 0% CTR (was position 11.1 earlier in the period)
+  - aggregate (90d): position 10, 4660 impr, 0% CTR vs 2% expected
+  - last 14d: position 8.6, 1603 impr, 0% CTR (was position 10.8 earlier in the period)
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
   - current title: "Best Football Boots for Wide Feet Kids | Football Parent"
   - current meta description: "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#why-shin-pads-matter**
+  - aggregate (90d): position 7.8, 4659 impr, 0% CTR vs 3% expected
+  - last 14d: position 6.3, 1859 impr, 0% CTR (was position 8.8 earlier in the period)
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
 - **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#signs-boots-are-too-narrow**
-  - aggregate (90d): position 10.7, 3233 impr, 0% CTR vs 1% expected
-  - last 14d: position 10.4, 1746 impr, 0% CTR (was position 11.1 earlier in the period)
+  - aggregate (90d): position 10, 4582 impr, 0% CTR vs 2% expected
+  - last 14d: position 8.6, 1601 impr, 0% CTR (was position 10.8 earlier in the period)
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+  - current title: "Best Football Boots for Wide Feet Kids | Football Parent"
+  - current meta description: "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying."
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
+  - aggregate (90d): position 10, 4543 impr, 0% CTR vs 2% expected
+  - last 14d: position 8.6, 1592 impr, 0% CTR (was position 10.8 earlier in the period)
   - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
   - current title: "Best Football Boots for Wide Feet Kids | Football Parent"
   - current meta description: "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying."
 - **https://www.footballparent.co.uk/academy-trials/what-happens-at-academy-trials**
-  - aggregate (90d): position 5.9, 3200 impr, 1.5% CTR vs 5% expected
-  - last 14d: position 5.9, 1219 impr, 1.5% CTR (was position 5.9 earlier in the period)
+  - aggregate (90d): position 5.9, 4133 impr, 1.5% CTR vs 5% expected
+  - last 14d: position 5.7, 1117 impr, 1.5% CTR (was position 5.9 earlier in the period)
   - file: `app\academy-trials\what-happens-at-academy-trials\page.tsx`
   - content: `content\academy-trials\what-happens-at-academy-trials.mdx`
   - current title: "What Happens at Football Academy Trials"
   - current meta description: "What to expect on the day of a football academy trial, and how to prepare a child for trial at an academy or development centre."
-- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#why-boot-fit-matters**
-  - aggregate (90d): position 10.7, 3200 impr, 0% CTR vs 1% expected
-  - last 14d: position 10.4, 1730 impr, 0% CTR (was position 11.1 earlier in the period)
-  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
-  - current title: "Best Football Boots for Wide Feet Kids | Football Parent"
-  - current meta description: "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying."
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#best-shin-pads-for-kids-football**
-  - aggregate (90d): position 8.7, 3035 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.1, 1895 impr, 0% CTR (was position 9.7 earlier in the period)
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-  - current title: "Best Shin Pads for Kids Football | Football Parent"
-  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#types-of-shin-pads**
-  - aggregate (90d): position 8.7, 3032 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.1, 1892 impr, 0% CTR (was position 9.7 earlier in the period)
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-  - current title: "Best Shin Pads for Kids Football | Football Parent"
-  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#why-shin-pads-matter**
-  - aggregate (90d): position 8.7, 3028 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.1, 1889 impr, 0% CTR (was position 9.7 earlier in the period)
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-  - current title: "Best Shin Pads for Kids Football | Football Parent"
-  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
-- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#proper-fit**
-  - aggregate (90d): position 8.7, 2678 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.2, 1649 impr, 0% CTR (was position 9.6 earlier in the period)
-  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
-  - current title: "Best Shin Pads for Kids Football | Football Parent"
-  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
-- **https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies**
-  - aggregate (90d): position 6.4, 2378 impr, 2.1% CTR vs 5% expected
-  - last 14d: position 6.1, 598 impr, 2.3% CTR (was position 6.6 earlier in the period)
-  - file: `app\academy-pathway\development-centres-vs-academies\page.tsx`
-  - content: `content\academy-pathway\development-centres-vs-academies.mdx`
-  - current title: "Development Centres vs Academies: What's the Difference?"
-  - current meta description: "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway."
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained**
+  - aggregate (90d): position 7, 3768 impr, 2% CTR vs 4% expected
+  - last 14d: position 5.7, 1213 impr, 1.6% CTR (was position 7.7 earlier in the period)
+  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
+  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
+  - current title: "UK Football Development Centres Explained"
+  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
 - **https://www.footballparent.co.uk/football-development/playing-up-an-age-group-football**
-  - aggregate (90d): position 5.9, 2154 impr, 2.2% CTR vs 5% expected
-  - last 14d: position 5.3, 825 impr, 2.7% CTR (was position 6.2 earlier in the period)
+  - aggregate (90d): position 5.8, 2912 impr, 2.1% CTR vs 5% expected
+  - last 14d: position 5.5, 933 impr, 1.9% CTR (was position 6 earlier in the period)
   - file: `app\football-development\playing-up-an-age-group-football\page.tsx`
   - content: `content\football-development\playing-up-an-age-group-football.mdx`
   - current title: "Should My Child Play Up an Age Group in Football?"
   - current meta description: "Weighing up whether to let a child play up an age group in football: the genuine benefits, the risks, and the questions worth asking first."
+- **https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies**
+  - aggregate (90d): position 6.2, 2905 impr, 1.8% CTR vs 5% expected
+  - last 14d: position 5.7, 662 impr, 1.2% CTR (was position 6.4 earlier in the period)
+  - file: `app\academy-pathway\development-centres-vs-academies\page.tsx`
+  - content: `content\academy-pathway\development-centres-vs-academies.mdx`
+  - current title: "Development Centres vs Academies: What's the Difference?"
+  - current meta description: "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway."
 - **https://www.footballparent.co.uk/academy-pathway/understanding-academy-release**
-  - aggregate (90d): position 5.2, 2148 impr, 1.6% CTR vs 6% expected
-  - last 14d: position 5.5, 653 impr, 1.5% CTR (was position 5.1 earlier in the period)
+  - aggregate (90d): position 5.2, 2802 impr, 1.5% CTR vs 6% expected
+  - last 14d: position 5.1, 769 impr, 1.6% CTR (was position 5.2 earlier in the period)
   - file: `app\academy-pathway\understanding-academy-release\page.tsx`
   - content: `content\academy-pathway\understanding-academy-release.mdx`
   - current title: "Understanding Academy Release In Football"
   - current meta description: "Being released from a football academy: what happens at a release meeting, emotional support and the next steps."
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#what-ages-are-classed-as-grassroots-football**
-  - aggregate (90d): position 7.8, 2064 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.9, 1178 impr, 0% CTR (was position 7.7 earlier in the period)
+  - aggregate (90d): position 7.5, 2788 impr, 0% CTR vs 3% expected
+  - last 14d: position 6.8, 920 impr, 0% CTR (was position 7.9 earlier in the period)
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
   - current title: "What Is Grassroots Football?"
   - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#proper-fit**
+  - aggregate (90d): position 8.7, 2681 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.7, 162 impr, 0% CTR (was position 8.8 earlier in the period)
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#who-runs-grassroots-football**
-  - aggregate (90d): position 7.8, 1967 impr, 0% CTR vs 3% expected
-  - last 14d: position 8, 1152 impr, 0% CTR (was position 7.6 earlier in the period)
+  - aggregate (90d): position 7.6, 2637 impr, 0% CTR vs 3% expected
+  - last 14d: position 6.9, 861 impr, 0% CTR (was position 7.9 earlier in the period)
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
   - current title: "What Is Grassroots Football?"
   - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
+- **https://www.footballparent.co.uk/academy-pathway/brentford-development-centre-guide**
+  - aggregate (90d): position 6.3, 2456 impr, 2.7% CTR vs 5% expected
+  - last 14d: position 6.3, 1630 impr, 2.6% CTR (was position 6.3 earlier in the period)
+  - file: `app\academy-pathway\brentford-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\brentford-development-centre-guide.mdx`
+  - current title: "Brentford FC Development Centre: A Parent's Guide"
+  - current meta description: "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in."
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#what-is-grassroots-football-grassroots-football-meaning**
-  - aggregate (90d): position 7.8, 1814 impr, 0.1% CTR vs 3% expected
-  - last 14d: position 7.9, 1003 impr, 0.1% CTR (was position 7.7 earlier in the period)
+  - aggregate (90d): position 7.5, 2421 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.7, 761 impr, 0% CTR (was position 7.8 earlier in the period)
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
   - current title: "What Is Grassroots Football?"
   - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#how-grassroots-football-differs-from-academy-football**
-  - aggregate (90d): position 7.9, 1701 impr, 0% CTR vs 3% expected
-  - last 14d: position 8, 981 impr, 0% CTR (was position 7.6 earlier in the period)
-  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
-  - content: `content\parent-guides\what-is-grassroots-football.mdx`
-  - current title: "What Is Grassroots Football?"
-  - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
-- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#what-level-of-commitment-should-parents-expect**
-  - aggregate (90d): position 7.8, 1671 impr, 0% CTR vs 3% expected
-  - last 14d: position 8, 959 impr, 0% CTR (was position 7.6 earlier in the period)
+  - aggregate (90d): position 7.5, 2275 impr, 0% CTR vs 3% expected
+  - last 14d: position 6.8, 721 impr, 0% CTR (was position 7.9 earlier in the period)
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
   - current title: "What Is Grassroots Football?"
   - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
 - **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#quick-answer**
-  - aggregate (90d): position 7.6, 1535 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.9, 1197 impr, 0% CTR (was position 6.5 earlier in the period)
+  - aggregate (90d): position 7.3, 2270 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.8, 934 impr, 0.1% CTR (was position 7.6 earlier in the period)
   - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
   - content: `content\parent-guides\what-is-grassroots-football.mdx`
   - current title: "What Is Grassroots Football?"
   - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
+- **https://www.footballparent.co.uk/parent-guides/what-is-grassroots-football#what-level-of-commitment-should-parents-expect**
+  - aggregate (90d): position 7.5, 2224 impr, 0% CTR vs 3% expected
+  - last 14d: position 6.8, 698 impr, 0% CTR (was position 7.9 earlier in the period)
+  - file: `app\parent-guides\what-is-grassroots-football\page.tsx`
+  - content: `content\parent-guides\what-is-grassroots-football.mdx`
+  - current title: "What Is Grassroots Football?"
+  - current meta description: "What grassroots football means in the UK, the ages it covers, how it differs from academy football, and whether it's the right environment for your child."
+- **https://www.footballparent.co.uk/academy-pathway/fulham-fc-development-centre-guide**
+  - aggregate (90d): position 7.3, 2223 impr, 1.9% CTR vs 4% expected
+  - last 14d: position 7.3, 1191 impr, 2.2% CTR (was position 7.2 earlier in the period)
+  - file: `app\academy-pathway\fulham-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\fulham-fc-development-centre-guide.mdx`
+  - current title: "Fulham FC Development Centre: A Parent's Guide"
+  - current meta description: "Fulham runs boys' and girls' Player Development Centres for ages 7-16, separate from the Category One academy. How the Pathway and trials actually work."
 - **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#category-1**
-  - aggregate (90d): position 7, 1317 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.9, 747 impr, 0% CTR (was position 7.1 earlier in the period)
+  - aggregate (90d): position 6.9, 2195 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.7, 1023 impr, 0% CTR (was position 7.1 earlier in the period)
   - file: `app\academy-pathway\academy-categories-explained\page.tsx`
   - content: `content\academy-pathway\academy-categories-explained.mdx`
   - current title: "Category 1, 2, 3 & 4 Football Academies"
   - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
 - **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#category-4**
-  - aggregate (90d): position 7, 1315 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.9, 745 impr, 0% CTR (was position 7.1 earlier in the period)
+  - aggregate (90d): position 6.9, 2187 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.7, 1016 impr, 0% CTR (was position 7.1 earlier in the period)
   - file: `app\academy-pathway\academy-categories-explained\page.tsx`
   - content: `content\academy-pathway\academy-categories-explained.mdx`
   - current title: "Category 1, 2, 3 & 4 Football Academies"
   - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
 - **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#at-a-glance-category-comparison**
-  - aggregate (90d): position 7, 1302 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.9, 733 impr, 0% CTR (was position 7.1 earlier in the period)
+  - aggregate (90d): position 6.9, 2175 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.7, 1016 impr, 0% CTR (was position 7.1 earlier in the period)
   - file: `app\academy-pathway\academy-categories-explained\page.tsx`
   - content: `content\academy-pathway\academy-categories-explained.mdx`
   - current title: "Category 1, 2, 3 & 4 Football Academies"
   - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
-- **https://www.footballparent.co.uk/parent-guides/leave-grassroots-football-for-an-academy**
-  - aggregate (90d): position 7.4, 1277 impr, 1.3% CTR vs 4% expected
-  - last 14d: position 7.7, 235 impr, 1.3% CTR (was position 7.4 earlier in the period)
-  - file: `app\parent-guides\leave-grassroots-football-for-an-academy\page.tsx`
-  - content: `content\parent-guides\leave-grassroots-football-for-an-academy.mdx`
-  - current title: "Should My Child Leave Grassroots Football For An Academy?"
-  - current meta description: "Should your child leave grassroots football for an academy? Compare the coaching, commitment, pressure, travel and development benefits before deciding."
-- **https://www.footballparent.co.uk/academy-pathway/fulham-fc-development-centre-guide**
-  - aggregate (90d): position 7.1, 1232 impr, 1.9% CTR vs 4% expected
-  - last 14d: position 6.8, 606 impr, 1.5% CTR (was position 7.4 earlier in the period)
-  - file: `app\academy-pathway\fulham-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\fulham-fc-development-centre-guide.mdx`
-  - current title: "Fulham FC Development Centre: A Parent's Guide"
-  - current meta description: "Fulham runs boys' and girls' Player Development Centres for ages 7-16, separate from the Category One academy. How the Pathway and trials actually work."
-- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#category-3**
-  - aggregate (90d): position 7, 1172 impr, 0% CTR vs 4% expected
-  - last 14d: position 7, 663 impr, 0% CTR (was position 7 earlier in the period)
-  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
-  - content: `content\academy-pathway\academy-categories-explained.mdx`
-  - current title: "Category 1, 2, 3 & 4 Football Academies"
-  - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
-- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#why-categories-exist**
-  - aggregate (90d): position 7, 1121 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.9, 629 impr, 0% CTR (was position 7.1 earlier in the period)
-  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
-  - content: `content\academy-pathway\academy-categories-explained.mdx`
-  - current title: "Category 1, 2, 3 & 4 Football Academies"
-  - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
-- **https://www.footballparent.co.uk/football-development**
-  - aggregate (90d): position 20.1, 1108 impr, 0.3% CTR vs 1% expected
-  - last 14d: position 15.2, 217 impr, 0% CTR (was position 21.3 earlier in the period)
-  - file: `app\football-development\page.tsx`
-  - current title: "Football Development for Young Players | Football Parent"
-  - current meta description: "Football confidence, decision making, training load and late development: what actually predicts long-term progress in young players."
-- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#what-category-actually-means-for-your-childs-development**
-  - aggregate (90d): position 7, 1004 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.9, 567 impr, 0% CTR (was position 7.1 earlier in the period)
-  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
-  - content: `content\academy-pathway\academy-categories-explained.mdx`
-  - current title: "Category 1, 2, 3 & 4 Football Academies"
-  - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
+- **https://www.footballparent.co.uk/football-gear/best-football-boots-for-kids**
+  - aggregate (90d): position 6.4, 2120 impr, 0.8% CTR vs 5% expected
+  - last 14d: position 6.4, 2120 impr, 0.8% CTR
+  - file: `app\football-gear\best-football-boots-for-kids\page.tsx`
+  - content: `content\football-gear\best-football-boots-for-kids.mdx`
+  - current title: "Best Football Boots for Kids (2026 Buying Guide)"
+  - current meta description: "Kids' football boots split into FG, AG and SG soles, and the wrong one for the pitch causes real discomfort. Fit, budget and age-by-age buying guidance."
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#football-sizes-by-age-quick-reference**
-  - aggregate (90d): position 9.9, 836 impr, 0% CTR vs 2% expected
-  - last 14d: position 9.4, 296 impr, 0% CTR (was position 10.1 earlier in the period)
+  - aggregate (90d): position 9.4, 2083 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.1, 1347 impr, 0% CTR (was position 9.9 earlier in the period)
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
   - current title: "Football Sizes by Age: Best Footballs For Kids"
   - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-4-footballs-under-12s-and-under-13s**
-  - aggregate (90d): position 9.9, 767 impr, 0% CTR vs 2% expected
-  - last 14d: position 9.5, 253 impr, 0% CTR (was position 10.1 earlier in the period)
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-  - current title: "Football Sizes by Age: Best Footballs For Kids"
-  - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
-- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-3-footballs-under-7s-to-under-11s**
-  - aggregate (90d): position 9.8, 738 impr, 0% CTR vs 2% expected
-  - last 14d: position 9.3, 252 impr, 0% CTR (was position 10.1 earlier in the period)
-  - file: `app\football-gear\best-footballs-by-age\page.tsx`
-  - content: `content\football-gear\best-footballs-by-age.mdx`
-  - current title: "Football Sizes by Age: Best Footballs For Kids"
-  - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
+- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#category-3**
+  - aggregate (90d): position 6.9, 1951 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.8, 907 impr, 0% CTR (was position 7.1 earlier in the period)
+  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
+  - content: `content\academy-pathway\academy-categories-explained.mdx`
+  - current title: "Category 1, 2, 3 & 4 Football Academies"
+  - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-5-footballs-under-14s-and-above**
-  - aggregate (90d): position 9.9, 737 impr, 0% CTR vs 2% expected
-  - last 14d: position 9.5, 258 impr, 0% CTR (was position 10.1 earlier in the period)
+  - aggregate (90d): position 9.4, 1894 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.1, 1242 impr, 0% CTR (was position 9.9 earlier in the period)
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+  - current title: "Football Sizes by Age: Best Footballs For Kids"
+  - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
+- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#why-categories-exist**
+  - aggregate (90d): position 6.9, 1870 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.6, 862 impr, 0% CTR (was position 7.1 earlier in the period)
+  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
+  - content: `content\academy-pathway\academy-categories-explained.mdx`
+  - current title: "Category 1, 2, 3 & 4 Football Academies"
+  - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-4-footballs-under-12s-and-under-13s**
+  - aggregate (90d): position 9.4, 1830 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.1, 1146 impr, 0% CTR (was position 9.9 earlier in the period)
+  - file: `app\football-gear\best-footballs-by-age\page.tsx`
+  - content: `content\football-gear\best-footballs-by-age.mdx`
+  - current title: "Football Sizes by Age: Best Footballs For Kids"
+  - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#best-shin-pad-sleeves-and-sock-shin-pads**
+  - aggregate (90d): position 6.2, 1822 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.2, 1822 impr, 0% CTR
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
+- **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#size-3-footballs-under-7s-to-under-11s**
+  - aggregate (90d): position 9.4, 1801 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.1, 1148 impr, 0% CTR (was position 9.8 earlier in the period)
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
   - current title: "Football Sizes by Age: Best Footballs For Kids"
   - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#why-ball-size-matters-for-young-players**
-  - aggregate (90d): position 9.9, 737 impr, 0% CTR vs 2% expected
-  - last 14d: position 9.5, 238 impr, 0% CTR (was position 10.1 earlier in the period)
+  - aggregate (90d): position 9.4, 1779 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.1, 1121 impr, 0% CTR (was position 9.9 earlier in the period)
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
   - current title: "Football Sizes by Age: Best Footballs For Kids"
   - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
 - **https://www.footballparent.co.uk/football-gear/best-footballs-by-age#training-balls-vs-match-balls-do-you-need-both**
-  - aggregate (90d): position 9.9, 725 impr, 0% CTR vs 2% expected
-  - last 14d: position 9.5, 237 impr, 0% CTR (was position 10.1 earlier in the period)
+  - aggregate (90d): position 9.4, 1767 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.1, 1122 impr, 0% CTR (was position 9.9 earlier in the period)
   - file: `app\football-gear\best-footballs-by-age\page.tsx`
   - content: `content\football-gear\best-footballs-by-age.mdx`
   - current title: "Football Sizes by Age: Best Footballs For Kids"
   - current meta description: "Find out what size football your child needs by age group, including UK guidance for mini soccer, youth football and older players."
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#how-to-join-crystal-palace-academy**
-  - aggregate (90d): position 6.8, 684 impr, 0.1% CTR vs 4% expected
-  - last 14d: position 6.4, 316 impr, 0.3% CTR (was position 7 earlier in the period)
-  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-  - current title: "Crystal Palace Development Centre"
-  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#crystal-palace-academy-trials**
-  - aggregate (90d): position 6.8, 655 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.5, 309 impr, 0% CTR (was position 7 earlier in the period)
-  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-  - current title: "Crystal Palace Development Centre"
-  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#girls-pathway**
-  - aggregate (90d): position 6.9, 648 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.6, 297 impr, 0% CTR (was position 7.2 earlier in the period)
-  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-  - current title: "Crystal Palace Development Centre"
-  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/academy-pathway/football-development-centres-in-london**
-  - aggregate (90d): position 8.1, 606 impr, 0.8% CTR vs 3% expected
-  - last 14d: position 7.8, 193 impr, 0.5% CTR (was position 8.2 earlier in the period)
-  - file: `app\academy-pathway\football-development-centres-in-london\page.tsx`
-  - content: `content\academy-pathway\football-development-centres-in-london.mdx`
-  - current title: "Football Development Centres in London: A Parent's Guide"
-  - current meta description: "London has more youth football development pathways than anywhere else in England - the options for both boys and girls across the capital."
-- **https://www.footballparent.co.uk/football-development/is-private-football-coaching-worth-it**
-  - aggregate (90d): position 8.2, 596 impr, 1.3% CTR vs 3% expected
-  - last 14d: position 7.4, 226 impr, 0.4% CTR (was position 8.7 earlier in the period)
-  - file: `app\football-development\is-private-football-coaching-worth-it\page.tsx`
-  - content: `content\football-development\is-private-football-coaching-worth-it.mdx`
-  - current title: "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?"
-  - current meta description: "Thinking about private football coaching or 1-to-1 football coaching? Learn when it helps, what it costs, how to choose a coach and whether it's worth it for young players."
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#tier-3-talent-centre**
-  - aggregate (90d): position 6.6, 588 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.3, 266 impr, 0% CTR (was position 6.8 earlier in the period)
-  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-  - current title: "Crystal Palace Development Centre"
-  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/coaching/what-qualifications-do-i-need-to-be-a-football-coach**
-  - aggregate (90d): position 11.4, 574 impr, 0.5% CTR vs 1% expected
-  - last 14d: position 8.8, 204 impr, 1.5% CTR (was position 12.9 earlier in the period)
-  - file: `app\coaching\what-qualifications-do-i-need-to-be-a-football-coach\page.tsx`
-  - content: `content\coaching\what-qualifications-do-i-need-to-be-a-football-coach.mdx`
-  - current title: "What Qualifications Do You Need to Be a Football Coach?"
-  - current meta description: "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?"
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#the-crystal-palace-academy**
-  - aggregate (90d): position 6.8, 574 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.5, 249 impr, 0% CTR (was position 7 earlier in the period)
-  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-  - current title: "Crystal Palace Development Centre"
-  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/academy-pathway/how-to-join-a-football-academy**
-  - aggregate (90d): position 12.7, 550 impr, 0.5% CTR vs 1% expected
-  - last 14d: position 19.2, 93 impr, 2.2% CTR (was position 11.4 earlier in the period)
-  - file: `app\academy-pathway\how-to-join-a-football-academy\page.tsx`
-  - content: `content\academy-pathway\how-to-join-a-football-academy.mdx`
-  - current title: "How to Join a Football Academy"
-  - current meta description: "Learn how to join a football academy, how to get into academy football, how clubs recruit young players and what parents can realistically do to improve their child's chances."
-- **https://www.footballparent.co.uk/football-development/late-developers-in-football**
-  - aggregate (90d): position 6.1, 535 impr, 2.1% CTR vs 5% expected
-  - last 14d: position 5, 136 impr, 2.2% CTR (was position 6.5 earlier in the period)
-  - file: `app\football-development\late-developers-in-football\page.tsx`
-  - content: `content\football-development\late-developers-in-football.mdx`
-  - current title: "Why Some Kids Develop Later In Football"
-  - current meta description: "Understanding late physical and technical development in football and why early success does not guarantee long-term outcomes."
+- **https://www.footballparent.co.uk/academy-pathway/academy-categories-explained#what-category-actually-means-for-your-childs-development**
+  - aggregate (90d): position 6.9, 1676 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.7, 773 impr, 0% CTR (was position 7.1 earlier in the period)
+  - file: `app\academy-pathway\academy-categories-explained\page.tsx`
+  - content: `content\academy-pathway\academy-categories-explained.mdx`
+  - current title: "Category 1, 2, 3 & 4 Football Academies"
+  - current meta description: "What's the difference between a Category 1 and Category 4 football academy? Here's what each level means for training hours, facilities, travel demands and your child's development."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#shin-pad-sizes-by-age**
+  - aggregate (90d): position 6.2, 1656 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.2, 1656 impr, 0% CTR
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#best-shin-pads-with-ankle-protection**
+  - aggregate (90d): position 6.1, 1646 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.1, 1646 impr, 0% CTR
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
+- **https://www.footballparent.co.uk/football-gear/shin-pads/best-shin-pads-for-kids-football#best-slip-in-shin-pads**
+  - aggregate (90d): position 6.2, 1642 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.2, 1642 impr, 0% CTR
+  - file: `app\football-gear\shin-pads\best-shin-pads-for-kids-football\page.tsx`
+  - current title: "Best Shin Pads for Kids Football | Football Parent"
+  - current meta description: "How to choose shin pads that balance comfort, protection and fit for young footballers."
+- **https://www.footballparent.co.uk/parent-guides/leave-grassroots-football-for-an-academy**
+  - aggregate (90d): position 7.2, 1589 impr, 1.1% CTR vs 4% expected
+  - last 14d: position 6.6, 355 impr, 0.3% CTR (was position 7.4 earlier in the period)
+  - file: `app\parent-guides\leave-grassroots-football-for-an-academy\page.tsx`
+  - content: `content\parent-guides\leave-grassroots-football-for-an-academy.mdx`
+  - current title: "Should My Child Leave Grassroots Football For An Academy?"
+  - current meta description: "Should your child leave grassroots football for an academy? Compare the coaching, commitment, pressure, travel and development benefits before deciding."
+- **https://www.footballparent.co.uk/football-gear/boots/best-football-boots-for-wide-feet-kids#boots-worth-trying**
+  - aggregate (90d): position 8.4, 1376 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.4, 1376 impr, 0% CTR
+  - file: `app\football-gear\boots\best-football-boots-for-wide-feet-kids\page.tsx`
+  - current title: "Best Football Boots for Wide Feet Kids | Football Parent"
+  - current meta description: "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying."
 - **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#veo-vs-xbotgo**
-  - aggregate (90d): position 6.9, 531 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.6, 347 impr, 0% CTR (was position 7.4 earlier in the period)
+  - aggregate (90d): position 7.1, 1347 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.1, 920 impr, 0% CTR (was position 6.9 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#cost-and-accessibility**
-  - aggregate (90d): position 6.6, 511 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.1, 261 impr, 0% CTR (was position 7.2 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/football-development**
+  - aggregate (90d): position 17.8, 1328 impr, 0.2% CTR vs 1% expected
+  - last 14d: position 13, 325 impr, 0% CTR (was position 19.4 earlier in the period)
+  - file: `app\football-development\page.tsx`
+  - current title: "Football Development for Young Players | Football Parent"
+  - current meta description: "Football confidence, decision making, training load and late development: what actually predicts long-term progress in young players."
 - **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#cheaper-alternatives-to-a-veo-camera**
-  - aggregate (90d): position 6.9, 501 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.6, 329 impr, 0% CTR (was position 7.3 earlier in the period)
+  - aggregate (90d): position 7, 1302 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.1, 902 impr, 0% CTR (was position 6.8 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-are-emerging-talent-centres**
-  - aggregate (90d): position 6.6, 500 impr, 0% CTR vs 4% expected
-  - last 14d: position 6, 254 impr, 0% CTR (was position 7.2 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#how-the-etc-pathway-works**
-  - aggregate (90d): position 6.6, 489 impr, 0% CTR vs 4% expected
-  - last 14d: position 5.9, 251 impr, 0% CTR (was position 7.3 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/coaching/equal-playing-time-in-grassroots-football**
+  - aggregate (90d): position 6.4, 1118 impr, 1.6% CTR vs 5% expected
+  - last 14d: position 6.5, 871 impr, 1.4% CTR (was position 6.1 earlier in the period)
+  - file: `app\coaching\equal-playing-time-in-grassroots-football\page.tsx`
+  - content: `content\coaching\equal-playing-time-in-grassroots-football.mdx`
+  - current title: "Equal Playing Time in Grassroots Football: Getting Fair Rotation Right"
+  - current meta description: "A working formula for fair playing time, the real difference between equal minutes and equal position time, and what rolling substitutions actually allow."
 - **https://www.footballparent.co.uk/parent-guides/jpl-and-academy-football**
-  - aggregate (90d): position 5.1, 481 impr, 1.5% CTR vs 6% expected
-  - last 14d: position 4.5, 66 impr, 0% CTR (was position 5.2 earlier in the period)
+  - aggregate (90d): position 4.6, 1023 impr, 1.6% CTR vs 6% expected
+  - last 14d: position 4.1, 549 impr, 1.6% CTR (was position 5.1 earlier in the period)
   - file: `app\parent-guides\jpl-and-academy-football\page.tsx`
   - content: `content\parent-guides\jpl-and-academy-football.mdx`
   - current title: "Does the Junior Premier League Lead to Academy Football?"
   - current meta description: "Playing in the JPL doesn't create an automatic route into an academy - scouts select on ability, not league. What actually gets a child noticed."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#etc-vs-pro-game-academy**
-  - aggregate (90d): position 6.6, 469 impr, 0% CTR vs 4% expected
-  - last 14d: position 6, 246 impr, 0% CTR (was position 7.2 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#how-recruitment-works**
-  - aggregate (90d): position 6.5, 463 impr, 0% CTR vs 4% expected
-  - last 14d: position 5.9, 243 impr, 0% CTR (was position 7.1 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
-- **https://www.footballparent.co.uk/parent-guides/how-to-become-a-football-coach**
-  - aggregate (90d): position 10.4, 459 impr, 0.7% CTR vs 2% expected
-  - last 14d: position 7.9, 136 impr, 0.7% CTR (was position 11.4 earlier in the period)
-  - file: `app\parent-guides\how-to-become-a-football-coach\page.tsx`
-  - content: `content\parent-guides\how-to-become-a-football-coach.mdx`
-  - current title: "How to Become a Grassroots Football Coach"
-  - current meta description: "How to become a grassroots football coach: joining as a volunteer, DBS checks, safeguarding, first aid, time commitment and coaching your own child."
-- **https://www.footballparent.co.uk/academy-pathway/pre-academy-football**
-  - aggregate (90d): position 3.8, 451 impr, 4.4% CTR vs 8% expected
-  - last 14d: position 3.4, 123 impr, 3.3% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\pre-academy-football\page.tsx`
-  - content: `content\academy-pathway\pre-academy-football.mdx`
-  - current title: "What Is Pre-Academy Football?"
-  - current meta description: "What is pre-academy football, what ages does it cover, and is it worth it? How pre-academies and trials relate to the wider academy pathway."
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#goalkeeper-pathway**
-  - aggregate (90d): position 6.7, 418 impr, 0% CTR vs 4% expected
-  - last 14d: position 6, 152 impr, 0% CTR (was position 7.1 earlier in the period)
-  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-  - current title: "Crystal Palace Development Centre"
-  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/girls-football/what-age-do-girls-football-academies-recruit**
-  - aggregate (90d): position 5.1, 413 impr, 3.1% CTR vs 6% expected
-  - last 14d: position 5.1, 57 impr, 5.3% CTR (was position 5.1 earlier in the period)
-  - file: `app\girls-football\what-age-do-girls-football-academies-recruit\page.tsx`
-  - content: `content\girls-football\what-age-do-girls-football-academies-recruit.mdx`
-  - current title: "What Age Do Girls Football Academies Recruit?"
-  - current meta description: "Understanding the recruitment ages and pathway stages within girls academy football in the UK."
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#tier-1-player-development-centres**
-  - aggregate (90d): position 5.9, 388 impr, 0.3% CTR vs 5% expected
-  - last 14d: position 6, 208 impr, 0% CTR (was position 5.8 earlier in the period)
-  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
-  - current title: "Crystal Palace Development Centre"
-  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/football-development/improve-football-decision-making**
-  - aggregate (90d): position 7.4, 387 impr, 1.8% CTR vs 4% expected
-  - last 14d: position 7.4, 49 impr, 4.1% CTR (was position 7.4 earlier in the period)
-  - file: `app\football-development\improve-football-decision-making\page.tsx`
-  - content: `content\football-development\improve-football-decision-making.mdx`
-  - current title: "How To Improve Football Decision Making In Young Players"
-  - current meta description: "Decision making is one of the most important skills in youth football - and one of the hardest to coach. Here's how parents and coaches can help young players think faster and clearer on the pitch."
 - **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#veo-cam-3-vs-xbotgo-falcon**
-  - aggregate (90d): position 7.3, 378 impr, 0% CTR vs 4% expected
-  - last 14d: position 7, 233 impr, 0% CTR (was position 7.9 earlier in the period)
-  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
-  - content: `content\football-gear\veo-camera-alternatives.mdx`
-  - current title: "Veo Camera Alternatives: Cost & Comparisons"
-  - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#equipment-costs**
-  - aggregate (90d): position 5.8, 370 impr, 0% CTR vs 5% expected
-  - last 14d: position 5.8, 229 impr, 0% CTR (was position 5.8 earlier in the period)
-  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
-  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
-  - current title: "How Much Does Academy Football Cost?"
-  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
-- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#veo-vs-trace-and-pixellot**
-  - aggregate (90d): position 6.9, 363 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.7, 249 impr, 0% CTR (was position 7.5 earlier in the period)
+  - aggregate (90d): position 7.4, 1022 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.4, 708 impr, 0% CTR (was position 7.3 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
 - **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#what-is-a-veo-camera-and-how-does-it-work**
-  - aggregate (90d): position 6.9, 357 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.5, 228 impr, 0% CTR (was position 7.6 earlier in the period)
+  - aggregate (90d): position 7, 1016 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.1, 737 impr, 0% CTR (was position 6.9 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#the-costs-many-parents-dont-expect**
-  - aggregate (90d): position 5.8, 344 impr, 0% CTR vs 5% expected
-  - last 14d: position 5.8, 206 impr, 0% CTR (was position 5.9 earlier in the period)
-  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
-  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
-  - current title: "How Much Does Academy Football Cost?"
-  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
-- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#development-centre-costs**
-  - aggregate (90d): position 5.9, 341 impr, 0% CTR vs 5% expected
-  - last 14d: position 5.9, 219 impr, 0% CTR (was position 5.9 earlier in the period)
-  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
-  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
-  - current title: "How Much Does Academy Football Cost?"
-  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#where-etcs-fit-in-the-full-pathway**
-  - aggregate (90d): position 6.1, 338 impr, 0% CTR vs 5% expected
-  - last 14d: position 5.4, 165 impr, 0% CTR (was position 6.7 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-etc-selection-really-means**
-  - aggregate (90d): position 5.9, 336 impr, 0% CTR vs 5% expected
-  - last 14d: position 5.4, 181 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
-- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#tier-2-invite-only-centres**
-  - aggregate (90d): position 7.5, 335 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.3, 148 impr, 0% CTR (was position 7.6 earlier in the period)
+- **https://www.footballparent.co.uk/academy-pathway/how-to-find-a-football-agent-for-your-child**
+  - aggregate (90d): position 5, 933 impr, 3.1% CTR vs 6% expected
+  - last 14d: position 4.5, 577 impr, 2.4% CTR (was position 5.6 earlier in the period)
+  - file: `app\academy-pathway\how-to-find-a-football-agent-for-your-child\page.tsx`
+  - content: `content\academy-pathway\how-to-find-a-football-agent-for-your-child.mdx`
+  - current title: "How to Find a Football Agent for Your Child"
+  - current meta description: "FA rules block agents from representing players under 18 outside a first professional contract. When they genuinely become relevant, and warning signs to watch for."
+- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#veo-vs-trace-and-pixellot**
+  - aggregate (90d): position 7, 929 impr, 0% CTR vs 4% expected
+  - last 14d: position 7, 643 impr, 0% CTR (was position 6.9 earlier in the period)
+  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
+  - content: `content\football-gear\veo-camera-alternatives.mdx`
+  - current title: "Veo Camera Alternatives: Cost & Comparisons"
+  - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#how-to-join-crystal-palace-academy**
+  - aggregate (90d): position 6.8, 915 impr, 0.1% CTR vs 4% expected
+  - last 14d: position 6.9, 267 impr, 0% CTR (was position 6.8 earlier in the period)
   - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
   - current title: "Crystal Palace Development Centre"
   - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
-- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#can-you-use-veo-3-in-the-uk**
-  - aggregate (90d): position 6.8, 319 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.3, 202 impr, 0% CTR (was position 7.6 earlier in the period)
-  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
-  - content: `content\football-gear\veo-camera-alternatives.mdx`
-  - current title: "Veo Camera Alternatives: Cost & Comparisons"
-  - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#travel-and-time-commitments**
-  - aggregate (90d): position 5.9, 316 impr, 0% CTR vs 5% expected
-  - last 14d: position 5.9, 195 impr, 0% CTR (was position 5.9 earlier in the period)
-  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
-  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
-  - current title: "How Much Does Academy Football Cost?"
-  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
-- **https://www.footballparent.co.uk/coaching/best-football-formations-by-age-group**
-  - aggregate (90d): position 6.4, 315 impr, 0.6% CTR vs 5% expected
-  - last 14d: position 6.4, 315 impr, 0.6% CTR
-  - file: `app\coaching\best-football-formations-by-age-group\page.tsx`
-  - content: `content\coaching\best-football-formations-by-age-group.mdx`
-  - current title: "Best Football Formations by Age Group: 7-a-Side and 9-a-Side Explained"
-  - current meta description: "7v7 now starts at U10 and 9v9 at U12 under the FA's 2026/27 format changes, not the old U9/U11 split. Suggested formations and rules for both explained."
-- **https://www.footballparent.co.uk/academy-trials/how-football-clubs-recruit-young-players**
-  - aggregate (90d): position 9.1, 309 impr, 0.6% CTR vs 3% expected
-  - last 14d: position 8, 89 impr, 1.1% CTR (was position 9.6 earlier in the period)
-  - file: `app\academy-trials\how-football-clubs-recruit-young-players\page.tsx`
-  - content: `content\academy-trials\how-football-clubs-recruit-young-players.mdx`
-  - current title: "How Football Clubs Recruit Young Players"
-  - current meta description: "How do professional football clubs actually find and recruit young players? How scouting, development centres, referrals and trials fit together, and what parents should realistically expect."
-- **https://www.footballparent.co.uk/football-development/why-isnt-my-child-improving-at-football**
-  - aggregate (90d): position 6.5, 303 impr, 2% CTR vs 4% expected
-  - last 14d: position 6.2, 113 impr, 1.8% CTR (was position 6.7 earlier in the period)
-  - file: `app\football-development\why-isnt-my-child-improving-at-football\page.tsx`
-  - content: `content\football-development\why-isnt-my-child-improving-at-football.mdx`
-  - current title: "Why Isn't My Child Improving at Football?"
-  - current meta description: "If your child's football progress has stalled, you're not alone. Here's why football development plateaus happen, what's normal, and a plan for the next few months."
-- **https://www.footballparent.co.uk/football-development/how-much-training-is-too-much**
-  - aggregate (90d): position 5.6, 303 impr, 0.7% CTR vs 5% expected
-  - last 14d: position 5.3, 68 impr, 1.5% CTR (was position 5.7 earlier in the period)
-  - file: `app\football-development\how-much-training-is-too-much\page.tsx`
-  - content: `content\football-development\how-much-training-is-too-much.mdx`
-  - current title: "How Much Training Is Too Much For Young Footballers?"
-  - current meta description: "More sessions doesn't always mean more development. Age-by-age training load guidelines, from 1-2 sessions a week at U8-U10, and the real signs of burnout."
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#chelsea-ptc-pdc-and-ppc-explained**
-  - aggregate (90d): position 6.5, 295 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.5, 224 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
-  - current title: "Chelsea FC Development Centre: A Parent's Guide"
-  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#chelsea-development-centre-trials**
-  - aggregate (90d): position 6.6, 287 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.6, 219 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
-  - current title: "Chelsea FC Development Centre: A Parent's Guide"
-  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#chelseas-academy-reputation**
-  - aggregate (90d): position 6.4, 285 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.4, 218 impr, 0% CTR (was position 6.6 earlier in the period)
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
-  - current title: "Chelsea FC Development Centre: A Parent's Guide"
-  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#how-chelsea-structure-their-youth-pathway**
-  - aggregate (90d): position 6.5, 266 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.5, 204 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
-  - current title: "Chelsea FC Development Centre: A Parent's Guide"
-  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#how-players-typically-reach-chelseas-pathway**
-  - aggregate (90d): position 6.5, 262 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.5, 201 impr, 0% CTR (was position 6.4 earlier in the period)
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
-  - current title: "Chelsea FC Development Centre: A Parent's Guide"
-  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#realistic-recruitment-expectations**
-  - aggregate (90d): position 6.5, 257 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.6, 196 impr, 0% CTR (was position 6.4 earlier in the period)
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
-  - current title: "Chelsea FC Development Centre: A Parent's Guide"
-  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
-- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#what-parents-should-understand-before-getting-involved**
-  - aggregate (90d): position 6.5, 257 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.6, 196 impr, 0% CTR (was position 6.4 earlier in the period)
-  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
-  - current title: "Chelsea FC Development Centre: A Parent's Guide"
-  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
-- **https://www.footballparent.co.uk/football-development/football-burnout**
-  - aggregate (90d): position 5.7, 253 impr, 2% CTR vs 5% expected
-  - last 14d: position 5.4, 114 impr, 0.9% CTR (was position 5.9 earlier in the period)
-  - file: `app\football-development\football-burnout\page.tsx`
-  - content: `content\football-development\football-burnout.mdx`
-  - current title: "Football Burnout: Signs, Causes and What Parents Can Do"
-  - current meta description: "How to recognise football burnout in young players, how it differs from a normal bad patch, and the changes that help a child rediscover enjoyment."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#crystal-palace-academy-trials**
+  - aggregate (90d): position 6.8, 885 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.9, 265 impr, 0% CTR (was position 6.8 earlier in the period)
+  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
+  - current title: "Crystal Palace Development Centre"
+  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#girls-pathway**
+  - aggregate (90d): position 6.9, 868 impr, 0% CTR vs 4% expected
+  - last 14d: position 7, 253 impr, 0% CTR (was position 6.9 earlier in the period)
+  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
+  - current title: "Crystal Palace Development Centre"
+  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
+- **https://www.footballparent.co.uk/academy-pathway/pre-academy-football**
+  - aggregate (90d): position 3.8, 816 impr, 4.3% CTR vs 8% expected
+  - last 14d: position 3.7, 390 impr, 4.4% CTR (was position 3.9 earlier in the period)
+  - file: `app\academy-pathway\pre-academy-football\page.tsx`
+  - content: `content\academy-pathway\pre-academy-football.mdx`
+  - current title: "What Is Pre-Academy Football?"
+  - current meta description: "What is pre-academy football, what ages does it cover, and is it worth it? How pre-academies and trials relate to the wider academy pathway."
+- **https://www.footballparent.co.uk/football-development/is-private-football-coaching-worth-it**
+  - aggregate (90d): position 7.9, 782 impr, 1.2% CTR vs 3% expected
+  - last 14d: position 7.1, 233 impr, 0.9% CTR (was position 8.2 earlier in the period)
+  - file: `app\football-development\is-private-football-coaching-worth-it\page.tsx`
+  - content: `content\football-development\is-private-football-coaching-worth-it.mdx`
+  - current title: "Private Football Coaching: Is 1-to-1 Football Coaching Worth It?"
+  - current meta description: "Thinking about private football coaching or 1-to-1 football coaching? Learn when it helps, what it costs, how to choose a coach and whether it's worth it for young players."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#tier-3-talent-centre**
+  - aggregate (90d): position 6.7, 780 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.8, 223 impr, 0% CTR (was position 6.6 earlier in the period)
+  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
+  - current title: "Crystal Palace Development Centre"
+  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
+- **https://www.footballparent.co.uk/academy-pathway/football-development-centres-in-london**
+  - aggregate (90d): position 7.6, 779 impr, 0.8% CTR vs 3% expected
+  - last 14d: position 6.8, 241 impr, 0.8% CTR (was position 8 earlier in the period)
+  - file: `app\academy-pathway\football-development-centres-in-london\page.tsx`
+  - content: `content\academy-pathway\football-development-centres-in-london.mdx`
+  - current title: "Football Development Centres in London: A Parent's Guide"
+  - current meta description: "London has more youth football development pathways than anywhere else in England - the options for both boys and girls across the capital."
+- **https://www.footballparent.co.uk/coaching/what-qualifications-do-i-need-to-be-a-football-coach**
+  - aggregate (90d): position 10.5, 775 impr, 0.5% CTR vs 1% expected
+  - last 14d: position 8, 248 impr, 1.2% CTR (was position 11.7 earlier in the period)
+  - file: `app\coaching\what-qualifications-do-i-need-to-be-a-football-coach\page.tsx`
+  - content: `content\coaching\what-qualifications-do-i-need-to-be-a-football-coach.mdx`
+  - current title: "What Qualifications Do You Need to Be a Football Coach?"
+  - current meta description: "FA Level 1 (now Introduction to Coaching Football) and Level 2 (UEFA C) explained for grassroots parent coaches: what's involved, what it costs, worth it?"
 - **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#do-you-need-a-veo-subscription**
-  - aggregate (90d): position 6.8, 252 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.6, 187 impr, 0% CTR (was position 7.3 earlier in the period)
+  - aggregate (90d): position 7.3, 775 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.4, 585 impr, 0% CTR (was position 6.7 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/football-development/what-is-football-iq**
-  - aggregate (90d): position 7, 251 impr, 0.4% CTR vs 4% expected
-  - last 14d: position 5.8, 50 impr, 2% CTR (was position 7.3 earlier in the period)
-  - file: `app\football-development\what-is-football-iq\page.tsx`
-  - content: `content\football-development\what-is-football-iq.mdx`
-  - current title: "What Is Football IQ? Football Intelligence Explained"
-  - current meta description: "What football IQ actually means, why coaches value it so highly, and how scanning, decision making and match experience help children develop it."
-- **https://www.footballparent.co.uk/coaching/equal-playing-time-in-grassroots-football**
-  - aggregate (90d): position 6.1, 248 impr, 2.4% CTR vs 5% expected
-  - last 14d: position 6.1, 248 impr, 2.4% CTR
-  - file: `app\coaching\equal-playing-time-in-grassroots-football\page.tsx`
-  - content: `content\coaching\equal-playing-time-in-grassroots-football.mdx`
-  - current title: "Equal Playing Time in Grassroots Football: Getting Fair Rotation Right"
-  - current meta description: "A working formula for fair playing time, the real difference between equal minutes and equal position time, and what rolling substitutions actually allow."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#the-crystal-palace-academy**
+  - aggregate (90d): position 6.8, 758 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.9, 212 impr, 0% CTR (was position 6.8 earlier in the period)
+  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
+  - current title: "Crystal Palace Development Centre"
+  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
 - **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#arsenals-academy-reputation**
-  - aggregate (90d): position 7.5, 238 impr, 0.4% CTR vs 3% expected
-  - last 14d: position 7.6, 223 impr, 0.4% CTR (was position 6.5 earlier in the period)
+  - aggregate (90d): position 7.6, 755 impr, 0.1% CTR vs 3% expected
+  - last 14d: position 7.7, 596 impr, 0.2% CTR (was position 7.5 earlier in the period)
   - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
   - current title: "Arsenal FC Development Centre: A Parent's Guide"
   - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
-- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#are-football-academies-free**
-  - aggregate (90d): position 5.8, 229 impr, 0% CTR vs 5% expected
-  - last 14d: position 5.8, 228 impr, 0% CTR (was position 2 earlier in the period)
-  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
-  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
-  - current title: "How Much Does Academy Football Cost?"
-  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
-- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#how-much-is-a-veo-camera**
-  - aggregate (90d): position 7.2, 224 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.8, 145 impr, 0% CTR (was position 7.8 earlier in the period)
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#cost-and-accessibility**
+  - aggregate (90d): position 6.3, 746 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.6, 288 impr, 0% CTR (was position 6.7 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-are-emerging-talent-centres**
+  - aggregate (90d): position 6.2, 732 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.6, 284 impr, 0% CTR (was position 6.7 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#how-the-etc-pathway-works**
+  - aggregate (90d): position 6.2, 705 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.5, 269 impr, 0% CTR (was position 6.7 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/academy-pathway/tottenham-development-centres-explained**
+  - aggregate (90d): position 6.5, 691 impr, 2.9% CTR vs 5% expected
+  - last 14d: position 5.8, 201 impr, 3% CTR (was position 6.7 earlier in the period)
+  - file: `app\academy-pathway\tottenham-development-centres-explained\page.tsx`
+  - content: `content\academy-pathway\tottenham-development-centres-explained.mdx`
+  - current title: "Tottenham Hotspur Development Centres Explained: A Parent's Guide"
+  - current meta description: "Tottenham's Academy Development Centres (boys, 10 and under) sit apart from its 15-21 Education Centres. Real ages, and Spurs' own trial scam warning."
+- **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#how-arsenal-structure-their-youth-pathway**
+  - aggregate (90d): position 7.7, 683 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.7, 533 impr, 0% CTR (was position 7.6 earlier in the period)
+  - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
+  - current title: "Arsenal FC Development Centre: A Parent's Guide"
+  - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#etc-vs-pro-game-academy**
+  - aggregate (90d): position 6.2, 683 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.5, 264 impr, 0% CTR (was position 6.6 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#does-arsenal-have-a-development-centre**
+  - aggregate (90d): position 7.6, 682 impr, 0.1% CTR vs 3% expected
+  - last 14d: position 7.7, 543 impr, 0.2% CTR (was position 7.5 earlier in the period)
+  - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
+  - current title: "Arsenal FC Development Centre: A Parent's Guide"
+  - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
+- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#what-a-veo-camera-costs-over-a-season**
+  - aggregate (90d): position 7.3, 681 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.4, 550 impr, 0% CTR (was position 7 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#how-arsenal-structure-their-youth-pathway**
-  - aggregate (90d): position 7.7, 220 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.8, 205 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
-  - current title: "Arsenal FC Development Centre: A Parent's Guide"
-  - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
-- **https://www.footballparent.co.uk/football-development/relative-age-effect-football**
-  - aggregate (90d): position 6.6, 219 impr, 0.5% CTR vs 4% expected
-  - last 14d: position 6.2, 72 impr, 1.4% CTR (was position 6.8 earlier in the period)
-  - file: `app\football-development\relative-age-effect-football\page.tsx`
-  - content: `content\football-development\relative-age-effect-football.mdx`
-  - current title: "What Is the Relative Age Effect in Youth Football?"
-  - current meta description: "How birth month can influence academy selection, and what it means for your child's development in youth football."
-- **https://www.footballparent.co.uk/academy-trials/what-do-academy-coaches-look-for**
-  - aggregate (90d): position 6.5, 216 impr, 0.5% CTR vs 4% expected
-  - last 14d: position 4.9, 16 impr, 0% CTR (was position 6.7 earlier in the period)
-  - file: `app\academy-trials\what-do-academy-coaches-look-for\page.tsx`
-  - content: `content\academy-trials\what-do-academy-coaches-look-for.mdx`
-  - current title: "What Do Academy Coaches Look For?"
-  - current meta description: "It's rarely goals or pace: academy coaches watch what a player does before the ball arrives. The technical and behavioural traits that get noticed."
-- **https://www.footballparent.co.uk/football-development/build-confidence-young-footballers**
-  - aggregate (90d): position 9.2, 213 impr, 0.5% CTR vs 3% expected
-  - last 14d: position 8, 54 impr, 0% CTR (was position 9.6 earlier in the period)
-  - file: `app\football-development\build-confidence-young-footballers\page.tsx`
-  - content: `content\football-development\build-confidence-young-footballers.mdx`
-  - current title: "How To Build Confidence In Young Footballers"
-  - current meta description: "How parents can help young footballers build football confidence without adding pressure or unrealistic expectations."
-- **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#does-arsenal-have-a-development-centre**
-  - aggregate (90d): position 7.4, 209 impr, 0.5% CTR vs 4% expected
-  - last 14d: position 7.5, 197 impr, 0.5% CTR (was position 6.4 earlier in the period)
-  - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
-  - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
-  - current title: "Arsenal FC Development Centre: A Parent's Guide"
-  - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#how-recruitment-works**
+  - aggregate (90d): position 6.2, 674 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.5, 262 impr, 0% CTR (was position 6.6 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
 - **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#the-hale-end-academy**
-  - aggregate (90d): position 7.6, 200 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.7, 188 impr, 0% CTR (was position 6.4 earlier in the period)
+  - aggregate (90d): position 7.7, 669 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.7, 533 impr, 0% CTR (was position 7.6 earlier in the period)
   - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
   - current title: "Arsenal FC Development Centre: A Parent's Guide"
   - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
+- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#how-much-is-a-veo-camera**
+  - aggregate (90d): position 7.2, 650 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.2, 472 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
+  - content: `content\football-gear\veo-camera-alternatives.mdx`
+  - current title: "Veo Camera Alternatives: Cost & Comparisons"
+  - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
+- **https://www.footballparent.co.uk/parent-guides/how-to-become-a-football-coach**
+  - aggregate (90d): position 9.7, 648 impr, 0.6% CTR vs 2% expected
+  - last 14d: position 7.9, 214 impr, 0.5% CTR (was position 10.6 earlier in the period)
+  - file: `app\parent-guides\how-to-become-a-football-coach\page.tsx`
+  - content: `content\parent-guides\how-to-become-a-football-coach.mdx`
+  - current title: "How to Become a Grassroots Football Coach"
+  - current meta description: "How to become a grassroots football coach: joining as a volunteer, DBS checks, safeguarding, first aid, time commitment and coaching your own child."
+- **https://www.footballparent.co.uk/football-development/late-developers-in-football**
+  - aggregate (90d): position 6, 614 impr, 2.4% CTR vs 5% expected
+  - last 14d: position 4.8, 114 impr, 3.5% CTR (was position 6.2 earlier in the period)
+  - file: `app\football-development\late-developers-in-football\page.tsx`
+  - content: `content\football-development\late-developers-in-football.mdx`
+  - current title: "Why Some Kids Develop Later In Football"
+  - current meta description: "Understanding late physical and technical development in football and why early success does not guarantee long-term outcomes."
 - **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#how-players-are-identified**
-  - aggregate (90d): position 7.6, 191 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.7, 179 impr, 0% CTR (was position 6.4 earlier in the period)
+  - aggregate (90d): position 7.7, 609 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.7, 479 impr, 0% CTR (was position 7.6 earlier in the period)
   - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
   - current title: "Arsenal FC Development Centre: A Parent's Guide"
   - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
 - **https://www.footballparent.co.uk/academy-pathway/arsenal-development-centre-guide#realistic-expectations-for-families**
-  - aggregate (90d): position 7.6, 191 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.7, 179 impr, 0% CTR (was position 6.4 earlier in the period)
+  - aggregate (90d): position 7.7, 608 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.7, 478 impr, 0% CTR (was position 7.6 earlier in the period)
   - file: `app\academy-pathway\arsenal-development-centre-guide\page.tsx`
   - content: `content\academy-pathway\arsenal-development-centre-guide.mdx`
   - current title: "Arsenal FC Development Centre: A Parent's Guide"
   - current meta description: "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted."
-- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#how-players-typically-reach-west-hams-pathway**
-  - aggregate (90d): position 6.9, 191 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.9, 106 impr, 0% CTR (was position 6.8 earlier in the period)
-  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
-  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
-  - current title: "West Ham United Development Centre: A Parent's Guide"
-  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
-- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#how-west-ham-structure-their-youth-pathway**
-  - aggregate (90d): position 7, 183 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.1, 97 impr, 0% CTR (was position 6.8 earlier in the period)
-  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
-  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
-  - current title: "West Ham United Development Centre: A Parent's Guide"
-  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
-- **https://www.footballparent.co.uk/academy-trials/how-football-scouts-identify-players**
-  - aggregate (90d): position 7.9, 176 impr, 0.6% CTR vs 3% expected
-  - last 14d: position 6.5, 49 impr, 0% CTR (was position 8.4 earlier in the period)
-  - file: `app\academy-trials\how-football-scouts-identify-players\page.tsx`
-  - content: `content\academy-trials\how-football-scouts-identify-players.mdx`
-  - current title: "How Football Scouts Identify Players"
-  - current meta description: "Scouts spend more time watching what happens away from the ball than goals or assists: scanning, reactions to mistakes, work rate. What gets noticed, age by age."
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#what-is-a-football-development-centre**
-  - aggregate (90d): position 6.2, 174 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.9, 108 impr, 0% CTR (was position 4.9 earlier in the period)
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-  - current title: "UK Football Development Centres Explained"
-  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#do-development-centres-lead-to-academy-contracts**
-  - aggregate (90d): position 6.2, 173 impr, 0% CTR vs 5% expected
-  - last 14d: position 7, 107 impr, 0% CTR (was position 4.9 earlier in the period)
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-  - current title: "UK Football Development Centres Explained"
-  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
-- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#what-a-veo-camera-costs-over-a-season**
-  - aggregate (90d): position 7, 173 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.8, 121 impr, 0% CTR (was position 7.4 earlier in the period)
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#chelsea-ptc-pdc-and-ppc-explained**
+  - aggregate (90d): position 6.2, 538 impr, 0% CTR vs 5% expected
+  - last 14d: position 6, 279 impr, 0% CTR (was position 6.5 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#can-you-use-veo-3-in-the-uk**
+  - aggregate (90d): position 6.6, 537 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.3, 261 impr, 0% CTR (was position 6.9 earlier in the period)
   - file: `app\football-gear\veo-camera-alternatives\page.tsx`
   - content: `content\football-gear\veo-camera-alternatives.mdx`
   - current title: "Veo Camera Alternatives: Cost & Comparisons"
   - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#how-development-centres-fit-into-academy-pathways**
-  - aggregate (90d): position 6.2, 172 impr, 0% CTR vs 5% expected
-  - last 14d: position 7, 106 impr, 0% CTR (was position 4.9 earlier in the period)
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#chelsea-development-centre-trials**
+  - aggregate (90d): position 6.2, 530 impr, 0% CTR vs 5% expected
+  - last 14d: position 6, 280 impr, 0% CTR (was position 6.5 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#goalkeeper-pathway**
+  - aggregate (90d): position 6.7, 530 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.7, 126 impr, 0% CTR (was position 6.7 earlier in the period)
+  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
+  - current title: "Crystal Palace Development Centre"
+  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#chelseas-academy-reputation**
+  - aggregate (90d): position 6.2, 529 impr, 0% CTR vs 5% expected
+  - last 14d: position 6, 282 impr, 0% CTR (was position 6.4 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#tier-1-player-development-centres**
+  - aggregate (90d): position 6, 523 impr, 0.2% CTR vs 5% expected
+  - last 14d: position 6.5, 159 impr, 0% CTR (was position 5.9 earlier in the period)
+  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
+  - current title: "Crystal Palace Development Centre"
+  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
+- **https://www.footballparent.co.uk/academy-trials/how-football-scouts-identify-players**
+  - aggregate (90d): position 6.5, 521 impr, 1.2% CTR vs 5% expected
+  - last 14d: position 5.9, 358 impr, 1.4% CTR (was position 7.7 earlier in the period)
+  - file: `app\academy-trials\how-football-scouts-identify-players\page.tsx`
+  - content: `content\academy-trials\how-football-scouts-identify-players.mdx`
+  - current title: "How Football Scouts Identify Players"
+  - current meta description: "Scouts spend more time watching what happens away from the ball than goals or assists: scanning, reactions to mistakes, work rate. What gets noticed, age by age."
+- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#equipment-costs**
+  - aggregate (90d): position 5.7, 520 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.7, 190 impr, 0% CTR (was position 5.8 earlier in the period)
+  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
+  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
+  - current title: "How Much Does Academy Football Cost?"
+  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#how-chelsea-structure-their-youth-pathway**
+  - aggregate (90d): position 6.2, 500 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.9, 271 impr, 0% CTR (was position 6.5 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#how-players-typically-reach-chelseas-pathway**
+  - aggregate (90d): position 6.2, 493 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.9, 268 impr, 0% CTR (was position 6.5 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-etc-selection-really-means**
+  - aggregate (90d): position 5.5, 490 impr, 0% CTR vs 5% expected
+  - last 14d: position 4.8, 189 impr, 0% CTR (was position 5.9 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#development-centre-costs**
+  - aggregate (90d): position 5.8, 486 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.7, 185 impr, 0% CTR (was position 5.9 earlier in the period)
+  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
+  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
+  - current title: "How Much Does Academy Football Cost?"
+  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#realistic-recruitment-expectations**
+  - aggregate (90d): position 6.2, 480 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.9, 258 impr, 0% CTR (was position 6.5 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/academy-pathway/chelsea-fc-development-centre-guide#what-parents-should-understand-before-getting-involved**
+  - aggregate (90d): position 6.2, 480 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.9, 258 impr, 0% CTR (was position 6.5 earlier in the period)
+  - file: `app\academy-pathway\chelsea-fc-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\chelsea-fc-development-centre-guide.mdx`
+  - current title: "Chelsea FC Development Centre: A Parent's Guide"
+  - current meta description: "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining."
+- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#the-costs-many-parents-dont-expect**
+  - aggregate (90d): position 5.8, 475 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.7, 167 impr, 0% CTR (was position 5.8 earlier in the period)
+  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
+  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
+  - current title: "How Much Does Academy Football Cost?"
+  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#where-etcs-fit-in-the-full-pathway**
+  - aggregate (90d): position 5.6, 470 impr, 0% CTR vs 5% expected
+  - last 14d: position 4.8, 166 impr, 0% CTR (was position 6.1 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/football-development/improve-football-decision-making**
+  - aggregate (90d): position 7.4, 465 impr, 1.7% CTR vs 4% expected
+  - last 14d: position 7.6, 86 impr, 1.2% CTR (was position 7.4 earlier in the period)
+  - file: `app\football-development\improve-football-decision-making\page.tsx`
+  - content: `content\football-development\improve-football-decision-making.mdx`
+  - current title: "How To Improve Football Decision Making In Young Players"
+  - current meta description: "Decision making is one of the most important skills in youth football - and one of the hardest to coach. Here's how parents and coaches can help young players think faster and clearer on the pitch."
+- **https://www.footballparent.co.uk/academy-pathway/crystal-palace-development-centre-guide#tier-2-invite-only-centres**
+  - aggregate (90d): position 7.5, 463 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.4, 147 impr, 0% CTR (was position 7.5 earlier in the period)
+  - file: `app\academy-pathway\crystal-palace-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\crystal-palace-development-centre-guide.mdx`
+  - current title: "Crystal Palace Development Centre"
+  - current meta description: "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families."
+- **https://www.footballparent.co.uk/football-development/why-isnt-my-child-improving-at-football**
+  - aggregate (90d): position 6.2, 457 impr, 1.8% CTR vs 5% expected
+  - last 14d: position 5.7, 167 impr, 1.2% CTR (was position 6.5 earlier in the period)
+  - file: `app\football-development\why-isnt-my-child-improving-at-football\page.tsx`
+  - content: `content\football-development\why-isnt-my-child-improving-at-football.mdx`
+  - current title: "Why Isn't My Child Improving at Football?"
+  - current meta description: "If your child's football progress has stalled, you're not alone. Here's why football development plateaus happen, what's normal, and a plan for the next few months."
+- **https://www.footballparent.co.uk/girls-football/what-age-do-girls-football-academies-recruit**
+  - aggregate (90d): position 5.1, 453 impr, 3.3% CTR vs 6% expected
+  - last 14d: position 4.6, 47 impr, 4.3% CTR (was position 5.1 earlier in the period)
+  - file: `app\girls-football\what-age-do-girls-football-academies-recruit\page.tsx`
+  - content: `content\girls-football\what-age-do-girls-football-academies-recruit.mdx`
+  - current title: "What Age Do Girls Football Academies Recruit?"
+  - current meta description: "Understanding the recruitment ages and pathway stages within girls academy football in the UK."
+- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#travel-and-time-commitments**
+  - aggregate (90d): position 5.8, 441 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.8, 161 impr, 0% CTR (was position 5.9 earlier in the period)
+  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
+  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
+  - current title: "How Much Does Academy Football Cost?"
+  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
+- **https://www.footballparent.co.uk/coaching/best-football-formations-by-age-group**
+  - aggregate (90d): position 6.5, 387 impr, 1% CTR vs 5% expected
+  - last 14d: position 6.5, 119 impr, 1.7% CTR (was position 6.5 earlier in the period)
+  - file: `app\coaching\best-football-formations-by-age-group\page.tsx`
+  - content: `content\coaching\best-football-formations-by-age-group.mdx`
+  - current title: "Best Football Formations by Age Group: 7-a-Side and 9-a-Side Explained"
+  - current meta description: "7v7 now starts at U10 and 9v9 at U12 under the FA's 2026/27 format changes, not the old U9/U11 split. Suggested formations and rules for both explained."
+- **https://www.footballparent.co.uk/football-development/football-burnout**
+  - aggregate (90d): position 5.4, 382 impr, 2.9% CTR vs 6% expected
+  - last 14d: position 4.8, 143 impr, 4.9% CTR (was position 5.7 earlier in the period)
+  - file: `app\football-development\football-burnout\page.tsx`
+  - content: `content\football-development\football-burnout.mdx`
+  - current title: "Football Burnout: Signs, Causes and What Parents Can Do"
+  - current meta description: "How to recognise football burnout in young players, how it differs from a normal bad patch, and the changes that help a child rediscover enjoyment."
+- **https://www.footballparent.co.uk/academy-trials/how-football-clubs-recruit-young-players**
+  - aggregate (90d): position 8.7, 382 impr, 0.8% CTR vs 3% expected
+  - last 14d: position 7.5, 98 impr, 1% CTR (was position 9.2 earlier in the period)
+  - file: `app\academy-trials\how-football-clubs-recruit-young-players\page.tsx`
+  - content: `content\academy-trials\how-football-clubs-recruit-young-players.mdx`
+  - current title: "How Football Clubs Recruit Young Players"
+  - current meta description: "How do professional football clubs actually find and recruit young players? How scouting, development centres, referrals and trials fit together, and what parents should realistically expect."
+- **https://www.footballparent.co.uk/academy-pathway/how-much-does-academy-football-cost#are-football-academies-free**
+  - aggregate (90d): position 5.7, 378 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.7, 189 impr, 0% CTR (was position 5.8 earlier in the period)
+  - file: `app\academy-pathway\how-much-does-academy-football-cost\page.tsx`
+  - content: `content\academy-pathway\how-much-does-academy-football-cost.mdx`
+  - current title: "How Much Does Academy Football Cost?"
+  - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
+- **https://www.footballparent.co.uk/football-development/signs-your-child-is-ready-for-academy-football**
+  - aggregate (90d): position 6.6, 362 impr, 1.9% CTR vs 4% expected
+  - last 14d: position 6, 226 impr, 0.9% CTR (was position 7.8 earlier in the period)
+  - file: `app\football-development\signs-your-child-is-ready-for-academy-football\page.tsx`
+  - content: `content\football-development\signs-your-child-is-ready-for-academy-football.mdx`
+  - current title: "Is My Child Ready for Academy Football?"
+  - current meta description: "The qualities scouts actually look for, the myths parents commonly believe, and why dominating at grassroots level tells you very little."
+- **https://www.footballparent.co.uk/football-development/how-much-training-is-too-much**
+  - aggregate (90d): position 5.5, 354 impr, 1.7% CTR vs 6% expected
+  - last 14d: position 4.9, 63 impr, 6.3% CTR (was position 5.6 earlier in the period)
+  - file: `app\football-development\how-much-training-is-too-much\page.tsx`
+  - content: `content\football-development\how-much-training-is-too-much.mdx`
+  - current title: "How Much Training Is Too Much For Young Footballers?"
+  - current meta description: "More sessions doesn't always mean more development. Age-by-age training load guidelines, from 1-2 sessions a week at U8-U10, and the real signs of burnout."
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#types-of-football-scholarships-available**
+  - aggregate (90d): position 8.6, 326 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.4, 244 impr, 0% CTR (was position 9.2 earlier in the period)
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+  - current title: "Football Scholarships UK: What Parents Need to Know"
+  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#cost-and-features-at-a-glance**
+  - aggregate (90d): position 7.2, 308 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.3, 190 impr, 0% CTR (was position 6.8 earlier in the period)
+  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
+  - content: `content\football-gear\veo-camera-alternatives.mdx`
+  - current title: "Veo Camera Alternatives: Cost & Comparisons"
+  - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
+- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#how-players-typically-reach-west-hams-pathway**
+  - aggregate (90d): position 6.8, 297 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.5, 136 impr, 0% CTR (was position 7 earlier in the period)
+  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
+  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
+  - current title: "West Ham United Development Centre: A Parent's Guide"
+  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
+- **https://www.footballparent.co.uk/football-development/build-confidence-young-footballers**
+  - aggregate (90d): position 9.2, 296 impr, 1% CTR vs 3% expected
+  - last 14d: position 9, 96 impr, 2.1% CTR (was position 9.3 earlier in the period)
+  - file: `app\football-development\build-confidence-young-footballers\page.tsx`
+  - content: `content\football-development\build-confidence-young-footballers.mdx`
+  - current title: "How To Build Confidence In Young Footballers"
+  - current meta description: "How parents can help young footballers build football confidence without adding pressure or unrealistic expectations."
+- **https://www.footballparent.co.uk/football-development/what-is-football-iq**
+  - aggregate (90d): position 6.7, 296 impr, 1% CTR vs 4% expected
+  - last 14d: position 5.3, 54 impr, 5.6% CTR (was position 7 earlier in the period)
+  - file: `app\football-development\what-is-football-iq\page.tsx`
+  - content: `content\football-development\what-is-football-iq.mdx`
+  - current title: "What Is Football IQ? Football Intelligence Explained"
+  - current meta description: "What football IQ actually means, why coaches value it so highly, and how scanning, decision making and match experience help children develop it."
+- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#how-west-ham-structure-their-youth-pathway**
+  - aggregate (90d): position 6.9, 285 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.6, 128 impr, 0% CTR (was position 7.1 earlier in the period)
+  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
+  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
+  - current title: "West Ham United Development Centre: A Parent's Guide"
+  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#what-is-a-football-development-centre**
+  - aggregate (90d): position 6.4, 278 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.4, 130 impr, 0% CTR (was position 6.4 earlier in the period)
   - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
   - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
   - current title: "UK Football Development Centres Explained"
   - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
 - **https://www.footballparent.co.uk/academy-trials/how-to-get-scouted-for-football**
-  - aggregate (90d): position 11.3, 169 impr, 0.6% CTR vs 1% expected
-  - last 14d: position 6.6, 27 impr, 0% CTR (was position 12.2 earlier in the period)
+  - aggregate (90d): position 10.2, 277 impr, 0.4% CTR vs 2% expected
+  - last 14d: position 8.4, 111 impr, 0% CTR (was position 11.4 earlier in the period)
   - file: `app\academy-trials\how-to-get-scouted-for-football\page.tsx`
   - content: `content\academy-trials\how-to-get-scouted-for-football.mdx`
   - current title: "How to Get Scouted for Football"
   - current meta description: "Paid showcase events rarely help: scouts assess players through live football, not highlight reels. What genuinely improves your child's chances of being noticed."
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#what-is-eppp**
-  - aggregate (90d): position 8.4, 165 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.3, 99 impr, 0% CTR (was position 8.6 earlier in the period)
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-  - current title: "How Academy Football Works in the UK"
-  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#what-is-a-football-academy**
-  - aggregate (90d): position 8.5, 162 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.3, 98 impr, 0% CTR (was position 8.7 earlier in the period)
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-  - current title: "How Academy Football Works in the UK"
-  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#academy-categories-explained**
-  - aggregate (90d): position 8.4, 155 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.3, 93 impr, 0% CTR (was position 8.5 earlier in the period)
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-  - current title: "How Academy Football Works in the UK"
-  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#why-etcs-replaced-rtcs**
-  - aggregate (90d): position 8.1, 152 impr, 0% CTR vs 3% expected
-  - last 14d: position 7.4, 74 impr, 0% CTR (was position 8.8 earlier in the period)
-  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
-  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
-  - current title: "Emerging Talent Centres (ETCs) Explained"
-  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#how-does-academy-football-work**
-  - aggregate (90d): position 8.6, 150 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.4, 89 impr, 0% CTR (was position 8.8 earlier in the period)
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-  - current title: "How Academy Football Works in the UK"
-  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
-- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#the-player-pathway-programme**
-  - aggregate (90d): position 6.9, 146 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.9, 73 impr, 0% CTR (was position 7 earlier in the period)
-  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
-  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
-  - current title: "West Ham United Development Centre: A Parent's Guide"
-  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
-- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#professional-development-phase-under-17-to-under-23**
-  - aggregate (90d): position 8.5, 144 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.4, 83 impr, 0% CTR (was position 8.6 earlier in the period)
-  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
-  - content: `content\academy-pathway\how-academy-football-works.mdx`
-  - current title: "How Academy Football Works in the UK"
-  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#how-development-centres-are-structured**
-  - aggregate (90d): position 5.8, 144 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.7, 86 impr, 0% CTR (was position 4.5 earlier in the period)
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#do-development-centres-lead-to-academy-contracts**
+  - aggregate (90d): position 6.4, 276 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.4, 129 impr, 0% CTR (was position 6.4 earlier in the period)
   - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
   - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
   - current title: "UK Football Development Centres Explained"
   - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
+- **https://www.footballparent.co.uk/football-development/relative-age-effect-football**
+  - aggregate (90d): position 6.5, 272 impr, 1.1% CTR vs 4% expected
+  - last 14d: position 6.5, 78 impr, 2.6% CTR (was position 6.5 earlier in the period)
+  - file: `app\football-development\relative-age-effect-football\page.tsx`
+  - content: `content\football-development\relative-age-effect-football.mdx`
+  - current title: "What Is the Relative Age Effect in Youth Football?"
+  - current meta description: "How birth month can influence academy selection, and what it means for your child's development in youth football."
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#how-to-apply-for-football-scholarships**
+  - aggregate (90d): position 8.4, 268 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.3, 212 impr, 0% CTR (was position 8.8 earlier in the period)
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+  - current title: "Football Scholarships UK: What Parents Need to Know"
+  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#what-is-eppp**
+  - aggregate (90d): position 8.2, 263 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.9, 111 impr, 0% CTR (was position 8.4 earlier in the period)
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - current title: "How Academy Football Works in the UK"
+  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#how-development-centres-fit-into-academy-pathways**
+  - aggregate (90d): position 6.3, 263 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.2, 115 impr, 0% CTR (was position 6.4 earlier in the period)
+  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
+  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
+  - current title: "UK Football Development Centres Explained"
+  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
+- **https://www.footballparent.co.uk/football-gear/best-football-gloves-for-winter-training**
+  - aggregate (90d): position 9.8, 260 impr, 1.2% CTR vs 2% expected
+  - last 14d: position 5.7, 56 impr, 0% CTR (was position 10.9 earlier in the period)
+  - file: `app\football-gear\best-football-gloves-for-winter-training\page.tsx`
+  - content: `content\football-gear\best-football-gloves-for-winter-training.mdx`
+  - current title: "Best Football Gloves For Winter Training"
+  - current meta description: "Choosing football gloves for winter training: what to look for, what to avoid, and which types work best for younger players in cold and wet conditions."
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#what-is-a-football-academy**
+  - aggregate (90d): position 8.2, 258 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.9, 109 impr, 0% CTR (was position 8.4 earlier in the period)
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - current title: "How Academy Football Works in the UK"
+  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer#the-main-pathways-into-professional-football**
+  - aggregate (90d): position 8.5, 257 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.5, 236 impr, 0% CTR (was position 8 earlier in the period)
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+  - current title: "How to Become a Professional Footballer: What Parents Should Know"
+  - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer#how-many-academy-footballers-become-professional**
+  - aggregate (90d): position 8.5, 255 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.5, 234 impr, 0% CTR (was position 8 earlier in the period)
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+  - current title: "How to Become a Professional Footballer: What Parents Should Know"
+  - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#what-age-can-players-access-football-scholarships**
+  - aggregate (90d): position 8.5, 253 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.3, 195 impr, 0% CTR (was position 9.3 earlier in the period)
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+  - current title: "Football Scholarships UK: What Parents Need to Know"
+  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#academy-categories-explained**
+  - aggregate (90d): position 8.2, 242 impr, 0% CTR vs 3% expected
+  - last 14d: position 8, 100 impr, 0% CTR (was position 8.3 earlier in the period)
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - current title: "How Academy Football Works in the UK"
+  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#how-does-academy-football-work**
+  - aggregate (90d): position 8.3, 242 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.9, 103 impr, 0% CTR (was position 8.5 earlier in the period)
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - current title: "How Academy Football Works in the UK"
+  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#what-is-a-football-scholarship**
+  - aggregate (90d): position 8.4, 240 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 192 impr, 0% CTR (was position 8.9 earlier in the period)
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+  - current title: "Football Scholarships UK: What Parents Need to Know"
+  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#how-development-centres-are-structured**
+  - aggregate (90d): position 6.2, 239 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.4, 118 impr, 0% CTR (was position 6 earlier in the period)
+  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
+  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
+  - current title: "UK Football Development Centres Explained"
+  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
+- **https://www.footballparent.co.uk/academy-trials/what-do-academy-coaches-look-for**
+  - aggregate (90d): position 6.3, 236 impr, 0.8% CTR vs 5% expected
+  - last 14d: position 4.4, 24 impr, 4.2% CTR (was position 6.6 earlier in the period)
+  - file: `app\academy-trials\what-do-academy-coaches-look-for\page.tsx`
+  - content: `content\academy-trials\what-do-academy-coaches-look-for.mdx`
+  - current title: "What Do Academy Coaches Look For?"
+  - current meta description: "It's rarely goals or pace: academy coaches watch what a player does before the ball arrives. The technical and behavioural traits that get noticed."
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#do-football-scholarships-lead-to-professional-football**
+  - aggregate (90d): position 8.3, 232 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 188 impr, 0% CTR (was position 8.7 earlier in the period)
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+  - current title: "Football Scholarships UK: What Parents Need to Know"
+  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-is-an-emerging-talent-centre**
+  - aggregate (90d): position 7.1, 232 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.6, 117 impr, 0% CTR (was position 7.5 earlier in the period)
+  - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
+  - content: `content\girls-football\emerging-talent-centres-explained.mdx`
+  - current title: "Emerging Talent Centres (ETCs) Explained"
+  - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
+- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#the-player-pathway-programme**
+  - aggregate (90d): position 6.6, 231 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.2, 104 impr, 0% CTR (was position 7 earlier in the period)
+  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
+  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
+  - current title: "West Ham United Development Centre: A Parent's Guide"
+  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#football-scholarships-vs-football-academies**
+  - aggregate (90d): position 8.3, 229 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 181 impr, 0% CTR (was position 8.9 earlier in the period)
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+  - current title: "Football Scholarships UK: What Parents Need to Know"
+  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#west-ham-academy-reputation**
+  - aggregate (90d): position 6.9, 227 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.5, 102 impr, 0% CTR (was position 7.1 earlier in the period)
+  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
+  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
+  - current title: "West Ham United Development Centre: A Parent's Guide"
+  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer#what-actually-matters-environment-and-mentality**
+  - aggregate (90d): position 8.7, 227 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.8, 206 impr, 0% CTR (was position 8 earlier in the period)
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+  - current title: "How to Become a Professional Footballer: What Parents Should Know"
+  - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#professional-development-phase-under-17-to-under-23**
+  - aggregate (90d): position 8.2, 225 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.9, 92 impr, 0% CTR (was position 8.4 earlier in the period)
+  - file: `app\academy-pathway\how-academy-football-works\page.tsx`
+  - content: `content\academy-pathway\how-academy-football-works.mdx`
+  - current title: "How Academy Football Works in the UK"
+  - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#what-ages-do-development-centres-recruit**
+  - aggregate (90d): position 6.1, 225 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.2, 104 impr, 0% CTR (was position 6 earlier in the period)
+  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
+  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
+  - current title: "UK Football Development Centres Explained"
+  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
+- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#education-and-qualifications**
+  - aggregate (90d): position 8.3, 224 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 181 impr, 0% CTR (was position 8.8 earlier in the period)
+  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
+  - content: `content\academy-pathway\football-scholarships-uk.mdx`
+  - current title: "Football Scholarships UK: What Parents Need to Know"
+  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
 - **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#foundation-phase-under-9-to-under-11**
-  - aggregate (90d): position 8.5, 143 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.4, 83 impr, 0% CTR (was position 8.6 earlier in the period)
+  - aggregate (90d): position 8.2, 223 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.9, 91 impr, 0% CTR (was position 8.4 earlier in the period)
   - file: `app\academy-pathway\how-academy-football-works\page.tsx`
   - content: `content\academy-pathway\how-academy-football-works.mdx`
   - current title: "How Academy Football Works in the UK"
   - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
 - **https://www.footballparent.co.uk/academy-pathway/how-academy-football-works#youth-development-phase-under-12-to-under-16**
-  - aggregate (90d): position 8.5, 143 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.4, 83 impr, 0% CTR (was position 8.6 earlier in the period)
+  - aggregate (90d): position 8.2, 223 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.9, 91 impr, 0% CTR (was position 8.4 earlier in the period)
   - file: `app\academy-pathway\how-academy-football-works\page.tsx`
   - content: `content\academy-pathway\how-academy-football-works.mdx`
   - current title: "How Academy Football Works in the UK"
   - current meta description: "Academy football runs through three EPPP phases, Foundation, Youth Development and Professional Development, each with different stakes and training hours."
-- **https://www.footballparent.co.uk/football-gear/veo-camera-alternatives#cost-and-features-at-a-glance**
-  - aggregate (90d): position 6.9, 143 impr, 0% CTR vs 4% expected
-  - last 14d: position 6.8, 89 impr, 0% CTR (was position 7.1 earlier in the period)
-  - file: `app\football-gear\veo-camera-alternatives\page.tsx`
-  - content: `content\football-gear\veo-camera-alternatives.mdx`
-  - current title: "Veo Camera Alternatives: Cost & Comparisons"
-  - current meta description: "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football."
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#what-ages-do-development-centres-recruit**
-  - aggregate (90d): position 5.8, 142 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.7, 84 impr, 0% CTR (was position 4.5 earlier in the period)
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-  - current title: "UK Football Development Centres Explained"
-  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
-- **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#west-ham-academy-reputation**
-  - aggregate (90d): position 7.1, 142 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.2, 68 impr, 0% CTR (was position 7 earlier in the period)
-  - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
-  - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
-  - current title: "West Ham United Development Centre: A Parent's Guide"
-  - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
 - **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#why-do-professional-clubs-run-development-centres**
-  - aggregate (90d): position 5.8, 139 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.7, 84 impr, 0% CTR (was position 4.5 earlier in the period)
+  - aggregate (90d): position 6.1, 221 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.3, 103 impr, 0% CTR (was position 6 earlier in the period)
   - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
   - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
   - current title: "UK Football Development Centres Explained"
   - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
 - **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#realistic-recruitment-expectations**
-  - aggregate (90d): position 7.1, 139 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.2, 66 impr, 0% CTR (was position 7 earlier in the period)
+  - aggregate (90d): position 6.8, 220 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.4, 97 impr, 0% CTR (was position 7.1 earlier in the period)
   - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
   - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
   - current title: "West Ham United Development Centre: A Parent's Guide"
   - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
 - **https://www.footballparent.co.uk/academy-pathway/west-ham-player-pathway-guide#what-parents-should-understand-before-getting-involved**
-  - aggregate (90d): position 7.1, 139 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.2, 66 impr, 0% CTR (was position 7 earlier in the period)
+  - aggregate (90d): position 6.8, 220 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.4, 97 impr, 0% CTR (was position 7.1 earlier in the period)
   - file: `app\academy-pathway\west-ham-player-pathway-guide\page.tsx`
   - content: `content\academy-pathway\west-ham-player-pathway-guide.mdx`
   - current title: "West Ham United Development Centre: A Parent's Guide"
   - current meta description: "West Ham's academy and the Foundation's Player Pathway aren't the same thing. How each route actually works, and which one most east London families join."
-- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#what-is-an-emerging-talent-centre**
-  - aggregate (90d): position 7.4, 134 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.1, 88 impr, 0% CTR (was position 8 earlier in the period)
+- **https://www.footballparent.co.uk/girls-football/emerging-talent-centres-explained#why-etcs-replaced-rtcs**
+  - aggregate (90d): position 7.8, 219 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.1, 85 impr, 0% CTR (was position 8.2 earlier in the period)
   - file: `app\girls-football\emerging-talent-centres-explained\page.tsx`
   - content: `content\girls-football\emerging-talent-centres-explained.mdx`
   - current title: "Emerging Talent Centres (ETCs) Explained"
   - current meta description: "What are Emerging Talent Centres in girls' football? How ETCs work, how recruitment happens, where they fit in the current FA girls' pathway, and what replaced RTCs."
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#types-of-football-scholarships-available**
-  - aggregate (90d): position 8.8, 120 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.8, 119 impr, 0% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-  - current title: "Football Scholarships UK: What Parents Need to Know"
-  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
-- **https://www.footballparent.co.uk/girls-football/girls-rtcs-explained**
-  - aggregate (90d): position 5.5, 114 impr, 1.8% CTR vs 6% expected
-  - last 14d: position 3, 32 impr, 3.1% CTR (was position 6.4 earlier in the period)
-  - file: `app\girls-football\girls-rtcs-explained\page.tsx`
-  - content: `content\girls-football\girls-rtcs-explained.mdx`
-  - current title: "Girls RTCs Explained: What They Were and What Replaced Them"
-  - current meta description: "RTCs in girls football no longer exist. They were replaced by Emerging Talent Centres and Professional Game Academies. What the pathway looks like now."
+- **https://www.footballparent.co.uk/football-gear**
+  - aggregate (90d): position 24.4, 188 impr, 0.5% CTR vs 1% expected
+  - last 14d: position 13.9, 46 impr, 0% CTR (was position 27.8 earlier in the period)
+  - file: `app\football-gear\page.tsx`
+  - current title: "Football Gear | Football Parent"
+  - current meta description: "Boots, shin pads, footballs and training kit for young players: what actually matters for sizing, fit and durability, and what"
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league#is-the-jpl-connected-to-the-premier-league**
+  - aggregate (90d): position 8.3, 180 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 142 impr, 0% CTR (was position 8.6 earlier in the period)
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+  - current title: "What Is the Junior Premier League (JPL)?"
+  - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league#standard-of-football**
+  - aggregate (90d): position 8.3, 177 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 140 impr, 0% CTR (was position 8.6 earlier in the period)
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+  - current title: "What Is the Junior Premier League (JPL)?"
+  - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer#the-reality-of-the-numbers**
+  - aggregate (90d): position 8.5, 171 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.6, 156 impr, 0% CTR (was position 7.7 earlier in the period)
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+  - current title: "How to Become a Professional Footballer: What Parents Should Know"
+  - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league#what-is-the-junior-premier-league**
+  - aggregate (90d): position 8.2, 169 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.1, 135 impr, 0% CTR (was position 8.6 earlier in the period)
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+  - current title: "What Is the Junior Premier League (JPL)?"
+  - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer#pathways-at-a-glance**
+  - aggregate (90d): position 8.5, 168 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.5, 153 impr, 0% CTR (was position 7.7 earlier in the period)
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+  - current title: "How to Become a Professional Footballer: What Parents Should Know"
+  - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league#who-runs-the-jpl**
+  - aggregate (90d): position 8.3, 168 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 135 impr, 0% CTR (was position 8.7 earlier in the period)
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+  - current title: "What Is the Junior Premier League (JPL)?"
+  - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer#a-note-on-pressure**
+  - aggregate (90d): position 8.5, 167 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.5, 152 impr, 0% CTR (was position 7.7 earlier in the period)
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+  - current title: "How to Become a Professional Footballer: What Parents Should Know"
+  - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/football-development/how-to-become-a-professional-footballer#education-is-not-a-backup-plan---its-part-of-the-plan**
+  - aggregate (90d): position 8.5, 167 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.5, 152 impr, 0% CTR (was position 7.7 earlier in the period)
+  - file: `app\football-development\how-to-become-a-professional-footballer\page.tsx`
+  - content: `content\football-development\how-to-become-a-professional-footballer.mdx`
+  - current title: "How to Become a Professional Footballer: What Parents Should Know"
+  - current meta description: "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent."
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#what-are-fg-boots**
+  - aggregate (90d): position 9.5, 162 impr, 0% CTR vs 2% expected
+  - last 14d: position 9.7, 120 impr, 0% CTR (was position 9.3 earlier in the period)
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - current title: "FG vs AG Football Boots for Kids"
+  - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#what-are-ag-boots**
+  - aggregate (90d): position 9.5, 161 impr, 0% CTR vs 2% expected
+  - last 14d: position 9.6, 119 impr, 0% CTR (was position 9.3 earlier in the period)
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - current title: "FG vs AG Football Boots for Kids"
+  - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#when-are-fg-boots-still-fine**
+  - aggregate (90d): position 9.6, 160 impr, 0% CTR vs 2% expected
+  - last 14d: position 9.7, 118 impr, 0% CTR (was position 9.3 earlier in the period)
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - current title: "FG vs AG Football Boots for Kids"
+  - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league#age-groups-and-league-structure**
+  - aggregate (90d): position 8.3, 155 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.1, 125 impr, 0% CTR (was position 8.7 earlier in the period)
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+  - current title: "What Is the Junior Premier League (JPL)?"
+  - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league#clubs-involved**
+  - aggregate (90d): position 8.3, 155 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.2, 126 impr, 0% CTR (was position 8.7 earlier in the period)
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+  - current title: "What Is the Junior Premier League (JPL)?"
+  - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
+- **https://www.footballparent.co.uk/parent-guides/what-is-the-junior-premier-league#costs-and-travel**
+  - aggregate (90d): position 8.2, 154 impr, 0% CTR vs 3% expected
+  - last 14d: position 8.1, 125 impr, 0% CTR (was position 8.7 earlier in the period)
+  - file: `app\parent-guides\what-is-the-junior-premier-league\page.tsx`
+  - content: `content\parent-guides\what-is-the-junior-premier-league.mdx`
+  - current title: "What Is the Junior Premier League (JPL)?"
+  - current meta description: "What the Junior Premier League is: who runs it, how it works, age groups, costs, travel, and what standard of football your child can expect."
+- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#costs-and-what-families-should-know**
+  - aggregate (90d): position 7, 145 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.1, 71 impr, 0% CTR (was position 6.9 earlier in the period)
+  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
+  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
+  - current title: "UK Football Development Centres Explained"
+  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
 - **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#finding-local-jpl-clubs**
-  - aggregate (90d): position 7.1, 107 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.5, 66 impr, 0% CTR (was position 6.4 earlier in the period)
-  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
-  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
-  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
-- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#do-jpl-clubs-hold-trials**
-  - aggregate (90d): position 7.1, 106 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.5, 65 impr, 0% CTR (was position 6.4 earlier in the period)
-  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
-  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
-  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
-- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#how-jpl-recruitment-works**
-  - aggregate (90d): position 7.1, 105 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.6, 65 impr, 0% CTR (was position 6.4 earlier in the period)
-  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
-  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
-  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
-- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#jpl-registration-and-squad-places**
-  - aggregate (90d): position 7.2, 99 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.6, 61 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
-  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
-  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
-- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#costs-to-expect**
-  - aggregate (90d): position 7.2, 98 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.6, 59 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
-  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
-  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
-- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#what-age-can-children-join**
-  - aggregate (90d): position 7.2, 98 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.6, 59 impr, 0% CTR (was position 6.5 earlier in the period)
-  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
-  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
-  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
-  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
-- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#what-coaches-look-for**
-  - aggregate (90d): position 7.2, 98 impr, 0% CTR vs 4% expected
-  - last 14d: position 7.6, 59 impr, 0% CTR (was position 6.5 earlier in the period)
+  - aggregate (90d): position 6.9, 143 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.6, 49 impr, 0% CTR (was position 7.1 earlier in the period)
   - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
   - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
   - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
   - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
 - **https://www.footballparent.co.uk/girls-football**
-  - aggregate (90d): position 21.5, 96 impr, 0% CTR vs 1% expected
-  - last 14d: position 15.4, 18 impr, 0% CTR (was position 22.9 earlier in the period)
+  - aggregate (90d): position 17.2, 139 impr, 0% CTR vs 1% expected
+  - last 14d: position 10.3, 59 impr, 0% CTR (was position 22.3 earlier in the period)
   - file: `app\girls-football\page.tsx`
   - current title: "Girls Football | Football Parent"
   - current meta description: "Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway works for UK families."
-- **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#costs-and-what-families-should-know**
-  - aggregate (90d): position 6.8, 87 impr, 0% CTR vs 4% expected
-  - last 14d: position 8, 53 impr, 0% CTR (was position 4.9 earlier in the period)
-  - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
-  - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
-  - current title: "UK Football Development Centres Explained"
-  - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#how-to-apply-for-football-scholarships**
-  - aggregate (90d): position 8.4, 85 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.5, 84 impr, 0% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-  - current title: "Football Scholarships UK: What Parents Need to Know"
-  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#what-age-can-players-access-football-scholarships**
-  - aggregate (90d): position 8.8, 84 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.8, 83 impr, 0% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-  - current title: "Football Scholarships UK: What Parents Need to Know"
-  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#what-is-a-football-scholarship**
-  - aggregate (90d): position 8.4, 71 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.5, 70 impr, 0% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-  - current title: "Football Scholarships UK: What Parents Need to Know"
-  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#do-football-scholarships-lead-to-professional-football**
-  - aggregate (90d): position 8.1, 70 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.1, 69 impr, 0% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-  - current title: "Football Scholarships UK: What Parents Need to Know"
-  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#football-scholarships-vs-football-academies**
-  - aggregate (90d): position 8.3, 70 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.4, 69 impr, 0% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-  - current title: "Football Scholarships UK: What Parents Need to Know"
-  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
-- **https://www.footballparent.co.uk/academy-pathway/football-scholarships-uk#education-and-qualifications**
-  - aggregate (90d): position 8.2, 65 impr, 0% CTR vs 3% expected
-  - last 14d: position 8.3, 64 impr, 0% CTR (was position 4 earlier in the period)
-  - file: `app\academy-pathway\football-scholarships-uk\page.tsx`
-  - content: `content\academy-pathway\football-scholarships-uk.mdx`
-  - current title: "Football Scholarships UK: What Parents Need to Know"
-  - current meta description: "Football scholarships in the UK: the difference between academy scholarships, college programmes and education pathways for young footballers aged 16 to 18."
+- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#do-jpl-clubs-hold-trials**
+  - aggregate (90d): position 7, 139 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.7, 46 impr, 0% CTR (was position 7.1 earlier in the period)
+  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
+  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
+  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
+  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
+- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#how-jpl-recruitment-works**
+  - aggregate (90d): position 7, 139 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.6, 47 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
+  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
+  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
+  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
+- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#what-coaches-look-for**
+  - aggregate (90d): position 7.1, 129 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.8, 42 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
+  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
+  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
+  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#soleplate-comparison**
+  - aggregate (90d): position 9.2, 128 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.4, 97 impr, 0% CTR (was position 8.6 earlier in the period)
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - current title: "FG vs AG Football Boots for Kids"
+  - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
+- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#jpl-registration-and-squad-places**
+  - aggregate (90d): position 7.1, 128 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.9, 40 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
+  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
+  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
+  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#the-grassroots-reality-most-kids-are-playing-on-3g**
+  - aggregate (90d): position 9.3, 127 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.5, 96 impr, 0% CTR (was position 8.6 earlier in the period)
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - current title: "FG vs AG Football Boots for Kids"
+  - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
+- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#what-age-can-children-join**
+  - aggregate (90d): position 7.1, 127 impr, 0% CTR vs 4% expected
+  - last 14d: position 6.9, 40 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
+  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
+  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
+  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#practical-buying-guidance-for-parents**
+  - aggregate (90d): position 9.3, 126 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.5, 95 impr, 0% CTR (was position 8.6 earlier in the period)
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - current title: "FG vs AG Football Boots for Kids"
+  - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
+- **https://www.footballparent.co.uk/football-gear/ag-vs-fg-boots#what-about-moulded-boots**
+  - aggregate (90d): position 9.3, 126 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.5, 95 impr, 0% CTR (was position 8.6 earlier in the period)
+  - file: `app\football-gear\ag-vs-fg-boots\page.tsx`
+  - content: `content\football-gear\ag-vs-fg-boots.mdx`
+  - current title: "FG vs AG Football Boots for Kids"
+  - current meta description: "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose."
+- **https://www.footballparent.co.uk/parent-guides/how-to-get-into-the-jpl#costs-to-expect**
+  - aggregate (90d): position 7.1, 126 impr, 0% CTR vs 4% expected
+  - last 14d: position 7, 39 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\parent-guides\how-to-get-into-the-jpl\page.tsx`
+  - content: `content\parent-guides\how-to-get-into-the-jpl.mdx`
+  - current title: "JPL Trials: How Do You Get Into the Junior Premier League?"
+  - current meta description: "Learn how JPL trials work, how to join a Junior Premier League club, what coaches look for, typical costs and what parents should expect from the recruitment process."
+- **https://www.footballparent.co.uk/girls-football/girls-rtcs-explained**
+  - aggregate (90d): position 5.2, 122 impr, 1.6% CTR vs 6% expected
+  - last 14d: position 4.7, 30 impr, 0% CTR (was position 5.4 earlier in the period)
+  - file: `app\girls-football\girls-rtcs-explained\page.tsx`
+  - content: `content\girls-football\girls-rtcs-explained.mdx`
+  - current title: "Girls RTCs Explained: What They Were and What Replaced Them"
+  - current meta description: "RTCs in girls football no longer exist. They were replaced by Emerging Talent Centres and Professional Game Academies. What the pathway looks like now."
 - **https://www.footballparent.co.uk/academy-pathway/uk-football-development-centres-explained#how-players-get-identified-or-invited**
-  - aggregate (90d): position 4.3, 58 impr, 0% CTR vs 8% expected
-  - last 14d: position 4.6, 31 impr, 0% CTR (was position 4 earlier in the period)
+  - aggregate (90d): position 4.5, 82 impr, 0% CTR vs 6% expected
+  - last 14d: position 4.5, 32 impr, 0% CTR (was position 4.6 earlier in the period)
   - file: `app\academy-pathway\uk-football-development-centres-explained\page.tsx`
   - content: `content\academy-pathway\uk-football-development-centres-explained.mdx`
   - current title: "UK Football Development Centres Explained"
   - current meta description: "Development centres run from age five, use inconsistent names like PDC, PTC and RTC, and most players never reach a club's academy."
 - **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football#coaching-and-training**
-  - aggregate (90d): position 6.1, 54 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.7, 28 impr, 0% CTR (was position 5.5 earlier in the period)
+  - aggregate (90d): position 6.8, 80 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.7, 30 impr, 0% CTR (was position 6.2 earlier in the period)
   - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
   - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
   - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
   - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
 - **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football#costs**
-  - aggregate (90d): position 6.1, 54 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.7, 28 impr, 0% CTR (was position 5.5 earlier in the period)
+  - aggregate (90d): position 6.8, 80 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.7, 30 impr, 0% CTR (was position 6.2 earlier in the period)
   - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
   - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
   - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
   - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
 - **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football#playing-time**
-  - aggregate (90d): position 6.2, 53 impr, 0% CTR vs 5% expected
-  - last 14d: position 6.9, 27 impr, 0% CTR (was position 5.5 earlier in the period)
+  - aggregate (90d): position 6.8, 79 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.7, 30 impr, 0% CTR (was position 6.3 earlier in the period)
   - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
   - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
   - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
   - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
 - **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football#development-and-enjoyment**
-  - aggregate (90d): position 6.3, 52 impr, 0% CTR vs 5% expected
-  - last 14d: position 7, 26 impr, 0% CTR (was position 5.5 earlier in the period)
+  - aggregate (90d): position 6.9, 78 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.7, 30 impr, 0% CTR (was position 6.4 earlier in the period)
   - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
   - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
   - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
   - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
+- **https://www.footballparent.co.uk/academy-pathway/brentford-development-centre-guide#what-brentford-looks-for-in-young-players**
+  - aggregate (90d): position 6.4, 75 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.4, 75 impr, 0% CTR
+  - file: `app\academy-pathway\brentford-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\brentford-development-centre-guide.mdx`
+  - current title: "Brentford FC Development Centre: A Parent's Guide"
+  - current meta description: "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in."
+- **https://www.footballparent.co.uk/academy-pathway/brentford-development-centre-guide#the-trusts-football-development-centre-explained**
+  - aggregate (90d): position 6.3, 74 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.3, 74 impr, 0% CTR
+  - file: `app\academy-pathway\brentford-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\brentford-development-centre-guide.mdx`
+  - current title: "Brentford FC Development Centre: A Parent's Guide"
+  - current meta description: "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in."
+- **https://www.footballparent.co.uk/academy-pathway/brentford-development-centre-guide#what-is-the-brentford-fc-development-centre**
+  - aggregate (90d): position 6.3, 74 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.3, 74 impr, 0% CTR
+  - file: `app\academy-pathway\brentford-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\brentford-development-centre-guide.mdx`
+  - current title: "Brentford FC Development Centre: A Parent's Guide"
+  - current meta description: "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in."
+- **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football#match-standard-and-competition**
+  - aggregate (90d): position 6.7, 73 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.7, 30 impr, 0% CTR (was position 6 earlier in the period)
+  - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
+  - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
+  - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
+  - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
+- **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football#understanding-the-choice**
+  - aggregate (90d): position 6.6, 73 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.7, 30 impr, 0% CTR (was position 5.9 earlier in the period)
+  - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
+  - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
+  - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
+  - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
+- **https://www.footballparent.co.uk/academy-pathway/brentford-development-centre-guide#why-brentfords-academy-story-is-different**
+  - aggregate (90d): position 6.4, 72 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.4, 72 impr, 0% CTR
+  - file: `app\academy-pathway\brentford-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\brentford-development-centre-guide.mdx`
+  - current title: "Brentford FC Development Centre: A Parent's Guide"
+  - current meta description: "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in."
+- **https://www.footballparent.co.uk/parent-guides/jpl-vs-grassroots-football#travel-and-time-commitment**
+  - aggregate (90d): position 6.7, 72 impr, 0% CTR vs 4% expected
+  - last 14d: position 7.7, 30 impr, 0% CTR (was position 6 earlier in the period)
+  - file: `app\parent-guides\jpl-vs-grassroots-football\page.tsx`
+  - content: `content\parent-guides\jpl-vs-grassroots-football.mdx`
+  - current title: "JPL vs Grassroots Football: Which Is Right for Your Child?"
+  - current meta description: "Is JPL better than grassroots football? Coaching, match standard, playing time, costs, travel, development and family commitment, compared."
+- **https://www.footballparent.co.uk/academy-pathway/brentford-development-centre-guide#how-the-b-team-fits-alongside-the-academy-today**
+  - aggregate (90d): position 6.4, 71 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.4, 71 impr, 0% CTR
+  - file: `app\academy-pathway\brentford-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\brentford-development-centre-guide.mdx`
+  - current title: "Brentford FC Development Centre: A Parent's Guide"
+  - current meta description: "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in."
+- **https://www.footballparent.co.uk/academy-pathway/brentford-development-centre-guide#how-to-get-your-child-seen-by-brentford**
+  - aggregate (90d): position 6.3, 69 impr, 0% CTR vs 5% expected
+  - last 14d: position 6.3, 69 impr, 0% CTR
+  - file: `app\academy-pathway\brentford-development-centre-guide\page.tsx`
+  - content: `content\academy-pathway\brentford-development-centre-guide.mdx`
+  - current title: "Brentford FC Development Centre: A Parent's Guide"
+  - current meta description: "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in."
+- **https://www.footballparent.co.uk/parent-guides/jpl-martin-brock-interview-part-2**
+  - aggregate (90d): position 5.6, 59 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.6, 51 impr, 0% CTR (was position 5.3 earlier in the period)
+  - file: `app\parent-guides\jpl-martin-brock-interview-part-2\page.tsx`
+  - content: `content\parent-guides\jpl-martin-brock-interview-part-2.mdx`
+  - current title: "Martin Brock on the JPL Part 2: Scouts, Misconceptions and Matchday Behaviour"
+  - current meta description: "JPL chief executive Martin Brock on development vs results, whether the JPL leads to scouts and academies, common parent misconceptions, and matchday conduct."
+- **https://www.footballparent.co.uk/football-gear/best-football-goals-for-kids**
+  - aggregate (90d): position 9.2, 58 impr, 0% CTR vs 3% expected
+  - last 14d: position 9.2, 58 impr, 0% CTR
+  - file: `app\football-gear\best-football-goals-for-kids\page.tsx`
+  - content: `content\football-gear\best-football-goals-for-kids.mdx`
+  - current title: "Best Football Goals for the Garden (2026 Kids' Buying Guide)"
+  - current meta description: "Football goals for the garden: FA-sized for 3v3 to 9v9, how to anchor one safely, and pop-up versus folding goals that survive a full season of practice."
+- **https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies#at-a-glance**
+  - aggregate (90d): position 6.4, 55 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.2, 21 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\academy-pathway\development-centres-vs-academies\page.tsx`
+  - content: `content\academy-pathway\development-centres-vs-academies.mdx`
+  - current title: "Development Centres vs Academies: What's the Difference?"
+  - current meta description: "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway."
+- **https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies#what-is-a-development-centre**
+  - aggregate (90d): position 6.4, 55 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.2, 21 impr, 0% CTR (was position 7.2 earlier in the period)
+  - file: `app\academy-pathway\development-centres-vs-academies\page.tsx`
+  - content: `content\academy-pathway\development-centres-vs-academies.mdx`
+  - current title: "Development Centres vs Academies: What's the Difference?"
+  - current meta description: "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway."
+- **https://www.footballparent.co.uk/academy-pathway/development-centres-vs-academies#are-development-centres-worth-it**
+  - aggregate (90d): position 6.5, 54 impr, 0% CTR vs 5% expected
+  - last 14d: position 5.2, 21 impr, 0% CTR (was position 7.3 earlier in the period)
+  - file: `app\academy-pathway\development-centres-vs-academies\page.tsx`
+  - content: `content\academy-pathway\development-centres-vs-academies.mdx`
+  - current title: "Development Centres vs Academies: What's the Difference?"
+  - current meta description: "What's the difference between a football development centre and a professional academy, and what each means for a family navigating the youth football pathway."
 
 ### Insufficient recent data - too few recent impressions to judge
 
 - **https://www.footballparent.co.uk/parent-guides/what-to-say-after-football-matches**
-  - aggregate (90d): position 7.1, 266 impr, 1.9% CTR vs 4% expected
-  - last 14d: position 6.3, 11 impr, 0% CTR (was position 7.1 earlier in the period)
+  - aggregate (90d): position 7.1, 275 impr, 1.8% CTR vs 4% expected
+  - last 14d: position 7, 10 impr, 0% CTR (was position 7.1 earlier in the period)
   - file: `app\parent-guides\what-to-say-after-football-matches\page.tsx`
   - content: `content\parent-guides\what-to-say-after-football-matches.mdx`
   - current title: "What Should Parents Say After Football Matches?"
@@ -1834,28 +2129,41 @@ Aggregate 90-day CTR can be misleading for pages that only recently started rank
   - current meta description: "Are football academies free? Learn how much football academy really costs, what parents pay for, and the hidden expenses most families don't expect."
 - **https://www.footballparent.co.uk/girls-football/girls-academy-vs-grassroots-football**
   - aggregate (90d): position 8, 109 impr, 0% CTR vs 3% expected
-  - last 14d: position 4.7, 3 impr, 0% CTR (was position 8.1 earlier in the period)
+  - last 14d: position 7, 1 impr, 0% CTR (was position 8 earlier in the period)
   - file: `app\girls-football\girls-academy-vs-grassroots-football\page.tsx`
   - content: `content\girls-football\girls-academy-vs-grassroots-football.mdx`
   - current title: "Girls Academy Football vs Grassroots Football"
   - current meta description: "Comparing girls academy football and grassroots football environments, commitments and development opportunities."
 - **https://www.footballparent.co.uk/editorial-policy**
-  - aggregate (90d): position 4.3, 58 impr, 0% CTR vs 8% expected
-  - last 14d: position 3, 8 impr, 0% CTR (was position 4.5 earlier in the period)
+  - aggregate (90d): position 5.9, 64 impr, 0% CTR vs 5% expected
+  - last 14d: position 17.4, 8 impr, 0% CTR (was position 4.3 earlier in the period)
   - file: `app\editorial-policy\page.tsx`
   - current title: "Editorial Policy | Football Parent"
   - current meta description: "How Football Parent researches, writes, fact-checks and updates content. Our commitment to independent, honest guidance for football families."
 - **https://www.footballparent.co.uk/academy-pathway/what-is-eppp#eppp-at-a-glance**
-  - aggregate (90d): position 8.2, 52 impr, 0% CTR vs 3% expected
-  - last 14d: position 5, 5 impr, 0% CTR (was position 8.5 earlier in the period)
+  - aggregate (90d): position 8.1, 57 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.2, 5 impr, 0% CTR (was position 8.2 earlier in the period)
   - file: `app\academy-pathway\what-is-eppp\page.tsx`
   - content: `content\academy-pathway\what-is-eppp.mdx`
   - current title: "What Is EPPP? Elite Player Performance Plan"
   - current meta description: "EPPP stands for Elite Player Performance Plan. Here is what it means in academy football, including categories, coaching hours, player movement and what parents need to know."
 - **https://www.footballparent.co.uk/academy-pathway/what-is-eppp#why-the-eppp-was-introduced**
-  - aggregate (90d): position 8.3, 51 impr, 0% CTR vs 3% expected
-  - last 14d: position 5, 5 impr, 0% CTR (was position 8.6 earlier in the period)
+  - aggregate (90d): position 8.2, 56 impr, 0% CTR vs 3% expected
+  - last 14d: position 7.2, 5 impr, 0% CTR (was position 8.3 earlier in the period)
   - file: `app\academy-pathway\what-is-eppp\page.tsx`
   - content: `content\academy-pathway\what-is-eppp.mdx`
   - current title: "What Is EPPP? Elite Player Performance Plan"
   - current meta description: "EPPP stands for Elite Player Performance Plan. Here is what it means in academy football, including categories, coaching hours, player movement and what parents need to know."
+- **https://www.footballparent.co.uk/girls-football/late-developers-in-girls-football**
+  - aggregate (90d): position 10.1, 53 impr, 0% CTR vs 2% expected
+  - last 14d: position 9.4, 5 impr, 0% CTR (was position 10.1 earlier in the period)
+  - file: `app\girls-football\late-developers-in-girls-football\page.tsx`
+  - content: `content\girls-football\late-developers-in-girls-football.mdx`
+  - current title: "Late Developers In Girls Football"
+  - current meta description: "Why some girls develop later in football and why early selection does not always predict long-term success."
+
+## decay
+
+- **https://www.footballparent.co.uk/academy-trials**
+  - clicks dropped 36.4% (11 -> 7)
+  - file: `app\academy-trials\page.tsx`
