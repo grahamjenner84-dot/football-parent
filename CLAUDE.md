@@ -97,6 +97,13 @@ Why a session created here works in the app: `/coach-app` is a Vercel *rewrite* 
   This exists because a past SEO edit cost a page its rankings entirely; reverting recovered them. The point is traceability and reversibility, not timidity.
 - **Log every SEO-relevant change — including new article publishes — to the most recent `seo-changes-YYYY-MM-DD.md` file in the repo root, as it happens, not saved up for the next scheduled check-in write-up.** For an edit: what changed, the page, and the commit hash. For a new article: the publish date, slug/URL and category. This is what makes an unexplained traffic uplift or downturn traceable back to a specific dated change without reconstructing it from git log. When a check-in review gets written up (~every 2 weeks), that file becomes the closed record for that period and a new dated `seo-changes-*.md` file starts as the append target going forward — always log to whichever `seo-changes-*.md` file has the most recent date, not a new one per change.
 
+## Link-building outreach pipeline
+
+- Weekly loop: a Monday routine runs the `football-parent-outreach` skill, which finds and vets prospects, drafts up to 15 emails, queues chase-ups and checks for links won. Graham edits and sends each email himself from footballparentuk@gmail.com at `/admin/outreach` (the "Open in Gmail" button pre-fills a compose window). **Nothing in this system sends email.**
+- Data lives in `outreach_prospects` / `outreach_events` in the `football-parent-social` project (`supabase/migrations/20260924120000_outreach.sql`). Everything goes through `lib/supabase/outreach.ts`, and the routine uses it via `scripts/outreach/cli.ts`.
+- `lib/outreach/quality.ts` is the hard gate every prospect passes, whatever its source. It rejects PDFs and file links, other sports, non-UK sites, competitors, forums, shops and archive pages. It parks governing bodies, homepage links and partner pages, because those links come from business relationships rather than cold pitches. Rejected rows are kept so discovery never proposes them again. Earlier prospect lists failed on exactly these cases, so tighten the gate rather than filtering by hand.
+- `lib/outreach/score.ts` ranks the backlog: type, UK, fit, authority, contact found, season for the pitched page, time waiting, and Graham's own skip rate per type. It is recomputed every run. `lib/outreach/lifecycle.ts` holds the status machine: sent, then a chase at 7 days, a second at 14, then closed as no reply. It also holds the generic chase copy.
+
 ## Editorial rules
 - Never use em dashes (—) — use commas, colons, or restructure the sentence
 - Never use "badge" framing clichés (e.g. "without the badge") — reads as AI filler
