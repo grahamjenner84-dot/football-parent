@@ -154,3 +154,12 @@ test("history import reads Graham's sheet: name vs URL columns, yearless dates, 
   assert.equal(linked.status, "won");
   assert.equal(future.emailedAt?.slice(0, 10), "2025-12-30", "a yearless date in the future means last year");
 });
+
+test("gate fixes from the first backlog run", () => {
+  const girls = assessProspect({ url: "https://championhergame.co.uk/pages/coaching-a-girls-team", title: "Coaching a girls team", context: "New to coaching girls guide, cites Women in Sport and netball crossover" });
+  assert.equal(girls.verdict, "ok", "other sport only in context is a note, not a reject");
+  assert.match(girls.reasons.join(" "), /check the page is about football/);
+  assert.equal(verdict("https://www.example.co.uk/netball-parents-guide"), "rejected");
+  assert.equal(verdict("https://wembleyjuniormagpies.com/parents", { title: "Parents info", context: "Wembley Junior Magpies, Perth, Western Australia" }), "rejected");
+  assert.equal(verdict("https://www.perthshirejfc.co.uk/parents"), "ok", "UK Perth is fine");
+});
