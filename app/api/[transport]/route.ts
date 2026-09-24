@@ -3,7 +3,7 @@ import { z } from "zod";
 import { getSeoReport, getPageInspection, comparePeriods } from "@/lib/gsc";
 import { addToContentQueue } from "@/lib/supabase/content-queue";
 import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
-import { getPageViewStats } from "@/lib/supabase/page-views";
+import { getPageViewStats, getPageViewCountryStats } from "@/lib/supabase/page-views";
 
 const handler = createMcpHandler(
   (server) => {
@@ -118,6 +118,22 @@ const handler = createMcpHandler(
       },
       async ({ days }) => {
         const result = await getPageViewStats(days ?? 30);
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
+
+    server.registerTool(
+      "get_page_view_countries",
+      {
+        title: "Get page views by country and hour of day",
+        description:
+          "Where footballparent.co.uk's readers are and when in the UK day they arrive, from the same first-party page_views table as get_page_view_stats (same bot exclusions, so the totals reconcile). Country is the ISO 3166-1 alpha-2 code Vercel geolocated the request to (recorded from 2026-09-24; older rows report as 'Unknown'). Returns views and estimated visits by country, the views landing before 06:30 UK time split by country and by page, views by hour of day in Europe/London time (each hour split UK / overseas / unknown), and the pages overseas readers open. Backs the Countries tab on /admin/seo.",
+        inputSchema: {
+          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. Country was only recorded from 2026-09-24; the hour-of-day breakdown covers all rows in the window."),
+        },
+      },
+      async ({ days }) => {
+        const result = await getPageViewCountryStats(days ?? 30);
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );
