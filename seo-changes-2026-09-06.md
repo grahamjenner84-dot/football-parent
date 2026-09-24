@@ -903,3 +903,12 @@ The last residual reframe from the Bucket C slop-tidy. Section heading "Educatio
 Not a site change; logged so a later link-profile or `/coaching` movement can be traced to it. Graham is offering the £200 GoDaddy minimum for grassrootsfootball.co.uk (TeamStats-owned, redirects to teamstats.net/blog), walking away above £300. Basis: the domain's own profile is about a dozen genuine referring domains (FourFourTwo 35 dofollow, Mirror and Birmingham Mail nofollow) plus 79 spam directories, against footballparent.co.uk's 10 junk links and domain rank 0. Plan, page-level redirect map and draft disavow file are in `seo-data/exports/grassrootsfootball-couk-acquisition-plan.md`, `-redirect-map-2026-09-23.csv` and `-disavow-draft.txt`. If bought: root to `/coaching`, six `/article/` URLs to matching pages, everything else 410, then verify the old domain in Search Console and disavow the spam there, not on footballparent.co.uk. The redirect commit will be logged here separately with its hash when it ships.
 
 Update 2026-09-23: offer of $300 (about £225) submitted through GoDaddy. Ceiling unchanged at £300 (about $400).
+
+## Top searches cleanup and Countries tab on /admin/seo (2026-09-24)
+
+Admin tooling only, no article or metadata change, logged so a shift in the numbers on these tabs is traceable.
+
+- Top searches: the header dropdown was logging a search after a 600ms typing pause, so one search typed on a phone showed as a dozen prefixes each counted as its own 0-result search. Logging now fires on commit (result click, submit, closing the panel) with a 3s idle fallback, and the report folds a query into a longer one logged within two minutes that starts with it. Expect the search totals and the "no results" count to drop; that is the correction, not a traffic change. Window toggle and a single-day picker added.
+- Countries: new tab. `page_views.country` (ISO code from Vercel's `x-vercel-ip-country` header, no IP stored) via migration `20260924120000_page_views_country.sql`, which must be applied to the football-parent-social project. Shows views by country, the share landing before 06:30 UK time and which countries and pages that is, and views by hour in UK time. Rows before the migration report as Unknown. Prompted by mornings with ~25% of the day's views before 06:30.
+
+Commit hashes on commit below.

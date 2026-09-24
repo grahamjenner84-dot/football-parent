@@ -17,7 +17,7 @@ import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only im
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
 import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
-import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCount, BannerVariantStats } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
+import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCount, BannerVariantStats, PageViewCountryStats, CountryViewRow } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
 import type { PartnerClickStats } from "@/lib/supabase/partner-clicks"; // type-only, same reasoning as the page-views import above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
@@ -40,6 +40,7 @@ type Tab =
   | "pageviews"
   | "pageviewsCompare"
   | "pageviewsTrend"
+  | "countries"
   | "coachApp"
   | "affiliate"
   | "partnerClicks";
@@ -54,6 +55,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "partnerClicks", label: "Football DNA clicks" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
+  { id: "countries", label: "Countries" },
   { id: "compare", label: "Compare days" },
   { id: "searches", label: "Top searches" },
   { id: "silence", label: "Gone quiet" },
@@ -389,6 +391,8 @@ export default function SeoAdminPage() {
           <ComparePageViews />
         ) : tab === "pageviewsTrend" ? (
           <PageViewTrend observedPaths={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
+        ) : tab === "countries" ? (
+          <CountriesReport />
         ) : tab === "coachApp" ? (
           <>
             {!coachAppViewStats && !coachAppViewError && (
@@ -477,6 +481,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "pageviewsCompare":
       return 0;
     case "pageviewsTrend":
+      return 0;
+    case "countries":
       return 0;
     case "coachApp":
       return 0;
@@ -1325,6 +1331,168 @@ function SearchesList({
                 )}
                 {!date && <span style={styles.cardStatsInline}>last {r.lastSeen}</span>}
               </div>
+            </div>
+          ))}
+        </>
+      )}
+    </div>
+  );
+}
+
+// ISO 3166-1 alpha-2 -> "United Kingdom". Falls back to the code itself for
+// anything Intl does not know, and "Unknown" passes straight through.
+const regionNames = typeof Intl !== "undefined" && "DisplayNames" in Intl
+  ? new Intl.DisplayNames(["en-GB"], { type: "region" })
+  : null;
+function countryName(code: string): string {
+  if (code === "Unknown") return "Unknown (logged before country tracking)";
+  try {
+    return regionNames?.of(code) ?? code;
+  } catch {
+    return code;
+  }
+}
+
+function CountryRows({ rows, max }: { rows: CountryViewRow[]; max: number }) {
+  return (
+    <>
+      {rows.map((c) => (
+        <div key={c.country} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{countryName(c.country)}</span>
+            <span style={styles.cardBadge}>{pct(c.share)}</span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>{c.views} views</span>
+            <span>{c.estimatedVisits} visits</span>
+          </div>
+          <div style={styles.barTrack}>
+            <div style={{ ...styles.barFill, width: `${max > 0 ? (c.views / max) * 100 : 0}%` }} />
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
+function CountriesReport() {
+  const [days, setDays] = useState<DayWindow>(28);
+  const [fetched, setFetched] = useState<{ days: DayWindow; data: PageViewCountryStats } | null>(null);
+  const [error, setError] = useState("");
+  const stats = fetched?.days === days ? fetched.data : null;
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`/api/page-view-country-report?days=${days}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load country report");
+        }
+        return res.json();
+      })
+      .then((data: PageViewCountryStats) => {
+        if (cancelled) return;
+        setFetched({ days, data });
+        setError("");
+      })
+      .catch((err) => {
+        if (!cancelled) setError(err.message);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [days]);
+
+  const maxCountry = stats?.countries[0]?.views ?? 0;
+  const maxHour = stats ? Math.max(...stats.byHour.map((h) => h.views), 0) : 0;
+  const maxEarly = stats?.earlyMorning.countries[0]?.views ?? 0;
+  const unknownShare = stats && stats.totalViews > 0 ? 1 - stats.knownCountryViews / stats.totalViews : 0;
+
+  return (
+    <div style={styles.list}>
+      <SectionNote label="How this is measured">
+        Country comes from Vercel&rsquo;s geolocation of each request
+        (x-vercel-ip-country), recorded as a two-letter code only, never the
+        IP. Recording started on 24 September 2026, so anything logged before
+        that shows as Unknown and the split only describes traffic since then.
+        Hours are UK local time (Europe/London), not UTC. Same bot exclusions
+        as the Page views tab, so the totals reconcile. A VPN or a mobile
+        network&rsquo;s gateway can put a UK reader in another country, so
+        treat a few percent of overseas as noise; a big overseas share piled
+        onto one or two URLs is the shape that matters.
+      </SectionNote>
+
+      <PeriodFilter value={days} onChange={setDays} />
+
+      {error && <p style={styles.error}>{error}</p>}
+      {!stats && !error && <p style={styles.muted}>Loading country report...</p>}
+
+      {stats && (
+        <>
+          <div style={styles.cardStats}>
+            <span>Views: {stats.totalViews}</span>
+            <span>With a country: {stats.knownCountryViews}</span>
+            <span>Bots excluded: {stats.botViews}</span>
+            {unknownShare > 0.5 && (
+              <span style={{ ...styles.cardBadge, ...styles.cardBadgeWarn }}>
+                {pct(unknownShare)} still Unknown - the country split needs a few days of data
+              </span>
+            )}
+          </div>
+
+          <p style={styles.affiliateHeading}>Views by country</p>
+          {!stats.countries.length && <EmptyState text="No page views in this window." />}
+          <CountryRows rows={stats.countries} max={maxCountry} />
+
+          <p style={styles.affiliateHeading}>Before 06:30 UK time</p>
+          <div style={styles.cardStats}>
+            <span>{stats.earlyMorning.views} views</span>
+            <span>{pct(stats.earlyMorning.share)} of the window</span>
+          </div>
+          {stats.earlyMorning.views === 0 ? (
+            <EmptyState text="Nothing landed before 06:30 in this window." />
+          ) : (
+            <>
+              <CountryRows rows={stats.earlyMorning.countries} max={maxEarly} />
+              <p style={styles.muted}>What the early-morning traffic was reading:</p>
+              {stats.earlyMorning.topPaths.map((p) => (
+                <div key={p.path} style={styles.cannibalRow}>
+                  <span style={styles.cardPage}>{shortPage(p.path)}</span>
+                  <span style={styles.cardStatsInline}>{p.count} views</span>
+                </div>
+              ))}
+            </>
+          )}
+
+          <p style={styles.affiliateHeading}>Views by hour of day (UK time)</p>
+          <p style={styles.muted}>
+            Each bar is the whole window&rsquo;s views in that hour. The split
+            is UK / overseas / unknown.
+          </p>
+          {stats.byHour.map((h) => (
+            <div key={h.hour} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{String(h.hour).padStart(2, "0")}:00</span>
+                <span style={styles.cardBadge}>{h.views}</span>
+              </div>
+              <div style={styles.cardStats}>
+                <span>UK {h.uk}</span>
+                <span>Overseas {h.overseas}</span>
+                <span>Unknown {h.unknown}</span>
+              </div>
+              <div style={styles.barTrack}>
+                <div style={{ ...styles.barFill, width: `${maxHour > 0 ? (h.views / maxHour) * 100 : 0}%` }} />
+              </div>
+            </div>
+          ))}
+
+          <p style={styles.affiliateHeading}>What overseas readers open</p>
+          {!stats.overseasTopPaths.length && <EmptyState text="No overseas views with a recorded country yet." />}
+          {stats.overseasTopPaths.map((p) => (
+            <div key={p.path} style={styles.cannibalRow}>
+              <span style={styles.cardPage}>{shortPage(p.path)}</span>
+              <span style={styles.cardStatsInline}>{p.count} views</span>
             </div>
           ))}
         </>
