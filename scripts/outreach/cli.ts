@@ -25,6 +25,13 @@
  *                                 omitted = checked, nothing yet.
  *   close-expired                 Mark prospects past their last chase as no_reply.
  *   rescore                       Recompute backlog/drafted scores.
+ *   known-domains                 JSON: every site already on the list (any
+ *                                 status but rejected), with status and date
+ *                                 emailed. Load this before discovery and skip
+ *                                 those domains.
+ *   import-history <file>         Past outreach from Graham's sheet (CSV/TSV
+ *                                 with a header row), same as the admin page
+ *                                 import. --preview parses without writing.
  *   stats                         Scoreboard JSON.
  *
  * Writes go to the football-parent-social Supabase project (SUPABASE_URL /
@@ -244,6 +251,21 @@ async function main() {
         }
       }
       console.log(`closed ${n} as no_reply`);
+      return;
+    }
+    case "known-domains": {
+      console.log(JSON.stringify(await db.listKnownDomains(), null, 2));
+      return;
+    }
+    case "import-history": {
+      const { parseHistory } = await import("../../lib/outreach/import");
+      const parsed = parseHistory(fs.readFileSync(path.resolve(args[0]), "utf8"));
+      if (args.includes("--preview")) {
+        console.log(JSON.stringify(parsed, null, 2));
+        return;
+      }
+      const res = await db.importHistory(parsed.rows);
+      console.log(JSON.stringify({ errors: parsed.errors, results: res }, null, 2));
       return;
     }
     case "rescore": {

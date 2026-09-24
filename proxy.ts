@@ -94,7 +94,7 @@ export const config = {
     "/api/page-view-by-path",
     "/api/affiliate-click-report",
     "/api/partner-click-report",
-    "/api/outreach",
+    "/api/outreach/:path*",
     "/api/coach-app-view-report",
   ],
 };

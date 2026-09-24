@@ -119,3 +119,38 @@ test("page digest reports problems instead of guessing", async () => {
   assert.match(digestContentParsing("https://x.co.uk/a", [{ items: [{ status_code: 404 }] }]).problem ?? "", /404/);
   assert.match(digestContentParsing("https://x.co.uk/a", [{ items: [{ status_code: 200, page_content: {} }] }]).problem ?? "", /no readable text/);
 });
+
+test("history import reads Graham's sheet: name vs URL columns, yearless dates, notes after the date", async () => {
+  const { parseHistory, resolveImportedStatus } = await import("../lib/outreach/import");
+  const now = new Date("2026-09-25T10:00:00Z");
+  const sheet = [
+    "Site\temail\tWhen contacted\tWhat pitched\tDomain Auth\tURL\tStatus",
+    "Girls United\tlondon@girlsunitedfa.org\t14/06, replied to their email\tQ/a on girls football and their mission\t37\thttp://www.girlsunitedfa.org\t",
+    "Recent Club\t\t20/09\tEqual playing time guide\t\trecentclub.co.uk\t",
+    "Linked Blog\t\t01/03/2026\tTrials guide\t22\thttps://linkedblog.co.uk/post\tlinked",
+    "Future date\t\t30/12\tx\t\tfuture.co.uk\t",
+    "No url\t\t01/01/2026\tx\t\t\t",
+  ].join("\n");
+  const r = parseHistory(sheet, now);
+  assert.equal(r.columns.url, "URL");
+  assert.equal(r.columns.title, "Site");
+  assert.equal(r.rows.length, 4);
+  assert.equal(r.errors.length, 1);
+
+  const [gu, recent, linked, future] = r.rows;
+  assert.equal(gu.title, "Girls United");
+  assert.equal(gu.domain, "girlsunitedfa.org");
+  assert.equal(gu.emailedAt?.slice(0, 10), "2026-06-14");
+  assert.equal(gu.domainScore, 37);
+  assert.equal(gu.angle, "Q/a on girls football and their mission");
+  assert.equal(gu.notes, "replied to their email");
+  assert.equal(gu.status, null, "free text after the date is kept as a note, not guessed into a status");
+  assert.equal(resolveImportedStatus(gu, now).status, "no_reply", "old with no status closes rather than queueing a chase");
+
+  const rs = resolveImportedStatus(recent, now);
+  assert.equal(rs.status, "sent");
+  assert.equal(rs.next_action_at?.slice(0, 10), "2026-09-27");
+
+  assert.equal(linked.status, "won");
+  assert.equal(future.emailedAt?.slice(0, 10), "2025-12-30", "a yearless date in the future means last year");
+});
