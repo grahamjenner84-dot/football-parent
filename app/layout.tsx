@@ -7,7 +7,7 @@ import CookieConsent from "./components/CookieConsent";
 import PageViewPing from "./components/PageViewPing";
 import AffiliateClickTracker from "./components/AffiliateClickTracker";
 import PartnerClickTracker from "./components/PartnerClickTracker";
-import { BRAND_IMAGE } from "@/lib/seo";
+import { brandOgImage } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     siteName: "Football Parent",
     locale: "en_GB",
     type: "website",
-    images: [{ ...BRAND_IMAGE.og, type: "image/png", alt: "Football Parent" }],
+    images: [brandOgImage()],
   },
   twitter: {
     card: "summary_large_image",
-    images: [{ ...BRAND_IMAGE.og, type: "image/png", alt: "Football Parent" }],
+    images: [brandOgImage()],
   },
   verification: {
     other: {

@@ -4,6 +4,7 @@ import CoachSignUpForm from "@/app/components/CoachSignUpForm";
 import { MDXContent } from "@/lib/MDXContent";
 import { extractFaqs } from "@/lib/faq";
 import type { LandingPage } from "@/lib/landing";
+import { BRAND_IMAGES } from "@/lib/seo";
 
 // Shared shell for every Coach App landing page, so a variant differs from
 // the main page only in its words - same hero shape, same form, same
@@ -75,6 +76,7 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
         operatingSystem: "Web, iOS, Android",
         url: "https://www.footballparent.co.uk/football-parent-coach-app",
         description: frontmatter.seoDescription ?? frontmatter.subhead,
+        image: [BRAND_IMAGES.coach.wide, BRAND_IMAGES.coach.standard, BRAND_IMAGES.coach.square],
         offers: [
           {
             "@type": "Offer",

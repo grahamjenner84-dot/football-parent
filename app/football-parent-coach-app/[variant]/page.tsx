@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import CoachLandingPage from "@/app/components/CoachLandingPage";
 import { getLandingPage, getLandingSlugs } from "@/lib/landing";
+import { brandOgImage } from "@/lib/seo";
 
 // One route serving every landing variant from content/landing/*.mdx.
 //
@@ -38,6 +39,21 @@ export async function generateMetadata({
     title: frontmatter.seoTitle ?? frontmatter.h1,
     description: frontmatter.seoDescription ?? frontmatter.subhead,
     robots: { index: indexable, follow: true },
+    // Every variant is a shareable link (the noindex ones are ad landing
+    // pages), so all of them carry the Coach App preview rather than the
+    // site-wide one the root layout would otherwise supply.
+    openGraph: {
+      title: frontmatter.seoTitle ?? frontmatter.h1,
+      description: frontmatter.seoDescription ?? frontmatter.subhead,
+      siteName: "Football Parent",
+      locale: "en_GB",
+      type: "website",
+      images: [brandOgImage("coach")],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: [brandOgImage("coach")],
+    },
     // Only an indexable variant gets a canonical of its own. Pointing a
     // noindex page's canonical at the main page would be contradictory -
     // canonical says "index this other page instead", noindex says "don't

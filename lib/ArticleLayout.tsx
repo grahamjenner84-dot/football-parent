@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Script from "next/script";
-import { BRAND_IMAGE } from "@/lib/seo";
+import { BRAND_IMAGES } from "@/lib/seo";
 import { extractFaqs } from "@/lib/faq";
 
 interface ArticleLayoutProps {
@@ -112,7 +112,7 @@ export default function ArticleLayout({
         description,
         // Google's Article guidance: at least 1200px wide, in 16:9, 4:3 and
         // 1:1 so it can pick the ratio each surface needs without cropping.
-        image: [BRAND_IMAGE.wide, BRAND_IMAGE.standard, BRAND_IMAGE.square],
+        image: [BRAND_IMAGES.parent.wide, BRAND_IMAGES.parent.standard, BRAND_IMAGES.parent.square],
         author: {
           "@type": "Person",
           name: "Graham Jenner",
