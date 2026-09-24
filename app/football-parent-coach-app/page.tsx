@@ -22,6 +22,7 @@ export const metadata = generateSEO({
   description: page?.frontmatter.seoDescription ?? page?.frontmatter.subhead ?? "",
   path: "/football-parent-coach-app",
   type: "website",
+  brand: "coach",
 });
 
 export default function CoachAppPage() {
