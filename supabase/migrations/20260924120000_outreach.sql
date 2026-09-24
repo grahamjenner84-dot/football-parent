@@ -1,7 +1,7 @@
 -- Link-building outreach pipeline: one row per prospect page, plus an event
 -- log for the scoreboard.
 --
--- Filled by the weekly outreach run (.claude/skills/football-parent-outreach,
+-- Filled by the weekly outreach run (.claude/skills/football-parent-link-building,
 -- scripts/outreach/cli.ts), worked through by Graham at /admin/outreach.
 -- Nothing here sends email: drafts are opened in Gmail and sent by hand.
 --

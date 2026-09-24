@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 /**
  * Outreach pipeline CLI. Used by the weekly outreach run
- * (.claude/skills/football-parent-outreach/SKILL.md) and by hand.
+ * (.claude/skills/football-parent-link-building/SKILL.md) and by hand.
  *
  *   npx tsx scripts/outreach/cli.ts <command> [args]
  *

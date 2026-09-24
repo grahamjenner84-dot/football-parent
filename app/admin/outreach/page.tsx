@@ -12,7 +12,7 @@ import {
 } from "@/lib/outreach/lifecycle";
 
 // Weekly link-building queue. Drafts and prospects are written by the weekly
-// outreach run (.claude/skills/football-parent-outreach); this page is where
+// outreach run (.claude/skills/football-parent-link-building); this page is where
 // Graham edits, sends (via Gmail) and records outcomes. Nothing here sends
 // email itself.
 
