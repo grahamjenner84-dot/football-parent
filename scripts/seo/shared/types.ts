@@ -15,7 +15,8 @@ export type CacheFamily =
   | "trends"
   | "competitor_rankings"
   | "backlinks"
-  | "app_data";
+  | "app_data"
+  | "page_content";
 
 export const CACHE_FRESHNESS_DAYS: Record<CacheFamily, number> = {
   gsc: 7,
@@ -28,4 +29,8 @@ export const CACHE_FRESHNESS_DAYS: Record<CacheFamily, number> = {
   competitor_rankings: 30,
   backlinks: 30,
   app_data: 30,
+  // Outreach prospect pages (scripts/outreach/research.ts). Two weeks is
+  // long enough to re-read a page while drafting without paying twice, short
+  // enough that a link we're waiting on gets a fresh fetch.
+  page_content: 14,
 };
