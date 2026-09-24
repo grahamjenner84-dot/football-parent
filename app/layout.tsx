@@ -15,9 +15,6 @@ export const metadata: Metadata = {
   description:
     "Independent guidance for parents navigating UK football development and academy pathways.",
   metadataBase: new URL("https://www.footballparent.co.uk"),
-  icons: {
-    icon: "/icon.png",
-  },
   // Default link preview for the pages that write their own metadata instead
   // of calling generateSEO (about, author, policy pages). Article and category
   // pages override the whole openGraph/twitter block via generateSEO.
