@@ -2,6 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ['@napi-rs/canvas'],
+  // The reviewed outreach backlogs written by the link-building skill are
+  // plain JSON in the repo; ship them with the route that loads them into
+  // the queue from /admin/outreach (nothing imports them, so tracing alone
+  // would leave them out of the deployment).
+  outputFileTracingIncludes: {
+    '/api/outreach/backlogs': ['./seo-data/exports/outreach-backlog-*.json'],
+  },
   async redirects() {
     return [
       // A mistyped inbound link picked up a trailing colon, most likely from

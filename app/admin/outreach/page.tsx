@@ -55,7 +55,7 @@ interface Stats {
   backlog: number;
 }
 
-type Tab = "week" | "waiting" | "backlog" | "parked" | "won";
+type Tab = "week" | "waiting" | "backlog" | "parked" | "won" | "history";
 
 const firstName = (name: string | null) => (name ? name.trim().split(/\s+/)[0] : null);
 
@@ -128,6 +128,11 @@ export default function OutreachAdminPage() {
       backlog: prospects.filter((p) => p.status === "backlog").sort((a, b) => b.score - a.score),
       parked: prospects.filter((p) => p.status === "parked"),
       won: prospects.filter((p) => p.status === "won"),
+      // Closed without a link: imported history lands here too (anything
+      // emailed over three weeks ago with no status comes in as no reply).
+      history: prospects
+        .filter((p) => ["no_reply", "lost", "skipped"].includes(p.status))
+        .sort((a, b) => (b.sent_at ?? "").localeCompare(a.sent_at ?? "")),
     };
   }, [prospects]);
 
@@ -137,6 +142,7 @@ export default function OutreachAdminPage() {
     { id: "backlog", label: "Backlog", count: groups.backlog.length },
     { id: "parked", label: "Parked", count: groups.parked.length },
     { id: "won", label: "Won", count: groups.won.length },
+    { id: "history", label: "History", count: groups.history.length },
   ];
 
   return (
@@ -194,6 +200,7 @@ export default function OutreachAdminPage() {
 
         {tab === "backlog" && (
           <>
+            <ReviewedBacklogs onLoaded={load} />
             <AddProspect onAdded={load} />
             <ImportHistory onImported={load} />
             {groups.backlog.map((p) => (
@@ -221,6 +228,29 @@ export default function OutreachAdminPage() {
                 <p style={styles.meta}>{p.status_reason}</p>
                 <div style={styles.actions}>
                   <Btn onClick={() => act(p.id, "restore")} disabled={busy === p.id} subtle>Move to backlog</Btn>
+                </div>
+              </div>
+            ))}
+          </>
+        )}
+
+        {tab === "history" && (
+          <>
+            <p style={styles.muted}>Sites already approached with no link: no reply, said no, or skipped. Kept so nothing gets pitched twice.</p>
+            {groups.history.map((p) => (
+              <div key={p.id} style={styles.card}>
+                <CardHead p={p} />
+                <p style={styles.meta}>
+                  {STATUS_LABEL[p.status] ?? p.status}
+                  {p.sent_at ? `, emailed ${fmtDate(p.sent_at)}` : ""}
+                  {p.contact_email ? ` to ${p.contact_email}` : ""}
+                </p>
+                {p.angle && <p style={styles.meta}>Pitched: {p.angle}</p>}
+                {p.notes && <p style={styles.reasons}>{p.notes}</p>}
+                <div style={styles.actions}>
+                  <Btn onClick={() => act(p.id, "replied")} disabled={busy === p.id} subtle>They replied</Btn>
+                  <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
+                  <Btn onClick={() => act(p.id, "restore")} disabled={busy === p.id} subtle>Back to backlog</Btn>
                 </div>
               </div>
             ))}
@@ -500,6 +530,78 @@ interface PreviewRow {
   notes: string | null;
   resolved: { status: OutreachStatus };
   existing: Known | null;
+}
+
+// Backlog files the link-building skill has committed (after Graham's
+// review), loaded into the queue in one tap. Rows go through the same gate
+// and duplicate check as everything else.
+function ReviewedBacklogs({ onLoaded }: { onLoaded: () => void }) {
+  const [files, setFiles] = useState<{ name: string; rows: number; loaded: number }[] | null>(null);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [working, setWorking] = useState<string | null>(null);
+
+  const refresh = useCallback(
+    () =>
+      fetch("/api/outreach/backlogs", { cache: "no-store" })
+        .then((r) => r.json())
+        .then((j) => (j.error ? setMsg(j.error) : setFiles(j.files)))
+        .catch((e) => setMsg(String(e))),
+    []
+  );
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
+
+  const loadFile = async (name: string) => {
+    setWorking(name);
+    try {
+      const res = await fetch("/api/outreach/backlogs", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ file: name }),
+      });
+      const j = await res.json();
+      if (!res.ok) throw new Error(j.error || res.statusText);
+      const r = j.results as { outcome: string; status?: string; existing?: Known }[];
+      const n = (f: (x: (typeof r)[number]) => boolean) => r.filter(f).length;
+      const known = r.filter((x) => x.outcome === "domain_known" && x.existing).map((x) => describeKnown(x.existing));
+      setMsg(
+        `Loaded ${name}: ${n((x) => x.outcome === "added" && x.status === "backlog")} to the backlog, ` +
+          `${n((x) => x.outcome === "added" && x.status === "parked")} parked, ` +
+          `${n((x) => x.outcome === "added" && x.status === "rejected")} rejected by the gate, ` +
+          `${n((x) => x.outcome === "duplicate")} already loaded` +
+          (known.length ? `, ${known.length} already on your list: ${known.join("; ")}` : "") +
+          "."
+      );
+      await refresh();
+      onLoaded();
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : String(e));
+    } finally {
+      setWorking(null);
+    }
+  };
+
+  if (!files?.length && !msg) return null;
+  return (
+    <div style={styles.card}>
+      <p style={styles.meta}>{"Reviewed backlogs from link building. Import your past outreach first, so anyone you've already emailed is caught."}</p>
+      {files?.map((f) => (
+        <div key={f.name} style={{ ...styles.actions, alignItems: "center" }}>
+          <span style={{ ...styles.meta, flex: 1 }}>
+            {f.name.replace("outreach-backlog-", "").replace(".json", "")}: {f.rows} prospects{f.loaded ? `, ${f.loaded} already loaded` : ""}
+          </span>
+          {f.loaded < f.rows && (
+            <Btn onClick={() => loadFile(f.name)} disabled={working !== null}>
+              {working === f.name ? "Loading..." : `Load ${f.rows - f.loaded}`}
+            </Btn>
+          )}
+        </div>
+      ))}
+      {msg && <p style={styles.meta}>{msg}</p>}
+    </div>
+  );
 }
 
 // Paste straight from the spreadsheet (select the cells including the header
