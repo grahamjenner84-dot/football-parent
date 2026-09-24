@@ -34,6 +34,11 @@ export async function POST(req: Request) {
     }
 
     const userAgent = cleanString(req.headers.get("user-agent"), MAX_UA_LENGTH);
+    // Vercel geolocates every request and sets this to the ISO 3166-1
+    // alpha-2 country (e.g. "GB"). Only the code is kept, never the IP.
+    // Absent on localhost, so null there.
+    const countryHeader = (req.headers.get("x-vercel-ip-country") ?? "").trim().toUpperCase();
+    const country = /^[A-Z]{2}$/.test(countryHeader) ? countryHeader : null;
     // Graham's own devices, recognised by the admin session cookie rather
     // than by the localStorage flag in lib/page-view-optout.ts. That flag is
     // per-browser-profile, has to be set by hand on every device, and gives
@@ -76,6 +81,7 @@ export async function POST(req: Request) {
         gclid: cleanString(body.gclid, MAX_CLICK_ID_LENGTH),
         fbclid: cleanString(body.fbclid, MAX_CLICK_ID_LENGTH),
         bannerVariant: cleanString(body.bannerVariant, MAX_BANNER_VARIANT_LENGTH),
+        country,
       });
     }
 

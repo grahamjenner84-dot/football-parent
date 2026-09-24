@@ -9,7 +9,15 @@ import { logSearchOnce } from "@/lib/search-log-client";
 import { searchArticles } from "@/lib/site-search";
 
 const MAX_LIVE_RESULTS = 6;
-const LOG_DEBOUNCE_MS = 600;
+// How long the query has to sit unchanged before it is logged as a search
+// in its own right. 600ms was far too short: anyone typing at phone speed
+// pauses that long mid-word, so a single search like "who to register
+// child's 5 years old to become pro" was landing in the report as a dozen
+// prefixes, each counted as a separate 0-result search. The dropdown now
+// mostly logs on commit instead (a result click, submit, or closing the
+// panel with a query in it), and this idle timer only catches the visitor
+// who types, reads the results and then leaves the panel open.
+const LOG_IDLE_MS = 3000;
 
 export default function SearchPanel() {
   const [open, setOpen] = useState(false);
@@ -70,9 +78,29 @@ export default function SearchPanel() {
     const fuse = fuseRef.current;
     const timer = setTimeout(() => {
       logSearchOnce(trimmed, searchArticles(fuse, index, trimmed).length);
-    }, LOG_DEBOUNCE_MS);
+    }, LOG_IDLE_MS);
     return () => clearTimeout(timer);
   }, [query, index]);
+
+  // Log the settled query when the panel closes (outside click, Escape, a
+  // result click, or the header unmounting on navigation), so a search
+  // that was abandoned before the idle timer fired still counts once, as
+  // whatever the visitor had typed last, rather than as its prefixes.
+  const latestRef = useRef({ query: "", resultCount: 0 });
+  useEffect(() => {
+    latestRef.current = { query: query.trim(), resultCount: results.length };
+  }, [query, results.length]);
+  useEffect(() => {
+    if (open) return;
+    const { query: settled, resultCount } = latestRef.current;
+    if (settled && index) logSearchOnce(settled, resultCount);
+  }, [open, index]);
+  useEffect(() => {
+    return () => {
+      const { query: settled, resultCount } = latestRef.current;
+      if (settled) logSearchOnce(settled, resultCount);
+    };
+  }, []);
 
   function goToResultsPage() {
     const trimmed = query.trim();
