@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Best Football Formations by Age Group | Football Parent",
+  title: "Best 7-a-Side and 9-a-Side Football Formations by Age",
   description:
     "7v7 now starts at U10 and 9v9 at U12 under the FA's 2026/27 format changes, not the old U9/U11 split. Suggested formations and rules for both explained.",
   path: "/coaching/best-football-formations-by-age-group",
