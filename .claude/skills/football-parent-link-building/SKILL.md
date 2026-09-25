@@ -98,9 +98,14 @@ approached.
 
 **People writing about a topic, not organisations describing themselves.**
 A good prospect is an authored piece (an opinion piece, advice article,
-explainer, column, or a parent's or coach's blog post) on something we
-cover, which already cites independent sources. For that writer, "here's
-another good read on this" is a natural thing to add.
+explainer, column, or a parent's or coach's blog post, including a
+coaching business's or academy provider's blog) on something we cover.
+Pages that already cite independent sources are the likeliest to say yes,
+so they rank higher, but citing nothing is **not** a reason to drop a page
+(Graham, Sept 2026: three strict runs kept 1 page out of ~200, while his own
+pass through the top 30 for "academy trials" found several worth emailing).
+For a page that cites nothing, the pitch is "here's the further reading
+your piece doesn't have yet".
 
 **Not prospects**, however on-topic:
 - **Club policies, handbooks, codes of conduct, ethos and philosophy
@@ -122,9 +127,25 @@ entry is a fair ask.
 ## Finding prospects: routes
 
 Record the route in each prospect's `source` so the report can show which
-works. **Start with route 1 every run.** It's Graham's method, and it
-finds people with a track record of linking to sites like ours. Spread
-what budget is left over the other routes.
+works. **Start with route 0, the SERP sweep, every run**: it's how Graham
+finds prospects himself and it produced far more than anything else. Then
+route 1 and the others as budget allows.
+
+0. **SERP sweep on the keywords links would help** (`source: "sweep:<keyword>"`).
+   Pick the keywords where a few links could move a page: from `our-pages`,
+   linkable pages ranking roughly #8 to #30 on a keyword with real volume
+   (the JPL explainer, academy trials, how to become a footballer, academy
+   categories, grassroots football, the club academy guides). For each,
+   `search "<keyword>" --depth 30` and go through the whole top 30 like
+   Graham does: every UK page from someone who could add a link to one of
+   our pages is a candidate, whether it's a blog, a coaching business, an
+   academy or trials provider's advice post, a local news feature or a
+   club article. Skip only what the gate and the vetting rules exclude
+   (commercial rival apps, forums, shops, policy pages, big national
+   sites, pages already on the list). `read` each, vet, find the contact.
+   The pitch is usually our page as the next read for their readers, on
+   the point where their page stops (for example, their trials page says
+   "prepare well" and ours explains what happens on the day).
 
 1. **Link graph on our biggest keywords** (`source: "graph:<keyword>"`).
    Take the highest-volume keywords from `our-pages` (linkable pages only,
@@ -250,14 +271,16 @@ keywords, and which of them look open to a link or a mutual.
 `read` every candidate the URL gate keeps. The result has a `verdict` that
 combines the URL gate with the **page-content check**
 (`assessPageContent` in `lib/outreach/quality.ts`). The content check
-rejects pages with:
-- no outbound links
-- only FA, league, social, admin or sponsor links
-- only site furniture: web-designer credits, Akismet or Pinterest, affiliate
-  and referral links, links to its own shop or booking system, newspaper
-  jobs/notices links
+passes any article (an author signal, or a 350+ word post on a blog or
+news path) whether or not it cites anyone, and marks the ones that don't
+with "cites no other sites" (`citesSources: false`). It rejects:
+- club policy and admin pages
 - link spam (usually unmoderated comments), which marks an abandoned site
-- no author, date or first-person voice and no curated independent links
+- non-articles (site pages, links pages) whose links are only FA, league,
+  social, admin, sponsor or site furniture (web-designer credits, Akismet,
+  affiliate and referral links, its own shop or booking system, newspaper
+  jobs/notices links)
+- thin pages and site pages with no author voice that aren't curated lists
 
 The URL gate also rejects link farms (.xyz, .online and similar,
 "seo-backlinks" directories) and wiki mirrors before anything is read.
@@ -266,6 +289,11 @@ counts as a citation, so check the `independentLinks` yourself.
 
 **A `rejected` verdict is final: don't argue a page back in.** If the check
 is clearly wrong about a page, say so in the report so the rule gets fixed.
+
+Pages ruled out under an older, stricter rule can be brought back when a
+rule is relaxed: re-vet them from the cached reads, then
+`cli.ts add <file> --revive` moves those that now pass from Ruled out back
+to the backlog with the new fit note and contact.
 
 For pages that pass, **only keep them if all of these are true:**
 

@@ -17,6 +17,9 @@
  *                                 country?, authority?, fit?, fit_note?, fp_page?,
  *                                 angle?, contact_*?}]. Rejected ones are stored
  *                                 as rejected so they are never re-proposed.
+ *                                 --revive: a URL already Ruled out is
+ *                                 re-assessed and, if it now passes, moved
+ *                                 back to the backlog with the new fields.
  *   queue                         JSON: drafted count, top backlog to draft,
  *                                 chase-ups due, link checks due.
  *   save-drafts <file.json>       [{id, subject, body, chase_line?, contact_*?,
@@ -203,7 +206,7 @@ async function main() {
       return;
     }
     case "add": {
-      console.log(JSON.stringify(await db.addProspects(readJson<NewProspect[]>(args[0])), null, 2));
+      console.log(JSON.stringify(await db.addProspects(readJson<NewProspect[]>(args[0]), { revive: args.includes("--revive") }), null, 2));
       return;
     }
     case "queue": {

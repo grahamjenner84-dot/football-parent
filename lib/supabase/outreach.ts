@@ -66,7 +66,7 @@ export interface NewProspect extends ProspectCandidate {
 
 export interface AddResult {
   url: string;
-  outcome: "added" | "duplicate" | "domain_known";
+  outcome: "added" | "revived" | "duplicate" | "domain_known";
   // For duplicate / domain_known: what's already on the list for that site,
   // so the admin page can say "emailed 3 Mar, no reply" rather than just no.
   existing?: KnownDomain;
@@ -122,13 +122,18 @@ export async function listKnownDomains(): Promise<KnownDomain[]> {
 
 // Runs the quality gate and stores the result either way: a rejected row is
 // kept (status 'rejected') so discovery never proposes the same page again.
-export async function addProspects(items: NewProspect[]): Promise<AddResult[]> {
+// `revive`: a URL already stored as rejected (ruled out) is re-assessed and,
+// if it now passes, brought back to the backlog with the new fields. For when
+// a rule is relaxed and pages ruled out under the old one deserve another
+// look. Anything in any other status is still a duplicate.
+export async function addProspects(items: NewProspect[], opts: { revive?: boolean } = {}): Promise<AddResult[]> {
   const supabase = adminClient();
   const results: AddResult[] = [];
 
   for (const item of items) {
     const { data: existing } = await supabase.from("outreach_prospects").select("id, url, domain, status, sent_at").eq("url", item.url).maybeSingle();
-    if (existing) {
+    const reviveId = existing && opts.revive && existing.status === "rejected" ? (existing.id as number) : null;
+    if (existing && !reviveId) {
       results.push({ url: item.url, outcome: "duplicate", existing: existing as KnownDomain });
       continue;
     }
@@ -155,7 +160,11 @@ export async function addProspects(items: NewProspect[]): Promise<AddResult[]> {
       createdAt: new Date().toISOString(),
     });
 
-    const { error } = await supabase.from("outreach_prospects").insert({
+    if (reviveId && status === "rejected") {
+      results.push({ url: item.url, outcome: "duplicate", existing: existing as KnownDomain });
+      continue;
+    }
+    const row = {
       url: item.url,
       domain: q.domain || hostOf(item.url),
       title: item.title ?? null,
@@ -175,9 +184,12 @@ export async function addProspects(items: NewProspect[]): Promise<AddResult[]> {
       status_reason: status === "backlog" ? (reasons.join("; ") || null) : reasons.join("; "),
       score: s.score,
       score_reasons: s.reasons.join(", "),
-    });
-    if (error) throw new Error(`insert ${item.url}: ${error.message}`);
-    results.push({ url: item.url, outcome: "added", status, reasons });
+    };
+    const { error } = reviveId
+      ? await supabase.from("outreach_prospects").update(row).eq("id", reviveId)
+      : await supabase.from("outreach_prospects").insert(row);
+    if (error) throw new Error(`${reviveId ? "revive" : "insert"} ${item.url}: ${error.message}`);
+    results.push({ url: item.url, outcome: reviveId ? "revived" : "added", status, reasons });
   }
   return results;
 }

@@ -341,6 +341,9 @@ export interface PageContentResult {
   kind: "article" | "resource_list" | "other";
   reasons: string[];
   independentLinks: { url: string; anchor: string }[];
+  // Whether the page already points readers at other people's work. No longer
+  // a requirement for an article, but a page that does is likelier to link.
+  citesSources: boolean;
 }
 
 // Outbound links that say nothing about willingness to cite a third party:
@@ -467,35 +470,47 @@ const RESOURCE_LIST = /\b(useful links|resources|further reading|recommended rea
 export function assessPageContent(page: PageContent): PageContentResult {
   const reasons: string[] = [];
   const independentLinks = editorialLinks(page);
-  const reject = (why: string, kind: PageContentResult["kind"] = "other"): PageContentResult => ({ verdict: "rejected", kind, reasons: [...reasons, why], independentLinks });
+  const reject = (why: string, kind: PageContentResult["kind"] = "other"): PageContentResult => ({ verdict: "rejected", kind, reasons: [...reasons, why], independentLinks, citesSources: independentLinks.length > 0 });
 
   const titleAndHeadings = [page.title ?? "", ...page.headings].join(" | ");
   if (CLUB_ADMIN_TITLE.test(titleAndHeadings.split(" | ").slice(0, 3).join(" "))) {
     return reject("club policy/admin page: states their own rules, not written to send readers elsewhere");
   }
-  if (page.externalLinks.length === 0) return reject("doesn't link to any other site");
   const spam = page.externalLinks.filter(isSpamLink);
   if (spam.length >= 3) {
     return reject(`carries link spam (${spam.length} links such as "${spam[0].anchor.slice(0, 40)}"), usually unmoderated comments: the site isn't being looked after`);
   }
+
+  const head = page.text.slice(0, 800);
+  const signals = [BYLINE.test(head) && "byline", DATE_TEXT.test(page.text.slice(0, 1500)) && "dated", FIRST_PERSON.test(page.text) && "first-person"].filter(Boolean) as string[];
+  let path = "";
+  try {
+    path = new URL(page.url).pathname;
+  } catch {}
+  // An article is something someone wrote about a topic: an author signal, or
+  // a post on a blog/news path. Citing other sites is no longer required
+  // (Graham, Sept 2026): a page that cites nothing is still a real person or
+  // business writing for parents, and "here's the further reading your piece
+  // doesn't have" is a fair pitch. It's flagged as lower odds instead.
+  const isArticle = page.wordCount >= 350 && (signals.length > 0 || EDITORIAL_PATH.test(path));
+  const isResourceList = RESOURCE_LIST.test(titleAndHeadings) && independentLinks.length >= 3;
+
+  if (isArticle) {
+    const voice = signals.length ? signals.join(", ") : "blog post, no byline";
+    reasons.push(`article (${voice}; ${page.wordCount} words; ${independentLinks.length} independent outbound link${independentLinks.length === 1 ? "" : "s"})`);
+    if (!independentLinks.length) reasons.push("cites no other sites: lower odds, pitch our page as the further reading it doesn't have");
+    if (!signals.length) reasons.push("no named author: pitch the site's editor or owner");
+    return { verdict: "ok", kind: "article", reasons, independentLinks, citesSources: independentLinks.length > 0 };
+  }
+  if (isResourceList) {
+    reasons.push(`curated resource list with ${independentLinks.length} independent links`);
+    return { verdict: "ok", kind: "resource_list", reasons, independentLinks, citesSources: true };
+  }
+  if (page.externalLinks.length === 0) return reject("doesn't link to any other site, and not an article");
   if (independentLinks.length === 0) {
     return reject(
       `only links to FA, league, social or admin sites, or site furniture (credits, affiliate links, plugins, its own shop) (${page.externalLinks.length} links, none to independent articles or resources)`
     );
-  }
-
-  const head = page.text.slice(0, 800);
-  const signals = [BYLINE.test(head) && "byline", DATE_TEXT.test(page.text.slice(0, 1500)) && "dated", FIRST_PERSON.test(page.text) && "first-person"].filter(Boolean) as string[];
-  const isArticle = page.wordCount >= 350 && signals.length > 0;
-  const isResourceList = RESOURCE_LIST.test(titleAndHeadings) && independentLinks.length >= 3;
-
-  if (isArticle) {
-    reasons.push(`article (${signals.join(", ")}; ${page.wordCount} words; ${independentLinks.length} independent outbound link${independentLinks.length === 1 ? "" : "s"})`);
-    return { verdict: "ok", kind: "article", reasons, independentLinks };
-  }
-  if (isResourceList) {
-    reasons.push(`curated resource list with ${independentLinks.length} independent links`);
-    return { verdict: "ok", kind: "resource_list", reasons, independentLinks };
   }
   return reject(
     page.wordCount < 350
