@@ -197,3 +197,13 @@ test("history import explains lost cell boundaries instead of failing silently",
   assert.equal(r.rows.length, 0);
   assert.match(r.errors[0], /cell boundaries were probably lost/);
 });
+
+test("score explanations match the stored reasons and add up", async () => {
+  const { explainScore } = await import("../lib/outreach/score-explain");
+  const s = scoreProspect({ type: "club", isUk: true, fit: 7, authority: 370, fpPage: "/coaching/x", hasContact: true, createdAt: "2026-07-01T00:00:00Z", now: new Date("2026-09-25T00:00:00Z") });
+  const parts = explainScore(s.reasons.join(", "));
+  assert.equal(parts.reduce((n, p) => n + p.points, 0), s.score);
+  assert.match(parts.find((p) => p.label.startsWith("fit"))!.why, /7\/10 = \+14/);
+  assert.match(parts.find((p) => p.label === "club")!.why, /Starting points/);
+  assert.ok(parts.every((p) => p.why && p.why !== p.label), "every part has a real explanation");
+});

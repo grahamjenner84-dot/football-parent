@@ -40,6 +40,8 @@ export interface OutreachRow {
   status: OutreachStatus;
   chase_count: number;
   next_action_at: string | null;
+  sent_at?: string | null;
+  last_contact_at?: string | null;
 }
 
 export type OutreachAction =
@@ -51,7 +53,10 @@ export type OutreachAction =
   | { action: "no_reply" }
   | { action: "skip" }
   | { action: "park" }
-  | { action: "restore" };
+  | { action: "restore" }
+  // Manual override from the row detail panel: put a prospect in any status
+  // (e.g. it replied by phone, or a chase went out from another inbox).
+  | { action: "set_status"; status: OutreachStatus };
 
 export interface Transition {
   status: OutreachStatus;
@@ -96,6 +101,24 @@ export function applyAction(row: OutreachRow, a: OutreachAction, now = new Date(
       return { status: "parked", next_action_at: null };
     case "restore":
       return { status: "backlog", next_action_at: null };
+    case "set_status": {
+      const to = a.status;
+      if (!STATUSES.includes(to)) throw new Error(`unknown status ${to}`);
+      if (to === "sent" || to === "chase_1" || to === "chase_2") {
+        // Keep the real history where there is one; otherwise treat it as
+        // happening now. The next chase is a week after the last contact.
+        const chases = to === "sent" ? 0 : to === "chase_1" ? 1 : 2;
+        const last = row.last_contact_at ?? row.sent_at ?? iso;
+        return {
+          status: to,
+          sent_at: row.sent_at ?? iso,
+          last_contact_at: last,
+          chase_count: chases,
+          next_action_at: addDays(new Date(last), CHASE_AFTER_DAYS),
+        };
+      }
+      return { status: to, next_action_at: null };
+    }
   }
 }
 

@@ -5,7 +5,9 @@ import {
   getStats,
   listProspects,
   saveDraft,
+  updateEditableFields,
   updateProspectFields,
+  type EditableField,
 } from "@/lib/supabase/outreach";
 import type { OutreachAction } from "@/lib/outreach/lifecycle";
 
@@ -13,7 +15,7 @@ import type { OutreachAction } from "@/lib/outreach/lifecycle";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const ACTIONS = new Set(["mark_sent", "mark_chased", "replied", "won", "lost", "no_reply", "skip", "park", "restore"]);
+const ACTIONS = new Set(["mark_sent", "mark_chased", "replied", "won", "lost", "no_reply", "skip", "park", "restore", "set_status"]);
 
 function fail(err: unknown, status = 500) {
   return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status });
@@ -73,7 +75,8 @@ export async function POST(req: NextRequest) {
 type PatchBody =
   | ({ id: number; kind: "action" } & OutreachAction)
   | { id: number; kind: "draft"; subject: string; body: string; contact_email?: string | null; contact_name?: string | null }
-  | { id: number; kind: "notes"; notes: string };
+  | { id: number; kind: "notes"; notes: string }
+  | { id: number; kind: "fields"; fields: Partial<Record<EditableField, string | number | null>> };
 
 export async function PATCH(req: NextRequest) {
   try {
@@ -89,6 +92,9 @@ export async function PATCH(req: NextRequest) {
     if (body.kind === "draft") {
       await saveDraft({ id: body.id, subject: body.subject, body: body.body, contact_email: body.contact_email, contact_name: body.contact_name });
       return NextResponse.json({ ok: true });
+    }
+    if (body.kind === "fields") {
+      return NextResponse.json({ prospect: await updateEditableFields(body.id, body.fields ?? {}) });
     }
     if (body.kind === "notes") {
       await updateProspectFields(body.id, { notes: body.notes });

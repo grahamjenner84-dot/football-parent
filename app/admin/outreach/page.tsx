@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
 import {
   AWAITING,
   chaseBody,
@@ -8,8 +8,10 @@ import {
   gmailComposeUrl,
   gmailThreadSearchUrl,
   OUTREACH_FROM_EMAIL,
+  STATUSES,
   type OutreachStatus,
 } from "@/lib/outreach/lifecycle";
+import { explainScore, SCORE_SUMMARY } from "@/lib/outreach/score-explain";
 
 // Weekly link-building queue. Drafts and prospects are written by the weekly
 // outreach run (.claude/skills/football-parent-link-building); this page is where
@@ -36,10 +38,15 @@ interface Prospect {
   draft_body: string | null;
   chase_line: string | null;
   sent_at: string | null;
+  last_contact_at: string | null;
   next_action_at: string | null;
   chase_count: number;
   won_link_url: string | null;
   notes: string | null;
+  source: string;
+  fit: number | null;
+  authority: number | null;
+  created_at: string;
 }
 
 interface Stats {
@@ -55,7 +62,7 @@ interface Stats {
   backlog: number;
 }
 
-type Tab = "week" | "waiting" | "backlog" | "parked" | "won" | "history";
+type Tab = "week" | "backlog" | "noReply" | "discussion" | "rejected" | "won" | "parked";
 
 const firstName = (name: string | null) => (name ? name.trim().split(/\s+/)[0] : null);
 
@@ -70,6 +77,8 @@ export default function OutreachAdminPage() {
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>("week");
   const [busy, setBusy] = useState<number | null>(null);
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const [showAdd, setShowAdd] = useState(false);
 
   // State is only set in promise callbacks, never synchronously in the
   // effect body (react-hooks/set-state-in-effect).
@@ -120,30 +129,35 @@ export default function OutreachAdminPage() {
     const drafted = prospects.filter((p) => p.status === "drafted").sort((a, b) => b.score - a.score);
     const awaiting = prospects.filter((p) => AWAITING.includes(p.status));
     const due = awaiting.filter((p) => dueAction(p, now) !== null);
-    const waiting = [...awaiting.filter((p) => dueAction(p, now) === null), ...prospects.filter((p) => p.status === "replied")];
+    const byLatest = (a: Prospect, b: Prospect) => (b.last_contact_at ?? b.sent_at ?? "").localeCompare(a.last_contact_at ?? a.sent_at ?? "");
     return {
       drafted,
       due,
-      waiting,
+      // Emailed, nothing back yet: still being chased (and not due this
+      // week) plus closed as no reply after the second chase.
+      noReply: [...awaiting.filter((p) => dueAction(p, now) === null), ...prospects.filter((p) => p.status === "no_reply")].sort(byLatest),
+      discussion: prospects.filter((p) => p.status === "replied").sort(byLatest),
+      rejected: prospects.filter((p) => p.status === "lost").sort(byLatest),
       backlog: prospects.filter((p) => p.status === "backlog").sort((a, b) => b.score - a.score),
-      parked: prospects.filter((p) => p.status === "parked"),
+      // Not good leads: ones Graham ruled out, plus partnership-only sites the
+      // quality filter set aside (FA pages, homepages, partner pages).
+      parked: prospects.filter((p) => p.status === "skipped" || p.status === "parked"),
       won: prospects.filter((p) => p.status === "won"),
-      // Closed without a link: imported history lands here too (anything
-      // emailed over three weeks ago with no status comes in as no reply).
-      history: prospects
-        .filter((p) => ["no_reply", "lost", "skipped"].includes(p.status))
-        .sort((a, b) => (b.sent_at ?? "").localeCompare(a.sent_at ?? "")),
     };
   }, [prospects]);
 
   const tabs: { id: Tab; label: string; count: number }[] = [
     { id: "week", label: "This week", count: groups.drafted.length + groups.due.length },
-    { id: "waiting", label: "Waiting", count: groups.waiting.length },
     { id: "backlog", label: "Backlog", count: groups.backlog.length },
+    { id: "noReply", label: "Emailed: no reply", count: groups.noReply.length },
+    { id: "discussion", label: "Emailed: in discussion", count: groups.discussion.length },
+    { id: "rejected", label: "Emailed: rejected", count: groups.rejected.length },
+    { id: "won", label: "Won (live)", count: groups.won.length },
     { id: "parked", label: "Parked", count: groups.parked.length },
-    { id: "won", label: "Won", count: groups.won.length },
-    { id: "history", label: "History", count: groups.history.length },
   ];
+
+  const rowsFor = (t: Tab): Prospect[] =>
+    t === "week" ? [...groups.due, ...groups.drafted] : (groups as unknown as Record<string, Prospect[]>)[t] ?? [];
 
   return (
     <main style={styles.page}>
@@ -152,8 +166,15 @@ export default function OutreachAdminPage() {
           <h1 style={styles.title}>Link outreach</h1>
           <p style={styles.subtitle}>Sending from {OUTREACH_FROM_EMAIL}. Drafts refresh every Monday.</p>
         </div>
-        <a href="/admin/seo" style={styles.navLink}>SEO dashboard</a>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "flex-end" }}>
+          <button onClick={() => setShowAdd((v) => !v)} style={styles.addButton}>
+            {showAdd ? "Close" : "+ Add prospects"}
+          </button>
+          <a href="/admin/seo" style={styles.navLink}>SEO dashboard</a>
+        </div>
       </header>
+
+      {showAdd && <AddPanel onChanged={load} />}
 
       {stats && <Scoreboard stats={stats} />}
 
@@ -169,105 +190,17 @@ export default function OutreachAdminPage() {
         {loading && <p style={styles.muted}>Loading...</p>}
         {error && <p style={styles.error}>{error}</p>}
 
-        {tab === "week" && !loading && (
+        {!loading && (
           <>
-            {groups.due.length > 0 && <h2 style={styles.h2}>Chase-ups due ({groups.due.length})</h2>}
-            {groups.due.map((p) => (
-              <ChaseCard key={p.id} p={p} busy={busy === p.id} act={act} />
-            ))}
-            <h2 style={styles.h2}>New emails ({groups.drafted.length})</h2>
-            {groups.drafted.length === 0 && <p style={styles.muted}>Nothing drafted yet. The Monday run tops this up to 15.</p>}
-            {groups.drafted.map((p) => (
-              <DraftCard key={p.id} p={p} busy={busy === p.id} act={act} patch={patch} />
-            ))}
+            <p style={styles.muted}>{TAB_HELP[tab]}</p>
+            <ProspectTable
+              rows={rowsFor(tab)}
+              expanded={expanded}
+              onToggle={(id) => setExpanded((cur) => (cur === id ? null : id))}
+              renderDetail={(p) => <ProspectDetail key={p.id} p={p} busy={busy === p.id} act={act} patch={patch} />}
+            />
           </>
         )}
-
-        {tab === "waiting" &&
-          groups.waiting.map((p) => (
-            <div key={p.id} style={styles.card}>
-              <CardHead p={p} />
-              <p style={styles.meta}>
-                {p.status === "replied" ? "Replied: agree the details, then mark won or lost." : `Sent ${fmtDate(p.sent_at)}. Next chase ${fmtDate(p.next_action_at)}.`}
-              </p>
-              <div style={styles.actions}>
-                {p.status !== "replied" && <Btn onClick={() => act(p.id, "replied")} disabled={busy === p.id}>Replied</Btn>}
-                <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
-                <Btn onClick={() => act(p.id, "lost")} disabled={busy === p.id} subtle>Said no</Btn>
-              </div>
-            </div>
-          ))}
-
-        {tab === "backlog" && (
-          <>
-            <ReviewedBacklogs onLoaded={load} />
-            <AddProspect onAdded={load} />
-            <ImportHistory onImported={load} />
-            {groups.backlog.map((p) => (
-              <div key={p.id} style={styles.card}>
-                <CardHead p={p} />
-                {p.angle && <p style={styles.meta}>Angle: {p.angle}</p>}
-                {p.fit_note && <p style={styles.meta}>{p.fit_note}</p>}
-                {p.notes && <p style={styles.meta}>{p.notes}</p>}
-                <p style={styles.reasons}>{p.score_reasons}</p>
-                <div style={styles.actions}>
-                  <Btn onClick={() => act(p.id, "skip")} disabled={busy === p.id} subtle>Skip</Btn>
-                  <Btn onClick={() => act(p.id, "park")} disabled={busy === p.id} subtle>Park</Btn>
-                </div>
-              </div>
-            ))}
-          </>
-        )}
-
-        {tab === "parked" && (
-          <>
-            <p style={styles.muted}>Real relationships that need a partnership or press conversation, not a cold link request.</p>
-            {groups.parked.map((p) => (
-              <div key={p.id} style={styles.card}>
-                <CardHead p={p} />
-                <p style={styles.meta}>{p.status_reason}</p>
-                <div style={styles.actions}>
-                  <Btn onClick={() => act(p.id, "restore")} disabled={busy === p.id} subtle>Move to backlog</Btn>
-                </div>
-              </div>
-            ))}
-          </>
-        )}
-
-        {tab === "history" && (
-          <>
-            <p style={styles.muted}>Sites already approached with no link: no reply, said no, or skipped. Kept so nothing gets pitched twice.</p>
-            {groups.history.map((p) => (
-              <div key={p.id} style={styles.card}>
-                <CardHead p={p} />
-                <p style={styles.meta}>
-                  {STATUS_LABEL[p.status] ?? p.status}
-                  {p.sent_at ? `, emailed ${fmtDate(p.sent_at)}` : ""}
-                  {p.contact_email ? ` to ${p.contact_email}` : ""}
-                </p>
-                {p.angle && <p style={styles.meta}>Pitched: {p.angle}</p>}
-                {p.notes && <p style={styles.reasons}>{p.notes}</p>}
-                <div style={styles.actions}>
-                  <Btn onClick={() => act(p.id, "replied")} disabled={busy === p.id} subtle>They replied</Btn>
-                  <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
-                  <Btn onClick={() => act(p.id, "restore")} disabled={busy === p.id} subtle>Back to backlog</Btn>
-                </div>
-              </div>
-            ))}
-          </>
-        )}
-
-        {tab === "won" &&
-          groups.won.map((p) => (
-            <div key={p.id} style={styles.card}>
-              <CardHead p={p} />
-              {p.won_link_url && (
-                <a href={p.won_link_url} target="_blank" rel="noopener noreferrer" style={styles.link}>
-                  {p.won_link_url}
-                </a>
-              )}
-            </div>
-          ))}
       </section>
     </main>
   );
@@ -293,22 +226,6 @@ function Scoreboard({ stats }: { stats: Stats }) {
   );
 }
 
-function CardHead({ p }: { p: Prospect }) {
-  return (
-    <div>
-      <div style={styles.cardTop}>
-        <span style={styles.domain}>{p.domain}</span>
-        <span style={styles.pill}>{p.prospect_type}</span>
-        <span style={styles.score}>{p.score}</span>
-      </div>
-      <a href={p.url} target="_blank" rel="noopener noreferrer" style={styles.link}>
-        {p.title || p.url}
-      </a>
-      {p.fp_page && <p style={styles.meta}>Pitching: {p.fp_page}</p>}
-    </div>
-  );
-}
-
 type ActFn = (id: number, action: string, extra?: Record<string, unknown>) => Promise<void>;
 
 function DraftCard({ p, busy, act, patch }: { p: Prospect; busy: boolean; act: ActFn; patch: (x: Record<string, unknown>) => Promise<void> }) {
@@ -320,9 +237,8 @@ function DraftCard({ p, busy, act, patch }: { p: Prospect; busy: boolean; act: A
   const save = () => patch({ id: p.id, kind: "draft", subject, body, contact_email: to || null });
 
   return (
-    <div style={styles.card}>
-      <CardHead p={p} />
-      {p.angle && <p style={styles.meta}>Angle: {p.angle}</p>}
+    <div>
+      <h3 style={styles.h3}>Email to send</h3>
       <label style={styles.label}>
         To {p.contact_name ? `(${p.contact_name})` : ""}
         <input value={to} onChange={(e) => setTo(e.target.value)} style={styles.input} placeholder="no email found" />
@@ -374,8 +290,8 @@ function ChaseCard({ p, busy, act }: { p: Prospect; busy: boolean; act: ActFn })
   const [text, setText] = useState(close ? "" : chaseBody({ firstName: firstName(p.contact_name), n, personal: p.chase_line }));
 
   return (
-    <div style={styles.card}>
-      <CardHead p={p} />
+    <div>
+      <h3 style={styles.h3}>{close ? "Close it off?" : `Chase ${n} of 2`}</h3>
       <p style={styles.meta}>
         {close
           ? `Two chases sent, last on ${fmtDate(p.next_action_at)}. Close it off?`
@@ -401,7 +317,7 @@ function ChaseCard({ p, busy, act }: { p: Prospect; busy: boolean; act: ActFn })
   );
 }
 
-function WonButton({ onWon, disabled }: { onWon: (url: string) => void; disabled: boolean }) {
+function WonButton({ onWon, disabled, label = "Won" }: { onWon: (url: string) => void; disabled: boolean; label?: string }) {
   return (
     <Btn
       disabled={disabled}
@@ -410,7 +326,7 @@ function WonButton({ onWon, disabled }: { onWon: (url: string) => void; disabled
         if (url) onWon(url.trim());
       }}
     >
-      Won
+      {label}
     </Btn>
   );
 }
@@ -492,11 +408,11 @@ const STATUS_LABEL: Partial<Record<OutreachStatus, string>> = {
   sent: "waiting for a reply",
   chase_1: "chased once",
   chase_2: "chased twice",
-  replied: "replied",
+  replied: "in discussion",
   won: "link won",
   lost: "said no",
   no_reply: "no reply",
-  skipped: "skipped",
+  skipped: "not a good lead",
   parked: "parked",
 };
 
@@ -585,7 +501,8 @@ function ReviewedBacklogs({ onLoaded }: { onLoaded: () => void }) {
     }
   };
 
-  if (!files?.length && !msg) return null;
+  if (files === null && !msg) return <p style={styles.muted}>Loading...</p>;
+  if (!files?.length && !msg) return <p style={styles.muted}>No research files yet. Ask Claude to do link building and its reviewed list will appear here.</p>;
   return (
     <div style={styles.card}>
       <p style={styles.meta}>{"Reviewed backlogs from link building. Import your past outreach first, so anyone you've already emailed is caught."}</p>
@@ -609,8 +526,8 @@ function ReviewedBacklogs({ onLoaded }: { onLoaded: () => void }) {
 // Paste straight from the spreadsheet (select the cells including the header
 // row, copy, paste) or pick a CSV. Preview first, nothing is written until
 // "Import".
-function ImportHistory({ onImported }: { onImported: () => void }) {
-  const [open, setOpen] = useState(false);
+function ImportHistory({ onImported, startOpen = false }: { onImported: () => void; startOpen?: boolean }) {
+  const [open, setOpen] = useState(startOpen);
   const [text, setText] = useState("");
   const [preview, setPreview] = useState<{ rows: PreviewRow[]; errors: string[]; columns: Record<string, string | null> } | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
@@ -747,6 +664,303 @@ function ImportHistory({ onImported }: { onImported: () => void }) {
   );
 }
 
+const TAB_HELP: Record<Tab, string> = {
+  week: "This week's new emails (topped up to 15 every Monday) and any chase-ups due. Tap a row to edit the email and send it.",
+  backlog: "Everyone not contacted yet, highest priority first. The Monday run drafts from the top. Tap a row to see or change anything.",
+  noReply: "Emailed with nothing back: still being chased, or closed after the second chase.",
+  discussion: "They replied and it looks promising. Mark won once the link is live.",
+  rejected: "Said no, or went nowhere after replying. Kept so they aren't pitched again.",
+  won: "Links that are live.",
+  parked: "Not good leads: ones you've ruled out, plus FA, homepage and partner pages the filter set aside as partnership-only.",
+};
+
+function rowStatus(p: Prospect): string {
+  if (p.status === "drafted") return "Draft ready";
+  const due = dueAction(p);
+  if (due === "chase") return `Chase ${p.chase_count + 1} due`;
+  if (due === "close") return "Close off?";
+  if (AWAITING.includes(p.status) && p.next_action_at) return `${STATUS_LABEL[p.status]}, chase ${fmtDate(p.next_action_at)}`;
+  return STATUS_LABEL[p.status] ?? p.status;
+}
+
+// Add one / import past outreach / load research: kept out of the backlog
+// list behind the header's "+ Add prospects" button.
+function AddPanel({ onChanged }: { onChanged: () => void }) {
+  const [mode, setMode] = useState<"one" | "import" | "research">("one");
+  return (
+    <section style={{ ...styles.body, paddingTop: 12 }}>
+      <div style={styles.card}>
+        <div style={{ ...styles.tabBar, padding: 0, marginBottom: 8 }}>
+          {(
+            [
+              ["one", "Add one"],
+              ["import", "Import past outreach"],
+              ["research", "Load research"],
+            ] as const
+          ).map(([id, label]) => (
+            <button key={id} onClick={() => setMode(id)} style={{ ...styles.tab, ...(mode === id ? styles.tabActive : {}) }}>
+              {label}
+            </button>
+          ))}
+        </div>
+        {mode === "one" && <AddProspect onAdded={onChanged} />}
+        {mode === "import" && <ImportHistory onImported={onChanged} startOpen />}
+        {mode === "research" && <ReviewedBacklogs onLoaded={onChanged} />}
+      </div>
+    </section>
+  );
+}
+
+function ScoreCell({ p }: { p: Prospect }) {
+  // Fixed-position tooltip anchored to the badge, so the table's horizontal
+  // scroll container can't clip it.
+  const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
+  const parts = explainScore(p.score_reasons);
+  if (!parts.length) {
+    return (
+      <span style={styles.muted} title="Only prospects waiting to be contacted are scored.">
+        -
+      </span>
+    );
+  }
+  const place = (el: HTMLElement) => {
+    const r = el.getBoundingClientRect();
+    const width = 340;
+    const below = window.innerHeight - r.bottom > 320;
+    setPos({ top: below ? r.bottom + 6 : Math.max(8, r.top - 326), left: Math.max(8, Math.min(r.left, window.innerWidth - width - 8)) });
+  };
+  return (
+    <span
+      style={{ display: "inline-block" }}
+      onMouseEnter={(e) => place(e.currentTarget)}
+      onMouseLeave={() => setPos(null)}
+      onClick={(e) => {
+        e.stopPropagation();
+        if (pos) setPos(null);
+        else place(e.currentTarget);
+      }}
+    >
+      <span style={styles.scoreBadge}>{p.score}</span>
+      {pos && (
+        <span style={{ ...styles.tooltip, top: pos.top, left: pos.left }}>
+          <ScoreBreakdown p={p} />
+        </span>
+      )}
+    </span>
+  );
+}
+
+function ScoreBreakdown({ p }: { p: Prospect }) {
+  const parts = explainScore(p.score_reasons);
+  return (
+    <span style={{ display: "block" }}>
+      <span style={{ display: "block", marginBottom: 6, color: "#c9b896" }}>{SCORE_SUMMARY}</span>
+      {parts.map((part) => (
+        <span key={part.label} style={{ display: "block", margin: "4px 0" }}>
+          <strong style={{ color: part.points < 0 ? "#e57373" : "#e8b04b" }}>
+            {part.points > 0 ? "+" : ""}
+            {part.points}
+          </strong>{" "}
+          <strong>{part.label}</strong>: {part.why}
+        </span>
+      ))}
+      <span style={{ display: "block", marginTop: 6, borderTop: "1px solid #3a2c1d", paddingTop: 6 }}>
+        <strong style={{ color: "#e8b04b" }}>= {p.score}</strong>
+      </span>
+    </span>
+  );
+}
+
+function ProspectTable({
+  rows,
+  expanded,
+  onToggle,
+  renderDetail,
+}: {
+  rows: Prospect[];
+  expanded: number | null;
+  onToggle: (id: number) => void;
+  renderDetail: (p: Prospect) => ReactNode;
+}) {
+  if (!rows.length) return <p style={styles.muted}>Nothing here yet.</p>;
+  return (
+    <div style={styles.tableWrap}>
+      <table style={styles.table}>
+        <thead>
+          <tr>
+            {["Site", "Score", "Fit", "Type", "Pitching", "Contact", "Emailed", "Last contact", "Status"].map((h) => (
+              <th key={h} style={styles.th}>
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((p) => (
+            <Fragment key={p.id}>
+              <tr onClick={() => onToggle(p.id)} style={{ ...styles.tr, ...(expanded === p.id ? styles.trOpen : {}) }}>
+                <td style={styles.td}>
+                  <div style={{ fontWeight: 600 }}>{p.title || p.domain}</div>
+                  <a href={p.url} target="_blank" rel="noopener noreferrer" style={styles.link} onClick={(e) => e.stopPropagation()}>
+                    {p.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                  </a>
+                </td>
+                <td style={styles.td}>
+                  <ScoreCell p={p} />
+                </td>
+                <td style={styles.tdNowrap}>{p.fit != null ? `${p.fit}/10` : "-"}</td>
+                <td style={styles.td}>{p.prospect_type.replace("_", " ")}</td>
+                <td style={{ ...styles.td, maxWidth: 220 }}>{p.fp_page ?? "-"}</td>
+                <td style={{ ...styles.td, maxWidth: 200 }}>{p.contact_email ?? (p.contact_url ? "contact form" : "-")}</td>
+                <td style={styles.tdNowrap}>{fmtDate(p.sent_at) || "-"}</td>
+                <td style={styles.tdNowrap}>{fmtDate(p.last_contact_at) || "-"}</td>
+                <td style={styles.td}>{rowStatus(p)}</td>
+              </tr>
+              {expanded === p.id && (
+                <tr>
+                  <td colSpan={9} style={styles.detailCell}>
+                    {renderDetail(p)}
+                  </td>
+                </tr>
+              )}
+            </Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// Everything about one prospect, opened by tapping its row: the email or
+// chase if one is due, quick outcome buttons, any status by hand, editable
+// details, and how the score was worked out.
+function ProspectDetail({ p, busy, act, patch }: { p: Prospect; busy: boolean; act: ActFn; patch: (x: Record<string, unknown>) => Promise<void> }) {
+  const [status, setStatus] = useState<OutreachStatus>(p.status);
+  const [f, setF] = useState({
+    title: p.title ?? "",
+    contact_name: p.contact_name ?? "",
+    contact_email: p.contact_email ?? "",
+    contact_url: p.contact_url ?? "",
+    fp_page: p.fp_page ?? "",
+    angle: p.angle ?? "",
+    notes: p.notes ?? "",
+    won_link_url: p.won_link_url ?? "",
+    fit: p.fit != null ? String(p.fit) : "",
+    da: p.authority != null ? String(Math.round(p.authority / 10)) : "",
+  });
+  const set = (k: keyof typeof f) => (e: { target: { value: string } }) => setF((cur) => ({ ...cur, [k]: e.target.value }));
+  const due = dueAction(p);
+
+  const saveFields = () =>
+    patch({
+      id: p.id,
+      kind: "fields",
+      fields: {
+        title: f.title,
+        contact_name: f.contact_name,
+        contact_email: f.contact_email,
+        contact_url: f.contact_url,
+        fp_page: f.fp_page,
+        angle: f.angle,
+        notes: f.notes,
+        won_link_url: f.won_link_url,
+        fit: f.fit === "" ? null : Number(f.fit),
+        authority: f.da === "" ? null : Math.round(Number(f.da) * 10),
+      },
+    });
+
+  const input = (label: string, k: keyof typeof f, placeholder = "") => (
+    <label style={styles.label}>
+      {label}
+      <input value={f[k]} onChange={set(k)} placeholder={placeholder} style={styles.input} />
+    </label>
+  );
+
+  return (
+    <div style={styles.detailGrid} onClick={(e) => e.stopPropagation()}>
+      <div>
+        {p.status === "drafted" && <DraftCard p={p} busy={busy} act={act} patch={patch} />}
+        {due && <ChaseCard p={p} busy={busy} act={act} />}
+
+        <h3 style={styles.h3}>Update status</h3>
+        <div style={styles.actions}>
+          {["backlog", "drafted"].includes(p.status) && <Btn onClick={() => act(p.id, "mark_sent")} disabled={busy}>Mark emailed</Btn>}
+          {p.status !== "replied" && <Btn onClick={() => act(p.id, "replied")} disabled={busy}>They replied</Btn>}
+          {p.status !== "won" && <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy} />}
+          {!["lost", "backlog", "parked", "skipped", "drafted"].includes(p.status) && (
+            <Btn onClick={() => act(p.id, "lost")} disabled={busy} subtle>Said no</Btn>
+          )}
+          {["backlog", "drafted"].includes(p.status) && (
+            <Btn onClick={() => act(p.id, "skip")} disabled={busy} subtle>Not a good lead</Btn>
+          )}
+          {["parked", "skipped", "no_reply"].includes(p.status) && (
+            <Btn onClick={() => act(p.id, "restore")} disabled={busy} subtle>Back to backlog</Btn>
+          )}
+        </div>
+        <div style={{ ...styles.actions, alignItems: "center" }}>
+          <span style={styles.muted}>Or set it to</span>
+          <select value={status} onChange={(e) => setStatus(e.target.value as OutreachStatus)} style={{ ...styles.input, width: "auto", margin: 0 }}>
+            {STATUSES.filter((st) => st !== "rejected").map((st) => (
+              <option key={st} value={st}>
+                {STATUS_LABEL[st] ?? st}
+              </option>
+            ))}
+          </select>
+          <Btn onClick={() => act(p.id, "set_status", { status })} disabled={busy || status === p.status}>
+            Set
+          </Btn>
+        </div>
+
+        <h3 style={styles.h3}>How the score was worked out</h3>
+        {p.score_reasons ? (
+          <div style={styles.breakdown}>
+            <ScoreBreakdown p={p} />
+          </div>
+        ) : (
+          <p style={styles.muted}>Only prospects waiting to be contacted are scored.</p>
+        )}
+        {(p.fit_note || p.status_reason) && (
+          <>
+            <h3 style={styles.h3}>Notes from the research</h3>
+            {p.fit_note && <p style={styles.meta}>{p.fit_note}</p>}
+            {p.status_reason && <p style={styles.reasons}>{p.status_reason}</p>}
+          </>
+        )}
+        <p style={styles.reasons}>
+          Source: {p.source}. Added {fmtDate(p.created_at)}.
+        </p>
+      </div>
+
+      <div>
+        <h3 style={styles.h3}>Details</h3>
+        {input("Site name", "title")}
+        {input("Contact name", "contact_name")}
+        {input("Contact email", "contact_email")}
+        {input("Contact page / form", "contact_url")}
+        {input("Our page to pitch", "fp_page", "/coaching/...")}
+        <label style={styles.label}>
+          Angle / what you pitched
+          <textarea value={f.angle} onChange={set("angle")} style={styles.textarea} rows={3} />
+        </label>
+        <label style={styles.label}>
+          Notes
+          <textarea value={f.notes} onChange={set("notes")} style={styles.textarea} rows={4} />
+        </label>
+        <div style={{ display: "flex", gap: 8 }}>
+          <div style={{ flex: 1 }}>{input("Fit (0-10)", "fit")}</div>
+          <div style={{ flex: 1 }}>{input("Domain score (DA/DR)", "da")}</div>
+        </div>
+        {input("Live link (once won)", "won_link_url", "https://...")}
+        <div style={styles.actions}>
+          <Btn onClick={saveFields} disabled={busy}>
+            Save details
+          </Btn>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Btn({ children, onClick, disabled, subtle }: { children: ReactNode; onClick: () => void; disabled?: boolean; subtle?: boolean }) {
   return (
     <button onClick={onClick} disabled={disabled} style={{ ...(subtle ? styles.subtle : styles.button), opacity: disabled ? 0.5 : 1 }}>
@@ -770,7 +984,21 @@ const styles: Record<string, CSSProperties> = {
   tab: { background: "transparent", border: "1px solid #3a2c1d", color: "#c9b896", borderRadius: 999, padding: "7px 12px", fontSize: 13, whiteSpace: "nowrap", cursor: "pointer" },
   tabActive: { background: "#e8b04b", color: "#1a1410", borderColor: "#e8b04b" },
   count: { opacity: 0.7, marginLeft: 4 },
-  body: { padding: "4px 16px", maxWidth: 760, margin: "0 auto" },
+  body: { padding: "4px 16px" },
+  addButton: { background: "#e8b04b", color: "#1a1410", border: "none", borderRadius: 8, padding: "8px 12px", fontSize: 13, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap" },
+  tableWrap: { width: "100%", overflowX: "auto", border: "1px solid #3a2c1d", borderRadius: 10 },
+  table: { width: "100%", minWidth: 980, borderCollapse: "collapse", fontSize: 13 },
+  th: { textAlign: "left", padding: "10px 12px", color: "#9c8a72", fontWeight: 600, fontSize: 12, borderBottom: "1px solid #3a2c1d", background: "#241b14", whiteSpace: "nowrap" },
+  tr: { cursor: "pointer", borderBottom: "1px solid #2e241a" },
+  trOpen: { background: "#2a2017" },
+  td: { padding: "10px 12px", verticalAlign: "top", color: "#f0e6d2", overflowWrap: "anywhere" },
+  tdNowrap: { padding: "10px 12px", verticalAlign: "top", color: "#f0e6d2", whiteSpace: "nowrap" },
+  detailCell: { padding: 16, background: "#211912", borderBottom: "1px solid #3a2c1d", cursor: "default" },
+  detailGrid: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 },
+  h3: { fontSize: 13, color: "#e8b04b", margin: "14px 0 6px", textTransform: "uppercase", letterSpacing: 0.4 },
+  scoreBadge: { display: "inline-block", minWidth: 34, textAlign: "center", background: "#3a2c1d", color: "#e8b04b", fontWeight: 700, borderRadius: 6, padding: "3px 6px", cursor: "help" },
+  tooltip: { position: "fixed", zIndex: 50, width: 340, maxHeight: 320, overflowY: "auto", background: "#120d09", border: "1px solid #3a2c1d", borderRadius: 10, padding: 12, fontSize: 12, lineHeight: 1.45, color: "#f0e6d2", boxShadow: "0 8px 24px rgba(0,0,0,0.5)" },
+  breakdown: { background: "#1a1410", border: "1px solid #3a2c1d", borderRadius: 10, padding: 12, fontSize: 12, lineHeight: 1.45 },
   h2: { fontSize: 14, color: "#c9b896", margin: "18px 0 8px", textTransform: "uppercase", letterSpacing: 0.5 },
   card: { background: "#241b14", border: "1px solid #3a2c1d", borderRadius: 12, padding: 14, marginBottom: 12 },
   cardTop: { display: "flex", alignItems: "center", gap: 8, marginBottom: 4 },
