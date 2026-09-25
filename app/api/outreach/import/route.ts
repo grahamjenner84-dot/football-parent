@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parseHistory, resolveImportedStatus } from "@/lib/outreach/import";
-import { findKnownDomain, importHistory } from "@/lib/supabase/outreach";
+import { findKnownDomain, importHistory, isFromHistoryImport } from "@/lib/supabase/outreach";
 
 // Admin-only (guarded in proxy.ts). Bulk import of past outreach from
 // Graham's own sheet. `preview: true` parses and checks each site against
@@ -25,7 +25,8 @@ export async function POST(req: NextRequest) {
       const rows = [];
       for (const row of parsed.rows) {
         const existing = await findKnownDomain(row.domain);
-        rows.push({ ...row, resolved: resolveImportedStatus(row, now), existing });
+        const fromEarlierImport = existing ? await isFromHistoryImport(row.domain) : false;
+        rows.push({ ...row, resolved: resolveImportedStatus(row, now), existing, fromEarlierImport });
       }
       return NextResponse.json({ columns: parsed.columns, errors: parsed.errors, rows });
     }

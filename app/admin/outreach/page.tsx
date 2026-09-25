@@ -530,6 +530,8 @@ interface PreviewRow {
   notes: string | null;
   resolved: { status: OutreachStatus };
   existing: Known | null;
+  // Saved by an earlier import of the sheet: a re-import overwrites it.
+  fromEarlierImport?: boolean;
 }
 
 // Backlog files the link-building skill has committed (after Graham's
@@ -654,7 +656,7 @@ function ImportHistory({ onImported }: { onImported: () => void }) {
     );
   }
 
-  const willImport = preview ? preview.rows.filter((r) => !r.existing || ["backlog", "drafted", "parked", "skipped"].includes(r.existing.status)) : [];
+  const willImport = preview ? preview.rows.filter((r) => !r.existing || r.fromEarlierImport || ["backlog", "drafted", "parked", "skipped"].includes(r.existing.status)) : [];
 
   return (
     <div style={styles.card}>
@@ -720,7 +722,7 @@ function ImportHistory({ onImported }: { onImported: () => void }) {
             </p>
           ))}
           {preview.rows.map((r) => {
-            const skip = r.existing && !["backlog", "drafted", "parked", "skipped"].includes(r.existing.status);
+            const skip = r.existing && !r.fromEarlierImport && !["backlog", "drafted", "parked", "skipped"].includes(r.existing.status);
             return (
               <div key={r.line} style={{ borderTop: "1px solid #3a2c1d", padding: "8px 0", opacity: skip ? 0.55 : 1 }}>
                 <div style={styles.cardTop}>
@@ -735,7 +737,7 @@ function ImportHistory({ onImported }: { onImported: () => void }) {
                 </p>
                 {r.angle && <p style={styles.reasons}>Pitched: {r.angle}</p>}
                 {r.notes && <p style={styles.reasons}>{r.notes}</p>}
-                {r.existing && <p style={styles.reasons}>{skip ? "Left alone: " : "Will update: "}{describeKnown(r.existing)}</p>}
+                {r.existing && <p style={styles.reasons}>{skip ? "Left alone: " : r.fromEarlierImport ? "Replaces earlier import: " : "Will update: "}{describeKnown(r.existing)}</p>}
               </div>
             );
           })}
