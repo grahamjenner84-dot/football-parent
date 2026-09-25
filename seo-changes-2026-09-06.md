@@ -942,4 +942,14 @@ Title tag only, in `app/coaching/equal-playing-time-in-grassroots-football/page.
 
 Why: "game time football" is ~320 UK searches/month (canonical Google Ads volume, 6 Sep) against ~20 for "equal playing time football", and the title never mentioned game time. Page already ranks ~7.7 for "equal game time". Live traffic at the time of the change: 1,349 impressions, 24 clicks, avg position 6.4, CTR 1.8% (28 days), flagged low-CTR. Previous change to this page was 6 Sep, so outside its watch window.
 
-Commit: `af27498`. Watch until ~7 Oct before touching the page again. The planned follow-up (H2 "How to Calculate Fair Playing Time" to "How to Calculate Equal Game Time") waits until then.
+Commit: `af27498`. Watch until ~7 Oct before touching the page again.
+
+## Same page, same day: calculation H2 renamed (2026-09-25, deliberate exception to the watch window)
+
+H2 "How to Calculate Fair Playing Time" renamed to "How to Calculate Equal Game Time", with its frontmatter `sections` TOC entry (id and title) updated to match. Section body unchanged, no headings removed, no inbound anchor links to the old id anywhere on the site.
+
+Why: targets "playing time calculator" (260/mo) and "equal playing time calculator" (210/mo), and gets "game time" into a main heading alongside the title change above.
+
+**Rule exception, logged explicitly:** this is a second change to this page on the same day as the title change (`af27498`). Graham asked for it to go now rather than wait out the 10-14 day window, so any movement over the next two weeks can't be put down to one of the two changes alone. If the page drops, revert both, then re-apply the title on its own.
+
+Commit: `8008588`. Watch until ~7 Oct.
