@@ -122,11 +122,14 @@ async function readAll<T>(
   return rows;
 }
 
-export async function getCoachAppShareStats(days: number = 30): Promise<CoachAppShareStats> {
+/** `startAt` lets a caller start later than the share tracking itself, e.g.
+ * the funnel tab, which starts every number at its own go-live. */
+export async function getCoachAppShareStats(days: number = 30, startAt?: string): Promise<CoachAppShareStats> {
   const supabase = adminClient();
   const sinceMs = Math.max(
     Date.now() - days * 24 * 60 * 60 * 1000,
-    new Date(SHARE_TRACKING_STARTED_AT).getTime()
+    new Date(SHARE_TRACKING_STARTED_AT).getTime(),
+    startAt ? Date.parse(startAt) : 0
   );
   const since = new Date(sinceMs).toISOString();
 

@@ -73,9 +73,13 @@ export async function logCoachAppSignup(event: SignupEvent, userAgent: string | 
 // The funnel report
 // ---------------------------------------------------------------------------
 
-// Sign-up events started with this deploy. Earlier sign-ups exist only in
-// the Coach App project (profiles.acquisition_*).
-export const SIGNUP_TRACKING_STARTED_AT = "2026-09-25T00:00:00Z";
+// When the funnel tab went live (merged to main 2026-09-25 ~21:30 UTC). Every
+// number on the tab starts here, visits included, not only sign-ups: the
+// channel table puts visits and sign-ups side by side, and counting weeks of
+// visits against a few hours of sign-ups made every channel look like it
+// converted nobody. Earlier sign-ups exist only in the Coach App project
+// (profiles.acquisition_*). Update only if the funnel is restarted.
+export const FUNNEL_TRACKING_STARTED_AT = "2026-09-25T21:30:00Z";
 
 const LANDING_PREFIX = "/football-parent-coach-app";
 const SIGN_IN_PATH = "/coach-app/sign-in";
@@ -87,7 +91,7 @@ export interface FunnelChannelRow {
   landingViews: number;
   /** Views of the app's own sign-in screen. */
   signInViews: number;
-  /** Sign-ups since SIGNUP_TRACKING_STARTED_AT (clamped to the window). */
+  /** Sign-ups in the same window. */
   signups: number;
 }
 
@@ -109,8 +113,11 @@ export interface CoachingArticleRow {
 
 export interface CoachAppFunnel {
   days: number;
+  /** Start of every number on the tab: the later of `days` ago and
+   * FUNNEL_TRACKING_STARTED_AT. */
   since: string;
-  signupsSince: string;
+  /** True when the window was cut short by FUNNEL_TRACKING_STARTED_AT. */
+  clampedToTrackingStart: boolean;
   channels: FunnelChannelRow[];
   totals: { landingViews: number; signInViews: number; signups: number };
   /** Newest first, capped. Anonymous: no account is identifiable here. */
@@ -192,10 +199,10 @@ function signupChannel(row: SignupRow): CoachAppChannel {
 
 export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunnel> {
   const supabase = adminClient();
-  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
-  const signupsSince = new Date(
-    Math.max(Date.parse(since), Date.parse(SIGNUP_TRACKING_STARTED_AT))
-  ).toISOString();
+  const requestedSince = Date.now() - days * 24 * 60 * 60 * 1000;
+  const trackingStart = Date.parse(FUNNEL_TRACKING_STARTED_AT);
+  const clampedToTrackingStart = trackingStart > requestedSince;
+  const since = new Date(Math.max(requestedSince, trackingStart)).toISOString();
 
   const [landingRows, signInRows, coachingRows, signupResult, sharing] = await Promise.all([
     readViews(supabase, since, { like: `${LANDING_PREFIX}%` }),
@@ -206,10 +213,10 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
       .select(
         "attributed, landing_path, entry_path, entry_source_group, banner, utm_source, utm_medium, utm_campaign, had_gclid, user_agent, created_at"
       )
-      .gte("created_at", signupsSince)
+      .gte("created_at", since)
       .order("created_at", { ascending: false })
       .limit(5000),
-    getCoachAppShareStats(days).catch((err: unknown) => ({
+    getCoachAppShareStats(days, since).catch((err: unknown) => ({
       error: err instanceof Error ? err.message : "Unknown error",
     })),
   ]);
@@ -264,7 +271,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   return {
     days,
     since,
-    signupsSince,
+    clampedToTrackingStart,
     channels,
     totals,
     recentSignups: signupRows.slice(0, 50).map((r) => ({

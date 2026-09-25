@@ -1458,8 +1458,10 @@ function CountriesReport() {
       <SectionNote label="How this is measured">
         Country comes from Vercel&rsquo;s geolocation of each request
         (x-vercel-ip-country), recorded as a two-letter code only, never the
-        IP. Recording started on 24 September 2026, so anything logged before
-        that shows as Unknown and the split only describes traffic since then.
+        IP. Recording started on 24 September 2026, and this tab starts at the
+        first view that has a country, so older traffic (all Unknown) is left
+        out rather than diluting the split. A longer period than that shows
+        the same data until enough time has passed.
         Hours are UK local time (Europe/London), not UTC. Same bot exclusions
         as the Page views tab, so the totals reconcile. A VPN or a mobile
         network&rsquo;s gateway can put a UK reader in another country, so
@@ -1475,6 +1477,13 @@ function CountriesReport() {
       {stats && (
         <>
           <div style={styles.cardStats}>
+            {stats.clampedToCountryStart && (
+              <span>
+                Since{" "}
+                {new Date(stats.since).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}{" "}
+                (when country recording started)
+              </span>
+            )}
             <span>Views: {stats.totalViews}</span>
             <span>With a country: {stats.knownCountryViews}</span>
             <span>Bots excluded: {stats.botViews}</span>
@@ -2374,7 +2383,8 @@ function CoachAppFunnelTab({
   bannerVariants?: BannerVariantStats;
 }) {
   const per100 = (signups: number, views: number) => (views > 0 ? ((signups / views) * 100).toFixed(1) : "n/a");
-  const signupsFrom = new Date(funnel.signupsSince).toLocaleDateString("en-GB");
+  const sinceLabel = new Date(funnel.since).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const windowLabel = funnel.clampedToTrackingStart ? `since ${sinceLabel}` : `last ${funnel.days} days`;
 
   return (
     <div style={styles.list}>
@@ -2387,9 +2397,10 @@ function CoachAppFunnelTab({
         ours, no banner), Direct, Other. Unknown is sign-ups only: the coach
         declined analytics cookies, so nothing about their visit was kept.
         Landing views are the Coach App page and its ad variants; sign-in views
-        are the app&rsquo;s own sign-in screen. Sign-ups are counted from{" "}
-        {signupsFrom}, when the app started reporting them here; earlier ones
-        are only in the Coach App database. No sign-up row identifies a coach.
+        are the app&rsquo;s own sign-in screen. Every number on this tab
+        starts when the funnel went live ({sinceLabel}), visits included, so
+        visits and sign-ups cover the same period. Earlier sign-ups are only
+        in the Coach App database. No sign-up row identifies a coach.
       </SectionNote>
 
       {funnel.signupsError && (
@@ -2400,7 +2411,7 @@ function CoachAppFunnelTab({
         </p>
       )}
 
-      <FunnelHeading>By channel, last {funnel.days} days</FunnelHeading>
+      <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
       <div style={{ overflowX: "auto" }}>
         <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
           <thead>
@@ -2441,7 +2452,7 @@ function CoachAppFunnelTab({
 
       <FunnelHeading>Sign-ups</FunnelHeading>
       {funnel.recentSignups.length === 0 ? (
-        <p style={styles.muted}>No sign-ups reported since {signupsFrom}.</p>
+        <p style={styles.muted}>No sign-ups reported {windowLabel}.</p>
       ) : (
         <>
           <p style={styles.sectionNote}>
@@ -2474,7 +2485,7 @@ function CoachAppFunnelTab({
         </>
       )}
 
-      <FunnelHeading>SEO: coaching articles, last {funnel.days} days</FunnelHeading>
+      <FunnelHeading>SEO: coaching articles, {windowLabel}</FunnelHeading>
       <p style={styles.sectionNote}>
         {funnel.coachingArticles.totalViews} views of /coaching/ articles,{" "}
         {funnel.coachingArticles.searchViews} from search. By source:{" "}
