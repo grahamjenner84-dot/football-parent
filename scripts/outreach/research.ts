@@ -13,7 +13,10 @@
  * search  UK Google results (location 2826, en), each run through the
  *         outreach quality gate so rejects are visible straight away.
  * read    Fetches and digests one page: title, headings, text, outbound
- *         links, links to us, contact pages and email addresses. --js asks
+ *         links, links to us, contact pages and email addresses, plus
+ *         `verdict` from both the URL gate and the page-content check
+ *         (assessPageContent: an authored article or curated resource list
+ *         that already links to independent sources, not just FA/league). --js asks
  *         DataForSEO to render JavaScript (dearer); only use it when a plain
  *         read comes back with no text.
  * our-pages  Our ranking pages with the keywords each ranks for, from
@@ -46,7 +49,7 @@ import { parseCsv } from "../seo/shared/csv";
 import { REPO_ROOT } from "../seo/shared/env";
 import fs from "node:fs";
 import path from "node:path";
-import { assessProspect } from "../../lib/outreach/quality";
+import { assessPageContent, assessProspect } from "../../lib/outreach/quality";
 import { digestContentParsing } from "../../lib/outreach/page-digest";
 
 ensureEnvLoaded();
@@ -97,7 +100,12 @@ async function read(url: string, js: boolean) {
   const res = await contentParsingLive(url, { ...requestOpts(), enableJavascript: js });
   if (res.error) return { url, environment: res.environment, cost: res.cost, ok: false, problem: res.error };
   const digest = digestContentParsing(url, res.data?.tasks?.[0]?.result);
-  return { environment: res.environment, cache: res.cacheStatus, cost: res.cost, quality: assessProspect({ url, title: digest.title }), ...digest };
+  // Two checks: the URL/title gate, and the content check on what the page
+  // actually says and links to. A prospect needs both to pass.
+  const quality = assessProspect({ url, title: digest.title });
+  const content = digest.ok ? assessPageContent(digest) : null;
+  const verdict = !digest.ok ? "unreadable" : quality.verdict !== "ok" ? quality.verdict : content!.verdict;
+  return { environment: res.environment, cache: res.cacheStatus, cost: res.cost, verdict, quality, content, ...digest };
 }
 
 type RankedRow = { keyword: string; volume: number; position: number; url: string };

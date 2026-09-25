@@ -207,3 +207,57 @@ test("score explanations match the stored reasons and add up", async () => {
   assert.match(parts.find((p) => p.label === "club")!.why, /Starting points/);
   assert.ok(parts.every((p) => p.why && p.why !== p.label), "every part has a real explanation");
 });
+
+test("targets people writing about a topic, not club rules pages", async () => {
+  const { assessPageContent } = await import("../lib/outreach/quality");
+  const words = (n: number) => Array.from({ length: n }, (_, i) => `word${i}`).join(" ");
+  // Club policy / admin URLs are rejected before reading.
+  assert.equal(verdict("https://www.lintonaztecs.co.uk/club-ethos/"), "rejected");
+  assert.equal(verdict("https://miltoncoltsfc.com/club-info/managers-handbook-2026"), "rejected");
+  assert.equal(verdict("https://www.exampleblog.co.uk/blog/my-coaching-philosophy-for-u9s"), "ok", "a coach writing about philosophy is a target");
+  assert.equal(verdict("https://www.exampleblog.co.uk/blog/why-every-club-needs-a-playing-time-policy"), "ok", "an article about policy, under /blog/, is a target");
+
+  // A useful-links page that only points at the FA and the league.
+  const linksPage = assessPageContent({
+    url: "https://www.ackworthjuniors.co.uk/useful-links/",
+    title: "Useful Links",
+    headings: ["Useful Links"],
+    text: "FA Respect. Full-Time fixtures. Our league.",
+    wordCount: 8,
+    externalLinks: [
+      { url: "https://www.thefa.com/respect", anchor: "FA Respect" },
+      { url: "https://fulltime.thefa.com/index.html", anchor: "Full-Time" },
+      { url: "https://www.hdjfl.co.uk", anchor: "League" },
+      { url: "https://www.facebook.com/ackworth", anchor: "Facebook" },
+    ],
+  });
+  assert.equal(linksPage.verdict, "rejected");
+  assert.match(linksPage.reasons.join(" "), /only links to FA, league, social or admin/);
+
+  // An opinion piece with a byline that cites an independent source.
+  const article = assessPageContent({
+    url: "https://www.grassrootsdad.co.uk/why-equal-game-time-matters",
+    title: "Why equal game time matters more than winning at U9",
+    headings: ["Why equal game time matters more than winning at U9"],
+    text: `By Sam Jones, 12 March 2026. As a parent and coach I think ${words(500)}`,
+    wordCount: 520,
+    externalLinks: [
+      { url: "https://www.thefa.com/respect", anchor: "FA" },
+      { url: "https://www.playerdevelopmentproject.com/equal-game-time", anchor: "this piece on equal game time" },
+    ],
+  });
+  assert.equal(article.verdict, "ok");
+  assert.equal(article.kind, "article");
+  assert.equal(article.independentLinks.length, 1);
+
+  // A club page with lots of words but no author voice and only a sponsor link.
+  const clubPage = assessPageContent({
+    url: "https://www.club.co.uk/parents",
+    title: "Parents",
+    headings: ["Parents"],
+    text: words(600),
+    wordCount: 600,
+    externalLinks: [{ url: "https://www.localbuilder.co.uk", anchor: "Our sponsor" }],
+  });
+  assert.equal(clubPage.verdict, "rejected");
+});
