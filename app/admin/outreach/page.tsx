@@ -36,6 +36,7 @@ interface Prospect {
   draft_body: string | null;
   chase_line: string | null;
   sent_at: string | null;
+  last_contact_at: string | null;
   next_action_at: string | null;
   chase_count: number;
   won_link_url: string | null;
@@ -55,7 +56,7 @@ interface Stats {
   backlog: number;
 }
 
-type Tab = "week" | "waiting" | "backlog" | "parked" | "won" | "history";
+type Tab = "week" | "backlog" | "noReply" | "discussion" | "rejected" | "won" | "parked";
 
 const firstName = (name: string | null) => (name ? name.trim().split(/\s+/)[0] : null);
 
@@ -120,29 +121,31 @@ export default function OutreachAdminPage() {
     const drafted = prospects.filter((p) => p.status === "drafted").sort((a, b) => b.score - a.score);
     const awaiting = prospects.filter((p) => AWAITING.includes(p.status));
     const due = awaiting.filter((p) => dueAction(p, now) !== null);
-    const waiting = [...awaiting.filter((p) => dueAction(p, now) === null), ...prospects.filter((p) => p.status === "replied")];
+    const byLatest = (a: Prospect, b: Prospect) => (b.last_contact_at ?? b.sent_at ?? "").localeCompare(a.last_contact_at ?? a.sent_at ?? "");
     return {
       drafted,
       due,
-      waiting,
+      // Emailed, nothing back yet: still being chased (and not due this
+      // week) plus closed as no reply after the second chase.
+      noReply: [...awaiting.filter((p) => dueAction(p, now) === null), ...prospects.filter((p) => p.status === "no_reply")].sort(byLatest),
+      discussion: prospects.filter((p) => p.status === "replied").sort(byLatest),
+      rejected: prospects.filter((p) => p.status === "lost").sort(byLatest),
       backlog: prospects.filter((p) => p.status === "backlog").sort((a, b) => b.score - a.score),
-      parked: prospects.filter((p) => p.status === "parked"),
+      // Not good leads: ones Graham ruled out, plus partnership-only sites the
+      // quality filter set aside (FA pages, homepages, partner pages).
+      parked: prospects.filter((p) => p.status === "skipped" || p.status === "parked"),
       won: prospects.filter((p) => p.status === "won"),
-      // Closed without a link: imported history lands here too (anything
-      // emailed over three weeks ago with no status comes in as no reply).
-      history: prospects
-        .filter((p) => ["no_reply", "lost", "skipped"].includes(p.status))
-        .sort((a, b) => (b.sent_at ?? "").localeCompare(a.sent_at ?? "")),
     };
   }, [prospects]);
 
   const tabs: { id: Tab; label: string; count: number }[] = [
     { id: "week", label: "This week", count: groups.drafted.length + groups.due.length },
-    { id: "waiting", label: "Waiting", count: groups.waiting.length },
     { id: "backlog", label: "Backlog", count: groups.backlog.length },
+    { id: "noReply", label: "Emailed: no reply", count: groups.noReply.length },
+    { id: "discussion", label: "Emailed: in discussion", count: groups.discussion.length },
+    { id: "rejected", label: "Emailed: rejected", count: groups.rejected.length },
+    { id: "won", label: "Won (live)", count: groups.won.length },
     { id: "parked", label: "Parked", count: groups.parked.length },
-    { id: "won", label: "Won", count: groups.won.length },
-    { id: "history", label: "History", count: groups.history.length },
   ];
 
   return (
@@ -183,23 +186,9 @@ export default function OutreachAdminPage() {
           </>
         )}
 
-        {tab === "waiting" &&
-          groups.waiting.map((p) => (
-            <div key={p.id} style={styles.card}>
-              <CardHead p={p} />
-              <p style={styles.meta}>
-                {p.status === "replied" ? "Replied: agree the details, then mark won or lost." : `Sent ${fmtDate(p.sent_at)}. Next chase ${fmtDate(p.next_action_at)}.`}
-              </p>
-              <div style={styles.actions}>
-                {p.status !== "replied" && <Btn onClick={() => act(p.id, "replied")} disabled={busy === p.id}>Replied</Btn>}
-                <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
-                <Btn onClick={() => act(p.id, "lost")} disabled={busy === p.id} subtle>Said no</Btn>
-              </div>
-            </div>
-          ))}
-
         {tab === "backlog" && (
           <>
+            <p style={styles.muted}>Everyone not contacted yet, best first. The Monday run drafts from the top of this list.</p>
             <ReviewedBacklogs onLoaded={load} />
             <AddProspect onAdded={load} />
             <ImportHistory onImported={load} />
@@ -211,21 +200,76 @@ export default function OutreachAdminPage() {
                 {p.notes && <p style={styles.meta}>{p.notes}</p>}
                 <p style={styles.reasons}>{p.score_reasons}</p>
                 <div style={styles.actions}>
-                  <Btn onClick={() => act(p.id, "skip")} disabled={busy === p.id} subtle>Skip</Btn>
-                  <Btn onClick={() => act(p.id, "park")} disabled={busy === p.id} subtle>Park</Btn>
+                  <Btn onClick={() => act(p.id, "skip")} disabled={busy === p.id} subtle>Not a good lead</Btn>
                 </div>
               </div>
             ))}
           </>
         )}
 
+        {tab === "noReply" && (
+          <>
+            <p style={styles.muted}>Emailed, nothing back yet. Chase-ups fall due in This week; after the second chase they stay here as no reply.</p>
+            {groups.noReply.map((p) => (
+              <ContactCard key={p.id} p={p}>
+                <Btn onClick={() => act(p.id, "replied")} disabled={busy === p.id}>They replied</Btn>
+                <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
+                <Btn onClick={() => act(p.id, "lost")} disabled={busy === p.id} subtle>Said no</Btn>
+                {p.status === "no_reply" && (
+                  <Btn onClick={() => act(p.id, "restore")} disabled={busy === p.id} subtle>Try again later</Btn>
+                )}
+              </ContactCard>
+            ))}
+          </>
+        )}
+
+        {tab === "discussion" && (
+          <>
+            <p style={styles.muted}>They replied and it looks promising. Mark won once the link is live.</p>
+            {groups.discussion.map((p) => (
+              <ContactCard key={p.id} p={p}>
+                <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
+                <Btn onClick={() => act(p.id, "lost")} disabled={busy === p.id} subtle>Fell through</Btn>
+              </ContactCard>
+            ))}
+          </>
+        )}
+
+        {tab === "rejected" && (
+          <>
+            <p style={styles.muted}>{"Said no, or went nowhere after replying. Kept so they aren't pitched again."}</p>
+            {groups.rejected.map((p) => (
+              <ContactCard key={p.id} p={p}>
+                <Btn onClick={() => act(p.id, "replied")} disabled={busy === p.id} subtle>Back in discussion</Btn>
+              </ContactCard>
+            ))}
+          </>
+        )}
+
+        {tab === "won" && (
+          <>
+            <p style={styles.muted}>Links that are live.</p>
+            {groups.won.map((p) => (
+              <ContactCard key={p.id} p={p}>
+                {p.won_link_url ? (
+                  <a href={p.won_link_url} target="_blank" rel="noopener noreferrer" style={styles.link}>
+                    {p.won_link_url}
+                  </a>
+                ) : (
+                  <WonButton label="Add the live link" onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
+                )}
+              </ContactCard>
+            ))}
+          </>
+        )}
+
         {tab === "parked" && (
           <>
-            <p style={styles.muted}>Real relationships that need a partnership or press conversation, not a cold link request.</p>
+            <p style={styles.muted}>{"Not good leads: ones you've ruled out, plus FA, homepage and partner pages the filter set aside as partnership-only."}</p>
             {groups.parked.map((p) => (
               <div key={p.id} style={styles.card}>
                 <CardHead p={p} />
-                <p style={styles.meta}>{p.status_reason}</p>
+                <p style={styles.meta}>{p.status === "skipped" ? "You marked this as not a good lead." : p.status_reason}</p>
                 <div style={styles.actions}>
                   <Btn onClick={() => act(p.id, "restore")} disabled={busy === p.id} subtle>Move to backlog</Btn>
                 </div>
@@ -233,41 +277,6 @@ export default function OutreachAdminPage() {
             ))}
           </>
         )}
-
-        {tab === "history" && (
-          <>
-            <p style={styles.muted}>Sites already approached with no link: no reply, said no, or skipped. Kept so nothing gets pitched twice.</p>
-            {groups.history.map((p) => (
-              <div key={p.id} style={styles.card}>
-                <CardHead p={p} />
-                <p style={styles.meta}>
-                  {STATUS_LABEL[p.status] ?? p.status}
-                  {p.sent_at ? `, emailed ${fmtDate(p.sent_at)}` : ""}
-                  {p.contact_email ? ` to ${p.contact_email}` : ""}
-                </p>
-                {p.angle && <p style={styles.meta}>Pitched: {p.angle}</p>}
-                {p.notes && <p style={styles.reasons}>{p.notes}</p>}
-                <div style={styles.actions}>
-                  <Btn onClick={() => act(p.id, "replied")} disabled={busy === p.id} subtle>They replied</Btn>
-                  <WonButton onWon={(url) => act(p.id, "won", { url })} disabled={busy === p.id} />
-                  <Btn onClick={() => act(p.id, "restore")} disabled={busy === p.id} subtle>Back to backlog</Btn>
-                </div>
-              </div>
-            ))}
-          </>
-        )}
-
-        {tab === "won" &&
-          groups.won.map((p) => (
-            <div key={p.id} style={styles.card}>
-              <CardHead p={p} />
-              {p.won_link_url && (
-                <a href={p.won_link_url} target="_blank" rel="noopener noreferrer" style={styles.link}>
-                  {p.won_link_url}
-                </a>
-              )}
-            </div>
-          ))}
       </section>
     </main>
   );
@@ -401,7 +410,26 @@ function ChaseCard({ p, busy, act }: { p: Prospect; busy: boolean; act: ActFn })
   );
 }
 
-function WonButton({ onWon, disabled }: { onWon: (url: string) => void; disabled: boolean }) {
+// One card layout for every "Emailed" tab: who, when, what was pitched,
+// the notes, then the tab's own buttons.
+function ContactCard({ p, children }: { p: Prospect; children: ReactNode }) {
+  const last = p.last_contact_at && p.last_contact_at !== p.sent_at ? `, last contact ${fmtDate(p.last_contact_at)}` : "";
+  return (
+    <div style={styles.card}>
+      <CardHead p={p} />
+      <p style={styles.meta}>
+        {p.sent_at ? `Emailed ${fmtDate(p.sent_at)}${last}` : "Date not recorded"}
+        {p.contact_email ? ` · ${p.contact_email}` : ""}
+        {AWAITING.includes(p.status) && p.next_action_at ? ` · next chase ${fmtDate(p.next_action_at)}` : ""}
+      </p>
+      {p.angle && <p style={styles.meta}>Pitched: {p.angle}</p>}
+      {p.notes && <p style={styles.reasons}>{p.notes}</p>}
+      <div style={styles.actions}>{children}</div>
+    </div>
+  );
+}
+
+function WonButton({ onWon, disabled, label = "Won" }: { onWon: (url: string) => void; disabled: boolean; label?: string }) {
   return (
     <Btn
       disabled={disabled}
@@ -410,7 +438,7 @@ function WonButton({ onWon, disabled }: { onWon: (url: string) => void; disabled
         if (url) onWon(url.trim());
       }}
     >
-      Won
+      {label}
     </Btn>
   );
 }
@@ -492,11 +520,11 @@ const STATUS_LABEL: Partial<Record<OutreachStatus, string>> = {
   sent: "waiting for a reply",
   chase_1: "chased once",
   chase_2: "chased twice",
-  replied: "replied",
+  replied: "in discussion",
   won: "link won",
   lost: "said no",
   no_reply: "no reply",
-  skipped: "skipped",
+  skipped: "not a good lead",
   parked: "parked",
 };
 
