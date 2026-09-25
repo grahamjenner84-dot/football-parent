@@ -77,6 +77,11 @@ that file looks stale (pages we've published since are missing), use
 
 ## Before searching: load the sites already on the list
 
+**Never pay twice for the same page.** Run
+`npx tsx scripts/outreach/cli.ts seen-urls` first. It lists every URL
+already recorded, in any status, including everything ruled out before.
+Skip any candidate on that list before you `read` it.
+
 If `cli.ts stats` works, run `npx tsx scripts/outreach/cli.ts known-domains`
 first. It lists every site already on the list: prospects in the backlog,
 sites Graham has emailed (including his own history imported from his
@@ -288,9 +293,12 @@ outreach tables are reachable:
 
 1. `cli.ts queue` gives the top of the backlog. For a full sweep, use
    `known-domains` together with the admin page.
-2. `read` each backlog prospect. Any that come back `rejected` get
-   `npx tsx scripts/outreach/cli.ts set-status <id> skipped "<reason>"`.
-   That moves them to Parked with the reason, so they're never drafted.
+2. First run `npx tsx scripts/outreach/cli.ts recheck`. It's free: it
+   re-applies the address rules and moves failures to Ruled out. Then
+   `read` each remaining backlog prospect. Any that come back `rejected`
+   get `npx tsx scripts/outreach/cli.ts set-status <id> rejected "<reason>"`.
+   That puts them in the **Ruled out** tab with the reason, so they're never
+   drafted or re-found.
 3. List what you moved in the report.
 
 ## Independent audit (before anything is saved)
@@ -386,6 +394,11 @@ ends like this:
      `link-graph` calls).
    - `competitor-map-<YYYY-MM-DD>.md` (`research.ts competitor-map`).
    - `our-domain-strength.json` (refreshed by `research.ts our-strength`).
+   - When the outreach tables are reachable, also record the removals:
+     `npx tsx scripts/outreach/cli.ts rule-out seo-data/exports/outreach-backlog-<YYYY-MM-DD>-removed.json`.
+     Otherwise Graham does it with **Load research**, which records them
+     too. Either way they show in the Ruled out tab with their reasons, and
+     no later run pays for them again.
    - In weekly mode, also `outreach-run-<YYYY-MM-DD>.md`: a short log of
      the link checks, chase-ups, drafts written (site and subject only,
      not the email bodies) and backlog re-vet moves.

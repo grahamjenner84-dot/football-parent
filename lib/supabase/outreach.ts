@@ -500,3 +500,85 @@ export async function importHistory(rows: HistoryRow[], now = new Date()): Promi
   }
   return results;
 }
+
+// ---------------------------------------------------------------------------
+// Ruled out: everything we've looked at and decided against, kept so a later
+// run never pays to find, read or vet it again, and so Graham can see what
+// was dropped and why (the "Ruled out" tab).
+
+export interface RuledOutItem extends NewProspect {
+  reason: string;
+}
+
+export interface RuledOutResult {
+  url: string;
+  outcome: "recorded" | "updated" | "already_known";
+}
+
+// Records prospects removed during research (vetting or the audit) as
+// status 'rejected' with their reason. A URL already on the list is only
+// changed if it's still waiting in the backlog or drafted, i.e. never
+// contacted: anything Graham has actually emailed is left alone.
+export async function recordRuledOut(items: RuledOutItem[]): Promise<RuledOutResult[]> {
+  const supabase = adminClient();
+  const out: RuledOutResult[] = [];
+  for (const item of items) {
+    const { data: existing } = await supabase.from("outreach_prospects").select("id, status").eq("url", item.url).maybeSingle();
+    if (existing) {
+      const row = existing as { id: number; status: OutreachStatus };
+      if (row.status === "backlog" || row.status === "drafted") {
+        await updateProspectFields(row.id, { status: "rejected", status_reason: item.reason, next_action_at: null });
+        await logEvent(row.id, "ruled_out", item.reason);
+        out.push({ url: item.url, outcome: "updated" });
+      } else out.push({ url: item.url, outcome: "already_known" });
+      continue;
+    }
+    const q = assessProspect(item);
+    const { error } = await supabase.from("outreach_prospects").insert({
+      url: item.url,
+      domain: q.domain || hostOf(item.url),
+      title: item.title ?? null,
+      prospect_type: q.type,
+      is_uk: q.isUk,
+      source: item.source || "research",
+      authority: item.authority ?? null,
+      fit: item.fit ?? null,
+      fit_note: item.fit_note ?? item.context ?? null,
+      fp_page: item.fp_page ?? null,
+      angle: item.angle ?? null,
+      contact_name: item.contact_name || null,
+      contact_email: item.contact_email || null,
+      contact_url: item.contact_url || null,
+      status: "rejected",
+      status_reason: item.reason,
+    });
+    if (error) throw new Error(`insert ${item.url}: ${error.message}`);
+    out.push({ url: item.url, outcome: "recorded" });
+  }
+  return out;
+}
+
+// Re-runs the current URL rules over everything still waiting (backlog,
+// drafted). Free: no page reads. Anything the rules now reject moves to
+// Ruled out with the reason, e.g. the club ethos/philosophy pages added
+// before those rules existed. Pages that need reading to judge (FA-only
+// links pages) are caught by the next link-building run's re-vet.
+export async function recheckBacklog(): Promise<{ id: number; url: string; reason: string }[]> {
+  const rows = await listProspects(["backlog", "drafted"], 5000);
+  const moved: { id: number; url: string; reason: string }[] = [];
+  for (const p of rows) {
+    const q = assessProspect({ url: p.url, title: p.title });
+    if (q.verdict !== "rejected") continue;
+    const reason = `Ruled out by the updated rules: ${q.reasons[q.reasons.length - 1]}`;
+    await updateProspectFields(p.id, { status: "rejected", status_reason: reason, next_action_at: null });
+    await logEvent(p.id, "ruled_out", reason);
+    moved.push({ id: p.id, url: p.url, reason });
+  }
+  return moved;
+}
+
+// Every URL we've ever recorded, any status. A research run skips these
+// before spending anything on them.
+export async function listSeenUrls(): Promise<string[]> {
+  return (await listProspects(undefined, 20000)).map((p) => p.url);
+}
