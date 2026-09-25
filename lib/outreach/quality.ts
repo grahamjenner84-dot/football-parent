@@ -131,11 +131,19 @@ const DEAD_END_HOSTS = [
   "nike.com",
   "adidas.co.uk",
   "podbean.com",
-  "wordpress.com",
-  "blogspot.com",
-  "medium.com",
   "trustburn.com",
 ];
+// Club admin pages: policies, handbooks, codes of conduct, ethos and
+// philosophy pages, committee lists. They state the club's own rules and are
+// not written to send readers anywhere else, so "link to our article" has no
+// natural home on them. The first backlog run was mostly these (Sept 2026).
+// Kept conservative on purpose: a coach's blog post on "my coaching
+// philosophy" is exactly what we want, so only club-flavoured slugs count,
+// and anything under a blog/news path is left to the page-content check.
+const CLUB_ADMIN_PAGE = /(polic(y|ies)|code-?of-?conduct|constitution|handbook|welcome-?pack|club-?rules|rules-and-regulations|safeguarding|club-?ethos|our-?ethos|club-?philosophy|playing-?philosophy|the-player-journey|club-?documents|committee|club-?officials|join-?us|registration|membership|kit-?list|managing-a-.*-team)/i;
+const EDITORIAL_PATH = /\/(blog|news|articles?|insights|posts?|stories|opinion|features?)\//i;
+const CLUB_ADMIN_TITLE = /\b(policy|policies|code of conduct|constitution|handbook|welcome pack|club rules|safeguarding|our ethos|club ethos|playing philosophy|committee|club officials)\b/i;
+
 const FORUM_PATH = /\/(threads?|forum|forums|topic|community\/t)\//i;
 
 // Archive/listing pages (author, tag, paged category archives): nothing on
@@ -244,6 +252,9 @@ export function assessProspect(c: ProspectCandidate): QualityResult {
     return reject(`file download (PDF/doc/CDN), not an editable web page${clubHint}`);
   }
   if (ARCHIVE_PATH.test(u.pathname)) return reject("archive/author/tag listing page, not an article");
+  if (!EDITORIAL_PATH.test(u.pathname) && (CLUB_ADMIN_PAGE.test(u.pathname) || CLUB_ADMIN_TITLE.test(c.title ?? ""))) {
+    return reject("club policy/admin page: states their own rules, not written to send readers elsewhere");
+  }
   if (type === "business" && COMPETITOR_SLUGS.test(u.pathname)) {
     reasons.push("competitor listing on a directory: ask to list the Coach App too, not for an article link");
   } else if (PRODUCT_PATH.test(u.pathname)) {
@@ -272,4 +283,116 @@ export function assessProspect(c: ProspectCandidate): QualityResult {
 
   if (isUk === null) reasons.push("country unclear from URL");
   return { verdict: "ok", reasons, type, domain: host, isUk };
+}
+
+// ---------------------------------------------------------------------------
+// Page-content check, run once the page has actually been read
+// (scripts/outreach/research.ts read). The URL gate above can't see what a
+// page says or links to; this can.
+//
+// What we want is people writing about a topic: an opinion piece, advice
+// article or explainer that already cites independent sources, so "here's
+// another good read on this" is a natural ask. What we don't want is a page
+// whose only outbound links are the FA, the league and social media: it has
+// shown it doesn't point readers to independent resources, whatever the
+// topic.
+
+export interface PageContent {
+  url: string;
+  title: string | null;
+  headings: string[];
+  text: string;
+  wordCount: number;
+  externalLinks: { url: string; anchor: string }[];
+}
+
+export interface PageContentResult {
+  verdict: "ok" | "rejected";
+  kind: "article" | "resource_list" | "other";
+  reasons: string[];
+  independentLinks: { url: string; anchor: string }[];
+}
+
+// Outbound links that say nothing about willingness to cite a third party:
+// governing bodies, leagues, fixtures/club-admin platforms, social media,
+// app stores, payment and booking tools.
+const INSTITUTIONAL_HOSTS = [
+  ...GOVERNING_BODY_HOSTS,
+  "fulltime.thefa.com",
+  "wholegame.thefa.com",
+  "pitchero.com",
+  "teamstats.net",
+  "spond.com",
+  "clubbuzz.co.uk",
+  "teamapp.com",
+  "sportlomo.com",
+  "facebook.com",
+  "instagram.com",
+  "x.com",
+  "twitter.com",
+  "tiktok.com",
+  "youtube.com",
+  "linkedin.com",
+  "whatsapp.com",
+  "apple.com",
+  "play.google.com",
+  "google.com",
+  "maps.google.com",
+  "paypal.com",
+  "gocardless.com",
+  "eventbrite.co.uk",
+  "eventbrite.com",
+  "justgiving.com",
+  "wix.com",
+  "wordpress.org",
+  "clubsite.co.uk",
+];
+
+export function isInstitutionalLink(link: { url: string; anchor: string }): boolean {
+  const host = hostOf(link.url);
+  if (!host) return true;
+  // Grassroots leagues rarely say "league" in their domain: hdjfl.co.uk,
+  // svyfl.org.uk, jpl, ...dfl, ...yl.
+  const leagueHost = /league/i.test(host) || /^([a-z0-9-]+\.)?[a-z0-9-]*(jfl|yfl|jyfl|dfl|ydfl|jpl|ysl|yl|fl)\.(co\.uk|org\.uk|org|com|uk)$/i.test(host);
+  if (hostMatches(host, INSTITUTIONAL_HOSTS) || COUNTY_FA_PATTERN.test(host) || leagueHost) return true;
+  return /\b(sponsor|sponsored by|partner|kit supplier|powered by|website by|designed by)\b/i.test(link.anchor);
+}
+
+const BYLINE = /\b(by|written by|author|posted by|words by)[:\s]+[A-Z][a-z]+(\s[A-Z][a-z]+)?/;
+const DATE_TEXT = /\b(\d{1,2}(st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+20\d{2}|(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{1,2},?\s+20\d{2}|\d{1,2}\/\d{1,2}\/20\d{2})\b/i;
+const FIRST_PERSON = /\b(I think|I believe|in my (view|opinion|experience)|as a (parent|coach|dad|mum)|we've found|my (son|daughter|child|kids))\b/i;
+const RESOURCE_LIST = /\b(useful links|resources|further reading|recommended reading|reading list|helpful links|links for parents|parent resources)\b/i;
+
+export function assessPageContent(page: PageContent): PageContentResult {
+  const reasons: string[] = [];
+  const independentLinks = page.externalLinks.filter((l) => !isInstitutionalLink(l));
+  const reject = (why: string, kind: PageContentResult["kind"] = "other"): PageContentResult => ({ verdict: "rejected", kind, reasons: [...reasons, why], independentLinks });
+
+  const titleAndHeadings = [page.title ?? "", ...page.headings].join(" | ");
+  if (CLUB_ADMIN_TITLE.test(titleAndHeadings.split(" | ").slice(0, 3).join(" "))) {
+    return reject("club policy/admin page: states their own rules, not written to send readers elsewhere");
+  }
+  if (page.externalLinks.length === 0) return reject("doesn't link to any other site");
+  if (independentLinks.length === 0) {
+    return reject(`only links to FA, league, social or admin sites (${page.externalLinks.length} links, none to independent articles or resources)`);
+  }
+
+  const head = page.text.slice(0, 800);
+  const signals = [BYLINE.test(head) && "byline", DATE_TEXT.test(page.text.slice(0, 1500)) && "dated", FIRST_PERSON.test(page.text) && "first-person"].filter(Boolean) as string[];
+  const isArticle = page.wordCount >= 350 && signals.length > 0;
+  const isResourceList = RESOURCE_LIST.test(titleAndHeadings) && independentLinks.length >= 3;
+
+  if (isArticle) {
+    reasons.push(`article (${signals.join(", ")}; ${page.wordCount} words; ${independentLinks.length} independent outbound link${independentLinks.length === 1 ? "" : "s"})`);
+    return { verdict: "ok", kind: "article", reasons, independentLinks };
+  }
+  if (isResourceList) {
+    reasons.push(`curated resource list with ${independentLinks.length} independent links`);
+    return { verdict: "ok", kind: "resource_list", reasons, independentLinks };
+  }
+  return reject(
+    page.wordCount < 350
+      ? `too thin to be an article (${page.wordCount} words) and not a resource list with independent links`
+      : "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote"
+  );
 }

@@ -25,6 +25,11 @@
  *                                 omitted = checked, nothing yet.
  *   close-expired                 Mark prospects past their last chase as no_reply.
  *   rescore                       Recompute backlog/drafted scores.
+ *   set-status <id> <status> [reason]
+ *                                 Move a prospect to any status (e.g. skipped
+ *                                 when a backlog row fails the page-content
+ *                                 check); the reason is saved as its
+ *                                 status_reason.
  *   known-domains                 JSON: every site already on the list (any
  *                                 status but rejected), with status and date
  *                                 emailed. Load this before discovery and skip
@@ -266,6 +271,15 @@ async function main() {
       }
       const res = await db.importHistory(parsed.rows);
       console.log(JSON.stringify({ errors: parsed.errors, results: res }, null, 2));
+      return;
+    }
+    case "set-status": {
+      const [idRaw, status, ...why] = args;
+      const id = Number(idRaw);
+      if (!id || !status) throw new Error("usage: set-status <id> <status> [reason]");
+      await db.applyProspectAction(id, { action: "set_status", status: status as import("../../lib/outreach/lifecycle").OutreachStatus });
+      if (why.length) await db.updateProspectFields(id, { status_reason: why.join(" ") });
+      console.log(`prospect ${id} -> ${status}`);
       return;
     }
     case "rescore": {

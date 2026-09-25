@@ -1,6 +1,6 @@
 ---
 name: football-parent-link-building
-description: "Football Parent link building, end to end: finds UK sites likely to link to us (competitors' linkers for keywords we rank for, complementary pages in those search results, warm contacts, club and league parent pages, unlinked mentions), reads and vets every page, finds a named contact, has an independent audit remove weak prospects, then either writes a reviewable backlog file or fills the /admin/outreach queue with personal email drafts, chase-ups and link checks. Use whenever Graham asks to do link building, find link or backlink prospects, build or top up the outreach backlog, or draft outreach emails. Never sends email."
+description: "Football Parent link building, end to end: finds people writing about our topics (opinion pieces, advice articles, coach and parent blogs, writers who link to competitors on our keywords, warm contacts, unlinked mentions), rejects club policy/admin pages and pages that only link to the FA or league, reads and vets every page, finds the author's contact, has an independent audit remove weak prospects, then writes a reviewable backlog file or fills the /admin/outreach queue with personal drafts, chase-ups and link checks. Use whenever Graham asks to do link building, find link or backlink prospects, build or top up the outreach backlog, or draft outreach emails. Never sends email."
 ---
 
 # Football Parent link building
@@ -87,42 +87,82 @@ In build mode, if the tables aren't reachable, say that you couldn't check
 against his history, so the review file may include sites he's already
 approached.
 
-## Finding prospects: six routes
+## Who we're looking for
+
+**People writing about a topic, not organisations describing themselves.**
+A good prospect is an authored piece (an opinion piece, advice article,
+explainer, column, or a parent's or coach's blog post) on something we
+cover, which already cites independent sources. For that writer, "here's
+another good read on this" is a natural thing to add.
+
+**Not prospects**, however on-topic:
+- **Club policies, handbooks, codes of conduct, ethos and philosophy
+  pages.** A club's "our policy on fair playing time" states its own rules.
+  It isn't written to send parents elsewhere, and it won't link to a third
+  party unless the club adopts it. The first backlog (Sept 2026) was mostly
+  these, and Graham rejected them.
+- **Club or league "useful links" pages whose only links are the FA, the
+  league, Full-Time and social media.** They've shown they don't point
+  readers to independent resources.
+- **Directories, homepages, sponsor/partner pages, governing bodies, shops
+  and forums.**
+
+The one club-page exception: a curated resources list that already links to
+independent articles or guides (blogs, charities, other parent sites), not
+just FA and league pages. That's a real list someone maintains, so one more
+entry is a fair ask.
+
+## Finding prospects: routes
 
 No single route is the main one. Use all of them, spread the effort, and
 put more into whichever is producing good prospects in this run. Record the
 route in each prospect's `source` so the report can show which works.
 
-1. **Who links to competitors on our keywords** (`source: "linkers:<keyword>"`).
-   From `our-pages`, take the top linkable pages (guides, explainers, the
-   calculator; skip gear). For each page, `search` its top 1 or 2
-   keywords. Take the 2 or 3 strongest **competitor** results (another
-   site answering the same question) and run `linkers` on each. Those
-   domains have already linked to this exact topic, so "here's another
-   useful resource on it" is a natural ask. Pitch our matching page.
-2. **Complementary pages in the same results** (`source: "serp:<keyword>"`).
-   In those same searches, pages that cover a different angle rather than
-   competing (a club's policy page, a league's rules page, a coach's blog, a
-   local news piece) can be pitched directly. Competitor articles
-   themselves are never pitched.
-3. **Warm contacts** (`source: "warm:<who>"`). Experts interviewed on the
+1. **Topic articles and opinion pieces** (`source: "topic:<query>"`). Search
+   for what people write about our topics, phrased the way writers phrase
+   them. Some examples:
+   - `why equal game time matters grassroots football`
+   - `benefits of equal playing time youth football blog`
+   - `should kids play every position`
+   - `touchline parents opinion`
+   - `academy football is it worth it parent`
+   - `my son got released from an academy`
+   - `development centre or grassroots`
+   - `how to support your child after a bad game`
+   - `new FA youth formats opinion`
+   - `girls football parents blog uk`
+
+   Look for bylines, dates and first-person voices. The pitch is our
+   article as a deeper read on the point they're making (for example, our
+   equal playing time guide explains the *benefits* their piece argues
+   for).
+2. **Who links to competitors on our keywords** (`source: "linkers:<keyword>"`).
+   From `our-pages`, take the top linkable pages (guides, explainers; skip
+   gear). `search` each page's top 1 or 2 keywords, take the 2 or 3
+   strongest **competitor articles** and run `linkers` on each. Keep only
+   linking pages that are themselves articles or curated resource lists.
+   `linkers` returns plenty of directories and club pages, which get
+   dropped at vetting like everything else.
+3. **Complementary articles in the same results** (`source: "serp:<keyword>"`).
+   Articles in those same results that take a different angle (a coach's
+   blog, a local news feature, a parenting site) can be pitched directly.
+   Competitor articles themselves are never pitched.
+4. **Warm contacts** (`source: "warm:<who>"`). Experts interviewed on the
    site (search `content/` for interviews), partners (Football DNA, see
    `lib/outbound-partners.ts`) and brands we review. The ask is a link from
    their bio, press or "as featured in" page, or a post about the
    collaboration. These convert best: always include them.
-4. **UK club and league parent pages, and playing-time policies**
-   (`source: "search:<query>"`). Search for queries like
-   `junior football club parents useful links`,
-   `youth football club new parents information`,
-   `football league parents resources`,
-   `club equal playing time policy under 9s`. Pitch a guide or the equal
-   playing time calculator as a resource for their parents. Policy pages
-   fit `/coaching/equal-playing-time-in-grassroots-football`.
-5. **UK grassroots blogs and resource roundups** on topics we're strong on:
-   academy trials, development centres, JPL, parent behaviour, coaching.
+5. **Writers and columnists** (`source: "writer:<name>"`). People who write
+   regularly about grassroots or youth football: coaching bloggers,
+   parent bloggers, local sports journalists, Substack writers. Find them
+   through their articles, then pitch the piece of theirs where our link
+   fits best.
 6. **Unlinked mentions** (`source: "mention"`). Search `"Football Parent" -site:footballparent.co.uk`
    and `"footballparent.co.uk"`. Pages that mention us without linking are
    the easiest wins of all.
+
+Club and league sites only come in through the resource-list exception
+above. Don't search for club policy or parent-information pages.
 
 **Governing bodies:** county FAs and thefa.com link to commercial partners
 (TeamStats' county links come from hosting FA leagues), not to independent
@@ -131,44 +171,66 @@ shows up.
 
 ## Vetting every prospect
 
-`read` every candidate the gate keeps. **Only keep it if all of these are true:**
+`read` every candidate the URL gate keeps. The result has a `verdict` that
+combines the URL gate with the **page-content check**
+(`assessPageContent` in `lib/outreach/quality.ts`). The content check
+rejects pages with:
+- no outbound links
+- only FA, league, social, admin or sponsor links
+- no author, date or first-person voice and no curated independent links
 
-- It's a live HTML page about football, and a UK audience is plausible.
-- It's editorial: an article, a resource page, or a club or league
-  information page. Not a PDF, shop, forum, directory, homepage or partner
-  page.
-- It's current: not an abandoned site, and not a years-old post on a dead
-  blog.
-- It already links out (`externalLinks`), or it's the kind of page that
-  naturally would.
+**A `rejected` verdict is final: don't argue a page back in.** If the check
+is clearly wrong about a page, say so in the report so the rule gets fixed.
+
+For pages that pass, **only keep them if all of these are true:**
+
+- A UK audience is plausible, and the page is current: not an abandoned
+  site, and not a years-old post on a dead blog.
+- It's written by someone about a topic (`content.kind` is `article`), or
+  it's a curated resource list with independent links (`resource_list`).
 - It doesn't already link to us (`linksToUs` is empty). If it does, list it
   separately as "already linking".
-- You can name the exact Football Parent page that improves it (check it
-  exists in `lib/routes.ts`), and say why in one specific, true sentence.
+- You can name the exact Football Parent page that adds to the argument or
+  advice on their page (check it exists in `lib/routes.ts`), and say why in
+  one specific, true sentence. "Their piece argues X; ours explains Y" is
+  the shape of a good fit note. "Club page mentions X" is not.
 
-Then find a contact. Read the site's contact or committee page (from
-`contactPages`) to get a named person in the right role (secretary, welfare
-officer, editor, author) and an email address that actually appears on
-their site. **Never guess or construct an email address.** A contact form
-URL is an acceptable fallback.
+Then find a contact: the author first, then the site's editor. Read the
+author bio, about page or contact page (from `contactPages`) to get a named
+person and an email address that actually appears on their site. **Never
+guess or construct an email address.** A contact form URL is an acceptable
+fallback.
 
 Record each prospect in this format (the `cli.ts add` format):
 
 ```json
 {
-  "url": "https://example-jfc.co.uk/parents",
-  "source": "search:junior football club parents useful links",
-  "title": "Information for parents",
-  "context": "Club parent info page, links to FA Respect and the club's kit shop",
+  "url": "https://www.example-coach.co.uk/blog/why-every-child-should-play",
+  "source": "topic:why equal game time matters grassroots football",
+  "title": "Why every child should play every week",
+  "context": "Coach's opinion piece arguing for equal minutes at U9; cites Player Development Project and an FA article",
   "fit": 8,
-  "fit_note": "Parent info page for U7-U12 with nothing on kit sizing",
-  "fp_page": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
-  "angle": "Offer our shin pad sizing guide as a resource under their kit list",
-  "contact_name": "Jo Smith (club secretary)",
-  "contact_email": "secretary@example-jfc.co.uk",
-  "contact_url": "https://example-jfc.co.uk/contact"
+  "fit_note": "Their piece argues for equal minutes; our guide explains the development benefits and how coaches actually rotate",
+  "fp_page": "/coaching/equal-playing-time-in-grassroots-football",
+  "angle": "Offer our guide as a further-reading link beside their Player Development Project citation",
+  "contact_name": "Sam Jones (author)",
+  "contact_email": "sam@example-coach.co.uk",
+  "contact_url": "https://www.example-coach.co.uk/about"
 }
 ```
+
+## Re-vet the existing backlog (every run)
+
+The rules above are stricter than the ones the first backlog was built
+under, so the backlog can hold prospects that no longer qualify. When the
+outreach tables are reachable:
+
+1. `cli.ts queue` gives the top of the backlog. For a full sweep, use
+   `known-domains` together with the admin page.
+2. `read` each backlog prospect. Any that come back `rejected` get
+   `npx tsx scripts/outreach/cli.ts set-status <id> skipped "<reason>"`.
+   That moves them to Parked with the reason, so they're never drafted.
+3. List what you moved in the report.
 
 ## Independent audit (before anything is saved)
 
