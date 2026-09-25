@@ -440,7 +440,7 @@ export default function SeoAdminPage() {
             {!funnel && !funnelError && <p style={styles.muted}>Loading Coach App funnel...</p>}
             {funnelError && <p style={styles.error}>{funnelError}</p>}
             {funnel && (
-              <CoachAppFunnelTab funnel={funnel} bannerVariants={coachAppViewStats?.bannerVariants} />
+              <CoachAppFunnelTab funnel={funnel} />
             )}
           </>
         ) : tab === "affiliate" ? (
@@ -2375,13 +2375,7 @@ function FunnelHeading({ children }: { children: ReactNode }) {
 
 // Traffic and sign-ups per channel, side by side, plus the SEO articles and
 // the share loop. Channel rules: lib/coach-app-channels.ts.
-function CoachAppFunnelTab({
-  funnel,
-  bannerVariants,
-}: {
-  funnel: CoachAppFunnel;
-  bannerVariants?: BannerVariantStats;
-}) {
+function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
   const per100 = (signups: number, views: number) => (views > 0 ? ((signups / views) * 100).toFixed(1) : "n/a");
   const sinceLabel = new Date(funnel.since).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
   const windowLabel = funnel.clampedToTrackingStart ? `since ${sinceLabel}` : `last ${funnel.days} days`;
@@ -2514,7 +2508,7 @@ function CoachAppFunnelTab({
         </table>
       </div>
 
-      <SharingReport stats={funnel.sharing} bannerVariants={bannerVariants} />
+      <SharingReport stats={funnel.sharing} impressions={funnel.shareBannerImpressions} />
     </div>
   );
 }
@@ -2525,10 +2519,11 @@ function CoachAppFunnelTab({
 // volume a single day's share numbers are single digits.
 function SharingReport({
   stats,
-  bannerVariants,
+  impressions,
 }: {
   stats: CoachAppShareStats | { error: string };
-  bannerVariants?: BannerVariantStats;
+  /** Share-banner article views over the same window as the taps. */
+  impressions: number;
 }) {
   const heading = (
     <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
@@ -2549,8 +2544,6 @@ function SharingReport({
     );
   }
 
-  const shareRows = (bannerVariants?.rows ?? []).filter((r) => r.audience === "share");
-  const impressions = shareRows.reduce((sum, r) => sum + r.impressions, 0);
   const pct = (n: number, d: number) => (d > 0 ? `${((n / d) * 100).toFixed(1)}%` : "n/a");
 
   return (
@@ -2558,7 +2551,7 @@ function SharingReport({
       {heading}
       <SectionNote label="How sharing is measured">
         Impressions are views of the grassroots articles carrying the share
-        banner (same count as the creative test above). Taps are every press
+        banner, over the same period as the taps. Taps are every press
         of &ldquo;Send it to your child&rsquo;s coach&rdquo;, logged
         first-party so cookie consent doesn&rsquo;t hide them; &ldquo;sent&rdquo;
         excludes share sheets that were opened and then dismissed. Shared-link

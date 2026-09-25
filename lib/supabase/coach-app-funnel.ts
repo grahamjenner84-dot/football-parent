@@ -8,6 +8,7 @@ import {
   type CoachAppChannel,
 } from "@/lib/coach-app-channels";
 import { getCoachAppShareStats, type CoachAppShareStats } from "@/lib/supabase/coach-app-shares";
+import { SHARE_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key (football-parent-social),
 // same pattern as the other lib/supabase modules. Never import from client
@@ -132,6 +133,9 @@ export interface CoachAppFunnel {
   };
   /** Null with an error message if the share table can't be read. */
   sharing: CoachAppShareStats | { error: string };
+  /** Views of the articles carrying the share banner, over the same window
+   * as everything else on the tab: the denominator for share taps. */
+  shareBannerImpressions: number;
   /** Present if coach_app_signups couldn't be read (e.g. migration missing). */
   signupsError?: string;
 }
@@ -186,6 +190,35 @@ async function readViews(
 
 const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
 
+// Views of the grassroots articles that carry the share banner
+// (SHARE_AUDIENCE_SLUGS, never /coaching/), from `since`. Counted here rather
+// than taken from the banner test report, whose window goes back to
+// 2026-09-04 and would set weeks of views against hours of taps.
+async function countShareBannerImpressions(
+  supabase: ReturnType<typeof adminClient>,
+  since: string
+): Promise<number> {
+  let count = 0;
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("path, user_agent")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (error) throw new Error("Failed to read page_views: " + error.message);
+    const batch = (data ?? []) as { path: string; user_agent: string | null }[];
+    for (const row of batch) {
+      if (row.path.startsWith(COACHING_PREFIX) || !isHuman(row.user_agent)) continue;
+      const slug = row.path.split("/").filter(Boolean).pop();
+      if (slug && SHARE_AUDIENCE_SLUGS.has(slug)) count++;
+    }
+    if (batch.length < pageSize) break;
+  }
+  return count;
+}
+
 function signupChannel(row: SignupRow): CoachAppChannel {
   return channelFor({
     attributed: row.attributed,
@@ -204,7 +237,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   const clampedToTrackingStart = trackingStart > requestedSince;
   const since = new Date(Math.max(requestedSince, trackingStart)).toISOString();
 
-  const [landingRows, signInRows, coachingRows, signupResult, sharing] = await Promise.all([
+  const [landingRows, signInRows, coachingRows, signupResult, sharing, shareBannerImpressions] = await Promise.all([
     readViews(supabase, since, { like: `${LANDING_PREFIX}%` }),
     readViews(supabase, since, { eq: SIGN_IN_PATH }),
     readViews(supabase, since, { like: `${COACHING_PREFIX}%` }),
@@ -219,6 +252,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     getCoachAppShareStats(days, since).catch((err: unknown) => ({
       error: err instanceof Error ? err.message : "Unknown error",
     })),
+    countShareBannerImpressions(supabase, since),
   ]);
 
   const signupRows = ((signupResult.data ?? []) as SignupRow[]).filter((r) => isHuman(r.user_agent));
@@ -294,6 +328,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
       byArticle: Array.from(articleMap.values()).sort((a, b) => b.views - a.views),
     },
     sharing,
+    shareBannerImpressions,
     ...(signupsError ? { signupsError } : {}),
   };
 }

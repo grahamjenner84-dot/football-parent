@@ -6,7 +6,7 @@ import {
   BANNER_TEST_STARTED_AT,
   CATEGORY_BANNER_PATHS,
   bannerStyleForKey,
-  defaultAudienceForSlug,
+  audienceAt,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 
@@ -1044,12 +1044,12 @@ export interface BannerVariantStats {
 
 const MIN_IMPRESSIONS_PER_ARM = 300;
 
-// Mirrors the routing in app/components/CoachAppBanner.tsx: /coaching/* gets
-// the coach copy (set on each page), every other article whatever
-// defaultAudienceForSlug gives its slug.
-function audienceForPath(path: string): CoachAppAudience {
-  if (path.startsWith("/coaching/")) return "coach";
-  return defaultAudienceForSlug(path.split("/").filter(Boolean).pop());
+// Mirrors the routing in app/components/CoachAppBanner.tsx as it stood when
+// the view happened: /coaching/* gets the coach copy, every other article
+// the parent copy before SHARE_BANNER_STARTED_AT and whatever
+// defaultAudienceForSlug gives its slug after.
+function audienceForPath(path: string, createdAt: string): CoachAppAudience {
+  return audienceAt(path.split("/").filter(Boolean).pop(), path.startsWith("/coaching/"), createdAt);
 }
 
 // Which banner creative (if any) a given logged pageview path would have
@@ -1057,7 +1057,8 @@ function audienceForPath(path: string): CoachAppAudience {
 // section promo, the landing page itself, /search, policy pages and so on.
 function bannerOnPath(
   path: string,
-  articleSlugs: Set<string>
+  articleSlugs: Set<string>,
+  createdAt: string
 ): { style: string; audience: string; placement: string } | null {
   if (path === "/") {
     return {
@@ -1088,7 +1089,7 @@ function bannerOnPath(
 
   return {
     style: bannerStyleForKey(lastSegment),
-    audience: audienceForPath(path),
+    audience: audienceForPath(path, createdAt),
     placement: "article",
   };
 }
@@ -1185,7 +1186,7 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
       bump(clicksByDay, day, row.banner_variant);
     }
 
-    const banner = bannerOnPath(row.path, articleSlugs);
+    const banner = bannerOnPath(row.path, articleSlugs, row.created_at);
     if (banner) {
       const key = `${banner.style}-${banner.audience}-${banner.placement}`;
       impressions.set(key, (impressions.get(key) ?? 0) + 1);
