@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
   // would leave them out of the deployment).
   outputFileTracingIncludes: {
     '/api/outreach/backlogs': ['./seo-data/exports/outreach-backlog-*.json'],
+    // Our own domain strength, shown at the top of /admin/outreach.
+    '/api/outreach': ['./seo-data/exports/our-domain-strength.json'],
   },
   async redirects() {
     return [

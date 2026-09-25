@@ -12,6 +12,7 @@ import {
   type OutreachStatus,
 } from "@/lib/outreach/lifecycle";
 import { explainScore, SCORE_SUMMARY } from "@/lib/outreach/score-explain";
+import { compareStrength, toStrength, type OurStrength } from "@/lib/outreach/strength";
 
 // Weekly link-building queue. Drafts and prospects are written by the weekly
 // outreach run (.claude/skills/football-parent-link-building); this page is where
@@ -73,6 +74,7 @@ function fmtDate(iso: string | null) {
 export default function OutreachAdminPage() {
   const [prospects, setProspects] = useState<Prospect[]>([]);
   const [stats, setStats] = useState<Stats | null>(null);
+  const [ourStrength, setOurStrength] = useState<OurStrength | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>("week");
@@ -90,6 +92,7 @@ export default function OutreachAdminPage() {
           if (!res.ok) throw new Error(json.error || res.statusText);
           setProspects(json.prospects);
           setStats(json.stats);
+          setOurStrength(json.ourStrength ?? null);
           setError(null);
         })
         .catch((err) => setError(err instanceof Error ? err.message : String(err)))
@@ -176,7 +179,7 @@ export default function OutreachAdminPage() {
 
       {showAdd && <AddPanel onChanged={load} />}
 
-      {stats && <Scoreboard stats={stats} />}
+      {stats && <Scoreboard stats={stats} ourStrength={ourStrength} />}
 
       <nav style={styles.tabBar}>
         {tabs.map((t) => (
@@ -198,6 +201,7 @@ export default function OutreachAdminPage() {
               expanded={expanded}
               onToggle={(id) => setExpanded((cur) => (cur === id ? null : id))}
               renderDetail={(p) => <ProspectDetail key={p.id} p={p} busy={busy === p.id} act={act} patch={patch} />}
+              ours={toStrength(ourStrength?.rank)}
             />
           </>
         )}
@@ -206,8 +210,15 @@ export default function OutreachAdminPage() {
   );
 }
 
-function Scoreboard({ stats }: { stats: Stats }) {
+function Scoreboard({ stats, ourStrength }: { stats: Stats; ourStrength: OurStrength | null }) {
+  const ours = toStrength(ourStrength?.rank);
   const tiles = [
+    {
+      label: ourStrength
+        ? `Your domain strength (${ourStrength.referringDomains ?? "?"} linking sites, ${fmtDate(ourStrength.date)})`
+        : "Your domain strength (not measured yet)",
+      value: ours == null ? "-" : `${ours} / 100`,
+    },
     { label: "Links this month", value: `${stats.wonThisMonth} / ${stats.monthlyTarget}` },
     { label: "Sent this week", value: String(stats.sentThisWeek) },
     { label: "Chases this week", value: String(stats.chasesThisWeek) },
@@ -776,11 +787,13 @@ function ProspectTable({
   expanded,
   onToggle,
   renderDetail,
+  ours,
 }: {
   rows: Prospect[];
   expanded: number | null;
   onToggle: (id: number) => void;
   renderDetail: (p: Prospect) => ReactNode;
+  ours: number | null;
 }) {
   if (!rows.length) return <p style={styles.muted}>Nothing here yet.</p>;
   return (
@@ -788,7 +801,7 @@ function ProspectTable({
       <table style={styles.table}>
         <thead>
           <tr>
-            {["Site", "Score", "Fit", "Type", "Pitching", "Contact", "Emailed", "Last contact", "Status"].map((h) => (
+            {["Site", "Score", "Strength", "Fit", "Type", "Pitching", "Contact", "Emailed", "Last contact", "Status"].map((h) => (
               <th key={h} style={styles.th}>
                 {h}
               </th>
@@ -808,6 +821,12 @@ function ProspectTable({
                 <td style={styles.td}>
                   <ScoreCell p={p} />
                 </td>
+                <td style={styles.tdNowrap} title="Domain strength 0-100 (DataForSEO rank / 10, or the DA/DR you entered)">
+                  {toStrength(p.authority) ?? "-"}
+                  {compareStrength(toStrength(p.authority), ours) && (
+                    <div style={styles.reasons}>{compareStrength(toStrength(p.authority), ours)}</div>
+                  )}
+                </td>
                 <td style={styles.tdNowrap}>{p.fit != null ? `${p.fit}/10` : "-"}</td>
                 <td style={styles.td}>{p.prospect_type.replace("_", " ")}</td>
                 <td style={{ ...styles.td, maxWidth: 220 }}>{p.fp_page ?? "-"}</td>
@@ -818,7 +837,7 @@ function ProspectTable({
               </tr>
               {expanded === p.id && (
                 <tr>
-                  <td colSpan={9} style={styles.detailCell}>
+                  <td colSpan={10} style={styles.detailCell}>
                     {renderDetail(p)}
                   </td>
                 </tr>

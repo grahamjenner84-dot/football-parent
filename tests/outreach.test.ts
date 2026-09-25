@@ -339,3 +339,15 @@ test("content peers are pitchable (as a mutual); commercial rivals aren't", asyn
   assert.match(map[0].verdict, /independent and links out/);
   assert.match(map.find((r) => r.domain === "teamstats.net")!.verdict, /commercial rival/);
 });
+
+test("domain strength scale and comparison", async () => {
+  const { toStrength, compareStrength } = await import("../lib/outreach/strength");
+  assert.equal(toStrength(440), 44);
+  assert.equal(toStrength(0), 0);
+  assert.equal(toStrength(null), null);
+  assert.equal(compareStrength(2, 0), "about your size");
+  assert.equal(compareStrength(15, 0), "bigger than you");
+  assert.equal(compareStrength(44, 0), "much bigger than you");
+  assert.equal(compareStrength(10, 30), "smaller than you");
+  assert.equal(compareStrength(null, 0), null);
+});

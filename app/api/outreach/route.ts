@@ -10,6 +10,19 @@ import {
   type EditableField,
 } from "@/lib/supabase/outreach";
 import type { OutreachAction } from "@/lib/outreach/lifecycle";
+import type { OurStrength } from "@/lib/outreach/strength";
+import fs from "node:fs";
+import path from "node:path";
+
+// Refreshed by research.ts and shipped with this route (next.config.ts
+// outputFileTracingIncludes). Missing file just means no figure to show.
+function readOurStrength(): OurStrength | null {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(process.cwd(), "seo-data", "exports", "our-domain-strength.json"), "utf8")) as OurStrength;
+  } catch {
+    return null;
+  }
+}
 
 // Admin-only (guarded in proxy.ts). Backs /admin/outreach.
 export const runtime = "nodejs";
@@ -27,7 +40,7 @@ export async function GET() {
       listProspects(["backlog", "drafted", "sent", "chase_1", "chase_2", "replied", "won", "parked", "no_reply", "lost", "skipped"], 2000),
       getStats(),
     ]);
-    return NextResponse.json({ prospects, stats });
+    return NextResponse.json({ prospects, stats, ourStrength: readOurStrength() });
   } catch (err) {
     return fail(err);
   }

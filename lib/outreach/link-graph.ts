@@ -154,6 +154,9 @@ export interface GraphProspect {
   url: string;
   kind: "open_peer" | "hub" | "linker";
   score: number;
+  // DataForSEO domain rank (0-1000), where known. Record it as `authority`
+  // when adding the prospect.
+  rank: number | null;
   why: string[];
   // Peers this site links to (hubs/linkers) or small sites it links out to (open peers).
   connections: string[];
@@ -182,6 +185,7 @@ export function buildLinkGraph(data: PeerLinks[], exclude: Set<string> = new Set
       domain: d.peer.domain,
       url: d.peer.url,
       kind: "open_peer",
+      rank: d.peer.rank,
       score: 20 + Math.min(smallOut.length, 6) * 5 + toOtherPeers.length * 5 + (d.peer.position > 10 ? 10 : 0),
       why,
       connections: smallOut,
@@ -215,7 +219,7 @@ export function buildLinkGraph(data: PeerLinks[], exclude: Set<string> = new Set
       existing.why.push(...why);
       continue;
     }
-    out.set(domain, { domain, url: v.url, kind: n >= 2 ? "hub" : "linker", score, why, connections: [...v.peers] });
+    out.set(domain, { domain, url: v.url, kind: n >= 2 ? "hub" : "linker", rank: v.rank, score, why, connections: [...v.peers] });
   }
 
   return [...out.values()].sort((a, b) => b.score - a.score);
