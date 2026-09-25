@@ -228,12 +228,29 @@ export function classifyType(host: string, url: URL, text: string): ProspectType
   if (/league/i.test(host)) return "league";
   if (
     /(jfc|afc|fc|juniors|youth|united|rovers|athletic|colts|communityfootball)\b/i.test(host.replace(/[.-]/g, " ")) ||
+    // Club foundations and community trusts: stfcfoundation, brentfordfccst,
+    // pompeyitc, bfcct. Not footballfoundation.org.uk (no "fc").
+    /^[a-z0-9-]*(fc[a-z0-9-]*(foundation|trust|cst|cct)|(cst|ccst|cct|itc))$/i.test(host.split(".")[0]) ||
     /\b(jfc|youth fc|junior football club|youth football club|community football club)\b/i.test(text)
   )
     return "club";
   if (/\/(blog|news|articles?|insights|the-[a-z-]+)\//i.test(url.pathname)) return "blog";
   if (/\b(resources?|useful links|links|parents?)\b/i.test(url.pathname.replace(/[/-]/g, " "))) return "resource";
   return "other";
+}
+
+// Link farms and scraped copies. Backlink data for any page we look at is
+// full of them: "natural-seo-backlinks" directories on .link/.online domains,
+// escort pages on numbered .xyz hosts, wiki mirrors. The Sept 2026 link-graph
+// run passed all of these as "ok". Nobody wrote them, so there is no one to
+// pitch and a link from them would hurt.
+const SPAM_TLDS = [".xyz", ".top", ".online", ".site", ".website", ".click", ".link", ".icu", ".cyou", ".cfd", ".sbs", ".buzz", ".rest", ".monster", ".wiki"];
+const SPAM_HOST = /escort|casino|porn|viagra|payday|betting|backlink|linklegion|link-legion|seo-?anomaly|dapa|domainauthority|domain-authority|wholinks|\bseo\b|seo(biz|global|tools|link)/i;
+const SPAM_PATH = /escort|casino|natural-seo-backlinks|seo-anomaly|backlinks?-checker/i;
+const MIRROR_HOSTS = ["wikiwand.com", "grokipedia.com", "wikisort.org", "dewiki.one", "profilpelajar.com", "twitt-stats.com", "poddtoppen.se", "ivy.fm", "podimo.com"];
+
+export function isSpamHost(host: string): boolean {
+  return SPAM_TLDS.some((t) => host.endsWith(t)) || SPAM_HOST.test(host.replace(/\./g, " "));
 }
 
 export function assessProspect(c: ProspectCandidate): QualityResult {
@@ -253,6 +270,8 @@ export function assessProspect(c: ProspectCandidate): QualityResult {
   const park = (why: string): QualityResult => ({ verdict: "parked", reasons: [...reasons, why], type, domain: host, isUk });
 
   if (host === OUR_DOMAIN || host.endsWith(`.${OUR_DOMAIN}`)) return reject("our own site");
+  if (isSpamHost(host) || SPAM_PATH.test(u.pathname)) return reject("link farm or spam domain: nobody wrote this page");
+  if (hostMatches(host, MIRROR_HOSTS)) return reject("wiki mirror, scraper or podcast directory: a copy of someone else's page, nobody to pitch");
   if (hostMatches(host, COMPETITOR_HOSTS)) return reject("commercial rival (app, club software or paid service): will not link to a rival product");
   if (hostMatches(host, CONTENT_PEER_HOSTS)) reasons.push("content site ranking for our keywords: may see us as a rival, so pitch as a mutual");
   if (hostMatches(host, DEAD_END_HOSTS) || FORUM_PATH.test(u.pathname)) return reject("platform/forum/marketplace: nobody to pitch");
@@ -369,6 +388,77 @@ export function isInstitutionalLink(link: { url: string; anchor: string }): bool
   return /\b(sponsor|sponsored by|partner|kit supplier|powered by|website by|designed by)\b/i.test(link.anchor);
 }
 
+// Site furniture: links that sit on the page whoever wrote it and say nothing
+// about whether the writer cites other people's work. In the Sept 2026 run
+// these carried most of the pages that passed: a "Website built by Jamie
+// Clarke" footer credit, Akismet's comment notice, Pinterest follow buttons,
+// amzn.to and Awin affiliate links, an energy-switch referral, "Ask ChatGPT"
+// summary buttons, cookie widgets, Microsoft Forms sign-ups, and the jobs,
+// notices and bingo links every regional newspaper page carries.
+const NON_EDITORIAL_HOSTS = [
+  // blog plumbing and credits
+  "akismet.com", "gravatar.com", "jetpack.com", "wordpress.com", "pinterest.com", "flickr.com", "unsplash.com", "pexels.com", "shutterstock.com",
+  "cookiedatabase.org", "cookiebot.com", "onetrust.com", "hs-sites.com",
+  // forms, tickets, booking
+  "forms.office.com", "forms.cloud.microsoft", "forms.gle", "typeform.com", "jotform.com", "tixr.com", "square.site", "raffall.com", "mixlr.com", "bookpebble.co.uk",
+  // shorteners: the destination can't be judged, so they prove nothing
+  "bit.ly", "t.co", "tinyurl.com", "ow.ly", "goo.gl", "maps.app.goo.gl", "linktr.ee",
+  // affiliate and referral
+  "amzn.to", "amazon.co.uk", "amazon.com", "awin1.com", "awin.com", "skimresources.com", "redirectingat.com", "linksynergy.com", "shareasale.com", "anrdoezrs.net", "prf.hn", "tidd.ly", "rstyle.me", "share.octopus.energy",
+  // "summarise this page" buttons
+  "chatgpt.com", "claude.ai", "grok.com", "perplexity.ai",
+  // regional newspaper network furniture
+  "inyourarea.co.uk", "newspapersubs.co.uk", "funeral-notices.co.uk", "publicnoticeportal.uk", "bookanad.com", "reachplc.com", "trinitymirror.com", "mirrorbingo.com", "mirrorpix.com", "reachphotosales.co.uk", "jobstoday.co.uk", "nationalworld.com", "connect-local.co.uk", "newsprints.co.uk", "yimbly.com",
+];
+// Staging and hosting subdomains: a link to a half-migrated copy of the site
+// itself, not a citation.
+const STAGING_HOST = /(\.sg-host\.com|\.stackstaging\.com|\.temp\.link|\.wpengine(powered)?\.com|\.wpcomstaging\.com|\.netlify\.app|\.vercel\.app|\.herokuapp\.com)$/i;
+const AFFILIATE_PARAM = /[?&](tag|awinaffid|affid|aff_id|irclickid|clickref)=/i;
+const CREDIT_ANCHOR = /\b(site|website|web site)\b[\w\s&,]{0,30}?\bby\b|\b(designed|developed|built|hosted|made) by\b|\bweb ?design\b|\btheme by\b|^pingback:|comment data is processed|\bview \S+ profile on\b|all rights reserved|©|\bask (chatgpt|claude|grok|perplexity)\b/i;
+const FURNITURE_ANCHOR = /^(jobs?|notices|funeral notices|public notices|family notices|subscribe|subscriptions?|advertis(e|ing)( with us)?|place an ad|photo sales|buy (a )?photos?|bingo|dating|puzzles|competitions|tickets?|shop|newsletters?|cookie (policy|settings|preferences)|privacy( policy)?|terms( (and|&) conditions)?|contact us|log ?in|sign ?up|book now|parent login|school login)$/i;
+
+// Unmoderated comment spam: a page carrying these is on a site nobody is
+// looking after (acoachesview.com's "taboo series" post had 39 of them).
+const SPAM_ANCHOR = /\b(rehab|detox|escorts?|casino|slots|betting|bet365|poker|payday|loans?|viagra|cialis|cbd|vape|crypto|forex|porn|xxx|plombier|locksmith|seo services|backlinks?|mental health treatment|treatment (center|facility))\b/i;
+
+export function isSpamLink(link: { url: string; anchor: string }): boolean {
+  return SPAM_ANCHOR.test(link.anchor) || isSpamHost(hostOf(link.url));
+}
+
+// The site's own name, ignoring subdomains and the public suffix:
+// bookings.activeme360.co.uk -> activeme360, laceeze.com -> laceeze.
+function siteLabel(host: string): string {
+  const parts = host.split(".");
+  const suffixLen = /\.(co|org|me|ac|gov|net|ltd|plc|sch)\.uk$/.test(host) ? 3 : 2;
+  return parts.length >= suffixLen ? parts[parts.length - suffixLen] : parts[0];
+}
+
+// A link to the site's own shop, booking system, course platform or sister
+// domain (bookings.activeme360.co.uk, coachkurtis.gr8.com, laceeze.com from
+// laceeze.co.uk) is not a citation of someone else.
+function isOwnSiteLink(linkHost: string, pageHost: string): boolean {
+  if (!pageHost) return false;
+  const label = siteLabel(pageHost);
+  return siteLabel(linkHost) === label || (label.length >= 6 && linkHost.includes(label));
+}
+
+export function isNonEditorialLink(link: { url: string; anchor: string }, pageHost = ""): boolean {
+  const host = hostOf(link.url);
+  if (!host) return true;
+  if (hostMatches(host, NON_EDITORIAL_HOSTS) || STAGING_HOST.test(host) || AFFILIATE_PARAM.test(link.url)) return true;
+  if (isOwnSiteLink(host, pageHost)) return true;
+  const anchor = link.anchor.trim();
+  return CREDIT_ANCHOR.test(anchor) || FURNITURE_ANCHOR.test(anchor);
+}
+
+// What's left once governing bodies, social media, site furniture, the site's
+// own properties and spam are taken out: links that show the writer points
+// readers at other people's work.
+export function editorialLinks(page: Pick<PageContent, "url" | "externalLinks">): { url: string; anchor: string }[] {
+  const pageHost = hostOf(page.url);
+  return page.externalLinks.filter((l) => !isInstitutionalLink(l) && !isNonEditorialLink(l, pageHost) && !isSpamLink(l));
+}
+
 const BYLINE = /\b(by|written by|author|posted by|words by)[:\s]+[A-Z][a-z]+(\s[A-Z][a-z]+)?/;
 const DATE_TEXT = /\b(\d{1,2}(st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+20\d{2}|(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{1,2},?\s+20\d{2}|\d{1,2}\/\d{1,2}\/20\d{2})\b/i;
 const FIRST_PERSON = /\b(I think|I believe|in my (view|opinion|experience)|as a (parent|coach|dad|mum)|we've found|my (son|daughter|child|kids))\b/i;
@@ -376,7 +466,7 @@ const RESOURCE_LIST = /\b(useful links|resources|further reading|recommended rea
 
 export function assessPageContent(page: PageContent): PageContentResult {
   const reasons: string[] = [];
-  const independentLinks = page.externalLinks.filter((l) => !isInstitutionalLink(l));
+  const independentLinks = editorialLinks(page);
   const reject = (why: string, kind: PageContentResult["kind"] = "other"): PageContentResult => ({ verdict: "rejected", kind, reasons: [...reasons, why], independentLinks });
 
   const titleAndHeadings = [page.title ?? "", ...page.headings].join(" | ");
@@ -384,8 +474,14 @@ export function assessPageContent(page: PageContent): PageContentResult {
     return reject("club policy/admin page: states their own rules, not written to send readers elsewhere");
   }
   if (page.externalLinks.length === 0) return reject("doesn't link to any other site");
+  const spam = page.externalLinks.filter(isSpamLink);
+  if (spam.length >= 3) {
+    return reject(`carries link spam (${spam.length} links such as "${spam[0].anchor.slice(0, 40)}"), usually unmoderated comments: the site isn't being looked after`);
+  }
   if (independentLinks.length === 0) {
-    return reject(`only links to FA, league, social or admin sites (${page.externalLinks.length} links, none to independent articles or resources)`);
+    return reject(
+      `only links to FA, league, social or admin sites, or site furniture (credits, affiliate links, plugins, its own shop) (${page.externalLinks.length} links, none to independent articles or resources)`
+    );
   }
 
   const head = page.text.slice(0, 800);

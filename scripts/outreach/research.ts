@@ -65,7 +65,7 @@ import { googleOrganicSerp } from "../seo/dataforseo/endpoints/serp";
 import { contentParsingLive } from "../seo/dataforseo/endpoints/on_page";
 import { backlinksList, backlinksSummary, bulkRanks, referringDomains } from "../seo/dataforseo/endpoints/backlinks";
 import { compareStrength, toStrength, type OurStrength } from "../../lib/outreach/strength";
-import { buildCompetitorMap, buildLinkGraph, pickPeers, type PeerLinks, type SavedGraphRun, type SerpResult } from "../../lib/outreach/link-graph";
+import { buildCompetitorMap, buildLinkGraph, pickPeers, stripTracking, type PeerLinks, type SavedGraphRun, type SerpResult } from "../../lib/outreach/link-graph";
 import { rankedKeywords } from "../seo/dataforseo/endpoints/labs";
 import { parseCsv } from "../seo/shared/csv";
 import { REPO_ROOT } from "../seo/shared/env";
@@ -265,7 +265,7 @@ async function linkGraph(keyword: string, depth: number, maxPeers: number, linke
   type Item = { type?: string; url?: string; title?: string; rank_absolute?: number };
   const results: SerpResult[] = ((serp.data?.tasks?.[0]?.result?.[0] as { items?: Item[] } | undefined)?.items ?? [])
     .filter((i) => i.type === "organic" && i.url)
-    .map((i) => ({ url: i.url!, title: i.title ?? null, position: i.rank_absolute ?? 0 }));
+    .map((i) => ({ url: stripTracking(i.url!), title: i.title ?? null, position: i.rank_absolute ?? 0 }));
 
   const hosts = [...new Set([OUR_SITE, ...results.map((r) => { try { return new URL(r.url).hostname.replace(/^www\./, ""); } catch { return ""; } })].filter(Boolean))];
   const ranks = new Map<string, number | null>();
@@ -280,10 +280,12 @@ async function linkGraph(keyword: string, depth: number, maxPeers: number, linke
   const peers = pickPeers(results, ranks, maxPeers);
   const ours = await domainsLinkingToUs();
   const data: PeerLinks[] = [];
+  const linkerErrors = new Map<string, string>();
   for (const peer of peers) {
     const page = await read(peer.url, false);
     const outbound = "content" in page && page.content ? page.content.independentLinks : [];
     const bl = await backlinksList(peer.url, { ...requestOpts(), limit: linkerLimit });
+    if (bl.error) linkerErrors.set(peer.domain, bl.error);
     type Row = { url_from?: string; domain_from?: string; anchor?: string; dofollow?: boolean; domain_from_rank?: number };
     const rows = ((bl.data?.tasks?.[0]?.result?.[0] as { items?: Row[] } | undefined)?.items ?? []);
     data.push({
@@ -306,6 +308,7 @@ async function linkGraph(keyword: string, depth: number, maxPeers: number, linke
     size: d.peer.size,
     smallSitesLinkedOut: d.outbound.length,
     linkersFound: d.inbound.length,
+    ...(linkerErrors.has(d.peer.domain) ? { linkerError: linkerErrors.get(d.peer.domain) } : {}),
   }));
   // Saved for the competitor map (research.ts competitor-map). Only live
   // runs: sandbox data is fake and would pollute the map.
@@ -326,7 +329,13 @@ async function linkGraph(keyword: string, depth: number, maxPeers: number, linke
       const strength = toStrength(p.rank);
       return { ...p, strength, vsUs: compareStrength(strength, toStrength(ranks.get(OUR_SITE) ?? readOurStrength()?.rank)) };
     }),
-    note: "Every prospect still needs research.ts read + the vetting rules before it's added. Hubs first, then open peers, then single linkers.",
+    note: [
+      "Every prospect still needs research.ts read + the vetting rules before it's added. Hubs first, then open peers, then single linkers.",
+      linkerErrors.size ? `Backlinks lookup failed for ${[...linkerErrors.keys()].join(", ")}: their 0 linkers means unknown, not none. Re-run to retry (successful calls are cached).` : "",
+      peerSummary.length && peerSummary.every((p) => p.linkersFound === 0) && !linkerErrors.size
+        ? "No ranking page here has indexed backlinks, which is normal for news and club pages. Try research.ts linkers on the strongest competitor article for this keyword instead."
+        : "",
+    ].filter(Boolean).join(" "),
   };
 }
 

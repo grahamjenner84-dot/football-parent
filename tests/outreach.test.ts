@@ -340,6 +340,86 @@ test("content peers are pitchable (as a mutual); commercial rivals aren't", asyn
   assert.match(map.find((r) => r.domain === "teamstats.net")!.verdict, /commercial rival/);
 });
 
+test("rule fixes from the Sept 2026 link-graph run", async () => {
+  const { assessPageContent } = await import("../lib/outreach/quality");
+  const { pickPeers, buildLinkGraph, buildCompetitorMap, stripTracking } = await import("../lib/outreach/link-graph");
+  const words = (n: number) => Array.from({ length: n }, (_, i) => `word${i}`).join(" ");
+  const article = (url: string, externalLinks: { url: string; anchor: string }[]) =>
+    assessPageContent({ url, title: "Should my child have a set position?", headings: [], text: `As a coach I think ${words(600)}`, wordCount: 620, externalLinks });
+
+  // Site furniture is not a citation: the only outbound link on these real
+  // pages was a web credit, Akismet, an affiliate link or a referral.
+  for (const links of [
+    [{ url: "https://jamieclarke.online/", anchor: "Website built by Jamie Clarke" }],
+    [{ url: "https://www.robinsonsbuilding.co.uk/", anchor: "Website Built and Provided by Robinsons Building & Roofing Services" }],
+    [{ url: "https://akismet.com/privacy/", anchor: "This site uses Akismet to reduce spam. Learn how your comment data is processed." }, { url: "https://www.pinterest.com/humankinetics/", anchor: "View humankinetics's profile on Pinterest" }],
+    [{ url: "https://amzn.to/3rx2zQQ", anchor: "this book" }, { url: "http://share.octopus.energy/light-human-543", anchor: "switch your energy" }],
+    [{ url: "https://www.awin1.com/cread.php?awinmid=64226&awinaffid=279161", anchor: "Networld Sports" }],
+    [{ url: "http://loveallblogs.com/guide/", anchor: "Pingback: Guide to being a football mum | Love All Blogs" }],
+    [{ url: "https://bookings.foot-techacademy.co.uk/list", anchor: "Book now" }, { url: "https://foot-techacademy.com/shop", anchor: "Kit" }],
+  ]) {
+    const r = article("https://foot-techacademy.co.uk/should-my-child-have-a-set-position/", links);
+    assert.equal(r.verdict, "rejected", links[0].anchor);
+    assert.match(r.reasons.join(" "), /site furniture/);
+  }
+  const cited = article("https://coachkurtis.com/2026/09/13/released-from-academy-what-to-do-next/", [
+    { url: "https://coachkurtis.gr8.com/", anchor: "Get Your Coaching Checklist NOW!" },
+    { url: "https://www.parentsinsport.co.uk/2021/05/16/released-picking-up-the-pieces-as-a-sporting-parent/", anchor: "Working With Parents In Sport have written well on this" },
+  ]);
+  assert.equal(cited.verdict, "ok", "a real citation still counts");
+  assert.deepEqual(cited.independentLinks.map((l) => l.url), ["https://www.parentsinsport.co.uk/2021/05/16/released-picking-up-the-pieces-as-a-sporting-parent/"], "own checklist subdomain dropped");
+
+  // Comment spam means an abandoned blog, however many "links" it has.
+  const spam = article("https://www.acoachesview.com/blog/grassroots-football-the-taboo-series-changing-clubs", [
+    { url: "https://redemptionrecoverygroup.com/", anchor: "drug and alcohol rehab" },
+    { url: "https://maps.app.goo.gl/x", anchor: "detox in nashville" },
+    { url: "https://maps.app.goo.gl/y", anchor: "Depression Rehab" },
+    { url: "https://example-coach.co.uk/post", anchor: "a good post" },
+  ]);
+  assert.equal(spam.verdict, "rejected");
+  assert.match(spam.reasons.join(" "), /link spam/);
+
+  // Link farms and mirrors fail the URL gate.
+  for (const u of [
+    "https://link-legion-278.xyz/escort-belarus-escort-03-09-2026/3036-7/",
+    "https://checkdomainauthority.website/dir/natural-seo-backlinks-108934",
+    "https://seo-globallink.com/dir/natural-seo-backlinks-108934",
+    "https://usaseobiz.info/dir/natural-seo-backlinks-108934",
+    "https://www.wikiwand.com/it/English_Football_League",
+    "https://grokipedia.com/page/Steve_Kember",
+  ])
+    assert.equal(verdict(u), "rejected", u);
+
+  // Clubs, club foundations and universities rank for our keywords but are
+  // not content peers; their plumbing links don't make them "open".
+  const peers = pickPeers(
+    [
+      { url: "https://www.liverpoolfc.com/foundation/emerging-talent-centre-etc", position: 19 },
+      { url: "https://www.stfcfoundation.com/programmes/teams/emerging-talent-centre", position: 16 },
+      { url: "https://pompeyitc.co.uk/girls-emerging-talent-centre/", position: 21 },
+      { url: "https://www.glos.ac.uk/sport/sport-scholarships/womens-football-scholarship/", position: 19 },
+      { url: "https://playerscout.co.uk/football-academy-categories/", position: 14 },
+    ],
+    new Map([["liverpoolfc.com", 483], ["stfcfoundation.com", 258], ["pompeyitc.co.uk", 208], ["glos.ac.uk", 406], ["playerscout.co.uk", 212]]),
+    10
+  );
+  const kinds = Object.fromEntries(peers.map((p) => [p.domain, p.kind]));
+  assert.deepEqual(kinds, { "liverpoolfc.com": "club", "stfcfoundation.com": "club", "pompeyitc.co.uk": "club", "glos.ac.uk": "institution", "playerscout.co.uk": "content" });
+  const graph = buildLinkGraph(peers.map((peer) => ({ peer, outbound: [{ url: "https://someblog.co.uk/post", anchor: "a post" }], inbound: [] })));
+  assert.deepEqual(graph.map((g) => g.domain), ["playerscout.co.uk"], "only content sites become open peers");
+
+  const map = buildCompetitorMap([
+    { keyword: "etc", ranAt: "2026-09-25", peers: [{ domain: "liverpoolfc.com", url: "https://www.liverpoolfc.com/foundation/etc", position: 19, rank: 483, pitchable: true, kind: "content", size: "established", smallSitesLinkedOut: 1, linkersFound: 3 }] },
+  ]);
+  assert.equal(map[0].kind, "club", "old runs saved as content are re-derived");
+  assert.match(map[0].verdict, /not a content peer/);
+
+  assert.equal(
+    stripTracking("https://mhgoals.com/new-fa-future-fit-scheme/?srsltid=AU7gw4Xf&utm_source=x&page=2"),
+    "https://mhgoals.com/new-fa-future-fit-scheme/?page=2"
+  );
+});
+
 test("domain strength scale and comparison", async () => {
   const { toStrength, compareStrength } = await import("../lib/outreach/strength");
   assert.equal(toStrength(440), 44);

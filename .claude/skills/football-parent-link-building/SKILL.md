@@ -141,7 +141,12 @@ what budget is left over the other routes.
      a scheme.
    - **Linkers**: link to one peer. Weaker, but still worth a read.
 
-   Sites ranking against us come in two kinds (`peers[].kind`):
+   Sites ranking against us come in four kinds (`peers[].kind`). Only
+   `content` peers become open peers:
+   - **Clubs** (`club`: pro clubs, grassroots clubs, club foundations and
+     community trusts) and **universities** (`institution`) describe their
+     own programmes. They are never content peers or mutuals. A club only
+     comes in through the curated resources-list exception below.
    - **Commercial rivals** (TeamStats, Spond and other apps, club software,
      paid trials and academy services) are mined for their links but never
      pitched. A business won't link to a rival product.
@@ -155,6 +160,11 @@ what budget is left over the other routes.
      one-person sites. Every graph prospect still goes through
    `read` and the vetting rules below: the graph finds who links, the
    vetting decides whether they're a real article or resource list.
+
+   `linkersFound: 0` on every peer is normal for news and club pages
+   (their article URLs rarely have indexed backlinks); switch to route 2
+   for that keyword. A peer with `linkerError` means the lookup failed,
+   not that nobody links: re-run it.
 2. **Who links to a specific competitor article** (`source: "linkers:<keyword>"`).
    From `our-pages`, take the top linkable pages (guides, explainers; skip
    gear). `search` each page's top 1 or 2 keywords, take the 2 or 3
@@ -238,7 +248,16 @@ combines the URL gate with the **page-content check**
 rejects pages with:
 - no outbound links
 - only FA, league, social, admin or sponsor links
+- only site furniture: web-designer credits, Akismet or Pinterest, affiliate
+  and referral links, links to its own shop or booking system, newspaper
+  jobs/notices links
+- link spam (usually unmoderated comments), which marks an abandoned site
 - no author, date or first-person voice and no curated independent links
+
+The URL gate also rejects link farms (.xyz, .online and similar,
+"seo-backlinks" directories) and wiki mirrors before anything is read.
+A footer credit whose anchor is just the agency's name ("Vipertech") still
+counts as a citation, so check the `independentLinks` yourself.
 
 **A `rejected` verdict is final: don't argue a page back in.** If the check
 is clearly wrong about a page, say so in the report so the rule gets fixed.
