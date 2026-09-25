@@ -928,3 +928,7 @@ Commit hashes on commit below.
 ## Fix: page views stopped logging after the Countries deploy (2026-09-24, 17:44 to fix)
 
 The country insert fell back to the old row shape only on Postgres code 42703, but PostgREST reports an unknown insert column as PGRST204, so with the `country` migration not yet applied every `/api/page-view` insert failed and the dashboard sat at 207 views. Fallback now covers both codes. Views in that gap are lost, not recoverable; treat 24 September's total as under-counted by roughly the length of the gap. Commit hash on commit below.
+
+## Paul Barry interview card added to /academy-pathway (2026-09-25)
+
+The interview (`/academy-pathway/academy-life-paul-barry-interview`, published 2026-09-20) was in `lib/routes.ts` and the sitemap but had no card on the Academy Pathway category page, so its only internal links came from other articles. Card added at the end of the articles grid. Additive only, one internal link. Commit 5e95d0f.
