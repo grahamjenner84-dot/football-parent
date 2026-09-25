@@ -87,6 +87,22 @@ export const SHARE_AUDIENCE_SLUGS = new Set([
   "late-developers-in-girls-football",
 ]);
 
+// When the share audience (and the audience routing below) went live: the
+// merge that shipped it, 2026-09-25 19:14 UTC. Before this every article
+// outside /coaching/ showed the parent banner, so the report must not apply
+// today's routing to older page views - that counted weeks of parent-banner
+// views as share-banner impressions.
+export const SHARE_BANNER_STARTED_AT = "2026-09-25T19:14:00Z";
+
+/** The audience a page's banner actually spoke to at a given time, for the
+ * report. /coaching/* was always the coach copy; everything else was the
+ * parent copy until SHARE_BANNER_STARTED_AT. */
+export function audienceAt(slug: string | undefined, isCoachingPath: boolean, createdAt: string): CoachAppAudience {
+  if (isCoachingPath) return "coach";
+  if (createdAt < SHARE_BANNER_STARTED_AT) return "parent";
+  return defaultAudienceForSlug(slug);
+}
+
 // Articles outside /coaching/ written for people who coach, or want to.
 export const COACH_AUDIENCE_SLUGS = new Set(["how-to-become-a-football-coach"]);
 
