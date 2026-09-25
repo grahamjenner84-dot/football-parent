@@ -953,3 +953,17 @@ Why: targets "playing time calculator" (260/mo) and "equal playing time calculat
 **Rule exception, logged explicitly:** this is a second change to this page on the same day as the title change (`af27498`). Graham asked for it to go now rather than wait out the 10-14 day window, so any movement over the next two weeks can't be put down to one of the two changes alone. If the page drops, revert both, then re-apply the title on its own.
 
 Commit: `8008588`. Watch until ~7 Oct.
+
+## Drills and formations title tags (2026-09-25)
+
+Two pages, one lever each (title tag in `page.tsx` only; H1 frontmatter titles, meta descriptions, headings and body unchanged), separate commits. Asked for by Graham after a volume review showed both title tags missing their highest-volume target phrases. Both are low-traffic pages, so low risk.
+
+| Page | Before | After | Commit |
+|---|---|---|---|
+| `coaching/football-drills-for-7-and-8-year-olds` | "Ball Mastery Drills for 7 and 8 Year Olds \| Football Parent" (59) | "Football Drills for 7 and 8 Year Olds: Ball Mastery" (51) | `90445e3` |
+| `coaching/best-football-formations-by-age-group` | "Best Football Formations by Age Group \| Football Parent" (55) | "Best 7-a-Side and 9-a-Side Football Formations by Age" (53) | `2ed3239` |
+
+- Drills: "football drills for 8 year olds" 210/mo and "football drills for 7 year olds" 140/mo (KD 0, 22 Aug research), ranking 11 and 11.9. Those words dropped out of the title tag when it was shortened on 23 Aug. At the change: 315 impressions, 8 clicks, avg pos 6.7 (28 days).
+- Formations: "7 a side formations" and its variants ~480/mo each (probably the same pool, from the TeamStats ranked-keywords export, where TeamStats holds positions 4-7), "best 7 a side formation" 170/mo, "formation for 7 a side football" 110/mo, 9v9 terms 40-110/mo. The page's H1 already said "7-a-Side and 9-a-Side" but the title tag did not. At the change: 402 impressions, 4 clicks, avg pos 6.5. This overrides the 22 Sep "watch only" note above on Graham's instruction; indexing was confirmed clean then.
+
+Both on watch until ~7 Oct.
