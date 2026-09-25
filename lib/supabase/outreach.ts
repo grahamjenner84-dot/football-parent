@@ -245,11 +245,68 @@ export async function saveDraft(d: DraftInput): Promise<void> {
   if (current.status === "backlog") await logEvent(d.id, "drafted");
 }
 
+// A manual status change is logged under the same event kind as the
+// matching button, so the scoreboard counts it the same way (a prospect set
+// to "sent" by hand counts as sent this week).
+const SET_STATUS_EVENT: Partial<Record<OutreachStatus, string>> = {
+  sent: "mark_sent",
+  chase_1: "mark_chased",
+  chase_2: "mark_chased",
+  replied: "replied",
+  won: "won",
+  lost: "lost",
+  no_reply: "no_reply",
+  skipped: "skip",
+  parked: "park",
+  backlog: "restore",
+};
+
 export async function applyProspectAction(id: number, action: OutreachAction): Promise<OutreachProspect> {
   const current = await getProspect(id);
   const t = applyAction(current, action);
   await updateProspectFields(id, t as Partial<OutreachProspect>);
-  await logEvent(id, action.action, "url" in action ? action.url ?? null : null);
+  let kind: string = action.action;
+  if (action.action === "set_status") {
+    // Only moving out of not-yet-contacted into sent counts as a send.
+    const wasUncontacted = ["backlog", "drafted", "parked", "skipped"].includes(current.status);
+    kind = action.status === "sent" && !wasUncontacted ? "set_status" : SET_STATUS_EVENT[action.status] ?? "set_status";
+  }
+  await logEvent(id, kind, "url" in action ? action.url ?? null : action.action === "set_status" ? action.status : null);
+  return getProspect(id);
+}
+
+// Fields Graham can edit from the row detail panel. Anything that feeds the
+// priority score triggers a rescore of that one prospect.
+export const EDITABLE_FIELDS = ["title", "contact_name", "contact_email", "contact_url", "angle", "notes", "fp_page", "won_link_url", "fit", "authority"] as const;
+export type EditableField = (typeof EDITABLE_FIELDS)[number];
+
+export async function updateEditableFields(id: number, fields: Partial<Record<EditableField, string | number | null>>): Promise<OutreachProspect> {
+  const clean: Record<string, unknown> = {};
+  for (const k of EDITABLE_FIELDS) {
+    if (!(k in fields)) continue;
+    const v = fields[k];
+    if (k === "fit" || k === "authority") {
+      const n = v === null || v === "" ? null : Number(v);
+      if (n !== null && (!Number.isFinite(n) || n < 0 || n > (k === "fit" ? 10 : 1000))) throw new Error(`${k} out of range`);
+      clean[k] = n === null ? null : Math.round(n);
+    } else {
+      clean[k] = typeof v === "string" ? v.trim() || null : v ?? null;
+    }
+  }
+  await updateProspectFields(id, clean as Partial<OutreachProspect>);
+  const p = await getProspect(id);
+  if (["backlog", "drafted"].includes(p.status)) {
+    const s = scoreProspect({
+      type: p.prospect_type,
+      isUk: p.is_uk,
+      authority: p.authority,
+      fit: p.fit,
+      fpPage: p.fp_page,
+      hasContact: Boolean(p.contact_email || p.contact_url),
+      createdAt: p.created_at,
+    });
+    await updateProspectFields(id, { score: s.score, score_reasons: s.reasons.join(", ") });
+  }
   return getProspect(id);
 }
 

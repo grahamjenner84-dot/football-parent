@@ -33,7 +33,7 @@ export interface ScoreResult {
 // already in the habit of linking out; clubs and leagues say yes less often
 // but a "resources for parents" page on a club site is exactly our audience.
 // Expert/business are warm contacts (interviewees, partners) and convert best.
-const TYPE_WEIGHT: Record<ProspectType, number> = {
+export const TYPE_WEIGHT: Record<ProspectType, number> = {
   expert: 40,
   business: 34,
   blog: 32,
