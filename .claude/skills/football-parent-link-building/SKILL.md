@@ -315,20 +315,13 @@ correction) for every prospect. Apply its verdicts.
 
 1. Stop at about 120 vetted prospects, or earlier once new searches stop
    turning up anything new.
-2. Save the kept list to `seo-data/exports/outreach-backlog-<YYYY-MM-DD>.json`
-   and the removals, with reasons, to
-   `seo-data/exports/outreach-backlog-<YYYY-MM-DD>-removed.json`.
-3. Run `npx tsx scripts/outreach/cli.ts review seo-data/exports/outreach-backlog-<YYYY-MM-DD>.json`.
-   It re-runs the gate and writes the `.md` review table beside the file.
-4. Commit only those three files, plus any new `seo-data/exports/link-graph/*.json`
-   runs, the `competitor-map-<date>.md` and `seo-data/exports/our-domain-strength.json`,
-   and push the branch.
-5. If a type of junk keeps turning up in the removals (for example
+2. Write the files and push them, as described in "Saving the run" below.
+3. If a type of junk keeps turning up in the removals (for example
    abandoned club sites), say so: the fix belongs in
    `lib/outreach/quality.ts`, not in manual filtering.
 
-Once Graham has approved the file and the outreach tables exist, load it
-with `cli.ts add <file>`.
+Once Graham has approved the file, he loads it from `/admin/outreach`
+(**+ Add prospects → Load research**), or you load it with `cli.ts add <file>`.
 
 ## Weekly mode
 
@@ -351,8 +344,9 @@ with `cli.ts add <file>`.
    true to say about it, don't draft it. Otherwise write the email (below)
    and save it all with `cli.ts save-drafts <file>`:
    `[{id, subject, body, contact_name, contact_email, contact_url, fp_page, angle, fit, fit_note, chase_line}]`.
-7. Don't commit anything in weekly mode: it changes Supabase rows, not the
-   repo.
+7. Save and push the run, as described in "Saving the run" below. Weekly
+   mode changes Supabase rows **and** leaves files, so Graham (and a
+   reviewing session) can see what was found and why.
 
 ### Writing the email
 
@@ -375,10 +369,37 @@ with `cli.ts add <file>`.
   box" cliches, no AI filler ("I hope this email finds you well", "I came
   across your amazing...", "delve", "game-changer").
 
+## Saving the run (both modes, every run, no exceptions)
+
+A run whose results only live in Supabase or in the chat can't be
+reviewed. The Sept 2026 weekly run left nothing to check. So every run
+ends like this:
+
+1. **Files** (all in `seo-data/exports/`, dated today):
+   - `outreach-backlog-<YYYY-MM-DD>.json`: every prospect this run kept,
+     in the `cli.ts add` format. In weekly mode, these are the ones you
+     added to the queue.
+   - `outreach-backlog-<YYYY-MM-DD>-removed.json`: every prospect removed
+     by vetting or the audit, each with a one-line reason.
+   - `outreach-backlog-<YYYY-MM-DD>.md`: from `npx tsx scripts/outreach/cli.ts review seo-data/exports/outreach-backlog-<YYYY-MM-DD>.json`.
+   - The new `link-graph/*.json` runs (saved automatically by live
+     `link-graph` calls).
+   - `competitor-map-<YYYY-MM-DD>.md` (`research.ts competitor-map`).
+   - `our-domain-strength.json` (refreshed by `research.ts our-strength`).
+   - In weekly mode, also `outreach-run-<YYYY-MM-DD>.md`: a short log of
+     the link checks, chase-ups, drafts written (site and subject only,
+     not the email bodies) and backlog re-vet moves.
+2. **Git:** never commit to `main`. Create a branch from the current
+   `main` named `claude/link-building-<YYYY-MM-DD>`, adding `-2`, `-3` and
+   so on if the name is taken. Commit only the files above and push the
+   branch.
+3. **Tell Graham the branch name** in the report, so it can be reviewed.
+
 ## Report (both modes)
 
 Keep it short. Include:
 
+- **Branch:** the branch the run's files were pushed to.
 - **Totals:** found, removed by the audit (with the most common reasons),
   and kept or drafted.
 - **Mix by route and by type,** plus which route produced the best
