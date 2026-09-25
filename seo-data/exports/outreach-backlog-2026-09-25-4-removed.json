@@ -1,0 +1,187 @@
+[
+  {
+    "url": "https://www.whyteleafefc-youth.co.uk/news/how-parents-can-support-their-childs-football-development-without-the-pressure",
+    "source": "linkers:parentsinsport.co.uk",
+    "reason": "Audit: no contact route (contact page says to contact team managers; no form or email)"
+  },
+  {
+    "url": "https://www.britishfootballschool.com/blogs/how-to-support-your-childs-football-journey-tips-for-parents",
+    "source": "topic:football parent blog uk",
+    "reason": "Audit: not UK (contact numbers are French and Romanian)"
+  },
+  {
+    "url": "https://ukfootballschools.com/blog/how-can-my-son-or-daughter-get-to-become-a-professional-footballer/",
+    "source": "topic:my child wants to be a footballer parent blog",
+    "reason": "Audit: site looks stopped at 2023, no contact form or email, post is a lead-in to their own schools list"
+  },
+  {
+    "url": "https://360tft.co.uk/blog/attitude-vs-talent-why-character-wins-in-youth-football/",
+    "source": "search:best youth football coaching blogs uk 2025",
+    "reason": "Audit: no confirmed contact route; author sells FootballGPT, a coaching app close to a rival"
+  },
+  {
+    "url": "https://www.britishfootballcoaches.com/post/creating-fun-engaging-sessions-for-players",
+    "source": "linkers:footballdna.co.uk",
+    "reason": "Audit: site footer stops at 2023 (dormant) and the fit is generic"
+  },
+  {
+    "url": "https://thrive4grassroots.com/blog/six-of-the-best-football-coaching-and-tactics-software-to-try-in-2026/",
+    "source": "linkers:footballdna.co.uk",
+    "reason": "Audit: commercial rival, Thrive4 sells grassroots club management software and the post promotes it"
+  },
+  {
+    "url": "https://www.inputyouth.co.uk/jobguides/job-footballer.html",
+    "source": "sweep:how to become a professional footballer",
+    "reason": "Audit: resource list carries paid links (essay mill, pin badges), so they sell links"
+  },
+  {
+    "url": "https://footballflick.com/blogs/news/how-to-become-a-professional-footballer",
+    "source": "sweep:how to become a professional footballer",
+    "reason": "Audit: no contact route found"
+  },
+  {
+    "url": "https://www.challengetrophies.co.uk/blog/grassroots-football-uk-decline/",
+    "source": "sweep:grassroots football",
+    "reason": "Audit: 2017 news-style piece; our explainer is a generic fit"
+  },
+  {
+    "url": "https://bromsgrovestandard.co.uk/lifestyle/is-grassroots-football-thriving-in-england/",
+    "source": "sweep:grassroots football",
+    "reason": "Audit: stats sourced from a betting site, marks it as a paid placement"
+  },
+  {
+    "url": "https://www.noblescouting.co.uk/blog/understanding-the-premier-league-fa-academy-system",
+    "source": "relaxed-rule re-vet",
+    "reason": "no contact route found"
+  },
+  {
+    "url": "https://foot-techacademy.co.uk/my-child-has-been-offered-an-academy-place-should-i-say-yes/",
+    "source": "relaxed-rule re-vet",
+    "reason": "no contact link anywhere on the site"
+  },
+  {
+    "url": "https://www.uniteddragonsfc.com/talk-dragons/benefits-of-playing-in-multiple-positions",
+    "source": "relaxed-rule re-vet",
+    "reason": "audience looks US (league evaluation), no contact"
+  },
+  {
+    "url": "https://bubbablueandme.com/grassroots-football-benefits/",
+    "source": "relaxed-rule re-vet",
+    "reason": "no contact route found"
+  },
+  {
+    "url": "https://www.knpsportpsychology.com/post/q-a-with-the-academy-dad-supporting-children-in-academy-football",
+    "source": "relaxed-rule re-vet",
+    "reason": "interview dates from 2013, no contact"
+  },
+  {
+    "url": "https://we-are-family.com/uk/blog-insights/witnessing-the-rise-of-womens-football-through-my-daughters-eyes/",
+    "source": "relaxed-rule re-vet",
+    "reason": "market-research agency blog, off-topic for a link"
+  },
+  {
+    "url": "https://proelitefootballacademy.co.uk/football-blog-for-parents",
+    "source": "relaxed-rule re-vet",
+    "reason": "blog index page, not an article"
+  },
+  {
+    "url": "https://www.byfarthegreatestteam.com/posts/stories-of-a-scout/",
+    "source": "relaxed-rule re-vet",
+    "reason": "fan site story, no contact"
+  },
+  {
+    "url": "https://inscoutnetwork.co.uk/resources/article/football-recruitment-age-groups-explained",
+    "source": "relaxed-rule re-vet",
+    "reason": "scouting platform, no contact route"
+  },
+  {
+    "url": "https://www.soccercoachweekly.net/coaching-advice/parents-prevent-the-damage-from-the-touchline",
+    "source": "relaxed-rule re-vet",
+    "reason": "article by a US coach"
+  },
+  {
+    "url": "https://jobs4football.com/blog/how-does-the-eppp-category-system-work",
+    "source": "relaxed-rule re-vet",
+    "reason": "2019 EPPP explainer, same topic as ours, weak fit"
+  },
+  {
+    "url": "https://footballreach.com/articles/eppp-academy-system-explained",
+    "source": "relaxed-rule re-vet",
+    "reason": "no contact route"
+  },
+  {
+    "url": "https://www.grassrootscoaching.com/become-better-football-parent/",
+    "source": "relaxed-rule re-vet",
+    "reason": "subscription coaching platform, no contact"
+  },
+  {
+    "url": "https://www.elevate-northwest.com/blog/helping-child-after-a-bad-game/",
+    "source": "relaxed-rule re-vet",
+    "reason": "reads as a US site"
+  },
+  {
+    "url": "https://www.tafc.org.uk/newsandevents/new-framework-for-grassroots-youth-football-in-england-starting-2026-2027",
+    "source": "relaxed-rule re-vet",
+    "reason": "club news restating the FA announcement"
+  },
+  {
+    "url": "https://risewithtalent.com/blog/parental-pressure-youth-football/",
+    "source": "relaxed-rule re-vet",
+    "reason": "country unclear, no contact"
+  },
+  {
+    "url": "https://afcas.education/grassroots-coaching-working-with-parents-what-nobody-tells-you-before-your-first-season",
+    "source": "relaxed-rule re-vet",
+    "reason": "coaching-course business, no contact"
+  },
+  {
+    "url": "https://apsleyfc.org/running-the-line-every-parents-dream/",
+    "source": "relaxed-rule re-vet",
+    "reason": "club post, no contact"
+  },
+  {
+    "url": "https://www.hoddesdontownfc.co.uk/news/the-love-of-the-game-what-grassroots-football-really-gives-us-2992966.html",
+    "source": "relaxed-rule re-vet",
+    "reason": "club news about a book release"
+  },
+  {
+    "url": "https://fabricofthegame.substack.com/p/introducing-tactics-in-grassroots",
+    "source": "relaxed-rule re-vet",
+    "reason": "Substack with no contact route found"
+  },
+  {
+    "url": "https://hsmfc.co.uk/coaching.html",
+    "source": "relaxed-rule re-vet",
+    "reason": "club information page for new coaches"
+  },
+  {
+    "url": "https://www.thefootballparent.co.uk/post/dealing-with-touchline-behaviour-a-parent-s-guide-to-supporting-young-footballers",
+    "source": "relaxed-rule re-vet",
+    "reason": "near-identical brand name, no contact"
+  },
+  {
+    "url": "https://heartof.football/2020/04/27/an-introduction-to-uk-academy-football/",
+    "source": "relaxed-rule re-vet",
+    "reason": "2020 post, stale"
+  },
+  {
+    "url": "https://www.ianmcclurg.com/post/earn-a-partial-or-full-scholarship-from-a-professional-club-in-the-uk-or-europe",
+    "source": "relaxed-rule re-vet",
+    "reason": "no contact route"
+  },
+  {
+    "url": "https://careers-in-sport.co.uk/careers/how-to-become-a-professional-footballer/",
+    "source": "sweep",
+    "reason": "no author voice, site page"
+  },
+  {
+    "url": "https://www.myscholarhq.com/top-23-football-scholarships-for-16-year-olds-in-the-uk/",
+    "source": "sweep",
+    "reason": "no author voice, list page"
+  },
+  {
+    "url": "https://www.nfyl.co.uk/nfyl-clubs/apply-to-a-junior-club/",
+    "source": "sweep",
+    "reason": "league info page, not an article"
+  }
+]
