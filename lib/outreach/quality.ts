@@ -151,7 +151,7 @@ const DEAD_END_HOSTS = [
 // philosophy" is exactly what we want, so only club-flavoured slugs count,
 // and anything under a blog/news path is left to the page-content check.
 const CLUB_ADMIN_PAGE = /(polic(y|ies)|code-?of-?conduct|constitution|handbook|welcome-?pack|club-?rules|rules-and-regulations|safeguarding|club-?ethos|our-?ethos|club-?philosophy|playing-?philosophy|the-player-journey|club-?documents|committee|club-?officials|join-?us|registration|membership|kit-?list|managing-a-.*-team)/i;
-const EDITORIAL_PATH = /\/(blog|news|articles?|insights|posts?|stories|opinion|features?)\//i;
+const EDITORIAL_PATH = /\/(blogs?|news|newsandevents|articles?|insights|posts?|stories|opinion|features?)\//i;
 const CLUB_ADMIN_TITLE = /\b(policy|policies|code of conduct|constitution|handbook|welcome pack|club rules|safeguarding|our ethos|club ethos|playing philosophy|committee|club officials)\b/i;
 
 const FORUM_PATH = /\/(threads?|forum|forums|topic|community\/t)\//i;
@@ -462,7 +462,8 @@ export function editorialLinks(page: Pick<PageContent, "url" | "externalLinks">)
   return page.externalLinks.filter((l) => !isInstitutionalLink(l) && !isNonEditorialLink(l, pageHost) && !isSpamLink(l));
 }
 
-const BYLINE = /\b(by|written by|author|posted by|words by)[:\s]+[A-Z][a-z]+(\s[A-Z][a-z]+)?/;
+// The keyword may start a sentence ("By Sam Jones"); the name must be capitalised.
+const BYLINE = /\b([Bb]y|[Ww]ritten by|[Aa]uthor|[Pp]osted by|[Ww]ords by)[:\s]+[A-Z][a-z]+(\s[A-Z][a-z]+)?/;
 const DATE_TEXT = /\b(\d{1,2}(st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+20\d{2}|(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\s+\d{1,2},?\s+20\d{2}|\d{1,2}\/\d{1,2}\/20\d{2})\b/i;
 const FIRST_PERSON = /\b(I think|I believe|in my (view|opinion|experience)|as a (parent|coach|dad|mum)|we've found|my (son|daughter|child|kids))\b/i;
 const RESOURCE_LIST = /\b(useful links|resources|further reading|recommended reading|reading list|helpful links|links for parents|parent resources)\b/i;
@@ -494,6 +495,28 @@ export function assessPageContent(page: PageContent): PageContentResult {
   // doesn't have" is a fair pitch. It's flagged as lower odds instead.
   const isArticle = page.wordCount >= 350 && (signals.length > 0 || EDITORIAL_PATH.test(path));
   const isResourceList = RESOURCE_LIST.test(titleAndHeadings) && independentLinks.length >= 3;
+
+  // Club and league sites (Graham, Sept 2026: "ackworth or whitegrove still
+  // looks a bit shit"). Quick-links lists and parent/player info pages were
+  // let in through a resource-list exception and never looked worth an email.
+  // What can be: a post in the club's news or blog section that links out to
+  // other sites. The angle there is a Q&A or feature rather than a plain link,
+  // and it's mainly worth it when the club's domain strength is high.
+  let siteType: ProspectType = "other";
+  try {
+    siteType = classifyType(hostOf(page.url), new URL(page.url), [page.url, page.title ?? ""].join(" "));
+  } catch {}
+  if (siteType === "club" || siteType === "league") {
+    const clubPost = isArticle && EDITORIAL_PATH.test(path) && (independentLinks.length > 0 || BYLINE.test(head));
+    if (!clubPost && (isArticle || isResourceList)) {
+      return reject(
+        isResourceList && !isArticle
+          ? "club or league quick-links page: not worth an email, whatever it links to"
+          : "club or league information page, not a news or blog post: not worth an email"
+      );
+    }
+    if (clubPost) reasons.push("club news/blog post: pitch a Q&A or feature rather than a plain link, mainly worth it if their domain strength is high");
+  }
 
   if (isArticle) {
     const voice = signals.length ? signals.join(", ") : "blog post, no byline";
