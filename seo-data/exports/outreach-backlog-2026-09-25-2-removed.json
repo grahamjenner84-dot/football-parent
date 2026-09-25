@@ -1,0 +1,487 @@
+[
+  {
+    "url": "https://www.thecrapthatcomesoutofmyhead.com/2024/07/16/english-football-has-a-winning-problem/",
+    "source": "linkers:equal playing time (FA learn page)",
+    "reason": "Audit: one-off July 2024 football post on a geopolitics blog by a rugby coach; only contact is a 14-month-old LinkedIn share"
+  },
+  {
+    "url": "https://www.parentsinsport.co.uk/2021/05/16/released-picking-up-the-pieces-as-a-sporting-parent/",
+    "source": "topic:academy release parents advice blog",
+    "reason": "Audit: 2021 post and no readable contact page, form or email (about/meet-the-team/contact unreadable). Worth a direct approach if Graham has a contact: we already cite them in /parent-guides/what-to-say-after-football-matches"
+  },
+  {
+    "url": "https://playerscout.co.uk/football-academy-categories/",
+    "source": "graph:cat 1 academy",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote"
+  },
+  {
+    "url": "https://www.noblescouting.co.uk/blog/understanding-the-premier-league-fa-academy-system",
+    "source": "graph:cat 1 academy",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.pbsfootball.com/faq-academy-football",
+    "source": "graph:cat 1 academy",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.football4football.com/football-training/uk-football-academy-system-intro",
+    "source": "graph:cat 1 academy",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.thefootballparent.co.uk/category-1-football-clubs",
+    "source": "graph:cat 1 academy",
+    "reason": "only links to FA, league, social or admin sites (1 links, none to independent articles or resources); content site ranking for our keywords: may see us as a rival, so pitch as a mutual"
+  },
+  {
+    "url": "https://jobs4football.com/blog/how-does-the-eppp-category-system-work",
+    "source": "graph:eppp football",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://mhgoals.com/new-fa-future-fit-scheme-what-it-means-for-you/",
+    "source": "graph:new fa youth football format",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://tacticosport.com/resources/future-fit-club-briefing",
+    "source": "graph:new fa youth football format",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.tafc.org.uk/newsandevents/new-framework-for-grassroots-youth-football-in-england-starting-2026-2027",
+    "source": "graph:new fa youth football format",
+    "reason": "club news restating the FA Future Fit announcement; its only independent links are the web builder credit and an FA event page"
+  },
+  {
+    "url": "https://thefsa.org.uk/news/the-eppp-and-why-youth-development-matters/",
+    "source": "graph:eppp football",
+    "reason": "archive FSF-era news item (tinyurl, fsf.org.uk join link), years old, no one to pitch"
+  },
+  {
+    "url": "https://footballreach.com/articles/eppp-academy-system-explained",
+    "source": "graph:eppp football",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.afglobal.football/afglobal-blogs/how-to-play-for-liverpool-trials-scouting-and-requirements",
+    "source": "graph:emerging talent centres",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://trainingground.guru/category-one-two-teams-set-to-come-together-in-new-play-offs/",
+    "source": "graph:cat 1 academy",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://www.welwynpegasusfc.co.uk/blog-1/categories/junior-premier-league",
+    "source": "graph:junior premier league",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.tonyknows.co.uk/careers/professional-footballer/",
+    "source": "graph:how to become a professional footballer",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.pcfacademy.co.uk/post/support-child-after-tough-football-match",
+    "source": "topic:how to support your child after a bad game football",
+    "reason": "only links to FA, league, social or admin sites (1 links, none to independent articles or resources)"
+  },
+  {
+    "url": "https://www.elevate-northwest.com/blog/helping-child-after-a-bad-game/",
+    "source": "topic:how to support your child after a bad game football",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://mhusseinfootballacademy.com/football-tips-talking-to-your-child-after-a-bad-football-game/",
+    "source": "topic:how to support your child after a bad game football",
+    "reason": "only links to FA, league, social or admin sites (1 links, none to independent articles or resources); country unclear from URL"
+  },
+  {
+    "url": "https://fairplayfc.co.uk/blog/parents-on-the-touchline/",
+    "source": "topic:touchline parents grassroots football opinion",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.ssunited.co.uk/news/touchline-behaviour-how-parents-can-best-support-their-child",
+    "source": "topic:touchline parents grassroots football opinion",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.thefootballparent.co.uk/post/dealing-with-touchline-behaviour-a-parent-s-guide-to-supporting-young-footballers",
+    "source": "topic:touchline parents grassroots football opinion",
+    "reason": "doesn't link to any other site; content site ranking for our keywords: may see us as a rival, so pitch as a mutual"
+  },
+  {
+    "url": "https://www.juniorgrassrootshub.com/resources/touchline-respect-for-parents",
+    "source": "topic:touchline parents grassroots football opinion",
+    "reason": "doesn't link to any other site; content site ranking for our keywords: may see us as a rival, so pitch as a mutual; country unclear from URL"
+  },
+  {
+    "url": "https://www.grassrootscoaching.com/become-better-football-parent/",
+    "source": "topic:touchline parents grassroots football opinion",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://mypersonalfootballcoach.com/im-a-parent/",
+    "source": "mention",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://ministry-of-football.com/for-parents/",
+    "source": "mention",
+    "reason": "curated list looks unmaintained: links date from 2012-14 and several point at a staging host; no readable contact"
+  },
+  {
+    "url": "https://www.future11.co.uk/blogs/what-football-position-should-my-child-play-a-simple-guide-for-parents",
+    "source": "topic:should kids play every position football blog",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://foot-techacademy.co.uk/should-my-child-have-a-set-position/",
+    "source": "topic:should kids play every position football blog",
+    "reason": "Leeds coaching business blog; only outbound link is the web designer credit, cites no sources"
+  },
+  {
+    "url": "https://www.uniteddragonsfc.com/talk-dragons/benefits-of-playing-in-multiple-positions",
+    "source": "topic:should kids play every position football blog",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://foundationagecoaching.com/5-benefits-of-rotating-positions-in-the-foundation-ages/",
+    "source": "topic:should kids play every position football blog",
+    "reason": "coaching-app membership business (a Coach App rival) with no contact found"
+  },
+  {
+    "url": "https://footballdna.co.uk/what-age-should-players-specialise-into-certain-positions/",
+    "source": "warm:Football DNA",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://medium.com/@Switchingthefield/the-problem-with-positions-99a894493b6c",
+    "source": "topic:should kids play every position football blog",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://www.parentsinsport.co.uk/2024/01/16/spotlight-on-academy-football-partnerships/",
+    "source": "topic:girls football parents blog uk",
+    "reason": "promotional post for their own academy workshops; only outbound is the web developer credit"
+  },
+  {
+    "url": "https://proelitefootballacademy.co.uk/football-blog-for-parents",
+    "source": "topic:academy release parents advice blog",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://medium.com/@raisingaballer.org/the-parents-guide-to-football-academies-26b8f0711134",
+    "source": "topic:academy release parents advice blog",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://www.thecoachdiary.com/equal-game-time-is-important-in-the-development-of-young-players-pa-curran/",
+    "source": "topic:equal playing time youth football blog uk",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://www.phoenixyouthfc.com/the-rhubarb--custard---updates/i-recently-saw-a-post-from-grassroots-football-uk-about-equal-play-and-it-stil",
+    "source": "topic:equal playing time youth football blog uk",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://footballdna.co.uk/mastering-equal-playtime/",
+    "source": "warm:Football DNA",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://www.thekicksapp.com/guides/equal-playing-time-youth-football.html",
+    "source": "topic:equal playing time youth football blog uk",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://thegomezway.com/2025/05/28/beyond-talent-a-parents-guide-to-helping-your-child-become-a-professional-football-soccer-player/",
+    "source": "topic:my child wants to be a footballer parent blog",
+    "reason": "US family blog (Mexican-American), not a UK audience"
+  },
+  {
+    "url": "https://www.britishfootballschool.com/blogs/how-to-support-your-childs-football-journey-tips-for-parents",
+    "source": "topic:my child wants to be a footballer parent blog",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://ukfootballschools.com/blog/how-can-my-son-or-daughter-get-to-become-a-professional-footballer/",
+    "source": "topic:my child wants to be a footballer parent blog",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.sportingagenda.co.uk/post/an-insight-into-academy-football",
+    "source": "topic:how to get scouted for football academy uk blog",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.byfarthegreatestteam.com/posts/stories-of-a-scout/",
+    "source": "topic:how to get scouted for football academy uk blog",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.chrisplatts.co.uk/football-academies-are-a-business-and-your-child-is-the-product-2/",
+    "source": "topic:is a football development centre worth it",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://foot-techacademy.co.uk/my-child-has-been-offered-an-academy-place-should-i-say-yes/",
+    "source": "topic:is a football development centre worth it",
+    "reason": "same site as 27; only outbound link is the web designer credit"
+  },
+  {
+    "url": "https://lovesfootball.com/2026/03/29/what-is-the-best-age-to-be-scouted-by-an-academy/",
+    "source": "topic:what age do football academies scout",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://lovesfootball.com/2025/12/11/10-steps-to-get-your-child-into-an-academy/",
+    "source": "topic:what age do football academies scout",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://inscoutnetwork.co.uk/resources/article/football-recruitment-age-groups-explained",
+    "source": "topic:what age do football academies scout",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://thepfsa.co.uk/how-to-get-scouted-for-football/",
+    "source": "topic:what age do football academies scout",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote"
+  },
+  {
+    "url": "https://humankinetics.me/2021/01/13/grassroots-football-insights-from-a-volunteer-football-coach/",
+    "source": "writer:volunteer coach",
+    "reason": "publisher sponsor blog from 2021; only outbound links are Akismet and Pinterest"
+  },
+  {
+    "url": "https://sebtidey.com/index.php/2023/05/22/60-tips-for-grassroots-coaches/",
+    "source": "writer:Seb Tidey",
+    "reason": "too thin to be an article (229 words) and not a resource list with independent links; country unclear from URL"
+  },
+  {
+    "url": "https://www.the-football-hub.org/post/the-diary-of-a-grassroots-coach",
+    "source": "writer:grassroots coach diary",
+    "reason": "2023 diary post whose only outbound link is an amzn.to affiliate link"
+  },
+  {
+    "url": "https://www.thesoccerstore.co.uk/blog/youth-football/learning-one-position-versus-many/",
+    "source": "topic:should kids play every position football blog",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.soccercoachweekly.net/coaching-advice/parents-prevent-the-damage-from-the-touchline",
+    "source": "topic:touchline parents grassroots football opinion",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.theparentsguideto.co.uk/tips",
+    "source": "topic:academy release parents advice blog",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote"
+  },
+  {
+    "url": "https://www.thefootballparent.co.uk/post/academy-development-centre-or-grassroots-understanding-the-pathways-in-youth-sport",
+    "source": "topic:development centre or grassroots football",
+    "reason": "doesn't link to any other site; content site ranking for our keywords: may see us as a rival, so pitch as a mutual"
+  },
+  {
+    "url": "https://www.excelsport.co.uk/parents/",
+    "source": "mention",
+    "reason": "too thin to be an article (152 words) and not a resource list with independent links"
+  },
+  {
+    "url": "https://www.acoachesview.com/blog/grassroots-football-the-taboo-series-changing-clubs",
+    "source": "writer:A Coach's View",
+    "reason": "abandoned blog: the 39 independent links are comment spam (rehab, escorts, plumbers)"
+  },
+  {
+    "url": "https://vault.thefmha.com/supporting-parents-in-grassroots-football/",
+    "source": "topic:grassroots football parent opinion column",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://www.thecoachdiary.com/things-coaches-do-that-drive-parents-crazy/",
+    "source": "writer:The Coach Diary",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://stevehalegoalkeeping.co.uk/development-blog-part-two-2/",
+    "source": "writer:Steve Hale",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.whyteleafefc-youth.co.uk/news/how-parents-can-support-their-childs-football-development-without-the-pressure",
+    "source": "topic:youth football development blog UK coach",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://360tft.co.uk/blog/attitude-vs-talent-why-character-wins-in-youth-football/",
+    "source": "topic:youth football development blog UK coach",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote"
+  },
+  {
+    "url": "https://www.hergametoo.co.uk/grassroots",
+    "source": "topic:girls football grassroots growth blog uk",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.lpff.org.uk/girls-football-hub/",
+    "source": "topic:girls football grassroots growth blog uk",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://www.bristolroverscommunity.org.uk/post/blog-women-s-football-is-growing-it-is-inspiring-generations-and-it-is-here-to-stay",
+    "source": "topic:girls football grassroots growth blog uk",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://www.fmgconsulting.co.uk/blog/female-football-clubs",
+    "source": "topic:girls football grassroots growth blog uk",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote"
+  },
+  {
+    "url": "https://foxesclub.com/the-growing-popularity-and-importance-of-competitive-football-for-girls/",
+    "source": "topic:girls football grassroots growth blog uk",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://ministry-of-football.com/playing-time-in-junior-football/",
+    "source": "topic:\"my son\" grassroots football blog game time",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://bubbablueandme.com/grassroots-football-benefits/",
+    "source": "topic:\"my son\" grassroots football blog game time",
+    "reason": "family blog whose only outbound link is an Awin affiliate link; no cited sources"
+  },
+  {
+    "url": "https://footballbookreviews.com/2025/11/25/doing-it-for-the-kids-how-i-survived-12-years-as-a-grassroots-football-dad-by-chris-hunt/",
+    "source": "writer:football book reviews",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://www.mrsmummypenny.co.uk/football-academy-update-how-to-help-your-child-handle-rejection/",
+    "source": "topic:football mum blog academy son",
+    "reason": "2018 post; outbound links are an energy referral, amzn.to and a site credit"
+  },
+  {
+    "url": "https://mumofthreeworld.com/2014/11/guide-football-mum.html",
+    "source": "topic:football mum blog academy son",
+    "reason": "2014 post; outbound links are pingbacks and Akismet"
+  },
+  {
+    "url": "https://sportsvrse.substack.com/p/grassroots-football-a-creative-goldmine",
+    "source": "writer:substack",
+    "reason": "only links to FA, league, social or admin sites (1 links, none to independent articles or resources); country unclear from URL"
+  },
+  {
+    "url": "https://fabricofthegame.substack.com/p/introducing-tactics-in-grassroots",
+    "source": "writer:substack",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://countycoachdevelopment.substack.com/p/the-coaching-journey",
+    "source": "writer:substack",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://salfordnow.substack.com/p/grassroots-football-in-salford-is",
+    "source": "writer:substack",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote; country unclear from URL"
+  },
+  {
+    "url": "https://theaccidentalcoach.substack.com/p/accidental-coach-youth-football-is",
+    "source": "writer:substack",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://thefootballdad.substack.com/",
+    "source": "writer:substack",
+    "reason": "doesn't link to any other site; homepage-level link: usually a sitewide partner/sponsor/directory link, i.e. a business relationship"
+  },
+  {
+    "url": "https://grassrootsfootballcoach.substack.com/",
+    "source": "writer:substack",
+    "reason": "doesn't link to any other site; homepage-level link: usually a sitewide partner/sponsor/directory link, i.e. a business relationship"
+  },
+  {
+    "url": "https://www.knpsportpsychology.com/post/q-a-with-the-academy-dad-supporting-children-in-academy-football",
+    "source": "topic:son released from academy blog parent uk",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://sport-excellence.co.uk/elite-youth-football-release-support/",
+    "source": "topic:son released from academy blog parent uk",
+    "reason": "no author, date or first-person voice, and not a resource list with independent links: reads like a site page, not something someone wrote"
+  },
+  {
+    "url": "https://we-are-family.com/uk/blog-insights/witnessing-the-rise-of-womens-football-through-my-daughters-eyes/",
+    "source": "topic:girls football my daughter blog grassroots",
+    "reason": "only links to FA, league, social or admin sites (2 links, none to independent articles or resources); country unclear from URL"
+  },
+  {
+    "url": "https://kickitherway.co.uk/blog/",
+    "source": "topic:girls football my daughter blog grassroots",
+    "reason": "unreadable even with --js: no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+  },
+  {
+    "url": "https://www.amandamccormack.co.uk/grassroots-girls.html",
+    "source": "topic:girls football my daughter blog grassroots",
+    "reason": "only links to FA, league, social or admin sites (1 links, none to independent articles or resources)"
+  },
+  {
+    "url": "https://www.karenyeomans.com/grass-roots-girls-football-apyfc",
+    "source": "topic:girls football my daughter blog grassroots",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://wemadeawish.co.uk/girls-football-why-its-great-for-your-daughter-and-how-to-get-her-started",
+    "source": "topic:girls football my daughter blog grassroots",
+    "reason": "adoption blog guest post on getting girls started; no Football Parent page fits (our girls pages cover the academy pathway)"
+  },
+  {
+    "url": "https://www.thecoachdiary.com/parents-warning-football-academies-a-side-of-football-no-one-talks-about/",
+    "source": "topic:academy parent diary blog football",
+    "reason": "no cited sources (Akismet only) and an Irish coaching blog, UK audience unclear"
+  },
+  {
+    "url": "https://www.diyfc.co.uk/blog",
+    "source": "topic:\"my son\" grassroots football blog game time",
+    "reason": "doesn't link to any other site"
+  },
+  {
+    "url": "https://dadfc.com/blog/",
+    "source": "writer:dad fc",
+    "reason": "doesn't link to any other site; country unclear from URL"
+  },
+  {
+    "url": "https://www.thecrapthatcomesoutofmyhead.com/2024/07/",
+    "source": "linkers:equal playing time (FA learn page)",
+    "reason": "month archive page; replaced by the post URL itself"
+  },
+  {
+    "url": "https://www.swlondoner.co.uk/sport/24102025-london-clubs-urge-fa-to-do-more-to-grow-womens-football",
+    "source": "linkers:FA Squad Girls page",
+    "reason": "student news report from Oct 2025; news items are not updated with further reading"
+  },
+  {
+    "url": "https://www.freeflosports.com/post/what-is-ball-mastery",
+    "source": "linkers:Player Development Project",
+    "reason": "site dated 2023, audience unclear (not UK); no fitting page"
+  },
+  {
+    "url": "https://www.thickaccent.com/2025/01/31/how-much-do-tottenham-pay-their-youth-players-salaries-of-dane-scarlett-damola-ajayi-and-mikey-moore/",
+    "source": "linkers:pbsfootball.com",
+    "reason": "fan transfer/salary news, not written for parents; no fitting page"
+  },
+  {
+    "url": "https://teachme.to/blog/how-to-choose-a-youth-football-camp-or-academy",
+    "source": "linkers:pbsfootball.com",
+    "reason": "US American football camps"
+  }
+]

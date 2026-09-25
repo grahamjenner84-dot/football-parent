@@ -1,0 +1,94 @@
+{
+  "keyword": "football scholarship uk",
+  "ranAt": "2026-09-25T13:29:37.204Z",
+  "peers": [
+    {
+      "domain": "ussportsscholarships.com",
+      "url": "https://www.ussportsscholarships.com/football-scholarships/",
+      "position": 11,
+      "rank": 226,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "uel.ac.uk",
+      "url": "https://www.uel.ac.uk/study/campus-life/sport/sports-scholarships/performance-sports/football",
+      "position": 14,
+      "rank": 425,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "stir.ac.uk",
+      "url": "https://www.stir.ac.uk/student-life/sport-at-stirling/performance-sport/football-men/",
+      "position": 15,
+      "rank": 415,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 6
+    },
+    {
+      "domain": "fabacademy.co.uk",
+      "url": "https://fabacademy.co.uk/internationalacademy",
+      "position": 16,
+      "rank": 237,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "breakingthelines.com",
+      "url": "https://breakingthelines.com/@btl/best-uk-universities-offering-soccer-scholarships",
+      "position": 17,
+      "rank": 323,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "eastleighfc.com",
+      "url": "https://eastleighfc.com/youth/scholarships/",
+      "position": 18,
+      "rank": 271,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 13
+    },
+    {
+      "domain": "glos.ac.uk",
+      "url": "https://www.glos.ac.uk/sport/sport-scholarships/womens-football-scholarship/",
+      "position": 19,
+      "rank": 406,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 2
+    },
+    {
+      "domain": "oriamscotland.com",
+      "url": "https://oriamscotland.com/oriam/performance-sports/sports-scholarships/football-scholarships/",
+      "position": 20,
+      "rank": 215,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 5
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "keyword": "grassroots football",
+  "ranAt": "2026-09-25T13:07:06.342Z",
+  "peers": [
+    {
+      "domain": "petition.parliament.uk",
+      "url": "https://petition.parliament.uk/petitions/46134",
+      "position": 13,
+      "rank": 492,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 0
+    },
+    {
+      "domain": "thesoccerstore.co.uk",
+      "url": "https://www.thesoccerstore.co.uk/blog/youth-football/the-premier-league-and-fa-join-forces-to-save-grassroots-football/",
+      "position": 14,
+      "rank": 241,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "footballfoundation.org.uk",
+      "url": "https://footballfoundation.org.uk/grant/goalposts?sc_src=email_7488475&sc_lid=787818287&sc_uid=vyxDi4ONEI&sc_llid=42532&fbclid=IwY2xjawR5AO1leHRuA2FlbQIxMABicmlkETF1R0dTRVA1TnNQdjEzQnplc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHlmLgM6QSxoQQJlhzDLqiXMH17QhfMWqeHyijMHHyq6n-BGcunecEcpiK73i_aem_3wNPl0vAaYO51u-S92THSQ",
+      "position": 19,
+      "rank": 415,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 9,
+      "linkersFound": 0
+    },
+    {
+      "domain": "mjfctrinity.co.uk",
+      "url": "https://mjfctrinity.co.uk/news/grassroots-football-in-england-suspended",
+      "position": 24,
+      "rank": 0,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "joe.co.uk",
+      "url": "https://www.joe.co.uk/sport/grassroots-football-to-return-in-august-fa-announce-245013",
+      "position": 25,
+      "rank": 443,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "bromsgrovestandard.co.uk",
+      "url": "https://bromsgrovestandard.co.uk/lifestyle/is-grassroots-football-thriving-in-england/",
+      "position": 27,
+      "rank": 441,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 5,
+      "linkersFound": 0
+    },
+    {
+      "domain": "meltontimes.co.uk",
+      "url": "https://www.meltontimes.co.uk/sport/football/plan-for-grassroots-football-clubs-to-return-to-league-action-from-september-government-approves-fa-plans-for-return-to-competitive-training-2917572",
+      "position": 30,
+      "rank": 384,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 10,
+      "linkersFound": 0
+    },
+    {
+      "domain": "walesonline.co.uk",
+      "url": "https://www.walesonline.co.uk/all-about/grassroots-football",
+      "position": 31,
+      "rank": 502,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 13,
+      "linkersFound": 0
+    }
+  ]
+}

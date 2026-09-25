@@ -1,0 +1,94 @@
+{
+  "keyword": "eppp football",
+  "ranAt": "2026-09-25T13:30:00.587Z",
+  "peers": [
+    {
+      "domain": "noblescouting.co.uk",
+      "url": "https://www.noblescouting.co.uk/blog/understanding-the-premier-league-fa-academy-system",
+      "position": 11,
+      "rank": 33,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "thefsa.org.uk",
+      "url": "https://thefsa.org.uk/news/the-eppp-and-why-youth-development-matters/",
+      "position": 13,
+      "rank": 396,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 1
+    },
+    {
+      "domain": "footballreach.com",
+      "url": "https://footballreach.com/articles/eppp-academy-system-explained",
+      "position": 18,
+      "rank": 416,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "footballviewpoint.wordpress.com",
+      "url": "https://footballviewpoint.wordpress.com/2016/05/23/elite-player-performance-plan/",
+      "position": 20,
+      "rank": 0,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 0
+    },
+    {
+      "domain": "observer.co.uk",
+      "url": "https://observer.co.uk/news/sport/article/eppp-legacy-under-21s-rory-smith",
+      "position": 21,
+      "rank": 459,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 4
+    },
+    {
+      "domain": "leadersinsport.com",
+      "url": "https://leadersinsport.com/performance-institute/articles/how-the-premier-leagues-elite-player-performance-plan-is-tackling-some-of-the-most-pressing-questions-on-talent-pathways/",
+      "position": 22,
+      "rank": 425,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 1
+    },
+    {
+      "domain": "jobs4football.com",
+      "url": "https://jobs4football.com/blog/how-does-the-eppp-category-system-work",
+      "position": 24,
+      "rank": 206,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "readingfc.co.uk",
+      "url": "https://www.readingfc.co.uk/news/2013/july/what-is-the-eppp/",
+      "position": 25,
+      "rank": 353,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "keyword": "cat 1 academy",
+  "ranAt": "2026-09-25T13:07:54.982Z",
+  "peers": [
+    {
+      "domain": "thefootballparent.co.uk",
+      "url": "https://www.thefootballparent.co.uk/category-1-football-clubs",
+      "position": 13,
+      "rank": 0,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "playerscout.co.uk",
+      "url": "https://playerscout.co.uk/football-academy-categories/",
+      "position": 14,
+      "rank": 212,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 3
+    },
+    {
+      "domain": "cpfc.co.uk",
+      "url": "https://www.cpfc.co.uk/information/academy/",
+      "position": 15,
+      "rank": 385,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 25
+    },
+    {
+      "domain": "noblescouting.co.uk",
+      "url": "https://www.noblescouting.co.uk/blog/understanding-the-premier-league-fa-academy-system",
+      "position": 16,
+      "rank": 33,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "pbsfootball.com",
+      "url": "https://www.pbsfootball.com/faq-academy-football",
+      "position": 17,
+      "rank": 47,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 4
+    },
+    {
+      "domain": "football4football.com",
+      "url": "https://www.football4football.com/football-training/uk-football-academy-system-intro",
+      "position": 18,
+      "rank": 116,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "fulhamfc.com",
+      "url": "https://www.fulhamfc.com/club/academy/category-one-status",
+      "position": 21,
+      "rank": 376,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 2
+    },
+    {
+      "domain": "trainingground.guru",
+      "url": "https://trainingground.guru/category-one-two-teams-set-to-come-together-in-new-play-offs/",
+      "position": 22,
+      "rank": 289,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 6,
+      "linkersFound": 2
+    }
+  ]
+}

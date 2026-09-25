@@ -1,0 +1,94 @@
+{
+  "keyword": "emerging talent centres",
+  "ranAt": "2026-09-25T13:08:54.897Z",
+  "peers": [
+    {
+      "domain": "tees.ac.uk",
+      "url": "https://www.tees.ac.uk/sections/sport/fa_centre.cfm",
+      "position": 11,
+      "rank": 445,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "brentfordfccst.com",
+      "url": "https://www.brentfordfccst.com/en/emerging-talent-centre-etc",
+      "position": 14,
+      "rank": 276,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 1
+    },
+    {
+      "domain": "stfcfoundation.com",
+      "url": "https://www.stfcfoundation.com/programmes/teams/emerging-talent-centre",
+      "position": 16,
+      "rank": 258,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "pnefc.net",
+      "url": "https://www.pnefc.net/pnecet/emerging-talent-centre-etc",
+      "position": 17,
+      "rank": 319,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 2
+    },
+    {
+      "domain": "liverpoolfc.com",
+      "url": "https://www.liverpoolfc.com/foundation/emerging-talent-centre-etc",
+      "position": 19,
+      "rank": 483,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 3
+    },
+    {
+      "domain": "pompeyitc.co.uk",
+      "url": "https://pompeyitc.co.uk/girls-emerging-talent-centre/",
+      "position": 21,
+      "rank": 208,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "cu-fc.com",
+      "url": "https://www.cu-fc.com/cucf/programmes/sports-participation/female-football/emerging-talent-centre/",
+      "position": 22,
+      "rank": 345,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "bfcct.co.uk",
+      "url": "https://www.bfcct.co.uk/fa-girls-emerging-talent-centre/",
+      "position": 24,
+      "rank": 214,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 1
+    }
+  ]
+}
