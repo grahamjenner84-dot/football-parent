@@ -119,10 +119,15 @@ your piece doesn't have yet".
 - **Directories, homepages, sponsor/partner pages, governing bodies, shops
   and forums.**
 
-The one club-page exception: a curated resources list that already links to
-independent articles or guides (blogs, charities, other parent sites), not
-just FA and league pages. That's a real list someone maintains, so one more
-entry is a fair ask.
+**Club sites: news posts only, never links pages.** Graham, Sept 2026:
+club "useful links" and quick-links pages (Ackworth, Whitegrove) and club
+info pages (a players' and parents' guide) aren't worth an email, whatever
+they link to, so the old resource-list exception is gone and the content
+check rejects them. What can be worth it is a post in the club's news or
+blog section that links out to other sites. The angle there is a Q&A or
+feature (an interview with their coach or welfare officer, a piece for
+their parents) rather than "please add our link", and it's mainly worth
+the email when the club's domain strength is high.
 
 ## Finding prospects: routes
 
@@ -172,7 +177,7 @@ route 1 and the others as budget allows.
    - **Clubs** (`club`: pro clubs, grassroots clubs, club foundations and
      community trusts) and **universities** (`institution`) describe their
      own programmes. They are never content peers or mutuals. A club only
-     comes in through the curated resources-list exception below.
+     comes in through a news or blog post (see "Club sites" above).
    - **Commercial rivals** (TeamStats, Spond and other apps, club software,
      paid trials and academy services) are mined for their links but never
      pitched. A business won't link to a rival product.
@@ -234,8 +239,8 @@ route 1 and the others as budget allows.
    article as a deeper read on the point they're making (for example, our
    equal playing time guide explains the *benefits* their piece argues
    for).
-Club and league sites only come in through the resource-list exception
-above. Don't search for club policy or parent-information pages.
+Club and league sites only come in through a news or blog post that links
+out (see "Club sites" above). Don't search for club policy or parent-information pages.
 
 **Governing bodies:** county FAs and thefa.com link to commercial partners
 (TeamStats' county links come from hosting FA leagues), not to independent

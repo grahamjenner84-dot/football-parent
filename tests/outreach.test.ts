@@ -433,6 +433,38 @@ test("rule fixes from the Sept 2026 link-graph run", async () => {
   );
 });
 
+test("club links and info pages never pass (Graham, Sept 2026)", async () => {
+  const { assessPageContent } = await import("../lib/outreach/quality");
+  const words = (n: number) => Array.from({ length: n }, (_, i) => `word${i}`).join(" ");
+  const indie = [
+    { url: "https://www.c-r-y.org.uk/", anchor: "Cardiac Risk in the Young" },
+    { url: "https://www.youngminds.org.uk/", anchor: "Young Minds" },
+    { url: "https://www.parentsinsport.co.uk/", anchor: "Working with Parents in Sport" },
+  ];
+  const links = assessPageContent({ url: "https://whitegrovefc.com/useful-links/", title: "Useful Links", headings: ["Useful Links"], text: words(200), wordCount: 200, externalLinks: indie });
+  assert.equal(links.verdict, "rejected");
+  assert.match(links.reasons.join(" "), /club or league quick-links page/);
+
+  const guide = assessPageContent({ url: "https://www.kirkhamjuniors.co.uk/guide-for-players-parents-carers-u7-yr2-upwards/", title: "Guide for players, parents and carers", headings: [], text: `By Club Secretary. As a parent ${words(900)}`, wordCount: 920, externalLinks: indie });
+  assert.equal(guide.verdict, "rejected");
+  assert.match(guide.reasons.join(" "), /club or league information page/);
+
+  const post = assessPageContent({ url: "https://www.examplejfc.co.uk/blog/why-we-rotate-positions", title: "Why we rotate positions", headings: [], text: `By Sam Jones, U9 coach. I think ${words(700)}`, wordCount: 720, externalLinks: indie });
+  assert.equal(post.verdict, "ok", "a club coach's bylined blog post is still a target");
+
+  // A club news post that links out to other sites is worth a Q&A pitch,
+  // byline or not.
+  const news = assessPageContent({ url: "https://www.whyteleafefc-youth.co.uk/news/how-parents-can-support-their-child", title: "How parents can support their child", headings: [], text: words(900), wordCount: 900, externalLinks: indie });
+  assert.equal(news.verdict, "ok");
+  assert.match(news.reasons.join(" "), /Q&A or feature/);
+  // The same club news post with no outbound links and no byline is not.
+  const bare = assessPageContent({ url: "https://www.whyteleafefc-youth.co.uk/news/season-starts", title: "Season starts", headings: [], text: words(900), wordCount: 900, externalLinks: [] });
+  assert.equal(bare.verdict, "rejected");
+
+  const brand = assessPageContent({ url: "https://www.future11.co.uk/blogs/what-football-position-should-my-child-play", title: "What position should my child play?", headings: [], text: words(700), wordCount: 700, externalLinks: [] });
+  assert.equal(brand.verdict, "ok", "brand blogs are unaffected");
+});
+
 test("domain strength scale and comparison", async () => {
   const { toStrength, compareStrength } = await import("../lib/outreach/strength");
   assert.equal(toStrength(440), 44);
