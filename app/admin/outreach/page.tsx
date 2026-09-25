@@ -63,7 +63,7 @@ interface Stats {
   backlog: number;
 }
 
-type Tab = "week" | "backlog" | "noReply" | "discussion" | "rejected" | "won" | "parked";
+type Tab = "week" | "backlog" | "noReply" | "discussion" | "rejected" | "won" | "parked" | "ruledOut";
 
 const firstName = (name: string | null) => (name ? name.trim().split(/\s+/)[0] : null);
 
@@ -146,6 +146,9 @@ export default function OutreachAdminPage() {
       // quality filter set aside (FA pages, homepages, partner pages).
       parked: prospects.filter((p) => p.status === "skipped" || p.status === "parked"),
       won: prospects.filter((p) => p.status === "won"),
+      // Looked at and ruled out (by the filter, a run's vetting or audit, or
+      // the backlog re-check), newest first, with the reason.
+      ruledOut: prospects.filter((p) => p.status === "rejected").sort((a, b) => b.created_at.localeCompare(a.created_at)),
     };
   }, [prospects]);
 
@@ -157,6 +160,7 @@ export default function OutreachAdminPage() {
     { id: "rejected", label: "Emailed: rejected", count: groups.rejected.length },
     { id: "won", label: "Won (live)", count: groups.won.length },
     { id: "parked", label: "Parked", count: groups.parked.length },
+    { id: "ruledOut", label: "Ruled out", count: groups.ruledOut.length },
   ];
 
   const rowsFor = (t: Tab): Prospect[] =>
@@ -196,6 +200,7 @@ export default function OutreachAdminPage() {
         {!loading && (
           <>
             <p style={styles.muted}>{TAB_HELP[tab]}</p>
+            {tab === "backlog" && <RecheckBar onDone={load} />}
             <ProspectTable
               rows={rowsFor(tab)}
               expanded={expanded}
@@ -424,6 +429,7 @@ const STATUS_LABEL: Partial<Record<OutreachStatus, string>> = {
   lost: "said no",
   no_reply: "no reply",
   skipped: "not a good lead",
+  rejected: "ruled out",
   parked: "parked",
 };
 
@@ -465,7 +471,7 @@ interface PreviewRow {
 // review), loaded into the queue in one tap. Rows go through the same gate
 // and duplicate check as everything else.
 function ReviewedBacklogs({ onLoaded }: { onLoaded: () => void }) {
-  const [files, setFiles] = useState<{ name: string; rows: number; loaded: number }[] | null>(null);
+  const [files, setFiles] = useState<{ name: string; rows: number; loaded: number; removed: number; removedLoaded: number }[] | null>(null);
   const [msg, setMsg] = useState<string | null>(null);
   const [working, setWorking] = useState<string | null>(null);
 
@@ -493,6 +499,7 @@ function ReviewedBacklogs({ onLoaded }: { onLoaded: () => void }) {
       const j = await res.json();
       if (!res.ok) throw new Error(j.error || res.statusText);
       const r = j.results as { outcome: string; status?: string; existing?: Known }[];
+      const ro = (j.ruledOut ?? []) as { outcome: string }[];
       const n = (f: (x: (typeof r)[number]) => boolean) => r.filter(f).length;
       const known = r.filter((x) => x.outcome === "domain_known" && x.existing).map((x) => describeKnown(x.existing));
       setMsg(
@@ -501,6 +508,7 @@ function ReviewedBacklogs({ onLoaded }: { onLoaded: () => void }) {
           `${n((x) => x.outcome === "added" && x.status === "rejected")} rejected by the gate, ` +
           `${n((x) => x.outcome === "duplicate")} already loaded` +
           (known.length ? `, ${known.length} already on your list: ${known.join("; ")}` : "") +
+          (ro.length ? `. ${ro.filter((x) => x.outcome !== "already_known").length} of the research's removals recorded under Ruled out` : "") +
           "."
       );
       await refresh();
@@ -521,10 +529,15 @@ function ReviewedBacklogs({ onLoaded }: { onLoaded: () => void }) {
         <div key={f.name} style={{ ...styles.actions, alignItems: "center" }}>
           <span style={{ ...styles.meta, flex: 1 }}>
             {f.name.replace("outreach-backlog-", "").replace(".json", "")}: {f.rows} prospects{f.loaded ? `, ${f.loaded} already loaded` : ""}
+            {f.removed ? `; ${f.removed} ruled out by the research${f.removedLoaded ? `, ${f.removedLoaded} recorded` : ""}` : ""}
           </span>
-          {f.loaded < f.rows && (
+          {(f.loaded < f.rows || f.removedLoaded < f.removed) && (
             <Btn onClick={() => loadFile(f.name)} disabled={working !== null}>
-              {working === f.name ? "Loading..." : `Load ${f.rows - f.loaded}`}
+              {working === f.name
+                ? "Loading..."
+                : [f.loaded < f.rows ? `Load ${f.rows - f.loaded}` : "", f.removedLoaded < f.removed ? `record ${f.removed - f.removedLoaded} ruled out` : ""]
+                    .filter(Boolean)
+                    .join(" + ")}
             </Btn>
           )}
         </div>
@@ -683,15 +696,54 @@ const TAB_HELP: Record<Tab, string> = {
   rejected: "Said no, or went nowhere after replying. Kept so they aren't pitched again.",
   won: "Links that are live.",
   parked: "Not good leads: ones you've ruled out, plus FA, homepage and partner pages the filter set aside as partnership-only.",
+  ruledOut:
+    "Everything looked at and ruled out, with the reason: by the quality rules, a research run's vetting or audit, or the backlog re-check. Kept so it's never found, read or paid for again. Tap one and use Back to backlog if the rules got it wrong.",
 };
 
 function rowStatus(p: Prospect): string {
+  if (p.status === "rejected") {
+    const why = (p.status_reason ?? "no reason recorded").replace(/^Ruled out by the updated rules: /, "");
+    return `Ruled out: ${why.length > 90 ? `${why.slice(0, 87)}...` : why}`;
+  }
   if (p.status === "drafted") return "Draft ready";
   const due = dueAction(p);
   if (due === "chase") return `Chase ${p.chase_count + 1} due`;
   if (due === "close") return "Close off?";
   if (AWAITING.includes(p.status) && p.next_action_at) return `${STATUS_LABEL[p.status]}, chase ${fmtDate(p.next_action_at)}`;
   return STATUS_LABEL[p.status] ?? p.status;
+}
+
+// Re-runs the current URL rules over the backlog (free, no page reads) and
+// moves anything they now reject to Ruled out.
+function RecheckBar({ onDone }: { onDone: () => void }) {
+  const [msg, setMsg] = useState<string | null>(null);
+  const [working, setWorking] = useState(false);
+  const run = async () => {
+    setWorking(true);
+    setMsg(null);
+    try {
+      const res = await fetch("/api/outreach/recheck", { method: "POST" });
+      const j = await res.json();
+      if (!res.ok) throw new Error(j.error || res.statusText);
+      const moved = j.moved as { url: string; reason: string }[];
+      setMsg(moved.length ? `Moved ${moved.length} to Ruled out.` : "Nothing in the backlog fails the current rules.");
+      onDone();
+    } catch (e) {
+      setMsg(e instanceof Error ? e.message : String(e));
+    } finally {
+      setWorking(false);
+    }
+  };
+  return (
+    <div style={{ ...styles.actions, alignItems: "center", marginBottom: 10 }}>
+      <Btn onClick={run} disabled={working}>
+        {working ? "Checking..." : "Re-check against current rules"}
+      </Btn>
+      <span style={styles.muted}>
+        {msg ?? "Free: re-applies the address rules (club policy, ethos, handbook pages...). Links-only pages are caught when the next run reads them."}
+      </span>
+    </div>
+  );
 }
 
 // Add one / import past outreach / load research: kept out of the backlog
@@ -912,7 +964,7 @@ function ProspectDetail({ p, busy, act, patch }: { p: Prospect; busy: boolean; a
           {["backlog", "drafted"].includes(p.status) && (
             <Btn onClick={() => act(p.id, "skip")} disabled={busy} subtle>Not a good lead</Btn>
           )}
-          {["parked", "skipped", "no_reply"].includes(p.status) && (
+          {["parked", "skipped", "no_reply", "rejected"].includes(p.status) && (
             <Btn onClick={() => act(p.id, "restore")} disabled={busy} subtle>Back to backlog</Btn>
           )}
         </div>

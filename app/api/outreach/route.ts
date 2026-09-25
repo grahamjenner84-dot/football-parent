@@ -37,7 +37,7 @@ function fail(err: unknown, status = 500) {
 export async function GET() {
   try {
     const [prospects, stats] = await Promise.all([
-      listProspects(["backlog", "drafted", "sent", "chase_1", "chase_2", "replied", "won", "parked", "no_reply", "lost", "skipped"], 2000),
+      listProspects(["backlog", "drafted", "sent", "chase_1", "chase_2", "replied", "won", "parked", "no_reply", "lost", "skipped", "rejected"], 5000),
       getStats(),
     ]);
     return NextResponse.json({ prospects, stats, ourStrength: readOurStrength() });

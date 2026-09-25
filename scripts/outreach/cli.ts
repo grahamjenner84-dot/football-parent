@@ -25,6 +25,13 @@
  *                                 omitted = checked, nothing yet.
  *   close-expired                 Mark prospects past their last chase as no_reply.
  *   rescore                       Recompute backlog/drafted scores.
+ *   seen-urls                     JSON list of every URL already recorded, any
+ *                                 status (including ruled out). Skip these
+ *                                 before spending anything on them.
+ *   rule-out <removed.json>       Record a run's removals as Ruled out, each
+ *                                 with its removed_reason (or reason).
+ *   recheck                       Re-apply the current URL rules to the
+ *                                 backlog; failures move to Ruled out.
  *   set-status <id> <status> [reason]
  *                                 Move a prospect to any status (e.g. skipped
  *                                 when a backlog row fails the page-content
@@ -271,6 +278,22 @@ async function main() {
       }
       const res = await db.importHistory(parsed.rows);
       console.log(JSON.stringify({ errors: parsed.errors, results: res }, null, 2));
+      return;
+    }
+    case "seen-urls": {
+      console.log(JSON.stringify(await db.listSeenUrls()));
+      return;
+    }
+    case "rule-out": {
+      const rows = readJson<(NewProspect & { removed_reason?: string; reason?: string })[]>(args[0]);
+      const res = await db.recordRuledOut(rows.map((r) => ({ ...r, source: r.source || "research", reason: r.removed_reason || r.reason || "removed during research" })));
+      const n = (o: string) => res.filter((r) => r.outcome === o).length;
+      console.log(`ruled out: ${n("recorded")} recorded, ${n("updated")} moved from the backlog, ${n("already_known")} already known`);
+      return;
+    }
+    case "recheck": {
+      const moved = await db.recheckBacklog();
+      console.log(JSON.stringify(moved, null, 2));
       return;
     }
     case "set-status": {
