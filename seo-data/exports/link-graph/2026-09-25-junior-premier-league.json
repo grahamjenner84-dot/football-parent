@@ -1,0 +1,61 @@
+{
+  "keyword": "junior premier league",
+  "ranAt": "2026-09-25T13:07:37.387Z",
+  "peers": [
+    {
+      "domain": "leedsunited.com",
+      "url": "https://www.leedsunited.com/en/news/foundation-launch-their-own-junior-football-league",
+      "position": 11,
+      "rank": 402,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 9,
+      "linkersFound": 0
+    },
+    {
+      "domain": "welwynpegasusfc.co.uk",
+      "url": "https://www.welwynpegasusfc.co.uk/blog-1/categories/junior-premier-league",
+      "position": 17,
+      "rank": 97,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "warringtontownfc.co.uk",
+      "url": "https://warringtontownfc.co.uk/posts/players-wanted-for-junior-premier-league-under-13s-side/1443",
+      "position": 18,
+      "rank": 338,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 0
+    },
+    {
+      "domain": "statsports.com",
+      "url": "https://statsports.com/article/junior-premier-league-welcomes-statsports-as-official-partner",
+      "position": 21,
+      "rank": 324,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 0
+    },
+    {
+      "domain": "jplwarriors.com",
+      "url": "https://jplwarriors.com/",
+      "position": 6,
+      "rank": 200,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 25
+    }
+  ]
+}
