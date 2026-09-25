@@ -11,7 +11,7 @@
 // Pure: takes already-fetched SERP, rank, page and backlink data and scores
 // it. The DataForSEO calls live in scripts/outreach/research.ts link-graph.
 
-import { assessProspect, hostOf, isInstitutionalLink, OUR_DOMAIN } from "./quality";
+import { assessProspect, hostOf, isCommercialRival, isInstitutionalLink, OUR_DOMAIN } from "./quality";
 
 // Sites too big (or too institutional) to be a peer or a realistic prospect.
 // Their presence in the results says nothing about who links to small sites.
@@ -70,7 +70,10 @@ export const BIG_RANK = 550;
 export function isBigSite(host: string, rank?: number | null): boolean {
   if (!host) return true;
   if (BIG_HOSTS.some((h) => host === h || host.endsWith(`.${h}`))) return true;
-  if (isInstitutionalLink({ url: `https://${host}/`, anchor: "" })) return true;
+  // Commercial rivals (TeamStats, Spond...) are on the institutional list for
+  // judging outbound links, but as ranking sites they belong in the
+  // competitor map, labelled commercial, not silently dropped.
+  if (!isCommercialRival(host) && isInstitutionalLink({ url: `https://${host}/`, anchor: "" })) return true;
   return rank != null && rank > BIG_RANK;
 }
 
@@ -90,6 +93,13 @@ export interface Peer {
   // their links but never pitched (lib/outreach/quality.ts rejects them).
   pitchable: boolean;
   gateReasons: string[];
+  // Commercial rivals (apps, club software, paid services) vs content sites.
+  // Content peers are pitchable even though they rank against us: a one-person
+  // site has no product to protect.
+  kind: "commercial" | "content";
+  // Rough size from domain rank: small sites are the likeliest to be one
+  // person, and the likeliest to say yes.
+  size: "small" | "established" | "unknown";
 }
 
 export function pickPeers(results: SerpResult[], ranks: Map<string, number | null>, max: number): Peer[] {
@@ -102,12 +112,28 @@ export function pickPeers(results: SerpResult[], ranks: Map<string, number | nul
     const rank = ranks.get(domain) ?? null;
     if (isBigSite(domain, rank)) continue;
     const q = assessProspect({ url: r.url, title: r.title });
-    peers.push({ url: r.url, domain, title: r.title ?? null, position: r.position, rank, pitchable: q.verdict === "ok", gateReasons: q.reasons });
+    const commercial = q.reasons.some((x) => /commercial rival/.test(x)) || q.type === "business";
+    peers.push({
+      url: r.url,
+      domain,
+      title: r.title ?? null,
+      position: r.position,
+      rank,
+      pitchable: q.verdict === "ok",
+      gateReasons: q.reasons,
+      kind: commercial ? "commercial" : "content",
+      size: sizeOf(rank),
+    });
   }
   // Pages 2-3 first when trimming: smaller, hungrier sites are the ones
   // Graham expects to be open to linking, and page-1 peers are often
   // established competitors.
   return peers.sort((a, b) => bucket(a.position) - bucket(b.position) || a.position - b.position).slice(0, max);
+}
+
+export function sizeOf(rank: number | null): Peer["size"] {
+  if (rank == null) return "unknown";
+  return rank <= 250 ? "small" : "established";
 }
 
 function bucket(position: number): number {
@@ -150,6 +176,8 @@ export function buildLinkGraph(data: PeerLinks[], exclude: Set<string> = new Set
     ];
     if (toOtherPeers.length) why.push(`including ${toOtherPeers.length} other site${toOtherPeers.length === 1 ? "" : "s"} ranking for the same keyword`);
     if (d.peer.position > 10) why.push("on page 2-3, so likely hungry for links");
+    if (d.peer.size === "small") why.push("small site, likely one person");
+    if (d.peer.gateReasons.some((x) => /pitch as a mutual/.test(x))) why.push("ranks against us: pitch as a mutual, peers helping each other");
     out.set(d.peer.domain, {
       domain: d.peer.domain,
       url: d.peer.url,
@@ -191,4 +219,67 @@ export function buildLinkGraph(data: PeerLinks[], exclude: Set<string> = new Set
   }
 
   return [...out.values()].sort((a, b) => b.score - a.score);
+}
+
+// ---------------------------------------------------------------------------
+// Competitor map: every link-graph run is saved, and this folds them into one
+// view of who keeps turning up for our keywords, how big they are, whether
+// they're commercial or independent content, and whether they link out.
+
+export interface SavedGraphRun {
+  keyword: string;
+  ranAt: string;
+  peers: {
+    domain: string;
+    url: string;
+    position: number;
+    rank: number | null;
+    pitchable: boolean;
+    kind: Peer["kind"];
+    size: Peer["size"];
+    smallSitesLinkedOut: number;
+    linkersFound: number;
+  }[];
+}
+
+export interface CompetitorRow {
+  domain: string;
+  kind: Peer["kind"];
+  size: Peer["size"];
+  rank: number | null;
+  keywords: { keyword: string; position: number }[];
+  bestPosition: number;
+  linksOut: boolean;
+  linkersSeen: number;
+  pitchable: boolean;
+  verdict: string;
+}
+
+export function buildCompetitorMap(runs: SavedGraphRun[]): CompetitorRow[] {
+  const by = new Map<string, CompetitorRow>();
+  for (const run of runs) {
+    for (const p of run.peers) {
+      const row =
+        by.get(p.domain) ??
+        ({ domain: p.domain, kind: p.kind, size: p.size, rank: p.rank, keywords: [], bestPosition: 999, linksOut: false, linkersSeen: 0, pitchable: p.pitchable, verdict: "" } as CompetitorRow);
+      if (!row.keywords.some((k) => k.keyword === run.keyword)) row.keywords.push({ keyword: run.keyword, position: p.position });
+      row.bestPosition = Math.min(row.bestPosition, p.position);
+      row.linksOut ||= p.smallSitesLinkedOut > 0;
+      row.linkersSeen = Math.max(row.linkersSeen, p.linkersFound);
+      row.rank ??= p.rank;
+      by.set(p.domain, row);
+    }
+  }
+  for (const row of by.values()) {
+    row.verdict =
+      row.kind === "commercial"
+        ? "commercial rival: study, don't pitch"
+        : row.linksOut
+          ? row.size === "small"
+            ? "independent and links out: good prospect for a link or a mutual"
+            : "established content site that links out: worth a pitch"
+          : "doesn't link out on its ranking page: low odds, watch as a competitor";
+  }
+  // Most overlap first: the sites competing with us on the most keywords.
+  return [...by.values()].sort((a, b) => b.keywords.length - a.keywords.length || a.bestPosition - b.bestPosition);
 }

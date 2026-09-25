@@ -140,9 +140,18 @@ what budget is left over the other routes.
      a scheme.
    - **Linkers**: link to one peer. Weaker, but still worth a read.
 
-   Competitor sites show up as peers (TeamStats, Junior Grassroots Hub and
-   so on). They're mined for their links but never pitched; the gate
-   marks them `pitchable: false`. Every graph prospect still goes through
+   Sites ranking against us come in two kinds (`peers[].kind`):
+   - **Commercial rivals** (TeamStats, Spond and other apps, club software,
+     paid trials and academy services) are mined for their links but never
+     pitched. A business won't link to a rival product.
+   - **Content sites** (independent parent and grassroots sites such as
+     Junior Grassroots Hub, often one person) **are** pitchable, even
+     though they compete with us on keywords. Many aren't run as a business
+     and are happy to link to good content. Pitch them as peers: "we both
+     write for grassroots parents; your piece on X and ours on Y would sit
+     well together". A mutual link is fine here, within the exchange rules
+     above. `size: "small"` (domain rank 250 or less) marks the likeliest
+     one-person sites. Every graph prospect still goes through
    `read` and the vetting rules below: the graph finds who links, the
    vetting decides whether they're a real article or resource list.
 2. **Who links to a specific competitor article** (`source: "linkers:<keyword>"`).
@@ -195,6 +204,20 @@ above. Don't search for club policy or parent-information pages.
 (TeamStats' county links come from hosting FA leagues), not to independent
 sites. The gate parks them. Only mention a genuine partnership route if one
 shows up.
+
+### After the graph runs: the competitor map
+
+Live `link-graph` runs are saved to `seo-data/exports/link-graph/`. Once a
+run's keywords are done, run `npx tsx scripts/outreach/research.ts competitor-map`.
+It costs nothing. It folds every saved run so far into
+`seo-data/exports/competitor-map-<date>.md`, showing:
+- who keeps ranking for our keywords, and at what positions
+- commercial rival or independent content site, and size
+- whether they link out to small sites
+- a verdict for each
+
+Include its top 10 in the report: the sites competing with us on the most
+keywords, and which of them look open to a link or a mutual.
 
 ## Vetting every prospect
 
@@ -286,7 +309,8 @@ correction) for every prospect. Apply its verdicts.
    `seo-data/exports/outreach-backlog-<YYYY-MM-DD>-removed.json`.
 3. Run `npx tsx scripts/outreach/cli.ts review seo-data/exports/outreach-backlog-<YYYY-MM-DD>.json`.
    It re-runs the gate and writes the `.md` review table beside the file.
-4. Commit only those three files and push the branch.
+4. Commit only those three files, plus any new `seo-data/exports/link-graph/*.json`
+   runs and the `competitor-map-<date>.md`, and push the branch.
 5. If a type of junk keeps turning up in the removals (for example
    abandoned club sites), say so: the fix belongs in
    `lib/outreach/quality.ts`, not in manual filtering.

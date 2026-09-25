@@ -36,6 +36,12 @@
  *         sites: pitch directly or propose an exchange), hubs (sites linking
  *         to 2+ peers: strongest leads) and single linkers, scored. Costs one
  *         SERP, one bulk-rank, and a page read plus a backlinks call per peer.
+ *         Live runs are saved to seo-data/exports/link-graph/ for:
+ * competitor-map
+ *         Folds every saved link-graph run into one table of who keeps
+ *         ranking for our keywords: commercial rival vs independent content
+ *         site, size, keywords and positions, whether they link out, and a
+ *         verdict. Free. Writes seo-data/exports/competitor-map-<date>.md.
  * spend   DataForSEO spend by this workflow in the last 24 hours.
  *
  * Sandbox (free, dummy data) unless all three of DATAFORSEO_ENV=live,
@@ -53,7 +59,7 @@ import { ensureEnvLoaded } from "../seo/shared/env";
 import { googleOrganicSerp } from "../seo/dataforseo/endpoints/serp";
 import { contentParsingLive } from "../seo/dataforseo/endpoints/on_page";
 import { backlinksList, bulkRanks, referringDomains } from "../seo/dataforseo/endpoints/backlinks";
-import { buildLinkGraph, pickPeers, type PeerLinks, type SerpResult } from "../../lib/outreach/link-graph";
+import { buildCompetitorMap, buildLinkGraph, pickPeers, type PeerLinks, type SavedGraphRun, type SerpResult } from "../../lib/outreach/link-graph";
 import { rankedKeywords } from "../seo/dataforseo/endpoints/labs";
 import { parseCsv } from "../seo/shared/csv";
 import { REPO_ROOT } from "../seo/shared/env";
@@ -66,6 +72,7 @@ ensureEnvLoaded();
 
 const WORKFLOW = "outreach-research";
 const OUR_SITE = "footballparent.co.uk";
+const GRAPH_DIR = path.join(REPO_ROOT, "seo-data", "exports", "link-graph");
 const BUDGET_USD = Number(process.env.OUTREACH_RESEARCH_BUDGET_USD || 5);
 
 function liveReady(): boolean {
@@ -247,23 +254,59 @@ async function linkGraph(keyword: string, depth: number, maxPeers: number, linke
   }
 
   const prospects = buildLinkGraph(data, ours);
+  const peerSummary = data.map((d) => ({
+    domain: d.peer.domain,
+    url: d.peer.url,
+    position: d.peer.position,
+    rank: d.peer.rank,
+    pitchable: d.peer.pitchable,
+    kind: d.peer.kind,
+    size: d.peer.size,
+    smallSitesLinkedOut: d.outbound.length,
+    linkersFound: d.inbound.length,
+  }));
+  // Saved for the competitor map (research.ts competitor-map). Only live
+  // runs: sandbox data is fake and would pollute the map.
+  if (serp.environment === "live") {
+    fs.mkdirSync(GRAPH_DIR, { recursive: true });
+    const run: SavedGraphRun = { keyword, ranAt: new Date().toISOString(), peers: peerSummary };
+    const slug = keyword.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
+    fs.writeFileSync(path.join(GRAPH_DIR, `${run.ranAt.slice(0, 10)}-${slug}.json`), JSON.stringify(run, null, 2));
+  }
   return {
     keyword,
     environment: serp.environment,
     resultsChecked: results.length,
     bigSitesDropped: hosts.length - peers.length,
-    peers: data.map((d) => ({
-      domain: d.peer.domain,
-      url: d.peer.url,
-      position: d.peer.position,
-      rank: d.peer.rank,
-      pitchable: d.peer.pitchable,
-      smallSitesLinkedOut: d.outbound.length,
-      linkersFound: d.inbound.length,
-    })),
+    peers: peerSummary,
     prospects,
     note: "Every prospect still needs research.ts read + the vetting rules before it's added. Hubs first, then open peers, then single linkers.",
   };
+}
+
+// Folds every saved link-graph run into one competitor map. Free: reads
+// files only. Writes seo-data/exports/competitor-map-<date>.md for Graham.
+function competitorMap() {
+  const files = fs.existsSync(GRAPH_DIR) ? fs.readdirSync(GRAPH_DIR).filter((f) => f.endsWith(".json")) : [];
+  const runs = files.map((f) => JSON.parse(fs.readFileSync(path.join(GRAPH_DIR, f), "utf8")) as SavedGraphRun);
+  const rows = buildCompetitorMap(runs);
+  const cell = (v: unknown) => String(v ?? "-").replace(/\|/g, "/");
+  const md = [
+    `# Competitor map (${new Date().toISOString().slice(0, 10)})`,
+    "",
+    `Small and mid-size sites ranking for our keywords, from ${runs.length} link-graph run${runs.length === 1 ? "" : "s"} (${[...new Set(runs.map((r) => r.keyword))].join(", ") || "none yet"}). Big sites (FA, BBC, press, brands) are left out.`,
+    "",
+    "| Site | Kind | Size (rank) | Keywords (position) | Links out to small sites | Verdict |",
+    "| --- | --- | --- | --- | --- | --- |",
+    ...rows.map(
+      (r) =>
+        `| ${cell(r.domain)} | ${r.kind} | ${r.size} (${cell(r.rank)}) | ${r.keywords.map((k) => `${k.keyword} (#${k.position})`).join("; ")} | ${r.linksOut ? "yes" : "no"} | ${cell(r.verdict)} |`
+    ),
+    "",
+  ].join("\n");
+  const out = path.join(REPO_ROOT, "seo-data", "exports", `competitor-map-${new Date().toISOString().slice(0, 10)}.md`);
+  fs.writeFileSync(out, md);
+  return { runs: runs.length, sites: rows.length, file: path.relative(REPO_ROOT, out), rows };
 }
 
 async function main() {
@@ -282,9 +325,10 @@ async function main() {
   else if (cmd === "linkers" && args[0]) out = await linkers(args[0], Number(value("--limit") ?? 50));
   else if (cmd === "link-graph" && args[0])
     out = await linkGraph(args[0], Number(value("--depth") ?? 30), Number(value("--peers") ?? 8), Number(value("--linkers") ?? 25));
+  else if (cmd === "competitor-map") out = competitorMap();
   else if (cmd === "spend") out = { workflow: WORKFLOW, live: liveReady(), spentLast24hUsd: Number(spentLast24h().toFixed(4)), budgetUsd: BUDGET_USD };
   else {
-    console.error("Usage: research.ts search \"<query>\" [--depth 20] | read <url> [--js] | our-pages [--refresh] | linkers <url> [--limit 50] | link-graph \"<keyword>\" [--depth 30] [--peers 8] [--linkers 25] | spend");
+    console.error("Usage: research.ts search \"<query>\" [--depth 20] | read <url> [--js] | our-pages [--refresh] | linkers <url> [--limit 50] | link-graph \"<keyword>\" [--depth 30] [--peers 8] [--linkers 25] | competitor-map | spend");
     process.exit(1);
   }
   console.log(JSON.stringify(out, null, 2));
