@@ -144,8 +144,7 @@ test("history import reads Graham's sheet: name vs URL columns, yearless dates, 
   assert.equal(gu.domainScore, 37);
   assert.equal(gu.angle, "Q/a on girls football and their mission");
   assert.equal(gu.notes, "replied to their email");
-  assert.equal(gu.status, null, "free text after the date is kept as a note, not guessed into a status");
-  assert.equal(resolveImportedStatus(gu, now).status, "no_reply", "old with no status closes rather than queueing a chase");
+  assert.equal(gu.status, "replied", "a conversation in the notes keeps it in Waiting, not closed");
 
   const rs = resolveImportedStatus(recent, now);
   assert.equal(rs.status, "sent");
@@ -162,4 +161,39 @@ test("gate fixes from the first backlog run", () => {
   assert.equal(verdict("https://www.example.co.uk/netball-parents-guide"), "rejected");
   assert.equal(verdict("https://wembleyjuniormagpies.com/parents", { title: "Parents info", context: "Wembley Junior Magpies, Perth, Western Australia" }), "rejected");
   assert.equal(verdict("https://www.perthshirejfc.co.uk/parents"), "ok", "UK Perth is fine");
+});
+
+test("history import: Graham's real rows, status and dates from free text", async () => {
+  const { parseHistory, resolveImportedStatus } = await import("../lib/outreach/import");
+  const now = new Date("2026-09-25T10:00:00Z");
+  const sheet = [
+    "email\tWhen contacted\tWhat pitched\tDomain Auth\tURL",
+    "london@girlsunitedfa.org\t14/06, replied to their email 22/6- chased up as realised I hadn't copied in the two people, chased a third time 9 september. Said they would have something w/c 21st Sept\tQ/a on girls football and their mission\t37\thttp://www.girlsunitedfa.org/'",
+    "On site\tAricle like 29 June\tArticle live 29 June\t39\thttps://www.teamstats.net/blog",
+    "footballparentuk@gmail.com\t26/06, replied and sent questions 26/06\tQ/A live. Have asked for backlink to the article (01 July, will see what happens)- looks likely\t22\thttps://footballdna.co.uk/",
+    "enquiries@junior-premier.co.uk\t26/06, tried second time with their contact us form (6th July)\t2 part Q/A first part live 16th August\t25\thttps://www.juniorpremierleague.com/england/about",
+    "\temailed 2nd Sept, followed up 16th- Replied saying happy to do something\tpotential link exchange\t5\thttps://12th-man.co.uk/blog/#",
+  ].join("\n");
+  const r = parseHistory(sheet, now);
+  assert.deepEqual(r.errors, []);
+  const by = Object.fromEntries(r.rows.map((x) => [x.domain, x]));
+  assert.equal(by["girlsunitedfa.org"].url, "http://www.girlsunitedfa.org/", "trailing quote stripped");
+  assert.equal(by["girlsunitedfa.org"].status, "replied");
+  assert.equal(by["girlsunitedfa.org"].emailedAt?.slice(0, 10), "2026-06-14");
+  assert.equal(by["girlsunitedfa.org"].lastContactAt?.slice(0, 10), "2026-09-09", "latest date in the thread");
+  assert.equal(by["teamstats.net"].status, "won");
+  assert.equal(by["teamstats.net"].emailedAt?.slice(0, 10), "2026-06-29");
+  assert.equal(by["footballdna.co.uk"].status, "replied");
+  assert.equal(by["footballdna.co.uk"].contactEmail, null, "our own address isn't their contact");
+  assert.equal(by["juniorpremierleague.com"].status, null, "our article going live isn't their reply");
+  assert.equal(resolveImportedStatus(by["juniorpremierleague.com"], now).status, "no_reply");
+  assert.equal(by["12th-man.co.uk"].status, "replied");
+  assert.equal(by["12th-man.co.uk"].emailedAt?.slice(0, 10), "2026-09-02");
+});
+
+test("history import explains lost cell boundaries instead of failing silently", async () => {
+  const { parseHistory } = await import("../lib/outreach/import");
+  const r = parseHistory("email When contacted URL\nx 14/06 foo.co.uk");
+  assert.equal(r.rows.length, 0);
+  assert.match(r.errors[0], /cell boundaries were probably lost/);
 });

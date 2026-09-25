@@ -103,6 +103,16 @@ export async function findKnownDomain(domain: string): Promise<KnownDomain | nul
   return data?.length ? pickMostAdvanced(data as KnownDomain[]) : null;
 }
 
+export async function isFromHistoryImport(domain: string): Promise<boolean> {
+  const supabase = adminClient();
+  const { count } = await supabase
+    .from("outreach_prospects")
+    .select("id", { count: "exact", head: true })
+    .eq("domain", domain)
+    .eq("source", "import:history");
+  return (count ?? 0) > 0;
+}
+
 export async function listKnownDomains(): Promise<KnownDomain[]> {
   const all = (await listProspects(undefined, 10000)).filter((p) => p.status !== "rejected");
   const byDomain = new Map<string, KnownDomain[]>();
@@ -376,8 +386,18 @@ export async function importHistory(rows: HistoryRow[], now = new Date()): Promi
     const scoreNote = row.domainScore != null ? `Domain score ${row.domainScore} (entered by hand)` : null;
     const notes = [row.notes, scoreNote, "Imported from outreach history"].filter(Boolean).join("\n");
 
-    const known = await findKnownDomain(row.domain);
-    if (known && !["backlog", "drafted", "parked", "skipped"].includes(known.status)) {
+    // A re-import of the sheet overwrites what an earlier import of it
+    // saved (the parser gets better, the sheet gets updated). Rows that came
+    // from anywhere else are never overwritten by an import.
+    const { data: prior } = await supabase
+      .from("outreach_prospects")
+      .select("id, url, domain, status, sent_at")
+      .eq("domain", row.domain)
+      .eq("source", "import:history")
+      .limit(1)
+      .maybeSingle();
+    const known = (prior as KnownDomain | null) ?? (await findKnownDomain(row.domain));
+    if (known && !prior && !["backlog", "drafted", "parked", "skipped"].includes(known.status)) {
       results.push({ line: row.line, url: row.url, outcome: "already_contacted", existing: known });
       continue;
     }
@@ -394,6 +414,7 @@ export async function importHistory(rows: HistoryRow[], now = new Date()): Promi
         notes,
       } as Partial<OutreachProspect>);
       results.push({ line: row.line, url: row.url, outcome: "updated", status: r.status });
+      if (row.title) await updateProspectFields(id, { title: row.title });
     } else {
       const q = assessProspect({ url: row.url });
       const { data, error } = await supabase
