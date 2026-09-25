@@ -213,6 +213,12 @@ export default function AcademyPathwayPage() {
           description:
             "Aston Villa's academy has held Category One status since 2014 and won the FA Youth Cup in 2025. How the Foundation's six age-banded centres feed into it.",
         },
+        {
+          title: "Academy Life: Paul Barry Interview",
+          href: "/academy-pathway/academy-life-paul-barry-interview",
+          description:
+            "Football DNA's Paul Barry on academy categories, juggling grassroots and academy football, development centres as a route in, and supporting a child through release.",
+        },
       ]}
       bottomContent={{
         title: "About the Academy Pathway",
