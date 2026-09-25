@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { isPageViewOptedOut } from "@/lib/page-view-optout";
+import { captureFirstTouch } from "@/lib/coach-app-handoff";
 
 // True total page-view count, deliberately decoupled from CookieConsent.tsx
 // entirely - fires on every route regardless of consent state, so it
@@ -19,6 +20,12 @@ export default function PageViewPing() {
     // Skip /admin/* - that's Graham checking the dashboard, not a real
     // visitor, and would otherwise inflate the count it's meant to report.
     if (!pathname || pathname.startsWith("/admin")) return;
+
+    // How this visit began, for Coach App sign-up attribution. Before the
+    // opt-out and localhost checks below: those decide whether a page view
+    // is counted, and this is not a count. It is consent-gated on its own
+    // terms - see lib/coach-app-handoff.ts.
+    captureFirstTouch();
 
     // Same reasoning as the /admin skip above, extended to the public site:
     // Graham's own browsing isn't visitor traffic, and at this volume it

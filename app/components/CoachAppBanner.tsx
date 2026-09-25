@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CoachAppShareButton from "@/app/components/CoachAppShareButton";
 
 // Promo banner for the Coach App, in two creatives and two audiences.
 //
@@ -21,7 +22,10 @@ import Link from "next/link";
 // silently flip it to the other creative mid-test. Set AB_TEST_ENABLED to
 // false to end the test and serve ACTIVE_BANNER_STYLE everywhere.
 
-export type CoachAppAudience = "parent" | "coach";
+// "share" is for parents reading grassroots articles: rather than pitch
+// them an app built for coaches, it asks them to pass it on to their
+// child's coach. See CoachAppShareButton.tsx.
+export type CoachAppAudience = "parent" | "coach" | "share";
 export type CoachAppBannerStyle = "dark" | "light";
 
 // Where a banner sits. "article" is the in-body placement the A/B test runs
@@ -55,6 +59,45 @@ export const ACTIVE_BANNER_STYLE: CoachAppBannerStyle = "dark";
 
 const DESTINATION = "/football-parent-coach-app";
 
+// Articles whose readers are mostly grassroots parents: the ones most
+// likely to be one message away from their child's coach. Everything under
+// /coaching/ gets the coach copy instead (set on each page), and every other
+// article keeps the parent copy. Keyed by slug so the Coach App report
+// (audienceForPath in lib/supabase/page-views.ts) can resolve a logged path
+// to the same audience without a second list to keep in sync.
+export const SHARE_AUDIENCE_SLUGS = new Set([
+  "biggest-football-parent-mistakes",
+  "jpl-vs-grassroots-football",
+  "support-child-after-bad-match",
+  "what-is-grassroots-football",
+  "what-to-say-after-football-matches",
+  "build-confidence-young-footballers",
+  "football-burnout",
+  "good-football-development-environment",
+  "how-much-training-is-too-much",
+  "improve-football-decision-making",
+  "late-developers-in-football",
+  "new-fa-youth-football-format",
+  "playing-up-an-age-group-football",
+  "relative-age-effect-football",
+  "what-is-football-iq",
+  "why-isnt-my-child-improving-at-football",
+  "is-private-football-coaching-worth-it",
+  "girls-academy-vs-grassroots-football",
+  "late-developers-in-girls-football",
+]);
+
+// Articles outside /coaching/ written for people who coach, or want to.
+export const COACH_AUDIENCE_SLUGS = new Set(["how-to-become-a-football-coach"]);
+
+/** The audience an article's banner speaks to when the page doesn't say. */
+export function defaultAudienceForSlug(slug: string | undefined): CoachAppAudience {
+  if (!slug) return "parent";
+  if (COACH_AUDIENCE_SLUGS.has(slug)) return "coach";
+  if (SHARE_AUDIENCE_SLUGS.has(slug)) return "share";
+  return "parent";
+}
+
 // FNV-1a. Any stable, well-spread hash works here; the only requirements are
 // that it's deterministic across builds (so a given article keeps its
 // creative for the whole test) and doesn't correlate with anything about the
@@ -78,6 +121,8 @@ const DARK_COPY: Record<CoachAppAudience, string> = {
     "Log every goal, assist and man of the match from the touchline.",
   coach:
     "Fair game time, lineups and match stats, without the Sunday-morning spreadsheet.",
+  share:
+    "Know a grassroots coach still working out subs on the touchline? The Coach App does the game-time maths for them.",
 };
 
 const LIGHT_COPY: Record<
@@ -91,6 +136,10 @@ const LIGHT_COPY: Record<
   coach: {
     title: "Fair game time without doing the maths on the touchline",
     body: "Equal-time rotation, lineups, availability and match records in one place, so the Sunday-morning admin stops eating into the coaching.",
+  },
+  share: {
+    title: "Know a coach who'd use this?",
+    body: "Most grassroots coaches are parents fitting it in around work. The Coach App works out fair game time, lineups and availability for them, and it's free to start. If your child's coach is still doing subs on the back of a teamsheet, it's worth passing on.",
   },
 };
 
@@ -124,6 +173,38 @@ export default function CoachAppBanner({
 }) {
   const spacing = placement === "article" ? "my-10" : "";
   const href = `${DESTINATION}?b=${style}-${audience}-${placement}`;
+
+  if (style === "dark" && audience === "share") {
+    // Not wrapped in one big Link like the other dark banners: it holds two
+    // actions, and a button inside an anchor is invalid HTML.
+    return (
+      <div className={`rounded-2xl bg-black px-6 py-6 text-white sm:px-8 ${spacing}`}>
+        {/* Stacked at every width, unlike the other dark banners: with two
+            actions beside it, a side-by-side row squeezes the copy into a
+            narrow column inside the article's text width. */}
+        <img
+          src="/logo-horizontal-coach-white.png"
+          alt="Football Parent Coach App"
+          className="mb-4 h-8 w-auto self-start sm:h-9"
+        />
+
+        <p className="mb-5 text-lg font-semibold leading-snug text-white sm:text-xl">
+          {DARK_COPY.share}
+        </p>
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+          <CoachAppShareButton tone="dark" />
+          <Link
+            href={href}
+            className="group inline-flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-white/70 transition-colors hover:text-white"
+          >
+            See how it works
+            <Arrow />
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (style === "dark") {
     return (
@@ -188,12 +269,21 @@ export default function CoachAppBanner({
 
           <p className="mb-5 text-base leading-7 text-gray-700">{copy.body}</p>
 
-          <Link
-            href={href}
-            className="inline-block rounded-lg bg-blue-700 px-6 py-3 text-sm font-semibold text-white! transition-colors hover:bg-blue-800"
-          >
-            See the Coach App
-          </Link>
+          {audience === "share" ? (
+            <div className="flex flex-wrap items-center gap-4">
+              <CoachAppShareButton tone="light" />
+              <Link href={href} className="text-sm font-semibold text-blue-700 underline">
+                See the Coach App
+              </Link>
+            </div>
+          ) : (
+            <Link
+              href={href}
+              className="inline-block rounded-lg bg-blue-700 px-6 py-3 text-sm font-semibold text-white! transition-colors hover:bg-blue-800"
+            >
+              See the Coach App
+            </Link>
+          )}
         </div>
       </div>
     </aside>

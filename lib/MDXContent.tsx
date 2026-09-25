@@ -13,6 +13,7 @@ import { affiliateLinkProps } from "@/lib/affiliate";
 import { competitorLinkProps } from "@/lib/externalLinks";
 import CoachAppBanner, {
   bannerStyleForKey,
+  defaultAudienceForSlug,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 
@@ -187,6 +188,7 @@ function splitAtMiddleHeading(content: string): [string, string] | null {
 interface MDXContentProps {
   content: string;
   // "none" opts a page out of the mid-article Coach App banner entirely.
+  // Left unset, the audience comes from the slug (defaultAudienceForSlug).
   coachAppBanner?: CoachAppAudience | "none";
   // The article's slug, used only to assign it one arm of the banner A/B
   // test. Stable across content edits, unlike hashing the body would be.
@@ -195,7 +197,7 @@ interface MDXContentProps {
 
 export async function MDXContent({
   content,
-  coachAppBanner = "parent",
+  coachAppBanner,
   slug,
 }: MDXContentProps) {
   const split =
@@ -212,7 +214,11 @@ export async function MDXContent({
           />
 
           <CoachAppBanner
-            audience={coachAppBanner === "none" ? "parent" : coachAppBanner}
+            audience={
+              coachAppBanner && coachAppBanner !== "none"
+                ? coachAppBanner
+                : defaultAudienceForSlug(slug)
+            }
             style={bannerStyleForKey(slug)}
           />
 

@@ -967,3 +967,7 @@ Two pages, one lever each (title tag in `page.tsx` only; H1 frontmatter titles, 
 - Formations: "7 a side formations" and its variants ~480/mo each (probably the same pool, from the TeamStats ranked-keywords export, where TeamStats holds positions 4-7), "best 7 a side formation" 170/mo, "formation for 7 a side football" 110/mo, 9v9 terms 40-110/mo. The page's H1 already said "7-a-Side and 9-a-Side" but the title tag did not. At the change: 402 impressions, 4 clicks, avg pos 6.5. This overrides the 22 Sep "watch only" note above on Graham's instruction; indexing was confirmed clean then.
 
 Both on watch until ~7 Oct.
+
+## Coach App banner: "send it to your child's coach" on 19 grassroots articles (2026-09-25)
+
+Not an SEO lever, logged because it changes a mid-article block on 19 live pages. The in-article Coach App banner on grassroots-focused parent articles (list: `SHARE_AUDIENCE_SLUGS` in `app/components/CoachAppBanner.tsx`) now asks the reader to pass the app to their child's coach, with a native share button, instead of pitching them the parent features. `how-to-become-a-football-coach` switched to the coach copy; `/coaching/best-grassroots-football-apps` and `/coaching/football-team-spreadsheet` corrected from parent to coach copy. Headings, links and article text unchanged. Commit `49d70ad`. If engagement on those pages moves in the next two weeks, this is a candidate cause.
