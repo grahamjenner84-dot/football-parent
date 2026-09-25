@@ -21,6 +21,7 @@ import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCo
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
 import type { PartnerClickStats } from "@/lib/supabase/partner-clicks"; // type-only, same reasoning as the page-views import above
 import type { CoachAppShareStats } from "@/lib/supabase/coach-app-shares"; // type-only, as above
+import type { CoachAppFunnel } from "@/lib/supabase/coach-app-funnel"; // type-only, as above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
@@ -46,12 +47,14 @@ type Tab =
   | "pageviewsTrend"
   | "countries"
   | "coachApp"
+  | "coachFunnel"
   | "affiliate"
   | "partnerClicks";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "dashboard", label: "Dashboard" },
+  { id: "coachFunnel", label: "Coach App funnel" },
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
   { id: "coachApp", label: "Coach App" },
@@ -156,6 +159,8 @@ export default function SeoAdminPage() {
   const [pageViewError, setPageViewError] = useState("");
   const [coachAppViewStats, setCoachAppViewStats] = useState<CoachAppViewStats | null>(null);
   const [coachAppViewError, setCoachAppViewError] = useState("");
+  const [funnel, setFunnel] = useState<CoachAppFunnel | null>(null);
+  const [funnelError, setFunnelError] = useState("");
   const [affiliateStats, setAffiliateStats] = useState<AffiliateClickStats | null>(null);
   const [affiliateError, setAffiliateError] = useState("");
   const [partnerStats, setPartnerStats] = useState<PartnerClickStats | null>(null);
@@ -231,6 +236,22 @@ export default function SeoAdminPage() {
         setCoachAppViewError("");
       })
       .catch((err) => setCoachAppViewError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/coach-app-funnel-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load Coach App funnel");
+        }
+        return res.json();
+      })
+      .then((data: CoachAppFunnel) => {
+        setFunnel(data);
+        setFunnelError("");
+      })
+      .catch((err) => setFunnelError(err.message));
   }, []);
 
   useEffect(() => {
@@ -337,6 +358,9 @@ export default function SeoAdminPage() {
             {t.id === "coachApp" && coachAppViewStats && (
               <span style={styles.tabCount}>{coachAppViewStats.totalViews}</span>
             )}
+            {t.id === "coachFunnel" && funnel && (
+              <span style={styles.tabCount}>{funnel.totals.signups}</span>
+            )}
             {t.id === "affiliate" && affiliateStats && (
               <span style={styles.tabCount}>{affiliateStats.totalClicks}</span>
             )}
@@ -351,6 +375,7 @@ export default function SeoAdminPage() {
               t.id !== "pageviewsCompare" &&
               t.id !== "pageviewsTrend" &&
               t.id !== "coachApp" &&
+              t.id !== "coachFunnel" &&
               t.id !== "affiliate" &&
               t.id !== "partnerClicks" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
@@ -409,6 +434,14 @@ export default function SeoAdminPage() {
             )}
             {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
             {coachAppViewStats && <CoachAppTab stats={coachAppViewStats} />}
+          </>
+        ) : tab === "coachFunnel" ? (
+          <>
+            {!funnel && !funnelError && <p style={styles.muted}>Loading Coach App funnel...</p>}
+            {funnelError && <p style={styles.error}>{funnelError}</p>}
+            {funnel && (
+              <CoachAppFunnelTab funnel={funnel} bannerVariants={coachAppViewStats?.bannerVariants} />
+            )}
           </>
         ) : tab === "affiliate" ? (
           <>
@@ -494,6 +527,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "countries":
       return 0;
     case "coachApp":
+      return 0;
+    case "coachFunnel":
       return 0;
     case "dashboard":
       return 0;
@@ -2308,10 +2343,168 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
       {stats.bannerVariants && (
         <BannerVariantsReport stats={stats.bannerVariants} selectedDate={selectedDate} />
       )}
-      {stats.shareStats && (
-        <SharingReport stats={stats.shareStats} bannerVariants={stats.bannerVariants} />
-      )}
     </>
+  );
+}
+
+const funnelTh: CSSProperties = {
+  textAlign: "left",
+  padding: "6px 8px",
+  borderBottom: "1px solid #3a2c1d",
+  color: "#e8b04b",
+  fontWeight: 600,
+  whiteSpace: "nowrap",
+};
+const funnelTd: CSSProperties = { padding: "6px 8px", borderBottom: "1px solid #2e2319", color: "#e9dcc5" };
+const funnelNum: CSSProperties = { ...funnelTd, textAlign: "right", fontVariantNumeric: "tabular-nums" };
+
+function FunnelHeading({ children }: { children: ReactNode }) {
+  return (
+    <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "14px 0 2px" }}>{children}</h3>
+  );
+}
+
+// Traffic and sign-ups per channel, side by side, plus the SEO articles and
+// the share loop. Channel rules: lib/coach-app-channels.ts.
+function CoachAppFunnelTab({
+  funnel,
+  bannerVariants,
+}: {
+  funnel: CoachAppFunnel;
+  bannerVariants?: BannerVariantStats;
+}) {
+  const per100 = (signups: number, views: number) => (views > 0 ? ((signups / views) * 100).toFixed(1) : "n/a");
+  const signupsFrom = new Date(funnel.signupsSince).toLocaleDateString("en-GB");
+
+  return (
+    <div style={styles.list}>
+      <SectionNote label="How channels are decided">
+        Every visit to a Coach App page and every sign-up is put in one channel,
+        first match wins: Google Ads (an ad click), Shared link (the link a
+        parent sent from the share banner), Article banner (clicked a Coach App
+        banner in an article, usually after arriving from Google), Search
+        (arrived from a search engine, no banner), Site link (another page of
+        ours, no banner), Direct, Other. Unknown is sign-ups only: the coach
+        declined analytics cookies, so nothing about their visit was kept.
+        Landing views are the Coach App page and its ad variants; sign-in views
+        are the app&rsquo;s own sign-in screen. Sign-ups are counted from{" "}
+        {signupsFrom}, when the app started reporting them here; earlier ones
+        are only in the Coach App database. No sign-up row identifies a coach.
+      </SectionNote>
+
+      {funnel.signupsError && (
+        <p style={styles.error}>
+          Couldn&rsquo;t load sign-ups: {funnel.signupsError}. If it says the
+          coach_app_signups table is missing, run
+          20260925200000_coach_app_signups.sql.
+        </p>
+      )}
+
+      <FunnelHeading>By channel, last {funnel.days} days</FunnelHeading>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={funnelTh}>Channel</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Landing views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Sign-in views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Per 100 landing views</th>
+            </tr>
+          </thead>
+          <tbody>
+            {funnel.channels.map((row) => (
+              <tr key={row.channel}>
+                <td style={funnelTd}>{row.channel}</td>
+                <td style={funnelNum}>{row.landingViews}</td>
+                <td style={funnelNum}>{row.signInViews}</td>
+                <td style={funnelNum}>{row.signups}</td>
+                <td style={funnelNum}>{per100(row.signups, row.landingViews)}</td>
+              </tr>
+            ))}
+            <tr>
+              <td style={{ ...funnelTd, fontWeight: 600 }}>Total</td>
+              <td style={{ ...funnelNum, fontWeight: 600 }}>{funnel.totals.landingViews}</td>
+              <td style={{ ...funnelNum, fontWeight: 600 }}>{funnel.totals.signInViews}</td>
+              <td style={{ ...funnelNum, fontWeight: 600 }}>{funnel.totals.signups}</td>
+              <td style={{ ...funnelNum, fontWeight: 600 }}>
+                {per100(funnel.totals.signups, funnel.totals.landingViews)}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style={styles.sectionNote}>
+        Sign-ups can come from a sign-in screen view rather than a landing view,
+        so the per-100 figure is a guide, not a strict conversion rate.
+      </p>
+
+      <FunnelHeading>Sign-ups</FunnelHeading>
+      {funnel.recentSignups.length === 0 ? (
+        <p style={styles.muted}>No sign-ups reported since {signupsFrom}.</p>
+      ) : (
+        <>
+          <p style={styles.sectionNote}>
+            By day: {funnel.signupsByDay.map((d) => `${d.date}: ${d.signups}`).join(" · ")}
+          </p>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={funnelTh}>When</th>
+                  <th style={funnelTh}>Channel</th>
+                  <th style={funnelTh}>Signed up on</th>
+                  <th style={funnelTh}>Visit began on</th>
+                  <th style={funnelTh}>Banner / campaign</th>
+                </tr>
+              </thead>
+              <tbody>
+                {funnel.recentSignups.map((r, i) => (
+                  <tr key={`${r.createdAt}-${i}`}>
+                    <td style={funnelTd}>{new Date(r.createdAt).toLocaleString("en-GB")}</td>
+                    <td style={funnelTd}>{r.channel}</td>
+                    <td style={funnelTd}>{r.landingPath ?? "-"}</td>
+                    <td style={funnelTd}>{r.entryPath ?? "-"}</td>
+                    <td style={funnelTd}>{r.banner ?? r.utmCampaign ?? "-"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+
+      <FunnelHeading>SEO: coaching articles, last {funnel.days} days</FunnelHeading>
+      <p style={styles.sectionNote}>
+        {funnel.coachingArticles.totalViews} views of /coaching/ articles,{" "}
+        {funnel.coachingArticles.searchViews} from search. By source:{" "}
+        {funnel.coachingArticles.bySourceGroup.map((g) => `${g.group} ${g.views}`).join(", ") || "none"}.
+        Sign-ups these articles produced show above as Article banner, Search or
+        Site link; the Sign-ups table names the article each visit began on.
+      </p>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={funnelTh}>Article</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>From search</th>
+            </tr>
+          </thead>
+          <tbody>
+            {funnel.coachingArticles.byArticle.map((a) => (
+              <tr key={a.path}>
+                <td style={funnelTd}>{a.path.replace("/coaching/", "")}</td>
+                <td style={funnelNum}>{a.views}</td>
+                <td style={funnelNum}>{a.searchViews}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <SharingReport stats={funnel.sharing} bannerVariants={bannerVariants} />
+    </div>
   );
 }
 

@@ -1,5 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
+// utm_source on the link the share button sends: a page view carrying it is
+// a coach (or whoever) opening what a parent sent them.
+import { SHARED_LINK_UTM_SOURCE } from "@/lib/coach-app-channels";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/partner-clicks.ts - this must never be imported from client
@@ -18,10 +21,6 @@ function adminClient() {
 export const SHARE_METHODS = ["share-sheet", "share-cancelled", "clipboard", "email"] as const;
 export type ShareMethod = (typeof SHARE_METHODS)[number];
 
-/** utm_source on the link the share button sends, set in
- * app/components/CoachAppShareButton.tsx. A page view carrying it is a coach
- * (or whoever) opening what a parent sent them. */
-export const SHARED_LINK_UTM_SOURCE = "parent-share";
 
 // When share tracking went live. Nothing before this can exist in
 // coach_app_shares, and the shared link didn't exist either.
