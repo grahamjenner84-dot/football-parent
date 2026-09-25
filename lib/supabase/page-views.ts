@@ -144,6 +144,11 @@ export interface HourOfDayRow {
 
 export interface PageViewCountryStats {
   days: number;
+  // Start of the window actually used: the later of `days` ago and the first
+  // page view that has a country recorded.
+  since: string;
+  // True when the window was cut short to start at country recording.
+  clampedToCountryStart: boolean;
   totalViews: number;
   botViews: number;
   // Views with a country recorded. While this is well below totalViews the
@@ -211,7 +216,28 @@ function topPathRows(counts: Map<string, number>, limit: number): { path: string
 // here reconcile with the Page views tab.
 export async function getPageViewCountryStats(days: number = 30): Promise<PageViewCountryStats> {
   const supabase = adminClient();
-  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+  const requestedSince = Date.now() - days * 24 * 60 * 60 * 1000;
+
+  // Start at the first row that has a country, not `days` ago. Everything
+  // before the country column existed reads as Unknown, and on the first
+  // days that was ~2,000 views swamping the split. Taken from the data
+  // rather than a hardcoded time, because the column went live in stages on
+  // 2026-09-24 (deploy, a failed-insert gap, then the migration) and the
+  // first real value is the only exact answer.
+  const { data: firstWithCountry, error: firstError } = await supabase
+    .from("page_views")
+    .select("created_at")
+    .not("country", "is", null)
+    .order("created_at", { ascending: true })
+    .limit(1);
+  if (firstError && isMissingColumnError(firstError)) {
+    throw new Error(
+      "page_views has no country column yet - apply supabase/migrations/20260924120000_page_views_country.sql to the football-parent-social project."
+    );
+  }
+  const countryStart = firstWithCountry?.[0]?.created_at ? Date.parse(firstWithCountry[0].created_at) : 0;
+  const clampedToCountryStart = countryStart > requestedSince;
+  const since = new Date(Math.max(requestedSince, countryStart)).toISOString();
 
   let rows: {
     path: string;
@@ -315,6 +341,8 @@ export async function getPageViewCountryStats(days: number = 30): Promise<PageVi
 
   return {
     days,
+    since,
+    clampedToCountryStart,
     totalViews,
     botViews,
     knownCountryViews,

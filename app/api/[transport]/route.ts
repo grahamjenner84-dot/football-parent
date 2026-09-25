@@ -4,7 +4,7 @@ import { getSeoReport, getPageInspection, comparePeriods } from "@/lib/gsc";
 import { addToContentQueue } from "@/lib/supabase/content-queue";
 import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
 import { getPageViewStats, getPageViewCountryStats, getBannerVariantStats } from "@/lib/supabase/page-views";
-import { getCoachAppShareStats } from "@/lib/supabase/coach-app-shares";
+import { getCoachAppFunnel } from "@/lib/supabase/coach-app-funnel";
 
 const handler = createMcpHandler(
   (server) => {
@@ -128,37 +128,31 @@ const handler = createMcpHandler(
       {
         title: "Get the Coach App funnel",
         description:
-          "The Coach App funnel on footballparent.co.uk from first-party data (football-parent-social project), the same numbers as the Coach App tab on /admin/seo. Returns: (1) views of the Coach App landing pages (/football-parent-coach-app and its ad variants), the app's sign-in screen (/coach-app/sign-in) and signed-in app loads (/coach-app), with a per-day count and traffic-source groups; (2) the in-article Coach App banner test: impressions, clicks (landings carrying the banner's ?b= param) and CTR per creative/audience/placement, including the 'share' audience on grassroots articles; (3) sharing: taps on 'Send it to your child's coach', how many were sent vs cancelled, and visits to the shared link (utm_source=parent-share). It does NOT include sign-ups: those live only in the separate Coach App Supabase project (profiles.acquisition_* columns), which this server deliberately has no access to because it holds children's data. For sign-ups by source, run the reference query in the coach-app repo's migration 0038 in that project's SQL editor.",
+          "The Coach App funnel on footballparent.co.uk, the same numbers as the 'Coach App funnel' tab on /admin/seo, all from the football-parent-social project. Returns: (1) channels: for each channel (Google Ads, Shared link, Article banner, Search, Site link, Direct, Other, Unknown) the views of the Coach App landing pages, views of the app's sign-in screen, and sign-ups; (2) recent sign-ups, anonymous, each with its channel, the page signed up on, the page the visit began on and the banner or campaign; (3) SEO: views of the /coaching/ articles and how many came from search; (4) sharing: taps on 'Send it to your child's coach', sent vs cancelled, and visits to the shared link; (5) the in-article banner test (impressions, clicks, CTR per creative/audience/placement); (6) landing and sign-in views by path and by day. Sign-ups are reported to this site by the Coach App itself as anonymous events (no account, email or name) and, like every number from this tool's funnel section, are counted from when the funnel went live (2026-09-25 21:30 UTC); earlier sign-ups exist only in the separate Coach App database, which this server has no access to by design.",
         inputSchema: {
           days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. The banner test is clamped to when banners went live (2026-09-04) and sharing to 2026-09-25."),
         },
       },
       async ({ days }) => {
         const windowDays = days ?? 30;
-        const [views, banners, sharing] = await Promise.all([
+        const [funnel, views, banners] = await Promise.all([
+          getCoachAppFunnel(windowDays),
           getPageViewStats(windowDays, { pathPrefixes: ["/football-parent-coach-app", "/coach-app"] }),
           getBannerVariantStats(windowDays),
-          getCoachAppShareStats(windowDays).catch((err: unknown) => ({
-            error: err instanceof Error ? err.message : "Unknown error",
-          })),
         ]);
         const result = {
-          days: windowDays,
-          views: {
-            totalViews: views.totalViews,
-            byPath: views.topPaths,
-            sourceGroups: views.sourceGroups,
-            byDay: views.byDay.map((d) => ({ date: d.date, count: d.count })),
-          },
+          ...funnel,
           bannerTest: {
             since: banners.since,
             totalClicks: banners.totalClicks,
             enoughData: banners.enoughData,
             rows: banners.rows,
           },
-          sharing,
-          signups:
-            "Not available here by design: see the tool description for where sign-ups by source live.",
+          views: {
+            totalViews: views.totalViews,
+            byPath: views.topPaths,
+            byDay: views.byDay.map((d) => ({ date: d.date, count: d.count })),
+          },
         };
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
@@ -169,9 +163,9 @@ const handler = createMcpHandler(
       {
         title: "Get page views by country and hour of day",
         description:
-          "Where footballparent.co.uk's readers are and when in the UK day they arrive, from the same first-party page_views table as get_page_view_stats (same bot exclusions, so the totals reconcile). Country is the ISO 3166-1 alpha-2 code Vercel geolocated the request to (recorded from 2026-09-24; older rows report as 'Unknown'). Returns views and estimated visits by country, the views landing before 06:30 UK time split by country and by page, views by hour of day in Europe/London time (each hour split UK / overseas / unknown), and the pages overseas readers open. Backs the Countries tab on /admin/seo.",
+          "Where footballparent.co.uk's readers are and when in the UK day they arrive, from the same first-party page_views table as get_page_view_stats (same bot exclusions, so the totals reconcile). Country is the ISO 3166-1 alpha-2 code Vercel geolocated the request to. The window starts no earlier than the first view with a country recorded (2026-09-24), so older, country-less traffic doesn't dilute the split; 'since' in the response says where it actually starts. Returns views and estimated visits by country, the views landing before 06:30 UK time split by country and by page, views by hour of day in Europe/London time (each hour split UK / overseas / unknown), and the pages overseas readers open. Backs the Countries tab on /admin/seo.",
         inputSchema: {
-          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. Country was only recorded from 2026-09-24; the hour-of-day breakdown covers all rows in the window."),
+          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. Clamped to start at the first view with a country recorded (2026-09-24)."),
         },
       },
       async ({ days }) => {
