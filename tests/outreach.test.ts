@@ -261,3 +261,44 @@ test("targets people writing about a topic, not club rules pages", async () => {
   });
   assert.equal(clubPage.verdict, "rejected");
 });
+
+test("link graph: drops big sites, prefers page 2-3 peers, finds open peers and hubs", async () => {
+  const { pickPeers, buildLinkGraph, isBigSite } = await import("../lib/outreach/link-graph");
+  assert.equal(isBigSite("bbc.co.uk"), true);
+  assert.equal(isBigSite("thefa.com"), true);
+  assert.equal(isBigSite("smallblog.co.uk", 700), true, "high domain rank counts as big");
+  assert.equal(isBigSite("smallblog.co.uk", 120), false);
+
+  const results = [
+    { url: "https://www.thefa.com/youth", position: 1 },
+    { url: "https://www.bbc.co.uk/sport/football/kids", position: 2 },
+    { url: "https://www.footballparent.co.uk/parent-guides/x", position: 3 },
+    { url: "https://coachblog.co.uk/blog/equal-minutes", position: 5, title: "Equal minutes" },
+    { url: "https://dadontheline.co.uk/why-every-kid-plays", position: 24, title: "Why every kid plays" },
+    { url: "https://tinyparentblog.co.uk/playing-time", position: 27, title: "Playing time" },
+  ];
+  const ranks = new Map<string, number | null>([["coachblog.co.uk", 210], ["dadontheline.co.uk", 90], ["tinyparentblog.co.uk", 40]]);
+  const peers = pickPeers(results, ranks, 2);
+  assert.deepEqual(peers.map((p) => p.domain), ["dadontheline.co.uk", "tinyparentblog.co.uk"], "page 2-3 peers kept first when trimming; FA, BBC and us dropped");
+
+  const all = pickPeers(results, ranks, 10);
+  const graph = buildLinkGraph([
+    // Page-3 blog that links out to another small site: open to linking.
+    { peer: all.find((p) => p.domain === "dadontheline.co.uk")!, outbound: [{ url: "https://tinyparentblog.co.uk/playing-time", anchor: "great post" }, { url: "https://www.thefa.com/x", anchor: "FA" }], inbound: [] },
+    { peer: all.find((p) => p.domain === "tinyparentblog.co.uk")!, outbound: [], inbound: [
+      { url: "https://grassrootsroundup.co.uk/best-parent-blogs", domain: "grassrootsroundup.co.uk", dofollow: true, rank: 150 },
+      { url: "https://www.facebook.com/x", domain: "facebook.com" },
+    ] },
+    { peer: all.find((p) => p.domain === "coachblog.co.uk")!, outbound: [], inbound: [
+      { url: "https://grassrootsroundup.co.uk/best-coaching-blogs", domain: "grassrootsroundup.co.uk", dofollow: true, rank: 150 },
+      { url: "https://onelinker.co.uk/post", domain: "onelinker.co.uk" },
+    ] },
+  ]);
+  const by = Object.fromEntries(graph.map((g) => [g.domain, g]));
+  assert.equal(by["grassrootsroundup.co.uk"].kind, "hub", "links to two peers");
+  assert.equal(by["dadontheline.co.uk"].kind, "open_peer");
+  assert.match(by["dadontheline.co.uk"].why.join(" "), /page 2-3/);
+  assert.equal(by["onelinker.co.uk"].kind, "linker");
+  assert.equal(by["facebook.com"], undefined, "big sites never become prospects");
+  assert.equal(graph[0].domain, "grassrootsroundup.co.uk", "hubs rank first");
+});
