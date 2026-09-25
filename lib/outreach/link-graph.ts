@@ -95,8 +95,12 @@ export interface Peer {
   gateReasons: string[];
   // Commercial rivals (apps, club software, paid services) vs content sites.
   // Content peers are pitchable even though they rank against us: a one-person
-  // site has no product to protect.
-  kind: "commercial" | "content";
+  // site has no product to protect. Clubs (pro, grassroots, and their
+  // foundations) and universities rank for our keywords too, but they are
+  // describing their own programmes, not writing for parents: never peers
+  // for a mutual. The Sept 2026 map called Liverpool FC and Leeds United
+  // "established content site ... worth a pitch".
+  kind: "commercial" | "content" | "club" | "institution";
   // Rough size from domain rank: small sites are the likeliest to be one
   // person, and the likeliest to say yes.
   size: "small" | "established" | "unknown";
@@ -112,7 +116,7 @@ export function pickPeers(results: SerpResult[], ranks: Map<string, number | nul
     const rank = ranks.get(domain) ?? null;
     if (isBigSite(domain, rank)) continue;
     const q = assessProspect({ url: r.url, title: r.title });
-    const commercial = q.reasons.some((x) => /commercial rival/.test(x)) || q.type === "business";
+    const kind = peerKind(q, domain);
     peers.push({
       url: r.url,
       domain,
@@ -121,7 +125,7 @@ export function pickPeers(results: SerpResult[], ranks: Map<string, number | nul
       rank,
       pitchable: q.verdict === "ok",
       gateReasons: q.reasons,
-      kind: commercial ? "commercial" : "content",
+      kind,
       size: sizeOf(rank),
     });
   }
@@ -129,6 +133,30 @@ export function pickPeers(results: SerpResult[], ranks: Map<string, number | nul
   // Graham expects to be open to linking, and page-1 peers are often
   // established competitors.
   return peers.sort((a, b) => bucket(a.position) - bucket(b.position) || a.position - b.position).slice(0, max);
+}
+
+const ACADEMIC_HOST = /\.(ac\.uk|edu|sch\.uk)$/i;
+
+export function peerKind(q: { reasons: string[]; type: string }, domain: string): Peer["kind"] {
+  if (q.reasons.some((x) => /commercial rival/.test(x)) || q.type === "business") return "commercial";
+  if (q.type === "club" || q.type === "league") return "club";
+  if (ACADEMIC_HOST.test(domain)) return "institution";
+  return "content";
+}
+
+// Google appends tracking parameters to SERP URLs (srsltid on shops, fbclid
+// and sc_* on shared links). Backlink lookups match the URL exactly, so a
+// tracked URL never finds its links.
+const TRACKING_PARAM = /^(utm_[a-z]+|srsltid|fbclid|gclid|dclid|msclkid|mc_[a-z]+|sc_[a-z]+|_gl|_ga|igshid|ref_src)$/i;
+
+export function stripTracking(rawUrl: string): string {
+  try {
+    const u = new URL(rawUrl);
+    for (const k of [...u.searchParams.keys()]) if (TRACKING_PARAM.test(k)) u.searchParams.delete(k);
+    return u.toString();
+  } catch {
+    return rawUrl;
+  }
 }
 
 export function sizeOf(rank: number | null): Peer["size"] {
@@ -169,7 +197,7 @@ export function buildLinkGraph(data: PeerLinks[], exclude: Set<string> = new Set
   // Open peers: small ranking sites that already link out to other small
   // content sites.
   for (const d of data) {
-    if (!d.peer.pitchable || exclude.has(d.peer.domain)) continue;
+    if (!d.peer.pitchable || d.peer.kind !== "content" || exclude.has(d.peer.domain)) continue;
     const smallOut = [...new Set(d.outbound.map((l) => hostOf(l.url)).filter((h) => h && h !== d.peer.domain && !isBigSite(h)))];
     if (!smallOut.length) continue;
     const toOtherPeers = smallOut.filter((h) => peerDomains.has(h));
@@ -243,6 +271,9 @@ export interface SavedGraphRun {
     size: Peer["size"];
     smallSitesLinkedOut: number;
     linkersFound: number;
+    // Set when the backlinks call failed, so "0 linkers" isn't mistaken for
+    // a page nobody links to.
+    linkerError?: string;
   }[];
 }
 
@@ -263,9 +294,12 @@ export function buildCompetitorMap(runs: SavedGraphRun[]): CompetitorRow[] {
   const by = new Map<string, CompetitorRow>();
   for (const run of runs) {
     for (const p of run.peers) {
+      // Runs saved before clubs and universities had their own kind recorded
+      // them as "content": re-derive from the URL so old runs fold in right.
+      const kind = p.kind === "content" ? peerKind(assessProspect({ url: p.url }), p.domain) : p.kind;
       const row =
         by.get(p.domain) ??
-        ({ domain: p.domain, kind: p.kind, size: p.size, rank: p.rank, keywords: [], bestPosition: 999, linksOut: false, linkersSeen: 0, pitchable: p.pitchable, verdict: "" } as CompetitorRow);
+        ({ domain: p.domain, kind, size: p.size, rank: p.rank, keywords: [], bestPosition: 999, linksOut: false, linkersSeen: 0, pitchable: p.pitchable, verdict: "" } as CompetitorRow);
       if (!row.keywords.some((k) => k.keyword === run.keyword)) row.keywords.push({ keyword: run.keyword, position: p.position });
       row.bestPosition = Math.min(row.bestPosition, p.position);
       row.linksOut ||= p.smallSitesLinkedOut > 0;
@@ -278,7 +312,11 @@ export function buildCompetitorMap(runs: SavedGraphRun[]): CompetitorRow[] {
     row.verdict =
       row.kind === "commercial"
         ? "commercial rival: study, don't pitch"
-        : row.linksOut
+        : row.kind === "club"
+          ? "club or club foundation describing its own programme: not a content peer, only worth it through a curated parents/resources page"
+          : row.kind === "institution"
+            ? "university or college page: not a content peer"
+            : row.linksOut
           ? row.size === "small"
             ? "independent and links out: good prospect for a link or a mutual"
             : "established content site that links out: worth a pitch"
