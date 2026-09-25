@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Equal Playing Time in Grassroots Football | Football Parent",
+  title: "Equal Playing Time in Grassroots Football: Fair Game Time",
   description:
     "A working formula for fair playing time, the real difference between equal minutes and equal position time, and what rolling substitutions actually allow.",
   path: "/coaching/equal-playing-time-in-grassroots-football",

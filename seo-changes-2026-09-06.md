@@ -932,3 +932,14 @@ The country insert fell back to the old row shape only on Postgres code 42703, b
 ## Paul Barry interview card added to /academy-pathway (2026-09-25)
 
 The interview (`/academy-pathway/academy-life-paul-barry-interview`, published 2026-09-20) was in `lib/routes.ts` and the sitemap but had no card on the Academy Pathway category page, so its only internal links came from other articles. Card added at the end of the articles grid. Additive only, one internal link. Commit 99fcf47.
+
+## `equal-playing-time-in-grassroots-football`: "game time" added to the title tag (2026-09-25)
+
+Title tag only, in `app/coaching/equal-playing-time-in-grassroots-football/page.tsx`. H1 (frontmatter title), meta description, headings and body unchanged.
+
+- Before: "Equal Playing Time in Grassroots Football | Football Parent" (59 chars)
+- After: "Equal Playing Time in Grassroots Football: Fair Game Time" (57 chars, site-name suffix dropped to stay under ~60)
+
+Why: "game time football" is ~320 UK searches/month (canonical Google Ads volume, 6 Sep) against ~20 for "equal playing time football", and the title never mentioned game time. Page already ranks ~7.7 for "equal game time". Live traffic at the time of the change: 1,349 impressions, 24 clicks, avg position 6.4, CTR 1.8% (28 days), flagged low-CTR. Previous change to this page was 6 Sep, so outside its watch window.
+
+Commit: `af27498`. Watch until ~7 Oct before touching the page again. The planned follow-up (H2 "How to Calculate Fair Playing Time" to "How to Calculate Equal Game Time") waits until then.
