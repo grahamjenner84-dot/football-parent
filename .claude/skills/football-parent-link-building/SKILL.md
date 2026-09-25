@@ -1,6 +1,6 @@
 ---
 name: football-parent-link-building
-description: "Football Parent link building, end to end: finds people writing about our topics (opinion pieces, advice articles, coach and parent blogs, writers who link to competitors on our keywords, warm contacts, unlinked mentions), rejects club policy/admin pages and pages that only link to the FA or league, reads and vets every page, finds the author's contact, has an independent audit remove weak prospects, then writes a reviewable backlog file or fills the /admin/outreach queue with personal drafts, chase-ups and link checks. Use whenever Graham asks to do link building, find link or backlink prospects, build or top up the outreach backlog, or draft outreach emails. Never sends email."
+description: "Football Parent link building, end to end. Leads with a link graph on our biggest keywords: small sites ranking to page 3, who links in to them (hubs linking to several are the best leads) and who they link out to (open to linking or an exchange). Also covers competitor linkers, opinion pieces and blogs, warm contacts and unlinked mentions. Rejects club policy/admin pages and FA/league-only link pages, vets every page, finds the author's contact, runs an independent audit, then writes a reviewable backlog or fills the /admin/outreach queue. Use whenever Graham asks to do link building, find link or backlink prospects, build or top up the outreach backlog, or draft outreach emails. Never sends email."
 ---
 
 # Football Parent link building
@@ -66,6 +66,7 @@ one line, before starting.
 | `research.ts search "<query>" [--depth 20]` | UK Google top results, each with a quality-gate verdict | 1 SERP call |
 | `research.ts linkers <competitor-page-url>` | Domains linking to that page but not to us, each with a gate verdict | 1 backlinks call (+1 the first time, for our own referring domains) |
 | `research.ts read <url> [--js]` | Title, headings, text, outbound links, links to us, contact pages, emails. `--js` only when a plain read has no text | 1 page call |
+| `research.ts link-graph "<keyword>"` | Graham's method: small sites ranking to page 3 for the keyword, who links in to them and who they link out to, scored as hubs / open peers / linkers | 1 SERP + 1 bulk-rank + a read and a backlinks call per peer (8 by default) |
 | `research.ts spend` | DataForSEO spend in the last 24h against the cap | free |
 | `cli.ts check <url>` | Quality gate on one URL | free |
 
@@ -114,29 +115,37 @@ entry is a fair ask.
 
 ## Finding prospects: routes
 
-No single route is the main one. Use all of them, spread the effort, and
-put more into whichever is producing good prospects in this run. Record the
-route in each prospect's `source` so the report can show which works.
+Record the route in each prospect's `source` so the report can show which
+works. **Start with route 1 every run.** It's Graham's method, and it
+finds people with a track record of linking to sites like ours. Spread
+what budget is left over the other routes.
 
-1. **Topic articles and opinion pieces** (`source: "topic:<query>"`). Search
-   for what people write about our topics, phrased the way writers phrase
-   them. Some examples:
-   - `why equal game time matters grassroots football`
-   - `benefits of equal playing time youth football blog`
-   - `should kids play every position`
-   - `touchline parents opinion`
-   - `academy football is it worth it parent`
-   - `my son got released from an academy`
-   - `development centre or grassroots`
-   - `how to support your child after a bad game`
-   - `new FA youth formats opinion`
-   - `girls football parents blog uk`
+1. **Link graph on our biggest keywords** (`source: "graph:<keyword>"`).
+   Take the highest-volume keywords from `our-pages` (linkable pages only,
+   skip gear), 1 or 2 per page, about 8 to 10 keywords a run. Run
+   `research.ts link-graph "<keyword>"` on each. It drops the big sites
+   (FA, BBC, Reddit, national press, brands, domain rank over 550) and
+   maps the small content sites ranking on pages 1 to 3. It returns three
+   kinds of prospect, best first:
+   - **Hubs**: link to two or more of the small sites ranking for this
+     keyword. They demonstrably link to content like ours, so they're the
+     strongest leads. Pitch: "you link to A and B on this topic; our piece
+     covers C, which neither does."
+   - **Open peers**: small sites ranking for the keyword that already link
+     out to other small content sites, often on page 2 or 3 and hungry for
+     links. Pitch our related article as a resource, or propose a genuine
+     exchange where each side links to the other's relevant piece. Keep
+     exchanges occasional and topical: one relevant article each, never a
+     links page or a batch. Google treats patterns of reciprocal linking as
+     a scheme.
+   - **Linkers**: link to one peer. Weaker, but still worth a read.
 
-   Look for bylines, dates and first-person voices. The pitch is our
-   article as a deeper read on the point they're making (for example, our
-   equal playing time guide explains the *benefits* their piece argues
-   for).
-2. **Who links to competitors on our keywords** (`source: "linkers:<keyword>"`).
+   Competitor sites show up as peers (TeamStats, Junior Grassroots Hub and
+   so on). They're mined for their links but never pitched; the gate
+   marks them `pitchable: false`. Every graph prospect still goes through
+   `read` and the vetting rules below: the graph finds who links, the
+   vetting decides whether they're a real article or resource list.
+2. **Who links to a specific competitor article** (`source: "linkers:<keyword>"`).
    From `our-pages`, take the top linkable pages (guides, explainers; skip
    gear). `search` each page's top 1 or 2 keywords, take the 2 or 3
    strongest **competitor articles** and run `linkers` on each. Keep only
@@ -161,6 +170,24 @@ route in each prospect's `source` so the report can show which works.
    and `"footballparent.co.uk"`. Pages that mention us without linking are
    the easiest wins of all.
 
+7. **Topic articles and opinion pieces** (`source: "topic:<query>"`). Search
+   for what people write about our topics, phrased the way writers phrase
+   them. Some examples:
+   - `why equal game time matters grassroots football`
+   - `benefits of equal playing time youth football blog`
+   - `should kids play every position`
+   - `touchline parents opinion`
+   - `academy football is it worth it parent`
+   - `my son got released from an academy`
+   - `development centre or grassroots`
+   - `how to support your child after a bad game`
+   - `new FA youth formats opinion`
+   - `girls football parents blog uk`
+
+   Look for bylines, dates and first-person voices. The pitch is our
+   article as a deeper read on the point they're making (for example, our
+   equal playing time guide explains the *benefits* their piece argues
+   for).
 Club and league sites only come in through the resource-list exception
 above. Don't search for club policy or parent-information pages.
 

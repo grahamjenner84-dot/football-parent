@@ -27,6 +27,15 @@
  * linkers  Pages linking to a competitor's page (backlinks/backlinks/live),
  *         minus domains that already link to us, each run through the
  *         quality gate. These sites have already linked to the exact topic.
+ * link-graph "<keyword>" [--depth 30] [--peers 8] [--linkers 25]
+ *         Graham's method. UK results to page 3 for the keyword; drop the big
+ *         sites (FA, BBC, Reddit, national press, brands, anything with a
+ *         domain rank over 550); for each small site left ("peer"), read its
+ *         ranking page for who it links out to and pull who links in to it.
+ *         Returns open peers (small sites already linking to other small
+ *         sites: pitch directly or propose an exchange), hubs (sites linking
+ *         to 2+ peers: strongest leads) and single linkers, scored. Costs one
+ *         SERP, one bulk-rank, and a page read plus a backlinks call per peer.
  * spend   DataForSEO spend by this workflow in the last 24 hours.
  *
  * Sandbox (free, dummy data) unless all three of DATAFORSEO_ENV=live,
@@ -43,7 +52,8 @@ import { getDb } from "../seo/database/db";
 import { ensureEnvLoaded } from "../seo/shared/env";
 import { googleOrganicSerp } from "../seo/dataforseo/endpoints/serp";
 import { contentParsingLive } from "../seo/dataforseo/endpoints/on_page";
-import { backlinksList, referringDomains } from "../seo/dataforseo/endpoints/backlinks";
+import { backlinksList, bulkRanks, referringDomains } from "../seo/dataforseo/endpoints/backlinks";
+import { buildLinkGraph, pickPeers, type PeerLinks, type SerpResult } from "../../lib/outreach/link-graph";
 import { rankedKeywords } from "../seo/dataforseo/endpoints/labs";
 import { parseCsv } from "../seo/shared/csv";
 import { REPO_ROOT } from "../seo/shared/env";
@@ -202,6 +212,60 @@ async function linkers(target: string, limit: number) {
   return { target, environment: res.environment, cache: res.cacheStatus, cost: res.cost, linkingDomains: out.length, results: out };
 }
 
+async function linkGraph(keyword: string, depth: number, maxPeers: number, linkerLimit: number) {
+  const serp = await googleOrganicSerp(keyword, { ...requestOpts(), depth });
+  if (serp.error) throw new Error(serp.error);
+  type Item = { type?: string; url?: string; title?: string; rank_absolute?: number };
+  const results: SerpResult[] = ((serp.data?.tasks?.[0]?.result?.[0] as { items?: Item[] } | undefined)?.items ?? [])
+    .filter((i) => i.type === "organic" && i.url)
+    .map((i) => ({ url: i.url!, title: i.title ?? null, position: i.rank_absolute ?? 0 }));
+
+  const hosts = [...new Set(results.map((r) => { try { return new URL(r.url).hostname.replace(/^www\./, ""); } catch { return ""; } }).filter(Boolean))];
+  const ranks = new Map<string, number | null>();
+  if (hosts.length) {
+    const rr = await bulkRanks(hosts.slice(0, 1000), { ...requestOpts() });
+    const rows = ((rr.data?.tasks?.[0]?.result?.[0] as { items?: { target?: string; rank?: number }[] } | undefined)?.items ?? []);
+    for (const r of rows) if (r.target) ranks.set(r.target.replace(/^www\./, ""), r.rank ?? null);
+  }
+
+  const peers = pickPeers(results, ranks, maxPeers);
+  const ours = await domainsLinkingToUs();
+  const data: PeerLinks[] = [];
+  for (const peer of peers) {
+    const page = await read(peer.url, false);
+    const outbound = "content" in page && page.content ? page.content.independentLinks : [];
+    const bl = await backlinksList(peer.url, { ...requestOpts(), limit: linkerLimit });
+    type Row = { url_from?: string; domain_from?: string; anchor?: string; dofollow?: boolean; domain_from_rank?: number };
+    const rows = ((bl.data?.tasks?.[0]?.result?.[0] as { items?: Row[] } | undefined)?.items ?? []);
+    data.push({
+      peer,
+      outbound,
+      inbound: rows
+        .filter((r) => r.url_from && r.domain_from)
+        .map((r) => ({ url: r.url_from!, domain: r.domain_from!, anchor: r.anchor, dofollow: r.dofollow, rank: r.domain_from_rank ?? null })),
+    });
+  }
+
+  const prospects = buildLinkGraph(data, ours);
+  return {
+    keyword,
+    environment: serp.environment,
+    resultsChecked: results.length,
+    bigSitesDropped: hosts.length - peers.length,
+    peers: data.map((d) => ({
+      domain: d.peer.domain,
+      url: d.peer.url,
+      position: d.peer.position,
+      rank: d.peer.rank,
+      pitchable: d.peer.pitchable,
+      smallSitesLinkedOut: d.outbound.length,
+      linkersFound: d.inbound.length,
+    })),
+    prospects,
+    note: "Every prospect still needs research.ts read + the vetting rules before it's added. Hubs first, then open peers, then single linkers.",
+  };
+}
+
 async function main() {
   migrate();
   const [cmd, ...args] = process.argv.slice(2);
@@ -216,9 +280,11 @@ async function main() {
   else if (cmd === "read" && args[0]) out = await read(args[0], flag("--js"));
   else if (cmd === "our-pages") out = await ourPages(flag("--refresh"), Number(value("--min-volume") ?? 50));
   else if (cmd === "linkers" && args[0]) out = await linkers(args[0], Number(value("--limit") ?? 50));
+  else if (cmd === "link-graph" && args[0])
+    out = await linkGraph(args[0], Number(value("--depth") ?? 30), Number(value("--peers") ?? 8), Number(value("--linkers") ?? 25));
   else if (cmd === "spend") out = { workflow: WORKFLOW, live: liveReady(), spentLast24hUsd: Number(spentLast24h().toFixed(4)), budgetUsd: BUDGET_USD };
   else {
-    console.error("Usage: research.ts search \"<query>\" [--depth 20] | read <url> [--js] | our-pages [--refresh] | linkers <url> [--limit 50] | spend");
+    console.error("Usage: research.ts search \"<query>\" [--depth 20] | read <url> [--js] | our-pages [--refresh] | linkers <url> [--limit 50] | link-graph \"<keyword>\" [--depth 30] [--peers 8] [--linkers 25] | spend");
     process.exit(1);
   }
   console.log(JSON.stringify(out, null, 2));
