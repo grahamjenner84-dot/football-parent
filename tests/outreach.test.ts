@@ -302,3 +302,52 @@ test("link graph: drops big sites, prefers page 2-3 peers, finds open peers and 
   assert.equal(by["facebook.com"], undefined, "big sites never become prospects");
   assert.equal(graph[0].domain, "grassrootsroundup.co.uk", "hubs rank first");
 });
+
+test("content peers are pitchable (as a mutual); commercial rivals aren't", async () => {
+  const { pickPeers, buildCompetitorMap } = await import("../lib/outreach/link-graph");
+  const jgh = assessProspect({ url: "https://juniorgrassrootshub.com/parents-behaviour-junior-grassroots-football/" });
+  assert.equal(jgh.verdict, "ok", "one-person content sites can link to us");
+  assert.match(jgh.reasons.join(" "), /pitch as a mutual/);
+  assert.equal(verdict("https://www.teamstats.net/blog/the-art-of-parenting"), "rejected", "commercial app stays off limits");
+
+  const peers = pickPeers(
+    [
+      { url: "https://www.teamstats.net/blog/equal-playing-time", position: 4 },
+      { url: "https://juniorgrassrootshub.com/equal-playing-time/", position: 6 },
+    ],
+    new Map([["teamstats.net", 420], ["juniorgrassrootshub.com", 180]]),
+    10
+  );
+  const by = Object.fromEntries(peers.map((p) => [p.domain, p]));
+  assert.equal(by["teamstats.net"].kind, "commercial");
+  assert.equal(by["teamstats.net"].pitchable, false);
+  assert.equal(by["juniorgrassrootshub.com"].kind, "content");
+  assert.equal(by["juniorgrassrootshub.com"].size, "small");
+  assert.equal(by["juniorgrassrootshub.com"].pitchable, true);
+
+  const map = buildCompetitorMap([
+    { keyword: "equal playing time", ranAt: "2026-09-25", peers: [
+      { domain: "juniorgrassrootshub.com", url: "u", position: 6, rank: 180, pitchable: true, kind: "content", size: "small", smallSitesLinkedOut: 3, linkersFound: 5 },
+      { domain: "teamstats.net", url: "u", position: 4, rank: 420, pitchable: false, kind: "commercial", size: "established", smallSitesLinkedOut: 0, linkersFound: 20 },
+    ] },
+    { keyword: "grassroots football parents", ranAt: "2026-09-25", peers: [
+      { domain: "juniorgrassrootshub.com", url: "u", position: 12, rank: 180, pitchable: true, kind: "content", size: "small", smallSitesLinkedOut: 1, linkersFound: 2 },
+    ] },
+  ]);
+  assert.equal(map[0].domain, "juniorgrassrootshub.com", "most keyword overlap first");
+  assert.equal(map[0].keywords.length, 2);
+  assert.match(map[0].verdict, /independent and links out/);
+  assert.match(map.find((r) => r.domain === "teamstats.net")!.verdict, /commercial rival/);
+});
+
+test("domain strength scale and comparison", async () => {
+  const { toStrength, compareStrength } = await import("../lib/outreach/strength");
+  assert.equal(toStrength(440), 44);
+  assert.equal(toStrength(0), 0);
+  assert.equal(toStrength(null), null);
+  assert.equal(compareStrength(2, 0), "about your size");
+  assert.equal(compareStrength(15, 0), "bigger than you");
+  assert.equal(compareStrength(44, 0), "much bigger than you");
+  assert.equal(compareStrength(10, 30), "smaller than you");
+  assert.equal(compareStrength(null, 0), null);
+});

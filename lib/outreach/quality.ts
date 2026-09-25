@@ -84,13 +84,12 @@ const GOVERNING_BODY_HOSTS = [
 // County FAs: berks-bucksfa.com, sheffieldfa.freshdesk.com, scottishyouthfa.co.uk, aberdeenshireafa.com...
 const COUNTY_FA_PATTERN = /(^|\.)[a-z-]*(county)?a?fa\.(com|co\.uk|org\.uk|org)$|(^|\.)[a-z-]+fa\.freshdesk\.com$/i;
 
-// Coaching/club-admin apps that compete with the Coach App or with us for the
-// same parent audience. They will not link to a rival.
+// Commercial rivals: apps, club software and paid trials/academy services
+// that compete with the Coach App or sell to the same parents. A business
+// won't link to a rival product. Rejected.
 const COMPETITOR_HOSTS = [
   "teamstats.net",
   "teamgrassroots.co.uk",
-  "juniorgrassrootshub.com",
-  "grassrootsfootballuk.com",
   "mycoachfootball.com",
   "mingle.sport",
   "spond.com",
@@ -108,6 +107,17 @@ const COMPETITOR_HOSTS = [
   "ukfootballtrials.com",
   "soccertrials.com",
 ];
+
+// Content peers: independent parent/grassroots content sites that rank for
+// the same keywords. Not rejected (Graham, Sept 2026): a one-person content
+// site has no product to protect and is often happy to link to good,
+// relevant content, especially as a mutual. Flagged so the pitch is framed
+// as peers helping each other, not as a cold request.
+export function isCommercialRival(host: string): boolean {
+  return hostMatches(host, COMPETITOR_HOSTS);
+}
+
+export const CONTENT_PEER_HOSTS = ["juniorgrassrootshub.com", "grassrootsfootballuk.com", "thefootballparent.co.uk"];
 
 // Platforms where there is nobody to email about a link, or the link would be
 // worthless (UGC, forums, marketplaces, big brands).
@@ -243,7 +253,8 @@ export function assessProspect(c: ProspectCandidate): QualityResult {
   const park = (why: string): QualityResult => ({ verdict: "parked", reasons: [...reasons, why], type, domain: host, isUk });
 
   if (host === OUR_DOMAIN || host.endsWith(`.${OUR_DOMAIN}`)) return reject("our own site");
-  if (hostMatches(host, COMPETITOR_HOSTS)) return reject("competitor app/site: will not link to a rival");
+  if (hostMatches(host, COMPETITOR_HOSTS)) return reject("commercial rival (app, club software or paid service): will not link to a rival product");
+  if (hostMatches(host, CONTENT_PEER_HOSTS)) reasons.push("content site ranking for our keywords: may see us as a rival, so pitch as a mutual");
   if (hostMatches(host, DEAD_END_HOSTS) || FORUM_PATH.test(u.pathname)) return reject("platform/forum/marketplace: nobody to pitch");
 
   const lowerPath = u.pathname.toLowerCase();
