@@ -931,4 +931,4 @@ The country insert fell back to the old row shape only on Postgres code 42703, b
 
 ## Paul Barry interview card added to /academy-pathway (2026-09-25)
 
-The interview (`/academy-pathway/academy-life-paul-barry-interview`, published 2026-09-20) was in `lib/routes.ts` and the sitemap but had no card on the Academy Pathway category page, so its only internal links came from other articles. Card added at the end of the articles grid. Additive only, one internal link. Commit 5e95d0f.
+The interview (`/academy-pathway/academy-life-paul-barry-interview`, published 2026-09-20) was in `lib/routes.ts` and the sitemap but had no card on the Academy Pathway category page, so its only internal links came from other articles. Card added at the end of the articles grid. Additive only, one internal link. Commit 99fcf47.
