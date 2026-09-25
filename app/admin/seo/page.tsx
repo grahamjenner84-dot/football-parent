@@ -20,10 +20,14 @@ import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCount, BannerVariantStats, PageViewCountryStats, CountryViewRow } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
 import type { PartnerClickStats } from "@/lib/supabase/partner-clicks"; // type-only, same reasoning as the page-views import above
+import type { CoachAppShareStats } from "@/lib/supabase/coach-app-shares"; // type-only, as above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
-type CoachAppViewStats = PageViewStats & { bannerVariants?: BannerVariantStats };
+type CoachAppViewStats = PageViewStats & {
+  bannerVariants?: BannerVariantStats;
+  shareStats?: CoachAppShareStats | { error: string };
+};
 
 type Tab =
   | "dashboard"
@@ -2304,7 +2308,111 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
       {stats.bannerVariants && (
         <BannerVariantsReport stats={stats.bannerVariants} selectedDate={selectedDate} />
       )}
+      {stats.shareStats && (
+        <SharingReport stats={stats.shareStats} bannerVariants={stats.bannerVariants} />
+      )}
     </>
+  );
+}
+
+// "Send it to your child's coach": the parent-to-coach loop on the share
+// banner. Taps are first-party (coach_app_shares); shared-link visits are
+// page_views carrying utm_source=parent-share. Whole window only - at this
+// volume a single day's share numbers are single digits.
+function SharingReport({
+  stats,
+  bannerVariants,
+}: {
+  stats: CoachAppShareStats | { error: string };
+  bannerVariants?: BannerVariantStats;
+}) {
+  const heading = (
+    <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "10px 0 2px" }}>
+      Sharing: parents sending the app to their child&rsquo;s coach
+    </h3>
+  );
+
+  if ("error" in stats) {
+    return (
+      <div style={styles.list}>
+        {heading}
+        <p style={styles.error}>
+          Couldn&rsquo;t load share stats: {stats.error}. If this says the
+          coach_app_shares table is missing, the migration
+          20260925180000_coach_app_shares.sql hasn&rsquo;t been applied.
+        </p>
+      </div>
+    );
+  }
+
+  const shareRows = (bannerVariants?.rows ?? []).filter((r) => r.audience === "share");
+  const impressions = shareRows.reduce((sum, r) => sum + r.impressions, 0);
+  const pct = (n: number, d: number) => (d > 0 ? `${((n / d) * 100).toFixed(1)}%` : "n/a");
+
+  return (
+    <div style={styles.list}>
+      {heading}
+      <SectionNote label="How sharing is measured">
+        Impressions are views of the grassroots articles carrying the share
+        banner (same count as the creative test above). Taps are every press
+        of &ldquo;Send it to your child&rsquo;s coach&rdquo;, logged
+        first-party so cookie consent doesn&rsquo;t hide them; &ldquo;sent&rdquo;
+        excludes share sheets that were opened and then dismissed. Shared-link
+        visits are page views arriving with utm_source=parent-share, i.e.
+        someone opening what a parent sent. Sign-ups from those visits show in
+        the Coach App database as acquisition_utm_source = parent-share, not
+        here. Since {new Date(stats.since).toLocaleDateString("en-GB")}.
+      </SectionNote>
+
+      <div style={styles.card}>
+        <div style={styles.cardStats}>
+          <span>Share banner impressions: {impressions}</span>
+          <span>Taps: {stats.taps} ({pct(stats.taps, impressions)} of impressions)</span>
+          <span>Sent: {stats.shares}</span>
+          <span>Cancelled: {stats.cancelled}</span>
+          <span>Shared-link visits: {stats.sharedLinkVisits}</span>
+          <span>
+            Visits per share: {stats.visitsPerShare === null ? "n/a" : stats.visitsPerShare.toFixed(2)}
+          </span>
+        </div>
+      </div>
+
+      {stats.taps === 0 && stats.sharedLinkVisits === 0 && (
+        <p style={styles.muted}>No shares recorded yet.</p>
+      )}
+
+      {stats.byPath.length > 0 && (
+        <>
+          <h4 style={{ fontSize: 12, fontWeight: 600, color: "#9c8a72", margin: "8px 0 0" }}>
+            Taps by article
+          </h4>
+          {stats.byPath.map((row) => (
+            <div key={row.key} style={styles.card}>
+              <div style={{ fontWeight: 600, fontSize: 13 }}>{row.key}</div>
+              <div style={styles.cardStats}>
+                <span>Taps: {row.count}</span>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
+      {stats.byMethod.length > 0 && (
+        <p style={styles.sectionNote}>
+          How: {stats.byMethod.map((m) => `${m.key} ${m.count}`).join(", ")}. By creative:{" "}
+          {stats.byVariant.map((v) => `${v.key} ${v.count}`).join(", ")}.
+        </p>
+      )}
+
+      {stats.byDay.length > 0 && (
+        <p style={styles.sectionNote}>
+          By day:{" "}
+          {stats.byDay
+            .map((d) => `${d.date}: ${d.shares} sent, ${d.cancelled} cancelled, ${d.sharedLinkVisits} visits`)
+            .join(" · ")}
+        </p>
+      )}
+    </div>
   );
 }
 

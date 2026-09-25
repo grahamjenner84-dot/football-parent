@@ -22,22 +22,45 @@ const SHARE_TEXT =
   "Thought this might help with subs and game time on matchdays: a free app for grassroots coaches that works out fair playing time for you.";
 
 type Gtag = (...args: unknown[]) => void;
+type ShareMethod = "share-sheet" | "share-cancelled" | "clipboard" | "email";
 
-export default function CoachAppShareButton({ tone }: { tone: "dark" | "light" }) {
+// First-party count of every tap, into coach_app_shares via
+// /api/coach-app-share (anonymous, so not consent-gated). Fire and forget:
+// measurement must never get in the way of the share itself.
+function logShare(variant: string, method: ShareMethod) {
+  try {
+    fetch("/api/coach-app-share", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ path: window.location.pathname, variant, method }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // Nothing to do.
+  }
+  // Also to GA4, which only sees consenting visitors, so undercounts.
+  (window as typeof window & { gtag?: Gtag }).gtag?.("event", "coach_app_share", { method, variant });
+}
+
+export default function CoachAppShareButton({
+  tone,
+  variant,
+}: {
+  tone: "dark" | "light";
+  /** The banner variant carrying the button, e.g. dark-share-article. */
+  variant: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   async function share() {
-    const w = window as typeof window & { gtag?: Gtag };
-    // Consent-gated like every gtag call, so an undercount. There is no
-    // first-party count of share taps; the shared link's own utm landings
-    // in page_views are the number that matters.
-    w.gtag?.("event", "coach_app_share");
-
     if (typeof navigator.share === "function") {
       try {
         await navigator.share({ title: "Football Parent Coach App", text: SHARE_TEXT, url: SHARE_URL });
+        logShare(variant, "share-sheet");
       } catch {
-        // Cancelled from the share sheet. Nothing to do.
+        // Dismissed the share sheet. Still worth knowing: lots of opens and
+        // few sends says the idea lands but the moment doesn't.
+        logShare(variant, "share-cancelled");
       }
       return;
     }
@@ -45,9 +68,11 @@ export default function CoachAppShareButton({ tone }: { tone: "dark" | "light" }
     // Desktop browsers mostly lack the share sheet: copy instead.
     try {
       await navigator.clipboard.writeText(`${SHARE_TEXT} ${SHARE_URL}`);
+      logShare(variant, "clipboard");
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     } catch {
+      logShare(variant, "email");
       window.location.href = `mailto:?subject=${encodeURIComponent("Football Parent Coach App")}&body=${encodeURIComponent(`${SHARE_TEXT}\n\n${SHARE_URL}`)}`;
     }
   }

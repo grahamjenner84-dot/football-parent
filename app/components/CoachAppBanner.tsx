@@ -193,7 +193,7 @@ export default function CoachAppBanner({
         </p>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-          <CoachAppShareButton tone="dark" />
+          <CoachAppShareButton tone="dark" variant={`${style}-${audience}-${placement}`} />
           <Link
             href={href}
             className="group inline-flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-white/70 transition-colors hover:text-white"
@@ -271,7 +271,7 @@ export default function CoachAppBanner({
 
           {audience === "share" ? (
             <div className="flex flex-wrap items-center gap-4">
-              <CoachAppShareButton tone="light" />
+              <CoachAppShareButton tone="light" variant={`${style}-${audience}-${placement}`} />
               <Link href={href} className="text-sm font-semibold text-blue-700 underline">
                 See the Coach App
               </Link>

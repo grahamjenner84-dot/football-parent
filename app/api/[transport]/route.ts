@@ -3,7 +3,8 @@ import { z } from "zod";
 import { getSeoReport, getPageInspection, comparePeriods } from "@/lib/gsc";
 import { addToContentQueue } from "@/lib/supabase/content-queue";
 import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
-import { getPageViewStats, getPageViewCountryStats } from "@/lib/supabase/page-views";
+import { getPageViewStats, getPageViewCountryStats, getBannerVariantStats } from "@/lib/supabase/page-views";
+import { getCoachAppShareStats } from "@/lib/supabase/coach-app-shares";
 
 const handler = createMcpHandler(
   (server) => {
@@ -118,6 +119,47 @@ const handler = createMcpHandler(
       },
       async ({ days }) => {
         const result = await getPageViewStats(days ?? 30);
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
+
+    server.registerTool(
+      "get_coach_app_funnel",
+      {
+        title: "Get the Coach App funnel",
+        description:
+          "The Coach App funnel on footballparent.co.uk from first-party data (football-parent-social project), the same numbers as the Coach App tab on /admin/seo. Returns: (1) views of the Coach App landing pages (/football-parent-coach-app and its ad variants), the app's sign-in screen (/coach-app/sign-in) and signed-in app loads (/coach-app), with a per-day count and traffic-source groups; (2) the in-article Coach App banner test: impressions, clicks (landings carrying the banner's ?b= param) and CTR per creative/audience/placement, including the 'share' audience on grassroots articles; (3) sharing: taps on 'Send it to your child's coach', how many were sent vs cancelled, and visits to the shared link (utm_source=parent-share). It does NOT include sign-ups: those live only in the separate Coach App Supabase project (profiles.acquisition_* columns), which this server deliberately has no access to because it holds children's data. For sign-ups by source, run the reference query in the coach-app repo's migration 0038 in that project's SQL editor.",
+        inputSchema: {
+          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. The banner test is clamped to when banners went live (2026-09-04) and sharing to 2026-09-25."),
+        },
+      },
+      async ({ days }) => {
+        const windowDays = days ?? 30;
+        const [views, banners, sharing] = await Promise.all([
+          getPageViewStats(windowDays, { pathPrefixes: ["/football-parent-coach-app", "/coach-app"] }),
+          getBannerVariantStats(windowDays),
+          getCoachAppShareStats(windowDays).catch((err: unknown) => ({
+            error: err instanceof Error ? err.message : "Unknown error",
+          })),
+        ]);
+        const result = {
+          days: windowDays,
+          views: {
+            totalViews: views.totalViews,
+            byPath: views.topPaths,
+            sourceGroups: views.sourceGroups,
+            byDay: views.byDay.map((d) => ({ date: d.date, count: d.count })),
+          },
+          bannerTest: {
+            since: banners.since,
+            totalClicks: banners.totalClicks,
+            enoughData: banners.enoughData,
+            rows: banners.rows,
+          },
+          sharing,
+          signups:
+            "Not available here by design: see the tool description for where sign-ups by source live.",
+        };
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );
