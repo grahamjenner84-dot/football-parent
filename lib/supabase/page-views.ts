@@ -6,6 +6,8 @@ import {
   BANNER_TEST_STARTED_AT,
   CATEGORY_BANNER_PATHS,
   bannerStyleForKey,
+  defaultAudienceForSlug,
+  type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key, same pattern as
@@ -1015,9 +1017,11 @@ export interface BannerVariantStats {
 const MIN_IMPRESSIONS_PER_ARM = 300;
 
 // Mirrors the routing in app/components/CoachAppBanner.tsx: /coaching/* gets
-// the coach copy, every other article the parent copy.
-function audienceForPath(path: string): "parent" | "coach" {
-  return path.startsWith("/coaching/") ? "coach" : "parent";
+// the coach copy (set on each page), every other article whatever
+// defaultAudienceForSlug gives its slug.
+function audienceForPath(path: string): CoachAppAudience {
+  if (path.startsWith("/coaching/")) return "coach";
+  return defaultAudienceForSlug(path.split("/").filter(Boolean).pop());
 }
 
 // Which banner creative (if any) a given logged pageview path would have
