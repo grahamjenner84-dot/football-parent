@@ -358,10 +358,23 @@ test("rule fixes from the Sept 2026 link-graph run", async () => {
     [{ url: "http://loveallblogs.com/guide/", anchor: "Pingback: Guide to being a football mum | Love All Blogs" }],
     [{ url: "https://bookings.foot-techacademy.co.uk/list", anchor: "Book now" }, { url: "https://foot-techacademy.com/shop", anchor: "Kit" }],
   ]) {
+    // Since Graham relaxed the citation rule, an authored article that cites
+    // nothing still passes, flagged as lower odds; the furniture must not be
+    // mistaken for a citation.
     const r = article("https://foot-techacademy.co.uk/should-my-child-have-a-set-position/", links);
-    assert.equal(r.verdict, "rejected", links[0].anchor);
-    assert.match(r.reasons.join(" "), /site furniture/);
+    assert.equal(r.verdict, "ok", links[0].anchor);
+    assert.equal(r.independentLinks.length, 0, links[0].anchor);
+    assert.equal(r.citesSources, false);
+    assert.match(r.reasons.join(" "), /cites no other sites/);
   }
+  // Without an author voice or an article, furniture-only pages still fail.
+  const furnitureOnly = assessPageContent({ url: "https://www.club.co.uk/links", title: "Links", headings: [], text: "Links", wordCount: 40, externalLinks: [{ url: "https://jamieclarke.online/", anchor: "Website built by Jamie Clarke" }] });
+  assert.equal(furnitureOnly.verdict, "rejected");
+  assert.match(furnitureOnly.reasons.join(" "), /site furniture/);
+  // A blog post with no byline passes, with a note to pitch the editor.
+  const blogPost = assessPageContent({ url: "https://www.soccerschool.co.uk/blog/what-happens-at-academy-trials", title: "What happens at academy trials", headings: [], text: words(700), wordCount: 700, externalLinks: [] });
+  assert.equal(blogPost.verdict, "ok");
+  assert.match(blogPost.reasons.join(" "), /no named author/);
   const cited = article("https://coachkurtis.com/2026/09/13/released-from-academy-what-to-do-next/", [
     { url: "https://coachkurtis.gr8.com/", anchor: "Get Your Coaching Checklist NOW!" },
     { url: "https://www.parentsinsport.co.uk/2021/05/16/released-picking-up-the-pieces-as-a-sporting-parent/", anchor: "Working With Parents In Sport have written well on this" },
