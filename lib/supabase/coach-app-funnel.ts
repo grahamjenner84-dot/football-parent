@@ -71,6 +71,128 @@ export async function logCoachAppSignup(event: SignupEvent, userAgent: string | 
 }
 
 // ---------------------------------------------------------------------------
+// Usage snapshots (from /api/coach-app-snapshot, posted by the Coach App
+// project's own database every 10 minutes)
+// ---------------------------------------------------------------------------
+
+/** Whole-app counts from the Coach App database, Graham's accounts left out.
+ * Definitions live with the query: usage_snapshot_counts() in coach-app
+ * migration 0039. */
+export interface CoachAppUsageCounts {
+  totalAccounts: number;
+  /** Accounts created since UK midnight. */
+  signupsToday: number;
+  /** Accounts that opened the app since UK midnight. */
+  activeToday: number;
+  /** Accounts that opened the app in the last 7 days. */
+  active7d: number;
+  /** Accounts on at least one team (a team exists once onboarding is done). */
+  accountsWithTeam: number;
+  /** League/cup/friendly and tournament games marked finished. */
+  finishedMatches: number;
+  /** Accounts on a team with at least one finished match. */
+  accountsWithFinishedMatch: number;
+  /** Each account's own plan; the three add up to totalAccounts. Paid
+   * includes a subscription whose payment is being retried. Lapsed is a
+   * trial that ended, a cancelled subscription, or an old free account. */
+  planPaid: number;
+  planTrial: number;
+  planLapsed: number;
+}
+
+export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachAppUsageCounts): Promise<void> {
+  const { error } = await adminClient().from("coach_app_usage_snapshots").insert({
+    taken_at: takenAt,
+    total_accounts: counts.totalAccounts,
+    signups_today: counts.signupsToday,
+    active_today: counts.activeToday,
+    active_7d: counts.active7d,
+    accounts_with_team: counts.accountsWithTeam,
+    finished_matches: counts.finishedMatches,
+    accounts_with_finished_match: counts.accountsWithFinishedMatch,
+    plan_paid: counts.planPaid,
+    plan_trial: counts.planTrial,
+    plan_lapsed: counts.planLapsed,
+  });
+  if (error) {
+    throw new Error("Failed to insert coach_app_usage_snapshots row: " + error.message);
+  }
+}
+
+export interface CoachAppUsage {
+  /** The most recent snapshot, or null before the first one arrives. */
+  latest: (CoachAppUsageCounts & { takenAt: string }) | null;
+  /** The last snapshot of each UK day, newest first: that day's closing
+   * figures, so activeToday there is the day's active accounts. */
+  byDay: (CoachAppUsageCounts & { date: string; takenAt: string })[];
+}
+
+type SnapshotRow = {
+  taken_at: string;
+  total_accounts: number;
+  signups_today: number;
+  active_today: number;
+  active_7d: number;
+  accounts_with_team: number;
+  finished_matches: number;
+  accounts_with_finished_match: number;
+  plan_paid: number;
+  plan_trial: number;
+  plan_lapsed: number;
+};
+
+function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string } {
+  return {
+    takenAt: r.taken_at,
+    totalAccounts: r.total_accounts,
+    signupsToday: r.signups_today,
+    activeToday: r.active_today,
+    active7d: r.active_7d,
+    accountsWithTeam: r.accounts_with_team,
+    finishedMatches: r.finished_matches,
+    accountsWithFinishedMatch: r.accounts_with_finished_match,
+    planPaid: r.plan_paid,
+    planTrial: r.plan_trial,
+    planLapsed: r.plan_lapsed,
+  };
+}
+
+const londonDay = (iso: string) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date(iso));
+
+async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: number): Promise<CoachAppUsage> {
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+  const rows: SnapshotRow[] = [];
+  const pageSize = 1000;
+  // Newest first, so the first row seen for each day is its closing figure.
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("coach_app_usage_snapshots")
+      .select(
+        "taken_at, total_accounts, signups_today, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed"
+      )
+      .gte("taken_at", since)
+      .order("taken_at", { ascending: false })
+      .range(from, from + pageSize - 1);
+    if (error) throw new Error("Failed to read coach_app_usage_snapshots: " + error.message);
+    const batch = (data ?? []) as SnapshotRow[];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  const byDay = new Map<string, CoachAppUsageCounts & { date: string; takenAt: string }>();
+  for (const r of rows) {
+    const date = londonDay(r.taken_at);
+    if (!byDay.has(date)) byDay.set(date, { date, ...snapshotCounts(r) });
+  }
+
+  return {
+    latest: rows.length > 0 ? snapshotCounts(rows[0]) : null,
+    byDay: Array.from(byDay.values()),
+  };
+}
+
+// ---------------------------------------------------------------------------
 // The funnel report
 // ---------------------------------------------------------------------------
 
@@ -138,6 +260,9 @@ export interface CoachAppFunnel {
   shareBannerImpressions: number;
   /** Present if coach_app_signups couldn't be read (e.g. migration missing). */
   signupsError?: string;
+  /** Whole-app counts from the Coach App database. Not clamped to
+   * FUNNEL_TRACKING_STARTED_AT: the totals are all-time by definition. */
+  usage: CoachAppUsage | { error: string };
 }
 
 type ViewRow = {
@@ -237,7 +362,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   const clampedToTrackingStart = trackingStart > requestedSince;
   const since = new Date(Math.max(requestedSince, trackingStart)).toISOString();
 
-  const [landingRows, signInRows, coachingRows, signupResult, sharing, shareBannerImpressions] = await Promise.all([
+  const [landingRows, signInRows, coachingRows, signupResult, sharing, shareBannerImpressions, usage] = await Promise.all([
     readViews(supabase, since, { like: `${LANDING_PREFIX}%` }),
     readViews(supabase, since, { eq: SIGN_IN_PATH }),
     readViews(supabase, since, { like: `${COACHING_PREFIX}%` }),
@@ -253,6 +378,9 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
       error: err instanceof Error ? err.message : "Unknown error",
     })),
     countShareBannerImpressions(supabase, since),
+    getCoachAppUsage(supabase, days).catch((err: unknown) => ({
+      error: err instanceof Error ? err.message : "Unknown error",
+    })),
   ]);
 
   const signupRows = ((signupResult.data ?? []) as SignupRow[]).filter((r) => isHuman(r.user_agent));
@@ -330,5 +458,6 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     sharing,
     shareBannerImpressions,
     ...(signupsError ? { signupsError } : {}),
+    usage,
   };
 }

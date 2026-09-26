@@ -2373,6 +2373,111 @@ function FunnelHeading({ children }: { children: ReactNode }) {
   );
 }
 
+function UsageTile({ label, value, sub }: { label: string; value: number; sub?: string }) {
+  return (
+    <div style={styles.card}>
+      <p style={styles.cardPage}>{label}</p>
+      <span style={{ ...styles.cardQuery, fontSize: 20 }}>{value}</span>
+      {sub && <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>{sub}</p>}
+    </div>
+  );
+}
+
+// Whole-app counts the Coach App database posts every 10 minutes (coach-app
+// migration 0039). Numbers only; this site never reads that database.
+function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
+  if ("error" in usage) {
+    return (
+      <p style={styles.error}>
+        Couldn&rsquo;t load app usage: {usage.error}. If it says the
+        coach_app_usage_snapshots table is missing, run
+        20260926180000_coach_app_usage_snapshots.sql.
+      </p>
+    );
+  }
+  const latest = usage.latest;
+  if (!latest) {
+    return (
+      <p style={styles.muted}>
+        No usage snapshot received yet. The Coach App database sends one every
+        10 minutes once coach-app migration 0039 and COACH_APP_SNAPSHOT_SECRET
+        are set up.
+      </p>
+    );
+  }
+  const pct = (n: number) => (latest.totalAccounts > 0 ? `${Math.round((n / latest.totalAccounts) * 100)}% of accounts` : undefined);
+  const updated = new Date(latest.takenAt).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  return (
+    <>
+      <div style={styles.summaryGrid}>
+        <UsageTile label="Total accounts" value={latest.totalAccounts} />
+        <UsageTile label="Sign-ups today" value={latest.signupsToday} />
+        <UsageTile label="Active today" value={latest.activeToday} />
+        <UsageTile label="Active last 7 days" value={latest.active7d} sub={pct(latest.active7d)} />
+        <UsageTile label="Set up a team" value={latest.accountsWithTeam} sub={pct(latest.accountsWithTeam)} />
+        <UsageTile
+          label="Finished a match"
+          value={latest.accountsWithFinishedMatch}
+          sub={`${pct(latest.accountsWithFinishedMatch) ?? ""}${pct(latest.accountsWithFinishedMatch) ? ", " : ""}${latest.finishedMatches} matches in all`}
+        />
+        <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
+        <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
+        <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+      </div>
+      <p style={styles.sectionNote}>
+        Updated {updated}, every 10 minutes. Counts accounts (people), not
+        devices, and leaves out your own accounts and any account asking to be
+        deleted. Active means the app was opened (it records this once per app
+        load). Set up a team means on at least one team, as owner or invited
+        coach. Finished a match counts league, cup, friendly and tournament
+        games marked finished. Paid, On trial and Lapsed are each
+        account&rsquo;s own plan and add up to Total accounts: Paid includes a
+        subscription whose payment is being retried; Lapsed is a trial that
+        ended, a cancelled subscription, or an old free account. An invited
+        coach covered by their team&rsquo;s subscription counts by their own
+        plan, so Paid is paying accounts. All time, not limited to the funnel
+        window.
+      </p>
+      {usage.byDay.length > 1 && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Day (closing figures)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Accounts</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Active</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Active 7d</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>With team</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Finished a match</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {usage.byDay.map((d) => (
+                <tr key={d.date}>
+                  <td style={funnelTd}>{d.date}</td>
+                  <td style={funnelNum}>{d.totalAccounts}</td>
+                  <td style={funnelNum}>{d.signupsToday}</td>
+                  <td style={funnelNum}>{d.activeToday}</td>
+                  <td style={funnelNum}>{d.active7d}</td>
+                  <td style={funnelNum}>{d.accountsWithTeam}</td>
+                  <td style={funnelNum}>{d.accountsWithFinishedMatch}</td>
+                  <td style={funnelNum}>{d.planPaid}</td>
+                  <td style={funnelNum}>{d.planTrial}</td>
+                  <td style={funnelNum}>{d.planLapsed}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
 // Traffic and sign-ups per channel, side by side, plus the SEO articles and
 // the share loop. Channel rules: lib/coach-app-channels.ts.
 function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
@@ -2404,6 +2509,9 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
           20260925200000_coach_app_signups.sql.
         </p>
       )}
+
+      <FunnelHeading>App usage</FunnelHeading>
+      <CoachAppUsageSection usage={funnel.usage} />
 
       <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
       <div style={{ overflowX: "auto" }}>
