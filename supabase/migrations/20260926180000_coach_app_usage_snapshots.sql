@@ -24,6 +24,11 @@ create table if not exists coach_app_usage_snapshots (
   accounts_with_team integer not null,
   finished_matches integer not null,
   accounts_with_finished_match integer not null,
+  -- Each account's own plan (see usage_snapshot_counts in coach-app 0039):
+  -- the three add up to total_accounts.
+  plan_paid integer not null,
+  plan_trial integer not null,
+  plan_lapsed integer not null,
   received_at timestamptz not null default now()
 );
 

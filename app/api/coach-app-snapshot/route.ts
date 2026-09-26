@@ -43,6 +43,9 @@ export async function POST(req: Request) {
       accountsWithTeam: count(body?.accountsWithTeam),
       finishedMatches: count(body?.finishedMatches),
       accountsWithFinishedMatch: count(body?.accountsWithFinishedMatch),
+      planPaid: count(body?.planPaid),
+      planTrial: count(body?.planTrial),
+      planLapsed: count(body?.planLapsed),
     };
     if (!Number.isFinite(takenAt) || Object.values(counts).some((v) => v === null)) {
       return NextResponse.json({ error: "Bad snapshot" }, { status: 400 });

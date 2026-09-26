@@ -92,6 +92,12 @@ export interface CoachAppUsageCounts {
   finishedMatches: number;
   /** Accounts on a team with at least one finished match. */
   accountsWithFinishedMatch: number;
+  /** Each account's own plan; the three add up to totalAccounts. Paid
+   * includes a subscription whose payment is being retried. Lapsed is a
+   * trial that ended, a cancelled subscription, or an old free account. */
+  planPaid: number;
+  planTrial: number;
+  planLapsed: number;
 }
 
 export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachAppUsageCounts): Promise<void> {
@@ -104,6 +110,9 @@ export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachApp
     accounts_with_team: counts.accountsWithTeam,
     finished_matches: counts.finishedMatches,
     accounts_with_finished_match: counts.accountsWithFinishedMatch,
+    plan_paid: counts.planPaid,
+    plan_trial: counts.planTrial,
+    plan_lapsed: counts.planLapsed,
   });
   if (error) {
     throw new Error("Failed to insert coach_app_usage_snapshots row: " + error.message);
@@ -127,6 +136,9 @@ type SnapshotRow = {
   accounts_with_team: number;
   finished_matches: number;
   accounts_with_finished_match: number;
+  plan_paid: number;
+  plan_trial: number;
+  plan_lapsed: number;
 };
 
 function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string } {
@@ -139,6 +151,9 @@ function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string
     accountsWithTeam: r.accounts_with_team,
     finishedMatches: r.finished_matches,
     accountsWithFinishedMatch: r.accounts_with_finished_match,
+    planPaid: r.plan_paid,
+    planTrial: r.plan_trial,
+    planLapsed: r.plan_lapsed,
   };
 }
 
@@ -154,7 +169,7 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
     const { data, error } = await supabase
       .from("coach_app_usage_snapshots")
       .select(
-        "taken_at, total_accounts, signups_today, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match"
+        "taken_at, total_accounts, signups_today, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed"
       )
       .gte("taken_at", since)
       .order("taken_at", { ascending: false })
