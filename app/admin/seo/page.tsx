@@ -2405,6 +2405,51 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         </p>
       )}
 
+      <FunnelHeading>Active coaches</FunnelHeading>
+      {"error" in funnel.activeDays ? (
+        <p style={styles.error}>
+          Couldn&rsquo;t load active coaches: {funnel.activeDays.error}. If it
+          says the coach_app_active_days table is missing, run
+          20260926170000_coach_app_active_days.sql.
+        </p>
+      ) : (
+        <>
+          <p style={styles.sectionNote}>
+            <strong>Today so far: {funnel.activeDays.today.devices}</strong>. Each
+            device with a signed-in coach counts once per UK day, however many
+            times the app is opened, and shows here the moment it first opens.
+            Devices, not people: a coach on a phone and a laptop counts twice.
+            Your own accounts and devices are left out.
+          </p>
+          {funnel.activeDays.byDay.length === 0 ? (
+            <p style={styles.muted}>No app opens reported in the last {funnel.days} days.</p>
+          ) : (
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+                <thead>
+                  <tr>
+                    <th style={funnelTh}>Day</th>
+                    <th style={{ ...funnelTh, textAlign: "right" }}>Active devices</th>
+                    <th style={{ ...funnelTh, textAlign: "right" }}>Web / PWA</th>
+                    <th style={{ ...funnelTh, textAlign: "right" }}>Android app</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {funnel.activeDays.byDay.map((d) => (
+                    <tr key={d.date}>
+                      <td style={funnelTd}>{d.date}</td>
+                      <td style={funnelNum}>{d.devices}</td>
+                      <td style={funnelNum}>{d.web}</td>
+                      <td style={funnelNum}>{d.android}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
+      )}
+
       <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
       <div style={{ overflowX: "auto" }}>
         <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
