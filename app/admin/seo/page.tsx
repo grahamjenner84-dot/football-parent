@@ -2373,6 +2373,96 @@ function FunnelHeading({ children }: { children: ReactNode }) {
   );
 }
 
+function UsageTile({ label, value, sub }: { label: string; value: number; sub?: string }) {
+  return (
+    <div style={styles.card}>
+      <p style={styles.cardPage}>{label}</p>
+      <span style={{ ...styles.cardQuery, fontSize: 20 }}>{value}</span>
+      {sub && <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>{sub}</p>}
+    </div>
+  );
+}
+
+// Whole-app counts the Coach App database posts every 10 minutes (coach-app
+// migration 0039). Numbers only; this site never reads that database.
+function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
+  if ("error" in usage) {
+    return (
+      <p style={styles.error}>
+        Couldn&rsquo;t load app usage: {usage.error}. If it says the
+        coach_app_usage_snapshots table is missing, run
+        20260926180000_coach_app_usage_snapshots.sql.
+      </p>
+    );
+  }
+  const latest = usage.latest;
+  if (!latest) {
+    return (
+      <p style={styles.muted}>
+        No usage snapshot received yet. The Coach App database sends one every
+        10 minutes once coach-app migration 0039 and COACH_APP_SNAPSHOT_SECRET
+        are set up.
+      </p>
+    );
+  }
+  const pct = (n: number) => (latest.totalAccounts > 0 ? `${Math.round((n / latest.totalAccounts) * 100)}% of accounts` : undefined);
+  const updated = new Date(latest.takenAt).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  return (
+    <>
+      <div style={styles.summaryGrid}>
+        <UsageTile label="Total accounts" value={latest.totalAccounts} />
+        <UsageTile label="Sign-ups today" value={latest.signupsToday} />
+        <UsageTile label="Active today" value={latest.activeToday} />
+        <UsageTile label="Active last 7 days" value={latest.active7d} sub={pct(latest.active7d)} />
+        <UsageTile label="Set up a team" value={latest.accountsWithTeam} sub={pct(latest.accountsWithTeam)} />
+        <UsageTile
+          label="Finished a match"
+          value={latest.accountsWithFinishedMatch}
+          sub={`${pct(latest.accountsWithFinishedMatch) ?? ""}${pct(latest.accountsWithFinishedMatch) ? ", " : ""}${latest.finishedMatches} matches in all`}
+        />
+      </div>
+      <p style={styles.sectionNote}>
+        Updated {updated}, every 10 minutes. Counts accounts (people), not
+        devices, and leaves out your own accounts and any account asking to be
+        deleted. Active means the app was opened (it records this once per app
+        load). Set up a team means on at least one team, as owner or invited
+        coach. Finished a match counts league, cup, friendly and tournament
+        games marked finished. All time, not limited to the funnel window.
+      </p>
+      {usage.byDay.length > 1 && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Day (closing figures)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Accounts</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Active</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Active 7d</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>With team</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Finished a match</th>
+              </tr>
+            </thead>
+            <tbody>
+              {usage.byDay.map((d) => (
+                <tr key={d.date}>
+                  <td style={funnelTd}>{d.date}</td>
+                  <td style={funnelNum}>{d.totalAccounts}</td>
+                  <td style={funnelNum}>{d.signupsToday}</td>
+                  <td style={funnelNum}>{d.activeToday}</td>
+                  <td style={funnelNum}>{d.active7d}</td>
+                  <td style={funnelNum}>{d.accountsWithTeam}</td>
+                  <td style={funnelNum}>{d.accountsWithFinishedMatch}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
 // Traffic and sign-ups per channel, side by side, plus the SEO articles and
 // the share loop. Channel rules: lib/coach-app-channels.ts.
 function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
@@ -2405,50 +2495,8 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         </p>
       )}
 
-      <FunnelHeading>Active coaches</FunnelHeading>
-      {"error" in funnel.activeDays ? (
-        <p style={styles.error}>
-          Couldn&rsquo;t load active coaches: {funnel.activeDays.error}. If it
-          says the coach_app_active_days table is missing, run
-          20260926170000_coach_app_active_days.sql.
-        </p>
-      ) : (
-        <>
-          <p style={styles.sectionNote}>
-            <strong>Today so far: {funnel.activeDays.today.devices}</strong>. Each
-            device with a signed-in coach counts once per UK day, however many
-            times the app is opened, and shows here the moment it first opens.
-            Devices, not people: a coach on a phone and a laptop counts twice.
-            Your own accounts and devices are left out.
-          </p>
-          {funnel.activeDays.byDay.length === 0 ? (
-            <p style={styles.muted}>No app opens reported in the last {funnel.days} days.</p>
-          ) : (
-            <div style={{ overflowX: "auto" }}>
-              <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
-                <thead>
-                  <tr>
-                    <th style={funnelTh}>Day</th>
-                    <th style={{ ...funnelTh, textAlign: "right" }}>Active devices</th>
-                    <th style={{ ...funnelTh, textAlign: "right" }}>Web / PWA</th>
-                    <th style={{ ...funnelTh, textAlign: "right" }}>Android app</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {funnel.activeDays.byDay.map((d) => (
-                    <tr key={d.date}>
-                      <td style={funnelTd}>{d.date}</td>
-                      <td style={funnelNum}>{d.devices}</td>
-                      <td style={funnelNum}>{d.web}</td>
-                      <td style={funnelNum}>{d.android}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </>
-      )}
+      <FunnelHeading>App usage</FunnelHeading>
+      <CoachAppUsageSection usage={funnel.usage} />
 
       <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
       <div style={{ overflowX: "auto" }}>
