@@ -388,6 +388,7 @@ export default function SeoAdminPage() {
           <Dashboard
             pageViewStats={pageViewStats}
             coachAppViewStats={coachAppViewStats}
+            coachAppUsage={funnel?.usage ?? null}
             affiliateStats={affiliateStats}
             pageViewError={pageViewError}
           />
@@ -1698,11 +1699,14 @@ function categoryTotals(paths: { path: string; count: number }[]): { label: stri
 function Dashboard({
   pageViewStats,
   coachAppViewStats,
+  coachAppUsage,
   affiliateStats,
   pageViewError,
 }: {
   pageViewStats: PageViewStats | null;
   coachAppViewStats: CoachAppViewStats | null;
+  /** From the funnel report; null while it loads. */
+  coachAppUsage: CoachAppFunnel["usage"] | null;
   affiliateStats: AffiliateClickStats | null;
   pageViewError: string;
 }) {
@@ -1750,6 +1754,17 @@ function Dashboard({
       ? daySourceRows(caDay)
       : []
     : [];
+
+  // App usage for the chosen scope: the latest snapshot for today or the
+  // whole window, otherwise that day's closing figures (UK days, against the
+  // page views' UTC days: the same date either way outside 00:00-01:00 BST).
+  const usage = coachAppUsage && !("error" in coachAppUsage) ? coachAppUsage : null;
+  const usageDay =
+    !usage || !usage.latest
+      ? null
+      : isWindow || effective === latest
+      ? usage.latest
+      : usage.byDay.find((d) => d.date === effective) ?? null;
 
   // Affiliate clicks for the chosen scope.
   const afDay =
@@ -1809,6 +1824,18 @@ function Dashboard({
         <div style={styles.card}>
           <DashboardStat label="Coach App views" current={caTotal} prior={caPriorTotal} />
           <SourceLine rows={caSources} />
+          {usageDay && (
+            <div style={{ ...styles.cardStats, marginTop: 6 }}>
+              <span>
+                Active{isWindow ? " today" : ""}: <strong>{usageDay.activeToday}</strong>
+              </span>
+              <span>
+                Sign-ups{isWindow ? " today" : ""}: <strong>{usageDay.signupsToday}</strong>
+                {usageDay.signupsTodayWithTeam !== null && ` (${usageDay.signupsTodayWithTeam} set up a team)`}
+              </span>
+              {isWindow && <span>Active last 7 days: {usageDay.active7d}</span>}
+            </div>
+          )}
         </div>
       )}
 
@@ -2411,7 +2438,11 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
     <>
       <div style={styles.summaryGrid}>
         <UsageTile label="Total accounts" value={latest.totalAccounts} />
-        <UsageTile label="Sign-ups today" value={latest.signupsToday} />
+        <UsageTile
+          label="Sign-ups today"
+          value={latest.signupsToday}
+          sub={latest.signupsTodayWithTeam === null ? undefined : `${latest.signupsTodayWithTeam} set up a team`}
+        />
         <UsageTile label="Active today" value={latest.activeToday} />
         <UsageTile label="Active last 7 days" value={latest.active7d} sub={pct(latest.active7d)} />
         <UsageTile label="Set up a team" value={latest.accountsWithTeam} sub={pct(latest.accountsWithTeam)} />
@@ -2424,20 +2455,21 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
       </div>
-      <p style={styles.sectionNote}>
-        Updated {updated}, every 10 minutes. Counts accounts (people), not
-        devices, and leaves out your own accounts and any account asking to be
-        deleted. Active means the app was opened (it records this once per app
-        load). Set up a team means on at least one team, as owner or invited
-        coach. Finished a match counts league, cup, friendly and tournament
-        games marked finished. Paid, On trial and Lapsed are each
-        account&rsquo;s own plan and add up to Total accounts: Paid includes a
-        subscription whose payment is being retried; Lapsed is a trial that
-        ended, a cancelled subscription, or an old free account. An invited
-        coach covered by their team&rsquo;s subscription counts by their own
-        plan, so Paid is paying accounts. All time, not limited to the funnel
-        window.
-      </p>
+      <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
+      <SectionNote label="What these numbers count">
+        Accounts (people), not devices, all time rather than the funnel
+        window. Your own accounts and any account asking to be deleted are
+        left out. Active means the app was opened (it records this once per
+        app load). Set up a team means on at least one team, as owner or
+        invited coach; under Sign-ups today it is how many of today&rsquo;s
+        new accounts have got that far. Finished a match counts league, cup,
+        friendly and tournament games marked finished. Paid, On trial and
+        Lapsed are each account&rsquo;s own plan and add up to Total accounts:
+        Paid includes a subscription whose payment is being retried; Lapsed is
+        a trial that ended, a cancelled subscription, or an old free account.
+        An invited coach covered by their team&rsquo;s subscription counts by
+        their own plan, so Paid is paying accounts.
+      </SectionNote>
       {usage.byDay.length > 1 && (
         <div style={{ overflowX: "auto" }}>
           <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
@@ -2446,6 +2478,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                 <th style={funnelTh}>Day (closing figures)</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Accounts</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>of which team set up</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Active</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Active 7d</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>With team</th>
@@ -2461,6 +2494,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                   <td style={funnelTd}>{d.date}</td>
                   <td style={funnelNum}>{d.totalAccounts}</td>
                   <td style={funnelNum}>{d.signupsToday}</td>
+                  <td style={funnelNum}>{d.signupsTodayWithTeam ?? "-"}</td>
                   <td style={funnelNum}>{d.activeToday}</td>
                   <td style={funnelNum}>{d.active7d}</td>
                   <td style={funnelNum}>{d.accountsWithTeam}</td>
@@ -2487,20 +2521,6 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
 
   return (
     <div style={styles.list}>
-      <SectionNote label="How channels are decided">
-        Every visit to a Coach App page and every sign-up is put in one channel,
-        first match wins: Google Ads (an ad click), Shared link (the link a
-        parent sent from the share banner), Article banner (clicked a Coach App
-        banner in an article, usually after arriving from Google), Search
-        (arrived from a search engine, no banner), Site link (another page of
-        ours, no banner), Direct, Other. Unknown is sign-ups only: the coach
-        declined analytics cookies, so nothing about their visit was kept.
-        Landing views are the Coach App page and its ad variants; sign-in views
-        are the app&rsquo;s own sign-in screen. Every number on this tab
-        starts when the funnel went live ({sinceLabel}), visits included, so
-        visits and sign-ups cover the same period. Earlier sign-ups are only
-        in the Coach App database. No sign-up row identifies a coach.
-      </SectionNote>
 
       {funnel.signupsError && (
         <p style={styles.error}>
@@ -2514,6 +2534,22 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
       <CoachAppUsageSection usage={funnel.usage} />
 
       <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
+      <SectionNote label="How channels are decided">
+        Every visit to a Coach App page and every sign-up is put in one channel,
+        first match wins: Google Ads (an ad click), Shared link (the link a
+        parent sent from the share banner), Article banner (clicked a Coach App
+        banner in an article, usually after arriving from Google), Search
+        (arrived from a search engine, no banner), Site link (another page of
+        ours, no banner), Direct, Other. Unknown is sign-ups only: the coach
+        declined analytics cookies, so nothing about their visit was kept.
+        Landing views are the Coach App page and its ad variants; sign-in views
+        are the app&rsquo;s own sign-in screen. Every number on this tab
+        starts when the funnel went live ({sinceLabel}), visits included, so
+        visits and sign-ups cover the same period. Earlier sign-ups are only
+        in the Coach App database. No sign-up row identifies a coach.
+        Sign-ups can come from a sign-in screen view rather than a landing
+        view, so the per-100 figure is a guide, not a strict conversion rate.
+      </SectionNote>
       <div style={{ overflowX: "auto" }}>
         <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
           <thead>
@@ -2547,10 +2583,6 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
           </tbody>
         </table>
       </div>
-      <p style={styles.sectionNote}>
-        Sign-ups can come from a sign-in screen view rather than a landing view,
-        so the per-100 figure is a guide, not a strict conversion rate.
-      </p>
 
       <FunnelHeading>Sign-ups</FunnelHeading>
       {funnel.recentSignups.length === 0 ? (
@@ -2592,9 +2624,11 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         {funnel.coachingArticles.totalViews} views of /coaching/ articles,{" "}
         {funnel.coachingArticles.searchViews} from search. By source:{" "}
         {funnel.coachingArticles.bySourceGroup.map((g) => `${g.group} ${g.views}`).join(", ") || "none"}.
+      </p>
+      <SectionNote label="Where these show up as sign-ups">
         Sign-ups these articles produced show above as Article banner, Search or
         Site link; the Sign-ups table names the article each visit began on.
-      </p>
+      </SectionNote>
       <div style={{ overflowX: "auto" }}>
         <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
           <thead>

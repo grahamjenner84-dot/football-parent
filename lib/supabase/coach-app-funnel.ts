@@ -82,6 +82,9 @@ export interface CoachAppUsageCounts {
   totalAccounts: number;
   /** Accounts created since UK midnight. */
   signupsToday: number;
+  /** Of those, how many are already on a team. Null in snapshots sent
+   * before the Coach App started reporting it. */
+  signupsTodayWithTeam: number | null;
   /** Accounts that opened the app since UK midnight. */
   activeToday: number;
   /** Accounts that opened the app in the last 7 days. */
@@ -105,6 +108,7 @@ export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachApp
     taken_at: takenAt,
     total_accounts: counts.totalAccounts,
     signups_today: counts.signupsToday,
+    signups_today_with_team: counts.signupsTodayWithTeam,
     active_today: counts.activeToday,
     active_7d: counts.active7d,
     accounts_with_team: counts.accountsWithTeam,
@@ -131,6 +135,7 @@ type SnapshotRow = {
   taken_at: string;
   total_accounts: number;
   signups_today: number;
+  signups_today_with_team: number | null;
   active_today: number;
   active_7d: number;
   accounts_with_team: number;
@@ -146,6 +151,7 @@ function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string
     takenAt: r.taken_at,
     totalAccounts: r.total_accounts,
     signupsToday: r.signups_today,
+    signupsTodayWithTeam: r.signups_today_with_team,
     activeToday: r.active_today,
     active7d: r.active_7d,
     accountsWithTeam: r.accounts_with_team,
@@ -169,7 +175,7 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
     const { data, error } = await supabase
       .from("coach_app_usage_snapshots")
       .select(
-        "taken_at, total_accounts, signups_today, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed"
+        "taken_at, total_accounts, signups_today, signups_today_with_team, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed"
       )
       .gte("taken_at", since)
       .order("taken_at", { ascending: false })
