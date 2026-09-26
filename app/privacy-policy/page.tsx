@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 27 August 2026
+            Last updated: 26 September 2026
           </p>
         </div>
       </section>
@@ -58,7 +58,8 @@ export default function PrivacyPolicyPage() {
             <li>The footballparent.co.uk website</li>
             <li>
               The Coach App (used by coaches to manage their team, squad and
-              matches)
+              matches), whether used in a web browser or as the Android app
+              from Google Play
             </li>
           </ul>
 
@@ -91,15 +92,41 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <p>
-            <strong>Usage and technical data.</strong> Like most websites and
-            apps, we automatically collect some technical information - IP
-            address, browser/device type, and basic usage data - mainly for
-            security, troubleshooting and improving the service.
+            <strong>Subscription and payment data.</strong> If you subscribe
+            to the Coach App, we record your plan, its status (for example
+            active, trial or cancelled) and which payment provider you used.
+            On the web, payments are handled by Stripe; in the Android app,
+            they&apos;re handled by Google Play, with RevenueCat verifying the
+            purchase on our behalf. We never see or store your card details.
           </p>
 
           <p>
-            <strong>Cookies and advertising.</strong> The website may use
-            cookies and similar technologies for analytics and for
+            <strong>Feedback you send us.</strong> If you report a bug or
+            suggest a feature in the Coach App, we store your message along
+            with the page you were on and your browser/device type, so we can
+            look into it.
+          </p>
+
+          <p>
+            <strong>Usage and technical data.</strong> Like most websites and
+            apps, we automatically collect some technical information - IP
+            address, browser/device type, and basic usage data (such as when
+            you last used the Coach App and whether you&apos;ve installed it)
+            - mainly for security, troubleshooting and improving the service.
+          </p>
+
+          <p>
+            <strong>How you found us.</strong> When you create a Coach App
+            account, we may record how you arrived - for example, the page
+            you first landed on, the website that referred you, any campaign
+            tags in the link, and whether you came from an ad. We only record
+            this if you&apos;ve accepted analytics cookies, and use it to
+            understand which of our marketing is working.
+          </p>
+
+          <p>
+            <strong>Cookies and advertising.</strong> The website and the
+            Coach App may use cookies and similar technologies for analytics and for
             advertising. This includes conversion tracking and retargeting
             through advertising platforms such as Google Ads, Meta (Facebook
             and Instagram) and TikTok - for example, measuring whether an ad
@@ -116,7 +143,7 @@ export default function PrivacyPolicyPage() {
             >
               cookie settings
             </a>{" "}
-            on our site.
+            on our site or in the app.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
@@ -157,6 +184,39 @@ export default function PrivacyPolicyPage() {
                   </td>
                   <td className="border border-gray-300 p-3">
                     Performance of a contract
+                  </td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    Subscription and payment data
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    To provide and manage your subscription
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Performance of a contract
+                  </td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    Feedback you send us
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    To fix problems and improve the app
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Legitimate interests
+                  </td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    How you found us (sign-up source)
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    To understand which of our marketing works
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Consent
                   </td>
                 </tr>
                 <tr className="[&:nth-child(even)]:bg-gray-50">
@@ -278,14 +338,51 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            7. Where your data is stored
+            7. Who processes your data, and where it&apos;s stored
           </h2>
 
           <p>
-            Your data is stored with our infrastructure providers (including
-            Supabase), which may process data outside the UK/EEA. Where that
-            happens, appropriate safeguards (such as standard contractual
-            clauses) are in place.
+            We use a small number of service providers to run the website and
+            the Coach App. They process data only on our instructions:
+          </p>
+
+          <ul className="list-disc pl-6 space-y-2">
+            <li>
+              <strong>Supabase</strong> - database, sign-in and storage of
+              your account and team data
+            </li>
+            <li>
+              <strong>Vercel</strong> - hosting of the website and the web
+              version of the Coach App
+            </li>
+            <li>
+              <strong>Stripe</strong> - subscription payments on the web
+            </li>
+            <li>
+              <strong>Google Play</strong> - subscription payments in the
+              Android app
+            </li>
+            <li>
+              <strong>RevenueCat</strong> - verifying and managing
+              subscriptions bought through Google Play
+            </li>
+            <li>
+              <strong>Advertising and analytics platforms</strong> (Google,
+              Meta, TikTok) - analytics and ad measurement, only with your
+              consent
+            </li>
+          </ul>
+
+          <p>
+            We don&apos;t sell your data, and we never share your team or
+            squad data (including player names) with any of these providers
+            for their own purposes.
+          </p>
+
+          <p>
+            Some of these providers may process data outside the UK/EEA.
+            Where that happens, appropriate safeguards (such as standard
+            contractual clauses) are in place.
           </p>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
@@ -313,7 +410,17 @@ export default function PrivacyPolicyPage() {
           <p>
             If you delete your account, access ends immediately and your data
             is erased 7 days later. During those 7 days you can restore your
-            account by logging back in.
+            account by logging back in. You can delete your account from
+            Settings in the Coach App, or by emailing{" "}
+            <a
+              href="mailto:footballparentuk@gmail.com"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              footballparentuk@gmail.com
+            </a>
+            . Deleting your account cancels a subscription you bought on the
+            web; a subscription bought through Google Play must be cancelled
+            in Google Play.
           </p>
 
           <p>
