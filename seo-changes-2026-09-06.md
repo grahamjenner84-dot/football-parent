@@ -982,3 +982,11 @@ The page tells most readers to buy AG but only carried FG/MG picks (flagged as a
 ## New article: /football-gear/childrens-soft-ground-football-boots (2026-09-27)
 
 Published 2026-09-27, category Football Gear. "Children's Soft Ground Football Boots: Do Kids Need Them?" Targets "childrens soft ground football boots" / "soft ground football boots junior" (1,000/mo each, KD 0) and the metal-studs question cluster ("are metal studs allowed in football" 170, "can you wear metal studs on 4g" 110, "on 3g"/"on astro" 70 each). Replaces the planned `soft-ground-vs-firm-ground-football-boots` slug, which led on a 40/mo comparison phrase. Keeps "firm ground football boots meaning" with `ag-vs-fg-boots` to avoid cannibalisation. One Amazon pick (adidas Predator League Fold-Over Tongue SG kids, B0F33WK9NZ) as a quick pick and in-article. Timed for the November SG seasonal peak. Commit 0ccaa53.
+
+## Soft ground boots guide: pre-publish review fixes (2026-09-27)
+
+Review pass on the unpublished article before it went live: 9v9 pitch-size error fixed, youth metal-studs rule attributed to the FA Laws for Mini-Soccer and county officiating guidance, stud-key claims softened, booking-cancellation point attributed to West Riding FA, repeated stock line trimmed. Added FG/MG picks (B0DPHMCDL1, B0F1WYXFZ6) under "Do Kids Need Soft Ground Football Boots?" and an AG training-pair pick (B0F341CZS5) in the 3G section, all reused from existing articles. Commit c2d2396.
+
+## Inbound link to soft ground guide from /football-gear/best-football-boots-for-kids (2026-09-27)
+
+One internal link added in the FAQ "Can my child wear SG boots for grassroots football?", anchor "children's soft ground football boots". Same sentence corrected from "they're never appropriate on 3G or 4G surfaces" to "most 3G and 4G venues ban them", since West Riding FA's 3G pitch permits screw-in studs under 21mm. Previous change to this page was 2026-09-13, so the watch window was clear. Watch list until ~2026-10-09. Commit 40bbb9a.
