@@ -1,3 +1,4 @@
+import ProgressJoinForm from "@/app/components/ProgressJoinForm";
 import { generateSEO } from "@/lib/seo";
 
 // Landing page for Progress, the parents' app (progress.footballparent.co.uk).
@@ -6,16 +7,15 @@ import { generateSEO } from "@/lib/seo";
 //
 // Hand-written rather than an MDX landing variant: lib/landing.ts and
 // CoachLandingPage are built around the Coach App's sign-up form, and
-// Progress has its own sign-in on its own subdomain. The join form is a plain
-// GET to the app with ?email=, which the app's sign-in screen prefills; the
-// parent taps once there to get their link. So this site never holds a
-// Progress key and nothing here talks to the Progress backend (it holds
-// children's data; see CLAUDE.md on keeping projects isolated).
+// Progress has its own sign-in on its own subdomain. The join form
+// (app/components/ProgressJoinForm.tsx) sends the Progress sign-in email from
+// this page through lib/progress-auth.ts: anon key, auth only, a sanctioned
+// and deliberately narrow exception (read that file before extending it).
+// Without its env vars the form falls back to handing the email to the app.
 //
 // Claims on this page describe what the app does today. Change them with the
 // app, not ahead of it. The price and trial must match Progress's own Terms.
 
-const APP_URL = "https://progress.footballparent.co.uk";
 const PAGE_URL = "https://www.footballparent.co.uk/progress";
 
 const TITLE = "Progress: Track Your Child's Football Stats and Development";
@@ -123,40 +123,6 @@ function Check() {
   );
 }
 
-/** "Start your journey": the email goes to the app's sign-in screen, which
- *  fills it in (see the header comment). A plain form, so it works without
- *  JavaScript and needs no client component. */
-function JoinForm({ id, dark = false }: { id?: string; dark?: boolean }) {
-  return (
-    <form id={id} action={APP_URL} method="get" className="w-full max-w-md scroll-mt-24">
-      <p className={`text-lg font-bold mb-3 ${dark ? "text-white" : "text-[#16211b]"}`}>Start your journey</p>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <label htmlFor={id ? `${id}-email` : undefined} className="sr-only">
-          Your email
-        </label>
-        <input
-          id={id ? `${id}-email` : undefined}
-          type="email"
-          name="email"
-          required
-          autoComplete="email"
-          placeholder="Your email"
-          className="flex-1 min-w-0 rounded-full border border-[#c3ccb8] bg-white px-5 py-3.5 text-base text-[#16211b] placeholder:text-[#8a978d] focus:outline-none focus:ring-2 focus:ring-[#1a7a45]"
-        />
-        <button
-          type="submit"
-          className="rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#0f5d34] cursor-pointer"
-        >
-          Start free trial
-        </button>
-      </div>
-      <p className={`mt-3 text-sm ${dark ? "text-[#c9d3c4]" : "text-[#5d6b60]"}`}>
-        We&apos;ll take you to Progress to send your sign-in link. No password needed.
-      </p>
-    </form>
-  );
-}
-
 export default function ProgressPage() {
   const faqSchema = {
     "@context": "https://schema.org",
@@ -224,7 +190,7 @@ export default function ProgressPage() {
               keep their career stats (previous seasons included), track training
               and coach feedback, and turn the season into cards worth sharing.
             </p>
-            <JoinForm id="join" />
+            <ProgressJoinForm id="join" />
             <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#5d6b60] list-none p-0">
               {TRUST.map((t) => (
                 <li key={t} className="flex items-center gap-1.5">
@@ -306,7 +272,7 @@ export default function ProgressPage() {
             can cancel any time. If you don&apos;t subscribe, nothing is deleted.
           </p>
           <div className="flex justify-center text-left">
-            <JoinForm id="join-trial" dark />
+            <ProgressJoinForm id="join-trial" dark />
           </div>
         </div>
       </section>
