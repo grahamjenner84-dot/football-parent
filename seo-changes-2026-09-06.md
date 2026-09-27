@@ -990,3 +990,7 @@ Review pass on the unpublished article before it went live: 9v9 pitch-size error
 ## Inbound link to soft ground guide from /football-gear/best-football-boots-for-kids (2026-09-27)
 
 One internal link added in the FAQ "Can my child wear SG boots for grassroots football?", anchor "children's soft ground football boots". Same sentence corrected from "they're never appropriate on 3G or 4G surfaces" to "most 3G and 4G venues ban them", since West Riding FA's 3G pitch permits screw-in studs under 21mm. Previous change to this page was 2026-09-13, so the watch window was clear. Watch list until ~2026-10-09. Commit 9508aba.
+
+## Soft ground boots guide: intro rewritten (2026-09-27)
+
+Same day as publish, before any impressions. Replaced the "Search for children's soft ground football boots and you'll mostly find..." opener (a template already used on the formations and coaching-qualifications articles) and the "This guide covers..." roadmap paragraph with an intro that leads on who actually needs SG boots and the 3G rules conflict. Primary phrase kept in the first paragraph. Commit 4521858.
