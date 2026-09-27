@@ -978,3 +978,7 @@ New indexable page at `/progress` (`app/progress/page.tsx`, added to `lib/routes
 ## AG boot pick added to /football-gear/ag-vs-fg-boots (2026-09-27)
 
 The page tells most readers to buy AG but only carried FG/MG picks (flagged as a gap in this file earlier). Added a one-item `GearPicks` block, adidas Predator League Fold-Over Tongue AG kids (ASIN B0F341CZS5, tag footballpar09-21), at the end of "The Grassroots Reality: Most Kids Are Playing on 3G". Additive only; no title, meta, heading or link changes. Last prior change to this page was 2026-09-13, so the 10-14 day window was clear. Commit 7ab2d59. Watch Amazon clicks for this page on /admin/seo.
+
+## New article: /football-gear/childrens-soft-ground-football-boots (2026-09-27)
+
+Published 2026-09-27, category Football Gear. "Children's Soft Ground Football Boots: Do Kids Need Them?" Targets "childrens soft ground football boots" / "soft ground football boots junior" (1,000/mo each, KD 0) and the metal-studs question cluster ("are metal studs allowed in football" 170, "can you wear metal studs on 4g" 110, "on 3g"/"on astro" 70 each). Replaces the planned `soft-ground-vs-firm-ground-football-boots` slug, which led on a 40/mo comparison phrase. Keeps "firm ground football boots meaning" with `ag-vs-fg-boots` to avoid cannibalisation. One Amazon pick (adidas Predator League Fold-Over Tongue SG kids, B0F33WK9NZ) as a quick pick and in-article. Timed for the November SG seasonal peak. Commit 0ccaa53.
