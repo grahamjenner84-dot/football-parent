@@ -994,3 +994,16 @@ One internal link added in the FAQ "Can my child wear SG boots for grassroots fo
 ## Soft ground boots guide: intro rewritten (2026-09-27)
 
 Same day as publish, before any impressions. Replaced the "Search for children's soft ground football boots and you'll mostly find..." opener (a template already used on the formations and coaching-qualifications articles) and the "This guide covers..." roadmap paragraph with an intro that leads on who actually needs SG boots and the 3G rules conflict. Primary phrase kept in the first paragraph. Commit 4521858.
+
+## Weekly round-up (2026-09-27): no changes made, results only
+
+GSC 18-24 Sept vs 11-17 Sept: 53,475 vs 55,521 impressions (-4%), 910 vs 926 clicks (-2%), average position 6.5 both weeks. 24 Sept was still inside GSC's processing lag. First-party page views were flat week on week; the 24 Sept dip is the Countries logging outage, not a real drop. No silence entries. The only decay entries are small: the /academy-trials hub (12 to 6 clicks, position ~20) and leave-grassroots-football-for-an-academy (10 to 7).
+
+- **Buy buttons moved above the fold (19 Sept):** Amazon click-outs per page view on wide-feet boots went from 16.7% to 33.6% (18 to 42 clicks; 27 of those came from the new gear-picks box). Shin pads stayed about the same (68% to 64%) and so did boots-for-kids (24% to 21%). Site total 148 to 217 clicks (12-18 vs 19-26 Sept) on 13% more page views.
+- **Veo alternatives (11 Sept edit):** 4,838 to 7,624 impressions a week, clicks 42 to 57. Price queries are climbing ("how much is a veo" 12 to 9.7). CTR is slipping (0.9% to 0.7%) because the new impressions come in at positions 8-10.
+- **Equal playing time ("game time" phrasing, 6 Sept, and /coaching hub):** 215 to 935 impressions a week, clicks 4 to 15. The title tag and H2 changes from 25 Sept are not measurable yet.
+- **Best football boots for kids (13 Sept):** 2,563 impressions and 21 clicks in its first 2 weeks. Most of its top queries are long synthetic prompts ending "asking as: youth soccer parent", which look like AI rank-tracker probes rather than real searches, so the impression count is inflated and the CTR understated.
+- **Best grassroots apps (11 Sept):** position 16.6 to 14.2, still page 2-3 for its main terms.
+- **Goals (19 Sept):** 289 impressions at position 8.7 in its first week.
+- **Paul Barry callouts (20-21 Sept) and slop tidy (22-23 Sept):** too recent to read. One to watch: "how to become a footballer" 7.1 to 17 (49 to 1 impressions, tiny volume) after the 23 Sept heading change. Page-level position is flat at 7.9.
+- **Drops that are demand, not rankings:** wide feet (-1,152 impressions, but position 8.0 to 7.6 and clicks flat); JPL explainer (-913, almost all from "jpl league" 990 to 229 at a steady position); Aston Villa (launch bump fading, position steady 5.3).
