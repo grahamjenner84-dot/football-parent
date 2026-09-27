@@ -75,6 +75,12 @@ export default function FootballGearPage() {
             "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose.",
         },
         {
+          title: "Children's Soft Ground Football Boots",
+          href: "/football-gear/childrens-soft-ground-football-boots",
+          description:
+            "When junior SG boots genuinely help on muddy grass, whether metal studs are allowed in youth football, and why 3G pitch rules vary by venue.",
+        },
+        {
           title: "Best Football Gloves for Winter Training",
           href: "/football-gear/best-football-gloves-for-winter-training",
           description:
