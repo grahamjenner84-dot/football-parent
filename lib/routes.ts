@@ -124,6 +124,9 @@ export const routes = [
   // Coach App
   '/football-parent-coach-app',
 
+  // Progress (the parents' app, progress.footballparent.co.uk)
+  '/progress',
+
   // Legal
   '/privacy-policy',
   '/cookie-policy',
