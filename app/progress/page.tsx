@@ -209,8 +209,13 @@ export default function ProgressPage() {
               alt="Progress by Football Parent"
               width={574}
               height={146}
-              className="h-14 w-auto mb-7"
+              className="h-14 w-auto mb-4"
             />
+            {/* The brand strapline. Only "progress" is ever green (brand rules
+                in the progress repo's brand/README.md). */}
+            <p className="text-xl font-bold text-[#16211b] mb-7">
+              Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
+            </p>
             <h1 className="text-4xl lg:text-5xl font-bold text-[#16211b] leading-tight mb-5">
               Your child&apos;s football journey, kept for good
             </h1>
@@ -292,6 +297,9 @@ export default function ProgressPage() {
       {/* Price */}
       <section className="bg-[#16211b] text-[#f4f6f1]">
         <div className="max-w-5xl mx-auto px-6 py-14 lg:py-16 text-center">
+          <p className="text-2xl lg:text-3xl font-bold text-white mb-8">
+            Trust the process. Track the <span className="text-[#47b473]">progress</span>.
+          </p>
           <h2 className="text-3xl font-bold text-white mb-3">Try everything free for 4 weeks</h2>
           <p className="text-lg text-[#c9d3c4] max-w-xl mx-auto mb-8">
             No card needed to start. After the trial it&apos;s £2.50 a month, and you
