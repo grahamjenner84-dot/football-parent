@@ -971,3 +971,7 @@ Both on watch until ~7 Oct.
 ## Coach App banner: "send it to your child's coach" on 19 grassroots articles (2026-09-25)
 
 Not an SEO lever, logged because it changes a mid-article block on 19 live pages. The in-article Coach App banner on grassroots-focused parent articles (list: `SHARE_AUDIENCE_SLUGS` in `app/components/CoachAppBanner.tsx`) now asks the reader to pass the app to their child's coach, with a native share button, instead of pitching them the parent features. `how-to-become-a-football-coach` switched to the coach copy; `/coaching/best-grassroots-football-apps` and `/coaching/football-team-spreadsheet` corrected from parent to coach copy. Headings, links and article text unchanged. Commit `49d70ad`. If engagement on those pages moves in the next two weeks, this is a candidate cause.
+
+## New page: Progress landing page (2026-09-27)
+
+New indexable page at `/progress` (`app/progress/page.tsx`, added to `lib/routes.ts`), the landing page for Progress, the parents' app at progress.footballparent.co.uk. Every Progress share card prints "footballparent.co.uk/progress" in its footer, so this is where parents land from a shared card. Hand-written page (not an MDX landing variant), with SoftwareApplication and FAQPage JSON-LD and its own og:image (`/og/progress-1200x630.png`). Example images use a made-up player. All CTAs link out to the app; nothing here connects to the Progress backend. Not linked from site navigation or articles yet.
