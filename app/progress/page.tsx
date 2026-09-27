@@ -6,9 +6,11 @@ import { generateSEO } from "@/lib/seo";
 //
 // Hand-written rather than an MDX landing variant: lib/landing.ts and
 // CoachLandingPage are built around the Coach App's sign-up form, and
-// Progress has its own sign-in on its own subdomain, so every CTA here is a
-// plain link out. Nothing on this site talks to the Progress backend (it
-// holds children's data; see CLAUDE.md on keeping projects isolated).
+// Progress has its own sign-in on its own subdomain. The join form is a plain
+// GET to the app with ?email=, which the app's sign-in screen prefills; the
+// parent taps once there to get their link. So this site never holds a
+// Progress key and nothing here talks to the Progress backend (it holds
+// children's data; see CLAUDE.md on keeping projects isolated).
 //
 // Claims on this page describe what the app does today. Change them with the
 // app, not ahead of it. The price and trial must match Progress's own Terms.
@@ -28,7 +30,7 @@ export const metadata = generateSEO({
   image: "/og/progress-1200x630.png",
 });
 
-const TRUST = ["4 weeks free, no card needed", "Then £2.50 a month", "Works on any phone"];
+const TRUST = ["4 weeks free, no card needed", "Then £2.50 a month", "Add their previous seasons too"];
 
 // The four features called out with a screenshot each. Screenshots are the
 // real app screens with a made-up player (Alfie) and made-up teammates and
@@ -41,8 +43,8 @@ const HIGHLIGHTS = [
     alt: "The goals list for a 5-2 win: each goal with the scorer, the assist, and left foot, right foot or header",
   },
   {
-    title: "Track their whole career, across teams and seasons",
-    body: "Every club, age group and season in one place, from their first Saturday morning team to today. Playing for two teams at once? Add both. Kept a notebook for years? Add past seasons with their totals, and it all adds up to one career.",
+    title: "Track their whole career, including previous seasons",
+    body: "Every club, age group and season in one place, from their first Saturday morning team to today. Already a few seasons in? Add their previous seasons with the games, goals and assists from each, and it all adds up to one career. Playing for two teams at once? Add both.",
     img: "/progress/screen-career.webp",
     alt: "The Progress home screen: career totals of 54 games and 32 goals, with City FC's U9, U10 and U11 seasons and a futsal team listed",
   },
@@ -73,13 +75,6 @@ const MORE = [
     title: "Both parents, one record",
     body: "Share a player with another parent so you can both log matches. You see their email and approve them before they get access.",
   },
-];
-
-const PRIVACY = [
-  "We never ask for your child's date of birth.",
-  "Player photos stay on your phone. They are never uploaded to us.",
-  "Share cards show first name only unless you choose otherwise.",
-  "Delete a player or your whole account from Settings at any time, with 7 days to change your mind.",
 ];
 
 const FAQS = [
@@ -128,14 +123,37 @@ function Check() {
   );
 }
 
-function StartButton({ label = "Start your free trial" }: { label?: string }) {
+/** "Start your journey": the email goes to the app's sign-in screen, which
+ *  fills it in (see the header comment). A plain form, so it works without
+ *  JavaScript and needs no client component. */
+function JoinForm({ id, dark = false }: { id?: string; dark?: boolean }) {
   return (
-    <a
-      href={APP_URL}
-      className="inline-flex items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white no-underline shadow-sm transition-colors hover:bg-[#0f5d34]"
-    >
-      {label}
-    </a>
+    <form id={id} action={APP_URL} method="get" className="w-full max-w-md scroll-mt-24">
+      <p className={`text-lg font-bold mb-3 ${dark ? "text-white" : "text-[#16211b]"}`}>Start your journey</p>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <label htmlFor={id ? `${id}-email` : undefined} className="sr-only">
+          Your email
+        </label>
+        <input
+          id={id ? `${id}-email` : undefined}
+          type="email"
+          name="email"
+          required
+          autoComplete="email"
+          placeholder="Your email"
+          className="flex-1 min-w-0 rounded-full border border-[#c3ccb8] bg-white px-5 py-3.5 text-base text-[#16211b] placeholder:text-[#8a978d] focus:outline-none focus:ring-2 focus:ring-[#1a7a45]"
+        />
+        <button
+          type="submit"
+          className="rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#0f5d34] cursor-pointer"
+        >
+          Start free trial
+        </button>
+      </div>
+      <p className={`mt-3 text-sm ${dark ? "text-[#c9d3c4]" : "text-[#5d6b60]"}`}>
+        We&apos;ll take you to Progress to send your sign-in link. No password needed.
+      </p>
+    </form>
   );
 }
 
@@ -197,11 +215,11 @@ export default function ProgressPage() {
               Your child&apos;s football journey, kept for good
             </h1>
             <p className="text-lg text-[#3c4a40] leading-relaxed max-w-xl mb-8">
-              Progress is the app for football parents. Log every match, keep their
-              career stats, track training and coach feedback, and turn the season
-              into cards worth sharing.
+              Progress is the app for football parents. Log every goal and assist,
+              keep their career stats (previous seasons included), track training
+              and coach feedback, and turn the season into cards worth sharing.
             </p>
-            <StartButton />
+            <JoinForm id="join" />
             <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#5d6b60] list-none p-0">
               {TRUST.map((t) => (
                 <li key={t} className="flex items-center gap-1.5">
@@ -271,32 +289,6 @@ export default function ProgressPage() {
         </div>
       </section>
 
-      {/* Privacy */}
-      <section className="max-w-5xl mx-auto px-6 py-14 lg:py-20">
-        <h2 className="text-3xl font-bold text-[#16211b] mb-3">Built with children&apos;s data in mind</h2>
-        <p className="text-lg text-[#3c4a40] max-w-2xl mb-8">
-          Progress holds information about your child, so we collect as little as
-          we can and keep it under your control.
-        </p>
-        <ul className="grid gap-3 sm:grid-cols-2 list-none p-0 m-0">
-          {PRIVACY.map((p) => (
-            <li key={p} className="flex gap-3 rounded-xl bg-[#f4f6f1] p-4 text-[#3c4a40]">
-              <span className="mt-1">
-                <Check />
-              </span>
-              <span>{p}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-6 text-sm text-[#5d6b60]">
-          Read the full{" "}
-          <a href={`${APP_URL}/privacy`} className="text-[#0f5d34] underline">
-            Progress privacy policy
-          </a>
-          .
-        </p>
-      </section>
-
       {/* Price */}
       <section className="bg-[#16211b] text-[#f4f6f1]">
         <div className="max-w-5xl mx-auto px-6 py-14 lg:py-16 text-center">
@@ -305,7 +297,9 @@ export default function ProgressPage() {
             No card needed to start. After the trial it&apos;s £2.50 a month, and you
             can cancel any time. If you don&apos;t subscribe, nothing is deleted.
           </p>
-          <StartButton />
+          <div className="flex justify-center text-left">
+            <JoinForm id="join-trial" dark />
+          </div>
         </div>
       </section>
 
@@ -326,7 +320,12 @@ export default function ProgressPage() {
           ))}
         </div>
         <div className="mt-12 text-center">
-          <StartButton label="Start tracking their progress" />
+          <a
+            href="#join"
+            className="inline-flex items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white no-underline shadow-sm transition-colors hover:bg-[#0f5d34]"
+          >
+            Start your journey
+          </a>
         </div>
       </section>
     </div>
