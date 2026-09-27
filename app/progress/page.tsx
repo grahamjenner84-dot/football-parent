@@ -30,30 +30,48 @@ export const metadata = generateSEO({
 
 const TRUST = ["4 weeks free, no card needed", "Then £2.50 a month", "Works on any phone"];
 
-const FEATURES = [
+// The four features called out with a screenshot each. Screenshots are the
+// real app screens with a made-up player (Alfie) and made-up teammates and
+// coach, captured at 390px wide. Retake them if those screens change.
+const HIGHLIGHTS = [
   {
-    title: "Every match, logged in a minute",
-    body: "Record the score, who scored, their goals and assists, player of the match and a rating out of 10 straight after the game. Or log it live from the touchline, period by period, with the line-up and their minutes on the pitch.",
+    title: "Log every goal and every assist",
+    body: "After the game or live from the touchline, record who scored, who set it up, and how: left foot, right foot or header, open play or penalty. Log the whole team's goals, not just your child's, and the app keeps the top scorers and assisters for every season.",
+    img: "/progress/screen-goals.webp",
+    alt: "The goals list for a 5-2 win: each goal with the scorer, the assist, and left foot, right foot or header",
   },
   {
-    title: "Their whole career in one place",
-    body: "Every club and every season, with games, goals, assists and player of the match adding up as you go. Season already started? Add the games so far. Kept a notebook for years? Add past seasons with their totals.",
+    title: "Track their whole career, across teams and seasons",
+    body: "Every club, age group and season in one place, from their first Saturday morning team to today. Playing for two teams at once? Add both. Kept a notebook for years? Add past seasons with their totals, and it all adds up to one career.",
+    img: "/progress/screen-career.webp",
+    alt: "The Progress home screen: career totals of 54 games and 32 goals, with City FC's U9, U10 and U11 seasons and a futsal team listed",
   },
   {
-    title: "Training and development",
-    body: "Note what they worked on at training and how it went, and see how they're developing across the FA's four corners: technical and tactical, physical, psychological and social.",
+    title: "Get feedback from their coach",
+    body: "Send the coach a private link. They rate your child across the FA's four corners and write what's going well and what to work on, in their browser, with no account and no app. Every report is kept, so you can see how they've come on since the last one.",
+    img: "/progress/screen-coach.webp",
+    alt: "A coach report from Coach Dan: a four-corner chart and ratings for skills such as first touch, dribbling and finishing",
   },
   {
-    title: "Feedback from their coach",
-    body: "Send the coach a private link. They rate your child and write a short report in their browser, with no account and no app to download, and it lands straight in your child's record.",
+    title: "Make notes on games and training, and spot patterns",
+    body: "After a match or a session, jot down what went well and what to work on, and tag it: first touch, confidence, weaker foot. The tags add up across the four corners, so you can see what keeps coming up and what to practise next.",
+    img: "/progress/screen-notes.webp",
+    alt: "Training notes tagged with skills such as finishing, weaker foot and communication, with counts for each of the four corners",
+  },
+];
+
+const MORE = [
+  {
+    title: "Minutes and line-ups",
+    body: "Log a game live, quarter by quarter or half by half, and see their minutes on the pitch and where they played.",
   },
   {
     title: "Cards worth sharing",
-    body: "Turn a season, a month or a big game into a card sized for WhatsApp and Instagram, with hat-trick, brace and player of the match versions. First name only by default.",
+    body: "Turn a season, a month or a big game into a card for WhatsApp and Instagram, with hat-trick, brace and player of the match versions. First name only by default.",
   },
   {
     title: "Both parents, one record",
-    body: "Share a player with another parent so you can both log matches. They ask to join with a link, and you see their email and approve them before they get access.",
+    body: "Share a player with another parent so you can both log matches. You see their email and approve them before they get access.",
   },
 ];
 
@@ -207,48 +225,48 @@ export default function ProgressPage() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Highlights: text and a screenshot, alternating sides */}
       <section className="max-w-5xl mx-auto px-6 py-14 lg:py-20">
         <h2 className="text-3xl font-bold text-[#16211b] mb-3">What you can keep</h2>
-        <p className="text-lg text-[#3c4a40] max-w-2xl mb-10">
+        <p className="text-lg text-[#3c4a40] max-w-2xl mb-12">
           The things you&apos;d otherwise lose to a group chat, a camera roll or
           memory, all in one record that grows with them.
         </p>
-        <div className="grid gap-5 sm:grid-cols-2">
-          {FEATURES.map((f) => (
-            <div key={f.title} className="rounded-2xl border border-[#d8ded1] bg-white p-6">
-              <h3 className="text-xl font-bold text-[#16211b] mb-2">{f.title}</h3>
-              <p className="text-[#3c4a40] leading-relaxed m-0">{f.body}</p>
+        <div className="grid gap-16 lg:gap-20">
+          {HIGHLIGHTS.map((h, i) => (
+            <div key={h.title} className="grid gap-8 md:grid-cols-2 md:items-center">
+              <div className={i % 2 === 1 ? "md:order-2" : undefined}>
+                <h3 className="text-2xl font-bold text-[#16211b] mb-3">{h.title}</h3>
+                <p className="text-lg text-[#3c4a40] leading-relaxed m-0">{h.body}</p>
+              </div>
+              <div className="flex justify-center">
+                {/* eslint-disable-next-line @next/next/no-img-element -- static
+                    screenshot, sized below; a made-up player throughout. */}
+                <img
+                  src={h.img}
+                  alt={h.alt}
+                  width={780}
+                  height={1688}
+                  loading="lazy"
+                  className="w-64 sm:w-72 h-auto rounded-[2rem] border-[6px] border-[#16211b] shadow-xl"
+                />
+              </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Career at a glance */}
+      {/* And more */}
       <section className="bg-[#f4f6f1] border-y border-[#d8ded1]">
-        <div className="max-w-5xl mx-auto px-6 py-14 lg:py-16 grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <h2 className="text-3xl font-bold text-[#16211b] mb-4">Their career at a glance</h2>
-            <p className="text-lg text-[#3c4a40] leading-relaxed mb-4">
-              Open the app and their games, goals, assists and player of the match
-              awards are right there, across every club and season. Tap a season
-              for the matches, the line-ups and how many minutes they played.
-            </p>
-            <p className="text-lg text-[#3c4a40] leading-relaxed m-0">
-              Playing for two teams at once is fine too: add both, and everything
-              adds up.
-            </p>
-          </div>
-          <div className="flex justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element -- static
-                example image of the app's player card, made-up player. */}
-            <img
-              src="/progress/player-card-example.webp"
-              alt="The Progress player card for a made-up player, Alfie: 63 games, 38 goals, 21 assists, 9 player of the match awards"
-              width={752}
-              height={390}
-              className="w-full max-w-md h-auto rounded-2xl shadow-lg"
-            />
+        <div className="max-w-5xl mx-auto px-6 py-14 lg:py-16">
+          <h2 className="text-3xl font-bold text-[#16211b] mb-8">And there&apos;s more</h2>
+          <div className="grid gap-5 md:grid-cols-3">
+            {MORE.map((m) => (
+              <div key={m.title} className="rounded-2xl border border-[#d8ded1] bg-white p-6">
+                <h3 className="text-xl font-bold text-[#16211b] mb-2">{m.title}</h3>
+                <p className="text-[#3c4a40] leading-relaxed m-0">{m.body}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
