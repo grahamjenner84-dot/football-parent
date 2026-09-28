@@ -1028,3 +1028,4 @@ One `<ExpertOpinion>` callout per page, each an excerpt of his answer from the n
 - `football-development/football-burnout`, "Burnout or Just a Bad Week?" (dip vs burnout): 616a8b4
 - `parent-guides/biggest-football-parent-mistakes`, "Touchline Behaviour" (body language): 1af2ace
 - `parent-guides/jpl-vs-grassroots-football`, "Pressure and environment" (who is the goal for?): 6d18999. Page had a slop tidy on 22 Sept.
+- `parent-guides/what-to-say-after-football-matches`: added a `<ParentNote>` (Graham's own car-journey story, in his words) under "Processing your frustration out loud": 3c59e79. Same page and day as the Matt Baxter quote (277ff1f), so read the two as one change.
