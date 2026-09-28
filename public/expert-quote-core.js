@@ -37,6 +37,16 @@
     var leftX = side, rightEdge = W - side - extraR;
     return { W: W, H: H, leftX: leftX, rightEdge: rightEdge, maxW: rightEdge - leftX, centerX: (leftX + rightEdge) / 2, safeTop: top, safeBottom: H - bot };
   }
+  // The cover is the only slide the profile grid shows, and the grid crops a
+  // 4:5 carousel cover to roughly its centre x 127-953, so the 96px carousel
+  // margin let the headline and credit logo run off the tile's edges. Covers
+  // get a wider side margin on carousels; reels (full width in the grid) keep safe().
+  function coverSafe(format) {
+    var S = safe(format);
+    if (format !== 'carousel') return S;
+    var side = 170;
+    return { W: S.W, H: S.H, leftX: side, rightEdge: S.W - side, maxW: S.W - 2 * side, centerX: S.W / 2, safeTop: S.safeTop, safeBottom: S.safeBottom };
+  }
 
   function theme(bgMode) {
     var light = bgMode === 'light';
@@ -279,7 +289,7 @@
 
   /* ---------- slide drawing ---------- */
   function drawCoverQuestion(ctx, format, data, images) {
-    var S = safe(format), t = theme(bgFor(data.bgBySlide, 'cover'));
+    var S = coverSafe(format), t = theme(bgFor(data.bgBySlide, 'cover'));
     bgDark(ctx, format, t);
     stamp(ctx, S.centerX, S.safeTop + 64, t);
     var creditY = S.safeBottom - 150, eyebrowH = 52;
@@ -301,7 +311,7 @@
     footerHandles(ctx, S, !t.light, data.platform, data.handle);
   }
   function drawCoverQuote(ctx, format, data, images) {
-    var S = safe(format), t = theme(bgFor(data.bgBySlide, 'cover'));
+    var S = coverSafe(format), t = theme(bgFor(data.bgBySlide, 'cover'));
     bgDark(ctx, format, t); goldGlow();
     var accent = data.quoteWhite ? t.text : t.accent;
     stamp(ctx, S.centerX, S.safeTop + 64, t);
@@ -323,7 +333,7 @@
     footerHandles(ctx, S, !t.light, data.platform, data.handle);
   }
   function drawCoverClassic(ctx, format, data, images) {
-    var S = safe(format), t = theme(bgFor(data.bgBySlide, 'cover'));
+    var S = coverSafe(format), t = theme(bgFor(data.bgBySlide, 'cover'));
     bgDark(ctx, format, t); goldGlow();
     var cx = S.centerX, y = S.safeTop + 120;
     stamp(ctx, cx, y, t); y += 70;
@@ -357,6 +367,11 @@
     ctx.lineWidth = 6; ctx.strokeStyle = t.accent; roundRect(ctx, x, y, w, h, 26); ctx.stroke();
     ctx.restore();
   }
+  // Photo box on the bio slide, smaller on 4:5 so the bio text keeps room.
+  // NAME_GAP is box bottom to the name's baseline: the name is 62px Anton
+  // drawn on an alphabetic baseline, so a smaller gap puts it over the frame.
+  var BIO_NAME_GAP = 96;
+  function bioPhotoSize(format) { return format === 'carousel' ? { w: 420, h: 420 } : { w: 470, h: 490 }; }
   function drawBio(ctx, format, data, images) {
     var S = safe(format), t = theme(bgFor(data.bgBySlide, 'bio'));
     bgDark(ctx, format, t);
@@ -364,8 +379,8 @@
     var y = S.safeTop + 118;
     ctx.textAlign = 'center'; ctx.textBaseline = 'top';
     ctx.font = "600 26px 'Spline Sans Mono'"; ctx.fillStyle = t.accent; ctx.fillText('MEET THE EXPERT', S.centerX, y); y += 52;
-    var pw = 470, ph = 490, px = S.centerX - pw / 2;
-    photoBox(ctx, px, y, pw, ph, t, images.bioImg); y += ph + 46;
+    var ps = bioPhotoSize(format), pw = ps.w, ph = ps.h, px = S.centerX - pw / 2;
+    photoBox(ctx, px, y, pw, ph, t, images.bioImg); y += ph + BIO_NAME_GAP;
     ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
     ctx.font = "400 62px 'Anton'"; ctx.fillStyle = t.text; ctx.fillText(creditName(data).toUpperCase(), S.centerX, y); y += 42;
     ctx.font = "600 25px 'Spline Sans Mono'"; ctx.fillStyle = t.accent; ctx.fillText((data.role || '').toUpperCase(), S.centerX, y); y += 54;
@@ -497,6 +512,9 @@
     CAROUSEL_HEIGHT: CAROUSEL_HEIGHT,
     dims: dims,
     safe: safe,
+    coverSafe: coverSafe,
+    bioPhotoSize: bioPhotoSize,
+    BIO_NAME_GAP: BIO_NAME_GAP,
     theme: theme,
     myHandle: myHandle,
     platformName: platformName,

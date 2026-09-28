@@ -270,7 +270,7 @@ const EXPERT_FORMAT = "carousel";
 function measureExpertCoverQuestion(label: string, head: string, body: string): SlideFitResult {
   const dims = ExpertQuoteCore.dims(EXPERT_FORMAT) as { W: number; H: number };
   const ctx = getCtx(dims.W, dims.H);
-  const S = ExpertQuoteCore.safe(EXPERT_FORMAT);
+  const S = ExpertQuoteCore.coverSafe(EXPERT_FORMAT);
   // Mirrors drawCoverQuestion() exactly - see public/expert-quote-core.js.
   const creditY = S.safeBottom - 150;
   const eyebrowH = 52;
@@ -309,11 +309,12 @@ function measureExpertBio(label: string, bio: string): SlideFitResult {
   const dims = ExpertQuoteCore.dims(EXPERT_FORMAT) as { W: number; H: number };
   const ctx = getCtx(dims.W, dims.H);
   const S = ExpertQuoteCore.safe(EXPERT_FORMAT);
-  // Mirrors drawBio() exactly: eyebrow (52px) + fixed 470x490 photo box
-  // (+46 gap) + name line (42px) + role line (54px) all precede the bio
+  // Mirrors drawBio() exactly: eyebrow (52px) + fixed photo box (per format)
+  // + name gap + name line (42px) + role line (54px) all precede the bio
   // text - see public/expert-quote-core.js. None of that depends on
   // content, so the bio text's budget is a fixed value for a given format.
-  const y = S.safeTop + 118 + 52 + 490 + 46 + 42 + 54;
+  const ph = (ExpertQuoteCore.bioPhotoSize(EXPERT_FORMAT) as { w: number; h: number }).h;
+  const y = S.safeTop + 118 + 52 + ph + ExpertQuoteCore.BIO_NAME_GAP + 42 + 54;
   const budget = S.safeBottom - y - 70;
   const archivo = (s: number) => `500 ${s}px 'Archivo'`;
   const f = ExpertQuoteCore.fitWords(ctx, [ExpertQuoteCore.wordsRaw(bio)], S.maxW, budget, 38, 30, 1.4, 0, archivo);
