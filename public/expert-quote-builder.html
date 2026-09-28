@@ -145,6 +145,17 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
       <div style="border:1px solid #2a2a2f;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:9px">
         <div class="lbl" style="color:#E6B53D">Import a full post</div>
+        <select id="fieldPost" class="fld">
+          <option value="">Saved posts: pick one to load every slide…</option>
+        </select>
+        <div id="blockCaption" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <span class="lbl">Caption</span>
+            <button id="btnCopyCaption" class="seg" style="padding:5px 11px;font-size:12px">Copy caption</button>
+          </div>
+          <textarea id="fieldCaption" class="fld" style="margin-top:7px;height:120px;resize:vertical"></textarea>
+          <div id="collabNote" class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5;margin-top:6px"></div>
+        </div>
         <div class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5">Fill every slide at once. Upload (or paste) the builder block Claude returns, or any labelled text / JSON.</div>
         <div style="display:flex;gap:8px">
           <button id="btnPickImport" class="ar" style="flex:1;background:#16161a;color:#E6B53D;border:1px solid #E6B53D;padding:10px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer">⬆ Upload .txt / .json</button>
@@ -241,6 +252,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     interview: 'Full article — link in our bio',
     siteUrl: 'footballparent.co.uk',
     shareLine: 'Share it with them',
+    caption: '',
+    collab: '',
     platform: 'ig',
     format: 'reel',
     active: 0,
@@ -268,7 +281,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         logoSrc: s.logoSrc, topic: s.topic, bio: s.bio, bioSrc: s.bioSrc, quoteFirst: s.quoteFirst, coverStyle: s.coverStyle,
         coverQuestion: s.coverQuestion, coverEyebrow: s.coverEyebrow, coverContext: s.coverContext, blurb: s.blurb,
         qas: s.qas, quote: s.quote, cta: s.cta, interview: s.interview, siteUrl: s.siteUrl, shareLine: s.shareLine,
-        format: s.format, bgBySlide: s.bgBySlide
+        format: s.format, bgBySlide: s.bgBySlide, caption: s.caption, collab: s.collab
       }));
     } catch (e) {}
   }
@@ -323,10 +336,53 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         presets.forEach(function (p) { var o = document.createElement('option'); o.value = p.id; o.textContent = p.label || p.person || p.name; sel.appendChild(o); });
       }).catch(function () {});
   }
-  function applyPreset(id) {
-    var p = presets.find(function (x) { return x.id === id; }); if (!p) return;
+  function applyPreset(id, quiet) {
+    var p = presets.find(function (x) { return x.id === id; }); if (!p) return false;
     ['name', 'handle', 'person', 'role', 'bio', 'logoSrc', 'bioSrc'].forEach(function (k) { state[k] = p[k] || ''; });
-    persist(); loadLogo(state.logoSrc); loadBio(state.bioSrc); render();
+    loadLogo(state.logoSrc); loadBio(state.bioSrc);
+    if (!quiet) { persist(); render(); }
+    return true;
+  }
+
+  /* ---------- saved posts (public/expert-posts.json) ---------- */
+  // One entry per planned carousel: an expert preset id plus one theme's
+  // cover, Q&As, quote, closing line and caption. Written by the
+  // football-parent-expert-carousel skill.
+  var posts = [];
+  function loadPosts() {
+    fetch('/expert-posts.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (list) {
+        posts = Array.isArray(list) ? list : [];
+        var sel = document.getElementById('fieldPost');
+        posts.forEach(function (p) { var o = document.createElement('option'); o.value = p.id; o.textContent = p.label || p.id; sel.appendChild(o); });
+      }).catch(function () {});
+  }
+  function applyPost(id) {
+    var p = posts.find(function (x) { return x.id === id; }); if (!p) return;
+    if (p.expert) applyPreset(p.expert, true);
+    Object.assign(state, {
+      coverStyle: 'question',
+      coverEyebrow: p.coverEyebrow || 'Football Parent asks',
+      coverQuestion: p.coverQuestion || '',
+      coverContext: p.coverContext || '',
+      qas: (p.qas || []).map(function (x) { return { q: x.q || '', a: x.a || '' }; }),
+      quote: p.quote || '',
+      quoteFirst: false,
+      cta: p.cta || state.cta,
+      interview: p.interview || state.interview,
+      caption: p.caption || '',
+      collab: p.collab || '',
+      bgBySlide: {},
+      active: 0,
+      importMsg: '✓ Loaded ' + (p.label || p.id) + '.'
+    });
+    persist(); render();
+  }
+  async function copyCaption() {
+    var btn = document.getElementById('btnCopyCaption');
+    try { await navigator.clipboard.writeText(state.caption); btn.textContent = '✓ Copied'; }
+    catch (e) { var ta = document.getElementById('fieldCaption'); ta.select(); try { document.execCommand('copy'); btn.textContent = '✓ Copied'; } catch (e2) { btn.textContent = 'Select and copy'; } }
+    setTimeout(function () { btn.textContent = 'Copy caption'; }, 2000);
   }
 
   /* ---------- QA editing ---------- */
@@ -346,9 +402,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     text = String(text).trim();
     if (text && (text[0] === '{' || text[0] === '[')) { try { return normObj(JSON.parse(text)); } catch (e) {} }
     var lines = text.split(/\r?\n/); var out = { qas: [] }; var cur = null, curQ = null;
-    var fmap = { name: 'name', handle: 'handle', role: 'role', person: 'person', topic: 'topic', bio: 'bio', blurb: 'blurb', quote: 'quote', cta: 'cta', closing: 'cta', interview: 'interview' };
+    var fmap = { name: 'name', handle: 'handle', role: 'role', person: 'person', topic: 'topic', bio: 'bio', blurb: 'blurb', quote: 'quote', cta: 'cta', closing: 'cta', interview: 'interview', expert: 'expert', cover: 'coverQuestion', context: 'coverContext', eyebrow: 'coverEyebrow' };
     lines.forEach(function (line) {
-      var m = line.match(/^\s*(name|handle|role|person|topic|bio|blurb|quote|cta|closing|interview|q|a|question|answer)\s*\d*\s*[:\-–]\s*(.*)$/i);
+      var m = line.match(/^\s*(name|handle|role|person|topic|bio|blurb|quote|cta|closing|interview|expert|cover|context|eyebrow|q|a|question|answer)\s*\d*\s*[:\-–]\s*(.*)$/i);
       if (m) {
         var key = m[1].toLowerCase(), val = m[2];
         if (key === 'q' || key === 'question') { curQ = { q: val, a: '' }; out.qas.push(curQ); cur = 'q'; }
@@ -378,23 +434,29 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     return {
       name: get('name'), handle: get('handle'), role: get('role'), person: get('person'), topic: get('topic'), bio: get('bio'),
       blurb: get('blurb'), quote: get('quote'), cta: get('cta', 'closing'), interview: get('interview'),
+      expert: get('expert'), coverQuestion: get('coverquestion', 'cover'), coverContext: get('covercontext', 'context'), coverEyebrow: get('covereyebrow', 'eyebrow'),
       qas: Array.isArray(arr) ? arr.map(function (x) { return { q: String(x.q || x.question || '').trim(), a: String(x.a || x.answer || '').trim() }; }) : []
     };
   }
   function applyImport(o) {
     if (!o) { state.importMsg = 'Could not read that file.'; render(); return; }
     var next = {};
-    ['name', 'handle', 'role', 'person', 'topic', 'bio', 'blurb', 'quote', 'cta', 'interview'].forEach(function (k) {
+    // EXPERT: <preset id> fills name/handle/role/person/bio/logo/photo first;
+    // any explicit NAME/ROLE/etc. lines still win.
+    var usedPreset = !!(o.expert && applyPreset(String(o.expert).trim(), true));
+    ['name', 'handle', 'role', 'person', 'topic', 'bio', 'blurb', 'quote', 'cta', 'interview', 'coverQuestion', 'coverContext', 'coverEyebrow'].forEach(function (k) {
       if (o[k] != null && String(o[k]).trim() !== '') next[k] = String(o[k]).trim();
     });
     if (next.handle && next.handle[0] !== '@') next.handle = '@' + next.handle;
     var qas = Array.isArray(o.qas) ? o.qas.filter(function (x) { return (x.q && x.q.trim()) || (x.a && x.a.trim()); }) : [];
     if (qas.length) next.qas = qas;
-    if (!Object.keys(next).length) { state.importMsg = 'No recognisable fields found.'; render(); return; }
+    if (next.coverQuestion) next.coverStyle = 'question';
+    if (!Object.keys(next).length && !usedPreset) { state.importMsg = 'No recognisable fields found.'; render(); return; }
     next.active = 0;
     var bits = [];
     if (next.qas) bits.push(next.qas.length + ' Q&A');
-    var fc = Object.keys(next).filter(function (k) { return k !== 'qas' && k !== 'active'; }).length;
+    if (usedPreset) bits.push('saved expert');
+    var fc = Object.keys(next).filter(function (k) { return k !== 'qas' && k !== 'active' && k !== 'coverStyle'; }).length;
     if (fc) bits.push(fc + ' field' + (fc > 1 ? 's' : ''));
     next.importMsg = '✓ Imported ' + bits.join(' + ') + '.';
     next.showPaste = false;
@@ -646,6 +708,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     document.getElementById('btnPasteImport').textContent = state.showPaste ? 'Hide' : 'Paste';
     document.getElementById('blockPasteImport').style.display = state.showPaste ? '' : 'none';
     document.getElementById('importMsg').textContent = state.importMsg || '';
+    document.getElementById('blockCaption').style.display = state.caption ? '' : 'none';
+    setVal('fieldCaption', state.caption);
+    document.getElementById('collabNote').textContent = state.collab ? 'Collab: invite ' + state.collab + ' as a collaborator when you post.' : '';
 
     // preview nav
     var list = slideList(); var active = Math.min(state.active, list.length - 1);
@@ -674,6 +739,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('btnIG').addEventListener('click', function () { set('platform', 'ig'); });
   document.getElementById('btnTK').addEventListener('click', function () { set('platform', 'tiktok'); });
 
+  document.getElementById('fieldPost').addEventListener('change', function (e) { applyPost(e.target.value); e.target.value = ''; });
+  document.getElementById('btnCopyCaption').addEventListener('click', copyCaption);
+  document.getElementById('fieldCaption').addEventListener('change', function (e) { set('caption', e.target.value); });
   document.getElementById('fieldPreset').addEventListener('change', function (e) { applyPreset(e.target.value); e.target.value = ''; });
   document.getElementById('fieldName').addEventListener('change', function (e) { set('name', e.target.value); });
   document.getElementById('fieldHandle').addEventListener('change', function (e) {
@@ -737,6 +805,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   loadBio(state.bioSrc);
   loadPrompt();
   loadPresets();
+  loadPosts();
   ensureFonts().then(redraw);
   render();
 })();

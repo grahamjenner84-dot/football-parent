@@ -114,5 +114,10 @@ log the new article in the latest `seo-changes-*.md`. When Graham says to put
 it live, merge to `main` and confirm the deploy.
 
 Tell Graham in the summary that the expert is now in the builder's
-"Saved experts" list. For the carousel content itself, the builder's
-"Copy hook-finder prompt" plus the new article is the route.
+"Saved experts" list.
+
+## 6. Instagram posts
+
+Once the article exists, run the `football-parent-expert-carousel` skill on
+it to harvest 2-3 carousels (one angle each, exact words only) into the
+builder's "Saved posts" list.

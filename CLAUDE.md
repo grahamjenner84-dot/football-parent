@@ -120,5 +120,6 @@ Why a session created here works in the app: `/coach-app` is a Vercel *rewrite* 
 ## Skills
 - Use the football-parent-articles skill (`.claude/skills/football-parent-articles/SKILL.md`) for any new article
 - Use the football-parent-expert-interview skill (`.claude/skills/football-parent-expert-interview/SKILL.md`) for interview write-ups from an expert's Q&As: it writes the article and adds the expert (photo, logo, bio, role, handle) to `public/expert-presets.json` for the Instagram Expert Opinion builder
+- Use the football-parent-expert-carousel skill (`.claude/skills/football-parent-expert-carousel/SKILL.md`) to turn an interview into 2-3 Instagram Expert Opinion carousels in `public/expert-posts.json`: exact expert words only, checked by `scripts/expert-post-check.ts`
 - Use the football-parent-review skill (`.claude/skills/football-parent-review/SKILL.md`) for fact-checking and audits
 - Use the football-parent-link-building skill (`.claude/skills/football-parent-link-building/SKILL.md`) for link building, prospecting and outreach drafts
