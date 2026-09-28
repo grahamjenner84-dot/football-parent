@@ -1,0 +1,212 @@
+[
+  {
+    "url": "https://www.coachbentley.com/post/2016/03/10/combating-relative-age-effect",
+    "source": "topic:relative age effect youth football blog",
+    "reason": "US soccer coach's 2016 post about US birth-year registration: not UK, not current"
+  },
+  {
+    "url": "https://www.pavfunballacademy.co.uk/fear-of-age-mixing-in-football-why/",
+    "source": "topic:should my child play up an age group football",
+    "reason": "Content check rejected: only links to social share buttons"
+  },
+  {
+    "url": "https://www.pavfunballacademy.co.uk/is-my-child-talented-tips-for-coaches-and-parents/",
+    "source": "topic:signs your child is ready for academy football",
+    "reason": "Content check rejected: only links to social share buttons"
+  },
+  {
+    "url": "https://www.innerdrive.co.uk/blog/playing-up-young-athletes/",
+    "source": "topic:should my child play up an age group football",
+    "reason": "Unreadable: bot wall even with JS rendering"
+  },
+  {
+    "url": "https://generationelite.co.uk/9-aside-football-formations/",
+    "source": "topic:best formation for 9v9 football",
+    "reason": "Unreadable: bot wall even with JS rendering"
+  },
+  {
+    "url": "https://www.premierskillsacademy.com/news/99-how-to-choose-the-right-kids-football-club",
+    "source": "topic:how to choose a grassroots football club for your child",
+    "reason": "Unreadable: bot wall even with JS rendering"
+  },
+  {
+    "url": "https://babyballers.com/how-to-choose-the-right-football-club-for-your-child/",
+    "source": "topic:how to choose a grassroots football club for your child",
+    "reason": "Unreadable: bot wall even with JS rendering"
+  },
+  {
+    "url": "https://thefootballweek.com/2026/01/02/what-parents-dont-see-academy-dream/",
+    "source": "topic:football academy trial rejection what next parents",
+    "reason": "Unreadable, plain and JS; worth a retry next run (recent, on-topic)"
+  },
+  {
+    "url": "https://thefootballweek.com/2026/01/07/confidence-self-esteem-young-football-players/",
+    "source": "topic:shy child football confidence tips parents",
+    "reason": "Unreadable, plain and JS; worth a retry next run"
+  },
+  {
+    "url": "https://www.sportsmith.co/articles/bio-banding-brentford-fc-academy-players-age-is-just-another-number/",
+    "source": "topic:late developers football academy blog",
+    "reason": "Practitioner S&C publication citing journals; a parent guide is the wrong level for its readers"
+  },
+  {
+    "url": "https://www.sportandhealthacademy.com/childrens-football/benefits-of-private-football-coaching/",
+    "source": "topic:is private football coaching worth it",
+    "reason": "Content check rejected: site page with no author voice"
+  },
+  {
+    "url": "https://www.lawinsport.com/topics/item/a-guide-for-young-footballers-on-how-on-to-choose-an-agent",
+    "source": "topic:does my child need a football agent",
+    "reason": "Legal trade publication; a bylined guest piece that will not be edited to add a parent-site link"
+  },
+  {
+    "url": "https://www.discountfootballkits.com/blog/fa-coaching-badges-how-to-be-a-football-coach/",
+    "source": "topic:how to become a grassroots football coach uk",
+    "reason": "4,000-word competitor to our own coaching guides; nothing ours adds that theirs lacks"
+  },
+  {
+    "url": "https://ukfootballacademyfinder.com/football_pathway_advice/what-is-a-development-centre/",
+    "source": "sweep:development centre vs academy football",
+    "reason": "Content check rejected: not an article, no outbound links (private academy placement service)"
+  },
+  {
+    "url": "https://www.conorthomasacademy.com/post/from-grassroots-to-academy-football-what-needs-to-change-in-your-game",
+    "source": "sweep:development centre vs academy football",
+    "reason": "No contact route found: no email, no contact form, only a booking page"
+  },
+  {
+    "url": "https://ultimatecrystalpalace.com/crystal-palace-academy-trials-process-tips/",
+    "source": "sweep:crystal palace academy trials",
+    "reason": "No contact route; anonymous theme-template fan site that reads as auto-generated"
+  },
+  {
+    "url": "https://prestigefootballschools.com/blogs/best-uk-football-schools/the-pathway-to-professional-football-understanding-the-academy-system",
+    "source": "sweep:football scholarship at 16 explained",
+    "reason": "Placement service for overseas families; no named author, weak fit"
+  },
+  {
+    "url": "https://www.franchisewmf.com/en-gb/news/how-to-choose-the-right-football-academy-for-your-child",
+    "source": "sweep:development centre vs academy football",
+    "reason": "Franchise-recruitment site for a paid academy provider; only links to its own brand"
+  },
+  {
+    "url": "https://goalstation.com/blogs/magazine/what-is-a-football-academy",
+    "source": "sweep:what is a football academy",
+    "reason": "Training-equipment product site, US/Spain-facing, cites US soccer sites"
+  },
+  {
+    "url": "https://www.islandecho.co.uk/how-to-become-a-football-scout/",
+    "source": "sweep:how do football scouts find players uk",
+    "reason": "Sponsored post linking to non-GamStop casinos and 1xbet: link spam"
+  },
+  {
+    "url": "https://myfootballfuture.com/blog/how-to-get-football-agent-youth-player",
+    "source": "topic:does my child need a football agent",
+    "reason": "Commercial trials/career platform aimed at international players"
+  },
+  {
+    "url": "https://www.croatianfootballacademy.com/post/from-pitch-to-paper-a-parent-s-guide-to-football-agents",
+    "source": "topic:does my child need a football agent",
+    "reason": "Not UK"
+  },
+  {
+    "url": "https://www.nexaimfootball.co.uk/post/theimportance-of-confidence-in-youth-football-tips-to-improve-it",
+    "source": "topic:building confidence in young footballers blog",
+    "reason": "Content check rejected: thin, no outbound links"
+  },
+  {
+    "url": "https://tsccoachesclub.com/how-grassroots-football-coaches-can-boost-confidence-in-their-players/",
+    "source": "topic:building confidence in young footballers blog",
+    "reason": "Content check rejected: site page with no author voice"
+  },
+  {
+    "url": "https://www.strikeracademy.co.uk/3-ways-help-child-excel-football/",
+    "source": "topic:why isn't my child improving at football",
+    "reason": "Content check rejected: site page with no author voice"
+  },
+  {
+    "url": "https://bfcsoccerschools.com/blog/how-to-prepare-your-child-for-a-football-trial-or-selection-camp",
+    "source": "topic:girls football trials advice parents",
+    "reason": "Bengaluru FC soccer schools (India): not UK"
+  },
+  {
+    "url": "https://starcrossdonsfc.co.uk/the-chairman-blogs/",
+    "source": "topic:football drills for 7 year olds blog",
+    "reason": "Content check rejected: club information page"
+  },
+  {
+    "url": "https://fenregistrophies.co.uk/could-you-be-a-grassroots-coach/",
+    "source": "topic:grassroots football volunteer coach blog uk",
+    "reason": "Content check rejected: only links to social and its own shop"
+  },
+  {
+    "url": "https://www.letsplaythegame.co.uk/blog/10-things-every-grassroots-football-coach/",
+    "source": "topic:grassroots football volunteer coach blog uk",
+    "reason": "Site footer dated 2015 and posts undated: looks abandoned; no readable email"
+  },
+  {
+    "url": "https://www.football-tutorials.com/coaching-youth-football/",
+    "source": "topic:u7 football first season parents what to expect",
+    "reason": "American football site"
+  },
+  {
+    "url": "https://blog.isportsanalysis.com/how-to-get-scouted-in-football-benchmarking-your-skills-against-premier-league-academy-players/",
+    "source": "graph:how to get scouted for football",
+    "reason": "Content check rejected: product site page with no author voice"
+  },
+  {
+    "url": "https://learn1to1footballcambridge.com/how-to-get-scouted-in-football/",
+    "source": "graph:how to get scouted for football",
+    "reason": "Content check rejected: no outbound links, not an article"
+  },
+  {
+    "url": "https://soccerspen.com/how-to-prepare-for-a-football-trial-at-a-uk-academy-a-practical-guide/",
+    "source": "graph:how to get scouted for football",
+    "reason": "Unreadable; found via a spam-heavy linker set"
+  },
+  {
+    "url": "https://bookpebble.co.uk/blog/kids-football-activities-how-to-find-the-right-football-club-for-your-budding-footballer",
+    "source": "topic:how to choose a grassroots football club for your child",
+    "reason": "Booking-software company whose blog now targets activity providers, not parents"
+  },
+  {
+    "url": "https://www.csracademy.co.uk/blog",
+    "source": "topic:football parent blog uk",
+    "reason": "Content check rejected: members-only hub, no content"
+  },
+  {
+    "url": "https://sportsgazette.co.uk/its-business-not-personal-broken-dreams-in-academy-football/",
+    "source": "topic:is academy football worth it for my child",
+    "reason": "2021 student-magazine piece; writers move on and old posts are not updated"
+  },
+  {
+    "url": "https://wilvalerangers.co.uk/unlocking-the-benefits-of-youth-football-for-your-child",
+    "source": "topic:what age should my child start football",
+    "reason": "Content check rejected: club page linking only to its web designer"
+  },
+  {
+    "url": "https://www.topballerzfc.com/post/preparing-for-a-football-trial-tips-for-parents-and-players",
+    "source": "topic:football trials tips for parents blog",
+    "reason": "Content check rejected: too thin (318 words)"
+  },
+  {
+    "url": "https://blog.bay-bee.co.uk/how-to-know-your-local-football-academy-is-right-for-your-child/",
+    "source": "topic:signs your child is ready for academy football",
+    "reason": "Brand-collaboration lifestyle blog; the post links a paid academy and reads as sponsored, so a link would likely come with a fee"
+  },
+  {
+    "url": "https://thehalftimepint.co.uk/blog/how-to-get-scouted-for-football/",
+    "source": "sweep:how do football scouts find players uk",
+    "reason": "Audit: dormant hobby/FIFA blog, undated posts, newest content pre-2023, no outbound links"
+  },
+  {
+    "url": "https://academyparent.com/learn/what-do-football-scouts-look-for/",
+    "source": "sweep:how do football scouts find players uk",
+    "reason": "Audit: direct competitor with its own club pages, tools and affiliate links; Paul Barry interview does not cover scouting, so the angle is a stretch"
+  },
+  {
+    "url": "https://www.firststepssoccer.com/blog/prepare-child-for-first-football-match/",
+    "source": "topic:shy child football confidence tips parents",
+    "reason": "Audit: contact route unverifiable; generic local-SEO filler (2014 footer, US terms like umpires)"
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "url": "https://childrensfootball.com/blogs/news/what-age-group-should-my-child-be-playing-in",
+    "source": "topic:should my child play up an age group football",
+    "title": "What age group should my child be playing football in?",
+    "context": "Blog of a UK junior football equipment business run by parent coaches (Macclesfield); first-person explainer mapping school years to age groups and mini soccer. Cites no other sites.",
+    "fit": 6,
+    "fit_note": "Their piece explains which age group a child belongs in by school year; ours covers the question parents ask next, whether to let them play up a year, with the benefits, risks and questions to ask first",
+    "fp_page": "/football-development/playing-up-an-age-group-football",
+    "angle": "Suggest our playing-up guide as further reading beneath their age-group table",
+    "contact_name": "ChildrensFootball.com team",
+    "contact_email": "",
+    "contact_url": "https://childrensfootball.com/pages/contact"
+  },
+  {
+    "url": "https://coachnotes.co.uk/blogs/how-to-coach/how-to-coach-u5-u7-your-first-sessions",
+    "source": "topic:u7 football first season parents what to expect",
+    "title": "How to Coach U5-U7: Your First Sessions",
+    "context": "UK coaching-resource site (drill and session library); detailed guide for new U5-U7 coaches. Doesn't mention the 2026/27 FutureFit format changes. Cites no other sites.",
+    "fit": 6,
+    "fit_note": "Their guide is for coaches starting with U5-U7s; ours explains the FA's FutureFit changes that make 3v3 the Under-7 entry format from 2026/27, which those same coaches now face",
+    "fp_page": "/football-development/new-fa-youth-football-format",
+    "angle": "Offer our FutureFit explainer as the link for readers asking what match format their U7s will play this season. Check the contact page has a form before sending: its readable text is mostly a newsletter pitch",
+    "contact_name": "Coach Notes team",
+    "contact_email": "",
+    "contact_url": "https://coachnotes.co.uk/pages/contact"
+  },
+  {
+    "url": "https://www.progressivesoccer.co.uk/blog/how-to-prepare-your-child-for-a-football-trial",
+    "source": "topic:football trials tips for parents blog",
+    "title": "How to Prepare Your Child for a Football Trial",
+    "context": "UK coaching provider's blog; first-person piece by a coach who manages a team that trials about 200 players a season. Short (436 words), cites no other sites.",
+    "fit": 7,
+    "fit_note": "Their coach's advice is about mindset going in; ours walks parents through the day itself, what coaches watch, how decisions get made afterwards and a trial-day checklist",
+    "fp_page": "/academy-trials/what-happens-at-academy-trials",
+    "angle": "Offer our trials guide as the practical companion to their mindset advice, linked from 'If your child isn't selected' or the end of the post",
+    "contact_name": "Progressive Soccer (post author)",
+    "contact_email": "",
+    "contact_url": "https://www.progressivesoccer.co.uk/contact-progressive-soccer"
+  }
+]

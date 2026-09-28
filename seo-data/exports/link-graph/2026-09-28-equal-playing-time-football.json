@@ -1,0 +1,50 @@
+{
+  "keyword": "equal playing time football",
+  "ranAt": "2026-09-28T07:26:26.516Z",
+  "peers": [
+    {
+      "domain": "equalplayingfield.com",
+      "url": "https://equalplayingfield.com/blog/2017/6/5/player-profile-paige-uttley-usa",
+      "position": 20,
+      "rank": 182,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "newstalk.com",
+      "url": "https://www.newstalk.com/news/ive-seen-kids-crying-on-the-sidelines-mother-demands-equal-playing-time-for-all-children-1425175",
+      "position": 5,
+      "rank": 413,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 0
+    },
+    {
+      "domain": "news.lenovo.com",
+      "url": "https://news.lenovo.com/can-technology-create-more-equal-playing-field-fifa-soccer/",
+      "position": 7,
+      "rank": 460,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 1
+    },
+    {
+      "domain": "thesoccerstore.co.uk",
+      "url": "https://www.thesoccerstore.co.uk/blog/latest-news/can-uefas-equal-game-project-get-more-people-involved-in-football/",
+      "position": 10,
+      "rank": 241,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "keyword": "development centre football",
+  "ranAt": "2026-09-28T07:28:29.130Z",
+  "peers": [
+    {
+      "domain": "wiltshiresportsacademy.co.uk",
+      "url": "https://www.wiltshiresportsacademy.co.uk/football-coaching-academy/development-centres",
+      "position": 11,
+      "rank": 31,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "ignitesportuk.com",
+      "url": "https://www.ignitesportuk.com/course/ocfc-development-centre",
+      "position": 12,
+      "rank": 172,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 0
+    },
+    {
+      "domain": "maidstoneunited.co.uk",
+      "url": "https://maidstoneunited.co.uk/youth/player-development-centre/",
+      "position": 13,
+      "rank": 302,
+      "pitchable": true,
+      "kind": "club",
+      "size": "established",
+      "smallSitesLinkedOut": 3,
+      "linkersFound": 0
+    },
+    {
+      "domain": "community.chesterfc.com",
+      "url": "https://community.chesterfc.com/programmes/coaching/player-development-centres/",
+      "position": 14,
+      "rank": 223,
+      "pitchable": true,
+      "kind": "club",
+      "size": "small",
+      "smallSitesLinkedOut": 2,
+      "linkersFound": 0
+    },
+    {
+      "domain": "hereforddevelopmentcentre.co.uk",
+      "url": "https://hereforddevelopmentcentre.co.uk/",
+      "position": 15,
+      "rank": 0,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 9
+    },
+    {
+      "domain": "pathwaydevelopmentcentre.com",
+      "url": "https://www.pathwaydevelopmentcentre.com/",
+      "position": 17,
+      "rank": 0,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "argylecommunitytrust.co.uk",
+      "url": "https://argylecommunitytrust.co.uk/what-we-do/football/development-centres/",
+      "position": 18,
+      "rank": 327,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 5,
+      "linkersFound": 6
+    },
+    {
+      "domain": "arsenal.com",
+      "url": "https://www.arsenal.com/arsenal-football-development",
+      "position": 19,
+      "rank": 485,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 3,
+      "linkersFound": 0
+    }
+  ]
+}

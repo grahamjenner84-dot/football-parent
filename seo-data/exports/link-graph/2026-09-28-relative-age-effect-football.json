@@ -1,0 +1,94 @@
+{
+  "keyword": "relative age effect football",
+  "ranAt": "2026-09-28T07:27:08.521Z",
+  "peers": [
+    {
+      "domain": "nswyouthfootball.proboards.com",
+      "url": "https://nswyouthfootball.proboards.com/thread/3556/relative-age-effect-pros-cons",
+      "position": 12,
+      "rank": 0,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "papers.ssrn.com",
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2467013",
+      "position": 16,
+      "rank": 542,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 1
+    },
+    {
+      "domain": "esr.ie",
+      "url": "https://esr.ie/index.php/esr/article/view/453",
+      "position": 19,
+      "rank": 263,
+      "pitchable": false,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 3,
+      "linkersFound": 0
+    },
+    {
+      "domain": "ideas.repec.org",
+      "url": "https://ideas.repec.org/a/bpj/jqsprt/v15y2019i3p185-202n4.html",
+      "position": 21,
+      "rank": 500,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 3,
+      "linkersFound": 0
+    },
+    {
+      "domain": "changingthegameproject.com",
+      "url": "https://changingthegameproject.com/category/relative-age-effect/",
+      "position": 25,
+      "rank": 298,
+      "pitchable": false,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "redcafe.net",
+      "url": "https://www.redcafe.net/threads/relative-age-effect-long-article.458750/",
+      "position": 26,
+      "rank": 289,
+      "pitchable": false,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "socalsoccer.com",
+      "url": "https://socalsoccer.com/threads/da-boys-relative-age-effect-late-dobs-developers-bio-banding-and-the-future-of-us-soccer-an-information-clearinghouse-and-discussion-group.18298/page-3",
+      "position": 29,
+      "rank": 199,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 14,
+      "linkersFound": 0
+    },
+    {
+      "domain": "repository.mmu.ac.uk",
+      "url": "https://repository.mmu.ac.uk/articles/journal_contribution/A_longitudinal_investigation_into_the_relative_age_effect_in_an_English_professional_football_club_exploring_the_underdog_hypothesis_/32476986",
+      "position": 3,
+      "rank": 83,
+      "pitchable": true,
+      "kind": "institution",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    }
+  ]
+}
