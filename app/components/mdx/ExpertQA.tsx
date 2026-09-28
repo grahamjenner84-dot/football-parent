@@ -83,7 +83,7 @@ export default function ExpertQA({
               href={profileHref}
               target="_blank"
               rel="noopener"
-              className="mt-1 inline-block text-xs font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
+              className="mt-1 inline-block text-xs text-amber-900/80 underline underline-offset-2 hover:text-amber-950 transition"
             >
               {profileLabel ?? profileHref}
             </a>
@@ -107,10 +107,10 @@ export default function ExpertQA({
       </div>
 
       {sourceHref ? (
-        <div className="border-t border-amber-200 bg-white px-4 py-3 text-sm">
+        <div className="border-t border-amber-200 bg-amber-50 px-4 py-2 text-right text-xs">
           <a
             href={sourceHref}
-            className="font-medium text-blue-700 underline underline-offset-4 hover:text-blue-900 transition"
+            className="text-amber-800 underline underline-offset-2 hover:text-amber-950 transition"
           >
             {sourceLabel ?? "Read the full interview"}
           </a>
