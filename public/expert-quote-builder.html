@@ -337,7 +337,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   /* ---------- saved experts (public/expert-presets.json) ---------- */
   var presets = [];
   function loadPresets() {
-    fetch('/expert-presets.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
+    return fetch('/expert-presets.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
       .then(function (list) {
         presets = Array.isArray(list) ? list : [];
         var sel = document.getElementById('fieldPreset');
@@ -361,8 +361,16 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     fetch('/expert-posts.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
       .then(function (list) {
         posts = Array.isArray(list) ? list : [];
+        // Grouped under each expert: picking a post loads its expert too, so
+        // this one dropdown is all that's needed for a saved post.
         var sel = document.getElementById('fieldPost');
-        posts.forEach(function (p) { var o = document.createElement('option'); o.value = p.id; o.textContent = p.label || p.id; sel.appendChild(o); });
+        var groups = {};
+        posts.forEach(function (p) {
+          var ex = presets.find(function (x) { return x.id === p.expert; });
+          var name = ex ? (ex.label || ex.person || ex.name) : 'Other';
+          if (!groups[name]) { groups[name] = document.createElement('optgroup'); groups[name].label = name; sel.appendChild(groups[name]); }
+          var o = document.createElement('option'); o.value = p.id; o.textContent = p.label || p.id; groups[name].appendChild(o);
+        });
       }).catch(function () {});
   }
   function applyPost(id) {
@@ -850,8 +858,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   loadLogo(state.logoSrc);
   loadBio(state.bioSrc);
   loadPrompt();
-  loadPresets();
-  loadPosts();
+  loadPresets().then(loadPosts);
   ensureFonts().then(redraw);
   render();
 })();
