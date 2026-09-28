@@ -487,17 +487,32 @@ an interview request and is a confirmed fit for this. See the "Resilient
 Physiotherapy" entry below, which carries the fuller question set that
 supersedes this generic draft.
 
-### Matt (The Elite Mind Coach) — youth athlete mindset coach, tag: mindset, parent support, confidence
+### Matt Baxter (Elite Mindset Coach, his business) — youth athlete mindset coach, tag: mindset, parent support, confidence
 Drafted 2026-09-23. Replied to interview request 2026-09-22. Details received
 2026-09-23 (his about-me page + name confirmed by Graham).
+**ANSWERED 2026-09-28: all 8 questions.** Full answers published as the Q&A
+article `/parent-guides/matt-baxter-young-footballer-mindset-interview`
+(`content/parent-guides/matt-baxter-young-footballer-mindset-interview.mdx`),
+which is the source of record for any excerpt. Q1 and Q2 were sent in slightly
+reworded form (see the article for the exact wording he answered). Each answer
+maps to the bracketed article below for a future `<ExpertOpinion>` callout;
+reuse counts: 0 so far. Follow the reuse rule (show Graham the full Q&A with
+the excerpt highlighted before inserting).
+Matt asked (2026-09-28) for links to point at his Instagram,
+https://www.instagram.com/elitemindset_coaching/, rather than his website; the
+website is fine alongside it in a bio. Headshot: `/images/people/matt-baxter.jpg`
+(cropped from the photo on theelitemindcoach.com/about).
+Naming (Graham, 2026-09-28): describe Matt as a "youth athlete mindset coach".
+Only use "Elite Mindset Coach" when clearly naming his business, never as his
+title next to his name, or it reads as Football Parent calling him elite.
 Attribution scaffold for `<ExpertQA>` / `<ExpertOpinion>` (confirm/adjust on
 answers):
 ```
 name="Matt Baxter"
-role="Youth Athlete Mindset Coach, The Elite Mind Coach"
+role="Youth Athlete Mindset Coach"
 bio="A youth athlete mindset coach and parent who works one to one with young athletes aged 8 to 18, across football and other sports and from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
-profileHref="https://theelitemindcoach.com"
-profileLabel="The Elite Mind Coach"
+profileHref="https://www.instagram.com/elitemindset_coaching/"
+profileLabel="Instagram"
 ```
 Fit note from his about-me: excellent match for confidence, pressure, mistakes,
 enjoyment and quitting (Q2-Q8). His focus is helping current athletes thrive IN

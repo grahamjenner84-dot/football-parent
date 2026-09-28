@@ -111,6 +111,12 @@ export default function ParentGuidesPage() {
             "Football DNA's Paul Barry explains whether 3v3 football is too chaotic, why some clubs are avoiding it, why 11v11 is moving to U14 and what FutureFit could change.",
         },
         {
+          title: "Young Footballer Mindset: Matt Baxter Interview",
+          href: "/parent-guides/matt-baxter-young-footballer-mindset-interview",
+          description:
+            "Mindset coach Matt Baxter on the first ten minutes after a bad game, where real confidence comes from, spotting burnout, talk of quitting and pressure that backfires.",
+        },
+        {
           title: "What is Grassroots Football?",
           href: "/parent-guides/what-is-grassroots-football",
           description:
