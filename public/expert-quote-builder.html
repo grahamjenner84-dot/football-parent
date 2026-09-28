@@ -52,6 +52,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
       <div>
         <div class="lbl" style="color:#E6B53D">The expert</div>
+        <select id="fieldPreset" class="fld" style="margin-top:9px">
+          <option value="">Saved experts: pick one to fill logo, photo and bio…</option>
+        </select>
         <div style="display:flex;gap:13px;margin-top:9px;align-items:center">
           <div id="btnPickLogo" style="width:62px;height:62px;border-radius:50%;flex:none;border:2px solid #E6B53D;overflow:hidden;cursor:pointer;background:#16161a;display:flex;align-items:center;justify-content:center">
             <img id="logoPreview" src="/footballdna-logo.png" alt="logo" style="width:100%;height:100%;object-fit:cover">
@@ -64,9 +67,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
             </div>
           </div>
         </div>
-        <input id="fieldRole" class="fld" placeholder="Academy coaches · player development" style="margin-top:8px">
         <input id="fieldPerson" class="fld" placeholder="Person to credit (optional) e.g. Dave Smith, Lead Coach" style="margin-top:8px">
         <input type="file" id="logoFile" accept="image/*" style="display:none">
+        <div class="ar" style="font-size:11px;color:#6f6f6f;margin-top:5px;line-height:1.4">Saved experts live in <span class="mono">public/expert-presets.json</span>, so they work on any device.</div>
       </div>
 
       <div>
@@ -88,7 +91,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         </div>
       </div>
 
-      <div>
+      <div id="blockTopic">
         <div class="lbl">Cover topic <span style="color:#6f6f6f;font-weight:600;text-transform:none">— *word* = gold</span></div>
         <input id="fieldTopic" class="fld" placeholder="On the *Future Fit* changes" style="margin-top:7px">
       </div>
@@ -102,6 +105,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
           </div>
           <textarea id="fieldBio" class="fld" placeholder="Why they're an expert — experience, clubs, qualifications." style="flex:1;height:96px;resize:vertical"></textarea>
         </div>
+        <input id="fieldRole" class="fld" placeholder="Role under their name, e.g. Head of Coaching · Football DNA" style="margin-top:8px">
         <button id="btnPickBio2" class="seg" style="margin-top:8px;padding:7px 13px">Upload photo…</button>
         <input type="file" id="bioFile" accept="image/*" style="display:none">
       </div>
@@ -138,8 +142,6 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         <input id="fieldInterview" class="fld" placeholder="Full article — link in our bio" style="margin-top:7px">
         <textarea id="fieldBlurb" class="fld" placeholder="Why follow — shown under the Follow button." style="margin-top:7px;height:64px;resize:vertical"></textarea>
       </div>
-
-      <button id="btnLoadSample" class="ar" style="background:#1a1a1e;color:#eaeaea;border:1px solid #2a2a2f;padding:11px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer">↺ Load Football DNA sample</button>
 
       <div style="border:1px solid #2a2a2f;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:9px">
         <div class="lbl" style="color:#E6B53D">Import a full post</div>
@@ -311,6 +313,22 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     r.readAsDataURL(f); e.target.value = '';
   }
 
+  /* ---------- saved experts (public/expert-presets.json) ---------- */
+  var presets = [];
+  function loadPresets() {
+    fetch('/expert-presets.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (list) {
+        presets = Array.isArray(list) ? list : [];
+        var sel = document.getElementById('fieldPreset');
+        presets.forEach(function (p) { var o = document.createElement('option'); o.value = p.id; o.textContent = p.label || p.person || p.name; sel.appendChild(o); });
+      }).catch(function () {});
+  }
+  function applyPreset(id) {
+    var p = presets.find(function (x) { return x.id === id; }); if (!p) return;
+    ['name', 'handle', 'person', 'role', 'bio', 'logoSrc', 'bioSrc'].forEach(function (k) { state[k] = p[k] || ''; });
+    persist(); loadLogo(state.logoSrc); loadBio(state.bioSrc); render();
+  }
+
   /* ---------- QA editing ---------- */
   function addQA() { state.qas = state.qas.concat([{ q: '', a: '' }]); persist(); render(); }
   function delQA(i) {
@@ -321,20 +339,6 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   function editQA(i, field, val) {
     var q = state.qas.slice(); q[i] = Object.assign({}, q[i]); q[i][field] = val;
     state.qas = q; persist(); render();
-  }
-
-  function loadSample() {
-    Object.assign(state, {
-      name: 'Football DNA', handle: '@footballdna_', role: 'Academy coaches · player development',
-      topic: 'On the *Future Fit* changes',
-      bio: 'A grassroots-to-academy coaching team behind thousands of young players. Coach education, player development and the stuff parents actually ask about.',
-      blurb: 'Honest, jargon-free help for parents of grassroots and academy players. New expert Q&A every week.',
-      qas: sampleQAs(),
-      quote: "Future Fit isn't about *winning* at eight. It's about still playing at eighteen.",
-      cta: 'Know a parent asking about *Future Fit?*',
-      quoteFirst: false, active: 0
-    });
-    persist(); render();
   }
 
   /* ---------- import ---------- */
@@ -608,6 +612,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         : 'Leads with your first question in huge type. Hits the parent’s own worry instantly.';
     document.getElementById('blockCoverQuestion').style.display = st === 'question' ? '' : 'none';
     document.getElementById('blockCoverContext').style.display = st !== 'classic' ? '' : 'none';
+    // Topic is only drawn on the classic cover.
+    document.getElementById('blockTopic').style.display = st === 'classic' ? '' : 'none';
 
     document.getElementById('btnQuoteGold').classList.toggle('on', !state.quoteWhite);
     document.getElementById('btnQuoteWhite').classList.toggle('on', !!state.quoteWhite);
@@ -668,6 +674,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('btnIG').addEventListener('click', function () { set('platform', 'ig'); });
   document.getElementById('btnTK').addEventListener('click', function () { set('platform', 'tiktok'); });
 
+  document.getElementById('fieldPreset').addEventListener('change', function (e) { applyPreset(e.target.value); e.target.value = ''; });
   document.getElementById('fieldName').addEventListener('change', function (e) { set('name', e.target.value); });
   document.getElementById('fieldHandle').addEventListener('change', function (e) {
     var v = e.target.value.trim(); if (v && v[0] !== '@') v = '@' + v; set('handle', v);
@@ -703,7 +710,6 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('btnQuoteFirst').addEventListener('click', function () { set('quoteFirst', true); });
 
   document.getElementById('btnAddQA').addEventListener('click', addQA);
-  document.getElementById('btnLoadSample').addEventListener('click', loadSample);
 
   document.getElementById('btnPickImport').addEventListener('click', function () { document.getElementById('importFile').click(); });
   document.getElementById('importFile').addEventListener('change', onImportFile);
@@ -730,6 +736,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   loadLogo(state.logoSrc);
   loadBio(state.bioSrc);
   loadPrompt();
+  loadPresets();
   ensureFonts().then(redraw);
   render();
 })();

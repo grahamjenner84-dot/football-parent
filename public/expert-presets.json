@@ -1,0 +1,35 @@
+[
+  {
+    "id": "paul-barry",
+    "label": "Paul Barry (Football DNA)",
+    "name": "Football DNA",
+    "handle": "@footballdna_",
+    "person": "Paul Barry",
+    "role": "Head of Coaching · Football DNA",
+    "logoSrc": "/footballdna-logo.png",
+    "bioSrc": "/images/people/paul-football-dna.jpg",
+    "bio": "Before Football DNA, Paul coached in the academy system at Southend United, Watford and Arsenal, most recently as Crystal Palace's Head of Coaching for the Foundation Phase."
+  },
+  {
+    "id": "martin-brock",
+    "label": "Martin Brock (JPL)",
+    "name": "Junior Premier League",
+    "handle": "@jnrpremleague",
+    "person": "Martin Brock",
+    "role": "Chief Executive · JPL",
+    "logoSrc": "/images/people/martin-brock-jpl.png",
+    "bioSrc": "/images/people/martin-brock-jpl.png",
+    "bio": "Martin is Chief Executive of the Junior Premier League, one of the largest competitive youth football organisations in the UK, alongside its girls' league, JPL Warriors."
+  },
+  {
+    "id": "matt-baxter",
+    "label": "Matt Baxter (Elite Mindset Coach)",
+    "name": "Elite Mindset Coach",
+    "handle": "@elitemindset_coaching",
+    "person": "Matt Baxter",
+    "role": "Youth athlete mindset coach",
+    "logoSrc": "/images/people/matt-baxter.jpg",
+    "bioSrc": "/images/people/matt-baxter.jpg",
+    "bio": "Matt works one to one with young athletes aged 8 to 18, from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
+  }
+]
