@@ -23,8 +23,15 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 .qa{border:1px solid #232327;background:#0e0e11;border-radius:10px;padding:12px;margin-top:10px}
 .navdot{width:9px;height:9px;border-radius:50%;background:#3a3a3f;cursor:pointer;border:none;padding:0}
 .navdot.on{background:#E6B53D}
-.jumpPreview{display:none}
-@media (max-width:760px){.jumpPreview{display:block}}
+@media (max-width:760px){
+  #mainWrap{flex-direction:column !important;flex-wrap:nowrap !important}
+  #leftCol{display:contents !important}
+  #leftCol > *{margin:0 16px 16px;flex:none !important}
+  #picksBox{order:1;margin-top:16px}
+  #previewCol{order:2;flex:none !important;overflow:visible !important;min-width:0 !important;padding:4px 16px 20px !important;margin-bottom:16px;border-bottom:1px solid #1d1d20}
+  #blockCaption{order:3}
+  #leftCol > *:not(#picksBox):not(#blockCaption){order:4}
+}
 .xbtn{background:none;border:none;color:#c77;cursor:pointer;font-size:13px;font-weight:800}
 </style>
 </head>
@@ -47,32 +54,33 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     </div>
   </div>
 
-  <div style="flex:1;display:flex;min-height:0;flex-wrap:wrap">
+  <div id="mainWrap" style="flex:1;display:flex;min-height:0;flex-wrap:wrap">
 
     <!-- LEFT: inputs -->
-    <div style="flex:1;min-width:360px;display:flex;flex-direction:column;border-right:1px solid #1d1d20;padding:20px 22px 40px;overflow:auto;gap:16px">
+    <div id="leftCol" style="flex:1;min-width:360px;display:flex;flex-direction:column;border-right:1px solid #1d1d20;padding:20px 22px 40px;overflow:auto;gap:16px">
 
-      <div style="border:1px solid #E6B53D;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:9px">
+      <div id="picksBox" style="border:1px solid #E6B53D;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:9px">
         <div class="lbl" style="color:#E6B53D">Saved posts</div>
         <select id="fieldPost" class="fld">
           <option value="">Saved posts: pick one to load every slide…</option>
         </select>
-        <div id="blockCaption" style="display:none">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span class="lbl">Caption</span>
-            <button id="btnCopyCaption" class="seg" style="padding:5px 11px;font-size:12px">Copy caption</button>
-          </div>
-          <textarea id="fieldCaption" class="fld" style="margin-top:7px;height:120px;resize:vertical"></textarea>
-          <div id="collabNote" class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5;margin-top:6px"></div>
+        <div class="ar" style="font-size:11px;color:#6f6f6f;line-height:1.4;margin-top:-3px">A saved post loads its expert too. Saved experts is for starting a new post.</div>
+        <select id="fieldPreset" class="fld">
+          <option value="">Saved experts: pick one to fill logo, photo and bio…</option>
+        </select>
+      </div>
+
+      <div id="blockCaption" style="display:none;border:1px solid #2a2a2f;border-radius:10px;padding:13px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <span class="lbl" style="color:#E6B53D">Caption</span>
+          <button id="btnCopyCaption" class="seg" style="padding:5px 11px;font-size:12px">Copy caption</button>
         </div>
-        <a href="#previewCol" class="ar jumpPreview" style="font-size:12.5px;color:#E6B53D;font-weight:700;text-decoration:none">Preview and save slides ↓</a>
+        <textarea id="fieldCaption" class="fld" style="margin-top:7px;height:120px;resize:vertical"></textarea>
+        <div id="collabNote" class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5;margin-top:6px"></div>
       </div>
 
       <div>
         <div class="lbl" style="color:#E6B53D">The expert</div>
-        <select id="fieldPreset" class="fld" style="margin-top:9px">
-          <option value="">Saved experts: pick one to fill logo, photo and bio…</option>
-        </select>
         <div style="display:flex;gap:13px;margin-top:9px;align-items:center">
           <div id="btnPickLogo" style="width:62px;height:62px;border-radius:50%;flex:none;border:2px solid #E6B53D;overflow:hidden;cursor:pointer;background:#16161a;display:flex;align-items:center;justify-content:center">
             <img id="logoPreview" src="/footballdna-logo.png" alt="logo" style="width:100%;height:100%;object-fit:cover">
@@ -212,6 +220,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         <button id="btnShareReady" class="ar" style="display:none;background:#E6B53D;color:#0b0b0d;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:800;cursor:pointer"></button>
         <button id="btnExportSlide" class="ar" style="background:#1a1a1e;color:#cfcfcf;border:1px solid #2a2a2f;padding:11px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer">⬇  This slide (.png)</button>
         <button id="btnExportSlideVideo" class="ar" style="background:#1a1a1e;color:#cfcfcf;border:1px solid #2a2a2f;padding:11px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer">▶  This slide (.mp4)</button>
+        <div id="captionHint" class="ar" style="display:none;font-size:11.5px;color:#7d7d77;text-align:center">Downloading also copies the caption.</div>
         <div id="status" class="ar" style="font-size:12px;color:#E6B53D;min-height:16px;text-align:center"></div>
       </div>
     </div>
@@ -582,11 +591,22 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     } catch (e) { return false; }
   })();
   var pendingFiles = null;
+  // Called at the very start of a download click, before any await, so the
+  // clipboard write still counts as part of the tap (Safari needs that).
+  // Resolves true if the caption made it to the clipboard.
+  function copyCaptionOnTap() {
+    if (!state.caption || !navigator.clipboard) return Promise.resolve(false);
+    return navigator.clipboard.writeText(state.caption).then(function () { return true; }, function () { return false; });
+  }
+  var captionCopied = Promise.resolve(false);
+  function withCaption(msg) {
+    return captionCopied.then(function (ok) { setStatus(msg + (ok ? ' Caption copied.' : '')); });
+  }
   async function shareFiles(files) {
     try {
       await navigator.share({ files: files });
       pendingFiles = null; document.getElementById('btnShareReady').style.display = 'none';
-      setStatus('✓ Shared ' + files.length + ' slides.');
+      withCaption('✓ Shared ' + files.length + ' slides.');
     } catch (e) {
       if (e && e.name === 'AbortError') { setStatus('Cancelled.'); return; }
       // Building the slides can take long enough that the browser no longer
@@ -599,6 +619,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     }
   }
   async function exportCarousel() {
+    captionCopied = copyCaptionOnTap();
     await ensureFonts();
     var list = slideList();
     if (canShareFiles) {
@@ -619,7 +640,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     }
     var out = await zip.generateAsync({ type: 'blob' });
     download(out, 'footballparent-expert-' + (state.name || 'guest').replace(/[^a-z0-9]+/gi, '').toLowerCase() + '.zip');
-    setStatus('✓ Downloaded ' + list.length + ' PNGs (carousel order).');
+    withCaption('✓ Downloaded ' + list.length + ' PNGs (carousel order).');
   }
   async function exportSlideVideo() {
     await ensureFonts();
@@ -631,13 +652,14 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     setStatus('✓ Slide video downloaded (' + r.ext.toUpperCase() + ', ' + state.secs + 's).');
   }
   async function exportReel() {
+    captionCopied = copyCaptionOnTap();
     await ensureFonts();
     var list = slideList();
     setStatus('● Encoding Reel… keep this tab open.');
     var r = await renderReel(list, state.secs);
     if (!r) { setStatus('⚠ Video unsupported here — use Chrome/Edge, or export the carousel PNGs.'); return; }
     download(r.blob, 'footballparent-expert-reel.' + r.ext);
-    setStatus('✓ Reel downloaded (' + r.ext.toUpperCase() + ', ' + (list.length * state.secs) + 's).');
+    withCaption('✓ Reel downloaded (' + r.ext.toUpperCase() + ', ' + (list.length * state.secs) + 's).');
   }
   async function renderReel(list, secs) {
     var fps = 30, perSlide = Math.max(1, Math.round(secs * fps));
@@ -761,6 +783,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     document.getElementById('blockPasteImport').style.display = state.showPaste ? '' : 'none';
     document.getElementById('importMsg').textContent = state.importMsg || '';
     document.getElementById('blockCaption').style.display = state.caption ? '' : 'none';
+    document.getElementById('captionHint').style.display = state.caption ? '' : 'none';
     setVal('fieldCaption', state.caption);
     document.getElementById('collabNote').textContent = state.collab ? 'Collab: invite ' + state.collab + ' as a collaborator when you post.' : '';
 
@@ -850,7 +873,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
   document.getElementById('btnExportReel').addEventListener('click', exportReel);
   document.getElementById('btnExportCarousel').addEventListener('click', exportCarousel);
-  document.getElementById('btnShareReady').addEventListener('click', function () { if (pendingFiles) shareFiles(pendingFiles); });
+  document.getElementById('btnShareReady').addEventListener('click', function () { if (pendingFiles) { captionCopied = copyCaptionOnTap(); shareFiles(pendingFiles); } });
   if (canShareFiles) document.getElementById('btnExportCarousel').textContent = '⬇  Carousel — save all slides to Photos';
   document.getElementById('btnExportSlide').addEventListener('click', exportSlide);
   document.getElementById('btnExportSlideVideo').addEventListener('click', exportSlideVideo);
