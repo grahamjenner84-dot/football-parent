@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": "matt-baxter-praise",
+    "label": "Matt Baxter 1/3: praise that backfires (parents)",
+    "expert": "matt-baxter",
+    "article": "/parent-guides/matt-baxter-young-footballer-mindset-interview",
+    "audience": "parents",
+    "theme": "why outcome praise knocks confidence, and what to praise instead",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "Should you tell them they were the *best* player?",
+    "coverContext": "Mindset coach Matt Baxter on praise that backfires",
+    "qas": [
+      { "q": "What's wrong with \"you were the best\"?", "a": "\"You were the best player out there\" feels lovely, but it teaches a child that their worth depends on *results*." },
+      { "q": "So what should I praise?", "a": "Praise effort, choices and *courage* instead … \"I loved how you kept demanding the ball after that missed chance.\"" },
+      { "q": "What else knocks their confidence?", "a": "When parents step in too quickly, the child never gets to discover that they can *cope*." }
+    ],
+    "quote": "On the day they're not the best, the *confidence* goes with it.",
+    "cta": "Share this with your team's *parent* group",
+    "caption": "\"You were the best player out there\" feels like the kindest thing to say after a game.\n\nMindset coach @elitemindset_coaching explains why it can quietly knock a young player's confidence, and what to praise instead.\n\nFull interview: link in bio.\n\n#footballparent #grassrootsfootball #youthfootball",
+    "collab": "@elitemindset_coaching"
+  },
+  {
+    "id": "matt-baxter-plateau",
+    "label": "Matt Baxter 2/3: players who've stopped improving (coaches)",
+    "expert": "matt-baxter",
+    "article": "/parent-guides/matt-baxter-young-footballer-mindset-interview",
+    "audience": "coaches",
+    "theme": "plateaus are normal; how to get a stalled player learning again",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "How do you help a player who's stopped *improving*?",
+    "coverContext": "Mindset coach Matt Baxter on players who've stalled",
+    "qas": [
+      { "q": "Why do some players get stuck?", "a": "Ability is usually still developing underneath. What turns a plateau into a problem is how the child *interprets* it." },
+      { "q": "What's the simplest tool?", "a": "One of the simplest tools I use is the word *YET*. \"I can't beat that defender\" becomes \"I can't beat that defender yet.\"" },
+      { "q": "What helps day to day?", "a": "Pick one *specific* thing to work on for the next few weeks and notice small wins." }
+    ],
+    "quote": "Success leaves clues, and they can be *reapplied* to the new challenge.",
+    "cta": "Send this to your *coaching* WhatsApp group",
+    "caption": "Got a player who's stopped improving and is getting frustrated with it?\n\nMindset coach @elitemindset_coaching on why plateaus are a normal part of development, and the one-word tool he uses to get players learning again.\n\nFull interview: link in bio.\n\n#grassrootscoach #youthfootballcoach #grassrootsfootball",
+    "collab": "@elitemindset_coaching"
+  },
+  {
+    "id": "matt-baxter-mistakes",
+    "label": "Matt Baxter 3/3: bouncing back from a mistake (parents)",
+    "expert": "matt-baxter",
+    "article": "/parent-guides/matt-baxter-young-footballer-mindset-interview",
+    "audience": "parents",
+    "theme": "why some kids spiral after one mistake, and what they do instead",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "Why do some kids *crumble* after one mistake?",
+    "coverContext": "Mindset coach Matt Baxter on bouncing back mid-game",
+    "qas": [
+      { "q": "Is it about talent?", "a": "It rarely comes down to talent. It comes down to what the child does with the *next* moment." },
+      { "q": "What do the resilient ones know?", "a": "Young players who bounce back have learned that a mistake is an event, not a *verdict* on them." },
+      { "q": "How do they reset?", "a": "Notice the mistake, let it go, and put all their focus on the very next thing they can *control*." }
+    ],
+    "quote": "From the touchline, a parent influences more than they *realise*, mostly through their body language.",
+    "cta": "Send this to a parent on the *touchline*",
+    "caption": "Why do some kids fall apart after one mistake while others shrug it off?\n\nMindset coach @elitemindset_coaching says it rarely comes down to talent. It's what they do with the next moment, and what they see when they look over at you.\n\nFull interview: link in bio.\n\n#footballparent #grassrootsfootball #youthfootball",
+    "collab": "@elitemindset_coaching"
+  }
+]
