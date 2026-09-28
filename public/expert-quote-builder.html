@@ -23,6 +23,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 .qa{border:1px solid #232327;background:#0e0e11;border-radius:10px;padding:12px;margin-top:10px}
 .navdot{width:9px;height:9px;border-radius:50%;background:#3a3a3f;cursor:pointer;border:none;padding:0}
 .navdot.on{background:#E6B53D}
+.jumpPreview{display:none}
+@media (max-width:760px){.jumpPreview{display:block}}
 .xbtn{background:none;border:none;color:#c77;cursor:pointer;font-size:13px;font-weight:800}
 </style>
 </head>
@@ -49,6 +51,22 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
     <!-- LEFT: inputs -->
     <div style="flex:1;min-width:360px;display:flex;flex-direction:column;border-right:1px solid #1d1d20;padding:20px 22px 40px;overflow:auto;gap:16px">
+
+      <div style="border:1px solid #E6B53D;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:9px">
+        <div class="lbl" style="color:#E6B53D">Saved posts</div>
+        <select id="fieldPost" class="fld">
+          <option value="">Saved posts: pick one to load every slide…</option>
+        </select>
+        <div id="blockCaption" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+            <span class="lbl">Caption</span>
+            <button id="btnCopyCaption" class="seg" style="padding:5px 11px;font-size:12px">Copy caption</button>
+          </div>
+          <textarea id="fieldCaption" class="fld" style="margin-top:7px;height:120px;resize:vertical"></textarea>
+          <div id="collabNote" class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5;margin-top:6px"></div>
+        </div>
+        <a href="#previewCol" class="ar jumpPreview" style="font-size:12.5px;color:#E6B53D;font-weight:700;text-decoration:none">Preview and save slides ↓</a>
+      </div>
 
       <div>
         <div class="lbl" style="color:#E6B53D">The expert</div>
@@ -145,17 +163,6 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
       <div style="border:1px solid #2a2a2f;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:9px">
         <div class="lbl" style="color:#E6B53D">Import a full post</div>
-        <select id="fieldPost" class="fld">
-          <option value="">Saved posts: pick one to load every slide…</option>
-        </select>
-        <div id="blockCaption" style="display:none">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-            <span class="lbl">Caption</span>
-            <button id="btnCopyCaption" class="seg" style="padding:5px 11px;font-size:12px">Copy caption</button>
-          </div>
-          <textarea id="fieldCaption" class="fld" style="margin-top:7px;height:120px;resize:vertical"></textarea>
-          <div id="collabNote" class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5;margin-top:6px"></div>
-        </div>
         <div class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5">Fill every slide at once. Upload (or paste) the builder block Claude returns, or any labelled text / JSON.</div>
         <div style="display:flex;gap:8px">
           <button id="btnPickImport" class="ar" style="flex:1;background:#16161a;color:#E6B53D;border:1px solid #E6B53D;padding:10px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer">⬆ Upload .txt / .json</button>
@@ -174,7 +181,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     </div>
 
     <!-- RIGHT: preview + export -->
-    <div style="flex:1.1;min-width:360px;display:flex;flex-direction:column;align-items:center;padding:22px;overflow:auto">
+    <div id="previewCol" style="flex:1.1;min-width:360px;display:flex;flex-direction:column;align-items:center;padding:22px;overflow:auto">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:12px">
         <button id="btnPrev" class="seg" style="padding:7px 13px">‹</button>
         <span id="slideLabel" class="ar" style="font-size:12px;color:#bdbdbd;font-weight:700;min-width:120px;text-align:center"></span>
@@ -202,6 +209,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         </div>
         <button id="btnExportReel" style="background:#E6B53D;color:#0b0b0d;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:800;cursor:pointer">▶  Reel — all slides (.mp4)</button>
         <button id="btnExportCarousel" class="ar" style="background:#16161a;color:#eaeaea;border:1px solid #E6B53D;padding:12px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer">⬇  Carousel — all slides (.zip PNG)</button>
+        <button id="btnShareReady" class="ar" style="display:none;background:#E6B53D;color:#0b0b0d;border:none;padding:13px;border-radius:9px;font-size:14px;font-weight:800;cursor:pointer"></button>
         <button id="btnExportSlide" class="ar" style="background:#1a1a1e;color:#cfcfcf;border:1px solid #2a2a2f;padding:11px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer">⬇  This slide (.png)</button>
         <button id="btnExportSlideVideo" class="ar" style="background:#1a1a1e;color:#cfcfcf;border:1px solid #2a2a2f;padding:11px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer">▶  This slide (.mp4)</button>
         <div id="status" class="ar" style="font-size:12px;color:#E6B53D;min-height:16px;text-align:center"></div>
@@ -555,10 +563,46 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     download(blob, 'expert-' + pad(state.active + 1) + '-' + Core.slideName(s).replace(/\s+/g, '').toLowerCase() + '.png');
     setStatus('✓ Saved 1 PNG.');
   }
+  // On a phone, hand the slides to the share sheet ("Save N Images" puts them
+  // straight in Photos, or share straight to Instagram) instead of a zip that
+  // has to be unzipped in Files first. Touch devices only: desktop Chrome can
+  // share files too, but a zip in Downloads is what's wanted there.
+  var canShareFiles = (function () {
+    try {
+      return !!(navigator.canShare && window.matchMedia && matchMedia('(pointer: coarse)').matches &&
+        navigator.canShare({ files: [new File([''], 'x.png', { type: 'image/png' })] }));
+    } catch (e) { return false; }
+  })();
+  var pendingFiles = null;
+  async function shareFiles(files) {
+    try {
+      await navigator.share({ files: files });
+      pendingFiles = null; document.getElementById('btnShareReady').style.display = 'none';
+      setStatus('✓ Shared ' + files.length + ' slides.');
+    } catch (e) {
+      if (e && e.name === 'AbortError') { setStatus('Cancelled.'); return; }
+      // Building the slides can take long enough that the browser no longer
+      // counts the share as coming from the tap, so offer a second tap.
+      pendingFiles = files;
+      var b = document.getElementById('btnShareReady');
+      b.textContent = 'Tap to save ' + files.length + ' slides to Photos';
+      b.style.display = '';
+      setStatus('Slides ready.');
+    }
+  }
   async function exportCarousel() {
-    if (!window.JSZip) { setStatus('Zip still loading…'); return; }
     await ensureFonts();
     var list = slideList();
+    if (canShareFiles) {
+      setStatus('Building ' + list.length + ' carousel slides…');
+      var files = [];
+      for (var k = 0; k < list.length; k++) {
+        var pb = await renderPNG(list[k]);
+        files.push(new File([pb], pad(k + 1) + '-' + Core.slideName(list[k]).replace(/\s+/g, '').toLowerCase() + '.png', { type: 'image/png' }));
+      }
+      return shareFiles(files);
+    }
+    if (!window.JSZip) { setStatus('Zip still loading…'); return; }
     setStatus('Building ' + list.length + ' carousel slides…');
     var zip = new JSZip();
     for (var i = 0; i < list.length; i++) {
@@ -798,6 +842,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
   document.getElementById('btnExportReel').addEventListener('click', exportReel);
   document.getElementById('btnExportCarousel').addEventListener('click', exportCarousel);
+  document.getElementById('btnShareReady').addEventListener('click', function () { if (pendingFiles) shareFiles(pendingFiles); });
+  if (canShareFiles) document.getElementById('btnExportCarousel').textContent = '⬇  Carousel — save all slides to Photos';
   document.getElementById('btnExportSlide').addEventListener('click', exportSlide);
   document.getElementById('btnExportSlideVideo').addEventListener('click', exportSlideVideo);
 
