@@ -495,8 +495,13 @@ article `/parent-guides/matt-baxter-young-footballer-mindset-interview`
 (`content/parent-guides/matt-baxter-young-footballer-mindset-interview.mdx`),
 which is the source of record for any excerpt. Q1 and Q2 were sent in slightly
 reworded form (see the article for the exact wording he answered). Each answer
-maps to the bracketed article below for a future `<ExpertOpinion>` callout;
-reuse counts: 0 so far. Follow the reuse rule (show Graham the full Q&A with
+was used once, 2026-09-28, as an `<ExpertOpinion>` callout linking back to the
+interview. Reuse count 1 each: Q1 understanding-academy-release, Q2
+what-to-say-after-football-matches, Q3 biggest-football-parent-mistakes
+(touchline), Q4 build-confidence-young-footballers, Q5
+why-isnt-my-child-improving-at-football, Q6 football-burnout, Q7
+support-child-after-bad-match (quitting), Q8 jpl-vs-grassroots-football
+(pressure). Follow the reuse rule (show Graham the full Q&A with
 the excerpt highlighted before inserting).
 Matt asked (2026-09-28) for links to point at his Instagram,
 https://www.instagram.com/elitemindset_coaching/, rather than his website; the

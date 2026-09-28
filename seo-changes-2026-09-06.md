@@ -1015,3 +1015,16 @@ Commit e98cadf, on `/football-gear/veo-camera-alternatives`. Added a `GearPicks`
 ## New article: Matt Baxter mindset interview (2026-09-28)
 
 Published 28 Sept 2026: `/parent-guides/matt-baxter-young-footballer-mindset-interview`, category Parent Guides. Expert Q&A with youth athlete mindset coach Matt Baxter (business: Elite Mindset Coach), eight questions: rebuilding identity after release, the first ten minutes after a bad game, bouncing back vs spiralling, where confidence comes from, plateaus, early burnout signs, talk of quitting, encouragement vs pressure. Same format as the Paul Barry interview. Added to `lib/routes.ts` and the `/parent-guides` index. His answers are also a source for `<ExpertOpinion>` callouts on the eight articles the questions were written for (not added yet).
+
+## Matt Baxter expert quotes added to 8 articles (2026-09-28)
+
+One `<ExpertOpinion>` callout per page, each an excerpt of his answer from the new interview with a link back to `/parent-guides/matt-baxter-young-footballer-mindset-interview`. Additive only: no headings, text or links removed. One commit per page so each is a single revert.
+
+- `academy-pathway/understanding-academy-release`, "Identity and the Long Game" (release and identity): 32af46c. Stacks on the Paul Barry callout of 20 Sept, so read the two together.
+- `parent-guides/what-to-say-after-football-matches`, "The Simplest Rule: Let Them Lead" (first ten minutes): 277ff1f
+- `parent-guides/support-child-after-bad-match`, "When They Say They Want To Quit" (wobble vs real): 39f5e85
+- `football-development/build-confidence-young-footballers`, "The Role of Parents" (over-praise tied to outcomes): 1e741a6. Page had a slop tidy on 22 Sept.
+- `football-development/why-isnt-my-child-improving-at-football`, "Why Football Development Rarely Moves in a Straight Line" (plateaus, "yet"): 9a80be2
+- `football-development/football-burnout`, "Burnout or Just a Bad Week?" (dip vs burnout): 616a8b4
+- `parent-guides/biggest-football-parent-mistakes`, "Touchline Behaviour" (body language): 1af2ace
+- `parent-guides/jpl-vs-grassroots-football`, "Pressure and environment" (who is the goal for?): 6d18999. Page had a slop tidy on 22 Sept.
