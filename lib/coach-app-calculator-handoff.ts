@@ -31,6 +31,8 @@ export type CalculatorSquad = {
   /** One of `players`, or null. Only meaningful when keeperPlaysWholeGame. */
   goalkeeper: string | null;
   keeperPlaysWholeGame: boolean;
+  /** The app's "Position rotation" rule: true = Rotate positions. */
+  rotatePositions: boolean;
 };
 
 export function stashCalculatorSquad(squad: CalculatorSquad): void {

@@ -6,19 +6,25 @@ import {
   stashCalculatorSquad,
   type CalculatorFormat,
 } from "@/lib/coach-app-calculator-handoff";
-import { buildPlan } from "@/lib/playing-time-plan";
+import { buildPlan, DEFAULT_FORMATION, rotatePositions, type PositionCategory } from "@/lib/playing-time-plan";
+
+const POSITION_LABEL: Record<PositionCategory, string> = { GK: "GK", DEF: "Def", MID: "Mid", FWD: "Fwd" };
 
 // Equal playing time calculator, embedded at the top of
 // /coaching/equal-playing-time-in-grassroots-football.
 //
-// Two jobs. First, answer "playing time calculator" searches on the page:
-// the maths is the article's own Sheffield FA method (outfield places x match
-// length / outfield players available), and the initial state is the
-// article's worked example, so the first server render shows a real answer
-// rather than an empty form. Second, hand off to the Coach App where one
-// match stops being enough: the season preview under the result, then the
-// sign-up form, which carries the squad into the app's onboarding wizard
+// Two jobs. First, answer "playing time calculator" searches on the page with
+// a real plan, server-rendered from the initial state below. Second, hand off
+// to the Coach App: the season preview under the result, then the sign-up
+// form, which carries the squad into the app's onboarding wizard
 // (lib/coach-app-calculator-handoff.ts).
+//
+// The plan changes players only at half or quarter breaks, exactly as the
+// app does (see lib/playing-time-plan.ts), so a coach who signs up gets the
+// same split they just saw. When the places don't divide evenly that means
+// minutes differ by one period; the calculator says so rather than showing a
+// mid-period plan the app would never build. The article's formula still
+// appears, as the fair share over a season.
 //
 // The season preview's labels follow the app's real paywall
 // (src/domain/access/capabilities.ts in coach-app): game-time minutes are
@@ -53,11 +59,18 @@ const inputClass =
 
 export default function PlayingTimeCalculator() {
   const [format, setFormat] = useState<CalculatorFormat>("7v7");
-  const [periodType, setPeriodType] = useState<"halves" | "quarters">("halves");
-  const [periodMinutes, setPeriodMinutes] = useState(25);
-  const [squadSize, setSquadSize] = useState(10);
+  // A 7v7 keeper plus 8 outfield over four 15-minute quarters: a common
+  // grassroots setup, and one that divides evenly, so the first thing a
+  // visitor (and Google) sees is a genuinely equal plan.
+  const [periodType, setPeriodType] = useState<"halves" | "quarters">("quarters");
+  const [periodMinutes, setPeriodMinutes] = useState(15);
+  const [squadSize, setSquadSize] = useState(9);
   const [namesRaw, setNamesRaw] = useState("");
   const [keeperStays, setKeeperStays] = useState(true);
+  // Same choice as the app's "Position rotation" rule. Rotate is the default
+  // because it's what a new squad gets in the app anyway: Fixed positions
+  // needs every player's usual position, which the calculator doesn't ask.
+  const [rotate, setRotate] = useState(true);
   const [keeperName, setKeeperName] = useState("");
 
   const formatInfo = FORMATS.find((f) => f.key === format)!;
@@ -75,10 +88,19 @@ export default function PlayingTimeCalculator() {
 
   const valid = squad >= 1 && periodMinutes >= 1 && periodMinutes <= 60 && (!keeperPinned || squad >= 2);
 
-  const plan = valid ? buildPlan(squad, formatInfo.onPitch, keeperPinned, matchMinutes, periods) : null;
+  const plan = valid ? buildPlan(squad, formatInfo.onPitch, keeperPinned, periodMinutes, periods) : null;
+  const formation = DEFAULT_FORMATION[format];
+  // The rotating group fills the formation minus the keeper's slot when the
+  // keeper stays in goal; when the keeper rotates, GK is shared out too.
+  const rotatingSlots = keeperPinned ? formation.slots.filter((s, i) => s !== "GK" || i !== formation.slots.indexOf("GK")) : formation.slots;
+  const positions = plan && rotate ? rotatePositions(plan, rotatingSlots) : null;
 
   const minMinutes = plan ? Math.min(...plan.minutesByPlayer) : 0;
   const maxMinutes = plan ? Math.max(...plan.minutesByPlayer) : 0;
+  const countAt = (m: number) => (plan ? plan.minutesByPlayer.filter((x) => x === m).length : 0);
+  const breakWord = periodType === "halves" ? "half-time" : "each quarter break";
+  const periodWord = periodType === "halves" ? "half" : "quarter";
+  const periodLabel = (i: number) => (periodType === "halves" ? (i === 0 ? "1st half" : "2nd half") : `Q${i + 1}`);
 
   function carrySquadToApp() {
     stashCalculatorSquad({
@@ -90,6 +112,7 @@ export default function PlayingTimeCalculator() {
       players: names,
       goalkeeper: names.length > 0 ? keeper : null,
       keeperPlaysWholeGame: keeperPinned,
+      rotatePositions: rotate,
     });
   }
 
@@ -178,6 +201,33 @@ export default function PlayingTimeCalculator() {
           </label>
         )}
 
+        <fieldset>
+          <legend className="mb-1 text-sm font-semibold text-gray-800">Positions</legend>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { value: true, label: "Rotate positions" },
+              { value: false, label: "Fixed positions" },
+            ].map((o) => (
+              <button
+                key={o.label}
+                type="button"
+                aria-pressed={rotate === o.value}
+                onClick={() => setRotate(o.value)}
+                className={`rounded-full border px-3 py-1.5 text-sm font-medium ${
+                  rotate === o.value ? "border-blue-700 bg-blue-700 text-white" : "border-gray-300 text-gray-800 hover:bg-gray-50"
+                }`}
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
+          <p className="mt-1 text-xs text-gray-500">
+            {rotate
+              ? `Everyone moves around a ${formation.label}, so nobody is stuck in one position.`
+              : "Each child keeps to their usual position. You'd set those in the app."}
+          </p>
+        </fieldset>
+
         {formatInfo.hasKeeper && (
           <fieldset>
             <legend className="mb-1 text-sm font-semibold text-gray-800">Goalkeeper</legend>
@@ -224,35 +274,43 @@ export default function PlayingTimeCalculator() {
         <div className="mt-6" aria-live="polite">
           <div className="rounded-xl bg-blue-50 p-4">
             <p className="text-sm text-blue-900">
-              {plan.everyonePlaysAll ? "Everyone plays the whole match" : "Target per player"}
+              {plan.everyonePlaysAll
+                ? "Everyone plays the whole match"
+                : plan.exact
+                  ? `${keeperPinned ? "Each outfield player" : "Each player"} plays`
+                  : `${keeperPinned ? "Outfield players" : "Players"} get`}
             </p>
             <p className="text-3xl font-bold text-blue-900">
-              {fmt(plan.targetMinutes)} <span className="text-lg font-semibold">minutes</span>
+              {plan.exact ? fmt(maxMinutes) : `${fmt(minMinutes)} or ${fmt(maxMinutes)}`}{" "}
+              <span className="text-lg font-semibold">minutes</span>
             </p>
-            <p className="mt-1 text-sm text-blue-900">
-              {plan.outfieldPlaces} {keeperPinned ? "outfield " : ""}places x {matchMinutes} minutes ={" "}
-              {plan.outfieldPlaces * matchMinutes} minutes, shared between {plan.outfieldPlayers}{" "}
-              {keeperPinned ? "outfield players" : "players"}
-              {keeper ? `. ${keeper} plays all ${matchMinutes} in goal.` : "."}
-            </p>
+            {!plan.everyonePlaysAll && (
+              <p className="mt-1 text-sm text-blue-900">
+                Fair share: {plan.outfieldPlaces} {keeperPinned ? "outfield " : ""}places x {matchMinutes} minutes,
+                shared between {plan.outfieldPlayers} {keeperPinned ? "outfield players" : "players"} ={" "}
+                {fmt(plan.fairShareMinutes)} minutes each{plan.exact ? "." : " over a season."}
+                {keeper ? ` ${keeper} plays all ${matchMinutes} in goal.` : ""}
+              </p>
+            )}
           </div>
 
           {!plan.everyonePlaysAll && (
             <>
               <h3 className="mt-6 text-base font-semibold text-gray-900">Rotation plan</h3>
               <p className="text-sm text-gray-600">
+                Changes at {breakWord}, the same way the Coach App plans them.{" "}
                 {plan.exact
-                  ? `${plan.blocks.length} equal blocks. Everyone gets exactly the same minutes.`
-                  : `Exactly equal minutes isn't possible in one match with ${plan.outfieldPlayers} players for ${plan.outfieldPlaces} places without constant subs, so this plan uses ${plan.blocks.length} blocks and minutes range from ${fmt(minMinutes)} to ${fmt(maxMinutes)}. Over a season, the difference can be evened out.`}
+                  ? "Everyone gets exactly the same minutes."
+                  : `With ${plan.outfieldPlayers} players for ${plan.outfieldPlaces} places it can't come out exactly even in one match: ${countAt(maxMinutes)} get ${fmt(maxMinutes)} minutes and ${countAt(minMinutes)} get ${fmt(minMinutes)}. In the app, turn on Equal minutes over the season and the extra ${periodWord} goes to different players each week.`}
               </p>
               <div className="mt-3 overflow-x-auto">
                 <table className="w-full border-collapse text-sm">
                   <thead>
                     <tr className="text-left text-gray-600">
                       <th className="border-b border-gray-200 py-2 pr-3 font-semibold">Player</th>
-                      {plan.blocks.map((b, i) => (
+                      {plan.periods.map((_, i) => (
                         <th key={i} className="whitespace-nowrap border-b border-gray-200 px-2 py-2 text-center font-semibold">
-                          {fmt(b.start)}-{fmt(b.end)}&apos;
+                          {periodLabel(i)}
                         </th>
                       ))}
                       <th className="border-b border-gray-200 py-2 pl-3 text-right font-semibold">Minutes</th>
@@ -262,7 +320,7 @@ export default function PlayingTimeCalculator() {
                     {keeper && (
                       <tr>
                         <td className="border-b border-gray-100 py-2 pr-3 font-medium text-gray-900">{keeper} (GK)</td>
-                        {plan.blocks.map((_, i) => (
+                        {plan.periods.map((_, i) => (
                           <td key={i} className="border-b border-gray-100 px-2 py-2 text-center text-gray-900">
                             GK
                           </td>
@@ -273,12 +331,12 @@ export default function PlayingTimeCalculator() {
                     {rotating.map((name, p) => (
                       <tr key={`${name}-${p}`}>
                         <td className="border-b border-gray-100 py-2 pr-3 font-medium text-gray-900">{name}</td>
-                        {plan.blocks.map((b, i) => (
+                        {plan.periods.map((b, i) => (
                           <td
                             key={i}
                             className={`border-b border-gray-100 px-2 py-2 text-center ${b.on.has(p) ? "text-gray-900" : "text-gray-400"}`}
                           >
-                            {b.on.has(p) ? "On" : "Off"}
+                            {b.on.has(p) ? (positions ? POSITION_LABEL[positions[i].get(p)!] : "On") : "Off"}
                           </td>
                         ))}
                         <td className="border-b border-gray-100 py-2 pl-3 text-right font-semibold text-gray-900">
