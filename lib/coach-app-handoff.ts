@@ -180,7 +180,13 @@ function currentFirstTouch(): FirstTouch | null {
  * have. If that trade looks wrong, this function is the single place to
  * change it.
  */
-export function stashLandingHandoff(): void {
+export function stashLandingHandoff(
+  /** Stands in for the ?b= banner value when the form is embedded somewhere
+   * other than the landing page, e.g. "calculator" under the equal playing
+   * time calculator. Sign-ups with a banner report as "Article banner" in
+   * lib/coach-app-channels.ts. */
+  bannerOverride?: string,
+): void {
   const consent = freshConsent();
   if (!consent?.analytics) return;
 
@@ -202,7 +208,7 @@ export function stashLandingHandoff(): void {
         firstSeenAt: new Date().toISOString(),
         // Which Coach App banner sent them to this page, from the ?b= param
         // on the banner links (see app/components/CoachAppBanner.tsx).
-        banner: params.get("b"),
+        banner: bannerOverride ?? params.get("b"),
         entryPath: first?.entryPath ?? null,
         entryReferrerHost: first?.referrerHost ?? null,
         entrySourceGroup: first?.sourceGroup ?? null,

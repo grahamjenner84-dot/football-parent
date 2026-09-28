@@ -34,10 +34,18 @@ type Props = {
    * promise. Sits on the heading above the buttons, never on the buttons
    * themselves - see the Google button below for why. */
   heading?: string;
+  /** Labels sign-ups from a form embedded outside the landing page, stored
+   * as the handoff's banner. See stashLandingHandoff. */
+  source?: string;
+  /** Runs at the moment of intent, alongside the landing handoff: the
+   * calculator uses it to carry its squad into the app. */
+  onBeforeSignUp?: () => void;
 };
 
 export default function CoachSignUpForm({
   heading = "Set your team up in a couple of minutes",
+  source,
+  onBeforeSignUp,
 }: Props) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
@@ -52,7 +60,8 @@ export default function CoachSignUpForm({
     // Written at the moment of intent, not on page load: this is the page
     // the coach actually acted on, and a passive visit shouldn't claim
     // credit for a signup that happens from somewhere else later.
-    stashLandingHandoff();
+    stashLandingHandoff(source);
+    onBeforeSignUp?.();
     const { error } = await signInWithGoogle();
     if (error) {
       console.error("Coach App Google sign-in failed:", error);
@@ -65,7 +74,8 @@ export default function CoachSignUpForm({
     if (!email.trim()) return;
     setStatus("sending");
     setError(null);
-    stashLandingHandoff();
+    stashLandingHandoff(source);
+    onBeforeSignUp?.();
 
     const { error } = await signInWithEmail(email.trim());
     if (error) {
