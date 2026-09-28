@@ -505,6 +505,34 @@ doesn't exist. Questions drafted in `expert-quotes.md` pending section for:
 See per-article voice/citation numbers pulled 2026-08-09 for the current
 state of each.
 
+## Update 2026-09-28: sports-psychology gap filled (Matt Baxter)
+
+Matt Baxter, a youth athlete mindset coach, answered all 8 questions drafted
+for him on 2026-09-23.
+- [x] New interview article: `/parent-guides/matt-baxter-young-footballer-mindset-interview`
+  (Q&A format, same layout as the Paul Barry interview; described as "youth
+  athlete mindset coach", with "Elite Mindset Coach" used only as his business
+  name).
+- [x] One `<ExpertOpinion>` per article, each linking back to the interview:
+  understanding-academy-release, what-to-say-after-football-matches,
+  support-child-after-bad-match, build-confidence-young-footballers,
+  why-isnt-my-child-improving-at-football, football-burnout,
+  biggest-football-parent-mistakes, jpl-vs-grassroots-football.
+- [x] what-to-say-after-football-matches: first tagged `<ParentNote>` (Graham's
+  own story, asked for and written in his words).
+- [x] understanding-academy-release is no longer in "genuinely no personal fit,
+  citation-only territory": it now has two named experts (Paul Barry and Matt
+  Baxter), and moved from Bucket B to C in `eeat/eeat-scores.json`.
+- [ ] Watch list: leave all 8 pages alone until about 2026-10-10, then read
+  their GSC trend before any further change. understanding-academy-release,
+  build-confidence-young-footballers and jpl-vs-grassroots-football were also
+  edited 20-22 Sept, so their read covers both changes.
+
+**Still open, by leverage** (see `eeat/README.md`): scout / recruitment lead
+(11 Bucket B articles plus the templated club guides), academy coach (9),
+girls-pathway coach (7). Alfonso Carter (physio) has questions out for the
+sports-science pair.
+
 ## Coverage
 42 category cards + 71 of 71 articles touched somewhere in Phases 2-5, but
 only 40 of 71 have had a genuine Phase 5 (E-E-A-T) review - see correction

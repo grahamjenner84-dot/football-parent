@@ -66,7 +66,7 @@ that's noted.
 | emerging-talent-centres-explained | Girls Football | Light | 1.6% | 1 Parent Note but generic/advisory, not a specific anecdote |
 | academy-categories-explained | Academy Pathway | None | 0% | No personal fit — son was in development centres, not registered academy |
 | how-academy-football-works | Academy Pathway | None | 0% | Pillar/explainer, generic blockquote only |
-| understanding-academy-release | Academy Pathway | None | 0% | No personal experience of release |
+| understanding-academy-release | Academy Pathway | Moderate | n/a | No personal experience of release; 2 Expert Opinions (Paul Barry, Matt Baxter), added 2026-09-20 and 2026-09-28 |
 | what-age-do-football-academies-recruit | Academy Pathway | None | 0% | No personal fit; on expert-quote backlog |
 | what-is-eppp | Academy Pathway | None | 0% | Definitional/explainer, already well-sourced |
 | pdc-vs-ptc-vs-rtc-explained | Academy Pathway | None | 0% | Terminology explainer, no personal fit |
@@ -100,6 +100,17 @@ that's noted.
 | jpl-martin-brock-interview-part-1 | Parent Guides | None | 0% | Interview format — correctly no personal anecdote, views are Martin Brock's; added 2026-08-16 |
 
 ## Summary counts
+
+Updated 2026-09-28: Matt Baxter interview (`matt-baxter-young-footballer-mindset-interview`,
+interview format) published, and one `<ExpertOpinion>` from it added to 8 articles:
+understanding-academy-release (None to Moderate, the only level change),
+what-to-say-after-football-matches (also its first tagged `<ParentNote>`),
+support-child-after-bad-match, build-confidence-young-footballers,
+why-isnt-my-child-improving-at-football, football-burnout,
+biggest-football-parent-mistakes and jpl-vs-grassroots-football. The 2026-09-22
+semantic scores in `eeat/eeat-scores.json` are now the more current record;
+this file is kept for its per-article notes.
+
 
 Updated 2026-08-16: `what-is-the-junior-premier-league` and `jpl-vs-grassroots-football`
 each got a real `<ExpertOpinion>` from Martin Brock (JPL Chief Executive), sourced from

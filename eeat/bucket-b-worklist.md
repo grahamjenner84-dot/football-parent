@@ -123,9 +123,11 @@ needed. See `expert-question-bank.md` for the archetype-level question sets.
 - **football-gear/ag-vs-fg-boots** — *Boot Safety and Injury*: "What foot or
   lower-limb problems do you see in kids who wear FG studs on 3G all season?"
 
-## Sports psychologist (1 article)
+## Sports psychologist (DONE 2026-09-28, 0 left)
 
-- **academy-pathway/understanding-academy-release** — *The Emotional Impact*:
+- ~~**academy-pathway/understanding-academy-release**~~ Done: Matt Baxter
+  (youth athlete mindset coach) answered this; his quote is live in *Identity
+  and the Long Game*, and the article moved to Bucket C. Original question — *The Emotional Impact*:
   "When a released player says 'if I'm not a footballer, who am I?', what have
   you seen help a child rebuild their sense of self in the first weeks?"
 

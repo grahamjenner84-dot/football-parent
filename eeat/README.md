@@ -135,8 +135,29 @@ are-development-centres-worth-it (15->88), support-child-after-bad-match
 7. **Podiatrist / boot-fit** — gear cluster; optional.
 
 Existing experts on file (see `expert-quotes.md`): Martin Brock (JPL), Paul
-Barry (Football DNA), FutureFit. The recruits above are the gaps those three
-don't cover.
+Barry (Football DNA), FutureFit, Matt Baxter (youth athlete mindset coach,
+2026-09-28). **Sports psychologist (#5) is now filled** by Matt Baxter; the
+other recruits above are still open.
+
+## Update 2026-09-28: Matt Baxter interview + 8 expert quotes
+
+- New article `/parent-guides/matt-baxter-young-footballer-mindset-interview`
+  (8-question Q&A, Bucket C, voice 85, slop 28).
+- One `<ExpertOpinion>` from it on each of 8 parent-support articles, each
+  linking back to the interview: understanding-academy-release,
+  what-to-say-after-football-matches, support-child-after-bad-match,
+  build-confidence-young-footballers, why-isnt-my-child-improving-at-football,
+  football-burnout, biggest-football-parent-mistakes, jpl-vs-grassroots-football.
+  what-to-say-after-football-matches also got a Graham `<ParentNote>` (a car
+  journey he got wrong).
+- **understanding-academy-release moved B to C** (voice 42 to 60): it was the
+  only sports-psychologist Bucket B article, and now carries Paul Barry (why
+  clubs release) plus Matt Baxter (identity afterwards). The other seven were
+  already C; voice nudged up 1-4 points each.
+- New totals: **87 articles, A = 8, B = 35, C = 44; voice 47, slop 39.**
+  Expert demand now has no sports-psychologist entry.
+- All 8 edited pages are on the 10-14 day watch list (to about 2026-10-10).
+  Commits and sections are in `seo-changes-2026-09-06.md`.
 
 ## How to extend this next time
 

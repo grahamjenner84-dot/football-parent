@@ -505,24 +505,25 @@
       "slug": "what-to-say-after-football-matches",
       "category": "parent-guides",
       "url": "/parent-guides/what-to-say-after-football-matches",
-      "words": 1975,
-      "callouts": 0,
+      "words": 2377,
+      "callouts": 2,
       "isInterview": false,
       "citations": 2,
-      "citationsPer1000": 1.01,
-      "internalLinks": 7,
+      "citationsPer1000": 0.84,
+      "internalLinks": 8,
       "mechanical": {
-        "overall": 61,
-        "experience": 15,
+        "overall": 77,
+        "experience": 85,
         "expertise": 100,
-        "authoritativeness": 39
+        "authoritativeness": 34
       },
       "semantic": {
-        "voice": 88,
+        "voice": 92,
         "slop": 26,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-28",
+        "note": "2026-09-28: Matt Baxter quote (first ten minutes) + Graham ParentNote (car journey he got wrong)."
       }
     },
     {
@@ -679,24 +680,25 @@
       "slug": "biggest-football-parent-mistakes",
       "category": "parent-guides",
       "url": "/parent-guides/biggest-football-parent-mistakes",
-      "words": 2713,
-      "callouts": 1,
+      "words": 2930,
+      "callouts": 2,
       "isInterview": false,
       "citations": 1,
-      "citationsPer1000": 0.37,
-      "internalLinks": 11,
+      "citationsPer1000": 0.34,
+      "internalLinks": 12,
       "mechanical": {
-        "overall": 67,
-        "experience": 55,
+        "overall": 74,
+        "experience": 85,
         "expertise": 100,
         "authoritativeness": 21
       },
       "semantic": {
-        "voice": 92,
+        "voice": 93,
         "slop": 24,
         "bucket": "C",
         "expert": "scout",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-28",
+        "note": "2026-09-28: Matt Baxter quote (touchline body language)."
       }
     },
     {
@@ -1063,24 +1065,25 @@
       "slug": "support-child-after-bad-match",
       "category": "parent-guides",
       "url": "/parent-guides/support-child-after-bad-match",
-      "words": 2653,
-      "callouts": 1,
+      "words": 2915,
+      "callouts": 2,
       "isInterview": false,
       "citations": 2,
-      "citationsPer1000": 0.75,
-      "internalLinks": 14,
+      "citationsPer1000": 0.69,
+      "internalLinks": 15,
       "mechanical": {
-        "overall": 72,
-        "experience": 55,
+        "overall": 79,
+        "experience": 85,
         "expertise": 100,
-        "authoritativeness": 43
+        "authoritativeness": 41
       },
       "semantic": {
-        "voice": 88,
+        "voice": 90,
         "slop": 26,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-28",
+        "note": "2026-09-28: Matt Baxter quote (wobble vs real, quitting)."
       }
     },
     {
@@ -1357,24 +1360,25 @@
       "slug": "why-isnt-my-child-improving-at-football",
       "category": "football-development",
       "url": "/football-development/why-isnt-my-child-improving-at-football",
-      "words": 2841,
-      "callouts": 2,
+      "words": 2960,
+      "callouts": 3,
       "isInterview": false,
       "citations": 2,
-      "citationsPer1000": 0.7,
-      "internalLinks": 14,
+      "citationsPer1000": 0.68,
+      "internalLinks": 15,
       "mechanical": {
-        "overall": 77,
-        "experience": 85,
+        "overall": 80,
+        "experience": 100,
         "expertise": 100,
-        "authoritativeness": 31
+        "authoritativeness": 30
       },
       "semantic": {
-        "voice": 70,
+        "voice": 74,
         "slop": 34,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-28",
+        "note": "2026-09-28: Matt Baxter quote (plateaus, yet)."
       }
     },
     {
@@ -1717,27 +1721,28 @@
       "slug": "build-confidence-young-footballers",
       "category": "football-development",
       "url": "/football-development/build-confidence-young-footballers",
-      "words": 2569,
-      "callouts": 2,
+      "words": 2818,
+      "callouts": 3,
       "isInterview": false,
       "citations": 3,
-      "citationsPer1000": 1.17,
-      "internalLinks": 18,
+      "citationsPer1000": 1.06,
+      "internalLinks": 19,
       "mechanical": {
-        "overall": 83,
-        "experience": 85,
+        "overall": 86,
+        "experience": 100,
         "expertise": 100,
-        "authoritativeness": 55
+        "authoritativeness": 52
       },
       "semantic": {
-        "voice": 67,
+        "voice": 71,
         "slop": 31,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22",
+        "reviewed": "2026-09-28",
         "preTidySlop": 46,
         "preTidyVoice": 63,
-        "tidied": "2026-09-22 (2 passes)"
+        "tidied": "2026-09-22 (2 passes)",
+        "note": "2026-09-28: Matt Baxter quote (over-praise tied to outcomes)."
       }
     },
     {
@@ -1768,24 +1773,25 @@
       "slug": "understanding-academy-release",
       "category": "academy-pathway",
       "url": "/academy-pathway/understanding-academy-release",
-      "words": 2242,
-      "callouts": 1,
+      "words": 2506,
+      "callouts": 2,
       "isInterview": false,
       "citations": 7,
-      "citationsPer1000": 3.12,
-      "internalLinks": 9,
+      "citationsPer1000": 2.79,
+      "internalLinks": 10,
       "mechanical": {
-        "overall": 84,
-        "experience": 55,
+        "overall": 91,
+        "experience": 85,
         "expertise": 100,
         "authoritativeness": 89
       },
       "semantic": {
-        "voice": 42,
+        "voice": 60,
         "slop": 44,
-        "bucket": "B",
-        "expert": "sports-psychologist",
-        "reviewed": "2026-09-22"
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-28",
+        "note": "2026-09-28: Matt Baxter (release/identity) added beside Paul Barry (why clubs release). Expert gap filled; B to C."
       }
     },
     {
@@ -1984,27 +1990,28 @@
       "slug": "jpl-vs-grassroots-football",
       "category": "parent-guides",
       "url": "/parent-guides/jpl-vs-grassroots-football",
-      "words": 2779,
-      "callouts": 3,
+      "words": 2974,
+      "callouts": 4,
       "isInterview": false,
       "citations": 3,
-      "citationsPer1000": 1.08,
-      "internalLinks": 19,
+      "citationsPer1000": 1.01,
+      "internalLinks": 20,
       "mechanical": {
         "overall": 88,
         "experience": 100,
         "expertise": 100,
-        "authoritativeness": 63
+        "authoritativeness": 61
       },
       "semantic": {
-        "voice": 66,
+        "voice": 70,
         "slop": 34,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22",
+        "reviewed": "2026-09-28",
         "preTidySlop": 58,
         "preTidyVoice": 62,
-        "tidied": "2026-09-22"
+        "tidied": "2026-09-22",
+        "note": "2026-09-28: Matt Baxter quote (who is the goal for)."
       }
     },
     {
@@ -2086,35 +2093,61 @@
       "slug": "football-burnout",
       "category": "football-development",
       "url": "/football-development/football-burnout",
-      "words": 2615,
-      "callouts": 3,
+      "words": 2863,
+      "callouts": 4,
       "isInterview": false,
       "citations": 5,
-      "citationsPer1000": 1.91,
-      "internalLinks": 12,
+      "citationsPer1000": 1.75,
+      "internalLinks": 13,
       "mechanical": {
-        "overall": 97,
+        "overall": 96,
         "experience": 100,
         "expertise": 100,
-        "authoritativeness": 98
+        "authoritativeness": 93
       },
       "semantic": {
-        "voice": 90,
+        "voice": 92,
         "slop": 22,
         "bucket": "C",
         "expert": "sports-psychologist",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-09-28",
+        "note": "2026-09-28: Matt Baxter quote (dip vs burnout)."
+      }
+    },
+    {
+      "slug": "matt-baxter-young-footballer-mindset-interview",
+      "category": "parent-guides",
+      "url": "/parent-guides/matt-baxter-young-footballer-mindset-interview",
+      "words": 2438,
+      "callouts": 0,
+      "isInterview": true,
+      "citations": 4,
+      "citationsPer1000": 1.64,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 78,
+        "experience": 90,
+        "expertise": 85,
+        "authoritativeness": 45
+      },
+      "semantic": {
+        "voice": 85,
+        "slop": 28,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-09-28",
+        "note": "Expert Q&A with youth athlete mindset coach Matt Baxter, published 2026-09-28. Answers are his words; slop sits only in the short intro/outro."
       }
     }
   ],
   "semanticSummary": {
-    "reviewed": 86,
-    "avgVoice": 46,
+    "reviewed": 87,
+    "avgVoice": 47,
     "avgSlop": 39,
     "buckets": {
       "A": 8,
-      "B": 36,
-      "C": 42
+      "B": 35,
+      "C": 44
     },
     "expertDemand": {
       "academy-coach": 9,
@@ -2123,14 +2156,17 @@
       "sports-scientist": 2,
       "podiatrist": 2,
       "graham": 3,
-      "agent": 1,
-      "sports-psychologist": 1
+      "agent": 1
     },
     "tidied2026_09_22": {
       "articles": 9,
       "avgSlopBefore": 42,
       "avgSlopAfter": 31,
       "note": "Bucket C slop-tidy (2 passes): em dashes + reveal cliches removed, voice preserved. The 9 tidied articles dropped from ~42 to ~29 avg slop. Live on main (4fccef3). Deeper reveal-cadence remains but further removal needs heavier rewriting of ranking pages, diminishing returns."
+    },
+    "mattBaxter2026_09_28": {
+      "articles": 8,
+      "note": "Matt Baxter (youth athlete mindset coach) interview published plus one ExpertOpinion from it on each of 8 parent-support articles, each linking back. understanding-academy-release moved B to C (the only sports-psychologist B article). Watch list to ~2026-10-10."
     }
   }
 }
