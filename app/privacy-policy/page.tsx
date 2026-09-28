@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 26 September 2026
+            Last updated: 28 September 2026
           </p>
         </div>
       </section>
@@ -86,9 +86,19 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <p>
-            <strong>Marketing preferences.</strong> If you tell us whether
-            you want to hear about partner offers, we record that choice
-            (and when you made it) so we can honour it.
+            <strong>Email preferences.</strong> We record whether you want
+            to hear about partner offers (and when you told us), and the
+            email switches in the Coach App&apos;s Settings, so we can honour
+            them.
+          </p>
+
+          <p>
+            <strong>Notifications (Android app).</strong> If you allow
+            notifications in the Android app, we store a notification token
+            for your phone so we can send you match alerts, for example when
+            a player&apos;s availability changes or on match day. You can
+            turn them off in Settings in the app or in your phone&apos;s
+            settings, and signing out removes the token.
           </p>
 
           <p>
@@ -119,9 +129,12 @@ export default function PrivacyPolicyPage() {
             <strong>How you found us.</strong> When you create a Coach App
             account, we may record how you arrived - for example, the page
             you first landed on, the website that referred you, any campaign
-            tags in the link, and whether you came from an ad. We only record
-            this if you&apos;ve accepted analytics cookies, and use it to
-            understand which of our marketing is working.
+            tags in the link, and whether you came from an ad. In the Android
+            app, this comes from the information Google Play passes to the
+            app when it&apos;s installed (for example, whether the install
+            came from one of our ads). We only record this if you&apos;ve
+            accepted analytics cookies, and use it to understand which of our
+            marketing is working.
           </p>
 
           <p>
@@ -135,8 +148,10 @@ export default function PrivacyPolicyPage() {
             cookies or use pixels on our site for this purpose. Cookies that
             aren&apos;t strictly necessary for the site to function will only
             be set with your consent, which we&apos;ll ask for via a cookie
-            banner. You can withdraw that consent at any time through your
-            browser or the{" "}
+            banner. In the Android app, the same measurement uses Google&apos;s
+            Firebase Analytics, which can use your device&apos;s advertising
+            ID, again only with your consent. You can withdraw that consent
+            at any time through your browser or the{" "}
             <a
               href="/cookie-policy"
               className="font-semibold text-blue-700 hover:text-blue-900"
@@ -232,13 +247,38 @@ export default function PrivacyPolicyPage() {
                 </tr>
                 <tr className="[&:nth-child(even)]:bg-gray-50">
                   <td className="border border-gray-300 p-3">
-                    Service update emails (e.g. new features)
+                    Match reminder emails and notifications
                   </td>
                   <td className="border border-gray-300 p-3">
-                    To keep you informed about the product you use
+                    To help you run the matches you&apos;ve set up (you can
+                    switch these off in Settings)
                   </td>
                   <td className="border border-gray-300 p-3">
                     Legitimate interests
+                  </td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    Reminders and tips emails (getting started, new features)
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    To help you get set up and make the most of the app (you
+                    can switch these off in Settings)
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Legitimate interests
+                  </td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    Trial and account emails
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    To tell you about your own plan and account, for example
+                    when a trial is ending
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Performance of a contract
                   </td>
                 </tr>
                 <tr className="[&:nth-child(even)]:bg-gray-50">
@@ -276,27 +316,42 @@ export default function PrivacyPolicyPage() {
           </div>
 
           <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
-            4. Marketing emails
+            4. Emails we send
           </h2>
 
           <p>
-            We may send you two kinds of marketing email, and treat them
-            differently:
+            If you use the Coach App, we may email you about it. Each kind is
+            handled differently, and each email tells you how to switch it
+            off:
           </p>
 
           <ul className="list-disc pl-6 space-y-2">
             <li>
-              <strong>Product updates</strong> (what&apos;s new in Coach
-              App): sent by default, since you&apos;re already a user and
-              it&apos;s directly relevant to the product you use. Every
-              email has an unsubscribe link, and you can also turn this off
-              any time in Settings.
+              <strong>Match reminders</strong> (the day before a match,
+              before kick-off, and if a match is left running): sent by
+              default, because they&apos;re about fixtures you&apos;ve set up.
+              Switch them off in Settings &gt; Account &gt; Match reminders.
+              In the Android app, you may get these as notifications instead.
+            </li>
+            <li>
+              <strong>Reminders and tips</strong> (help getting started, such
+              as setting up your team or adding a match, and news about new
+              features): sent by default, since they&apos;re about the product
+              you use. Switch them off in Settings &gt; Account &gt; Reminders
+              and tips.
+            </li>
+            <li>
+              <strong>Trial and account emails</strong> (for example, that
+              your trial is ending, or that your account is about to be
+              paused or deleted): always sent, because they&apos;re about your
+              own plan and account.
             </li>
             <li>
               <strong>Partner offers</strong> (e.g. discounts, samples or
               competitions from brands like VEO): only sent if you&apos;ve
               explicitly opted in. You can opt in or out at any time from
-              Settings in the app. We do not share your email address or any
+              Settings &gt; Marketing preferences in the app. We do not share
+              your email address or any
               other personal data with these partners - we send the email
               ourselves, from our own list.
             </li>
@@ -365,6 +420,15 @@ export default function PrivacyPolicyPage() {
             <li>
               <strong>RevenueCat</strong> - verifying and managing
               subscriptions bought through Google Play
+            </li>
+            <li>
+              <strong>Resend</strong> - sending our emails, including sign-in
+              links and the Coach App emails described above
+            </li>
+            <li>
+              <strong>Google Firebase</strong> - delivering notifications in
+              the Android app, and app analytics and ad measurement there
+              (analytics and ads only with your consent)
             </li>
             <li>
               <strong>Advertising and analytics platforms</strong> (Google,
