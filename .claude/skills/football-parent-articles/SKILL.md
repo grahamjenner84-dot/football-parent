@@ -5,6 +5,10 @@ description: Writes fact-checked Football Parent (footballparent.co.uk) articles
 
 # Football Parent Article Writer
 
+For an expert interview write-up (Graham supplies the Q&As and a photo), use
+the `football-parent-expert-interview` skill: it follows this skill for the
+article and also sets the expert up in the Instagram Expert Opinion builder.
+
 Produces a complete, fact-checked, house-style MDX article and its matching
 `page.tsx` for footballparent.co.uk from a short brief (title, topic, or
 search intent).
