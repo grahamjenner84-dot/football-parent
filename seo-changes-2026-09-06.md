@@ -1029,3 +1029,10 @@ One `<ExpertOpinion>` callout per page, each an excerpt of his answer from the n
 - `parent-guides/biggest-football-parent-mistakes`, "Touchline Behaviour" (body language): 1af2ace
 - `parent-guides/jpl-vs-grassroots-football`, "Pressure and environment" (who is the goal for?): 6d18999. Page had a slop tidy on 22 Sept.
 - `parent-guides/what-to-say-after-football-matches`: added a `<ParentNote>` (Graham's own car-journey story, in his words) under "Processing your frustration out loud": 3c59e79. Same page and day as the Matt Baxter quote (277ff1f), so read the two as one change.
+
+## Expert box presentation tidy (2026-09-28, later the same day)
+
+Presentation only, no change to what the experts said. Graham's feedback: Matt's boxes had a big blue link inside the quote, and Paul's read as if the interview was done for Football DNA.
+- 5842bcf: `ExpertQA` footer link ("Read the full interview") and profile link now small, underlined, same amber colour as the box. `ExpertOpinion` gained `org`/`orgHref`, so an organisation in the title can be a plain underlined link.
+- a5e9262: Matt Baxter's 8 quotes switched from `ExpertOpinion` to the photo `ExpertQA` box (his question, an excerpt of his answer, small "Read Matt's full interview" link, no Instagram). Two moved: understanding-academy-release from "Identity and the Long Game" to "Rebuilding Confidence" (was reading back to back with the Football Parent note), and biggest-football-parent-mistakes from "Touchline Behaviour" (next to Paul's box) to "Too Much Pressure". jpl-vs-grassroots moved up one paragraph to separate it from Martin Brock's box.
+- 0a291b6 (plus the 3 Paul boxes in a5e9262's pages): all 13 Paul Barry `ExpertOpinion` boxes now show "Football DNA" as an underlined link in his title, and the trailing ", his interview for Football DNA" is gone.
