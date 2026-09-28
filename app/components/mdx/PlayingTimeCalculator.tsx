@@ -296,9 +296,10 @@ export default function PlayingTimeCalculator() {
           <div className="mt-8 border-t border-gray-200 pt-6">
             <h3 className="text-base font-semibold text-gray-900">That&apos;s one match. Now do it all season.</h3>
             <p className="mt-1 text-sm text-gray-600">
-              Next week someone&apos;s missing, someone arrives late, and one child has come off first three weeks
-              running. The Coach App carries every player&apos;s minutes from match to match and builds each lineup
-              to even them out.
+              Next week someone&apos;s missing, someone arrives late, and it&apos;s easy for the same child to come
+              off first three weeks running. The Coach App keeps every player&apos;s minutes from match to match. It
+              plans your changes at half or quarter breaks and records any extra subs you make during the game, and
+              with Equal minutes over the season switched on, the spare minutes go to whoever is owed most.
             </p>
             <div className="mt-3 overflow-x-auto" aria-hidden="true">
               <table className="w-full border-collapse text-sm text-gray-500">
