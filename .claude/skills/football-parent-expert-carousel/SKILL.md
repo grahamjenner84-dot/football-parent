@@ -105,8 +105,10 @@ set in posting order, strongest first, so the dropdown reads as a plan.
 handle); the builder shows it as a reminder under the caption.
 
 Graham marks a post as posted in the builder (button under the caption), which
-hides it from the dropdown on that device. To hide it on every device, add
-`"posted": "YYYY-MM-DD"` to the entry. A posted entry is still a record of
+hides it from the dropdown. Signed in to `/admin`, the mark syncs across his
+devices (`expert_posts_posted` table via `/api/expert-posted`); signed out, it
+stays on that device. `"posted": "YYYY-MM-DD"` on the entry also hides it
+everywhere. A posted entry is still a record of
 what's been used: never reuse its answer passages in a new post.
 
 ### 5. Check, fix, look

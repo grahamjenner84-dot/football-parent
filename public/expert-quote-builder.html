@@ -79,6 +79,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         <textarea id="fieldCaption" class="fld" style="margin-top:7px;height:120px;resize:vertical"></textarea>
         <div id="collabNote" class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5;margin-top:6px"></div>
         <button id="btnMarkPosted" class="seg" style="display:none;margin-top:9px;padding:8px 12px;font-size:12.5px;width:100%"></button>
+        <div id="postedSyncNote" class="ar" style="font-size:11px;color:#6f6f6f;line-height:1.4;margin-top:5px"></div>
       </div>
 
       <div>
@@ -368,8 +369,10 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   // cover, Q&As, quote, closing line and caption. Written by the
   // football-parent-expert-carousel skill.
   var posts = [];
-  // Posts Graham has marked as posted drop out of the dropdown. Kept in this
-  // browser's localStorage ({ id: 'YYYY-MM-DD' }); a post can also be marked
+  // Posts Graham has marked as posted drop out of the dropdown. Synced across
+  // devices through /api/expert-posted (Supabase, behind the /admin sign-in);
+  // when that isn't reachable (not signed in), kept in this browser's
+  // localStorage instead ({ id: 'YYYY-MM-DD' }). A post can also be marked
   // for every device with "posted": "YYYY-MM-DD" in expert-posts.json.
   var POSTED_KEY = 'fp_expert_posted', LOADED_KEY = 'fp_expert_loaded_post';
   function readStore(k, dflt) { try { return JSON.parse(localStorage.getItem(k)) || dflt; } catch (e) { return dflt; } }
@@ -377,12 +380,33 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   var postedIds = readStore(POSTED_KEY, {});
   var loadedPostId = readStore(LOADED_KEY, '');
   var showPosted = false;
+  var synced = false; // true once /api/expert-posted answered
+  function loadPostedFromServer() {
+    return fetch('/api/expert-posted', { cache: 'no-store', credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        if (!j || !j.posted) return;
+        synced = true;
+        // Carry over anything marked on this device before syncing existed.
+        Object.keys(postedIds).forEach(function (id) {
+          if (!j.posted[id]) { j.posted[id] = postedIds[id]; savePosted(id, postedIds[id]); }
+        });
+        postedIds = j.posted; writeStore(POSTED_KEY, postedIds);
+      }).catch(function () {});
+  }
+  function savePosted(id, date) {
+    return fetch('/api/expert-posted', {
+      method: 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id, posted: date || null })
+    }).then(function (r) { return r.ok; }).catch(function () { return false; });
+  }
   function isPosted(p) { return !!(p.posted || postedIds[p.id]); }
   function loadPosts() {
     fetch('/expert-posts.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
       .then(function (list) {
         posts = Array.isArray(list) ? list : [];
         buildPostOptions(); renderPosted();
+        return loadPostedFromServer().then(function () { buildPostOptions(); renderPosted(); });
       }).catch(function () {});
   }
   function buildPostOptions() {
@@ -413,18 +437,20 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   function renderPosted() {
     var b = document.getElementById('btnMarkPosted');
     var p = posts.find(function (x) { return x.id === loadedPostId; });
-    if (!p) { b.style.display = 'none'; return; }
+    if (!p) { b.style.display = 'none'; document.getElementById('postedSyncNote').textContent = ''; return; }
     b.style.display = '';
     if (p.posted) { b.textContent = '✓ Posted ' + p.posted; b.disabled = true; return; }
     b.disabled = false;
     b.textContent = postedIds[p.id] ? '✓ Posted ' + postedIds[p.id] + ' · tap to undo' : 'Mark "' + (p.label || p.id) + '" as posted';
+    document.getElementById('postedSyncNote').textContent = synced ? '' : 'Saved on this device only. Sign in at /admin/login to sync across devices.';
   }
   function togglePosted() {
     var p = posts.find(function (x) { return x.id === loadedPostId; }); if (!p || p.posted) return;
-    if (postedIds[p.id]) delete postedIds[p.id];
-    else postedIds[p.id] = new Date().toISOString().slice(0, 10);
+    var date = postedIds[p.id] ? null : new Date().toISOString().slice(0, 10);
+    if (date) postedIds[p.id] = date; else delete postedIds[p.id];
     writeStore(POSTED_KEY, postedIds);
     buildPostOptions(); renderPosted();
+    if (synced) savePosted(p.id, date).then(function (ok) { if (!ok) setStatus('⚠ Couldn\'t sync the posted mark; it\'s saved on this device.'); });
   }
   function applyPost(id) {
     var p = posts.find(function (x) { return x.id === id; }); if (!p) return;

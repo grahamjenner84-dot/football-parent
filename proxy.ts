@@ -46,7 +46,8 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith("/api/partner-click-report") ||
     pathname.startsWith("/api/outreach") ||
     pathname.startsWith("/api/coach-app-view-report") ||
-    pathname.startsWith("/api/coach-app-funnel-report");
+    pathname.startsWith("/api/coach-app-funnel-report") ||
+    pathname.startsWith("/api/expert-posted");
 
   if (!isProtected) return NextResponse.next();
 
@@ -98,5 +99,6 @@ export const config = {
     "/api/outreach/:path*",
     "/api/coach-app-view-report",
     "/api/coach-app-funnel-report",
+    "/api/expert-posted",
   ],
 };
