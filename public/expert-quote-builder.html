@@ -610,9 +610,13 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   // straight in Photos, or share straight to Instagram) instead of a zip that
   // has to be unzipped in Files first. Touch devices only: desktop Chrome can
   // share files too, but a zip in Downloads is what's wanted there.
+  // Not Android either: its share sheet has no "save to gallery" option,
+  // while a plain download lands in Downloads, which Gallery and Google
+  // Photos both show. So Android downloads each slide as its own PNG.
+  var isAndroid = /Android/i.test(navigator.userAgent);
   var canShareFiles = (function () {
     try {
-      return !!(navigator.canShare && window.matchMedia && matchMedia('(pointer: coarse)').matches &&
+      return !isAndroid && !!(navigator.canShare && window.matchMedia && matchMedia('(pointer: coarse)').matches &&
         navigator.canShare({ files: [new File([''], 'x.png', { type: 'image/png' })] }));
     } catch (e) { return false; }
   })();
@@ -673,6 +677,16 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         files.push(new File([pb], pad(k + 1) + '-' + Core.slideName(list[k]).replace(/\s+/g, '').toLowerCase() + '.png', { type: 'image/png' }));
       }
       return shareFiles(files);
+    }
+    if (isAndroid) {
+      setStatus('Building ' + list.length + ' carousel slides…');
+      for (var a = 0; a < list.length; a++) {
+        var ab = await renderPNG(list[a]);
+        download(ab, 'expert-' + pad(a + 1) + '-' + Core.slideName(list[a]).replace(/\s+/g, '').toLowerCase() + '.png');
+        // Chrome drops downloads fired back to back; space them out.
+        await new Promise(function (r) { setTimeout(r, 400); });
+      }
+      return withCaption('✓ Saved ' + list.length + ' PNGs to Downloads (in Gallery/Photos). If only one arrived, allow multiple downloads and tap again.');
     }
     if (!window.JSZip) { setStatus('Zip still loading…'); return; }
     setStatus('Building ' + list.length + ' carousel slides…');
@@ -923,6 +937,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('btnExportCarousel').addEventListener('click', exportCarousel);
   document.getElementById('btnShareReady').addEventListener('click', function () { if (pendingFiles) shareFiles(pendingFiles); });
   if (canShareFiles) document.getElementById('btnExportCarousel').textContent = '⬇  Carousel — save all slides to Photos';
+  if (isAndroid) document.getElementById('btnExportCarousel').textContent = '⬇  Carousel — save all slides (PNGs)';
   document.getElementById('btnExportSlide').addEventListener('click', exportSlide);
   document.getElementById('btnExportSlideVideo').addEventListener('click', exportSlideVideo);
 
