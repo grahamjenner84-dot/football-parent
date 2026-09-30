@@ -64,6 +64,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         <select id="fieldPost" class="fld">
           <option value="">Saved posts: pick one to load every slide…</option>
         </select>
+        <label id="showPostedWrap" class="ar" style="display:none;font-size:11.5px;color:#9a9a94;align-items:center;gap:7px;margin-top:-3px"><input id="fieldShowPosted" type="checkbox"> <span id="showPostedText"></span></label>
         <div class="ar" style="font-size:11px;color:#6f6f6f;line-height:1.4;margin-top:-3px">A saved post loads its expert too. Saved experts is for starting a new post.</div>
         <select id="fieldPreset" class="fld">
           <option value="">Saved experts: pick one to fill logo, photo and bio…</option>
@@ -77,6 +78,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         </div>
         <textarea id="fieldCaption" class="fld" style="margin-top:7px;height:120px;resize:vertical"></textarea>
         <div id="collabNote" class="ar" style="font-size:11.5px;color:#7d7d77;line-height:1.5;margin-top:6px"></div>
+        <button id="btnMarkPosted" class="seg" style="display:none;margin-top:9px;padding:8px 12px;font-size:12.5px;width:100%"></button>
       </div>
 
       <div>
@@ -366,24 +368,67 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   // cover, Q&As, quote, closing line and caption. Written by the
   // football-parent-expert-carousel skill.
   var posts = [];
+  // Posts Graham has marked as posted drop out of the dropdown. Kept in this
+  // browser's localStorage ({ id: 'YYYY-MM-DD' }); a post can also be marked
+  // for every device with "posted": "YYYY-MM-DD" in expert-posts.json.
+  var POSTED_KEY = 'fp_expert_posted', LOADED_KEY = 'fp_expert_loaded_post';
+  function readStore(k, dflt) { try { return JSON.parse(localStorage.getItem(k)) || dflt; } catch (e) { return dflt; } }
+  function writeStore(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  var postedIds = readStore(POSTED_KEY, {});
+  var loadedPostId = readStore(LOADED_KEY, '');
+  var showPosted = false;
+  function isPosted(p) { return !!(p.posted || postedIds[p.id]); }
   function loadPosts() {
     fetch('/expert-posts.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
       .then(function (list) {
         posts = Array.isArray(list) ? list : [];
-        // Grouped under each expert: picking a post loads its expert too, so
-        // this one dropdown is all that's needed for a saved post.
-        var sel = document.getElementById('fieldPost');
-        var groups = {};
-        posts.forEach(function (p) {
-          var ex = presets.find(function (x) { return x.id === p.expert; });
-          var name = ex ? (ex.label || ex.person || ex.name) : 'Other';
-          if (!groups[name]) { groups[name] = document.createElement('optgroup'); groups[name].label = name; sel.appendChild(groups[name]); }
-          var o = document.createElement('option'); o.value = p.id; o.textContent = p.label || p.id; groups[name].appendChild(o);
-        });
+        buildPostOptions(); renderPosted();
       }).catch(function () {});
+  }
+  function buildPostOptions() {
+    // Grouped under each expert: picking a post loads its expert too, so
+    // this one dropdown is all that's needed for a saved post.
+    var sel = document.getElementById('fieldPost');
+    while (sel.options.length > 1) sel.remove(1);
+    Array.prototype.slice.call(sel.querySelectorAll('optgroup')).forEach(function (g) { g.remove(); });
+    var groups = {}, done = [];
+    posts.forEach(function (p) {
+      if (isPosted(p)) { done.push(p); return; }
+      var ex = presets.find(function (x) { return x.id === p.expert; });
+      var name = ex ? (ex.label || ex.person || ex.name) : 'Other';
+      if (!groups[name]) { groups[name] = document.createElement('optgroup'); groups[name].label = name; sel.appendChild(groups[name]); }
+      var o = document.createElement('option'); o.value = p.id; o.textContent = p.label || p.id; groups[name].appendChild(o);
+    });
+    if (showPosted && done.length) {
+      var g = document.createElement('optgroup'); g.label = 'Already posted'; sel.appendChild(g);
+      done.forEach(function (p) {
+        var o = document.createElement('option'); o.value = p.id;
+        o.textContent = '✓ ' + (p.label || p.id) + ' (' + (p.posted || postedIds[p.id]) + ')'; g.appendChild(o);
+      });
+    }
+    var wrap = document.getElementById('showPostedWrap');
+    wrap.style.display = done.length ? 'flex' : 'none';
+    document.getElementById('showPostedText').textContent = 'Show ' + done.length + ' already posted';
+  }
+  function renderPosted() {
+    var b = document.getElementById('btnMarkPosted');
+    var p = posts.find(function (x) { return x.id === loadedPostId; });
+    if (!p) { b.style.display = 'none'; return; }
+    b.style.display = '';
+    if (p.posted) { b.textContent = '✓ Posted ' + p.posted; b.disabled = true; return; }
+    b.disabled = false;
+    b.textContent = postedIds[p.id] ? '✓ Posted ' + postedIds[p.id] + ' · tap to undo' : 'Mark "' + (p.label || p.id) + '" as posted';
+  }
+  function togglePosted() {
+    var p = posts.find(function (x) { return x.id === loadedPostId; }); if (!p || p.posted) return;
+    if (postedIds[p.id]) delete postedIds[p.id];
+    else postedIds[p.id] = new Date().toISOString().slice(0, 10);
+    writeStore(POSTED_KEY, postedIds);
+    buildPostOptions(); renderPosted();
   }
   function applyPost(id) {
     var p = posts.find(function (x) { return x.id === id; }); if (!p) return;
+    loadedPostId = p.id; writeStore(LOADED_KEY, p.id); renderPosted();
     if (p.expert) applyPreset(p.expert, true);
     Object.assign(state, {
       coverStyle: 'question',
@@ -877,6 +922,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('btnTK').addEventListener('click', function () { set('platform', 'tiktok'); });
 
   document.getElementById('fieldPost').addEventListener('change', function (e) { applyPost(e.target.value); e.target.value = ''; });
+  document.getElementById('btnMarkPosted').addEventListener('click', togglePosted);
+  document.getElementById('fieldShowPosted').addEventListener('change', function (e) { showPosted = e.target.checked; buildPostOptions(); });
   document.getElementById('btnCopyCaption').addEventListener('click', copyCaption);
   document.getElementById('fieldCaption').addEventListener('change', function (e) { set('caption', e.target.value); });
   document.getElementById('fieldPreset').addEventListener('change', function (e) { applyPreset(e.target.value); e.target.value = ''; });
