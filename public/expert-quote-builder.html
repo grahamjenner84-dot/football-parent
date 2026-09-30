@@ -200,7 +200,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         <button id="btnFmtReel" class="seg" style="padding:6px 13px">Reel / Story 9:16</button>
         <button id="btnFmtCarousel" class="seg" style="padding:6px 13px">Feed post 4:5</button>
       </div>
-      <canvas id="preview" width="1080" height="1920" style="width:300px;height:auto;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.5);display:block;background:#0b0b0d"></canvas>
+      <canvas id="preview" width="1080" height="1920" style="touch-action:pan-y;user-select:-webkit-none;-webkit-user-select:none;width:300px;height:auto;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.5);display:block;background:#0b0b0d"></canvas>
       <div id="dots" style="display:flex;gap:7px;margin-top:12px;flex-wrap:wrap;justify-content:center"></div>
       <button id="btnSafe" class="seg" style="margin-top:12px;padding:6px 13px">Show safe area</button>
       <div style="display:flex;align-items:center;gap:8px;margin-top:12px">
@@ -558,6 +558,29 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   function prev() { state.active = Math.max(0, state.active - 1); render(); }
   function next() { state.active = Math.min(Core.slideCount(state) - 1, state.active + 1); render(); }
 
+  // Swipe the preview left/right to change slide, like the Instagram carousel.
+  // touch-action:pan-y on the canvas keeps vertical page scrolling native.
+  (function () {
+    var x0 = null, y0 = 0, id = null;
+    function reset() { x0 = null; id = null; previewCanvas.style.transition = 'transform .18s'; previewCanvas.style.transform = ''; }
+    previewCanvas.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse') return;
+      x0 = e.clientX; y0 = e.clientY; id = e.pointerId; previewCanvas.style.transition = 'none';
+    });
+    previewCanvas.addEventListener('pointermove', function (e) {
+      if (e.pointerId !== id || x0 === null) return;
+      var dx = e.clientX - x0;
+      if (Math.abs(dx) > Math.abs(e.clientY - y0)) previewCanvas.style.transform = 'translateX(' + dx * 0.5 + 'px)';
+    });
+    previewCanvas.addEventListener('pointerup', function (e) {
+      if (e.pointerId !== id || x0 === null) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      reset();
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { if (dx < 0) next(); else prev(); }
+    });
+    previewCanvas.addEventListener('pointercancel', reset);
+  })();
+
   /* ---------- export ---------- */
   function download(blob, name) {
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
@@ -577,7 +600,10 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     await ensureFonts();
     var list = slideList(); var s = list[state.active];
     var blob = await renderPNG(s);
-    download(blob, 'expert-' + pad(state.active + 1) + '-' + Core.slideName(s).replace(/\s+/g, '').toLowerCase() + '.png');
+    var name = 'expert-' + pad(state.active + 1) + '-' + Core.slideName(s).replace(/\s+/g, '').toLowerCase() + '.png';
+    var f = new File([blob], name, { type: 'image/png' });
+    if (canShareFile(f)) return shareFiles([f]);
+    download(blob, name);
     setStatus('✓ Saved 1 PNG.');
   }
   // On a phone, hand the slides to the share sheet ("Save N Images" puts them
@@ -602,24 +628,41 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   function withCaption(msg) {
     return captionCopied.then(function (ok) { setStatus(msg + (ok ? ' Caption copied.' : '')); });
   }
+  // The share sheet must be the first thing a tap does: Safari refuses it
+  // (NotAllowedError) if the tap was already spent on anything else, the
+  // clipboard included. So on phones the caption is copied only after the
+  // share sheet closes, and the Copy caption button covers it if that fails.
+  function describe(files) {
+    var video = files[0] && /^video\//.test(files[0].type);
+    return video ? 'video' : files.length === 1 ? 'slide' : files.length + ' slides';
+  }
   async function shareFiles(files) {
     try {
       await navigator.share({ files: files });
       pendingFiles = null; document.getElementById('btnShareReady').style.display = 'none';
-      withCaption('✓ Shared ' + files.length + ' slides.');
+      var copied = false;
+      if (state.caption && navigator.clipboard) {
+        try { await navigator.clipboard.writeText(state.caption); copied = true; } catch (e) {}
+      }
+      setStatus('✓ Shared ' + describe(files) + '.' + (copied ? ' Caption copied.' : state.caption ? ' Tap Copy caption for the caption.' : ''));
     } catch (e) {
       if (e && e.name === 'AbortError') { setStatus('Cancelled.'); return; }
-      // Building the slides can take long enough that the browser no longer
+      // Building the files can take long enough that the browser no longer
       // counts the share as coming from the tap, so offer a second tap.
       pendingFiles = files;
       var b = document.getElementById('btnShareReady');
-      b.textContent = 'Tap to save ' + files.length + ' slides to Photos';
+      b.textContent = 'Tap to save ' + describe(files) + ' to Photos';
       b.style.display = '';
-      setStatus('Slides ready.');
+      setStatus('Ready.');
     }
   }
+  // On phones, hand a file to the share sheet ("Save Image/Video" puts it in
+  // Photos); an <a download> would only land it in Files.
+  function canShareFile(f) {
+    try { return canShareFiles && navigator.canShare({ files: [f] }); } catch (e) { return false; }
+  }
   async function exportCarousel() {
-    captionCopied = copyCaptionOnTap();
+    if (!canShareFiles) captionCopied = copyCaptionOnTap();
     await ensureFonts();
     var list = slideList();
     if (canShareFiles) {
@@ -648,17 +691,22 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     setStatus('● Encoding slide… keep this tab open.');
     var r = await renderReel([s], state.secs);
     if (!r) { setStatus('⚠ Video unsupported here — use Chrome/Edge, or export the PNG.'); return; }
-    download(r.blob, 'expert-' + pad(state.active + 1) + '-' + Core.slideName(s).replace(/\s+/g, '').toLowerCase() + '.' + r.ext);
+    var name = 'expert-' + pad(state.active + 1) + '-' + Core.slideName(s).replace(/\s+/g, '').toLowerCase() + '.' + r.ext;
+    var f = new File([r.blob], name, { type: r.blob.type || 'video/' + r.ext });
+    if (canShareFile(f)) return shareFiles([f]);
+    download(r.blob, name);
     setStatus('✓ Slide video downloaded (' + r.ext.toUpperCase() + ', ' + state.secs + 's).');
   }
   async function exportReel() {
-    captionCopied = copyCaptionOnTap();
+    if (!canShareFiles) captionCopied = copyCaptionOnTap();
     await ensureFonts();
     var list = slideList();
     setStatus('● Encoding Reel… keep this tab open.');
     var r = await renderReel(list, state.secs);
     if (!r) { setStatus('⚠ Video unsupported here — use Chrome/Edge, or export the carousel PNGs.'); return; }
-    download(r.blob, 'footballparent-expert-reel.' + r.ext);
+    var f = new File([r.blob], 'footballparent-expert-reel.' + r.ext, { type: r.blob.type || 'video/' + r.ext });
+    if (canShareFile(f)) return shareFiles([f]);
+    download(r.blob, f.name);
     withCaption('✓ Reel downloaded (' + r.ext.toUpperCase() + ', ' + (list.length * state.secs) + 's).');
   }
   async function renderReel(list, secs) {
@@ -873,7 +921,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
   document.getElementById('btnExportReel').addEventListener('click', exportReel);
   document.getElementById('btnExportCarousel').addEventListener('click', exportCarousel);
-  document.getElementById('btnShareReady').addEventListener('click', function () { if (pendingFiles) { captionCopied = copyCaptionOnTap(); shareFiles(pendingFiles); } });
+  document.getElementById('btnShareReady').addEventListener('click', function () { if (pendingFiles) shareFiles(pendingFiles); });
   if (canShareFiles) document.getElementById('btnExportCarousel').textContent = '⬇  Carousel — save all slides to Photos';
   document.getElementById('btnExportSlide').addEventListener('click', exportSlide);
   document.getElementById('btnExportSlideVideo').addEventListener('click', exportSlideVideo);
