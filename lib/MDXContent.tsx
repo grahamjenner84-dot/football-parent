@@ -149,6 +149,14 @@ const mdxOptions = {
 // Only splits at a heading in the middle 30-70% of the body, and only counts
 // headings outside fenced code blocks - if nothing qualifies (short article,
 // too few headings) it returns null and the article renders as one block.
+//
+// A heading that comes soon after an expert or parent callout is skipped, so
+// the banner never sits straight after one: callouts are there to break up
+// the prose, and two boxes back to back read as one wall. "Soon" is less
+// than CALLOUT_GAP characters of prose between the callout and the heading.
+const CALLOUT_CLOSE = /^\s*<\/(ExpertQA|ExpertOpinion|ParentNote)>\s*$/;
+const CALLOUT_GAP = 400;
+
 function splitAtMiddleHeading(content: string): [string, string] | null {
   const lines = content.split("\n");
   const total = content.length;
@@ -158,14 +166,19 @@ function splitAtMiddleHeading(content: string): [string, string] | null {
   const candidates: { line: number; offset: number }[] = [];
   let offset = 0;
   let inFence = false;
+  let lastCalloutEnd = -Infinity;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
     if (/^\s*```/.test(line)) {
       inFence = !inFence;
+    } else if (!inFence && CALLOUT_CLOSE.test(line)) {
+      lastCalloutEnd = offset + line.length + 1;
     } else if (!inFence && /^## /.test(line)) {
-      candidates.push({ line: i, offset });
+      if (offset - lastCalloutEnd >= CALLOUT_GAP) {
+        candidates.push({ line: i, offset });
+      }
     }
 
     offset += line.length + 1;

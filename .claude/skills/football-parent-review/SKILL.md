@@ -92,7 +92,11 @@ Also flag "badge" framing clichés and reframe/negative-parallelism
 constructions ("It isn't X. It's Y.", "X matters far less than Y", "Focus on
 Y, not X", and similar reject-then-reveal contrast shortcuts) wherever they
 appear, including inside `<ParentNote>`/`<ExpertOpinion>` callouts — a real
-quote can still be phrased as a fake-depth rhetorical shortcut. For each:
+quote can still be phrased as a fake-depth rhetorical shortcut. Also flag
+search-behaviour openers anywhere in the article, especially the first
+sentence: "When people/parents search for X...", "If you search for X...",
+"Search for X and most of what comes back is..." and rewordings of the same
+shape. They are banned site-wide; the fix leads with the answer instead. For each:
 original sentence/section, why it's weak, what specific parent/
 coaching/UK-football/safeguarding/research insight is missing, and the exact
 MDX replacement text. Also flag sections that feel isolated from the rest of
@@ -119,6 +123,13 @@ reusable on-topic quote before recommending a brand new request). Any
 callout content must read as genuine, specific material, not a generic
 statement dressed up in a callout box — flag a callout that fails that bar
 the same as a missing one.
+Also flag any `<ExpertOpinion>` from an expert who has a photo on record
+(`public/expert-presets.json`, or an existing `<ExpertQA photoSrc=...>`
+placement): it should be an `<ExpertQA>` with the photo and original
+question. And flag a callout stacked straight after another box (another
+callout, a table, GearPicks): callouts are there to split up walls of
+text. Flag any body paragraph over ~450 characters (about 5 lines on
+desktop) and give the split point.
 
 ### 8. SEO & E-E-A-T Review
 Weak expertise/authoritativeness/trust signals, unsupported claims, missing

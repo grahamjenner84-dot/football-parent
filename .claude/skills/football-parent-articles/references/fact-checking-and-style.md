@@ -120,6 +120,16 @@ callout text, not just body prose — a real quote or story can still be
 written using a fake-depth rhetorical shortcut, and it's just as much AI-slop
 there as anywhere else.
 
+Also banned: search-behaviour openers that narrate what people search for
+or what comes back, instead of answering. "When people search for X...",
+"When parents search for X...", "If you search for X...", "Search for X and
+most of what comes back is...", "You'll mostly find retailer pages..." and
+any rewording of the same shape. It is AI throat-clearing and has become a
+site-wide template tell (Watford, soft ground boots, formations by age,
+coaching qualifications, academy trials UK). Lead with the answer or a
+concrete football situation. Before settling an intro, grep `content/` for
+`search for` to make sure the opener is not repeating this.
+
 If a paragraph could be dropped unmodified into a tennis, rugby, cricket or
 swimming article, rewrite it to be football-specific.
 
@@ -207,6 +217,24 @@ step in SKILL.md). Both callout types must contain genuine material, never
 a fabricated anecdote or an invented expert view. Check
 `references/expert-quotes.md` first for an existing reusable quote before
 asking for a new one.
+
+**Expert quotes use `<ExpertQA>` with the photo, not `<ExpertOpinion>`.**
+When the expert has a headshot (check `public/expert-presets.json` and the
+existing `<ExpertQA>` placements in `content/`, e.g. Paul Barry's
+`photoSrc="/images/people/paul-football-dna.jpg"`), place their answer as
+`<ExpertQA>` with `photoSrc`, `photoAlt`, `bio`, `profileHref`/
+`profileLabel`, `sourceHref` back to the interview, and the original
+question in `<ExpertQAItem q="...">`, copying the attributes from an
+existing placement rather than retyping them. Don't add a prose lead-in
+that restates the question, since the box shows it. `<ExpertOpinion>` is
+only for experts with no photo or no original question on record.
+
+**Callouts break up the prose, so keep them away from the Coach App
+banner.** `lib/MDXContent.tsx` drops the banner at the `##` heading nearest
+the middle of the article, and skips any heading with under ~400
+characters of prose after a callout, so a box never lands straight after a
+`<ParentNote>`/`<ExpertQA>`/`<ExpertOpinion>`. Spread callouts through long
+stretches of text instead of stacking them next to other boxes.
 
 This rule exists to guarantee genuine human material exists somewhere in the
 article, not to mandate a specific visual format. If an article already has
@@ -298,6 +326,10 @@ survives truncation instead of landing after it.
 ## Style
 
 - British English throughout.
+- Short paragraphs: aim for 2-4 sentences and no more than ~450 characters
+  (about 5 lines on desktop). Anything running to 8-9 lines is a wall of
+  text; split it where the point turns, e.g. a new fact, a source, or an
+  internal-link sentence.
 - No em dashes — use full stops, commas, colons, semicolons or parentheses.
 - No markdown pipe tables, ever. Use bullet comparisons, numbered steps,
   pros/cons blocks, or stacked "Option A vs Option B" sections instead —
@@ -328,3 +360,6 @@ survives truncation instead of landing after it.
 9. Are there at least 2 `<ParentNote>`/`<ExpertOpinion>` callouts (or 1 plus
    a logged pending expert-quote request), each containing genuine,
    non-fabricated material?
+10. Does the intro open with the answer, not a search-behaviour opener
+    ("When people/parents search for X...", "Search for X and...")? Grep
+    `content/` for `search for` to confirm.
