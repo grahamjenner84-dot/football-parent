@@ -556,7 +556,7 @@ deeper cut than Paul Barry's Q10 (that covered release structurally, not the
 
 ### Alfonso Carter (Resilient Physio) — physiotherapist and former pro footballer, tag: training load, overuse injury, physical development
 Drafted 2026-09-23. Replied to interview request 2026-09-22. Details received
-2026-09-23 (his about-me page). Strong credentials: former professional
+2026-09-23 (his about-me page). Chased 2026-10-02, awaiting answers. Strong credentials: former professional
 footballer of 15+ years, BSc (Hons) Physiotherapy (Salford, 2023), first-team
 physio in professional football, plus sports massage and strength &
 conditioning qualifications, DBS checked, registered with the Chartered Society
@@ -664,7 +664,7 @@ Send around 8 (each tagged with the article it feeds; Q5 is the reusable one):
 Drafted: 2026-08-09. Reassigned 2026-09-06: Adam Sells is an FA-registered
 intermediary (see his full entry below under "Pending" for bio) - a much
 stronger fit than the original TBD generic agent/lawyer ask, since he
-actively works this exact role. Messaged 2026-09-06, awaiting reply.
+actively works this exact role. Messaged 2026-09-06, chased 2026-10-02, awaiting reply.
 1. What's the biggest misconception parents have about when they actually need
    an agent or intermediary?
 2. What age, or what stage of a child's development, is it actually sensible
@@ -956,7 +956,11 @@ been through the Trust's PDC or Advanced PDC, or a Trust coach.
    the girls' PDC groups?
 
 ### Elevation academy interview — Crystal Palace academy coach, tag: academy scouting/coaching, U6-U8 development, 1v1/ball mastery, Crystal Palace insider, private coaching crossover, bio-banding
-Drafted: 2026-08-25
+Drafted: 2026-08-25. Sent, then chased twice by Graham, no reply.
+**CLOSED 2026-10-02: not interested** (he normally replies quickly, so read
+the silence as a no). Don't chase again. The questions below are still
+useful for another academy coach or scout (several overlap David Hobson's
+batch).
 Graham knows a coach who works at Crystal Palace's academy and separately runs
 his own 1v1/ball-mastery training business. Covers several open gaps at once:
 `what-do-academy-coaches-look-for` and `how-football-scouts-identify-players`
@@ -1000,8 +1004,12 @@ Bio-banding:
 
 ### Paul Barry — round 2, tag: talent ID, inside the academy system, release
 Drafted: 2026-09-06. Messaged 2026-09-06. Questions 1-4 answered
-2026-09-09 - see "Answered" section below. Questions 5-10 still awaiting
-reply.
+2026-09-09 - see "Answered" section below. **ALL ANSWERED: Questions 5-10
+published as [Academy Life: Paul Barry on Categories, Development Centres and
+Release](/academy-pathway/academy-life-paul-barry-interview)
+(`content/academy-pathway/academy-life-paul-barry-interview.mdx`, one section
+per question), which is the source of record for any excerpt.** Nothing
+outstanding (tracker confirmed 2026-10-02).
 Follow-up to the FutureFit interview, this time drawing on his Head of
 Coaching/Talent ID roles across Southend, Watford, Arsenal and Crystal
 Palace rather than the Football DNA development-philosophy angle. Covers
@@ -1044,7 +1052,7 @@ Supporting a child through release:
     child through release?
 
 ### Adam Sells, tag: goalkeeper academy pathway, goalkeeper coaching
-Drafted: 2026-09-06. Messaged 2026-09-06, awaiting reply.
+Drafted: 2026-09-06. Messaged 2026-09-06, chased 2026-10-02, awaiting reply.
 Bio: schoolboy academy goalkeeper at Chelsea, Crystal Palace and Brentford
 before a non-League playing career. Coached goalkeepers in Charlton's
 youth system in the late 1990s, then in Crystal Palace's academy setup
@@ -1085,8 +1093,11 @@ The pathway onward, from where he sits now as an intermediary:
 7. Is there a stage where a goalkeeper's development can stall that's
    specific to the position, that outfield players don't really face?
 
-### The physio (Instagram) — TBD, tag: injury prevention/workouts, embedded video
-Drafted: 2026-09-06. Messaged via Instagram DM 2026-09-06, awaiting reply.
+### The physio (Instagram) — MERGED into Alfonso Carter (Resilient Physio) entry above
+Confirmed 2026-10-02 (Graham): this Instagram physio is Alfie Carter. Track
+status, questions and the embedded-reels plan on his entry only; the notes
+below are kept for history.
+Drafted: 2026-09-06. Messaged via Instagram DM 2026-09-06.
 Contact and exact focus still TBD - Graham messaged directly rather than
 by email. Plan is to pair the Q&A with 1-2 embedded Instagram Reels of
 their suggested workouts (new `InstagramEmbed` MDX component built
@@ -1094,6 +1105,44 @@ their suggested workouts (new `InstagramEmbed` MDX component built
 linking back to their Instagram profile. Questions not drafted yet -
 depends on his specialty once confirmed and which article(s) this ends up
 supporting.
+
+### The Pre-Academy Player (anonymous parent author) — tag: pre-academy, parent experience, first-hand
+Drafted and emailed 2026-10-02, awaiting reply.
+Instagram: https://www.instagram.com/the_pre_academy_player/ . Parent who
+went through a pre-academy start to finish and has written a book about it
+(author listed as unknown, so expect them to stay anonymous). Book:
+https://www.amazon.co.uk/dp/B0HCWW2793?tag=footballpar09-21 (title, format
+and release date not yet confirmed, Amazon blocked the fetch; pre-order at
+time of contact). Plan: standalone Q&A article with the book as a tagged
+affiliate link (disclosed to them in the email), Expert Opinion carousel
+using their exact words, then link from
+`content/academy-pathway/pre-academy-football.mdx` as one logged SEO change.
+Why: that guide is well sourced but has zero first-hand experience; Q1, Q5,
+Q7, Q11 and Q12 fill specific unsupported or missing points (lines ~79, 86-92,
+90, 94-106 and the missing "how it ends" angle). Treat answers as one family's
+experience, never as "parents report".
+Asked privately (not for publication): which club's pre-academy and roughly
+which years, to verify. Publish nothing naming or hinting at the club, and no
+child name, club or photos. Also asked for: preferred byline name, book cover
+image, a short author-box line.
+1. How old was your child when it started, and how did the invitation come about?
+2. Was the pre-academy run by the club's own academy staff, or by a separate
+   coaching company working with the club?
+3. What did you expect pre-academy to be, and what was it actually like?
+4. What did a typical week look like: sessions, travel, time?
+5. Roughly what did it cost per month, including kit and travel? Were there
+   any costs you didn't expect?
+6. Did your child keep playing grassroots football alongside it? How did that work?
+7. How did you know how it was going? Did the coaches give feedback, and what
+   form did it take?
+8. What was the hardest moment, for you and for your child?
+9. How did you handle the waiting, and the comparing with other parents?
+10. What did nobody tell you at the start that you wish they had?
+11. How did it end, and how did your child take it?
+12. Would you do it again? What would you do differently?
+13. What's the one thing you'd say to a parent whose child has just been
+    invited to a pre-academy?
+14. Why did you write the book, and who is it for?
 
 Format for new entries:
 ```
