@@ -939,6 +939,21 @@ Centre, or a Foundation coach.
 4. What would you tell a parent whose child has just been invited to a further
    look from Foundation level, that isn't obvious from the club's own information?
 
+### watford-development-centre-guide — TBD, tag: Watford CSE Trust Player Development Programme / girls' ETC, first-hand experience
+Drafted: 2026-10-02
+Shipped with one callout (Paul Barry Q6, see the reuse note under the Paul
+Barry placements below), pending Graham's sign-off on that excerpt. No
+Watford-specific parent voice yet. Well suited to a parent whose child has
+been through the Trust's PDC or Advanced PDC, or a Trust coach.
+1. How did your child move from the PDC to the Advanced PDC, and what did
+   the coach tell you about why?
+2. Two evenings a week plus grassroots: how did that work in practice, and
+   did anything give?
+3. Has a PDC coach ever recommended a player for an academy trial, and how
+   was that communicated to the family?
+4. For girls' families: how does the ETC at the training ground compare with
+   the girls' PDC groups?
+
 ### Elevation academy interview — Crystal Palace academy coach, tag: academy scouting/coaching, U6-U8 development, 1v1/ball mastery, Crystal Palace insider, private coaching crossover, bio-banding
 Drafted: 2026-08-25
 Graham knows a coach who works at Crystal Palace's academy and separately runs
@@ -1209,6 +1224,14 @@ interview article and a link to [Football DNA](https://footballdna.co.uk):
   trimmed a different way (different sentences kept, same duplicate-
   content discipline as the reused parent-story trims above), in
   "Movement Between Pathway Levels"
+- `watford-development-centre-guide` (2026-10-02) - Q6 again (2nd article
+  after `academy-categories-explained`), as an `<ExpertOpinion>` in
+  "Watford's Academy and the Move to Category Three". Trimmed the opposite
+  way to the categories article: that one keeps paragraph 1 plus the first
+  sentence of paragraph 2; this one keeps only paragraph 2, all three
+  sentences (the "underdog"/staff-wear-more-than-one-hat point, which fits a
+  club that has just dropped a category). Relevant because Paul coached in
+  Watford's academy in 2021. Pending Graham's go-ahead on the excerpt.
 
 `pdc-vs-ptc-vs-rtc-explained` and `pre-academy-football` still have no
 callout from this round - no answer above was a strong enough topical fit
