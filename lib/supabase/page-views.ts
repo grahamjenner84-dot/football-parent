@@ -6,6 +6,7 @@ import {
   BANNER_TEST_STARTED_AT,
   CATEGORY_BANNER_PATHS,
   bannerStyleForKey,
+  HOME_BANNER_ENDED_AT,
   audienceAt,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
@@ -1061,6 +1062,7 @@ function bannerOnPath(
   createdAt: string
 ): { style: string; audience: string; placement: string } | null {
   if (path === "/") {
+    if (createdAt >= HOME_BANNER_ENDED_AT) return null;
     return {
       style: bannerStyleForKey(undefined),
       audience: "parent",
@@ -1181,7 +1183,9 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
 
     const day = row.created_at.slice(0, 10);
 
-    if (row.banner_variant) {
+    // progress-* clicks come from the Progress banners (ProgressBanner.tsx),
+    // not a Coach App creative.
+    if (row.banner_variant && !row.banner_variant.startsWith("progress-")) {
       clicks.set(row.banner_variant, (clicks.get(row.banner_variant) ?? 0) + 1);
       bump(clicksByDay, day, row.banner_variant);
     }

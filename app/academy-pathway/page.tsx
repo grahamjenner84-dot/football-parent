@@ -1,4 +1,5 @@
 import CategoryPage from "../components/category-page";
+import ProgressBanner from "../components/ProgressBanner";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -18,6 +19,8 @@ export default function AcademyPathwayPage() {
       intro={[
         "The football academy system in the UK is structured around the Elite Player Performance Plan, which divides clubs into Category 1 to 4 academies with different levels of resource, coaching, and player commitment. Alongside full academies, most professional clubs also run development centres that are open to a wider range of players. Understanding where your child fits in this pathway, and what each stage actually involves, is what these guides are designed to help with. Written from first-hand experience of Crystal Palace and Chelsea's development programmes in south London.",
       ]}
+      // Progress sponsors this section (the strapline version of its banner).
+      promo={<ProgressBanner placement="academy-pathway" />}
       startHere={{
         title: "Start Here",
         description:

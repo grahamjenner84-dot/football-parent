@@ -41,7 +41,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white text-slate-950 shadow-sm">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <Link href="/" scroll={true} className="flex items-center gap-1.5 no-underline">
+        <Link href="/" scroll={true} className="flex shrink-0 items-center gap-1.5 no-underline">
           <Image
             src="/parent/icon/parent-circle-512.png"
             alt=""
@@ -56,7 +56,7 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
+        <nav className="hidden items-center gap-6 px-4 text-sm font-medium text-slate-700 xl:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -70,11 +70,21 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          {/* Our own app, set apart from the article categories. From md up
+              it sits in the bar; the seven category links only fit beside it
+              from xl, so below that they live in the Menu (as on phones). */}
+          <Link
+            href="/progress"
+            scroll={true}
+            className="hidden whitespace-nowrap rounded-full bg-[#1a7a45] px-3.5 py-1.5 text-sm font-semibold text-white no-underline transition hover:bg-[#0f5d34] md:inline-block"
+          >
+            Progress app
+          </Link>
           <SearchPanel />
 
           <button
             type="button"
-            className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-900 md:hidden"
+            className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-900 xl:hidden"
             onClick={() => setOpen((current) => !current)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -85,7 +95,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-slate-200 bg-white px-5 py-4 md:hidden">
+        <nav className="border-t border-slate-200 bg-white px-5 py-4 xl:hidden">
           <div className="mx-auto grid max-w-6xl gap-2">
             {navItems.map((item) => (
               <Link
@@ -98,6 +108,14 @@ export default function Header() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/progress"
+              scroll={true}
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-3 text-sm font-semibold text-[#1a7a45] no-underline transition hover:bg-slate-100"
+            >
+              Progress app: track your child&apos;s football
+            </Link>
           </div>
         </nav>
       )}
