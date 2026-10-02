@@ -217,6 +217,12 @@ export default function AcademyPathwayPage() {
             "Aston Villa's academy has held Category One status since 2014 and won the FA Youth Cup in 2025. How the Foundation's six age-banded centres feed into it.",
         },
         {
+          title: "Watford Development Centre Guide",
+          href: "/academy-pathway/watford-development-centre-guide",
+          description:
+            "Watford's Trust runs three development centre tiers, the top one invite only, and the academy dropped to Category Three for 2026/27. What that means for your child.",
+        },
+        {
           title: "Academy Life: Paul Barry Interview",
           href: "/academy-pathway/academy-life-paul-barry-interview",
           description:
