@@ -2,6 +2,28 @@
 
 import { useState, type FormEvent } from "react";
 import { PROGRESS_APP_URL, progressAuthConfigured, sendProgressSignInLink } from "@/lib/progress-auth";
+import { currentVisitSource } from "@/lib/coach-app-handoff";
+
+// One anonymous event per sent link, for the Progress pipeline on
+// /admin/seo (see /api/progress-join). Never the email address. Fire and
+// forget: measurement must never get in the way of signing up.
+function logJoin(form: string | undefined, marketing: boolean) {
+  try {
+    fetch("/api/progress-join", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        form: form ?? null,
+        banner: new URLSearchParams(window.location.search).get("b"),
+        marketingOptIn: marketing,
+        ...currentVisitSource(),
+      }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // ignore
+  }
+}
 
 // "Start your journey" on /progress: the parent types their email here and
 // Progress emails them a sign-in link straight away. See lib/progress-auth.ts
@@ -36,6 +58,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
       setStatus("idle");
       return;
     }
+    logJoin(id, marketing);
     setStatus("sent");
   }
 
