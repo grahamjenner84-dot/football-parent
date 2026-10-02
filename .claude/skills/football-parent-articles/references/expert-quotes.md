@@ -942,7 +942,8 @@ Centre, or a Foundation coach.
 ### watford-development-centre-guide — TBD, tag: Watford CSE Trust Player Development Programme / girls' ETC, first-hand experience
 Drafted: 2026-10-02
 Shipped with one callout (Paul Barry Q6, see the reuse note under the Paul
-Barry placements below), pending Graham's sign-off on that excerpt. No
+Barry placements below; excerpt approved by Graham 2026-10-02). Graham has
+no Watford experience himself (confirmed 2026-10-02). No
 Watford-specific parent voice yet. Well suited to a parent whose child has
 been through the Trust's PDC or Advanced PDC, or a Trust coach.
 1. How did your child move from the PDC to the Advanced PDC, and what did
@@ -1231,7 +1232,7 @@ interview article and a link to [Football DNA](https://footballdna.co.uk):
   sentence of paragraph 2; this one keeps only paragraph 2, all three
   sentences (the "underdog"/staff-wear-more-than-one-hat point, which fits a
   club that has just dropped a category). Relevant because Paul coached in
-  Watford's academy in 2021. Pending Graham's go-ahead on the excerpt.
+  Watford's academy in 2021. Graham approved the excerpt 2026-10-02.
 
 `pdc-vs-ptc-vs-rtc-explained` and `pre-academy-football` still have no
 callout from this round - no answer above was a strong enough topical fit
