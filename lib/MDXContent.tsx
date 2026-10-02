@@ -17,6 +17,7 @@ import CoachAppBanner, {
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 import ProgressBanner from "@/app/components/ProgressBanner";
+import { routes } from "@/lib/routes";
 
 // Custom components for MDX rendering with styling
 const components = {
@@ -208,6 +209,10 @@ export async function MDXContent({
   const audience =
     coachAppBanner && coachAppBanner !== "none" ? coachAppBanner : defaultAudienceForSlug(slug);
   const showProgress = coachAppBanner !== "none" && audience !== "coach";
+  // Progress sponsors the Academy Pathway section: its articles get the
+  // sponsor version of the banner.
+  const inAcademyPathway =
+    !!slug && routes.some((r) => r === `/academy-pathway/${slug}`);
 
   return (
     <div className="space-y-6 text-gray-700 leading-relaxed max-w-none">
@@ -238,7 +243,12 @@ export async function MDXContent({
         />
       )}
 
-      {showProgress && <ProgressBanner placement="article" />}
+      {showProgress && (
+        <ProgressBanner
+          placement={inAcademyPathway ? "academy-pathway" : "article"}
+          inArticle
+        />
+      )}
     </div>
   );
 }

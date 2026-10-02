@@ -1,6 +1,5 @@
 ﻿import Link from "next/link";
 import { generateSEO } from "@/lib/seo";
-import CoachAppBanner from "@/app/components/CoachAppBanner";
 import ProgressBanner from "@/app/components/ProgressBanner";
 
 export const metadata = generateSEO({
@@ -110,9 +109,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pb-12 md:pb-16 space-y-6">
+      {/* The homepage's one app slot: Progress, the parents' app, since
+          2 Oct 2026 (it was the Coach App's parent banner until then). */}
+      <section className="mx-auto max-w-6xl px-5 pb-12 md:pb-16">
         <ProgressBanner placement="home" />
-        <CoachAppBanner audience="parent" placement="home" />
       </section>
 
       <section className="border-t border-slate-200 bg-white">

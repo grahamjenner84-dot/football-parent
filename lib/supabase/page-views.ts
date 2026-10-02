@@ -6,6 +6,7 @@ import {
   BANNER_TEST_STARTED_AT,
   CATEGORY_BANNER_PATHS,
   bannerStyleForKey,
+  HOME_BANNER_ENDED_AT,
   audienceAt,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
@@ -1061,6 +1062,7 @@ function bannerOnPath(
   createdAt: string
 ): { style: string; audience: string; placement: string } | null {
   if (path === "/") {
+    if (createdAt >= HOME_BANNER_ENDED_AT) return null;
     return {
       style: bannerStyleForKey(undefined),
       audience: "parent",
