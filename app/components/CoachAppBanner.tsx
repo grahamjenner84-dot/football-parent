@@ -59,7 +59,7 @@ export const BANNER_TEST_STARTED_AT = "2026-09-04T20:30:00Z";
 // slot): the merge that shipped it. The report counts no homepage
 // impressions after this, so the "home" row isn't padded with views of a
 // page that no longer shows the banner.
-export const HOME_BANNER_ENDED_AT = "2026-10-02T13:00:00Z";
+export const HOME_BANNER_ENDED_AT = "2026-10-02T13:15:00Z";
 export const ACTIVE_BANNER_STYLE: CoachAppBannerStyle = "dark";
 
 const DESTINATION = "/football-parent-coach-app";
