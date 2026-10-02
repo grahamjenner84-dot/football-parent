@@ -1181,7 +1181,9 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
 
     const day = row.created_at.slice(0, 10);
 
-    if (row.banner_variant) {
+    // progress-* clicks come from the Progress banners (ProgressBanner.tsx),
+    // not a Coach App creative.
+    if (row.banner_variant && !row.banner_variant.startsWith("progress-")) {
       clicks.set(row.banner_variant, (clicks.get(row.banner_variant) ?? 0) + 1);
       bump(clicksByDay, day, row.banner_variant);
     }

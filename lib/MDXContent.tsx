@@ -16,6 +16,7 @@ import CoachAppBanner, {
   defaultAudienceForSlug,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
+import ProgressBanner from "@/app/components/ProgressBanner";
 
 // Custom components for MDX rendering with styling
 const components = {
@@ -202,6 +203,11 @@ export async function MDXContent({
 }: MDXContentProps) {
   const split =
     coachAppBanner === "none" ? null : splitAtMiddleHeading(content);
+  // Progress (the parents' app) at the end of every parent-facing article.
+  // Not on coach pages (/coaching/*, set to "coach") or landing pages ("none").
+  const audience =
+    coachAppBanner && coachAppBanner !== "none" ? coachAppBanner : defaultAudienceForSlug(slug);
+  const showProgress = coachAppBanner !== "none" && audience !== "coach";
 
   return (
     <div className="space-y-6 text-gray-700 leading-relaxed max-w-none">
@@ -214,11 +220,7 @@ export async function MDXContent({
           />
 
           <CoachAppBanner
-            audience={
-              coachAppBanner && coachAppBanner !== "none"
-                ? coachAppBanner
-                : defaultAudienceForSlug(slug)
-            }
+            audience={audience}
             style={bannerStyleForKey(slug)}
           />
 
@@ -235,6 +237,8 @@ export async function MDXContent({
           options={mdxOptions}
         />
       )}
+
+      {showProgress && <ProgressBanner placement="article" />}
     </div>
   );
 }
