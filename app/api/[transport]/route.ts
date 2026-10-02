@@ -5,6 +5,7 @@ import { addToContentQueue } from "@/lib/supabase/content-queue";
 import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
 import { getPageViewStats, getPageViewCountryStats, getBannerVariantStats } from "@/lib/supabase/page-views";
 import { getCoachAppFunnel } from "@/lib/supabase/coach-app-funnel";
+import { getProgressFunnel } from "@/lib/supabase/progress-funnel";
 
 const handler = createMcpHandler(
   (server) => {
@@ -154,6 +155,22 @@ const handler = createMcpHandler(
             byDay: views.byDay.map((d) => ({ date: d.date, count: d.count })),
           },
         };
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
+
+    server.registerTool(
+      "get_progress_funnel",
+      {
+        title: "Get the Progress pipeline",
+        description:
+          "The Progress (parents' app) pipeline on footballparent.co.uk, the same numbers as the 'Progress pipeline' tab on /admin/seo, all from the football-parent-social project. Returns: (1) pipeline: Progress banner impressions (views of pages carrying a banner: homepage, /academy-pathway and its articles, and the end of every other non-coaching article), banner clicks (landings on /progress with ?b=progress-*), /progress views, join form sends (sign-in emails sent from the form on /progress; new trials and returning sign-ins alike), and new accounts (sum of each UK day's closing sign-ups from the app snapshots); (2) placements: impressions, clicks and CTR for home, article and academy-pathway; (3) channels: /progress views and join sends per channel (same rules as the Coach App funnel; 'Article banner' means any Progress banner); (4) byDay (UTC); (5) recent join sends, anonymous; (6) usage: whole-app counts the Progress database posts every 10 minutes (latest plus each UK day's closing figures): total accounts, sign-ups today (and how many added a player), active today and last 7 days, accounts with a player, players, shared players, matches logged, accounts with a match, training sessions, and accounts by plan (paid, trial, lapsed), excluding Graham's own accounts. Site-side numbers start when the banners went live (2026-10-02 13:16 UTC). This server never reads the Progress database.",
+        inputSchema: {
+          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. Site-side numbers are clamped to 2026-10-02 13:16 UTC."),
+        },
+      },
+      async ({ days }) => {
+        const result = await getProgressFunnel(days ?? 30);
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );

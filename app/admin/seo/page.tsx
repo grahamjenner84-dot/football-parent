@@ -22,6 +22,7 @@ import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // t
 import type { PartnerClickStats } from "@/lib/supabase/partner-clicks"; // type-only, same reasoning as the page-views import above
 import type { CoachAppShareStats } from "@/lib/supabase/coach-app-shares"; // type-only, as above
 import type { CoachAppFunnel } from "@/lib/supabase/coach-app-funnel"; // type-only, as above
+import type { ProgressFunnel } from "@/lib/supabase/progress-funnel"; // type-only, as above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
@@ -48,6 +49,7 @@ type Tab =
   | "countries"
   | "coachApp"
   | "coachFunnel"
+  | "progress"
   | "affiliate"
   | "partnerClicks";
 type DayWindow = 7 | 28 | 90;
@@ -55,6 +57,7 @@ type DayWindow = 7 | 28 | 90;
 const TABS: { id: Tab; label: string }[] = [
   { id: "dashboard", label: "Dashboard" },
   { id: "coachFunnel", label: "Coach App funnel" },
+  { id: "progress", label: "Progress pipeline" },
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
   { id: "coachApp", label: "Coach App" },
@@ -161,6 +164,8 @@ export default function SeoAdminPage() {
   const [coachAppViewError, setCoachAppViewError] = useState("");
   const [funnel, setFunnel] = useState<CoachAppFunnel | null>(null);
   const [funnelError, setFunnelError] = useState("");
+  const [progressFunnel, setProgressFunnel] = useState<ProgressFunnel | null>(null);
+  const [progressError, setProgressError] = useState("");
   const [affiliateStats, setAffiliateStats] = useState<AffiliateClickStats | null>(null);
   const [affiliateError, setAffiliateError] = useState("");
   const [partnerStats, setPartnerStats] = useState<PartnerClickStats | null>(null);
@@ -252,6 +257,22 @@ export default function SeoAdminPage() {
         setFunnelError("");
       })
       .catch((err) => setFunnelError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/progress-funnel-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load Progress pipeline");
+        }
+        return res.json();
+      })
+      .then((data: ProgressFunnel) => {
+        setProgressFunnel(data);
+        setProgressError("");
+      })
+      .catch((err) => setProgressError(err.message));
   }, []);
 
   useEffect(() => {
@@ -361,6 +382,9 @@ export default function SeoAdminPage() {
             {t.id === "coachFunnel" && funnel && (
               <span style={styles.tabCount}>{funnel.totals.signups}</span>
             )}
+            {t.id === "progress" && progressFunnel && (
+              <span style={styles.tabCount}>{progressFunnel.pipeline.joins}</span>
+            )}
             {t.id === "affiliate" && affiliateStats && (
               <span style={styles.tabCount}>{affiliateStats.totalClicks}</span>
             )}
@@ -376,6 +400,7 @@ export default function SeoAdminPage() {
               t.id !== "pageviewsTrend" &&
               t.id !== "coachApp" &&
               t.id !== "coachFunnel" &&
+              t.id !== "progress" &&
               t.id !== "affiliate" &&
               t.id !== "partnerClicks" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
@@ -389,6 +414,7 @@ export default function SeoAdminPage() {
             pageViewStats={pageViewStats}
             coachAppViewStats={coachAppViewStats}
             coachAppUsage={funnel?.usage ?? null}
+            progressFunnel={progressFunnel}
             affiliateStats={affiliateStats}
             pageViewError={pageViewError}
           />
@@ -443,6 +469,12 @@ export default function SeoAdminPage() {
             {funnel && (
               <CoachAppFunnelTab funnel={funnel} />
             )}
+          </>
+        ) : tab === "progress" ? (
+          <>
+            {!progressFunnel && !progressError && <p style={styles.muted}>Loading Progress pipeline...</p>}
+            {progressError && <p style={styles.error}>{progressError}</p>}
+            {progressFunnel && <ProgressPipelineTab funnel={progressFunnel} />}
           </>
         ) : tab === "affiliate" ? (
           <>
@@ -530,6 +562,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "coachApp":
       return 0;
     case "coachFunnel":
+      return 0;
+    case "progress":
       return 0;
     case "dashboard":
       return 0;
@@ -1700,6 +1734,7 @@ function Dashboard({
   pageViewStats,
   coachAppViewStats,
   coachAppUsage,
+  progressFunnel,
   affiliateStats,
   pageViewError,
 }: {
@@ -1707,6 +1742,8 @@ function Dashboard({
   coachAppViewStats: CoachAppViewStats | null;
   /** From the funnel report; null while it loads. */
   coachAppUsage: CoachAppFunnel["usage"] | null;
+  /** Null while it loads. */
+  progressFunnel: ProgressFunnel | null;
   affiliateStats: AffiliateClickStats | null;
   pageViewError: string;
 }) {
@@ -1765,6 +1802,32 @@ function Dashboard({
       : isWindow || effective === latest
       ? usage.latest
       : usage.byDay.find((d) => d.date === effective) ?? null;
+
+  // Progress for the chosen scope: the site-side pipeline by UTC day, and
+  // the app's own counts the same way as the Coach App's above.
+  const pgDay =
+    isWindow || !progressFunnel ? null : progressFunnel.byDay.find((d) => d.date === effective) ?? null;
+  const pgPrior =
+    isWindow || !progressFunnel
+      ? null
+      : progressFunnel.byDay.find((d) => d.date === previousDay(effective)) ?? null;
+  const pgScope = progressFunnel
+    ? isWindow
+      ? progressFunnel.pipeline
+      : {
+          impressions: pgDay?.impressions ?? 0,
+          bannerClicks: pgDay?.bannerClicks ?? 0,
+          landingViews: pgDay?.landingViews ?? 0,
+          joins: pgDay?.joins ?? 0,
+        }
+    : null;
+  const pgUsage = progressFunnel && !("error" in progressFunnel.usage) ? progressFunnel.usage : null;
+  const pgUsageDay =
+    !pgUsage || !pgUsage.latest
+      ? null
+      : isWindow || effective === latest
+      ? pgUsage.latest
+      : pgUsage.byDay.find((d) => d.date === effective) ?? null;
 
   // Affiliate clicks for the chosen scope.
   const afDay =
@@ -1834,6 +1897,44 @@ function Dashboard({
                 {usageDay.signupsTodayWithTeam !== null && ` (${usageDay.signupsTodayWithTeam} set up a team)`}
               </span>
               {isWindow && <span>Active last 7 days: {usageDay.active7d}</span>}
+            </div>
+          )}
+        </div>
+      )}
+
+      <h3 style={styles.affiliateHeading}>Progress</h3>
+      {!progressFunnel || !pgScope ? (
+        <p style={styles.muted}>Loading Progress...</p>
+      ) : (
+        <div style={styles.card}>
+          <DashboardStat
+            label="/progress views"
+            current={pgScope.landingViews}
+            prior={isWindow ? null : pgPrior?.landingViews ?? 0}
+          />
+          <div style={{ ...styles.cardStats, marginTop: 6 }}>
+            <span>
+              Banner impressions: <strong>{pgScope.impressions}</strong>
+            </span>
+            <span>
+              Banner clicks: <strong>{pgScope.bannerClicks}</strong>
+            </span>
+            <span>
+              Join form sends: <strong>{pgScope.joins}</strong>
+            </span>
+          </div>
+          {pgUsageDay && (
+            <div style={{ ...styles.cardStats, marginTop: 6 }}>
+              <span>
+                Sign-ups{isWindow ? " today" : ""}: <strong>{pgUsageDay.signupsToday}</strong>
+                {` (${pgUsageDay.signupsTodayWithPlayer} added a player)`}
+              </span>
+              <span>
+                Active{isWindow ? " today" : ""}: <strong>{pgUsageDay.activeToday}</strong>
+              </span>
+              <span>
+                Accounts: {pgUsageDay.totalAccounts} ({pgUsageDay.planPaid} paid, {pgUsageDay.planTrial} on trial)
+              </span>
             </div>
           )}
         </div>
@@ -2509,6 +2610,300 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         </div>
       )}
     </>
+  );
+}
+
+// Whole-app counts the Progress database posts every 10 minutes (progress
+// migration 0021). Numbers only; this site never reads that database.
+function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
+  if ("error" in usage) {
+    return (
+      <p style={styles.error}>
+        Couldn&rsquo;t load app usage: {usage.error}. If it says the
+        progress_usage_snapshots table is missing, run
+        20261002140000_progress_pipeline.sql.
+      </p>
+    );
+  }
+  const latest = usage.latest;
+  if (!latest) {
+    return (
+      <p style={styles.muted}>
+        No usage snapshot received yet. The Progress database sends one every
+        10 minutes once progress migration 0021, its Vault secret and
+        PROGRESS_SNAPSHOT_SECRET are set up.
+      </p>
+    );
+  }
+  const pct = (n: number) =>
+    latest.totalAccounts > 0 ? `${Math.round((n / latest.totalAccounts) * 100)}% of accounts` : undefined;
+  const updated = new Date(latest.takenAt).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  return (
+    <>
+      <div style={styles.summaryGrid}>
+        <UsageTile label="Total accounts" value={latest.totalAccounts} />
+        <UsageTile
+          label="Sign-ups today"
+          value={latest.signupsToday}
+          sub={`${latest.signupsTodayWithPlayer} added a player`}
+        />
+        <UsageTile label="Active today" value={latest.activeToday} />
+        <UsageTile label="Active last 7 days" value={latest.active7d} sub={pct(latest.active7d)} />
+        <UsageTile label="Added a player" value={latest.accountsWithPlayer} sub={pct(latest.accountsWithPlayer)} />
+        <UsageTile
+          label="Logged a match"
+          value={latest.accountsWithMatch}
+          sub={`${pct(latest.accountsWithMatch) ?? ""}${pct(latest.accountsWithMatch) ? ", " : ""}${latest.matchesLogged} matches in all`}
+        />
+        <UsageTile label="Players" value={latest.players} sub={`${latest.sharedPlayers} shared with another parent`} />
+        <UsageTile label="Training sessions" value={latest.trainingLogged} />
+        <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
+        <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
+        <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+      </div>
+      <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
+      <SectionNote label="What these numbers count">
+        Accounts (parents), not devices, all time rather than the pipeline
+        window. Your own accounts and any account asking to be deleted are left
+        out, and so are their players. Active means the app was opened. Added a
+        player counts a player of their own or one shared with them; Logged a
+        match is accounts with a player that has at least one match. Paid, On
+        trial and Lapsed are each account&rsquo;s own plan and add up to Total
+        accounts: Paid includes a payment being retried; Lapsed is a trial that
+        ended or a cancelled subscription. A co-parent counts by their own
+        plan, so Paid is paying accounts.
+      </SectionNote>
+      {usage.byDay.length > 1 && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Day (closing figures)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Accounts</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>of which added a player</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Active</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Active 7d</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Logged a match</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {usage.byDay.map((d) => (
+                <tr key={d.date}>
+                  <td style={funnelTd}>{d.date}</td>
+                  <td style={funnelNum}>{d.totalAccounts}</td>
+                  <td style={funnelNum}>{d.signupsToday}</td>
+                  <td style={funnelNum}>{d.signupsTodayWithPlayer}</td>
+                  <td style={funnelNum}>{d.activeToday}</td>
+                  <td style={funnelNum}>{d.active7d}</td>
+                  <td style={funnelNum}>{d.accountsWithMatch}</td>
+                  <td style={funnelNum}>{d.planPaid}</td>
+                  <td style={funnelNum}>{d.planTrial}</td>
+                  <td style={funnelNum}>{d.planLapsed}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
+const PLACEMENT_LABEL: Record<string, string> = {
+  home: "Homepage",
+  article: "End of articles",
+  "academy-pathway": "Academy Pathway (sponsor)",
+};
+
+// The Progress pipeline: banner impressions -> clicks -> /progress views ->
+// join form sends -> new accounts, then by placement, channel and day.
+// Everything site-side is from this project; app counts from the snapshot.
+function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
+  const pct = (a: number, b: number) => (b > 0 ? `${((a / b) * 100).toFixed(1)}%` : "n/a");
+  const sinceLabel = new Date(funnel.since).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const windowLabel = funnel.clampedToTrackingStart ? `since ${sinceLabel}` : `last ${funnel.days} days`;
+  const p = funnel.pipeline;
+  // The channel rules are shared with the Coach App; "Article banner" there
+  // means any Progress banner here (homepage and sponsor included).
+  const channelLabel = (c: string) => (c === "Article banner" ? "Progress banner" : c);
+  const steps: { label: string; value: number | null; note?: string }[] = [
+    { label: "Banner impressions", value: p.impressions },
+    { label: "Banner clicks", value: p.bannerClicks, note: `${pct(p.bannerClicks, p.impressions)} of impressions` },
+    { label: "/progress views", value: p.landingViews, note: "all routes in, banners included" },
+    { label: "Join form sends", value: p.joins, note: `${pct(p.joins, p.landingViews)} of /progress views` },
+    {
+      label: "New accounts",
+      value: p.newAccounts,
+      note: p.newAccounts === null ? "waiting for the first app snapshot" : "every route in, the app's own sign-in screen too",
+    },
+  ];
+
+  return (
+    <div style={styles.list}>
+      {funnel.joinsError && (
+        <p style={styles.error}>
+          Couldn&rsquo;t load join form sends: {funnel.joinsError}. If it says
+          the progress_join_events table is missing, run
+          20261002140000_progress_pipeline.sql.
+        </p>
+      )}
+
+      <FunnelHeading>Pipeline, {windowLabel}</FunnelHeading>
+      <div style={styles.summaryGrid}>
+        {steps.map((st) =>
+          st.value === null ? (
+            <div key={st.label} style={styles.card}>
+              <p style={styles.cardPage}>{st.label}</p>
+              <span style={{ ...styles.cardQuery, fontSize: 20 }}>-</span>
+              {st.note && <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>{st.note}</p>}
+            </div>
+          ) : (
+            <UsageTile key={st.label} label={st.label} value={st.value} sub={st.note} />
+          )
+        )}
+      </div>
+      <SectionNote label="What each step counts">
+        Banner impressions are views of pages carrying a Progress banner (the
+        homepage, the Academy Pathway page and its articles, and the end of
+        every other article except coaching ones): a page view, not proof the
+        banner was scrolled to. Banner clicks are landings on /progress from
+        one. /progress views include every way in (the menu button, search,
+        direct). Join form sends are sign-in emails sent from the form on
+        /progress: a new trial or a returning parent signing in, the form
+        can&rsquo;t tell which. New accounts come from the app and include
+        parents who signed up on the app&rsquo;s own screen. Everything
+        site-side starts when the banners went live ({sinceLabel}); your own
+        devices and bots are left out.
+      </SectionNote>
+
+      <FunnelHeading>App usage</FunnelHeading>
+      <ProgressUsageSection usage={funnel.usage} />
+
+      <FunnelHeading>Banners by placement, {windowLabel}</FunnelHeading>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={funnelTh}>Placement</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Impressions</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>CTR</th>
+            </tr>
+          </thead>
+          <tbody>
+            {funnel.placements.map((row) => (
+              <tr key={row.placement}>
+                <td style={funnelTd}>{PLACEMENT_LABEL[row.placement] ?? row.placement}</td>
+                <td style={funnelNum}>{row.impressions}</td>
+                <td style={funnelNum}>{row.clicks}</td>
+                <td style={funnelNum}>{pct(row.clicks, row.impressions)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
+      <SectionNote label="How channels are decided">
+        The same rules as the Coach App funnel, first match wins: Google Ads,
+        Progress banner (arrived through any Progress banner), Search, Site
+        link (another page of ours, including the menu button), Direct, Other.
+      </SectionNote>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={funnelTh}>Channel</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>/progress views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Join form sends</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Sends per view</th>
+            </tr>
+          </thead>
+          <tbody>
+            {funnel.channels.map((row) => (
+              <tr key={row.channel}>
+                <td style={funnelTd}>{channelLabel(row.channel)}</td>
+                <td style={funnelNum}>{row.landingViews}</td>
+                <td style={funnelNum}>{row.joins}</td>
+                <td style={funnelNum}>{pct(row.joins, row.landingViews)}</td>
+              </tr>
+            ))}
+            <tr>
+              <td style={{ ...funnelTd, fontWeight: 600 }}>Total</td>
+              <td style={{ ...funnelNum, fontWeight: 600 }}>{p.landingViews}</td>
+              <td style={{ ...funnelNum, fontWeight: 600 }}>{p.joins}</td>
+              <td style={{ ...funnelNum, fontWeight: 600 }}>{pct(p.joins, p.landingViews)}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <FunnelHeading>By day</FunnelHeading>
+      {funnel.byDay.length === 0 ? (
+        <p style={styles.muted}>Nothing yet {windowLabel}.</p>
+      ) : (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Day (UTC)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Impressions</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Banner clicks</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>/progress views</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Join sends</th>
+              </tr>
+            </thead>
+            <tbody>
+              {funnel.byDay.map((d) => (
+                <tr key={d.date}>
+                  <td style={funnelTd}>{d.date}</td>
+                  <td style={funnelNum}>{d.impressions}</td>
+                  <td style={funnelNum}>{d.bannerClicks}</td>
+                  <td style={funnelNum}>{d.landingViews}</td>
+                  <td style={funnelNum}>{d.joins}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      <FunnelHeading>Join form sends</FunnelHeading>
+      {funnel.recentJoins.length === 0 ? (
+        <p style={styles.muted}>No sends {windowLabel}.</p>
+      ) : (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>When</th>
+                <th style={funnelTh}>Channel</th>
+                <th style={funnelTh}>Visit began on</th>
+                <th style={funnelTh}>Banner / campaign</th>
+                <th style={funnelTh}>Form</th>
+                <th style={funnelTh}>Updates opt-in</th>
+              </tr>
+            </thead>
+            <tbody>
+              {funnel.recentJoins.map((r, i) => (
+                <tr key={`${r.createdAt}-${i}`}>
+                  <td style={funnelTd}>{new Date(r.createdAt).toLocaleString("en-GB")}</td>
+                  <td style={funnelTd}>{channelLabel(r.channel)}</td>
+                  <td style={funnelTd}>{r.entryPath ?? "-"}</td>
+                  <td style={funnelTd}>{r.banner ?? r.utmCampaign ?? "-"}</td>
+                  <td style={funnelTd}>{r.form === "join-trial" ? "bottom" : r.form === "join" ? "top" : r.form ?? "-"}</td>
+                  <td style={funnelTd}>{r.marketingOptIn ? "yes" : "no"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
   );
 }
 

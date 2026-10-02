@@ -160,6 +160,29 @@ function currentFirstTouch(): FirstTouch | null {
   return readStoredFirstTouch() ?? visitTouch;
 }
 
+/** How this visit began, for an ANONYMOUS event (one that is never tied to
+ * an account, like a page view): the Progress join-form send. gclid is
+ * reduced to whether there was one. */
+export function currentVisitSource(): {
+  entryPath: string | null;
+  sourceGroup: string | null;
+  utmSource: string | null;
+  utmMedium: string | null;
+  utmCampaign: string | null;
+  hadGclid: boolean;
+} {
+  const first = currentFirstTouch();
+  const params = new URLSearchParams(window.location.search);
+  return {
+    entryPath: first?.entryPath ?? null,
+    sourceGroup: first?.sourceGroup ?? null,
+    utmSource: params.get("utm_source") ?? first?.utmSource ?? null,
+    utmMedium: params.get("utm_medium") ?? first?.utmMedium ?? null,
+    utmCampaign: params.get("utm_campaign") ?? first?.utmCampaign ?? null,
+    hadGclid: Boolean(params.get("gclid") ?? first?.gclid),
+  };
+}
+
 /**
  * Writes the stash, if consent allows.
  *
