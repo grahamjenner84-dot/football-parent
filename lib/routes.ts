@@ -90,6 +90,7 @@ export const routes = [
   '/football-gear/boots/best-football-boots-for-wide-feet-kids',
   '/football-gear/shin-pads/best-shin-pads-for-kids-football',
   '/football-gear/veo-camera-alternatives',
+  '/football-gear/best-football-gps-trackers-for-kids',
 
   // Girls Football
   '/girls-football/girls-academy-vs-grassroots-football',

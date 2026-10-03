@@ -116,6 +116,12 @@ export default function FootballGearPage() {
           description:
             "Real prices, subscription costs and cheaper alternatives to a Veo camera for grassroots football.",
         },
+        {
+          title: "Best Football GPS Trackers for Kids",
+          href: "/football-gear/best-football-gps-trackers-for-kids",
+          description:
+            "GPS vests, calf sensors and boot sensors compared: what each measures, which need a subscription, and when a child is old enough for one.",
+        },
       ]}
       bottomContent={{
         title: "About Football Gear",
