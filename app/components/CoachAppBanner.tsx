@@ -73,7 +73,7 @@ const DESTINATION = "/football-parent-coach-app";
 export const SHARE_AUDIENCE_SLUGS = new Set([
   "biggest-football-parent-mistakes",
   "jpl-vs-grassroots-football",
-  "support-child-after-bad-match",
+  "child-lost-confidence-in-football",
   "what-is-grassroots-football",
   "what-to-say-after-football-matches",
   "build-confidence-young-footballers",

@@ -126,7 +126,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 
 - /parent-guides/biggest-football-parent-mistakes
 - /parent-guides/leave-grassroots-football-for-an-academy
-- /parent-guides/support-child-after-bad-match
+- /parent-guides/child-lost-confidence-in-football
 - /parent-guides/what-to-say-after-football-matches
 - /parent-guides/are-football-development-centres-worth-it
 - /parent-guides/what-is-the-junior-premier-league

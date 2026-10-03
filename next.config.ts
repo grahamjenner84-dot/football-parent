@@ -27,6 +27,15 @@ const nextConfig: NextConfig = {
         destination: '/parent-guides/what-is-grassroots-football',
         permanent: true,
       },
+      // Moved 3 October 2026: Google left the old slug in "Discovered -
+      // currently not indexed" from May, and it read as a twin of
+      // what-to-say-after-football-matches. The article is about a run of
+      // poor form and lost confidence, not one bad match.
+      {
+        source: '/parent-guides/support-child-after-bad-match',
+        destination: '/parent-guides/child-lost-confidence-in-football',
+        permanent: true,
+      },
       {
         source: '/pdc-vs-ptc-vs-rtc-explained',
         destination: '/academy-pathway/pdc-vs-ptc-vs-rtc-explained',

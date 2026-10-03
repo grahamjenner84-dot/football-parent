@@ -93,8 +93,8 @@ export default function ParentGuidesPage() {
             "The best conversations to have with a child after football matches, and the mistakes to avoid.",
         },
         {
-          title: "When Your Child Is Struggling in Football",
-          href: "/parent-guides/support-child-after-bad-match",
+          title: "When Your Child Has Lost Confidence in Football",
+          href: "/parent-guides/child-lost-confidence-in-football",
           description:
             "Three or four bad matches in a row is different from one bad match. The warning signs of a genuine confidence dip, what not to do, and when to talk to the coach.",
         },
