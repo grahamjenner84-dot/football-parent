@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Best Football Boots for Wide Feet Kids | Football Parent",
+  title: "Wide Fit Football Boots for Kids: Best Picks for Wide Feet",
   description:
     "Choosing comfortable football boots for children with wider feet: fit, sizing and what to check before buying.",
   path: "/football-gear/boots/best-football-boots-for-wide-feet-kids",
