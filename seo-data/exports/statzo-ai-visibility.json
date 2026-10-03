@@ -1,0 +1,299 @@
+{
+  "aio": [
+    {
+      "q": "football stats app",
+      "hasAio": false,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "football stats tracker",
+      "hasAio": true,
+      "urls": [],
+      "text": "You can track professional soccer performance using the Playermaker AI Tracker for foot-mounted metric analysis. STATSports : Wearable FIFA-approved GPS vest that tracks distance, speed, and sprints. Playermaker : Strap-mounted sensors that track touches, passing, and left/right foot distribution. Statzo : Mobile app to log player, manager, or parent stats after a match. SportMember : Free team and club tracker for attendance, goals, and cards. Football StatKeeper : Simple mobile tap logger for goals, assists, and training stats. Are you looking to track personal physical performance (GPS/wearables) or team match stats (goals, assists, line-ups) ?",
+      "statzoCited": [],
+      "statzoNamed": true,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "best football stats app",
+      "hasAio": true,
+      "urls": [
+        "https://apps.apple.com/lt/app/fotmob-football-live-scores/id488575683",
+        "https://www.reddit.com/r/football/comments/1115nzd/football_apps_with_good_previous_match_statistics/",
+        "https://statmaster.io/",
+        "https://statzoapp.com/",
+        "https://www.sportmonks.com/blogs/popular-football-data-apps-use-cases/"
+      ],
+      "text": "FotMob is the best overall football stats app for live scores, in-depth match data, and expected goals (xG) tracking. Best for General Live Scores & Stats: FotMob offers comprehensive coverage of over 400 global competitions, providing instant goal alerts, shot maps, player ratings, and xG data. Most users on Reddit agree that FotMob is the top choice for clean matchday statistics. Best for Tactical Breakdowns: WhoScored provides deep post-match data, individual player ratings, and detailed tactical characteristics for major leagues. Best for Betting & Trends: FootyStats focuses on long-term form patterns, predictive analytics, and deep statistical trends for corners, cards, and goals. Best for Referee & In-Play Data: Statmaster covers over 1,600 competitions with specialized metrics including referee tendencies, card distributions, and market streaks. Best for Tracking Your Own Stats: Statzo is designed for grassroots players, parents, and managers to log and analyze personal match performance. If you tell me what specific stats you care about most (like live scores, betting trends, or player performance tracking), I can recommend the exact app for you.",
+      "statzoCited": [
+        "https://statzoapp.com/"
+      ],
+      "statzoNamed": true,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "grassroots football stats app",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "grassroots football app",
+      "hasAio": false,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "best grassroots football app",
+      "hasAio": true,
+      "urls": [
+        "https://apps.apple.com/gb/app/prematch-real-football/id1579841897",
+        "https://www.englandfootball.com/participate/leagues-and-clubs/helpful-apps-and-websites/matchday",
+        "https://www.spond.com/news-and-blog/football-scheduling-and-payment-app/",
+        "https://www.sportplan.net/drills/Football/guides/best-free-grassroots-football-apps-2026.jsp",
+        "https://www.footballparent.co.uk/coaching/best-grassroots-football-apps",
+        "https://statzoapp.com/",
+        "https://jonerfootball.com/app/"
+      ],
+      "text": "The best apps for grassroots football depend on what you need to manage, ranging from official league admin to team availability and player training. Spond : Widely considered the best free tool for day-to-day team admin, handling event scheduling, automated availability tracking, and integrated payments or match fees with no member caps. Teamo : Excellent for club administration, offering fixture management, a dedicated club app/website, and direct debit collection (free for up to 25 members). Heja : A popular, simple alternative for team communication and tracking player attendance. Matchday (England Football) : The official free app for affiliated English grassroots teams, syncing directly with FA systems to handle fixtures, results, and player registration. Prematch : A top choice for amateur teams and players wanting live match tracking, local community engagement, and detailed performance stats. Statzo : A quick, user-friendly app designed for players and managers to track individual and team match stats over the course of a season. FootballDNA : Great for grassroots coaches looking for structured session plans, technical guides, and drill ideas. Joner Football App : Popular for follow-along training programs and specific technical skills development for players and coaches. If you share whether you are a coach, player, or parent, and whether you are based in the UK or elsewhere, I can recommend the exact app setup that fits your team size and budget.",
+      "statzoCited": [
+        "https://statzoapp.com/"
+      ],
+      "statzoNamed": true,
+      "fpCited": true,
+      "paaHits": []
+    },
+    {
+      "q": "track my child's football stats",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "app to track my child's football",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "football stats app for parents",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "football stats tracker for parents",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "kids football stats app",
+      "hasAio": false,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "how to track football stats",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "how to track your football stats",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "football stats app for coaches",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "football stats app for grassroots players",
+      "hasAio": false,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "football player stats tracker",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "app to track football stats",
+      "hasAio": true,
+      "urls": [
+        "https://apps.apple.com/gb/app/statzo-football-stats-tracker/id6670539360",
+        "https://www.sportmember.co.uk/en/stat-tracker",
+        "https://www.teamstats.net/",
+        "https://play.google.com/store/apps/details?id=com.tech.statzo.statzoapp&hl=en",
+        "https://www.facebook.com/statsports/videos/fifa-approved-gps-tracking/537696929363529/"
+      ],
+      "text": "You can track player metrics and match data using STATZO, a dedicated grassroots football tracking app available on iOS and Android. STATZO : Designed for grassroots players, parents, and managers to log goals, assists, clean sheets, and match ratings. It offers a free trial for two matches with annual subscriptions priced around £4.99. TeamStats: A comprehensive team management platform used by grassroots coaches and players to track automated team and player statistics, match reports, and availability. SportMember: Provides a free built-in stat tracker supporting over 35 sports, allowing you to log goals, assists, cards, attendance, and custom metrics. STATSports GPS: A FIFA-approved physical performance tracker that uses wearable GPS tech to monitor metrics like max speed, total distance, and heat maps. If you let me know whether you want to track individual player stats, team management/fixtures, or physical GPS performance, I can recommend the best option for your needs.",
+      "statzoCited": [
+        "https://apps.apple.com/gb/app/statzo-football-stats-tracker/id6670539360",
+        "https://play.google.com/store/apps/details?id=com.tech.statzo.statzoapp&hl=en"
+      ],
+      "statzoNamed": true,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "football match stats app",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "is there a free app to track football stats",
+      "hasAio": true,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    },
+    {
+      "q": "best app for tracking my son's football stats",
+      "hasAio": false,
+      "urls": [],
+      "text": "",
+      "statzoCited": [],
+      "statzoNamed": false,
+      "fpCited": false,
+      "paaHits": []
+    }
+  ],
+  "llm": [
+    {
+      "prompt": "What's the best app to track my child's grassroots football stats in the UK?",
+      "answer": "**Exploring grassroots football apps**\n\nI need to find recommendations for current apps related to grassroots football in the UK. I wonder if I should be asking specific questions to narrow it down. Some potential options that come to mind include TeamStats, Spond, Heja, Pitchero, and FA Matchday. They seem like good choices for stats tracking for children. I’ll search a bit to see what I can find!\nFor **tracking your child’s grassroots football stats in the UK**, I’d start with **TeamStats** as the best all-round choice.\n\n**Why TeamStats is probably the best fit:** it’s football-specific, UK-focused, and built around exactly the kind of things parents/coaches usually want: **appearances, goals, assists, results, player stats, team stats, availability, line-ups and game-time management**. Its App Store listing even has a review from a parent saying they used it to track their son’s grassroots club stats, including assists and contributions from defenders/goalkeepers — which is very close to your use case. ([teamstats.net](https://www.teamstats.net/team-management-app?utm_source=openai))\n\n### My shortlist\n\n| App | Best for | Notes |\n|---|---|---|\n| **TeamStats** | **Player/team stats for grassroots football** | Best if your main aim is tracking goals, assists, appearances, results and player contributions. |\n| **Squadd** | Modern football-specific team management | UK grassroots-focused, with scorers, cards, Player of the Match, match reports, minutes and parent voting features. Newer than TeamStats. ([squadd.co.uk](https://www.squadd.co.uk/?utm_source=openai)) |\n| **Pitchero** | Whole-club setup | Better if the club wants website, membership, payments, fixtures, results, line-ups, stats and comms in one system. ([pitchero.com](https://www.pitchero.com/features/team-management?utm_source=openai)) |\n| **Spond** | Free team organisation | Great for availability, messages and payments, but less strong if your priority is football-specific stats. ([spond.com](https://www.spond.com/news-and-blog/top-5-grassroots-football-team-apps/?utm_source=openai)) |\n| **Mingle Sport** | Player development/content sharing | Worth a look if you want line-ups, substitution management and player development features rather than just admin. ([mingle.sport](https://mingle.sport/blog/best-football-team-app-uk-australia-2025/?utm_source=openai)) |\n\n### My recommendation\n\nIf you’re a **parent or coach wanting simple grassroots football stats**, choose:\n\n**1. TeamStats** — best default pick for UK grassroots football stats.  \n**2. Squadd** — consider it if you want a more modern, football-only app with match reports and parent-friendly features.  \n**3. Pitchero** — best if the whole club wants a bigger platform, not just one team’s stats.\n\nOne important note: for children’s teams, don’t overdo public stats or rankings. I’d use the app mainly to track **minutes, availability, assists, effort, positions played and development**, not just goals.",
+      "cited": [
+        "https://www.teamstats.net/team-management-app?utm_source=openai",
+        "https://www.squadd.co.uk/?utm_source=openai",
+        "https://www.pitchero.com/features/team-management?utm_source=openai",
+        "https://www.spond.com/news-and-blog/top-5-grassroots-football-team-apps/?utm_source=openai",
+        "https://mingle.sport/blog/best-football-team-app-uk-australia-2025/?utm_source=openai"
+      ],
+      "cost": 0.08465
+    },
+    {
+      "prompt": "Is there an app where I can log my son's goals and assists for his junior football team?",
+      "answer": "**Searching for app recommendations**\n\nI’m thinking we need to find answers about current apps, possibly focusing on football in the UK. The phrase \"junior football\" could mean it’s related to youth soccer in the U.S., mentioning goals and assists. I wonder if I should ask for clarification from the user. It might be helpful to provide some options first and then search to confirm which apps are best for their needs. Let’s get started!\nYes — several apps can do this. If you mean **soccer / UK-style junior football**, the best options are:\n\n1. **GameChanger Soccer** — probably the easiest if you want to log match events like **goals, assists, saves, shots**, and review season stats. It’s built for youth sports and has soccer scorekeeping. ([gc.com](https://gc.com/soccer?utm_source=openai))\n\n2. **TeamSnap** — good if the team already uses it for schedules/messages. It supports **soccer stats tracking**, but the stats feature is tied to paid team plans, and setup/management is mainly through web/mobile browser rather than fully in-app. ([teamsnap.com](https://www.teamsnap.com/teams/features/statistics?utm_source=openai))\n\n3. **GoalKickr** — youth-soccer-focused, with player minutes, scorers, assists, player-of-the-match nominations, and milestone badges like first goal/assist. ([goalkickr.com](https://www.goalkickr.com/?utm_source=openai))\n\n4. **Bring It In** — a simpler youth team-management app that says you can track **goals, assists, and attendance** while running the team. ([bringitin.app](https://www.bringitin.app/?utm_source=openai))\n\n5. **Team Stat Manager** — straightforward for entering post-match stats and automatically building season leaderboards for goals and assists. ([teamstatmanager.com](https://teamstatmanager.com/soccer?utm_source=openai))\n\n**My recommendation:**  \n- If you’re just a parent logging your son’s stats privately, a simple spreadsheet/Google Sheet may be easiest.  \n- If you’re helping run the whole team, try **GameChanger Soccer** or **TeamSnap**.  \n- If the focus is specifically junior soccer development, **GoalKickr** looks worth a look.\n\nOne thing to check before using any app: if these are young children, be mindful of privacy and whether the coach/club allows public player stats.",
+      "cited": [
+        "https://gc.com/soccer?utm_source=openai",
+        "https://www.teamsnap.com/teams/features/statistics?utm_source=openai",
+        "https://www.goalkickr.com/?utm_source=openai",
+        "https://www.bringitin.app/?utm_source=openai",
+        "https://teamstatmanager.com/soccer?utm_source=openai"
+      ],
+      "cost": 0.07928
+    },
+    {
+      "prompt": "What's the best football stats app for a grassroots coach running an under 10s team?",
+      "answer": "**Clarifying app recommendations**\n\nI need to provide app recommendations, and it seems a web search is required for current options. I might need to clarify whether the user is referring to soccer or American football. The term \"under 10s grassroots\" likely points to UK football. Should I ask the user for clarification? I can mention that I can help better if they mean football in the soccer sense. Then, I’ll proceed with a search.\nAssuming you mean **soccer/UK-style football** and you’re coaching **U10 grassroots**, I’d prioritise **playing-time tracking and simple match notes** over “serious” performance analytics. At that age, the best app is the one you can use quickly on the touchline without ignoring the kids.\n\n## Best overall pick: **Onside**\nFor a U10 grassroots coach, I’d start with **Onside**. It’s specifically positioned as a **match-day app for grassroots football coaches**, designed to run the match live and turn games into season-long stats without needing spreadsheets. ([onside-football.com](https://onside-football.com/en/?utm_source=openai))\n\nWhy it fits U10s:\n- Helps with **subs and fair game time**\n- Keeps things simple during the match\n- Produces useful season-long records\n- Better suited to grassroots than pro-analysis tools\n- Less likely to drag you into over-analysing 9-year-olds\n\n## Strong alternative: **TeamStats**\nIf you want a more traditional football team-management/statistics platform, **TeamStats** is a good option. It’s aimed at grassroots managers and coaches, and includes football team management plus performance/stat tracking features. ([teamstats.net](https://www.teamstats.net/?utm_source=openai))\n\nGood if you want:\n- Fixtures, squad info and results\n- Player stats across the season\n- A more “club/team admin” feel\n- Something that can grow with the team\n\nPotential downside: it may be more than you need if your main problem is simply **who played where, how long, and what happened in the match**.\n\n## If your biggest headache is parents/admin: **Spond, TeamSnap or Squadd**\nFor U10s, admin often matters more than stats. If the real pain is availability, messages, payments, reminders and parent communication, then a team-management app may be more useful than a pure stats app. **TeamSnap** is strong for scheduling and parent communication, though it lacks soccer-specific training and game-day tools. ([playerblueprint.club](https://www.playerblueprint.club/blog/best-soccer-coaching-apps-2026?utm_source=openai)) **Squadd** is also aimed directly at UK grassroots coaches, with youth/parent reply and fair-play tools. ([squadd.co.uk](https://www.squadd.co.uk/?utm_source=openai))\n\n## My practical recommendation\n\nFor a U10 team, I’d use:\n\n1. **Onside** — for match day, subs, minutes and simple stats  \n2. **Spond / WhatsApp / Squadd** — for parent communication and availability  \n3. Avoid complex pro-style analytics unless you have an assistant doing the tagging\n\nThe most useful U10 stats are usually:\n\n- Minutes played\n- Positions played\n- Goals/assists, if you want\n- Player-of-the-match notes\n- Attendance\n- Simple development notes: effort, confidence, passing, tackling, listening\n\nI’d avoid ranking kids heavily on ratings, xG-style numbers or detailed errors. At under 10s, the app should help you be **fair, organised and development-focused**, not turn the team into a mini academy spreadsheet.",
+      "cited": [
+        "https://onside-football.com/en/?utm_source=openai",
+        "https://www.teamstats.net/?utm_source=openai",
+        "https://www.playerblueprint.club/blog/best-soccer-coaching-apps-2026?utm_source=openai",
+        "https://www.squadd.co.uk/?utm_source=openai"
+      ],
+      "cost": 0.086945
+    },
+    {
+      "prompt": "How can I track my football stats as a grassroots player?",
+      "answer": "You can track your football stats pretty effectively with a mix of **simple manual logging**, **match video**, and, if you want, **wearable GPS/app tools**.\n\n## 1. Decide what stats matter for your position\n\nDon’t try to track everything at first. Pick 5–10 useful metrics.\n\n### For all players\n- Minutes played\n- Goals\n- Assists\n- Shots / shots on target\n- Passes completed vs attempted\n- Tackles won\n- Interceptions\n- Fouls committed / won\n- Yellow/red cards\n- Match rating out of 10\n\n### For attackers\n- Chances created\n- Successful dribbles\n- Crosses\n- Pressures leading to turnover\n- Offsides\n- Expected goals “rough estimate” if you want to get advanced\n\n### For midfielders\n- Forward passes\n- Key passes\n- Ball recoveries\n- Duels won\n- Turnovers/lost possession\n- Successful switches of play\n\n### For defenders\n- Clearances\n- Blocks\n- Aerial duels won\n- 1v1s won/lost\n- Defensive errors\n- Successful long passes\n\n### For goalkeepers\n- Saves\n- Goals conceded\n- Claims/catches\n- Punches\n- Distribution accuracy\n- 1v1 saves\n- Clean sheets\n\n---\n\n## 2. Use a simple match log\n\nAfter every game, record your stats while the match is still fresh.\n\nYou can use:\n\n- Notes app\n- Google Sheets / Excel\n- Notion\n- A printed notebook\n- A football-specific app\n\nExample table:\n\n| Date | Opponent | Position | Minutes | Goals | Assists | Shots | Pass % | Tackles | Rating | Notes |\n|---|---|---:|---:|---:|---:|---:|---:|---:|---|\n| 03/10/26 | FC United | CM | 80 | 0 | 1 | 2 | 78% | 5 | 7.5 | Good pressing, tired late |\n\nAlso add a short reflection:\n\n- **What went well?**\n- **What needs improving?**\n- **One focus for next match**\n\nThis turns your stats into actual development.\n\n---\n\n## 3. Track “easy live stats” during the game\n\nSome stats are hard to remember afterward. Ask a teammate, coach, parent, or friend to record basic events during the match.\n\nUse simple tally marks for:\n\n- Shots\n- Goals\n- Assists\n- Tackles won\n- Key passes\n- Lost possessions\n- Saves\n- Fouls\n- Interceptions\n\nThey don’t need to be perfect. Consistency matters more than precision at grassroots level.\n\n---\n\n## 4. Record your matches if possible\n\nVideo is the best way to get accurate stats.\n\nSet up a phone, GoPro, or camera on the halfway line if your club allows it. Afterward, rewatch and track:\n\n- Passes completed/attempted\n- First touch quality\n- Positioning\n- Decision-making\n- Defensive recovery runs\n- Pressing moments\n- Movement off the ball\n\nWhen reviewing video, use timestamps:\n\n| Time | Event | Note |\n|---|---|---|\n| 12:30 | Lost ball | Took extra touch under pressure |\n| 27:10 | Key pass | Good scan before receiving |\n| 61:45 | Missed run | Didn’t track runner |\n\n---\n\n## 5. Use a rating system\n\nStats don’t tell the full story, so rate key areas from 1–10:\n\n- Fitness\n- Passing\n- Defending\n- Attacking contribution\n- Communication\n- Positioning\n- Decision-making\n- Work rate\n- Confidence\n\nExample:\n\n| Category | Rating |\n|---|---:|\n| Fitness | 7 |\n| Passing | 8 |\n| Positioning | 6 |\n| Work rate | 9 |\n| Decision-making | 7 |\n\nOver time, this helps you spot patterns.\n\n---\n\n## 6. Track physical stats if you can\n\nIf you have a smartwatch, GPS vest, or running app, you can monitor:\n\n- Distance covered\n- Sprint distance\n- Top speed\n- Average speed\n- Heart rate\n- Calories burned\n- Workload over the week\n\nGrassroots players don’t need elite-level tech, but even basic distance and sprint tracking can help with fitness.\n\nUseful options include:\n- Smartwatch fitness apps\n- Strava\n- Garmin / Apple Watch / Fitbit\n- Football GPS trackers if you want something more serious\n\n---\n\n## 7. Create monthly summaries\n\nEvery month, review your numbers.\n\nLook for trends like:\n\n- Are you playing more minutes?\n- Are your pass completion numbers improving?\n- Are you creating more chances?\n- Are you losing the ball less?\n- Are you winning more duels?\n- Are you contributing goals/assists?\n- Is your fitness improving?\n\nExample monthly summary:\n\n| Month | Games | Goals | Assists | Avg Rating | Main Improvement |\n|---|---:|---:|---:|---:|---|\n| September | 4 | 2 | 1 | 7.1 | Better crossing |\n| October | 5 | 3 | 3 | 7.8 | More confident shooting |\n\n---\n\n## 8. Keep it honest and consistent\n\nYour stats only help if they’re realistic.\n\nA few tips:\n\n- Use the same definitions every match\n- Don’t exaggerate numbers\n- Include mistakes as well as positives\n- Track performance, not just goals\n- Compare yourself to your past self, not everyone else\n\n---\n\n## Simple starter template\n\nFor each match, write this:\n\n**Match:**  \n**Date:**  \n**Opponent:**  \n**Position:**  \n**Minutes:**  \n**Result:**  \n\n**Stats:**  \n- Goals:\n- Assists:\n- Shots:\n- Passes completed/attempted:\n- Tackles won:\n- Interceptions:\n- Fouls:\n- Rating /10:\n\n**Reflection:**  \n- Best moment:\n- Biggest mistake:\n- What I learned:\n- Focus for next match:\n\n---\n\nIf you want the simplest version: use a **Google Sheet**, track **minutes, goals, assists, shots, pass completion, tackles, interceptions, and match rating**, then add **one short note after every game**. That alone will give you a clear picture of your progress over the season.",
+      "cited": [],
+      "cost": 0.062885
+    },
+    {
+      "prompt": "What are the best grassroots football apps in the UK?",
+      "answer": "**Considering concise lists**\n\nI want to create a concise list while keeping in mind that what’s \"best\" can depend on various factors. I think I should add a caveat about that in my list. Also, I might want to include citations for any claims I make. Maybe I could reference the official Spond site? That sounds like a good place to start, so I'll look into it and gather what I need for a thoughtful response.\nHere are the **best grassroots football apps in the UK**, depending on what you’re trying to manage:\n\n| Best for | App | Why it’s good |\n|---|---|---|\n| **FA-affiliated match admin** | **FA Matchday** | Best if your league uses FA systems; integrates with Full-Time / Club Portal and helps with official matchday admin. ([englandfootball.com](https://www.englandfootball.com/participate/leagues-and-clubs/helpful-apps-and-websites/matchday?utm_source=openai)) |\n| **Simple team comms + availability** | **Spond** | Very popular for grassroots teams; strong for availability, reminders, payments and parent/player communication. Sportplan calls it a “default free scheduler” for many UK grassroots teams. ([sportplan.net](https://www.sportplan.net/drills/Football/guides/best-free-grassroots-football-apps-2026.jsp?utm_source=openai)) |\n| **Whole-club platform** | **Pitchero** | Best for clubs that want a website, team management, member management, payments, fixtures, results and comms in one system. Pitchero says it supports fixtures, training, availability, team selection, match events and match fees. ([pitchero.com](https://www.pitchero.com/features/pitchero-app?utm_source=openai)) |\n| **Football-specific team management + stats** | **TeamStats** | Good for Sunday league / junior teams that want football-specific features such as line-ups, formations, stats, payments and match reports. ([squadd.co.uk](https://www.squadd.co.uk/blog/best-football-team-management-apps?utm_source=openai)) |\n| **Modern one-team coaching / parent app** | **Football Parent Coach App** | Good for a single grassroots team wanting squad management, scheduling, line-ups, live match tracking and season stats without a full club platform. ([footballparent.co.uk](https://www.footballparent.co.uk/coaching/best-grassroots-football-apps?utm_source=openai)) |\n| **UK-built coach-focused alternative** | **Squadd** | Built specifically for UK grassroots coaches, with fixtures, availability, squad, training, payments, match reports and paid “Pro” features like live recording and stats. ([squadd.co.uk](https://www.squadd.co.uk/?utm_source=openai)) |\n| **Club finance / subs focus** | **TeamFeePay** | Worth considering if your biggest pain point is subscriptions, fees and club payments; it’s commonly positioned around grassroots payments and fundraising. ([pembee.app](https://www.pembee.app/blog/best-football-club-management-software?utm_source=openai)) |\n| **Newer all-in-one UK football club app** | **Sprout** | A newer UK grassroots-football-specific option covering fixtures, subs, training, safeguarding, chat and matchday across teams. ([sprout-club.co.uk](https://sprout-club.co.uk/?utm_source=openai)) |\n\n## My quick recommendations\n\n- **If you’re an FA-affiliated youth / grassroots team:** use **FA Matchday** for official admin, plus **Spond** or **Pitchero** for day-to-day comms.\n- **If you run one team:** start with **Spond**, **TeamStats**, **Squadd** or **Football Parent Coach App**.\n- **If you run a whole club:** look at **Pitchero**, **Teamo**, **TeamFeePay**, **Sprout** or **LoveAdmin / Thrive4**.\n- **If you care about stats, line-ups and reports:** **TeamStats**, **Squadd** or **Football Parent Coach App** are better than generic club apps.\n- **If you mainly need parent communication and attendance:** **Spond** is probably the easiest starting point.\n\n**Best overall pick for most UK grassroots teams:** **Spond** for simplicity, or **Pitchero** if you’re managing a multi-team club.  \n**Best football-specific pick:** **TeamStats** or **Squadd**.  \n**Best official FA companion:** **FA Matchday**.",
+      "cited": [
+        "https://www.englandfootball.com/participate/leagues-and-clubs/helpful-apps-and-websites/matchday?utm_source=openai",
+        "https://www.sportplan.net/drills/Football/guides/best-free-grassroots-football-apps-2026.jsp?utm_source=openai",
+        "https://www.pitchero.com/features/pitchero-app?utm_source=openai",
+        "https://www.squadd.co.uk/blog/best-football-team-management-apps?utm_source=openai",
+        "https://www.footballparent.co.uk/coaching/best-grassroots-football-apps?utm_source=openai",
+        "https://www.squadd.co.uk/?utm_source=openai",
+        "https://www.pembee.app/blog/best-football-club-management-software?utm_source=openai",
+        "https://sprout-club.co.uk/?utm_source=openai"
+      ],
+      "cost": 0.10016
+    },
+    {
+      "prompt": "Recommend a football stats tracker app for parents",
+      "answer": "**Exploring app recommendations**\n\nI think I need to find some current app recommendations, and it looks like using the web for this would be the best approach. There are so many apps out there, and it's important to pick those that are relevant right now. I'll search for some trending apps to provide valuable suggestions. I'm curious about what the latest favorites are, and I'm eager to share that information with the user!\n**Considering sports tracking options**\n\nI need to clarify whether the user is talking about American football or soccer. Since they mentioned tracking for parents, it's likely American football in the U.S., but search results can point to soccer due to football being a common term. I'll aim to keep my response concise and include a caveat. Maybe I could recommend GameChanger for youth American football? I need to verify if GameChanger is officially supported for that.\n**Best pick for most parents: _GameChanger_** — if you mean **American football / flag football**.\n\nIt’s parent-friendly because it’s built around youth teams: schedules, RSVP, team chat, score updates, live following for family, and basic stats/recaps depending on how the team uses it. It’s especially useful if the coach or another parent is willing to score games consistently.\n\nIf you mean **soccer / “football”**, I’d recommend:\n\n1. **STATZO** — best simple parent/player stat tracker  \n   - Made for grassroots football players, parents, and managers  \n   - Tracks matches, goals, assists, clean sheets, ratings, seasons, notes, photos/videos  \n   - Supports tracking multiple players under one parent account  \n   - Available on iOS and Android, according to its site/App Store listing. ([apps.apple.com](https://apps.apple.com/us/app/statzo-football-stats-tracker/id6670539360?utm_source=openai))\n\n2. **MetricsFC** — best “sideline parent” option  \n   - Specifically marketed as a simple football tracking app for parents and families following youth football  \n   - Android is available; iOS was listed as “coming soon” on its site. ([metricsfc.app](https://metricsfc.app/?utm_source=openai))\n\n3. **Soccer Stats Tracker** — best if you just want personal stats  \n   - Designed for youth soccer parents and kids, not as a full club-management suite  \n   - Good for goals, assists, playing time, saves, and simple family tracking. ([soccerstattracker.com](https://soccerstattracker.com/for-parents/?utm_source=openai))\n\n**My recommendation:**  \n- For **American youth football/flag**: start with **GameChanger**.  \n- For **soccer/football**: start with **STATZO** if you want the most complete parent/player tracking, or **MetricsFC** if you want something very simple and parent-focused.",
+      "cited": [
+        "https://apps.apple.com/us/app/statzo-football-stats-tracker/id6670539360?utm_source=openai",
+        "https://metricsfc.app/?utm_source=openai",
+        "https://soccerstattracker.com/for-parents/?utm_source=openai"
+      ],
+      "cost": 0.08939
+    }
+  ]
+}
