@@ -1099,3 +1099,9 @@ Additive only, in `content/coaching/best-grassroots-football-apps.mdx`: a new se
 Why: competitor research on Statzo (statzoapp.com, grassroots stats app). Google AI Overviews name Statzo as the "track your own stats" pick on 4 of 20 stats/app queries, largely from its App Store/Play listings and one repeated positioning sentence. This article is already cited in the AI Overview for "best grassroots football app" and in ChatGPT's answer to "best grassroots football apps in the UK", but never mentioned Progress, so the parent-stats slot went to Statzo. Claims in the section are taken from `/progress` (what the app does today). Trimmed the same day to a shorter, lower-key version: no disclosure line, no price or trial detail. Research data: `seo-data/exports/statzo-ai-visibility.json`.
 
 Commit `5149d01`. Watch until ~17 Oct: rankings for "grassroots football app" (#3) and "grassroots football stats" (#5), and re-run `scripts/seo/cli/statzo-ai-visibility.ts` to see whether Progress gets named.
+
+## New article: `/football-gear/best-football-gps-trackers-for-kids` (written 2026-10-03, publish date = merge date)
+
+Category: Football Gear. Targets football gps tracker (480/mo, KD 23), football gps vest (320, KD 15), football tracker vest (320, KD 13), football tracker (720, KD 46), playermaker football tracker (210, KD 1), football boot tracker (170, KD 10). Page one for these was Amazon/eBay search pages, brand shops and two non-UK roundups. Picks verified on Amazon UK the same day: Footbar Meteor (B08FCK78K8), STATSports Academy (B0B3F1DGBQ), PitcheroGPS youth vest (B0CY3KX4DN), CityPlay (B0C625498V). Progress listed as the goals/assists/minutes pick. Research: `seo-data/exports/stats-gps-discovery.json`.
+
+Commit `6dac4df`.
