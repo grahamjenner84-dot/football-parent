@@ -51,6 +51,12 @@ export default function ParentGuidesPage() {
       }}
       articles={[
         {
+          title: "Best Football Stats Apps for Kids",
+          href: "/parent-guides/best-football-stats-apps",
+          description:
+            "The best ways to track your child's football stats: apps for parents and coaches, match log books, and trackers they can wear.",
+        },
+        {
           title: "Should You Leave Grassroots Football for an Academy?",
           href: "/parent-guides/leave-grassroots-football-for-an-academy",
           description:
