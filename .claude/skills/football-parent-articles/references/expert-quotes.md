@@ -1150,6 +1150,10 @@ don't reintroduce that framing without a specific sourced reason to.
 
 Q1 and Q2 placed in [what-do-academy-coaches-look-for](/academy-trials/what-do-academy-coaches-look-for),
 new "Football Parent Asks The Expert" section.
+Q2 reused (2nd use, Graham approved 2026-10-03 after seeing the full Q&A) in
+[best-football-gps-trackers-for-kids](/football-gear/best-football-gps-trackers-for-kids),
+"What to Do With the Numbers", trimmed differently: first sentence, `[…]`,
+then from "Are they actually improving" to the end.
 Q3 placed in [how-football-scouts-identify-players](/academy-trials/how-football-scouts-identify-players),
 new "Football Parent Asks The Expert" section.
 Q4 placed in [how-to-get-scouted-for-football](/academy-trials/how-to-get-scouted-for-football),
