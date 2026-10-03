@@ -1080,3 +1080,14 @@ The page sat in "Discovered - currently not indexed" from May to October, with z
 - Body, headings and meta description unchanged.
 
 Commit `2d10b7c`. After deploy: request indexing for the new URL in Search Console, and check its inspection status again ~17 Oct.
+
+## `best-football-boots-for-wide-feet-kids`: "wide fit" added to the title tag (2026-10-03)
+
+Title tag only, in `app/football-gear/boots/best-football-boots-for-wide-feet-kids/page.tsx`. H1 (frontmatter title), meta description, headings and body unchanged.
+
+- Before: "Best Football Boots for Wide Feet Kids | Football Parent" (56 chars)
+- After: "Wide Fit Football Boots for Kids: Best Picks for Wide Feet" (57 chars; the site name suffix was typed into the old string, no title template adds one)
+
+Why: the page's largest query, "wide fit football boots kids", had 3,046 impressions in 28 days at position 10.6 and 0.2% CTR, and the "wide fit"/"wide fitting" variants ("wide fitting football boots kids" 621, "kids football boots wide fit" 556 at 11.3, "wide fitting kids football boots" 372) never appeared in the title. "Wide feet" kept for the queries already ranking 7-8. **Live traffic:** 21,730 impressions, 175 clicks, position 8.5 (28 days), 54 clicks in the week of 23 Sept, position improving on its own from ~14 in July. Last prior change 19 Sept (buy box), so the window was clear. If position slips over the next 14 days, revert.
+
+Commit `cfe92d3`. Watch until ~17 Oct.
