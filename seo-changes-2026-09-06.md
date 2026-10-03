@@ -1105,3 +1105,5 @@ Commit `5149d01`. Watch until ~17 Oct: rankings for "grassroots football app" (#
 Category: Football Gear. Targets football gps tracker (480/mo, KD 23), football gps vest (320, KD 15), football tracker vest (320, KD 13), football tracker (720, KD 46), playermaker football tracker (210, KD 1), football boot tracker (170, KD 10). Page one for these was Amazon/eBay search pages, brand shops and two non-UK roundups. Picks verified on Amazon UK the same day: Footbar Meteor (B08FCK78K8), STATSports Academy (B0B3F1DGBQ), PitcheroGPS youth vest (B0CY3KX4DN), CityPlay (B0C625498V). Progress listed as the goals/assists/minutes pick. Research: `seo-data/exports/stats-gps-discovery.json`.
 
 Commit `6dac4df`.
+
+Follow-ups the same day: slop/fact pass and Paul Barry Q&A added to the article (`35eb6e8`). Inbound links, one added sentence each, nothing else on those pages changed: `how-much-training-is-too-much` (`064ad70`, after the training-load lists) and `late-developers-in-football` (`062ab78`, end of Comparison Culture). Both pages were last changed in August, so outside any watch window; both now on watch until ~17 Oct.
