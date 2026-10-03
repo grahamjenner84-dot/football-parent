@@ -1091,3 +1091,11 @@ Title tag only, in `app/football-gear/boots/best-football-boots-for-wide-feet-ki
 Why: the page's largest query, "wide fit football boots kids", had 3,046 impressions in 28 days at position 10.6 and 0.2% CTR, and the "wide fit"/"wide fitting" variants ("wide fitting football boots kids" 621, "kids football boots wide fit" 556 at 11.3, "wide fitting kids football boots" 372) never appeared in the title. "Wide feet" kept for the queries already ranking 7-8. **Live traffic:** 21,730 impressions, 175 clicks, position 8.5 (28 days), 54 clicks in the week of 23 Sept, position improving on its own from ~14 in July. Last prior change 19 Sept (buy box), so the window was clear. If position slips over the next 14 days, revert.
 
 Commit `cfe92d3`. Watch until ~17 Oct.
+
+## `best-grassroots-football-apps`: Progress added as the pick for parents (2026-10-03)
+
+Additive only, in `content/coaching/best-grassroots-football-apps.mdx`: a new section "Best for Parents Tracking Their Child's Stats: Progress" (between Spond and TeamStats/Pitchero), its TOC entry, one at-a-glance line, and `dateModified`. Title, meta description, existing headings, links and body unchanged.
+
+Why: competitor research on Statzo (statzoapp.com, grassroots stats app). Google AI Overviews name Statzo as the "track your own stats" pick on 4 of 20 stats/app queries, largely from its App Store/Play listings and one repeated positioning sentence. This article is already cited in the AI Overview for "best grassroots football app" and in ChatGPT's answer to "best grassroots football apps in the UK", but never mentioned Progress, so the parent-stats slot went to Statzo. Claims in the section are taken from `/progress` (what the app does today; £2.50/month after a 4-week free trial; web app, not on the stores). Research data: `seo-data/exports/statzo-ai-visibility.json`.
+
+Commit `5149d01`. Watch until ~17 Oct: rankings for "grassroots football app" (#3) and "grassroots football stats" (#5), and re-run `scripts/seo/cli/statzo-ai-visibility.ts` to see whether Progress gets named.
