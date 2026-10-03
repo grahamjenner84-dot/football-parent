@@ -1054,3 +1054,29 @@ Internal links into it, commit 064ead8, one additive link per page: football-dev
 Same day, readability pass on the Watford guide (published hours earlier, no traffic yet, so not on a watch window): the Paul Barry quote is now an `ExpertQA` with his photo, bio and the original interview question instead of a plain `ExpertOpinion` (the prose lead-in that restated the question is gone), and five long paragraphs split at sentence breaks with no wording changed. Site-wide in the same commit: the mid-article Coach App banner (`lib/MDXContent.tsx`) now skips any heading with under ~400 characters of prose after a ParentNote/ExpertQA/ExpertOpinion, so it never sits straight after a callout. That moves the banner to a different heading on 14 articles (none lose it). Layout only, no copy change on those pages.
 
 Watford guide opener rewritten (commit 9f27668): "When parents search for Watford academy trials, most of what they find is run by..." became "Most trials and development centres advertised under the Watford name are run by...". Same facts, filler opener removed. Earlier same-day readability commits: a559bf9 (banner placement, site-wide), 337dc57 (ExpertQA photo, paragraph splits).
+
+## Weekly round-up (2026-10-03): GSC 22-28 Sept vs 15-21 Sept
+
+54,102 vs 56,008 impressions (-3%), 980 vs 979 clicks, average position 6.5 vs 6.4, CTR 1.8% vs 1.7%. The impression dip is demand plus the AI rank-tracker probe queries ("... asking as: youth soccer parent") dropping out of best-football-boots-for-kids, not lost rankings.
+
+- **Veo quick-pick box (27 Sept):** Amazon click-out rate flat, 20.2% to 20.8% (20-26 Sept vs 27 Sept-1 Oct); 5 of 16 clicks came via the box, so it mostly moved clicks from the inline links. Search side still growing: 7,288 to 7,808 impressions, 57 to 67 clicks, position 6.8 to 6.5.
+- **Wide-feet buy box (19 Sept):** holding, 37.1% to 40.8% click-out. Shin pads 65% to 74%, and +2,650 impressions, 98 to 127 clicks.
+- **Drills title (25 Sept):** 103 to 237 impressions, 3 to 5 clicks. **Formations title (25 Sept):** nothing to read yet. **Equal playing time title/H2 (25 Sept):** 975 to 821 impressions, 15 to 9 clicks, position 6.4 to 6.7, inside noise; now picking up junk "fair matlab" impressions at position 1, probably from "Fair Game Time" in the title. Watch to ~7 Oct.
+- **Playing time calculator is not live.** It is only on the unmerged `claude/playing-time-calculator` branch, which Graham is reworking. Its watch window starts from the real merge date.
+- Best grassroots apps position 15.2 to 10.1, clicks 9 to 21. Football team spreadsheet back to 24 impressions/4 clicks at 4.3. Soft ground boots 69 impressions at 7.3 in its first two days.
+- Silence flag on `/coach-app` is expected (the app is noindex). Decay: only the `/academy-trials` hub again.
+- URL Inspection: `support-child-after-bad-match` still "Discovered - currently not indexed", never fetched (moved, see below); the Matt Baxter interview "URL is unknown to Google" at 4 days old.
+
+## `support-child-after-bad-match` moved to `/parent-guides/child-lost-confidence-in-football` (2026-10-03)
+
+The page sat in "Discovered - currently not indexed" from May to October, with zero impressions, despite manual indexing requests and the 6 Sept anchor fix. Google never fetched it, so this was a URL-level judgement, not a content one. The slug said "after bad match" while the article opens "This article is not about the single bad match", and it read as a twin of `what-to-say-after-football-matches`. A content comparison found little overlap with that page (one is the car journey after one match, this is a run of poor form, confidence, the coach conversation, a break, quitting), so it was moved rather than merged. Zero impressions meant no traffic to protect, so the whole move went in one commit.
+
+- Slug research (DataForSEO, $0.16, `scripts/seo/cli/child-struggling-slug-research.ts`): almost every phrasing has no measurable UK volume; "my son wants to quit football", "son wants to quit football", "my son has lost his confidence in football", "lost/losing confidence in football" ~10/mo each. The "child lost confidence in football" SERP is UK parent sites (teamgrassroots.co.uk #2, wemakefootballers.com #3); the "wants to quit" SERP is Reddit/US/social, and quitting is only one section of the article. AI Overview on both.
+- Cannibalisation check against `build-confidence-young-footballers`: it gets ~25-40 impressions a week and no "lost/losing confidence" queries; its setback section already hands a bad run of form to this article. Its "See:" link anchor changed to "what to do when your child has lost confidence in football" to make the split explicit.
+- Changes: 301 from the old URL (`next.config.ts`), `lib/routes.ts`, `/parent-guides` card, Coach App banner slug list, 13 internal links repointed (anchor text unchanged except the build-confidence one), skills' valid-urls lists.
+- Title tag: "When Your Child Is Struggling in Football | Football Parent" to "Child Lost Confidence in Football? What Parents Can Do".
+- H1: "When Your Child Is Struggling in Football | Football Parent" (the site name was showing in the H1) to "When Your Child Has Lost Confidence in Football".
+- Frontmatter `date` corrected from 2026-06-15 to the real publish date 2026-05-26 (fixes the BlogPosting `datePublished`).
+- Body, headings and meta description unchanged.
+
+Commit `2d10b7c`. After deploy: request indexing for the new URL in Search Console, and check its inspection status again ~17 Oct.
