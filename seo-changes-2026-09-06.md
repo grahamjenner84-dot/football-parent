@@ -1122,3 +1122,11 @@ From the rank tracker (27-29 Sep vs 20-22 Sep; GSC running ~5 days behind). One 
 
 - `/academy-pathway/football-scholarships-uk`: added FAQ "Are there football scholarships for 16 year olds?" after the existing "What age" FAQ. Targets "football scholarships for 16 year olds" (179 impressions in 6 days, position 10.6 to 10.2). Uses only facts already in the article. Commit `961a614`. Watch until ~18 Oct.
 - `/academy-pathway/brentford-development-centre-guide`: one inbound link with the anchor "Brentford academy", added as a sentence in the "How Tottenham Compares to Other London Clubs" section of `tottenham-development-centres-explained` (which listed Arsenal, Chelsea, West Ham and Fulham but not Brentford). Targets "brentford academy" (73 impressions, 10.6 to 10.2) and "brentford fc academy" (6.8 to 10.6). The guide had 11 inbound links, none using "academy" in the anchor. Brentford guide itself unchanged. Commit `9bda1c0`. Watch until ~18 Oct.
+
+## `best-footballs-by-age`: age-in-years list under the quick reference table (2026-10-04)
+
+Page: `/football-gear/best-footballs-by-age`. Commit `9e9d6d8`. **Live traffic page** (Google's AI answers cite it), so additive only: added a short "By age in years" list (6-10: size 3; 11: 3 or 4; 12: 4; 13: 4 or 5; 14+: 5, explained via the 31 August age-group cutoff) directly under the existing paragraph below the InfoTable. Table, title, meta, headings, FAQ and GearPicks untouched. Searches are phrased by age in years, while the table is by age group, which also left 11 and 13 year olds ambiguous.
+
+**Baseline before the change** (GSC, 28 days to ~29 Sep): 27,309 impressions, 44 clicks, average position 8.7. Top queries: what size football for 10 year old 9.6, for 8 year old 9.9, football sizes by age 9.7, for 7 year old 10.0, for 6 year old 9.7, for 9 year old 10.2, football size for 10 year old 10.6, size 3 football age 10.4, for 12 year old 10.4, for 11 year old 9.1, for 13 year old 9.2.
+
+**Revert rule agreed with Graham:** if "football sizes by age" or the main age queries lose more than ~2 positions and hold there for a week, `git revert 9e9d6d8`. GSC is ~5 days behind, so read at ~14 days (around 18-20 Oct). Also recheck the AI Overview citation for "what size football for 10 year old" and "football sizes by age" after about a week. No other edit to this page until then.
