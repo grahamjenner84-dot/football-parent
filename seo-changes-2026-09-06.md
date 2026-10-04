@@ -1130,3 +1130,7 @@ Page: `/football-gear/best-footballs-by-age`. Commit `9e9d6d8`. **Live traffic p
 **Baseline before the change** (GSC, 28 days to ~29 Sep): 27,309 impressions, 44 clicks, average position 8.7. Top queries: what size football for 10 year old 9.6, for 8 year old 9.9, football sizes by age 9.7, for 7 year old 10.0, for 6 year old 9.7, for 9 year old 10.2, football size for 10 year old 10.6, size 3 football age 10.4, for 12 year old 10.4, for 11 year old 9.1, for 13 year old 9.2.
 
 **Revert rule agreed with Graham:** if "football sizes by age" or the main age queries lose more than ~2 positions and hold there for a week, `git revert 9e9d6d8`. GSC is ~5 days behind, so read at ~14 days (around 18-20 Oct). Also recheck the AI Overview citation for "what size football for 10 year old" and "football sizes by age" after about a week. No other edit to this page until then.
+
+## `equal-playing-time-in-grassroots-football`: game time calculator links (2026-10-04)
+
+Page: `/coaching/equal-playing-time-in-grassroots-football`. Commit `5cdc51e`. Additive only: a "Work it out for your squad" tool card after the intro (before the first H2) and a one-line "Try it on your own squad: game time calculator" link after the last FAQ, both to `/coach-app/game-time-calculator` with `utm_source=footballparent&utm_medium=article&utm_campaign=game-time-calculator`. Frontmatter, title, headings and existing internal links unchanged. Clicks show on the Coach App funnel tab under that campaign.
