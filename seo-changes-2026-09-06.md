@@ -1134,3 +1134,9 @@ Page: `/football-gear/best-footballs-by-age`. Commit `9e9d6d8`. **Live traffic p
 ## `equal-playing-time-in-grassroots-football`: game time calculator links (2026-10-04)
 
 Page: `/coaching/equal-playing-time-in-grassroots-football`. Commit `5cdc51e`. Additive only: a "Work it out for your squad" tool card after the intro (before the first H2) and a one-line "Try it on your own squad: game time calculator" link after the last FAQ, both to `/coach-app/game-time-calculator` with `utm_source=footballparent&utm_medium=article&utm_campaign=game-time-calculator`. Frontmatter, title, headings and existing internal links unchanged. Clicks show on the Coach App funnel tab under that campaign.
+
+## `how-academy-football-works`: Paul Barry quote moved down the page (2026-10-04)
+
+Page: `/academy-pathway/how-academy-football-works`. Commit `4e64155`. **Live traffic page.** Layout only: the ExpertQA block (Paul Barry on how families are treated at smaller vs Category 1 academies) moved from directly under the Category 1-4 cards to the "What Parents Should Expect From Academy Football" section, after the paragraph on the whole-family commitment. No wording, headings, links, title or meta changed. Graham asked for it so the quote breaks up the article rather than stacking against the graphic.
+
+**External mention, same day:** the Grassroots Hub Facebook group posted this article on the evening of 4 Oct. 24 Facebook referrals in the first 3 hours, all phones in the Facebook app. Expect a one-off bump in page_views and GA for this URL on 4-5 Oct that is not search traffic.
