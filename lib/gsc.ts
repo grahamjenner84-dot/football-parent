@@ -61,6 +61,9 @@ const RANK_TRACKER_WINDOW_DAYS = 3;
 // all - filters out the long tail of one-off searches that would otherwise
 // dominate the table with meaningless swings.
 const RANK_TRACKER_MIN_COMBINED_IMPRESSIONS = 4;
+// How many days beyond currentEnd GSC can lag before the rank tracker's
+// prior window starts falling outside the fetched range.
+const RANK_TRACKER_EXTRA_LAG_DAYS = 5;
 
 // Rough expected CTR by position - industry ballpark, used only to rank
 // opportunities relative to each other, not as an absolute target.
@@ -347,11 +350,22 @@ export type RankRow = {
 // "Position today" vs "position 7 days ago" per query/page, each side
 // smoothed over RANK_TRACKER_WINDOW_DAYS - see the constant comment for why
 // a literal single day isn't meaningful with GSC's sampled data.
+//
+// The recent window ends on the latest date GSC actually returned, not on
+// currentEnd. GSC's lag is usually ~3 days but stretches to 5+ at times;
+// anchoring on currentEnd then leaves the whole recent window empty and
+// every keyword reads as "lost" (seen 2026-10-04: 0 ranking terms while the
+// site was still averaging position 6). Dates are compared as YYYY-MM-DD
+// strings: comparing GSC's midnight-UTC dates against a time-of-day Date
+// silently dropped the first day of each window.
 function analyseRankTracker(rows: GscRow[], currentEnd: Date): RankRow[] {
-  const recentEnd = currentEnd;
-  const recentStart = addDays(recentEnd, -(RANK_TRACKER_WINDOW_DAYS - 1));
-  const priorEnd = addDays(recentEnd, -7);
-  const priorStart = addDays(recentStart, -7);
+  let latest = "";
+  for (const r of rows) if (r.keys[2] > latest) latest = r.keys[2];
+  const recentEndDate = latest ? new Date(`${latest}T12:00:00Z`) : currentEnd;
+  const recentEnd = isoDate(recentEndDate);
+  const recentStart = isoDate(addDays(recentEndDate, -(RANK_TRACKER_WINDOW_DAYS - 1)));
+  const priorEnd = isoDate(addDays(recentEndDate, -7));
+  const priorStart = isoDate(addDays(recentEndDate, -(RANK_TRACKER_WINDOW_DAYS - 1 + 7)));
 
   type Bucket = { impressions: number; clicks: number; posWeighted: number };
   const emptyBucket = (): Bucket => ({ impressions: 0, clicks: 0, posWeighted: 0 });
@@ -360,8 +374,7 @@ function analyseRankTracker(rows: GscRow[], currentEnd: Date): RankRow[] {
   const meta = new Map<string, { query: string; page: string }>();
 
   for (const r of rows) {
-    const [query, page, dateStr] = r.keys;
-    const date = new Date(dateStr);
+    const [query, page, date] = r.keys;
     const key = `${query}||${page}`;
     if (!meta.has(key)) meta.set(key, { query, page });
 
@@ -627,10 +640,15 @@ export async function getSeoReport(options: SeoReportOptions = {}): Promise<SeoR
 
   const silenceWindowStart = addDays(currentEnd, -(SILENCE_RECENT_DAYS + SILENCE_BASELINE_DAYS - 1));
 
-  // Rank tracker needs its "recent" window (currentEnd back RANK_TRACKER_WINDOW_DAYS)
-  // and the same span 7 days earlier - covered by one fetch from the older
-  // boundary through currentEnd.
-  const rankTrackerWindowStart = addDays(currentEnd, -(RANK_TRACKER_WINDOW_DAYS - 1 + 7));
+  // Rank tracker needs its "recent" window (latest day with data back
+  // RANK_TRACKER_WINDOW_DAYS) and the same span 7 days earlier - covered by
+  // one fetch from the older boundary through currentEnd. The extra slack
+  // keeps the prior window fully fetched when GSC lags beyond currentEnd and
+  // analyseRankTracker anchors earlier.
+  const rankTrackerWindowStart = addDays(
+    currentEnd,
+    -(RANK_TRACKER_WINDOW_DAYS - 1 + 7 + RANK_TRACKER_EXTRA_LAG_DAYS)
+  );
 
   const strikingStart = addDays(currentEnd, -strikingDays);
   const ctrStart = addDays(currentEnd, -ctrDays);
