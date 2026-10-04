@@ -9,6 +9,7 @@ import ExpertQA, { ExpertQAItem } from "@/app/components/mdx/ExpertQA";
 import AffiliateDisclosure from "@/app/components/mdx/AffiliateDisclosure";
 import GearPicks from "@/app/components/mdx/GearPicks";
 import InstagramEmbed from "@/app/components/mdx/InstagramEmbed";
+import ToolCallout from "@/app/components/mdx/ToolCallout";
 import { affiliateLinkProps } from "@/lib/affiliate";
 import { competitorLinkProps } from "@/lib/externalLinks";
 import CoachAppBanner, {
@@ -29,6 +30,7 @@ const components = {
   AffiliateDisclosure,
   GearPicks,
   InstagramEmbed,
+  ToolCallout,
 
   h2: ({ children }: any) => (
     <h2
