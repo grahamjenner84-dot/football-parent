@@ -1108,6 +1108,8 @@ Commit `6dac4df`.
 
 Follow-ups the same day: slop/fact pass and Paul Barry Q&A added to the article (`35eb6e8`). Inbound links, one added sentence each, nothing else on those pages changed: `how-much-training-is-too-much` (`064ad70`, after the training-load lists) and `late-developers-in-football` (`062ab78`, end of Comparison Culture). Both pages were last changed in August, so outside any watch window; both now on watch until ~17 Oct.
 
+Inline affiliate links added 2026-10-04 (`86029b6`): one link on the first mention of each of the four picks in its own "Best Football GPS Trackers for Kids" subsection (STATSports Academy, PitcheroGPS, Footbar Meteor, CityPlay), same ASINs as the GearPicks card. No wording changed. Playermaker 2.0 and SoccerBee left unlinked (no verified UK ASIN).
+
 ## New article: `/parent-guides/best-football-stats-apps` (written 2026-10-03, publish date = merge date)
 
 Category: Parent Guides. Targets the cluster statzoapp.com's homepage ranks for: football stats app / football statistics app / football stat app / app for football stats (110/mo each, KD 0-19), best football stats app (70, KD 14), football stats tracker (140, KD 52), football stats book (50, KD 0), plus unmeasured parent phrasings (track my child's football stats, football stats app for parents). Picks: Progress, Coach App, three Amazon stats books/journals (B0D1P58YB6, B0CCCKYMZF, B0D8VVF4KR), Footbar Meteor (B08FCK78K8). No competing apps named (Graham's rule). Inbound link added from `football-team-spreadsheet` (one sentence, `6f41210`; last changed 11 Sept, now on watch until ~17 Oct). Research: `seo-data/exports/stats-gps-discovery.json`, `statzo-ai-visibility.json`.
