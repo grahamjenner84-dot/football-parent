@@ -73,6 +73,21 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // In production /coach-app is a Vercel rewrite to the app's own deployment
+  // (vercel.json), which `npm run dev` knows nothing about: the Coach App
+  // links 404 locally and the calculator page's iframe comes up empty. This
+  // proxies the same path to the live app in development only, so the
+  // embed can be checked on localhost. Same-origin from the browser's point
+  // of view, exactly as in production. Never active in a build.
+  async rewrites() {
+    if (process.env.NODE_ENV !== 'development') return [];
+    return [
+      {
+        source: '/coach-app/:path*',
+        destination: 'https://coach-app-zeta.vercel.app/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

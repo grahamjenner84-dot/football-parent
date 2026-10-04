@@ -78,6 +78,12 @@ export default function CoachingPage() {
             "A working formula for fair playing time, the real difference between equal minutes and equal position time, and what rolling substitutions actually allow.",
         },
         {
+          title: "Equal Playing Time Calculator",
+          href: "/coaching/equal-playing-time-calculator",
+          description:
+            "Free calculator: add your squad and format, get a fair game time plan with changes at every break, and run it from the touchline.",
+        },
+        {
           title: "Ball Mastery Drills for 7 and 8 Year Olds",
           href: "/coaching/football-drills-for-7-and-8-year-olds",
           description:
