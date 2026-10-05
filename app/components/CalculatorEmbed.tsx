@@ -41,8 +41,12 @@ export default function CalculatorEmbed() {
     return () => window.removeEventListener("message", onMessage);
   }, []);
 
+  // The app lays the calculator out as a phone-width column (.calc-page is
+  // max-width 480px, flush left), so the frame is that wide too: wider and
+  // it is a dark box with the calculator pinned to its left edge. Full
+  // width on a phone, where the page is narrower than this anyway.
   return (
-    <div>
+    <div className="max-w-[480px]">
       <iframe
         src={CALCULATOR_PATH}
         title="Equal playing time calculator"
