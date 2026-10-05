@@ -4,7 +4,6 @@ import CoachSignUpForm from "@/app/components/CoachSignUpForm";
 import { MDXContent } from "@/lib/MDXContent";
 import { extractFaqs } from "@/lib/faq";
 import type { LandingPage } from "@/lib/landing";
-import { BRAND_IMAGES } from "@/lib/seo";
 
 // Shared shell for every Coach App landing page, so a variant differs from
 // the main page only in its words - same hero shape, same form, same
@@ -64,35 +63,13 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
         }
       : null;
 
-  // Deliberately no aggregateRating: there are no reviews to aggregate, and
-  // inventing one is both a Google penalty and a lie. Offers describes what
-  // the page itself states - a free tier and a 2.99/month paid tier.
-  const appSchema = indexable
-    ? {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        name: "Football Parent Coach App",
-        applicationCategory: "SportsApplication",
-        operatingSystem: "Web, iOS, Android",
-        url: "https://www.footballparent.co.uk/football-parent-coach-app",
-        description: frontmatter.seoDescription ?? frontmatter.subhead,
-        image: [BRAND_IMAGES.coach.wide, BRAND_IMAGES.coach.standard, BRAND_IMAGES.coach.square],
-        offers: [
-          {
-            "@type": "Offer",
-            name: "Free",
-            price: "0",
-            priceCurrency: "GBP",
-          },
-          {
-            "@type": "Offer",
-            name: "Paid",
-            price: "2.99",
-            priceCurrency: "GBP",
-          },
-        ],
-      }
-    : null;
+  // No SoftwareApplication schema. Google's Software App rich result needs
+  // aggregateRating or review as well as name and offers, and there are no
+  // reviews to aggregate (inventing one is both a Google penalty and a lie).
+  // Without a rating the entity can never earn the rich result and only
+  // reports as a structured-data error (Semrush site audit, 5 Oct 2026,
+  // on the /progress page carrying the same shape). Reinstate it, with
+  // real reviews, when there are some.
 
   return (
     <main className="min-h-screen bg-white">
@@ -101,13 +78,6 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
           id={`landing-faq-schema-${slug}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
-      {appSchema && (
-        <Script
-          id={`landing-app-schema-${slug}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
         />
       )}
       <section className="bg-gray-50 border-b border-gray-200">
