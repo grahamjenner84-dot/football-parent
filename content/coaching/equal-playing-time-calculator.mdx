@@ -1,10 +1,10 @@
 ---
 title: "Free Equal Playing Time Calculator for Grassroots Football"
 description: "Free equal playing time calculator for grassroots football. Add your squad, pick your format and get a fair game time plan with changes at every break."
-date: "2026-10-04"
+date: "2026-10-05"
 category: "Coaching"
 categoryUrl: "/coaching"
-readTime: 6
+readTime: 7
 sections:
   - id: "how-the-calculator-works"
     title: "How the Calculator Works"
@@ -22,64 +22,160 @@ sections:
     title: "Frequently Asked Questions"
 ---
 
-{/* DRAFT SHELL, not for publishing. The calculator itself is rendered by the
-    page (app/coaching/equal-playing-time-calculator/page.tsx) above this
-    body. The headings below are the agreed outline from
-    game-time-calculator-plan.md sections 3 and 7.5; each "Draft:" line is
-    the brief for that section and must be replaced by the written,
-    fact-checked content (football-parent-articles skill) before this page
-    goes live. */}
+This free equal playing time calculator works out a fair share of the game for every child in a grassroots football squad. Type in who is playing today, pick your format and match length, and it gives you each player's minutes, who is on the pitch in every stint, and when to make the changes. Some clubs say equal game time rather than equal playing time. It is the same thing and the same maths, so this is an equal game time calculator too.
 
-An equal playing time calculator for grassroots football: add the players who are here today, pick your format and match length, and it works out everyone's share of the game and when to make the changes. Also known as an equal game time calculator.
-
-*Draft: one more intro line on who it is for (grassroots coaches, U7 to U14), with no "search for X" opener.*
+It covers the formats children play in England from Under-8 upwards, 5v5, 7v7, 9v9 and 11v11, with the FA match length for each already filled in. Below the calculator you will find the formula, ready-worked target minutes for the usual squad sizes, and the questions coaches and parents ask most about equal game time.
 
 ## How the Calculator Works
 
-*Draft: changes at half-time or the quarter breaks or rolling, the least-played player goes on first, positions rotate or stay set, the keeper rotates or is fixed. Say plainly what the tool does, in text, because the frame above is invisible to Google. It is the same planner as the Coach App's Auto-generate, run change by change. Then the touchline runner: a clock for each period, the lineup on the pitch, a nudge when it is time to change (runs on the full page).*
+**Your game.** Pick the format, from 3-a-side to 11-a-side, and a formation. Choose halves, quarters or one period with no breaks, and set the minutes for each. The FA length for your format is suggested, and you can change it to whatever your league plays.
+
+**Your rules.** Set a minimum game time for every player (none, a quarter or a half), whether positions rotate or each child keeps a set position, whether the goalkeeper rotates at the breaks or stays in goal all game, and whether substitutions are unlimited or capped at the number your league allows. With a fixed keeper you can name them or let the calculator choose.
+
+**Who is playing.** First names are fine, and you can paste a list straight from the team WhatsApp group. Add only the children who are actually there, because the point is sharing today's minutes among today's squad.
+
+Then choose how often to change players: only at the breaks, or every few minutes within each half or quarter. The keeper always stays put until a real break. The calculator plans every stint, brings on the child who has played least, and runs several versions of the plan to keep the one with the smallest gap between the most and least played player. You get each child's minutes, a grid of who is where in every period, a stint-by-stint view of the bench and who comes on and off, and the number of changes the plan takes.
+
+It is the same planner that picks the team inside the [Coach App](/football-parent-coach-app), run change by change. Nothing on this page needs an account.
+
+**On the touchline.** "Run it on the touchline" opens the full-screen version with a clock for each period, the current lineup and bench, and an alert when a change is due or a break arrives: a beep, a buzz on Android phones, and the screen kept awake while the clock runs. At full time it shows the minutes each child actually played.
 
 ## How to Calculate Equal Game Time
 
-*Draft: the Sheffield FA method in plain text: outfield positions times match length, divided by the outfield players available. A worked example (7v7, 50 minutes, 10 players, one keeper all game: 6 x 50 = 300 outfield minutes over 9 players, about 33 each). Then the goalkeeper variant: when the keeper rotates outfield, the whole squad shares the minutes in goal too, so the target rises. Source each number.*
+**Outfield positions in your format, multiplied by the match length, divided by the number of outfield players you have today.** That is the target minutes per player. [Sheffield FA's guidance on calculating equal playing time](https://sheffieldfa.freshdesk.com/support/solutions/articles/76000060364-how-to-plan-equal-playing-time-calculating-minutes-) sets out the same method, with a second version for a rotating goalkeeper.
+
+A worked example for 7v7, the format Under-10s and Under-11s play from the 2026/27 season:
+
+1. A 7-a-side team has 6 outfield positions once you take the keeper out.
+2. The match is 50 minutes, so there are 6 x 50 = 300 outfield minutes to share.
+3. Ten children have turned up. One is in goal all game, which leaves 9 outfield players.
+4. 300 divided by 9 is just over 33 minutes each.
+
+**With a rotating goalkeeper** nobody's minutes are ring-fenced, so you count all 7 positions, including the goal: 7 x 50 = 350 minutes shared by all 10 children, which is 35 minutes each, and that 35 includes each child's time in goal. The target rises because the keeper's slot joins the pool instead of being one child's whole game.
+
+A real plan rarely lands on the exact figure, because changes happen in whole stints: with changes every 5 minutes a child plays 30 or 35 minutes, not 33. A gap of one stint between the most and least played child is as level as a single match gets.
 
 ## Target Minutes by Format and Squad Size
 
-*Draft: ready-worked tables for 5v5, 7v7 and 9v9 at the FA match lengths for each age group, with the half-time or break length too (answers "how long is a game" and "is halftime 15 or 30 minutes"). Squad sizes from one spare up to the realistic maximum. Match lengths sourced from the FA youth rules during the build, not assumed. This is the content Google can read and the frame cannot give it.*
+The FA's [Know Your Format guide for the 2026/27 season](https://harpn.s3-eu-west-2.amazonaws.com/fa/futurefit/Know%20Your%20Format.pdf) sets the maximum match length for each format and which age groups play it, and the tables below use those lengths. Under-7s play 3v3 in games of 6 to 10 minutes with no goalkeeper, no substitutes and every child playing, which is why the tables start at 5v5. The same guide records the FA's best-practice recommendation that from Under-8 every child gets at least 50% of the game.
+
+Leagues can play shorter than the maximum. If yours does, put your real match length into the calculator and ignore the figures here. Each table runs from one spare player up to the largest squad the FA's Standard Code allows, which is double the number on the pitch. The first figure is with one child in goal all game, the second with a rotating keeper, where time in goal counts towards each child's share.
+
+**5v5, 40 minutes (Under-8 and Under-9)**
+
+<InfoTable data='[
+  {"label":"6 players","value":"32 minutes each with a fixed keeper, about 33 if the keeper rotates"},
+  {"label":"7 players","value":"About 27 minutes each, or about 29 with a rotating keeper"},
+  {"label":"8 players","value":"About 23 minutes each, or 25 with a rotating keeper"},
+  {"label":"9 players","value":"20 minutes each, or about 22 with a rotating keeper"},
+  {"label":"10 players","value":"About 18 minutes each, or 20 with a rotating keeper"}
+]' />
+
+**7v7, 50 minutes (Under-10 and Under-11)**
+
+<InfoTable data='[
+  {"label":"8 players","value":"About 43 minutes each with a fixed keeper, about 44 if the keeper rotates"},
+  {"label":"9 players","value":"37.5 minutes each, or about 39 with a rotating keeper"},
+  {"label":"10 players","value":"About 33 minutes each, or 35 with a rotating keeper"},
+  {"label":"11 players","value":"30 minutes each, or about 32 with a rotating keeper"},
+  {"label":"12 players","value":"About 27 minutes each, or about 29 with a rotating keeper"},
+  {"label":"13 players","value":"25 minutes each, or about 27 with a rotating keeper"},
+  {"label":"14 players","value":"About 23 minutes each, or 25 with a rotating keeper"}
+]' />
+
+**9v9, 60 minutes (Under-12 and Under-13)**
+
+<InfoTable data='[
+  {"label":"10 players","value":"About 53 minutes each with a fixed keeper, 54 if the keeper rotates"},
+  {"label":"11 players","value":"48 minutes each, or about 49 with a rotating keeper"},
+  {"label":"12 players","value":"About 44 minutes each, or 45 with a rotating keeper"},
+  {"label":"13 players","value":"40 minutes each, or about 42 with a rotating keeper"},
+  {"label":"14 players","value":"About 37 minutes each, or about 39 with a rotating keeper"},
+  {"label":"15 players","value":"About 34 minutes each, or 36 with a rotating keeper"},
+  {"label":"16 players","value":"32 minutes each, or about 34 with a rotating keeper"},
+  {"label":"18 players","value":"About 28 minutes each, or 30 with a rotating keeper"}
+]' />
+
+**11v11, 70 minutes (Under-14)**
+
+By Under-14 most teams have a settled goalkeeper, so these assume a fixed keeper and 10 outfield positions.
+
+<InfoTable data='[
+  {"label":"12 players","value":"About 64 minutes each"},
+  {"label":"13 players","value":"About 58 minutes each"},
+  {"label":"14 players","value":"About 54 minutes each"},
+  {"label":"15 players","value":"50 minutes each"},
+  {"label":"16 players","value":"About 47 minutes each"},
+  {"label":"18 players","value":"About 41 minutes each"}
+]' />
+
+A squad of 14 at 7v7, or 10 at 5v5, is where the target drops below half a game. That is the practical case for keeping squads a little smaller than the maximum at the younger ages, or running two teams when the numbers allow it.
 
 ## Halves, Quarters or Rolling Subs
 
-*Draft: what each means for the plan and the number of changes. Where quarters are the norm (younger age groups) and where halves are. Rolling substitutions: what the rules allow at each age group, with a link to the full explainer article's section on it.*
+How the match is split decides how many natural change points you get, and that shapes the plan more than anything else.
+
+**Quarters** give you three breaks, so at 5v5 with 8 children you can get close to equal minutes without a single change during play. Most mini-soccer leagues play 5v5 in four 10-minute quarters for exactly this reason, and the calculator defaults to that split.
+
+**Halves** give you one. A 7v7 squad of 12 playing two 25-minute halves cannot get near 27 minutes each by changing only at half-time: five children would play the whole game and five would miss a whole half. Getting close needs changes during play, which is what the "every 5 minutes" and "every 12.5 minutes" options are for. The calculator shows how many changes each option takes, so the trade-off between a level plan and a disruptive one is in front of you.
+
+**Rolling substitutions** are what make those mid-half changes legal. The FA's [Standard Code of Rules for Youth Competitions](https://www.thefa.com/~/media/Files/TheFAPortal/governance-docs/rules-of-the-association/standard-code-of-rules-for-youth-competitions.ashx) allows roll-on, roll-off substitutes across youth football: a player who has come off can go back on for another player, with the referee's permission, at a stoppage in play. Leagues can still cap the number of substitutes or changes, which is what the "Limited" setting is for. Our explainer covers [what rolling substitutions actually allow](/coaching/equal-playing-time-in-grassroots-football#what-rolling-substitutions-actually-allow) at each age group.
+
+<ParentNote>
+We aim for equal game time over a season rather than match by match, since chasing exact equality every single game can mean a lot of substitutions, which is hard to get right. Some weeks a boy might play two quarters, the next week three.
+</ParentNote>
+
+That is a sensible way to use the calculator at the youngest ages: changes at the breaks only, one child a quarter up this week, someone else next time. The frequent-change plans are for the coach who wants it level today.
 
 ## Equal Minutes vs Equal Positions
 
-*Draft: short. Equal minutes is the floor; equal position time is the harder, better aim across a season. One paragraph, then the link to the explainer: [equal playing time in grassroots football](/coaching/equal-playing-time-in-grassroots-football).*
+Equal minutes is the floor. A child who plays 33 minutes every week but always at right-back is getting a narrower education than one who plays the same 33 minutes across defence, midfield and attack, and over a season the difference shows.
+
+"Rotate positions" moves children through positions from stint to stint. "Keep set positions" holds each child to the positions you have given them, which suits an older team with a settled shape. Our guide to [equal playing time in grassroots football](/coaching/equal-playing-time-in-grassroots-football) covers the difference between equal minutes and equal position time properly, and our guide to [the best football formations by age group](/coaching/best-football-formations-by-age-group) looks at which shapes still rotate fairly.
 
 ## Keeping It Fair Across a Season
 
-*Draft: one match is easy, the ninth is not: squad numbers change, someone misses two Sundays. A short "Prefer a spreadsheet?" line linking the [football team spreadsheet](/coaching/football-team-spreadsheet) guide. Then the honest answer to "is there an app that does this": the Coach App saves this squad and plan in one tap from the calculator, and tracks every player's minutes across the season. Tracking is free; no price or trial details here, no competitor apps named.*
+One match is easy. The ninth is not. Squad numbers change from week to week, one child misses two Sundays, another arrives late and plays a quarter. A target that is right for a single match drifts as soon as you stretch it over a season, and that is when a child quietly ends up well behind the rest.
+
+If you keep your own records, our guide to [building a football team spreadsheet](/coaching/football-team-spreadsheet) includes a minutes tracker you can run alongside this calculator: note the minutes from each plan after the game, and the running totals tell you who gets the extra stint next week.
+
+The Coach App is our free app for grassroots coaches, and it is where this calculator comes from. Save the squad you have just typed and it becomes your team with the same rules, every match from then on evens the minutes out from the week before, and each child's season total is there to check. Minutes tracking is free. Our round-up of [grassroots football apps](/coaching/best-grassroots-football-apps) covers the wider options.
 
 ## Frequently Asked Questions
 
 ### Should kids get equal playing time?
 
-*Draft: the FA's position for youth football, with the source.*
+For children's football in England, the national guidance says yes. [England Football's coaching guidance](https://learn.englandfootball.com/articles-and-resources/coaching/resources/2023/What-is-equal-playing-time-in-football) describes equal playing time as every child in the team getting the same time on the pitch on matchday, for two reasons: children left on the sideline lose interest, and nobody can tell at 8 or 9 which children will be the strongest at 15, so holding minutes back from the ones behind now narrows the pool for no gain. The FA's Know Your Format guide puts a number on it as best practice from Under-8: at least half the game for every child. Our guide to [late developers in football](/football-development/late-developers-in-football) covers why the children behind at 7 or 8 so often catch up when they get the game time to do it.
 
-### Should coaches give equal playing time?
+### What do the FA guidelines say, and does it change by age?
 
-*Draft: equal opportunity versus equal minutes; what changes with age.*
-
-### What do the FA guidelines say about equal playing time?
-
-*Draft: by age group, with the England Football and Cornwall FA guidance linked as sources.*
+The FA's position is best practice rather than a law: from Under-8, at least 50% of each game for every child, and at Under-7 no substitutes at all. How clubs apply it above that floor is their own policy. [Cornwall FA's guidance on equal playing time](https://www.thefa.com/-/media/cfa/cornwallfa/files/governance/cornwall-fa-guidance--equal-playing-time-2018.ashx) gives a common pattern: equal time in every match from Under-6 to Under-11, then equal time over the whole season from Under-12 to Under-16, so a coach can protect a child against a far stronger opponent one week and make the minutes up the next. Whatever the policy, it should be written down, shared with parents and applied consistently.
 
 ### How long is a grassroots football match at each age group?
 
-*Draft: the match lengths and break lengths by format, pointing back to the tables.*
+Under the FA's 2026/27 formats, the maximum is 40 minutes at 5v5 (Under-8 and Under-9), 50 at 7v7 (Under-10 and Under-11), 60 at 9v9 (Under-12 and Under-13) and 70 at 11v11 from Under-14, with Under-7s playing 3v3 games of up to 10 minutes. These are maximums. Leagues can agree shorter games, and tournaments and festivals usually do, so put the real length into the calculator rather than the figure for your age group.
+
+### Is half-time 15 or 30 minutes?
+
+In grassroots youth football it is usually 5 to 10 minutes. The FA's Standard Code lets each league set its own interval provided it does not exceed 15 minutes, and the referee has to agree to any change on the day. Fifteen minutes is the interval in the adult professional game, which is where the figure comes from. Nothing in football has a 30-minute half-time. The break length does not change the equal playing time maths, because only playing minutes are shared out.
 
 ### Is there a downside to equal playing time?
 
-*Draft: the honest case against, and why it still holds at grassroots.*
+The honest case against has two parts. In a competitive league, a team rotating everyone will sometimes lose to one that does not, and that gets harder for children to accept as they get older. And a child a long way behind physically can have a miserable afternoon against a much stronger side, which is what the season-long version of the policy exists for: a shorter game that week, more the next. Neither argument carries much weight below Under-12. If equal minutes feel unfair to the strongest child in a squad, that is usually a sign the child is ready for a stronger team, which is a different conversation from cutting another child's game.
 
 ### Is there an app that works out equal playing time?
 
-*Draft: the Coach App, in one sentence, with what the calculator hands over when a coach saves their team.*
+Yes. The calculator on this page is part of the Coach App, our free app for grassroots coaches. Save your squad from the calculator and the app keeps the same rules, plans every match with the minutes evened out from the week before, and tracks each child's season total. You can also keep using the calculator here without an account for as long as you like.
+
+### Can I use it for 3v3 at Under-7?
+
+You can plan a 3-a-side or 4-a-side game, but at Under-7 you should not need to. The FA's 3v3 format has no substitutes and no goalkeeper: every child plays the whole 6-to-10 minute game, and clubs run several short games across the session. Where it helps at that age is a festival with odd numbers, where you want each child to play the same number of games. Our explainer on [the new FA youth football formats](/football-development/new-fa-youth-football-format) covers how 3v3 works and why the FA introduced it.
+
+Try it on your own squad at the top of this page, or [open the calculator full screen](/coach-app/game-time-calculator).
+
+## Related Articles
+
+- [Equal Playing Time in Grassroots Football: Getting Fair Rotation Right](/coaching/equal-playing-time-in-grassroots-football)
+- [Football Team Spreadsheet: Tracking Team Stats, Goals and Playing Time](/coaching/football-team-spreadsheet)
+- [Best Football Formations by Age Group](/coaching/best-football-formations-by-age-group)
+- [Understanding the New FA Youth Football Format Changes](/football-development/new-fa-youth-football-format)

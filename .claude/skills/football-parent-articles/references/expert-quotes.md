@@ -280,6 +280,26 @@ discipline as expert quotes: light house-style edits only when reusing, no
 invented flourish, cap reuse so it doesn't read as duplicated across
 articles.
 
+### Equal game time over a season, not match by match
+
+Graham's own, from `equal-playing-time-in-grassroots-football` (the full
+note there also covers equal position time and why he prefers rotating
+positions; this is the season-vs-match-by-match part only).
+
+> We aim for that over a season rather than match by match, since chasing
+> exact equality every single game can mean a lot of substitutions, which
+> is hard to get right. Some weeks a boy might play two quarters, the next
+> week three.
+
+**Topics:** equal game time, substitution frequency, quarters at U7/U8,
+season-long fairness vs single-match fairness.
+**Used in:** [equal-playing-time-in-grassroots-football](/coaching/equal-playing-time-in-grassroots-football) (1/3) -
+original, full version; [equal-playing-time-calculator](/coaching/equal-playing-time-calculator) (2/3) -
+2026-10-05, trimmed to the two season sentences above, "that" expanded to
+"equal game time" so it stands alone. Reuse flagged to Graham for his OK in
+the session that wrote the calculator page; a fresh calculator-specific
+note was requested at the same time (see Pending).
+
 ### Noticing genuine enjoyment vs. going through the motions
 
 Trimmed from `signs-your-child-is-ready-for-academy-football` (kept a
@@ -450,6 +470,19 @@ used with young players.
 **Used in:** [crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide) (1/3)
 
 ## Pending — questions drafted for an expert, not yet sent/answered
+
+### equal-playing-time-calculator — Graham (own ParentNote), tag: running changes on the day, touchline
+Drafted: 2026-10-05
+Asked in the session that wrote the page; answer goes into a `<ParentNote>` in
+"How the Calculator Works" or "Halves, Quarters or Rolling Subs" and can
+replace the reused season-vs-match note above once it exists.
+1. On a Sunday with 10 or 11 at 7v7, how do you actually decide who comes
+   off at the break: a list written before kick-off, whoever has played
+   least, or feel on the day? What goes wrong most often?
+2. Have you ever tried changing players part-way through a half rather than
+   only at the breaks? What happened, and would you do it again?
+3. When one child ends up a quarter short, what do you say to them, or to
+   the parent, and how do you make it up?
 
 ### understanding-academy-release — answered 2026-09-20 via Paul Barry round 2, Q10
 Drafted: 2026-08-09
