@@ -16,8 +16,6 @@ import { generateSEO } from "@/lib/seo";
 // Claims on this page describe what the app does today. Change them with the
 // app, not ahead of it. The price and trial must match Progress's own Terms.
 
-const PAGE_URL = "https://www.footballparent.co.uk/progress";
-
 const TITLE = "Progress: Track Your Child's Football Stats and Development";
 const DESCRIPTION =
   "Progress is the app for football parents: log matches, keep your child's career stats, track training and coach feedback, and share season cards. 4 weeks free.";
@@ -134,31 +132,15 @@ export default function ProgressPage() {
     })),
   };
 
-  // No aggregateRating: there are no reviews to aggregate. The offer is what
-  // the page states: £2.50 a month after the free trial.
-  const appSchema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: "Progress by Football Parent",
-    applicationCategory: "SportsApplication",
-    operatingSystem: "Web, iOS, Android",
-    url: PAGE_URL,
-    description: DESCRIPTION,
-    image: "https://www.footballparent.co.uk/og/progress-1200x630.png",
-    offers: {
-      "@type": "Offer",
-      price: "2.50",
-      priceCurrency: "GBP",
-      description: "£2.50 a month after a 4-week free trial",
-    },
-  };
+  // No SoftwareApplication schema. Google's Software App rich result needs
+  // aggregateRating or review as well as name and offers, and there are no
+  // reviews to aggregate. Without a rating the entity can never earn the
+  // rich result and only reports as a structured-data error ("a value for
+  // the aggregateRating or review field is required", Semrush site audit,
+  // 5 Oct 2026). Reinstate it, with real reviews, when there are some.
 
   return (
     <div className="bg-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
