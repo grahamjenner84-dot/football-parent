@@ -1149,3 +1149,14 @@ Branch `calculator-page`, live when it merges. Two pages outside their watch win
 - `/parent-guides/how-to-become-a-football-coach` (last changed 4 Sept): the coaching-your-own-child rotation sentence. Commit `91bce7f`.
 
 Queued, not done, because those pages are inside watch windows: the explainer's tool card and closing link swap from `/coach-app/game-time-calculator` to the new page (`equal-playing-time-in-grassroots-football`, changed 4 Oct, from ~18 Oct); one sentence each on `football-team-spreadsheet` and `best-grassroots-football-apps` (changed 3 Oct, from ~17 Oct); `best-football-formations-by-age-group` (title changed 25 Sept, from ~9 Oct). The calculator page itself is not yet published; its publish entry goes here when it merges (content commits `6c002fa`, `c7039ba`, `bed5b76`, `7767870`).
+
+## Calculator inbound links: the queued four, done early (2026-10-06)
+
+Graham chose to add these inside the watch windows rather than wait. Each is one clause or sentence, additive only, anchor "equal playing time calculator", target `/coaching/equal-playing-time-calculator`:
+
+- `/coaching/equal-playing-time-in-grassroots-football`: the intro tool card and the closing link now go to the calculator page instead of `/coach-app/game-time-calculator?utm_campaign=game-time-calculator`. The Coach App funnel's `game-time-calculator` campaign clicks stop here; from now the article-to-calculator path shows as page views of the calculator page with this article as referrer. Commit `42ca8d8`.
+- `/coaching/football-team-spreadsheet`: one sentence after the master-table paragraph. Commit `64e3ce7`.
+- `/coaching/best-grassroots-football-apps`: one clause in the Coach App pick. Commit `d8a80b1`.
+- `/coaching/best-football-formations-by-age-group`: one clause in the rotation section. Commit `633d601`.
+
+Each of these pages had a change in the previous two weeks (see entries above), so if any of them moves in the next fortnight, both changes are candidate causes.
