@@ -27,6 +27,10 @@ interface ArticleLayoutProps {
   // than a BlogPosting. Articles are unaffected: the default is "article".
   kind?: "article" | "tool";
   hero?: React.ReactNode;
+  // Tool pages only: a one-paragraph lead rendered in the header where an
+  // article shows its description, so the hero (the calculator) starts as
+  // high as possible, inside the first screen on a phone.
+  lead?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -79,6 +83,7 @@ export default function ArticleLayout({
   content,
   kind = "article",
   hero,
+  lead,
   children,
 }: ArticleLayoutProps) {
   const articleUrl = path ? createAbsoluteUrl(path) : undefined;
@@ -227,7 +232,7 @@ export default function ArticleLayout({
 
       <div className="bg-gray-50 border-b border-gray-200">
         <nav className="max-w-7xl mx-auto px-6 py-4 text-sm">
-          <div className="flex items-center gap-2 text-gray-600">
+          <div className={`flex items-center gap-2 text-gray-600 ${isTool ? "min-w-0" : ""}`}>
             <Link href="/" className="hover:text-gray-900">
               Home
             </Link>
@@ -236,25 +241,27 @@ export default function ArticleLayout({
               {category}
             </Link>
             <span className="text-gray-400">/</span>
-            <span className="text-gray-900 font-medium">{title}</span>
+            <span className={`text-gray-900 font-medium ${isTool ? "truncate" : ""}`}>{title}</span>
           </div>
         </nav>
       </div>
 
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
-          <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-6">
+        <div className={`max-w-4xl mx-auto px-6 ${isTool ? "py-6 lg:py-20" : "py-16 lg:py-20"}`}>
+          <span className={`${isTool ? "hidden sm:inline-block" : "inline-block"} px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-6`}>
             {isTool ? "Free tool" : "Guide"}
           </span>
 
-          <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-6 text-gray-900">
+          <h1 className={`${isTool ? "text-3xl sm:text-4xl" : "text-4xl"} lg:text-5xl font-bold leading-tight mb-6 text-gray-900`}>
             {title}
           </h1>
 
-          {/* A tool page's lead paragraphs sit directly under this header,
-              and the description would repeat them almost word for word.
-              The meta description in the head is unaffected. */}
-          {!isTool && (
+          {/* A tool page shows its lead here instead of the description,
+              which would repeat it almost word for word. The meta
+              description in the head is unaffected. */}
+          {isTool ? (
+            lead && <div className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">{lead}</div>
+          ) : (
             <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">
               {description}
             </p>
@@ -297,7 +304,7 @@ export default function ArticleLayout({
 
       {hero && (
         <div className="bg-white">
-          <div className="max-w-4xl mx-auto px-6 pt-10 lg:pt-12">{hero}</div>
+          <div className="max-w-4xl mx-auto px-6 pt-4 lg:pt-12">{hero}</div>
         </div>
       )}
 

@@ -12,11 +12,11 @@ export const metadata = generateSEO({
   type: "website",
 });
 
-// The MDX body is split at this marker: the paragraphs before it are the
-// lead, rendered above the calculator so a visitor knows what the box is
-// before they meet it (and so the paragraph carrying the target phrasings
-// is in the first screen, not 1,400px down). Everything after it is the
-// body. The full content still goes to ArticleLayout for the FAQ schema.
+// The MDX body is split at this marker: the one paragraph before it is the
+// lead, rendered in the page header in place of the description so the
+// calculator starts inside the first screen on a phone (and the sentence
+// carrying the target phrasings stays at the top). Everything after it is
+// the body. The full content still goes to ArticleLayout for the FAQ schema.
 const CALCULATOR_MARKER = "{/* calculator */}";
 
 // A tool page, not an article: the Coach App's calculator sits in the
@@ -33,16 +33,8 @@ export default async function Page() {
   return (
     <ArticleLayout
       kind="tool"
-      hero={
-        <>
-          {lead && (
-            <div className="max-w-2xl mb-10">
-              <MDXContent content={lead} coachAppBanner="none" />
-            </div>
-          )}
-          <CalculatorEmbed />
-        </>
-      }
+      hero={<CalculatorEmbed />}
+      lead={lead ? <MDXContent content={lead} coachAppBanner="none" /> : undefined}
       title={article.frontmatter.title}
       description={article.frontmatter.description}
       category={article.frontmatter.category}

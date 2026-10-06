@@ -1194,3 +1194,7 @@ Six of the seven `/girls-football` articles had no ParentNote or expert callout.
 - `/girls-football/girls-academy-vs-grassroots-football`, "The Real Variables: Environment and Enjoyment": choosing a club. Commit `abf10b9`.
 
 Queued for after the watch window (from ~20 Oct): trials "Parent Behaviour at Trials" (coaching from the sideline answer) and late developers "What Late Developers Often Share" (most-improved players answer). `what-age-do-girls-football-academies-recruit` left alone for now: it has live traffic (150 impressions, position ~4) and the candidate answer was only a moderate fit.
+
+## Calculator page: one-sentence lead, calculator in the first phone screen (2026-10-06)
+
+Layout only, same day as publish. The lead is one paragraph in the header slot; the rest of the intro is now the first body paragraph under the frame. Tool-page header tightened on phones (truncated breadcrumb, smaller H1, chip hidden, less padding). Calculator top on a 390px phone: 1242px at publish, 810px after the first move, 642px now. Words, headings, links and schema unchanged. Commit `dae729c`.
