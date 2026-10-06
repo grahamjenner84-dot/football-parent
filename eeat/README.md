@@ -136,7 +136,7 @@ are-development-centres-worth-it (15->88), support-child-after-bad-match
 
 Existing experts on file (see `expert-quotes.md`): Martin Brock (JPL), Paul
 Barry (Football DNA), FutureFit, Matt Baxter (youth athlete mindset coach,
-2026-09-28). **Sports psychologist (#5) is now filled** by Matt Baxter; the
+2026-09-28), Girls United team (girls' grassroots, 2026-10-06; partial fill for #2). **Sports psychologist (#5) is now filled** by Matt Baxter; the
 other recruits above are still open.
 
 ## Update 2026-09-28: Matt Baxter interview + 8 expert quotes
@@ -158,6 +158,22 @@ other recruits above are still open.
   Expert demand now has no sports-psychologist entry.
 - All 8 edited pages are on the 10-14 day watch list (to about 2026-10-10).
   Commits and sections are in `seo-changes-2026-09-06.md`.
+
+## Update 2026-10-06: Girls United interview + 3 expert boxes
+
+- New article `/girls-football/girls-united-daughter-football-interview`
+  (10-question Q&A with the Girls United London team, Bucket C, voice 60,
+  slop 30; voice held down because the answers are general advice).
+- One `<ExpertQA>` box on each of girls-football-trials,
+  late-developers-in-girls-football and girls-academy-vs-grassroots-football
+  (voice +12 each). **All three stay Bucket B** and girls-pathway-coach demand
+  stays 7: a grassroots organisation's general answers are a partial fill, not
+  the pathway coach this cluster needs (recruit #2 above is still open). Their
+  mechanical experience score jumps to 90 only because the scorer counts the
+  ExpertQA tag as interview material; trust the bucket.
+- New totals: **88 articles, A = 8, B = 35, C = 45; voice 47, slop 39.**
+- Watch list to about 2026-10-20. Commits and sections are in
+  `seo-changes-2026-09-06.md`.
 
 ## How to extend this next time
 

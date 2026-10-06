@@ -89,17 +89,20 @@ that's noted.
 | best-football-boots-for-wide-feet-kids | Football Gear | None | 0% | Gear, no personal fit |
 | best-shin-pads-for-kids-football | Football Gear | None | 0% | Gear, no personal fit |
 | veo-camera-alternatives | Football Gear | None | 0% | Gear, no personal fit, already excellently sourced |
-| girls-academy-vs-grassroots-football | Girls Football | None | 0% | No personal fit; on expert-quote backlog |
-| girls-football-trials | Girls Football | None | 0% | No personal fit; on expert-quote backlog |
+| girls-academy-vs-grassroots-football | Girls Football | Light | n/a | 1 ExpertQA (Girls United team, choosing a club), added 2026-10-06 from [girls-united-daughter-football-interview](/girls-football/girls-united-daughter-football-interview); general answer, still on expert-quote backlog for a pathway coach |
+| girls-football-trials | Girls Football | Light | n/a | 1 ExpertQA (Girls United team, what coaches look for), added 2026-10-06; general answer, still on expert-quote backlog |
 | how-girls-football-academies-work | Girls Football | None | 0% | No personal fit, already well-sourced |
-| late-developers-in-girls-football | Girls Football | None | 0% | No personal fit; on expert-quote backlog |
+| late-developers-in-girls-football | Girls Football | Light | n/a | 1 ExpertQA (Girls United team, talented but lacks confidence), added 2026-10-06; still wants a pathway coach on puberty |
 | what-age-do-girls-football-academies-recruit | Girls Football | None | 0% | No personal fit; on expert-quote backlog |
 | girls-rtcs-explained | Girls Football | None | 0% | No personal fit; on expert-quote backlog |
 | futurefit-football-dna-interview-part-1 | Parent Guides | None | 0% | Interview format — correctly no personal anecdote, views are Paul Barry's |
 | futurefit-football-dna-interview-part-2 | Parent Guides | None | 0% | Same as Part 1 |
 | jpl-martin-brock-interview-part-1 | Parent Guides | None | 0% | Interview format — correctly no personal anecdote, views are Martin Brock's; added 2026-08-16 |
+| girls-united-daughter-football-interview | Girls Football | None | n/a | Interview format, views are the Girls United team's; added 2026-10-06 |
 
 ## Summary counts
+
+Updated 2026-10-06: Girls United interview ([girls-united-daughter-football-interview](/girls-football/girls-united-daughter-football-interview), interview format, credited to the London team) published, and one `<ExpertQA>` box from it added to three girls' pages: girls-football-trials, late-developers-in-girls-football and girls-academy-vs-grassroots-football, each None to Light. Light rather than Moderate on purpose: the answers are a grassroots organisation's general advice, with no first-hand examples, and say nothing about the ETC/academy pathway. All three stay on the expert-quote backlog for a girls-pathway coach. Untouched: emerging-talent-centres-explained (the cluster's biggest page by far, ~6,400 impressions in 28 days), how-girls-football-academies-work, what-age-do-girls-football-academies-recruit, girls-rtcs-explained. Counts below not re-tallied.
 
 Updated 2026-09-28: Matt Baxter interview (`matt-baxter-young-footballer-mindset-interview`,
 interview format) published, and one `<ExpertOpinion>` from it added to 8 articles:

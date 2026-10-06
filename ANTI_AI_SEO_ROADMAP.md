@@ -533,6 +533,30 @@ for him on 2026-09-23.
 girls-pathway coach (7). Alfonso Carter (physio) has questions out for the
 sports-science pair.
 
+## Update 2026-10-06: first outside voice in the girls' cluster (Girls United)
+
+The Girls United London team (Lucien Hodgson, Robert Wright, Abigail Ingram,
+credited together at their request) answered 10 questions for parents new to
+girls' football.
+- [x] New interview article: `/girls-football/girls-united-daughter-football-interview`
+  (first interview in the Girls Football category; two stats cited to the FA).
+- [x] One `<ExpertQA>` box per page, linking back to the interview:
+  girls-football-trials (what coaches look for), late-developers-in-girls-football
+  (talented but lacks confidence), girls-academy-vs-grassroots-football
+  (choosing a club).
+- [x] Three Instagram carousels saved to `public/expert-posts.json`.
+- [ ] Watch list: leave those three pages alone until about 2026-10-20.
+- [ ] Queued after the watch: trials "Parent Behaviour at Trials" (coaching
+  from the sideline) and late developers "What Late Developers Often Share"
+  (most-improved players). Both answers are unused so far.
+- [ ] Still open: a girls-pathway coach (ETC or WSL/Championship academy).
+  The Girls United answers were general and hard to get, so this is a partial
+  fill: all three pages stay Bucket B. The priority page is
+  emerging-talent-centres-explained (~6,400 impressions and 73 clicks in 28
+  days, position ~5), which has no outside voice at all. Questions are drafted
+  per page in `expert-quotes.md`, plus two saved 2026-10-06 for the next
+  girls' expert.
+
 ## Coverage
 42 category cards + 71 of 71 articles touched somewhere in Phases 2-5, but
 only 40 of 71 have had a genuine Phase 5 (E-E-A-T) review - see correction

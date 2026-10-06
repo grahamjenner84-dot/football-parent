@@ -139,48 +139,50 @@
       "slug": "girls-academy-vs-grassroots-football",
       "category": "girls-football",
       "url": "/girls-football/girls-academy-vs-grassroots-football",
-      "words": 1515,
-      "callouts": 0,
-      "isInterview": false,
+      "words": 1679,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 0,
       "citationsPer1000": 0,
       "internalLinks": 10,
       "mechanical": {
-        "overall": 42,
-        "experience": 15,
-        "expertise": 97,
+        "overall": 61,
+        "experience": 90,
+        "expertise": 100,
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 10,
+        "voice": 22,
         "slop": 60,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-06",
+        "note": "2026-10-06: Girls United ExpertQA box (choosing a club) in 'The Real Variables'. Best fit of the three, still a general answer: stays B."
       }
     },
     {
       "slug": "girls-football-trials",
       "category": "girls-football",
       "url": "/girls-football/girls-football-trials",
-      "words": 1584,
-      "callouts": 0,
-      "isInterview": false,
+      "words": 1732,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 0,
       "citationsPer1000": 0,
       "internalLinks": 10,
       "mechanical": {
-        "overall": 42,
-        "experience": 15,
-        "expertise": 99,
+        "overall": 61,
+        "experience": 90,
+        "expertise": 100,
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 12,
+        "voice": 24,
         "slop": 50,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-06",
+        "note": "2026-10-06: Girls United ExpertQA box (what coaches look for beyond technical ability) in 'What Coaches Are Actually Looking For'. A grassroots organisation's general answer, not a pathway coach: partial fill, stays B. The mechanical experience/isInterview jump comes from the ExpertQA tag, not real depth."
       }
     },
     {
@@ -259,24 +261,25 @@
       "slug": "late-developers-in-girls-football",
       "category": "girls-football",
       "url": "/girls-football/late-developers-in-girls-football",
-      "words": 1741,
-      "callouts": 0,
-      "isInterview": false,
+      "words": 1911,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 0,
       "citationsPer1000": 0,
       "internalLinks": 10,
       "mechanical": {
-        "overall": 43,
-        "experience": 15,
+        "overall": 61,
+        "experience": 90,
         "expertise": 100,
         "authoritativeness": 0
       },
       "semantic": {
-        "voice": 10,
+        "voice": 22,
         "slop": 62,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-06",
+        "note": "2026-10-06: Girls United ExpertQA box (talented but lacks confidence) in 'The Confidence Dimension'. Partial fill, stays B; still wants a girls-pathway coach on puberty and maturation."
       }
     },
     {
@@ -2138,16 +2141,41 @@
         "reviewed": "2026-09-28",
         "note": "Expert Q&A with youth athlete mindset coach Matt Baxter, published 2026-09-28. Answers are his words; slop sits only in the short intro/outro."
       }
+    },
+    {
+      "slug": "girls-united-daughter-football-interview",
+      "category": "girls-football",
+      "url": "/girls-football/girls-united-daughter-football-interview",
+      "words": 1464,
+      "callouts": 0,
+      "isInterview": true,
+      "citations": 6,
+      "citationsPer1000": 4.1,
+      "internalLinks": 9,
+      "mechanical": {
+        "overall": 85,
+        "experience": 90,
+        "expertise": 80,
+        "authoritativeness": 78
+      },
+      "semantic": {
+        "voice": 60,
+        "slop": 30,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-10-06",
+        "note": "Expert Q&A with the Girls United London team (credited as a team), published 2026-10-06. Their words throughout, two stats cited to FA sources. Voice held at 60: general advice with no first-hand examples."
+      }
     }
   ],
   "semanticSummary": {
-    "reviewed": 87,
+    "reviewed": 88,
     "avgVoice": 47,
     "avgSlop": 39,
     "buckets": {
       "A": 8,
       "B": 35,
-      "C": 44
+      "C": 45
     },
     "expertDemand": {
       "academy-coach": 9,
@@ -2167,6 +2195,10 @@
     "mattBaxter2026_09_28": {
       "articles": 8,
       "note": "Matt Baxter (youth athlete mindset coach) interview published plus one ExpertOpinion from it on each of 8 parent-support articles, each linking back. understanding-academy-release moved B to C (the only sports-psychologist B article). Watch list to ~2026-10-10."
+    },
+    "girlsUnited2026_10_06": {
+      "articles": 3,
+      "note": "Girls United team interview published (girls-football, Bucket C) plus one ExpertQA box on girls-football-trials, late-developers-in-girls-football and girls-academy-vs-grassroots-football (voice +12 each). Partial fill only: all three stay B and girls-pathway-coach demand stays 7, because a grassroots organisation's general answers don't cover the ETC/academy pathway. Watch list to ~2026-10-20."
     }
   }
 }
