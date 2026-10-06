@@ -1176,3 +1176,7 @@ Semrush also crawled `/progress?b=progress-home` and `?b=progress-academy-pathwa
 ## `equal-playing-time-in-grassroots-football`: calculation section shortened (2026-10-06)
 
 Live-traffic page (about 2,000 impressions and 29 clicks a month, position ~7 for "equal game time"), so this is the one to watch. The "How to Calculate Equal Game Time" H2 stays, but its body drops from five paragraphs to three: the sum in one sentence with the 7v7 example, a new link to `/coaching/equal-playing-time-calculator`, and the season-tracking paragraph with its Coach App link. Removed: the "bare online calculator" aside, the Sheffield FA external link (Graham's call: the formula is division, not a method to attribute), and the "number itself matters less than having one" paragraph. Done the same day as the tool-card swap above, so the two changes share a watch window. Purpose: stop the two pages competing for "how to calculate equal game time" and send that question to the calculator page. `dateModified` set to 2026-10-06. Commit `b6f2a5b`.
+
+## Calculator page: intro moved above the embed (2026-10-06)
+
+Layout only, same day as publish: the two lead paragraphs now sit between the header and the calculator instead of below it, and the tool layout no longer shows the description line under the H1 (meta description unchanged). Body, headings, links and schema unchanged. Commit `14b934e`.

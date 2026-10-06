@@ -251,9 +251,14 @@ export default function ArticleLayout({
             {title}
           </h1>
 
-          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">
-            {description}
-          </p>
+          {/* A tool page's lead paragraphs sit directly under this header,
+              and the description would repeat them almost word for word.
+              The meta description in the head is unaffected. */}
+          {!isTool && (
+            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">
+              {description}
+            </p>
+          )}
 
           <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 pt-6 border-t border-gray-200">
             <div className="flex items-center gap-2">
