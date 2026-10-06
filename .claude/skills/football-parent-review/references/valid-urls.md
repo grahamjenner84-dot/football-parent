@@ -27,6 +27,8 @@ Avoid linking to Football Gear articles unless the article is specifically about
 - /about
 - /author/graham-jenner
 - /editorial-policy
+- /football-parent-coach-app
+- /progress
 
 (The three utility pages above weren't present in the last sitemap export —
 sitemaps often exclude non-article pages intentionally, so they're kept here
@@ -39,6 +41,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-development
 - /football-gear
 - /girls-football
+- /coaching
 - /parent-guides
 
 ## Academy Pathway
@@ -63,6 +66,15 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /academy-pathway/west-ham-player-pathway-guide
 - /academy-pathway/can-academy-players-play-grassroots-football
 - /academy-pathway/how-much-does-academy-football-cost
+- /academy-pathway/academy-life-paul-barry-interview
+- /academy-pathway/aston-villa-development-centre-guide
+- /academy-pathway/brentford-development-centre-guide
+- /academy-pathway/football-development-centres-in-london
+- /academy-pathway/fulham-fc-development-centre-guide
+- /academy-pathway/leeds-united-development-centre-guide
+- /academy-pathway/pre-academy-football
+- /academy-pathway/tottenham-development-centres-explained
+- /academy-pathway/watford-development-centre-guide
 
 ## Academy Trials
 
@@ -87,6 +99,10 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-development/signs-your-child-is-ready-for-academy-football
 - /football-development/playing-up-an-age-group-football
 - /football-development/new-fa-youth-football-format
+- /football-development/bio-banding-football
+- /football-development/football-burnout
+- /football-development/what-is-football-iq
+- /football-development/why-isnt-my-child-improving-at-football
 
 ## Football Gear
 
@@ -95,6 +111,11 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-gear/best-footballs-by-age
 - /football-gear/boots/best-football-boots-for-wide-feet-kids
 - /football-gear/shin-pads/best-shin-pads-for-kids-football
+- /football-gear/best-football-boots-for-kids
+- /football-gear/best-football-goals-for-kids
+- /football-gear/best-football-gps-trackers-for-kids
+- /football-gear/childrens-soft-ground-football-boots
+- /football-gear/veo-camera-alternatives
 
 ## Girls Football
 
@@ -105,6 +126,16 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /girls-football/late-developers-in-girls-football
 - /girls-football/what-age-do-girls-football-academies-recruit
 - /girls-football/girls-rtcs-explained
+
+## Coaching
+
+- /coaching/best-football-formations-by-age-group
+- /coaching/best-grassroots-football-apps
+- /coaching/equal-playing-time-calculator
+- /coaching/equal-playing-time-in-grassroots-football
+- /coaching/football-drills-for-7-and-8-year-olds
+- /coaching/football-team-spreadsheet
+- /coaching/what-qualifications-do-i-need-to-be-a-football-coach
 
 ## Parent Guides
 
@@ -118,6 +149,13 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /parent-guides/jpl-and-academy-football
 - /parent-guides/how-to-get-into-the-jpl
 - /parent-guides/futurefit-football-dna-interview-part-1
+- /parent-guides/best-football-stats-apps
+- /parent-guides/futurefit-football-dna-interview-part-2
+- /parent-guides/how-to-become-a-football-coach
+- /parent-guides/jpl-martin-brock-interview-part-1
+- /parent-guides/jpl-martin-brock-interview-part-2
+- /parent-guides/matt-baxter-young-footballer-mindset-interview
+- /parent-guides/what-is-grassroots-football
 
 ## Rules for link recommendations
 
