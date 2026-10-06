@@ -61,18 +61,26 @@ const supabase = createClient(url, key, { auth: { persistSession: false } });
 
 const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
 
-const { data, error } = await supabase
-  .from("cookie_consent_events")
-  .select("action, analytics_granted, created_at")
-  .gte("created_at", since)
-  .order("created_at", { ascending: true });
+// PostgREST caps a select at 1,000 rows, so page through until a short page
+// comes back, or a wide window silently stops partway through.
+const PAGE_SIZE = 1000;
+const rows = [];
+for (let from = 0; ; from += PAGE_SIZE) {
+  const { data, error } = await supabase
+    .from("cookie_consent_events")
+    .select("action, analytics_granted, created_at")
+    .gte("created_at", since)
+    .order("created_at", { ascending: true })
+    .range(from, from + PAGE_SIZE - 1);
 
-if (error) {
-  console.error("Failed to read cookie_consent_events:", error.message);
-  process.exit(1);
+  if (error) {
+    console.error("Failed to read cookie_consent_events:", error.message);
+    process.exit(1);
+  }
+
+  rows.push(...(data ?? []));
+  if (!data || data.length < PAGE_SIZE) break;
 }
-
-const rows = data ?? [];
 const byDay = new Map();
 
 for (const row of rows) {
