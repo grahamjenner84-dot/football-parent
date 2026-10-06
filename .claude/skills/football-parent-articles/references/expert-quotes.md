@@ -294,11 +294,9 @@ positions; this is the season-vs-match-by-match part only).
 **Topics:** equal game time, substitution frequency, quarters at U7/U8,
 season-long fairness vs single-match fairness.
 **Used in:** [equal-playing-time-in-grassroots-football](/coaching/equal-playing-time-in-grassroots-football) (1/3) -
-original, full version; [equal-playing-time-calculator](/coaching/equal-playing-time-calculator) (2/3) -
-2026-10-05, trimmed to the two season sentences above, "that" expanded to
-"equal game time" so it stands alone. Reuse flagged to Graham for his OK in
-the session that wrote the calculator page; a fresh calculator-specific
-note was requested at the same time (see Pending).
+original, full version. Offered for the calculator page on 2026-10-05;
+Graham chose a fresh note instead (2026-10-06), so it was taken out again
+before publish. Still available for reuse elsewhere.
 
 ### Noticing genuine enjoyment vs. going through the motions
 
@@ -473,9 +471,10 @@ used with young players.
 
 ### equal-playing-time-calculator — Graham (own ParentNote), tag: running changes on the day, touchline
 Drafted: 2026-10-05
-Asked in the session that wrote the page; answer goes into a `<ParentNote>` in
-"How the Calculator Works" or "Halves, Quarters or Rolling Subs" and can
-replace the reused season-vs-match note above once it exists.
+Graham asked for a fresh note rather than the reused season-vs-match one
+(2026-10-06). Answer goes into a `<ParentNote>` in "How the Calculator
+Works" or "Halves, Quarters or Rolling Subs"; the page currently has no
+callout until it arrives.
 1. On a Sunday with 10 or 11 at 7v7, how do you actually decide who comes
    off at the break: a list written before kick-off, whoever has played
    least, or feel on the day? What goes wrong most often?
