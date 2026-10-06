@@ -1140,3 +1140,12 @@ Page: `/coaching/equal-playing-time-in-grassroots-football`. Commit `5cdc51e`. A
 Page: `/academy-pathway/how-academy-football-works`. Commit `4e64155`. **Live traffic page.** Layout only: the ExpertQA block (Paul Barry on how families are treated at smaller vs Category 1 academies) moved from directly under the Category 1-4 cards to the "What Parents Should Expect From Academy Football" section, after the paragraph on the whole-family commitment. No wording, headings, links, title or meta changed. Graham asked for it so the quote breaks up the article rather than stacking against the graphic.
 
 **External mention, same day:** the Grassroots Hub Facebook group posted this article on the evening of 4 Oct. 24 Facebook referrals in the first 3 hours, all phones in the Facebook app. Expect a one-off bump in page_views and GA for this URL on 4-5 Oct that is not search traffic.
+
+## Inbound links to the equal playing time calculator page (2026-10-06)
+
+Branch `calculator-page`, live when it merges. Two pages outside their watch windows each gained one clause linking `/coaching/equal-playing-time-calculator` (anchor "equal playing time calculator"), additive only, titles, headings and existing links unchanged:
+
+- `/coaching/what-qualifications-do-i-need-to-be-a-football-coach` (last changed 8 Sept): the rotation/minutes sentence. Commit `15b8027`.
+- `/parent-guides/how-to-become-a-football-coach` (last changed 4 Sept): the coaching-your-own-child rotation sentence. Commit `91bce7f`.
+
+Queued, not done, because those pages are inside watch windows: the explainer's tool card and closing link swap from `/coach-app/game-time-calculator` to the new page (`equal-playing-time-in-grassroots-football`, changed 4 Oct, from ~18 Oct); one sentence each on `football-team-spreadsheet` and `best-grassroots-football-apps` (changed 3 Oct, from ~17 Oct); `best-football-formations-by-age-group` (title changed 25 Sept, from ~9 Oct). The calculator page itself is not yet published; its publish entry goes here when it merges (content commits `6c002fa`, `c7039ba`, `bed5b76`, `7767870`).
