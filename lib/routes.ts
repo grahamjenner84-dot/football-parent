@@ -122,6 +122,7 @@ export const routes = [
   '/coaching/football-drills-for-7-and-8-year-olds',
   '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
   '/coaching/equal-playing-time-in-grassroots-football',
+  '/coaching/equal-playing-time-calculator',
   '/coaching/best-football-formations-by-age-group',
   '/coaching/football-team-spreadsheet',
   '/coaching/best-grassroots-football-apps',

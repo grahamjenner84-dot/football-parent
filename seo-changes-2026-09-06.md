@@ -1141,8 +1141,34 @@ Page: `/academy-pathway/how-academy-football-works`. Commit `4e64155`. **Live tr
 
 **External mention, same day:** the Grassroots Hub Facebook group posted this article on the evening of 4 Oct. 24 Facebook referrals in the first 3 hours, all phones in the Facebook app. Expect a one-off bump in page_views and GA for this URL on 4-5 Oct that is not search traffic.
 
+## Inbound links to the equal playing time calculator page (2026-10-06)
+
+Branch `calculator-page`, live when it merges. Two pages outside their watch windows each gained one clause linking `/coaching/equal-playing-time-calculator` (anchor "equal playing time calculator"), additive only, titles, headings and existing links unchanged:
+
+- `/coaching/what-qualifications-do-i-need-to-be-a-football-coach` (last changed 8 Sept): the rotation/minutes sentence. Commit `15b8027`.
+- `/parent-guides/how-to-become-a-football-coach` (last changed 4 Sept): the coaching-your-own-child rotation sentence. Commit `91bce7f`.
+
+Queued, not done, because those pages are inside watch windows: the explainer's tool card and closing link swap from `/coach-app/game-time-calculator` to the new page (`equal-playing-time-in-grassroots-football`, changed 4 Oct, from ~18 Oct); one sentence each on `football-team-spreadsheet` and `best-grassroots-football-apps` (changed 3 Oct, from ~17 Oct); `best-football-formations-by-age-group` (title changed 25 Sept, from ~9 Oct). The calculator page itself is not yet published; its publish entry goes here when it merges (content commits `6c002fa`, `c7039ba`, `bed5b76`, `7767870`).
+
+## Calculator inbound links: the queued four, done early (2026-10-06)
+
+Graham chose to add these inside the watch windows rather than wait. Each is one clause or sentence, additive only, anchor "equal playing time calculator", target `/coaching/equal-playing-time-calculator`:
+
+- `/coaching/equal-playing-time-in-grassroots-football`: the intro tool card and the closing link now go to the calculator page instead of `/coach-app/game-time-calculator?utm_campaign=game-time-calculator`. The Coach App funnel's `game-time-calculator` campaign clicks stop here; from now the article-to-calculator path shows as page views of the calculator page with this article as referrer. Commit `42ca8d8`.
+- `/coaching/football-team-spreadsheet`: one sentence after the master-table paragraph. Commit `64e3ce7`.
+- `/coaching/best-grassroots-football-apps`: one clause in the Coach App pick. Commit `d8a80b1`.
+- `/coaching/best-football-formations-by-age-group`: one clause in the rotation section. Commit `633d601`.
+
+Each of these pages had a change in the previous two weeks (see entries above), so if any of them moves in the next fortnight, both changes are candidate causes.
+
 ## `/progress` and the Coach App landing: SoftwareApplication schema removed (2026-10-05)
 
 Pages: `/progress` (`app/progress/page.tsx`) and `/football-parent-coach-app` plus its indexable variants (`app/components/CoachLandingPage.tsx`). Semrush's site audit (5 Oct) flagged the `/progress` SoftwareApplication JSON-LD as invalid: "a value for the aggregateRating or review field is required". Google's Software App rich result needs a rating or review as well as name and offers, and there are none to give (inventing one is against Google's review guidelines), so the block could never earn a rich result and only ever reported as an error. Removed from both pages, since the Coach App landing carried the same shape and would be flagged next crawl. FAQPage schema on both pages untouched; titles, meta, headings and content untouched. Not a ranking lever, so no watch period needed; reinstate with real reviews if the apps ever collect them.
 
 Semrush also crawled `/progress?b=progress-home` and `?b=progress-academy-pathway` as separate pages. The canonical already points at `/progress`, so Google is fine; in Semrush, add `b` under Site Audit settings > Remove URL parameters to stop the duplicates.
+
+## New page: Equal Playing Time Calculator (published 2026-10-06)
+
+- URL: `/coaching/equal-playing-time-calculator`. Category: Coaching. A tool page: the Coach App's game time calculator embedded in a same-origin iframe above ~2,400 words of written content (formula with a 9v9 worked example and rotating-keeper variant, target minutes by format and squad size at the FA 2026/27 lengths, halves vs quarters vs rolling subs, position rotation, season tracking, seven FAQs from People Also Ask, three Graham ParentNotes). WebApplication plus FAQPage JSON-LD via the new `kind="tool"` layout.
+- Targets (UK, Oct 2026): playing time calculator 260/mo, equal playing time calculator 210, equal game time calculator 140, then equal game time 50, equal playing time 30 and the 10-20/mo tail (fair game time calculator, game time calculator football, football substitution calculator). Research: `game-time-calculator-plan.md` sections 7.3 to 7.5, `seo-data/exports/game-time-calculator-serp-research-2026-10-04.md`.
+- Content commits `6c002fa`, `c7039ba`, `bed5b76`, `7767870`; shell `065961f`, `b22e5a6`. Inbound links: see the two entries above. Watch from today; the explainer (`equal-playing-time-in-grassroots-football`, position ~7 for "equal game time") is the page to check for any cannibalisation on "how to calculate equal game time", the one heading the two pages share.

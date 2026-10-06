@@ -280,6 +280,24 @@ discipline as expert quotes: light house-style edits only when reusing, no
 invented flourish, cap reuse so it doesn't read as duplicated across
 articles.
 
+### Equal game time over a season, not match by match
+
+Graham's own, from `equal-playing-time-in-grassroots-football` (the full
+note there also covers equal position time and why he prefers rotating
+positions; this is the season-vs-match-by-match part only).
+
+> We aim for that over a season rather than match by match, since chasing
+> exact equality every single game can mean a lot of substitutions, which
+> is hard to get right. Some weeks a boy might play two quarters, the next
+> week three.
+
+**Topics:** equal game time, substitution frequency, quarters at U7/U8,
+season-long fairness vs single-match fairness.
+**Used in:** [equal-playing-time-in-grassroots-football](/coaching/equal-playing-time-in-grassroots-football) (1/3) -
+original, full version. Offered for the calculator page on 2026-10-05;
+Graham chose a fresh note instead (2026-10-06), so it was taken out again
+before publish. Still available for reuse elsewhere.
+
 ### Noticing genuine enjoyment vs. going through the motions
 
 Trimmed from `signs-your-child-is-ready-for-academy-football` (kept a
@@ -450,6 +468,18 @@ used with young players.
 **Used in:** [crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide) (1/3)
 
 ## Pending — questions drafted for an expert, not yet sent/answered
+
+### equal-playing-time-calculator — Graham (own ParentNote) — answered 2026-10-06, placed as three ParentNotes
+Drafted: 2026-10-05. Answered in conversation 2026-10-06 and placed the
+same day in "How the Calculator Works" (Q1), "Halves, Quarters or Rolling
+Subs" (Q2) and "Keeping It Fair Across a Season" (Q3), grammar edits only.
+Verbatim answers kept here for reuse elsewhere (same cap as other stories).
+Q1: On a Sunday with 10 or 11 at 7v7, how do you actually decide who comes off at the break? What goes wrong most often?
+A1: I think doing it live on the day is difficult. Usually you have 3 subs on the sideline all asking when they are coming on, all asking if they can play the same position you also have to then consider who on the pitch hasn't played that position and how your subs impact the change after that. So you put little Johnny striker and then realise Max has been defender for two periods and you told him he'd play striker. Personally I find that hard to do in the moment if you are looking for full rotation. When I have had to do it last minute I tended to use notepad and try and quickly note down the positions before I had to coach or answer questions.
+Q2: Have you ever changed players part-way through a half rather than only at the breaks?
+A2: I try and avoid and prefer taking the season long approach so that you don't get constant changes. Some coaches do it, or make a sub 1 minute before the end of the period to just get them a little warm before they play the next. But when you are rotating positions and players it already creates disruption and I think they need a few minutes to adjust. I think for me it just makes the game too disjointed if you are making multiple subs per quarter at the younger ages. Also, depending on how the game is going, if you are changing every 5 minutes they may have only touched the ball a couple of times before you've moved or subbed them.
+Q3: When one child ends up a quarter short, what do you say to them or the parent, and how do you make it up?
+A3: We've never had an issue with it really. We make sure everyone gets at least a half that is our commitment, but we also even it our over a season and share the numbers with the parents regularly so they can see that. At younger ages equal game time is important to help them develop and while they may seem behind another player they'll never catch up without the same opportunities. Having coached a few different teams, you will have some that are the standout player throughout ever age group, natural ability, good attitude and physical attributes. But you'll also have some that peak early, others that are late developers. So I think you need to try and give them all the same opportunities and environment to learn and develop and see who grasps it.
 
 ### understanding-academy-release — answered 2026-09-20 via Paul Barry round 2, Q10
 Drafted: 2026-08-09

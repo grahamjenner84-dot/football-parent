@@ -20,6 +20,13 @@ interface ArticleLayoutProps {
     color?: string;
     description?: string;
   }[];
+  // A "tool" page is one whose main content is something the reader uses
+  // (the equal playing time calculator) rather than reads. It renders the
+  // hero slot full width above the body, drops the read time, badges itself
+  // "Free tool" and describes itself to Google as a WebApplication rather
+  // than a BlogPosting. Articles are unaffected: the default is "article".
+  kind?: "article" | "tool";
+  hero?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -70,12 +77,15 @@ export default function ArticleLayout({
   datePublished,
   dateModified,
   content,
+  kind = "article",
+  hero,
   children,
 }: ArticleLayoutProps) {
   const articleUrl = path ? createAbsoluteUrl(path) : undefined;
   const categoryAbsoluteUrl = createAbsoluteUrl(categoryUrl);
   const schemaId = createSchemaId(title);
   const faqs = content ? extractFaqs(content) : [];
+  const isTool = kind === "tool";
 
   const breadcrumbSchema = articleUrl
     ? {
@@ -104,37 +114,68 @@ export default function ArticleLayout({
       }
     : null;
 
-  const articleSchema = articleUrl
-    ? {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: title,
-        description,
-        // Google's Article guidance: at least 1200px wide, in 16:9, 4:3 and
-        // 1:1 so it can pick the ratio each surface needs without cropping.
-        image: [BRAND_IMAGES.parent.wide, BRAND_IMAGES.parent.standard, BRAND_IMAGES.parent.square],
-        author: {
-          "@type": "Person",
-          name: "Graham Jenner",
-          url: "https://www.footballparent.co.uk/author/graham-jenner",
-        },
-        publisher: {
-          "@type": "Organization",
-          name: "Football Parent",
-          url: "https://www.footballparent.co.uk",
-          logo: {
-            "@type": "ImageObject",
-            url: "https://www.footballparent.co.uk/parent/icon/parent-icon-512.png",
+  const author = {
+    "@type": "Person",
+    name: "Graham Jenner",
+    url: "https://www.footballparent.co.uk/author/graham-jenner",
+  };
+
+  const publisher = {
+    "@type": "Organization",
+    name: "Football Parent",
+    url: "https://www.footballparent.co.uk",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.footballparent.co.uk/parent/icon/parent-icon-512.png",
+    },
+  };
+
+  // Google's Article guidance: at least 1200px wide, in 16:9, 4:3 and 1:1 so
+  // it can pick the ratio each surface needs without cropping.
+  const images = [BRAND_IMAGES.parent.wide, BRAND_IMAGES.parent.standard, BRAND_IMAGES.parent.square];
+
+  const dates = {
+    ...(datePublished ? { datePublished } : {}),
+    ...(dateModified ? { dateModified } : {}),
+  };
+
+  const mainSchema = !articleUrl
+    ? null
+    : isTool
+      ? {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          name: title,
+          description,
+          url: articleUrl,
+          applicationCategory: "SportsApplication",
+          operatingSystem: "Any",
+          browserRequirements: "Requires JavaScript",
+          isAccessibleForFree: true,
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "GBP",
           },
-        },
-        ...(datePublished ? { datePublished } : {}),
-        ...(dateModified ? { dateModified } : {}),
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": articleUrl,
-        },
-      }
-    : null;
+          image: images,
+          author,
+          publisher,
+          ...dates,
+        }
+      : {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: title,
+          description,
+          image: images,
+          author,
+          publisher,
+          ...dates,
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": articleUrl,
+          },
+        };
 
   const faqSchema =
     faqs.length > 0
@@ -154,12 +195,12 @@ export default function ArticleLayout({
 
   return (
     <main className="min-h-screen bg-white">
-      {articleSchema && (
+      {mainSchema && (
         <Script
           id={`article-schema-${schemaId}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(articleSchema),
+            __html: JSON.stringify(mainSchema),
           }}
         />
       )}
@@ -203,7 +244,7 @@ export default function ArticleLayout({
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
           <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-6">
-            Guide
+            {isTool ? "Free tool" : "Guide"}
           </span>
 
           <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-6 text-gray-900">
@@ -239,11 +280,21 @@ export default function ArticleLayout({
               </>
             )}
 
-            <span className="text-gray-300">•</span>
-            <span>{readTime} min read</span>
+            {!isTool && (
+              <>
+                <span className="text-gray-300">•</span>
+                <span>{readTime} min read</span>
+              </>
+            )}
           </div>
         </div>
       </div>
+
+      {hero && (
+        <div className="bg-white">
+          <div className="max-w-4xl mx-auto px-6 pt-10 lg:pt-12">{hero}</div>
+        </div>
+      )}
 
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
