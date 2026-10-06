@@ -1370,7 +1370,7 @@ same as the pre-existing `[FutureFit Part 2...]` link pattern.
 **ANSWERED 2026-10-06: all 10 questions**, published as
 `/girls-football/girls-united-daughter-football-interview`
 (`content/girls-football/girls-united-daughter-football-interview.mdx`), the
-source of record for any excerpt. Not yet reused anywhere (reuse count 0 each).
+source of record for any excerpt. Placed 2026-10-06 as `<ExpertQA>` boxes, reuse count 1 each: "what coaches look for" in girls-football-trials, "talented but lacks confidence" in late-developers-in-girls-football, "choosing a club" in girls-academy-vs-grassroots-football. Every other answer: 0.
 Credit: they asked to be credited as the team, not one person. Answers came
 from Lucien Hodgson (London Marketing Lead), Robert Wright (London Programme
 Lead, FC & Fixtures) and Abigail Ingram (London Manager); name the three in a
