@@ -1184,3 +1184,13 @@ Layout only, same day as publish: the two lead paragraphs now sit between the he
 ## New page: Girls United interview (published 2026-10-06)
 
 - URL: `/girls-football/girls-united-daughter-football-interview`. Category: Girls Football (the first interview in that category; earlier interviews sit in Parent Guides or Academy Pathway). Ten-question Q&A with the Girls United London team (credited as the team at their request), answers in their own words, two stats linked to FA sources. Added to the girls' football category page and `lib/routes.ts`. Angle: parents new to girls' football (getting started, barriers, confidence, choosing a club). Commit: see git log for "Girls United interview".
+
+## Girls' football: first expert voice on three pages (2026-10-06)
+
+Six of the seven `/girls-football` articles had no ParentNote or expert callout. One `ExpertQA` box per page (logo, question, answer verbatim, link to the Girls United interview), additive only, no `dateModified`, nothing else on the page touched. All three are low-traffic (under 30 impressions in the last 28 days), so latitude was fine:
+
+- `/girls-football/girls-football-trials`, "What Coaches Are Actually Looking For": what coaches look for beyond technical ability. Commit `c235db2`.
+- `/girls-football/late-developers-in-girls-football`, "The Confidence Dimension": talented but lacks confidence. Commit `5baeb76`.
+- `/girls-football/girls-academy-vs-grassroots-football`, "The Real Variables: Environment and Enjoyment": choosing a club. Commit `abf10b9`.
+
+Queued for after the watch window (from ~20 Oct): trials "Parent Behaviour at Trials" (coaching from the sideline answer) and late developers "What Late Developers Often Share" (most-improved players answer). `what-age-do-girls-football-academies-recruit` left alone for now: it has live traffic (150 impressions, position ~4) and the candidate answer was only a moderate fit.
