@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { logPageView } from "@/lib/supabase/page-views";
 import { isKnownBot } from "@/lib/user-agent-bots";
-import { ADMIN_SESSION_COOKIE, NO_TRACK_COOKIE, hasAdminSession } from "@/lib/admin-session";
+import { isOwnerRequest } from "@/lib/owner-request";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -39,30 +39,10 @@ export async function POST(req: Request) {
     // Absent on localhost, so null there.
     const countryHeader = (req.headers.get("x-vercel-ip-country") ?? "").trim().toUpperCase();
     const country = /^[A-Z]{2}$/.test(countryHeader) ? countryHeader : null;
-    // Graham's own devices, recognised by the admin session cookie rather
-    // than by the localStorage flag in lib/page-view-optout.ts. That flag is
-    // per-browser-profile, has to be set by hand on every device, and gives
-    // no sign when it silently isn't set - which is how 13 of his own visits
-    // landed in the table on 8 Sept. The admin cookie is httpOnly with path
-    // "/", so any browser signed in to /admin sends it on this request too,
-    // and both his devices are covered the moment each has signed in once.
-    const cookieHeader = req.headers.get("cookie") ?? "";
-    const sessionValue = cookieHeader
-      .split(";")
-      .map((part) => part.trim())
-      .find((part) => part.startsWith(`${ADMIN_SESSION_COOKIE}=`))
-      ?.slice(ADMIN_SESSION_COOKIE.length + 1);
-
-    // fp_no_track outlives the 30-day session cookie by design: a device
-    // that has not opened the dashboard in a month would otherwise quietly
-    // start counting its owner as a visitor again, which is the same silent
-    // failure the localStorage flag had.
-    const noTrack = cookieHeader
-      .split(";")
-      .map((part) => part.trim())
-      .some((part) => part === `${NO_TRACK_COOKIE}=1`);
-
-    if (noTrack || hasAdminSession(sessionValue)) {
+    // Graham's own devices: the admin cookies from /admin login, or a request
+    // from one of the networks listed in owner_networks (he browses in
+    // incognito, where cookies never survive). See lib/owner-request.ts.
+    if (await isOwnerRequest(req)) {
       return NextResponse.json({ ok: true });
     }
 

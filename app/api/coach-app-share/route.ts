@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { logCoachAppShare, SHARE_METHODS, type ShareMethod } from "@/lib/supabase/coach-app-shares";
 import { isKnownBot } from "@/lib/user-agent-bots";
-import { ADMIN_SESSION_COOKIE, NO_TRACK_COOKIE, hasAdminSession } from "@/lib/admin-session";
+import { isOwnerRequest } from "@/lib/owner-request";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -34,13 +34,7 @@ export async function POST(req: Request) {
         ? (req.headers.get("user-agent") as string).slice(0, MAX_UA_LENGTH)
         : null;
 
-    const cookieParts = (req.headers.get("cookie") ?? "").split(";").map((part) => part.trim());
-    const sessionValue = cookieParts
-      .find((part) => part.startsWith(`${ADMIN_SESSION_COOKIE}=`))
-      ?.slice(ADMIN_SESSION_COOKIE.length + 1);
-    const noTrack = cookieParts.some((part) => part === `${NO_TRACK_COOKIE}=1`);
-
-    if (noTrack || hasAdminSession(sessionValue)) {
+    if (await isOwnerRequest(req)) {
       return NextResponse.json({ ok: true });
     }
 

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { logProgressJoin } from "@/lib/supabase/progress-funnel";
 import { isKnownBot } from "@/lib/user-agent-bots";
-import { ADMIN_SESSION_COOKIE, NO_TRACK_COOKIE, hasAdminSession } from "@/lib/admin-session";
+import { isOwnerRequest } from "@/lib/owner-request";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,12 +25,7 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => ({}));
     const userAgent = str(req.headers.get("user-agent"))?.slice(0, MAX_UA_LENGTH) ?? null;
 
-    const cookieParts = (req.headers.get("cookie") ?? "").split(";").map((part) => part.trim());
-    const sessionValue = cookieParts
-      .find((part) => part.startsWith(`${ADMIN_SESSION_COOKIE}=`))
-      ?.slice(ADMIN_SESSION_COOKIE.length + 1);
-    const noTrack = cookieParts.some((part) => part === `${NO_TRACK_COOKIE}=1`);
-    if (noTrack || hasAdminSession(sessionValue) || isKnownBot(userAgent)) {
+    if (await isOwnerRequest(req) || isKnownBot(userAgent)) {
       return NextResponse.json({ ok: true });
     }
 

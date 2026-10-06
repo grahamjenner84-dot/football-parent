@@ -354,6 +354,7 @@ export default function SeoAdminPage() {
           </p>
         )}
         <PageViewOptOutToggle />
+        <OwnerNetworkPanel />
       </header>
 
       <nav style={styles.tabBar}>
@@ -2427,6 +2428,115 @@ function PageViewOptOutToggle() {
         ? "This browser is excluded from page view logging"
         : "Exclude this browser from page view logging"}
     </label>
+  );
+}
+
+type OwnerNetworkStatus = {
+  network: string | null;
+  cookie: boolean;
+  networkListed: boolean;
+  networks: { id: number; label: string | null; created_at: string }[];
+};
+
+// Whether the connection you are on would count as a visitor, and the list
+// of networks treated as Graham's own. The toggle above and the admin cookie
+// each cover one browser profile, which is no use in incognito; this covers
+// the whole connection. Only the network the dashboard is being viewed from
+// can be added, and it is stored as a keyed hash. See lib/owner-request.ts.
+function OwnerNetworkPanel() {
+  const [status, setStatus] = useState<OwnerNetworkStatus | null>(null);
+  const [label, setLabel] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/owner-network")
+      .then((res) => res.json())
+      .then((data) => (data.error ? setError(String(data.error)) : setStatus(data)))
+      .catch((err) => setError(String(err)));
+  }, []);
+
+  async function send(method: "POST" | "DELETE", body: object) {
+    setBusy(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/owner-network", {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      if (data.error) {
+        setError(String(data.error));
+      } else {
+        setStatus(data);
+        setLabel("");
+      }
+    } catch (err) {
+      setError(String(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  if (!status) {
+    return error ? (
+      <p style={{ fontSize: 12, color: "#c0392b", marginTop: 8 }}>Owner networks: {error}</p>
+    ) : null;
+  }
+
+  const small: React.CSSProperties = { fontSize: 12, cursor: "pointer" };
+
+  return (
+    <div style={{ marginTop: 8, fontSize: 12, color: "#9c8a72" }}>
+      {status.networkListed ? (
+        <div style={{ color: "#7bb661" }}>
+          This network is excluded from all first-party tracking
+          {status.network ? ` (${status.network})` : ""}
+        </div>
+      ) : (
+        <div style={{ color: "#c0392b" }}>
+          This network is not excluded: incognito visits from here count as visitors
+          {status.network ? ` (${status.network})` : ""}
+          {status.cookie ? ". This signed-in browser is excluded by its cookie." : ""}
+        </div>
+      )}
+      {!status.networkListed && status.network && (
+        <div style={{ display: "flex", gap: 6, alignItems: "center", marginTop: 4 }}>
+          <input
+            value={label}
+            onChange={(e) => setLabel(e.target.value)}
+            placeholder="Label, e.g. Home wifi"
+            style={{ fontSize: 12, padding: "2px 6px" }}
+          />
+          <button disabled={busy} onClick={() => send("POST", { label })} style={small}>
+            Exclude this network
+          </button>
+        </div>
+      )}
+      {status.networks.length > 0 && (
+        <div style={{ marginTop: 4 }}>
+          Excluded networks:{" "}
+          {status.networks.map((n) => (
+            <span key={n.id} style={{ marginRight: 10 }}>
+              {n.label ?? "unlabelled"} (added {n.created_at.slice(0, 10)})
+              <button
+                disabled={busy}
+                onClick={() => send("DELETE", { id: n.id })}
+                style={{ ...small, marginLeft: 4, fontSize: 11 }}
+              >
+                remove
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+      <div style={{ marginTop: 2 }}>
+        Covers every browser on this connection, incognito included, and screenshots run from
+        this PC. Not mobile data: sign in here on the phone for that.
+      </div>
+      {error && <div style={{ color: "#c0392b" }}>{error}</div>}
+    </div>
   );
 }
 

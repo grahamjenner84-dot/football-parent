@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { logPartnerClick } from "@/lib/supabase/partner-clicks";
 import { matchOutboundPartner } from "@/lib/outbound-partners";
 import { isKnownBot } from "@/lib/user-agent-bots";
-import { ADMIN_SESSION_COOKIE, NO_TRACK_COOKIE, hasAdminSession } from "@/lib/admin-session";
+import { isOwnerRequest } from "@/lib/owner-request";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -47,14 +47,7 @@ export async function POST(req: Request) {
     // Same owner-device exclusion as the affiliate and page-view endpoints: at
     // this click volume a handful of Graham's own checks that a link still
     // works would dominate the numbers.
-    const cookieHeader = req.headers.get("cookie") ?? "";
-    const cookieParts = cookieHeader.split(";").map((part) => part.trim());
-    const sessionValue = cookieParts
-      .find((part) => part.startsWith(`${ADMIN_SESSION_COOKIE}=`))
-      ?.slice(ADMIN_SESSION_COOKIE.length + 1);
-    const noTrack = cookieParts.some((part) => part === `${NO_TRACK_COOKIE}=1`);
-
-    if (noTrack || hasAdminSession(sessionValue)) {
+    if (await isOwnerRequest(req)) {
       return NextResponse.json({ ok: true });
     }
 

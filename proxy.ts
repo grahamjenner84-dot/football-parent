@@ -48,7 +48,8 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith("/api/coach-app-view-report") ||
     pathname.startsWith("/api/coach-app-funnel-report") ||
     pathname.startsWith("/api/progress-funnel-report") ||
-    pathname.startsWith("/api/expert-posted");
+    pathname.startsWith("/api/expert-posted") ||
+    pathname.startsWith("/api/owner-network");
 
   if (!isProtected) return NextResponse.next();
 
@@ -102,5 +103,6 @@ export const config = {
     "/api/coach-app-funnel-report",
     "/api/progress-funnel-report",
     "/api/expert-posted",
+    "/api/owner-network",
   ],
 };
