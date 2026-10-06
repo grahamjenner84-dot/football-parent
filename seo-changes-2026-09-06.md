@@ -1198,3 +1198,10 @@ Queued for after the watch window (from ~20 Oct): trials "Parent Behaviour at Tr
 ## Calculator page: one-sentence lead, calculator in the first phone screen (2026-10-06)
 
 Layout only, same day as publish. The lead is one paragraph in the header slot; the rest of the intro is now the first body paragraph under the frame. Tool-page header tightened on phones (truncated breadcrumb, smaller H1, chip hidden, less padding). Calculator top on a 390px phone: 1242px at publish, 810px after the first move, 642px now. Words, headings, links and schema unchanged. Commit `dae729c`.
+
+## Development centre guides: duplicated ParentNote replaced on Fulham and Leeds (2026-10-06)
+
+The same first-hand ParentNote (coaches matter more than the club, four-corner feedback forms, weaker foot scored both ways) appeared on Arsenal, Fulham and Leeds. Arsenal keeps it. Fulham and Leeds each get a new note in Graham's words from a Q&A, framed as experience at other clubs' centres. ParentNote text only: headings, links, frontmatter and `dateModified` unchanged. Both pages carry live traffic, so both go on the 10-14 day watch list (to ~20 Oct) before any expert-quote swaps on them.
+
+- `/academy-pathway/fulham-fc-development-centre-guide`: choosing a centre by location and midweek travel, uneven coaching week to week. Commit `81c8337`.
+- `/academy-pathway/leeds-united-development-centre-guide`: Friday travel, a session with no goals putting him off, starting with small-group coaching instead. Commit `ec9cd29`.
