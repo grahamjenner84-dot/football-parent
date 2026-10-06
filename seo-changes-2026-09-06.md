@@ -1209,3 +1209,13 @@ The same first-hand ParentNote (coaches matter more than the club, four-corner f
 ## Owner network exclusion for first-party tracking (2026-10-06)
 
 Commit `859c023`. Not a content change, but it changes what `page_views`, `affiliate_clicks`, `partner_clicks`, `coach_app_shares`, `coach_app_signups` and `progress_join_events` count: requests from networks listed in the new `owner_networks` table are dropped at write time, alongside the existing admin-cookie exclusion. Graham browses in incognito, so the cookie never applied to him; 4-6 Oct saw about a hundred of his calculator test visits and two test sign-ups deleted by hand. Expect a small step down in page views from the home network from today, especially on `/coach-app/*` and the calculator pages, that is not a traffic change. Migration `20261006210000_owner_networks` applied before deploy.
+
+## Indexing requested for 3 unindexed pages (2026-10-06)
+
+URL Inspection API check of all 105 routes in `lib/routes.ts`: 102 "Submitted and indexed" with Google's canonical matching ours. Graham then used "Request indexing" in Search Console for the other three. No code change.
+
+- `/parent-guides/matt-baxter-young-footballer-mindset-interview` (published 28 Sept): "Discovered - currently not indexed", never crawled, despite 9 internal inbound links.
+- `/girls-football/girls-united-daughter-football-interview` (published 6 Oct): "URL is unknown to Google".
+- `/coaching/equal-playing-time-calculator` (live 6 Oct): "URL is unknown to Google".
+
+Recheck around 13 Oct. If Matt Baxter is still not indexed, look at it again rather than requesting indexing a second time.
