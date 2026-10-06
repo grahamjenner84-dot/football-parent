@@ -1141,7 +1141,6 @@ Page: `/academy-pathway/how-academy-football-works`. Commit `4e64155`. **Live tr
 
 **External mention, same day:** the Grassroots Hub Facebook group posted this article on the evening of 4 Oct. 24 Facebook referrals in the first 3 hours, all phones in the Facebook app. Expect a one-off bump in page_views and GA for this URL on 4-5 Oct that is not search traffic.
 
-<<<<<<< HEAD
 ## Inbound links to the equal playing time calculator page (2026-10-06)
 
 Branch `calculator-page`, live when it merges. Two pages outside their watch windows each gained one clause linking `/coaching/equal-playing-time-calculator` (anchor "equal playing time calculator"), additive only, titles, headings and existing links unchanged:
@@ -1161,13 +1160,12 @@ Graham chose to add these inside the watch windows rather than wait. Each is one
 - `/coaching/best-football-formations-by-age-group`: one clause in the rotation section. Commit `633d601`.
 
 Each of these pages had a change in the previous two weeks (see entries above), so if any of them moves in the next fortnight, both changes are candidate causes.
-=======
+
 ## `/progress` and the Coach App landing: SoftwareApplication schema removed (2026-10-05)
 
 Pages: `/progress` (`app/progress/page.tsx`) and `/football-parent-coach-app` plus its indexable variants (`app/components/CoachLandingPage.tsx`). Semrush's site audit (5 Oct) flagged the `/progress` SoftwareApplication JSON-LD as invalid: "a value for the aggregateRating or review field is required". Google's Software App rich result needs a rating or review as well as name and offers, and there are none to give (inventing one is against Google's review guidelines), so the block could never earn a rich result and only ever reported as an error. Removed from both pages, since the Coach App landing carried the same shape and would be flagged next crawl. FAQPage schema on both pages untouched; titles, meta, headings and content untouched. Not a ranking lever, so no watch period needed; reinstate with real reviews if the apps ever collect them.
 
 Semrush also crawled `/progress?b=progress-home` and `?b=progress-academy-pathway` as separate pages. The canonical already points at `/progress`, so Google is fine; in Semrush, add `b` under Site Audit settings > Remove URL parameters to stop the duplicates.
->>>>>>> origin/main
 
 ## New page: Equal Playing Time Calculator (published 2026-10-06)
 
