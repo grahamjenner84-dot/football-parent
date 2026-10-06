@@ -25,6 +25,7 @@ const HEIGHT_MESSAGE = "fp-calculator-height";
 // when the first real height arrives.
 const STARTING_HEIGHT = 700;
 const MIN_HEIGHT = 320;
+const FRAME_BORDER = 1;
 
 export default function CalculatorEmbed() {
   const [height, setHeight] = useState(STARTING_HEIGHT);
@@ -45,13 +46,19 @@ export default function CalculatorEmbed() {
   // max-width 480px, flush left), so the frame is that wide too: wider and
   // it is a dark box with the calculator pinned to its left edge. Full
   // width on a phone, where the page is narrower than this anyway.
+  //
+  // The outline is the theme's --border (globals.css), so it shows in both
+  // modes: in light mode the calculator's white panels run edge to edge and
+  // would otherwise meet the white page with nothing between them. The box
+  // is border-box, so the frame is the reported height plus the two border
+  // lines, or the content would scroll inside it by 2px.
   return (
     <div className="max-w-[480px]">
       <iframe
         src={CALCULATOR_PATH}
         title="Equal playing time calculator"
-        className="block w-full rounded-2xl border border-gray-200"
-        style={{ height, border: 0 }}
+        className="block w-full rounded-2xl"
+        style={{ height: height + 2 * FRAME_BORDER, border: `${FRAME_BORDER}px solid var(--border)` }}
       />
       {/* A plain <a>, not next/link: /coach-app is outside the Next router
           (see ToolCallout.tsx). Doubles as the fallback if the frame fails. */}
