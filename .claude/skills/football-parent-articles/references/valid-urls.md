@@ -27,6 +27,8 @@ Avoid linking to Football Gear articles unless the article is specifically about
 - /about
 - /author/graham-jenner
 - /editorial-policy
+- /football-parent-coach-app
+- /progress
 
 (The three utility pages above weren't present in the last sitemap export —
 sitemaps often exclude non-article pages intentionally, so they're kept here
@@ -39,6 +41,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-development
 - /football-gear
 - /girls-football
+- /coaching
 - /parent-guides
 
 ## Academy Pathway
@@ -70,6 +73,8 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /academy-pathway/pre-academy-football
 - /academy-pathway/brentford-development-centre-guide
 - /academy-pathway/watford-development-centre-guide
+- /academy-pathway/academy-life-paul-barry-interview
+- /academy-pathway/aston-villa-development-centre-guide
 
 ## Academy Trials
 
@@ -107,6 +112,10 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-gear/boots/best-football-boots-for-wide-feet-kids
 - /football-gear/shin-pads/best-shin-pads-for-kids-football
 - /football-gear/veo-camera-alternatives
+- /football-gear/best-football-boots-for-kids
+- /football-gear/best-football-goals-for-kids
+- /football-gear/best-football-gps-trackers-for-kids
+- /football-gear/childrens-soft-ground-football-boots
 
 ## Girls Football
 
@@ -121,6 +130,12 @@ on the assumption they're still live. Flag it if any of them have moved.)
 ## Coaching
 
 - /coaching/what-qualifications-do-i-need-to-be-a-football-coach
+- /coaching/best-football-formations-by-age-group
+- /coaching/best-grassroots-football-apps
+- /coaching/equal-playing-time-calculator
+- /coaching/equal-playing-time-in-grassroots-football
+- /coaching/football-drills-for-7-and-8-year-olds
+- /coaching/football-team-spreadsheet
 
 ## Parent Guides
 
@@ -137,6 +152,10 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /parent-guides/futurefit-football-dna-interview-part-2
 - /parent-guides/how-to-become-a-football-coach
 - /parent-guides/what-is-grassroots-football
+- /parent-guides/best-football-stats-apps
+- /parent-guides/jpl-martin-brock-interview-part-1
+- /parent-guides/jpl-martin-brock-interview-part-2
+- /parent-guides/matt-baxter-young-footballer-mindset-interview
 
 ## Suggested contextual links by topic
 
