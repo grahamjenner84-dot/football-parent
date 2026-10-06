@@ -1183,6 +1183,20 @@ Drafted: <date>
 ...
 ```
 
+### Next girls' football expert (not yet chosen) — tag: girls football, getting started, drop-out
+Drafted 2026-10-06. Held back from Girls United, whose answers were general and
+hard to get, for a girls' football coach who will give real, first-hand detail.
+Ask for specific examples, not general advice: one named voice, not a team.
+1. Think of a girl who came to you having never played football. What was she
+   like at the start, and what changed for her over her first season?
+2. At what age do you see girls drop out of football most, and what is
+   usually going on when they do?
+Gap these fill: six of the seven `/girls-football` articles have no ParentNote
+or expert callout (only `emerging-talent-centres-explained` has one); Q1 suits
+`girls-academy-vs-grassroots-football` and the Girls United interview's
+getting-started angle, Q2 suits `late-developers-in-girls-football` and
+`what-age-do-girls-football-academies-recruit`.
+
 ## Answered — captured, not yet placed in an article
 
 (none currently pending placement — see "Placed in articles" below for the
