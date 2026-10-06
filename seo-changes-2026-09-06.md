@@ -1205,3 +1205,7 @@ The same first-hand ParentNote (coaches matter more than the club, four-corner f
 
 - `/academy-pathway/fulham-fc-development-centre-guide`: choosing a centre by location and midweek travel, uneven coaching week to week. Commit `81c8337`.
 - `/academy-pathway/leeds-united-development-centre-guide`: Friday travel, a session with no goals putting him off, starting with small-group coaching instead. Commit `ec9cd29`.
+
+## Owner network exclusion for first-party tracking (2026-10-06)
+
+Commit `859c023`. Not a content change, but it changes what `page_views`, `affiliate_clicks`, `partner_clicks`, `coach_app_shares`, `coach_app_signups` and `progress_join_events` count: requests from networks listed in the new `owner_networks` table are dropped at write time, alongside the existing admin-cookie exclusion. Graham browses in incognito, so the cookie never applied to him; 4-6 Oct saw about a hundred of his calculator test visits and two test sign-ups deleted by hand. Expect a small step down in page views from the home network from today, especially on `/coach-app/*` and the calculator pages, that is not a traffic change. Migration `20261006210000_owner_networks` applied before deploy.
