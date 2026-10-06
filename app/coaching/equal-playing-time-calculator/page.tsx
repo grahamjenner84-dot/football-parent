@@ -12,17 +12,37 @@ export const metadata = generateSEO({
   type: "website",
 });
 
-// A tool page, not an article: the Coach App's calculator sits above the
-// body in the layout's hero slot (see CalculatorEmbed for the contract with
-// the app), and the written content underneath is what Google ranks, since
-// it cannot see inside the frame.
+// The MDX body is split at this marker: the paragraphs before it are the
+// lead, rendered above the calculator so a visitor knows what the box is
+// before they meet it (and so the paragraph carrying the target phrasings
+// is in the first screen, not 1,400px down). Everything after it is the
+// body. The full content still goes to ArticleLayout for the FAQ schema.
+const CALCULATOR_MARKER = "{/* calculator */}";
+
+// A tool page, not an article: the Coach App's calculator sits in the
+// layout's hero slot under the lead (see CalculatorEmbed for the contract
+// with the app), and the written content underneath is what Google ranks,
+// since it cannot see inside the frame.
 export default async function Page() {
   const article = getArticleBySlug("coaching", "equal-playing-time-calculator");
+  const markerAt = article.content.indexOf(CALCULATOR_MARKER);
+  const lead = markerAt === -1 ? "" : article.content.slice(0, markerAt);
+  const body =
+    markerAt === -1 ? article.content : article.content.slice(markerAt + CALCULATOR_MARKER.length);
 
   return (
     <ArticleLayout
       kind="tool"
-      hero={<CalculatorEmbed />}
+      hero={
+        <>
+          {lead && (
+            <div className="max-w-2xl mb-10">
+              <MDXContent content={lead} coachAppBanner="none" />
+            </div>
+          )}
+          <CalculatorEmbed />
+        </>
+      }
       title={article.frontmatter.title}
       description={article.frontmatter.description}
       category={article.frontmatter.category}
@@ -34,7 +54,7 @@ export default async function Page() {
       dateModified={article.frontmatter.dateModified}
       content={article.content}
     >
-      <MDXContent content={article.content} slug={article.slug} coachAppBanner="coach" />
+      <MDXContent content={body} slug={article.slug} coachAppBanner="coach" />
     </ArticleLayout>
   );
 }
