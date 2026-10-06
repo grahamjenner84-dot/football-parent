@@ -1065,31 +1065,6 @@
       }
     },
     {
-      "slug": "support-child-after-bad-match",
-      "category": "parent-guides",
-      "url": "/parent-guides/support-child-after-bad-match",
-      "words": 2915,
-      "callouts": 2,
-      "isInterview": false,
-      "citations": 2,
-      "citationsPer1000": 0.69,
-      "internalLinks": 15,
-      "mechanical": {
-        "overall": 79,
-        "experience": 85,
-        "expertise": 100,
-        "authoritativeness": 41
-      },
-      "semantic": {
-        "voice": 90,
-        "slop": 26,
-        "bucket": "C",
-        "expert": "none",
-        "reviewed": "2026-09-28",
-        "note": "2026-09-28: Matt Baxter quote (wobble vs real, quitting)."
-      }
-    },
-    {
       "slug": "academy-categories-explained",
       "category": "academy-pathway",
       "url": "/academy-pathway/academy-categories-explained",
@@ -1532,24 +1507,25 @@
       "slug": "fulham-fc-development-centre-guide",
       "category": "academy-pathway",
       "url": "/academy-pathway/fulham-fc-development-centre-guide",
-      "words": 1773,
+      "words": 1924,
       "callouts": 1,
       "isInterview": false,
       "citations": 3,
-      "citationsPer1000": 1.69,
+      "citationsPer1000": 1.56,
       "internalLinks": 9,
       "mechanical": {
-        "overall": 79,
+        "overall": 78,
         "experience": 55,
         "expertise": 100,
-        "authoritativeness": 69
+        "authoritativeness": 65
       },
       "semantic": {
-        "voice": 60,
-        "slop": 34,
+        "voice": 68,
+        "slop": 32,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "note": "2026-10-06: duplicated ParentNote (shared with Arsenal/Leeds) replaced with an original one on choosing a centre by midweek travel, and uneven coaching (81c8337). Plus the existing \"Is It Worth It\" first-person section. Typos there: \"willigness\", \"its worth\".",
+        "reviewed": "2026-10-06"
       }
     },
     {
@@ -1628,11 +1604,11 @@
       "slug": "leeds-united-development-centre-guide",
       "category": "academy-pathway",
       "url": "/academy-pathway/leeds-united-development-centre-guide",
-      "words": 2024,
+      "words": 2223,
       "callouts": 1,
       "isInterview": false,
       "citations": 7,
-      "citationsPer1000": 3.46,
+      "citationsPer1000": 3.15,
       "internalLinks": 12,
       "mechanical": {
         "overall": 81,
@@ -1641,11 +1617,12 @@
         "authoritativeness": 78
       },
       "semantic": {
-        "voice": 35,
+        "voice": 45,
         "slop": 30,
-        "bucket": "B",
-        "expert": "academy-coach",
-        "reviewed": "2026-09-22"
+        "bucket": "C",
+        "expert": "none",
+        "note": "2026-10-06: duplicated ParentNote replaced with an original one (Friday travel, a no-goals session putting him off, small-group coaching in hindsight; ec9cd29). B to C on par with Arsenal (45), but it is one note in a 2,200-word impersonal page: a scout or academy-coach quote would still lift it.",
+        "reviewed": "2026-10-06"
       }
     },
     {
@@ -2166,24 +2143,174 @@
         "reviewed": "2026-10-06",
         "note": "Expert Q&A with the Girls United London team (credited as a team), published 2026-10-06. Their words throughout, two stats cited to FA sources. Voice held at 60: general advice with no first-hand examples."
       }
+    },
+    {
+      "slug": "watford-development-centre-guide",
+      "category": "academy-pathway",
+      "url": "/academy-pathway/watford-development-centre-guide",
+      "words": 2267,
+      "callouts": 2,
+      "isInterview": true,
+      "citations": 5,
+      "citationsPer1000": 2.21,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 92,
+        "experience": 90,
+        "expertise": 100,
+        "authoritativeness": 89
+      },
+      "semantic": {
+        "voice": 30,
+        "slop": 26,
+        "bucket": "B",
+        "expert": "graham",
+        "note": "2026-10-06 first score. Strong club-specific research (three tiers, academies-plural recommendation, Category Three move) and a relevant Paul Barry ExpertQA (he coached at Watford), but no first-hand note. The \"What a Season at the Advanced PDC Looks Like\" section is the natural home for Graham's Friday-evening travel story.",
+        "reviewed": "2026-10-06"
+      }
+    },
+    {
+      "slug": "best-football-gps-trackers-for-kids",
+      "category": "football-gear",
+      "url": "/football-gear/best-football-gps-trackers-for-kids",
+      "words": 2246,
+      "callouts": 4,
+      "isInterview": true,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 64,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": {
+        "voice": 50,
+        "slop": 30,
+        "bucket": "C",
+        "expert": "none",
+        "note": "2026-10-06 first score. Three short ParentNotes (as a coach, comparing numbers) plus Paul Barry ExpertQA. That ExpertQA has no sourceHref and is trimmed with [...]: its answer is not in a published interview. Mild slop: two \"misconception\" framings.",
+        "reviewed": "2026-10-06"
+      }
+    },
+    {
+      "slug": "childrens-soft-ground-football-boots",
+      "category": "football-gear",
+      "url": "/football-gear/childrens-soft-ground-football-boots",
+      "words": 2179,
+      "callouts": 4,
+      "isInterview": false,
+      "citations": 0,
+      "citationsPer1000": 0,
+      "internalLinks": 10,
+      "mechanical": {
+        "overall": 64,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 0
+      },
+      "semantic": {
+        "voice": 62,
+        "slop": 24,
+        "bucket": "C",
+        "expert": "none",
+        "note": "2026-10-06 first score. Four specific ParentNotes (flooded corner, pink boots gone brown), first-hand stock check on Amazon.",
+        "reviewed": "2026-10-06"
+      }
+    },
+    {
+      "slug": "best-football-stats-apps",
+      "category": "parent-guides",
+      "url": "/parent-guides/best-football-stats-apps",
+      "words": 1769,
+      "callouts": 2,
+      "isInterview": false,
+      "citations": 1,
+      "citationsPer1000": 0.57,
+      "internalLinks": 13,
+      "mechanical": {
+        "overall": 76,
+        "experience": 85,
+        "expertise": 100,
+        "authoritativeness": 27
+      },
+      "semantic": {
+        "voice": 45,
+        "slop": 22,
+        "bucket": "C",
+        "expert": "none",
+        "note": "2026-10-06 first score. Two ParentNotes (notes-app habit, saving development centre feedback). Own-app page, voice adequate for the format.",
+        "reviewed": "2026-10-06"
+      }
+    },
+    {
+      "slug": "child-lost-confidence-in-football",
+      "category": "parent-guides",
+      "url": "/parent-guides/child-lost-confidence-in-football",
+      "words": 2876,
+      "callouts": 3,
+      "isInterview": true,
+      "citations": 2,
+      "citationsPer1000": 0.7,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 83,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 42
+      },
+      "semantic": {
+        "voice": 88,
+        "slop": 34,
+        "bucket": "C",
+        "expert": "none",
+        "note": "2026-10-06 re-read after the slug move from support-child-after-bad-match (was voice 90). Extensive voice woven through the prose plus Matt Baxter ExpertQA. Slop: reframe cadence (\"not frustrated but flat\", \"not a complaint\") and one spaced hyphen used as a dash.",
+        "reviewed": "2026-10-06"
+      }
+    },
+    {
+      "slug": "equal-playing-time-calculator",
+      "category": "coaching",
+      "url": "/coaching/equal-playing-time-calculator",
+      "words": 2845,
+      "callouts": 3,
+      "isInterview": false,
+      "citations": 4,
+      "citationsPer1000": 1.41,
+      "internalLinks": 14,
+      "mechanical": {
+        "overall": 88,
+        "experience": 100,
+        "expertise": 100,
+        "authoritativeness": 61
+      },
+      "semantic": {
+        "voice": 72,
+        "slop": 22,
+        "bucket": "C",
+        "expert": "none",
+        "note": "2026-10-06 first score (coaching tool page, not the /landing copy). Four coach ParentNotes on live subs and season-long fairness. One slop word: \"The honest case against\".",
+        "reviewed": "2026-10-06"
+      }
     }
   ],
   "semanticSummary": {
-    "reviewed": 88,
-    "avgVoice": 47,
-    "avgSlop": 39,
+    "reviewed": 93,
+    "avgVoice": 48,
+    "avgSlop": 38,
     "buckets": {
       "A": 8,
       "B": 35,
-      "C": 45
+      "C": 50
     },
     "expertDemand": {
-      "academy-coach": 9,
+      "academy-coach": 8,
       "scout": 11,
       "girls-pathway-coach": 7,
       "sports-scientist": 2,
       "podiatrist": 2,
-      "graham": 3,
+      "graham": 4,
       "agent": 1
     },
     "tidied2026_09_22": {
@@ -2199,6 +2326,10 @@
     "girlsUnited2026_10_06": {
       "articles": 3,
       "note": "Girls United team interview published (girls-football, Bucket C) plus one ExpertQA box on girls-football-trials, late-developers-in-girls-football and girls-academy-vs-grassroots-football (voice +12 each). Partial fill only: all three stay B and girls-pathway-coach demand stays 7, because a grassroots organisation's general answers don't cover the ETC/academy pathway. Watch list to ~2026-10-20."
+    },
+    "rescore2026_10_06": {
+      "articles": 8,
+      "note": "Six unscored articles added (Watford, GPS trackers, soft-ground boots, stats apps, calculator, child-lost-confidence which replaces the old support-child-after-bad-match slug) and Fulham/Leeds re-read after their duplicated ParentNote was replaced. Leeds B to C, Watford enters as B (needs Graham note)."
     }
   }
 }
