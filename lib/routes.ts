@@ -100,6 +100,7 @@ export const routes = [
   '/girls-football/late-developers-in-girls-football',
   '/girls-football/what-age-do-girls-football-academies-recruit',
   '/girls-football/girls-rtcs-explained',
+  '/girls-football/girls-united-daughter-football-interview',
 
   // Parent Guides
   '/parent-guides/biggest-football-parent-mistakes',

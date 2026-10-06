@@ -1180,3 +1180,7 @@ Live-traffic page (about 2,000 impressions and 29 clicks a month, position ~7 fo
 ## Calculator page: intro moved above the embed (2026-10-06)
 
 Layout only, same day as publish: the two lead paragraphs now sit between the header and the calculator instead of below it, and the tool layout no longer shows the description line under the H1 (meta description unchanged). Body, headings, links and schema unchanged. Commit `14b934e`.
+
+## New page: Girls United interview (published 2026-10-06)
+
+- URL: `/girls-football/girls-united-daughter-football-interview`. Category: Girls Football (the first interview in that category; earlier interviews sit in Parent Guides or Academy Pathway). Ten-question Q&A with the Girls United London team (credited as the team at their request), answers in their own words, two stats linked to FA sources. Added to the girls' football category page and `lib/routes.ts`. Angle: parents new to girls' football (getting started, barriers, confidence, choosing a club). Commit: see git log for "Girls United interview".

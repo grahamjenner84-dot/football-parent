@@ -31,5 +31,16 @@
     "logoSrc": "/images/people/matt-baxter.jpg",
     "bioSrc": "/images/people/matt-baxter.jpg",
     "bio": "Matt works one to one with young athletes aged 8 to 18, from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
+  },
+  {
+    "id": "girls-united",
+    "label": "Girls United team",
+    "name": "Girls United",
+    "handle": "@girlsunitedfa",
+    "person": "Girls United team",
+    "role": "Girls' football · London",
+    "logoSrc": "/images/people/girls-united-logo.png",
+    "bioSrc": "/images/people/girls-united-logo.png",
+    "bio": "Girls United runs girls' football clubs and sessions in London and Mexico, including Play Like a Girl in South London, where girls can start even if they've never played or don't know anyone."
   }
 ]

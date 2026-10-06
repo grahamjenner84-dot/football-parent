@@ -1351,3 +1351,31 @@ all 3 existing Paul Barry `<ExpertQA>` placements (Q1/Q2 in
 change - its `children` are normal MDX content, so a markdown link to
 Football DNA could just be added inline in the trailing context sentence,
 same as the pre-existing `[FutureFit Part 2...]` link pattern.
+
+### Girls United team — girls' football organisation (London and Mexico), tag: girls football, getting started, confidence, choosing a club
+**ANSWERED 2026-10-06: all 10 questions**, published as
+`/girls-football/girls-united-daughter-football-interview`
+(`content/girls-football/girls-united-daughter-football-interview.mdx`), the
+source of record for any excerpt. Not yet reused anywhere (reuse count 0 each).
+Credit: they asked to be credited as the team, not one person. Answers came
+from Lucien Hodgson (London Marketing Lead), Robert Wright (London Programme
+Lead, FC & Fixtures) and Abigail Ingram (London Manager); name the three in a
+bio, never attribute a quote to one of them individually. Links:
+https://www.girlsunitedfa.org and https://www.instagram.com/girlsunitedfa/.
+Logo (doubles as photo): `/images/people/girls-united-logo.png`.
+Attribution scaffold:
+```
+name="The Girls United team"
+role="Girls United, London"
+bio="Girls United runs girls' football clubs and sessions in London and Mexico, including Play Like a Girl in South London."
+profileHref="https://www.instagram.com/girlsunitedfa/"
+profileLabel="Instagram"
+```
+Strongest reusable answers: the less obvious barriers (confidence under the
+practical ones) for girls' football getting-started pages; "coaching from the
+sideline" for biggest-football-parent-mistakes; talented-but-lacks-confidence
+(work on it with the coach deliberately) for child-lost-confidence /
+build-confidence; choosing a club (community, qualified coaches, staff who
+understand women and girls in sport) for girls-academy-vs-grassroots. Stats in
+Q1 verified 2026-10-06: FA 56% (2020-24) and FA/Barclays 2.6m girls with
+equal access (Nov 2025).

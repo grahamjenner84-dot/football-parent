@@ -92,6 +92,12 @@ export default function GirlsFootballPage() {
           description:
             "RTCs in girls football no longer exist. They were replaced by Emerging Talent Centres and Professional Game Academies. What the pathway looks like now.",
         },
+        {
+          title: "Getting Your Daughter Into Football: Girls United Interview",
+          href: "/girls-football/girls-united-daughter-football-interview",
+          description:
+            "Girls United on what has changed for girls, the barriers parents miss, building a nervous player's confidence and choosing a club.",
+        },
       ]}
       bottomContent={{
         title: "About Girls Football",
