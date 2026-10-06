@@ -1219,3 +1219,8 @@ URL Inspection API check of all 105 routes in `lib/routes.ts`: 102 "Submitted an
 - `/coaching/equal-playing-time-calculator` (live 6 Oct): "URL is unknown to Google".
 
 Recheck around 13 Oct. If Matt Baxter is still not indexed, look at it again rather than requesting indexing a second time.
+
+## Watford DC guide: first ParentNote; Fulham typo fix (2026-10-06)
+
+- `/academy-pathway/watford-development-centre-guide`: first first-hand note, added in "What a Season at the Advanced PDC Looks Like for a Family" from Graham's Q&A answers not used on Fulham or Leeds (foundations taking themselves too seriously, coach experience, spotting a good session, small groups run by academy coaches). Additive only. Page published 2 Oct, so low existing traffic. Commit: see git log "Watford DC guide: first ParentNote".
+- `/academy-pathway/fulham-fc-development-centre-guide`: "willigness" and "its worth" corrected. Spelling only, same day as the ParentNote swap above, so it shares that watch window.

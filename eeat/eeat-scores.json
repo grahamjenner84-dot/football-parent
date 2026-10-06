@@ -1524,7 +1524,7 @@
         "slop": 32,
         "bucket": "C",
         "expert": "none",
-        "note": "2026-10-06: duplicated ParentNote (shared with Arsenal/Leeds) replaced with an original one on choosing a centre by midweek travel, and uneven coaching (81c8337). Plus the existing \"Is It Worth It\" first-person section. Typos there: \"willigness\", \"its worth\".",
+        "note": "2026-10-06: duplicated ParentNote (shared with Arsenal/Leeds) replaced with an original one on choosing a centre by midweek travel, and uneven coaching (81c8337). Plus the existing \"Is It Worth It\" first-person section. Typos fixed the same day.",
         "reviewed": "2026-10-06"
       }
     },
@@ -2161,12 +2161,12 @@
         "authoritativeness": 89
       },
       "semantic": {
-        "voice": 30,
+        "voice": 42,
         "slop": 26,
-        "bucket": "B",
-        "expert": "graham",
-        "note": "2026-10-06 first score. Strong club-specific research (three tiers, academies-plural recommendation, Category Three move) and a relevant Paul Barry ExpertQA (he coached at Watford), but no first-hand note. The \"What a Season at the Advanced PDC Looks Like\" section is the natural home for Graham's Friday-evening travel story.",
-        "reviewed": "2026-10-06"
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-10-06",
+        "note": "2026-10-06: first ParentNote added in the Advanced PDC section (foundations taking themselves too seriously, coach experience, recognising a good session, small groups by academy coaches). B to C, on par with Leeds: one note in a research-led page."
       }
     },
     {
@@ -2190,7 +2190,7 @@
         "slop": 30,
         "bucket": "C",
         "expert": "none",
-        "note": "2026-10-06 first score. Three short ParentNotes (as a coach, comparing numbers) plus Paul Barry ExpertQA. That ExpertQA has no sourceHref and is trimmed with [...]: its answer is not in a published interview. Mild slop: two \"misconception\" framings.",
+        "note": "2026-10-06 first score. Three short ParentNotes (as a coach, comparing numbers) plus Paul Barry ExpertQA. Its Paul Barry Q&A was asked for this article, so no interview link is needed..]: its answer is not in a published interview. Mild slop: two \"misconception\" framings.",
         "reviewed": "2026-10-06"
       }
     },
@@ -2301,8 +2301,8 @@
     "avgSlop": 38,
     "buckets": {
       "A": 8,
-      "B": 35,
-      "C": 50
+      "B": 34,
+      "C": 51
     },
     "expertDemand": {
       "academy-coach": 8,
@@ -2310,7 +2310,7 @@
       "girls-pathway-coach": 7,
       "sports-scientist": 2,
       "podiatrist": 2,
-      "graham": 4,
+      "graham": 3,
       "agent": 1
     },
     "tidied2026_09_22": {
@@ -2329,7 +2329,7 @@
     },
     "rescore2026_10_06": {
       "articles": 8,
-      "note": "Six unscored articles added (Watford, GPS trackers, soft-ground boots, stats apps, calculator, child-lost-confidence which replaces the old support-child-after-bad-match slug) and Fulham/Leeds re-read after their duplicated ParentNote was replaced. Leeds B to C, Watford enters as B (needs Graham note)."
+      "note": "Six unscored articles added (Watford, GPS trackers, soft-ground boots, stats apps, calculator, child-lost-confidence which replaces the old support-child-after-bad-match slug) and Fulham/Leeds re-read after their duplicated ParentNote was replaced. Leeds B to C, Watford enters as B (needs Graham note). Watford then got its own note the same day: B to C."
     }
   }
 }
