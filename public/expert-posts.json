@@ -118,5 +118,66 @@
     "cta": "Send this to your club's *coaches* WhatsApp group",
     "caption": "One of your players gets picked up by an academy. Do you lose them?\n\nNot necessarily. Paul Barry, ex-Arsenal and Crystal Palace academy coach, on the rule that lets U9 to U11 academy boys keep playing grassroots, and why so few families use it.\n\nThanks @footballdna_. Full interview: link in bio.\n\n#grassrootsfootball #footballcoach #academyfootball",
     "collab": "@footballdna_"
+  },
+  {
+    "id": "girls-united-what-coaches-look-for",
+    "label": "Girls United 1/3: what coaches look for (parents)",
+    "expert": "girls-united",
+    "article": "/girls-football/girls-united-daughter-football-interview",
+    "audience": "parents",
+    "theme": "the qualities beyond technical ability that coaches look for in young girls, and what the most improved players share",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "What do coaches *really* look for in girls?",
+    "coverContext": "The Girls United team on what matters beyond skill",
+    "qas": [
+      { "q": "What do coaches look for beyond skill?", "a": "Coaches want players who have a willingness to *learn*, who are focused, and who pay attention." },
+      { "q": "What else matters?", "a": "A growth mindset matters a lot, as does being able to take *feedback* and actually put it into practice." },
+      { "q": "Who improves the most?", "a": "The players who improve most tend to show real *determination*, they keep working even when a session is hard or they're not getting it right straight away." }
+    ],
+    "quote": "That combination of determination, communication and a genuine willingness to learn is what we see driving the biggest *improvements*.",
+    "cta": "Send this to a parent of a girl who *plays*",
+    "caption": "It isn't only about how good she is on the ball.\n\nThe Girls United team on the qualities coaches notice in young girls, and the traits they see in the players who improve the most over time.\n\nThanks @girlsunitedfa. Full interview: link in bio.\n\n#girlsfootball #footballparent #womensfootball",
+    "collab": "@girlsunitedfa"
+  },
+  {
+    "id": "girls-united-talented-not-confident",
+    "label": "Girls United 2/3: talented but not confident (parents)",
+    "expert": "girls-united",
+    "article": "/girls-football/girls-united-daughter-football-interview",
+    "audience": "parents",
+    "theme": "a talented daughter who lacks confidence: work on it with the coach, and don't coach from the sideline",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "She's *talented*. So why is she holding back?",
+    "coverContext": "The Girls United team on confidence in young girls",
+    "qas": [
+      { "q": "Will confidence come if she keeps turning up?", "a": "Confidence doesn't just build on its own from *showing* up" },
+      { "q": "So what can a parent do?", "a": "Talk to her coach about it, as they can help build a purposeful *plan* to develop her confidence rather than leaving it to chance." },
+      { "q": "What's the most common parent mistake?", "a": "A big one is coaching from the *sideline*. It can contradict what the coach is asking for and distract the player" }
+    ],
+    "quote": "It's also easy to start living through your daughter's game, and she can *feel* that.",
+    "cta": "Send this to a parent on the *touchline*",
+    "caption": "Talented but quiet on the pitch? Confidence is something you can plan for.\n\nThe Girls United team on why confidence doesn't just arrive by turning up, who to talk to about it, and the touchline habit that makes it harder.\n\nThanks @girlsunitedfa. Full interview: link in bio.\n\n#girlsfootball #footballparent #grassrootsfootball",
+    "collab": "@girlsunitedfa"
+  },
+  {
+    "id": "girls-united-barriers",
+    "label": "Girls United 3/3: why girls don't start or stay (coaches)",
+    "expert": "girls-united",
+    "article": "/girls-football/girls-united-daughter-football-interview",
+    "audience": "coaches",
+    "theme": "the less obvious barriers that stop girls starting or staying, and what a good girls' club does about it",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "Why do girls *stop* turning up?",
+    "coverContext": "The Girls United team on the barriers coaches don't see",
+    "qas": [
+      { "q": "What's the barrier behind the practical ones?", "a": "*Confidence* is often the real barrier underneath the practical ones" },
+      { "q": "What does that look like?", "a": "some girls feel self-conscious about starting something new or don't have anyone in their family or *community* who plays." },
+      { "q": "And girls new to sport?", "a": "girls with no sporting background can feel like they're already *behind* before they start." },
+      { "q": "What does a good girls' club do?", "a": "Extra opportunities off the pitch, like events and activities that bring players and *families* together, are a good sign too." }
+    ],
+    "quote": "It's also worth checking that staff genuinely understand women and girls in *sport*",
+    "cta": "Send this to your club's girls' *coaches*",
+    "caption": "Most girls who drop out of football don't say why.\n\nThe Girls United team on the barriers under the practical ones (confidence, no one at home who plays, feeling behind before they start) and what a girls' club can do about it.\n\nThanks @girlsunitedfa. Full interview: link in bio.\n\n#girlsfootball #grassrootsfootball #footballcoach",
+    "collab": "@girlsunitedfa"
   }
 ]
