@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 28 September 2026
+            Last updated: 6 October 2026
           </p>
         </div>
       </section>
@@ -126,6 +126,18 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <p>
+            <strong>Site visit counts.</strong> When you open a page on
+            footballparent.co.uk, we record that the page was viewed: the
+            page address, the time, the website that linked you to it (just
+            the site name, such as google.com, never the full address), any
+            campaign tags in the link, your browser type and the country you
+            were in. We do this ourselves, without cookies, and we do not
+            store your IP address or anything that identifies you or links
+            one visit to another. We use these counts to see which guides
+            are read and where readers come from.
+          </p>
+
+          <p>
             <strong>How you found us.</strong> When you create a Coach App
             account, we may record how you arrived - for example, the page
             you first landed on, the website that referred you, any campaign
@@ -218,6 +230,17 @@ export default function PrivacyPolicyPage() {
                   </td>
                   <td className="border border-gray-300 p-3">
                     To fix problems and improve the app
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    Legitimate interests
+                  </td>
+                </tr>
+                <tr className="[&:nth-child(even)]:bg-gray-50">
+                  <td className="border border-gray-300 p-3">
+                    Site visit counts
+                  </td>
+                  <td className="border border-gray-300 p-3">
+                    To see which pages are read and where visitors come from
                   </td>
                   <td className="border border-gray-300 p-3">
                     Legitimate interests
