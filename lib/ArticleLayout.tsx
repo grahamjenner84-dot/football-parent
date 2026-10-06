@@ -309,9 +309,14 @@ export default function ArticleLayout({
       )}
 
       <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
+        {/* A tool page keeps one left edge for its title, the tool and the
+            copy: the same centred column as the header and hero, with no
+            sidebar. (The sidebar's "On this page" box is hidden on every
+            article anyway; here its empty 256px pushed the copy out of line
+            with the calculator above it on a desktop.) */}
+        <div className={`${isTool ? "max-w-4xl" : "max-w-7xl"} mx-auto px-6 py-16 lg:py-20`}>
           <div className="flex flex-col lg:flex-row gap-12">
-            <aside className="hidden lg:block lg:w-64 flex-shrink-0">
+            <aside className={`hidden ${isTool ? "" : "lg:block"} lg:w-64 flex-shrink-0`}>
               <div className="hidden sticky top-8 bg-white border border-gray-200 rounded-2xl p-6 space-y-4 shadow-sm">
                 <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide">
                   On this page
@@ -340,7 +345,7 @@ export default function ArticleLayout({
       </div>
 
       <div className="bg-white border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-12 lg:py-16">
+        <div className={`${isTool ? "max-w-4xl" : "max-w-7xl"} mx-auto px-6 py-12 lg:py-16`}>
           <div className="max-w-4xl">
             <div className="bg-gray-50 rounded-lg p-8 lg:p-10">
               <div className="flex gap-6 mb-6">
