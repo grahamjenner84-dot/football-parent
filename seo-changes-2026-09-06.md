@@ -1184,3 +1184,7 @@ Layout only, same day as publish: the two lead paragraphs now sit between the he
 ## New page: Girls United interview (published 2026-10-06)
 
 - URL: `/girls-football/girls-united-daughter-football-interview`. Category: Girls Football (the first interview in that category; earlier interviews sit in Parent Guides or Academy Pathway). Ten-question Q&A with the Girls United London team (credited as the team at their request), answers in their own words, two stats linked to FA sources. Added to the girls' football category page and `lib/routes.ts`. Angle: parents new to girls' football (getting started, barriers, confidence, choosing a club). Commit: see git log for "Girls United interview".
+
+## Calculator page: one-sentence lead, calculator in the first phone screen (2026-10-06)
+
+Layout only, same day as publish. The lead is one paragraph in the header slot; the rest of the intro is now the first body paragraph under the frame. Tool-page header tightened on phones (truncated breadcrumb, smaller H1, chip hidden, less padding). Calculator top on a 390px phone: 1242px at publish, 810px after the first move, 642px now. Words, headings, links and schema unchanged. Commit `dae729c`.
