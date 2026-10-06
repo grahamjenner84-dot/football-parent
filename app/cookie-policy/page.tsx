@@ -23,7 +23,7 @@ export default function CookiePolicyPage() {
           </h1>
 
           <p className="text-lg text-gray-700 leading-relaxed">
-            Last updated: 27 August 2026
+            Last updated: 6 October 2026
           </p>
         </div>
       </section>
@@ -69,7 +69,16 @@ export default function CookiePolicyPage() {
               cookie settings
             </a>
             . If you reject or don&apos;t respond, none of the cookies below
-            are set.
+            are set. Separately, we count page views ourselves without any
+            cookie: that count holds no IP address or identifier, and is
+            explained in our{" "}
+            <a
+              href="/privacy-policy"
+              className="font-semibold text-blue-700 hover:text-blue-900"
+            >
+              Privacy Policy
+            </a>
+            .
           </p>
 
           <div className="overflow-x-auto mb-6">
