@@ -164,10 +164,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
       </div>
 
       <div>
-        <div class="lbl">Closing slide <span style="color:#6f6f6f;font-weight:600;text-transform:none">— follow + share</span></div>
+        <div class="lbl">Closing slide <span style="color:#6f6f6f;font-weight:600;text-transform:none">— follow</span></div>
         <input id="fieldSiteUrl" class="fld" placeholder="Site URL — top-left masthead" style="margin-top:7px">
         <textarea id="fieldFollowLine" class="fld" placeholder="Why follow, under the Follow button. Blank = for a new *expert* answering parents’ questions every week" style="margin-top:7px;height:64px;resize:vertical"></textarea>
-        <input id="fieldCta" class="fld" placeholder="Share ask, e.g. Send this to a parent on the *touchline*" style="margin-top:7px">
         <input id="fieldInterview" class="fld" placeholder="Full article — link in our bio" style="margin-top:7px">
       </div>
 
@@ -857,7 +856,6 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     setVal('fieldBio', state.bio);
     setVal('fieldQuote', state.quote);
     setVal('fieldSiteUrl', state.siteUrl);
-    setVal('fieldCta', state.cta);
     setVal('fieldInterview', state.interview);
     setVal('fieldFollowLine', state.followLine);
     setVal('fieldCoverEyebrow', state.coverEyebrow);
@@ -960,7 +958,6 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('fieldTopic').addEventListener('change', function (e) { set('topic', e.target.value); });
   document.getElementById('fieldBio').addEventListener('change', function (e) { set('bio', e.target.value); });
   document.getElementById('fieldQuote').addEventListener('change', function (e) { set('quote', e.target.value); });
-  document.getElementById('fieldCta').addEventListener('change', function (e) { set('cta', e.target.value); });
   document.getElementById('fieldSiteUrl').addEventListener('change', function (e) { set('siteUrl', e.target.value); });
   document.getElementById('fieldInterview').addEventListener('change', function (e) { set('interview', e.target.value); });
   document.getElementById('fieldFollowLine').addEventListener('change', function (e) { set('followLine', e.target.value); });

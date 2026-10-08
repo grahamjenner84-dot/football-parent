@@ -24,7 +24,7 @@ device.
    words don't make the point short enough, pick a different passage.
    `scripts/expert-post-check.ts` enforces this against the article.
 2. **Short copy.** Cover 10 words max, questions 9, answers 35, quote 20,
-   closing line 10, follow line 14, caption 600 characters. These are hard caps in the
+   follow line 14, caption 600 characters. These are hard caps in the
    checker. Shorter is better: an answer of 15-25 words reads best on a slide.
 3. **An interesting angle, for a named audience.** Every post is for one of
    Graham's two audiences:
@@ -72,10 +72,10 @@ this interview so nothing is repeated.
   may paraphrase. The answer is exact words (rule 1), with one `*gold*` word.
 - **Pull-quote:** the single punchiest exact line on this angle, not
   repeating a Q&A answer in the same post.
-- **Closing line:** tells this audience who to send it to ("Send this to your
-  coaching WhatsApp group").
+- **Follow line (optional):** see the closing slide note below.
 - **Caption:** a hook line, one or two lines on why it matters, credit the
-  expert's handle, "Full interview: link in bio". No hashtag walls (3 at
+  expert's handle, one line telling this audience who to send it to ("Send
+  this to your coaching WhatsApp group"), "Full interview: link in bio". No hashtag walls (3 at
   most), no em dashes, none of the slop phrases in CLAUDE.md's editorial rules.
 
 ### 4. Save to `public/expert-posts.json`
@@ -93,7 +93,6 @@ this interview so nothing is repeated.
   "coverContext": "Mindset coach Matt Baxter on the car ride home",
   "qas": [{ "q": "…", "a": "exact words … exact words" }],
   "quote": "…",
-  "cta": "…",
   "followLine": "…",
   "caption": "…",
   "collab": "@elitemindset_coaching"
@@ -105,9 +104,9 @@ set in posting order, strongest first, so the dropdown reads as a plan.
 `collab` is the handle to invite as a collaborator (usually the preset's
 handle); the builder shows it as a reminder under the caption.
 
-The closing slide leads with the follow ask: a "FOLLOW @football.parent" button,
-then `followLine` as the rest of that sentence, then the `cta` share line
-smaller underneath. `followLine` starts with "for" and marks one *gold* word.
+The closing slide is only the follow ask: a "FOLLOW @football.parent" button,
+then `followLine` large as the rest of that sentence, and the interview line at
+the bottom. The share ask goes in the caption, not on the slide. `followLine` starts with "for" and marks one *gold* word.
 Leave it out on parent posts to get the default ("for a new *expert* answering
 parents' questions every week"); give coach posts their own, e.g. "for academy
 coaches answering *your* coaching questions every week". Views on a collab come

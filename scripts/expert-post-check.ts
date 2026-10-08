@@ -159,7 +159,7 @@ async function main() {
       { label: "cover", renderer: "expert-quote-core", slideKind: "cover-question", head: post.coverQuestion, body: post.coverContext || "" },
       ...(preset?.bio ? [{ label: "bio", renderer: "expert-quote-core" as const, slideKind: "bio", head: String(preset.bio) }] : []),
       ...(post.qas || []).map((qa, i) => ({ label: `Q${i + 1}`, renderer: "expert-quote-core" as const, slideKind: "qa", head: qa.q, body: qa.a })),
-      { label: "closing", renderer: "expert-quote-core", slideKind: "closing", head: post.followLine || "", body: post.cta || "" },
+      { label: "closing", renderer: "expert-quote-core", slideKind: "closing", head: post.followLine || "" },
     ];
     for (const r of checkSlidesFit(inputs)) {
       if (!r.fits) errs.push(`${r.label} overflows: ${r.detail}`);
