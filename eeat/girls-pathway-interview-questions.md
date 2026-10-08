@@ -1,6 +1,7 @@
 # Girls' pathway interview: question set
 
-Drafted 2026-10-08. Fills the **girls-pathway coach** slot, second in
+Drafted 2026-10-08. **Status: sent 2026-10-08** to Graham's friend at the FA,
+who is asking around for people to answer it. Waiting on replies. Fills the **girls-pathway coach** slot, second in
 `expert-question-bank.md`, and the weakest whole cluster on the site: eight
 girls' pages and no pathway expert. The Girls United interview (2026-10-06)
 moved three of them only to Light, because its answers are general grassroots
