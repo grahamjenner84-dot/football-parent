@@ -1224,3 +1224,9 @@ Recheck around 13 Oct. If Matt Baxter is still not indexed, look at it again rat
 
 - `/academy-pathway/watford-development-centre-guide`: first first-hand note, added in "What a Season at the Advanced PDC Looks Like for a Family" from Graham's Q&A answers not used on Fulham or Leeds (foundations taking themselves too seriously, coach experience, spotting a good session, small groups run by academy coaches). Additive only. Page published 2 Oct, so low existing traffic. Commit: see git log "Watford DC guide: first ParentNote".
 - `/academy-pathway/fulham-fc-development-centre-guide`: "willigness" and "its worth" corrected. Spelling only, same day as the ParentNote swap above, so it shares that watch window.
+
+## Instagram follow prompts (2026-10-08)
+
+- Every article: "Follow on Instagram" card in the "Written by" box at the end (PR #64, merge 3ccb637, live 8 Oct). Sitewide, so it shares one date across all articles. Clicks on the "Instagram clicks" tab at /admin/seo.
+- Mid-article "More like this on Instagram" box (`<InstagramPromo />`), additive, no wording changed, placed at a section break about 15-35% in: `/academy-pathway/academy-categories-explained`, `/academy-pathway/chelsea-fc-development-centre-guide`, `/academy-pathway/arsenal-development-centre-guide`, `/academy-pathway/crystal-palace-development-centre-guide`, `/football-development/new-fa-youth-football-format`. Commit 60c7fa7.
+- Held back until their watch windows end (around 18-20 Oct): Leeds DC guide (edited 6 Oct), how-academy-football-works and football-scholarships-uk (both edited 4 Oct).
