@@ -70,10 +70,10 @@ export const ACTIVE_BANNER_STYLE: CoachAppBannerStyle = "dark";
 
 // When the Coaching section switched to the sponsor creative, on both the
 // category page and the mid-article banner of every /coaching/ article: the
-// merge that shipped it. Before this those pages showed the ordinary coach
+// deploy that shipped it (live 21:26:48 UTC). Before this those pages showed the ordinary coach
 // creative, so the report must not count their earlier views as sponsor
 // impressions.
-export const COACHING_SPONSOR_STARTED_AT = "2026-10-08T21:40:00Z";
+export const COACHING_SPONSOR_STARTED_AT = "2026-10-08T21:27:00Z";
 
 // When parent-facing articles stopped carrying a Coach App banner: from here
 // the mid-article slot on every article whose audience isn't "coach" shows
@@ -81,7 +81,7 @@ export const COACHING_SPONSOR_STARTED_AT = "2026-10-08T21:40:00Z";
 // no longer render anywhere. The report counts no parent or share article
 // impressions after this, and the share banner's impression count stops
 // here too. Same deploy as the Coaching sponsor.
-export const PARENT_ARTICLE_BANNER_ENDED_AT = "2026-10-08T21:40:00Z";
+export const PARENT_ARTICLE_BANNER_ENDED_AT = "2026-10-08T21:27:00Z";
 
 /** Whether a /coaching page or article was showing the sponsor creative at a
  * given time. */
