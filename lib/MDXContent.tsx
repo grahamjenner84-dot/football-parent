@@ -228,6 +228,9 @@ export async function MDXContent({
   // sponsor version of the banner.
   const inAcademyPathway =
     !!slug && routes.some((r) => r === `/academy-pathway/${slug}`);
+  // The Coach App sponsors the Coaching section: the mid-article banner on
+  // its articles is the sponsor creative rather than an arm of the A/B test.
+  const inCoaching = !!slug && routes.some((r) => r === `/coaching/${slug}`);
 
   return (
     <div className="space-y-6 text-gray-700 leading-relaxed max-w-none">
@@ -241,7 +244,7 @@ export async function MDXContent({
 
           <CoachAppBanner
             audience={audience}
-            style={bannerStyleForKey(slug)}
+            style={inCoaching ? "sponsor" : bannerStyleForKey(slug)}
           />
 
           <MDXRemote

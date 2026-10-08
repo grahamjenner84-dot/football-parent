@@ -26,7 +26,12 @@ import CoachAppShareButton from "@/app/components/CoachAppShareButton";
 // them an app built for coaches, it asks them to pass it on to their
 // child's coach. See CoachAppShareButton.tsx.
 export type CoachAppAudience = "parent" | "coach" | "share";
-export type CoachAppBannerStyle = "dark" | "light";
+// "sponsor" is the dark creative with a "Coaching is supported by" line above
+// it: the Coach App as house sponsor of the Coaching section, holding the
+// slot a paying sponsor would take, the way Progress does for Academy
+// Pathway. It sits outside the dark/light A/B test, which only ever assigns
+// dark or light.
+export type CoachAppBannerStyle = "dark" | "light" | "sponsor";
 
 // Where a banner sits. "article" is the in-body placement the A/B test runs
 // on; "home" is the homepage; "category" is the section-level promo above a
@@ -61,6 +66,19 @@ export const BANNER_TEST_STARTED_AT = "2026-09-04T20:30:00Z";
 // page that no longer shows the banner.
 export const HOME_BANNER_ENDED_AT = "2026-10-02T13:15:00Z";
 export const ACTIVE_BANNER_STYLE: CoachAppBannerStyle = "dark";
+
+// When the Coaching section switched to the sponsor creative, on both the
+// category page and the mid-article banner of every /coaching/ article: the
+// merge that shipped it. Before this those pages showed the ordinary coach
+// creative, so the report must not count their earlier views as sponsor
+// impressions.
+export const COACHING_SPONSOR_STARTED_AT = "2026-10-08T22:00:00Z";
+
+/** Whether a /coaching page or article was showing the sponsor creative at a
+ * given time. */
+export function coachingSponsorAt(createdAt: string): boolean {
+  return createdAt >= COACHING_SPONSOR_STARTED_AT;
+}
 
 const DESTINATION = "/football-parent-coach-app";
 
@@ -227,7 +245,7 @@ export default function CoachAppBanner({
     );
   }
 
-  if (style === "dark") {
+  if (style === "dark" || style === "sponsor") {
     return (
       <Link
         href={href}
@@ -238,6 +256,11 @@ export default function CoachAppBanner({
         // rather than the background, which would bring the box back.
         className={`group block rounded-2xl bg-black px-6 py-6 text-white transition hover:ring-1 hover:ring-white/25 sm:px-8 ${spacing}`}
       >
+        {style === "sponsor" && (
+          <p className="m-0 mb-4 text-xs font-semibold uppercase tracking-wide text-white/60">
+            Coaching is supported by
+          </p>
+        )}
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
           {/* self-start is load-bearing: the mobile layout is flex-col, so the
               cross axis is horizontal and the default align-items:stretch

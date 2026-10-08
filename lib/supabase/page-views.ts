@@ -8,6 +8,7 @@ import {
   bannerStyleForKey,
   HOME_BANNER_ENDED_AT,
   audienceAt,
+  coachingSponsorAt,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 
@@ -1080,7 +1081,10 @@ function bannerOnPath(
   // category page has no meaningful slug to split on.
   if (CATEGORY_BANNER_PATHS.has(path)) {
     return {
-      style: bannerStyleForKey(undefined),
+      style:
+        path === "/coaching" && coachingSponsorAt(createdAt)
+          ? "sponsor"
+          : bannerStyleForKey(undefined),
       audience: "coach",
       placement: "category",
     };
@@ -1090,7 +1094,12 @@ function bannerOnPath(
   if (!lastSegment || !articleSlugs.has(lastSegment)) return null;
 
   return {
-    style: bannerStyleForKey(lastSegment),
+    // /coaching/ articles carry the sponsor creative from
+    // COACHING_SPONSOR_STARTED_AT (lib/MDXContent.tsx).
+    style:
+      path.startsWith("/coaching/") && coachingSponsorAt(createdAt)
+        ? "sponsor"
+        : bannerStyleForKey(lastSegment),
     audience: audienceForPath(path, createdAt),
     placement: "article",
   };
