@@ -12,6 +12,16 @@
 // component and the delegated listener already catches it.
 
 export const INSTAGRAM_URL = "https://www.instagram.com/football.parent";
+
+// Where on the site an Instagram link sits. Carried in the link itself as
+// utm_content (Instagram ignores it), because partner_clicks stores the full
+// href and has no placement column: the "Instagram clicks" report reads it
+// back out with instagramPlacementFromHref in lib/supabase/partner-clicks.ts.
+export type InstagramPlacement = "end-card" | "mid-article" | "footer";
+
+export function instagramUrl(placement: InstagramPlacement): string {
+  return `${INSTAGRAM_URL}/?utm_content=${placement}`;
+}
 export const INSTAGRAM_HANDLE = "@football.parent";
 
 export function InstagramIcon({ className = "h-5 w-5" }: { className?: string }) {
@@ -35,7 +45,7 @@ export default function InstagramFollow() {
         </p>
       </div>
       <a
-        href={INSTAGRAM_URL}
+        href={instagramUrl("end-card")}
         target="_blank"
         // No noreferrer: the profile visit should show it came from us.
         rel="noopener"

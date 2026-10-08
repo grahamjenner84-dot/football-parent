@@ -1,4 +1,4 @@
-import { INSTAGRAM_HANDLE, INSTAGRAM_URL, InstagramIcon } from "@/app/components/InstagramFollow";
+import { INSTAGRAM_HANDLE, InstagramIcon, instagramUrl } from "@/app/components/InstagramFollow";
 
 // Mid-article "more like this on Instagram" box, placed by hand in the
 // highest-traffic articles as <InstagramPromo /> (about a fifth of the way
@@ -8,8 +8,8 @@ import { INSTAGRAM_HANDLE, INSTAGRAM_URL, InstagramIcon } from "@/app/components
 // pulling readers off-site competes with the affiliate click-out (same
 // reasoning as the no-outbound-citations rule in CLAUDE.md).
 //
-// Clicks are counted by PartnerClickTracker like the end-of-article card;
-// data-instagram-placement is there so the two can be told apart later.
+// Clicks are counted by PartnerClickTracker like the end-of-article card,
+// told apart by the utm_content in the link (see instagramUrl).
 export default function InstagramPromo() {
   return (
     <aside
@@ -29,7 +29,7 @@ export default function InstagramPromo() {
           </p>
         </div>
         <a
-          href={INSTAGRAM_URL}
+          href={instagramUrl("mid-article")}
           target="_blank"
           rel="noopener"
           className="inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] px-5 py-2.5 text-sm font-semibold !text-white no-underline shadow-sm transition hover:opacity-90"
