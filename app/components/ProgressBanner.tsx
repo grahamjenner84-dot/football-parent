@@ -5,8 +5,9 @@ import Link from "next/link";
 // what it does and start the trial from the join form there.
 //
 // Placements: "home" (the homepage's app slot, which it took over from the
-// Coach App banner), "article" (the end of parent-facing articles; the Coach
-// App banner keeps the middle, so the two never sit together) and
+// Coach App banner), "article" (the mid-article slot of parent-facing
+// articles, which it took over from the Coach App banner; see
+// lib/MDXContent.tsx) and
 // "academy-pathway" (Progress sponsors the Academy Pathway section: the
 // category page and the end of its articles carry the sponsor version, with
 // the strapline).
@@ -84,11 +85,11 @@ export default function ProgressBanner({
           ) : (
             <>
               <p className="m-0 mb-2 text-lg font-bold leading-snug text-[#16211b] sm:text-xl">
-                Keep your child&apos;s whole football journey in one place
+                Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
               </p>
               <p className="m-0 text-base leading-7 text-[#3c4a40]">
-                Goals, assists and career stats, training and coach feedback, and season cards worth
-                sharing.
+                Track their goals and assists, log their progress and keep coach feedback in one
+                place, season after season.
               </p>
             </>
           )}

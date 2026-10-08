@@ -3,9 +3,10 @@ import CoachAppShareButton from "@/app/components/CoachAppShareButton";
 
 // Promo banner for the Coach App, in two creatives and two audiences.
 //
-// Audience: parents care about their child's own record (goals, assists,
-// man of the match); coaches/managers care about fair game time and the
-// admin around it.
+// Audience: since PARENT_ARTICLE_BANNER_ENDED_AT only coaches see these
+// (parents get Progress, the parents' app). The coach pitch is less admin:
+// pick the team fast and keep the team's stats. The parent and share copy
+// is no longer rendered, kept so old variants still read in the report.
 //
 // Style: "dark" is the full-width black bar with the horizontal logo and a
 // single line of copy; "light" is the quieter grey card with a paragraph and
@@ -167,7 +168,7 @@ const DARK_COPY: Record<CoachAppAudience, string> = {
   parent:
     "Log every goal, assist and man of the match from the touchline.",
   coach:
-    "Fair game time, lineups and match stats, without the Sunday-morning spreadsheet.",
+    "Less admin. Pick the team fast and keep track of your team's stats.",
   share:
     "Know a grassroots coach still working out subs on the touchline? The Coach App does the game-time maths for them.",
 };
@@ -181,8 +182,8 @@ const LIGHT_COPY: Record<
     body: "Appearances, goals, assists and minutes played, logged match by match instead of half-remembered at the end of the season.",
   },
   coach: {
-    title: "Fair game time without doing the maths on the touchline",
-    body: "Equal-time rotation, lineups, availability and match records in one place, so the Sunday-morning admin stops eating into the coaching.",
+    title: "Pick the team fast and keep your team's stats",
+    body: "Lineups, fair game time and availability sorted in a few taps, with every result, goal and minute played logged as you go. Less admin, more time for the coaching.",
   },
   share: {
     title: "Know a coach who'd use this?",
