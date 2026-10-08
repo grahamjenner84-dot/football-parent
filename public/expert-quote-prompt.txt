@@ -27,7 +27,7 @@ HARD RULES ON THE ANSWERS (most important)
 - If a hook needs context the source does not give, drop it and pick another.
 
 LENGTH (hard caps, shorter is better)
-- Cover question 10 words, questions 9 words, answers 35 words (15 to 25 reads best), pull-quote 20 words, closing line 10 words.
+- Cover question 10 words, questions 9 words, answers 35 words (15 to 25 reads best), pull-quote 20 words, follow line 14 words.
 
 HOOK SELECTION
 - Favour the surprising, the reassuring, and the gentle myth-buster.
@@ -38,10 +38,10 @@ HOOK SELECTION
 ALSO PICK
 - The single punchiest line in the whole source to feature as the big pull-quote: exact words, cut only, same rule as the answers.
 - A cover question: the angle as the worry the audience already has, in their words.
-- A closing line telling this audience who to send it to.
+- A follow line: the reason this audience should follow Football Parent, as the end of the sentence "Follow @football.parent ...", so it starts with "for". For a parent post you can leave it out (the builder's default is "for a new *expert* answering parents' questions every week"). For a coach post write one for coaches.
 
 OUTPUT
-Return ONLY the paste-ready import block below, in EXACTLY this labelled format (the builder's "Import a full post" button reads it). Mark exactly one *word* with asterisks in the cover question, each answer, the quote and the closing line (that word renders gold). One label per line:
+Return ONLY the paste-ready import block below, in EXACTLY this labelled format (the builder's "Import a full post" button reads it). Mark exactly one *word* with asterisks in the cover question, each answer, the quote and the follow line (that word renders gold). One label per line:
 
 NAME: <guest name>
 HANDLE: <@handle>
@@ -55,9 +55,8 @@ A: <answer 1, true to the source>
 Q: <summarised question 2>
 A: <answer 2, true to the source>
 QUOTE: <punchiest line from the source>
-CTA: <closing line>
 INTERVIEW: <where to find the full interview, e.g. Full interview: link in our bio>
-BLURB: <one line on what Football Parent is, for the follow slide>
+FOLLOW: <optional: for ... (one *gold* word), 14 words max>
 
 Then paste that block into the builder to load every slide at once.
 

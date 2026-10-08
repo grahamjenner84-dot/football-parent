@@ -52,13 +52,12 @@ export type ExpertQuoteData = {
   coverQuestion?: string;
   coverEyebrow?: string;
   coverContext?: string;
-  blurb?: string;
+  followLine?: string;
   qas: ExpertQA[];
   quote?: string;
   cta?: string;
   interview?: string;
   siteUrl?: string;
-  shareLine?: string;
   platform?: "ig" | "tiktok";
   format?: "reel" | "carousel";
   bgBySlide?: Record<string, "dark" | "light">;
