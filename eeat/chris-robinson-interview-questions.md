@@ -1,6 +1,6 @@
 # Chris Robinson interview: question set
 
-Lined up 2026-10-07. Fills the **Scout / recruitment lead** slot, which is the
+Lined up 2026-10-07. **Status: questions sent 2026-10-08.** Waiting on answers. Fills the **Scout / recruitment lead** slot, which is the
 top-priority expert in `expert-question-bank.md` (the trials cluster plus the
 templated club dev-centre guides). Until now no expert on file has covered
 scouting.
