@@ -45,31 +45,46 @@ function isMissingTable(error: { code?: string }): boolean {
   return error.code === "PGRST205" || error.code === "42P01";
 }
 
-export async function recordAccountDaily(supabase: SupabaseClient, creds: AccountCredentials, now = new Date()): Promise<{ snapshotDate: string; followers: number | null } | { skipped: string }> {
-  const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-  const until = Math.floor(todayUtc / 1000);
-  const since = until - 24 * 60 * 60;
-  const snapshotDate = new Date(since * 1000).toISOString().slice(0, 10);
+const DAY_SECONDS = 24 * 60 * 60;
+// Instagram lets a day's account insights be read afterwards, so missing
+// days are filled in: up to BACKFILL_PER_RUN per night, newest first, looking
+// back BACKFILL_DAYS. A day counts as missing if it has no row, or its row
+// got neither reach nor views (e.g. Instagram was down, or the token had
+// expired), so it is retried. followers_count stays null on filled-in days:
+// Instagram only ever gives the current count.
+const BACKFILL_DAYS = 30;
+const BACKFILL_PER_RUN = 5;
+
+function dateOf(unixSeconds: number): string {
+  return new Date(unixSeconds * 1000).toISOString().slice(0, 10);
+}
+
+// The insight numbers for one UTC day. `withExtras` adds the requests that
+// only make sense for yesterday (follower counts are "now"; online_followers
+// isn't a per-day figure).
+async function dayRow(creds: AccountCredentials, since: number, withExtras: boolean) {
   const { igUserId, accessToken } = creds;
-  const day = { period: "day", since, until, metric_type: "total_value" };
+  const day = { period: "day", since, until: since + DAY_SECONDS, metric_type: "total_value" };
   const raw: Raw = {};
 
-  const counts = await attempt(raw, "counts", () => getAccountCounts(igUserId, accessToken));
+  const counts = withExtras ? await attempt(raw, "counts", () => getAccountCounts(igUserId, accessToken)) : undefined;
   const totals = await attempt(raw, "totals", () => getAccountInsights(igUserId, accessToken, { ...day, metric: "reach,views,profile_links_taps" }));
   const reachSplit = await attempt(raw, "reach_by_follow_type", () => getAccountInsights(igUserId, accessToken, { ...day, metric: "reach", breakdown: "follow_type" }));
   const viewsSplit = await attempt(raw, "views_by_follow_type", () => getAccountInsights(igUserId, accessToken, { ...day, metric: "views", breakdown: "follow_type" }));
   const follows = await attempt(raw, "follows_and_unfollows", () => getAccountInsights(igUserId, accessToken, { ...day, metric: "follows_and_unfollows", breakdown: "follow_type" }));
-  // Format split (reels vs posts vs stories) is the nearest thing to "where
-  // it was seen" the API has offered; kept raw only.
-  await attempt(raw, "views_by_media_product_type", () => getAccountInsights(igUserId, accessToken, { ...day, metric: "views", breakdown: "media_product_type" }));
-  const online = await attempt(raw, "online_followers", () => getAccountInsights(igUserId, accessToken, { metric: "online_followers", period: "lifetime", since, until }));
+  let onlineValue: unknown = null;
+  if (withExtras) {
+    // Format split (reels vs posts vs stories) is the nearest thing to
+    // "where it was seen" the API has offered; kept raw only.
+    await attempt(raw, "views_by_media_product_type", () => getAccountInsights(igUserId, accessToken, { ...day, metric: "views", breakdown: "media_product_type" }));
+    const online = await attempt(raw, "online_followers", () => getAccountInsights(igUserId, accessToken, { metric: "online_followers", period: "lifetime", since, until: since + DAY_SECONDS }));
+    // online_followers' value is an hour -> count map, not a number.
+    onlineValue = online?.data?.find((d) => d.name === "online_followers")?.values?.at(-1)?.value as unknown;
+  }
 
-  // online_followers' value is an hour -> count map, not a number.
-  const onlineValue = online?.data?.find((d) => d.name === "online_followers")?.values?.at(-1)?.value as unknown;
-
-  const row = {
+  return {
     account_id: creds.accountRowId,
-    snapshot_date: snapshotDate,
+    snapshot_date: dateOf(since),
     followers_count: counts?.followers_count ?? null,
     follows_count: counts?.follows_count ?? null,
     media_count: counts?.media_count ?? null,
@@ -88,11 +103,50 @@ export async function recordAccountDaily(supabase: SupabaseClient, creds: Accoun
     raw,
     pulled_at: new Date().toISOString(),
   };
+}
 
-  const { error } = await supabase.from("instagram_account_daily").upsert(row, { onConflict: "account_id,snapshot_date" });
-  if (error) {
-    if (isMissingTable(error)) return { skipped: "instagram_account_daily table missing (apply 20261008090000_post_metrics_follows.sql)" };
-    throw new Error(`Failed to record account daily snapshot: ${error.message}`);
+export type AccountDailyResult = { snapshotDate: string; followers: number | null; backfilled: string[] } | { skipped: string };
+
+export async function recordAccountDaily(supabase: SupabaseClient, creds: AccountCredentials, now = new Date()): Promise<AccountDailyResult> {
+  const todayUtc = Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 1000);
+  const yesterday = todayUtc - DAY_SECONDS;
+  const earliest = todayUtc - BACKFILL_DAYS * DAY_SECONDS;
+
+  // Which recent days already have usable numbers.
+  const { data: existing, error: readError } = await supabase
+    .from("instagram_account_daily")
+    .select("snapshot_date, reach, views")
+    .eq("account_id", creds.accountRowId)
+    .gte("snapshot_date", dateOf(earliest));
+  if (readError) {
+    if (isMissingTable(readError)) return { skipped: "instagram_account_daily table missing (apply 20261008090000_post_metrics_follows.sql)" };
+    throw new Error(`Failed to read account daily snapshots: ${readError.message}`);
   }
-  return { snapshotDate, followers: row.followers_count };
+  const done = new Set((existing ?? []).filter((r) => r.reach != null || r.views != null).map((r) => r.snapshot_date as string));
+
+  const upsert = async (row: Record<string, unknown>) => {
+    const { error } = await supabase.from("instagram_account_daily").upsert(row, { onConflict: "account_id,snapshot_date" });
+    if (error) throw new Error(`Failed to record account daily snapshot for ${row.snapshot_date}: ${error.message}`);
+  };
+
+  // Yesterday always (it carries the follower count, which can't be had later).
+  const latest = await dayRow(creds, yesterday, true);
+  await upsert(latest);
+
+  // Then fill gaps, newest first. A filled-in day is only written if it got
+  // numbers, so a day Instagram won't answer for stays missing and is retried.
+  // Attempts are capped too, so a run of days Instagram won't answer for
+  // can't use up the cron's time limit.
+  const backfilled: string[] = [];
+  let tried = 0;
+  for (let d = yesterday - DAY_SECONDS; d >= earliest && tried < BACKFILL_PER_RUN; d -= DAY_SECONDS) {
+    if (done.has(dateOf(d))) continue;
+    tried++;
+    const row = await dayRow(creds, d, false);
+    if (row.reach == null && row.views == null) continue;
+    await upsert(row);
+    backfilled.push(row.snapshot_date);
+  }
+
+  return { snapshotDate: latest.snapshot_date, followers: latest.followers_count, backfilled };
 }

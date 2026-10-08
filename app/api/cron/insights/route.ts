@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/render-pipeline";
 import { getDueInsightsPulls } from "@/lib/instagram/insights-pipeline";
 import { discoverMedia } from "@/lib/instagram/discover-media";
-import { recordAccountDaily } from "@/lib/instagram/account-daily";
+import { recordAccountDaily, AccountDailyResult } from "@/lib/instagram/account-daily";
 import { runInsightsBatch } from "@/lib/instagram/insights-flow";
 import { getAccountCredentials, ensureValidToken, TokenError } from "@/lib/instagram/publish-flow";
 import { isAuthorizedCronRequest } from "@/lib/cron-auth";
@@ -47,9 +47,10 @@ async function handle(req: NextRequest) {
   }
 
   // Whole-account numbers for yesterday (follower count, reach and views
-  // split by followers vs non-followers, bio-link taps, follows). Same rule:
+  // split by followers vs non-followers, bio-link taps, follows), plus up to
+  // five missing days from the last 30 filled in. Same rule:
   // a failure here doesn't stop the per-post pulls.
-  let account: Awaited<ReturnType<typeof recordAccountDaily>> | { error: string };
+  let account: AccountDailyResult | { error: string };
   try {
     account = await recordAccountDaily(supabase, creds);
     console.log(`[cron/insights] account daily: ${JSON.stringify(account)}`);
