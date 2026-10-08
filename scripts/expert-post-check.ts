@@ -33,6 +33,7 @@ type Post = {
   qas: QA[];
   quote?: string;
   cta?: string;
+  followLine?: string;
   caption?: string;
   collab?: string;
 };
@@ -45,6 +46,7 @@ export const LIMITS = {
   answerWords: 35,
   quoteWords: 20,
   ctaWords: 10,
+  followWords: 14,
   captionChars: 600,
   minQas: 2,
   maxQas: 4,
@@ -130,6 +132,7 @@ async function main() {
     });
     if (post.quote) cap("quote", words(post.quote), LIMITS.quoteWords);
     if (post.cta) cap("closing line", words(post.cta), LIMITS.ctaWords);
+    if (post.followLine) cap("follow line", words(post.followLine), LIMITS.followWords);
     if ((post.caption || "").length > LIMITS.captionChars) errs.push(`caption: ${post.caption!.length} chars, max ${LIMITS.captionChars}`);
     const n = (post.qas || []).length;
     if (n < LIMITS.minQas || n > LIMITS.maxQas) errs.push(`${n} Q&As, want ${LIMITS.minQas}-${LIMITS.maxQas}`);
@@ -156,6 +159,7 @@ async function main() {
       { label: "cover", renderer: "expert-quote-core", slideKind: "cover-question", head: post.coverQuestion, body: post.coverContext || "" },
       ...(preset?.bio ? [{ label: "bio", renderer: "expert-quote-core" as const, slideKind: "bio", head: String(preset.bio) }] : []),
       ...(post.qas || []).map((qa, i) => ({ label: `Q${i + 1}`, renderer: "expert-quote-core" as const, slideKind: "qa", head: qa.q, body: qa.a })),
+      { label: "closing", renderer: "expert-quote-core", slideKind: "closing", head: post.followLine || "", body: post.cta || "" },
     ];
     for (const r of checkSlidesFit(inputs)) {
       if (!r.fits) errs.push(`${r.label} overflows: ${r.detail}`);
@@ -174,7 +178,7 @@ async function main() {
         ...preset, bioSrc: dataUri(preset.bioSrc) ?? undefined,
         coverStyle: "question", coverEyebrow: post.coverEyebrow || "Football Parent asks",
         coverQuestion: post.coverQuestion, coverContext: post.coverContext || "",
-        qas: post.qas, quote: post.quote || "", cta: post.cta || "", format: "carousel", platform: "ig",
+        qas: post.qas, quote: post.quote || "", cta: post.cta || "", followLine: post.followLine || "", format: "carousel", platform: "ig",
       };
       const slides = [{ type: "cover" }, { type: "bio" }, ...post.qas.map((_, i) => ({ type: "qa", i })), { type: "quote" }, { type: "cta" }];
       for (let i = 0; i < slides.length; i++) {

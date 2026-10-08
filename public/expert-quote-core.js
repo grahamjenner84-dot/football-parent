@@ -449,6 +449,31 @@
     ctx.fillStyle = t.accent; ctx.fillText(b, x + wa, topY);
     ctx.restore();
   }
+  // Closing slide: the follow ask first ("Follow @football.parent" pill, then
+  // the reason as one sentence starting "for ..."), where to tap, then the
+  // share ask (data.cta) and the interview line, smaller. Views on collab
+  // posts come from the guest's followers, so the follow ask leads.
+  // ctaLayout() does all the measuring so lib/instagram/slide-fit.ts checks
+  // exactly what drawCTA() draws.
+  var DEFAULT_FOLLOW_LINE = 'for a new *expert* answering parents’ questions every week';
+  var CTA_HEAD_MAX_H = 300, CTA_SHARE_MAX_H = 130;
+  function ctaLayout(ctx, format, data) {
+    var S = safe(format);
+    var head = ((data.followLine || '').trim()) || DEFAULT_FOLLOW_LINE;
+    var hf = fitWords(ctx, [wordsUC(head)], S.maxW, CTA_HEAD_MAX_H, 72, 46, 1.06, 0, function (s) { return "400 " + s + "px 'Anton'"; });
+    var cta = (data.cta || '').trim();
+    var cf = cta ? fitWords(ctx, [wordsRaw(cta)], S.maxW - 30, CTA_SHARE_MAX_H, 36, 28, 1.36, 0, function (s) { return "600 " + s + "px 'Archivo'"; }) : null;
+    var iv = (data.interview || '').trim();
+    var g = { pillFs: 50, pillH: 120, g1: 40, g2: 40, hintH: 34, gSec: 96, g3: 22, actH: 40 };
+    var hHead = hf.wrapped[0].length * hf.lineH, hShare = cf ? cf.wrapped[0].length * cf.lineH : 0;
+    var total = g.pillH + g.g1 + hHead + g.g2 + g.hintH + g.gSec + 2 + g.gSec / 2 + hShare + (iv ? g.g3 + g.actH : 0);
+    var regionTop = S.safeTop + 120, regionBot = S.safeBottom - 52;
+    return {
+      S: S, hf: hf, cf: cf, iv: iv, g: g, total: total, budget: regionBot - regionTop,
+      top: Math.max(regionTop, (regionTop + regionBot) / 2 - total / 2),
+      fits: hHead <= CTA_HEAD_MAX_H && hShare <= CTA_SHARE_MAX_H && total <= regionBot - regionTop
+    };
+  }
   function drawCTA(ctx, format, data, images) {
     var S = safe(format), t = theme(bgFor(data.bgBySlide, 'cta'));
     bgDark(ctx, format, t);
@@ -457,27 +482,16 @@
       ctx.save(); ctx.textAlign = 'left'; ctx.textBaseline = 'top'; ctx.font = "400 40px 'Anton'"; try { ctx.letterSpacing = '1px'; } catch (e) {}
       ctx.fillStyle = t.text; ctx.fillText(site.toUpperCase(), S.leftX, S.safeTop + 18); ctx.restore();
     }
-    ctx.textAlign = 'center';
-    var actH = 40;
-    var hf = fitWords(ctx, [wordsUC(data.cta)], S.maxW, 260, 52, 38, 1.08, 0, function (s) { return "400 " + s + "px 'Anton'"; });
-    var iv = (data.interview || '').trim();
-    var sh = (data.shareLine || '').trim();
-    var rf = fitWords(ctx, [wordsRaw(data.blurb)], S.maxW - 30, 240, 34, 28, 1.42, 0, function (s) { return "500 " + s + "px 'Archivo'"; });
-    var pillFs = 54, pillH = Math.round(pillFs * 2.4);
-    var g2 = 28, gSec = 104, g4 = 40;
-    var hHead = hf.wrapped[0].length * hf.lineH;
-    var hAct = ((sh ? 1 : 0) + (iv ? 1 : 0)) * actH;
-    var hReason = rf.wrapped[0].length * rf.lineH;
-    var total = hHead + g2 + hAct + gSec + pillH + g4 + hReason;
-    var regionTop = S.safeTop + 150, regionBot = S.safeBottom - 52;
-    var y = Math.max(regionTop, (regionTop + regionBot) / 2 - total / 2);
-    ctx.textBaseline = 'top';
-    ctx.font = "400 " + hf.size + "px 'Anton'"; y = drawLines(ctx, hf.wrapped[0], S.centerX, y, hf.lineH, 'center', hf.space, t.text, t.accent); y += g2;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.font = "600 30px 'Spline Sans Mono'"; ctx.fillStyle = t.body;
-    if (sh) { drawIconLine(ctx, 'diagonal', sh.toUpperCase(), S.centerX, y, "600 30px 'Spline Sans Mono'", t.body); y += actH; }
-    if (iv) { drawIconLine(ctx, 'right', iv.toUpperCase(), S.centerX, y, "600 30px 'Spline Sans Mono'", t.body); y += actH; }
-    y += gSec; var pillCy = y + pillH / 2; followPill(ctx, S.centerX, pillCy, t, pillFs, data.platform); y = pillCy + pillH / 2 + g4;
-    ctx.font = "500 " + rf.size + "px 'Archivo'"; y = drawLines(ctx, rf.wrapped[0], S.centerX, y, rf.lineH, 'center', rf.space, t.body, t.accent);
+    var L = ctaLayout(ctx, format, data), g = L.g, hf = L.hf, cf = L.cf;
+    var hint = format === 'carousel' ? 'TAP OUR NAME AT THE TOP TO FOLLOW' : 'TAP OUR NAME BELOW TO FOLLOW';
+    var y = L.top;
+    var pillCy = y + g.pillH / 2; followPill(ctx, S.centerX, pillCy, t, g.pillFs, data.platform); y = pillCy + g.pillH / 2 + g.g1;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    ctx.font = "400 " + hf.size + "px 'Anton'"; y = drawLines(ctx, hf.wrapped[0], S.centerX, y, hf.lineH, 'center', hf.space, t.text, t.accent); y += g.g2;
+    ctx.textAlign = 'center'; ctx.font = "600 26px 'Spline Sans Mono'"; ctx.fillStyle = t.sub; ctx.fillText(hint, S.centerX, y); y += g.hintH + g.gSec;
+    ctx.fillStyle = t.light ? 'rgba(22,20,15,.16)' : 'rgba(255,255,255,.14)'; ctx.fillRect(S.centerX - 90, y, 180, 2); y += 2 + g.gSec / 2;
+    if (cf) { ctx.font = "600 " + cf.size + "px 'Archivo'"; y = drawLines(ctx, cf.wrapped[0], S.centerX, y, cf.lineH, 'center', cf.space, t.body, t.accent); }
+    if (L.iv) { y += g.g3; drawIconLine(ctx, 'right', L.iv.toUpperCase(), S.centerX, y, "600 28px 'Spline Sans Mono'", t.sub); }
     footerHandles(ctx, S, !t.light, data.platform, data.handle);
   }
   function drawSafeOverlay(ctx, format) {
@@ -493,8 +507,8 @@
 
   // slide: {type:'cover'|'bio'|'qa'|'quote'|'cta', i?} (i = qa index, for type 'qa').
   // data: {name,handle,role,person,quoteWhite,topic,bio,bioSrc,quoteFirst,coverStyle,
-  //   coverQuestion,coverEyebrow,coverContext,blurb,qas,quote,cta,interview,siteUrl,
-  //   shareLine,platform,format,bgBySlide}. images: {logoImg,bioImg} (loaded Image or null).
+  //   coverQuestion,coverEyebrow,coverContext,followLine,qas,quote,cta,interview,siteUrl,
+  //   platform,format,bgBySlide}. images: {logoImg,bioImg} (loaded Image or null).
   function draw(ctx, slide, data, images) {
     images = images || {};
     var t = slide.type;
@@ -553,6 +567,8 @@
     followPill: followPill,
     drawWordmark: drawWordmark,
     drawCTA: drawCTA,
+    ctaLayout: ctaLayout,
+    DEFAULT_FOLLOW_LINE: DEFAULT_FOLLOW_LINE,
     drawSafeOverlay: drawSafeOverlay,
     draw: draw
   };

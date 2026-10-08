@@ -24,7 +24,7 @@ device.
    words don't make the point short enough, pick a different passage.
    `scripts/expert-post-check.ts` enforces this against the article.
 2. **Short copy.** Cover 10 words max, questions 9, answers 35, quote 20,
-   closing line 10, caption 600 characters. These are hard caps in the
+   closing line 10, follow line 14, caption 600 characters. These are hard caps in the
    checker. Shorter is better: an answer of 15-25 words reads best on a slide.
 3. **An interesting angle, for a named audience.** Every post is for one of
    Graham's two audiences:
@@ -94,6 +94,7 @@ this interview so nothing is repeated.
   "qas": [{ "q": "…", "a": "exact words … exact words" }],
   "quote": "…",
   "cta": "…",
+  "followLine": "…",
   "caption": "…",
   "collab": "@elitemindset_coaching"
 }
@@ -103,6 +104,14 @@ this interview so nothing is repeated.
 set in posting order, strongest first, so the dropdown reads as a plan.
 `collab` is the handle to invite as a collaborator (usually the preset's
 handle); the builder shows it as a reminder under the caption.
+
+The closing slide leads with the follow ask: a "FOLLOW @football.parent" button,
+then `followLine` as the rest of that sentence, then the `cta` share line
+smaller underneath. `followLine` starts with "for" and marks one *gold* word.
+Leave it out on parent posts to get the default ("for a new *expert* answering
+parents' questions every week"); give coach posts their own, e.g. "for academy
+coaches answering *your* coaching questions every week". Views on a collab come
+from the guest's followers, so this line is the reason a stranger follows us.
 
 Graham marks a post as posted in the builder (button under the caption), which
 hides it from the dropdown. Signed in to `/admin`, the mark syncs across his

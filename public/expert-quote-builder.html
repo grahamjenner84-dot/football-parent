@@ -164,12 +164,11 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
       </div>
 
       <div>
-        <div class="lbl">Closing slide <span style="color:#6f6f6f;font-weight:600;text-transform:none">— share + follow</span></div>
+        <div class="lbl">Closing slide <span style="color:#6f6f6f;font-weight:600;text-transform:none">— follow + share</span></div>
         <input id="fieldSiteUrl" class="fld" placeholder="Site URL — top-left masthead" style="margin-top:7px">
-        <input id="fieldCta" class="fld" placeholder="Know a parent asking about *Future Fit?*" style="margin-top:7px">
-        <input id="fieldShareLine" class="fld" placeholder="Share prompt" style="margin-top:7px">
+        <textarea id="fieldFollowLine" class="fld" placeholder="Why follow, under the Follow button. Blank = for a new *expert* answering parents’ questions every week" style="margin-top:7px;height:64px;resize:vertical"></textarea>
+        <input id="fieldCta" class="fld" placeholder="Share ask, e.g. Send this to a parent on the *touchline*" style="margin-top:7px">
         <input id="fieldInterview" class="fld" placeholder="Full article — link in our bio" style="margin-top:7px">
-        <textarea id="fieldBlurb" class="fld" placeholder="Why follow — shown under the Follow button." style="margin-top:7px;height:64px;resize:vertical"></textarea>
       </div>
 
       <div style="border:1px solid #2a2a2f;border-radius:10px;padding:13px;display:flex;flex-direction:column;gap:9px">
@@ -265,13 +264,12 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     coverQuestion: '',
     coverEyebrow: 'A parent asks',
     coverContext: '',
-    blurb: 'Honest, jargon-free help for parents of grassroots and academy players. New expert Q&A every week.',
+    followLine: '',
     qas: sampleQAs(),
     quote: "Future Fit isn't about *winning* at eight. It's about still playing at eighteen.",
     cta: 'Know a parent asking about *Future Fit?*',
     interview: 'Full article — link in our bio',
     siteUrl: 'footballparent.co.uk',
-    shareLine: 'Share it with them',
     caption: '',
     collab: '',
     platform: 'ig',
@@ -299,8 +297,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
       localStorage.setItem('fp_expert_builder', JSON.stringify({
         name: s.name, handle: s.handle, role: s.role, person: s.person, quoteWhite: s.quoteWhite, bgMode: s.bgMode,
         logoSrc: s.logoSrc, topic: s.topic, bio: s.bio, bioSrc: s.bioSrc, quoteFirst: s.quoteFirst, coverStyle: s.coverStyle,
-        coverQuestion: s.coverQuestion, coverEyebrow: s.coverEyebrow, coverContext: s.coverContext, blurb: s.blurb,
-        qas: s.qas, quote: s.quote, cta: s.cta, interview: s.interview, siteUrl: s.siteUrl, shareLine: s.shareLine,
+        coverQuestion: s.coverQuestion, coverEyebrow: s.coverEyebrow, coverContext: s.coverContext, followLine: s.followLine,
+        qas: s.qas, quote: s.quote, cta: s.cta, interview: s.interview, siteUrl: s.siteUrl,
         format: s.format, bgBySlide: s.bgBySlide, caption: s.caption, collab: s.collab
       }));
     } catch (e) {}
@@ -465,6 +463,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
       quote: p.quote || '',
       quoteFirst: false,
       cta: p.cta || state.cta,
+      followLine: p.followLine || '',
       interview: p.interview || state.interview,
       caption: p.caption || '',
       collab: p.collab || '',
@@ -498,9 +497,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     text = String(text).trim();
     if (text && (text[0] === '{' || text[0] === '[')) { try { return normObj(JSON.parse(text)); } catch (e) {} }
     var lines = text.split(/\r?\n/); var out = { qas: [] }; var cur = null, curQ = null;
-    var fmap = { name: 'name', handle: 'handle', role: 'role', person: 'person', topic: 'topic', bio: 'bio', blurb: 'blurb', quote: 'quote', cta: 'cta', closing: 'cta', interview: 'interview', expert: 'expert', cover: 'coverQuestion', context: 'coverContext', eyebrow: 'coverEyebrow' };
+    var fmap = { name: 'name', handle: 'handle', role: 'role', person: 'person', topic: 'topic', bio: 'bio', blurb: 'blurb', follow: 'followLine', quote: 'quote', cta: 'cta', closing: 'cta', interview: 'interview', expert: 'expert', cover: 'coverQuestion', context: 'coverContext', eyebrow: 'coverEyebrow' };
     lines.forEach(function (line) {
-      var m = line.match(/^\s*(name|handle|role|person|topic|bio|blurb|quote|cta|closing|interview|expert|cover|context|eyebrow|q|a|question|answer)\s*\d*\s*[:\-–]\s*(.*)$/i);
+      var m = line.match(/^\s*(name|handle|role|person|topic|bio|blurb|follow|quote|cta|closing|interview|expert|cover|context|eyebrow|q|a|question|answer)\s*\d*\s*[:\-–]\s*(.*)$/i);
       if (m) {
         var key = m[1].toLowerCase(), val = m[2];
         if (key === 'q' || key === 'question') { curQ = { q: val, a: '' }; out.qas.push(curQ); cur = 'q'; }
@@ -529,7 +528,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     var arr = get('qas', 'questions', 'qa') || [];
     return {
       name: get('name'), handle: get('handle'), role: get('role'), person: get('person'), topic: get('topic'), bio: get('bio'),
-      blurb: get('blurb'), quote: get('quote'), cta: get('cta', 'closing'), interview: get('interview'),
+      followLine: get('followline', 'follow'), quote: get('quote'), cta: get('cta', 'closing'), interview: get('interview'),
       expert: get('expert'), coverQuestion: get('coverquestion', 'cover'), coverContext: get('covercontext', 'context'), coverEyebrow: get('covereyebrow', 'eyebrow'),
       qas: Array.isArray(arr) ? arr.map(function (x) { return { q: String(x.q || x.question || '').trim(), a: String(x.a || x.answer || '').trim() }; }) : []
     };
@@ -540,7 +539,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     // EXPERT: <preset id> fills name/handle/role/person/bio/logo/photo first;
     // any explicit NAME/ROLE/etc. lines still win.
     var usedPreset = !!(o.expert && applyPreset(String(o.expert).trim(), true));
-    ['name', 'handle', 'role', 'person', 'topic', 'bio', 'blurb', 'quote', 'cta', 'interview', 'coverQuestion', 'coverContext', 'coverEyebrow'].forEach(function (k) {
+    ['name', 'handle', 'role', 'person', 'topic', 'bio', 'followLine', 'quote', 'cta', 'interview', 'coverQuestion', 'coverContext', 'coverEyebrow'].forEach(function (k) {
       if (o[k] != null && String(o[k]).trim() !== '') next[k] = String(o[k]).trim();
     });
     if (next.handle && next.handle[0] !== '@') next.handle = '@' + next.handle;
@@ -859,9 +858,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     setVal('fieldQuote', state.quote);
     setVal('fieldSiteUrl', state.siteUrl);
     setVal('fieldCta', state.cta);
-    setVal('fieldShareLine', state.shareLine);
     setVal('fieldInterview', state.interview);
-    setVal('fieldBlurb', state.blurb);
+    setVal('fieldFollowLine', state.followLine);
     setVal('fieldCoverEyebrow', state.coverEyebrow);
     setVal('fieldCoverQuestion', state.coverQuestion);
     setVal('fieldCoverContext', state.coverContext);
@@ -964,9 +962,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('fieldQuote').addEventListener('change', function (e) { set('quote', e.target.value); });
   document.getElementById('fieldCta').addEventListener('change', function (e) { set('cta', e.target.value); });
   document.getElementById('fieldSiteUrl').addEventListener('change', function (e) { set('siteUrl', e.target.value); });
-  document.getElementById('fieldShareLine').addEventListener('change', function (e) { set('shareLine', e.target.value); });
   document.getElementById('fieldInterview').addEventListener('change', function (e) { set('interview', e.target.value); });
-  document.getElementById('fieldBlurb').addEventListener('change', function (e) { set('blurb', e.target.value); });
+  document.getElementById('fieldFollowLine').addEventListener('change', function (e) { set('followLine', e.target.value); });
   document.getElementById('fieldCoverEyebrow').addEventListener('change', function (e) { set('coverEyebrow', e.target.value); });
   document.getElementById('fieldCoverQuestion').addEventListener('change', function (e) { set('coverQuestion', e.target.value); });
   document.getElementById('fieldCoverContext').addEventListener('change', function (e) { set('coverContext', e.target.value); });

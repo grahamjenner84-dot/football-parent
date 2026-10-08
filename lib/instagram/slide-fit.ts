@@ -95,7 +95,8 @@ export type Renderer = "single-slide-core" | "reel-core" | "expert-quote-core";
 //     body entirely and draws brand.ctaUrl/ctaLines instead, so a payload
 //     that puts real content on a 'cta' slide should use 'content' instead -
 //     see copy-flow.ts's joke-carousel closing slide)
-//   expert-quote-core: "cover-question" (hook, coverStyle='question') | "bio" | "qa"
+//   expert-quote-core: "cover-question" (hook, coverStyle='question') | "bio" | "qa" |
+//     "closing" (head = follow line, body = share line; checked in both formats)
 export interface SlideFitInput {
   label: string;
   renderer: Renderer;
@@ -362,6 +363,31 @@ function measureExpertQa(label: string, question: string, answer: string): Slide
   };
 }
 
+// Closing slide. Uses ctaLayout(), the same function drawCTA() lays out
+// with, in both formats (the reel's narrower safe width wraps more), with the
+// interview line present as the worst case.
+function measureExpertClosing(label: string, followLine: string, cta: string): SlideFitResult {
+  const parts: string[] = [];
+  let fits = true;
+  let tight = false;
+  for (const format of ["carousel", "reel"]) {
+    const dims = ExpertQuoteCore.dims(format) as { W: number; H: number };
+    const ctx = getCtx(dims.W, dims.H);
+    const L = ExpertQuoteCore.ctaLayout(ctx, format, { followLine, cta, interview: "Full interview: link in our bio" });
+    fits = fits && L.fits;
+    tight = tight || L.hf.size <= 50 || Boolean(L.cf && L.cf.size <= 30);
+    parts.push(`${format}: follow line ${L.hf.size}px, ${Math.round(L.total)}px vs ${Math.round(L.budget)}px`);
+  }
+  return {
+    label,
+    renderer: "expert-quote-core",
+    slideKind: "closing",
+    fits,
+    tight: fits && tight,
+    detail: parts.join("; ") + (fits ? "" : " - OVERFLOWS"),
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Dispatcher
 // ---------------------------------------------------------------------------
@@ -379,6 +405,9 @@ export function checkSlideFit(input: SlideFitInput): SlideFitResult {
   }
   if (input.slideKind === "bio") {
     return measureExpertBio(input.label, input.head);
+  }
+  if (input.slideKind === "closing") {
+    return measureExpertClosing(input.label, input.head, input.body ?? "");
   }
   return measureExpertQa(input.label, input.head, input.body ?? "");
 }
