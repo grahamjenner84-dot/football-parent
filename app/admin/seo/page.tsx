@@ -84,12 +84,17 @@ const TABS: { id: Tab; label: string }[] = [
 // push the actual data below the fold. Native <details> keeps it one click
 // away, collapsed by default, with no JS state to manage. Short status lines
 // ("showing 20 of 87", a freshness warning) stay visible - only the standing
-// explainers are folded away.
+// explainers are folded away. Closed, each one is a single faint "i" line
+// rather than a boxed panel, so a tab with three of them doesn't read as three
+// extra blocks of furniture; the box only appears once it's opened.
 function SectionNote({ label, children }: { label: string; children: ReactNode }) {
   return (
     <details style={styles.noteDetails}>
-      <summary style={styles.noteSummary}>{label}</summary>
-      <div style={{ ...styles.sectionNote, marginTop: 6 }}>{children}</div>
+      <summary style={styles.noteSummary}>
+        <span style={styles.noteIcon}>i</span>
+        {label}
+      </summary>
+      <div style={styles.noteBody}>{children}</div>
     </details>
   );
 }
@@ -1589,10 +1594,10 @@ function CountriesReport() {
           )}
 
           <p style={styles.affiliateHeading}>Views by hour of day (UK time)</p>
-          <p style={styles.muted}>
+          <SectionNote label="How to read this">
             Each bar is the whole window&rsquo;s views in that hour. The split
             is UK / overseas / unknown.
-          </p>
+          </SectionNote>
           {stats.byHour.map((h) => (
             <div key={h.hour} style={styles.card}>
               <div style={styles.cardTop}>
@@ -1902,11 +1907,11 @@ function Dashboard({
       </label>
 
       {!isWindow && effective === today && (
-        <p style={styles.sectionNote}>
-          Today is still in progress, so its numbers are partial and the
-          &ldquo;vs prev day&rdquo; change compares a part-day against a full
-          one. Pick yesterday for the last complete day.
-        </p>
+        <SectionNote label="Today is still in progress">
+          Today&rsquo;s numbers are partial and the &ldquo;vs prev day&rdquo;
+          change compares a part-day against a full one. Pick yesterday for the
+          last complete day.
+        </SectionNote>
       )}
 
       <h3 style={styles.affiliateHeading}>Page views (whole site)</h3>
@@ -2598,27 +2603,29 @@ function OwnerNetworkPanel() {
           </button>
         </div>
       )}
-      {status.networks.length > 0 && (
+      <SectionNote label={`Excluded networks (${status.networks.length})`}>
+        {status.networks.length > 0 && (
+          <div>
+            Excluded networks:{" "}
+            {status.networks.map((n) => (
+              <span key={n.id} style={{ marginRight: 10 }}>
+                {n.label ?? "unlabelled"} (added {n.created_at.slice(0, 10)})
+                <button
+                  disabled={busy}
+                  onClick={() => send("DELETE", { id: n.id })}
+                  style={{ ...small, marginLeft: 4, fontSize: 11 }}
+                >
+                  remove
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
         <div style={{ marginTop: 4 }}>
-          Excluded networks:{" "}
-          {status.networks.map((n) => (
-            <span key={n.id} style={{ marginRight: 10 }}>
-              {n.label ?? "unlabelled"} (added {n.created_at.slice(0, 10)})
-              <button
-                disabled={busy}
-                onClick={() => send("DELETE", { id: n.id })}
-                style={{ ...small, marginLeft: 4, fontSize: 11 }}
-              >
-                remove
-              </button>
-            </span>
-          ))}
+          Covers every browser on this connection, incognito included, and screenshots run from
+          this PC. Not mobile data: sign in here on the phone for that.
         </div>
-      )}
-      <div style={{ marginTop: 2 }}>
-        Covers every browser on this connection, incognito included, and screenshots run from
-        this PC. Not mobile data: sign in here on the phone for that.
-      </div>
+      </SectionNote>
       {error && <div style={{ color: "#c0392b" }}>{error}</div>}
     </div>
   );
@@ -3406,12 +3413,12 @@ function BannerVariantsReport({
       </SectionNote>
 
       {selectedDate && (
-        <p style={styles.sectionNote}>
+        <SectionNote label="Why one day can't call the test">
           One day on its own can never call the test - a day&rsquo;s worth of
           impressions is far below what a CTR gap needs to mean anything.
           Clear the date to read the result; use a single day only to see
           what actually happened on it.
-        </p>
+        </SectionNote>
       )}
 
       {selectedDate && !selectedDay && (
@@ -4731,18 +4738,40 @@ const styles: Record<string, CSSProperties> = {
     borderBottom: "1px solid #3a2c1d",
   },
   noteDetails: {
+    margin: "4px 0",
+  },
+  noteSummary: {
+    cursor: "pointer",
+    fontSize: 11,
+    color: "#7d6d58",
+    listStyle: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+  },
+  noteIcon: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 14,
+    height: 14,
+    borderRadius: "50%",
+    border: "1px solid #7d6d58",
+    fontSize: 9,
+    fontWeight: 700,
+    fontStyle: "italic",
+    fontFamily: "Georgia, serif",
+    lineHeight: 1,
+  },
+  noteBody: {
+    fontSize: 12,
+    color: "#9c8a72",
+    lineHeight: 1.5,
     background: "#2a1f14",
     border: "1px solid #3a2c1d",
     borderRadius: 6,
     padding: "6px 10px",
-    margin: "8px 0",
-  },
-  noteSummary: {
-    cursor: "pointer",
-    fontSize: 12,
-    fontWeight: 600,
-    color: "#b8a68c",
-    listStyle: "revert",
+    marginTop: 6,
   },
   suggestionTag: {
     marginLeft: 8,
