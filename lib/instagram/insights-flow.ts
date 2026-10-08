@@ -1,7 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { getMediaInsights, withRetry, isTransientError } from "./graph-client";
+import { getMediaInsights, withRetry, isTransientError, IgApiError, MediaInsightsResponse } from "./graph-client";
 import { AccountCredentials } from "./publish-pipeline";
-import { DuePull, metricsForFormat, parseInsightsResponse, buildMetricsRow, buildErrorRow, recordMetricsPull } from "./insights-pipeline";
+import { DuePull, metricsForFormat, extraMetricsForFormat, parseInsightsResponse, buildMetricsRow, buildErrorRow, recordMetricsPull } from "./insights-pipeline";
 
 export interface InsightsPullOutcome {
   postId: string;
@@ -14,9 +14,20 @@ export async function pullInsightsForPost(supabase: SupabaseClient, due: DuePull
   const { post, window } = due;
   const mediaId = post.ig_media_id as string; // guaranteed non-null by getDueInsightsPulls' query filter
   const metrics = metricsForFormat(post.format);
+  const withExtras = [...metrics, ...extraMetricsForFormat(post.format)];
 
   try {
-    const response = await withRetry(() => getMediaInsights(mediaId, creds.accessToken, metrics));
+    // Try with follows/profile_visits first; if Meta rejects the request
+    // (a 400 for an unsupported metric), fall back to the base list so the
+    // post still gets its reach and engagement numbers.
+    let response: MediaInsightsResponse;
+    try {
+      response = await withRetry(() => getMediaInsights(mediaId, creds.accessToken, withExtras));
+    } catch (err) {
+      if (!(err instanceof IgApiError) || isTransientError(err) || err.httpStatus !== 400) throw err;
+      console.warn(`[insights] post ${post.id}: extra metrics rejected (${err.message}), retrying with base metrics`);
+      response = await withRetry(() => getMediaInsights(mediaId, creds.accessToken, metrics));
+    }
     const raw = parseInsightsResponse(response);
     await recordMetricsPull(supabase, buildMetricsRow(post.id, window.label, post.format, raw));
     return { postId: post.id, window: window.label, outcome: "pulled" };

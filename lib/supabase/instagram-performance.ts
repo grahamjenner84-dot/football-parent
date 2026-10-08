@@ -21,7 +21,8 @@ export type SortMetric =
   | "saves"
   | "shares"
   | "total_interactions"
-  | "avg_watch_time_sec";
+  | "avg_watch_time_sec"
+  | "follows";
 
 export interface GetInstagramPerformanceInput {
   limit?: number; // number of posts to return, after sorting/filtering
@@ -42,6 +43,10 @@ interface MetricsSnapshot {
   views: number | null;
   totalInteractions: number | null;
   avgWatchTimeSec: number | null;
+  // Account growth from this post. Null = Instagram didn't return it (reels
+  // may not support it, and pulls before 8 Oct 2026 never asked), not zero.
+  follows: number | null;
+  profileVisits: number | null;
   // % of the whole reel's runtime the average viewer watched, derived
   // locally from avgWatchTimeSec / summed post_slides.duration_sec - not a
   // metric Meta returns itself, and NOT a per-second retention curve. See
@@ -87,7 +92,7 @@ const RETENTION_CAPABILITIES = {
   carousels:
     "Meta's Graph API does not expose any per-slide/per-card view or drop-off metric for carousel posts - only whole-post aggregates (reach, likes, comments, saves, shares, total_interactions). There is no API field anywhere for 'how many people saw slide 2 vs slide 4'. This is a hard platform limitation, not a gap in this tool's collection - the app-native Insights screen doesn't show this breakdown either, even to the account owner.",
   followsFromPost:
-    "Not collected. Meta does not expose a 'follows attributable to this specific post' metric via the Graph API media insights endpoint, so it isn't in metricsForFormat() (lib/instagram/insights-pipeline.ts) and was never fetched or stored.",
+    "Collected from 8 Oct 2026 as follows and profileVisits per pull (extraMetricsForFormat() in lib/instagram/insights-pipeline.ts). Instagram documents these for feed/carousel posts; reels may not return them. Null means not returned or pulled before collection began, not zero.",
   impressions:
     "The post_metrics.impressions column exists but is never populated - Meta retired the impressions metric platform-wide in 2025. Use reach/views instead.",
 };
@@ -109,6 +114,8 @@ function toSnapshot(row: Record<string, unknown>, durationSec: number | null): M
     views: (row.views as number | null) ?? null,
     totalInteractions: (row.total_interactions as number | null) ?? null,
     avgWatchTimeSec: avgWatchTimeSec ?? null,
+    follows: (row.follows as number | null) ?? null,
+    profileVisits: (row.profile_visits as number | null) ?? null,
     avgWatchTimePctOfDuration,
     pullError: (row.pull_error as string | null) ?? null,
   };
@@ -135,6 +142,7 @@ function sortValue(post: PostPerformance, sortBy: SortMetric): number {
       shares: "shares",
       total_interactions: "totalInteractions",
       avg_watch_time_sec: "avgWatchTimeSec",
+      follows: "follows",
     } as const)[sortBy]
   ];
   return typeof v === "number" ? v : -Infinity;

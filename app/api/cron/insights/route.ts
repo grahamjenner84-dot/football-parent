@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/render-pipeline";
 import { getDueInsightsPulls } from "@/lib/instagram/insights-pipeline";
+import { discoverMedia } from "@/lib/instagram/discover-media";
 import { runInsightsBatch } from "@/lib/instagram/insights-flow";
 import { getAccountCredentials, ensureValidToken, TokenError } from "@/lib/instagram/publish-flow";
 import { isAuthorizedCronRequest } from "@/lib/cron-auth";
@@ -33,17 +34,28 @@ async function handle(req: NextRequest) {
     return NextResponse.json({ error: message, tokenError: err instanceof TokenError }, { status: 502 });
   }
 
+  // Pick up posts made by hand in the app, so they get measured too. A
+  // failure here mustn't stop the pulls for posts already known.
+  let discovered: { onAccount: number; added: number } | { error: string };
+  try {
+    discovered = await discoverMedia(supabase, creds);
+    console.log(`[cron/insights] discovery: ${discovered.onAccount} on account, ${discovered.added} new`);
+  } catch (err) {
+    discovered = { error: err instanceof Error ? err.message : String(err) };
+    console.error(`[cron/insights] discovery failed, pulling known posts only: ${discovered.error}`);
+  }
+
   const due = await getDueInsightsPulls(supabase, 20);
   console.log(`[cron/insights] ${due.length} pull(s) due`);
 
   if (!due.length) {
-    return NextResponse.json({ pulled: 0, deferred: 0, failed: 0, results: [] });
+    return NextResponse.json({ discovered, pulled: 0, deferred: 0, failed: 0, results: [] });
   }
 
   const summary = await runInsightsBatch(supabase, due, creds);
   console.log(`[cron/insights] done: pulled=${summary.pulled} deferred=${summary.deferred} failed=${summary.failed}`);
 
-  return NextResponse.json(summary);
+  return NextResponse.json({ discovered, ...summary });
 }
 
 export { handle as GET, handle as POST };

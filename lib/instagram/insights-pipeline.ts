@@ -48,6 +48,16 @@ export function metricsForFormat(format: PostFormat): string[] {
   return format === "reel" ? REEL_METRICS : CAROUSEL_METRICS;
 }
 
+// Account-growth metrics per post, asked for on top of the lists above.
+// Instagram documents them for feed/carousel media; support on reels is
+// unclear, and Meta 400s the whole request on one unsupported metric, so
+// pullInsightsForPost() retries with the base list alone if the request
+// with these is rejected. Carousels also get `views` here because it was
+// added for feed media after CAROUSEL_METRICS was written.
+export function extraMetricsForFormat(format: PostFormat): string[] {
+  return format === "reel" ? ["follows", "profile_visits"] : ["views", "follows", "profile_visits"];
+}
+
 export interface DuePull {
   post: PostRow;
   window: PullWindow;
@@ -115,6 +125,8 @@ export interface PostMetricsRow {
   views?: number | null;
   total_interactions?: number | null;
   avg_watch_time_sec?: number | null;
+  follows?: number | null;
+  profile_visits?: number | null;
   pull_error?: string | null;
 }
 
@@ -141,6 +153,8 @@ export function buildMetricsRow(postId: string, pullWindow: string, format: Post
     views: raw.views ?? null,
     total_interactions: raw.total_interactions ?? null,
     avg_watch_time_sec: format === "reel" && raw.ig_reels_avg_watch_time != null ? raw.ig_reels_avg_watch_time / 1000 : null,
+    follows: raw.follows ?? null,
+    profile_visits: raw.profile_visits ?? null,
   };
 }
 
@@ -148,7 +162,24 @@ export function buildErrorRow(postId: string, pullWindow: string, message: strin
   return { post_id: postId, pull_window: pullWindow, pulled_at: new Date().toISOString(), pull_error: message };
 }
 
+// follows/profile_visits arrived in migration 20261008090000. If that
+// migration isn't applied, PostgREST rejects the unknown columns with
+// PGRST204 (Postgres's own 42703 if it ever gets that far), and without
+// this retry the failure would land in pullInsightsForPost's catch and be
+// written as a permanent pull_error for that window. Same safety net as
+// lib/supabase/page-views.ts; the migration still goes first.
+function isMissingColumn(error: { code?: string; message?: string }): boolean {
+  return error.code === "PGRST204" || error.code === "42703";
+}
+
 export async function recordMetricsPull(supabase: SupabaseClient, row: PostMetricsRow): Promise<void> {
-  const { error } = await supabase.from("post_metrics").upsert(row, { onConflict: "post_id,pull_window" });
+  let { error } = await supabase.from("post_metrics").upsert(row, { onConflict: "post_id,pull_window" });
+  if (error && isMissingColumn(error)) {
+    console.warn(`post_metrics is missing follows/profile_visits (apply 20261008090000_post_metrics_follows.sql): ${error.message}`);
+    const { follows: _f, profile_visits: _p, ...base } = row;
+    void _f;
+    void _p;
+    ({ error } = await supabase.from("post_metrics").upsert(base, { onConflict: "post_id,pull_window" }));
+  }
   if (error) throw new Error(`Failed to record metrics pull for post ${row.post_id} window ${row.pull_window}: ${error.message}`);
 }
