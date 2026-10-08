@@ -2,6 +2,7 @@ import Link from "next/link";
 import Script from "next/script";
 import { BRAND_IMAGES } from "@/lib/seo";
 import { extractFaqs } from "@/lib/faq";
+import InstagramFollow from "@/app/components/InstagramFollow";
 
 interface ArticleLayoutProps {
   title: string;
@@ -379,6 +380,8 @@ export default function ArticleLayout({
                   </p>
                 </div>
               </div>
+
+              <InstagramFollow />
             </div>
           </div>
         </div>

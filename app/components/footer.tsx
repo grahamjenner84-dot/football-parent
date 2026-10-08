@@ -56,7 +56,7 @@ export default function Footer() {
             href="https://www.instagram.com/football.parent"
             className="hover:text-black"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener"
           >
             Instagram
           </a>

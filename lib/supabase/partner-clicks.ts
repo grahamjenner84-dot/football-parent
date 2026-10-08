@@ -157,13 +157,22 @@ function buildPageCounts(rows: ClickRow[]): PartnerClickPageCount[] {
     .sort((a, b) => b.clicks - a.clicks);
 }
 
-export async function getPartnerClickStats(days: number = 30): Promise<PartnerClickStats> {
+export async function getPartnerClickStats(
+  days: number = 30,
+  // One partner's slug, so each destination gets its own click-through rate
+  // (Instagram follow clicks must not inflate Football DNA's). Omitted, every
+  // destination is counted together.
+  partner?: string
+): Promise<PartnerClickStats> {
   const supabase = adminClient();
 
-  // Never look further back than the point partner click logging went live, on
-  // both sides of the ratio - see PARTNER_TRACKING_STARTED_AT.
+  // Never look further back than the point click logging went live for this
+  // destination, on both sides of the ratio - see PARTNER_TRACKING_STARTED_AT.
   const requestedSince = Date.now() - days * 24 * 60 * 60 * 1000;
-  const trackingStart = new Date(PARTNER_TRACKING_STARTED_AT).getTime();
+  const trackingStart = new Date(
+    OUTBOUND_PARTNERS.find((p) => p.slug === partner)?.trackingStartedAt ??
+      PARTNER_TRACKING_STARTED_AT
+  ).getTime();
   const clampedToTrackingStart = trackingStart > requestedSince;
   const sinceMs = Math.max(requestedSince, trackingStart);
   const since = new Date(sinceMs).toISOString();
@@ -172,10 +181,12 @@ export async function getPartnerClickStats(days: number = 30): Promise<PartnerCl
 
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
-    const { data, error } = await supabase
+    let query = supabase
       .from("partner_clicks")
       .select("path, href, partner, host, link_text, user_agent, created_at")
-      .gte("created_at", since)
+      .gte("created_at", since);
+    if (partner) query = query.eq("partner", partner);
+    const { data, error } = await query
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
 
