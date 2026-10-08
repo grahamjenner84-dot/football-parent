@@ -2335,6 +2335,32 @@ function PartnerClicksReport({
         </label>
       )}
 
+      {stats.byPlacement && stats.byPlacement.length > 0 && (
+        <>
+          <h3 style={styles.affiliateHeading}>By placement</h3>
+          <p style={styles.sectionNote}>
+            Impressions are views of the pages carrying each placement, not
+            times it was scrolled into view. The end card sits at the
+            bottom of the page, so many readers never reach it and its
+            rate reads low next to the mid-article box.
+          </p>
+          {stats.byPlacement.map((row) => (
+            <div key={row.placement} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.label}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+              {row.impressions !== null && (
+                <div style={styles.cardStats}>
+                  <span>Impressions: {row.impressions}</span>
+                  <span>Click-through rate: {row.ctr === null ? "-" : pct(row.ctr)}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </>
+      )}
+
       {stats.totalClicks === 0 ? (
         <EmptyState
           text={
@@ -2369,20 +2395,6 @@ function PartnerClicksReport({
             <span>Clicks: {stats.totalClicks}</span>
             <span>Click-through rate: {overallRate === null ? "-" : pct(overallRate)}</span>
           </div>
-
-          {stats.byPlacement && stats.byPlacement.length > 0 && (
-            <>
-              <h3 style={styles.affiliateHeading}>By placement</h3>
-              {stats.byPlacement.map((row) => (
-                <div key={row.placement} style={styles.card}>
-                  <div style={styles.cardTop}>
-                    <span style={styles.cardQuery}>{row.label}</span>
-                    <span style={styles.cardBadge}>{row.clicks} clicks</span>
-                  </div>
-                </div>
-              ))}
-            </>
-          )}
 
           {stats.byPartner.length > 1 && (
             <>

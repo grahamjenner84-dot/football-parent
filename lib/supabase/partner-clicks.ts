@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getPageViewsForPath } from "@/lib/supabase/page-views";
 import { OUTBOUND_PARTNERS } from "@/lib/outbound-partners";
+import { getAllArticleSlugs, getArticleSlugsUsing } from "@/lib/content";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/page-views.ts and lib/supabase/affiliate-clicks.ts - this must
@@ -103,6 +104,60 @@ export interface PartnerClickPlacement {
   placement: string;
   label: string;
   clicks: number;
+  // Human views of the pages that carry this placement over the same window,
+  // and clicks / impressions. A page view, not "scrolled into view": the end
+  // card sits at the bottom of the page, so its rate reads low against the
+  // mid-article box. null for "unlabelled", which has no single placement.
+  impressions: number | null;
+  ctr: number | null;
+}
+
+// Which placements a page view counts as an impression for. Must mirror where
+// the components render: the end card is in lib/ArticleLayout.tsx (every MDX
+// article), the mid-article box wherever an article's MDX uses
+// <InstagramPromo />, and the footer link is on every page.
+function instagramPlacementsOnPath(
+  path: string,
+  articleSlugs: Set<string>,
+  promoSlugs: Set<string>
+): string[] {
+  const placements = ["footer"];
+  const slug = path.split("/").filter(Boolean).pop();
+  if (slug && articleSlugs.has(slug)) placements.push("end-card");
+  if (slug && promoSlugs.has(slug)) placements.push("mid-article");
+  return placements;
+}
+
+async function getInstagramImpressions(
+  supabase: ReturnType<typeof adminClient>,
+  since: string
+): Promise<Map<string, number>> {
+  const articleSlugs = getAllArticleSlugs();
+  const promoSlugs = getArticleSlugsUsing("<InstagramPromo");
+  const counts = new Map<string, number>();
+
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("path, user_agent")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (error) throw new Error("Failed to read page_views: " + error.message);
+
+    const batch = (data ?? []) as { path: string; user_agent: string | null }[];
+    for (const row of batch) {
+      if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
+      if (row.path.startsWith("/admin")) continue;
+      for (const p of instagramPlacementsOnPath(row.path, articleSlugs, promoSlugs)) {
+        counts.set(p, (counts.get(p) ?? 0) + 1);
+      }
+    }
+    if (batch.length < pageSize) break;
+  }
+
+  return counts;
 }
 
 // Instagram only: where on the site each click to our own profile came from,
@@ -252,17 +307,27 @@ export async function getPartnerClickStats(
 
   let byPlacement: PartnerClickPlacement[] | null = null;
   if (isInstagram) {
-    const counts = new Map<string, number>();
+    const impressions = await getInstagramImpressions(supabase, since);
+    // Every placement gets a row, clicked or not, so a box nobody clicks
+    // still shows its impressions.
+    const counts = new Map<string, number>(
+      ["end-card", "mid-article", "footer"].map((p) => [p, 0])
+    );
     for (const row of humanRows) {
       const placement = instagramPlacementFromHref(row.href)!;
       counts.set(placement, (counts.get(placement) ?? 0) + 1);
     }
     byPlacement = Array.from(counts.entries())
-      .map(([placement, clicks]) => ({
-        placement,
-        label: INSTAGRAM_PLACEMENT_LABELS[placement] ?? placement,
-        clicks,
-      }))
+      .map(([placement, clicks]) => {
+        const shown = placement === "unlabelled" ? null : impressions.get(placement) ?? 0;
+        return {
+          placement,
+          label: INSTAGRAM_PLACEMENT_LABELS[placement] ?? placement,
+          clicks,
+          impressions: shown,
+          ctr: shown ? clicks / shown : null,
+        };
+      })
       .sort((a, b) => b.clicks - a.clicks);
   }
 
