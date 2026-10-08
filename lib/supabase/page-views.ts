@@ -9,6 +9,7 @@ import {
   HOME_BANNER_ENDED_AT,
   audienceAt,
   coachingSponsorAt,
+  PARENT_ARTICLE_BANNER_ENDED_AT,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 
@@ -1093,6 +1094,11 @@ function bannerOnPath(
   const lastSegment = path.split("/").filter(Boolean).pop();
   if (!lastSegment || !articleSlugs.has(lastSegment)) return null;
 
+  const audience = audienceForPath(path, createdAt);
+  // Parent and share articles show Progress in this slot from
+  // PARENT_ARTICLE_BANNER_ENDED_AT (lib/MDXContent.tsx).
+  if (audience !== "coach" && createdAt >= PARENT_ARTICLE_BANNER_ENDED_AT) return null;
+
   return {
     // /coaching/ articles carry the sponsor creative from
     // COACHING_SPONSOR_STARTED_AT (lib/MDXContent.tsx).
@@ -1100,7 +1106,7 @@ function bannerOnPath(
       path.startsWith("/coaching/") && coachingSponsorAt(createdAt)
         ? "sponsor"
         : bannerStyleForKey(lastSegment),
-    audience: audienceForPath(path, createdAt),
+    audience,
     placement: "article",
   };
 }

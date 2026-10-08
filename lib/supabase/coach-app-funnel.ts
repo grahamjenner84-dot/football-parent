@@ -8,7 +8,7 @@ import {
   type CoachAppChannel,
 } from "@/lib/coach-app-channels";
 import { getCoachAppShareStats, type CoachAppShareStats } from "@/lib/supabase/coach-app-shares";
-import { SHARE_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
+import { PARENT_ARTICLE_BANNER_ENDED_AT, SHARE_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key (football-parent-social),
 // same pattern as the other lib/supabase modules. Never import from client
@@ -325,6 +325,8 @@ const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
 // (SHARE_AUDIENCE_SLUGS, never /coaching/), from `since`. Counted here rather
 // than taken from the banner test report, whose window goes back to
 // 2026-09-04 and would set weeks of views against hours of taps.
+// Stops at PARENT_ARTICLE_BANNER_ENDED_AT, when those articles swapped the
+// share banner for Progress.
 async function countShareBannerImpressions(
   supabase: ReturnType<typeof adminClient>,
   since: string
@@ -336,6 +338,7 @@ async function countShareBannerImpressions(
       .from("page_views")
       .select("path, user_agent")
       .gte("created_at", since)
+      .lt("created_at", PARENT_ARTICLE_BANNER_ENDED_AT)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
     if (error) throw new Error("Failed to read page_views: " + error.message);

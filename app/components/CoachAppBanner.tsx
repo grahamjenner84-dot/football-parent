@@ -72,7 +72,15 @@ export const ACTIVE_BANNER_STYLE: CoachAppBannerStyle = "dark";
 // merge that shipped it. Before this those pages showed the ordinary coach
 // creative, so the report must not count their earlier views as sponsor
 // impressions.
-export const COACHING_SPONSOR_STARTED_AT = "2026-10-08T22:00:00Z";
+export const COACHING_SPONSOR_STARTED_AT = "2026-10-08T21:40:00Z";
+
+// When parent-facing articles stopped carrying a Coach App banner: from here
+// the mid-article slot on every article whose audience isn't "coach" shows
+// Progress instead (lib/MDXContent.tsx), so the parent and share creatives
+// no longer render anywhere. The report counts no parent or share article
+// impressions after this, and the share banner's impression count stops
+// here too. Same deploy as the Coaching sponsor.
+export const PARENT_ARTICLE_BANNER_ENDED_AT = "2026-10-08T21:40:00Z";
 
 /** Whether a /coaching page or article was showing the sponsor creative at a
  * given time. */
