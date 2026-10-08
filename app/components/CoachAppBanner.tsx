@@ -3,9 +3,10 @@ import CoachAppShareButton from "@/app/components/CoachAppShareButton";
 
 // Promo banner for the Coach App, in two creatives and two audiences.
 //
-// Audience: parents care about their child's own record (goals, assists,
-// man of the match); coaches/managers care about fair game time and the
-// admin around it.
+// Audience: since PARENT_ARTICLE_BANNER_ENDED_AT only coaches see these
+// (parents get Progress, the parents' app). The coach pitch is less admin:
+// pick the team fast and keep the team's stats. The parent and share copy
+// is no longer rendered, kept so old variants still read in the report.
 //
 // Style: "dark" is the full-width black bar with the horizontal logo and a
 // single line of copy; "light" is the quieter grey card with a paragraph and
@@ -26,7 +27,12 @@ import CoachAppShareButton from "@/app/components/CoachAppShareButton";
 // them an app built for coaches, it asks them to pass it on to their
 // child's coach. See CoachAppShareButton.tsx.
 export type CoachAppAudience = "parent" | "coach" | "share";
-export type CoachAppBannerStyle = "dark" | "light";
+// "sponsor" is the dark creative with a "Coaching is supported by" line above
+// it: the Coach App as house sponsor of the Coaching section, holding the
+// slot a paying sponsor would take, the way Progress does for Academy
+// Pathway. It sits outside the dark/light A/B test, which only ever assigns
+// dark or light.
+export type CoachAppBannerStyle = "dark" | "light" | "sponsor";
 
 // Where a banner sits. "article" is the in-body placement the A/B test runs
 // on; "home" is the homepage; "category" is the section-level promo above a
@@ -61,6 +67,27 @@ export const BANNER_TEST_STARTED_AT = "2026-09-04T20:30:00Z";
 // page that no longer shows the banner.
 export const HOME_BANNER_ENDED_AT = "2026-10-02T13:15:00Z";
 export const ACTIVE_BANNER_STYLE: CoachAppBannerStyle = "dark";
+
+// When the Coaching section switched to the sponsor creative, on both the
+// category page and the mid-article banner of every /coaching/ article: the
+// merge that shipped it. Before this those pages showed the ordinary coach
+// creative, so the report must not count their earlier views as sponsor
+// impressions.
+export const COACHING_SPONSOR_STARTED_AT = "2026-10-08T21:40:00Z";
+
+// When parent-facing articles stopped carrying a Coach App banner: from here
+// the mid-article slot on every article whose audience isn't "coach" shows
+// Progress instead (lib/MDXContent.tsx), so the parent and share creatives
+// no longer render anywhere. The report counts no parent or share article
+// impressions after this, and the share banner's impression count stops
+// here too. Same deploy as the Coaching sponsor.
+export const PARENT_ARTICLE_BANNER_ENDED_AT = "2026-10-08T21:40:00Z";
+
+/** Whether a /coaching page or article was showing the sponsor creative at a
+ * given time. */
+export function coachingSponsorAt(createdAt: string): boolean {
+  return createdAt >= COACHING_SPONSOR_STARTED_AT;
+}
 
 const DESTINATION = "/football-parent-coach-app";
 
@@ -141,7 +168,7 @@ const DARK_COPY: Record<CoachAppAudience, string> = {
   parent:
     "Log every goal, assist and man of the match from the touchline.",
   coach:
-    "Fair game time, lineups and match stats, without the Sunday-morning spreadsheet.",
+    "Less admin. Pick the team fast and keep track of your team's stats.",
   share:
     "Know a grassroots coach still working out subs on the touchline? The Coach App does the game-time maths for them.",
 };
@@ -155,8 +182,8 @@ const LIGHT_COPY: Record<
     body: "Appearances, goals, assists and minutes played, logged match by match instead of half-remembered at the end of the season.",
   },
   coach: {
-    title: "Fair game time without doing the maths on the touchline",
-    body: "Equal-time rotation, lineups, availability and match records in one place, so the Sunday-morning admin stops eating into the coaching.",
+    title: "Pick the team fast and keep your team's stats",
+    body: "Lineups, fair game time and availability sorted in a few taps, with every result, goal and minute played logged as you go. Less admin, more time for the coaching.",
   },
   share: {
     title: "Know a coach who'd use this?",
@@ -227,7 +254,7 @@ export default function CoachAppBanner({
     );
   }
 
-  if (style === "dark") {
+  if (style === "dark" || style === "sponsor") {
     return (
       <Link
         href={href}
@@ -238,6 +265,11 @@ export default function CoachAppBanner({
         // rather than the background, which would bring the box back.
         className={`group block rounded-2xl bg-black px-6 py-6 text-white transition hover:ring-1 hover:ring-white/25 sm:px-8 ${spacing}`}
       >
+        {style === "sponsor" && (
+          <p className="m-0 mb-4 text-xs font-semibold uppercase tracking-wide text-white/60">
+            Coaching is supported by
+          </p>
+        )}
         <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
           {/* self-start is load-bearing: the mobile layout is flex-col, so the
               cross axis is horizontal and the default align-items:stretch

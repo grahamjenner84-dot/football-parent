@@ -277,8 +277,10 @@ const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
 
 /** Which Progress banner a page view showed, if any. Mirrors where
  * ProgressBanner is rendered: the homepage, /academy-pathway and its
- * articles (sponsor version), and the end of every other article whose
- * banner audience isn't "coach" (lib/MDXContent.tsx). */
+ * articles (sponsor version), and every other article whose banner
+ * audience isn't "coach" (lib/MDXContent.tsx): at the end until
+ * PARENT_ARTICLE_BANNER_ENDED_AT, in the mid-article slot after it. Same
+ * pages either way, so the impression count needs no cut-over. */
 export function progressBannerOnPath(path: string, articleSlugs: Set<string>): ProgressPlacement | null {
   if (path === "/") return "home";
   if (path === "/academy-pathway") return "academy-pathway";

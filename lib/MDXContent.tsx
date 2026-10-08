@@ -221,15 +221,22 @@ export async function MDXContent({
 }: MDXContentProps) {
   const split =
     coachAppBanner === "none" ? null : splitAtMiddleHeading(content);
-  // Progress (the parents' app) at the end of every parent-facing article.
-  // Not on coach pages (/coaching/*, set to "coach") or landing pages ("none").
+  // One app per article, in the mid-article slot: the Coach App for coach
+  // pages (/coaching/*, set to "coach", and COACH_AUDIENCE_SLUGS), Progress
+  // (the parents' app) for every other article. Parent and share audiences
+  // used to get a Coach App banner here and Progress at the end; since
+  // PARENT_ARTICLE_BANNER_ENDED_AT Progress takes the middle and the end
+  // banner is gone. Landing pages ("none") get neither.
   const audience =
     coachAppBanner && coachAppBanner !== "none" ? coachAppBanner : defaultAudienceForSlug(slug);
-  const showProgress = coachAppBanner !== "none" && audience !== "coach";
+  const showProgress = audience !== "coach";
   // Progress sponsors the Academy Pathway section: its articles get the
   // sponsor version of the banner.
   const inAcademyPathway =
     !!slug && routes.some((r) => r === `/academy-pathway/${slug}`);
+  // The Coach App sponsors the Coaching section: the mid-article banner on
+  // its articles is the sponsor creative rather than an arm of the A/B test.
+  const inCoaching = !!slug && routes.some((r) => r === `/coaching/${slug}`);
 
   return (
     <div className="space-y-6 text-gray-700 leading-relaxed max-w-none">
@@ -241,10 +248,17 @@ export async function MDXContent({
             options={mdxOptions}
           />
 
-          <CoachAppBanner
-            audience={audience}
-            style={bannerStyleForKey(slug)}
-          />
+          {showProgress ? (
+            <ProgressBanner
+              placement={inAcademyPathway ? "academy-pathway" : "article"}
+              inArticle
+            />
+          ) : (
+            <CoachAppBanner
+              audience={audience}
+              style={inCoaching ? "sponsor" : bannerStyleForKey(slug)}
+            />
+          )}
 
           <MDXRemote
             source={split[1]}
@@ -253,18 +267,22 @@ export async function MDXContent({
           />
         </>
       ) : (
-        <MDXRemote
-          source={content}
-          components={components}
-          options={mdxOptions}
-        />
-      )}
+        <>
+          <MDXRemote
+            source={content}
+            components={components}
+            options={mdxOptions}
+          />
 
-      {showProgress && (
-        <ProgressBanner
-          placement={inAcademyPathway ? "academy-pathway" : "article"}
-          inArticle
-        />
+          {/* An article too short or flat to split still gets Progress, at
+              the end as before. */}
+          {coachAppBanner !== "none" && showProgress && (
+            <ProgressBanner
+              placement={inAcademyPathway ? "academy-pathway" : "article"}
+              inArticle
+            />
+          )}
+        </>
       )}
     </div>
   );
