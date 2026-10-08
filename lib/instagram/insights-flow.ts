@@ -1,7 +1,8 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { getMediaInsights, withRetry, isTransientError } from "./graph-client";
+import { getMediaInsights, getMediaInsightBreakdown, withRetry, isTransientError, IgApiError, MediaInsightsResponse } from "./graph-client";
+import { breakdownValue } from "./account-daily";
 import { AccountCredentials } from "./publish-pipeline";
-import { DuePull, metricsForFormat, parseInsightsResponse, buildMetricsRow, buildErrorRow, recordMetricsPull } from "./insights-pipeline";
+import { DuePull, metricAttemptsForFormat, BREAKDOWN_PROBES, parseInsightsResponse, buildMetricsRow, buildErrorRow, recordMetricsPull } from "./insights-pipeline";
 
 export interface InsightsPullOutcome {
   postId: string;
@@ -13,12 +14,46 @@ export interface InsightsPullOutcome {
 export async function pullInsightsForPost(supabase: SupabaseClient, due: DuePull, creds: AccountCredentials): Promise<InsightsPullOutcome> {
   const { post, window } = due;
   const mediaId = post.ig_media_id as string; // guaranteed non-null by getDueInsightsPulls' query filter
-  const metrics = metricsForFormat(post.format);
+  const attempts = metricAttemptsForFormat(post.format);
 
   try {
-    const response = await withRetry(() => getMediaInsights(mediaId, creds.accessToken, metrics));
-    const raw = parseInsightsResponse(response);
-    await recordMetricsPull(supabase, buildMetricsRow(post.id, window.label, post.format, raw));
+    // Richest metric list first; on a 400 (a metric this media type doesn't
+    // support) step down to the next, so the post always gets at least its
+    // reach and engagement numbers.
+    let response: MediaInsightsResponse | undefined;
+    for (let i = 0; i < attempts.length && !response; i++) {
+      try {
+        response = await withRetry(() => getMediaInsights(mediaId, creds.accessToken, attempts[i]));
+      } catch (err) {
+        const last = i === attempts.length - 1;
+        if (last || !(err instanceof IgApiError) || isTransientError(err) || err.httpStatus !== 400) throw err;
+        console.warn(`[insights] post ${post.id}: metrics rejected (${err.message}), trying a shorter list`);
+      }
+    }
+    const row = buildMetricsRow(post.id, window.label, post.format, parseInsightsResponse(response as MediaInsightsResponse));
+
+    // Breakdowns, one request each; a rejection only loses that number.
+    const extra: Record<string, unknown> = {};
+    for (const probe of BREAKDOWN_PROBES) {
+      const key = `${probe.metric}_by_${probe.breakdown}`;
+      try {
+        const res = await getMediaInsightBreakdown(mediaId, creds.accessToken, probe.metric, probe.breakdown);
+        extra[key] = res;
+        if (probe.metric === "profile_activity") {
+          const total = res.data?.find((d) => d.name === "profile_activity")?.total_value?.value;
+          row.profile_activity = typeof total === "number" ? total : null;
+          row.bio_link_taps = breakdownValue(res, "profile_activity", "BIO_LINK_CLICKED");
+        } else {
+          row.reach_followers = breakdownValue(res, "reach", "FOLLOWER");
+          row.reach_non_followers = breakdownValue(res, "reach", "NON_FOLLOWER");
+        }
+      } catch (err) {
+        extra[key] = { error: err instanceof Error ? err.message : String(err) };
+      }
+    }
+    row.extra = extra;
+
+    await recordMetricsPull(supabase, row);
     return { postId: post.id, window: window.label, outcome: "pulled" };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);

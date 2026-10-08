@@ -259,3 +259,46 @@ export async function withRetry<T>(fn: () => Promise<T>, opts: { retries?: numbe
   }
   throw lastErr;
 }
+
+// Breakdown responses (metric_type=total_value) carry the split under
+// total_value.breakdowns[].results[], keyed by dimension_values.
+export interface BreakdownResult {
+  dimension_values: string[];
+  value: number;
+}
+export interface InsightWithBreakdown extends MediaInsightMetric {
+  total_value?: { value: number; breakdowns?: { dimension_keys: string[]; results: BreakdownResult[] }[] };
+}
+export interface InsightsWithBreakdownResponse {
+  data: InsightWithBreakdown[];
+}
+
+// One media metric split by one breakdown, e.g. profile_activity by
+// action_type or reach by follow_type. Which combinations Meta accepts is
+// per metric and per media type; callers treat a rejection as "not
+// available", not as a failed pull.
+export async function getMediaInsightBreakdown(mediaId: string, accessToken: string, metric: string, breakdown: string): Promise<InsightsWithBreakdownResponse> {
+  return igRequest<InsightsWithBreakdownResponse>(`/${mediaId}/insights`, accessToken, {
+    method: "GET",
+    params: { metric, breakdown, metric_type: "total_value" },
+  });
+}
+
+// Account-level insights for a time range (Unix seconds).
+export async function getAccountInsights(
+  igUserId: string,
+  accessToken: string,
+  params: { metric: string; period: string; since?: number; until?: number; metric_type?: string; breakdown?: string }
+): Promise<InsightsWithBreakdownResponse> {
+  return igRequest<InsightsWithBreakdownResponse>(`/${igUserId}/insights`, accessToken, { method: "GET", params });
+}
+
+export interface AccountCounts {
+  followers_count?: number;
+  follows_count?: number;
+  media_count?: number;
+}
+
+export async function getAccountCounts(igUserId: string, accessToken: string): Promise<AccountCounts> {
+  return igRequest<AccountCounts>(`/${igUserId}`, accessToken, { method: "GET", params: { fields: "followers_count,follows_count,media_count" } });
+}

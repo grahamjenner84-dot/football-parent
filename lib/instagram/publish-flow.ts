@@ -273,6 +273,24 @@ const REFRESH_IF_EXPIRING_WITHIN_MS = 10 * 24 * 60 * 60 * 1000; // 10 days
 export async function ensureValidToken(supabase: SupabaseClient, creds: AccountCredentials): Promise<AccountCredentials> {
   const expiringSoon = creds.tokenExpiresAt != null && new Date(creds.tokenExpiresAt).getTime() - Date.now() < REFRESH_IF_EXPIRING_WITHIN_MS;
 
+  // No recorded expiry (e.g. the token came from IG_ACCESS_TOKEN or was
+  // pasted in without one): refresh it now while it still works, which also
+  // records an expiry so the 10-day rule above takes over. Previously such a
+  // token was only refreshed after it had already died, and an expired
+  // token can't be refreshed. If this refresh fails (e.g. the token is under
+  // 24 hours old), carry on with it as long as it still validates.
+  if (creds.tokenExpiresAt == null) {
+    try {
+      const refreshed = await refreshLongLivedToken(creds.accessToken);
+      const tokenExpiresAt = new Date(Date.now() + refreshed.expires_in * 1000).toISOString();
+      await updateAccountToken(supabase, creds.accountRowId, refreshed.access_token, tokenExpiresAt);
+      console.log(`Instagram token had no recorded expiry; refreshed, now valid until ${tokenExpiresAt}`);
+      return { ...creds, accessToken: refreshed.access_token, tokenExpiresAt };
+    } catch (err) {
+      console.warn(`Instagram token has no recorded expiry and refresh failed (${err instanceof Error ? err.message : String(err)}); validating it as is`);
+    }
+  }
+
   if (!expiringSoon) {
     try {
       await validateToken(creds.accessToken);
