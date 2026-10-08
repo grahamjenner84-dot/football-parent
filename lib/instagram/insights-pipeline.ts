@@ -5,6 +5,9 @@ import { MediaInsightsResponse } from "./graph-client";
 export interface PullWindow {
   label: string;
   delayHours: number;
+  // Skip the window entirely once a post is older than this, so a late
+  // first pull isn't stored under a label that claims it was early.
+  maxAgeHours?: number;
 }
 
 // Initial pull lands in the 48-72h window the brief calls for (engagement
@@ -19,7 +22,12 @@ export interface PullWindow {
 // indefinitely. A 'story' format would need its own pull window with
 // delayHours well under 24 (e.g. 12h), never reusing these feed/reel
 // windows - the schedule below assumes non-expiring media.
+//
+// "early" (added Oct 2026) is a first look a few hours in, to compare with
+// the later pulls. The cron runs once a night, so in practice it lands
+// between 6 and 30 hours after posting; posts older than that never get one.
 const DEFAULT_PULL_WINDOWS: PullWindow[] = [
+  { label: "early", delayHours: 6, maxAgeHours: 30 },
   { label: "initial", delayHours: 60 },
   { label: "followup_7d", delayHours: 168 },
 ];
@@ -28,12 +36,13 @@ export function getPullWindows(): PullWindow[] {
   const raw = process.env.INSIGHTS_PULL_WINDOWS;
   if (!raw) return DEFAULT_PULL_WINDOWS;
   return raw.split(",").map((entry) => {
-    const [hours, label] = entry.split(":");
+    const [hours, label, maxAge] = entry.split(":");
     const delayHours = Number(hours);
-    if (!label || Number.isNaN(delayHours)) {
-      throw new Error(`Malformed INSIGHTS_PULL_WINDOWS entry "${entry}" - expected "hours:label"`);
+    const maxAgeHours = maxAge ? Number(maxAge) : undefined;
+    if (!label || Number.isNaN(delayHours) || (maxAgeHours !== undefined && Number.isNaN(maxAgeHours))) {
+      throw new Error(`Malformed INSIGHTS_PULL_WINDOWS entry "${entry}" - expected "hours:label" or "hours:label:maxAgeHours"`);
     }
-    return { label: label.trim(), delayHours };
+    return { label: label.trim(), delayHours, maxAgeHours };
   });
 }
 
@@ -48,15 +57,25 @@ export function metricsForFormat(format: PostFormat): string[] {
   return format === "reel" ? REEL_METRICS : CAROUSEL_METRICS;
 }
 
-// Account-growth metrics per post, asked for on top of the lists above.
-// Instagram documents them for feed/carousel media; support on reels is
-// unclear, and Meta 400s the whole request on one unsupported metric, so
-// pullInsightsForPost() retries with the base list alone if the request
-// with these is rejected. Carousels also get `views` here because it was
-// added for feed media after CAROUSEL_METRICS was written.
-export function extraMetricsForFormat(format: PostFormat): string[] {
-  return format === "reel" ? ["follows", "profile_visits"] : ["views", "follows", "profile_visits"];
+// Metric lists to try in order, richest first. Meta 400s the whole request
+// on one unsupported metric, and follows/profile_visits are documented for
+// feed media but may not be for reels, so pullInsightsForPost() falls back
+// down this list rather than losing the pull. Carousels get `views` (added
+// for feed media after CAROUSEL_METRICS was written); reels get total watch
+// time.
+export function metricAttemptsForFormat(format: PostFormat): string[][] {
+  const base = metricsForFormat(format);
+  const extra = format === "reel" ? ["ig_reels_video_view_total_time"] : ["views"];
+  return [[...base, ...extra, "follows", "profile_visits"], [...base, ...extra], base];
 }
+
+// Optional breakdown requests made after the main pull, each on its own so
+// a rejection only loses that one number. Results go to post_metrics.extra
+// as well as the columns below.
+export const BREAKDOWN_PROBES = [
+  { metric: "profile_activity", breakdown: "action_type" }, // -> profile_activity, bio_link_taps
+  { metric: "reach", breakdown: "follow_type" }, // -> reach_followers, reach_non_followers
+] as const;
 
 export interface DuePull {
   post: PostRow;
@@ -93,10 +112,13 @@ export async function getDueInsightsPulls(supabase: SupabaseClient, limit = 20):
     const publishedAt = new Date(post.published_at as string).getTime();
     for (const window of windows) {
       if (pulledWindows.has(`${post.id}:${window.label}`)) continue;
+      if (window.maxAgeHours != null && now > publishedAt + window.maxAgeHours * 60 * 60 * 1000) continue;
       if (now >= publishedAt + window.delayHours * 60 * 60 * 1000) due.push({ post, window });
     }
-    if (due.length >= limit) break;
   }
+  // Early windows first: they expire (maxAgeHours), the others don't, so a
+  // backlog of late pulls mustn't push a new post's early look past its age.
+  due.sort((a, b) => Number(b.window.maxAgeHours != null) - Number(a.window.maxAgeHours != null));
   return due.slice(0, limit);
 }
 
@@ -127,6 +149,12 @@ export interface PostMetricsRow {
   avg_watch_time_sec?: number | null;
   follows?: number | null;
   profile_visits?: number | null;
+  profile_activity?: number | null;
+  bio_link_taps?: number | null;
+  reach_followers?: number | null;
+  reach_non_followers?: number | null;
+  watch_time_total_sec?: number | null;
+  extra?: Record<string, unknown> | null;
   pull_error?: string | null;
 }
 
@@ -155,6 +183,8 @@ export function buildMetricsRow(postId: string, pullWindow: string, format: Post
     avg_watch_time_sec: format === "reel" && raw.ig_reels_avg_watch_time != null ? raw.ig_reels_avg_watch_time / 1000 : null,
     follows: raw.follows ?? null,
     profile_visits: raw.profile_visits ?? null,
+    // Milliseconds from Meta, like ig_reels_avg_watch_time.
+    watch_time_total_sec: format === "reel" && raw.ig_reels_video_view_total_time != null ? raw.ig_reels_video_view_total_time / 1000 : null,
   };
 }
 
@@ -162,12 +192,14 @@ export function buildErrorRow(postId: string, pullWindow: string, message: strin
   return { post_id: postId, pull_window: pullWindow, pulled_at: new Date().toISOString(), pull_error: message };
 }
 
-// follows/profile_visits arrived in migration 20261008090000. If that
+// The columns below arrived in migration 20261008090000. If that
 // migration isn't applied, PostgREST rejects the unknown columns with
 // PGRST204 (Postgres's own 42703 if it ever gets that far), and without
 // this retry the failure would land in pullInsightsForPost's catch and be
 // written as a permanent pull_error for that window. Same safety net as
 // lib/supabase/page-views.ts; the migration still goes first.
+const NEW_COLUMNS = ["follows", "profile_visits", "profile_activity", "bio_link_taps", "reach_followers", "reach_non_followers", "watch_time_total_sec", "extra"];
+
 function isMissingColumn(error: { code?: string; message?: string }): boolean {
   return error.code === "PGRST204" || error.code === "42703";
 }
@@ -175,10 +207,9 @@ function isMissingColumn(error: { code?: string; message?: string }): boolean {
 export async function recordMetricsPull(supabase: SupabaseClient, row: PostMetricsRow): Promise<void> {
   let { error } = await supabase.from("post_metrics").upsert(row, { onConflict: "post_id,pull_window" });
   if (error && isMissingColumn(error)) {
-    console.warn(`post_metrics is missing follows/profile_visits (apply 20261008090000_post_metrics_follows.sql): ${error.message}`);
-    const { follows: _f, profile_visits: _p, ...base } = row;
-    void _f;
-    void _p;
+    console.warn(`post_metrics is missing the Oct 2026 columns (apply 20261008090000_post_metrics_follows.sql): ${error.message}`);
+    const base: Record<string, unknown> = { ...row };
+    for (const col of NEW_COLUMNS) delete base[col];
     ({ error } = await supabase.from("post_metrics").upsert(base, { onConflict: "post_id,pull_window" }));
   }
   if (error) throw new Error(`Failed to record metrics pull for post ${row.post_id} window ${row.pull_window}: ${error.message}`);

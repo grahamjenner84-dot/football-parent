@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/render-pipeline";
 import { getDueInsightsPulls } from "@/lib/instagram/insights-pipeline";
 import { discoverMedia } from "@/lib/instagram/discover-media";
+import { recordAccountDaily } from "@/lib/instagram/account-daily";
 import { runInsightsBatch } from "@/lib/instagram/insights-flow";
 import { getAccountCredentials, ensureValidToken, TokenError } from "@/lib/instagram/publish-flow";
 import { isAuthorizedCronRequest } from "@/lib/cron-auth";
@@ -11,8 +12,8 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 // Pull windows are hour-granularity (see getPullWindows() in
-// lib/instagram/insights-pipeline.ts), so an hourly cron tick (vercel.json)
-// is plenty - unlike /api/cron/publish this isn't racing a scheduled_time,
+// lib/instagram/insights-pipeline.ts), so a daily cron tick (vercel.json,
+// 03:00 UTC) is enough - unlike /api/cron/publish this isn't racing a scheduled_time,
 // just checking whether enough time has passed since publish.
 async function handle(req: NextRequest) {
   if (!isAuthorizedCronRequest(req.headers.get("authorization"))) {
@@ -45,17 +46,31 @@ async function handle(req: NextRequest) {
     console.error(`[cron/insights] discovery failed, pulling known posts only: ${discovered.error}`);
   }
 
-  const due = await getDueInsightsPulls(supabase, 20);
+  // Whole-account numbers for yesterday (follower count, reach and views
+  // split by followers vs non-followers, bio-link taps, follows). Same rule:
+  // a failure here doesn't stop the per-post pulls.
+  let account: Awaited<ReturnType<typeof recordAccountDaily>> | { error: string };
+  try {
+    account = await recordAccountDaily(supabase, creds);
+    console.log(`[cron/insights] account daily: ${JSON.stringify(account)}`);
+  } catch (err) {
+    account = { error: err instanceof Error ? err.message : String(err) };
+    console.error(`[cron/insights] account daily failed: ${account.error}`);
+  }
+
+  // Each pull is now up to five requests (fallbacks plus two breakdowns),
+  // so 15 per run keeps well inside maxDuration.
+  const due = await getDueInsightsPulls(supabase, 15);
   console.log(`[cron/insights] ${due.length} pull(s) due`);
 
   if (!due.length) {
-    return NextResponse.json({ discovered, pulled: 0, deferred: 0, failed: 0, results: [] });
+    return NextResponse.json({ discovered, account, pulled: 0, deferred: 0, failed: 0, results: [] });
   }
 
   const summary = await runInsightsBatch(supabase, due, creds);
   console.log(`[cron/insights] done: pulled=${summary.pulled} deferred=${summary.deferred} failed=${summary.failed}`);
 
-  return NextResponse.json({ discovered, ...summary });
+  return NextResponse.json({ discovered, account, ...summary });
 }
 
 export { handle as GET, handle as POST };

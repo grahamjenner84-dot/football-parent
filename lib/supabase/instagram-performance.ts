@@ -47,6 +47,11 @@ interface MetricsSnapshot {
   // may not support it, and pulls before 8 Oct 2026 never asked), not zero.
   follows: number | null;
   profileVisits: number | null;
+  profileActivity: number | null;
+  bioLinkTaps: number | null;
+  reachFollowers: number | null;
+  reachNonFollowers: number | null;
+  watchTimeTotalSec: number | null;
   // % of the whole reel's runtime the average viewer watched, derived
   // locally from avgWatchTimeSec / summed post_slides.duration_sec - not a
   // metric Meta returns itself, and NOT a per-second retention curve. See
@@ -70,11 +75,29 @@ export interface PostPerformance {
   latest: MetricsSnapshot | null; // most recent successful pull, for sorting/at-a-glance
 }
 
+export interface AccountDay {
+  date: string;
+  followersCount: number | null;
+  reach: number | null;
+  reachFollowers: number | null;
+  reachNonFollowers: number | null;
+  views: number | null;
+  viewsFollowers: number | null;
+  viewsNonFollowers: number | null;
+  profileLinksTaps: number | null;
+  follows: number | null;
+  unfollows: number | null;
+  onlineFollowers: unknown;
+}
+
 export interface GetInstagramPerformanceResult {
   generatedAt: string;
   filters: Required<Omit<GetInstagramPerformanceInput, "format">> & { format: "reel" | "carousel" | "all" };
   postCount: number;
   posts: PostPerformance[];
+  // Whole-account numbers per day (instagram_account_daily), newest first,
+  // for the same `days` window. Empty before Oct 2026.
+  accountDaily: AccountDay[];
   // Answers "what CAN this tool actually show" up front, in-band, so a chat
   // reading this JSON never has to guess or assume finer granularity exists
   // than it does.
@@ -92,7 +115,7 @@ const RETENTION_CAPABILITIES = {
   carousels:
     "Meta's Graph API does not expose any per-slide/per-card view or drop-off metric for carousel posts - only whole-post aggregates (reach, likes, comments, saves, shares, total_interactions). There is no API field anywhere for 'how many people saw slide 2 vs slide 4'. This is a hard platform limitation, not a gap in this tool's collection - the app-native Insights screen doesn't show this breakdown either, even to the account owner.",
   followsFromPost:
-    "Collected from 8 Oct 2026 as follows and profileVisits per pull (extraMetricsForFormat() in lib/instagram/insights-pipeline.ts). Instagram documents these for feed/carousel posts; reels may not return them. Null means not returned or pulled before collection began, not zero.",
+    "Collected from 8 Oct 2026: follows, profileVisits, profileActivity, bioLinkTaps and reach split by followers/non-followers per pull (lib/instagram/insights-pipeline.ts). Instagram documents follows for feed/carousel posts; reels may not return them. Null means not returned or pulled before collection began, not zero. accountDaily gives daily follower counts, which judge a post's effect on growth even where per-post follows are missing.",
   impressions:
     "The post_metrics.impressions column exists but is never populated - Meta retired the impressions metric platform-wide in 2025. Use reach/views instead.",
 };
@@ -116,6 +139,11 @@ function toSnapshot(row: Record<string, unknown>, durationSec: number | null): M
     avgWatchTimeSec: avgWatchTimeSec ?? null,
     follows: (row.follows as number | null) ?? null,
     profileVisits: (row.profile_visits as number | null) ?? null,
+    profileActivity: (row.profile_activity as number | null) ?? null,
+    bioLinkTaps: (row.bio_link_taps as number | null) ?? null,
+    reachFollowers: (row.reach_followers as number | null) ?? null,
+    reachNonFollowers: (row.reach_non_followers as number | null) ?? null,
+    watchTimeTotalSec: (row.watch_time_total_sec as number | null) ?? null,
     avgWatchTimePctOfDuration,
     pullError: (row.pull_error as string | null) ?? null,
   };
@@ -146,6 +174,27 @@ function sortValue(post: PostPerformance, sortBy: SortMetric): number {
     } as const)[sortBy]
   ];
   return typeof v === "number" ? v : -Infinity;
+}
+
+async function getAccountDaily(supabase: ReturnType<typeof adminClient>, days: number): Promise<AccountDay[]> {
+  let q = supabase.from("instagram_account_daily").select("*").order("snapshot_date", { ascending: false }).limit(400);
+  if (days > 0) q = q.gte("snapshot_date", new Date(Date.now() - days * 86400000).toISOString().slice(0, 10));
+  const { data, error } = await q;
+  if (error) return []; // table not created yet
+  return (data ?? []).map((r) => ({
+    date: r.snapshot_date,
+    followersCount: r.followers_count,
+    reach: r.reach,
+    reachFollowers: r.reach_followers,
+    reachNonFollowers: r.reach_non_followers,
+    views: r.views,
+    viewsFollowers: r.views_followers,
+    viewsNonFollowers: r.views_non_followers,
+    profileLinksTaps: r.profile_links_taps,
+    follows: r.follows,
+    unfollows: r.unfollows,
+    onlineFollowers: r.online_followers,
+  }));
 }
 
 export async function getInstagramPerformance(input: GetInstagramPerformanceInput = {}): Promise<GetInstagramPerformanceResult> {
@@ -214,6 +263,7 @@ export async function getInstagramPerformance(input: GetInstagramPerformanceInpu
     filters: { limit, days, sortBy, order, format: format ?? "all" },
     postCount: Math.min(posts.length, limit),
     posts: posts.slice(0, limit),
+    accountDaily: await getAccountDaily(supabase, days),
     retentionCapabilities: RETENTION_CAPABILITIES,
   };
 }
