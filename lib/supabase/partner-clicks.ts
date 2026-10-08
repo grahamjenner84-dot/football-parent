@@ -99,6 +99,38 @@ export interface PartnerClickPartner {
   clicks: number;
 }
 
+export interface PartnerClickPlacement {
+  placement: string;
+  label: string;
+  clicks: number;
+}
+
+// Instagram only: where on the site each click to our own profile came from,
+// read from the utm_content the links carry (instagramUrl in
+// app/components/InstagramFollow.tsx). Links from before the tags were added
+// (8 Oct 2026) have none and count as "unlabelled".
+const INSTAGRAM_PLACEMENT_LABELS: Record<string, string> = {
+  "end-card": "End of article card",
+  "mid-article": "Mid-article box",
+  footer: "Footer link",
+  unlabelled: "Unlabelled (before placements were tagged)",
+};
+
+// null when the link goes to someone else's Instagram (an interviewed
+// expert's profile), which says nothing about follows of our account.
+export function instagramPlacementFromHref(href: string): string | null {
+  let url: URL;
+  try {
+    url = new URL(href);
+  } catch {
+    return null;
+  }
+  const account = url.pathname.split("/").filter(Boolean)[0]?.toLowerCase();
+  if (account !== "football.parent") return null;
+  const placement = url.searchParams.get("utm_content");
+  return placement && placement in INSTAGRAM_PLACEMENT_LABELS ? placement : "unlabelled";
+}
+
 export interface PartnerClickStats {
   days: number;
   // The window actually used: the later of `days` ago and the point partner
@@ -112,6 +144,10 @@ export interface PartnerClickStats {
   // Rows excluded as bot traffic, reported rather than silently dropped so
   // totalClicks + botClicks reconciles with the raw table.
   botClicks: number;
+  // Instagram only (null otherwise): clicks by placement, and clicks to other
+  // people's Instagram profiles, which are left out of every other number.
+  byPlacement: PartnerClickPlacement[] | null;
+  otherAccountClicks: number | null;
 }
 
 // How many pages get a page-view denominator, one query each. Partner links
@@ -202,10 +238,33 @@ export async function getPartnerClickStats(
   // The API route already refuses a self-declared bot (and a missing UA) at
   // insert time; this re-filter catches rows written before a pattern was
   // added to lib/user-agent-bots.ts, same as page_views and affiliate_clicks.
-  const humanRows = rows.filter(
+  const nonBotRows = rows.filter(
     (row) => !row.user_agent || !matchesKnownBotPattern(row.user_agent)
   );
-  const botClicks = rows.length - humanRows.length;
+  const botClicks = rows.length - nonBotRows.length;
+
+  // For Instagram, only clicks to our own profile count: the interviews also
+  // link to the experts' accounts, and those are not follows of ours.
+  const isInstagram = partner === "instagram";
+  const humanRows = isInstagram
+    ? nonBotRows.filter((row) => instagramPlacementFromHref(row.href) !== null)
+    : nonBotRows;
+
+  let byPlacement: PartnerClickPlacement[] | null = null;
+  if (isInstagram) {
+    const counts = new Map<string, number>();
+    for (const row of humanRows) {
+      const placement = instagramPlacementFromHref(row.href)!;
+      counts.set(placement, (counts.get(placement) ?? 0) + 1);
+    }
+    byPlacement = Array.from(counts.entries())
+      .map(([placement, clicks]) => ({
+        placement,
+        label: INSTAGRAM_PLACEMENT_LABELS[placement] ?? placement,
+        clicks,
+      }))
+      .sort((a, b) => b.clicks - a.clicks);
+  }
 
   const labelForSlug = new Map(OUTBOUND_PARTNERS.map((p) => [p.slug, p.label]));
 
@@ -277,5 +336,7 @@ export async function getPartnerClickStats(
     byPage,
     byPartner,
     botClicks,
+    byPlacement,
+    otherAccountClicks: isInstagram ? nonBotRows.length - humanRows.length : null,
   };
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { instagramUrl } from "@/app/components/InstagramFollow";
 
 export default function Footer() {
   return (
@@ -53,7 +54,7 @@ export default function Footer() {
           </a>
 
           <a
-            href="https://www.instagram.com/football.parent"
+            href={instagramUrl("footer")}
             className="hover:text-black"
             target="_blank"
             rel="noopener"

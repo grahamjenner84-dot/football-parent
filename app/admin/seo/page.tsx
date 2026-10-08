@@ -2264,6 +2264,14 @@ function PartnerClicksReport({
           itself. It counts readers sent to the profile, not follows: whether
           they tapped Follow happens inside Instagram, so compare this with
           follower growth in Instagram Insights over the same days.
+          {!!stats.otherAccountClicks && (
+            <>
+              {" "}
+              {stats.otherAccountClicks} click{stats.otherAccountClicks === 1 ? " was" : "s were"} on
+              links to interviewed experts&rsquo; own Instagram accounts and are
+              left out.
+            </>
+          )}
           {stats.botClicks > 0 && (
             <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
           )}
@@ -2356,6 +2364,20 @@ function PartnerClicksReport({
             <span>Clicks: {stats.totalClicks}</span>
             <span>Click-through rate: {overallRate === null ? "-" : pct(overallRate)}</span>
           </div>
+
+          {stats.byPlacement && stats.byPlacement.length > 0 && (
+            <>
+              <h3 style={styles.affiliateHeading}>By placement</h3>
+              {stats.byPlacement.map((row) => (
+                <div key={row.placement} style={styles.card}>
+                  <div style={styles.cardTop}>
+                    <span style={styles.cardQuery}>{row.label}</span>
+                    <span style={styles.cardBadge}>{row.clicks} clicks</span>
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
 
           {stats.byPartner.length > 1 && (
             <>
