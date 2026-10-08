@@ -51,7 +51,8 @@ type Tab =
   | "coachFunnel"
   | "progress"
   | "affiliate"
-  | "partnerClicks";
+  | "partnerClicks"
+  | "instagramClicks";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
@@ -63,6 +64,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "coachApp", label: "Coach App" },
   { id: "affiliate", label: "Affiliate clicks" },
   { id: "partnerClicks", label: "Football DNA clicks" },
+  { id: "instagramClicks", label: "Instagram clicks" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
   { id: "countries", label: "Countries" },
@@ -170,6 +172,8 @@ export default function SeoAdminPage() {
   const [affiliateError, setAffiliateError] = useState("");
   const [partnerStats, setPartnerStats] = useState<PartnerClickStats | null>(null);
   const [partnerError, setPartnerError] = useState("");
+  const [instagramStats, setInstagramStats] = useState<PartnerClickStats | null>(null);
+  const [instagramError, setInstagramError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -292,7 +296,7 @@ export default function SeoAdminPage() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/partner-click-report?days=30")
+    fetch("/api/partner-click-report?days=30&partner=football-dna")
       .then(async (res) => {
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
@@ -305,6 +309,22 @@ export default function SeoAdminPage() {
         setPartnerError("");
       })
       .catch((err) => setPartnerError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/partner-click-report?days=30&partner=instagram")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load Instagram click report");
+        }
+        return res.json();
+      })
+      .then((data: PartnerClickStats) => {
+        setInstagramStats(data);
+        setInstagramError("");
+      })
+      .catch((err) => setInstagramError(err.message));
   }, []);
 
   useEffect(() => {
@@ -392,6 +412,9 @@ export default function SeoAdminPage() {
             {t.id === "partnerClicks" && partnerStats && (
               <span style={styles.tabCount}>{partnerStats.totalClicks}</span>
             )}
+            {t.id === "instagramClicks" && instagramStats && (
+              <span style={styles.tabCount}>{instagramStats.totalClicks}</span>
+            )}
             {t.id !== "dashboard" &&
               t.id !== "searches" &&
               t.id !== "cookies" &&
@@ -404,6 +427,7 @@ export default function SeoAdminPage() {
               t.id !== "progress" &&
               t.id !== "affiliate" &&
               t.id !== "partnerClicks" &&
+              t.id !== "instagramClicks" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
           </button>
         ))}
@@ -493,6 +517,14 @@ export default function SeoAdminPage() {
             {partnerError && <p style={styles.error}>{partnerError}</p>}
             {partnerStats && <PartnerClicksReport stats={partnerStats} />}
           </>
+        ) : tab === "instagramClicks" ? (
+          <>
+            {!instagramStats && !instagramError && (
+              <p style={styles.muted}>Loading Instagram click report...</p>
+            )}
+            {instagramError && <p style={styles.error}>{instagramError}</p>}
+            {instagramStats && <PartnerClicksReport stats={instagramStats} instagram />}
+          </>
         ) : (
           <>
             {loading && <p style={styles.muted}>Loading report...</p>}
@@ -549,6 +581,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "affiliate":
       return 0;
     case "partnerClicks":
+      return 0;
+    case "instagramClicks":
       return 0;
     case "compare":
       return 0;
@@ -2199,7 +2233,15 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
   );
 }
 
-function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
+function PartnerClicksReport({
+  stats,
+  instagram = false,
+}: {
+  stats: PartnerClickStats;
+  // The same report for clicks on links to our Instagram profile (the follow
+  // card at the end of each article, the footer link), with its own wording.
+  instagram?: boolean;
+}) {
   const [selectedDate, setSelectedDate] = useState("");
 
   const pagesWithViews = stats.byPage.filter((p) => p.pageViews !== null);
@@ -2214,6 +2256,19 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
 
   return (
     <div style={styles.list}>
+      {instagram ? (
+        <SectionNote label="What this measures, and what it doesn't">
+          Every click on a link to the Football Parent Instagram profile: the
+          follow card at the end of each article, the footer link and any
+          Instagram link in an article, logged first-party from the click
+          itself. It counts readers sent to the profile, not follows: whether
+          they tapped Follow happens inside Instagram, so compare this with
+          follower growth in Instagram Insights over the same days.
+          {stats.botClicks > 0 && (
+            <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
+          )}
+        </SectionNote>
+      ) : (
       <SectionNote label="What this measures, and what it doesn't">
         Every click on an outbound link to an editorial partner (Football DNA
         today), logged first-party from the click itself. This is the number a
@@ -2228,10 +2283,11 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
           <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
         )}
       </SectionNote>
+      )}
 
       <SectionNote label="Why the view counts here are lower than the Page views tab">
         Views are counted over the same window as the clicks, starting when
-        partner click logging went live, not over the last {stats.days} days.
+        {instagram ? " Instagram" : " partner"} click logging went live, not over the last {stats.days} days.
         These articles have months of view history from before any click could
         be recorded, so counting all of it would divide a few clicks by
         thousands of views and call the result a click-through rate. The Page
@@ -2241,7 +2297,7 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
 
       <p style={styles.muted}>
         {stats.clampedToTrackingStart
-          ? `Clicks and views both counted since ${new Date(stats.since).toLocaleString("en-GB")}, when partner click logging went live.`
+          ? `Clicks and views both counted since ${new Date(stats.since).toLocaleString("en-GB")}, when ${instagram ? "Instagram" : "partner"} click logging went live.`
           : `Clicks and views both counted over the last ${stats.days} days.`}
       </p>
 
@@ -2267,7 +2323,13 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
       )}
 
       {stats.totalClicks === 0 ? (
-        <EmptyState text="No Football DNA clicks recorded yet. Tracking went live on 22 September 2026 - before that nothing was measured, so an empty window here is not the same as no clicks." />
+        <EmptyState
+          text={
+            instagram
+              ? "No Instagram clicks recorded yet. Tracking started with the follow card in October 2026; before that nothing was measured."
+              : "No Football DNA clicks recorded yet. Tracking went live on 22 September 2026 - before that nothing was measured, so an empty window here is not the same as no clicks."
+          }
+        />
       ) : selectedDay ? (
         <>
           <p style={styles.sectionNote}>

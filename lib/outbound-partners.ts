@@ -14,8 +14,11 @@
 //     (PartnerClickTracker / /api/partner-click / lib/supabase/partner-clicks)
 //     and never touch the Amazon compliance path.
 //
-// Football DNA is the only partner today; the shape is a list so a second
-// sponsor slots in without touching any other file.
+// Football DNA is the only editorial partner today. Instagram is our own
+// account, not a partner, but its follow links need exactly the same "how
+// many readers clicked out, from which page" count, so it rides the same
+// table and tracker under its own slug; the admin report filters by slug so
+// its clicks never mix into a partner's click-through rate.
 
 export interface OutboundPartner {
   // Stable identifier stored on each click row and used in the report.
@@ -25,10 +28,26 @@ export interface OutboundPartner {
   // Registrable hostnames for this partner. A click counts when its
   // destination host equals one of these or is a subdomain of it.
   hosts: string[];
+  // When click logging for this destination went live (start of the deploy
+  // day, UTC). The report clamps its window to it so the click-through rate
+  // never divides by page views from before any click could be recorded.
+  trackingStartedAt: string;
 }
 
 export const OUTBOUND_PARTNERS: OutboundPartner[] = [
-  { slug: "football-dna", label: "Football DNA", hosts: ["footballdna.co.uk"] },
+  {
+    slug: "football-dna",
+    label: "Football DNA",
+    hosts: ["footballdna.co.uk"],
+    trackingStartedAt: "2026-09-22T00:00:00Z",
+  },
+  {
+    slug: "instagram",
+    label: "Instagram",
+    hosts: ["instagram.com"],
+    // Update to the day this goes live if it merges later.
+    trackingStartedAt: "2026-10-08T00:00:00Z",
+  },
 ];
 
 // The partner a destination URL belongs to, or null if it is not a tracked
