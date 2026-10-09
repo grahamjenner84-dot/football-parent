@@ -2988,6 +2988,109 @@ function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"
   );
 }
 
+// Activation from the same snapshot: does a new parent get as far as a
+// player, a club, a logged match or training, and the installed app? Null
+// fields mean the snapshot didn't carry them (older snapshots, or the
+// 20261009120000_progress_usage_activation.sql migration not applied yet).
+function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }) {
+  if ("error" in usage || !usage.latest) return null;
+  const latest = usage.latest;
+  if (latest.signups7d === null) {
+    return (
+      <p style={styles.muted}>
+        No activation counts in the latest snapshot yet. They arrive once the
+        Progress database sends them and
+        20261009120000_progress_usage_activation.sql has been applied here.
+      </p>
+    );
+  }
+  const base = latest.signups7d;
+  const of7d = (n: number | null) =>
+    n === null ? "not sent" : base > 0 ? `${Math.round((n / base) * 100)}% of this week's sign-ups` : undefined;
+  const steps: { label: string; value: number | null }[] = [
+    { label: "Signed up, last 7 days", value: latest.signups7d },
+    { label: "Have a player", value: latest.signups7dWithPlayer },
+    { label: "Added a club", value: latest.signups7dWithClub },
+    { label: "Logged a match or training", value: latest.signups7dWithLog },
+    { label: "Installed the app", value: latest.signups7dInstalled },
+  ];
+  const rate = (a: number | null, b: number | null) =>
+    a === null || b === null ? "-" : b > 0 ? `${Math.round((a / b) * 100)}%` : "n/a";
+  const trend = usage.byDay.filter((d) => d.signups7d !== null);
+  return (
+    <>
+      <div style={styles.summaryGrid}>
+        {steps.map((st, i) =>
+          st.value === null ? (
+            <div key={st.label} style={styles.card}>
+              <p style={styles.cardPage}>{st.label}</p>
+              <span style={{ ...styles.cardQuery, fontSize: 20 }}>-</span>
+            </div>
+          ) : (
+            <UsageTile key={st.label} label={st.label} value={st.value} sub={i === 0 ? undefined : of7d(st.value)} />
+          )
+        )}
+        <UsageTile
+          label="Week-2 cohort activated"
+          value={latest.cohortWeek2Activated ?? 0}
+          sub={`${rate(latest.cohortWeek2Activated, latest.cohortWeek2)} of ${latest.cohortWeek2 ?? "-"} who signed up 7-14 days ago logged something in their first week`}
+        />
+        <UsageTile
+          label="Logged something, last 7 days"
+          value={latest.accountsLogged7d ?? 0}
+          sub="accounts: the weekly habit number"
+        />
+        <UsageTile label="Ever opened the installed app" value={latest.accountsInstalled ?? 0} sub="accounts, all time" />
+      </div>
+      <SectionNote label="What these numbers count">
+        The top row follows the accounts created in the last 7 days (a rolling
+        week, not this calendar week) through setup: a player they can see (their
+        own or shared), a club or season on that player, a match or training
+        logged, and the app opened from the home screen. The week-2 cohort is
+        accounts created 7 to 14 days ago, so their first week is complete:
+        activated means they logged a match or training within 7 days of
+        signing up. Logged something counts accounts with a match or training
+        created in the last 7 days. Your own accounts and accounts being
+        deleted are left out, as above.
+      </SectionNote>
+      {trend.length > 1 && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Day (closing figures)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups 7d</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Player</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Club</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Logged</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Installed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Week-2 activated</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Logged 7d (accounts)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {trend.map((d) => (
+                <tr key={d.date}>
+                  <td style={funnelTd}>{d.date}</td>
+                  <td style={funnelNum}>{d.signups7d ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithPlayer ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithClub ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithLog ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dInstalled ?? "-"}</td>
+                  <td style={funnelNum}>
+                    {d.cohortWeek2Activated ?? "-"} / {d.cohortWeek2 ?? "-"} ({rate(d.cohortWeek2Activated, d.cohortWeek2)})
+                  </td>
+                  <td style={funnelNum}>{d.accountsLogged7d ?? "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
 const PLACEMENT_LABEL: Record<string, string> = {
   home: "Homepage",
   article: "End of articles",
@@ -3057,6 +3160,9 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
 
       <FunnelHeading>App usage</FunnelHeading>
       <ProgressUsageSection usage={funnel.usage} />
+
+      <FunnelHeading>Activation</FunnelHeading>
+      <ProgressActivationSection usage={funnel.usage} />
 
       <FunnelHeading>Banners by placement, {windowLabel}</FunnelHeading>
       <div style={{ overflowX: "auto" }}>

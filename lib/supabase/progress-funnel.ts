@@ -152,10 +152,81 @@ const COLUMN: Record<keyof ProgressUsageCounts, string> = {
   planLapsed: "plan_lapsed",
 };
 
-export async function logProgressUsageSnapshot(takenAt: string, counts: ProgressUsageCounts): Promise<void> {
+/** Activation counts, sent by the Progress database since the activation
+ * change (progress side) and stored in nullable columns (migration
+ * 20261009120000_progress_usage_activation.sql). Null means the snapshot
+ * didn't carry it: older snapshots, or this site's columns not there yet. */
+export interface ProgressActivationCounts {
+  /** Accounts created in the last 7 days. */
+  signups7d: number | null;
+  /** Of those, with access to a live player. */
+  signups7dWithPlayer: number | null;
+  /** Of those, with a player that has at least one club/season (chapter). */
+  signups7dWithClub: number | null;
+  /** Of those, with a match or training logged on a player they can access. */
+  signups7dWithLog: number | null;
+  /** Of those, who have opened the app installed to the home screen. */
+  signups7dInstalled: number | null;
+  /** Accounts created 7 to 14 days ago: their first week is complete. */
+  cohortWeek2: number | null;
+  /** Of those, logged a match or training within 7 days of signing up. */
+  cohortWeek2Activated: number | null;
+  /** Accounts with a match or training logged (created) in the last 7 days:
+   * the weekly habit number. */
+  accountsLogged7d: number | null;
+  /** Accounts that have ever opened the installed app. */
+  accountsInstalled: number | null;
+}
+
+export const ACTIVATION_FIELDS: (keyof ProgressActivationCounts)[] = [
+  "signups7d",
+  "signups7dWithPlayer",
+  "signups7dWithClub",
+  "signups7dWithLog",
+  "signups7dInstalled",
+  "cohortWeek2",
+  "cohortWeek2Activated",
+  "accountsLogged7d",
+  "accountsInstalled",
+];
+
+const ACTIVATION_COLUMN: Record<keyof ProgressActivationCounts, string> = {
+  signups7d: "signups_7d",
+  signups7dWithPlayer: "signups_7d_with_player",
+  signups7dWithClub: "signups_7d_with_club",
+  signups7dWithLog: "signups_7d_with_log",
+  signups7dInstalled: "signups_7d_installed",
+  cohortWeek2: "cohort_week2",
+  cohortWeek2Activated: "cohort_week2_activated",
+  accountsLogged7d: "accounts_logged_7d",
+  accountsInstalled: "accounts_installed",
+};
+
+export type ProgressSnapshotCounts = ProgressUsageCounts & ProgressActivationCounts;
+
+// PostgREST reports an unknown column as PGRST204 (insert) and Postgres as
+// 42703; both mean the activation migration hasn't been applied yet. See
+// lib/supabase/page-views.ts for why both codes matter.
+function isMissingColumnError(error: { code?: string }): boolean {
+  return error.code === "PGRST204" || error.code === "42703";
+}
+
+export async function logProgressUsageSnapshot(takenAt: string, counts: ProgressSnapshotCounts): Promise<void> {
+  const supabase = adminClient();
   const row: Record<string, string | number> = { taken_at: takenAt };
   for (const f of USAGE_FIELDS) row[COLUMN[f]] = counts[f];
-  const { error } = await adminClient().from("progress_usage_snapshots").insert(row);
+  const activation: Record<string, unknown> = {};
+  for (const f of ACTIVATION_FIELDS) activation[ACTIVATION_COLUMN[f]] = counts[f];
+
+  const { error } = await supabase.from("progress_usage_snapshots").insert({ ...row, ...activation });
+  // Deployed before 20261009120000_progress_usage_activation.sql was
+  // applied: keep the snapshot, drop the activation counts, rather than
+  // lose every snapshot until the migration runs.
+  if (error && isMissingColumnError(error)) {
+    const retry = await supabase.from("progress_usage_snapshots").insert(row);
+    if (!retry.error) return;
+    throw new Error("Failed to insert progress_usage_snapshots row: " + retry.error.message);
+  }
   if (error) throw new Error("Failed to insert progress_usage_snapshots row: " + error.message);
 }
 
@@ -165,18 +236,22 @@ export async function logProgressUsageSnapshot(takenAt: string, counts: Progress
 
 export interface ProgressUsage {
   /** The most recent snapshot, or null before the first one arrives. */
-  latest: (ProgressUsageCounts & { takenAt: string }) | null;
+  latest: (ProgressSnapshotCounts & { takenAt: string }) | null;
   /** The last snapshot of each UK day, newest first: that day's closing
    * figures, so signupsToday there is that day's new accounts. */
-  byDay: (ProgressUsageCounts & { date: string; takenAt: string })[];
+  byDay: (ProgressSnapshotCounts & { date: string; takenAt: string })[];
 }
 
 const londonDay = (iso: string) =>
   new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date(iso));
 
-function snapshotCounts(r: Record<string, unknown>): ProgressUsageCounts & { takenAt: string } {
-  const out = { takenAt: r.taken_at as string } as ProgressUsageCounts & { takenAt: string };
+function snapshotCounts(r: Record<string, unknown>): ProgressSnapshotCounts & { takenAt: string } {
+  const out = { takenAt: r.taken_at as string } as ProgressSnapshotCounts & { takenAt: string };
   for (const f of USAGE_FIELDS) out[f] = r[COLUMN[f]] as number;
+  for (const f of ACTIVATION_FIELDS) {
+    const v = r[ACTIVATION_COLUMN[f]];
+    out[f] = typeof v === "number" ? v : null;
+  }
   return out;
 }
 
@@ -185,20 +260,34 @@ async function getProgressUsage(supabase: ReturnType<typeof adminClient>, days: 
   const rows: Record<string, unknown>[] = [];
   const pageSize = 1000;
   // Newest first, so the first row seen for each day is its closing figure.
+  // Without the activation migration the activation columns don't exist and
+  // selecting them fails: fall back to the original columns (activation
+  // counts then read as null) so the rest of the tab still loads.
+  const baseColumns = ["taken_at", ...USAGE_FIELDS.map((f) => COLUMN[f])];
+  let columns = [...baseColumns, ...ACTIVATION_FIELDS.map((f) => ACTIVATION_COLUMN[f])].join(", ");
   for (let from = 0; ; from += pageSize) {
-    const { data, error } = await supabase
+    let { data, error } = await supabase
       .from("progress_usage_snapshots")
-      .select(["taken_at", ...USAGE_FIELDS.map((f) => COLUMN[f])].join(", "))
+      .select(columns)
       .gte("taken_at", since)
       .order("taken_at", { ascending: false })
       .range(from, from + pageSize - 1);
+    if (error && from === 0 && isMissingColumnError(error)) {
+      columns = baseColumns.join(", ");
+      ({ data, error } = await supabase
+        .from("progress_usage_snapshots")
+        .select(columns)
+        .gte("taken_at", since)
+        .order("taken_at", { ascending: false })
+        .range(from, from + pageSize - 1));
+    }
     if (error) throw new Error("Failed to read progress_usage_snapshots: " + error.message);
     const batch = (data ?? []) as unknown as Record<string, unknown>[];
     rows.push(...batch);
     if (batch.length < pageSize) break;
   }
 
-  const byDay = new Map<string, ProgressUsageCounts & { date: string; takenAt: string }>();
+  const byDay = new Map<string, ProgressSnapshotCounts & { date: string; takenAt: string }>();
   for (const r of rows) {
     const date = londonDay(r.taken_at as string);
     if (!byDay.has(date)) byDay.set(date, { date, ...snapshotCounts(r) });
