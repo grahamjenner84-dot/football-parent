@@ -1,6 +1,13 @@
 import crypto from "crypto";
 import { NextResponse } from "next/server";
-import { USAGE_FIELDS, logProgressUsageSnapshot, type ProgressUsageCounts } from "@/lib/supabase/progress-funnel";
+import {
+  ACTIVATION_FIELDS,
+  USAGE_FIELDS,
+  logProgressUsageSnapshot,
+  type ProgressActivationCounts,
+  type ProgressSnapshotCounts,
+  type ProgressUsageCounts,
+} from "@/lib/supabase/progress-funnel";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -36,10 +43,25 @@ export async function POST(req: Request) {
     const takenAt = typeof body?.takenAt === "string" ? Date.parse(body.takenAt) : NaN;
     const counts = {} as Record<keyof ProgressUsageCounts, number | null>;
     for (const f of USAGE_FIELDS) counts[f] = count(body?.[f]);
-    if (!Number.isFinite(takenAt) || Object.values(counts).some((v) => v === null)) {
+    // The activation counts are optional (a Progress database that doesn't
+    // send them yet, or an older one): missing means null. Sent but not a
+    // count is as bad as a bad required field.
+    const activation = {} as ProgressActivationCounts;
+    let badActivation = false;
+    for (const f of ACTIVATION_FIELDS) {
+      const raw = body?.[f];
+      if (raw === undefined || raw === null) {
+        activation[f] = null;
+        continue;
+      }
+      activation[f] = count(raw);
+      if (activation[f] === null) badActivation = true;
+    }
+    if (!Number.isFinite(takenAt) || Object.values(counts).some((v) => v === null) || badActivation) {
       return NextResponse.json({ error: "Bad snapshot" }, { status: 400 });
     }
-    await logProgressUsageSnapshot(new Date(takenAt).toISOString(), counts as ProgressUsageCounts);
+    const snapshot: ProgressSnapshotCounts = { ...(counts as ProgressUsageCounts), ...activation };
+    await logProgressUsageSnapshot(new Date(takenAt).toISOString(), snapshot);
     return NextResponse.json({ ok: true });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";

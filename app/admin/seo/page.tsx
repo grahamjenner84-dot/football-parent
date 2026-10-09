@@ -2768,6 +2768,9 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+        {latest.emailsToday !== null && (
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub="scheduled, capped at 50 a day" />
+        )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
       <SectionNote label="What these numbers count">
@@ -2782,7 +2785,11 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         Paid includes a subscription whose payment is being retried; Lapsed is
         a trial that ended, a cancelled subscription, or an old free account.
         An invited coach covered by their team&rsquo;s subscription counts by
-        their own plan, so Paid is paying accounts.
+        their own plan, so Paid is paying accounts. Emails sent today is the
+        app&rsquo;s scheduled emails since midnight (match reminders, set-up
+        nudges, trial emails), which it caps at 50 a day; sign-in emails
+        aren&rsquo;t recorded anywhere, so they&rsquo;re not in it. Both apps
+        share one Resend allowance of 100 a day, sign-ins included.
       </SectionNote>
       {usage.byDay.length > 1 && (
         <div style={{ overflowX: "auto" }}>
@@ -2800,6 +2807,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Emails</th>
               </tr>
             </thead>
             <tbody>
@@ -2816,6 +2824,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
                   <td style={funnelNum}>{d.planLapsed}</td>
+                  <td style={funnelNum}>{d.emailsToday ?? "-"}</td>
                 </tr>
               ))}
             </tbody>
@@ -2873,6 +2882,9 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
         <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+        {latest.emailsToday !== null && (
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub="reminders and trial, capped at 25 a day" />
+        )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
       <SectionNote label="What these numbers count">
@@ -2884,7 +2896,10 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
         trial and Lapsed are each account&rsquo;s own plan and add up to Total
         accounts: Paid includes a payment being retried; Lapsed is a trial that
         ended or a cancelled subscription. A co-parent counts by their own
-        plan, so Paid is paying accounts.
+        plan, so Paid is paying accounts. Emails sent today is the reminder and
+        trial emails since midnight, which the app caps at 25 a day; sign-in
+        emails aren&rsquo;t recorded anywhere, so they&rsquo;re not in it. Both
+        apps share one Resend allowance of 100 a day, sign-ins included.
       </SectionNote>
       {usage.byDay.length > 1 && (
         <div style={{ overflowX: "auto" }}>
@@ -2901,6 +2916,7 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Emails</th>
               </tr>
             </thead>
             <tbody>
@@ -2916,6 +2932,172 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
                   <td style={funnelNum}>{d.planLapsed}</td>
+                  <td style={funnelNum}>{d.emailsToday ?? "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
+// The trial/development-centre banner A/B test (lib/progress-banner-test.ts):
+// per arm impressions (estimated), clicks, CTR and join sends, cumulative
+// from the test start, plus the Bayesian readout and what to do next.
+function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"] }) {
+  const started = new Date(test.startedAt).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const statusColour =
+    test.status === "b-wins" || test.status === "a-wins" ? "#166534" : test.status === "draw" ? "#92400e" : "#374151";
+  return (
+    <>
+      <FunnelHeading>Banner test: trial and development centre copy, since {started}</FunnelHeading>
+      <p style={{ ...styles.sectionNote, color: statusColour, fontWeight: 600 }}>{test.statusText}</p>
+      {test.started && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Arm</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Impressions (≈)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>CTR (≈)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Join sends</th>
+              </tr>
+            </thead>
+            <tbody>
+              {test.arms.map((a) => (
+                <tr key={a.arm}>
+                  <td style={funnelTd}>{a.label}</td>
+                  <td style={funnelNum}>≈{Math.round(a.impressions).toLocaleString("en-GB")}</td>
+                  <td style={funnelNum}>{a.clicks}</td>
+                  <td style={funnelNum}>{a.impressions > 0 ? `≈${(a.ctr * 100).toFixed(2)}%` : "n/a"}</td>
+                  <td style={funnelNum}>{a.joins}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {test.probBBeatsA !== null && (
+        <p style={styles.sectionNote}>
+          Probability B&rsquo;s CTR beats A&rsquo;s: <strong>{(test.probBBeatsA * 100).toFixed(1)}%</strong>.
+        </p>
+      )}
+      <SectionNote label="How the test works">
+        Articles under /academy-pathway/ and /academy-trials/ only. Every page
+        view shows A (the banner as it was) or B (same banner, body copy for
+        parents heading to a trial or development centre) at random, 50/50,
+        with nothing stored in the browser. Clicks are landings on /progress
+        from each arm&rsquo;s link (?b= {test.arms.map((a) => a.bannerValues.join(", ")).join(" / ")}),
+        and join sends are sign-in emails sent after arriving that way. No
+        page view records which arm it showed, so each arm&rsquo;s impressions
+        are half of the {test.eligibleViews.toLocaleString("en-GB")} views of
+        those articles since the test started: unbiased, because each view is
+        an independent coin flip, but an estimate, hence ≈. The probability
+        uses Beta(1 + clicks, 1 + impressions - clicks) for each arm. Keep it
+        running until both arms have {test.minImpressionsPerArm.toLocaleString("en-GB")} impressions,
+        then call it at {Math.round(test.threshold * 100)}% either way; anything
+        in between is a draw.
+      </SectionNote>
+    </>
+  );
+}
+
+// Activation from the same snapshot: does a new parent get as far as a
+// player, a club, a logged match or training, and the installed app? Null
+// fields mean the snapshot didn't carry them (older snapshots, or the
+// 20261009120000_progress_usage_activation.sql migration not applied yet).
+function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }) {
+  if ("error" in usage || !usage.latest) return null;
+  const latest = usage.latest;
+  if (latest.signups7d === null) {
+    return (
+      <p style={styles.muted}>
+        No activation counts in the latest snapshot yet. They arrive once the
+        Progress database sends them and
+        20261009120000_progress_usage_activation.sql has been applied here.
+      </p>
+    );
+  }
+  const base = latest.signups7d;
+  const of7d = (n: number | null) =>
+    n === null ? "not sent" : base > 0 ? `${Math.round((n / base) * 100)}% of this week's sign-ups` : undefined;
+  const steps: { label: string; value: number | null }[] = [
+    { label: "Signed up, last 7 days", value: latest.signups7d },
+    { label: "Have a player", value: latest.signups7dWithPlayer },
+    { label: "Added a club", value: latest.signups7dWithClub },
+    { label: "Logged a match or training", value: latest.signups7dWithLog },
+    { label: "Installed the app", value: latest.signups7dInstalled },
+  ];
+  const rate = (a: number | null, b: number | null) =>
+    a === null || b === null ? "-" : b > 0 ? `${Math.round((a / b) * 100)}%` : "n/a";
+  const trend = usage.byDay.filter((d) => d.signups7d !== null);
+  return (
+    <>
+      <div style={styles.summaryGrid}>
+        {steps.map((st, i) =>
+          st.value === null ? (
+            <div key={st.label} style={styles.card}>
+              <p style={styles.cardPage}>{st.label}</p>
+              <span style={{ ...styles.cardQuery, fontSize: 20 }}>-</span>
+            </div>
+          ) : (
+            <UsageTile key={st.label} label={st.label} value={st.value} sub={i === 0 ? undefined : of7d(st.value)} />
+          )
+        )}
+        <UsageTile
+          label="Week-2 cohort activated"
+          value={latest.cohortWeek2Activated ?? 0}
+          sub={`${rate(latest.cohortWeek2Activated, latest.cohortWeek2)} of ${latest.cohortWeek2 ?? "-"} who signed up 7-14 days ago logged something in their first week`}
+        />
+        <UsageTile
+          label="Logged something, last 7 days"
+          value={latest.accountsLogged7d ?? 0}
+          sub="accounts: the weekly habit number"
+        />
+        <UsageTile label="Ever opened the installed app" value={latest.accountsInstalled ?? 0} sub="accounts, all time" />
+      </div>
+      <SectionNote label="What these numbers count">
+        The top row follows the accounts created in the last 7 days (a rolling
+        week, not this calendar week) through setup: a player they can see (their
+        own or shared), a club or season on that player, a match or training
+        logged, and the app opened from the home screen. The week-2 cohort is
+        accounts created 7 to 14 days ago, so their first week is complete:
+        activated means they logged a match or training within 7 days of
+        signing up. Logged something counts accounts with a match or training
+        created in the last 7 days. Your own accounts and accounts being
+        deleted are left out, as above.
+      </SectionNote>
+      {trend.length > 1 && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Day (closing figures)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups 7d</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Player</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Club</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Logged</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Installed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Week-2 activated</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Logged 7d (accounts)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {trend.map((d) => (
+                <tr key={d.date}>
+                  <td style={funnelTd}>{d.date}</td>
+                  <td style={funnelNum}>{d.signups7d ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithPlayer ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithClub ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithLog ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dInstalled ?? "-"}</td>
+                  <td style={funnelNum}>
+                    {d.cohortWeek2Activated ?? "-"} / {d.cohortWeek2 ?? "-"} ({rate(d.cohortWeek2Activated, d.cohortWeek2)})
+                  </td>
+                  <td style={funnelNum}>{d.accountsLogged7d ?? "-"}</td>
                 </tr>
               ))}
             </tbody>
@@ -2996,6 +3178,9 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
       <FunnelHeading>App usage</FunnelHeading>
       <ProgressUsageSection usage={funnel.usage} />
 
+      <FunnelHeading>Activation</FunnelHeading>
+      <ProgressActivationSection usage={funnel.usage} />
+
       <FunnelHeading>Banners by placement, {windowLabel}</FunnelHeading>
       <div style={{ overflowX: "auto" }}>
         <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
@@ -3019,6 +3204,8 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
           </tbody>
         </table>
       </div>
+
+      <ProgressBannerTestSection test={funnel.bannerTest} />
 
       <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
       <SectionNote label="How channels are decided">

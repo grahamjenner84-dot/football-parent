@@ -234,6 +234,11 @@ export async function MDXContent({
   // sponsor version of the banner.
   const inAcademyPathway =
     !!slug && routes.some((r) => r === `/academy-pathway/${slug}`);
+  // The trial/development-centre banner A/B test runs on Academy Pathway
+  // and Academy Trials articles only (lib/progress-banner-test.ts).
+  const progressTest =
+    inAcademyPathway ||
+    (!!slug && routes.some((r) => r === `/academy-trials/${slug}`));
   // The Coach App sponsors the Coaching section: the mid-article banner on
   // its articles is the sponsor creative rather than an arm of the A/B test.
   const inCoaching = !!slug && routes.some((r) => r === `/coaching/${slug}`);
@@ -252,6 +257,7 @@ export async function MDXContent({
             <ProgressBanner
               placement={inAcademyPathway ? "academy-pathway" : "article"}
               inArticle
+              test={progressTest}
             />
           ) : (
             <CoachAppBanner
@@ -280,6 +286,7 @@ export async function MDXContent({
             <ProgressBanner
               placement={inAcademyPathway ? "academy-pathway" : "article"}
               inArticle
+              test={progressTest}
             />
           )}
         </>
