@@ -3,6 +3,18 @@ import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getAllArticleSlugs } from "@/lib/content";
 import { COACH_APP_CHANNELS, channelFor, channelForPageView, type CoachAppChannel } from "@/lib/coach-app-channels";
 import { COACH_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
+import {
+  PROGRESS_BANNER_TEST_MIN_IMPRESSIONS,
+  PROGRESS_BANNER_TEST_STARTED_AT,
+  PROGRESS_BANNER_TEST_THRESHOLD,
+  inProgressBannerTest,
+  parseProgressBanner,
+  probabilityBBeatsA,
+  progressBannerArmValue,
+  progressBannerTestStatus,
+  type ProgressBannerArm,
+  type ProgressBannerTestStatus,
+} from "@/lib/progress-banner-test";
 
 // The Progress pipeline: the "Progress pipeline" tab on /admin/seo, the
 // Progress card on its dashboard and the get_progress_funnel MCP tool.
@@ -224,6 +236,39 @@ export interface ProgressJoin {
   marketingOptIn: boolean;
 }
 
+export interface ProgressBannerTestArmRow {
+  arm: ProgressBannerArm;
+  label: string;
+  /** Its ?b= values, one per placement in the test. */
+  bannerValues: string[];
+  /** Estimated: half the eligible page views since the test started. Each
+   * view is an independent 50/50 draw, so this is unbiased, but it is an
+   * estimate (no per-view record of the arm is kept). */
+  impressions: number;
+  /** Landings on /progress from this arm's link. */
+  clicks: number;
+  ctr: number;
+  /** Join form sends whose ?b= was this arm's. */
+  joins: number;
+}
+
+/** The trial/development-centre banner test (lib/progress-banner-test.ts).
+ * Always cumulative from the test start, whatever the funnel's window. */
+export interface ProgressBannerTest {
+  startedAt: string;
+  started: boolean;
+  /** Human page views of the articles in the test since it started. */
+  eligibleViews: number;
+  arms: ProgressBannerTestArmRow[];
+  /** P(B's CTR > A's), Beta(1 + clicks, 1 + impressions - clicks)
+   * posteriors, closed form. Null before the test starts. */
+  probBBeatsA: number | null;
+  status: ProgressBannerTestStatus;
+  statusText: string;
+  minImpressionsPerArm: number;
+  threshold: number;
+}
+
 export interface ProgressFunnel {
   days: number;
   /** Start of every site-side number: the later of `days` ago and
@@ -246,6 +291,7 @@ export interface ProgressFunnel {
   recentJoins: ProgressJoin[];
   joinsError?: string;
   usage: ProgressUsage | { error: string };
+  bannerTest: ProgressBannerTest;
 }
 
 type ViewRow = {
@@ -290,10 +336,32 @@ export function progressBannerOnPath(path: string, articleSlugs: Set<string>): P
   return path.startsWith("/academy-pathway/") ? "academy-pathway" : "article";
 }
 
+// progress-<placement>, or progress-<placement>-a / -b from the banner test:
+// both arms count for their placement like any other click.
 function placementOf(banner: string | null): ProgressPlacement | null {
-  if (!banner?.startsWith("progress-")) return null;
-  const p = banner.slice("progress-".length) as ProgressPlacement;
-  return PROGRESS_PLACEMENTS.includes(p) ? p : null;
+  return parseProgressBanner(banner)?.placement ?? null;
+}
+
+const ARM_LABEL: Record<ProgressBannerArm, string> = {
+  a: "A: current copy (control)",
+  b: "B: trial and development centre copy",
+};
+
+function testStatusText(status: ProgressBannerTestStatus, armImpressions: number, prob: number | null): string {
+  const pctProb = prob === null ? "" : `${(prob * 100).toFixed(1)}%`;
+  const min = PROGRESS_BANNER_TEST_MIN_IMPRESSIONS.toLocaleString("en-GB");
+  switch (status) {
+    case "not-started":
+      return `Not started: the test starts at ${PROGRESS_BANNER_TEST_STARTED_AT}.`;
+    case "running":
+      return `Keep running: about ${Math.round(armImpressions).toLocaleString("en-GB")} of ${min} impressions per arm so far (B ahead with probability ${pctProb}; too early to call).`;
+    case "b-wins":
+      return `B wins: ${pctProb} probability that B's CTR beats A's, with ${min}+ impressions per arm. Stop the test and make B the banner.`;
+    case "a-wins":
+      return `A wins: only ${pctProb} probability that B beats A, with ${min}+ impressions per arm. Stop the test and keep A.`;
+    case "draw":
+      return `Draw: ${min}+ impressions per arm and B beats A with probability ${pctProb}, short of 95% either way. Neither copy is clearly better.`;
+  }
 }
 
 export async function getProgressFunnel(days: number = 30): Promise<ProgressFunnel> {
@@ -303,6 +371,12 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
   const clampedToTrackingStart = trackingStart > requestedSince;
   const since = new Date(Math.max(requestedSince, trackingStart)).toISOString();
   const articleSlugs = getAllArticleSlugs();
+  // The banner test reads from its own start, which may be before the
+  // window: rows are fetched from the earlier of the two and everything
+  // else filters back to `since`.
+  const testStart = Date.parse(PROGRESS_BANNER_TEST_STARTED_AT);
+  const testStarted = testStart <= Date.now();
+  const readFrom = testStarted && testStart < Date.parse(since) ? PROGRESS_BANNER_TEST_STARTED_AT : since;
 
   // Every human page view in the window: impressions need the whole site,
   // and /progress views come out of the same pass.
@@ -313,7 +387,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
       const { data, error } = await supabase
         .from("page_views")
         .select("path, referrer_host, utm_source, utm_medium, gclid, banner_variant, user_agent, created_at")
-        .gte("created_at", since)
+        .gte("created_at", readFrom)
         .order("id", { ascending: true })
         .range(from, from + pageSize - 1);
       if (error) throw new Error("Failed to read page_views: " + error.message);
@@ -324,14 +398,14 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     return rows.filter((r) => isHuman(r.user_agent));
   }
 
-  const [views, joinResult, usage] = await Promise.all([
+  const [allViews, joinResult, usage] = await Promise.all([
     readAllViews(),
     supabase
       .from("progress_join_events")
       .select(
         "form, entry_path, entry_source_group, banner, utm_source, utm_medium, utm_campaign, had_gclid, marketing_opt_in, user_agent, created_at"
       )
-      .gte("created_at", since)
+      .gte("created_at", readFrom)
       .order("created_at", { ascending: false })
       .limit(5000),
     getProgressUsage(supabase, days).catch((err: unknown) => ({
@@ -339,7 +413,12 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     })),
   ]);
 
-  const joinRows = ((joinResult.data ?? []) as JoinRow[]).filter((r) => isHuman(r.user_agent));
+  const allJoinRows = ((joinResult.data ?? []) as JoinRow[]).filter((r) => isHuman(r.user_agent));
+  // created_at and since are both ISO UTC strings from Postgres/JS; compare
+  // as instants, not text, since Postgres writes "+00:00" rather than "Z".
+  const sinceMs = Date.parse(since);
+  const views = allViews.filter((v) => Date.parse(v.created_at) >= sinceMs);
+  const joinRows = allJoinRows.filter((r) => Date.parse(r.created_at) >= sinceMs);
   const joinsError = joinResult.error?.message;
   const joinChannel = (r: JoinRow) =>
     channelFor({
@@ -401,6 +480,60 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
 
   const impressions = Array.from(placements.values()).reduce((s, p) => s + p.impressions, 0);
 
+  // The banner test, cumulative from its start.
+  const testArms = new Map<ProgressBannerArm, { clicks: number; joins: number }>([
+    ["a", { clicks: 0, joins: 0 }],
+    ["b", { clicks: 0, joins: 0 }],
+  ]);
+  let eligibleViews = 0;
+  if (testStarted) {
+    for (const v of allViews) {
+      if (Date.parse(v.created_at) < testStart) continue;
+      if (inProgressBannerTest(v.path) && progressBannerOnPath(v.path, articleSlugs)) eligibleViews++;
+      if (v.path !== LANDING_PATH) continue;
+      const arm = parseProgressBanner(v.banner_variant)?.arm;
+      if (arm) testArms.get(arm)!.clicks++;
+    }
+    for (const r of allJoinRows) {
+      if (Date.parse(r.created_at) < testStart) continue;
+      const arm = parseProgressBanner(r.banner)?.arm;
+      if (arm) testArms.get(arm)!.joins++;
+    }
+  }
+  // Randomised 50/50 per view, so half the eligible views is each arm's
+  // unbiased impression estimate (see lib/progress-banner-test.ts).
+  const armImpressions = eligibleViews / 2;
+  const armRows: ProgressBannerTestArmRow[] = (["a", "b"] as const).map((arm) => {
+    const t = testArms.get(arm)!;
+    return {
+      arm,
+      label: ARM_LABEL[arm],
+      bannerValues: [progressBannerArmValue("article", arm), progressBannerArmValue("academy-pathway", arm)],
+      impressions: armImpressions,
+      clicks: t.clicks,
+      ctr: armImpressions > 0 ? t.clicks / armImpressions : 0,
+      joins: t.joins,
+    };
+  });
+  const probBBeatsA = testStarted
+    ? probabilityBBeatsA(
+        { clicks: armRows[0].clicks, impressions: armImpressions },
+        { clicks: armRows[1].clicks, impressions: armImpressions }
+      )
+    : null;
+  const testStatus = progressBannerTestStatus(testStarted, armImpressions, armImpressions, probBBeatsA ?? 0.5);
+  const bannerTest: ProgressBannerTest = {
+    startedAt: PROGRESS_BANNER_TEST_STARTED_AT,
+    started: testStarted,
+    eligibleViews,
+    arms: armRows,
+    probBBeatsA,
+    status: testStatus,
+    statusText: testStatusText(testStatus, armImpressions, probBBeatsA),
+    minImpressionsPerArm: PROGRESS_BANNER_TEST_MIN_IMPRESSIONS,
+    threshold: PROGRESS_BANNER_TEST_THRESHOLD,
+  };
+
   return {
     days,
     since,
@@ -420,5 +553,6 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     })),
     ...(joinsError ? { joinsError } : {}),
     usage,
+    bannerTest,
   };
 }

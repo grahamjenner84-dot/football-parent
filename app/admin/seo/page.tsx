@@ -2926,6 +2926,68 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
   );
 }
 
+// The trial/development-centre banner A/B test (lib/progress-banner-test.ts):
+// per arm impressions (estimated), clicks, CTR and join sends, cumulative
+// from the test start, plus the Bayesian readout and what to do next.
+function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"] }) {
+  const started = new Date(test.startedAt).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const statusColour =
+    test.status === "b-wins" || test.status === "a-wins" ? "#166534" : test.status === "draw" ? "#92400e" : "#374151";
+  return (
+    <>
+      <FunnelHeading>Banner test: trial and development centre copy, since {started}</FunnelHeading>
+      <p style={{ ...styles.sectionNote, color: statusColour, fontWeight: 600 }}>{test.statusText}</p>
+      {test.started && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Arm</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Impressions (≈)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>CTR (≈)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Join sends</th>
+              </tr>
+            </thead>
+            <tbody>
+              {test.arms.map((a) => (
+                <tr key={a.arm}>
+                  <td style={funnelTd}>{a.label}</td>
+                  <td style={funnelNum}>≈{Math.round(a.impressions).toLocaleString("en-GB")}</td>
+                  <td style={funnelNum}>{a.clicks}</td>
+                  <td style={funnelNum}>{a.impressions > 0 ? `≈${(a.ctr * 100).toFixed(2)}%` : "n/a"}</td>
+                  <td style={funnelNum}>{a.joins}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {test.probBBeatsA !== null && (
+        <p style={styles.sectionNote}>
+          Probability B&rsquo;s CTR beats A&rsquo;s: <strong>{(test.probBBeatsA * 100).toFixed(1)}%</strong>.
+        </p>
+      )}
+      <SectionNote label="How the test works">
+        Articles under /academy-pathway/ and /academy-trials/ only. Every page
+        view shows A (the banner as it was) or B (same banner, body copy for
+        parents heading to a trial or development centre) at random, 50/50,
+        with nothing stored in the browser. Clicks are landings on /progress
+        from each arm&rsquo;s link (?b= {test.arms.map((a) => a.bannerValues.join(", ")).join(" / ")}),
+        and join sends are sign-in emails sent after arriving that way. No
+        page view records which arm it showed, so each arm&rsquo;s impressions
+        are half of the {test.eligibleViews.toLocaleString("en-GB")} views of
+        those articles since the test started: unbiased, because each view is
+        an independent coin flip, but an estimate, hence ≈. The probability
+        uses Beta(1 + clicks, 1 + impressions - clicks) for each arm. Keep it
+        running until both arms have {test.minImpressionsPerArm.toLocaleString("en-GB")} impressions,
+        then call it at {Math.round(test.threshold * 100)}% either way; anything
+        in between is a draw.
+      </SectionNote>
+    </>
+  );
+}
+
 const PLACEMENT_LABEL: Record<string, string> = {
   home: "Homepage",
   article: "End of articles",
@@ -3019,6 +3081,8 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
           </tbody>
         </table>
       </div>
+
+      <ProgressBannerTestSection test={funnel.bannerTest} />
 
       <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
       <SectionNote label="How channels are decided">
