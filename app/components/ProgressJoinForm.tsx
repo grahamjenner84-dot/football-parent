@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
 import { PROGRESS_APP_URL, progressAuthConfigured, sendProgressSignInLink } from "@/lib/progress-auth";
 import { currentVisitSource } from "@/lib/coach-app-handoff";
 import { trackProgressSignUpConversion } from "@/lib/ads-tracking";
@@ -26,6 +26,64 @@ function logJoin(form: string | undefined, marketing: boolean) {
   }
 }
 
+// Which email the sign-in link went to, shared by every copy of the form on
+// the page: /progress has two ("join" at the top, "join-trial" at the
+// bottom), and parents who didn't trust the first send used to fill in the
+// second a minute later. Once either sends, both show "Check your email",
+// with a resend button instead of a second form.
+type Sent = { email: string; marketing: boolean; sentAt: number };
+let sent: Sent | null = null;
+const listeners = new Set<() => void>();
+function setSent(next: Sent | null) {
+  sent = next;
+  listeners.forEach((l) => l());
+}
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+const useSent = () =>
+  useSyncExternalStore(
+    subscribe,
+    () => sent,
+    () => null,
+  );
+
+// Supabase allows one sign-in email per address a minute, so the resend
+// button waits that long.
+const RESEND_AFTER_MS = 60_000;
+
+function friendlyError(error: string) {
+  return /rate limit|too many|seconds/i.test(error)
+    ? "We've sent a few links already. Please wait a minute and try again."
+    : "Sorry, that didn't work. Check your email address and try again.";
+}
+
+function ResendButton({ sentAt, dark, onResend, busy }: { sentAt: number; dark: boolean; onResend: () => void; busy: boolean }) {
+  const [now, setNow] = useState(sentAt);
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      const t = Date.now();
+      setNow(t);
+      if (t >= sentAt + RESEND_AFTER_MS) window.clearInterval(id);
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [sentAt]);
+  const wait = Math.max(0, Math.ceil((sentAt + RESEND_AFTER_MS - now) / 1000));
+  return (
+    <button
+      type="button"
+      onClick={onResend}
+      disabled={wait > 0 || busy}
+      className={`text-sm font-semibold underline cursor-pointer disabled:cursor-default disabled:no-underline disabled:opacity-60 ${dark ? "text-white" : "text-[#0f5d34]"}`}
+    >
+      {busy ? "Sending…" : wait > 0 ? `Send it again (${wait}s)` : "Send it again"}
+    </button>
+  );
+}
+
 // "Start your journey" on /progress: the parent types their email here and
 // Progress emails them a sign-in link straight away. See lib/progress-auth.ts
 // for why this site may do that and exactly how far it goes.
@@ -36,50 +94,89 @@ function logJoin(form: string | undefined, marketing: boolean) {
 export default function ProgressJoinForm({ id, dark = false }: { id?: string; dark?: boolean }) {
   const [email, setEmail] = useState("");
   const [marketing, setMarketing] = useState(false);
-  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [sending, setSending] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [resent, setResent] = useState(false);
   const [error, setError] = useState("");
+  const sentTo = useSent();
   const configured = progressAuthConfigured();
   const inputId = id ? `${id}-email` : undefined;
   const text = dark ? "text-white" : "text-[#16211b]";
   const muted = dark ? "text-[#c9d3c4]" : "text-[#5d6b60]";
   const link = dark ? "text-white underline" : "text-[#0f5d34] underline";
+  const errorText = `mt-3 text-sm ${dark ? "text-[#f2a09b]" : "text-red-700"}`;
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     if (!configured) return; // let the plain GET to the app happen
     e.preventDefault();
-    setStatus("sending");
+    setSending(true);
     setError("");
     const { error } = await sendProgressSignInLink(email, marketing);
+    setSending(false);
     if (error) {
-      setError(
-        /rate limit|too many/i.test(error)
-          ? "We've sent a few links already. Please wait a minute and try again."
-          : "Sorry, that didn't work. Check your email address and try again.",
-      );
-      setStatus("idle");
+      setError(friendlyError(error));
       return;
     }
+    // One join event and one Ads conversion per send from the form. The
+    // resend button below logs neither, and the conversion fires at most
+    // once per page load whatever happens (lib/ads-tracking.ts).
     logJoin(id, marketing);
     trackProgressSignUpConversion();
-    setStatus("sent");
+    setResent(false);
+    setSent({ email: email.trim(), marketing, sentAt: Date.now() });
   }
 
-  if (status === "sent") {
+  async function onResend() {
+    if (!sentTo) return;
+    setResending(true);
+    setError("");
+    const { error } = await sendProgressSignInLink(sentTo.email, sentTo.marketing);
+    setResending(false);
+    if (error) {
+      setError(friendlyError(error));
+      return;
+    }
+    setResent(true);
+    setSent({ ...sentTo, sentAt: Date.now() });
+  }
+
+  if (sentTo) {
     return (
       <div id={id} className="w-full max-w-md scroll-mt-24" role="status">
         <p className={`text-lg font-bold mb-2 ${text}`}>Check your email</p>
         <p className={`m-0 ${muted}`}>
-          We&apos;ve sent a sign-in link to <strong className={text}>{email.trim()}</strong>. Tap it
-          and Progress opens, ready to set up your child&apos;s first team. Open it on the phone
-          you&apos;ll use at matches.
+          We&apos;ve {resent ? "sent another" : "sent a"} sign-in link to{" "}
+          <strong className={text}>{sentTo.email}</strong>. Tap it and Progress opens, ready to set
+          up your child&apos;s first team. Open it on the phone you&apos;ll use at matches.
         </p>
-        <button
-          type="button"
-          onClick={() => setStatus("idle")}
-          className={`mt-3 text-sm font-semibold ${dark ? "text-white" : "text-[#0f5d34]"} underline cursor-pointer`}
-        >
-          Use a different email
-        </button>
+        <p className={`mt-3 mb-0 text-sm ${muted}`}>
+          Not there after a minute? Check your Spam and Promotions folders.
+        </p>
+        {error && (
+          <p className={errorText} role="alert">
+            {error}
+          </p>
+        )}
+        <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+          <ResendButton
+            key={sentTo.sentAt}
+            sentAt={sentTo.sentAt}
+            dark={dark}
+            busy={resending}
+            onResend={() => void onResend()}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              setError("");
+              setResent(false);
+              setSent(null);
+            }}
+            className={`text-sm font-semibold ${dark ? "text-white" : "text-[#0f5d34]"} underline cursor-pointer`}
+          >
+            Use a different email
+          </button>
+        </div>
       </div>
     );
   }
@@ -111,10 +208,10 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
         />
         <button
           type="submit"
-          disabled={status === "sending"}
+          disabled={sending}
           className="rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#0f5d34] disabled:opacity-60 cursor-pointer"
         >
-          {status === "sending" ? "Sending…" : "Start free trial"}
+          {sending ? "Sending…" : "Start free trial"}
         </button>
       </div>
       {configured && (
@@ -129,7 +226,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
         </label>
       )}
       {error && (
-        <p className={`mt-3 text-sm ${dark ? "text-[#f2a09b]" : "text-red-700"}`} role="alert">
+        <p className={errorText} role="alert">
           {error}
         </p>
       )}
