@@ -1347,3 +1347,13 @@ Watch all of the above until ~23 Oct. Click-out per page on the "Amazon clicks" 
 - Queued until their watch windows end: `how-much-training-is-too-much` (unstructured play in the garden, from ~17 Oct), `new-fa-youth-football-format` (format and goal sizes, from ~22 Oct), and a "goals that suit this ball size" line on `best-footballs-by-age` (from ~20 Oct).
 - Off-site: the goals guide is the secondary target of the 9 Oct link-building run (gift guides, garden practice posts).
 - Same day, Graham OK'd two of the queued ones now, inside their watch windows: `/football-development/how-much-training-is-too-much` (unstructured play paragraph, anchor "garden football goal", `d6af46c`; page last changed 3 Oct) and `/football-development/new-fa-youth-football-format` ("What Parents Should Focus On", anchor "football goals for kids", `b28aa4b`; **live traffic page**, Instagram box added 8 Oct). Movement on either in the next fortnight has both changes as candidate causes.
+
+## `christmas-football-gifts-for-kids`: watch, personalised and goalkeeper gifts (2026-10-09)
+
+Same day as publish, before any ranking exists. Graham's call: the first version only re-sold picks from our other gear pages. DataForSEO research (`scripts/seo/cli/football-gifts-research.ts`, $0.14, output `seo-data/exports/football-gifts-research-2026-10-09.json` and `football-gifts-guides-headings-2026-10-09.json`): "football gifts" and "football presents" 8,100/mo each, "personalised football gifts" and "gifts for football lovers" 720, "christmas football gifts" and "football gift ideas" 590, "goalkeeper gifts" 320, "football stocking fillers" and "football birthday gifts" 260, all KD 0; kid-specific phrasings unmeasured. Page one is mostly retailers; ranking guides (footy.com, The Soccer Store, JD blog, grippysports) split gifts into "kids who play" and "kids who watch", which ours did not cover.
+
+Added three H2s (Gifts for Kids Who Watch Football, Personalised Football Gifts, Goalkeeper Gifts), three stocking fillers (boot bag, boot cleaning brush, hand warmers), and swapped the goalkeeper FAQ (now covered by its own section) for the PAA question "What do you buy a football-mad child?". Four new Graham ParentNotes (first match at 5/6 and the goal noise, name vs player on shirts, rotation and goalie gloves with a Coach App link, Boot Buddy). New affiliate links are tagged Amazon search links only. Intro sentence updated to match.
+
+## `christmas-football-gifts-for-kids`: Boot Buddy product link (2026-10-09)
+
+Stocking filler bullet "A boot cleaning brush": the tagged Amazon search link replaced with the product Graham owns, Boot Buddy (`/dp/B014UPAHO4?tag=footballpar09-21`), named inline as "the one we use". Affiliate link only, no other change.
