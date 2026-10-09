@@ -1310,3 +1310,9 @@ Title tag only, in `app/academy-pathway/aston-villa-development-centre-guide/pag
 - After: "Aston Villa Academy and Development Centre: A Parent's Guide" (58 chars)
 
 Why: "aston villa academy" is the page's biggest query (148 impressions at 9.1, 28 days) and "academy" was missing from the title; "aston villa academy trials" 27 at 9.1. "Aston villa development centre" ranks 4.2 and stays in the title. Page baseline: 1,312 impressions, 31 clicks, position 6.1; published 6 Sept, last edited 25 Sept (banner). Graham chose option A. Commit `db0d9e5`. Watch until ~23 Oct.
+
+## `christmas-football-gifts-for-kids`: slop pass, and first inbound link from the goals guide (2026-10-09)
+
+Same day as publish. AI-slop pass on the new gifts guide: removed three reject-then-reveal contrasts (including a "matter far more than" line), softened four unsupported superlatives ("most-used present there is", "most-requested"), cut two filler wrap-up lines and a rebounder sentence that repeated the ParentNote. Headings, picks and ParentNotes unchanged.
+
+First inbound contextual link: one sentence added at the end of the "Buying for Christmas or a Birthday" section of `/football-gear/best-football-goals-for-kids`, anchor "football gifts for kids". Additive only, nothing else on that page changed; the goals page has had no other change since publish (19 Sept). `best-footballs-by-age` was deliberately not linked yet: it is on watch after the 4 Oct edit, link from there after ~18 Oct.
