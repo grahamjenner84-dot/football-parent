@@ -113,6 +113,15 @@ function shortPage(page: string): string {
 // and no ranking data yet. Restricting the suggestion list to pages that
 // already have data is what made the search look broken: a real page you
 // could see impressions for simply never appeared.
+// Email limits. Both apps send through one Resend account, whose free plan
+// allows 100 emails a day in all, sign-ins included; each app caps its own
+// scheduled emails below that (coach-app DAILY_EMAIL_BUDGET in
+// match-reminders, progress DAILY_EMAIL_BUDGET in engagement-emails). Change
+// these with those constants, and when Resend is upgraded.
+const RESEND_DAILY_LIMIT = 100;
+const COACH_APP_EMAIL_CAP = 50;
+const PROGRESS_EMAIL_CAP = 25;
+
 const ALL_SITE_PATHS: string[] = siteRoutes.map((r) => (r === "" ? "/" : r));
 
 // Merges the site's own route list with whatever paths the data actually
@@ -1869,6 +1878,18 @@ function Dashboard({
       ? pgUsage.latest
       : pgUsage.byDay.find((d) => d.date === effective) ?? null;
 
+  // Emails sent for the chosen scope: each app's scheduled emails (reminders,
+  // nudges, trial emails) from the same snapshots, against its own daily cap
+  // and the one Resend allowance both share. Sign-in emails aren't recorded
+  // anywhere, so they're never in these numbers.
+  const caEmails = usageDay?.emailsToday ?? null;
+  const pgEmails = pgUsageDay?.emailsToday ?? null;
+  const emailsByDate = new Map<string, number>();
+  for (const d of [...(usage?.byDay ?? []), ...(pgUsage?.byDay ?? [])]) {
+    if (d.emailsToday !== null) emailsByDate.set(d.date, (emailsByDate.get(d.date) ?? 0) + d.emailsToday);
+  }
+  const busiestEmailDay = Array.from(emailsByDate.entries()).sort((a, b) => b[1] - a[1])[0] ?? null;
+
   // Affiliate clicks for the chosen scope.
   const afDay =
     isWindow || !affiliateStats ? null : affiliateStats.byDay.find((d) => d.date === effective) ?? null;
@@ -1977,6 +1998,39 @@ function Dashboard({
               </span>
             </div>
           )}
+        </div>
+      )}
+
+      <h3 style={styles.affiliateHeading}>Emails sent</h3>
+      {caEmails === null && pgEmails === null ? (
+        <p style={styles.muted}>
+          {usage || pgUsage ? "No email counts for this day (the apps started reporting them on 9 Oct 2026)." : "Loading emails..."}
+        </p>
+      ) : (
+        <div style={styles.card}>
+          <div style={styles.cardStats}>
+            <span>
+              Coach App: <strong>{caEmails ?? "-"}</strong> of {COACH_APP_EMAIL_CAP}
+            </span>
+            <span>
+              Progress: <strong>{pgEmails ?? "-"}</strong> of {PROGRESS_EMAIL_CAP}
+            </span>
+            <span>
+              Together: <strong>{(caEmails ?? 0) + (pgEmails ?? 0)}</strong> of {RESEND_DAILY_LIMIT}
+              {(caEmails ?? 0) + (pgEmails ?? 0) >= RESEND_DAILY_LIMIT * 0.75 && " (close to the limit: time to upgrade Resend)"}
+            </span>
+          </div>
+          {isWindow && busiestEmailDay && (
+            <p style={{ ...styles.cardStatsInline, marginTop: 6 }}>
+              These are today&rsquo;s so far. Busiest day in the last 30 days: {busiestEmailDay[1]} on{" "}
+              {busiestEmailDay[0]}.
+            </p>
+          )}
+          <p style={{ ...styles.cardStatsInline, marginTop: 6 }}>
+            Scheduled emails only (reminders, nudges, trial emails), each against its app&rsquo;s own daily cap.
+            Sign-in emails also count towards Resend&rsquo;s {RESEND_DAILY_LIMIT} a day but aren&rsquo;t recorded, so
+            the Resend dashboard has the true total.
+          </p>
         </div>
       )}
 
@@ -2769,7 +2823,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
         {latest.emailsToday !== null && (
-          <UsageTile label="Emails sent today" value={latest.emailsToday} sub="scheduled, capped at 50 a day" />
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub={`scheduled, capped at ${COACH_APP_EMAIL_CAP} a day`} />
         )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
@@ -2883,7 +2937,7 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
         {latest.emailsToday !== null && (
-          <UsageTile label="Emails sent today" value={latest.emailsToday} sub="reminders and trial, capped at 25 a day" />
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub={`reminders and trial, capped at ${PROGRESS_EMAIL_CAP} a day`} />
         )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
