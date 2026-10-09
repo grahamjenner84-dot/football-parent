@@ -33,13 +33,15 @@ export function trackCoachAppConversion() {
   w.fbq?.("track", META_CONVERSION_EVENT);
 }
 
-// "Progress Sign-up" conversion: fired by app/components/ProgressJoinForm.tsx
+// "Progress Trial" conversion: fired by app/components/ProgressJoinForm.tsx
 // once Progress has accepted the email and sent the sign-in link, so it counts
 // the same moment as a progress_join_events row. Label from Google Ads >
 // Goals > Conversions (manual/code setup, event snippet). Not a secret: it
-// ships in the page either way, same as the Coach App's labels.
+// ships in the page either way, same as the Coach App's labels. Its goal
+// category is Subscribe and not an account default, so Coach App campaigns,
+// which bid on the Sign-up goal, never count a Progress trial.
 // Google only: the Meta pixel is still a placeholder (see above).
-const GOOGLE_ADS_PROGRESS_LABEL = "0QwICMj5y5YdEImygeND";
+const GOOGLE_ADS_PROGRESS_LABEL = "HolACIWlz5YdEImygeND";
 
 export function trackProgressSignUpConversion() {
   if (typeof window === "undefined") return;
