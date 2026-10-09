@@ -1340,3 +1340,9 @@ Prompted by the 30-day Amazon click report (764 clicks: shin pads 469, wide feet
 **Soft ground boots** now has three inbound links (boots hub, AG vs FG, gloves), up from one.
 
 Watch all of the above until ~23 Oct. Click-out per page on the "Amazon clicks" tab at /admin/seo.
+
+## Goals guide: one more inbound link, and the queue for later (2026-10-09)
+
+- `/football-development/what-is-football-iq` (last edited 8 Aug): garden 1v1 games tip, clause with anchor "football goals for kids" to `/football-gear/best-football-goals-for-kids`. Commit `4b59fda`. Goals page now has inbound links from drills, decision making and football IQ added today, plus the gifts guide and footballs by age.
+- Queued until their watch windows end: `how-much-training-is-too-much` (unstructured play in the garden, from ~17 Oct), `new-fa-youth-football-format` (format and goal sizes, from ~22 Oct), and a "goals that suit this ball size" line on `best-footballs-by-age` (from ~20 Oct).
+- Off-site: the goals guide is the secondary target of the 9 Oct link-building run (gift guides, garden practice posts).
