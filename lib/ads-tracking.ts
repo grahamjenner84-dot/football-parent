@@ -32,3 +32,23 @@ export function trackCoachAppConversion() {
 
   w.fbq?.("track", META_CONVERSION_EVENT);
 }
+
+// "Progress Sign-up" conversion: fired by app/components/ProgressJoinForm.tsx
+// once Progress has accepted the email and sent the sign-in link, so it counts
+// the same moment as a progress_join_events row. Label from Google Ads >
+// Goals > Conversions (manual/code setup, event snippet). Not a secret: it
+// ships in the page either way, same as the Coach App's labels.
+// Google only: the Meta pixel is still a placeholder (see above).
+const GOOGLE_ADS_PROGRESS_LABEL = "0QwICMj5y5YdEImygeND";
+
+export function trackProgressSignUpConversion() {
+  if (typeof window === "undefined") return;
+
+  const w = window as typeof window & { gtag?: Gtag };
+
+  w.gtag?.("event", "conversion", {
+    send_to: `AW-18192816393/${GOOGLE_ADS_PROGRESS_LABEL}`,
+    value: 1.0,
+    currency: "GBP",
+  });
+}
