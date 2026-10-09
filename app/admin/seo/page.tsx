@@ -2768,6 +2768,9 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+        {latest.emailsToday !== null && (
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub="scheduled, capped at 50 a day" />
+        )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
       <SectionNote label="What these numbers count">
@@ -2782,7 +2785,11 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         Paid includes a subscription whose payment is being retried; Lapsed is
         a trial that ended, a cancelled subscription, or an old free account.
         An invited coach covered by their team&rsquo;s subscription counts by
-        their own plan, so Paid is paying accounts.
+        their own plan, so Paid is paying accounts. Emails sent today is the
+        app&rsquo;s scheduled emails since midnight (match reminders, set-up
+        nudges, trial emails), which it caps at 50 a day; sign-in emails
+        aren&rsquo;t recorded anywhere, so they&rsquo;re not in it. Both apps
+        share one Resend allowance of 100 a day, sign-ins included.
       </SectionNote>
       {usage.byDay.length > 1 && (
         <div style={{ overflowX: "auto" }}>
@@ -2800,6 +2807,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Emails</th>
               </tr>
             </thead>
             <tbody>
@@ -2816,6 +2824,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
                   <td style={funnelNum}>{d.planLapsed}</td>
+                  <td style={funnelNum}>{d.emailsToday ?? "-"}</td>
                 </tr>
               ))}
             </tbody>
@@ -2873,6 +2882,9 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
         <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+        {latest.emailsToday !== null && (
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub="reminders and trial, capped at 25 a day" />
+        )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
       <SectionNote label="What these numbers count">
@@ -2884,7 +2896,10 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
         trial and Lapsed are each account&rsquo;s own plan and add up to Total
         accounts: Paid includes a payment being retried; Lapsed is a trial that
         ended or a cancelled subscription. A co-parent counts by their own
-        plan, so Paid is paying accounts.
+        plan, so Paid is paying accounts. Emails sent today is the reminder and
+        trial emails since midnight, which the app caps at 25 a day; sign-in
+        emails aren&rsquo;t recorded anywhere, so they&rsquo;re not in it. Both
+        apps share one Resend allowance of 100 a day, sign-ins included.
       </SectionNote>
       {usage.byDay.length > 1 && (
         <div style={{ overflowX: "auto" }}>
@@ -2901,6 +2916,7 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Emails</th>
               </tr>
             </thead>
             <tbody>
@@ -2916,6 +2932,7 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
                   <td style={funnelNum}>{d.planLapsed}</td>
+                  <td style={funnelNum}>{d.emailsToday ?? "-"}</td>
                 </tr>
               ))}
             </tbody>

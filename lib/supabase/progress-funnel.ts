@@ -176,6 +176,10 @@ export interface ProgressActivationCounts {
   accountsLogged7d: number | null;
   /** Accounts that have ever opened the installed app. */
   accountsInstalled: number | null;
+  /** Not activation, but optional the same way: reminder and trial emails
+   * sent since UK midnight (progress migration 0024), not sign-in emails.
+   * Stored by 20261010090000_usage_snapshot_emails_today.sql. */
+  emailsToday: number | null;
 }
 
 export const ACTIVATION_FIELDS: (keyof ProgressActivationCounts)[] = [
@@ -188,6 +192,7 @@ export const ACTIVATION_FIELDS: (keyof ProgressActivationCounts)[] = [
   "cohortWeek2Activated",
   "accountsLogged7d",
   "accountsInstalled",
+  "emailsToday",
 ];
 
 const ACTIVATION_COLUMN: Record<keyof ProgressActivationCounts, string> = {
@@ -200,7 +205,13 @@ const ACTIVATION_COLUMN: Record<keyof ProgressActivationCounts, string> = {
   cohortWeek2Activated: "cohort_week2_activated",
   accountsLogged7d: "accounts_logged_7d",
   accountsInstalled: "accounts_installed",
+  emailsToday: "emails_today",
 };
+
+// Columns added by a later migration than the activation one: if only the
+// activation migration has run, these are dropped on their own rather than
+// taking the activation counts with them.
+const LATER_COLUMNS = new Set(["emails_today"]);
 
 export type ProgressSnapshotCounts = ProgressUsageCounts & ProgressActivationCounts;
 
@@ -218,16 +229,19 @@ export async function logProgressUsageSnapshot(takenAt: string, counts: Progress
   const activation: Record<string, unknown> = {};
   for (const f of ACTIVATION_FIELDS) activation[ACTIVATION_COLUMN[f]] = counts[f];
 
-  const { error } = await supabase.from("progress_usage_snapshots").insert({ ...row, ...activation });
-  // Deployed before 20261009120000_progress_usage_activation.sql was
-  // applied: keep the snapshot, drop the activation counts, rather than
+  const withoutLater = Object.fromEntries(Object.entries(activation).filter(([c]) => !LATER_COLUMNS.has(c)));
+
+  // Deployed before a migration was applied: keep the snapshot and drop the
+  // counts whose columns aren't there yet (the newest first), rather than
   // lose every snapshot until the migration runs.
-  if (error && isMissingColumnError(error)) {
-    const retry = await supabase.from("progress_usage_snapshots").insert(row);
-    if (!retry.error) return;
-    throw new Error("Failed to insert progress_usage_snapshots row: " + retry.error.message);
+  const attempts = [{ ...row, ...activation }, { ...row, ...withoutLater }, row];
+  for (const [i, attempt] of attempts.entries()) {
+    const { error } = await supabase.from("progress_usage_snapshots").insert(attempt);
+    if (!error) return;
+    if (!isMissingColumnError(error) || i === attempts.length - 1) {
+      throw new Error("Failed to insert progress_usage_snapshots row: " + error.message);
+    }
   }
-  if (error) throw new Error("Failed to insert progress_usage_snapshots row: " + error.message);
 }
 
 // ---------------------------------------------------------------------------
@@ -260,26 +274,29 @@ async function getProgressUsage(supabase: ReturnType<typeof adminClient>, days: 
   const rows: Record<string, unknown>[] = [];
   const pageSize = 1000;
   // Newest first, so the first row seen for each day is its closing figure.
-  // Without the activation migration the activation columns don't exist and
-  // selecting them fails: fall back to the original columns (activation
-  // counts then read as null) so the rest of the tab still loads.
+  // Without a migration its columns don't exist and selecting them fails:
+  // fall back to fewer columns (newest first; the missing counts then read
+  // as null) so the rest of the tab still loads.
   const baseColumns = ["taken_at", ...USAGE_FIELDS.map((f) => COLUMN[f])];
-  let columns = [...baseColumns, ...ACTIVATION_FIELDS.map((f) => ACTIVATION_COLUMN[f])].join(", ");
+  const activationColumns = ACTIVATION_FIELDS.map((f) => ACTIVATION_COLUMN[f]);
+  const columnSets = [
+    [...baseColumns, ...activationColumns],
+    [...baseColumns, ...activationColumns.filter((c) => !LATER_COLUMNS.has(c))],
+    baseColumns,
+  ].map((cols) => cols.join(", "));
+  let setIndex = 0;
   for (let from = 0; ; from += pageSize) {
-    let { data, error } = await supabase
-      .from("progress_usage_snapshots")
-      .select(columns)
-      .gte("taken_at", since)
-      .order("taken_at", { ascending: false })
-      .range(from, from + pageSize - 1);
-    if (error && from === 0 && isMissingColumnError(error)) {
-      columns = baseColumns.join(", ");
-      ({ data, error } = await supabase
+    const read = () =>
+      supabase
         .from("progress_usage_snapshots")
-        .select(columns)
+        .select(columnSets[setIndex])
         .gte("taken_at", since)
         .order("taken_at", { ascending: false })
-        .range(from, from + pageSize - 1));
+        .range(from, from + pageSize - 1);
+    let { data, error } = await read();
+    while (error && from === 0 && isMissingColumnError(error) && setIndex < columnSets.length - 1) {
+      setIndex++;
+      ({ data, error } = await read());
     }
     if (error) throw new Error("Failed to read progress_usage_snapshots: " + error.message);
     const batch = (data ?? []) as unknown as Record<string, unknown>[];
