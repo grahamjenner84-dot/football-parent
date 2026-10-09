@@ -33,16 +33,16 @@ export function trackCoachAppConversion() {
   w.fbq?.("track", META_CONVERSION_EVENT);
 }
 
-// "Progress trial sign-up" conversion: fired by app/components/ProgressJoinForm.tsx
+// "Progress Sign-up" conversion: fired by app/components/ProgressJoinForm.tsx
 // once Progress has accepted the email and sent the sign-in link, so it counts
-// the same moment as a progress_join_events row. The label comes from Google
-// Ads > Goals > Conversions (the part after the slash in send_to) and is set
-// in Vercel as NEXT_PUBLIC_GOOGLE_ADS_PROGRESS_LABEL; until then this no-ops.
+// the same moment as a progress_join_events row. Label from Google Ads >
+// Goals > Conversions (manual/code setup, event snippet). Not a secret: it
+// ships in the page either way, same as the Coach App's labels.
 // Google only: the Meta pixel is still a placeholder (see above).
-const GOOGLE_ADS_PROGRESS_LABEL = process.env.NEXT_PUBLIC_GOOGLE_ADS_PROGRESS_LABEL;
+const GOOGLE_ADS_PROGRESS_LABEL = "0QwICMj5y5YdEImygeND";
 
 export function trackProgressSignUpConversion() {
-  if (typeof window === "undefined" || !GOOGLE_ADS_PROGRESS_LABEL) return;
+  if (typeof window === "undefined") return;
 
   const w = window as typeof window & { gtag?: Gtag };
 
