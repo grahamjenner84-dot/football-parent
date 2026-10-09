@@ -42,7 +42,7 @@
 /** When the test went live. MUST be set to the actual deploy time of the
  * merge that ships the test: anything earlier counts pre-test views of
  * these articles as impressions for both arms, which dilutes both CTRs. */
-export const PROGRESS_BANNER_TEST_STARTED_AT = "2026-10-10T00:00:00Z";
+export const PROGRESS_BANNER_TEST_STARTED_AT = "2026-10-09T20:28:00Z";
 
 /** Impressions each arm needs before the test can be called. */
 export const PROGRESS_BANNER_TEST_MIN_IMPRESSIONS = 4000;
