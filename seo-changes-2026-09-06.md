@@ -1300,3 +1300,12 @@ Title tag only, in `app/academy-pathway/west-ham-player-pathway-guide/page.tsx`.
 - After: "West Ham Development Centre and Academy Trials: Parent's Guide" (62 chars, same pattern as the Watford guide)
 
 Why: none of the page's top queries appeared in the title: "west ham development" 562 impressions at 7.7 with 0 clicks, "west ham talent id" 197 at 7.0, "west ham academy trials 2026" 182 at 9.9, "west ham academy" 147 at 7.7 (28 days). The article already covers talent ID, trials and the academy. **Live traffic:** 4,440 impressions, 85 clicks, position 6.4 (28 days); last edited 4 Sept. Graham chose option A of three. If position slips over 14 days, revert. Commit `c06a4c2`. Watch until ~23 Oct.
+
+## `aston-villa-development-centre-guide`: "Academy" added to the title tag (2026-10-09)
+
+Title tag only, in `app/academy-pathway/aston-villa-development-centre-guide/page.tsx`. H1, meta, headings and body unchanged.
+
+- Before: "Aston Villa Development Centre: A Parent's Guide | Football Parent"
+- After: "Aston Villa Academy and Development Centre: A Parent's Guide" (58 chars)
+
+Why: "aston villa academy" is the page's biggest query (148 impressions at 9.1, 28 days) and "academy" was missing from the title; "aston villa academy trials" 27 at 9.1. "Aston villa development centre" ranks 4.2 and stays in the title. Page baseline: 1,312 impressions, 31 clicks, position 6.1; published 6 Sept, last edited 25 Sept (banner). Graham chose option A. Commit `db0d9e5`. Watch until ~23 Oct.
