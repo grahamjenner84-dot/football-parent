@@ -1291,3 +1291,12 @@ Prompted by "how to recruit players for grassroots football" (52 impressions at 
 - "how to start a youth football team" 30 KD 0 and "how to set up a football team" 30 KD 0: weak page one (FA PDF, Facebook, YouTube, Quora, Spond, kit shops), AI Overview present.
 - Labs keyword ideas for all three seed groups came back off-topic, so there is no hidden bigger cluster.
 - Verdict: small. Best shape if done at all is one /coaching article, "How to start a grassroots football team and find players", covering both the start-up and recruitment angles, low priority.
+
+## `west-ham-player-pathway-guide`: title tag targets "development" and "academy trials" (2026-10-09)
+
+Title tag only, in `app/academy-pathway/west-ham-player-pathway-guide/page.tsx`. H1, meta description, URL, headings and body unchanged.
+
+- Before: "West Ham Player Pathway Guide | Football Parent"
+- After: "West Ham Development Centre and Academy Trials: Parent's Guide" (62 chars, same pattern as the Watford guide)
+
+Why: none of the page's top queries appeared in the title: "west ham development" 562 impressions at 7.7 with 0 clicks, "west ham talent id" 197 at 7.0, "west ham academy trials 2026" 182 at 9.9, "west ham academy" 147 at 7.7 (28 days). The article already covers talent ID, trials and the academy. **Live traffic:** 4,440 impressions, 85 clicks, position 6.4 (28 days); last edited 4 Sept. Graham chose option A of three. If position slips over 14 days, revert. Commit `c06a4c2`. Watch until ~23 Oct.
