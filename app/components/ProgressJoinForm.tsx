@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { PROGRESS_APP_URL, progressAuthConfigured, sendProgressSignInLink } from "@/lib/progress-auth";
 import { currentVisitSource } from "@/lib/coach-app-handoff";
+import { trackProgressSignUpConversion } from "@/lib/ads-tracking";
 
 // One anonymous event per sent link, for the Progress pipeline on
 // /admin/seo (see /api/progress-join). Never the email address. Fire and
@@ -59,6 +60,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
       return;
     }
     logJoin(id, marketing);
+    trackProgressSignUpConversion();
     setStatus("sent");
   }
 
