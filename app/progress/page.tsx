@@ -28,7 +28,7 @@ export const metadata = generateSEO({
   image: "/og/progress-1200x630.png",
 });
 
-const TRUST = ["4 weeks free, no card needed", "Then £2.50 a month", "Add their previous seasons too"];
+const TRUST = ["4 weeks free, no card needed", "Add their previous seasons too"];
 
 // The four features called out with a screenshot each. Screenshots are the
 // real app screens with a made-up player (Alfie) and made-up teammates and
