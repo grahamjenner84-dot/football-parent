@@ -1238,3 +1238,9 @@ Recheck around 13 Oct. If Matt Baxter is still not indexed, look at it again rat
 
 Published 2026-10-09, category Football Gear. Primary keyword "football gifts for kids". Roadmap item from the 12 Sept Trends research: "football gifts" peaks in November and decays through December, so this went up ahead of that window. Gift guide by budget and age; picks reused from the sibling gear guides (ball, goals, shin pads, trackers), plus tagged Amazon search links for pump, cones and grip socks and a QuickPlay Replay Station link (the rebounder Graham owns). No external citations (gear page). Three Graham ParentNotes (Samba goal, rebounder, table football and keepie-up ball). Added to `lib/routes.ts` and the Football Gear category page. Cross-links into this page from the goals guide's "Buying for Christmas or a Birthday" section are a follow-up, not done here.
 
+
+## `christmas-football-gifts-for-kids`: slop pass, and first inbound link from the goals guide (2026-10-09)
+
+Same day as publish. AI-slop pass on the new gifts guide: removed three reject-then-reveal contrasts (including a "matter far more than" line), softened four unsupported superlatives ("most-used present there is", "most-requested"), cut two filler wrap-up lines and a rebounder sentence that repeated the ParentNote. Headings, picks and ParentNotes unchanged.
+
+First inbound contextual link: one sentence added at the end of the "Buying for Christmas or a Birthday" section of `/football-gear/best-football-goals-for-kids`, anchor "football gifts for kids". Additive only, nothing else on that page changed; the goals page has had no other change since publish (19 Sept). `best-footballs-by-age` was deliberately not linked yet: it is on watch after the 4 Oct edit, link from there after ~18 Oct.
