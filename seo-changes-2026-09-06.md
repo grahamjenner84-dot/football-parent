@@ -1316,3 +1316,27 @@ Why: "aston villa academy" is the page's biggest query (148 impressions at 9.1, 
 Same day as publish. AI-slop pass on the new gifts guide: removed three reject-then-reveal contrasts (including a "matter far more than" line), softened four unsupported superlatives ("most-used present there is", "most-requested"), cut two filler wrap-up lines and a rebounder sentence that repeated the ParentNote. Headings, picks and ParentNotes unchanged.
 
 First inbound contextual link: one sentence added at the end of the "Buying for Christmas or a Birthday" section of `/football-gear/best-football-goals-for-kids`, anchor "football gifts for kids". Additive only, nothing else on that page changed; the goals page has had no other change since publish (19 Sept). `best-footballs-by-age` was deliberately not linked yet: it is on watch after the 4 Oct edit, link from there after ~18 Oct.
+
+## Gear guides: affiliate push, internal links, AG vs FG pick box, gloves picks (2026-10-09)
+
+Prompted by the 30-day Amazon click report (764 clicks: shin pads 469, wide feet 130, Veo 87, boots hub 29, goals 20, footballs by age 16, GPS 12, AG vs FG 1, gloves and soft ground 0; 641 of 764 from GearPicks boxes, 123 inline). Every source page below was last edited before 26 Sept, so outside its watch window; each is one added sentence or clause, nothing else on the page changed, one commit per page.
+
+**Shin pads (ranking push for "best shin pads for kids", 4.9 with 6,077 impressions; target page itself untouched, it is on watch to 23 Oct):**
+- `/academy-trials/what-happens-at-academy-trials`, kit list paragraph, anchor "best shin pads for kids". `e804fd3`.
+- `/academy-pathway/pre-academy-football`, kit cost paragraph, anchors "best shin pads for kids" and "football boots for kids". `9bd76f8`.
+- `/parent-guides/what-is-grassroots-football`, costs paragraph, same two anchors. **Live traffic page** (AI Overview cited), additive sentence only. `3628378`.
+- Backlinks: the next link-building run should pitch this page first.
+
+**Goals (12-15 for "best kids football goals" / "best garden football goals", ahead of the November gift peak):**
+- `/coaching/football-drills-for-7-and-8-year-olds`, garden drills intro, anchor "best football goals for kids". `d049fe3`.
+- `/football-development/improve-football-decision-making`, garden kickabouts line, anchor "garden football goal". `2dcc527`.
+
+**GPS trackers:** `/academy-trials/what-do-academy-coaches-look-for`, work rate paragraph, anchor "football GPS tracker". `80ecbcf`.
+
+**AG vs FG (9k impressions a month, 1 Amazon click in 30 days):** quick-pick box above the first H2 (Predator League AG kids, Mercurial Vapor 16 FG/MG, Predator Club FG/MG, same ASINs as the existing boxes further down, which stay) plus one line linking `/football-gear/childrens-soft-ground-football-boots`. Done the same day as the title change (`b138a61`) at Graham's request, so a ranking movement here has both as causes; click-out rate is the metric for this one. `421c57d`.
+
+**Gloves (no Amazon links before; winter demand starts now):** "Shop by glove type" GearPicks after the glove types overview, three tagged Amazon UK search links (fleece, water-resistant, thin grip) rather than product ASINs, because nothing can be verified from here; swap in specific products when Graham sends SiteStripe full links. `41b4c5e`. Separate commit: one sentence in the waterproofing section linking the soft ground boots guide. `ff273b3`.
+
+**Soft ground boots** now has three inbound links (boots hub, AG vs FG, gloves), up from one.
+
+Watch all of the above until ~23 Oct. Click-out per page on the "Amazon clicks" tab at /admin/seo.
