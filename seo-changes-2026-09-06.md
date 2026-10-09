@@ -1248,3 +1248,20 @@ Recheck around 13 Oct. If Matt Baxter is still not indexed, look at it again rat
 - Decay: `/academy-trials` hub again, plus Tottenham DC (14 to 9 clicks, but position improved 6.7 to 5.9, so demand rather than rankings). Silence on `/coach-app` is expected (noindex).
 
 Opportunities queued for this week (not yet done): AG vs FG title tag, its top queries are about wearing FG boots on artificial grass/turf and neither the title nor H1 says so (from 11 Oct, when the 27 Sept watch ends); one FAQ on the maximum/minimum age to join an academy on `what-age-do-football-academies-recruit` ("maximum age to join football academy" 11.8, "minimum age" 18.3; page last edited 4 Sept).
+
+## `ag-vs-fg-boots`: title tag targets "FG boots on artificial grass" (2026-10-09)
+
+Title tag only, in `app/football-gear/ag-vs-fg-boots/page.tsx`. H1, meta description, headings and body unchanged.
+
+- Before: "AG vs FG Football Boots Explained | Football Parent"
+- After: "AG vs FG Boots: Can Kids Wear FG on Artificial Grass?" (53 chars)
+
+Why: the page's biggest queries are about wearing FG boots on artificial surfaces ("fg boots on artificial grass" 476 impressions at 8.0, "fg football boots on turf" 443 at 11.5, "can you use fg boots on artificial grass" 149 at 9.4, plus astroturf variants), and neither title nor H1 said so. CTR 0.2% at position 8.2 (9,278 impressions, 22 clicks in 28 days). Graham chose option A of three. Two days before the 27 Sept AG boot pick's watch window closed, so a movement from now has both as candidate causes, though the pick was a GearPicks block, not a ranking lever. Commit `b138a61`. Watch until ~23 Oct.
+
+## `what-age-do-football-academies-recruit`: FAQ on youngest and oldest age to join (2026-10-09)
+
+Additive only: one FAQ, "What is the youngest and oldest age to join a football academy?", first in the FAQ section. Uses only facts already on the page (Under-9 EPPP registration, pre-academy and development centres below that, recruitment through to Under-23, scholarship decisions at 16). Title, meta, headings and other FAQs unchanged. Targets "maximum age to join football academy" (50 impressions at 11.8; also 14.5 on how-academy-football-works) and "minimum age to join football academy" (18 at 18.3). **Live traffic:** 8,570 impressions, 58 clicks, position 5.5 in 28 days; last edited 4 Sept. Commit `0f86a67`. Watch until ~23 Oct.
+
+## Calculator and the two interviews: indexed (checked 2026-10-09)
+
+URL Inspection API: `/coaching/equal-playing-time-calculator`, `/parent-guides/matt-baxter-young-footballer-mindset-interview` and `/girls-football/girls-united-daughter-football-interview` are all "Submitted and indexed", crawled 6 Oct about 21:30 UTC, Google's canonical matching ours. This closes the 13 Oct recheck. GSC data runs to 6 Oct, so none of them can show impressions yet. The calculator had 8 page views in 6-9 Oct (first-party), none of them from search so far. The PPC variant `/football-parent-coach-app/equal-playing-time-calculator` and `/coach-app/game-time-calculator` are both noindex, so neither competes with it.
