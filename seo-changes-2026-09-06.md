@@ -1268,4 +1268,26 @@ URL Inspection API: `/coaching/equal-playing-time-calculator`, `/parent-guides/m
 
 ## New article: `/football-gear/christmas-football-gifts-for-kids` (2026-10-09)
 
-Published 2026-10-09, category Football Gear. Primary keyword "football gifts for kids". Roadmap item from the 12 Sept Trends research: "football gifts" peaks in November and decays through December, so this went up ahead of that window. Gift guide by budget and age; picks reused from the sibling gear guides (ball, goals, shin pads, trackers), plus tagged Amazon search links for pump, cones and grip socks and a QuickPlay rebounder link. No external citations (gear page). Three Graham ParentNotes (Samba goal, rebounder, table football and keepie-up ball). Added to `lib/routes.ts` and the Football Gear category page. Cross-links into this page from the goals guide's "Buying for Christmas or a Birthday" section are a follow-up, not done here.
+Published 2026-10-09, category Football Gear. Primary keyword "football gifts for kids". Roadmap item from the 12 Sept Trends research: "football gifts" peaks in November and decays through December, so this went up ahead of that window. Gift guide by budget and age; picks reused from the sibling gear guides (ball, goals, shin pads, trackers), plus tagged Amazon search links for pump, cones and grip socks and a QuickPlay Replay Station link (the rebounder Graham owns). No external citations (gear page). Three Graham ParentNotes (Samba goal, rebounder, table football and keepie-up ball). Added to `lib/routes.ts` and the Football Gear category page. Cross-links into this page from the goals guide's "Buying for Christmas or a Birthday" section are a follow-up, not done here.
+
+## `how-to-become-a-professional-footballer`: FAQ on becoming a professional at 16 (2026-10-09)
+
+Additive only: one FAQ, "Can you become a professional footballer at 16?", after "What age do most professional footballers get scouted?". Uses only routes already described on the page (scholarship decision at 16, non-league, college and post-16 academies, players picked up from non-league at 17-19). Title, meta, headings and other FAQs unchanged. Targets "how to become a professional footballer at 16" (385 impressions at 8.4, 0 clicks, 28 days); the head term "how to become a professional footballer" is at 11.4 (237). Page baseline (28 days): 6,583 impressions, 32 clicks, position 7.7. Last change 28 Sept (expert box presentation only), so done 3 days before that window closed. Commit `d9b5d44`. Watch until ~23 Oct.
+
+## `best-shin-pads-for-kids-football`: FAQ on shin pads for 4 and 5 year olds (2026-10-09)
+
+**Live traffic page, the site's biggest by clicks.** Additive only: one FAQ, "What are the best shin pads for a 4 or 5 year old?", last in the FAQ section. Ankle-guard advice and the Nike sizing (Kids S from 122cm, labelled age 4 to 6) are already on the page; the adidas youth Small (from roughly 100cm) is from the existing sizing FAQ's source. Not the same as the FAQ reverted on 12 Sept (that one answered an off-topic PAA question). Title, meta, headings, GearPicks and other FAQs unchanged. Targets "shin pads for 5 year old" (436 at 10.7), "shin pads for 5 year olds" (116 at 16.6), "toddler shin pads" (79 at 11.5), "kids shin pads 4 year old" (~10.5). Commit `0838cfe`.
+
+**Baseline (28 days to 6 Oct):** 49,225 impressions, 415 clicks, position 6.0. "best shin pads for kids" 4.9 (6,077 impressions, 77 clicks), "best kids shin pads" 4.2, "best shin pads for 6 year old" 3.2, "best shin pads for 5 year old" 3.5.
+
+**Revert rule:** if "best shin pads for kids" or "best kids shin pads" lose more than ~2 positions and hold for a week, or weekly clicks drop below ~80 for two weeks running without a matching impressions drop, `git revert 0838cfe`. Read at ~14 days (around 23 Oct). No other edit to this page until then.
+
+## Research: recruiting players to a grassroots team, sized (2026-10-09)
+
+Prompted by "how to recruit players for grassroots football" (52 impressions at ~14 over 90 days) landing on the parent-facing `/academy-trials/how-football-clubs-recruit-young-players`. Script `scripts/seo/cli/coach-recruit-players-research.ts`, output `seo-data/exports/coach-recruit-players-research-2026-10-09.json`, spend $0.16. Not added to the roadmap; Graham to decide.
+
+- Every "how to recruit / find / get more players" phrasing returned no measurable Google Ads volume (under ~10/mo each). GSC's 52 impressions in 90 days is the best real signal, so roughly 15-20 searches a month for that wording.
+- "players wanted football" 110/mo KD 0 and "football team looking for players" 30 KD 6 are noticeboard intent: page one is playerwanted.co.uk, league and county FA "Players Wanted"/"Find Players" pages, Facebook groups and the Team Grassroots finder. An article will not rank for those.
+- "how to start a youth football team" 30 KD 0 and "how to set up a football team" 30 KD 0: weak page one (FA PDF, Facebook, YouTube, Quora, Spond, kit shops), AI Overview present.
+- Labs keyword ideas for all three seed groups came back off-topic, so there is no hidden bigger cluster.
+- Verdict: small. Best shape if done at all is one /coaching article, "How to start a grassroots football team and find players", covering both the start-up and recruitment angles, low priority.
