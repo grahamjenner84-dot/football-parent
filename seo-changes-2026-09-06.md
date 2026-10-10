@@ -1449,4 +1449,4 @@ Sentence-level AI-slop tidy (no headings, links or sections changed; quote boxes
 - `/academy-pathway/west-ham-player-pathway-guide`: tidy `dc64315` (slop 56 to 36); facts `0ffca2c` (Luke Hirst quote, compensation rule, tier names) and `192e4a8` (unverified Chelmsford/Stanford-le-Hope/Wickford venues, "few pounds" trial fee and August-April season removed; girls' progression worded as the Foundation describes it).
 - Table of contents titles matched to headings on the girls' academies, PDC and girls' recruitment pages `0ae52de` (frontmatter only; the sidebar is currently hidden sitewide).
 
-Open: "Regional Talent Hubs" entry on the girls' recruitment page (no such programme found; Graham to confirm removal). West Ham ParentNote duplicates the Arsenal one; replacement pending Graham's answers.
+Same day: "Regional Talent Hubs" entry removed from the girls' recruitment page's terminology box (no such programme found) `fdee6e7`. West Ham ParentNote (word-for-word the opening of the Arsenal one) replaced with a new Graham note on asking other parents and the centre how many have progressed and how `488bb75`.

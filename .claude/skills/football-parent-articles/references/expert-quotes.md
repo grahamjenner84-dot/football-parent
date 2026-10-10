@@ -403,6 +403,7 @@ scaled-content risk caught in a cluster review 2026-08-22), re-trimmed
 "some coaches...rapport" sentences, but cuts the feedback-forms/four-corner-
 model/weaker-foot material entirely (the other 3 versions all keep some of
 that ending) - ends after "more than anything else."
+**Removed from West Ham 2026-10-10**: the session's slop review found the West Ham trim still matched the opening of the Arsenal note word for word, so it was replaced with a new Graham note (below, "Ask about the pathway up front"). This story is now on Arsenal, Fulham and Leeds only (3 uses).
 Reused a 3rd time in
 [fulham-fc-development-centre-guide](/academy-pathway/fulham-fc-development-centre-guide)
 - 2026-08-09, trimmed differently from the Arsenal/West Ham version (dropped
@@ -476,6 +477,23 @@ First used in `crystal-palace-development-centre-guide` - Phase 5C
 coaching approach looks like in practice, reflective/self-assessment tools
 used with young players.
 **Used in:** [crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide) (1/3)
+
+### Ask about the pathway up front (Graham, 2026-10-10)
+
+Given in session for the West Ham guide, from general development-centre
+experience (no West Ham-specific experience). Live in
+west-ham-player-pathway-guide (1/3).
+
+> The main thing I'd do is ask other parents about the pathway and about the
+> centre itself: how many players have progressed through the foundation to
+> the academy, and what the process is for that to happen. Development
+> centres seem to be a mixture. Some have a genuine pathway and are a way for
+> the club to widen its pool of prospects; others can be more of a revenue
+> stream. Knowing what you want to get from it, and asking those questions up
+> front, is probably the best thing you can do.
+
+**Topics:** any club foundation / development-centre guide; trims well to
+the "some have a genuine pathway... others a revenue stream" sentence.
 
 ## Pending — questions drafted for an expert, not yet sent/answered
 
