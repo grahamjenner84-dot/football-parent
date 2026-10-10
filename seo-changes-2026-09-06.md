@@ -1374,3 +1374,14 @@ One `<ExpertQA>` photo box per page, an excerpt of his answer (exact words, cut 
 - `/academy-pathway/what-age-do-football-academies-recruit`: "The 'Is It Too Late?' Question", after "But players still join academies at Under-16, Under-17, and beyond." Q6, priority recruitment age 6 to 8, first signing at under 9, players can still cross the gap up to 17 and 18. `7fae63a`. Added on Graham's say-so inside the watch window of the 9 Oct FAQ on the same page (**live traffic**: 8,570 impressions, 58 clicks in 28 days), so movement on this page in the next fortnight has both changes as candidate causes.
 
 Watch all three until ~24 Oct.
+
+## Chris Robinson quotes on four more pages, and a trial-length fix (2026-10-10)
+
+Same format as this morning's three: one `<ExpertQA>` box per page, his exact words cut not reworded, linking only to `/parent-guides/chris-robinson-football-scout-interview`. Additive, one commit per page. None of the four had an expert quote before.
+
+- `/academy-trials/what-happens-at-academy-trials`: first a one-line fix in "What Happens After Trial", "rolling trial periods of 4-6 weeks" became "trial periods of several weeks, often six to eight", so the page agrees with Chris (assessment over about six weeks, formal trial of eight). `d787e94`. Then the box after that paragraph: Q2, the formal eight week trial, mid-trial review, decision by consensus but recruitment's call. `84d0bbc`. This page had the shin pads link on 9 Oct (`e804fd3`), so movement here has three candidate causes.
+- `/academy-trials/football-academy-trials-uk`: "Open Football Trials vs Academy Scouting", after the scouting paragraph. Q2 opening, big one-off trials are "very hit and miss", assessment over weeks. `2638bbe`.
+- `/academy-trials/football-trials-near-me`: after the Football Parent note closing "Warning Signs: Paid Trial Scams". Q3, sending clips to the Head of Academy Recruitment, and showcases with a good track record. `45e1ff2`.
+- `/academy-trials/how-football-clubs-recruit-young-players`: "Grassroots Scouting", after the team-quality paragraph. Q3 opening, play at the highest standard, scouts start with the better leagues and teams. `199a92e`.
+
+Skipped: `uk-football-development-centres-explained` (only Q5's first paragraph was left unused, and it refers back to the interview). Watch all four until ~24 Oct.
