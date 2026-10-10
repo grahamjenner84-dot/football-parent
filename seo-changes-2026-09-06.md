@@ -1371,4 +1371,6 @@ One `<ExpertQA>` photo box per page, an excerpt of his answer (exact words, cut 
 - `/academy-pathway/how-to-find-a-football-agent-for-your-child`: "When Agents Become Relevant", after the scholarship stage paragraph. Q9, formal representation from the year before the scholarship decision (under 16), and people "masquerading as agents" who are not FIFA registered. `678e0f8`.
 - `/parent-guides/are-football-development-centres-worth-it`: "The Honest Caveats", after "Progression to the academy is far from guaranteed". Q5, some centres have very little contact with the main academy and can be commercial schemes; check the link and track record. `6eec9ff`.
 
-Watch both until ~24 Oct. Queued: `what-age-do-football-academies-recruit` (Q6, recruitment ages and late entry), from ~20 Oct when its 9 Oct FAQ watch ends.
+- `/academy-pathway/what-age-do-football-academies-recruit`: "The 'Is It Too Late?' Question", after "But players still join academies at Under-16, Under-17, and beyond." Q6, priority recruitment age 6 to 8, first signing at under 9, players can still cross the gap up to 17 and 18. `7fae63a`. Added on Graham's say-so inside the watch window of the 9 Oct FAQ on the same page (**live traffic**: 8,570 impressions, 58 clicks in 28 days), so movement on this page in the next fortnight has both changes as candidate causes.
+
+Watch all three until ~24 Oct.
