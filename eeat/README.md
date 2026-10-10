@@ -234,6 +234,29 @@ other recruits above are still open.
   against sources is where the real value is, more than the links.
 - New totals: **94 articles, A = 3, B = 23, C = 68; voice 50, slop 37.**
 
+## Update 2026-10-10: slop tidy on the five worst pages not in a watch window
+
+| Page | Slop before | After | AI-tell count |
+|---|---|---|---|
+| how-girls-football-academies-work | 66 | 40 | 26 to 5 |
+| pdc-vs-ptc-vs-rtc-explained | 62 | 38 | 31 to 8 |
+| playing-up-an-age-group-football | 60 | 36 | 38 to 12 |
+| what-age-do-girls-football-academies-recruit | 60 | 34 | 22 to 1 |
+| west-ham-player-pathway-guide | 56 | 36 | 15 to 4 |
+
+- Sentence-level only: no headings, links or sections changed, quote boxes
+  untouched. Each page has a slop commit and a separate fact-fix commit.
+- The fact checks found real errors on four of the five (girls' PGA ages,
+  what replaced RTCs, the pathway's name, a West Ham misquote and the
+  compensation rule). As with the citations pass, checking facts is where
+  most of the value is.
+- All five stay Bucket B: slop is down but voice still needs an expert or a
+  Graham note. Still high and waiting for their watch windows to end:
+  how-much-training-is-too-much (66), late-developers-in-girls-football (62),
+  girls-academy-vs-grassroots-football (60), what-is-football-iq (54),
+  pre-academy-football (52), plus Villa/what-happens/Brentford (edited today).
+- Site average slop now 36.
+
 ## How to extend this next time
 
 1. `node eeat/score-eeat.mjs` to refresh mechanical scores after new/edited
