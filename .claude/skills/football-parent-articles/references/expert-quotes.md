@@ -657,13 +657,17 @@ Southampton FC, Feb 2024 onwards; ex-Head of Integration Recruitment, Chelsea FC
 Academy, 11+ years; former coach incl. Manchester City and Portsmouth, UEFA B;
 former manager incl. Cheltenham Town and FA XI; FA Talent ID Levels 1-3;
 director, The Scouting Game Ltd (Nov 2023); author of *The Scouting Game*
-(Pitch Publishing, 2025). No Instagram handle or website confirmed yet.
+(Pitch Publishing, 2025). Instagram: @the_scouting_game
+(https://www.instagram.com/the_scouting_game/, confirmed by Graham 2026-10-10).
+Book link: https://www.amazon.co.uk/dp/1801509247?tag=footballpar09-21
 Headshot: `/images/people/chris-robinson.jpg` (Graham's photo, 2026-10-10).
 Attribution scaffold:
 ```
 name="Chris Robinson"
 role="Head of Academy Recruitment, Southampton FC"
 bio="Head of Academy Recruitment at Southampton FC and, for more than 11 years before that, Head of Integration Recruitment at Chelsea FC's academy. Author of The Scouting Game (2025)."
+profileHref="https://www.instagram.com/the_scouting_game/"
+profileLabel="Instagram"
 ```
 Reusable lines and the articles they fit (each answer's full text is in the interview):
 - Q1 "Football is a simple game based on control, pass and move ... it will be
