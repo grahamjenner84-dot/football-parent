@@ -1394,3 +1394,17 @@ Checked first (Graham asked): Paul Barry's boxes on the scouts, release and mist
 - `/academy-trials/what-do-academy-coaches-look-for`: end of "Technical Skills". Q1 in full (control, pass and move, plus the desire to win the ball back). `205ced8`. This page had the GPS trackers link on 9 Oct (`80ecbcf`), so movement here has both as candidate causes.
 
 Watch both until ~24 Oct. Chris now has boxes on nine pages.
+
+## Chris Robinson quotes on five more pages, plus the interview's affiliate disclosure (2026-10-10)
+
+- `/parent-guides/chris-robinson-football-scout-interview`: `<AffiliateDisclosure />` added under the Amazon book link (the E-E-A-T scorer flagged it as the only page with affiliate links and no disclosure). `c943064`.
+
+Five more `<ExpertQA>` boxes, same format, interview link only, one commit per page. Graham asked for Q1 to stay on a couple of pages and for repeats to be cut differently, so no two boxes match:
+
+- `/academy-pathway/brentford-development-centre-guide`: "What Brentford Looks for in Young Players". Q1 without the "simple game" opening (the basics, including winning the ball back). Q1's second and last use. `d22e3f7`.
+- `/academy-pathway/aston-villa-development-centre-guide`: "What Aston Villa Looks for in Young Players". Q2, several experienced scouts decide who comes in on trial, plus what the age group needs. `680233b`. Title tag changed 9 Oct, so movement here has both as candidate causes.
+- `/academy-pathway/how-to-join-a-football-academy`: "What Age Can Children Join a Football Academy?", away from the existing Paul Barry box. Q6, little difference between top grassroots and academy players early on, the gap widens with age. `6c89322`.
+- `/academy-pathway/premier-league-development-centres-list`: "Not All Development Centres Are The Same". Q5 first paragraph only (some centres have little academy contact, can be commercial schemes). `81d7900`.
+- `/academy-pathway/tottenham-development-centres-explained`: "How Genuine Scouting Actually Works", after the business-card paragraph. Q4, the card half only. `06b8228`.
+
+Watch all five until ~24 Oct. Chris now has boxes on 14 pages. E-E-A-T record updated: every former B page with a box is now C under Graham's rule (`eeat/README.md`).
