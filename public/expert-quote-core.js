@@ -256,7 +256,7 @@
   }
   function footerHandles(ctx, S, dark, platform, handle) {
     ctx.save(); ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'; ctx.font = "700 30px 'Archivo'";
-    var y = S.safeBottom - 10, my = myHandle(platform), th = handle || '@guest', cross = ' × ';
+    var y = S.safeBottom - 10, my = myHandle(platform), th = handle || '', cross = th ? ' × ' : '';
     ctx.font = "700 30px 'Archivo'";
     var wMy = ctx.measureText(my).width, wC = ctx.measureText(cross).width, wTh = ctx.measureText(th).width, tot = wMy + wC + wTh;
     var x = S.centerX - tot / 2; ctx.textAlign = 'left';
