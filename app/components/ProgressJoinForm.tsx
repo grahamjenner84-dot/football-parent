@@ -91,18 +91,7 @@ function ResendButton({ sentAt, dark, onResend, busy }: { sentAt: number; dark: 
 // Without the env vars it degrades to a plain GET to the app, whose sign-in
 // screen fills the email in (?email=) and sends the link from there.
 
-function GoogleIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden>
-      <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
-      <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
-      <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
-      <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
-    </svg>
-  );
-}
-
-// "Continue with Google" is only a link: the app starts Google sign-in itself
+// "Sign up with Google" is only a link: the app starts Google sign-in itself
 // (?signin=google), so this site still never calls anything in Progress's
 // Supabase project but signInWithOtp (CLAUDE.md, lib/progress-auth.ts). The
 // app applies the marketing choice only if that sign-in creates the account.
@@ -209,9 +198,31 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
       className="w-full max-w-md scroll-mt-24"
     >
       <p className={`text-lg font-bold mb-3 ${text}`}>Start your journey</p>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <label htmlFor={inputId} className="sr-only">
-          Your email
+      {/* Google first, as on the Coach App's sign-up form
+          (CoachSignUpForm.tsx): there, everyone who signed up with Google
+          got into the app, while the email link loses people between the
+          inbox and the app. */}
+      <a
+        href={googleHref(marketing)}
+        onClick={() => {
+          // Counted like a send: one join event (form "<id>-google") and the
+          // once-per-page Ads conversion. Whether Google sign-in then
+          // completes shows in the app snapshot's sign-ups by method.
+          logJoin(id ? `${id}-google` : "google", marketing);
+          trackProgressSignUpConversion();
+        }}
+        className="flex w-full items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white! shadow-sm transition-colors hover:bg-[#0f5d34]"
+      >
+        Sign up with Google
+      </a>
+      <div className="my-4 flex items-center gap-3" aria-hidden="true">
+        <span className={`h-px flex-1 ${dark ? "bg-white/25" : "bg-[#c3ccb8]"}`} />
+        <span className={`text-xs uppercase tracking-wide ${muted}`}>or</span>
+        <span className={`h-px flex-1 ${dark ? "bg-white/25" : "bg-[#c3ccb8]"}`} />
+      </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor={inputId} className={`text-sm ${muted}`}>
+          Sign up with an email link
         </label>
         <input
           id={inputId}
@@ -220,17 +231,21 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           inputMode="email"
           required
           autoComplete="email"
-          placeholder="Your email"
+          placeholder="you@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="flex-1 min-w-0 rounded-full border border-[#c3ccb8] bg-white px-5 py-3.5 text-base text-[#16211b] placeholder:text-[#8a978d] focus:outline-none focus:ring-2 focus:ring-[#1a7a45]"
+          className="w-full rounded-full border border-[#c3ccb8] bg-white px-5 py-3 text-base text-[#16211b] placeholder:text-[#8a978d] focus:outline-none focus:ring-2 focus:ring-[#1a7a45]"
         />
         <button
           type="submit"
           disabled={sending}
-          className="rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-[#0f5d34] disabled:opacity-60 cursor-pointer"
+          className={`rounded-full border px-7 py-3 text-base font-semibold transition-colors disabled:opacity-60 cursor-pointer ${
+            dark
+              ? "border-white/40 text-white hover:bg-white/10"
+              : "border-[#c3ccb8] bg-white text-[#16211b] hover:bg-[#f4f6f1]"
+          }`}
         >
-          {sending ? "Sending…" : "Start free trial"}
+          {sending ? "Sending…" : "Email me a link"}
         </button>
       </div>
       {configured && (
@@ -244,25 +259,6 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           <span>Email me occasional Progress updates and offers from Football Parent.</span>
         </label>
       )}
-      <div className={`mt-4 flex items-center gap-3 text-sm ${muted}`}>
-        <span className={`h-px flex-1 ${dark ? "bg-white/25" : "bg-[#c3ccb8]"}`} />
-        or
-        <span className={`h-px flex-1 ${dark ? "bg-white/25" : "bg-[#c3ccb8]"}`} />
-      </div>
-      <a
-        href={googleHref(marketing)}
-        onClick={() => {
-          // Counted like a send: one join event (form "<id>-google") and the
-          // once-per-page Ads conversion. Whether Google sign-in then
-          // completes shows in the app snapshot's sign-ups by method.
-          logJoin(id ? `${id}-google` : "google", marketing);
-          trackProgressSignUpConversion();
-        }}
-        className="mt-4 flex w-full items-center justify-center gap-3 rounded-full border border-[#c3ccb8] bg-white px-7 py-3.5 text-base font-semibold text-[#16211b] shadow-sm transition-colors hover:bg-[#f4f6f1]"
-      >
-        <GoogleIcon />
-        Continue with Google
-      </a>
       {error && (
         <p className={errorText} role="alert">
           {error}
@@ -270,7 +266,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
       )}
       <p className={`mt-3 text-sm ${muted}`}>
         {configured
-          ? "We'll email you a link and code to sign in. No password needed."
+          ? "Free trial, no card needed. No password either."
           : "We'll take you to Progress to send your sign-in link. No password needed."}{" "}
         By continuing you agree to the Progress{" "}
         <a href={`${PROGRESS_APP_URL}terms`} className={link}>
