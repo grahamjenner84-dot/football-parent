@@ -180,6 +180,13 @@ export interface ProgressActivationCounts {
    * sent since UK midnight (progress migration 0024), not sign-in emails.
    * Stored by 20261010090000_usage_snapshot_emails_today.sql. */
   emailsToday: number | null;
+  /** Accounts that have signed in with Google (progress migration 0025);
+   * the rest used the email link or code. Stored by
+   * 20261010120000_progress_usage_signup_method.sql. */
+  accountsGoogle: number | null;
+  /** Of the accounts created in the last 7 days, how many signed in with
+   * Google. */
+  signups7dGoogle: number | null;
 }
 
 export const ACTIVATION_FIELDS: (keyof ProgressActivationCounts)[] = [
@@ -193,6 +200,8 @@ export const ACTIVATION_FIELDS: (keyof ProgressActivationCounts)[] = [
   "accountsLogged7d",
   "accountsInstalled",
   "emailsToday",
+  "accountsGoogle",
+  "signups7dGoogle",
 ];
 
 const ACTIVATION_COLUMN: Record<keyof ProgressActivationCounts, string> = {
@@ -206,12 +215,26 @@ const ACTIVATION_COLUMN: Record<keyof ProgressActivationCounts, string> = {
   accountsLogged7d: "accounts_logged_7d",
   accountsInstalled: "accounts_installed",
   emailsToday: "emails_today",
+  accountsGoogle: "accounts_google",
+  signups7dGoogle: "signups_7d_google",
 };
 
-// Columns added by a later migration than the activation one: if only the
-// activation migration has run, these are dropped on their own rather than
-// taking the activation counts with them.
-const LATER_COLUMNS = new Set(["emails_today"]);
+// Columns added by migrations after the activation one, newest first. If a
+// migration hasn't been run yet, its columns are dropped on their own (the
+// newest group first) rather than taking the older counts with them.
+const LATER_GROUPS: string[][] = [["accounts_google", "signups_7d_google"], ["emails_today"]];
+
+/** The column sets to try, from everything down to none of the later
+ * groups: each step drops one more of the newest groups. */
+function laterFallbacks<T>(all: T[], key: (t: T) => string): T[][] {
+  const out: T[][] = [all];
+  const dropped = new Set<string>();
+  for (const group of LATER_GROUPS) {
+    group.forEach((c) => dropped.add(c));
+    out.push(all.filter((t) => !dropped.has(key(t))));
+  }
+  return out;
+}
 
 export type ProgressSnapshotCounts = ProgressUsageCounts & ProgressActivationCounts;
 
@@ -229,12 +252,13 @@ export async function logProgressUsageSnapshot(takenAt: string, counts: Progress
   const activation: Record<string, unknown> = {};
   for (const f of ACTIVATION_FIELDS) activation[ACTIVATION_COLUMN[f]] = counts[f];
 
-  const withoutLater = Object.fromEntries(Object.entries(activation).filter(([c]) => !LATER_COLUMNS.has(c)));
-
   // Deployed before a migration was applied: keep the snapshot and drop the
   // counts whose columns aren't there yet (the newest first), rather than
   // lose every snapshot until the migration runs.
-  const attempts = [{ ...row, ...activation }, { ...row, ...withoutLater }, row];
+  const attempts = [
+    ...laterFallbacks(Object.entries(activation), ([c]) => c).map((entries) => ({ ...row, ...Object.fromEntries(entries) })),
+    row,
+  ];
   for (const [i, attempt] of attempts.entries()) {
     const { error } = await supabase.from("progress_usage_snapshots").insert(attempt);
     if (!error) return;
@@ -280,8 +304,7 @@ async function getProgressUsage(supabase: ReturnType<typeof adminClient>, days: 
   const baseColumns = ["taken_at", ...USAGE_FIELDS.map((f) => COLUMN[f])];
   const activationColumns = ACTIVATION_FIELDS.map((f) => ACTIVATION_COLUMN[f]);
   const columnSets = [
-    [...baseColumns, ...activationColumns],
-    [...baseColumns, ...activationColumns.filter((c) => !LATER_COLUMNS.has(c))],
+    ...laterFallbacks(activationColumns, (c) => c).map((cols) => [...baseColumns, ...cols]),
     baseColumns,
   ].map((cols) => cols.join(", "));
   let setIndex = 0;

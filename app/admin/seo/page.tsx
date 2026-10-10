@@ -3112,6 +3112,13 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
           sub="accounts: the weekly habit number"
         />
         <UsageTile label="Ever opened the installed app" value={latest.accountsInstalled ?? 0} sub="accounts, all time" />
+        {latest.signups7dGoogle !== null && (
+          <UsageTile
+            label="Signed up with Google, last 7 days"
+            value={latest.signups7dGoogle}
+            sub={`${of7d(latest.signups7dGoogle) ?? "no sign-ups this week"}; ${latest.accountsGoogle ?? 0} accounts use Google overall, the rest email`}
+          />
+        )}
       </div>
       <SectionNote label="What these numbers count">
         The top row follows the accounts created in the last 7 days (a rolling
