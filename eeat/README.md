@@ -175,7 +175,7 @@ other recruits above are still open.
 - Watch list to about 2026-10-20. Commits and sections are in
   `seo-changes-2026-09-06.md`.
 
-## Update 2026-10-10: Chris Robinson interview + 9 expert boxes
+## Update 2026-10-10: Chris Robinson interview + 14 expert boxes
 
 - New article `/parent-guides/chris-robinson-football-scout-interview`
   (10-question Q&A with the Head of Academy Recruitment at Southampton FC,
@@ -184,21 +184,28 @@ other recruits above are still open.
   `<AffiliateDisclosure />` under its Amazon book link, which the scorer
   flagged as the only affiliate page without one.
 - One `<ExpertQA>` box (internal link to the interview only, Graham's rule)
-  on each of nine pages: football-academy-trials-uk and
-  how-football-clubs-recruit-young-players (**B to C**, both already had a
-  Graham note); what-happens-at-academy-trials, football-trials-near-me and
-  what-age-do-football-academies-recruit (**stay B**, scout gap filled but
-  still impersonal, so they now want a Graham note); the agent guide (stays B,
-  partial fill, still wants a registered agent); and three already-strong
-  pages (are-football-development-centres-worth-it and
-  what-do-academy-coaches-look-for, C; how-football-scouts-identify-players,
-  A).
+  on each of 14 pages: the trials cluster (what-happens-at-academy-trials,
+  football-academy-trials-uk, football-trials-near-me,
+  how-football-clubs-recruit-young-players, how-football-scouts-identify-players,
+  what-do-academy-coaches-look-for), what-age-do-football-academies-recruit,
+  how-to-join-a-football-academy, the agent guide,
+  are-football-development-centres-worth-it, and the Brentford, Aston Villa,
+  Tottenham and Premier League development-centre guides. Q1 is used on two
+  pages only, and repeat passages are cut differently so no two boxes match.
+- **New bucket rule (Graham, 2026-10-10): a genuine quote from the expert a
+  page needed counts as the Bucket B fix, so the page moves to C.** The voice
+  score still records how much of the page is personal, and the note says
+  where a Graham story would lift it further. Under this rule every B page
+  that got a box is now C. The agent guide carries a caveat (a recruitment
+  head, not a registered agent). The four templated club guides are C on
+  voice but still need club-specific detail to stop reading as copies.
 - Two line fixes to agree with him: trial length on
   what-happens-at-academy-trials, and scouts going to the coach first on
   how-football-scouts-identify-players.
-- New totals: **94 articles, A = 8, B = 32, C = 54; voice 50, slop 38.**
-  Expert demand: academy coach 8, girls-pathway coach 7, Graham 6, scout 6,
-  sports scientist 2, podiatrist 2, agent 1.
+- New totals: **94 articles, A = 8, B = 23, C = 63; voice 50, slop 38.**
+  Expert demand: academy coach 8, girls-pathway coach 7, Graham 3, sports
+  scientist 2, podiatrist 2, scout 1 (football-development-centres-in-london,
+  which needs a travel story he doesn't cover).
 - Watch list to about 2026-10-24. Commits and sections are in
   `seo-changes-2026-09-06.md`.
 

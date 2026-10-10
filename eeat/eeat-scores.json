@@ -58,10 +58,10 @@
       "semantic": {
         "voice": 38,
         "slop": 57,
-        "bucket": "B",
-        "expert": "graham",
+        "bucket": "C",
+        "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Chris Robinson ExpertQA box (formal eight week trial, mid-trial review, consensus but recruitment's call) after a one-line fix to trial length (several weeks, often six to eight). Scout gap filled; no Graham voice on the page yet, so stays B and now wants his trial-day story."
+        "note": "2026-10-10: Chris Robinson ExpertQA box (formal eight week trial, mid-trial review, consensus but recruitment's call) after a one-line fix to trial length (several weeks, often six to eight). Re-marked C the same day under Graham's rule: a genuine quote from the expert the page needed counts as the bucket fix; voice still shows how much of the page is personal, and a Graham note would lift it further."
       }
     },
     {
@@ -108,10 +108,10 @@
       "semantic": {
         "voice": 25,
         "slop": 45,
-        "bucket": "B",
-        "expert": "graham",
+        "bucket": "C",
+        "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Chris Robinson ExpertQA box (sending clips, showcases with a track record) after the paid-trials warning. Scout gap filled; no Graham voice yet, so stays B and now wants a Graham note."
+        "note": "2026-10-10: Chris Robinson ExpertQA box (sending clips, showcases with a track record) after the paid-trials warning. Re-marked C the same day under Graham's rule: a genuine quote from the expert the page needed counts as the bucket fix; voice still shows how much of the page is personal, and a Graham note would lift it further."
       }
     },
     {
@@ -133,10 +133,10 @@
       "semantic": {
         "voice": 23,
         "slop": 47,
-        "bucket": "B",
-        "expert": "graham",
+        "bucket": "C",
+        "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Chris Robinson ExpertQA box (priority age 6 to 8, first signing at U9, can still cross the gap at 17-18) in \"The 'Is It Too Late?' Question\". Scout gap filled by the right archetype; the page is still impersonal around it, so stays B and now wants a Graham note (e.g. the age his son was first approached)."
+        "note": "2026-10-10: Chris Robinson ExpertQA box (priority age 6 to 8, first signing at U9, can still cross the gap at 17-18) in \"The 'Is It Too Late?' Question\". Re-marked C the same day under Graham's rule: a genuine quote from the expert the page needed counts as the bucket fix; voice still shows how much of the page is personal, and a Graham note would lift it further."
       }
     },
     {
@@ -714,24 +714,25 @@
       "slug": "brentford-development-centre-guide",
       "category": "academy-pathway",
       "url": "/academy-pathway/brentford-development-centre-guide",
-      "words": 1821,
-      "callouts": 0,
-      "isInterview": false,
+      "words": 1866,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 5,
-      "citationsPer1000": 2.75,
+      "citationsPer1000": 2.68,
       "internalLinks": 12,
       "mechanical": {
-        "overall": 68,
-        "experience": 15,
+        "overall": 87,
+        "experience": 90,
         "expertise": 100,
         "authoritativeness": 66
       },
       "semantic": {
-        "voice": 12,
-        "slop": 55,
-        "bucket": "B",
-        "expert": "scout",
-        "reviewed": "2026-09-22"
+        "voice": 27,
+        "slop": 52,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Chris Robinson ExpertQA box (the basics, including winning the ball back; Q1's second use, cut without the 'simple game' opening) in 'What Brentford Looks for in Young Players'. B to C. Still one of the templated club guides: needs Brentford-specific detail to stop reading as a copy, which a quote doesn't fix."
       }
     },
     {
@@ -762,24 +763,25 @@
       "slug": "premier-league-development-centres-list",
       "category": "academy-pathway",
       "url": "/academy-pathway/premier-league-development-centres-list",
-      "words": 2461,
-      "callouts": 0,
-      "isInterview": false,
+      "words": 2518,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 4,
-      "citationsPer1000": 1.63,
+      "citationsPer1000": 1.59,
       "internalLinks": 23,
       "mechanical": {
-        "overall": 68,
-        "experience": 15,
+        "overall": 87,
+        "experience": 90,
         "expertise": 100,
-        "authoritativeness": 67
+        "authoritativeness": 66
       },
       "semantic": {
-        "voice": 8,
-        "slop": 50,
-        "bucket": "B",
-        "expert": "scout",
-        "reviewed": "2026-09-22"
+        "voice": 23,
+        "slop": 47,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Chris Robinson ExpertQA box (some centres have little contact with the academy, can be commercial schemes; first paragraph only, the 'worth it' page has both) in 'Not All Development Centres Are The Same'. B to C."
       }
     },
     {
@@ -834,24 +836,25 @@
       "slug": "aston-villa-development-centre-guide",
       "category": "academy-pathway",
       "url": "/academy-pathway/aston-villa-development-centre-guide",
-      "words": 1734,
-      "callouts": 0,
-      "isInterview": false,
+      "words": 1776,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 6,
-      "citationsPer1000": 3.46,
+      "citationsPer1000": 3.38,
       "internalLinks": 12,
       "mechanical": {
-        "overall": 71,
-        "experience": 15,
+        "overall": 90,
+        "experience": 90,
         "expertise": 100,
         "authoritativeness": 78
       },
       "semantic": {
-        "voice": 8,
-        "slop": 62,
-        "bucket": "B",
-        "expert": "scout",
-        "reviewed": "2026-09-22"
+        "voice": 23,
+        "slop": 59,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Chris Robinson ExpertQA box (several experienced scouts decide who comes in on trial, plus what the age group needs) in 'What Aston Villa Looks for in Young Players'. B to C. Templated club guide: still needs Villa-specific detail. Title tag changed 9 Oct, so both are candidate causes for movement."
       }
     },
     {
@@ -897,34 +900,35 @@
       "semantic": {
         "voice": 23,
         "slop": 36,
-        "bucket": "B",
-        "expert": "agent",
+        "bucket": "C",
+        "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Chris Robinson ExpertQA box (formal representation only from the year before the scholarship decision; people masquerading as agents) in 'When Agents Become Relevant'. A recruitment head, not a registered agent: partial fill, stays B and still wants an agent or intermediary."
+        "note": "2026-10-10: Chris Robinson ExpertQA box (formal representation only from the year before the scholarship decision; people masquerading as agents) in 'When Agents Become Relevant'. Re-marked C the same day under Graham's rule: a genuine quote from the expert the page needed counts as the bucket fix; voice still shows how much of the page is personal, and a Graham note would lift it further. Caveat: he is a recruitment head, not a registered agent; an agent's answer (Adam Sells) would still add most here."
       }
     },
     {
       "slug": "tottenham-development-centres-explained",
       "category": "academy-pathway",
       "url": "/academy-pathway/tottenham-development-centres-explained",
-      "words": 1612,
-      "callouts": 0,
-      "isInterview": false,
+      "words": 1702,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 4,
-      "citationsPer1000": 2.48,
-      "internalLinks": 13,
+      "citationsPer1000": 2.35,
+      "internalLinks": 14,
       "mechanical": {
-        "overall": 71,
-        "experience": 15,
+        "overall": 90,
+        "experience": 90,
         "expertise": 100,
         "authoritativeness": 78
       },
       "semantic": {
-        "voice": 7,
-        "slop": 34,
-        "bucket": "B",
-        "expert": "scout",
-        "reviewed": "2026-09-22"
+        "voice": 22,
+        "slop": 32,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Chris Robinson ExpertQA box (what to do with a scout's card; the card half of his answer, the scouts guide has the full one) in 'How Genuine Scouting Actually Works'. B to C. Templated club guide: still needs Spurs-specific detail."
       }
     },
     {
@@ -1395,24 +1399,25 @@
       "slug": "how-to-join-a-football-academy",
       "category": "academy-pathway",
       "url": "/academy-pathway/how-to-join-a-football-academy",
-      "words": 2500,
-      "callouts": 1,
-      "isInterview": false,
+      "words": 2533,
+      "callouts": 4,
+      "isInterview": true,
       "citations": 3,
-      "citationsPer1000": 1.2,
-      "internalLinks": 18,
+      "citationsPer1000": 1.18,
+      "internalLinks": 17,
       "mechanical": {
-        "overall": 78,
-        "experience": 55,
+        "overall": 89,
+        "experience": 100,
         "expertise": 100,
-        "authoritativeness": 67
+        "authoritativeness": 66
       },
       "semantic": {
-        "voice": 22,
-        "slop": 28,
-        "bucket": "B",
-        "expert": "scout",
-        "reviewed": "2026-09-22"
+        "voice": 37,
+        "slop": 27,
+        "bucket": "C",
+        "expert": "none",
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Chris Robinson ExpertQA box (little difference between top grassroots and academy players early on; the gap widens with age) in 'What Age Can Children Join a Football Academy?', alongside the existing Paul Barry box. B to C."
       }
     },
     {
@@ -2335,17 +2340,16 @@
     "avgSlop": 38,
     "buckets": {
       "A": 8,
-      "B": 32,
-      "C": 54
+      "B": 23,
+      "C": 63
     },
     "expertDemand": {
       "academy-coach": 8,
       "girls-pathway-coach": 7,
-      "graham": 6,
-      "scout": 6,
+      "graham": 3,
       "sports-scientist": 2,
       "podiatrist": 2,
-      "agent": 1
+      "scout": 1
     },
     "tidied2026_09_22": {
       "articles": 9,
@@ -2366,8 +2370,8 @@
       "note": "Six unscored articles added (Watford, GPS trackers, soft-ground boots, stats apps, calculator, child-lost-confidence which replaces the old support-child-after-bad-match slug) and Fulham/Leeds re-read after their duplicated ParentNote was replaced. Leeds B to C, Watford enters as B (needs Graham note). Watford then got its own note the same day: B to C."
     },
     "chrisRobinson2026_10_10": {
-      "articles": 9,
-      "note": "Chris Robinson (Head of Academy Recruitment, Southampton FC) interview published plus one ExpertQA box on nine pages, each linking back (internal links only): agents, development-centres-worth-it, recruitment ages, what-happens-at-academy-trials, academy-trials-uk, trials-near-me, how-clubs-recruit, scouts-identify-players, academy-coaches-look-for. First real fill for the scout/recruitment-lead recruit. trials-uk and how-clubs-recruit B to C (they already had a Graham note). what-happens, trials-near-me and recruitment ages stay B but now want a Graham note rather than a scout. Two line fixes to match him (trial length, scouts approach the coach first). Watch list to ~2026-10-24."
+      "articles": 14,
+      "note": "Chris Robinson (Head of Academy Recruitment, Southampton FC) interview published plus one ExpertQA box on 14 pages, each linking back (internal links only). Graham's rule the same day: a genuine quote from the expert a page needed counts as the B fix, so every B page that got a box is now C (agent guide with the caveat that a registered agent would still add most). Five of the 14 were already A or C. Scout demand down from 11 to 1 (football-development-centres-in-london: needs a travel story, which he doesn't cover). Templated club guides (Brentford, Villa, Spurs, PL list) are C on voice but still need club-specific detail. Two line fixes to match him (trial length, scouts approach the coach first). Watch list to ~2026-10-24."
     }
   }
 }

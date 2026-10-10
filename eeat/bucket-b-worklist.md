@@ -9,52 +9,37 @@ the expert archetype that fits, so one interview clears several at once.
 Ordered by recruit leverage. `graham` = a first-person story, no expert
 needed. See `expert-question-bank.md` for the archetype-level question sets.
 
-## Scout / recruitment lead (6 left of 11 — highest leverage)
+## Scout / recruitment lead (1 left of 11)
 
-**Update 2026-10-10:** Chris Robinson (Head of Academy Recruitment,
+**Done 2026-10-10:** Chris Robinson (Head of Academy Recruitment,
 Southampton FC; ex-Chelsea academy) answered ten questions
-(`/parent-guides/chris-robinson-football-scout-interview`). Boxes went on five
-of the articles below: two moved to Bucket C, three stay B but now need a
-Graham note rather than a scout (moved to the Graham section). Unused Chris
-answers that could still fill the rest, within the 2-3 page reuse cap: Q1
-(control, pass and move, used once) for the Brentford and Aston Villa "what
-they look for" sections; Q5 (development centres with little academy link,
-used once) for premier-league-development-centres-list. See
-`expert-quotes.md` for which passages are already used.
+(`/parent-guides/chris-robinson-football-scout-interview`), and a box from it
+went on ten of the eleven pages below. Under Graham's rule the same day (a
+genuine quote from the expert a page needed counts as the fix), all ten are
+now Bucket C. See `expert-quotes.md` for which passages each page uses.
 
-
-- ~~**academy-trials/what-happens-at-academy-trials**~~ Chris Robinson box
-  (formal trial and decision), 2026-10-10. Still B: now in the Graham section.
-- ~~**academy-trials/football-academy-trials-uk**~~ Chris Robinson box
-  (one-off trials hit and miss), 2026-10-10. B to C.
-- ~~**academy-trials/football-trials-near-me**~~ Chris Robinson box (clips,
-  showcases), 2026-10-10. Still B: now in the Graham section.
-- ~~**academy-trials/how-football-clubs-recruit-young-players**~~ Chris
-  Robinson box (play at the highest standard), 2026-10-10. B to C.
-- ~~**academy-pathway/what-age-do-football-academies-recruit**~~ Chris
-  Robinson box (recruitment ages, late entry), 2026-10-10. Still B: now in the
-  Graham section.
-- **academy-pathway/how-to-join-a-football-academy** — *How Do You Get Into
-  an Academy?*: "When you watch a grassroots game, what specifically makes
-  you note a player for a second look rather than move on?"
+- ~~academy-trials/what-happens-at-academy-trials~~ (formal trial and decision)
+- ~~academy-trials/football-academy-trials-uk~~ (one-off trials hit and miss)
+- ~~academy-trials/football-trials-near-me~~ (clips, showcases)
+- ~~academy-trials/how-football-clubs-recruit-young-players~~ (play at the
+  highest standard)
+- ~~academy-pathway/what-age-do-football-academies-recruit~~ (recruitment ages)
+- ~~academy-pathway/how-to-join-a-football-academy~~ (gap widens with age)
+- ~~academy-pathway/tottenham-development-centres-explained~~ (the scout's card)
+- ~~academy-pathway/brentford-development-centre-guide~~ (the basics)
+- ~~academy-pathway/premier-league-development-centres-list~~ (centres with
+  little academy link)
+- ~~academy-pathway/aston-villa-development-centre-guide~~ (who comes in on
+  trial)
 - **academy-pathway/football-development-centres-in-london** — *Travel /
-  Which Club Is Right*: "Walk me through a London family whose closest-looking
-  club was actually hardest to reach, and how travel changed their decision."
-- **academy-pathway/tottenham-development-centres-explained** — *How Genuine
-  Scouting Works*: "When you scouted a boy at a grassroots pitch, what
-  actually happened after you handed the parent your card?"
-- **academy-pathway/brentford-development-centre-guide** — *What Brentford
-  Looks For*: "When you watched players at a Brentford FDC or trial, what
-  specific thing made you flag a child for a longer look?" ♻ reusable across
-  club dev-centre guides
-- **academy-pathway/premier-league-development-centres-list** — *Not All
-  Development Centres Are The Same*: "How could a parent tell whether a club's
-  development centre is genuine talent-ID or mainly a paid coaching product?"
-  ♻ reusable
-- **academy-pathway/aston-villa-development-centre-guide** — *What Villa Looks
-  For*: "When you watch an 8–11-year-old at a development-centre session
-  versus an academy trial, what tells you a player's worth flagging, and what
-  do parents mistake for that signal?" ♻ reusable
+  Which Club Is Right*: still open. Chris doesn't cover travel; a Graham note
+  on choosing between London clubs by journey would fit better than a scout.
+
+Optional, would lift voice further on pages now C: a Graham note on
+what-happens-at-academy-trials (your son's Chelsea and Palace trial days),
+football-trials-near-me (any paid trial or showcase you were offered) and
+what-age-do-football-academies-recruit (the age he was first noticed). The
+Brentford, Villa, Spurs and PL-list guides still need club-specific detail.
 
 ## Academy coach / manager (9 articles)
 
@@ -137,28 +122,16 @@ used once) for premier-league-development-centres-list. See
   "When a released player says 'if I'm not a footballer, who am I?', what have
   you seen help a child rebuild their sense of self in the first weeks?"
 
-## Registered agent (1 article)
+## Registered agent (DONE 2026-10-10, with a caveat)
 
 - **academy-pathway/how-to-find-a-football-agent-for-your-child** — *When
   Agents Become Relevant*: "Walk me through the first real conversation you
   had with a family at scholarship stage: what did they misunderstand?"
-  Partial fill 2026-10-10: Chris Robinson box (under-16 rule, fake agents).
-  A recruitment head, not an agent, so it stays B for Adam Sells or another
-  registered agent.
+  Done 2026-10-10 (now C): Chris Robinson box (under-16 rule, fake agents).
+  Caveat: a recruitment head, not an agent; a registered agent's answer
+  (Adam Sells) would still add most here.
 
-## Graham first-person story (6 articles — no expert needed)
-
-Three added 2026-10-10: each now has a Chris Robinson box, but the page around
-it is still impersonal, so a first-hand story is what moves it to C.
-
-- **academy-trials/what-happens-at-academy-trials** — *What a Typical Trial
-  Day Looks Like*: your son's actual trial days (Chelsea, Palace): how long it
-  lasted, what they did, how long until you heard back.
-- **academy-trials/football-trials-near-me** — *Warning Signs: Paid Trial
-  Scams*: any paid trial or showcase you were offered or went to, and how you
-  judged it.
-- **academy-pathway/what-age-do-football-academies-recruit** — *Foundation
-  Phase*: the age your son was first noticed or invited, and how it happened.
+## Graham first-person story (3 articles — no expert needed)
 
 - **football-gear/veo-camera-alternatives** — *Is a Veo Worth It?*: your own
   footage: what it actually changed about how your son trained, and what was
