@@ -1437,3 +1437,16 @@ One-line corrections, one commit each. Same pages and day as the source links ab
 - `/parent-guides/jpl-and-academy-football`: "FA-registered academies do not charge for trials" to "Professional club academies operating under the EPPP do not normally charge for trials." `8c119d9`.
 - `/academy-pathway/how-academy-football-works` (**live traffic**): "U18, U21 and Premier League 2 competitions" to "U18 and U21 competitions (including the U18 Premier League and Premier League 2)". `f2cf813`.
 - `/academy-pathway/chelsea-fc-development-centre-guide`: Summary no longer says the Foundation tiers run "at Cobham". `57f7ce4`.
+
+## Slop tidy and fact fixes on five high-slop pages (2026-10-10)
+
+Sentence-level AI-slop tidy (no headings, links or sections changed; quote boxes untouched) plus fact fixes found while reading, in separate commits per page. Pages chosen as the highest-slop pages not in a watch window. Slop scores and details in `eeat/README.md`. Watch all five until ~24 Oct.
+
+- `/football-development/playing-up-an-age-group-football`: tidy `c71fdc7` (35 edits, slop 60 to 36); UK Coaching claim relinked from the homepage to the page that supports it `ac1b375`.
+- `/girls-football/what-age-do-girls-football-academies-recruit`: tidy `96770ce` (slop 60 to 34); facts `500244c` (PGAs ages 14 to 20, replaced FA WSL Academies in 2023; unsupported scholarship/reserve claim replaced).
+- `/academy-pathway/pdc-vs-ptc-vs-rtc-explained`: tidy `c49dff8` + `394c03e` (slop 62 to 38); facts `b2e0b3d` (girls' RTCs replaced by ETCs, not PGAs; PDC not an EPPP term).
+- `/girls-football/how-girls-football-academies-work`: tidy `046a916` (slop 66 to 40); facts `f83db55` (pathway name, ETC count, PGA ages, Discover My Talent referrals).
+- `/academy-pathway/west-ham-player-pathway-guide`: tidy `dc64315` (slop 56 to 36); facts `0ffca2c` (Luke Hirst quote, compensation rule, tier names) and `192e4a8` (unverified Chelmsford/Stanford-le-Hope/Wickford venues, "few pounds" trial fee and August-April season removed; girls' progression worded as the Foundation describes it).
+- Table of contents titles matched to headings on the girls' academies, PDC and girls' recruitment pages `0ae52de` (frontmatter only; the sidebar is currently hidden sitewide).
+
+Same day: "Regional Talent Hubs" entry removed from the girls' recruitment page's terminology box (no such programme found) `fdee6e7`. West Ham ParentNote (word-for-word the opening of the Arsenal one) replaced with a new Graham note on asking other parents and the centre how many have progressed and how `488bb75`.

@@ -19,24 +19,27 @@
       "slug": "pdc-vs-ptc-vs-rtc-explained",
       "category": "academy-pathway",
       "url": "/academy-pathway/pdc-vs-ptc-vs-rtc-explained",
-      "words": 1566,
+      "words": 1538,
       "callouts": 0,
       "isInterview": false,
       "citations": 0,
       "citationsPer1000": 0,
-      "internalLinks": 12,
+      "internalLinks": 13,
       "mechanical": {
-        "overall": 39,
+        "overall": 38,
         "experience": 15,
-        "expertise": 84,
+        "expertise": 83,
         "authoritativeness": 0
       },
       "semantic": {
         "voice": 6,
-        "slop": 62,
+        "slop": 38,
         "bucket": "B",
         "expert": "academy-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "preTidySlop": 62,
+        "tidied": "2026-10-10",
+        "note": "2026-10-10 slop tidy, slop 62 to 38: 24 sentence edits (tells 31 to 8), shared 'reluctant to answer' template sentence reworded, plus fact fixes: girls' RTCs replaced by ETCs (not PGAs), PDC is not an EPPP term. Voice unchanged, still B (needs an expert or a Graham note)."
       }
     },
     {
@@ -290,24 +293,27 @@
       "slug": "what-age-do-girls-football-academies-recruit",
       "category": "girls-football",
       "url": "/girls-football/what-age-do-girls-football-academies-recruit",
-      "words": 1614,
+      "words": 1455,
       "callouts": 0,
       "isInterview": false,
       "citations": 0,
       "citationsPer1000": 0,
       "internalLinks": 9,
       "mechanical": {
-        "overall": 43,
+        "overall": 41,
         "experience": 15,
-        "expertise": 100,
+        "expertise": 95,
         "authoritativeness": 0
       },
       "semantic": {
         "voice": 8,
-        "slop": 60,
+        "slop": 34,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "preTidySlop": 60,
+        "tidied": "2026-10-10",
+        "note": "2026-10-10 slop tidy, slop 60 to 34: 25 sentence edits (tells 22 to 1) plus fact fixes: PGAs are ages 14 to 20 and replaced FA WSL Academies in 2023; unsupported scholarship/reserve claim replaced. 'Regional Talent Hubs' entry unverified, left for Graham. Voice unchanged, still B (needs an expert or a Graham note)."
       }
     },
     {
@@ -665,24 +671,27 @@
       "slug": "playing-up-an-age-group-football",
       "category": "football-development",
       "url": "/football-development/playing-up-an-age-group-football",
-      "words": 2708,
+      "words": 2453,
       "callouts": 0,
       "isInterview": false,
       "citations": 3,
-      "citationsPer1000": 1.11,
+      "citationsPer1000": 1.22,
       "internalLinks": 12,
       "mechanical": {
-        "overall": 67,
+        "overall": 68,
         "experience": 15,
         "expertise": 100,
-        "authoritativeness": 64
+        "authoritativeness": 67
       },
       "semantic": {
         "voice": 25,
-        "slop": 60,
+        "slop": 36,
         "bucket": "B",
         "expert": "academy-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "preTidySlop": 60,
+        "tidied": "2026-10-10",
+        "note": "2026-10-10 slop tidy, slop 60 to 36: 35 sentence edits (AI-tell count 38 to 12, 2,735 to 2,480 words): 'honest' x5 and 'it's worth' x7 gone, reframes cut. No fact errors found. Voice unchanged, still B (needs an expert or a Graham note)."
       }
     },
     {
@@ -961,11 +970,11 @@
       "slug": "how-girls-football-academies-work",
       "category": "girls-football",
       "url": "/girls-football/how-girls-football-academies-work",
-      "words": 1691,
+      "words": 1589,
       "callouts": 0,
       "isInterview": false,
       "citations": 8,
-      "citationsPer1000": 4.73,
+      "citationsPer1000": 5.03,
       "internalLinks": 10,
       "mechanical": {
         "overall": 71,
@@ -975,10 +984,13 @@
       },
       "semantic": {
         "voice": 18,
-        "slop": 66,
+        "slop": 40,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "preTidySlop": 66,
+        "tidied": "2026-10-10",
+        "note": "2026-10-10 slop tidy, slop 66 to 40: 24 sentence edits (tells 26 to 5), 'crest on a training top' cut, plus fact fixes: pathway name, ETC count, PGA ages 14 to 20, Discover My Talent referrals. Voice unchanged, still B (needs an expert or a Graham note)."
       }
     },
     {
@@ -1796,11 +1808,11 @@
       "slug": "west-ham-player-pathway-guide",
       "category": "academy-pathway",
       "url": "/academy-pathway/west-ham-player-pathway-guide",
-      "words": 2193,
+      "words": 1958,
       "callouts": 1,
       "isInterview": false,
       "citations": 5,
-      "citationsPer1000": 2.28,
+      "citationsPer1000": 2.55,
       "internalLinks": 14,
       "mechanical": {
         "overall": 84,
@@ -1810,10 +1822,13 @@
       },
       "semantic": {
         "voice": 18,
-        "slop": 56,
+        "slop": 36,
         "bucket": "B",
         "expert": "graham",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "preTidySlop": 56,
+        "tidied": "2026-10-10",
+        "note": "2026-10-10 slop tidy, slop 56 to 36: 27 sentence edits (tells 15 to 4), banned 'badge' line cut, cluster template paragraph rewritten with West Ham detail, plus fact fixes: Luke Hirst quote, compensation rule, ETC and Female Youth Teams tier names. ParentNote duplicates the Arsenal one: needs a new note from Graham. Voice unchanged, still B (needs an expert or a Graham note)."
       }
     },
     {
@@ -2342,7 +2357,7 @@
   "semanticSummary": {
     "reviewed": 94,
     "avgVoice": 50,
-    "avgSlop": 37,
+    "avgSlop": 36,
     "buckets": {
       "A": 3,
       "B": 23,
@@ -2381,6 +2396,10 @@
     "citations2026_10_10": {
       "articles": 5,
       "note": "Bucket A citations on five pages (14 links, factual claims only, authoritative sources, most already cited elsewhere on the site): how-academy-football-works, jpl-and-academy-football, is-private-football-coaching-worth-it, academy-categories-explained, chelsea-fc-development-centre-guide. All five A to C. Left A: how-football-scouts-identify-players (in its watch window to ~24 Oct), best-shin-pads-for-kids-football (gear, exempt), football-development-centres-near-me (already link-heavy, club pages). The research also found five factual or wording errors on these pages; all five were fixed the same day (travel-rule example and audit frequency, 1-to-1 FAQ and an em dash, 'FA-registered academies', Premier League 2 listed twice, Chelsea tiers 'at Cobham')."
+    },
+    "slopTidy2026_10_10": {
+      "articles": 5,
+      "note": "Highest-slop pages not in a watch window: playing-up-an-age-group (60 to 36), what-age-do-girls-football-academies-recruit (60 to 34), pdc-vs-ptc-vs-rtc-explained (62 to 38), how-girls-football-academies-work (66 to 40), west-ham-player-pathway-guide (56 to 36). Sentence-level only (no headings, links or sections changed), each page a slop commit plus a fact-fix commit. The fact checks found real errors on four of the five (girls' PGA ages, RTC replacement, pathway name, West Ham misquote and compensation rule). All stay B: slop is down but voice needs an expert or Graham note."
     }
   }
 }
