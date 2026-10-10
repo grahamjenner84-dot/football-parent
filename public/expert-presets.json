@@ -33,6 +33,17 @@
     "bio": "Matt works one to one with young athletes aged 8 to 18, from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
   },
   {
+    "id": "chris-robinson",
+    "label": "Chris Robinson (Southampton FC)",
+    "name": "The Scouting Game",
+    "handle": "",
+    "person": "Chris Robinson",
+    "role": "Academy Recruitment · Southampton",
+    "logoSrc": "/images/people/chris-robinson.jpg",
+    "bioSrc": "/images/people/chris-robinson.jpg",
+    "bio": "Chris is Head of Academy Recruitment at Southampton FC. Before that he spent more than 11 years as Head of Integration Recruitment at Chelsea's academy, and wrote The Scouting Game (2025)."
+  },
+  {
     "id": "girls-united",
     "label": "Girls United team",
     "name": "Girls United",

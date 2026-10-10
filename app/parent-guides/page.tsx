@@ -123,6 +123,12 @@ export default function ParentGuidesPage() {
             "Mindset coach Matt Baxter on the first ten minutes after a bad game, where real confidence comes from, spotting burnout, talk of quitting and pressure that backfires.",
         },
         {
+          title: "Football Scouting: Chris Robinson Interview",
+          href: "/parent-guides/chris-robinson-football-scout-interview",
+          description:
+            "Southampton academy recruitment head and ex-Chelsea scout Chris Robinson on what scouts notice, how trials really work, spotting genuine scouts and agents.",
+        },
+        {
           title: "What is Grassroots Football?",
           href: "/parent-guides/what-is-grassroots-football",
           description:

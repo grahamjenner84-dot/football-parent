@@ -1357,3 +1357,8 @@ Added three H2s (Gifts for Kids Who Watch Football, Personalised Football Gifts,
 ## `christmas-football-gifts-for-kids`: Boot Buddy product link (2026-10-09)
 
 Stocking filler bullet "A boot cleaning brush": the tagged Amazon search link replaced with the product Graham owns, Boot Buddy (`/dp/B014UPAHO4?tag=footballpar09-21`), named inline as "the one we use". Affiliate link only, no other change.
+
+## New article: Chris Robinson scouting interview (2026-10-10)
+
+Published 10 Oct 2026: `/parent-guides/chris-robinson-football-scout-interview`, category Parent Guides. Expert Q&A with Chris Robinson, Head of Academy Recruitment at Southampton FC (ex-Head of Integration Recruitment, Chelsea FC Academy, 11+ years; author of *The Scouting Game*), ten questions: what a scout notices first, how trials really run, getting seen from grassroots, scout cards and genuine approaches, development centres vs the academy, recruitment age, coming back after release, parent behaviour, agents, one piece of advice. Same format as the Matt Baxter interview. Added to `lib/routes.ts` and the `/parent-guides` index. No callouts added to other articles yet; candidate pages are listed under his entry in `expert-quotes.md`.
+- Same day, before publish: Amazon link to his book *The Scouting Game* added (as promised to Chris), in the About bio and as a closing line under Final Thoughts. Swapped the same day for the product link Graham supplied: `/dp/1801509247?tag=footballpar09-21`.
