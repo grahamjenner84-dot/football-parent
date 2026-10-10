@@ -136,7 +136,7 @@ are-development-centres-worth-it (15->88), support-child-after-bad-match
 
 Existing experts on file (see `expert-quotes.md`): Martin Brock (JPL), Paul
 Barry (Football DNA), FutureFit, Matt Baxter (youth athlete mindset coach,
-2026-09-28), Girls United team (girls' grassroots, 2026-10-06; partial fill for #2). **Sports psychologist (#5) is now filled** by Matt Baxter; the
+2026-09-28), Girls United team (girls' grassroots, 2026-10-06; partial fill for #2), Chris Robinson (academy recruitment head, 2026-10-10; fills #1 for the trials cluster). **Sports psychologist (#5) is now filled** by Matt Baxter; the
 other recruits above are still open.
 
 ## Update 2026-09-28: Matt Baxter interview + 8 expert quotes
@@ -173,6 +173,33 @@ other recruits above are still open.
   ExpertQA tag as interview material; trust the bucket.
 - New totals: **88 articles, A = 8, B = 35, C = 45; voice 47, slop 39.**
 - Watch list to about 2026-10-20. Commits and sections are in
+  `seo-changes-2026-09-06.md`.
+
+## Update 2026-10-10: Chris Robinson interview + 9 expert boxes
+
+- New article `/parent-guides/chris-robinson-football-scout-interview`
+  (10-question Q&A with the Head of Academy Recruitment at Southampton FC,
+  ex-Chelsea academy; Bucket C, voice 85, slop 25). **First real fill for the
+  scout / recruitment lead recruit (#1 above).** Also given the standard
+  `<AffiliateDisclosure />` under its Amazon book link, which the scorer
+  flagged as the only affiliate page without one.
+- One `<ExpertQA>` box (internal link to the interview only, Graham's rule)
+  on each of nine pages: football-academy-trials-uk and
+  how-football-clubs-recruit-young-players (**B to C**, both already had a
+  Graham note); what-happens-at-academy-trials, football-trials-near-me and
+  what-age-do-football-academies-recruit (**stay B**, scout gap filled but
+  still impersonal, so they now want a Graham note); the agent guide (stays B,
+  partial fill, still wants a registered agent); and three already-strong
+  pages (are-football-development-centres-worth-it and
+  what-do-academy-coaches-look-for, C; how-football-scouts-identify-players,
+  A).
+- Two line fixes to agree with him: trial length on
+  what-happens-at-academy-trials, and scouts going to the coach first on
+  how-football-scouts-identify-players.
+- New totals: **94 articles, A = 8, B = 32, C = 54; voice 50, slop 38.**
+  Expert demand: academy coach 8, girls-pathway coach 7, Graham 6, scout 6,
+  sports scientist 2, podiatrist 2, agent 1.
+- Watch list to about 2026-10-24. Commits and sections are in
   `seo-changes-2026-09-06.md`.
 
 ## How to extend this next time
