@@ -1385,3 +1385,12 @@ Same format as this morning's three: one `<ExpertQA>` box per page, his exact wo
 - `/academy-trials/how-football-clubs-recruit-young-players`: "Grassroots Scouting", after the team-quality paragraph. Q3 opening, play at the highest standard, scouts start with the better leagues and teams. `199a92e`.
 
 Skipped: `uk-football-development-centres-explained` (only Q5's first paragraph was left unused, and it refers back to the interview). Watch all four until ~24 Oct.
+
+## Chris Robinson quotes on the scouts and academy coaches guides (2026-10-10)
+
+Checked first (Graham asked): Paul Barry's boxes on the scouts, release and mistakes pages are each used only once; two other Paul quotes are on two pages each ("goals and pace" on what-do-academy-coaches-look-for and best-football-gps-trackers-for-kids; "player development frameworks" on how-to-become-a-professional-footballer and how-to-join-a-football-academy), within the 2-3 cap. Release and mistakes already carry two experts each, so left as they are.
+
+- `/academy-trials/how-football-scouts-identify-players`: "How Contact Is Usually Made", first sentence changed from "they will typically contact the parent or the grassroots club's coach" to "they should speak to the grassroots club's coach first, rather than approaching the parent directly, and show their club photo ID", to match Chris. `50011e0`. Then a box after that paragraph: Q4 in full (photo ID shown to the team coach, approach goes to the coach first, ask the scout what the next step is). `76b88cb`.
+- `/academy-trials/what-do-academy-coaches-look-for`: end of "Technical Skills". Q1 in full (control, pass and move, plus the desire to win the ball back). `205ced8`. This page had the GPS trackers link on 9 Oct (`80ecbcf`), so movement here has both as candidate causes.
+
+Watch both until ~24 Oct. Chris now has boxes on nine pages.
