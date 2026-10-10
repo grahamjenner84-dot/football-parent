@@ -1408,3 +1408,15 @@ Five more `<ExpertQA>` boxes, same format, interview link only, one commit per p
 - `/academy-pathway/tottenham-development-centres-explained`: "How Genuine Scouting Actually Works", after the business-card paragraph. Q4, the card half only. `06b8228`.
 
 Watch all five until ~24 Oct. Chris now has boxes on 14 pages. E-E-A-T record updated: every former B page with a box is now C under Graham's rule (`eeat/README.md`).
+
+## Source links on five Bucket A pages (2026-10-10)
+
+Factual claims only (rules, ages, structures, research), one source per claim, no source twice on a page, most already cited elsewhere on the site. Link added to existing words, no sentence reworded. One commit per page.
+
+- `/academy-pathway/how-academy-football-works` (**live traffic**; also edited 4 Oct and 8 Oct, so those windows overlap): EPPP (Premier League EPPP page), Category contact time (PL Parent Hub), relative age effect (PMC study), bio-banding (PL elite performance page). `a980ede`.
+- `/parent-guides/jpl-and-academy-football`: JPL official site, EPPP categories, PL Parent Hub independent advice page. `c6bfbf4`.
+- `/football-development/is-private-football-coaching-worth-it`: GOV.UK DBS guide for self-employed workers, England Football UEFA C page, 2026 scoping review on decision-making (PMC), AAP report on overtraining and burnout. `81707e4`.
+- `/academy-pathway/academy-categories-explained` (InstagramPromo 8 Oct overlaps): 90-minute travel radius to the PL Youth Development Rules 2025-26. `ac155a3`.
+- `/academy-pathway/chelsea-fc-development-centre-guide` (InstagramPromo 8 Oct overlaps): Cobham and U9 academy start to chelseafc.com. `e07bf5e`.
+
+Watch all five until ~24 Oct. Content issues the research turned up, not changed (Graham to decide): see the summary in the session; they are listed in `eeat/eeat-scores.json` notes only where relevant.

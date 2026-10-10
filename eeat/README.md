@@ -209,6 +209,22 @@ other recruits above are still open.
 - Watch list to about 2026-10-24. Commits and sections are in
   `seo-changes-2026-09-06.md`.
 
+## Update 2026-10-10: Bucket A citations on five pages
+
+- 14 source links on factual claims only (rules, ages, research), each source
+  different on its page, most already cited elsewhere on the site:
+  how-academy-football-works (4), jpl-and-academy-football (3),
+  is-private-football-coaching-worth-it (4), academy-categories-explained (1),
+  chelsea-fc-development-centre-guide (2). All five **A to C**.
+- Context for next time: Google treats clear sourcing as a trust signal, but
+  outbound links are not a direct ranking factor, so this is done claim by
+  claim, never to hit a links-per-1000-words figure. Experience and expert
+  quotes matter more.
+- Left at A: how-football-scouts-identify-players (watch window to ~24 Oct),
+  best-shin-pads-for-kids-football (gear, exempt), football-development-centres-near-me
+  (already link-heavy).
+- New totals: **94 articles, A = 3, B = 23, C = 68.**
+
 ## How to extend this next time
 
 1. `node eeat/score-eeat.mjs` to refresh mechanical scores after new/edited

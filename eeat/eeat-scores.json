@@ -791,21 +791,22 @@
       "words": 2043,
       "callouts": 1,
       "isInterview": false,
-      "citations": 1,
-      "citationsPer1000": 0.49,
+      "citations": 5,
+      "citationsPer1000": 2.45,
       "internalLinks": 18,
       "mechanical": {
-        "overall": 68,
+        "overall": 86,
         "experience": 55,
         "expertise": 100,
-        "authoritativeness": 25
+        "authoritativeness": 100
       },
       "semantic": {
         "voice": 52,
         "slop": 46,
-        "bucket": "A",
+        "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Bucket A citations job done (81707e4): DBS for self-employed coaches (GOV.UK), UEFA C (England Football), unstructured play and decision-making (2026 scoping review, PMC), overtraining and burnout (AAP clinical report). Factual claims only, each source different. A to C."
       }
     },
     {
@@ -864,21 +865,22 @@
       "words": 1919,
       "callouts": 1,
       "isInterview": false,
-      "citations": 2,
-      "citationsPer1000": 1.04,
+      "citations": 4,
+      "citationsPer1000": 2.08,
       "internalLinks": 17,
       "mechanical": {
-        "overall": 71,
+        "overall": 78,
         "experience": 55,
         "expertise": 100,
-        "authoritativeness": 40
+        "authoritativeness": 66
       },
       "semantic": {
         "voice": 46,
         "slop": 44,
-        "bucket": "A",
+        "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Bucket A citations job done (e07bf5e): Cobham training base and U9 academy start (chelseafc.com). Factual claims only, each source different. A to C."
       }
     },
     {
@@ -1080,48 +1082,50 @@
       "slug": "academy-categories-explained",
       "category": "academy-pathway",
       "url": "/academy-pathway/academy-categories-explained",
-      "words": 2024,
-      "callouts": 1,
-      "isInterview": false,
+      "words": 1981,
+      "callouts": 2,
+      "isInterview": true,
       "citations": 3,
-      "citationsPer1000": 1.48,
-      "internalLinks": 12,
+      "citationsPer1000": 1.51,
+      "internalLinks": 11,
       "mechanical": {
-        "overall": 74,
-        "experience": 55,
+        "overall": 83,
+        "experience": 90,
         "expertise": 100,
-        "authoritativeness": 52
+        "authoritativeness": 53
       },
       "semantic": {
         "voice": 52,
         "slop": 42,
-        "bucket": "A",
+        "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Bucket A citations job done (ac155a3): 90-minute travel rule (Premier League Youth Development Rules 2025-26). Factual claims only, each source different. A to C."
       }
     },
     {
       "slug": "how-academy-football-works",
       "category": "academy-pathway",
       "url": "/academy-pathway/how-academy-football-works",
-      "words": 2759,
-      "callouts": 2,
-      "isInterview": false,
-      "citations": 2,
-      "citationsPer1000": 0.72,
-      "internalLinks": 26,
+      "words": 2684,
+      "callouts": 4,
+      "isInterview": true,
+      "citations": 4,
+      "citationsPer1000": 1.49,
+      "internalLinks": 24,
       "mechanical": {
-        "overall": 74,
-        "experience": 85,
+        "overall": 88,
+        "experience": 100,
         "expertise": 100,
-        "authoritativeness": 20
+        "authoritativeness": 63
       },
       "semantic": {
         "voice": 50,
         "slop": 40,
-        "bucket": "A",
+        "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Bucket A citations job done (a980ede): EPPP (Premier League), Category contact time (PL Parent Hub), relative age effect (PMC study of 1,003 academy players), bio-banding (PL elite performance page). Factual claims only, each source different. A to C."
       }
     },
     {
@@ -1131,21 +1135,22 @@
       "words": 2455,
       "callouts": 2,
       "isInterview": false,
-      "citations": 1,
-      "citationsPer1000": 0.41,
+      "citations": 4,
+      "citationsPer1000": 1.63,
       "internalLinks": 18,
       "mechanical": {
-        "overall": 74,
+        "overall": 89,
         "experience": 85,
         "expertise": 100,
-        "authoritativeness": 22
+        "authoritativeness": 79
       },
       "semantic": {
         "voice": 58,
         "slop": 50,
-        "bucket": "A",
+        "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-10-10",
+        "note": "2026-10-10: Bucket A citations job done (c6bfbf4): JPL official site, EPPP categories (Premier League), independent advice (PL Parent Hub support page). Factual claims only, each source different. A to C."
       }
     },
     {
@@ -2339,9 +2344,9 @@
     "avgVoice": 50,
     "avgSlop": 38,
     "buckets": {
-      "A": 8,
+      "A": 3,
       "B": 23,
-      "C": 63
+      "C": 68
     },
     "expertDemand": {
       "academy-coach": 8,
@@ -2372,6 +2377,10 @@
     "chrisRobinson2026_10_10": {
       "articles": 14,
       "note": "Chris Robinson (Head of Academy Recruitment, Southampton FC) interview published plus one ExpertQA box on 14 pages, each linking back (internal links only). Graham's rule the same day: a genuine quote from the expert a page needed counts as the B fix, so every B page that got a box is now C (agent guide with the caveat that a registered agent would still add most). Five of the 14 were already A or C. Scout demand down from 11 to 1 (football-development-centres-in-london: needs a travel story, which he doesn't cover). Templated club guides (Brentford, Villa, Spurs, PL list) are C on voice but still need club-specific detail. Two line fixes to match him (trial length, scouts approach the coach first). Watch list to ~2026-10-24."
+    },
+    "citations2026_10_10": {
+      "articles": 5,
+      "note": "Bucket A citations on five pages (14 links, factual claims only, authoritative sources, most already cited elsewhere on the site): how-academy-football-works, jpl-and-academy-football, is-private-football-coaching-worth-it, academy-categories-explained, chelsea-fc-development-centre-guide. All five A to C. Left A: how-football-scouts-identify-players (in its watch window to ~24 Oct), best-shin-pads-for-kids-football (gear, exempt), football-development-centres-near-me (already link-heavy, club pages)."
     }
   }
 }
