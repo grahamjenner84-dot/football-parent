@@ -223,7 +223,16 @@ other recruits above are still open.
 - Left at A: how-football-scouts-identify-players (watch window to ~24 Oct),
   best-shin-pads-for-kids-football (gear, exempt), football-development-centres-near-me
   (already link-heavy).
-- New totals: **94 articles, A = 3, B = 23, C = 68.**
+- Accuracy fixes the same day: researching the sources turned up five errors
+  on these pages, all corrected (one commit each): the academy-categories
+  travel-rule example (U9-U11 one-hour limit applies to every category) and
+  "audited every year"; the private-coaching FAQ that said 1-to-1 beats small
+  groups for decision-making, against its own article, plus an em dash;
+  "FA-registered academies" (academies are licensed under the EPPP); Premier
+  League 2 listed separately from U21; Chelsea's tiers said to run "at
+  Cobham". Worth repeating on future citation passes: checking a page's facts
+  against sources is where the real value is, more than the links.
+- New totals: **94 articles, A = 3, B = 23, C = 68; voice 50, slop 37.**
 
 ## How to extend this next time
 

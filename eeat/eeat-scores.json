@@ -788,11 +788,11 @@
       "slug": "is-private-football-coaching-worth-it",
       "category": "football-development",
       "url": "/football-development/is-private-football-coaching-worth-it",
-      "words": 2043,
+      "words": 2052,
       "callouts": 1,
       "isInterview": false,
       "citations": 5,
-      "citationsPer1000": 2.45,
+      "citationsPer1000": 2.44,
       "internalLinks": 18,
       "mechanical": {
         "overall": 86,
@@ -802,11 +802,11 @@
       },
       "semantic": {
         "voice": 52,
-        "slop": 46,
+        "slop": 44,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Bucket A citations job done (81707e4): DBS for self-employed coaches (GOV.UK), UEFA C (England Football), unstructured play and decision-making (2026 scoping review, PMC), overtraining and burnout (AAP clinical report). Factual claims only, each source different. A to C."
+        "note": "2026-10-10: Bucket A citations job done (81707e4): DBS for self-employed coaches (GOV.UK), UEFA C (England Football), unstructured play and decision-making (2026 scoping review, PMC), overtraining and burnout (AAP clinical report). Factual claims only, each source different. A to C. Same day: FAQ on 1-to-1 vs small group corrected to 'Often no' (it contradicted the article) and the one em dash removed."
       }
     },
     {
@@ -862,11 +862,11 @@
       "slug": "chelsea-fc-development-centre-guide",
       "category": "academy-pathway",
       "url": "/academy-pathway/chelsea-fc-development-centre-guide",
-      "words": 1919,
+      "words": 1917,
       "callouts": 1,
       "isInterview": false,
       "citations": 4,
-      "citationsPer1000": 2.08,
+      "citationsPer1000": 2.09,
       "internalLinks": 17,
       "mechanical": {
         "overall": 78,
@@ -880,7 +880,7 @@
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Bucket A citations job done (e07bf5e): Cobham training base and U9 academy start (chelseafc.com). Factual claims only, each source different. A to C."
+        "note": "2026-10-10: Bucket A citations job done (e07bf5e): Cobham training base and U9 academy start (chelseafc.com). Factual claims only, each source different. A to C. Same day: Summary no longer says the Foundation tiers run 'at Cobham' (the body says satellite venues)."
       }
     },
     {
@@ -1082,11 +1082,11 @@
       "slug": "academy-categories-explained",
       "category": "academy-pathway",
       "url": "/academy-pathway/academy-categories-explained",
-      "words": 1981,
+      "words": 1995,
       "callouts": 2,
       "isInterview": true,
       "citations": 3,
-      "citationsPer1000": 1.51,
+      "citationsPer1000": 1.5,
       "internalLinks": 11,
       "mechanical": {
         "overall": 83,
@@ -1100,14 +1100,14 @@
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Bucket A citations job done (ac155a3): 90-minute travel rule (Premier League Youth Development Rules 2025-26). Factual claims only, each source different. A to C."
+        "note": "2026-10-10: Bucket A citations job done (ac155a3): 90-minute travel rule (Premier League Youth Development Rules 2025-26). Factual claims only, each source different. A to C. Same day: travel-rule example corrected (U12-U16 and 90 minutes; the U9-U11 one-hour limit applies to every category) and FAQ now says audited every year."
       }
     },
     {
       "slug": "how-academy-football-works",
       "category": "academy-pathway",
       "url": "/academy-pathway/how-academy-football-works",
-      "words": 2684,
+      "words": 2690,
       "callouts": 4,
       "isInterview": true,
       "citations": 4,
@@ -1125,24 +1125,24 @@
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Bucket A citations job done (a980ede): EPPP (Premier League), Category contact time (PL Parent Hub), relative age effect (PMC study of 1,003 academy players), bio-banding (PL elite performance page). Factual claims only, each source different. A to C."
+        "note": "2026-10-10: Bucket A citations job done (a980ede): EPPP (Premier League), Category contact time (PL Parent Hub), relative age effect (PMC study of 1,003 academy players), bio-banding (PL elite performance page). Factual claims only, each source different. A to C. Same day: Premier League 2 no longer listed separately from U21 (it is the U21 league)."
       }
     },
     {
       "slug": "jpl-and-academy-football",
       "category": "parent-guides",
       "url": "/parent-guides/jpl-and-academy-football",
-      "words": 2455,
+      "words": 2461,
       "callouts": 2,
       "isInterview": false,
       "citations": 4,
       "citationsPer1000": 1.63,
       "internalLinks": 18,
       "mechanical": {
-        "overall": 89,
+        "overall": 88,
         "experience": 85,
         "expertise": 100,
-        "authoritativeness": 79
+        "authoritativeness": 78
       },
       "semantic": {
         "voice": 58,
@@ -1150,7 +1150,7 @@
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-10-10",
-        "note": "2026-10-10: Bucket A citations job done (c6bfbf4): JPL official site, EPPP categories (Premier League), independent advice (PL Parent Hub support page). Factual claims only, each source different. A to C."
+        "note": "2026-10-10: Bucket A citations job done (c6bfbf4): JPL official site, EPPP categories (Premier League), independent advice (PL Parent Hub support page). Factual claims only, each source different. A to C. Same day: 'FA-registered academies do not charge for trials' corrected to 'Professional club academies operating under the EPPP do not normally charge for trials'."
       }
     },
     {
@@ -2342,7 +2342,7 @@
   "semanticSummary": {
     "reviewed": 94,
     "avgVoice": 50,
-    "avgSlop": 38,
+    "avgSlop": 37,
     "buckets": {
       "A": 3,
       "B": 23,
@@ -2380,7 +2380,7 @@
     },
     "citations2026_10_10": {
       "articles": 5,
-      "note": "Bucket A citations on five pages (14 links, factual claims only, authoritative sources, most already cited elsewhere on the site): how-academy-football-works, jpl-and-academy-football, is-private-football-coaching-worth-it, academy-categories-explained, chelsea-fc-development-centre-guide. All five A to C. Left A: how-football-scouts-identify-players (in its watch window to ~24 Oct), best-shin-pads-for-kids-football (gear, exempt), football-development-centres-near-me (already link-heavy, club pages)."
+      "note": "Bucket A citations on five pages (14 links, factual claims only, authoritative sources, most already cited elsewhere on the site): how-academy-football-works, jpl-and-academy-football, is-private-football-coaching-worth-it, academy-categories-explained, chelsea-fc-development-centre-guide. All five A to C. Left A: how-football-scouts-identify-players (in its watch window to ~24 Oct), best-shin-pads-for-kids-football (gear, exempt), football-development-centres-near-me (already link-heavy, club pages). The research also found five factual or wording errors on these pages; all five were fixed the same day (travel-rule example and audit frequency, 1-to-1 FAQ and an em dash, 'FA-registered academies', Premier League 2 listed twice, Chelsea tiers 'at Cobham')."
     }
   }
 }
