@@ -1363,3 +1363,12 @@ Stocking filler bullet "A boot cleaning brush": the tagged Amazon search link re
 Published 10 Oct 2026: `/parent-guides/chris-robinson-football-scout-interview`, category Parent Guides. Expert Q&A with Chris Robinson, Head of Academy Recruitment at Southampton FC (ex-Head of Integration Recruitment, Chelsea FC Academy, 11+ years; author of *The Scouting Game*), ten questions: what a scout notices first, how trials really run, getting seen from grassroots, scout cards and genuine approaches, development centres vs the academy, recruitment age, coming back after release, parent behaviour, agents, one piece of advice. Same format as the Matt Baxter interview. Added to `lib/routes.ts` and the `/parent-guides` index. No callouts added to other articles yet; candidate pages are listed under his entry in `expert-quotes.md`.
 - Same day, before publish: Amazon link to his book *The Scouting Game* added (as promised to Chris), in the About bio and as a closing line under Final Thoughts. Swapped the same day for the product link Graham supplied: `/dp/1801509247?tag=footballpar09-21`.
 - Same day: Chris's Instagram (@the_scouting_game) linked from the About bio, the Final Thoughts closing line and the Editor's Note on `/parent-guides/chris-robinson-football-scout-interview`.
+
+## Chris Robinson quotes on two pages (2026-10-10)
+
+One `<ExpertQA>` photo box per page, an excerpt of his answer (exact words, cut not reworded) with "Read Chris's full interview" linking to `/parent-guides/chris-robinson-football-scout-interview`. Internal link only, no Instagram (Graham's rule for quote boxes, recorded in `expert-quotes.md`). Additive only. Neither page had an expert quote before.
+
+- `/academy-pathway/how-to-find-a-football-agent-for-your-child`: "When Agents Become Relevant", after the scholarship stage paragraph. Q9, formal representation from the year before the scholarship decision (under 16), and people "masquerading as agents" who are not FIFA registered. `678e0f8`.
+- `/parent-guides/are-football-development-centres-worth-it`: "The Honest Caveats", after "Progression to the academy is far from guaranteed". Q5, some centres have very little contact with the main academy and can be commercial schemes; check the link and track record. `6eec9ff`.
+
+Watch both until ~24 Oct. Queued: `what-age-do-football-academies-recruit` (Q6, recruitment ages and late entry), from ~20 Oct when its 9 Oct FAQ watch ends.

@@ -1,5 +1,15 @@
 # Expert quote library
 
+**Link rule for `<ExpertQA>` / `<ExpertOpinion>` boxes (Graham, 2026-10-10):
+internal links only.** A box links back to the expert's interview on our site
+(`sourceHref`) and nothing else: no `profileHref` to their Instagram or
+website, and no outbound link in the trailing sentence. Their own links belong
+in the interview article itself (About bio, closing line, Editor's Note), not
+in quote boxes on other pages. The one exception is Paul Barry, whose 18 boxes
+link to footballdna.co.uk on purpose: Graham is building a working
+relationship with Football DNA. Don't add that exception for anyone else
+unless Graham asks.
+
 Reusable `<ExpertOpinion>` material and a running log of pending/answered
 expert-quote requests. Check "Available quotes" before asking Graham to
 contact an expert for a new one — real material that already exists beats a
@@ -546,8 +556,6 @@ answers):
 name="Matt Baxter"
 role="Youth Athlete Mindset Coach"
 bio="A youth athlete mindset coach and parent who works one to one with young athletes aged 8 to 18, across football and other sports and from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
-profileHref="https://www.instagram.com/elitemindset_coaching/"
-profileLabel="Instagram"
 ```
 Fit note from his about-me: excellent match for confidence, pressure, mistakes,
 enjoyment and quitting (Q2-Q8). His focus is helping current athletes thrive IN
@@ -597,8 +605,6 @@ answers):
 name="Alfonso Carter"
 role="First-team physiotherapist at Forest Green Rovers and former professional footballer"
 bio="Alfonso Carter is a HCPC-registered physiotherapist (MCSP) and former professional footballer of 15+ years, currently first-team physiotherapist at Forest Green Rovers, with additional qualifications in strength and conditioning. Founder of Resilient Physio."
-profileHref="https://www.resilientphysiotherapy.co.uk"
-profileLabel="Resilient Physio"
 ```
 Credential note (Graham, 2026-09-23): Alfonso ("Alfie") is currently first-team
 physio at Forest Green Rovers, a named professional club, which is a much
@@ -650,7 +656,7 @@ physio also does maturity assessment.
 below, sent to Chris instead). Full answers published as
 `/parent-guides/chris-robinson-football-scout-interview`
 (`content/parent-guides/chris-robinson-football-scout-interview.mdx`), the
-source of record for any excerpt. Not yet used as callouts anywhere. Follow the
+source of record for any excerpt. Placed 2026-10-10 as `<ExpertQA>` boxes, reuse count 1 each: Q9 (agents) in how-to-find-a-football-agent-for-your-child, Q5 (development centres) in are-football-development-centres-worth-it. Drafted, to show Graham again from ~20 Oct: Q6 (recruitment ages) in what-age-do-football-academies-recruit, "The 'Is It Too Late?' Question". Every other answer: 0. Follow the
 reuse rule (show Graham the full Q&A with the excerpt highlighted first).
 Credentials (from his own slide, June 2025): Head of Academy Recruitment,
 Southampton FC, Feb 2024 onwards; ex-Head of Integration Recruitment, Chelsea FC
@@ -666,8 +672,6 @@ Attribution scaffold:
 name="Chris Robinson"
 role="Head of Academy Recruitment, Southampton FC"
 bio="Head of Academy Recruitment at Southampton FC and, for more than 11 years before that, Head of Integration Recruitment at Chelsea FC's academy. Author of The Scouting Game (2025)."
-profileHref="https://www.instagram.com/the_scouting_game/"
-profileLabel="Instagram"
 ```
 Reusable lines and the articles they fit (each answer's full text is in the interview):
 - Q1 "Football is a simple game based on control, pass and move ... it will be
@@ -716,8 +720,6 @@ him before publishing; no web access this session to verify):
 name="David Hobson"
 role="Founder of the Professional Football Scouts Association (PFSA)"
 bio="David Hobson is the founder of the Professional Football Scouts Association (PFSA), which trains and qualifies football scouts. [confirm further background/years with him]"
-profileHref="https://www.thepfsa.co.uk"   [CONFIRM exact URL]
-profileLabel="PFSA"
 ```
 Send around 8 (each tagged with the article it feeds; Q5 is the reusable one):
 1. [what-happens-at-academy-trials, football-academy-trials-uk] Walk me through a
@@ -1438,8 +1440,6 @@ Attribution scaffold:
 name="The Girls United team"
 role="Girls United, London"
 bio="Girls United runs girls' football clubs and sessions in London and Mexico, including Play Like a Girl in South London."
-profileHref="https://www.instagram.com/girlsunitedfa/"
-profileLabel="Instagram"
 ```
 Strongest reusable answers: the less obvious barriers (confidence under the
 practical ones) for girls' football getting-started pages; "coaching from the
