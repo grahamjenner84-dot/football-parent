@@ -10,9 +10,18 @@
     "coverQuestion": "Should you tell them they were the *best* player?",
     "coverContext": "Mindset coach Matt Baxter on praise that backfires",
     "qas": [
-      { "q": "What's wrong with \"you were the best\"?", "a": "\"You were the best player out there\" feels lovely, but it teaches a child that their worth depends on *results*." },
-      { "q": "So what should I praise?", "a": "Praise effort, choices and *courage* instead … \"I loved how you kept demanding the ball after that missed chance.\"" },
-      { "q": "What else knocks their confidence?", "a": "When parents step in too quickly, the child never gets to discover that they can *cope*." }
+      {
+        "q": "What's wrong with \"you were the best\"?",
+        "a": "\"You were the best player out there\" feels lovely, but it teaches a child that their worth depends on *results*."
+      },
+      {
+        "q": "So what should I praise?",
+        "a": "Praise effort, choices and *courage* instead … \"I loved how you kept demanding the ball after that missed chance.\""
+      },
+      {
+        "q": "What else knocks their confidence?",
+        "a": "When parents step in too quickly, the child never gets to discover that they can *cope*."
+      }
     ],
     "quote": "On the day they're not the best, the *confidence* goes with it.",
     "cta": "Share this with your team's *parent* group",
@@ -30,9 +39,18 @@
     "coverQuestion": "How do you help a player who's stopped *improving*?",
     "coverContext": "Mindset coach Matt Baxter on players who've stalled",
     "qas": [
-      { "q": "Why do some players get stuck?", "a": "Ability is usually still developing underneath. What turns a plateau into a problem is how the child *interprets* it." },
-      { "q": "What's the simplest tool?", "a": "One of the simplest tools I use is the word *YET*. \"I can't beat that defender\" becomes \"I can't beat that defender yet.\"" },
-      { "q": "What helps day to day?", "a": "Pick one *specific* thing to work on for the next few weeks and notice small wins." }
+      {
+        "q": "Why do some players get stuck?",
+        "a": "Ability is usually still developing underneath. What turns a plateau into a problem is how the child *interprets* it."
+      },
+      {
+        "q": "What's the simplest tool?",
+        "a": "One of the simplest tools I use is the word *YET*. \"I can't beat that defender\" becomes \"I can't beat that defender yet.\""
+      },
+      {
+        "q": "What helps day to day?",
+        "a": "Pick one *specific* thing to work on for the next few weeks and notice small wins."
+      }
     ],
     "quote": "Success leaves clues, and they can be *reapplied* to the new challenge.",
     "cta": "Send this to your *coaching* WhatsApp group",
@@ -51,9 +69,18 @@
     "coverQuestion": "Why do some kids *crumble* after one mistake?",
     "coverContext": "Mindset coach Matt Baxter on bouncing back mid-game",
     "qas": [
-      { "q": "Is it about talent?", "a": "It rarely comes down to talent. It comes down to what the child does with the *next* moment." },
-      { "q": "What do the resilient ones know?", "a": "Young players who bounce back have learned that a mistake is an event, not a *verdict* on them." },
-      { "q": "How do they reset?", "a": "Notice the mistake, let it go, and put all their focus on the very next thing they can *control*." }
+      {
+        "q": "Is it about talent?",
+        "a": "It rarely comes down to talent. It comes down to what the child does with the *next* moment."
+      },
+      {
+        "q": "What do the resilient ones know?",
+        "a": "Young players who bounce back have learned that a mistake is an event, not a *verdict* on them."
+      },
+      {
+        "q": "How do they reset?",
+        "a": "Notice the mistake, let it go, and put all their focus on the very next thing they can *control*."
+      }
     ],
     "quote": "From the touchline, a parent influences more than they *realise*, mostly through their body language.",
     "cta": "Send this to a parent on the *touchline*",
@@ -71,9 +98,18 @@
     "coverQuestion": "Is a Category 1 academy always the *best* move?",
     "coverContext": "Ex-Arsenal and Crystal Palace coach Paul Barry on choosing an academy",
     "qas": [
-      { "q": "Is Category 1 right for every player?", "a": "every player's journey is *different*, and therefore it's not a \"one size fits all\" development approach." },
-      { "q": "What can a lower category club give?", "a": "Sometimes, registering for a lower category club develops more humility, *resilience* and greater inner drive and motivation." },
-      { "q": "Are development centres a real way in?", "a": "Both Southend United and Crystal Palace had, or have, very productive development centres … which genuinely gave boys *opportunities* to trial throughout each season." }
+      {
+        "q": "Is Category 1 right for every player?",
+        "a": "every player's journey is *different*, and therefore it's not a \"one size fits all\" development approach."
+      },
+      {
+        "q": "What can a lower category club give?",
+        "a": "Sometimes, registering for a lower category club develops more humility, *resilience* and greater inner drive and motivation."
+      },
+      {
+        "q": "Are development centres a real way in?",
+        "a": "Both Southend United and Crystal Palace had, or have, very productive development centres … which genuinely gave boys *opportunities* to trial throughout each season."
+      }
     ],
     "quote": "Some players embrace the *pressure* and challenges posed by a Premier League Category 1 academy",
     "cta": "Send this to a parent weighing up an *academy*",
@@ -91,9 +127,18 @@
     "coverQuestion": "What should parents focus on in the *early* years?",
     "coverContext": "Paul Barry, former Crystal Palace Foundation Phase head of coaching",
     "qas": [
-      { "q": "What's the parent's job?", "a": "they need to be there emotionally for their child, give encouragement and positive reinforcement, and, importantly, leave the *coaching* to the club's coaches." },
-      { "q": "What should parents stop doing?", "a": "The life lessons formed through these experiences should be where parents focus, rather than constantly *comparing* their child with others" },
-      { "q": "And if they get released?", "a": "a release shouldn't be thought of as the final moment in a young player's journey, but instead a crucial *learning* moment" }
+      {
+        "q": "What's the parent's job?",
+        "a": "they need to be there emotionally for their child, give encouragement and positive reinforcement, and, importantly, leave the *coaching* to the club's coaches."
+      },
+      {
+        "q": "What should parents stop doing?",
+        "a": "The life lessons formed through these experiences should be where parents focus, rather than constantly *comparing* their child with others"
+      },
+      {
+        "q": "And if they get released?",
+        "a": "a release shouldn't be thought of as the final moment in a young player's journey, but instead a crucial *learning* moment"
+      }
     ],
     "quote": "There are likely to be far more challenging and difficult moments compared to relative *successes*",
     "cta": "Send this to your team's *parent* WhatsApp group",
@@ -111,9 +156,18 @@
     "coverQuestion": "Signed by an academy. Can they still play for *you*?",
     "coverContext": "Paul Barry of Football DNA on academy and grassroots football together",
     "qas": [
-      { "q": "Can academy players still play grassroots?", "a": "The Premier League allows boys in academies from the age of U9s, U10s and U11s to play *grassroots* at the same time as academy football." },
-      { "q": "Why is that allowed?", "a": "to give the youngest players opportunities to retain *friendships* … and continue playing the game for social reasons." },
-      { "q": "So why don't more families do it?", "a": "hardly any parents that I've seen take up this opportunity, probably through fear of \"losing *face*\"" }
+      {
+        "q": "Can academy players still play grassroots?",
+        "a": "The Premier League allows boys in academies from the age of U9s, U10s and U11s to play *grassroots* at the same time as academy football."
+      },
+      {
+        "q": "Why is that allowed?",
+        "a": "to give the youngest players opportunities to retain *friendships* … and continue playing the game for social reasons."
+      },
+      {
+        "q": "So why don't more families do it?",
+        "a": "hardly any parents that I've seen take up this opportunity, probably through fear of \"losing *face*\""
+      }
     ],
     "quote": "be the \"better\" player where the level is not as high or *competitive*",
     "cta": "Send this to your club's *coaches* WhatsApp group",
@@ -132,9 +186,18 @@
     "coverQuestion": "What do coaches *really* look for in girls?",
     "coverContext": "The Girls United team on what matters beyond skill",
     "qas": [
-      { "q": "What do coaches look for beyond skill?", "a": "Coaches want players who have a willingness to *learn*, who are focused, and who pay attention." },
-      { "q": "What else matters?", "a": "A growth mindset matters a lot, as does being able to take *feedback* and actually put it into practice." },
-      { "q": "Who improves the most?", "a": "The players who improve most tend to show real *determination*, they keep working even when a session is hard or they're not getting it right straight away." }
+      {
+        "q": "What do coaches look for beyond skill?",
+        "a": "Coaches want players who have a willingness to *learn*, who are focused, and who pay attention."
+      },
+      {
+        "q": "What else matters?",
+        "a": "A growth mindset matters a lot, as does being able to take *feedback* and actually put it into practice."
+      },
+      {
+        "q": "Who improves the most?",
+        "a": "The players who improve most tend to show real *determination*, they keep working even when a session is hard or they're not getting it right straight away."
+      }
     ],
     "quote": "That combination of determination, communication and a genuine willingness to learn is what we see driving the biggest *improvements*.",
     "cta": "Send this to a parent of a girl who *plays*",
@@ -152,9 +215,18 @@
     "coverQuestion": "She's *talented*. So why is she holding back?",
     "coverContext": "The Girls United team on confidence in young girls",
     "qas": [
-      { "q": "Will confidence come if she keeps turning up?", "a": "Confidence doesn't just build on its own from *showing* up" },
-      { "q": "So what can a parent do?", "a": "Talk to her coach about it, as they can help build a purposeful *plan* to develop her confidence rather than leaving it to chance." },
-      { "q": "What's the most common parent mistake?", "a": "A big one is coaching from the *sideline*. It can contradict what the coach is asking for and distract the player" }
+      {
+        "q": "Will confidence come if she keeps turning up?",
+        "a": "Confidence doesn't just build on its own from *showing* up"
+      },
+      {
+        "q": "So what can a parent do?",
+        "a": "Talk to her coach about it, as they can help build a purposeful *plan* to develop her confidence rather than leaving it to chance."
+      },
+      {
+        "q": "What's the most common parent mistake?",
+        "a": "A big one is coaching from the *sideline*. It can contradict what the coach is asking for and distract the player"
+      }
     ],
     "quote": "It's also easy to start living through your daughter's game, and she can *feel* that.",
     "cta": "Send this to a parent on the *touchline*",
@@ -172,15 +244,208 @@
     "coverQuestion": "Why do girls *stop* turning up?",
     "coverContext": "The Girls United team on the barriers coaches don't see",
     "qas": [
-      { "q": "What's the barrier behind the practical ones?", "a": "*Confidence* is often the real barrier underneath the practical ones" },
-      { "q": "What does that look like?", "a": "some girls feel self-conscious about starting something new or don't have anyone in their family or *community* who plays." },
-      { "q": "And girls new to sport?", "a": "girls with no sporting background can feel like they're already *behind* before they start." },
-      { "q": "What does a good girls' club do?", "a": "Extra opportunities off the pitch, like events and activities that bring players and *families* together, are a good sign too." }
+      {
+        "q": "What's the barrier behind the practical ones?",
+        "a": "*Confidence* is often the real barrier underneath the practical ones"
+      },
+      {
+        "q": "What does that look like?",
+        "a": "some girls feel self-conscious about starting something new or don't have anyone in their family or *community* who plays."
+      },
+      {
+        "q": "And girls new to sport?",
+        "a": "girls with no sporting background can feel like they're already *behind* before they start."
+      },
+      {
+        "q": "What does a good girls' club do?",
+        "a": "Extra opportunities off the pitch, like events and activities that bring players and *families* together, are a good sign too."
+      }
     ],
     "quote": "It's also worth checking that staff genuinely understand women and girls in *sport*",
     "cta": "Send this to your club's girls' *coaches*",
     "followLine": "for a new *expert* answering coaches’ questions every week",
     "caption": "Most girls who drop out of football don't say why.\n\nThe Girls United team on the barriers under the practical ones (confidence, no one at home who plays, feeling behind before they start) and what a girls' club can do about it.\n\nThanks @girlsunitedfa. Full interview: link in bio.\n\n#girlsfootball #grassrootsfootball #footballcoach",
     "collab": "@girlsunitedfa"
+  },
+  {
+    "id": "chris-robinson-get-seen",
+    "label": "Chris Robinson 1/6: what gets your child seen (parents)",
+    "expert": "chris-robinson",
+    "article": "/parent-guides/chris-robinson-football-scout-interview",
+    "audience": "parents",
+    "theme": "where scouts actually look, and what gets a grassroots player seen",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "What actually gets your child *seen* by scouts?",
+    "coverContext": "Southampton academy recruitment head Chris Robinson on getting spotted",
+    "qas": [
+      {
+        "q": "Where does a scout start on a Saturday?",
+        "a": "If you are a scout and you are going out on a Saturday morning, for example, then you will probably start with the better leagues and the better *teams*."
+      },
+      {
+        "q": "So what's the best thing we can do?",
+        "a": "players should play as high a standard as they can, with and against the best players that they can, and get the best *coaching* available."
+      },
+      {
+        "q": "No academy near us. Now what?",
+        "a": "you can send clips in to the Head of Academy Recruitment, but bear in mind the distance *qualifications*."
+      },
+      {
+        "q": "Are showcase events worth it?",
+        "a": "The showcase events vary in quality, but the better run ones with a good *track* record do bring players to the attention of scouts."
+      }
+    ],
+    "quote": "This is the way they develop as players … much more likely to bring them to the attention of *scouts*.",
+    "caption": "Scouts don't search everywhere. On a Saturday morning they start with the better leagues and the better teams.\n\nChris Robinson, Head of Academy Recruitment at Southampton FC and formerly at Chelsea's academy for 11 years, on what actually gets a grassroots player noticed, and whether showcases are worth it.\n\nSend this to a parent who's wondering how scouting works.\n\nFull interview: link in bio.\n\n#footballparent #grassrootsfootball #youthfootball",
+    "collab": ""
+  },
+  {
+    "id": "chris-robinson-what-scouts-see",
+    "label": "Chris Robinson 2/6: what a scout looks for (coaches)",
+    "expert": "chris-robinson",
+    "article": "/parent-guides/chris-robinson-football-scout-interview",
+    "audience": "coaches",
+    "theme": "what scouts look for in a player, and how a player's parents can count",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "What does a scout *really* look for in your players?",
+    "coverContext": "Southampton academy recruitment head Chris Robinson on the first five minutes",
+    "qas": [
+      {
+        "q": "What does a scout notice first?",
+        "a": "Football is a simple game based on control, pass and *move*."
+      },
+      {
+        "q": "Does winning it back count?",
+        "a": "particularly if we include the desire to *win* the ball back in the \"move\" part."
+      },
+      {
+        "q": "Do a player's parents make a difference?",
+        "a": "if it is at all marginal, then the behaviour of a parent will be taken into *account*, for good or bad"
+      },
+      {
+        "q": "Has it ever cost a player?",
+        "a": "There have been occasions when I have felt the player was not good enough for us to put up with difficult parent *behaviour*."
+      }
+    ],
+    "quote": "People like me complicate it, I think, so we can earn a *living*!",
+    "followLine": "for academy experts answering *your* coaching questions every week",
+    "caption": "Control, pass and move. That's what an academy recruitment head is watching your players for.\n\nChris Robinson, Head of Academy Recruitment at Southampton FC and formerly at Chelsea's academy for 11 years, on what scouts notice first, and when a parent's behaviour counts against a player.\n\nSend this to your coaching WhatsApp group.\n\nFull interview: link in bio.\n\n#grassrootsfootball #footballcoach #youthfootball",
+    "collab": ""
+  },
+  {
+    "id": "chris-robinson-scout-or-agent",
+    "label": "Chris Robinson 3/6: is that scout or agent real (parents)",
+    "expert": "chris-robinson",
+    "article": "/parent-guides/chris-robinson-football-scout-interview",
+    "audience": "parents",
+    "theme": "telling a genuine scout or agent approach from a fake one",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "Is that scout or agent the *real* thing?",
+    "coverContext": "Southampton academy recruitment head Chris Robinson on approaches to parents",
+    "qas": [
+      {
+        "q": "Who should a scout speak to first?",
+        "a": "An approach from a scout must go to the team *coach* first, not directly to the parent."
+      },
+      {
+        "q": "How can I tell they're genuine?",
+        "a": "every scout must have a proper photo *ID* from their club and this must be shown to the team coach."
+      },
+      {
+        "q": "When can an agent represent a player?",
+        "a": "agents can only be formally representing players when that player is in the academic year coming up to their scholar decision, i.e. at under *16*."
+      },
+      {
+        "q": "What should I watch out for?",
+        "a": "there are a lot of people around masquerading as agents when they are not actually FIFA *registered* agents."
+      }
+    ],
+    "quote": "Don't get too *excited*. There is a long way to go.",
+    "caption": "A genuine scout goes to your child's coach first, with club photo ID. Not straight to you.\n\nChris Robinson, Head of Academy Recruitment at Southampton FC and formerly at Chelsea's academy for 11 years, on spotting a real scout, and when agents are even allowed to represent a young player.\n\nSend this to a parent whose child has just been approached.\n\nFull interview: link in bio.\n\n#footballparent #grassrootsfootball #youthfootball",
+    "collab": ""
+  },
+  {
+    "id": "chris-robinson-trials",
+    "label": "Chris Robinson 4/6: how trials really work (parents)",
+    "expert": "chris-robinson",
+    "article": "/parent-guides/chris-robinson-football-scout-interview",
+    "audience": "parents",
+    "theme": "how academy trials run now: weeks of assessment, not one big day",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "What really happens at an academy *trial*?",
+    "coverContext": "Southampton academy recruitment head Chris Robinson on how trials work now",
+    "qas": [
+      {
+        "q": "Do the big one-day trials still happen?",
+        "a": "Most better academies are moving away from the big set piece trials … They are very hit and *miss*."
+      },
+      {
+        "q": "So how are players assessed now?",
+        "a": "a recommended player will come in and be assessed whether they are ready for a trial over a few weeks, perhaps one night a week for six *weeks*"
+      },
+      {
+        "q": "And a formal trial?",
+        "a": "Most academies will have some sort of mid-trial review to give some *feedback*, and then the final decision at the conclusion of the eight weeks."
+      }
+    ],
+    "quote": "It can be very difficult for young players to walk into a dressing room where they don't know *anybody*",
+    "caption": "The big one-day academy trial is on its way out. The better academies now assess players over weeks.\n\nChris Robinson, Head of Academy Recruitment at Southampton FC and formerly at Chelsea's academy for 11 years, on how trials really run, from the first assessment nights to the final decision.\n\nSend this to a parent with a trial coming up.\n\nFull interview: link in bio.\n\n#footballparent #academytrials #youthfootball",
+    "collab": ""
+  },
+  {
+    "id": "chris-robinson-too-late",
+    "label": "Chris Robinson 5/6: is it too late (parents)",
+    "expert": "chris-robinson",
+    "article": "/parent-guides/chris-robinson-football-scout-interview",
+    "audience": "parents",
+    "theme": "recruitment age, late entry and coming back after release",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "Is it too *late* for my child?",
+    "coverContext": "Southampton academy recruitment head Chris Robinson on age and second chances",
+    "qas": [
+      {
+        "q": "What age do academies really recruit?",
+        "a": "The *priority* age for recruitment for most academies is 6 to 8."
+      },
+      {
+        "q": "Can older players still get in?",
+        "a": "Players can still jump across that gap right up to ages 17 and 18. However, it does become more *difficult*."
+      },
+      {
+        "q": "What if they've been released?",
+        "a": "many players do come back into the academy system having been released at younger ages. This is very *common*."
+      }
+    ],
+    "quote": "There are an infinite number of pathways and it is never too *late*.",
+    "caption": "Most academies recruit hardest at 6 to 8. That isn't the end of the story.\n\nChris Robinson, Head of Academy Recruitment at Southampton FC and formerly at Chelsea's academy for 11 years, on late entry and how common it is for released players to come back.\n\nSend this to a parent who thinks their child has missed the boat.\n\nFull interview: link in bio.\n\n#footballparent #grassrootsfootball #youthfootball",
+    "collab": ""
+  },
+  {
+    "id": "chris-robinson-development-centres",
+    "label": "Chris Robinson 6/6: development centres (parents)",
+    "expert": "chris-robinson",
+    "article": "/parent-guides/chris-robinson-football-scout-interview",
+    "audience": "parents",
+    "theme": "whether a development or foundation centre is really linked to the academy",
+    "coverEyebrow": "Football Parent asks",
+    "coverQuestion": "Is a development centre the same as the *academy*?",
+    "coverContext": "Southampton academy recruitment head Chris Robinson on development centres",
+    "qas": [
+      {
+        "q": "Is every development centre linked to an academy?",
+        "a": "some development centres have very little contact in practice with the main *academy*."
+      },
+      {
+        "q": "What about Foundation programmes?",
+        "a": "These are usually \"pay for play\" and they can work well … but they can also just be commercial *schemes*."
+      },
+      {
+        "q": "How do I check?",
+        "a": "it is a matter of speaking to other parents and to the centre themselves to check what their *connection* is to the academy"
+      }
+    ],
+    "quote": "The term \"development centre\" covers a *range* of activities.",
+    "caption": "A development centre invite doesn't mean the academy is watching.\n\nChris Robinson, Head of Academy Recruitment at Southampton FC and formerly at Chelsea's academy for 11 years, on which centres are a real pathway and which are commercial schemes.\n\nSend this to a parent weighing up a paid development centre.\n\nFull interview: link in bio.\n\n#footballparent #grassrootsfootball #youthfootball",
+    "collab": ""
   }
 ]
