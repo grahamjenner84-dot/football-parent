@@ -283,7 +283,7 @@
     var r = 44; logoCircle(ctx, S.leftX + r, ay + r, r, t.accent, images.logoImg, data.name);
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = "400 42px 'Anton'"; ctx.fillStyle = t.text;
     ctx.fillText(creditName(data).toUpperCase(), S.leftX + 2 * r + 22, ay + 40);
-    var subLine = data.person ? ((data.name || '') + ' · ' + (data.handle || '')) : ((data.handle || '') + ' · WITH ' + myHandle(data.platform));
+    var subLine = data.person ? [data.name, data.handle].filter(Boolean).join(' · ') : ((data.handle || '') + ' · WITH ' + myHandle(data.platform));
     ctx.font = "600 22px 'Spline Sans Mono'"; ctx.fillStyle = t.sub; ctx.fillText(subLine.toUpperCase(), S.leftX + 2 * r + 22, ay + 74);
   }
 
@@ -429,7 +429,7 @@
     var r = 44; logoCircle(ctx, S.leftX + r, ay + r, r, t.accent, images.logoImg, data.name);
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = "400 42px 'Anton'"; ctx.fillStyle = t.text;
     ctx.fillText(creditName(data).toUpperCase(), S.leftX + 2 * r + 22, ay + 40);
-    var subLine = data.person ? ((data.name || '') + ' · ' + (data.handle || '')) : ((data.handle || '') + ' · WITH ' + myHandle(data.platform));
+    var subLine = data.person ? [data.name, data.handle].filter(Boolean).join(' · ') : ((data.handle || '') + ' · WITH ' + myHandle(data.platform));
     ctx.font = "600 22px 'Spline Sans Mono'"; ctx.fillStyle = t.sub; ctx.fillText(subLine.toUpperCase(), S.leftX + 2 * r + 22, ay + 74);
   }
   function followPill(ctx, cx, cy, t, fs, platform) {

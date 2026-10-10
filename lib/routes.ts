@@ -118,6 +118,7 @@ export const routes = [
   '/parent-guides/how-to-become-a-football-coach',
   '/parent-guides/futurefit-football-dna-interview-part-2',
   '/parent-guides/matt-baxter-young-footballer-mindset-interview',
+  '/parent-guides/chris-robinson-football-scout-interview',
   '/parent-guides/jpl-martin-brock-interview-part-1',
   '/parent-guides/jpl-martin-brock-interview-part-2',
   '/parent-guides/best-football-stats-apps',

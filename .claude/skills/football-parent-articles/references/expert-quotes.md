@@ -645,6 +645,58 @@ actually assessed and measured in practice) is a sports-scientist / S&C
 question more than a physiotherapist one, so it may stay open unless this
 physio also does maturity assessment.
 
+### Chris Robinson (Southampton FC) — academy recruitment head, tag: scouting, recruitment, trials, development centres, release, agents
+**ANSWERED 2026-10-10: all 10 questions** (largely the David Hobson question set
+below, sent to Chris instead). Full answers published as
+`/parent-guides/chris-robinson-football-scout-interview`
+(`content/parent-guides/chris-robinson-football-scout-interview.mdx`), the
+source of record for any excerpt. Not yet used as callouts anywhere. Follow the
+reuse rule (show Graham the full Q&A with the excerpt highlighted first).
+Credentials (from his own slide, June 2025): Head of Academy Recruitment,
+Southampton FC, Feb 2024 onwards; ex-Head of Integration Recruitment, Chelsea FC
+Academy, 11+ years; former coach incl. Manchester City and Portsmouth, UEFA B;
+former manager incl. Cheltenham Town and FA XI; FA Talent ID Levels 1-3;
+director, The Scouting Game Ltd (Nov 2023); author of *The Scouting Game*
+(Pitch Publishing, 2025). No Instagram handle or website confirmed yet.
+Headshot: `/images/people/chris-robinson.jpg` (Graham's photo, 2026-10-10).
+Attribution scaffold:
+```
+name="Chris Robinson"
+role="Head of Academy Recruitment, Southampton FC"
+bio="Head of Academy Recruitment at Southampton FC and, for more than 11 years before that, Head of Integration Recruitment at Chelsea FC's academy. Author of The Scouting Game (2025)."
+```
+Reusable lines and the articles they fit (each answer's full text is in the interview):
+- Q1 "Football is a simple game based on control, pass and move ... it will be
+  some bit of quality relating to these basics that attracts me."
+  [what-do-academy-coaches-look-for, how-football-scouts-identify-players]
+- Q2 big one-off trials "are very hit and miss"; better academies assess over
+  weeks, "perhaps one night a week for six weeks", then a formal eight week
+  trial with a mid-trial review. [what-happens-at-academy-trials,
+  football-academy-trials-uk]
+- Q3 "play as high a standard as they can ... with and against the best
+  players"; scouts "start with the better leagues and the better teams";
+  showcases vary, research the track record. [how-to-get-scouted-for-football,
+  football-trials-near-me]
+- Q4 genuine scouts carry club photo ID and approach the team coach first, not
+  the parent. [how-football-scouts-identify-players, safeguarding sections]
+- Q5 (REUSABLE across club development-centre guides) "development centre"
+  covers a range; some Foundation/community programmes "have very little
+  contact in practice with the main Academy" and can "just be commercial
+  schemes"; ask other parents about the link and track record.
+  [development-centres-vs-academies, are-football-development-centres-worth-it,
+  club DC guides]
+- Q6 priority recruitment age 6 to 8; first signing at under 9; players "can
+  still jump across that gap right up to ages 17 and 18".
+  [what-age-do-football-academies-recruit]
+- Q7 coming back after release "is very common ... it is never too late".
+  [understanding-academy-release]
+- Q8 marginal players: parent behaviour "will be taken into account".
+  [biggest-football-parent-mistakes]
+- Q9 formal representation only from the year before the scholarship decision
+  (under 16); people "masquerading as agents" who are not FIFA registered.
+  [how-to-find-a-football-agent-for-your-child]
+- Q10 "Don't get too excited. There is a long way to go."
+
 ### David Hobson (PFSA) — scout / scouting educator, tag: scouting, recruitment, trials, development centres
 Drafted 2026-09-23. Graham emailed David Hobson, founder of the PFSA
 (Professional Football Scouts Association), 2026-09-23. Awaiting reply.
