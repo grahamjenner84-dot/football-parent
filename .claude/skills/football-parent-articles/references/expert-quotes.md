@@ -656,7 +656,7 @@ physio also does maturity assessment.
 below, sent to Chris instead). Full answers published as
 `/parent-guides/chris-robinson-football-scout-interview`
 (`content/parent-guides/chris-robinson-football-scout-interview.mdx`), the
-source of record for any excerpt. Not yet used as callouts anywhere. Follow the
+source of record for any excerpt. Placed 2026-10-10 as `<ExpertQA>` boxes, reuse count 1 each: Q9 (agents) in how-to-find-a-football-agent-for-your-child, Q5 (development centres) in are-football-development-centres-worth-it. Approved and queued: Q6 (recruitment ages) in what-age-do-football-academies-recruit, "The 'Is It Too Late?' Question", from ~20 Oct. Every other answer: 0. Follow the
 reuse rule (show Graham the full Q&A with the excerpt highlighted first).
 Credentials (from his own slide, June 2025): Head of Academy Recruitment,
 Southampton FC, Feb 2024 onwards; ex-Head of Integration Recruitment, Chelsea FC
