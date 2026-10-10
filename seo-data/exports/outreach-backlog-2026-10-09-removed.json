@@ -1,0 +1,154 @@
+[
+  {
+    "url": "https://www.juniorgrassrootshub.com/guides/junior-football-kit-guide",
+    "reason": "Content check rejected: no outbound links and not an article (site guide page)"
+  },
+  {
+    "url": "https://www.juniorgrassrootshub.com/resources/what-to-expect-first-season",
+    "reason": "Content check rejected: thin resource page with no outbound links"
+  },
+  {
+    "url": "https://scawthorpescorpionsjfc.co.uk/ideal-football-presents-for-football-mad-kids/",
+    "reason": "Content check rejected: no outbound links, not an article"
+  },
+  {
+    "url": "https://harboroughtownfc.org/guidance-for-use-of-shin-pads-in-grassroots-football/",
+    "reason": "Content check rejected: club information page, not a news or blog post"
+  },
+  {
+    "url": "https://merseyjuniorsfc.co.uk/what-football-kit-does-my-child-need/",
+    "reason": "Unreadable (cookie/bot wall); JS read returned no content, rejected"
+  },
+  {
+    "url": "https://starfootballers.com/what-to-bring/",
+    "reason": "Content check rejected: 92-word site page"
+  },
+  {
+    "url": "http://www.kinetickidsacademy.co.uk/top-10-football-drills-for-2-3-year-olds",
+    "reason": "Content check rejected: no outbound links, not an article"
+  },
+  {
+    "url": "https://suburban-mum.com/ideas-to-keep-kids-active-in-the-garden/",
+    "reason": "Content check rejected: no author, date or first-person voice; reads like a site page"
+  },
+  {
+    "url": "https://propertyspoon.com/garden/best-football-training-equipment/",
+    "reason": "Content check rejected: only affiliate links; garden-goal affiliate competitor"
+  },
+  {
+    "url": "https://www.thefootballparent.co.uk/football-parent-advice",
+    "reason": "Content check rejected: thin page with no outbound links"
+  },
+  {
+    "url": "https://www.strikeracademy.co.uk/what-kind-of-clothing-should-my-child-wear-to-football-if-training-outdoors/",
+    "reason": "Content check rejected: only site-furniture links"
+  },
+  {
+    "url": "https://www.premier-education.com/news/5-football-practices-your-kids-will-enjoy-at-home/",
+    "reason": "Large national provider; only outbound link is its own modern slavery PDF; only contact route is a help-desk ticket form"
+  },
+  {
+    "url": "https://www.britishfootballschool.com/blogs/5-essential-football-drills-every-kid-should-know",
+    "reason": "UK audience unclear (international expansion, generic soccer copy); contact page unreadable"
+  },
+  {
+    "url": "https://www.cuddlefairy.com/post/what-football-equipment-do-you-need-for-a-youth-team",
+    "reason": "West of Ireland blog, and the post is a paid collaborative post"
+  },
+  {
+    "url": "https://bookpebble.co.uk/blog/the-parents-guide-to-football-classes-for-kids",
+    "reason": "B2B booking-platform blog; no contact beyond a sales demo booking link"
+  },
+  {
+    "url": "https://generationelite.co.uk/football-drills-for-kids/",
+    "reason": "Unreadable (no text returned)"
+  },
+  {
+    "url": "https://fantasyfootballer.co.uk/football-gifts-for-boys/",
+    "reason": "Duplicate domain: kept gifts-for-football-players instead"
+  },
+  {
+    "url": "https://awaydayparent.com/guides/kit-checklist",
+    "source": "sweep:football kit bag checklist kids",
+    "title": "The Youth Football Kit Checklist",
+    "context": "First-person parent kit checklist for a child's first season; notes shin pads are compulsory under the Laws of the Game; links out to Team Grassroots and No1Fan.Club. Independent parent content site (may see us as a peer/rival)",
+    "fit": 8,
+    "fit_note": "Their checklist says shin pads are compulsory but not how to size them; our shin pads guide covers sizing by height, sleeve vs slip-in and ankle guards for younger players",
+    "fp_page": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+    "angle": "Offer our shin pads guide as the further read on the shin pads line, beside their existing Team Grassroots and No1Fan links; open to a topical mutual if they ask",
+    "contact_name": "Away Day Parent (editor)",
+    "contact_email": "hello@awaydayparent.com",
+    "contact_url": "https://awaydayparent.com/contact",
+    "reason": "Audit: site has its own Shin Pads Guide in the nav, so the sizing gap in the fit note is false; peer content site would link its own guide"
+  },
+  {
+    "url": "https://www.homeukmagazine.co.uk/blog/how-to-create-a-family-football-pitch-in-your-garden-253",
+    "source": "sweep:kids football training at home garden ideas",
+    "title": "How To Create A Family Football Pitch In Your Garden",
+    "context": "Home and garden magazine post on setting up a garden football pitch; links to an artificial grass supplier; no byline",
+    "fit": 7,
+    "fit_note": "Their piece covers turf and space for a garden pitch but not the goal itself; our goals guide covers which goal sizes fit a garden and how to anchor one safely",
+    "fp_page": "/football-gear/best-football-goals-for-kids",
+    "angle": "Offer our goals guide as the next step after the pitch: choosing and safely anchoring the goal",
+    "contact_name": "Editor",
+    "contact_email": "editor@homeukmagazine.co.uk",
+    "contact_url": "https://www.homeukmagazine.co.uk/contact",
+    "reason": "Audit: old Grass Direct press release (quotes Euro 2016), no byline, archive content"
+  },
+  {
+    "url": "https://academyparent.com/learn/how-to-help-your-child-get-better-at-football/",
+    "source": "sweep:how to practise football at home with your child",
+    "title": "How to help your child get better at football",
+    "context": "Independent parent guide site (dated); cites Aspen Project Play, a GWU study and the FA 4-corner model. Content peer that also runs affiliate links, so likely sees us as a rival: pitch as a mutual",
+    "fit": 6,
+    "fit_note": "Their piece argues for kickabouts and home practice; our ball mastery drills for 7 and 8 year olds give parents a ready-made 10-minute routine for exactly that",
+    "fp_page": "/coaching/football-drills-for-7-and-8-year-olds",
+    "angle": "Peer pitch: our drills page as the practical follow-on to their home-practice section; open to a topical mutual",
+    "contact_name": "Academy Parent (editor)",
+    "contact_email": "hello@academyparent.com",
+    "contact_url": "https://academyparent.com/about/",
+    "reason": "Audit: direct competitor (independent academy parent guides with affiliate links), already links its own training-aid guides"
+  },
+  {
+    "url": "https://simpledrills.com/articles/how-to-coach-u7-football/",
+    "source": "sweep:under 7s football parents guide first season",
+    "title": "Coaching U7 football: the complete first-year guide",
+    "context": "UK FA Level 2 coach's (James Whitlock) bylined U7 coaching guide, updated Aug 2026; mentions match-weight balls; cites no other sites",
+    "fit": 6,
+    "fit_note": "Their U7 guide recommends match-weight balls but not the size; our footballs by age guide sets out size 3 for U7 and which balls hold up to weekly use",
+    "fp_page": "/football-gear/best-footballs-by-age",
+    "angle": "Offer our ball size guide as the reference next to their kit and ball line for new U7 coaches",
+    "contact_name": "James Whitlock (author)",
+    "contact_email": null,
+    "contact_url": "https://simpledrills.com/about/",
+    "reason": "Audit: fit note false; the match-ball line is their own Amazon affiliate widget, they run gear affiliates"
+  },
+  {
+    "url": "https://www.superleagueldn.com/blog/holiday-gift-guide",
+    "source": "sweep:gift guide for football loving kids blog",
+    "title": "Holiday gift guide for girls who love football!",
+    "context": "Girls Super League (London girls' league) blog gift guide, likely Dec 2022; 10 outbound links to books and shops; the same blog covers the Girls United Wembley takeover",
+    "fit": 5,
+    "fit_note": "Their gift guide covers books and memorabilia but no kit for playing at home; our goals guide covers garden goals for girls who practise between matches",
+    "fp_page": "/football-gear/best-football-goals-for-kids",
+    "angle": "League blog: lead with a feature angle (our Girls United interview, given their Girls United coverage) and offer the goals guide for this year's gift guide refresh",
+    "contact_name": "Girls Super League (blog editor)",
+    "contact_email": null,
+    "contact_url": "https://www.superleagueldn.com/contact",
+    "reason": "Audit: 2022 gift guide on a league blog, weak fit, no goal kit in the list"
+  },
+  {
+    "url": "https://www.arthurwears.com/2021/05/is-your-child-obsessed-with-football-gift-ideas.html",
+    "source": "sweep:football gifts for kids blog",
+    "title": "Is your child obsessed with football? (gift ideas and learning through football)",
+    "context": "UK early-years parent blogger (Sarah); 2021 post on football as a learning tool plus gift ideas; blog still active (Aug 2026 posts); links childledplay.co.uk",
+    "fit": 4,
+    "fit_note": "Their post uses football play at home for early learning; our goals guide covers small garden goals sized for under-7s",
+    "fp_page": "/football-gear/best-football-goals-for-kids",
+    "angle": "Low priority: older post; offer the goals guide as a practical add for the gift section",
+    "contact_name": "Sarah (Arthurwears)",
+    "contact_email": null,
+    "contact_url": "http://www.arthurwears.com/p/about-me.html",
+    "reason": "Audit: 2021 early-learning post that never mentions goals; fit invented"
+  }
+]

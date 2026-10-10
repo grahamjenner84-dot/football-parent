@@ -1,0 +1,67 @@
+[
+  {
+    "url": "https://www.soccershooters.com/post/does-my-child-need-shin-pads",
+    "source": "sweep:do kids need shin pads for football",
+    "title": "Does My Child Need Shin Pads?",
+    "context": "coaching provider's first-person post answering whether children need shin pads; cites FourFourTwo's shin pad review",
+    "fit": 8,
+    "fit_note": "Their post links FourFourTwo's general shin pad review; our guide is written for children, with kids' sizing by height and picks by age",
+    "fp_page": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+    "angle": "Suggest our kids-specific guide alongside (or as a parent-focused follow-on to) their FourFourTwo link",
+    "contact_name": "Soccer Shooters (owner)",
+    "contact_email": null,
+    "contact_url": "https://www.soccershooters.com/contact"
+  },
+  {
+    "url": "https://fantasyfootballer.co.uk/gifts-for-football-players/",
+    "source": "sweep:football gifts for kids blog",
+    "title": "Gifts for Football Players: Ideas for Kids Who Play Every Weekend",
+    "context": "Kent personalised-football-book maker's journal post (dated 1 Oct 2026); gift ideas for kids who play weekly, including a shin pads line citing IFAB Law 4 and a 'train at home' section",
+    "fit": 7,
+    "fit_note": "Their shin pads line cites Law 4 on pads being an appropriate size; our shin pads guide shows parents how to get that size right by height and brand",
+    "fp_page": "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+    "angle": "Offer our shin pads guide as the practical sizing read next to their IFAB citation; the goals guide fits their 'train at home' section as an alternative",
+    "contact_name": "Fantasy Footballer (editor)",
+    "contact_email": null,
+    "contact_url": "https://fantasyfootballer.co.uk/contact/"
+  },
+  {
+    "url": "https://www.supercamps.co.uk/blog/five-exciting-football-drills-for-kids-to-practice-at-home",
+    "source": "sweep:how to practise football at home with your child",
+    "title": "5 Exciting Football Drills For Kids To Practice at Home",
+    "context": "UK holiday camp provider's bylined blog post with home football drills; cites no other sites",
+    "fit": 6,
+    "fit_note": "Their drills list \"a wall or a goal (if you have one)\"; our goals guide helps parents pick a garden-sized goal for those finishing drills. Low priority: post undated, footer 2001-2022.",
+    "fp_page": "/football-gear/best-football-goals-for-kids",
+    "angle": "Pitch our goals guide as the further reading for parents setting up home practice",
+    "contact_name": "Super Camps (blog editor)",
+    "contact_email": "info@supercamps.co.uk",
+    "contact_url": "https://www.supercamps.co.uk/contact-us"
+  },
+  {
+    "url": "https://coachabilitygroup.com/post/5-practical-christmas-gifts-for-a-footballer",
+    "source": "sweep:gift guide for football loving kids blog",
+    "title": "5 Practical Christmas Gifts for a Footballer",
+    "context": "London private coaching marketplace's gift post; links Boot Buddy, Laceeze, Under Armour and a QuickPlay target net; no byline",
+    "fit": 6,
+    "fit_note": "Their list includes a QuickPlay target net for home practice; our goals guide compares garden goal sizes and pop-up vs folding goals for the same buyer",
+    "fp_page": "/football-gear/best-football-goals-for-kids",
+    "angle": "Offer our goals guide beside their target net pick as the 'which goal size' read, ahead of their Christmas refresh",
+    "contact_name": "Coachability (content team)",
+    "contact_email": null,
+    "contact_url": "https://coachabilitygroup.com/contact-us"
+  },
+  {
+    "url": "https://www.mumsmakelists.com/best-football-gift-ideas-for-boys-and-girls/",
+    "source": "sweep:football gifts for kids blog",
+    "title": "21 BEST gifts for football loving boys and girls",
+    "context": "Parent blogger's (founded 2011) first-person football gift list 'that aren't kit'; cites no sites; uses Amazon affiliate links; site does not accept guest posts (we are not offering one); contact email is obfuscated on the site",
+    "fit": 5,
+    "fit_note": "Their list includes a pop-up goal and target set for smaller gardens; our goals guide covers which goal sizes suit each age and garden. Low priority: site leans US.",
+    "fp_page": "/football-gear/best-football-goals-for-kids",
+    "angle": "Offer our goals guide as further reading under any goal-type gift in their list",
+    "contact_name": "Mums Make Lists (owner)",
+    "contact_email": null,
+    "contact_url": "https://www.mumsmakelists.com/contact/"
+  }
+]
