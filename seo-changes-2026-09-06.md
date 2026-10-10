@@ -1419,4 +1419,11 @@ Factual claims only (rules, ages, structures, research), one source per claim, n
 - `/academy-pathway/academy-categories-explained` (InstagramPromo 8 Oct overlaps): 90-minute travel radius to the PL Youth Development Rules 2025-26. `ac155a3`.
 - `/academy-pathway/chelsea-fc-development-centre-guide` (InstagramPromo 8 Oct overlaps): Cobham and U9 academy start to chelseafc.com. `e07bf5e`.
 
-Watch all five until ~24 Oct. Content issues the research turned up, not changed (Graham to decide): see the summary in the session; they are listed in `eeat/eeat-scores.json` notes only where relevant.
+Watch all five until ~24 Oct.
+
+Content issues the research turned up, not changed (Graham to decide):
+- academy-categories-explained: says Category 1 can approach an Under-11 more than 60 minutes away, but the one-hour rule for U9-U11 applies whatever the category (contradicts its own earlier line). FAQ "audited periodically" should be "every year".
+- is-private-football-coaching-worth-it: FAQ "Is 1-to-1 better than small group?" answers "Often yes" but its reasons (and the article) favour small groups. One em dash in the "Schedule already overloaded" card.
+- jpl-and-academy-football: "FA-registered academies do not charge for trials" has no rule behind it as worded (academies are licensed under the EPPP, not FA-registered).
+- how-academy-football-works: "U18, U21 and Premier League 2" lists PL2 twice (PL2 is the U21 league).
+- chelsea-fc-development-centre-guide: Summary says Foundation programmes run "at Cobham"; the body says satellite venues.
