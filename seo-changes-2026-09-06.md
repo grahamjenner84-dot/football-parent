@@ -1408,3 +1408,32 @@ Five more `<ExpertQA>` boxes, same format, interview link only, one commit per p
 - `/academy-pathway/tottenham-development-centres-explained`: "How Genuine Scouting Actually Works", after the business-card paragraph. Q4, the card half only. `06b8228`.
 
 Watch all five until ~24 Oct. Chris now has boxes on 14 pages. E-E-A-T record updated: every former B page with a box is now C under Graham's rule (`eeat/README.md`).
+
+## Source links on five Bucket A pages (2026-10-10)
+
+Factual claims only (rules, ages, structures, research), one source per claim, no source twice on a page, most already cited elsewhere on the site. Link added to existing words, no sentence reworded. One commit per page.
+
+- `/academy-pathway/how-academy-football-works` (**live traffic**; also edited 4 Oct and 8 Oct, so those windows overlap): EPPP (Premier League EPPP page), Category contact time (PL Parent Hub), relative age effect (PMC study), bio-banding (PL elite performance page). `a980ede`.
+- `/parent-guides/jpl-and-academy-football`: JPL official site, EPPP categories, PL Parent Hub independent advice page. `c6bfbf4`.
+- `/football-development/is-private-football-coaching-worth-it`: GOV.UK DBS guide for self-employed workers, England Football UEFA C page, 2026 scoping review on decision-making (PMC), AAP report on overtraining and burnout. `81707e4`.
+- `/academy-pathway/academy-categories-explained` (InstagramPromo 8 Oct overlaps): 90-minute travel radius to the PL Youth Development Rules 2025-26. `ac155a3`.
+- `/academy-pathway/chelsea-fc-development-centre-guide` (InstagramPromo 8 Oct overlaps): Cobham and U9 academy start to chelseafc.com. `e07bf5e`.
+
+Watch all five until ~24 Oct.
+
+Content issues the research turned up (fixed the same day on Graham's say-so, one commit each, listed below):
+- academy-categories-explained: says Category 1 can approach an Under-11 more than 60 minutes away, but the one-hour rule for U9-U11 applies whatever the category (contradicts its own earlier line). FAQ "audited periodically" should be "every year".
+- is-private-football-coaching-worth-it: FAQ "Is 1-to-1 better than small group?" answers "Often yes" but its reasons (and the article) favour small groups. One em dash in the "Schedule already overloaded" card.
+- jpl-and-academy-football: "FA-registered academies do not charge for trials" has no rule behind it as worded (academies are licensed under the EPPP, not FA-registered).
+- how-academy-football-works: "U18, U21 and Premier League 2" lists PL2 twice (PL2 is the U21 league).
+- chelsea-fc-development-centre-guide: Summary says Foundation programmes run "at Cobham"; the body says satellite venues.
+
+## Fixes to the five content issues found while sourcing (2026-10-10)
+
+One-line corrections, one commit each. Same pages and day as the source links above, so they share those watch windows (to ~24 Oct).
+
+- `/academy-pathway/academy-categories-explained`: travel-rule example corrected to Under-12 to Under-16 and 90 minutes, plus "At Under-9 to Under-11 the one-hour limit applies whatever the category." `89455d2`. FAQ "audited periodically" to "audited every year". `a01b03d`.
+- `/football-development/is-private-football-coaching-worth-it`: FAQ "Is 1-to-1 better than small group?" now answers "Often no, particularly for decision-making elements, which develop best in game-like situations with other players." `77c9b63`. Em dash in the "Schedule already overloaded" card replaced with a colon. `69a4fda`.
+- `/parent-guides/jpl-and-academy-football`: "FA-registered academies do not charge for trials" to "Professional club academies operating under the EPPP do not normally charge for trials." `8c119d9`.
+- `/academy-pathway/how-academy-football-works` (**live traffic**): "U18, U21 and Premier League 2 competitions" to "U18 and U21 competitions (including the U18 Premier League and Premier League 2)". `f2cf813`.
+- `/academy-pathway/chelsea-fc-development-centre-guide`: Summary no longer says the Foundation tiers run "at Cobham". `57f7ce4`.
