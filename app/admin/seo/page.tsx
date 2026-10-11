@@ -3398,7 +3398,8 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         (arrived from a search engine, no banner), Site link (another page of
         ours, no banner), Direct, Other. Unknown is sign-ups only: the coach
         declined analytics cookies, so nothing about their visit was kept.
-        Landing views are the Coach App page and its ad variants; sign-in views
+        Landing views are the Coach App page and its ad variants, plus ad
+        clicks landing on the equal playing time calculator; sign-in views
         are the app&rsquo;s own sign-in screen. Every number on this tab
         starts when the funnel went live ({sinceLabel}), visits included, so
         visits and sign-ups cover the same period. Earlier sign-ups are only
