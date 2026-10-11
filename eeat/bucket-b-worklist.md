@@ -52,9 +52,15 @@ Brentford, Villa, Spurs and PL-list guides still need club-specific detail.
 - **academy-pathway/pdc-vs-ptc-vs-rtc-explained** — *PTC section*: "When
   you've seen the same acronym mean different things at two clubs, what
   question exposed what the programme actually was?"
-- **academy-pathway/pre-academy-football** — *What to Expect*: "From inside a
+- ~~**academy-pathway/pre-academy-football**~~ — *What to Expect*: "From inside a
   pre-academy programme, what do those sessions actually give a 5–8-year-old
-  that a good grassroots team doesn't?"
+  that a good grassroots team doesn't?" Done 2026-10-11 (now C): box from the
+  parent author of *The Pre Academy Player* (Q3 + Q4, what it was like and a
+  typical week). A parent rather than a coach, but first-hand on exactly this.
+- Part-fill 2026-10-11, still open: how-much-training-is-too-much got the same
+  parent's "one club, not several" box (still needs the physio answer), and
+  how-much-does-academy-football-cost got their "only cost was petrol" box
+  (pre-academy only; the academy hidden-cost question is still open).
 - **academy-pathway/football-scholarships-uk** — *Do Scholarships Lead to
   Pro?*: "At intake with a 16-year-old scholar and their parents, what do you
   tell them about the odds, and how do the two years play out for the ones

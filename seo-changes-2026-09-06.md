@@ -1464,3 +1464,15 @@ Note from the same review: the drills page title tag change of 25 Sept (`90445e3
 ## New article: pre-academy parent interview (2026-10-11)
 
 Published `/parent-guides/pre-academy-football-parent-interview` (Parent Guides): 14-question interview with the anonymous parent author of *The Pre Academy Player* (Kindle, 2026), covering a Category 1 scout approach at an U6 festival, a typical week, cost, grassroots alongside, feedback, release and signing at a second club. Tagged affiliate link to the book (B0HCWW2793) and a link to @the_pre_academy_player. Added to the Parent Guides index. Commit `ac208dd`.
+
+## Pre Academy Player ExpertQA boxes on seven pages (2026-10-11)
+
+One `<ExpertQA>` box per page from the new pre-academy parent interview, each linking back to it ("Read the full interview"), each a different passage, placed mid-section with prose either side and clear of other boxes, banners and diagrams. Additive only. **Watch-window exception, Graham's call:** pre-academy-football and how-much-training-is-too-much changed 9 Oct, what-age-do-football-academies-recruit 10 Oct, how-much-does-academy-football-cost and understanding-academy-release 3 Oct, so movement on those to ~25 Oct can't be put down to this alone. Watch all seven to ~25 Oct.
+
+- `/academy-pathway/pre-academy-football` (Q3 + Q4, What to expect; closes its Bucket B gap) `3df3121`
+- `/football-development/how-much-training-is-too-much` (Q4, one club) `eccf7f8`
+- `/academy-pathway/how-much-does-academy-football-cost` (Q5, petrol) `feb375c`
+- `/academy-pathway/what-age-do-football-academies-recruit` (Q1 + Q10, Foundation Phase) `a281db9`
+- `/academy-pathway/can-academy-players-play-grassroots-football` (Q6) `76fef79`
+- `/academy-pathway/understanding-academy-release` (Q8, Emotional Impact) `7f5dfbf`
+- `/parent-guides/biggest-football-parent-mistakes` (Q13, Academy Obsession) `fc72a9c`

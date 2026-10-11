@@ -727,7 +727,16 @@ Reusable lines and the articles they fit (each answer's full text is in the inte
 **ANSWERED 2026-10-11: all 14 questions.** Published as
 `/parent-guides/pre-academy-football-parent-interview`
 (`content/parent-guides/pre-academy-football-parent-interview.mdx`), the source
-of record for any excerpt. Not yet placed anywhere else (reuse count 0 each).
+of record for any excerpt. Placed 2026-10-11 as `<ExpertQA>` boxes (Graham
+asked for all of them at once, each placed with prose either side, away from
+other boxes, banners and diagrams), reuse count 1 each: Q3 + Q4 paras 1-2
+(what it was like, typical week) in pre-academy-football; Q4 paras 3-4 (one
+club, not several) in how-much-training-is-too-much; Q5 (petrol) in
+how-much-does-academy-football-cost; Q1 first half + Q10 paras 2-3 in
+what-age-do-football-academies-recruit; Q6 in
+can-academy-players-play-grassroots-football; Q8 in
+understanding-academy-release; Q13 in biggest-football-parent-mistakes.
+Each passage used once. Unused so far: Q2, Q7, Q9, Q11, Q12, Q14.
 Follow the reuse rule (show Graham the full Q&A with the excerpt highlighted first).
 **Anonymous: never name them or guess a name, and don't gender the author
 (they/them). Their son is "he".** Credit as "The Pre Academy Player" / "Parent and author".
