@@ -16,10 +16,13 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const daysParam = Number(searchParams.get("days"));
     const days = Number.isFinite(daysParam) && daysParam > 0 ? daysParam : 30;
-    const [stats, bannerVariants, shareStats] = await Promise.all([
+    const [stats, calculatorSteps, bannerVariants, shareStats] = await Promise.all([
       getPageViewStats(days, {
         pathPrefixes: ["/football-parent-coach-app", "/coach-app"],
       }),
+      // The calculator's step events, which the page view counts above
+      // leave out (isCalculatorStepPath), shown on their own.
+      getPageViewStats(days, { pathPrefixes: ["/coach-app"], calculatorSteps: "only" }),
       // Not scoped by pathPrefixes: the click side is landings on the
       // Coach App page, but the impression side is views of the ARTICLES
       // carrying each banner, which are spread across the whole site.
@@ -30,7 +33,7 @@ export async function GET(req: Request) {
         error: err instanceof Error ? err.message : "Unknown error",
       })),
     ]);
-    return NextResponse.json({ ...stats, bannerVariants, shareStats });
+    return NextResponse.json({ ...stats, calculatorSteps, bannerVariants, shareStats });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return NextResponse.json({ error: message }, { status: 500 });
