@@ -248,10 +248,15 @@ export const FUNNEL_TRACKING_STARTED_AT = "2026-09-25T21:30:00Z";
 const LANDING_PREFIX = "/football-parent-coach-app";
 const SIGN_IN_PATH = "/coach-app/sign-in";
 const COACHING_PREFIX = "/coaching/";
+// The calculator is an SEO page, but Google Ads also send clicks to it
+// (from 2026-10-11). Those ad clicks count as landing views, like the ad
+// variants under LANDING_PREFIX; its organic views stay on the SEO side only.
+const CALCULATOR_PATH = "/coaching/equal-playing-time-calculator";
 
 export interface FunnelChannelRow {
   channel: CoachAppChannel;
-  /** Views of the Coach App landing pages (main page and ad variants). */
+  /** Views of the Coach App landing pages (main page and ad variants), plus
+   * Google Ads clicks landing on the equal playing time calculator. */
   landingViews: number;
   /** Views of the app's own sign-in screen. */
   signInViews: number;
@@ -271,7 +276,8 @@ export interface FunnelSignup {
 export interface CoachingArticleRow {
   path: string;
   views: number;
-  /** Views whose visit began from a search engine. */
+  /** Views whose visit began from a search engine (organic: ad clicks,
+   * which also arrive from Google, are grouped as Ads). */
   searchViews: number;
 }
 
@@ -436,6 +442,11 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   for (const row of landingRows) {
     if (isHuman(row.user_agent)) byChannel.get(channelForPageView(row))!.landingViews++;
   }
+  for (const row of coachingRows) {
+    if (row.path === CALCULATOR_PATH && isHuman(row.user_agent) && channelForPageView(row) === "Google Ads") {
+      byChannel.get("Google Ads")!.landingViews++;
+    }
+  }
   for (const row of signInRows) {
     if (isHuman(row.user_agent)) byChannel.get(channelForPageView(row))!.signInViews++;
   }
@@ -463,7 +474,9 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   const groupMap = new Map<string, number>();
   const articleMap = new Map<string, CoachingArticleRow>();
   for (const r of humanCoaching) {
-    const group = classifyReferrerHost(r.referrer_host).group;
+    // Same rule as getPageViewStats: a gclid marks an ad click, which the
+    // referrer alone would file under Search.
+    const group = r.gclid ? "Ads" : classifyReferrerHost(r.referrer_host).group;
     groupMap.set(group, (groupMap.get(group) ?? 0) + 1);
     let a = articleMap.get(r.path);
     if (!a) {
