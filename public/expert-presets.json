@@ -44,6 +44,17 @@
     "bio": "Chris is Head of Academy Recruitment at Southampton FC. Before that he spent more than 11 years as Head of Integration Recruitment at Chelsea's academy, and wrote The Scouting Game (2025)."
   },
   {
+    "id": "the-pre-academy-player",
+    "label": "The Pre Academy Player (anonymous parent author)",
+    "name": "Parent and author",
+    "handle": "@the_pre_academy_player",
+    "person": "The Pre Academy Player",
+    "role": "Parent and author",
+    "logoSrc": "/images/people/the-pre-academy-player-book.jpg",
+    "bioSrc": "/images/people/the-pre-academy-player-book.jpg",
+    "bio": "A parent whose son was scouted at an U6 festival aged four, released by a Category 1 club and later signed elsewhere. They wrote The Pre Academy Player for parents starting the journey."
+  },
+  {
     "id": "girls-united",
     "label": "Girls United team",
     "name": "Girls United",

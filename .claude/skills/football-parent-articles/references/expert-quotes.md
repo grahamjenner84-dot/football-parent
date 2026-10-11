@@ -723,6 +723,45 @@ Reusable lines and the articles they fit (each answer's full text is in the inte
   [how-to-find-a-football-agent-for-your-child]
 - Q10 "Don't get too excited. There is a long way to go."
 
+### The Pre Academy Player (anonymous parent author) — pre-academy parent experience, tag: pre-academy, scouting, release, grassroots, parent pressure
+**ANSWERED 2026-10-11: all 14 questions.** Published as
+`/parent-guides/pre-academy-football-parent-interview`
+(`content/parent-guides/pre-academy-football-parent-interview.mdx`), the source
+of record for any excerpt. Not yet placed anywhere else (reuse count 0 each).
+Follow the reuse rule (show Graham the full Q&A with the excerpt highlighted first).
+**Anonymous: never name them or guess a name, and don't gender the author
+(they/them). Their son is "he".** Credit as "The Pre Academy Player" / "Parent and author".
+Book: *The Pre Academy Player* (Kindle, 1 Sept 2026, author listed as "Unknown"),
+https://www.amazon.co.uk/dp/B0HCWW2793?tag=footballpar09-21 . Instagram:
+@the_pre_academy_player (https://www.instagram.com/the_pre_academy_player/).
+Image: book cover `/images/people/the-pre-academy-player-book.jpg` (no headshot).
+Attribution scaffold:
+```
+name="The Pre Academy Player"
+role="Parent and author"
+bio="A parent whose son was scouted at an U6 festival aged four, released by a Category 1 club and later signed elsewhere. Author of The Pre Academy Player (2026)."
+```
+Reusable lines and the articles they fit:
+- Q1 spotted by a Category 1 scout at an U6 festival aged four, playing a year up.
+  [what-age-do-football-academies-recruit, how-to-get-scouted-for-football]
+- Q3 "I always looked at it as free coaching with good coaches, and that's
+  essentially what it was." [pre-academy-football]
+- Q4 U6/U7 once a week for 1.5 hours, U8 twice a week; multiple clubs "could
+  hinder his development"; "I picked one club, the one he enjoyed the most, and
+  stuck with it." [pre-academy-football, how-much-training-is-too-much]
+- Q5 "the only real cost was petrol for the car." [pre-academy-football]
+- Q6 kept grassroots going: "That's the fun part, playing football with your
+  friends." [can-academy-players-play-grassroots-football]
+- Q7 very little feedback, and they didn't want any. [pre-academy-football]
+- Q8 telling him the Cat 1 club didn't want him back: "He cried his eyes out"
+  ... "He was a different boy after that day." [understanding-academy-release]
+- Q9 steered clear of pitch-side "gloating, gossiping and comparing".
+  [biggest-football-parent-mistakes]
+- Q10 "there is no rush"; going in very young "could potentially cause more
+  harm than good". [what-age-do-football-academies-recruit,
+  signs-your-child-is-ready-for-academy-football]
+- Q13 "Don't chase academy football. Let academy football chase you."
+
 ### David Hobson (PFSA) — scout / scouting educator, tag: scouting, recruitment, trials, development centres
 Drafted 2026-09-23. Graham emailed David Hobson, founder of the PFSA
 (Professional Football Scouts Association), 2026-09-23. Awaiting reply.

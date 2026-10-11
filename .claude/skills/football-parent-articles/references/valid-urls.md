@@ -157,6 +157,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /parent-guides/jpl-martin-brock-interview-part-1
 - /parent-guides/jpl-martin-brock-interview-part-2
 - /parent-guides/matt-baxter-young-footballer-mindset-interview
+- /parent-guides/pre-academy-football-parent-interview
 
 ## Suggested contextual links by topic
 
