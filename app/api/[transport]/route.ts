@@ -113,7 +113,7 @@ const handler = createMcpHandler(
       {
         title: "Get first-party page view stats",
         description:
-          "Actual page views for footballparent.co.uk from our own first-party tracking (the page_views Supabase table, football-parent-social project), not Search Console. Fires on every page load regardless of cookie consent state or traffic source, so unlike get_seo_report/inspect_page this includes direct, social and referral visits, not just Google search clicks. Returns total views for the window, a per-day breakdown (each with its own top paths and traffic-source groups), overall top paths, and overall source groups. Logging only started 2026-08-19, so a wide 'days' value won't return more history than that, it'll just come back thin for the earlier days in the window.",
+          "Actual page views for footballparent.co.uk from our own first-party tracking (the page_views Supabase table, football-parent-social project), not Search Console. Fires on every page load regardless of cookie consent state or traffic source, so unlike get_seo_report/inspect_page this includes direct, social and referral visits, not just Google search clicks. The game time calculator's step events (/coach-app/game-time-calculator/* and /coach-app/game-time/*) are not page views and are left out; get_coach_app_funnel returns them as calculatorSteps. Returns total views for the window, a per-day breakdown (each with its own top paths and traffic-source groups), overall top paths, and overall source groups. Logging only started 2026-08-19, so a wide 'days' value won't return more history than that, it'll just come back thin for the earlier days in the window.",
         inputSchema: {
           days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. Logging started 2026-08-19, so there's no data before that regardless of this value."),
         },
@@ -129,16 +129,17 @@ const handler = createMcpHandler(
       {
         title: "Get the Coach App funnel",
         description:
-          "The Coach App funnel on footballparent.co.uk, the same numbers as the 'Coach App funnel' tab on /admin/seo, all from the football-parent-social project. Returns: (1) channels: for each channel (Google Ads, Android app, Shared link, Article banner, Search, Site link, Direct, Other, Unknown) the views of the Coach App landing pages (the main page, its ad variants, and Google Ads clicks landing on /coaching/equal-playing-time-calculator), views of the app's sign-in screen, and sign-ups; (2) recent sign-ups, anonymous, each with its channel, the page signed up on, the page the visit began on and the banner or campaign; (3) SEO: views of the /coaching/ articles and how many came from organic search (Google Ads clicks are grouped as Ads, not Search); (4) sharing: taps on 'Send it to your child's coach', sent vs cancelled, and visits to the shared link; (5) the in-article banner test (impressions, clicks, CTR per creative/audience/placement); (6) landing and sign-in views by path and by day; (7) usage: whole-app counts the Coach App database posts every 10 minutes (latest snapshot plus each UK day's closing figures): total accounts, sign-ups today (and how many of them have set up a team), active today, active last 7 days, accounts with a team set up, finished matches, accounts with a finished match, and accounts by plan (paid, on trial, lapsed: trial ended, cancelled or old free; these three add up to total accounts), all time, counting accounts not devices and excluding Graham's own. Sign-ups are reported to this site by the Coach App itself as anonymous events (no account, email or name) and, like every number from this tool's funnel section, are counted from when the funnel went live (2026-09-25 21:30 UTC); earlier sign-ups exist only in the separate Coach App database, which this server has no access to by design.",
+          "The Coach App funnel on footballparent.co.uk, the same numbers as the 'Coach App funnel' tab on /admin/seo, all from the football-parent-social project. Returns: (1) channels: for each channel (Google Ads, Android app, Shared link, Article banner, Search, Site link, Direct, Other, Unknown) the views of the Coach App landing pages (the main page, its ad variants, and Google Ads clicks landing on /coaching/equal-playing-time-calculator), views of the app's sign-in screen, and sign-ups; (2) recent sign-ups, anonymous, each with its channel, the page signed up on, the page the visit began on and the banner or campaign; (3) SEO: views of the /coaching/ articles and how many came from organic search (Google Ads clicks are grouped as Ads, not Search); (4) sharing: taps on 'Send it to your child's coach', sent vs cancelled, and visits to the shared link; (5) the in-article banner test (impressions, clicks, CTR per creative/audience/placement); (6) landing and sign-in views by path and by day (page views only: the game time calculator's step events are left out here and returned separately as calculatorSteps, per path and per day: /coach-app/game-time-calculator/embed[/plan|/touchline|/full-time|/save-team] for the calculator inside /coaching/equal-playing-time-calculator, the same steps without /embed for the full-screen calculator, and /coach-app/game-time/* for the in-app tool); (7) usage: whole-app counts the Coach App database posts every 10 minutes (latest snapshot plus each UK day's closing figures): total accounts, sign-ups today (and how many of them have set up a team), active today, active last 7 days, accounts with a team set up, finished matches, accounts with a finished match, and accounts by plan (paid, on trial, lapsed: trial ended, cancelled or old free; these three add up to total accounts), all time, counting accounts not devices and excluding Graham's own. Sign-ups are reported to this site by the Coach App itself as anonymous events (no account, email or name) and, like every number from this tool's funnel section, are counted from when the funnel went live (2026-09-25 21:30 UTC); earlier sign-ups exist only in the separate Coach App database, which this server has no access to by design.",
         inputSchema: {
           days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. The banner test is clamped to when banners went live (2026-09-04) and sharing to 2026-09-25."),
         },
       },
       async ({ days }) => {
         const windowDays = days ?? 30;
-        const [funnel, views, banners] = await Promise.all([
+        const [funnel, views, calculatorSteps, banners] = await Promise.all([
           getCoachAppFunnel(windowDays),
           getPageViewStats(windowDays, { pathPrefixes: ["/football-parent-coach-app", "/coach-app"] }),
+          getPageViewStats(windowDays, { pathPrefixes: ["/coach-app"], calculatorSteps: "only" }),
           getBannerVariantStats(windowDays),
         ]);
         const result = {
@@ -153,6 +154,11 @@ const handler = createMcpHandler(
             totalViews: views.totalViews,
             byPath: views.topPaths,
             byDay: views.byDay.map((d) => ({ date: d.date, count: d.count })),
+          },
+          calculatorSteps: {
+            totalEvents: calculatorSteps.totalViews,
+            byPath: calculatorSteps.topPaths,
+            byDay: calculatorSteps.byDay.map((d) => ({ date: d.date, count: d.count, byPath: d.topPaths })),
           },
         };
         return { content: [{ type: "text", text: JSON.stringify(result) }] };

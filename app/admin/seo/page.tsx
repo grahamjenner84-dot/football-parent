@@ -27,6 +27,10 @@ import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & {
+  /** The game time calculator's step events (opened in the site's page,
+   * plan made, touchline, full time, save team), left out of the page view
+   * counts and shown on their own. */
+  calculatorSteps?: PageViewStats;
   bannerVariants?: BannerVariantStats;
   shareStats?: CoachAppShareStats | { error: string };
 };
@@ -2723,6 +2727,10 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
         tab, just filtered. /coach-app is served by the rewrite in
         vercel.json to the separate Coach App deployment, which pings the
         same /api/page-view endpoint, so both sides land in one table.
+        The game time calculator&rsquo;s steps are left out of these counts
+        and shown under Calculator steps below: each step is an event, not
+        a page view, and counted as views they doubled the calculator&rsquo;s
+        traffic and its Google Ads count.
       </SectionNote>
 
       {dateOptions.length > 0 && (
@@ -2746,6 +2754,21 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
       <PageViewsReport stats={stats} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       {stats.bannerVariants && (
         <BannerVariantsReport stats={stats.bannerVariants} selectedDate={selectedDate} />
+      )}
+      {stats.calculatorSteps && (
+        <>
+          <h3 style={styles.affiliateHeading}>Calculator steps</h3>
+          <SectionNote label="How to read this">
+            One row per step a coach reached in the game time calculator,
+            not page views. Under /embed is the calculator inside
+            /coaching/equal-playing-time-calculator (plan, touchline,
+            full-time, save-team); without /embed is the full-screen
+            calculator at /coach-app/game-time-calculator, whose opens are
+            in the page views above. /coach-app/game-time/ is the same tool
+            inside the app. Each step counts once per page load.
+          </SectionNote>
+          <PageViewsReport stats={stats.calculatorSteps} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+        </>
       )}
     </>
   );
