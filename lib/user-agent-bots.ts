@@ -40,6 +40,14 @@ const BOT_UA_PATTERNS = [
   // counts we care about. AdsBot-* is already caught by /bot/; this is the
   // variant that carries no "bot" in its name.
   /google-adwords/i,
+  // Google Play's store-listing checker, which fetches the privacy policy
+  // linked from the Play listing in bursts whenever a build or listing is
+  // reviewed (2026-10-12). Real users of the Android app send an ordinary
+  // Chrome/WebView UA, so this doesn't touch them.
+  /playstore-google/i,
+  // The same checker sometimes sends a bare "Google" UA. Anchored to the whole
+  // string so a real browser UA that merely mentions Google isn't caught.
+  /^google$/i,
 ];
 
 // Live write-time check (app/api/page-view/route.ts): a missing UA header
