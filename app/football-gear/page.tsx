@@ -128,6 +128,12 @@ export default function FootballGearPage() {
           description:
             "Christmas and birthday football gifts by age and budget, from stocking fillers to garden goals, and why boots are a risky surprise present.",
         },
+        {
+          title: "Best Football Rebounders for Kids",
+          href: "/football-gear/best-football-rebounders-for-kids",
+          description:
+            "Rebound boards vs net rebounders, which suits which age, and how to anchor one on grass, 3G or a patio.",
+        },
       ]}
       bottomContent={{
         title: "About Football Gear",
