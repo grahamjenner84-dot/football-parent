@@ -1476,3 +1476,7 @@ One `<ExpertQA>` box per page from the new pre-academy parent interview, each li
 - `/academy-pathway/can-academy-players-play-grassroots-football` (Q6) `76fef79`
 - `/academy-pathway/understanding-academy-release` (Q8, Emotional Impact) `7f5dfbf`
 - `/parent-guides/biggest-football-parent-mistakes` (Q13, Academy Obsession) `fc72a9c`
+
+## Shin pads: stock and dead-link fix (2026-10-12, link maintenance inside the watch window)
+
+`/football-gear/shin-pads/best-shin-pads-for-kids-football`, checked live on Amazon UK in Chrome. Not a ranking lever: links and one added pick, no prose or heading changes. (1) adidas Tiro links (quick picks and slip-in box) pointed at the S black/gold variant, which is sold out; moved to S white/black `B0D386HH7C` (£11.99, in stock in S, M and L). (2) "Nike Charge, black" (`B0BR5SH9DN`, the Youth M listing) is a dead page; replaced with the Youth M listing that still exists, `B0C36PLXQH`. (3) Nike Charge is low across the board (S 5 left, M 13, L 6), so added the Mitre Aircell ankle-sock pad `B0CNR8915F` (5,189 reviews, every size in stock) as the fallback in the ankle box. Quick-picks Charge left in place. Mercurial Lite (XS black) and JOGA sleeves in stock, unchanged. Page last changed 9 Oct, watch to ~26 Oct.
