@@ -83,6 +83,7 @@ export const routes = [
   // Football Gear
   '/football-gear/ag-vs-fg-boots',
   '/football-gear/best-football-boots-for-kids',
+  '/football-gear/best-football-boots-for-girls',
   '/football-gear/childrens-soft-ground-football-boots',
   '/football-gear/best-football-goals-for-kids',
   '/football-gear/best-football-gloves-for-winter-training',
