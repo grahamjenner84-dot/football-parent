@@ -69,6 +69,12 @@ export default function FootballGearPage() {
             "A general buying guide covering sole types (FG, AG, SG, moulded), fit, budget and how boot priorities change as your child gets older.",
         },
         {
+          title: "Best Football Boots for Girls",
+          href: "/football-gear/best-football-boots-for-girls",
+          description:
+            "Most girls' boots are unisex junior boots in different colours. Which ones are built on a female-specific fit, how sizing works and which sole to buy.",
+        },
+        {
           title: "AG vs FG Boots",
           href: "/football-gear/ag-vs-fg-boots",
           description:
