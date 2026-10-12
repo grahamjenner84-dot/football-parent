@@ -1476,3 +1476,7 @@ One `<ExpertQA>` box per page from the new pre-academy parent interview, each li
 - `/academy-pathway/can-academy-players-play-grassroots-football` (Q6) `76fef79`
 - `/academy-pathway/understanding-academy-release` (Q8, Emotional Impact) `7f5dfbf`
 - `/parent-guides/biggest-football-parent-mistakes` (Q13, Academy Obsession) `fc72a9c`
+
+## New article: football skins / base layers for kids (2026-10-12)
+
+Published `/football-gear/best-football-base-layers-for-kids` (Football Gear), "Football Skins for Kids: The Best Base Layers for Winter Football". Primary "childrens base layer football", secondary "football skins" (2,400/mo, 6,600 Nov peak), "football skins for juniors", "football base layer", "football thermals"; research in `seo-data/exports/base-layer-research-2026-10-12.md`, live SERP/AIO/PAA pull in `base-layer-article-serp-2026-10-12.json`. Page one is retailers plus two thin publisher roundups (soccerwares #5 on juniors, ericnixon #8 on football skins); AI Overviews on "football skins" and "football skins for juniors" cite retailers only. Angle: the Law 4 sleeve-colour and same-team-tights rule, skins vs thermals vs compression, sizing systems, snood ban (IFAB 2011) and Law 4.4 head covers. Picks are tagged Amazon UK search links (no ASINs verifiable here). Added to the Football Gear index. Inbound link from `best-football-gloves-for-winter-training` (one sentence, additive; that page changed 9 Oct, so this lands inside its watch window).

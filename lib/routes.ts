@@ -92,6 +92,7 @@ export const routes = [
   '/football-gear/veo-camera-alternatives',
   '/football-gear/best-football-gps-trackers-for-kids',
   '/football-gear/christmas-football-gifts-for-kids',
+  '/football-gear/best-football-base-layers-for-kids',
 
   // Girls Football
   '/girls-football/girls-academy-vs-grassroots-football',

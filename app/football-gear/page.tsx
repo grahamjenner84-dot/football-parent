@@ -87,6 +87,12 @@ export default function FootballGearPage() {
             "Choosing football gloves for winter training: what to look for, what to avoid, and which types work best for younger players in cold and wet conditions.",
         },
         {
+          title: "Football Skins for Kids: Best Base Layers",
+          href: "/football-gear/best-football-base-layers-for-kids",
+          description:
+            "Skins vs thermals, the match-day rule that base layers must match the shirt sleeve colour, sizing, leggings and snoods.",
+        },
+        {
           title: "Football Sizes by Age: Best Footballs For Kids",
           href: "/football-gear/best-footballs-by-age",
           description:
