@@ -1224,3 +1224,255 @@ Recheck around 13 Oct. If Matt Baxter is still not indexed, look at it again rat
 
 - `/academy-pathway/watford-development-centre-guide`: first first-hand note, added in "What a Season at the Advanced PDC Looks Like for a Family" from Graham's Q&A answers not used on Fulham or Leeds (foundations taking themselves too seriously, coach experience, spotting a good session, small groups run by academy coaches). Additive only. Page published 2 Oct, so low existing traffic. Commit: see git log "Watford DC guide: first ParentNote".
 - `/academy-pathway/fulham-fc-development-centre-guide`: "willigness" and "its worth" corrected. Spelling only, same day as the ParentNote swap above, so it shares that watch window.
+
+## Instagram follow prompts (2026-10-08)
+
+- Every article: "Follow on Instagram" card in the "Written by" box at the end (PR #64, merge 3ccb637, live 8 Oct). Sitewide, so it shares one date across all articles. Clicks on the "Instagram clicks" tab at /admin/seo.
+- Mid-article "More like this on Instagram" box (`<InstagramPromo />`), additive, no wording changed, placed at a section break about 15-35% in: `/academy-pathway/academy-categories-explained`, `/academy-pathway/chelsea-fc-development-centre-guide`, `/academy-pathway/arsenal-development-centre-guide`, `/academy-pathway/crystal-palace-development-centre-guide`, `/football-development/new-fa-youth-football-format`. Commit 60c7fa7.
+- Held back until their watch windows end (around 18-20 Oct): Leeds DC guide (edited 6 Oct), how-academy-football-works and football-scholarships-uk (both edited 4 Oct).
+- Same day, Graham OK'd adding it to those three now rather than waiting: `/academy-pathway/leeds-united-development-centre-guide`, `/academy-pathway/how-academy-football-works`, `/academy-pathway/football-scholarships-uk`. Commit edec1ab. Note this overlaps their earlier edits' watch windows (6 Oct and 4 Oct), so a movement on these three is harder to attribute.
+- Sitewide app banners (live 8 Oct, 21:27 UTC, merge 06e0a90): every parent and share-audience article now has the Progress banner in the mid-article slot instead of a Coach App banner, and no end-of-article Progress banner, so one app promo per article. /coaching and its articles: the Coach App banner becomes the "Coaching is supported by" sponsor version. New copy on both: Progress "Trust the process. Track the progress."; Coach App "Less admin. Pick the team fast and keep track of your team's stats." Banner block only, no article wording changed. Shares a date with the Instagram boxes above, so movement on 8 Oct onwards has two sitewide causes.
+- `/progress` (9 Oct, not yet merged): trial length and price taken off the page. Meta description ends "Try it free." instead of "4 weeks free.", the "How much does it cost?" FAQ removed, tick list and bottom section no longer give the 4 weeks or £2.50. Commits cb74f2c and c4144e8 on branch ccr-49d46835-hzf7ni.
+
+## Weekly round-up (2026-10-09): GSC 30 Sept-6 Oct vs 23-29 Sept
+
+58,342 vs 54,192 impressions (+8%), 962 vs 969 clicks, average position 6.5 both weeks, CTR 1.6% vs 1.8%. GSC data ends 6 Oct and the last day may still be partial. No changes made this round; results only.
+
+- **Wide-feet title (3 Oct):** rankings moved the right way. Weekly position 7.9 to 6.4, and the "wide fit" variants it targeted jumped: wide fitting football boots kids 10.6 to 4.5, kids football boots wide fit 9.5 to 5.1, wide fit kids football boots 7.6 to 3.7. Clicks 54 to 35, but the 23 Sept week was the page's best week so far, so read clicks at the 17 Oct watch end, not now. No revert signal.
+- **Footballs by age list (4 Oct):** only 2-3 days of data after the change. "What size football for 10 year old" 9.6 to 10.6, "football sizes by age" 9.1 to 10.3: about 1 position, under the agreed 2-position revert line and too early to read. Read again around 18-20 Oct.
+- **Best grassroots apps, Progress section (3 Oct):** mixed. Weekly position 9.1 to 12.0 and clicks 22 to 8, but "best football coaching apps" 11.6 to 5.5 in the rank tracker. One noisy week on a new page; watch to 17 Oct.
+- **Scholarships FAQ (4 Oct):** impressions 3,642 to 2,008 but position 6.7 to 5.5 and clicks 29 to 33; "football scholarships for 16 year olds" 9.9 to 9.0 with 2 clicks. Positive so far.
+- **Brentford inbound link (4 Oct):** brentford academy 10.2 to 10.8, brentford development 10.0 to 10.6. Small and early; watch to 18 Oct.
+- **Equal playing time explainer:** flat, 821 to 842 impressions, 9 to 7 clicks, position 6.7 to 6.8. Still picking up "fair matlab" junk at position 1.
+- **New pages, first week:** GPS trackers 192 impressions, 15 clicks, position 5.6. Watford DC guide 402 impressions, 23 clicks, 5.8. Stats apps 159 impressions, 4 clicks, 5.4. child-lost-confidence-in-football (moved 3 Oct) 87 impressions at 5.9, so the new URL is being served. Soft ground boots 151 to 651 impressions.
+- **Still no impressions:** Matt Baxter interview, Girls United interview, calculator page. Indexing recheck due 13 Oct as planned.
+- Decay: `/academy-trials` hub again, plus Tottenham DC (14 to 9 clicks, but position improved 6.7 to 5.9, so demand rather than rankings). Silence on `/coach-app` is expected (noindex).
+
+Opportunities queued for this week (not yet done): AG vs FG title tag, its top queries are about wearing FG boots on artificial grass/turf and neither the title nor H1 says so (from 11 Oct, when the 27 Sept watch ends); one FAQ on the maximum/minimum age to join an academy on `what-age-do-football-academies-recruit` ("maximum age to join football academy" 11.8, "minimum age" 18.3; page last edited 4 Sept).
+
+## `ag-vs-fg-boots`: title tag targets "FG boots on artificial grass" (2026-10-09)
+
+Title tag only, in `app/football-gear/ag-vs-fg-boots/page.tsx`. H1, meta description, headings and body unchanged.
+
+- Before: "AG vs FG Football Boots Explained | Football Parent"
+- After: "AG vs FG Boots: Can Kids Wear FG on Artificial Grass?" (53 chars)
+
+Why: the page's biggest queries are about wearing FG boots on artificial surfaces ("fg boots on artificial grass" 476 impressions at 8.0, "fg football boots on turf" 443 at 11.5, "can you use fg boots on artificial grass" 149 at 9.4, plus astroturf variants), and neither title nor H1 said so. CTR 0.2% at position 8.2 (9,278 impressions, 22 clicks in 28 days). Graham chose option A of three. Two days before the 27 Sept AG boot pick's watch window closed, so a movement from now has both as candidate causes, though the pick was a GearPicks block, not a ranking lever. Commit `b138a61`. Watch until ~23 Oct.
+
+## `what-age-do-football-academies-recruit`: FAQ on youngest and oldest age to join (2026-10-09)
+
+Additive only: one FAQ, "What is the youngest and oldest age to join a football academy?", first in the FAQ section. Uses only facts already on the page (Under-9 EPPP registration, pre-academy and development centres below that, recruitment through to Under-23, scholarship decisions at 16). Title, meta, headings and other FAQs unchanged. Targets "maximum age to join football academy" (50 impressions at 11.8; also 14.5 on how-academy-football-works) and "minimum age to join football academy" (18 at 18.3). **Live traffic:** 8,570 impressions, 58 clicks, position 5.5 in 28 days; last edited 4 Sept. Commit `0f86a67`. Watch until ~23 Oct.
+
+## Calculator and the two interviews: indexed (checked 2026-10-09)
+
+URL Inspection API: `/coaching/equal-playing-time-calculator`, `/parent-guides/matt-baxter-young-footballer-mindset-interview` and `/girls-football/girls-united-daughter-football-interview` are all "Submitted and indexed", crawled 6 Oct about 21:30 UTC, Google's canonical matching ours. This closes the 13 Oct recheck. GSC data runs to 6 Oct, so none of them can show impressions yet. The calculator had 8 page views in 6-9 Oct (first-party), none of them from search so far. The PPC variant `/football-parent-coach-app/equal-playing-time-calculator` and `/coach-app/game-time-calculator` are both noindex, so neither competes with it.
+
+## New article: `/football-gear/christmas-football-gifts-for-kids` (2026-10-09)
+
+Published 2026-10-09, category Football Gear. Primary keyword "football gifts for kids". Roadmap item from the 12 Sept Trends research: "football gifts" peaks in November and decays through December, so this went up ahead of that window. Gift guide by budget and age; picks reused from the sibling gear guides (ball, goals, shin pads, trackers), plus tagged Amazon search links for pump, cones and grip socks and a QuickPlay Replay Station link (the rebounder Graham owns). No external citations (gear page). Three Graham ParentNotes (Samba goal, rebounder, table football and keepie-up ball). Added to `lib/routes.ts` and the Football Gear category page. Cross-links into this page from the goals guide's "Buying for Christmas or a Birthday" section are a follow-up, not done here.
+
+## `how-to-become-a-professional-footballer`: FAQ on becoming a professional at 16 (2026-10-09)
+
+Additive only: one FAQ, "Can you become a professional footballer at 16?", after "What age do most professional footballers get scouted?". Uses only routes already described on the page (scholarship decision at 16, non-league, college and post-16 academies, players picked up from non-league at 17-19). Title, meta, headings and other FAQs unchanged. Targets "how to become a professional footballer at 16" (385 impressions at 8.4, 0 clicks, 28 days); the head term "how to become a professional footballer" is at 11.4 (237). Page baseline (28 days): 6,583 impressions, 32 clicks, position 7.7. Last change 28 Sept (expert box presentation only), so done 3 days before that window closed. Commit `d9b5d44`. Watch until ~23 Oct.
+
+## `best-shin-pads-for-kids-football`: FAQ on shin pads for 4 and 5 year olds (2026-10-09)
+
+**Live traffic page, the site's biggest by clicks.** Additive only: one FAQ, "What are the best shin pads for a 4 or 5 year old?", last in the FAQ section. Ankle-guard advice and the Nike sizing (Kids S from 122cm, labelled age 4 to 6) are already on the page; the adidas youth Small (from roughly 100cm) is from the existing sizing FAQ's source. Not the same as the FAQ reverted on 12 Sept (that one answered an off-topic PAA question). Title, meta, headings, GearPicks and other FAQs unchanged. Targets "shin pads for 5 year old" (436 at 10.7), "shin pads for 5 year olds" (116 at 16.6), "toddler shin pads" (79 at 11.5), "kids shin pads 4 year old" (~10.5). Commit `0838cfe`.
+
+**Baseline (28 days to 6 Oct):** 49,225 impressions, 415 clicks, position 6.0. "best shin pads for kids" 4.9 (6,077 impressions, 77 clicks), "best kids shin pads" 4.2, "best shin pads for 6 year old" 3.2, "best shin pads for 5 year old" 3.5.
+
+**Revert rule:** if "best shin pads for kids" or "best kids shin pads" lose more than ~2 positions and hold for a week, or weekly clicks drop below ~80 for two weeks running without a matching impressions drop, `git revert 0838cfe`. Read at ~14 days (around 23 Oct). No other edit to this page until then.
+
+## Research: recruiting players to a grassroots team, sized (2026-10-09)
+
+Prompted by "how to recruit players for grassroots football" (52 impressions at ~14 over 90 days) landing on the parent-facing `/academy-trials/how-football-clubs-recruit-young-players`. Script `scripts/seo/cli/coach-recruit-players-research.ts`, output `seo-data/exports/coach-recruit-players-research-2026-10-09.json`, spend $0.16. Not added to the roadmap; Graham to decide.
+
+- Every "how to recruit / find / get more players" phrasing returned no measurable Google Ads volume (under ~10/mo each). GSC's 52 impressions in 90 days is the best real signal, so roughly 15-20 searches a month for that wording.
+- "players wanted football" 110/mo KD 0 and "football team looking for players" 30 KD 6 are noticeboard intent: page one is playerwanted.co.uk, league and county FA "Players Wanted"/"Find Players" pages, Facebook groups and the Team Grassroots finder. An article will not rank for those.
+- "how to start a youth football team" 30 KD 0 and "how to set up a football team" 30 KD 0: weak page one (FA PDF, Facebook, YouTube, Quora, Spond, kit shops), AI Overview present.
+- Labs keyword ideas for all three seed groups came back off-topic, so there is no hidden bigger cluster.
+- Verdict: small. Best shape if done at all is one /coaching article, "How to start a grassroots football team and find players", covering both the start-up and recruitment angles, low priority.
+
+## `west-ham-player-pathway-guide`: title tag targets "development" and "academy trials" (2026-10-09)
+
+Title tag only, in `app/academy-pathway/west-ham-player-pathway-guide/page.tsx`. H1, meta description, URL, headings and body unchanged.
+
+- Before: "West Ham Player Pathway Guide | Football Parent"
+- After: "West Ham Development Centre and Academy Trials: Parent's Guide" (62 chars, same pattern as the Watford guide)
+
+Why: none of the page's top queries appeared in the title: "west ham development" 562 impressions at 7.7 with 0 clicks, "west ham talent id" 197 at 7.0, "west ham academy trials 2026" 182 at 9.9, "west ham academy" 147 at 7.7 (28 days). The article already covers talent ID, trials and the academy. **Live traffic:** 4,440 impressions, 85 clicks, position 6.4 (28 days); last edited 4 Sept. Graham chose option A of three. If position slips over 14 days, revert. Commit `c06a4c2`. Watch until ~23 Oct.
+
+## `aston-villa-development-centre-guide`: "Academy" added to the title tag (2026-10-09)
+
+Title tag only, in `app/academy-pathway/aston-villa-development-centre-guide/page.tsx`. H1, meta, headings and body unchanged.
+
+- Before: "Aston Villa Development Centre: A Parent's Guide | Football Parent"
+- After: "Aston Villa Academy and Development Centre: A Parent's Guide" (58 chars)
+
+Why: "aston villa academy" is the page's biggest query (148 impressions at 9.1, 28 days) and "academy" was missing from the title; "aston villa academy trials" 27 at 9.1. "Aston villa development centre" ranks 4.2 and stays in the title. Page baseline: 1,312 impressions, 31 clicks, position 6.1; published 6 Sept, last edited 25 Sept (banner). Graham chose option A. Commit `db0d9e5`. Watch until ~23 Oct.
+
+## `christmas-football-gifts-for-kids`: slop pass, and first inbound link from the goals guide (2026-10-09)
+
+Same day as publish. AI-slop pass on the new gifts guide: removed three reject-then-reveal contrasts (including a "matter far more than" line), softened four unsupported superlatives ("most-used present there is", "most-requested"), cut two filler wrap-up lines and a rebounder sentence that repeated the ParentNote. Headings, picks and ParentNotes unchanged.
+
+First inbound contextual link: one sentence added at the end of the "Buying for Christmas or a Birthday" section of `/football-gear/best-football-goals-for-kids`, anchor "football gifts for kids". Additive only, nothing else on that page changed; the goals page has had no other change since publish (19 Sept). `best-footballs-by-age` was deliberately not linked yet: it is on watch after the 4 Oct edit, link from there after ~18 Oct.
+
+## Gear guides: affiliate push, internal links, AG vs FG pick box, gloves picks (2026-10-09)
+
+Prompted by the 30-day Amazon click report (764 clicks: shin pads 469, wide feet 130, Veo 87, boots hub 29, goals 20, footballs by age 16, GPS 12, AG vs FG 1, gloves and soft ground 0; 641 of 764 from GearPicks boxes, 123 inline). Every source page below was last edited before 26 Sept, so outside its watch window; each is one added sentence or clause, nothing else on the page changed, one commit per page.
+
+**Shin pads (ranking push for "best shin pads for kids", 4.9 with 6,077 impressions; target page itself untouched, it is on watch to 23 Oct):**
+- `/academy-trials/what-happens-at-academy-trials`, kit list paragraph, anchor "best shin pads for kids". `e804fd3`.
+- `/academy-pathway/pre-academy-football`, kit cost paragraph, anchors "best shin pads for kids" and "football boots for kids". `9bd76f8`.
+- `/parent-guides/what-is-grassroots-football`, costs paragraph, same two anchors. **Live traffic page** (AI Overview cited), additive sentence only. `3628378`.
+- Backlinks: the next link-building run should pitch this page first.
+
+**Goals (12-15 for "best kids football goals" / "best garden football goals", ahead of the November gift peak):**
+- `/coaching/football-drills-for-7-and-8-year-olds`, garden drills intro, anchor "best football goals for kids". `d049fe3`.
+- `/football-development/improve-football-decision-making`, garden kickabouts line, anchor "garden football goal". `2dcc527`.
+
+**GPS trackers:** `/academy-trials/what-do-academy-coaches-look-for`, work rate paragraph, anchor "football GPS tracker". `80ecbcf`.
+
+**AG vs FG (9k impressions a month, 1 Amazon click in 30 days):** quick-pick box above the first H2 (Predator League AG kids, Mercurial Vapor 16 FG/MG, Predator Club FG/MG, same ASINs as the existing boxes further down, which stay) plus one line linking `/football-gear/childrens-soft-ground-football-boots`. Done the same day as the title change (`b138a61`) at Graham's request, so a ranking movement here has both as causes; click-out rate is the metric for this one. `421c57d`.
+
+**Gloves (no Amazon links before; winter demand starts now):** "Shop by glove type" GearPicks after the glove types overview, three tagged Amazon UK search links (fleece, water-resistant, thin grip) rather than product ASINs, because nothing can be verified from here; swap in specific products when Graham sends SiteStripe full links. `41b4c5e`. Separate commit: one sentence in the waterproofing section linking the soft ground boots guide. `ff273b3`.
+
+**Soft ground boots** now has three inbound links (boots hub, AG vs FG, gloves), up from one.
+
+Watch all of the above until ~23 Oct. Click-out per page on the "Amazon clicks" tab at /admin/seo.
+
+## Goals guide: one more inbound link, and the queue for later (2026-10-09)
+
+- `/football-development/what-is-football-iq` (last edited 8 Aug): garden 1v1 games tip, clause with anchor "football goals for kids" to `/football-gear/best-football-goals-for-kids`. Commit `4b59fda`. Goals page now has inbound links from drills, decision making and football IQ added today, plus the gifts guide and footballs by age.
+- Queued until their watch windows end: `how-much-training-is-too-much` (unstructured play in the garden, from ~17 Oct), `new-fa-youth-football-format` (format and goal sizes, from ~22 Oct), and a "goals that suit this ball size" line on `best-footballs-by-age` (from ~20 Oct).
+- Off-site: the goals guide is the secondary target of the 9 Oct link-building run (gift guides, garden practice posts).
+- Same day, Graham OK'd two of the queued ones now, inside their watch windows: `/football-development/how-much-training-is-too-much` (unstructured play paragraph, anchor "garden football goal", `d6af46c`; page last changed 3 Oct) and `/football-development/new-fa-youth-football-format` ("What Parents Should Focus On", anchor "football goals for kids", `b28aa4b`; **live traffic page**, Instagram box added 8 Oct). Movement on either in the next fortnight has both changes as candidate causes.
+
+## `christmas-football-gifts-for-kids`: watch, personalised and goalkeeper gifts (2026-10-09)
+
+Same day as publish, before any ranking exists. Graham's call: the first version only re-sold picks from our other gear pages. DataForSEO research (`scripts/seo/cli/football-gifts-research.ts`, $0.14, output `seo-data/exports/football-gifts-research-2026-10-09.json` and `football-gifts-guides-headings-2026-10-09.json`): "football gifts" and "football presents" 8,100/mo each, "personalised football gifts" and "gifts for football lovers" 720, "christmas football gifts" and "football gift ideas" 590, "goalkeeper gifts" 320, "football stocking fillers" and "football birthday gifts" 260, all KD 0; kid-specific phrasings unmeasured. Page one is mostly retailers; ranking guides (footy.com, The Soccer Store, JD blog, grippysports) split gifts into "kids who play" and "kids who watch", which ours did not cover.
+
+Added three H2s (Gifts for Kids Who Watch Football, Personalised Football Gifts, Goalkeeper Gifts), three stocking fillers (boot bag, boot cleaning brush, hand warmers), and swapped the goalkeeper FAQ (now covered by its own section) for the PAA question "What do you buy a football-mad child?". Four new Graham ParentNotes (first match at 5/6 and the goal noise, name vs player on shirts, rotation and goalie gloves with a Coach App link, Boot Buddy). New affiliate links are tagged Amazon search links only. Intro sentence updated to match.
+
+## `christmas-football-gifts-for-kids`: Boot Buddy product link (2026-10-09)
+
+Stocking filler bullet "A boot cleaning brush": the tagged Amazon search link replaced with the product Graham owns, Boot Buddy (`/dp/B014UPAHO4?tag=footballpar09-21`), named inline as "the one we use". Affiliate link only, no other change.
+
+## New article: Chris Robinson scouting interview (2026-10-10)
+
+Published 10 Oct 2026: `/parent-guides/chris-robinson-football-scout-interview`, category Parent Guides. Expert Q&A with Chris Robinson, Head of Academy Recruitment at Southampton FC (ex-Head of Integration Recruitment, Chelsea FC Academy, 11+ years; author of *The Scouting Game*), ten questions: what a scout notices first, how trials really run, getting seen from grassroots, scout cards and genuine approaches, development centres vs the academy, recruitment age, coming back after release, parent behaviour, agents, one piece of advice. Same format as the Matt Baxter interview. Added to `lib/routes.ts` and the `/parent-guides` index. No callouts added to other articles yet; candidate pages are listed under his entry in `expert-quotes.md`.
+- Same day, before publish: Amazon link to his book *The Scouting Game* added (as promised to Chris), in the About bio and as a closing line under Final Thoughts. Swapped the same day for the product link Graham supplied: `/dp/1801509247?tag=footballpar09-21`.
+- Same day: Chris's Instagram (@the_scouting_game) linked from the About bio, the Final Thoughts closing line and the Editor's Note on `/parent-guides/chris-robinson-football-scout-interview`.
+
+## Chris Robinson quotes on two pages (2026-10-10)
+
+One `<ExpertQA>` photo box per page, an excerpt of his answer (exact words, cut not reworded) with "Read Chris's full interview" linking to `/parent-guides/chris-robinson-football-scout-interview`. Internal link only, no Instagram (Graham's rule for quote boxes, recorded in `expert-quotes.md`). Additive only. Neither page had an expert quote before.
+
+- `/academy-pathway/how-to-find-a-football-agent-for-your-child`: "When Agents Become Relevant", after the scholarship stage paragraph. Q9, formal representation from the year before the scholarship decision (under 16), and people "masquerading as agents" who are not FIFA registered. `678e0f8`.
+- `/parent-guides/are-football-development-centres-worth-it`: "The Honest Caveats", after "Progression to the academy is far from guaranteed". Q5, some centres have very little contact with the main academy and can be commercial schemes; check the link and track record. `6eec9ff`.
+
+- `/academy-pathway/what-age-do-football-academies-recruit`: "The 'Is It Too Late?' Question", after "But players still join academies at Under-16, Under-17, and beyond." Q6, priority recruitment age 6 to 8, first signing at under 9, players can still cross the gap up to 17 and 18. `7fae63a`. Added on Graham's say-so inside the watch window of the 9 Oct FAQ on the same page (**live traffic**: 8,570 impressions, 58 clicks in 28 days), so movement on this page in the next fortnight has both changes as candidate causes.
+
+Watch all three until ~24 Oct.
+
+## Chris Robinson quotes on four more pages, and a trial-length fix (2026-10-10)
+
+Same format as this morning's three: one `<ExpertQA>` box per page, his exact words cut not reworded, linking only to `/parent-guides/chris-robinson-football-scout-interview`. Additive, one commit per page. None of the four had an expert quote before.
+
+- `/academy-trials/what-happens-at-academy-trials`: first a one-line fix in "What Happens After Trial", "rolling trial periods of 4-6 weeks" became "trial periods of several weeks, often six to eight", so the page agrees with Chris (assessment over about six weeks, formal trial of eight). `d787e94`. Then the box after that paragraph: Q2, the formal eight week trial, mid-trial review, decision by consensus but recruitment's call. `84d0bbc`. This page had the shin pads link on 9 Oct (`e804fd3`), so movement here has three candidate causes.
+- `/academy-trials/football-academy-trials-uk`: "Open Football Trials vs Academy Scouting", after the scouting paragraph. Q2 opening, big one-off trials are "very hit and miss", assessment over weeks. `2638bbe`.
+- `/academy-trials/football-trials-near-me`: after the Football Parent note closing "Warning Signs: Paid Trial Scams". Q3, sending clips to the Head of Academy Recruitment, and showcases with a good track record. `45e1ff2`.
+- `/academy-trials/how-football-clubs-recruit-young-players`: "Grassroots Scouting", after the team-quality paragraph. Q3 opening, play at the highest standard, scouts start with the better leagues and teams. `199a92e`.
+
+Skipped: `uk-football-development-centres-explained` (only Q5's first paragraph was left unused, and it refers back to the interview). Watch all four until ~24 Oct.
+
+## Chris Robinson quotes on the scouts and academy coaches guides (2026-10-10)
+
+Checked first (Graham asked): Paul Barry's boxes on the scouts, release and mistakes pages are each used only once; two other Paul quotes are on two pages each ("goals and pace" on what-do-academy-coaches-look-for and best-football-gps-trackers-for-kids; "player development frameworks" on how-to-become-a-professional-footballer and how-to-join-a-football-academy), within the 2-3 cap. Release and mistakes already carry two experts each, so left as they are.
+
+- `/academy-trials/how-football-scouts-identify-players`: "How Contact Is Usually Made", first sentence changed from "they will typically contact the parent or the grassroots club's coach" to "they should speak to the grassroots club's coach first, rather than approaching the parent directly, and show their club photo ID", to match Chris. `50011e0`. Then a box after that paragraph: Q4 in full (photo ID shown to the team coach, approach goes to the coach first, ask the scout what the next step is). `76b88cb`.
+- `/academy-trials/what-do-academy-coaches-look-for`: end of "Technical Skills". Q1 in full (control, pass and move, plus the desire to win the ball back). `205ced8`. This page had the GPS trackers link on 9 Oct (`80ecbcf`), so movement here has both as candidate causes.
+
+Watch both until ~24 Oct. Chris now has boxes on nine pages.
+
+## Chris Robinson quotes on five more pages, plus the interview's affiliate disclosure (2026-10-10)
+
+- `/parent-guides/chris-robinson-football-scout-interview`: `<AffiliateDisclosure />` added under the Amazon book link (the E-E-A-T scorer flagged it as the only page with affiliate links and no disclosure). `c943064`.
+
+Five more `<ExpertQA>` boxes, same format, interview link only, one commit per page. Graham asked for Q1 to stay on a couple of pages and for repeats to be cut differently, so no two boxes match:
+
+- `/academy-pathway/brentford-development-centre-guide`: "What Brentford Looks for in Young Players". Q1 without the "simple game" opening (the basics, including winning the ball back). Q1's second and last use. `d22e3f7`.
+- `/academy-pathway/aston-villa-development-centre-guide`: "What Aston Villa Looks for in Young Players". Q2, several experienced scouts decide who comes in on trial, plus what the age group needs. `680233b`. Title tag changed 9 Oct, so movement here has both as candidate causes.
+- `/academy-pathway/how-to-join-a-football-academy`: "What Age Can Children Join a Football Academy?", away from the existing Paul Barry box. Q6, little difference between top grassroots and academy players early on, the gap widens with age. `6c89322`.
+- `/academy-pathway/premier-league-development-centres-list`: "Not All Development Centres Are The Same". Q5 first paragraph only (some centres have little academy contact, can be commercial schemes). `81d7900`.
+- `/academy-pathway/tottenham-development-centres-explained`: "How Genuine Scouting Actually Works", after the business-card paragraph. Q4, the card half only. `06b8228`.
+
+Watch all five until ~24 Oct. Chris now has boxes on 14 pages. E-E-A-T record updated: every former B page with a box is now C under Graham's rule (`eeat/README.md`).
+
+## Source links on five Bucket A pages (2026-10-10)
+
+Factual claims only (rules, ages, structures, research), one source per claim, no source twice on a page, most already cited elsewhere on the site. Link added to existing words, no sentence reworded. One commit per page.
+
+- `/academy-pathway/how-academy-football-works` (**live traffic**; also edited 4 Oct and 8 Oct, so those windows overlap): EPPP (Premier League EPPP page), Category contact time (PL Parent Hub), relative age effect (PMC study), bio-banding (PL elite performance page). `a980ede`.
+- `/parent-guides/jpl-and-academy-football`: JPL official site, EPPP categories, PL Parent Hub independent advice page. `c6bfbf4`.
+- `/football-development/is-private-football-coaching-worth-it`: GOV.UK DBS guide for self-employed workers, England Football UEFA C page, 2026 scoping review on decision-making (PMC), AAP report on overtraining and burnout. `81707e4`.
+- `/academy-pathway/academy-categories-explained` (InstagramPromo 8 Oct overlaps): 90-minute travel radius to the PL Youth Development Rules 2025-26. `ac155a3`.
+- `/academy-pathway/chelsea-fc-development-centre-guide` (InstagramPromo 8 Oct overlaps): Cobham and U9 academy start to chelseafc.com. `e07bf5e`.
+
+Watch all five until ~24 Oct.
+
+Content issues the research turned up (fixed the same day on Graham's say-so, one commit each, listed below):
+- academy-categories-explained: says Category 1 can approach an Under-11 more than 60 minutes away, but the one-hour rule for U9-U11 applies whatever the category (contradicts its own earlier line). FAQ "audited periodically" should be "every year".
+- is-private-football-coaching-worth-it: FAQ "Is 1-to-1 better than small group?" answers "Often yes" but its reasons (and the article) favour small groups. One em dash in the "Schedule already overloaded" card.
+- jpl-and-academy-football: "FA-registered academies do not charge for trials" has no rule behind it as worded (academies are licensed under the EPPP, not FA-registered).
+- how-academy-football-works: "U18, U21 and Premier League 2" lists PL2 twice (PL2 is the U21 league).
+- chelsea-fc-development-centre-guide: Summary says Foundation programmes run "at Cobham"; the body says satellite venues.
+
+## Fixes to the five content issues found while sourcing (2026-10-10)
+
+One-line corrections, one commit each. Same pages and day as the source links above, so they share those watch windows (to ~24 Oct).
+
+- `/academy-pathway/academy-categories-explained`: travel-rule example corrected to Under-12 to Under-16 and 90 minutes, plus "At Under-9 to Under-11 the one-hour limit applies whatever the category." `89455d2`. FAQ "audited periodically" to "audited every year". `a01b03d`.
+- `/football-development/is-private-football-coaching-worth-it`: FAQ "Is 1-to-1 better than small group?" now answers "Often no, particularly for decision-making elements, which develop best in game-like situations with other players." `77c9b63`. Em dash in the "Schedule already overloaded" card replaced with a colon. `69a4fda`.
+- `/parent-guides/jpl-and-academy-football`: "FA-registered academies do not charge for trials" to "Professional club academies operating under the EPPP do not normally charge for trials." `8c119d9`.
+- `/academy-pathway/how-academy-football-works` (**live traffic**): "U18, U21 and Premier League 2 competitions" to "U18 and U21 competitions (including the U18 Premier League and Premier League 2)". `f2cf813`.
+- `/academy-pathway/chelsea-fc-development-centre-guide`: Summary no longer says the Foundation tiers run "at Cobham". `57f7ce4`.
+
+## Slop tidy and fact fixes on five high-slop pages (2026-10-10)
+
+Sentence-level AI-slop tidy (no headings, links or sections changed; quote boxes untouched) plus fact fixes found while reading, in separate commits per page. Pages chosen as the highest-slop pages not in a watch window. Slop scores and details in `eeat/README.md`. Watch all five until ~24 Oct.
+
+- `/football-development/playing-up-an-age-group-football`: tidy `c71fdc7` (35 edits, slop 60 to 36); UK Coaching claim relinked from the homepage to the page that supports it `ac1b375`.
+- `/girls-football/what-age-do-girls-football-academies-recruit`: tidy `96770ce` (slop 60 to 34); facts `500244c` (PGAs ages 14 to 20, replaced FA WSL Academies in 2023; unsupported scholarship/reserve claim replaced).
+- `/academy-pathway/pdc-vs-ptc-vs-rtc-explained`: tidy `c49dff8` + `394c03e` (slop 62 to 38); facts `b2e0b3d` (girls' RTCs replaced by ETCs, not PGAs; PDC not an EPPP term).
+- `/girls-football/how-girls-football-academies-work`: tidy `046a916` (slop 66 to 40); facts `f83db55` (pathway name, ETC count, PGA ages, Discover My Talent referrals).
+- `/academy-pathway/west-ham-player-pathway-guide`: tidy `dc64315` (slop 56 to 36); facts `0ffca2c` (Luke Hirst quote, compensation rule, tier names) and `192e4a8` (unverified Chelmsford/Stanford-le-Hope/Wickford venues, "few pounds" trial fee and August-April season removed; girls' progression worded as the Foundation describes it).
+- Table of contents titles matched to headings on the girls' academies, PDC and girls' recruitment pages `0ae52de` (frontmatter only; the sidebar is currently hidden sitewide).
+
+Same day: "Regional Talent Hubs" entry removed from the girls' recruitment page's terminology box (no such programme found) `fdee6e7`. West Ham ParentNote (word-for-word the opening of the Arsenal one) replaced with a new Graham note on asking other parents and the centre how many have progressed and how `488bb75`.
+
+## Coach App landing: no-download angle and team selector wording (2026-10-11)
+
+Page: `/football-parent-coach-app` (`content/landing/main.mdx`). Two additions in one commit: a "No Download Needed" H3 at the top of "What It Does" (runs in the browser, add to home screen, or install from Google Play, linked to `uk.co.footballparent.coachapp`) plus the FAQ "Do I need to download the Coach App?" (feeds the page's FAQPage JSON-LD); and "Team Selector & Lineups" renamed "Team Selector, Lineups & Subs" with the body naming the pitch view, bench, 4v4 to 11v11 and a substitution plan per quarter or half. Why: "football coaching app no download" has an AI Overview citing no one, and the feature-app terms (team selector app 40/mo, football team selector app 30, football lineup app 30, line up app 20, substitution app 10; live UK volumes 11 Oct) had no matching copy anywhere on the site. The page has almost no search impressions (20 all time), so low risk; the link also gives the new Play listing its first link from our domain. Commit `65e0061`.
+
+## Best grassroots apps: team management H2 (2026-10-11, inside the watch window)
+
+Page: `/coaching/best-grassroots-football-apps`. Added H2 "What Is the Best Football Team Management App?" (the PAA question on "football team management app") between the Progress and TeamStats/Pitchero sections, plus its TOC entry; additive only, `dateModified` 2026-10-11. Targets football team management app / manager app (50/mo) and football team app (70/mo), where the page sat at 26-36 in GSC (90 days). **Watch-window exception, Graham's call:** the page last changed 3 Oct (Progress section) and 6 Oct (calculator link), so movement to ~25 Oct can't be put down to this change alone. Baseline the same day (live UK, desktop/mobile): best football coaching apps 9/–, football coaching app 15/–, football coach app 20/–, grassroots football app 2/11, best football team management app –/27, football management app 22/21; GSC last 15 days: best football coaching apps 8.7, football coaching app 9.4, best football coaching app 4.4. Full baseline: `seo-data/exports/coach-funnel-rank-check-2026-10-11.json` (`scripts/seo/cli/coach-funnel-rank-check.ts`). Commit `8390503`.
+
+Note from the same review: the drills page title tag change of 25 Sept (`90445e3`) has worked (28-day impressions 315 to 1,204, "football drills for 7 year olds" 11.9 to 9.3), so it stays as is. `inspect_page` reports the MDX frontmatter title (the H1), not the `page.tsx` title tag, so it shows the old "Ball Mastery Drills..." wording there.
+
+## New article: pre-academy parent interview (2026-10-11)
+
+Published `/parent-guides/pre-academy-football-parent-interview` (Parent Guides): 14-question interview with the anonymous parent author of *The Pre Academy Player* (Kindle, 2026), covering a Category 1 scout approach at an U6 festival, a typical week, cost, grassroots alongside, feedback, release and signing at a second club. Tagged affiliate link to the book (B0HCWW2793) and a link to @the_pre_academy_player. Added to the Parent Guides index. Commit `ac208dd`.
+
+## Pre Academy Player ExpertQA boxes on seven pages (2026-10-11)
+
+One `<ExpertQA>` box per page from the new pre-academy parent interview, each linking back to it ("Read the full interview"), each a different passage, placed mid-section with prose either side and clear of other boxes, banners and diagrams. Additive only. **Watch-window exception, Graham's call:** pre-academy-football and how-much-training-is-too-much changed 9 Oct, what-age-do-football-academies-recruit 10 Oct, how-much-does-academy-football-cost and understanding-academy-release 3 Oct, so movement on those to ~25 Oct can't be put down to this alone. Watch all seven to ~25 Oct.
+
+- `/academy-pathway/pre-academy-football` (Q3 + Q4, What to expect; closes its Bucket B gap) `3df3121`
+- `/football-development/how-much-training-is-too-much` (Q4, one club) `eccf7f8`
+- `/academy-pathway/how-much-does-academy-football-cost` (Q5, petrol) `feb375c`
+- `/academy-pathway/what-age-do-football-academies-recruit` (Q1 + Q10, Foundation Phase) `a281db9`
+- `/academy-pathway/can-academy-players-play-grassroots-football` (Q6) `76fef79`
+- `/academy-pathway/understanding-academy-release` (Q8, Emotional Impact) `7f5dfbf`
+- `/parent-guides/biggest-football-parent-mistakes` (Q13, Academy Obsession) `fc72a9c`

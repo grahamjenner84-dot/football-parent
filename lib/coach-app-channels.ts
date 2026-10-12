@@ -7,17 +7,21 @@ import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
 // Order matters: the first rule that matches wins.
 //  1. Google Ads      - a gclid, or a paid utm_medium. Ads beat everything:
 //                       an ad click that then used a banner still cost money.
-//  2. Shared link     - utm_source=parent-share, the link the share banner's
+//  2. Android app     - sign-ups only: installed from the Play Store without
+//                       an ad (Play's install referrer, entry source group
+//                       "Play Store", sent by the Coach App's Android build).
+//                       An ad-driven install is caught by rule 1.
+//  3. Shared link     - utm_source=parent-share, the link the share banner's
 //                       "Send it to your child's coach" button sends.
-//  3. Article banner  - arrived through a Coach App banner in an article
+//  4. Article banner  - arrived through a Coach App banner in an article
 //                       (?b= param). Whatever brought them to the article,
 //                       usually Google, the article did the persuading.
-//  4. Search          - the visit began from a search engine, no banner.
-//  5. Site link       - moved from another page of ours, no banner (header
+//  5. Search          - the visit began from a search engine, no banner.
+//  6. Site link       - moved from another page of ours, no banner (header
 //                       menu, an in-article link).
-//  6. Direct          - no referrer at all.
-//  7. Other           - AI assistants, social, any other site.
-//  8. Unknown         - sign-ups only: the coach declined analytics cookies,
+//  7. Direct          - no referrer at all.
+//  8. Other           - AI assistants, social, any other site.
+//  9. Unknown         - sign-ups only: the coach declined analytics cookies,
 //                       so nothing about their visit was kept.
 //
 // "Began from" is honest for visits because Next's client-side navigation
@@ -25,6 +29,7 @@ import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
 // Google and clicks through to the Coach App page still reports google.com.
 export const COACH_APP_CHANNELS = [
   "Google Ads",
+  "Android app",
   "Shared link",
   "Article banner",
   "Search",
@@ -36,6 +41,11 @@ export const COACH_APP_CHANNELS = [
 export type CoachAppChannel = (typeof COACH_APP_CHANNELS)[number];
 
 export const SHARED_LINK_UTM_SOURCE = "parent-share";
+
+/** The entry source group the Coach App's Android build reports for a Play
+ * Store install (src/data/installAttribution.ts in coach-app). Never set by
+ * this site's own referrer classification. */
+export const PLAY_STORE_SOURCE_GROUP = "Play Store";
 
 const PAID_MEDIUMS = new Set(["cpc", "ppc", "paid", "paidsearch", "paid_search", "paid-social", "paidsocial"]);
 
@@ -54,6 +64,7 @@ export function channelFor(input: ChannelInputs): CoachAppChannel {
   if (input.attributed === false) return "Unknown";
   if (input.hasGclid || input.sourceGroup === "Ads") return "Google Ads";
   if (input.utmMedium && PAID_MEDIUMS.has(input.utmMedium.toLowerCase())) return "Google Ads";
+  if (input.sourceGroup === PLAY_STORE_SOURCE_GROUP) return "Android app";
   if (input.utmSource === SHARED_LINK_UTM_SOURCE) return "Shared link";
   if (input.banner) return "Article banner";
   switch (input.sourceGroup) {

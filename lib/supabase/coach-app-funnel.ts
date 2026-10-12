@@ -8,7 +8,7 @@ import {
   type CoachAppChannel,
 } from "@/lib/coach-app-channels";
 import { getCoachAppShareStats, type CoachAppShareStats } from "@/lib/supabase/coach-app-shares";
-import { SHARE_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
+import { PARENT_ARTICLE_BANNER_ENDED_AT, SHARE_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key (football-parent-social),
 // same pattern as the other lib/supabase modules. Never import from client
@@ -101,10 +101,23 @@ export interface CoachAppUsageCounts {
   planPaid: number;
   planTrial: number;
   planLapsed: number;
+  /** Scheduled emails sent since UK midnight: match reminders by email,
+   * set-up nudges and trial emails (coach-app migration 0060). Not sign-in
+   * emails, which Supabase Auth sends unrecorded. Null in snapshots sent
+   * before the Coach App started reporting it, or before this site's column
+   * (20261010090000_usage_snapshot_emails_today.sql) existed. */
+  emailsToday: number | null;
+}
+
+// PostgREST reports an unknown column as PGRST204 (insert) and Postgres as
+// 42703; both mean a migration hasn't been applied yet. See
+// lib/supabase/page-views.ts for why both codes matter.
+function isMissingColumnError(error: { code?: string }): boolean {
+  return error.code === "PGRST204" || error.code === "42703";
 }
 
 export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachAppUsageCounts): Promise<void> {
-  const { error } = await adminClient().from("coach_app_usage_snapshots").insert({
+  const row = {
     taken_at: takenAt,
     total_accounts: counts.totalAccounts,
     signups_today: counts.signupsToday,
@@ -117,7 +130,17 @@ export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachApp
     plan_paid: counts.planPaid,
     plan_trial: counts.planTrial,
     plan_lapsed: counts.planLapsed,
-  });
+  };
+  const supabase = adminClient();
+  const { error } = await supabase.from("coach_app_usage_snapshots").insert({ ...row, emails_today: counts.emailsToday });
+  // Deployed before 20261010090000_usage_snapshot_emails_today.sql was
+  // applied: keep the snapshot, drop the email count, rather than lose every
+  // snapshot until the migration runs.
+  if (error && isMissingColumnError(error)) {
+    const retry = await supabase.from("coach_app_usage_snapshots").insert(row);
+    if (!retry.error) return;
+    throw new Error("Failed to insert coach_app_usage_snapshots row: " + retry.error.message);
+  }
   if (error) {
     throw new Error("Failed to insert coach_app_usage_snapshots row: " + error.message);
   }
@@ -144,6 +167,7 @@ type SnapshotRow = {
   plan_paid: number;
   plan_trial: number;
   plan_lapsed: number;
+  emails_today?: number | null;
 };
 
 function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string } {
@@ -160,6 +184,7 @@ function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string
     planPaid: r.plan_paid,
     planTrial: r.plan_trial,
     planLapsed: r.plan_lapsed,
+    emailsToday: typeof r.emails_today === "number" ? r.emails_today : null,
   };
 }
 
@@ -171,17 +196,27 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
   const rows: SnapshotRow[] = [];
   const pageSize = 1000;
   // Newest first, so the first row seen for each day is its closing figure.
+  // Without the emails_today migration that column doesn't exist and
+  // selecting it fails: fall back to the rest (emailsToday then reads as
+  // null) so the tab still loads.
+  const baseColumns =
+    "taken_at, total_accounts, signups_today, signups_today_with_team, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed";
+  let columns = baseColumns + ", emails_today";
   for (let from = 0; ; from += pageSize) {
-    const { data, error } = await supabase
-      .from("coach_app_usage_snapshots")
-      .select(
-        "taken_at, total_accounts, signups_today, signups_today_with_team, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed"
-      )
-      .gte("taken_at", since)
-      .order("taken_at", { ascending: false })
-      .range(from, from + pageSize - 1);
+    const read = () =>
+      supabase
+        .from("coach_app_usage_snapshots")
+        .select(columns)
+        .gte("taken_at", since)
+        .order("taken_at", { ascending: false })
+        .range(from, from + pageSize - 1);
+    let { data, error } = await read();
+    if (error && from === 0 && isMissingColumnError(error)) {
+      columns = baseColumns;
+      ({ data, error } = await read());
+    }
     if (error) throw new Error("Failed to read coach_app_usage_snapshots: " + error.message);
-    const batch = (data ?? []) as SnapshotRow[];
+    const batch = (data ?? []) as unknown as SnapshotRow[];
     rows.push(...batch);
     if (batch.length < pageSize) break;
   }
@@ -213,10 +248,15 @@ export const FUNNEL_TRACKING_STARTED_AT = "2026-09-25T21:30:00Z";
 const LANDING_PREFIX = "/football-parent-coach-app";
 const SIGN_IN_PATH = "/coach-app/sign-in";
 const COACHING_PREFIX = "/coaching/";
+// The calculator is an SEO page, but Google Ads also send clicks to it
+// (from 2026-10-11). Those ad clicks count as landing views, like the ad
+// variants under LANDING_PREFIX; its organic views stay on the SEO side only.
+const CALCULATOR_PATH = "/coaching/equal-playing-time-calculator";
 
 export interface FunnelChannelRow {
   channel: CoachAppChannel;
-  /** Views of the Coach App landing pages (main page and ad variants). */
+  /** Views of the Coach App landing pages (main page and ad variants), plus
+   * Google Ads clicks landing on the equal playing time calculator. */
   landingViews: number;
   /** Views of the app's own sign-in screen. */
   signInViews: number;
@@ -236,7 +276,8 @@ export interface FunnelSignup {
 export interface CoachingArticleRow {
   path: string;
   views: number;
-  /** Views whose visit began from a search engine. */
+  /** Views whose visit began from a search engine (organic: ad clicks,
+   * which also arrive from Google, are grouped as Ads). */
   searchViews: number;
 }
 
@@ -325,6 +366,8 @@ const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
 // (SHARE_AUDIENCE_SLUGS, never /coaching/), from `since`. Counted here rather
 // than taken from the banner test report, whose window goes back to
 // 2026-09-04 and would set weeks of views against hours of taps.
+// Stops at PARENT_ARTICLE_BANNER_ENDED_AT, when those articles swapped the
+// share banner for Progress.
 async function countShareBannerImpressions(
   supabase: ReturnType<typeof adminClient>,
   since: string
@@ -336,6 +379,7 @@ async function countShareBannerImpressions(
       .from("page_views")
       .select("path, user_agent")
       .gte("created_at", since)
+      .lt("created_at", PARENT_ARTICLE_BANNER_ENDED_AT)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
     if (error) throw new Error("Failed to read page_views: " + error.message);
@@ -398,6 +442,11 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   for (const row of landingRows) {
     if (isHuman(row.user_agent)) byChannel.get(channelForPageView(row))!.landingViews++;
   }
+  for (const row of coachingRows) {
+    if (row.path === CALCULATOR_PATH && isHuman(row.user_agent) && channelForPageView(row) === "Google Ads") {
+      byChannel.get("Google Ads")!.landingViews++;
+    }
+  }
   for (const row of signInRows) {
     if (isHuman(row.user_agent)) byChannel.get(channelForPageView(row))!.signInViews++;
   }
@@ -425,7 +474,9 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   const groupMap = new Map<string, number>();
   const articleMap = new Map<string, CoachingArticleRow>();
   for (const r of humanCoaching) {
-    const group = classifyReferrerHost(r.referrer_host).group;
+    // Same rule as getPageViewStats: a gclid marks an ad click, which the
+    // referrer alone would file under Search.
+    const group = r.gclid ? "Ads" : classifyReferrerHost(r.referrer_host).group;
     groupMap.set(group, (groupMap.get(group) ?? 0) + 1);
     let a = articleMap.get(r.path);
     if (!a) {

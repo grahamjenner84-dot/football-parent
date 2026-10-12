@@ -14,11 +14,13 @@ import { generateSEO } from "@/lib/seo";
 // Without its env vars the form falls back to handing the email to the app.
 //
 // Claims on this page describe what the app does today. Change them with the
-// app, not ahead of it. The price and trial must match Progress's own Terms.
+// app, not ahead of it. The trial length and price are deliberately left off
+// this page (shown in the app before anyone pays); what it does say about the
+// trial must still match Progress's own Terms.
 
 const TITLE = "Progress: Track Your Child's Football Stats and Development";
 const DESCRIPTION =
-  "Progress is the app for football parents: log matches, keep your child's career stats, track training and coach feedback, and share season cards. 4 weeks free.";
+  "Progress is the app for football parents: log matches, keep your child's career stats, track training and coach feedback, and share season cards. Try it free.";
 
 export const metadata = generateSEO({
   title: TITLE,
@@ -28,7 +30,7 @@ export const metadata = generateSEO({
   image: "/og/progress-1200x630.png",
 });
 
-const TRUST = ["4 weeks free, no card needed", "Then £2.50 a month", "Add their previous seasons too"];
+const TRUST = ["Free trial, no card needed", "Add their previous seasons too"];
 
 // The four features called out with a screenshot each. Screenshots are the
 // real app screens with a made-up player (Alfie) and made-up teammates and
@@ -79,10 +81,6 @@ const FAQS = [
   {
     q: "Is Progress on the App Store or Google Play?",
     a: "No. Progress is a web app, so there is nothing to download from a store. Open it in your phone's browser, sign in with your email, and add it to your home screen. It then opens like any other app, on iPhone and Android.",
-  },
-  {
-    q: "How much does it cost?",
-    a: "Every new account gets a 4-week free trial with everything included, and you don't need a card to start. After that it's £2.50 a month, and you can cancel any time.",
   },
   {
     q: "What happens if the trial ends and I don't subscribe?",
@@ -248,10 +246,10 @@ export default function ProgressPage() {
           <p className="text-2xl lg:text-3xl font-bold text-white mb-8">
             Trust the process. Track the <span className="text-[#47b473]">progress</span>.
           </p>
-          <h2 className="text-3xl font-bold text-white mb-3">Try everything free for 4 weeks</h2>
+          <h2 className="text-3xl font-bold text-white mb-3">Try everything free</h2>
           <p className="text-lg text-[#c9d3c4] max-w-xl mx-auto mb-8">
-            No card needed to start. After the trial it&apos;s £2.50 a month, and you
-            can cancel any time. If you don&apos;t subscribe, nothing is deleted.
+            No card needed to start, and you can cancel any time. If you
+            don&apos;t subscribe, nothing is deleted.
           </p>
           <div className="flex justify-center text-left">
             <ProgressJoinForm id="join-trial" dark />

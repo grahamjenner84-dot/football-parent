@@ -1,0 +1,1390 @@
+{
+  "report": [
+    {
+      "keyword": "flashscores football",
+      "type": "idea",
+      "volume": 90500,
+      "cpc": 1.53,
+      "difficulty": 100
+    },
+    {
+      "keyword": "football quizzes",
+      "type": "idea",
+      "volume": 60500,
+      "cpc": 1.32,
+      "difficulty": 36
+    },
+    {
+      "keyword": "michael owen football",
+      "type": "idea",
+      "volume": 60500,
+      "cpc": null,
+      "difficulty": 22
+    },
+    {
+      "keyword": "tommy lee jones football",
+      "type": "idea",
+      "volume": 60500,
+      "cpc": null,
+      "difficulty": 4
+    },
+    {
+      "keyword": "stuart pearce football",
+      "type": "idea",
+      "volume": 40500,
+      "cpc": null,
+      "difficulty": 0
+    },
+    {
+      "keyword": "nfl games",
+      "type": "idea",
+      "volume": 33100,
+      "cpc": 2.13,
+      "difficulty": 75
+    },
+    {
+      "keyword": "bobby moore football",
+      "type": "idea",
+      "volume": 27100,
+      "cpc": 0.14,
+      "difficulty": 0
+    },
+    {
+      "keyword": "the sun football",
+      "type": "idea",
+      "volume": 22200,
+      "cpc": 2.71,
+      "difficulty": 25
+    },
+    {
+      "keyword": "sun football",
+      "type": "idea",
+      "volume": 22200,
+      "cpc": 2.17,
+      "difficulty": 39
+    },
+    {
+      "keyword": "football scores yesterday",
+      "type": "idea",
+      "volume": 22200,
+      "cpc": 0.99,
+      "difficulty": 72
+    },
+    {
+      "keyword": "football this weekend",
+      "type": "idea",
+      "volume": 14800,
+      "cpc": 1.5,
+      "difficulty": 61
+    },
+    {
+      "keyword": "today's football games",
+      "type": "idea",
+      "volume": 12100,
+      "cpc": 1.61,
+      "difficulty": 69
+    },
+    {
+      "keyword": "nfl shop uk",
+      "type": "idea",
+      "volume": 9900,
+      "cpc": 0.37,
+      "difficulty": 4
+    },
+    {
+      "keyword": "football gifts",
+      "type": "seed",
+      "volume": 8100,
+      "cpc": 0.64,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football presents",
+      "type": "seed",
+      "volume": 8100,
+      "cpc": 0.64,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football jersey",
+      "type": "idea",
+      "volume": 8100,
+      "cpc": 0.65,
+      "difficulty": 24
+    },
+    {
+      "keyword": "football jobs",
+      "type": "idea",
+      "volume": 5400,
+      "cpc": 1.12,
+      "difficulty": 21
+    },
+    {
+      "keyword": "espn fantasy football",
+      "type": "idea",
+      "volume": 1900,
+      "cpc": 0.28,
+      "difficulty": 39
+    },
+    {
+      "keyword": "reddit football highlights",
+      "type": "idea",
+      "volume": 1300,
+      "cpc": null,
+      "difficulty": 16
+    },
+    {
+      "keyword": "daily football games",
+      "type": "idea",
+      "volume": 1000,
+      "cpc": null,
+      "difficulty": 14
+    },
+    {
+      "keyword": "gifts for football lovers",
+      "type": "seed",
+      "volume": 720,
+      "cpc": 0.68,
+      "difficulty": 0
+    },
+    {
+      "keyword": "personalised football gifts",
+      "type": "seed",
+      "volume": 720,
+      "cpc": 0.81,
+      "difficulty": 0
+    },
+    {
+      "keyword": "christmas football gifts",
+      "type": "seed",
+      "volume": 590,
+      "cpc": 0.59,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football gift ideas",
+      "type": "seed",
+      "volume": 590,
+      "cpc": 0.71,
+      "difficulty": 0
+    },
+    {
+      "keyword": "men football",
+      "type": "idea",
+      "volume": 480,
+      "cpc": 0.75,
+      "difficulty": 79
+    },
+    {
+      "keyword": "goalkeeper gifts",
+      "type": "seed",
+      "volume": 320,
+      "cpc": 0.51,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football stocking fillers",
+      "type": "seed",
+      "volume": 260,
+      "cpc": 0.7,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football birthday gifts",
+      "type": "seed",
+      "volume": 260,
+      "cpc": 0.69,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football training gifts",
+      "type": "seed",
+      "volume": 140,
+      "cpc": 0.57,
+      "difficulty": 0
+    },
+    {
+      "keyword": "man knows football",
+      "type": "idea",
+      "volume": 10,
+      "cpc": null,
+      "difficulty": 12
+    },
+    {
+      "keyword": "football gifts for kids",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": null
+    },
+    {
+      "keyword": "football gifts for boys",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": null
+    },
+    {
+      "keyword": "football gifts for girls",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": null
+    },
+    {
+      "keyword": "football presents for kids",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": null
+    },
+    {
+      "keyword": "gifts for kids who love football",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": null
+    },
+    {
+      "keyword": "football gifts for 8 year old",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football gifts for 10 year old",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": 0
+    },
+    {
+      "keyword": "football gifts for teenage boy",
+      "type": "seed",
+      "volume": null,
+      "cpc": null,
+      "difficulty": null
+    }
+  ],
+  "serps": {
+    "football gifts": {
+      "organic": [
+        {
+          "rank": 1,
+          "domain": "www.amazon.co.uk",
+          "title": "Football Gifts For Boys Age 8",
+          "url": "https://www.amazon.co.uk/football-gifts-boys-age-8/s?k=football+gifts+for+boys+age+8"
+        },
+        {
+          "rank": 2,
+          "domain": "childrensfootball.com",
+          "title": "Childrens Football Gifts",
+          "url": "https://childrensfootball.com/collections/football-gifts"
+        },
+        {
+          "rank": 3,
+          "domain": "www.meandmysport.co.uk",
+          "title": "Football Gifts for Men online UK",
+          "url": "https://www.meandmysport.co.uk/football"
+        },
+        {
+          "rank": 4,
+          "domain": "www.smythstoys.com",
+          "title": "Football Training Equipment",
+          "url": "https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701"
+        },
+        {
+          "rank": 5,
+          "domain": "www.footballgifts.co.uk",
+          "title": "Football Gifts | Retro Football Gifts | Personalised Football ...",
+          "url": "https://www.footballgifts.co.uk/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.redletterdays.co.uk",
+          "title": "Gifts for Football Lovers",
+          "url": "https://www.redletterdays.co.uk/sports/football"
+        },
+        {
+          "rank": 7,
+          "domain": "www.footballgiftsonline.co.uk",
+          "title": "Football Gifts Online | Official Club Gifts & Merchandise",
+          "url": "https://www.footballgiftsonline.co.uk/?srsltid=AU7gw4XTl3Jf9LT34DD6e1sSc-BceIENqJgSMrbsI8RZwkrq1otn_GVb"
+        },
+        {
+          "rank": 8,
+          "domain": "www.footy.com",
+          "title": "15 great football gifts for kids",
+          "url": "https://www.footy.com/blog/culture/football-gifts-for-kids/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.nike.com",
+          "title": "Football Gifts, Ideas & Presents. Nike UK",
+          "url": "https://www.nike.com/gb/w/gifts-football-1gdj0z3b0uf"
+        }
+      ],
+      "itemTypes": [
+        "organic",
+        "popular_products",
+        "people_also_ask",
+        "images",
+        "related_searches"
+      ],
+      "features": {
+        "paaQuestions": [
+          "What to give someone who loves football?",
+          "What are some cool football gifts?",
+          "What to buy a kid that likes football?",
+          "What are some good football-related gifts?"
+        ],
+        "paaExpandedOverviews": [
+          {
+            "question": "What to give someone who loves football?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What are some cool football gifts?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What to buy a kid that likes football?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What are some good football-related gifts?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          }
+        ],
+        "relatedSearches": [
+          "Football gift ideas for boy",
+          "Football gifts for him",
+          "Football gifts kids",
+          "Football gifts for adults",
+          "Football gifts Arsenal",
+          "Football gifts for 10 year old boy"
+        ]
+      }
+    },
+    "football gifts for kids": {
+      "organic": [
+        {
+          "rank": 1,
+          "domain": "www.amazon.co.uk",
+          "title": "Kids Football Gifts",
+          "url": "https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts"
+        },
+        {
+          "rank": 2,
+          "domain": "childrensfootball.com",
+          "title": "Childrens Football Gifts",
+          "url": "https://childrensfootball.com/collections/football-gifts"
+        },
+        {
+          "rank": 3,
+          "domain": "www.argos.co.uk",
+          "title": "Football Gifts",
+          "url": "https://www.argos.co.uk/sd/football-gifts/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.smythstoys.com",
+          "title": "Football Training Equipment",
+          "url": "https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701"
+        },
+        {
+          "rank": 5,
+          "domain": "www.footy.com",
+          "title": "15 great football gifts for kids",
+          "url": "https://www.footy.com/blog/culture/football-gifts-for-kids/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.thesoccerstore.co.uk",
+          "title": "Best Football Gifts for Kids this Christmas 2025",
+          "url": "https://www.thesoccerstore.co.uk/blog/latest-news/best-football-gifts-for-kids-this-christmas-2025/"
+        },
+        {
+          "rank": 7,
+          "domain": "blog.jdsports.co.uk",
+          "title": "The Best Football Gifts for Kids | JD Sports",
+          "url": "https://blog.jdsports.co.uk/what-are-the-best-football-gifts-for-kids/"
+        },
+        {
+          "rank": 8,
+          "domain": "www.matalan.co.uk",
+          "title": "Football Gifts",
+          "url": "https://www.matalan.co.uk/c/gifts/football-gifts/"
+        },
+        {
+          "rank": 9,
+          "domain": "kidsmerch.co.uk",
+          "title": "Football Gifts",
+          "url": "https://kidsmerch.co.uk/collections/football-gifts?srsltid=AU7gw4WaR2ERJiLcgON24vp80YmL2T4V29J_i52BpMYDCR5AGX9fBZ4X"
+        }
+      ],
+      "itemTypes": [
+        "ai_overview",
+        "organic",
+        "popular_products",
+        "people_also_ask",
+        "related_searches"
+      ],
+      "features": {
+        "aiOverview": {
+          "type": "ai_overview",
+          "rank_group": 1,
+          "rank_absolute": 1,
+          "page": 1,
+          "position": "left",
+          "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]",
+          "asynchronous_ai_overview": false,
+          "markdown": "Here are great football gift ideas for kids, broken down by age, interest, and price:\n\n- **LEGO Football Highlights Sets** : Build display models featuring player stats, signatures, initials, and minifigures of icons like [LEGO Editions Lionel Messi Football Highlights 43011](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462876431076084,imageDocid:4763239185930743394,gpcid:2039627684028427479,headlineOfferDocid:1143714824955596400,catalogid:11130536755639296261,productDocid:16150046817478805641,rds:CSS_PC_2039627684028427479%7CPC_2039627684028427479%7CPROD_CSS_PC_2039627684028427479%7CPROD_PC_2039627684028427479&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAK) (£25 at [Argos](https://www.argos.co.uk/product/8091877?&utm_custom6=LIA&utm_source=google&utm_medium=free_listing&utm_campaign=merchant_center&deeplink=true)), [LEGO Editions Cristiano Ronaldo 43012](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462883336388113,imageDocid:15128997319201497410,gpcid:11955266136591197405,headlineOfferDocid:198163578268527400,catalogid:9457877986210766511,productDocid:8494046388592616080,rds:CSS_PC_11955266136591197405%7CPC_11955266136591197405%7CPROD_CSS_PC_11955266136591197405%7CPROD_PC_11955266136591197405&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAN) (£17.49–£25), and [LEGO Editions Vini Jr. Football Highlights 43027](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462544200797851,imageDocid:9793714447959752427,gpcid:14394879767109486399,headlineOfferDocid:624354838377074525,catalogid:10090724955748906770,productDocid:5829648822258425282,rds:CSS_PC_14394879767109486399%7CPC_14394879767109486399%7CPROD_CSS_PC_14394879767109486399%7CPROD_PC_14394879767109486399&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAP) (£17.49 at [Smyths Toys](https://www.smythstoys.com/uk/en-gb/brand/football-training-event/lego-editions-43027-football-highlights-vini-jr-set/p/254422?srsltid=AU7gw4V9P7L981viRtulqxIRKrGatHjcr8nDW_C_YO3ggG5FaxJHfbxJ2ek)).[[1]](https://www.google.com/search?q=product&prds=pvt:hg,productid:5829648822258425282,catalogid:10090724955748906770,gpcid:14394879767109486399,mid:576462544200797851&ibp=oshop)[[2]](https://www.google.com/search?q=product&prds=pvt:hg,productid:8494046388592616080,catalogid:9457877986210766511,gpcid:11955266136591197405,mid:576462883336388113&ibp=oshop)[[3]](https://www.google.com/search?q=product&prds=pvt:hg,productid:16150046817478805641,catalogid:11130536755639296261,gpcid:2039627684028427479,mid:576462876431076084&ibp=oshop)\n- **Funko POP! Player Figurines** : Collectible vinyl figures like Luis Diaz (£11.00).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n- **World Football Stars Guess Who?** : A football-themed twist on the classic board game (£15.00).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n\n### Training & Outdoor Play (All Ages)\n\n- **Pop-Up & Portable Goals** : Easy-to-set-up goals for the garden or park, available via [Smyths Toys](https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701) (starting around £19.99) or [The Early Learning Centre / The Entertainer](https://www.thetoyshop.com/c/outdoor-toys/sports-toys-and-equipment/football-toys) (£12–£35).[[1]](https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701)[[2]](https://www.thetoyshop.com/c/outdoor-toys/sports-toys-and-equipment/football-toys)\n- **Hover Footballs & Soccer Bots** : Indoor-safe floating hover balls like the [Spider Hover Football LED Toy](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462840978696642,imageDocid:16219108524834668692,gpcid:10927500043441775616,headlineOfferDocid:15487949733279610644,catalogid:4191685137895814436,productDocid:10237634755696386556&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIGhAD) (£13.99) or interactive options like the Strikesphere Soccer Bot (£49.99).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n- **Skill & Target Equipment** : Football kick trainers (£9.68), Mitre Scriball customizable mini footballs (£8.78), or mini tabletop pinball and magnetic football games.[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n\n### Books & Reading\n\n- **Annuals & Records** : The *Guinness World Records Football 2026* (£12.99) or *Ultimate Football Heroes 2026* (£5.00) book series.[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n\n### Room Decor & Accessories\n\n- **LED Night Lights** : 3D illusion football desk lamps or paint-your-own football lamp kits (£9.99–£12.72).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n- **Cosy Bedding & Wearables** : Giant soft blanket hoodies (£16.99) or football-themed throw blankets.[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n\nTo help narrow down the best choice, tell me:\n\n- **How old** is the child?\n- Are you looking for something to **play with outside**, **build/collect** , or **decorate a room**?\n- What is your **budget**?",
+          "items": [
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "Here are great football gift ideas for kids, broken down by age, interest, and price:",
+              "markdown": "Here are great football gift ideas for kids, broken down by age, interest, and price:",
+              "links": null,
+              "images": null,
+              "references": null
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "LEGO Football Highlights Sets : Build display models featuring player stats, signatures, initials, and minifigures of icons like LEGO Editions Lionel Messi Football Highlights 43011 (£25 at Argos ), LEGO Editions Cristiano Ronaldo 43012 (£17.49–£25), and LEGO Editions Vini Jr. Football Highlights 43027 (£17.49 at Smyths Toys ). Funko POP! Player Figurines : Collectible vinyl figures like Luis Diaz (£11.00). World Football Stars Guess Who? : A football-themed twist on the classic board game (£15.00).",
+              "markdown": "- **LEGO Football Highlights Sets** : Build display models featuring player stats, signatures, initials, and minifigures of icons like [LEGO Editions Lionel Messi Football Highlights 43011](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462876431076084,imageDocid:4763239185930743394,gpcid:2039627684028427479,headlineOfferDocid:1143714824955596400,catalogid:11130536755639296261,productDocid:16150046817478805641,rds:CSS_PC_2039627684028427479%7CPC_2039627684028427479%7CPROD_CSS_PC_2039627684028427479%7CPROD_PC_2039627684028427479&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAK) (£25 at [Argos](https://www.argos.co.uk/product/8091877?&utm_custom6=LIA&utm_source=google&utm_medium=free_listing&utm_campaign=merchant_center&deeplink=true)), [LEGO Editions Cristiano Ronaldo 43012](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462883336388113,imageDocid:15128997319201497410,gpcid:11955266136591197405,headlineOfferDocid:198163578268527400,catalogid:9457877986210766511,productDocid:8494046388592616080,rds:CSS_PC_11955266136591197405%7CPC_11955266136591197405%7CPROD_CSS_PC_11955266136591197405%7CPROD_PC_11955266136591197405&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAN) (£17.49–£25), and [LEGO Editions Vini Jr. Football Highlights 43027](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462544200797851,imageDocid:9793714447959752427,gpcid:14394879767109486399,headlineOfferDocid:624354838377074525,catalogid:10090724955748906770,productDocid:5829648822258425282,rds:CSS_PC_14394879767109486399%7CPC_14394879767109486399%7CPROD_CSS_PC_14394879767109486399%7CPROD_PC_14394879767109486399&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAP) (£17.49 at [Smyths Toys](https://www.smythstoys.com/uk/en-gb/brand/football-training-event/lego-editions-43027-football-highlights-vini-jr-set/p/254422?srsltid=AU7gw4V9P7L981viRtulqxIRKrGatHjcr8nDW_C_YO3ggG5FaxJHfbxJ2ek)).[[1]](https://www.google.com/search?q=product&prds=pvt:hg,productid:5829648822258425282,catalogid:10090724955748906770,gpcid:14394879767109486399,mid:576462544200797851&ibp=oshop)[[2]](https://www.google.com/search?q=product&prds=pvt:hg,productid:8494046388592616080,catalogid:9457877986210766511,gpcid:11955266136591197405,mid:576462883336388113&ibp=oshop)[[3]](https://www.google.com/search?q=product&prds=pvt:hg,productid:16150046817478805641,catalogid:11130536755639296261,gpcid:2039627684028427479,mid:576462876431076084&ibp=oshop)\n- **Funko POP! Player Figurines** : Collectible vinyl figures like Luis Diaz (£11.00).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n- **World Football Stars Guess Who?** : A football-themed twist on the classic board game (£15.00).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)",
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "LEGO Editions Lionel Messi Football Highlights 43011Go to product viewer dialogue for this item.",
+                  "description": null,
+                  "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462876431076084,imageDocid:4763239185930743394,gpcid:2039627684028427479,headlineOfferDocid:1143714824955596400,catalogid:11130536755639296261,productDocid:16150046817478805641,rds:CSS_PC_2039627684028427479%7CPC_2039627684028427479%7CPROD_CSS_PC_2039627684028427479%7CPROD_PC_2039627684028427479&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAK",
+                  "domain": "www.google.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "Argos",
+                  "description": null,
+                  "url": "https://www.argos.co.uk/product/8091877?&utm_custom6=LIA&utm_source=google&utm_medium=free_listing&utm_campaign=merchant_center&deeplink=true",
+                  "domain": "www.argos.co.uk"
+                },
+                {
+                  "type": "link_element",
+                  "title": "LEGO Editions Cristiano Ronaldo 43012Go to product viewer dialogue for this item.",
+                  "description": null,
+                  "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462883336388113,imageDocid:15128997319201497410,gpcid:11955266136591197405,headlineOfferDocid:198163578268527400,catalogid:9457877986210766511,productDocid:8494046388592616080,rds:CSS_PC_11955266136591197405%7CPC_11955266136591197405%7CPROD_CSS_PC_11955266136591197405%7CPROD_PC_11955266136591197405&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAN",
+                  "domain": "www.google.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "LEGO Editions Vini Jr. Football Highlights 43027Go to product viewer dialogue for this item.",
+                  "description": null,
+                  "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462544200797851,imageDocid:9793714447959752427,gpcid:14394879767109486399,headlineOfferDocid:624354838377074525,catalogid:10090724955748906770,productDocid:5829648822258425282,rds:CSS_PC_14394879767109486399%7CPC_14394879767109486399%7CPROD_CSS_PC_14394879767109486399%7CPROD_PC_14394879767109486399&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIBRAP",
+                  "domain": "www.google.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "Smyths Toys",
+                  "description": null,
+                  "url": "https://www.smythstoys.com/uk/en-gb/brand/football-training-event/lego-editions-43027-football-highlights-vini-jr-set/p/254422?srsltid=AU7gw4V9P7L981viRtulqxIRKrGatHjcr8nDW_C_YO3ggG5FaxJHfbxJ2ek",
+                  "domain": "www.smythstoys.com"
+                }
+              ],
+              "images": null,
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Google",
+                  "domain": "www.google.com",
+                  "url": "https://www.google.com/search?q=product&prds=pvt:hg,productid:5829648822258425282,catalogid:10090724955748906770,gpcid:14394879767109486399,mid:576462544200797851&ibp=oshop",
+                  "title": "LEGO Editions Vini Jr. Football Highlights 43027",
+                  "text": "Kids cheer on Brazil with the LEGO Editions Vini Jr. – Football Highlights (43027) building set for boys and girls aged 10 and ove..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Google",
+                  "domain": "www.google.com",
+                  "url": "https://www.google.com/search?q=product&prds=pvt:hg,productid:8494046388592616080,catalogid:9457877986210766511,gpcid:11955266136591197405,mid:576462883336388113&ibp=oshop",
+                  "title": "LEGO Editions 43012 Cristiano Ronaldo Football Highlights",
+                  "text": "LEGO Editions Cristiano Ronaldo – Football Highlights (43012) allows children and sports fans from 10 years of age to create a tri..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Google",
+                  "domain": "www.google.com",
+                  "url": "https://www.google.com/search?q=product&prds=pvt:hg,productid:16150046817478805641,catalogid:11130536755639296261,gpcid:2039627684028427479,mid:576462876431076084&ibp=oshop",
+                  "title": "LEGO Editions Lionel Messi Football Highlights 43011",
+                  "text": "Kids will cheer on a football legend with the LEGO Lionel Messi - Football Highlights (43011) for boys and girls 10+. Football fan..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Amazon UK",
+                  "domain": "www.amazon.co.uk",
+                  "url": "https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts",
+                  "title": "Amazon.co.uk: Kids Football Gifts",
+                  "text": "Products: Linkax 3D Illusion Football Night Light (£9.99), Spider Hover Football LED Toy (£13.99), Funko POP! Luis Diaz Figurine ("
+                }
+              ]
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "Training & Outdoor Play (All Ages)",
+              "markdown": "### Training & Outdoor Play (All Ages)",
+              "links": null,
+              "images": null,
+              "references": null
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "Pop-Up & Portable Goals : Easy-to-set-up goals for the garden or park, available via Smyths Toys (starting around £19.99) or The Early Learning Centre / The Entertainer (£12–£35). Hover Footballs & Soccer Bots : Indoor-safe floating hover balls like the Spider Hover Football LED Toy (£13.99) or interactive options like the Strikesphere Soccer Bot (£49.99). Skill & Target Equipment : Football kick trainers (£9.68), Mitre Scriball customizable mini footballs (£8.78), or mini tabletop pinball and magnetic football games.",
+              "markdown": "- **Pop-Up & Portable Goals** : Easy-to-set-up goals for the garden or park, available via [Smyths Toys](https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701) (starting around £19.99) or [The Early Learning Centre / The Entertainer](https://www.thetoyshop.com/c/outdoor-toys/sports-toys-and-equipment/football-toys) (£12–£35).[[1]](https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701)[[2]](https://www.thetoyshop.com/c/outdoor-toys/sports-toys-and-equipment/football-toys)\n- **Hover Footballs & Soccer Bots** : Indoor-safe floating hover balls like the [Spider Hover Football LED Toy](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462840978696642,imageDocid:16219108524834668692,gpcid:10927500043441775616,headlineOfferDocid:15487949733279610644,catalogid:4191685137895814436,productDocid:10237634755696386556&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIGhAD) (£13.99) or interactive options like the Strikesphere Soccer Bot (£49.99).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n- **Skill & Target Equipment** : Football kick trainers (£9.68), Mitre Scriball customizable mini footballs (£8.78), or mini tabletop pinball and magnetic football games.[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)",
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Smyths Toys",
+                  "description": null,
+                  "url": "https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701",
+                  "domain": "www.smythstoys.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "The Early Learning Centre / The Entertainer",
+                  "description": null,
+                  "url": "https://www.thetoyshop.com/c/outdoor-toys/sports-toys-and-equipment/football-toys",
+                  "domain": "www.thetoyshop.com"
+                },
+                {
+                  "type": "link_element",
+                  "title": "Spider Hover Football LED ToyGo to product viewer dialogue for this item.",
+                  "description": null,
+                  "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462840978696642,imageDocid:16219108524834668692,gpcid:10927500043441775616,headlineOfferDocid:15487949733279610644,catalogid:4191685137895814436,productDocid:10237634755696386556&q=product&sa=X&ved=2ahUKEwjlrY_L-q2XAxVgM0QIHfdiKKEQxa4PegoIAggACAAIGhAD",
+                  "domain": "www.google.com"
+                }
+              ],
+              "images": null,
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Smyths Toys Superstores",
+                  "domain": "www.smythstoys.com",
+                  "url": "https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701",
+                  "title": "Footballs & Football Training Equipment | Smyths Toys UK",
+                  "text": "Product Inventory: Footballs and Football Training Equipment at Smyths Toys UK. Categories: Footballs (sizes 1-5, match balls, sof..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "The Entertainer",
+                  "domain": "www.thetoyshop.com",
+                  "url": "https://www.thetoyshop.com/c/outdoor-toys/sports-toys-and-equipment/football-toys",
+                  "title": "Football Toys & Football Goals | Free Delivery Over £39.99",
+                  "text": "Offers: Free delivery over £39.99, free Click & Collect. Products (166 total range £10.00 to £50.00): Football Goals & Targets: Hy..."
+                }
+              ]
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "Books & Reading",
+              "markdown": "### Books & Reading",
+              "links": null,
+              "images": null,
+              "references": null
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "Annuals & Records : The Guinness World Records Football 2026 (£12.99) or Ultimate Football Heroes 2026 (£5.00) book series.",
+              "markdown": "- **Annuals & Records** : The *Guinness World Records Football 2026* (£12.99) or *Ultimate Football Heroes 2026* (£5.00) book series.[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)",
+              "links": null,
+              "images": null,
+              "references": null
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "Room Decor & Accessories",
+              "markdown": "### Room Decor & Accessories",
+              "links": null,
+              "images": null,
+              "references": null
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "LED Night Lights : 3D illusion football desk lamps or paint-your-own football lamp kits (£9.99–£12.72). Cosy Bedding & Wearables : Giant soft blanket hoodies (£16.99) or football-themed throw blankets.",
+              "markdown": "- **LED Night Lights** : 3D illusion football desk lamps or paint-your-own football lamp kits (£9.99–£12.72).[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)\n- **Cosy Bedding & Wearables** : Giant soft blanket hoodies (£16.99) or football-themed throw blankets.[[1]](https://www.amazon.co.uk/kids-football-gifts/s?k=kids+football+gifts)",
+              "links": null,
+              "images": null,
+              "references": null
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "To help narrow down the best choice, tell me:How old is the child?\nAre you looking for something to play with outside, build/collect, or decorate a room ?\nWhat is your budget ?",
+              "markdown": "To help narrow down the best choice, tell me:\n\n- **How old** is the child?\n- Are you looking for something to **play with outside**, **build/collect** , or **decorate a room**?\n- What is your **budget**?",
+              "links": null,
+              "images": null,
+              "references": null
+            }
+          ],
+          "references": null,
+          "rectangle": null
+        },
+        "paaQuestions": [
+          "What to get a kid that loves football?",
+          "What is a good gift for a boy who is a football fan?",
+          "What to buy a football mad child?",
+          "What is the best football gift?"
+        ],
+        "paaExpandedOverviews": [
+          {
+            "question": "What to get a kid that loves football?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What is a good gift for a boy who is a football fan?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What to buy a football mad child?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What is the best football gift?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          }
+        ],
+        "relatedSearches": [
+          "Football gifts for kids boys",
+          "Football gifts for kids girls",
+          "Football gifts for 10 year old boy",
+          "Football gifts for kids amazon",
+          "Best football gifts for kids",
+          "Football gifts for 6 year old Boy"
+        ]
+      }
+    },
+    "football stocking fillers": {
+      "organic": [
+        {
+          "rank": 1,
+          "domain": "www.sportsdirect.com",
+          "title": "Stocking Fillers | Toys, Games, Gift Sets",
+          "url": "https://www.sportsdirect.com/gifting/christmas/stocking-fillers"
+        },
+        {
+          "rank": 2,
+          "domain": "www.directsoccer.co.uk",
+          "title": "Stocking Fillers",
+          "url": "https://www.directsoccer.co.uk/football-kits/most-popular/stocking-fillers?srsltid=AU7gw4UK7UkNJ0IuN6Q5xrNIDAI0zd7ikznbHHxRfAkCV_GiMQi0VDp4"
+        },
+        {
+          "rank": 3,
+          "domain": "www.etsy.com",
+          "title": "Football Fillers - Etsy UK",
+          "url": "https://www.etsy.com/uk/market/football_fillers"
+        },
+        {
+          "rank": 4,
+          "domain": "laceeze.co.uk",
+          "title": "20 Budget Friendly Stocking Filler Ideas for Football Kids ...",
+          "url": "https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20"
+        },
+        {
+          "rank": 5,
+          "domain": "www.pinterest.com",
+          "title": "Football Stocking Stuffers",
+          "url": "https://www.pinterest.com/ideas/football-stocking-stuffers/914629259917/"
+        },
+        {
+          "rank": 6,
+          "domain": "store.manutd.com",
+          "title": "Buy Stocking Fillers | Manchester United Store",
+          "url": "https://store.manutd.com/en-gb/c/christmas/stocking-fillers?srsltid=AU7gw4WcUXkut41AuvENSZcRIztca-4YUaM7oFM-UAaKgWX8JVrLKWJa"
+        },
+        {
+          "rank": 7,
+          "domain": "grippysports.co.uk",
+          "title": "The 5 Best Football Gifts & Stocking Fillers in 2025",
+          "url": "https://grippysports.co.uk/blogs/blog/5-best-gifts-for-footballers-in-2025?srsltid=AU7gw4UMYEp4Rm5jLXx7_GWUOLoWJgWVhHH1TtgozlZRaOHXu2RTeUG_"
+        },
+        {
+          "rank": 8,
+          "domain": "www.amazon.co.uk",
+          "title": "Football Stocking Fillers",
+          "url": "https://www.amazon.co.uk/football-stocking-fillers/s?k=football+stocking+fillers"
+        },
+        {
+          "rank": 9,
+          "domain": "www.manutd.com",
+          "title": "Top 10 stocking fillers for United fans",
+          "url": "https://www.manutd.com/en/news/top-10-stocking-fillers-for-christmas-2024-man-utd-fans-official-merchandise"
+        }
+      ],
+      "itemTypes": [
+        "ai_overview",
+        "organic",
+        "people_also_ask"
+      ],
+      "features": {
+        "aiOverview": {
+          "type": "ai_overview",
+          "rank_group": 1,
+          "rank_absolute": 1,
+          "page": 1,
+          "position": "left",
+          "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]",
+          "asynchronous_ai_overview": false,
+          "markdown": "The best football stocking fillers are `small, budget-friendly accessories under £20` that fit easily into a Christmas stocking while celebrating a love for the game.\n\n### Practical Gear & Training Aids\n\n- **Boot Buddy** : A handy handheld tool to clean muddy football boots quickly (£10–£15).\n- **Grip Socks** : Special anti-slip socks designed to keep feet secure inside boots during play (£5–£10).[[1]](https://www.youtube.com/watch?v=H0ATdYG2KP0)\n- **Custom Shin Pads** : Personalised pads featuring photos, names, or favorite colors.[[1]](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20)[[2]](https://grippysports.co.uk/blogs/blog/5-best-gifts-for-footballers-in-2025)\n- **Glove Glu** : A spray designed to revive and improve goalkeeper glove grip.\n- **[Precision Training Water Bottle](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462428637450992,imageDocid:90230892321379795,gpcid:10843811548282275404,headlineOfferDocid:661904108756075076,catalogid:8439837666109566524,productDocid:5283901546687564393,rds:CSS_PC_10843811548282275404%7CPC_10843811548282275404%7CPROD_CSS_PC_10843811548282275404%7CPROD_PC_10843811548282275404&q=product&sa=X&ved=2ahUKEwjajdXN-q2XAxVr4ckDHSq9BN4Qxa4PegoIAggACAAIDhAg)** : A sturdy hydration essential for training sessions (£3.71–£4.95).[[1]](https://www.directsoccer.co.uk/football-kits/most-popular/stocking-fillers)\n\n### Fun & Novelty Gifts\n\n- **Personalised FUT Cards** : Custom FIFA-style player rating cards printed with a photo and custom stats.[[1]](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20)\n- **Novelty Football Socks** : Fun match-day socks featuring slogans like \"Do Not Disturb, I'm Watching Football\" (approx. £2–£5).[[1]](https://www.google.com/search?q=product&prds=pvt:hg,productid:12345222521848511624,catalogid:10939690616829947418,gpcid:1370015909418036004,mid:576462896353263012&ibp=oshop)\n- **Football Fillers & Keyrings** : 3D-printed shirt keyrings, club badges, and themed coasters available on platforms like [Etsy Football Fillers](https://www.etsy.com/uk/market/football_fillers).[[1]](https://www.etsy.com/uk/market/football_fillers)\n- **Top Trumps or Mini Card Games** : Football trivia and card games that easily slide into a stocking.\n\nYou can also browse broader collections of small gifts and accessories at [Laceeze Stocking Filler Ideas](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20) or check out [Sports Direct Stocking Fillers](https://www.sportsdirect.com/gifting/christmas/stocking-fillers) for more inspiration.[[1]](https://www.sportsdirect.com/gifting/christmas/stocking-fillers)[[2]](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20)If you'd like, tell me:\n\n- The **age** of the person receiving the stocking\n- Are they a **player** or a **fan** (and do you know their favorite team)?\n- Your **budget** for the stocking overall\n\nI can tailor these ideas into a specific shopping list for you.",
+          "items": [
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "The best football stocking fillers are small, budget-friendly accessories under £20 that fit easily into a Christmas stocking while celebrating a love for the game.",
+              "markdown": "The best football stocking fillers are `small, budget-friendly accessories under £20` that fit easily into a Christmas stocking while celebrating a love for the game.",
+              "links": null,
+              "images": null,
+              "references": null
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": "Practical Gear & Training Aids",
+              "text": "Boot Buddy : A handy handheld tool to clean muddy football boots quickly (£10–£15). Grip Socks : Special anti-slip socks designed to keep feet secure inside boots during play (£5–£10). Custom Shin Pads : Personalised pads featuring photos, names, or favorite colors. Glove Glu : A spray designed to revive and improve goalkeeper glove grip. Precision Training Water Bottle : A sturdy hydration essential for training sessions (£3.71–£4.95).",
+              "markdown": "- **Boot Buddy** : A handy handheld tool to clean muddy football boots quickly (£10–£15).\n- **Grip Socks** : Special anti-slip socks designed to keep feet secure inside boots during play (£5–£10).[[1]](https://www.youtube.com/watch?v=H0ATdYG2KP0)\n- **Custom Shin Pads** : Personalised pads featuring photos, names, or favorite colors.[[1]](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20)[[2]](https://grippysports.co.uk/blogs/blog/5-best-gifts-for-footballers-in-2025)\n- **Glove Glu** : A spray designed to revive and improve goalkeeper glove grip.\n- **[Precision Training Water Bottle](https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462428637450992,imageDocid:90230892321379795,gpcid:10843811548282275404,headlineOfferDocid:661904108756075076,catalogid:8439837666109566524,productDocid:5283901546687564393,rds:CSS_PC_10843811548282275404%7CPC_10843811548282275404%7CPROD_CSS_PC_10843811548282275404%7CPROD_PC_10843811548282275404&q=product&sa=X&ved=2ahUKEwjajdXN-q2XAxVr4ckDHSq9BN4Qxa4PegoIAggACAAIDhAg)** : A sturdy hydration essential for training sessions (£3.71–£4.95).[[1]](https://www.directsoccer.co.uk/football-kits/most-popular/stocking-fillers)",
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Precision Training Water BottleGo to product viewer dialogue for this item.",
+                  "description": null,
+                  "url": "https://www.google.com/search?ibp=oshop&prds=pvt:hg,pvo:48,mid:576462428637450992,imageDocid:90230892321379795,gpcid:10843811548282275404,headlineOfferDocid:661904108756075076,catalogid:8439837666109566524,productDocid:5283901546687564393,rds:CSS_PC_10843811548282275404%7CPC_10843811548282275404%7CPROD_CSS_PC_10843811548282275404%7CPROD_PC_10843811548282275404&q=product&sa=X&ved=2ahUKEwjajdXN-q2XAxVr4ckDHSq9BN4Qxa4PegoIAggACAAIDhAg",
+                  "domain": "www.google.com"
+                }
+              ],
+              "images": null,
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "YouTube",
+                  "domain": "www.youtube.com",
+                  "url": "https://www.youtube.com/watch?v=H0ATdYG2KP0",
+                  "title": "30+ Best Gifts for FOOTBALL + SOCCER fans ...",
+                  "text": "30+ Best Gifts for FOOTBALL + SOCCER fans! Footballers Ultimate Gift Guide ⚽️ hi guys welcome back to my channel today as promised..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Laceeze",
+                  "domain": "laceeze.co.uk",
+                  "url": "https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20",
+                  "title": "20 Budget Friendly Stocking Filler Ideas for Football Kids Under £20 – Laceeze",
+                  "text": "Stocking fillers under £20 for football kids: Boot bags, attachable goal targets, Bootbuddy, rechargeable hand warmers, Boot claw,"
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Grippy Sports",
+                  "domain": "grippysports.co.uk",
+                  "url": "https://grippysports.co.uk/blogs/blog/5-best-gifts-for-footballers-in-2025",
+                  "title": "The 5 Best Football Gifts & Stocking Fillers in 2025 - Grippy Sports",
+                  "text": "5 Best Gifts for Footballers in 2025. September 16, 2022. Share Share. Link. Close share. Copy link. With the season well underway..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Direct Soccer",
+                  "domain": "www.directsoccer.co.uk",
+                  "url": "https://www.directsoccer.co.uk/football-kits/most-popular/stocking-fillers",
+                  "title": "Stocking Fillers | Direct Soccer",
+                  "text": "Stocking Fillers. Browse our range of great stocking fillers that won't break the bank! Read More... Browse our range of great sto..."
+                }
+              ]
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": "Fun & Novelty Gifts",
+              "text": "Personalised FUT Cards : Custom FIFA-style player rating cards printed with a photo and custom stats. Novelty Football Socks : Fun match-day socks featuring slogans like \"Do Not Disturb, I'm Watching Football\" (approx. £2–£5). Football Fillers & Keyrings : 3D-printed shirt keyrings, club badges, and themed coasters available on platforms like Etsy Football Fillers. Top Trumps or Mini Card Games : Football trivia and card games that easily slide into a stocking.",
+              "markdown": "- **Personalised FUT Cards** : Custom FIFA-style player rating cards printed with a photo and custom stats.[[1]](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20)\n- **Novelty Football Socks** : Fun match-day socks featuring slogans like \"Do Not Disturb, I'm Watching Football\" (approx. £2–£5).[[1]](https://www.google.com/search?q=product&prds=pvt:hg,productid:12345222521848511624,catalogid:10939690616829947418,gpcid:1370015909418036004,mid:576462896353263012&ibp=oshop)\n- **Football Fillers & Keyrings** : 3D-printed shirt keyrings, club badges, and themed coasters available on platforms like [Etsy Football Fillers](https://www.etsy.com/uk/market/football_fillers).[[1]](https://www.etsy.com/uk/market/football_fillers)\n- **Top Trumps or Mini Card Games** : Football trivia and card games that easily slide into a stocking.",
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Etsy Football Fillers",
+                  "description": null,
+                  "url": "https://www.etsy.com/uk/market/football_fillers",
+                  "domain": "www.etsy.com"
+                }
+              ],
+              "images": null,
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Laceeze",
+                  "domain": "laceeze.co.uk",
+                  "url": "https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20",
+                  "title": "20 Budget Friendly Stocking Filler Ideas for Football Kids Under £20 – Laceeze",
+                  "text": "Stocking fillers under £20 for football kids: Boot bags, attachable goal targets, Bootbuddy, rechargeable hand warmers, Boot claw,"
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Google",
+                  "domain": "www.google.com",
+                  "url": "https://www.google.com/search?q=product&prds=pvt:hg,productid:12345222521848511624,catalogid:10939690616829947418,gpcid:1370015909418036004,mid:576462896353263012&ibp=oshop",
+                  "title": "Men's Do Not Disturb Football Socks",
+                  "text": "Featuring a funny \"Do not disturb, I'm watching football\" quote, these socks can be an ideal gift idea for football enthusiasts Si..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Etsy",
+                  "domain": "www.etsy.com",
+                  "url": "https://www.etsy.com/uk/market/football_fillers",
+                  "title": "Football Fillers",
+                  "text": "Football Fillers * Felt Football/ Wool Felted Sport Shapes/ DIY Garland/ Boy Nursery Decor/ Sports Fan/ Newborn Photo Shoot Props/"
+                }
+              ]
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "You can also browse broader collections of small gifts and accessories at Laceeze Stocking Filler Ideas or check out Sports Direct Stocking Fillers for more inspiration.",
+              "markdown": "You can also browse broader collections of small gifts and accessories at [Laceeze Stocking Filler Ideas](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20) or check out [Sports Direct Stocking Fillers](https://www.sportsdirect.com/gifting/christmas/stocking-fillers) for more inspiration.[[1]](https://www.sportsdirect.com/gifting/christmas/stocking-fillers)[[2]](https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20)",
+              "links": [
+                {
+                  "type": "link_element",
+                  "title": "Laceeze Stocking Filler Ideas",
+                  "description": null,
+                  "url": "https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20",
+                  "domain": "laceeze.co.uk"
+                },
+                {
+                  "type": "link_element",
+                  "title": "Sports Direct Stocking Fillers",
+                  "description": null,
+                  "url": "https://www.sportsdirect.com/gifting/christmas/stocking-fillers",
+                  "domain": "www.sportsdirect.com"
+                }
+              ],
+              "images": null,
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Sports Direct",
+                  "domain": "www.sportsdirect.com",
+                  "url": "https://www.sportsdirect.com/gifting/christmas/stocking-fillers",
+                  "title": "Stocking Fillers | Toys, Games, Gift Sets",
+                  "text": "Stocking Fillers | Toys, Games, Gift Sets * Trainers * Football Shirts * Tracksuits * Hoodies * T-shirts * Loungewear * Coats & Ja..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "left",
+                  "source": "Laceeze",
+                  "domain": "laceeze.co.uk",
+                  "url": "https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20",
+                  "title": "20 Budget Friendly Stocking Filler Ideas for Football Kids Under £20 – Laceeze",
+                  "text": "Stocking fillers under £20 for football kids: Boot bags, attachable goal targets, Bootbuddy, rechargeable hand warmers, Boot claw,"
+                }
+              ]
+            },
+            {
+              "type": "ai_overview_element",
+              "position": "left",
+              "title": null,
+              "text": "If you'd like, tell me:The age of the person receiving the stocking\nAre they a player or a fan (and do you know their favorite team)?\nYour budget for the stocking overall\nI can tailor these ideas into a specific shopping list for you.",
+              "markdown": "If you'd like, tell me:\n\n- The **age** of the person receiving the stocking\n- Are they a **player** or a **fan** (and do you know their favorite team)?\n- Your **budget** for the stocking overall\n\nI can tailor these ideas into a specific shopping list for you.",
+              "links": null,
+              "images": null,
+              "references": null
+            }
+          ],
+          "references": [
+            {
+              "type": "ai_overview_reference",
+              "position": "right",
+              "source": "Laceeze",
+              "domain": "laceeze.co.uk",
+              "url": "https://laceeze.co.uk/blogs/laceeze-blog/20-budget-friendly-stocking-filler-ideas-for-football-kids-under-20",
+              "title": "20 Budget Friendly Stocking Filler Ideas for Football Kids Under £20 – Laceeze",
+              "text": "Stocking fillers under £20 for football kids: Boot bags, attachable goal targets, Bootbuddy, rechargeable hand warmers, Boot claw,"
+            },
+            {
+              "type": "ai_overview_reference",
+              "position": "right",
+              "source": "Etsy",
+              "domain": "www.etsy.com",
+              "url": "https://www.etsy.com/uk/market/football_fillers",
+              "title": "Football Fillers",
+              "text": "Football Fillers * Felt Football/ Wool Felted Sport Shapes/ DIY Garland/ Boy Nursery Decor/ Sports Fan/ Newborn Photo Shoot Props/"
+            },
+            {
+              "type": "ai_overview_reference",
+              "position": "right",
+              "source": "Direct Soccer",
+              "domain": "www.directsoccer.co.uk",
+              "url": "https://www.directsoccer.co.uk/football-kits/most-popular/stocking-fillers",
+              "title": "Stocking Fillers | Direct Soccer",
+              "text": "Stocking Fillers. Browse our range of great stocking fillers that won't break the bank! Read More... Browse our range of great sto..."
+            },
+            {
+              "type": "ai_overview_reference",
+              "position": "right",
+              "source": "Sports Direct",
+              "domain": "www.sportsdirect.com",
+              "url": "https://www.sportsdirect.com/gifting/christmas/stocking-fillers",
+              "title": "Stocking Fillers | Toys, Games, Gift Sets",
+              "text": "Stocking Fillers | Toys, Games, Gift Sets * Trainers * Football Shirts * Tracksuits * Hoodies * T-shirts * Loungewear * Coats & Ja..."
+            },
+            {
+              "type": "ai_overview_reference",
+              "position": "right",
+              "source": "Grippy Sports",
+              "domain": "grippysports.co.uk",
+              "url": "https://grippysports.co.uk/blogs/blog/5-best-gifts-for-footballers-in-2025",
+              "title": "The 5 Best Football Gifts & Stocking Fillers in 2025 - Grippy Sports",
+              "text": "5 Best Gifts for Footballers in 2025. September 16, 2022. Share Share. Link. Close share. Copy link. With the season well underway..."
+            },
+            {
+              "type": "ai_overview_reference",
+              "position": "right",
+              "source": "YouTube",
+              "domain": "www.youtube.com",
+              "url": "https://www.youtube.com/watch?v=H0ATdYG2KP0",
+              "title": "30+ Best Gifts for FOOTBALL + SOCCER fans ...",
+              "text": "30+ Best Gifts for FOOTBALL + SOCCER fans! Footballers Ultimate Gift Guide ⚽️ hi guys welcome back to my channel today as promised..."
+            },
+            {
+              "type": "ai_overview_reference",
+              "position": "right",
+              "source": "Google",
+              "domain": "www.google.com",
+              "url": "https://www.google.com/search?q=product&prds=pvt:hg,productid:12345222521848511624,catalogid:10939690616829947418,gpcid:1370015909418036004,mid:576462896353263012&ibp=oshop",
+              "title": "Men's Do Not Disturb Football Socks",
+              "text": "Featuring a funny \"Do not disturb, I'm watching football\" quote, these socks can be an ideal gift idea for football enthusiasts Si..."
+            }
+          ],
+          "rectangle": null
+        },
+        "paaQuestions": [
+          "What are some good football stocking stuffers?",
+          "What are good stocking fillers?",
+          "What are some good football gift ideas?",
+          "What are some good stocking fillers for boys?"
+        ],
+        "paaExpandedOverviews": [
+          {
+            "question": "What are some good football stocking stuffers?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What are good stocking fillers?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What are some good football gift ideas?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What are some good stocking fillers for boys?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          }
+        ],
+        "relatedSearches": []
+      }
+    },
+    "football gifts for boys": {
+      "organic": [
+        {
+          "rank": 1,
+          "domain": "www.amazon.co.uk",
+          "title": "Football Gifts For Boys Age 8",
+          "url": "https://www.amazon.co.uk/football-gifts-boys-age-8/s?k=football+gifts+for+boys+age+8"
+        },
+        {
+          "rank": 2,
+          "domain": "childrensfootball.com",
+          "title": "Childrens Football Gifts",
+          "url": "https://childrensfootball.com/collections/football-gifts"
+        },
+        {
+          "rank": 3,
+          "domain": "www.argos.co.uk",
+          "title": "Football Gifts",
+          "url": "https://www.argos.co.uk/sd/football-gifts/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.smythstoys.com",
+          "title": "Football Training Equipment",
+          "url": "https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701"
+        },
+        {
+          "rank": 5,
+          "domain": "www.footy.com",
+          "title": "15 great football gifts for kids",
+          "url": "https://www.footy.com/blog/culture/football-gifts-for-kids/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.menkind.co.uk",
+          "title": "Football Gifts | Great for Xmas & Birthdays",
+          "url": "https://www.menkind.co.uk/football-gifts"
+        },
+        {
+          "rank": 7,
+          "domain": "www.sportsgearswag.com",
+          "title": "20 Gift Ideas for Kids that Love Football",
+          "url": "https://www.sportsgearswag.com/blog/20-gift-ideas-for-kids-that-love-football?srsltid=AU7gw4XjQ5MBHE-RS6xl9ZQqaewl_kN0hyJWzc1OsKh-CXI8OW97yvwB"
+        },
+        {
+          "rank": 8,
+          "domain": "www.pinterest.com",
+          "title": "Kids Football Gift Ideas",
+          "url": "https://www.pinterest.com/ideas/kids-football-gift-ideas/949726639567/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.matalan.co.uk",
+          "title": "Football Gifts",
+          "url": "https://www.matalan.co.uk/c/gifts/football-gifts/"
+        },
+        {
+          "rank": 10,
+          "domain": "www.sportsdirect.com",
+          "title": "Football Gifts",
+          "url": "https://www.sportsdirect.com/gifting/gifts-by-sport/football"
+        }
+      ],
+      "itemTypes": [
+        "organic",
+        "popular_products",
+        "people_also_search",
+        "people_also_ask",
+        "related_searches"
+      ],
+      "features": {
+        "paaQuestions": [
+          "What to get a boy that loves football?",
+          "What is the best gift for someone who loves football?",
+          "What to get someone obsessed with football?",
+          "What are some good soccer gift ideas for boys?"
+        ],
+        "paaExpandedOverviews": [
+          {
+            "question": "What to get a boy that loves football?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What is the best gift for someone who loves football?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What to get someone obsessed with football?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          },
+          {
+            "question": "What are some good soccer gift ideas for boys?",
+            "item": {
+              "type": "people_also_ask_ai_overview_expanded_element",
+              "items": null,
+              "references": null,
+              "asynchronous_ai_overview": true
+            }
+          }
+        ],
+        "relatedSearches": [
+          "Football gifts for boys under 10",
+          "Football gifts for boys Age 5",
+          "Best football gifts for boys",
+          "Football gifts for boys amazon",
+          "Football gifts for 13 year old boy",
+          "Football gifts for 12 Year Old Boy"
+        ]
+      }
+    }
+  },
+  "pages": [
+    {
+      "url": "https://childrensfootball.com/collections/football-gifts",
+      "title": "Collection: Childrens Football Gifts",
+      "headings": [
+        "Collection: Childrens Football Gifts",
+        "Kids Football Gift Sets",
+        "Sort by:",
+        "81 products",
+        "Filter and sort",
+        "Filter",
+        "Team Merchandise 45x34x15cm Ultra Backpack 25L",
+        "Precision Pro Double Sided Football Rebounder",
+        "2-in-1 Football Skills Trainer, Cones, Football & Pump Gift Set",
+        "ChildrensFootball.com Goalkeeper Gloves, Skills Trainer & Football Gift Set",
+        "Football, Pump, Bag and Sports Bottle Gift Set - ideal for children aged 6 to 10",
+        "Backpack with Football Holder Gift Set - Personalisation Available",
+        "Winter Football Player and Supporter Gift Set",
+        "Set of Two Precision Top Bins Corner Targets for Football Goals",
+        "Team Merchandise 3D BRXLZ Football",
+        "Team Merchandise Man United 11oz Fade Mug",
+        "Childrens Football Gift Set for 2 to 5 year olds",
+        "ChildrensFootball.com Shin Pads & Football Gift Set",
+        "Pair of Pop-up Goals & Football Gift Set",
+        "Team Merchandise 32 Panel Camo Signature Full Size Football",
+        "Precision Pro Matrix Shinguards with Sleeves",
+        "Precision Junior Fusion X Flat Cut Essential GK Gloves",
+        "Browse all Childrens Football Gifts, Toys & Games",
+        "Garden Goals & Accessories",
+        "Football Team Merchandise",
+        "Team Building Bricks Sets",
+        "Toys & Games",
+        "PrecisionPLAY Range"
+      ],
+      "problem": null
+    },
+    {
+      "url": "https://www.meandmysport.co.uk/football",
+      "title": "Football",
+      "headings": [
+        "Football",
+        "Arsenal FC Greatest Football Clubs Book",
+        "Chelsea FC Greatest Football Clubs Book",
+        "Football Stadium Unframed Print Six Teams",
+        "Liverpool FC Greatest Football Clubs Book",
+        "Manchester United Greatest Football Clubs Book",
+        "On the Ball Football Beer Glass",
+        "Personalised Coach's Whistle",
+        "Stinky Feet Shoe and Sports Bag Air Fresheners",
+        "The Striker Football Wallet - By THE GAME ™",
+        "Footballer Sculpture",
+        "Football Men's Upcycled Crew Socks",
+        "Personalised On This Day Football Team Book - 10 teams",
+        "Chocolate Football Gift Tin",
+        "Etched Glass Football Tumbler",
+        "Anfield Football Stadium Mug",
+        "Multi Football Leather Wallet",
+        "City of Manchester Football Stadium Mug",
+        "Old Trafford Football Stadium Mug",
+        "Highbury Football Stadium Mug",
+        "Stamford Bridge Football Stadium Mug",
+        "Personalised Name Football keyring",
+        "White Hart Lane Football New & Old Stadium Mug",
+        "Football leather wallet",
+        "Gift Set Football Card and Coaster",
+        "Personalised Football Shirt Cufflinks",
+        "Football Quotes Coasters",
+        "Football Soap on a Rope",
+        "Football Muddy Boot Brush",
+        "Vintage Football Tops Jigsaw"
+      ],
+      "problem": null
+    },
+    {
+      "url": "https://www.smythstoys.com/uk/en-gb/outdoor/sports-and-equipment/football/c/SM06030701",
+      "title": null,
+      "headings": [],
+      "problem": "no readable text (may need JavaScript rendering, or the site blocks crawlers)"
+    },
+    {
+      "url": "https://www.footballgifts.co.uk/",
+      "title": "Welcome to football gifts",
+      "headings": [
+        "Welcome to football gifts",
+        "Christmas delivery 2026",
+        "LEGAL INFORMATION",
+        "Welcome To Football Gifts",
+        "GiftS For fans OF THE BEAUTIFUL GAME",
+        "NEW! Retro Shirt Bucket Hats",
+        "Available for 80 Clubs- Here Comes The Summer!",
+        "FOOTBALL GREETING CARDS",
+        "Available for over 80 Clubs",
+        "CHAMPIONS oF eNGLAND 2026!",
+        "A great range of gifts to celebrate the Gooners 1st title in 22 years!",
+        "CHAMPIONSHIP CHAMPIONS 2026!",
+        "A great range of gifts to celebrate the Sky Blues return to the Top Flight",
+        "Retro Football Shirt Gifts",
+        "CLASSIC KITS RECREATED ON A VARIETY OF PRODUCTS",
+        "AROUND THE GROUNDS",
+        "Fabulous water colour pieces of art of your Team’s stadium",
+        "Christmas Delivery Deadline 2026",
+        "Mon 14th Dec",
+        "Time Remaining",
+        "FIND THE PERFECT GIFT",
+        "Shop By Team",
+        "Enter Your Team’s Name",
+        "SHOP BY PRODUCT Browse All",
+        "All Our Product categories Browse All",
+        "Aprons",
+        "Around The Grounds",
+        "At The Match Personalised Gifts",
+        "Car Head Rest Covers",
+        "Heart Glitter Blocks"
+      ],
+      "problem": null
+    },
+    {
+      "url": "https://www.redletterdays.co.uk/sports/football",
+      "title": "Football Gifts & Experiences",
+      "headings": [
+        "Football Gifts & Experiences",
+        "Stadium Tours",
+        "Adult Arsenal Emirates Stadium Tour for Two",
+        "A Tour of Arsenal Football Club's Emirates Stadium for One Adult and One Child",
+        "Liverpool FC Anfield Stadium Tour and Museum Entry for Two",
+        "Old Trafford Manchester United Stadium Tour for Two Adults",
+        "Old Trafford Manchester United Stadium Tour for One Adult and One Child",
+        "Wembley Stadium Tour for Two Adults and Two Children",
+        "Old Trafford Manchester United Stadium Tour for One Adult",
+        "Tour of Wembley Stadium for Two Adults",
+        "Arsenal Tour of Emirates Stadium for One Child",
+        "Liverpool FC Anfield Stadium Tour for One Adult and One Child with Museum Entry",
+        "Arsenal Tour of Emirates Stadium for One Adult",
+        "Old Trafford Manchester United Stadium Tour for Two Adults and Two Children",
+        "Tour of Wembley Stadium for One Adult and One Child",
+        "Arsenal Emirates Stadium Tour for Two Adults and Two Children",
+        "Family Manchester City Etihad Stadium Tour for Two Adults and Two Children",
+        "New Classic Stadium Tour of Chelsea FC Stamford Bridge for One Adult and One Child",
+        "Liverpool FC Anfield Stadium Family Tour with Museum Entry for Two Adults and Two Children",
+        "Wembley Stadium Tour for One Child",
+        "The Anfield Abseil at Liverpool FC Anfield Stadium for One Adult",
+        "Old Trafford Manchester United Stadium Tour for One Child",
+        "The Anfield Abseil at Liverpool FC Anfield Stadium for Two Adults",
+        "The Anfield Experience at Liverpool FC for Two",
+        "The Dare Skywalk at Tottenham Hotspur Stadium for One Adult and One Child",
+        "The Anfield Experience at Liverpool FC for One",
+        "Manchester City Etihad Stadium Tour for One Adult and One Child",
+        "New Chelsea FC Stamford Bridge Stadium Tour for One Adult and One Child",
+        "Legends Q and A with Liverpool FC Anfield Stadium Tour for Two People",
+        "Tour of West Ham London Stadium for Two Adults"
+      ],
+      "problem": null
+    },
+    {
+      "url": "https://www.footballgiftsonline.co.uk/?srsltid=AU7gw4XTl3Jf9LT34DD6e1sSc-BceIENqJgSMrbsI8RZwkrq1otn_GVb",
+      "title": "Buy OFFICIAL Premier League football team gifts",
+      "headings": [
+        "Buy OFFICIAL Premier League football team gifts",
+        "Arsenal Shop",
+        "Chelsea Shop",
+        "Everton Shop",
+        "Liverpool FC Shop",
+        "Manchester City Shop",
+        "Manchester United Shop",
+        "Tottenham Hotspur Shop",
+        "Newcastle United Shop",
+        "Buy Official Licensed Football Gifts",
+        "Fancy a Brew?",
+        "Unique Football Merchandise",
+        "Keep Warm this Winter!",
+        "Browse our Official Football Shops",
+        "Fan Favourites",
+        "Arsenal Sterling Silver Crest Cufflinks",
+        "Everton Rubber Duck",
+        "Liverpool FC Large Super Titanium Ring",
+        "Manchester United Fade Backpack",
+        "Newcastle United Stripe Wallet",
+        "Arsenal Rubiks Cube",
+        "Arsenal FC ‘Colour In’ Mini Football Set",
+        "Chelsea FC Stripe Tie"
+      ],
+      "problem": null
+    }
+  ]
+}

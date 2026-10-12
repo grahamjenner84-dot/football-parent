@@ -91,6 +91,7 @@ export const routes = [
   '/football-gear/shin-pads/best-shin-pads-for-kids-football',
   '/football-gear/veo-camera-alternatives',
   '/football-gear/best-football-gps-trackers-for-kids',
+  '/football-gear/christmas-football-gifts-for-kids',
 
   // Girls Football
   '/girls-football/girls-academy-vs-grassroots-football',
@@ -117,6 +118,8 @@ export const routes = [
   '/parent-guides/how-to-become-a-football-coach',
   '/parent-guides/futurefit-football-dna-interview-part-2',
   '/parent-guides/matt-baxter-young-footballer-mindset-interview',
+  '/parent-guides/chris-robinson-football-scout-interview',
+  '/parent-guides/pre-academy-football-parent-interview',
   '/parent-guides/jpl-martin-brock-interview-part-1',
   '/parent-guides/jpl-martin-brock-interview-part-2',
   '/parent-guides/best-football-stats-apps',

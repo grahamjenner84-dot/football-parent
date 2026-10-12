@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getPageViewsForPath } from "@/lib/supabase/page-views";
 import { OUTBOUND_PARTNERS } from "@/lib/outbound-partners";
+import { getAllArticleSlugs, getArticleSlugsUsing } from "@/lib/content";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/page-views.ts and lib/supabase/affiliate-clicks.ts - this must
@@ -99,6 +100,92 @@ export interface PartnerClickPartner {
   clicks: number;
 }
 
+export interface PartnerClickPlacement {
+  placement: string;
+  label: string;
+  clicks: number;
+  // Human views of the pages that carry this placement over the same window,
+  // and clicks / impressions. A page view, not "scrolled into view": the end
+  // card sits at the bottom of the page, so its rate reads low against the
+  // mid-article box. null for "unlabelled", which has no single placement.
+  impressions: number | null;
+  ctr: number | null;
+}
+
+// Which placements a page view counts as an impression for. Must mirror where
+// the components render: the end card is in lib/ArticleLayout.tsx (every MDX
+// article), the mid-article box wherever an article's MDX uses
+// <InstagramPromo />, and the footer link is on every page.
+function instagramPlacementsOnPath(
+  path: string,
+  articleSlugs: Set<string>,
+  promoSlugs: Set<string>
+): string[] {
+  const placements = ["footer"];
+  const slug = path.split("/").filter(Boolean).pop();
+  if (slug && articleSlugs.has(slug)) placements.push("end-card");
+  if (slug && promoSlugs.has(slug)) placements.push("mid-article");
+  return placements;
+}
+
+async function getInstagramImpressions(
+  supabase: ReturnType<typeof adminClient>,
+  since: string
+): Promise<Map<string, number>> {
+  const articleSlugs = getAllArticleSlugs();
+  const promoSlugs = getArticleSlugsUsing("<InstagramPromo");
+  const counts = new Map<string, number>();
+
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("path, user_agent")
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (error) throw new Error("Failed to read page_views: " + error.message);
+
+    const batch = (data ?? []) as { path: string; user_agent: string | null }[];
+    for (const row of batch) {
+      if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
+      if (row.path.startsWith("/admin")) continue;
+      for (const p of instagramPlacementsOnPath(row.path, articleSlugs, promoSlugs)) {
+        counts.set(p, (counts.get(p) ?? 0) + 1);
+      }
+    }
+    if (batch.length < pageSize) break;
+  }
+
+  return counts;
+}
+
+// Instagram only: where on the site each click to our own profile came from,
+// read from the utm_content the links carry (instagramUrl in
+// app/components/InstagramFollow.tsx). Links from before the tags were added
+// (8 Oct 2026) have none and count as "unlabelled".
+const INSTAGRAM_PLACEMENT_LABELS: Record<string, string> = {
+  "end-card": "End of article card",
+  "mid-article": "Mid-article box",
+  footer: "Footer link",
+  unlabelled: "Unlabelled (before placements were tagged)",
+};
+
+// null when the link goes to someone else's Instagram (an interviewed
+// expert's profile), which says nothing about follows of our account.
+export function instagramPlacementFromHref(href: string): string | null {
+  let url: URL;
+  try {
+    url = new URL(href);
+  } catch {
+    return null;
+  }
+  const account = url.pathname.split("/").filter(Boolean)[0]?.toLowerCase();
+  if (account !== "football.parent") return null;
+  const placement = url.searchParams.get("utm_content");
+  return placement && placement in INSTAGRAM_PLACEMENT_LABELS ? placement : "unlabelled";
+}
+
 export interface PartnerClickStats {
   days: number;
   // The window actually used: the later of `days` ago and the point partner
@@ -112,6 +199,10 @@ export interface PartnerClickStats {
   // Rows excluded as bot traffic, reported rather than silently dropped so
   // totalClicks + botClicks reconciles with the raw table.
   botClicks: number;
+  // Instagram only (null otherwise): clicks by placement, and clicks to other
+  // people's Instagram profiles, which are left out of every other number.
+  byPlacement: PartnerClickPlacement[] | null;
+  otherAccountClicks: number | null;
 }
 
 // How many pages get a page-view denominator, one query each. Partner links
@@ -157,13 +248,22 @@ function buildPageCounts(rows: ClickRow[]): PartnerClickPageCount[] {
     .sort((a, b) => b.clicks - a.clicks);
 }
 
-export async function getPartnerClickStats(days: number = 30): Promise<PartnerClickStats> {
+export async function getPartnerClickStats(
+  days: number = 30,
+  // One partner's slug, so each destination gets its own click-through rate
+  // (Instagram follow clicks must not inflate Football DNA's). Omitted, every
+  // destination is counted together.
+  partner?: string
+): Promise<PartnerClickStats> {
   const supabase = adminClient();
 
-  // Never look further back than the point partner click logging went live, on
-  // both sides of the ratio - see PARTNER_TRACKING_STARTED_AT.
+  // Never look further back than the point click logging went live for this
+  // destination, on both sides of the ratio - see PARTNER_TRACKING_STARTED_AT.
   const requestedSince = Date.now() - days * 24 * 60 * 60 * 1000;
-  const trackingStart = new Date(PARTNER_TRACKING_STARTED_AT).getTime();
+  const trackingStart = new Date(
+    OUTBOUND_PARTNERS.find((p) => p.slug === partner)?.trackingStartedAt ??
+      PARTNER_TRACKING_STARTED_AT
+  ).getTime();
   const clampedToTrackingStart = trackingStart > requestedSince;
   const sinceMs = Math.max(requestedSince, trackingStart);
   const since = new Date(sinceMs).toISOString();
@@ -172,10 +272,12 @@ export async function getPartnerClickStats(days: number = 30): Promise<PartnerCl
 
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
-    const { data, error } = await supabase
+    let query = supabase
       .from("partner_clicks")
       .select("path, href, partner, host, link_text, user_agent, created_at")
-      .gte("created_at", since)
+      .gte("created_at", since);
+    if (partner) query = query.eq("partner", partner);
+    const { data, error } = await query
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
 
@@ -191,10 +293,43 @@ export async function getPartnerClickStats(days: number = 30): Promise<PartnerCl
   // The API route already refuses a self-declared bot (and a missing UA) at
   // insert time; this re-filter catches rows written before a pattern was
   // added to lib/user-agent-bots.ts, same as page_views and affiliate_clicks.
-  const humanRows = rows.filter(
+  const nonBotRows = rows.filter(
     (row) => !row.user_agent || !matchesKnownBotPattern(row.user_agent)
   );
-  const botClicks = rows.length - humanRows.length;
+  const botClicks = rows.length - nonBotRows.length;
+
+  // For Instagram, only clicks to our own profile count: the interviews also
+  // link to the experts' accounts, and those are not follows of ours.
+  const isInstagram = partner === "instagram";
+  const humanRows = isInstagram
+    ? nonBotRows.filter((row) => instagramPlacementFromHref(row.href) !== null)
+    : nonBotRows;
+
+  let byPlacement: PartnerClickPlacement[] | null = null;
+  if (isInstagram) {
+    const impressions = await getInstagramImpressions(supabase, since);
+    // Every placement gets a row, clicked or not, so a box nobody clicks
+    // still shows its impressions.
+    const counts = new Map<string, number>(
+      ["end-card", "mid-article", "footer"].map((p) => [p, 0])
+    );
+    for (const row of humanRows) {
+      const placement = instagramPlacementFromHref(row.href)!;
+      counts.set(placement, (counts.get(placement) ?? 0) + 1);
+    }
+    byPlacement = Array.from(counts.entries())
+      .map(([placement, clicks]) => {
+        const shown = placement === "unlabelled" ? null : impressions.get(placement) ?? 0;
+        return {
+          placement,
+          label: INSTAGRAM_PLACEMENT_LABELS[placement] ?? placement,
+          clicks,
+          impressions: shown,
+          ctr: shown ? clicks / shown : null,
+        };
+      })
+      .sort((a, b) => b.clicks - a.clicks);
+  }
 
   const labelForSlug = new Map(OUTBOUND_PARTNERS.map((p) => [p.slug, p.label]));
 
@@ -266,5 +401,7 @@ export async function getPartnerClickStats(days: number = 30): Promise<PartnerCl
     byPage,
     byPartner,
     botClicks,
+    byPlacement,
+    otherAccountClicks: isInstagram ? nonBotRows.length - humanRows.length : null,
   };
 }

@@ -35,7 +35,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => null);
     const takenAt = typeof body?.takenAt === "string" ? Date.parse(body.takenAt) : NaN;
-    const counts: Record<Exclude<keyof CoachAppUsageCounts, "signupsTodayWithTeam">, number | null> = {
+    const counts: Record<Exclude<keyof CoachAppUsageCounts, "signupsTodayWithTeam" | "emailsToday">, number | null> = {
       totalAccounts: count(body?.totalAccounts),
       signupsToday: count(body?.signupsToday),
       activeToday: count(body?.activeToday),
@@ -52,12 +52,14 @@ export async function POST(req: Request) {
     }
 
     // Optional: added after the first version of the Coach App function, so
-    // an older sender that doesn't include it still gets its row stored.
+    // an older sender that doesn't include them still gets its row stored.
     const signupsTodayWithTeam = count(body?.signupsTodayWithTeam);
+    const emailsToday = count(body?.emailsToday);
 
     await logCoachAppUsageSnapshot(new Date(takenAt).toISOString(), {
-      ...(counts as Omit<CoachAppUsageCounts, "signupsTodayWithTeam">),
+      ...(counts as Omit<CoachAppUsageCounts, "signupsTodayWithTeam" | "emailsToday">),
       signupsTodayWithTeam,
+      emailsToday,
     });
     return NextResponse.json({ ok: true });
   } catch (err) {

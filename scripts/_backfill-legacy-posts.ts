@@ -36,72 +36,16 @@ loadEnvLocal(REPO_ROOT);
 
 import { createAdminClient } from "../lib/supabase/render-pipeline";
 import { getAccountCredentials, ensureValidToken } from "../lib/instagram/publish-flow";
+import { discoverMedia } from "../lib/instagram/discover-media";
 
-const GRAPH_API_VERSION = process.env.IG_GRAPH_API_VERSION || "v23.0";
-
-interface IgMedia {
-  id: string;
-  media_type: string;
-  media_product_type?: string;
-  caption?: string;
-  timestamp: string;
-  permalink: string;
-}
-
-function buildMediaListUrl(igUserId: string, accessToken: string): string {
-  const u = new URL(`https://graph.instagram.com/${GRAPH_API_VERSION}/${igUserId}/media`);
-  u.searchParams.set("fields", "id,media_type,media_product_type,caption,timestamp,permalink");
-  u.searchParams.set("limit", "50");
-  u.searchParams.set("access_token", accessToken);
-  return u.toString();
-}
-
-async function fetchAllMedia(igUserId: string, accessToken: string): Promise<IgMedia[]> {
-  const all: IgMedia[] = [];
-  let nextUrl: string | null = buildMediaListUrl(igUserId, accessToken);
-
-  while (nextUrl) {
-    const res: Response = await fetch(nextUrl);
-    const json = await res.json();
-    if (!res.ok || json.error) throw new Error(`media list failed: ${JSON.stringify(json)}`);
-    all.push(...json.data);
-    nextUrl = json.paging?.next ?? null;
-  }
-  return all;
-}
-
-// Mirrors the same reel-vs-everything-else split the publisher already
-// uses (single images and carousels both get format='carousel' - there is
-// no separate 'single_image' format in the schema).
-function formatFor(m: IgMedia): "reel" | "carousel" {
-  return m.media_product_type === "REELS" || m.media_type === "VIDEO" ? "reel" : "carousel";
-}
-
+// The same discovery now runs at the start of every /api/cron/insights run
+// (lib/instagram/discover-media.ts); this script is for running it by hand.
 async function main() {
   const supabase = createAdminClient();
   const rawCreds = await getAccountCredentials(supabase);
   const creds = await ensureValidToken(supabase, rawCreds);
-
-  const media = await fetchAllMedia(creds.igUserId, creds.accessToken);
-  const reelCount = media.filter((m) => formatFor(m) === "reel").length;
-  console.log(`Fetched ${media.length} real media item(s): ${reelCount} reel(s), ${media.length - reelCount} carousel/feed post(s).`);
-
-  const rows = media.map((m) => ({
-    account_id: creds.accountRowId,
-    content_queue_id: null,
-    format: formatFor(m),
-    caption: m.caption ?? null,
-    scheduled_time: m.timestamp,
-    status: "published" as const,
-    ig_media_id: m.id,
-    published_at: m.timestamp,
-  }));
-
-  const { data, error } = await supabase.from("posts").upsert(rows, { onConflict: "ig_media_id", ignoreDuplicates: true }).select("id, ig_media_id");
-  if (error) throw new Error(`backfill upsert failed: ${error.message}`);
-
-  console.log(`\nUpsert returned ${data?.length ?? 0} row(s) (ignoreDuplicates means already-backfilled posts are silently skipped, not returned).`);
-  console.log("Done.");
+  const { onAccount, added } = await discoverMedia(supabase, creds);
+  console.log(`${onAccount} media item(s) on the account, ${added} new post row(s) added.`);
 }
 
 main().catch((e) => {

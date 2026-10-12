@@ -222,10 +222,13 @@ asking for a new one.
 When the expert has a headshot (check `public/expert-presets.json` and the
 existing `<ExpertQA>` placements in `content/`, e.g. Paul Barry's
 `photoSrc="/images/people/paul-football-dna.jpg"`), place their answer as
-`<ExpertQA>` with `photoSrc`, `photoAlt`, `bio`, `profileHref`/
-`profileLabel`, `sourceHref` back to the interview, and the original
-question in `<ExpertQAItem q="...">`, copying the attributes from an
-existing placement rather than retyping them. Don't add a prose lead-in
+`<ExpertQA>` with `photoSrc`, `photoAlt`, `bio`, `sourceHref` back to the
+interview, and the original question in `<ExpertQAItem q="...">`, copying
+the attributes from an existing placement rather than retyping them.
+Internal links only: no `profileHref`/`profileLabel` to the expert's
+Instagram or website (Graham, 2026-10-10). The only exception is Paul
+Barry's link to footballdna.co.uk; see the link rule at the top of
+`references/expert-quotes.md`. Don't add a prose lead-in
 that restates the question, since the box shows it. `<ExpertOpinion>` is
 only for experts with no photo or no original question on record.
 

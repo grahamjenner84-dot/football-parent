@@ -122,6 +122,12 @@ export default function FootballGearPage() {
           description:
             "GPS vests, calf sensors and boot sensors compared: what each measures, which need a subscription, and when a child is old enough for one.",
         },
+        {
+          title: "Football Gifts for Kids",
+          href: "/football-gear/christmas-football-gifts-for-kids",
+          description:
+            "Christmas and birthday football gifts by age and budget, from stocking fillers to garden goals, and why boots are a risky surprise present.",
+        },
       ]}
       bottomContent={{
         title: "About Football Gear",

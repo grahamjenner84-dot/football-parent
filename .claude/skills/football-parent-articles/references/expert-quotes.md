@@ -1,5 +1,15 @@
 # Expert quote library
 
+**Link rule for `<ExpertQA>` / `<ExpertOpinion>` boxes (Graham, 2026-10-10):
+internal links only.** A box links back to the expert's interview on our site
+(`sourceHref`) and nothing else: no `profileHref` to their Instagram or
+website, and no outbound link in the trailing sentence. Their own links belong
+in the interview article itself (About bio, closing line, Editor's Note), not
+in quote boxes on other pages. The one exception is Paul Barry, whose 18 boxes
+link to footballdna.co.uk on purpose: Graham is building a working
+relationship with Football DNA. Don't add that exception for anyone else
+unless Graham asks.
+
 Reusable `<ExpertOpinion>` material and a running log of pending/answered
 expert-quote requests. Check "Available quotes" before asking Graham to
 contact an expert for a new one — real material that already exists beats a
@@ -393,6 +403,7 @@ scaled-content risk caught in a cluster review 2026-08-22), re-trimmed
 "some coaches...rapport" sentences, but cuts the feedback-forms/four-corner-
 model/weaker-foot material entirely (the other 3 versions all keep some of
 that ending) - ends after "more than anything else."
+**Removed from West Ham 2026-10-10**: the session's slop review found the West Ham trim still matched the opening of the Arsenal note word for word, so it was replaced with a new Graham note (below, "Ask about the pathway up front"). This story is now on Arsenal, Fulham and Leeds only (3 uses).
 Reused a 3rd time in
 [fulham-fc-development-centre-guide](/academy-pathway/fulham-fc-development-centre-guide)
 - 2026-08-09, trimmed differently from the Arsenal/West Ham version (dropped
@@ -466,6 +477,23 @@ First used in `crystal-palace-development-centre-guide` - Phase 5C
 coaching approach looks like in practice, reflective/self-assessment tools
 used with young players.
 **Used in:** [crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide) (1/3)
+
+### Ask about the pathway up front (Graham, 2026-10-10)
+
+Given in session for the West Ham guide, from general development-centre
+experience (no West Ham-specific experience). Live in
+west-ham-player-pathway-guide (1/3).
+
+> The main thing I'd do is ask other parents about the pathway and about the
+> centre itself: how many players have progressed through the foundation to
+> the academy, and what the process is for that to happen. Development
+> centres seem to be a mixture. Some have a genuine pathway and are a way for
+> the club to widen its pool of prospects; others can be more of a revenue
+> stream. Knowing what you want to get from it, and asking those questions up
+> front, is probably the best thing you can do.
+
+**Topics:** any club foundation / development-centre guide; trims well to
+the "some have a genuine pathway... others a revenue stream" sentence.
 
 ## Pending — questions drafted for an expert, not yet sent/answered
 
@@ -546,8 +574,6 @@ answers):
 name="Matt Baxter"
 role="Youth Athlete Mindset Coach"
 bio="A youth athlete mindset coach and parent who works one to one with young athletes aged 8 to 18, across football and other sports and from grassroots to academy and national level, on confidence, handling mistakes and performing under pressure."
-profileHref="https://www.instagram.com/elitemindset_coaching/"
-profileLabel="Instagram"
 ```
 Fit note from his about-me: excellent match for confidence, pressure, mistakes,
 enjoyment and quitting (Q2-Q8). His focus is helping current athletes thrive IN
@@ -597,8 +623,6 @@ answers):
 name="Alfonso Carter"
 role="First-team physiotherapist at Forest Green Rovers and former professional footballer"
 bio="Alfonso Carter is a HCPC-registered physiotherapist (MCSP) and former professional footballer of 15+ years, currently first-team physiotherapist at Forest Green Rovers, with additional qualifications in strength and conditioning. Founder of Resilient Physio."
-profileHref="https://www.resilientphysiotherapy.co.uk"
-profileLabel="Resilient Physio"
 ```
 Credential note (Graham, 2026-09-23): Alfonso ("Alfie") is currently first-team
 physio at Forest Green Rovers, a named professional club, which is a much
@@ -645,6 +669,108 @@ actually assessed and measured in practice) is a sports-scientist / S&C
 question more than a physiotherapist one, so it may stay open unless this
 physio also does maturity assessment.
 
+### Chris Robinson (Southampton FC) — academy recruitment head, tag: scouting, recruitment, trials, development centres, release, agents
+**ANSWERED 2026-10-10: all 10 questions** (largely the David Hobson question set
+below, sent to Chris instead). Full answers published as
+`/parent-guides/chris-robinson-football-scout-interview`
+(`content/parent-guides/chris-robinson-football-scout-interview.mdx`), the
+source of record for any excerpt. Placed 2026-10-10 as `<ExpertQA>` boxes, reuse count 1 each: Q9 (agents) in how-to-find-a-football-agent-for-your-child, Q5 (development centres) in are-football-development-centres-worth-it. Q6 (recruitment ages) in what-age-do-football-academies-recruit. Same day: Q2 split across two pages (closing paragraphs on the formal trial and decision in what-happens-at-academy-trials; opening paragraphs on hit-and-miss one-off trials in football-academy-trials-uk) and Q3 split across two (clips and showcases in football-trials-near-me; play at the highest standard in how-football-clubs-recruit-young-players). Each passage used once; don't reuse a passage on a third page. Also 2026-10-10: Q4 (scout approaches) in full in how-football-scouts-identify-players, and Q1 (control, pass and move) in full in what-do-academy-coaches-look-for. Also 2026-10-10, second uses cut differently so no two boxes match: Q1 without its 'simple game' opening in brentford-development-centre-guide (Q1 now on 2 pages: Graham wants it kept to a couple); Q5 first paragraph only in premier-league-development-centres-list; Q4 card half only in tottenham-development-centres-explained. First uses: Q2 para 3 (several experienced scouts decide who comes in on trial) in aston-villa-development-centre-guide; Q6 para 3 (grassroots/academy gap widens with age) in how-to-join-a-football-academy. Unused so far: Q7 (coming back after release), Q8 (parent behaviour), Q10, Q5 para 1. understanding-academy-release and biggest-football-parent-mistakes already carry Paul Barry and Matt Baxter boxes, so Q7/Q8 were held back there (recommended; Graham went ahead with the scouts and academy coaches pages only). Follow the
+reuse rule (show Graham the full Q&A with the excerpt highlighted first).
+Credentials (from his own slide, June 2025): Head of Academy Recruitment,
+Southampton FC, Feb 2024 onwards; ex-Head of Integration Recruitment, Chelsea FC
+Academy, 11+ years; former coach incl. Manchester City and Portsmouth, UEFA B;
+former manager incl. Cheltenham Town and FA XI; FA Talent ID Levels 1-3;
+director, The Scouting Game Ltd (Nov 2023); author of *The Scouting Game*
+(Pitch Publishing, 2025). Instagram: @the_scouting_game
+(https://www.instagram.com/the_scouting_game/, confirmed by Graham 2026-10-10).
+Book link: https://www.amazon.co.uk/dp/1801509247?tag=footballpar09-21
+Headshot: `/images/people/chris-robinson.jpg` (Graham's photo, 2026-10-10).
+Attribution scaffold:
+```
+name="Chris Robinson"
+role="Head of Academy Recruitment, Southampton FC"
+bio="Head of Academy Recruitment at Southampton FC and, for more than 11 years before that, Head of Integration Recruitment at Chelsea FC's academy. Author of The Scouting Game (2025)."
+```
+Reusable lines and the articles they fit (each answer's full text is in the interview):
+- Q1 "Football is a simple game based on control, pass and move ... it will be
+  some bit of quality relating to these basics that attracts me."
+  [what-do-academy-coaches-look-for, how-football-scouts-identify-players]
+- Q2 big one-off trials "are very hit and miss"; better academies assess over
+  weeks, "perhaps one night a week for six weeks", then a formal eight week
+  trial with a mid-trial review. [what-happens-at-academy-trials,
+  football-academy-trials-uk]
+- Q3 "play as high a standard as they can ... with and against the best
+  players"; scouts "start with the better leagues and the better teams";
+  showcases vary, research the track record. [how-to-get-scouted-for-football,
+  football-trials-near-me]
+- Q4 genuine scouts carry club photo ID and approach the team coach first, not
+  the parent. [how-football-scouts-identify-players, safeguarding sections]
+- Q5 (REUSABLE across club development-centre guides) "development centre"
+  covers a range; some Foundation/community programmes "have very little
+  contact in practice with the main Academy" and can "just be commercial
+  schemes"; ask other parents about the link and track record.
+  [development-centres-vs-academies, are-football-development-centres-worth-it,
+  club DC guides]
+- Q6 priority recruitment age 6 to 8; first signing at under 9; players "can
+  still jump across that gap right up to ages 17 and 18".
+  [what-age-do-football-academies-recruit]
+- Q7 coming back after release "is very common ... it is never too late".
+  [understanding-academy-release]
+- Q8 marginal players: parent behaviour "will be taken into account".
+  [biggest-football-parent-mistakes]
+- Q9 formal representation only from the year before the scholarship decision
+  (under 16); people "masquerading as agents" who are not FIFA registered.
+  [how-to-find-a-football-agent-for-your-child]
+- Q10 "Don't get too excited. There is a long way to go."
+
+### The Pre Academy Player (anonymous parent author) — pre-academy parent experience, tag: pre-academy, scouting, release, grassroots, parent pressure
+**ANSWERED 2026-10-11: all 14 questions.** Published as
+`/parent-guides/pre-academy-football-parent-interview`
+(`content/parent-guides/pre-academy-football-parent-interview.mdx`), the source
+of record for any excerpt. Placed 2026-10-11 as `<ExpertQA>` boxes (Graham
+asked for all of them at once, each placed with prose either side, away from
+other boxes, banners and diagrams), reuse count 1 each: Q3 + Q4 paras 1-2
+(what it was like, typical week) in pre-academy-football; Q4 paras 3-4 (one
+club, not several) in how-much-training-is-too-much; Q5 (petrol) in
+how-much-does-academy-football-cost; Q1 first half + Q10 paras 2-3 in
+what-age-do-football-academies-recruit; Q6 in
+can-academy-players-play-grassroots-football; Q8 in
+understanding-academy-release; Q13 in biggest-football-parent-mistakes.
+Each passage used once. Unused so far: Q2, Q7, Q9, Q11, Q12, Q14.
+Follow the reuse rule (show Graham the full Q&A with the excerpt highlighted first).
+**Anonymous: never name them or guess a name, and don't gender the author
+(they/them). Their son is "he".** Credit as "The Pre Academy Player" / "Parent and author".
+Book: *The Pre Academy Player* (Kindle, 1 Sept 2026, author listed as "Unknown"),
+https://www.amazon.co.uk/dp/B0HCWW2793?tag=footballpar09-21 . Instagram:
+@the_pre_academy_player (https://www.instagram.com/the_pre_academy_player/).
+Image: book cover `/images/people/the-pre-academy-player-book.jpg` (no headshot).
+Attribution scaffold:
+```
+name="The Pre Academy Player"
+role="Parent and author"
+bio="A parent whose son was scouted at an U6 festival aged four, released by a Category 1 club and later signed elsewhere. Author of The Pre Academy Player (2026)."
+```
+Reusable lines and the articles they fit:
+- Q1 spotted by a Category 1 scout at an U6 festival aged four, playing a year up.
+  [what-age-do-football-academies-recruit, how-to-get-scouted-for-football]
+- Q3 "I always looked at it as free coaching with good coaches, and that's
+  essentially what it was." [pre-academy-football]
+- Q4 U6/U7 once a week for 1.5 hours, U8 twice a week; multiple clubs "could
+  hinder his development"; "I picked one club, the one he enjoyed the most, and
+  stuck with it." [pre-academy-football, how-much-training-is-too-much]
+- Q5 "the only real cost was petrol for the car." [pre-academy-football]
+- Q6 kept grassroots going: "That's the fun part, playing football with your
+  friends." [can-academy-players-play-grassroots-football]
+- Q7 very little feedback, and they didn't want any. [pre-academy-football]
+- Q8 telling him the Cat 1 club didn't want him back: "He cried his eyes out"
+  ... "He was a different boy after that day." [understanding-academy-release]
+- Q9 steered clear of pitch-side "gloating, gossiping and comparing".
+  [biggest-football-parent-mistakes]
+- Q10 "there is no rush"; going in very young "could potentially cause more
+  harm than good". [what-age-do-football-academies-recruit,
+  signs-your-child-is-ready-for-academy-football]
+- Q13 "Don't chase academy football. Let academy football chase you."
+
 ### David Hobson (PFSA) — scout / scouting educator, tag: scouting, recruitment, trials, development centres
 Drafted 2026-09-23. Graham emailed David Hobson, founder of the PFSA
 (Professional Football Scouts Association), 2026-09-23. Awaiting reply.
@@ -660,8 +786,6 @@ him before publishing; no web access this session to verify):
 name="David Hobson"
 role="Founder of the Professional Football Scouts Association (PFSA)"
 bio="David Hobson is the founder of the Professional Football Scouts Association (PFSA), which trains and qualifies football scouts. [confirm further background/years with him]"
-profileHref="https://www.thepfsa.co.uk"   [CONFIRM exact URL]
-profileLabel="PFSA"
 ```
 Send around 8 (each tagged with the article it feeds; Q5 is the reusable one):
 1. [what-happens-at-academy-trials, football-academy-trials-uk] Walk me through a
@@ -1382,8 +1506,6 @@ Attribution scaffold:
 name="The Girls United team"
 role="Girls United, London"
 bio="Girls United runs girls' football clubs and sessions in London and Mexico, including Play Like a Girl in South London."
-profileHref="https://www.instagram.com/girlsunitedfa/"
-profileLabel="Instagram"
 ```
 Strongest reusable answers: the less obvious barriers (confidence under the
 practical ones) for girls' football getting-started pages; "coaching from the

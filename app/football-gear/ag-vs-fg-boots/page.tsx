@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "AG vs FG Football Boots Explained | Football Parent",
+  title: "AG vs FG Boots: Can Kids Wear FG on Artificial Grass?",
   description:
     "Most grassroots football is played on 3G, not grass, so AG boots are usually the safer buy, not FG. Soleplate differences, injury risks and what to choose.",
   path: "/football-gear/ag-vs-fg-boots",

@@ -8,6 +8,8 @@ import {
   bannerStyleForKey,
   HOME_BANNER_ENDED_AT,
   audienceAt,
+  coachingSponsorAt,
+  PARENT_ARTICLE_BANNER_ENDED_AT,
   type CoachAppAudience,
 } from "@/app/components/CoachAppBanner";
 
@@ -270,7 +272,9 @@ export async function getPageViewCountryStats(days: number = 30): Promise<PageVi
     if (batch.length < pageSize) break;
   }
 
-  rows = rows.filter((row) => !isBeforeRecordingStart(row.path, row.created_at));
+  rows = rows.filter(
+    (row) => !isBeforeRecordingStart(row.path, row.created_at) && !isCalculatorStepPath(row.path)
+  );
 
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
@@ -468,6 +472,23 @@ const RECORDING_STARTS: { pathPrefix: string; from: string }[] = [
   { pathPrefix: "/football-parent-coach-app", from: "2026-09-09T00:00:00Z" },
 ];
 
+// The game time calculator reports each step (opened inside the site's
+// calculator page, plan made, run on the touchline, full time, save team,
+// and the in-app game time steps) to page_views as a synthetic path, with
+// the host page's gclid and referrer (coach-app src/data/calculatorTracking.ts).
+// They are events, not page views: counted as views they double the
+// calculator page's traffic and its Google Ads count (one ad visitor making
+// a plan is three "Ads" views). So page view totals, sources, countries and
+// comparisons skip them, and the Coach App tab reads them on their own with
+// getPageViewStats(..., { calculatorSteps: "only" }). The bare
+// /coach-app/game-time-calculator stays a page view: it is the calculator's
+// own full-screen page being opened.
+const CALCULATOR_STEP_PREFIXES = ["/coach-app/game-time-calculator/", "/coach-app/game-time/"];
+
+export function isCalculatorStepPath(path: string): boolean {
+  return CALCULATOR_STEP_PREFIXES.some((prefix) => path.startsWith(prefix));
+}
+
 function isBeforeRecordingStart(path: string, createdAt: string): boolean {
   const ts = new Date(createdAt).getTime();
   return RECORDING_STARTS.some(
@@ -511,6 +532,9 @@ export interface GetPageViewStatsOptions {
   // these - e.g. ["/football-parent-coach-app", "/coach-app"] for the Coach
   // App tab. Omit for site-wide stats.
   pathPrefixes?: string[];
+  // "exclude" (the default) leaves out the calculator's step events (see
+  // isCalculatorStepPath); "only" returns just those, for the Coach App tab.
+  calculatorSteps?: "exclude" | "only";
 }
 
 function matchesPathPrefixes(path: string, prefixes: string[]): boolean {
@@ -568,7 +592,9 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
     if (batch.length < pageSize) break;
   }
 
-  rows = rows.filter((row) => !isBeforeRecordingStart(row.path, row.created_at));
+  rows = rows.filter(
+    (row) => !isBeforeRecordingStart(row.path, row.created_at) && !isCalculatorStepPath(row.path)
+  );
 
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
@@ -882,6 +908,8 @@ export async function getPageViewStats(
   // user_agent, and grouping those together would flag huge swathes of
   // genuine old traffic as one giant "duplicate UA" combo.
   rows = rows.filter((row) => !isBeforeRecordingStart(row.path, row.created_at));
+  const onlySteps = options.calculatorSteps === "only";
+  rows = rows.filter((row) => isCalculatorStepPath(row.path) === onlySteps);
 
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
@@ -1080,7 +1108,10 @@ function bannerOnPath(
   // category page has no meaningful slug to split on.
   if (CATEGORY_BANNER_PATHS.has(path)) {
     return {
-      style: bannerStyleForKey(undefined),
+      style:
+        path === "/coaching" && coachingSponsorAt(createdAt)
+          ? "sponsor"
+          : bannerStyleForKey(undefined),
       audience: "coach",
       placement: "category",
     };
@@ -1089,9 +1120,19 @@ function bannerOnPath(
   const lastSegment = path.split("/").filter(Boolean).pop();
   if (!lastSegment || !articleSlugs.has(lastSegment)) return null;
 
+  const audience = audienceForPath(path, createdAt);
+  // Parent and share articles show Progress in this slot from
+  // PARENT_ARTICLE_BANNER_ENDED_AT (lib/MDXContent.tsx).
+  if (audience !== "coach" && createdAt >= PARENT_ARTICLE_BANNER_ENDED_AT) return null;
+
   return {
-    style: bannerStyleForKey(lastSegment),
-    audience: audienceForPath(path, createdAt),
+    // /coaching/ articles carry the sponsor creative from
+    // COACHING_SPONSOR_STARTED_AT (lib/MDXContent.tsx).
+    style:
+      path.startsWith("/coaching/") && coachingSponsorAt(createdAt)
+        ? "sponsor"
+        : bannerStyleForKey(lastSegment),
+    audience,
     placement: "article",
   };
 }

@@ -136,7 +136,7 @@ are-development-centres-worth-it (15->88), support-child-after-bad-match
 
 Existing experts on file (see `expert-quotes.md`): Martin Brock (JPL), Paul
 Barry (Football DNA), FutureFit, Matt Baxter (youth athlete mindset coach,
-2026-09-28), Girls United team (girls' grassroots, 2026-10-06; partial fill for #2). **Sports psychologist (#5) is now filled** by Matt Baxter; the
+2026-09-28), Girls United team (girls' grassroots, 2026-10-06; partial fill for #2), Chris Robinson (academy recruitment head, 2026-10-10; fills #1 for the trials cluster). **Sports psychologist (#5) is now filled** by Matt Baxter; the
 other recruits above are still open.
 
 ## Update 2026-09-28: Matt Baxter interview + 8 expert quotes
@@ -174,6 +174,88 @@ other recruits above are still open.
 - New totals: **88 articles, A = 8, B = 35, C = 45; voice 47, slop 39.**
 - Watch list to about 2026-10-20. Commits and sections are in
   `seo-changes-2026-09-06.md`.
+
+## Update 2026-10-10: Chris Robinson interview + 14 expert boxes
+
+- New article `/parent-guides/chris-robinson-football-scout-interview`
+  (10-question Q&A with the Head of Academy Recruitment at Southampton FC,
+  ex-Chelsea academy; Bucket C, voice 85, slop 25). **First real fill for the
+  scout / recruitment lead recruit (#1 above).** Also given the standard
+  `<AffiliateDisclosure />` under its Amazon book link, which the scorer
+  flagged as the only affiliate page without one.
+- One `<ExpertQA>` box (internal link to the interview only, Graham's rule)
+  on each of 14 pages: the trials cluster (what-happens-at-academy-trials,
+  football-academy-trials-uk, football-trials-near-me,
+  how-football-clubs-recruit-young-players, how-football-scouts-identify-players,
+  what-do-academy-coaches-look-for), what-age-do-football-academies-recruit,
+  how-to-join-a-football-academy, the agent guide,
+  are-football-development-centres-worth-it, and the Brentford, Aston Villa,
+  Tottenham and Premier League development-centre guides. Q1 is used on two
+  pages only, and repeat passages are cut differently so no two boxes match.
+- **New bucket rule (Graham, 2026-10-10): a genuine quote from the expert a
+  page needed counts as the Bucket B fix, so the page moves to C.** The voice
+  score still records how much of the page is personal, and the note says
+  where a Graham story would lift it further. Under this rule every B page
+  that got a box is now C. The agent guide carries a caveat (a recruitment
+  head, not a registered agent). The four templated club guides are C on
+  voice but still need club-specific detail to stop reading as copies.
+- Two line fixes to agree with him: trial length on
+  what-happens-at-academy-trials, and scouts going to the coach first on
+  how-football-scouts-identify-players.
+- New totals: **94 articles, A = 8, B = 23, C = 63; voice 50, slop 38.**
+  Expert demand: academy coach 8, girls-pathway coach 7, Graham 3, sports
+  scientist 2, podiatrist 2, scout 1 (football-development-centres-in-london,
+  which needs a travel story he doesn't cover).
+- Watch list to about 2026-10-24. Commits and sections are in
+  `seo-changes-2026-09-06.md`.
+
+## Update 2026-10-10: Bucket A citations on five pages
+
+- 14 source links on factual claims only (rules, ages, research), each source
+  different on its page, most already cited elsewhere on the site:
+  how-academy-football-works (4), jpl-and-academy-football (3),
+  is-private-football-coaching-worth-it (4), academy-categories-explained (1),
+  chelsea-fc-development-centre-guide (2). All five **A to C**.
+- Context for next time: Google treats clear sourcing as a trust signal, but
+  outbound links are not a direct ranking factor, so this is done claim by
+  claim, never to hit a links-per-1000-words figure. Experience and expert
+  quotes matter more.
+- Left at A: how-football-scouts-identify-players (watch window to ~24 Oct),
+  best-shin-pads-for-kids-football (gear, exempt), football-development-centres-near-me
+  (already link-heavy).
+- Accuracy fixes the same day: researching the sources turned up five errors
+  on these pages, all corrected (one commit each): the academy-categories
+  travel-rule example (U9-U11 one-hour limit applies to every category) and
+  "audited every year"; the private-coaching FAQ that said 1-to-1 beats small
+  groups for decision-making, against its own article, plus an em dash;
+  "FA-registered academies" (academies are licensed under the EPPP); Premier
+  League 2 listed separately from U21; Chelsea's tiers said to run "at
+  Cobham". Worth repeating on future citation passes: checking a page's facts
+  against sources is where the real value is, more than the links.
+- New totals: **94 articles, A = 3, B = 23, C = 68; voice 50, slop 37.**
+
+## Update 2026-10-10: slop tidy on the five worst pages not in a watch window
+
+| Page | Slop before | After | AI-tell count |
+|---|---|---|---|
+| how-girls-football-academies-work | 66 | 40 | 26 to 5 |
+| pdc-vs-ptc-vs-rtc-explained | 62 | 38 | 31 to 8 |
+| playing-up-an-age-group-football | 60 | 36 | 38 to 12 |
+| what-age-do-girls-football-academies-recruit | 60 | 34 | 22 to 1 |
+| west-ham-player-pathway-guide | 56 | 36 | 15 to 4 |
+
+- Sentence-level only: no headings, links or sections changed, quote boxes
+  untouched. Each page has a slop commit and a separate fact-fix commit.
+- The fact checks found real errors on four of the five (girls' PGA ages,
+  what replaced RTCs, the pathway's name, a West Ham misquote and the
+  compensation rule). As with the citations pass, checking facts is where
+  most of the value is.
+- All five stay Bucket B: slop is down but voice still needs an expert or a
+  Graham note. Still high and waiting for their watch windows to end:
+  how-much-training-is-too-much (66), late-developers-in-girls-football (62),
+  girls-academy-vs-grassroots-football (60), what-is-football-iq (54),
+  pre-academy-football (52), plus Villa/what-happens/Brentford (edited today).
+- Site average slop now 36.
 
 ## How to extend this next time
 

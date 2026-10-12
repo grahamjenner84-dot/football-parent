@@ -27,6 +27,10 @@ import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & {
+  /** The game time calculator's step events (opened in the site's page,
+   * plan made, touchline, full time, save team), left out of the page view
+   * counts and shown on their own. */
+  calculatorSteps?: PageViewStats;
   bannerVariants?: BannerVariantStats;
   shareStats?: CoachAppShareStats | { error: string };
 };
@@ -51,7 +55,8 @@ type Tab =
   | "coachFunnel"
   | "progress"
   | "affiliate"
-  | "partnerClicks";
+  | "partnerClicks"
+  | "instagramClicks";
 type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
@@ -63,6 +68,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "coachApp", label: "Coach App" },
   { id: "affiliate", label: "Affiliate clicks" },
   { id: "partnerClicks", label: "Football DNA clicks" },
+  { id: "instagramClicks", label: "Instagram clicks" },
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
   { id: "countries", label: "Countries" },
@@ -82,12 +88,17 @@ const TABS: { id: Tab; label: string }[] = [
 // push the actual data below the fold. Native <details> keeps it one click
 // away, collapsed by default, with no JS state to manage. Short status lines
 // ("showing 20 of 87", a freshness warning) stay visible - only the standing
-// explainers are folded away.
+// explainers are folded away. Closed, each one is a single faint "i" line
+// rather than a boxed panel, so a tab with three of them doesn't read as three
+// extra blocks of furniture; the box only appears once it's opened.
 function SectionNote({ label, children }: { label: string; children: ReactNode }) {
   return (
     <details style={styles.noteDetails}>
-      <summary style={styles.noteSummary}>{label}</summary>
-      <div style={{ ...styles.sectionNote, marginTop: 6 }}>{children}</div>
+      <summary style={styles.noteSummary}>
+        <span style={styles.noteIcon}>i</span>
+        {label}
+      </summary>
+      <div style={styles.noteBody}>{children}</div>
     </details>
   );
 }
@@ -106,6 +117,15 @@ function shortPage(page: string): string {
 // and no ranking data yet. Restricting the suggestion list to pages that
 // already have data is what made the search look broken: a real page you
 // could see impressions for simply never appeared.
+// Email limits. Both apps send through one Resend account, whose free plan
+// allows 100 emails a day in all, sign-ins included; each app caps its own
+// scheduled emails below that (coach-app DAILY_EMAIL_BUDGET in
+// match-reminders, progress DAILY_EMAIL_BUDGET in engagement-emails). Change
+// these with those constants, and when Resend is upgraded.
+const RESEND_DAILY_LIMIT = 100;
+const COACH_APP_EMAIL_CAP = 50;
+const PROGRESS_EMAIL_CAP = 25;
+
 const ALL_SITE_PATHS: string[] = siteRoutes.map((r) => (r === "" ? "/" : r));
 
 // Merges the site's own route list with whatever paths the data actually
@@ -170,6 +190,8 @@ export default function SeoAdminPage() {
   const [affiliateError, setAffiliateError] = useState("");
   const [partnerStats, setPartnerStats] = useState<PartnerClickStats | null>(null);
   const [partnerError, setPartnerError] = useState("");
+  const [instagramStats, setInstagramStats] = useState<PartnerClickStats | null>(null);
+  const [instagramError, setInstagramError] = useState("");
   const isFirstFetch = useRef(true);
 
   useEffect(() => {
@@ -292,7 +314,7 @@ export default function SeoAdminPage() {
   }, []);
 
   useEffect(() => {
-    fetch("/api/partner-click-report?days=30")
+    fetch("/api/partner-click-report?days=30&partner=football-dna")
       .then(async (res) => {
         if (!res.ok) {
           const body = await res.json().catch(() => ({}));
@@ -305,6 +327,22 @@ export default function SeoAdminPage() {
         setPartnerError("");
       })
       .catch((err) => setPartnerError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/partner-click-report?days=30&partner=instagram")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load Instagram click report");
+        }
+        return res.json();
+      })
+      .then((data: PartnerClickStats) => {
+        setInstagramStats(data);
+        setInstagramError("");
+      })
+      .catch((err) => setInstagramError(err.message));
   }, []);
 
   useEffect(() => {
@@ -392,6 +430,9 @@ export default function SeoAdminPage() {
             {t.id === "partnerClicks" && partnerStats && (
               <span style={styles.tabCount}>{partnerStats.totalClicks}</span>
             )}
+            {t.id === "instagramClicks" && instagramStats && (
+              <span style={styles.tabCount}>{instagramStats.totalClicks}</span>
+            )}
             {t.id !== "dashboard" &&
               t.id !== "searches" &&
               t.id !== "cookies" &&
@@ -404,6 +445,7 @@ export default function SeoAdminPage() {
               t.id !== "progress" &&
               t.id !== "affiliate" &&
               t.id !== "partnerClicks" &&
+              t.id !== "instagramClicks" &&
               report && <span style={styles.tabCount}>{countFor(report, t.id)}</span>}
           </button>
         ))}
@@ -493,6 +535,14 @@ export default function SeoAdminPage() {
             {partnerError && <p style={styles.error}>{partnerError}</p>}
             {partnerStats && <PartnerClicksReport stats={partnerStats} />}
           </>
+        ) : tab === "instagramClicks" ? (
+          <>
+            {!instagramStats && !instagramError && (
+              <p style={styles.muted}>Loading Instagram click report...</p>
+            )}
+            {instagramError && <p style={styles.error}>{instagramError}</p>}
+            {instagramStats && <PartnerClicksReport stats={instagramStats} instagram />}
+          </>
         ) : (
           <>
             {loading && <p style={styles.muted}>Loading report...</p>}
@@ -549,6 +599,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "affiliate":
       return 0;
     case "partnerClicks":
+      return 0;
+    case "instagramClicks":
       return 0;
     case "compare":
       return 0;
@@ -1555,10 +1607,10 @@ function CountriesReport() {
           )}
 
           <p style={styles.affiliateHeading}>Views by hour of day (UK time)</p>
-          <p style={styles.muted}>
+          <SectionNote label="How to read this">
             Each bar is the whole window&rsquo;s views in that hour. The split
             is UK / overseas / unknown.
-          </p>
+          </SectionNote>
           {stats.byHour.map((h) => (
             <div key={h.hour} style={styles.card}>
               <div style={styles.cardTop}>
@@ -1830,6 +1882,18 @@ function Dashboard({
       ? pgUsage.latest
       : pgUsage.byDay.find((d) => d.date === effective) ?? null;
 
+  // Emails sent for the chosen scope: each app's scheduled emails (reminders,
+  // nudges, trial emails) from the same snapshots, against its own daily cap
+  // and the one Resend allowance both share. Sign-in emails aren't recorded
+  // anywhere, so they're never in these numbers.
+  const caEmails = usageDay?.emailsToday ?? null;
+  const pgEmails = pgUsageDay?.emailsToday ?? null;
+  const emailsByDate = new Map<string, number>();
+  for (const d of [...(usage?.byDay ?? []), ...(pgUsage?.byDay ?? [])]) {
+    if (d.emailsToday !== null) emailsByDate.set(d.date, (emailsByDate.get(d.date) ?? 0) + d.emailsToday);
+  }
+  const busiestEmailDay = Array.from(emailsByDate.entries()).sort((a, b) => b[1] - a[1])[0] ?? null;
+
   // Affiliate clicks for the chosen scope.
   const afDay =
     isWindow || !affiliateStats ? null : affiliateStats.byDay.find((d) => d.date === effective) ?? null;
@@ -1868,11 +1932,11 @@ function Dashboard({
       </label>
 
       {!isWindow && effective === today && (
-        <p style={styles.sectionNote}>
-          Today is still in progress, so its numbers are partial and the
-          &ldquo;vs prev day&rdquo; change compares a part-day against a full
-          one. Pick yesterday for the last complete day.
-        </p>
+        <SectionNote label="Today is still in progress">
+          Today&rsquo;s numbers are partial and the &ldquo;vs prev day&rdquo;
+          change compares a part-day against a full one. Pick yesterday for the
+          last complete day.
+        </SectionNote>
       )}
 
       <h3 style={styles.affiliateHeading}>Page views (whole site)</h3>
@@ -1938,6 +2002,39 @@ function Dashboard({
               </span>
             </div>
           )}
+        </div>
+      )}
+
+      <h3 style={styles.affiliateHeading}>Emails sent</h3>
+      {caEmails === null && pgEmails === null ? (
+        <p style={styles.muted}>
+          {usage || pgUsage ? "No email counts for this day (the apps started reporting them on 9 Oct 2026)." : "Loading emails..."}
+        </p>
+      ) : (
+        <div style={styles.card}>
+          <div style={styles.cardStats}>
+            <span>
+              Coach App: <strong>{caEmails ?? "-"}</strong> of {COACH_APP_EMAIL_CAP}
+            </span>
+            <span>
+              Progress: <strong>{pgEmails ?? "-"}</strong> of {PROGRESS_EMAIL_CAP}
+            </span>
+            <span>
+              Together: <strong>{(caEmails ?? 0) + (pgEmails ?? 0)}</strong> of {RESEND_DAILY_LIMIT}
+              {(caEmails ?? 0) + (pgEmails ?? 0) >= RESEND_DAILY_LIMIT * 0.75 && " (close to the limit: time to upgrade Resend)"}
+            </span>
+          </div>
+          {isWindow && busiestEmailDay && (
+            <p style={{ ...styles.cardStatsInline, marginTop: 6 }}>
+              These are today&rsquo;s so far. Busiest day in the last 30 days: {busiestEmailDay[1]} on{" "}
+              {busiestEmailDay[0]}.
+            </p>
+          )}
+          <p style={{ ...styles.cardStatsInline, marginTop: 6 }}>
+            Scheduled emails only (reminders, nudges, trial emails), each against its app&rsquo;s own daily cap.
+            Sign-in emails also count towards Resend&rsquo;s {RESEND_DAILY_LIMIT} a day but aren&rsquo;t recorded, so
+            the Resend dashboard has the true total.
+          </p>
         </div>
       )}
 
@@ -2199,7 +2296,15 @@ function AffiliateClicksReport({ stats }: { stats: AffiliateClickStats }) {
   );
 }
 
-function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
+function PartnerClicksReport({
+  stats,
+  instagram = false,
+}: {
+  stats: PartnerClickStats;
+  // The same report for clicks on links to our Instagram profile (the follow
+  // card at the end of each article, the footer link), with its own wording.
+  instagram?: boolean;
+}) {
   const [selectedDate, setSelectedDate] = useState("");
 
   const pagesWithViews = stats.byPage.filter((p) => p.pageViews !== null);
@@ -2214,6 +2319,27 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
 
   return (
     <div style={styles.list}>
+      {instagram ? (
+        <SectionNote label="What this measures, and what it doesn't">
+          Every click on a link to the Football Parent Instagram profile: the
+          follow card at the end of each article, the footer link and any
+          Instagram link in an article, logged first-party from the click
+          itself. It counts readers sent to the profile, not follows: whether
+          they tapped Follow happens inside Instagram, so compare this with
+          follower growth in Instagram Insights over the same days.
+          {!!stats.otherAccountClicks && (
+            <>
+              {" "}
+              {stats.otherAccountClicks} click{stats.otherAccountClicks === 1 ? " was" : "s were"} on
+              links to interviewed experts&rsquo; own Instagram accounts and are
+              left out.
+            </>
+          )}
+          {stats.botClicks > 0 && (
+            <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
+          )}
+        </SectionNote>
+      ) : (
       <SectionNote label="What this measures, and what it doesn't">
         Every click on an outbound link to an editorial partner (Football DNA
         today), logged first-party from the click itself. This is the number a
@@ -2228,10 +2354,11 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
           <> {stats.botClicks} click{stats.botClicks === 1 ? " was" : "s were"} excluded as bot traffic.</>
         )}
       </SectionNote>
+      )}
 
       <SectionNote label="Why the view counts here are lower than the Page views tab">
         Views are counted over the same window as the clicks, starting when
-        partner click logging went live, not over the last {stats.days} days.
+        {instagram ? " Instagram" : " partner"} click logging went live, not over the last {stats.days} days.
         These articles have months of view history from before any click could
         be recorded, so counting all of it would divide a few clicks by
         thousands of views and call the result a click-through rate. The Page
@@ -2241,7 +2368,7 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
 
       <p style={styles.muted}>
         {stats.clampedToTrackingStart
-          ? `Clicks and views both counted since ${new Date(stats.since).toLocaleString("en-GB")}, when partner click logging went live.`
+          ? `Clicks and views both counted since ${new Date(stats.since).toLocaleString("en-GB")}, when ${instagram ? "Instagram" : "partner"} click logging went live.`
           : `Clicks and views both counted over the last ${stats.days} days.`}
       </p>
 
@@ -2266,8 +2393,40 @@ function PartnerClicksReport({ stats }: { stats: PartnerClickStats }) {
         </label>
       )}
 
+      {stats.byPlacement && stats.byPlacement.length > 0 && (
+        <>
+          <h3 style={styles.affiliateHeading}>By placement</h3>
+          <p style={styles.sectionNote}>
+            Impressions are views of the pages carrying each placement, not
+            times it was scrolled into view. The end card sits at the
+            bottom of the page, so many readers never reach it and its
+            rate reads low next to the mid-article box.
+          </p>
+          {stats.byPlacement.map((row) => (
+            <div key={row.placement} style={styles.card}>
+              <div style={styles.cardTop}>
+                <span style={styles.cardQuery}>{row.label}</span>
+                <span style={styles.cardBadge}>{row.clicks} clicks</span>
+              </div>
+              {row.impressions !== null && (
+                <div style={styles.cardStats}>
+                  <span>Impressions: {row.impressions}</span>
+                  <span>Click-through rate: {row.ctr === null ? "-" : pct(row.ctr)}</span>
+                </div>
+              )}
+            </div>
+          ))}
+        </>
+      )}
+
       {stats.totalClicks === 0 ? (
-        <EmptyState text="No Football DNA clicks recorded yet. Tracking went live on 22 September 2026 - before that nothing was measured, so an empty window here is not the same as no clicks." />
+        <EmptyState
+          text={
+            instagram
+              ? "No Instagram clicks recorded yet. Tracking started with the follow card in October 2026; before that nothing was measured."
+              : "No Football DNA clicks recorded yet. Tracking went live on 22 September 2026 - before that nothing was measured, so an empty window here is not the same as no clicks."
+          }
+        />
       ) : selectedDay ? (
         <>
           <p style={styles.sectionNote}>
@@ -2514,27 +2673,29 @@ function OwnerNetworkPanel() {
           </button>
         </div>
       )}
-      {status.networks.length > 0 && (
+      <SectionNote label={`Excluded networks (${status.networks.length})`}>
+        {status.networks.length > 0 && (
+          <div>
+            Excluded networks:{" "}
+            {status.networks.map((n) => (
+              <span key={n.id} style={{ marginRight: 10 }}>
+                {n.label ?? "unlabelled"} (added {n.created_at.slice(0, 10)})
+                <button
+                  disabled={busy}
+                  onClick={() => send("DELETE", { id: n.id })}
+                  style={{ ...small, marginLeft: 4, fontSize: 11 }}
+                >
+                  remove
+                </button>
+              </span>
+            ))}
+          </div>
+        )}
         <div style={{ marginTop: 4 }}>
-          Excluded networks:{" "}
-          {status.networks.map((n) => (
-            <span key={n.id} style={{ marginRight: 10 }}>
-              {n.label ?? "unlabelled"} (added {n.created_at.slice(0, 10)})
-              <button
-                disabled={busy}
-                onClick={() => send("DELETE", { id: n.id })}
-                style={{ ...small, marginLeft: 4, fontSize: 11 }}
-              >
-                remove
-              </button>
-            </span>
-          ))}
+          Covers every browser on this connection, incognito included, and screenshots run from
+          this PC. Not mobile data: sign in here on the phone for that.
         </div>
-      )}
-      <div style={{ marginTop: 2 }}>
-        Covers every browser on this connection, incognito included, and screenshots run from
-        this PC. Not mobile data: sign in here on the phone for that.
-      </div>
+      </SectionNote>
       {error && <div style={{ color: "#c0392b" }}>{error}</div>}
     </div>
   );
@@ -2566,6 +2727,10 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
         tab, just filtered. /coach-app is served by the rewrite in
         vercel.json to the separate Coach App deployment, which pings the
         same /api/page-view endpoint, so both sides land in one table.
+        The game time calculator&rsquo;s steps are left out of these counts
+        and shown under Calculator steps below: each step is an event, not
+        a page view, and counted as views they doubled the calculator&rsquo;s
+        traffic and its Google Ads count.
       </SectionNote>
 
       {dateOptions.length > 0 && (
@@ -2589,6 +2754,21 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
       <PageViewsReport stats={stats} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
       {stats.bannerVariants && (
         <BannerVariantsReport stats={stats.bannerVariants} selectedDate={selectedDate} />
+      )}
+      {stats.calculatorSteps && (
+        <>
+          <h3 style={styles.affiliateHeading}>Calculator steps</h3>
+          <SectionNote label="How to read this">
+            One row per step a coach reached in the game time calculator,
+            not page views. Under /embed is the calculator inside
+            /coaching/equal-playing-time-calculator (plan, touchline,
+            full-time, save-team); without /embed is the full-screen
+            calculator at /coach-app/game-time-calculator, whose opens are
+            in the page views above. /coach-app/game-time/ is the same tool
+            inside the app. Each step counts once per page load.
+          </SectionNote>
+          <PageViewsReport stats={stats.calculatorSteps} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
+        </>
       )}
     </>
   );
@@ -2665,6 +2845,9 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+        {latest.emailsToday !== null && (
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub={`scheduled, capped at ${COACH_APP_EMAIL_CAP} a day`} />
+        )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
       <SectionNote label="What these numbers count">
@@ -2679,7 +2862,11 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         Paid includes a subscription whose payment is being retried; Lapsed is
         a trial that ended, a cancelled subscription, or an old free account.
         An invited coach covered by their team&rsquo;s subscription counts by
-        their own plan, so Paid is paying accounts.
+        their own plan, so Paid is paying accounts. Emails sent today is the
+        app&rsquo;s scheduled emails since midnight (match reminders, set-up
+        nudges, trial emails), which it caps at 50 a day; sign-in emails
+        aren&rsquo;t recorded anywhere, so they&rsquo;re not in it. Both apps
+        share one Resend allowance of 100 a day, sign-ins included.
       </SectionNote>
       {usage.byDay.length > 1 && (
         <div style={{ overflowX: "auto" }}>
@@ -2697,6 +2884,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Emails</th>
               </tr>
             </thead>
             <tbody>
@@ -2713,6 +2901,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
                   <td style={funnelNum}>{d.planLapsed}</td>
+                  <td style={funnelNum}>{d.emailsToday ?? "-"}</td>
                 </tr>
               ))}
             </tbody>
@@ -2770,6 +2959,9 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
         <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
+        {latest.emailsToday !== null && (
+          <UsageTile label="Emails sent today" value={latest.emailsToday} sub={`reminders and trial, capped at ${PROGRESS_EMAIL_CAP} a day`} />
+        )}
       </div>
       <p style={styles.sectionNote}>Updated {updated}, every 10 minutes.</p>
       <SectionNote label="What these numbers count">
@@ -2781,7 +2973,10 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
         trial and Lapsed are each account&rsquo;s own plan and add up to Total
         accounts: Paid includes a payment being retried; Lapsed is a trial that
         ended or a cancelled subscription. A co-parent counts by their own
-        plan, so Paid is paying accounts.
+        plan, so Paid is paying accounts. Emails sent today is the reminder and
+        trial emails since midnight, which the app caps at 25 a day; sign-in
+        emails aren&rsquo;t recorded anywhere, so they&rsquo;re not in it. Both
+        apps share one Resend allowance of 100 a day, sign-ins included.
       </SectionNote>
       {usage.byDay.length > 1 && (
         <div style={{ overflowX: "auto" }}>
@@ -2798,6 +2993,7 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Emails</th>
               </tr>
             </thead>
             <tbody>
@@ -2813,6 +3009,179 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
                   <td style={funnelNum}>{d.planLapsed}</td>
+                  <td style={funnelNum}>{d.emailsToday ?? "-"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
+// The trial/development-centre banner A/B test (lib/progress-banner-test.ts):
+// per arm impressions (estimated), clicks, CTR and join sends, cumulative
+// from the test start, plus the Bayesian readout and what to do next.
+function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"] }) {
+  const started = new Date(test.startedAt).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const statusColour =
+    test.status === "b-wins" || test.status === "a-wins" ? "#166534" : test.status === "draw" ? "#92400e" : "#374151";
+  return (
+    <>
+      <FunnelHeading>Banner test: trial and development centre copy, since {started}</FunnelHeading>
+      <p style={{ ...styles.sectionNote, color: statusColour, fontWeight: 600 }}>{test.statusText}</p>
+      {test.started && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Arm</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Impressions (≈)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>CTR (≈)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Join sends</th>
+              </tr>
+            </thead>
+            <tbody>
+              {test.arms.map((a) => (
+                <tr key={a.arm}>
+                  <td style={funnelTd}>{a.label}</td>
+                  <td style={funnelNum}>≈{Math.round(a.impressions).toLocaleString("en-GB")}</td>
+                  <td style={funnelNum}>{a.clicks}</td>
+                  <td style={funnelNum}>{a.impressions > 0 ? `≈${(a.ctr * 100).toFixed(2)}%` : "n/a"}</td>
+                  <td style={funnelNum}>{a.joins}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {test.probBBeatsA !== null && (
+        <p style={styles.sectionNote}>
+          Probability B&rsquo;s CTR beats A&rsquo;s: <strong>{(test.probBBeatsA * 100).toFixed(1)}%</strong>.
+        </p>
+      )}
+      <SectionNote label="How the test works">
+        Articles under /academy-pathway/ and /academy-trials/ only. Every page
+        view shows A (the banner as it was) or B (same banner, body copy for
+        parents heading to a trial or development centre) at random, 50/50,
+        with nothing stored in the browser. Clicks are landings on /progress
+        from each arm&rsquo;s link (?b= {test.arms.map((a) => a.bannerValues.join(", ")).join(" / ")}),
+        and join sends are sign-in emails sent after arriving that way. No
+        page view records which arm it showed, so each arm&rsquo;s impressions
+        are half of the {test.eligibleViews.toLocaleString("en-GB")} views of
+        those articles since the test started: unbiased, because each view is
+        an independent coin flip, but an estimate, hence ≈. The probability
+        uses Beta(1 + clicks, 1 + impressions - clicks) for each arm. Keep it
+        running until both arms have {test.minImpressionsPerArm.toLocaleString("en-GB")} impressions,
+        then call it at {Math.round(test.threshold * 100)}% either way; anything
+        in between is a draw.
+      </SectionNote>
+    </>
+  );
+}
+
+// Activation from the same snapshot: does a new parent get as far as a
+// player, a club, a logged match or training, and the installed app? Null
+// fields mean the snapshot didn't carry them (older snapshots, or the
+// 20261009120000_progress_usage_activation.sql migration not applied yet).
+function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }) {
+  if ("error" in usage || !usage.latest) return null;
+  const latest = usage.latest;
+  if (latest.signups7d === null) {
+    return (
+      <p style={styles.muted}>
+        No activation counts in the latest snapshot yet. They arrive once the
+        Progress database sends them and
+        20261009120000_progress_usage_activation.sql has been applied here.
+      </p>
+    );
+  }
+  const base = latest.signups7d;
+  const of7d = (n: number | null) =>
+    n === null ? "not sent" : base > 0 ? `${Math.round((n / base) * 100)}% of this week's sign-ups` : undefined;
+  const steps: { label: string; value: number | null }[] = [
+    { label: "Signed up, last 7 days", value: latest.signups7d },
+    { label: "Have a player", value: latest.signups7dWithPlayer },
+    { label: "Added a club", value: latest.signups7dWithClub },
+    { label: "Logged a match or training", value: latest.signups7dWithLog },
+    { label: "Installed the app", value: latest.signups7dInstalled },
+  ];
+  const rate = (a: number | null, b: number | null) =>
+    a === null || b === null ? "-" : b > 0 ? `${Math.round((a / b) * 100)}%` : "n/a";
+  const trend = usage.byDay.filter((d) => d.signups7d !== null);
+  return (
+    <>
+      <div style={styles.summaryGrid}>
+        {steps.map((st, i) =>
+          st.value === null ? (
+            <div key={st.label} style={styles.card}>
+              <p style={styles.cardPage}>{st.label}</p>
+              <span style={{ ...styles.cardQuery, fontSize: 20 }}>-</span>
+            </div>
+          ) : (
+            <UsageTile key={st.label} label={st.label} value={st.value} sub={i === 0 ? undefined : of7d(st.value)} />
+          )
+        )}
+        <UsageTile
+          label="Week-2 cohort activated"
+          value={latest.cohortWeek2Activated ?? 0}
+          sub={`${rate(latest.cohortWeek2Activated, latest.cohortWeek2)} of ${latest.cohortWeek2 ?? "-"} who signed up 7-14 days ago logged something in their first week`}
+        />
+        <UsageTile
+          label="Logged something, last 7 days"
+          value={latest.accountsLogged7d ?? 0}
+          sub="accounts: the weekly habit number"
+        />
+        <UsageTile label="Ever opened the installed app" value={latest.accountsInstalled ?? 0} sub="accounts, all time" />
+        {latest.signups7dGoogle !== null && (
+          <UsageTile
+            label="Signed up with Google, last 7 days"
+            value={latest.signups7dGoogle}
+            sub={`${of7d(latest.signups7dGoogle) ?? "no sign-ups this week"}; ${latest.accountsGoogle ?? 0} accounts use Google overall, the rest email`}
+          />
+        )}
+      </div>
+      <SectionNote label="What these numbers count">
+        The top row follows the accounts created in the last 7 days (a rolling
+        week, not this calendar week) through setup: a player they can see (their
+        own or shared), a club or season on that player, a match or training
+        logged, and the app opened from the home screen. The week-2 cohort is
+        accounts created 7 to 14 days ago, so their first week is complete:
+        activated means they logged a match or training within 7 days of
+        signing up. Logged something counts accounts with a match or training
+        created in the last 7 days. Your own accounts and accounts being
+        deleted are left out, as above.
+      </SectionNote>
+      {trend.length > 1 && (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Day (closing figures)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups 7d</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Player</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Club</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Logged</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Installed</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Week-2 activated</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Logged 7d (accounts)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {trend.map((d) => (
+                <tr key={d.date}>
+                  <td style={funnelTd}>{d.date}</td>
+                  <td style={funnelNum}>{d.signups7d ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithPlayer ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithClub ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dWithLog ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dInstalled ?? "-"}</td>
+                  <td style={funnelNum}>
+                    {d.cohortWeek2Activated ?? "-"} / {d.cohortWeek2 ?? "-"} ({rate(d.cohortWeek2Activated, d.cohortWeek2)})
+                  </td>
+                  <td style={funnelNum}>{d.accountsLogged7d ?? "-"}</td>
                 </tr>
               ))}
             </tbody>
@@ -2893,6 +3262,9 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
       <FunnelHeading>App usage</FunnelHeading>
       <ProgressUsageSection usage={funnel.usage} />
 
+      <FunnelHeading>Activation</FunnelHeading>
+      <ProgressActivationSection usage={funnel.usage} />
+
       <FunnelHeading>Banners by placement, {windowLabel}</FunnelHeading>
       <div style={{ overflowX: "auto" }}>
         <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
@@ -2916,6 +3288,8 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
           </tbody>
         </table>
       </div>
+
+      <ProgressBannerTestSection test={funnel.bannerTest} />
 
       <FunnelHeading>By channel, {windowLabel}</FunnelHeading>
       <SectionNote label="How channels are decided">
@@ -3047,7 +3421,8 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         (arrived from a search engine, no banner), Site link (another page of
         ours, no banner), Direct, Other. Unknown is sign-ups only: the coach
         declined analytics cookies, so nothing about their visit was kept.
-        Landing views are the Coach App page and its ad variants; sign-in views
+        Landing views are the Coach App page and its ad variants, plus ad
+        clicks landing on the equal playing time calculator; sign-in views
         are the app&rsquo;s own sign-in screen. Every number on this tab
         starts when the funnel went live ({sinceLabel}), visits included, so
         visits and sign-ups cover the same period. Earlier sign-ups are only
@@ -3322,12 +3697,12 @@ function BannerVariantsReport({
       </SectionNote>
 
       {selectedDate && (
-        <p style={styles.sectionNote}>
+        <SectionNote label="Why one day can't call the test">
           One day on its own can never call the test - a day&rsquo;s worth of
           impressions is far below what a CTR gap needs to mean anything.
           Clear the date to read the result; use a single day only to see
           what actually happened on it.
-        </p>
+        </SectionNote>
       )}
 
       {selectedDate && !selectedDay && (
@@ -4647,18 +5022,40 @@ const styles: Record<string, CSSProperties> = {
     borderBottom: "1px solid #3a2c1d",
   },
   noteDetails: {
+    margin: "4px 0",
+  },
+  noteSummary: {
+    cursor: "pointer",
+    fontSize: 11,
+    color: "#7d6d58",
+    listStyle: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 6,
+  },
+  noteIcon: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 14,
+    height: 14,
+    borderRadius: "50%",
+    border: "1px solid #7d6d58",
+    fontSize: 9,
+    fontWeight: 700,
+    fontStyle: "italic",
+    fontFamily: "Georgia, serif",
+    lineHeight: 1,
+  },
+  noteBody: {
+    fontSize: 12,
+    color: "#9c8a72",
+    lineHeight: 1.5,
     background: "#2a1f14",
     border: "1px solid #3a2c1d",
     borderRadius: 6,
     padding: "6px 10px",
-    margin: "8px 0",
-  },
-  noteSummary: {
-    cursor: "pointer",
-    fontSize: 12,
-    fontWeight: 600,
-    color: "#b8a68c",
-    listStyle: "revert",
+    marginTop: 6,
   },
   suggestionTag: {
     marginLeft: 8,

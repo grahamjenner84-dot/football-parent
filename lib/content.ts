@@ -72,6 +72,27 @@ export function getAllArticles(): Article[] {
 // routes aren't uniformly /<category>/<slug> - some football-gear articles
 // sit a level deeper (e.g. /football-gear/boots/<slug>) while their MDX
 // still lives flat in content/football-gear.
+// Slugs of the articles whose MDX body uses a given component, e.g.
+// "<InstagramPromo", so a report can count views of the pages carrying it
+// without a hand-kept list that drifts when the component is added elsewhere.
+export function getArticleSlugsUsing(marker: string): Set<string> {
+  const slugs = new Set<string>();
+
+  for (const category of fs.readdirSync(contentDirectory)) {
+    const categoryPath = path.join(contentDirectory, category);
+    if (!fs.statSync(categoryPath).isDirectory()) continue;
+
+    for (const file of fs.readdirSync(categoryPath)) {
+      if (!file.endsWith(".mdx")) continue;
+      if (fs.readFileSync(path.join(categoryPath, file), "utf8").includes(marker)) {
+        slugs.add(file.replace(".mdx", ""));
+      }
+    }
+  }
+
+  return slugs;
+}
+
 export function getAllArticleSlugs(): Set<string> {
   const slugs = new Set<string>();
 
