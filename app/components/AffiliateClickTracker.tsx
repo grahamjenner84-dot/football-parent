@@ -82,9 +82,14 @@ export default function AffiliateClickTracker() {
       const payload = JSON.stringify({
         path: pathname,
         href,
-        // The readable half of an amzn.to short link: the product name as
-        // the reader saw it.
-        linkText: (anchor.textContent ?? "").replace(/\s+/g, " ").trim().slice(0, 200),
+        // The product name: GearPicks buttons carry it in
+        // data-affiliate-name (their visible text is just "View on Amazon"),
+        // inline links show it as their text. Logged at click time so the
+        // report can still name a link after it is swapped out of the content.
+        linkText: (anchor.getAttribute("data-affiliate-name") ?? anchor.textContent ?? "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 200),
         placement,
       });
 

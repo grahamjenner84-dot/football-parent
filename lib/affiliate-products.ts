@@ -1,5 +1,6 @@
 import { getAllArticles } from "@/lib/content";
 import { isAffiliateLink } from "@/lib/affiliate";
+import retiredLinks from "@/lib/affiliate-retired-links.json";
 
 // The affiliate click log stores the anchor's own text as link_text. For an
 // ordinary inline link that is the product name as the reader saw it, but for
@@ -64,6 +65,14 @@ export function getAffiliateProductNames(): Map<string, string> {
       const key = normalizeAffiliateHref(href);
       if (!map.has(key)) map.set(key, anchor);
     }
+  }
+
+  // Links since swapped out of the content (a sold-out variant replaced by
+  // an in-stock one, say) still have clicks logged against them, and without
+  // a name those rows show the raw URL in the report. Keyed by normalized
+  // href; add the old link here whenever one is replaced. Content wins.
+  for (const [key, name] of Object.entries(retiredLinks as Record<string, string>)) {
+    if (!map.has(key)) map.set(key, name);
   }
 
   cached = map;

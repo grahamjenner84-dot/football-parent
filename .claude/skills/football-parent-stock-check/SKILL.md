@@ -83,6 +83,12 @@ pick an `ok` one in a mid-range size. To find a replacement product, fetch
 Follow `football-parent-affiliate-link` for link format (full tagged `/dp/`
 link, never `amzn.to`).
 
+For every `/dp/` link you remove, add the old one to
+`lib/affiliate-retired-links.json` (key: `amazon.co.uk/dp/<asin>` in lower
+case, value: the product name it had). Clicks already logged against it are
+named from that file in the `/admin/seo` Amazon clicks report; without it they
+show as a raw URL.
+
 ## 4. Ship
 
 Branch from `main`, one commit for the link changes, log it in the latest

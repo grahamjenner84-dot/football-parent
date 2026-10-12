@@ -71,6 +71,7 @@ export default function GearPicks({
               href={item.href}
               {...affiliateLinkProps(item.href)}
               data-affiliate-placement="gear-picks"
+              data-affiliate-name={item.name}
               className="shrink-0 self-start rounded-lg bg-blue-700 px-4 py-2 text-center text-sm font-semibold text-white! hover:bg-blue-800 transition sm:self-auto"
             >
               {cta}
