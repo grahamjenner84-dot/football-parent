@@ -16,9 +16,13 @@ Legend: **★** = validated against the article in the 2026-09-22 proof batch.
 
 ## Recruit priority (by leverage)
 
-1. Scout / recruitment lead — highest (trials cluster + reusable across the
+1. Scout / recruitment lead — highest. Lined up 2026-10-07: Chris Robinson
+   (ex-Chelsea Academy recruitment, Southampton), questions in
+   `eeat/chris-robinson-interview-questions.md`. (trials cluster + reusable across the
    ~10 templated club dev-centre guides).
 2. Girls-pathway coach (ETC/RTC) — weakest whole cluster, no expert yet.
+   Questions sent 2026-10-08 via Graham's FA contact, grouped by expert type
+   in `eeat/girls-pathway-interview-questions.md`.
 3. Academy coach / manager — biggest cluster.
 4. Sports scientist / physio — maturation cluster.
 5. Sports psychologist — parent-support cluster (mostly a top-up).
