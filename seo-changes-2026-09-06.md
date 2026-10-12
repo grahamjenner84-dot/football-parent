@@ -1480,3 +1480,14 @@ One `<ExpertQA>` box per page from the new pre-academy parent interview, each li
 ## Shin pads: stock and dead-link fix (2026-10-12, link maintenance inside the watch window)
 
 `/football-gear/shin-pads/best-shin-pads-for-kids-football`, checked live on Amazon UK in Chrome. Not a ranking lever: links and one added pick, no prose or heading changes. (1) adidas Tiro links (quick picks and slip-in box) pointed at the S black/gold variant, which is sold out; moved to S white/black `B0D386HH7C` (£11.99, in stock in S, M and L). (2) "Nike Charge, black" (`B0BR5SH9DN`, the Youth M listing) is a dead page; replaced in that slot by the Mitre Aircell ankle-sock pad `B0CNR8915F` (5,189 reviews, every size in stock), Graham's call. Nike Charge is low across the board (S 5 left, L 6). Quick-picks Charge left in place. Mercurial Lite (XS black) and JOGA sleeves in stock, unchanged. Page last changed 9 Oct, watch to ~26 Oct.
+
+## Gear guides: Amazon stock sweep (2026-10-12, link maintenance)
+
+Every Amazon product link in the gear guides checked live in Chrome (each linked variant plus stock across all its size/colour variants). Links only, plus product names and two notes where the product changed; no headings or body sections touched.
+- Nike Jr Mercurial Vapor 16 Academy `B0DPHMCDL1` sold out (57 of 63 sizes) → Vapor 16 Club FG/MG `B0DPHTVG8T` (284 reviews, renamed "Vapor 16 Club") on `ag-vs-fg-boots` (x2), `best-football-boots-for-kids` (x2), `childrens-soft-ground-football-boots`.
+- Nike Jr Vapor Club velcro `B0GFGQYKZJ` sold out, and the other velcro listing is out in 51 of 52 sizes → tagged search link "nike jr vapor club velcro" on `best-football-boots-for-kids` (x2). Revisit when the Vapor 17 velcro lands.
+- `best-football-boots-for-wide-feet-kids`: Nike Jr Tiempo Legend 10 search link (x2) → Legend 10 Academy `B0C4PHWQJZ`; Copa Pure Club low-stock variant → in-stock `B0FVF4DLYY`.
+- `best-football-gloves-for-winter-training`: three search links → Westwood Fox thermal grip `B0BDWDFXLK`, OGLOVE waterproof `B07LDWKJZB`, Nike Youth Knitted Tech and Grip 2.0 `B0841K1XYS` (thin-grip note reworded to match a knitted glove).
+- `christmas-football-gifts-for-kids`: Mitre Impel sold-out variant → L30P size 3 `B09B28DHW6`.
+- `veo-camera-alternatives`: Falcon tripod bundle `B0HFCK1WDG` and Chameleon field bundle `B0GRVCFRX8` both sold out → XbotGo NT4 tripod `B0DCJ29SPD` (£179.99) in the picks box, the CTA line and the Chameleon paragraph.
+- Fine, unchanged: Predator Club, Predator League AG/SG (low in some sizes, watch), SAMBA goal, BazookaGoal, all four GPS trackers, Nike Academy ball, Boot Buddy, Chameleon, Falcon standalone.
