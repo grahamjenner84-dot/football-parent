@@ -62,8 +62,18 @@ can land on a different product.
    full tagged links rather than leaving them.
 
    Never reconstruct an ASIN from a product name or a web search result.
-   Nothing is verifiable from this environment, and a wrong ASIN sends a
-   parent to the wrong product with our tag on it.
+   A wrong ASIN sends a parent to the wrong product with our tag on it.
+
+   The one exception: an ASIN read from the product page itself, opened in
+   Graham's Chrome through Claude in Chrome (`mcp__claude-in-chrome__*`
+   tools; Amazon serves plain fetches a bot-check page, so curl and
+   WebFetch cannot do this). Open `amazon.co.uk/dp/<ASIN>` and confirm the
+   page title is the product named in the article, that it is sold in kids'
+   sizes where the article says so, that it is in stock, and that any claim
+   in the pick's note (colours, sizes, fabric, sole type) matches the
+   listing. Prefer the listing with the most reviews among the variants. No
+   Amazon sign-in is needed. Only when a product has no UK listing, keep a
+   tagged `/s?k=` search link or drop the pick, and say which.
 
 4. **Pick the placement.**
 
