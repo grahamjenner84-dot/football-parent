@@ -1476,3 +1476,7 @@ One `<ExpertQA>` box per page from the new pre-academy parent interview, each li
 - `/academy-pathway/can-academy-players-play-grassroots-football` (Q6) `76fef79`
 - `/academy-pathway/understanding-academy-release` (Q8, Emotional Impact) `7f5dfbf`
 - `/parent-guides/biggest-football-parent-mistakes` (Q13, Academy Obsession) `fc72a9c`
+
+## Football sizes by age: per-size Amazon links (2026-10-12, inside the watch window)
+
+`/football-gear/best-footballs-by-age`: one tagged Amazon link in the Size 3 section (Mitre Impel, size 3) and two in the Size 4 section (Mitre Impel budget, Nike Academy step up, noting size 5 for Under 14). The Size 5 section already linked the Nike Academy. Same two products and ASINs as the quick-picks box under the size table; the point is to catch readers who scroll past that box to their child's size. Baseline (9 Sept to 12 Oct): 18 Amazon clicks from 237 page views, 7.6% click-out rate, against 18-67% on the other gear guides; most of the traffic is "what size football for a 10 year old" / "football sizes by age" (informational, AI Overview cites us). **Watch-window exception, Graham's call:** the page changed 4 Oct (age-in-years list), so watch to ~26 Oct. Measure on the Amazon clicks tab: inline vs gear-picks clicks on this page. Commit `ad83d3a`.
