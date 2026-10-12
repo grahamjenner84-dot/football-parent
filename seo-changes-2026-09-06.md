@@ -1476,3 +1476,9 @@ One `<ExpertQA>` box per page from the new pre-academy parent interview, each li
 - `/academy-pathway/can-academy-players-play-grassroots-football` (Q6) `76fef79`
 - `/academy-pathway/understanding-academy-release` (Q8, Emotional Impact) `7f5dfbf`
 - `/parent-guides/biggest-football-parent-mistakes` (Q13, Academy Obsession) `fc72a9c`
+
+## New article: best football rebounders for kids (2026-10-12)
+
+Published `/football-gear/best-football-rebounders-for-kids` (Football Gear). Targets football rebounder (5,400/mo, KD 0), football rebounder wall / football rebound wall (320 each), best football rebounder (170); research 2026-09-19 in the tracker row. Angle: rebound boards vs net rebounders, by age, surface and garden space, plus a Christmas present section. Picks are QuickPlay (`?ref=footballparent`), specs checked on quickplaysport.com 12 Oct: REPLAY Station (the one Graham owns), REPLAY Station XL, SPOT Rebounder 5x3ft, PRO Rebounder 3x3ft, TEKKERS GS Trainer 6x4ft; one tagged Amazon `/s?k=football+rebounder+net` search link. No prices in prose, no external citations (gear page). One ParentNote reused from the gifts guide (Graham's QuickPlay volley-return story, 2nd use). Added to `lib/routes.ts` and the Football Gear index. Commit `348c046`.
+
+Inbound links, one sentence each, additive: `/football-gear/best-football-goals-for-kids` (after "One Big Goal or Two Small Ones?") and `/football-gear/christmas-football-gifts-for-kids` (rebounder section). Both pages changed 9 Oct, so this lands inside their watch window; internal link only, no copy, heading or title change. Commit `3bb6651`.
