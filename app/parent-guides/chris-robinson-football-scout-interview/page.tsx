@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Scouting: Chris Robinson on Trials, Scout Approaches and Agents | Football Parent",
+  title: "Football Scouting: Chris Robinson on Trials and Agents",
   description: "Southampton academy recruitment head and ex-Chelsea scout Chris Robinson on what scouts notice, how trials really work, spotting genuine scouts, and agents.",
   path: "/parent-guides/chris-robinson-football-scout-interview",
 });
