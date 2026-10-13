@@ -140,7 +140,13 @@ export const routes = [
   // Progress (the parents' app, progress.footballparent.co.uk)
   '/progress',
 
+  // About, author and editorial (trust pages, linked from every page footer)
+  '/about',
+  '/author/graham-jenner',
+  '/editorial-policy',
+
   // Legal
   '/privacy-policy',
   '/cookie-policy',
+  '/terms-and-conditions',
 ]
