@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Gifts for Kids (2026 Christmas Guide by Age and Budget) | Football Parent",
+  title: "Football Gifts for Kids (2026 Christmas Guide by Age)",
   description:
     "Football gifts for kids by age and budget: a size 3 ball until Under 11, a garden goal that fits, and why boots make a risky Christmas present mid-season.",
   path: "/football-gear/christmas-football-gifts-for-kids",
