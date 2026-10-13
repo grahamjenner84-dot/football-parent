@@ -57,20 +57,16 @@ function getClient(): SupabaseClient | null {
 }
 
 /** Send the Progress sign-in email. New emails get an account and a 4-week
- * trial (the app's database trigger); existing ones just sign in. The
- * marketing choice rides in the return URL, and the app saves it to the
- * profile once the session exists (only when that URL carries a real
- * sign-in, so a crafted link can't change anyone's consent). */
-export async function sendProgressSignInLink(
-  email: string,
-  marketing: boolean,
-): Promise<{ error: string | null }> {
+ * trial (the app's database trigger); existing ones just sign in. The link
+ * returns to the app's root with nothing added: the join form no longer
+ * asks for a marketing choice, so there is no ?marketing= to carry. */
+export async function sendProgressSignInLink(email: string): Promise<{ error: string | null }> {
   const supabase = getClient();
   if (!supabase) return { error: "unconfigured" };
 
   const { error } = await supabase.auth.signInWithOtp({
     email: email.trim(),
-    options: { emailRedirectTo: `${PROGRESS_APP_URL}?marketing=${marketing ? "1" : "0"}` },
+    options: { emailRedirectTo: PROGRESS_APP_URL },
   });
   return { error: error?.message ?? null };
 }

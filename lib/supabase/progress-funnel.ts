@@ -87,6 +87,40 @@ export async function logProgressJoin(event: JoinEvent, userAgent: string | null
   if (error) throw new Error("Failed to insert progress_join_events row: " + error.message);
 }
 
+const SEEN_FLOOD_WINDOW_MS = 60_000;
+// One row per banner per page view, so a page's seen rate can't outrun its
+// view rate: the same ceiling as page_views' per-path flood guard.
+const SEEN_FLOOD_THRESHOLD = 12;
+
+/** One Progress banner seen (half of it on screen) during a page view; see
+ * the progress_banner_seen migration. `banner` must already be a valid
+ * Progress ?b= value (the route checks it with parseProgressBanner). */
+export async function logProgressBannerSeen(
+  path: string,
+  banner: string,
+  userAgent: string | null
+): Promise<void> {
+  const parsed = parseProgressBanner(banner);
+  if (!parsed) return;
+  const supabase = adminClient();
+  const since = new Date(Date.now() - SEEN_FLOOD_WINDOW_MS).toISOString();
+  const { count } = await supabase
+    .from("progress_banner_seen")
+    .select("id", { count: "exact", head: true })
+    .eq("path", path)
+    .gte("created_at", since);
+  if ((count ?? 0) >= SEEN_FLOOD_THRESHOLD) return;
+
+  const { error } = await supabase.from("progress_banner_seen").insert({
+    path,
+    placement: parsed.placement,
+    arm: parsed.arm,
+    banner,
+    user_agent: userAgent,
+  });
+  if (error) throw new Error("Failed to insert progress_banner_seen row: " + error.message);
+}
+
 /** Whole-app counts from the Progress database, Graham's accounts and
  * accounts waiting to be deleted left out. Definitions live with the query:
  * usage_snapshot_counts() in progress migration 0021. */
@@ -187,6 +221,19 @@ export interface ProgressActivationCounts {
   /** Of the accounts created in the last 7 days, how many signed in with
    * Google. */
   signups7dGoogle: number | null;
+  /** Accounts that have ever signed in (an account can exist from a sent
+   * link that was never opened). Stored by
+   * 20261013120000_progress_usage_signed_in_coach.sql, as are the four
+   * below. */
+  accountsSignedIn: number | null;
+  /** Of the accounts created in the last 7 days, how many have signed in. */
+  signups7dSignedIn: number | null;
+  /** Accounts with a coach feedback link (made for a player they can access). */
+  accountsWithCoachLink: number | null;
+  /** Coach feedback reports submitted. */
+  coachReports: number | null;
+  /** Accounts with training logged. */
+  accountsWithTraining: number | null;
 }
 
 export const ACTIVATION_FIELDS: (keyof ProgressActivationCounts)[] = [
@@ -202,6 +249,11 @@ export const ACTIVATION_FIELDS: (keyof ProgressActivationCounts)[] = [
   "emailsToday",
   "accountsGoogle",
   "signups7dGoogle",
+  "accountsSignedIn",
+  "signups7dSignedIn",
+  "accountsWithCoachLink",
+  "coachReports",
+  "accountsWithTraining",
 ];
 
 const ACTIVATION_COLUMN: Record<keyof ProgressActivationCounts, string> = {
@@ -217,12 +269,21 @@ const ACTIVATION_COLUMN: Record<keyof ProgressActivationCounts, string> = {
   emailsToday: "emails_today",
   accountsGoogle: "accounts_google",
   signups7dGoogle: "signups_7d_google",
+  accountsSignedIn: "accounts_signed_in",
+  signups7dSignedIn: "signups_7d_signed_in",
+  accountsWithCoachLink: "accounts_with_coach_link",
+  coachReports: "coach_reports",
+  accountsWithTraining: "accounts_with_training",
 };
 
 // Columns added by migrations after the activation one, newest first. If a
 // migration hasn't been run yet, its columns are dropped on their own (the
 // newest group first) rather than taking the older counts with them.
-const LATER_GROUPS: string[][] = [["accounts_google", "signups_7d_google"], ["emails_today"]];
+const LATER_GROUPS: string[][] = [
+  ["accounts_signed_in", "signups_7d_signed_in", "accounts_with_coach_link", "coach_reports", "accounts_with_training"],
+  ["accounts_google", "signups_7d_google"],
+  ["emails_today"],
+];
 
 /** The column sets to try, from everything down to none of the later
  * groups: each step drops one more of the newest groups. */
@@ -345,6 +406,24 @@ export interface PlacementRow {
   /** Landings on /progress from this banner. */
   clicks: number;
   ctr: number;
+  /** Page views on which half the banner was on screen (progress_banner_seen;
+   * zero before that tracking shipped). */
+  seen: number;
+  /** Clicks since seen tracking started (bannerSeen.startedAt), the
+   * numerator of seenCtr, so clicks from before it can't inflate it. */
+  seenClicks: number;
+  /** seenClicks / seen, 0 when nothing has been seen. */
+  seenCtr: number;
+}
+
+/** When "banner seen" counting started: the first progress_banner_seen row
+ * ever, null before there is one. CTR on seen banners only counts clicks
+ * from here. */
+export interface ProgressBannerSeenInfo {
+  startedAt: string | null;
+  /** Reading the table failed (e.g. the migration hasn't run): seen counts
+   * read as zero. */
+  error?: string;
 }
 
 export interface ProgressChannelRow {
@@ -379,6 +458,12 @@ export interface ProgressBannerTestArmRow {
   ctr: number;
   /** Join form sends whose ?b= was this arm's. */
   joins: number;
+  /** Counted, not estimated: page views on which half of this arm's banner
+   * was on screen (progress_banner_seen, since the test started). */
+  seen: number;
+  /** This arm's clicks since seen tracking started, for seenCtr. */
+  seenClicks: number;
+  seenCtr: number;
 }
 
 /** The trial/development-centre banner test (lib/progress-banner-test.ts).
@@ -412,15 +497,26 @@ export interface ProgressFunnel {
     landingViews: number;
     joins: number;
     newAccounts: number | null;
+    /** Banners at least half on screen (progress_banner_seen). Starts when
+     * that tracking shipped, so it can be far below impressions early on. */
+    bannersSeen: number;
   };
   placements: PlacementRow[];
   channels: ProgressChannelRow[];
-  byDay: { date: string; impressions: number; bannerClicks: number; landingViews: number; joins: number }[];
+  byDay: {
+    date: string;
+    impressions: number;
+    bannersSeen: number;
+    bannerClicks: number;
+    landingViews: number;
+    joins: number;
+  }[];
   /** Newest first, capped. Anonymous: no account is identifiable here. */
   recentJoins: ProgressJoin[];
   joinsError?: string;
   usage: ProgressUsage | { error: string };
   bannerTest: ProgressBannerTest;
+  bannerSeen: ProgressBannerSeenInfo;
 }
 
 type ViewRow = {
@@ -444,6 +540,13 @@ type JoinRow = {
   utm_campaign: string | null;
   had_gclid: boolean;
   marketing_opt_in: boolean;
+  user_agent: string | null;
+  created_at: string;
+};
+
+type SeenRow = {
+  placement: string;
+  arm: string | null;
   user_agent: string | null;
   created_at: string;
 };
@@ -527,8 +630,48 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     return rows.filter((r) => isHuman(r.user_agent));
   }
 
-  const [allViews, joinResult, usage] = await Promise.all([
+  // "Banner seen" rows (progress_banner_seen) from the same start, and the
+  // first row ever: when seen tracking began, so CTR on seen banners only
+  // counts clicks from then. A read failure (the migration not run yet)
+  // shows as zero seen plus the error, never takes the tab down.
+  async function readSeen(): Promise<{ rows: SeenRow[]; startedAt: string | null; error?: string }> {
+    try {
+      const first = await supabase
+        .from("progress_banner_seen")
+        .select("created_at")
+        .order("created_at", { ascending: true })
+        .limit(1);
+      if (first.error) throw new Error(first.error.message);
+      const startedAt = ((first.data ?? []) as { created_at: string }[])[0]?.created_at ?? null;
+      const rows: SeenRow[] = [];
+      if (startedAt) {
+        const pageSize = 1000;
+        for (let from = 0; ; from += pageSize) {
+          const { data, error } = await supabase
+            .from("progress_banner_seen")
+            .select("placement, arm, user_agent, created_at")
+            .gte("created_at", readFrom)
+            .order("id", { ascending: true })
+            .range(from, from + pageSize - 1);
+          if (error) throw new Error(error.message);
+          const batch = (data ?? []) as SeenRow[];
+          rows.push(...batch);
+          if (batch.length < pageSize) break;
+        }
+      }
+      return { rows: rows.filter((r) => isHuman(r.user_agent)), startedAt };
+    } catch (err) {
+      return {
+        rows: [],
+        startedAt: null,
+        error: "Failed to read progress_banner_seen: " + (err instanceof Error ? err.message : "Unknown error"),
+      };
+    }
+  }
+
+  const [allViews, seenResult, joinResult, usage] = await Promise.all([
     readAllViews(),
+    readSeen(),
     supabase
       .from("progress_join_events")
       .select(
@@ -559,8 +702,15 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     });
 
   const placements = new Map<ProgressPlacement, PlacementRow>(
-    PROGRESS_PLACEMENTS.map((placement) => [placement, { placement, impressions: 0, clicks: 0, ctr: 0 }])
+    PROGRESS_PLACEMENTS.map((placement) => [
+      placement,
+      { placement, impressions: 0, clicks: 0, ctr: 0, seen: 0, seenClicks: 0, seenCtr: 0 },
+    ])
   );
+  // Clicks count towards CTR on seen banners only from when seen tracking
+  // began (never, before the first seen row).
+  const seenStartMs = seenResult.startedAt ? Date.parse(seenResult.startedAt) : Infinity;
+  const seenRows = seenResult.rows.filter((r) => Date.parse(r.created_at) >= sinceMs);
   const channels = new Map<CoachAppChannel, ProgressChannelRow>(
     COACH_APP_CHANNELS.map((channel) => [channel, { channel, landingViews: 0, joins: 0 }])
   );
@@ -568,7 +718,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
   const day = (date: string) => {
     let d = days_.get(date);
     if (!d) {
-      d = { date, impressions: 0, bannerClicks: 0, landingViews: 0, joins: 0 };
+      d = { date, impressions: 0, bannersSeen: 0, bannerClicks: 0, landingViews: 0, joins: 0 };
       days_.set(date, d);
     }
     return d;
@@ -589,6 +739,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     const clicked = placementOf(v.banner_variant);
     if (clicked) {
       placements.get(clicked)!.clicks++;
+      if (Date.parse(v.created_at) >= seenStartMs) placements.get(clicked)!.seenClicks++;
       bannerClicks++;
       day(v.created_at.slice(0, 10)).bannerClicks++;
     }
@@ -597,7 +748,18 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     channels.get(joinChannel(r))!.joins++;
     day(r.created_at.slice(0, 10)).joins++;
   }
-  for (const p of placements.values()) p.ctr = p.impressions > 0 ? p.clicks / p.impressions : 0;
+  let bannersSeen = 0;
+  for (const r of seenRows) {
+    const row = placements.get(r.placement as ProgressPlacement);
+    if (!row) continue;
+    row.seen++;
+    bannersSeen++;
+    day(r.created_at.slice(0, 10)).bannersSeen++;
+  }
+  for (const p of placements.values()) {
+    p.ctr = p.impressions > 0 ? p.clicks / p.impressions : 0;
+    p.seenCtr = p.seen > 0 ? p.seenClicks / p.seen : 0;
+  }
 
   // New accounts in the window: each UK day's closing sign-up count, from
   // the tracking start's day on.
@@ -610,9 +772,9 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
   const impressions = Array.from(placements.values()).reduce((s, p) => s + p.impressions, 0);
 
   // The banner test, cumulative from its start.
-  const testArms = new Map<ProgressBannerArm, { clicks: number; joins: number }>([
-    ["a", { clicks: 0, joins: 0 }],
-    ["b", { clicks: 0, joins: 0 }],
+  const testArms = new Map<ProgressBannerArm, { clicks: number; joins: number; seen: number; seenClicks: number }>([
+    ["a", { clicks: 0, joins: 0, seen: 0, seenClicks: 0 }],
+    ["b", { clicks: 0, joins: 0, seen: 0, seenClicks: 0 }],
   ]);
   let eligibleViews = 0;
   if (testStarted) {
@@ -621,12 +783,18 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
       if (inProgressBannerTest(v.path) && progressBannerOnPath(v.path, articleSlugs)) eligibleViews++;
       if (v.path !== LANDING_PATH) continue;
       const arm = parseProgressBanner(v.banner_variant)?.arm;
-      if (arm) testArms.get(arm)!.clicks++;
+      if (!arm) continue;
+      testArms.get(arm)!.clicks++;
+      if (Date.parse(v.created_at) >= seenStartMs) testArms.get(arm)!.seenClicks++;
     }
     for (const r of allJoinRows) {
       if (Date.parse(r.created_at) < testStart) continue;
       const arm = parseProgressBanner(r.banner)?.arm;
       if (arm) testArms.get(arm)!.joins++;
+    }
+    for (const r of seenResult.rows) {
+      if (Date.parse(r.created_at) < testStart) continue;
+      if (r.arm === "a" || r.arm === "b") testArms.get(r.arm)!.seen++;
     }
   }
   // Randomised 50/50 per view, so half the eligible views is each arm's
@@ -642,6 +810,9 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
       clicks: t.clicks,
       ctr: armImpressions > 0 ? t.clicks / armImpressions : 0,
       joins: t.joins,
+      seen: t.seen,
+      seenClicks: t.seenClicks,
+      seenCtr: t.seen > 0 ? t.seenClicks / t.seen : 0,
     };
   });
   const probBBeatsA = testStarted
@@ -667,7 +838,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     days,
     since,
     clampedToTrackingStart,
-    pipeline: { impressions, bannerClicks, landingViews, joins: joinRows.length, newAccounts },
+    pipeline: { impressions, bannerClicks, landingViews, joins: joinRows.length, newAccounts, bannersSeen },
     placements: Array.from(placements.values()),
     channels: Array.from(channels.values()).filter((c) => c.landingViews + c.joins > 0),
     byDay: Array.from(days_.values()).sort((a, b) => b.date.localeCompare(a.date)),
@@ -683,5 +854,9 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     ...(joinsError ? { joinsError } : {}),
     usage,
     bannerTest,
+    bannerSeen: {
+      startedAt: seenResult.startedAt,
+      ...(seenResult.error ? { error: seenResult.error } : {}),
+    },
   };
 }

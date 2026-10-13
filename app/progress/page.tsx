@@ -14,9 +14,10 @@ import { generateSEO } from "@/lib/seo";
 // Without its env vars the form falls back to handing the email to the app.
 //
 // Claims on this page describe what the app does today. Change them with the
-// app, not ahead of it. The trial length and price are deliberately left off
-// this page (shown in the app before anyone pays); what it does say about the
-// trial must still match Progress's own Terms.
+// app, not ahead of it. The price is deliberately left off this page, and
+// out of the sign-up boxes in particular (shown in the app before anyone
+// pays). The trial length (4 weeks, in the trust list under the top form)
+// and anything else said about the trial must match Progress's own Terms.
 
 const TITLE = "Progress: Track Your Child's Football Stats and Development";
 const DESCRIPTION =
@@ -30,7 +31,7 @@ export const metadata = generateSEO({
   image: "/og/progress-1200x630.png",
 });
 
-const TRUST = ["Free trial, no card needed", "Add their previous seasons too"];
+const TRUST = ["4-week free trial, no card needed", "Add their previous seasons too"];
 
 // The four features called out with a screenshot each. Screenshots are the
 // real app screens with a made-up player (Alfie) and made-up teammates and
@@ -163,12 +164,13 @@ export default function ProgressPage() {
               Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
             </p>
             <h1 className="text-4xl lg:text-5xl font-bold text-[#16211b] leading-tight mb-5">
-              Your child&apos;s football journey, kept for good
+              Every goal.
+              <br />
+              Every season.
             </h1>
             <p className="text-lg text-[#3c4a40] leading-relaxed max-w-xl mb-8">
-              Progress is the app for football parents. Log every goal and assist,
-              keep their career stats (previous seasons included), track training
-              and coach feedback, and turn the season into cards worth sharing.
+              The app for football parents: log their goals and assists, keep
+              their career stats and coach feedback, and share their season.
             </p>
             <ProgressJoinForm id="join" />
             <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#5d6b60] list-none p-0">

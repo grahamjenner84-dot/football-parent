@@ -1540,3 +1540,7 @@ Screaming Frog flagged 24 titles over ~561px. Only `<title>` changed (H1s and fr
 - `/football-gear/best-football-rebounders-for-kids` (`ca3c913`) and `/football-gear/best-football-boots-for-girls` (`131916f`): " | Football Parent" suffix dropped only.
 
 Left alone: pages where only the brand suffix is truncated (Veo, West Ham, can-academy-players, footballs by age, EPPP, playing up, boots for kids, leave grassroots, soft ground, goals, team spreadsheet, home). Deferred to after their watch windows: GPS trackers (~18 Oct), Watford (~20 Oct), coaching apps (~25 Oct).
+
+## 13 Oct 2026: /progress hero copy
+
+- `/progress` (`3cf0900`): H1 "Your child's football journey, kept for good" to "Every goal. / Every season." (two lines), and a shorter intro paragraph, so the sign-up box sits higher on phones. Title tag and meta description unchanged. Same deploy: the sign-up box lost its marketing tick and the cookie banner is more compact on phones (not SEO changes, noted because they move what's on the first screen).

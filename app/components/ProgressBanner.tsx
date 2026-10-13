@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
+import ProgressBannerLink from "@/app/components/ProgressBannerLink";
 import ProgressBannerTestArm from "@/app/components/ProgressBannerTestArm";
 
 // Promo for Progress, the parents' app (progress.footballparent.co.uk). It
@@ -17,7 +17,12 @@ import ProgressBannerTestArm from "@/app/components/ProgressBannerTestArm";
 // Measurement: links carry ?b=progress-<placement>, which PageViewPing.tsx
 // logs into page_views.banner_variant like the Coach App banners. The Coach
 // App A/B report skips progress-* values (getBannerVariantStats in
-// lib/supabase/page-views.ts) so they never count as Coach App clicks.
+// lib/supabase/page-views.ts) so they never count as Coach App clicks. The
+// first time half the banner is on screen during a page view, the link's
+// client island (ProgressBannerLink, or ProgressBannerTestArm in the test)
+// logs one anonymous "banner seen" with that ?b= value
+// (useProgressBannerSeen.ts -> progress_banner_seen), so CTR can be read on
+// banners seen as well as on pages carrying one.
 //
 // A/B test: with `test` set (articles under /academy-pathway/* and
 // /academy-trials/*, see lib/MDXContent.tsx), the banner renders arm A here
@@ -115,8 +120,8 @@ export default function ProgressBanner({
   }
 
   return (
-    <Link href={`/progress?b=progress-${placement}`} className={className}>
+    <ProgressBannerLink banner={`progress-${placement}`} className={className}>
       {inner(controlBody)}
-    </Link>
+    </ProgressBannerLink>
   );
 }
