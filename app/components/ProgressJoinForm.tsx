@@ -8,7 +8,7 @@ import { trackProgressSignUpConversion } from "@/lib/ads-tracking";
 // One anonymous event per sent link, for the Progress pipeline on
 // /admin/seo (see /api/progress-join). Never the email address. Fire and
 // forget: measurement must never get in the way of signing up.
-function logJoin(form: string | undefined, marketing: boolean) {
+function logJoin(form: string | undefined) {
   try {
     fetch("/api/progress-join", {
       method: "POST",
@@ -16,7 +16,8 @@ function logJoin(form: string | undefined, marketing: boolean) {
       body: JSON.stringify({
         form: form ?? null,
         banner: new URLSearchParams(window.location.search).get("b"),
-        marketingOptIn: marketing,
+        // The form no longer asks for a marketing opt-in.
+        marketingOptIn: false,
         ...currentVisitSource(),
       }),
       keepalive: true,
@@ -31,7 +32,7 @@ function logJoin(form: string | undefined, marketing: boolean) {
 // bottom), and parents who didn't trust the first send used to fill in the
 // second a minute later. Once either sends, both show "Check your email",
 // with a resend button instead of a second form.
-type Sent = { email: string; marketing: boolean; sentAt: number };
+type Sent = { email: string; sentAt: number };
 let sent: Sent | null = null;
 const listeners = new Set<() => void>();
 function setSent(next: Sent | null) {
@@ -93,15 +94,14 @@ function ResendButton({ sentAt, dark, onResend, busy }: { sentAt: number; dark: 
 
 // "Sign up with Google" is only a link: the app starts Google sign-in itself
 // (?signin=google), so this site still never calls anything in Progress's
-// Supabase project but signInWithOtp (CLAUDE.md, lib/progress-auth.ts). The
-// app applies the marketing choice only if that sign-in creates the account.
-function googleHref(marketing: boolean) {
-  return `${PROGRESS_APP_URL}?signin=google&marketing=${marketing ? "1" : "0"}`;
-}
+// Supabase project but signInWithOtp (CLAUDE.md, lib/progress-auth.ts).
+//
+// No marketing tick-box any more, so no ?marketing= on either route into
+// the app (this link or the email link): the form asks only for the email.
+const GOOGLE_HREF = `${PROGRESS_APP_URL}?signin=google`;
 
 export default function ProgressJoinForm({ id, dark = false }: { id?: string; dark?: boolean }) {
   const [email, setEmail] = useState("");
-  const [marketing, setMarketing] = useState(false);
   const [sending, setSending] = useState(false);
   const [resending, setResending] = useState(false);
   const [resent, setResent] = useState(false);
@@ -119,7 +119,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
     e.preventDefault();
     setSending(true);
     setError("");
-    const { error } = await sendProgressSignInLink(email, marketing);
+    const { error } = await sendProgressSignInLink(email);
     setSending(false);
     if (error) {
       setError(friendlyError(error));
@@ -128,17 +128,17 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
     // One join event and one Ads conversion per send from the form. The
     // resend button below logs neither, and the conversion fires at most
     // once per page load whatever happens (lib/ads-tracking.ts).
-    logJoin(id, marketing);
+    logJoin(id);
     trackProgressSignUpConversion();
     setResent(false);
-    setSent({ email: email.trim(), marketing, sentAt: Date.now() });
+    setSent({ email: email.trim(), sentAt: Date.now() });
   }
 
   async function onResend() {
     if (!sentTo) return;
     setResending(true);
     setError("");
-    const { error } = await sendProgressSignInLink(sentTo.email, sentTo.marketing);
+    const { error } = await sendProgressSignInLink(sentTo.email);
     setResending(false);
     if (error) {
       setError(friendlyError(error));
@@ -157,6 +157,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           <strong className={text}>{sentTo.email}</strong>. Tap it and Progress opens, ready to set
           up your child&apos;s first team. Open it on the phone you&apos;ll use at matches.
         </p>
+        <p className={`mt-3 mb-0 text-sm ${muted}`}>Or type the 6-digit code from the email into the app.</p>
         <p className={`mt-3 mb-0 text-sm ${muted}`}>
           Not there after a minute? Check your Spam and Promotions folders.
         </p>
@@ -203,12 +204,12 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           got into the app, while the email link loses people between the
           inbox and the app. */}
       <a
-        href={googleHref(marketing)}
+        href={GOOGLE_HREF}
         onClick={() => {
           // Counted like a send: one join event (form "<id>-google") and the
           // once-per-page Ads conversion. Whether Google sign-in then
           // completes shows in the app snapshot's sign-ups by method.
-          logJoin(id ? `${id}-google` : "google", marketing);
+          logJoin(id ? `${id}-google` : "google");
           trackProgressSignUpConversion();
         }}
         className="flex w-full items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white! shadow-sm transition-colors hover:bg-[#0f5d34]"
@@ -248,17 +249,6 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           {sending ? "Sending…" : "Email me a link"}
         </button>
       </div>
-      {configured && (
-        <label className={`mt-3 flex items-start gap-2 text-sm ${muted} cursor-pointer`}>
-          <input
-            type="checkbox"
-            checked={marketing}
-            onChange={(e) => setMarketing(e.target.checked)}
-            className="mt-1 accent-[#1a7a45]"
-          />
-          <span>Email me occasional Progress updates and offers from Football Parent.</span>
-        </label>
-      )}
       {error && (
         <p className={errorText} role="alert">
           {error}
@@ -266,7 +256,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
       )}
       <p className={`mt-3 text-sm ${muted}`}>
         {configured
-          ? "Free trial, no card needed. No password either."
+          ? "No password needed."
           : "We'll take you to Progress to send your sign-in link. No password needed."}{" "}
         By continuing you agree to the Progress{" "}
         <a href={`${PROGRESS_APP_URL}terms`} className={link}>

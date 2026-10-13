@@ -3040,6 +3040,8 @@ function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"
                 <th style={{ ...funnelTh, textAlign: "right" }}>Impressions (≈)</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>CTR (≈)</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Banners seen</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>CTR on seen</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Join sends</th>
               </tr>
             </thead>
@@ -3050,6 +3052,10 @@ function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"
                   <td style={funnelNum}>≈{Math.round(a.impressions).toLocaleString("en-GB")}</td>
                   <td style={funnelNum}>{a.clicks}</td>
                   <td style={funnelNum}>{a.impressions > 0 ? `≈${(a.ctr * 100).toFixed(2)}%` : "n/a"}</td>
+                  <td style={funnelNum}>{a.seen.toLocaleString("en-GB")}</td>
+                  <td style={funnelNum}>
+                    {a.seen > 0 ? `${(a.seenCtr * 100).toFixed(2)}% (${a.seenClicks} clicks)` : "n/a"}
+                  </td>
                   <td style={funnelNum}>{a.joins}</td>
                 </tr>
               ))}
@@ -3076,7 +3082,11 @@ function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"
         uses Beta(1 + clicks, 1 + impressions - clicks) for each arm. Keep it
         running until both arms have {test.minImpressionsPerArm.toLocaleString("en-GB")} impressions,
         then call it at {Math.round(test.threshold * 100)}% either way; anything
-        in between is a draw.
+        in between is a draw. Banners seen is counted, not estimated: views on
+        which half of that arm&rsquo;s banner was on screen. It only started
+        when seen tracking shipped, so CTR on seen uses that arm&rsquo;s clicks
+        from then on (shown in brackets), and the call above still runs on
+        the estimated impressions.
       </SectionNote>
     </>
   );
@@ -3103,6 +3113,7 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
     n === null ? "not sent" : base > 0 ? `${Math.round((n / base) * 100)}% of this week's sign-ups` : undefined;
   const steps: { label: string; value: number | null }[] = [
     { label: "Signed up, last 7 days", value: latest.signups7d },
+    { label: "Signed in", value: latest.signups7dSignedIn },
     { label: "Have a player", value: latest.signups7dWithPlayer },
     { label: "Added a club", value: latest.signups7dWithClub },
     { label: "Logged a match or training", value: latest.signups7dWithLog },
@@ -3111,6 +3122,17 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
   const rate = (a: number | null, b: number | null) =>
     a === null || b === null ? "-" : b > 0 ? `${Math.round((a / b) * 100)}%` : "n/a";
   const trend = usage.byDay.filter((d) => d.signups7d !== null);
+  // All-time counts that older snapshots don't carry (progress side sends
+  // them from 20261013120000_progress_usage_signed_in_coach.sql on): null is
+  // "-", never 0.
+  const ofAccounts = (n: number) =>
+    latest.totalAccounts > 0 ? `${Math.round((n / latest.totalAccounts) * 100)}% of ${latest.totalAccounts} accounts` : undefined;
+  const allTime: { label: string; value: number | null; sub?: (n: number) => string | undefined }[] = [
+    { label: "Accounts signed in", value: latest.accountsSignedIn, sub: (n) => ofAccounts(n) ?? "ever signed in" },
+    { label: "Accounts with a coach link", value: latest.accountsWithCoachLink, sub: ofAccounts },
+    { label: "Coach reports", value: latest.coachReports, sub: () => "submitted by coaches, all time" },
+    { label: "Accounts with training", value: latest.accountsWithTraining, sub: ofAccounts },
+  ];
   return (
     <>
       <div style={styles.summaryGrid}>
@@ -3142,6 +3164,16 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
             sub={`${of7d(latest.signups7dGoogle) ?? "no sign-ups this week"}; ${latest.accountsGoogle ?? 0} accounts use Google overall, the rest email`}
           />
         )}
+        {allTime.map((t) =>
+          t.value === null ? (
+            <div key={t.label} style={styles.card}>
+              <p style={styles.cardPage}>{t.label}</p>
+              <span style={{ ...styles.cardQuery, fontSize: 20 }}>-</span>
+            </div>
+          ) : (
+            <UsageTile key={t.label} label={t.label} value={t.value} sub={t.sub?.(t.value)} />
+          )
+        )}
       </div>
       <SectionNote label="What these numbers count">
         The top row follows the accounts created in the last 7 days (a rolling
@@ -3151,8 +3183,12 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
         accounts created 7 to 14 days ago, so their first week is complete:
         activated means they logged a match or training within 7 days of
         signing up. Logged something counts accounts with a match or training
-        created in the last 7 days. Your own accounts and accounts being
-        deleted are left out, as above.
+        created in the last 7 days. Signed in (next to this week&rsquo;s
+        sign-ups) and Accounts signed in count accounts that have ever
+        actually signed in: an account can exist from a link that was never
+        opened. Coach links, coach reports and accounts with training are all
+        time. A dash means the snapshot didn&rsquo;t carry that count yet. Your
+        own accounts and accounts being deleted are left out, as above.
       </SectionNote>
       {trend.length > 1 && (
         <div style={{ overflowX: "auto" }}>
@@ -3161,6 +3197,7 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
               <tr>
                 <th style={funnelTh}>Day (closing figures)</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups 7d</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Signed in</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Player</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Club</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Logged</th>
@@ -3174,6 +3211,7 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
                 <tr key={d.date}>
                   <td style={funnelTd}>{d.date}</td>
                   <td style={funnelNum}>{d.signups7d ?? "-"}</td>
+                  <td style={funnelNum}>{d.signups7dSignedIn ?? "-"}</td>
                   <td style={funnelNum}>{d.signups7dWithPlayer ?? "-"}</td>
                   <td style={funnelNum}>{d.signups7dWithClub ?? "-"}</td>
                   <td style={funnelNum}>{d.signups7dWithLog ?? "-"}</td>
@@ -3209,8 +3247,17 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
   // The channel rules are shared with the Coach App; "Article banner" there
   // means any Progress banner here (homepage and sponsor included).
   const channelLabel = (c: string) => (c === "Article banner" ? "Progress banner" : c);
+  // "Banner seen" counting starts at the first progress_banner_seen row.
+  const seenSinceLabel = funnel.bannerSeen.startedAt
+    ? new Date(funnel.bannerSeen.startedAt).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })
+    : null;
   const steps: { label: string; value: number | null; note?: string }[] = [
     { label: "Banner impressions", value: p.impressions },
+    {
+      label: "Banners seen",
+      value: p.bannersSeen,
+      note: seenSinceLabel ? `half on screen, counted since ${seenSinceLabel}` : "none recorded yet",
+    },
     { label: "Banner clicks", value: p.bannerClicks, note: `${pct(p.bannerClicks, p.impressions)} of impressions` },
     { label: "/progress views", value: p.landingViews, note: "all routes in, banners included" },
     { label: "Join form sends", value: p.joins, note: `${pct(p.joins, p.landingViews)} of /progress views` },
@@ -3228,6 +3275,14 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
           Couldn&rsquo;t load join form sends: {funnel.joinsError}. If it says
           the progress_join_events table is missing, run
           20261002140000_progress_pipeline.sql.
+        </p>
+      )}
+      {funnel.bannerSeen.error && (
+        <p style={styles.error}>
+          Couldn&rsquo;t load banners seen: {funnel.bannerSeen.error}. If it
+          says the progress_banner_seen table is missing, run
+          20261013130000_progress_banner_seen.sql. Seen counts show as 0 until
+          then.
         </p>
       )}
 
@@ -3249,8 +3304,11 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
         Banner impressions are views of pages carrying a Progress banner (the
         homepage, the Academy Pathway page and its articles, and the end of
         every other article except coaching ones): a page view, not proof the
-        banner was scrolled to. Banner clicks are landings on /progress from
-        one. /progress views include every way in (the menu button, search,
+        banner was scrolled to. Banners seen are page views on which at least
+        half a Progress banner was actually on screen, counted once per
+        banner per view, {seenSinceLabel ? `since ${seenSinceLabel}` : "from when that tracking ships"};
+        CTR on seen banners uses only the clicks from then. Banner clicks are
+        landings on /progress from one. /progress views include every way in (the menu button, search,
         direct). Join form sends are sign-in emails sent from the form on
         /progress: a new trial or a returning parent signing in, the form
         can&rsquo;t tell which. New accounts come from the app and include
@@ -3274,6 +3332,9 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
               <th style={{ ...funnelTh, textAlign: "right" }}>Impressions</th>
               <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
               <th style={{ ...funnelTh, textAlign: "right" }}>CTR</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Banners seen</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Seen / impressions</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>CTR on seen</th>
             </tr>
           </thead>
           <tbody>
@@ -3283,11 +3344,24 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
                 <td style={funnelNum}>{row.impressions}</td>
                 <td style={funnelNum}>{row.clicks}</td>
                 <td style={funnelNum}>{pct(row.clicks, row.impressions)}</td>
+                <td style={funnelNum}>{row.seen}</td>
+                <td style={funnelNum}>{row.seen > 0 ? pct(row.seen, row.impressions) : "n/a"}</td>
+                <td style={funnelNum}>
+                  {row.seen > 0 ? `${pct(row.seenClicks, row.seen)} (${row.seenClicks} clicks)` : "n/a"}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <SectionNote label="Seen versus impressions">
+        Impressions and CTR cover the whole window. Banners seen only start
+        when seen tracking shipped ({seenSinceLabel ?? "no seen banners recorded yet"}),
+        so early on Seen / impressions understates how often the banner is
+        reached; CTR on seen divides the clicks since then (in brackets) by
+        the banners seen. With JavaScript off a banner can be clicked without
+        being counted as seen.
+      </SectionNote>
 
       <ProgressBannerTestSection test={funnel.bannerTest} />
 
@@ -3336,6 +3410,7 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
               <tr>
                 <th style={funnelTh}>Day (UTC)</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Impressions</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Banners seen</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Banner clicks</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>/progress views</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Join sends</th>
@@ -3346,6 +3421,7 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
                 <tr key={d.date}>
                   <td style={funnelTd}>{d.date}</td>
                   <td style={funnelNum}>{d.impressions}</td>
+                  <td style={funnelNum}>{d.bannersSeen}</td>
                   <td style={funnelNum}>{d.bannerClicks}</td>
                   <td style={funnelNum}>{d.landingViews}</td>
                   <td style={funnelNum}>{d.joins}</td>

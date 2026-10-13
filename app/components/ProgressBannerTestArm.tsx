@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useSyncExternalStore, type ReactNode } from "react";
+import { useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useProgressBannerSeen } from "@/app/components/useProgressBannerSeen";
 import {
   progressBannerArmValue,
   type ProgressBannerArm,
@@ -37,8 +38,12 @@ export default function ProgressBannerTestArm({
     () => null
   );
   const value = arm ? progressBannerArmValue(placement, arm) : `progress-${placement}`;
+  // "Banner seen" with the drawn arm's value: not observed until the arm is
+  // drawn, so a seen is never logged with the pre-draw plain value.
+  const ref = useRef<HTMLAnchorElement | null>(null);
+  useProgressBannerSeen(ref, arm ? value : null);
   return (
-    <Link href={`/progress?b=${value}`} className={className}>
+    <Link ref={ref} href={`/progress?b=${value}`} className={className}>
       {arm === "b" ? b : a}
     </Link>
   );

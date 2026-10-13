@@ -175,10 +175,23 @@ export default function CookieConsent() {
       aria-label="Cookie consent"
       className="fixed inset-x-0 bottom-0 z-[100] border-t border-slate-200 bg-white shadow-[0_-4px_16px_rgba(0,0,0,0.08)]"
     >
-      <div className="mx-auto max-w-6xl px-5 py-5 sm:px-6">
+      {/* Phones (below sm) get a compact banner: one short sentence and the
+          three buttons in a single row of equal widths, so the banner takes
+          as little of the first screen as possible (on /progress it sat on
+          top of the join form). From sm up it is exactly as before. */}
+      <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6 sm:py-5">
         {!managing ? (
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm leading-relaxed text-slate-700">
+          <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+            <p className="text-[13px] leading-snug text-slate-700 sm:hidden">
+              We use cookies for site stats and ads, only with your consent.{" "}
+              <a
+                href="/cookie-policy"
+                className="font-semibold text-blue-700 hover:text-blue-900"
+              >
+                Cookie Policy
+              </a>
+            </p>
+            <p className="hidden text-sm leading-relaxed text-slate-700 sm:block">
               We use cookies to understand how visitors use Football Parent,
               and for advertising. These cookies are only set with your
               consent. See our{" "}
@@ -198,14 +211,17 @@ export default function CookieConsent() {
               .
             </p>
 
-            <div className="flex flex-shrink-0 flex-wrap gap-3">
+            {/* Phones: Reject, Manage, Accept all, in equal thirds (the
+                order-* classes; Reject and Accept all stay the same size).
+                From sm up: Manage, Reject, Accept all, as before. */}
+            <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-shrink-0 sm:flex-wrap sm:gap-3">
               <button
                 type="button"
                 onClick={() => {
                   setAnalyticsChoice(readConsent()?.analytics ?? false);
                   setManaging(true);
                 }}
-                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
+                className="order-2 rounded-lg border border-slate-300 bg-white px-2 py-2 text-[13px] font-semibold text-slate-900 transition hover:bg-slate-50 sm:order-none sm:px-4 sm:text-sm"
               >
                 Manage
               </button>
@@ -213,7 +229,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={rejectAll}
-                className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
+                className="order-1 rounded-lg border border-slate-300 bg-white px-2 py-2 text-[13px] font-semibold text-slate-900 transition hover:bg-slate-50 sm:order-none sm:px-4 sm:text-sm"
               >
                 Reject
               </button>
@@ -221,7 +237,7 @@ export default function CookieConsent() {
               <button
                 type="button"
                 onClick={acceptAll}
-                className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-700"
+                className="order-3 rounded-lg bg-slate-900 px-2 py-2 text-[13px] font-semibold text-white transition hover:bg-slate-700 sm:order-none sm:px-4 sm:text-sm"
               >
                 Accept all
               </button>
