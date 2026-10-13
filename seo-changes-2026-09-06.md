@@ -1524,3 +1524,19 @@ Full 12-section reviews are in `seo-data/exports/review-<slug>-2026-10-12.md`. B
 ## Sitemap: trust pages added, Girls United logo shrunk (2026-10-13)
 
 From a Screaming Frog crawl. `/about`, `/author/graham-jenner`, `/editorial-policy` and `/terms-and-conditions` were linked from every page footer but missing from `lib/routes.ts`, so absent from the sitemap. Added (no lastmod, as with the other non-article routes). Separately, `public/images/people/girls-united-logo.png` resized 600px to 352px (146 kB to 20 kB), used on four girls' football pages (`0cc2e8c`). SF's three "High" warnings were checked and are by design: the 6 canonicalised URLs are the `?b=` banner tracking links, and the noindex / no-outlinks URL is the calculator app at `/coach-app/game-time-calculator`.
+
+## Title tags shortened on 10 pages to fit the SERP (2026-10-13)
+
+Screaming Frog flagged 24 titles over ~561px. Only `<title>` changed (H1s and frontmatter untouched), one commit per page. Picked pages with little or no traffic where the cut fell inside the wording, not just on the brand suffix. Watch list until ~27 Oct.
+
+- `/girls-football/girls-united-daughter-football-interview` (`5411fb7`): "Getting Your Daughter Into Football: Girls United on Confidence, Clubs and Barriers | Football Parent" to "Getting Your Daughter Into Football: Advice from Girls United"
+- `/parent-guides/matt-baxter-young-footballer-mindset-interview` (`cfc0a5e`): "...Matt Baxter on Confidence, Bad Games and Burnout | Football Parent" to "Young Footballer Mindset: Matt Baxter on Confidence"
+- `/parent-guides/chris-robinson-football-scout-interview` (`489fb43`): "...Chris Robinson on Trials, Scout Approaches and Agents | Football Parent" to "Football Scouting: Chris Robinson on Trials and Agents"
+- `/academy-pathway/academy-life-paul-barry-interview` (`516016e`): "...Paul Barry on Categories, Development Centres and Release | Football Parent" to "Academy Life: Paul Barry on Development Centres and Release"
+- `/parent-guides/pre-academy-football-parent-interview` (`0924a6a`): "...A Parent on Scouts, Release and Signing | Football Parent" to "Pre-Academy Football: A Parent on Scouts and Signing"
+- `/football-gear/best-football-base-layers-for-kids` (`602b2e5`): "...The Best Base Layers for Winter Football | Football Parent" to "Football Skins for Kids: The Best Base Layers for Winter"
+- `/football-gear/christmas-football-gifts-for-kids` (`f50141f`): "Football Gifts for Kids (2026 Christmas Guide by Age and Budget) | Football Parent" to "Football Gifts for Kids (2026 Christmas Guide by Age)"
+- `/parent-guides/best-football-stats-apps` (`9a01843`, 340 impressions/28d, pos 5.9, the one with live traffic): "Best Football Stats Apps for Kids and Grassroots Players (2026) | Football Parent" to "Best Football Stats Apps for Kids and Grassroots (2026)"
+- `/football-gear/best-football-rebounders-for-kids` (`ca3c913`) and `/football-gear/best-football-boots-for-girls` (`131916f`): " | Football Parent" suffix dropped only.
+
+Left alone: pages where only the brand suffix is truncated (Veo, West Ham, can-academy-players, footballs by age, EPPP, playing up, boots for kids, leave grassroots, soft ground, goals, team spreadsheet, home). Deferred to after their watch windows: GPS trackers (~18 Oct), Watford (~20 Oct), coaching apps (~25 Oct).
