@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Getting Your Daughter Into Football: Girls United on Confidence, Clubs and Barriers | Football Parent",
+  title: "Getting Your Daughter Into Football: Advice from Girls United",
   description: "Girls United on getting your daughter into football: what has changed for girls, the barriers parents miss, building a nervous player's confidence, choosing a club.",
   path: "/girls-football/girls-united-daughter-football-interview",
 });
