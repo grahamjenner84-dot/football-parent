@@ -264,6 +264,21 @@ export interface FunnelChannelRow {
   signups: number;
 }
 
+/** One sign-up form: views of the page it sits on, and the sign-ups that
+ * report it as where they signed up (coach_app_signups.landing_path). */
+export interface FunnelFormRow {
+  /** Null for sign-ups that reported no page at all. */
+  path: string | null;
+  /** Human views of the page; null where the path is not a page this
+   * report reads views for (e.g. /coach-app/android-install). */
+  views: number | null;
+  signups: number;
+  /** Of those, how many carried no channel (Unknown): the coach declined
+   * analytics cookies, so only the form is known, from the sign-in
+   * redirect (coach-app src/data/signupSurface.ts). */
+  unknownChannel: number;
+}
+
 export interface FunnelSignup {
   createdAt: string;
   channel: CoachAppChannel;
@@ -293,6 +308,12 @@ export interface CoachAppFunnel {
   /** Newest first, capped. Anonymous: no account is identifiable here. */
   recentSignups: FunnelSignup[];
   signupsByDay: { date: string; signups: number }[];
+  /** Views against sign-ups per form: the Coach App page, its ad variants,
+   * the calculator page and the app's own sign-in screen, plus any other
+   * page a sign-up names. Older sign-ups with no channel mostly have no
+   * page either: the form only started riding along on the sign-in
+   * redirect in October 2026. */
+  bySignupForm: FunnelFormRow[];
   /** Traffic to the /coaching/ articles, the SEO side of the funnel. */
   coachingArticles: {
     totalViews: number;
@@ -464,6 +485,29 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     { landingViews: 0, signInViews: 0, signups: 0 }
   );
 
+  const formMap = new Map<string | null, FunnelFormRow>();
+  const formRow = (path: string | null) => {
+    let row = formMap.get(path);
+    if (!row) {
+      row = { path, views: null, signups: 0, unknownChannel: 0 };
+      formMap.set(path, row);
+    }
+    return row;
+  };
+  for (const r of [...landingRows, ...signInRows, ...coachingRows.filter((c) => c.path === CALCULATOR_PATH)]) {
+    if (!isHuman(r.user_agent)) continue;
+    const row = formRow(r.path);
+    row.views = (row.views ?? 0) + 1;
+  }
+  for (const r of signupRows) {
+    const row = formRow(r.landing_path);
+    row.signups++;
+    if (signupChannel(r) === "Unknown") row.unknownChannel++;
+  }
+  const bySignupForm = Array.from(formMap.values()).sort(
+    (a, b) => b.signups - a.signups || (b.views ?? 0) - (a.views ?? 0)
+  );
+
   const dayMap = new Map<string, number>();
   for (const r of signupRows) {
     const d = r.created_at.slice(0, 10);
@@ -504,6 +548,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     signupsByDay: Array.from(dayMap.entries())
       .map(([date, signups]) => ({ date, signups }))
       .sort((a, b) => b.date.localeCompare(a.date)),
+    bySignupForm,
     coachingArticles: {
       totalViews: humanCoaching.length,
       searchViews: groupMap.get("Search") ?? 0,

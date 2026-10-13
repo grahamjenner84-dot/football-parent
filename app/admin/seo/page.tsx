@@ -2727,6 +2727,11 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
         tab, just filtered. /coach-app is served by the rewrite in
         vercel.json to the separate Coach App deployment, which pings the
         same /api/page-view endpoint, so both sides land in one table.
+        In that app, /coach-app is a coach who is already signed in opening
+        it (every launch, reload or reopened tab), so it measures use of the
+        app, not people seeing a sign-up form. /coach-app/sign-in is the
+        app&rsquo;s sign-in screen, shown to anyone signed out: that is the
+        app&rsquo;s sign-up form view.
         The game time calculator&rsquo;s steps are left out of these counts
         and shown under Calculator steps below: each step is an event, not
         a page view, and counted as views they doubled the calculator&rsquo;s
@@ -2757,15 +2762,20 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
       )}
       {stats.calculatorSteps && (
         <>
-          <h3 style={styles.affiliateHeading}>Calculator steps</h3>
+          <h3 style={styles.affiliateHeading}>Calculator and sign-up form steps</h3>
           <SectionNote label="How to read this">
             One row per step a coach reached in the game time calculator,
             not page views. Under /embed is the calculator inside
             /coaching/equal-playing-time-calculator (plan, touchline,
-            full-time, save-team); without /embed is the full-screen
-            calculator at /coach-app/game-time-calculator, whose opens are
-            in the page views above. /coach-app/game-time/ is the same tool
-            inside the app. Each step counts once per page load.
+            full-time, save-team-open, save-team); without /embed is the
+            full-screen calculator at /coach-app/game-time-calculator, whose
+            opens are in the page views above. save-minutes is &ldquo;Save
+            today&rsquo;s minutes&rdquo; at full time, which goes to the
+            app&rsquo;s sign-in screen. /coach-app/game-time/ is the same
+            tool inside the app. /coach-app/signup-form/&lt;page&gt;/ is the
+            sign-up form on the Coach App page and its ad variants: view
+            (half the form on screen), google, google-error, email,
+            email-sent, email-error. Each step counts once per page load.
           </SectionNote>
           <PageViewsReport stats={stats.calculatorSteps} selectedDate={selectedDate} onSelectDate={setSelectedDate} />
         </>
@@ -3423,7 +3433,9 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         declined analytics cookies, so nothing about their visit was kept.
         Landing views are the Coach App page and its ad variants, plus ad
         clicks landing on the equal playing time calculator; sign-in views
-        are the app&rsquo;s own sign-in screen. Every number on this tab
+        are the app&rsquo;s own sign-in screen shown to a signed-out
+        visitor (/coach-app/sign-in). Opens of the app by coaches already
+        signed in are /coach-app and are not counted here. Every number on this tab
         starts when the funnel went live ({sinceLabel}), visits included, so
         visits and sign-ups cover the same period. Earlier sign-ups are only
         in the Coach App database. No sign-up row identifies a coach.
@@ -3463,6 +3475,49 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
           </tbody>
         </table>
       </div>
+
+      {funnel.bySignupForm && funnel.bySignupForm.length > 0 && (
+        <>
+          <FunnelHeading>By form, {windowLabel}</FunnelHeading>
+          <SectionNote label="How to read this">
+            Each sign-up form against the views of the page it sits on. A
+            sign-up counts against the form the coach signed up through,
+            whatever channel brought them. The no-channel column is the
+            Unknown sign-ups above: no analytics consent, so only the form
+            is known, carried on the sign-in redirect. That only began in
+            October 2026, so older no-channel sign-ups mostly reported no page
+            at all and sit under &ldquo;Not reported&rdquo;. /coach-app/sign-in is the app&rsquo;s
+            own sign-in screen (signed-out visits only, existing coaches on a
+            new device included); /coach-app/game-time-calculator is the
+            full-screen calculator. Where a step-by-step breakdown exists, it
+            is under Calculator and sign-up form steps on the Coach App tab.
+          </SectionNote>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={funnelTh}>Form on</th>
+                  <th style={{ ...funnelTh, textAlign: "right" }}>Page views</th>
+                  <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups</th>
+                  <th style={{ ...funnelTh, textAlign: "right" }}>of which no channel</th>
+                  <th style={{ ...funnelTh, textAlign: "right" }}>Per 100 views</th>
+                </tr>
+              </thead>
+              <tbody>
+                {funnel.bySignupForm.map((row) => (
+                  <tr key={row.path ?? "none"}>
+                    <td style={funnelTd}>{row.path ?? "Not reported"}</td>
+                    <td style={funnelNum}>{row.views ?? "-"}</td>
+                    <td style={funnelNum}>{row.signups}</td>
+                    <td style={funnelNum}>{row.unknownChannel}</td>
+                    <td style={funnelNum}>{row.views ? per100(row.signups, row.views) : "-"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
 
       <FunnelHeading>Sign-ups</FunnelHeading>
       {funnel.recentSignups.length === 0 ? (
