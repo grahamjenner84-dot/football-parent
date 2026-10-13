@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Academy Life: Paul Barry on Categories, Development Centres and Release | Football Parent",
+  title: "Academy Life: Paul Barry on Development Centres and Release",
   description:
     "Football DNA's Paul Barry on academy categories, juggling grassroots and academy football, development centres as a route in, and supporting a child through release.",
   path: "/academy-pathway/academy-life-paul-barry-interview",
