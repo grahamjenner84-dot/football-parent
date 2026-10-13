@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Best Football Stats Apps for Kids and Grassroots Players (2026) | Football Parent",
+  title: "Best Football Stats Apps for Kids and Grassroots (2026)",
   description: "Progress for one child's career stats, the Coach App for a whole team, a match log book for no screens at all: the best football stats apps and trackers for kids.", // must be word-for-word identical to the mdx frontmatter description
   path: "/parent-guides/best-football-stats-apps",
 });
