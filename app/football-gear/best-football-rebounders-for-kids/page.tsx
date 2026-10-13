@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Best Football Rebounders for Kids: Rebound Boards vs Nets | Football Parent",
+  title: "Best Football Rebounders for Kids: Rebound Boards vs Nets",
   description:
     "Football rebounders for kids: rebound boards vs net rebounders, which suits your child's age and garden, and how to anchor one on grass, 3G or a patio.",
   path: "/football-gear/best-football-rebounders-for-kids",
