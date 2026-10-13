@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Young Footballer Mindset: Matt Baxter on Confidence, Bad Games and Burnout | Football Parent",
+  title: "Young Footballer Mindset: Matt Baxter on Confidence",
   description: "Mindset coach Matt Baxter on the first ten minutes after a bad game, where real confidence comes from, spotting burnout, talk of quitting, and pressure that backfires.",
   path: "/parent-guides/matt-baxter-young-footballer-mindset-interview",
 });
