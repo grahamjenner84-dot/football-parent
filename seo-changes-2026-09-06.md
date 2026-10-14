@@ -1544,3 +1544,26 @@ Left alone: pages where only the brand suffix is truncated (Veo, West Ham, can-a
 ## 13 Oct 2026: /progress hero copy
 
 - `/progress` (`3cf0900`): H1 "Your child's football journey, kept for good" to "Every goal. / Every season." (two lines), and a shorter intro paragraph, so the sign-up box sits higher on phones. Title tag and meta description unchanged. Same deploy: the sign-up box lost its marketing tick and the cookie banner is more compact on phones (not SEO changes, noted because they move what's on the first screen).
+
+## 14 Oct 2026: Arsenal development centre title, aimed at academy queries
+
+- `/academy-pathway/arsenal-development-centre-guide` (`323e632`): `<title>` only, H1 and frontmatter untouched. "Arsenal Development Centre Guide | Football Parent" to "Arsenal Academy Trials & Development Centre: Parent's Guide" (560px; suffix dropped as in the 13 Oct titles). **Live traffic page.**
+
+Why: most of the page's queries are about the academy, not the development centre, and the old title only matched the latter. The new Ranking health tab also showed "arsenal academy" slipping from about 6.5 to 9.2 over 28 days.
+
+**Baseline (28 days to 10 Oct):**
+- Page: 14,692 impressions, 134 clicks, position 6.9, CTR 0.9%.
+- "arsenal development centre": 7.2 (768 impressions)
+- "arsenal academy": 8.8 (726)
+- "arsenal academy trials": 7.3 (621, 1 click)
+- "how to join arsenal academy u 12": 6.5 (512)
+- "arsenal pre academy": 5.5 (454)
+- "arsenal development centre trials": 4.7 (414, 8 clicks)
+
+Demand is falling seasonally (the trial window has passed), so judge the result on CTR and the per-query positions, not raw clicks.
+
+**Revert rule:** revert if either of the following happens:
+- "arsenal development centre" or "arsenal development centre trials" lose more than about 2 positions and hold there for a week.
+- Page CTR falls below 0.7% for two weeks running.
+
+**Watch list until ~28 Oct.**
