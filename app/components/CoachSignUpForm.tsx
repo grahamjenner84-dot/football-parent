@@ -42,6 +42,10 @@ export default function CoachSignUpForm({
 }: Props) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  // Google first, the email form on request: the same as the app's own
+  // sign-in screens. Every Google sign-up gets into the app; about a third
+  // of email sign-ups never opened the link.
+  const [emailOpen, setEmailOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Missing env vars shouldn't blank out the primary CTA on a page that is
@@ -138,13 +142,8 @@ export default function CoachSignUpForm({
             Sign up with Google
           </button>
 
-          <div className="flex items-center gap-3 my-4" aria-hidden="true">
-            <span className="h-px flex-1 bg-gray-200" />
-            <span className="text-xs text-gray-500 uppercase tracking-wide">or</span>
-            <span className="h-px flex-1 bg-gray-200" />
-          </div>
-
-          <form onSubmit={(e) => void handleEmail(e)} className="flex flex-col gap-2">
+          {emailOpen ? (
+          <form onSubmit={(e) => void handleEmail(e)} className="flex flex-col gap-2 mt-4">
             <label htmlFor="coach-signup-email" className="text-sm text-gray-700">
               Sign up with an email link
             </label>
@@ -157,6 +156,8 @@ export default function CoachSignUpForm({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              // Opened on purpose a moment ago: the keyboard can come straight up.
+              autoFocus
               className="border border-gray-300 rounded-lg px-3 py-2.5 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
             />
             <button
@@ -167,6 +168,18 @@ export default function CoachSignUpForm({
               {status === "sending" ? "Sending…" : "Email me a link"}
             </button>
           </form>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                trackSignupFormStep("email-open");
+                setEmailOpen(true);
+              }}
+              className="block mx-auto mt-4 text-sm text-gray-700 underline hover:text-gray-900"
+            >
+              No Google? Email me a sign-in link instead
+            </button>
+          )}
         </>
       )}
 

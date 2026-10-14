@@ -102,6 +102,7 @@ const GOOGLE_HREF = `${PROGRESS_APP_URL}?signin=google`;
 
 export default function ProgressJoinForm({ id, dark = false }: { id?: string; dark?: boolean }) {
   const [email, setEmail] = useState("");
+  const [emailOpen, setEmailOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [resending, setResending] = useState(false);
   const [resent, setResent] = useState(false);
@@ -216,12 +217,11 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
       >
         Sign up with Google
       </a>
-      <div className="my-4 flex items-center gap-3" aria-hidden="true">
-        <span className={`h-px flex-1 ${dark ? "bg-white/25" : "bg-[#c3ccb8]"}`} />
-        <span className={`text-xs uppercase tracking-wide ${muted}`}>or</span>
-        <span className={`h-px flex-1 ${dark ? "bg-white/25" : "bg-[#c3ccb8]"}`} />
-      </div>
-      <div className="flex flex-col gap-2">
+      {/* The email form opens on request only, as on the Coach App's
+          sign-up forms: every Google sign-up got into Progress, against
+          4 of 9 email sign-ups (14 Oct 2026). */}
+      {emailOpen ? (
+      <div className="mt-4 flex flex-col gap-2">
         <label htmlFor={inputId} className={`text-sm ${muted}`}>
           Sign up with an email link
         </label>
@@ -235,6 +235,8 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           placeholder="you@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          // Opened on purpose a moment ago: the keyboard can come straight up.
+          autoFocus
           className="w-full rounded-full border border-[#c3ccb8] bg-white px-5 py-3 text-base text-[#16211b] placeholder:text-[#8a978d] focus:outline-none focus:ring-2 focus:ring-[#1a7a45]"
         />
         <button
@@ -249,6 +251,15 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           {sending ? "Sending…" : "Email me a link"}
         </button>
       </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setEmailOpen(true)}
+          className={`mx-auto mt-4 block text-sm underline cursor-pointer ${muted}`}
+        >
+          No Google? Email me a sign-in link instead
+        </button>
+      )}
       {error && (
         <p className={errorText} role="alert">
           {error}

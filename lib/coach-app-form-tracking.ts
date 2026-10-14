@@ -16,6 +16,7 @@ import { isPageViewOptedOut } from "@/lib/page-view-optout";
 //   /coach-app/signup-form/<page>/view         the form was on screen
 //   /coach-app/signup-form/<page>/google       "Sign up with Google" tapped
 //   /coach-app/signup-form/<page>/google-error Google sign-in didn't open
+//   /coach-app/signup-form/<page>/email-open   "No Google?" tapped
 //   /coach-app/signup-form/<page>/email        "Email me a link" submitted
 //   /coach-app/signup-form/<page>/email-sent   the email went
 //   /coach-app/signup-form/<page>/email-error  the email failed to send
@@ -27,7 +28,7 @@ import { isPageViewOptedOut } from "@/lib/page-view-optout";
 
 export const SIGNUP_FORM_STEP_PREFIX = "/coach-app/signup-form";
 
-export type SignupFormStep = "view" | "google" | "google-error" | "email" | "email-sent" | "email-error";
+export type SignupFormStep = "view" | "google" | "google-error" | "email-open" | "email" | "email-sent" | "email-error";
 
 const sentThisLoad = new Set<string>();
 
