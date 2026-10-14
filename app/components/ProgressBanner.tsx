@@ -27,8 +27,10 @@ import ProgressBannerTestArm from "@/app/components/ProgressBannerTestArm";
 // A/B test: with `test` set (articles under /academy-pathway/* and
 // /academy-trials/*, see lib/MDXContent.tsx), the banner renders arm A here
 // on the server and ProgressBannerTestArm picks A or B in the browser on
-// every page view, tagging the link progress-<placement>-a / -b. Only the
-// body copy differs. Design and readout: lib/progress-banner-test.ts.
+// every page view, tagging the link progress-<placement>-a / -b. Both arms
+// use the trial and development-centre copy; B adds the Player of the Match
+// share card (the one in the Progress ads) and says "Try it free". Design,
+// readout and the earlier copy test's result: lib/progress-banner-test.ts.
 
 export type ProgressPlacement = "article" | "home" | "academy-pathway";
 
@@ -51,8 +53,9 @@ function Arrow() {
   );
 }
 
-// Arm B's body: written for parents heading to a trial or a development
-// centre. Nothing it says needs proving beyond what the app does.
+// The test's body copy (both arms): written for parents heading to a trial
+// or a development centre. Nothing it says needs proving beyond what the app
+// does.
 const TRIAL_BODY =
   "Heading to a trial or development centre? Keep a record of every game, goal and piece of coach feedback, so you can see how far they've come, season after season.";
 
@@ -75,7 +78,41 @@ export default function ProgressBanner({
     ? "Whatever the pathway brings, keep a record of it: goals, assists and career stats, training and coach feedback, and season cards worth sharing."
     : "Track their goals and assists, log their progress and keep coach feedback in one place, season after season.";
 
-  const inner = (body: string): ReactNode => (
+  const head = (
+    <>
+      {/* eslint-disable-next-line @next/next/no-img-element -- one small
+          SVG logo, as on the /progress page. */}
+      <img
+        src="/progress/progress-lockup.svg"
+        alt="Progress by Football Parent"
+        width={574}
+        height={146}
+        className="mb-3 h-9 w-auto"
+      />
+      {/* The brand strapline. Only "progress" is ever green (brand rules
+          in the progress repo's brand/README.md). */}
+      <p className="m-0 mb-2 text-lg font-bold leading-snug text-[#16211b] sm:text-xl">
+        Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
+      </p>
+    </>
+  );
+
+  // The Player of the Match share card from the Progress ads, rendered by
+  // the app's own card code (progress repo, src/share/shareCard.ts): beside
+  // the logo on phones, to the left of the text from sm up.
+  const card = (className: string) => (
+    // eslint-disable-next-line @next/next/no-img-element -- one small static image
+    <img
+      src="/progress/progress-potm-card.webp"
+      alt="A Progress share card: Alfie, Player of the Match, 1–0 vs Wanderers"
+      width={480}
+      height={600}
+      loading="lazy"
+      className={`h-auto rotate-3 rounded-lg shadow-[0_10px_24px_-10px_rgba(0,0,0,0.55)] ${className}`}
+    />
+  );
+
+  const inner = (body: string, withCard = false, cta = "Start free trial"): ReactNode => (
     <>
       {sponsor && (
         <p className="m-0 mb-3 text-xs font-semibold uppercase tracking-wide text-[#5d6b60]">
@@ -83,25 +120,20 @@ export default function ProgressBanner({
         </p>
       )}
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
+        {withCard && card("hidden w-[120px] shrink-0 sm:block")}
         <div className="flex-1">
-          {/* eslint-disable-next-line @next/next/no-img-element -- one small
-              SVG logo, as on the /progress page. */}
-          <img
-            src="/progress/progress-lockup.svg"
-            alt="Progress by Football Parent"
-            width={574}
-            height={146}
-            className="mb-3 h-9 w-auto"
-          />
-          {/* The brand strapline. Only "progress" is ever green (brand rules
-              in the progress repo's brand/README.md). */}
-          <p className="m-0 mb-2 text-lg font-bold leading-snug text-[#16211b] sm:text-xl">
-            Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
-          </p>
-          <p className="m-0 text-base leading-7 text-[#3c4a40]">{body}</p>
+          {withCard ? (
+            <div className="flex items-center gap-4">
+              <div className="min-w-0 flex-1">{head}</div>
+              {card("w-[104px] shrink-0 sm:hidden")}
+            </div>
+          ) : (
+            head
+          )}
+          <p className={`m-0 text-base leading-7 text-[#3c4a40] ${withCard ? "mt-3 sm:mt-0" : ""}`}>{body}</p>
         </div>
         <span className="inline-flex items-center gap-2 self-start whitespace-nowrap rounded-full bg-[#1a7a45] px-6 py-3 text-sm font-semibold text-white transition-colors group-hover:bg-[#0f5d34] sm:self-auto">
-          Start free trial
+          {cta}
           <Arrow />
         </span>
       </div>
@@ -113,8 +145,8 @@ export default function ProgressBanner({
       <ProgressBannerTestArm
         placement={placement}
         className={className}
-        a={inner(controlBody)}
-        b={inner(TRIAL_BODY)}
+        a={inner(TRIAL_BODY)}
+        b={inner(TRIAL_BODY, true, "Try it free")}
       />
     );
   }

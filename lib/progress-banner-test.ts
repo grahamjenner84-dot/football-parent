@@ -5,10 +5,21 @@
 // reading those are the ones heading to a trial or a development centre,
 // which is where Progress sign-ups have come from so far.
 //
-// Arms: A is the banner exactly as it rendered there before the test (the
-// control). B keeps the logo, the strapline, the sponsor overline (on
-// Academy Pathway articles) and the button, and changes only the body copy
-// to speak to trial and development-centre parents.
+// Test 2, the Player of the Match card (from 14 Oct 2026). Both arms use the
+// trial and development-centre body copy. A is that banner as it was (the
+// control: logo, strapline, sponsor overline on Academy Pathway articles,
+// "Start free trial"). B adds the Player of the Match share card from the
+// Progress ads (public/progress/progress-potm-card.webp, rendered by the
+// app's own card code) and says "Try it free". Card and button change
+// together: at this traffic one combined test is what's realistic, so it
+// answers "does the new banner beat the old?", not which change did it.
+//
+// Test 1, the body copy (9–14 Oct 2026), ended early, inconclusive, so test 2
+// could start. A (the site-wide copy) vs B (trial and development-centre
+// copy), about 382 impressions per arm: clicks A 6, B 7; join sends A 3,
+// B 1; banners seen (from 13 Oct) A 21 with 2 clicks, B 17 with 1;
+// P(B beats A) 61%. B's copy carried on into test 2 because it's written for
+// these pages' readers.
 //
 // Assignment: 50/50 at random on every page view, in the browser, after the
 // page mounts (app/components/ProgressBannerTestArm.tsx). Nothing is stored
@@ -42,7 +53,7 @@
 /** When the test went live. MUST be set to the actual deploy time of the
  * merge that ships the test: anything earlier counts pre-test views of
  * these articles as impressions for both arms, which dilutes both CTRs. */
-export const PROGRESS_BANNER_TEST_STARTED_AT = "2026-10-09T20:28:00Z";
+export const PROGRESS_BANNER_TEST_STARTED_AT = "2026-10-14T20:50:00Z";
 
 /** Impressions each arm needs before the test can be called. */
 export const PROGRESS_BANNER_TEST_MIN_IMPRESSIONS = 4000;
