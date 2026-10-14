@@ -1705,9 +1705,34 @@ function windowSourceRows(stats: PageViewStats): { label: string; count: number 
 }
 
 function previousDay(date: string): string {
+  return daysBefore(date, 1);
+}
+
+function daysBefore(date: string, n: number): string {
   const d = new Date(`${date}T00:00:00.000Z`);
-  d.setUTCDate(d.getUTCDate() - 1);
+  d.setUTCDate(d.getUTCDate() - n);
   return d.toISOString().slice(0, 10);
+}
+
+function weekdayName(date: string): string {
+  return new Date(`${date}T00:00:00.000Z`).toLocaleDateString("en-GB", { weekday: "short", timeZone: "UTC" });
+}
+
+// The same weekday a week before `date`, from a per-day series. Traffic is
+// strongly weekly (weekends run well above Thursday/Friday), so this is the
+// fair comparison; the day before mostly measures the weekday swing. Null
+// when that day falls before the series starts, rather than reading as 0.
+function sameDayLastWeek<T extends { date: string }>(
+  rows: T[] | undefined,
+  date: string,
+  pick: (row: T) => number
+): number | null {
+  if (!rows || !rows.length) return null;
+  const target = daysBefore(date, 7);
+  const oldest = rows.reduce((min, r) => (r.date < min ? r.date : min), rows[0].date);
+  if (target < oldest) return null;
+  const row = rows.find((r) => r.date === target);
+  return row ? pick(row) : 0;
 }
 
 function SourceLine({ rows }: { rows: { label: string; count: number }[] }) {
@@ -1723,16 +1748,22 @@ function SourceLine({ rows }: { rows: { label: string; count: number }[] }) {
   );
 }
 
-// A headline number with its day-over-day change. prior is null in whole-window
-// mode, where there's nothing to compare against.
+// A headline number with its change against the day before and against the
+// same weekday a week earlier. prior is null in whole-window mode, where
+// there's nothing to compare against; weekAgo is also null when that day is
+// before the data starts.
 function DashboardStat({
   label,
   current,
   prior,
+  weekAgo = null,
+  weekAgoDate,
 }: {
   label: string;
   current: number;
   prior: number | null;
+  weekAgo?: number | null;
+  weekAgoDate?: string;
 }) {
   return (
     <div style={styles.cardTop}>
@@ -1740,8 +1771,15 @@ function DashboardStat({
         {current.toLocaleString("en-GB")} <span style={{ fontSize: 13, fontWeight: 400 }}>{label}</span>
       </span>
       {prior !== null && (
-        <span style={{ ...styles.cardBadge, ...deltaColor(current - prior) }}>
-          {deltaLabel(current - prior)} vs prev day
+        <span style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
+          {weekAgo !== null && (
+            <span style={{ ...styles.cardBadge, ...deltaColor(current - weekAgo) }}>
+              {deltaLabel(current - weekAgo)} vs {weekAgoDate ? `last ${weekdayName(weekAgoDate)}` : "a week ago"}
+            </span>
+          )}
+          <span style={{ ...styles.cardBadge, ...deltaColor(current - prior) }}>
+            {deltaLabel(current - prior)} vs prev day
+          </span>
         </span>
       )}
     </div>
@@ -1830,6 +1868,11 @@ function Dashboard({
   const pvTotal = isWindow ? pageViewStats.totalViews : pvDay?.count ?? 0;
   const pvPriorTotal = isWindow ? null : pvPrior?.count ?? 0;
   const pvSources = isWindow ? windowSourceRows(pageViewStats) : pvDay ? daySourceRows(pvDay) : [];
+  const weekAgoDate = isWindow ? undefined : daysBefore(effective, 7);
+  const pvWeekAgo = isWindow ? null : sameDayLastWeek(pageViewStats.byDay, effective, (d) => d.count);
+  const caWeekAgo = isWindow ? null : sameDayLastWeek(coachAppViewStats?.byDay, effective, (d) => d.count);
+  const pgWeekAgo = isWindow ? null : sameDayLastWeek(progressFunnel?.byDay, effective, (d) => d.landingViews);
+  const afWeekAgo = isWindow ? null : sameDayLastWeek(affiliateStats?.byDay, effective, (d) => d.clicks);
 
   // Coach App views for the chosen scope.
   const caDay =
@@ -1936,15 +1979,21 @@ function Dashboard({
 
       {!isWindow && effective === today && (
         <SectionNote label="Today is still in progress">
-          Today&rsquo;s numbers are partial and the &ldquo;vs prev day&rdquo;
-          change compares a part-day against a full one. Pick yesterday for the
-          last complete day.
+          Today&rsquo;s numbers are partial, so both the &ldquo;vs last
+          week&rdquo; and &ldquo;vs prev day&rdquo; changes compare a part-day
+          against a full one. Pick yesterday for the last complete day.
         </SectionNote>
       )}
 
       <h3 style={styles.affiliateHeading}>Page views (whole site)</h3>
       <div style={styles.card}>
-        <DashboardStat label="page views" current={pvTotal} prior={pvPriorTotal} />
+        <DashboardStat
+          label="page views"
+          current={pvTotal}
+          prior={pvPriorTotal}
+          weekAgo={pvWeekAgo}
+          weekAgoDate={weekAgoDate}
+        />
         <SourceLine rows={pvSources} />
       </div>
 
@@ -1953,7 +2002,13 @@ function Dashboard({
         <p style={styles.muted}>Loading Coach App views...</p>
       ) : (
         <div style={styles.card}>
-          <DashboardStat label="Coach App views" current={caTotal} prior={caPriorTotal} />
+          <DashboardStat
+            label="Coach App views"
+            current={caTotal}
+            prior={caPriorTotal}
+            weekAgo={caWeekAgo}
+            weekAgoDate={weekAgoDate}
+          />
           <SourceLine rows={caSources} />
           {usageDay && (
             <div style={{ ...styles.cardStats, marginTop: 6 }}>
@@ -1979,6 +2034,8 @@ function Dashboard({
             label="/progress views"
             current={pgScope.landingViews}
             prior={isWindow ? null : pgPrior?.landingViews ?? 0}
+            weekAgo={pgWeekAgo}
+            weekAgoDate={weekAgoDate}
           />
           <div style={{ ...styles.cardStats, marginTop: 6 }}>
             <span>
@@ -2047,7 +2104,13 @@ function Dashboard({
       ) : (
         <>
           <div style={styles.card}>
-            <DashboardStat label="Affiliate clicks" current={afTotal} prior={afPriorTotal} />
+            <DashboardStat
+              label="Affiliate clicks"
+              current={afTotal}
+              prior={afPriorTotal}
+              weekAgo={afWeekAgo}
+              weekAgoDate={weekAgoDate}
+            />
           </div>
           {afProducts.length === 0 ? (
             <p style={styles.muted}>No affiliate clicks in this window.</p>
@@ -4577,6 +4640,76 @@ function pctChange(a: number, b: number): string {
   return `${pct > 0 ? "+" : ""}${pct}%`;
 }
 
+// Why a page or query moved: if its position held, the impressions moved
+// because search demand did (seasonal, weekday, news); if the position moved,
+// ranking is at least part of it. Page-level position is itself a blend of
+// that page's queries, so this is a pointer, not a verdict.
+const STEADY_POSITION = 0.5;
+
+function moverReason(r: { positionA: number | null; positionB: number | null }): { text: string; style: CSSProperties } {
+  if (r.positionA === null) return { text: "stopped ranking", style: { color: "#e07856" } };
+  if (r.positionB === null) return { text: "newly ranking", style: { color: "#8fd19e" } };
+  const change = Math.round((r.positionA - r.positionB) * 10) / 10;
+  if (Math.abs(change) < STEADY_POSITION) return { text: "rank steady: demand", style: { color: "#9c8a72" } };
+  return change < 0
+    ? { text: `ranked up ${Math.abs(change)}`, style: { color: "#8fd19e" } }
+    : { text: `ranked down ${change}`, style: { color: "#e07856" } };
+}
+
+function MoverSummaryRows({
+  rows,
+  isPage,
+}: {
+  rows: PeriodComparison["topPageGains"];
+  isPage: boolean;
+}) {
+  if (!rows.length) return <p style={styles.muted}>None cleared the noise threshold.</p>;
+  return (
+    <>
+      {rows.map((r) => {
+        const reason = moverReason(r);
+        return (
+          <div key={r.key} style={styles.stackedRow}>
+            <span style={styles.cardPage}>{isPage ? shortPage(r.key) : r.key}</span>
+            <span style={styles.cardStatsInline}>
+              <span style={deltaStyle(r.delta)}>
+                {signed(r.delta)} impr ({pctChange(r.impressionsA, r.impressionsB)})
+              </span>{" "}
+              - {r.impressionsA} (was {r.impressionsB}) - pos {r.positionA ?? "-"} (was {r.positionB ?? "-"}) -{" "}
+              <span style={reason.style}>{reason.text}</span>
+            </span>
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+// The five biggest impression gains and drops by page and by query, each
+// tagged with whether its ranking moved or only the searching did.
+function ImpressionMoversSummary({ result }: { result: PeriodComparison }) {
+  return (
+    <div style={{ ...styles.list, marginBottom: 16 }}>
+      <SectionNote label="Reading the tags">
+        &ldquo;Rank steady: demand&rdquo; means the position held within half a
+        place, so the impressions moved because people searched more or less
+        (season, weekday, news), not because Google moved the page.
+        &ldquo;Ranked up/down&rdquo; means the position moved too. Page
+        positions blend each page&rsquo;s queries, so treat the tag as a
+        pointer and drill into the page on Compare periods to confirm.
+      </SectionNote>
+      <FunnelHeading>Biggest impression drops: pages</FunnelHeading>
+      <MoverSummaryRows rows={result.topPageDrops.slice(0, 5)} isPage />
+      <FunnelHeading>Biggest impression gains: pages</FunnelHeading>
+      <MoverSummaryRows rows={result.topPageGains.slice(0, 5)} isPage />
+      <FunnelHeading>Biggest impression drops: queries</FunnelHeading>
+      <MoverSummaryRows rows={result.topQueryDrops.slice(0, 5)} isPage={false} />
+      <FunnelHeading>Biggest impression gains: queries</FunnelHeading>
+      <MoverSummaryRows rows={result.topQueryGains.slice(0, 5)} isPage={false} />
+    </div>
+  );
+}
+
 function RankingQualityPanel({
   quality,
   periodA,
@@ -4653,7 +4786,7 @@ function RankingQualityPanel({
 
       <FunnelHeading>Impressions by position band</FunnelHeading>
       {quality.bands.map((b) => (
-        <div key={b.label} style={styles.cannibalRow}>
+        <div key={b.label} style={styles.stackedRow}>
           <span style={styles.cardPage}>{b.label}</span>
           <span style={styles.cardStatsInline}>
             {b.impressionsA} impr (was {b.impressionsB},{" "}
@@ -4671,7 +4804,7 @@ function RankingQualityPanel({
         <>
           <FunnelHeading>Biggest ranking slips (same query, weighted by impressions)</FunnelHeading>
           {quality.biggestSlips.slice(0, 10).map((r) => (
-            <div key={r.query} style={styles.cannibalRow}>
+            <div key={r.query} style={styles.stackedRow}>
               <span style={{ ...styles.cardPage, color: "#e07856" }}>{r.query}</span>
               <span style={styles.cardStatsInline}>
                 #{r.positionA} (was #{r.positionB}, {signed(r.positionChange)}) - {r.impressionsA} impr (was{" "}
@@ -4686,7 +4819,7 @@ function RankingQualityPanel({
         <>
           <FunnelHeading>Largest queries that dropped out</FunnelHeading>
           {quality.droppedOut.top.map((r) => (
-            <div key={r.key} style={styles.cannibalRow}>
+            <div key={r.key} style={styles.stackedRow}>
               <span style={{ ...styles.cardPage, color: "#e07856" }}>{r.key}</span>
               <span style={styles.cardStatsInline}>
                 was #{r.positionB ?? "-"} with {r.impressionsB} impr, {r.clicksB} clicks
@@ -4733,6 +4866,7 @@ function RankingHealth28() {
           <p style={styles.sectionNote}>
             {periodLabel(result.periodA)} vs {periodLabel(result.periodB)}
           </p>
+          <ImpressionMoversSummary result={result} />
           <RankingQualityPanel quality={result.rankingQuality} periodA={result.periodA} periodB={result.periodB} />
         </>
       )}
@@ -5062,6 +5196,7 @@ function CompareMoverList({
                 <span>
                   pos: {r.positionA ?? "-"} (was {r.positionB ?? "-"})
                 </span>
+                <span style={moverReason(r).style}>{moverReason(r).text}</span>
               </div>
             </div>
             {isSelected && (
@@ -5224,6 +5359,15 @@ const styles: Record<string, CSSProperties> = {
   summaryTileButtonActive: {
     borderColor: "#e8b04b",
     background: "#2e2313",
+  },
+  // Name on one line, figures under it: long page paths and queries stay
+  // readable at phone width instead of being squeezed into a side column.
+  stackedRow: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 2,
+    padding: "6px 0",
+    borderTop: "1px solid #3a2c1d",
   },
   cannibalRow: {
     display: "flex",
