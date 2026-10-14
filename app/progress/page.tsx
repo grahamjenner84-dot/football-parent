@@ -184,10 +184,12 @@ export default function ProgressPage() {
           </div>
           <div className="flex justify-center">
             {/* eslint-disable-next-line @next/next/no-img-element -- static
-                example image; a made-up player, never a real child. */}
+                example image. The name and stats are made up; the photo is
+                Graham's son, back to the camera, added at his request (the
+                same card as in the Progress YouTube video). */}
             <img
-              src="/progress/share-card-example.webp"
-              alt="An example Progress season card for a made-up player, Alfie: 14 games, 11 goals, 6 assists, 3 player of the match awards"
+              src="/progress/match-card-example.webp"
+              alt="An example Progress match card: Alfie, player of the match, with 1 goal in a 1–0 win over Wanderers"
               width={720}
               height={900}
               className="w-full max-w-sm h-auto rounded-2xl shadow-xl"
