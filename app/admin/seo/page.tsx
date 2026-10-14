@@ -3543,9 +3543,53 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
           </table>
         </div>
       )}
+
+      <FunnelHeading>Join form steps</FunnelHeading>
+      <p style={styles.muted}>
+        Each step of the join forms, counted once per page load: seen, Google tapped, &ldquo;No Google?&rdquo;
+        tapped, email submitted, email sent. Anonymous counts, so read it top to bottom as where people stop,
+        not who. Started 14 Oct 2026.
+      </p>
+      {funnel.joinFormSteps.length === 0 ? (
+        <p style={styles.muted}>No steps {windowLabel}.</p>
+      ) : (
+        <div style={{ overflowX: "auto" }}>
+          <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+            <thead>
+              <tr>
+                <th style={funnelTh}>Form</th>
+                {JOIN_FORM_STEPS.map((step) => (
+                  <th key={step} style={funnelTh}>
+                    {step}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {Array.from(new Set(funnel.joinFormSteps.map((s) => s.form))).map((form) => (
+                <tr key={form}>
+                  <td style={funnelTd}>{JOIN_FORM_LABEL[form] ?? form}</td>
+                  {JOIN_FORM_STEPS.map((step) => (
+                    <td key={step} style={funnelNum}>
+                      {funnel.joinFormSteps.find((s) => s.form === form && s.step === step)?.count ?? 0}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
+
+const JOIN_FORM_STEPS = ["view", "google", "email-open", "email", "email-sent", "email-error"];
+const JOIN_FORM_LABEL: Record<string, string> = {
+  "site/join": "/progress, top form",
+  "site/join-trial": "/progress, bottom form",
+  "app/sign-in": "Progress app sign-in",
+};
 
 // Traffic and sign-ups per channel, side by side, plus the SEO articles and
 // the share loop. Channel rules: lib/coach-app-channels.ts.

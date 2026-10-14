@@ -15,6 +15,7 @@ import {
   type ProgressBannerArm,
   type ProgressBannerTestStatus,
 } from "@/lib/progress-banner-test";
+import { PROGRESS_FORM_STEP_PREFIX } from "@/lib/progress-form-tracking";
 
 // The Progress pipeline: the "Progress pipeline" tab on /admin/seo, the
 // Progress card on its dashboard and the get_progress_funnel MCP tool.
@@ -517,6 +518,11 @@ export interface ProgressFunnel {
   usage: ProgressUsage | { error: string };
   bannerTest: ProgressBannerTest;
   bannerSeen: ProgressBannerSeenInfo;
+  /** The join forms' own steps (lib/progress-form-tracking.ts): per form
+   * (site/join, site/join-trial, app/sign-in) how many times each step
+   * happened in the window. Anonymous counts; nothing links a step to a
+   * sign-up. */
+  joinFormSteps: { form: string; step: string; count: number }[];
 }
 
 type ViewRow = {
@@ -724,6 +730,18 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     return d;
   };
 
+  const formSteps = new Map<string, { form: string; step: string; count: number }>();
+  for (const v of views) {
+    if (!v.path.startsWith(`${PROGRESS_FORM_STEP_PREFIX}/`)) continue;
+    const parts = v.path.slice(PROGRESS_FORM_STEP_PREFIX.length + 1).split("/");
+    const step = parts.pop() ?? "";
+    const form = parts.join("/");
+    const key = `${form}|${step}`;
+    const row = formSteps.get(key) ?? { form, step, count: 0 };
+    row.count++;
+    formSteps.set(key, row);
+  }
+
   let landingViews = 0;
   let bannerClicks = 0;
   for (const v of views) {
@@ -858,5 +876,6 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
       startedAt: seenResult.startedAt,
       ...(seenResult.error ? { error: seenResult.error } : {}),
     },
+    joinFormSteps: Array.from(formSteps.values()).sort((a, b) => a.form.localeCompare(b.form)),
   };
 }
