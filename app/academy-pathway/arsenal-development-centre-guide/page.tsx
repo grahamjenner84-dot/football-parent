@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Arsenal Development Centre Guide | Football Parent",
+  title: "Arsenal Academy Trials & Development Centre: Parent's Guide",
   description:
     "Arsenal's academy is Category 1 and based at Hale End, but there's no public development centre to apply to. How the pathway works, and what to do if scouted.",
   path: "/academy-pathway/arsenal-development-centre-guide",
