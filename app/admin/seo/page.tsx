@@ -3100,7 +3100,7 @@ function ProgressUsageSection({ usage }: { usage: ProgressFunnel["usage"] }) {
   );
 }
 
-// The trial/development-centre banner A/B test (lib/progress-banner-test.ts):
+// The Progress banner A/B test (lib/progress-banner-test.ts), now test 2, the Player of the Match card:
 // per arm impressions (estimated), clicks, CTR and join sends, cumulative
 // from the test start, plus the Bayesian readout and what to do next.
 function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"] }) {
@@ -3109,7 +3109,7 @@ function ProgressBannerTestSection({ test }: { test: ProgressFunnel["bannerTest"
     test.status === "b-wins" || test.status === "a-wins" ? "#166534" : test.status === "draw" ? "#92400e" : "#374151";
   return (
     <>
-      <FunnelHeading>Banner test: trial and development centre copy, since {started}</FunnelHeading>
+      <FunnelHeading>Banner test: Player of the Match card, since {started}</FunnelHeading>
       <p style={{ ...styles.sectionNote, color: statusColour, fontWeight: 600 }}>{test.statusText}</p>
       {test.started && (
         <div style={{ overflowX: "auto" }}>

@@ -575,8 +575,8 @@ function placementOf(banner: string | null): ProgressPlacement | null {
 }
 
 const ARM_LABEL: Record<ProgressBannerArm, string> = {
-  a: "A: current copy (control)",
-  b: "B: trial and development centre copy",
+  a: "A: current banner (control)",
+  b: "B: Player of the Match card + Try it free",
 };
 
 function testStatusText(status: ProgressBannerTestStatus, armImpressions: number, prob: number | null): string {
