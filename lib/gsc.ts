@@ -986,6 +986,70 @@ export type MoverRow = {
   positionB: number | null;
 };
 
+// The blended avgPosition on PeriodTotals is impression-weighted across
+// whichever queries happened to show in each period, so a change in the mix
+// moves it even when no ranking moved: dropping out of a big, competitive
+// position-8 query removes it from the average entirely (which reads as an
+// improvement), and picking up lots of small long-tail top-3 queries pulls it
+// down too. These figures hold the query set or the position bands fixed so
+// a real ranking change can be told apart from a change in mix.
+export type RankingSlip = {
+  query: string;
+  impressionsA: number;
+  impressionsB: number;
+  positionA: number;
+  positionB: number;
+  // A minus B: positive = ranking worse in period A.
+  positionChange: number;
+};
+
+export type PositionBand = {
+  label: string;
+  maxInclusive: number | null;
+  queriesA: number;
+  queriesB: number;
+  impressionsA: number;
+  impressionsB: number;
+  clicksA: number;
+  clicksB: number;
+};
+
+export type RankingQuality = {
+  // Queries present in both periods, each weighted by its combined A+B
+  // impressions in both periods - the same weights on both sides, so this
+  // position can only move if rankings moved.
+  sameQueries: {
+    queryCount: number;
+    impressionsA: number;
+    impressionsB: number;
+    positionA: number | null;
+    positionB: number | null;
+    // A minus B: positive = worse in period A, negative = better.
+    positionChange: number | null;
+    // Counted only for queries with >= RANKING_COUNT_MIN_IMPRESSIONS combined
+    // and a move of at least RANKING_COUNT_MIN_MOVE positions, so single
+    // impressions bouncing around don't swamp the counts.
+    improved: number;
+    worsened: number;
+    unchanged: number;
+  };
+  // Impressions and clicks by the position band each query sat in, per
+  // period: shows whether impressions are coming from top-3 rankings or
+  // from 4-10 / page two, which the blended average hides.
+  bands: PositionBand[];
+  // Queries with impressions in B but none in A (stopped ranking or stopped
+  // being searched) and the reverse. top lists the biggest by impressions.
+  droppedOut: { queryCount: number; impressionsB: number; top: MoverRow[] };
+  newlyRanking: { queryCount: number; impressionsA: number; top: MoverRow[] };
+  // Same-query rankings that got worse, ordered by impact (positions lost x
+  // average impressions), so a big query slipping 1.5 places outranks a tiny
+  // one falling 10.
+  biggestSlips: RankingSlip[];
+  // Share of each period's total impressions that GSC reports at query level
+  // at all. The rest are anonymised rare queries none of the above can see.
+  queryCoverage: { a: number | null; b: number | null };
+};
+
 export type PeriodComparison = {
   periodA: PeriodTotals;
   periodB: PeriodTotals;
@@ -995,6 +1059,7 @@ export type PeriodComparison = {
   topPageGains: MoverRow[];
   topQueryDrops: MoverRow[];
   topQueryGains: MoverRow[];
+  rankingQuality: RankingQuality;
   // Non-null whenever either requested range reaches into GSC's own
   // reporting lag - see GSC_DATA_LAG_DAYS. Surfaced in the response itself,
   // not just the tool description, so a too-recent date can't quietly be
@@ -1098,6 +1163,166 @@ export type PageQueryMover = {
   // impressions swing".
   direction: "up" | "down" | "new" | "lost" | "same";
 };
+
+const RANKING_COUNT_MIN_IMPRESSIONS = 10;
+const RANKING_COUNT_MIN_MOVE = 0.5;
+const POSITION_BANDS: { label: string; maxInclusive: number | null }[] = [
+  { label: "Top 3", maxInclusive: 3 },
+  { label: "4-10", maxInclusive: 10 },
+  { label: "11-20", maxInclusive: 20 },
+  { label: "21+", maxInclusive: null },
+];
+
+function round1(n: number): number {
+  return Math.round(n * 10) / 10;
+}
+
+function bandIndex(position: number): number {
+  const i = POSITION_BANDS.findIndex((b) => b.maxInclusive !== null && position <= b.maxInclusive);
+  return i === -1 ? POSITION_BANDS.length - 1 : i;
+}
+
+function moverFrom(key: string, a: GscRow | undefined, b: GscRow | undefined): MoverRow {
+  const impressionsA = a?.impressions ?? 0;
+  const impressionsB = b?.impressions ?? 0;
+  return {
+    key,
+    impressionsA,
+    impressionsB,
+    delta: impressionsA - impressionsB,
+    clicksA: a?.clicks ?? 0,
+    clicksB: b?.clicks ?? 0,
+    positionA: a ? round1(a.position) : null,
+    positionB: b ? round1(b.position) : null,
+  };
+}
+
+function buildRankingQuality(
+  queryRowsA: GscRow[],
+  queryRowsB: GscRow[],
+  totalA: number,
+  totalB: number
+): RankingQuality {
+  const byQuery = new Map<string, { a?: GscRow; b?: GscRow }>();
+  for (const r of queryRowsA) {
+    if (!byQuery.has(r.keys[0])) byQuery.set(r.keys[0], {});
+    byQuery.get(r.keys[0])!.a = r;
+  }
+  for (const r of queryRowsB) {
+    if (!byQuery.has(r.keys[0])) byQuery.set(r.keys[0], {});
+    byQuery.get(r.keys[0])!.b = r;
+  }
+
+  const bands: PositionBand[] = POSITION_BANDS.map((b) => ({
+    ...b,
+    queriesA: 0,
+    queriesB: 0,
+    impressionsA: 0,
+    impressionsB: 0,
+    clicksA: 0,
+    clicksB: 0,
+  }));
+  let weight = 0;
+  let weightedA = 0;
+  let weightedB = 0;
+  let basketCount = 0;
+  let basketImpressionsA = 0;
+  let basketImpressionsB = 0;
+  let improved = 0;
+  let worsened = 0;
+  let unchanged = 0;
+  const slips: RankingSlip[] = [];
+  const dropped: MoverRow[] = [];
+  const added: MoverRow[] = [];
+  let droppedImpressions = 0;
+  let addedImpressions = 0;
+  let queryImpressionsA = 0;
+  let queryImpressionsB = 0;
+
+  for (const [query, { a, b }] of byQuery) {
+    if (a) {
+      const band = bands[bandIndex(a.position)];
+      band.queriesA++;
+      band.impressionsA += a.impressions;
+      band.clicksA += a.clicks;
+      queryImpressionsA += a.impressions;
+    }
+    if (b) {
+      const band = bands[bandIndex(b.position)];
+      band.queriesB++;
+      band.impressionsB += b.impressions;
+      band.clicksB += b.clicks;
+      queryImpressionsB += b.impressions;
+    }
+
+    if (a && b) {
+      const w = a.impressions + b.impressions;
+      weight += w;
+      weightedA += a.position * w;
+      weightedB += b.position * w;
+      basketCount++;
+      basketImpressionsA += a.impressions;
+      basketImpressionsB += b.impressions;
+
+      const change = a.position - b.position;
+      if (w >= RANKING_COUNT_MIN_IMPRESSIONS) {
+        if (change >= RANKING_COUNT_MIN_MOVE) worsened++;
+        else if (change <= -RANKING_COUNT_MIN_MOVE) improved++;
+        else unchanged++;
+      }
+      if (change > 0) {
+        slips.push({
+          query,
+          impressionsA: a.impressions,
+          impressionsB: b.impressions,
+          positionA: round1(a.position),
+          positionB: round1(b.position),
+          positionChange: round1(change),
+        });
+      }
+    } else if (b) {
+      droppedImpressions += b.impressions;
+      dropped.push(moverFrom(query, a, b));
+    } else if (a) {
+      addedImpressions += a.impressions;
+      added.push(moverFrom(query, a, b));
+    }
+  }
+
+  const positionA = weight ? round1(weightedA / weight) : null;
+  const positionB = weight ? round1(weightedB / weight) : null;
+  const impact = (s: RankingSlip) => s.positionChange * ((s.impressionsA + s.impressionsB) / 2);
+
+  return {
+    sameQueries: {
+      queryCount: basketCount,
+      impressionsA: basketImpressionsA,
+      impressionsB: basketImpressionsB,
+      positionA,
+      positionB,
+      positionChange: weight ? round1(weightedA / weight - weightedB / weight) : null,
+      improved,
+      worsened,
+      unchanged,
+    },
+    bands,
+    droppedOut: {
+      queryCount: dropped.length,
+      impressionsB: droppedImpressions,
+      top: dropped.sort((x, y) => y.impressionsB - x.impressionsB).slice(0, 10),
+    },
+    newlyRanking: {
+      queryCount: added.length,
+      impressionsA: addedImpressions,
+      top: added.sort((x, y) => y.impressionsA - x.impressionsA).slice(0, 10),
+    },
+    biggestSlips: slips.sort((x, y) => impact(y) - impact(x)).slice(0, 15),
+    queryCoverage: {
+      a: totalA ? Math.round((queryImpressionsA / totalA) * 1000) / 10 : null,
+      b: totalB ? Math.round((queryImpressionsB / totalB) * 1000) / 10 : null,
+    },
+  };
+}
 
 // Drill-down for one page from a period comparison: every query that page
 // had impressions for in either period, with position A vs B and a
@@ -1213,6 +1438,7 @@ export async function comparePeriods(
     topPageGains: pageMovers.gains,
     topQueryDrops: queryMovers.drops,
     topQueryGains: queryMovers.gains,
+    rankingQuality: buildRankingQuality(queryRowsA, queryRowsB, periodA.impressions, periodB.impressions),
     dataFreshnessWarning: freshnessWarning(startA, endA, startB, endB),
   };
 }
