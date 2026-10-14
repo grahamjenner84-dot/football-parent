@@ -46,6 +46,29 @@ const anonKey = process.env.NEXT_PUBLIC_COACH_APP_SUPABASE_ANON_KEY;
  */
 export const COACH_APP_URL = "https://www.footballparent.co.uk/coach-app/";
 
+/** The query param naming the form a sign-in started on. Keep in sync with
+ * SIGNUP_SURFACE_PARAM in src/data/signupSurface.ts in the coach-app repo. */
+const SIGNUP_SURFACE_PARAM = "via";
+
+/** COACH_APP_URL plus the path of the page whose form the coach used, so
+ * the app's anonymous sign-up event can say which form it came from even
+ * when the landing hand-off (lib/coach-app-handoff.ts) was never written:
+ * no analytics consent, or an email link opened in a mail app's own
+ * browser, whose storage is not this one. Those were the sign-ups the
+ * funnel reported as "Unknown" with no page at all. The param carries a
+ * page path and nothing about the coach, and it needs no storage.
+ *
+ * Still on the www host, so it is accepted as a redirect the same way the
+ * bare COACH_APP_URL is (the app's own sign-ins already return to paths
+ * below it, e.g. /coach-app/join/<token>). */
+export function coachAppRedirectFrom(pagePath: string): string {
+  return `${COACH_APP_URL}?${SIGNUP_SURFACE_PARAM}=${encodeURIComponent(pagePath)}`;
+}
+
+function redirectTarget(): string {
+  return typeof window === "undefined" ? COACH_APP_URL : coachAppRedirectFrom(window.location.pathname);
+}
+
 let client: SupabaseClient | null = null;
 
 /** Null when the env vars are missing, so the form can degrade to a plain
@@ -65,7 +88,7 @@ export async function signInWithGoogle(): Promise<SignInResult> {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: COACH_APP_URL,
+      redirectTo: redirectTarget(),
       // Matches the app's own sign-in: without this Google silently reuses
       // whichever account the browser is already signed in to, instead of
       // showing the account picker.
@@ -84,7 +107,7 @@ export async function signInWithEmail(email: string): Promise<SignInResult> {
     email,
     // emailRedirectTo, not redirectTo - signInWithOtp's own option name for
     // where the link in the email lands.
-    options: { emailRedirectTo: COACH_APP_URL },
+    options: { emailRedirectTo: redirectTarget() },
   });
 
   return { error: error?.message ?? null };

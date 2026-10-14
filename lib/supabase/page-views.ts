@@ -483,7 +483,11 @@ const RECORDING_STARTS: { pathPrefix: string; from: string }[] = [
 // getPageViewStats(..., { calculatorSteps: "only" }). The bare
 // /coach-app/game-time-calculator stays a page view: it is the calculator's
 // own full-screen page being opened.
-const CALCULATOR_STEP_PREFIXES = ["/coach-app/game-time-calculator/", "/coach-app/game-time/"];
+//
+// The Coach App sign-up form's steps (lib/coach-app-form-tracking.ts) are
+// the same kind of event and travel with them: kept out of page views,
+// shown beside the calculator's steps on the Coach App tab.
+const CALCULATOR_STEP_PREFIXES = ["/coach-app/game-time-calculator/", "/coach-app/game-time/", "/coach-app/signup-form/"];
 
 export function isCalculatorStepPath(path: string): boolean {
   return CALCULATOR_STEP_PREFIXES.some((prefix) => path.startsWith(prefix));

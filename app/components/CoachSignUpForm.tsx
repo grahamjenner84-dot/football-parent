@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import {
   COACH_APP_URL,
   getCoachAppAuth,
@@ -8,6 +8,7 @@ import {
   signInWithGoogle,
 } from "@/lib/coach-app-auth";
 import { stashLandingHandoff } from "@/lib/coach-app-handoff";
+import { trackSignupFormStep } from "@/lib/coach-app-form-tracking";
 
 // The sign-up form itself, embedded directly on the Coach App landing page so
 // a visitor converts on the page they arrived at. Before this existed the CTA
@@ -47,15 +48,37 @@ export default function CoachSignUpForm({
   // otherwise fine - fall back to the old link-to-the-app behaviour.
   const configured = getCoachAppAuth() !== null;
 
+  // "Seen", not "rendered": the page has two of these, and the lower one is
+  // a long scroll down. Half the form on screen counts, once per page load
+  // whichever form it was (lib/coach-app-form-tracking.ts).
+  const formRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          trackSignupFormStep("view");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [configured]);
+
   async function handleGoogle() {
     setError(null);
     // Written at the moment of intent, not on page load: this is the page
     // the coach actually acted on, and a passive visit shouldn't claim
     // credit for a signup that happens from somewhere else later.
     stashLandingHandoff();
+    trackSignupFormStep("google");
     const { error } = await signInWithGoogle();
     if (error) {
       console.error("Coach App Google sign-in failed:", error);
+      trackSignupFormStep("google-error");
       setError("Couldn't open Google sign-in. Try the email option instead.");
     }
   }
@@ -66,6 +89,7 @@ export default function CoachSignUpForm({
     setStatus("sending");
     setError(null);
     stashLandingHandoff();
+    trackSignupFormStep("email");
 
     const { error } = await signInWithEmail(email.trim());
     if (error) {
@@ -74,10 +98,12 @@ export default function CoachSignUpForm({
       // own AuthGate learned this the hard way - full detail to the console,
       // something human on screen.
       console.error("Coach App email sign-in failed:", error);
+      trackSignupFormStep("email-error");
       setError("Something went wrong sending that email. Please try again, or use Google instead.");
       setStatus("idle");
       return;
     }
+    trackSignupFormStep("email-sent");
     setStatus("sent");
   }
 
@@ -93,7 +119,7 @@ export default function CoachSignUpForm({
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm max-w-md">
+    <div ref={formRef} className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm max-w-md">
       <p className="text-sm font-semibold text-gray-900 mb-4">{heading}</p>
 
       {status === "sent" ? (
