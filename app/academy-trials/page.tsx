@@ -1,4 +1,5 @@
 import CategoryPage from "../components/category-page";
+import InstagramCategoryPromo from "../components/InstagramCategoryPromo";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -18,6 +19,9 @@ export default function AcademyTrialsPage() {
       intro={[
         "Football academy trials are one of the most misunderstood parts of youth football development. Most players will attend at least one trial during their development years, whether that is an open trial at a local club, an invitation to an EPPP academy session, or a development centre assessment. Having been through the process with my own child at Crystal Palace, I know how little honest information there is for parents going in for the first time. The guides below cover what scouts look for, how clubs recruit, and what really happens on the day.",
       ]}
+      // No sponsor yet: the Instagram follow box holds the slot until one
+      // takes it (see app/components/InstagramCategoryPromo.tsx).
+      promo={<InstagramCategoryPromo />}
       startHere={{
         title: "Start Here",
         description:

@@ -3,6 +3,7 @@ import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getPageViewsForPath } from "@/lib/supabase/page-views";
 import { OUTBOUND_PARTNERS } from "@/lib/outbound-partners";
 import { getAllArticleSlugs, getArticleSlugsUsing } from "@/lib/content";
+import { INSTAGRAM_CATEGORY_PATHS } from "@/app/components/InstagramCategoryPromo";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/page-views.ts and lib/supabase/affiliate-clicks.ts - this must
@@ -115,7 +116,8 @@ export interface PartnerClickPlacement {
 // Which placements a page view counts as an impression for. Must mirror where
 // the components render: the end card is in lib/ArticleLayout.tsx (every MDX
 // article), the mid-article box wherever an article's MDX uses
-// <InstagramPromo />, and the footer link is on every page.
+// <InstagramPromo />, the category box on the category pages in
+// INSTAGRAM_CATEGORY_PATHS, and the footer link is on every page.
 function instagramPlacementsOnPath(
   path: string,
   articleSlugs: Set<string>,
@@ -125,6 +127,7 @@ function instagramPlacementsOnPath(
   const slug = path.split("/").filter(Boolean).pop();
   if (slug && articleSlugs.has(slug)) placements.push("end-card");
   if (slug && promoSlugs.has(slug)) placements.push("mid-article");
+  if (INSTAGRAM_CATEGORY_PATHS.includes(path.replace(/\/+$/, ""))) placements.push("category");
   return placements;
 }
 
@@ -167,6 +170,7 @@ async function getInstagramImpressions(
 const INSTAGRAM_PLACEMENT_LABELS: Record<string, string> = {
   "end-card": "End of article card",
   "mid-article": "Mid-article box",
+  category: "Category page box",
   footer: "Footer link",
   unlabelled: "Unlabelled (before placements were tagged)",
 };
@@ -311,7 +315,7 @@ export async function getPartnerClickStats(
     // Every placement gets a row, clicked or not, so a box nobody clicks
     // still shows its impressions.
     const counts = new Map<string, number>(
-      ["end-card", "mid-article", "footer"].map((p) => [p, 0])
+      ["end-card", "mid-article", "category", "footer"].map((p) => [p, 0])
     );
     for (const row of humanRows) {
       const placement = instagramPlacementFromHref(row.href)!;

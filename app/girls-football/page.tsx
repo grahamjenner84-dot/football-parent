@@ -1,4 +1,5 @@
 import CategoryPage from "../components/category-page";
+import InstagramCategoryPromo from "../components/InstagramCategoryPromo";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -18,6 +19,9 @@ export default function GirlsFootballPage() {
       intro={[
         "Girls football in the UK has changed significantly in recent years, but the pathway from grassroots to academy level remains poorly understood by most parents. Whether your daughter is playing for a local club and wondering about the next step, or you have heard about Emerging Talent Centres and Regional Talent Clubs and want to know what they actually involve, these guides explain how the girls football development system works and what to realistically expect at each stage.",
       ]}
+      // No sponsor yet: the Instagram follow box holds the slot until one
+      // takes it (see app/components/InstagramCategoryPromo.tsx).
+      promo={<InstagramCategoryPromo />}
       startHere={{
         title: "Start Here",
         description:

@@ -17,7 +17,7 @@ export const INSTAGRAM_URL = "https://www.instagram.com/football.parent";
 // utm_content (Instagram ignores it), because partner_clicks stores the full
 // href and has no placement column: the "Instagram clicks" report reads it
 // back out with instagramPlacementFromHref in lib/supabase/partner-clicks.ts.
-export type InstagramPlacement = "end-card" | "mid-article" | "footer";
+export type InstagramPlacement = "end-card" | "mid-article" | "footer" | "category";
 
 export function instagramUrl(placement: InstagramPlacement): string {
   return `${INSTAGRAM_URL}/?utm_content=${placement}`;
