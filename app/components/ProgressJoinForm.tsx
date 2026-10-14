@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, useSyncExternalStore, type FormEvent } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
+import { trackProgressFormStep } from "@/lib/progress-form-tracking";
 import { PROGRESS_APP_URL, progressAuthConfigured, sendProgressSignInLink } from "@/lib/progress-auth";
 import { currentVisitSource } from "@/lib/coach-app-handoff";
 import { trackProgressSignUpConversion } from "@/lib/ads-tracking";
@@ -114,8 +115,29 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
   const muted = dark ? "text-[#c9d3c4]" : "text-[#5d6b60]";
   const link = dark ? "text-white underline" : "text-[#0f5d34] underline";
   const errorText = `mt-3 text-sm ${dark ? "text-[#f2a09b]" : "text-red-700"}`;
+  const stepForm = id ?? "join";
+
+  // "Seen", not "rendered": the lower form is a long scroll down. Half the
+  // form on screen counts, once per page load (lib/progress-form-tracking.ts).
+  const formRef = useRef<HTMLFormElement>(null);
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          trackProgressFormStep(stepForm, "view");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [stepForm, sentTo]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    trackProgressFormStep(stepForm, "email");
     if (!configured) return; // let the plain GET to the app happen
     e.preventDefault();
     setSending(true);
@@ -123,9 +145,11 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
     const { error } = await sendProgressSignInLink(email);
     setSending(false);
     if (error) {
+      trackProgressFormStep(stepForm, "email-error");
       setError(friendlyError(error));
       return;
     }
+    trackProgressFormStep(stepForm, "email-sent");
     // One join event and one Ads conversion per send from the form. The
     // resend button below logs neither, and the conversion fires at most
     // once per page load whatever happens (lib/ads-tracking.ts).
@@ -193,6 +217,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
 
   return (
     <form
+      ref={formRef}
       id={id}
       action={PROGRESS_APP_URL}
       method="get"
@@ -211,6 +236,7 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           // once-per-page Ads conversion. Whether Google sign-in then
           // completes shows in the app snapshot's sign-ups by method.
           logJoin(id ? `${id}-google` : "google");
+          trackProgressFormStep(stepForm, "google");
           trackProgressSignUpConversion();
         }}
         className="flex w-full items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white! shadow-sm transition-colors hover:bg-[#0f5d34]"
@@ -254,7 +280,10 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
       ) : (
         <button
           type="button"
-          onClick={() => setEmailOpen(true)}
+          onClick={() => {
+            trackProgressFormStep(stepForm, "email-open");
+            setEmailOpen(true);
+          }}
           className={`mx-auto mt-4 block text-sm underline cursor-pointer ${muted}`}
         >
           No Google? Email me a sign-in link instead
