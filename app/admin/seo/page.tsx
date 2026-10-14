@@ -15,7 +15,7 @@ import type {
 } from "@/lib/gsc";
 import type { SearchLogStats } from "@/lib/supabase/search-log"; // type-only import, erased at build time - safe from a client component
 import type { ConsentStats } from "@/lib/supabase/cookie-consent"; // type-only import, erased at build time - safe from a client component
-import type { PeriodComparison, PeriodTotals, PageQueryMover } from "@/lib/gsc";
+import type { PeriodComparison, PeriodTotals, PageQueryMover, RankingQuality } from "@/lib/gsc";
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCount, BannerVariantStats, PageViewCountryStats, CountryViewRow } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
@@ -72,7 +72,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "pageviewsCompare", label: "Compare page views" },
   { id: "pageviewsTrend", label: "Page trend" },
   { id: "countries", label: "Countries" },
-  { id: "compare", label: "Compare days" },
+  { id: "compare", label: "Compare periods" },
   { id: "searches", label: "Top searches" },
   { id: "silence", label: "Gone quiet" },
   { id: "noImpressions", label: "No impressions" },
@@ -560,7 +560,10 @@ export default function SeoAdminPage() {
                 {tab === "decay" && <DecayList rows={report.decay} />}
                 {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
                 {tab === "rank" && (
-                  <RankTrackerSection rows={report.rankTracker} summary={report.rankTrackerSummary} />
+                  <>
+                    <RankingHealth28 />
+                    <RankTrackerSection rows={report.rankTracker} summary={report.rankTrackerSummary} />
+                  </>
                 )}
               </>
             )}
@@ -4535,6 +4538,207 @@ function PathSourceBreakdown({ result }: { result: PageViewByPathResponse }) {
 
 type CompareAxis = "pages" | "terms";
 type CompareDirection = "gains" | "losses";
+type CompareMode = "days" | "7" | "28";
+
+// Rolling windows end 4 days ago, clear of GSC's ~3-day processing lag (same
+// default as Day A below), with B the equal-length window just before A.
+function rollingWindows(days: number) {
+  return {
+    startA: daysAgo(4 + days - 1),
+    endA: daysAgo(4),
+    startB: daysAgo(4 + 2 * days - 1),
+    endB: daysAgo(4 + days),
+  };
+}
+
+function periodLabel(p: PeriodTotals): string {
+  return p.start === p.end ? p.start : `${p.start} to ${p.end}`;
+}
+
+function signed(n: number): string {
+  return `${n > 0 ? "+" : ""}${n}`;
+}
+
+// Position is "lower is better", so a negative change is good news.
+function positionChangeStyle(change: number | null): CSSProperties {
+  if (change === null || Math.abs(change) < 0.05) return { color: "#9c8a72" };
+  return change < 0 ? { color: "#8fd19e" } : { color: "#e07856" };
+}
+
+function positionChangeLabel(change: number | null): string {
+  if (change === null) return "-";
+  if (Math.abs(change) < 0.05) return "no change";
+  return change < 0 ? `${Math.abs(change)} places better` : `${change} places worse`;
+}
+
+function pctChange(a: number, b: number): string {
+  if (!b) return a ? "new" : "-";
+  const pct = Math.round(((a - b) / b) * 100);
+  return `${pct > 0 ? "+" : ""}${pct}%`;
+}
+
+function RankingQualityPanel({
+  quality,
+  periodA,
+  periodB,
+}: {
+  quality: RankingQuality;
+  periodA: PeriodTotals;
+  periodB: PeriodTotals;
+}) {
+  const sq = quality.sameQueries;
+  const blendedChange =
+    periodA.avgPosition !== null && periodB.avgPosition !== null
+      ? Math.round((periodA.avgPosition - periodB.avgPosition) * 10) / 10
+      : null;
+
+  return (
+    <div style={{ ...styles.list, marginBottom: 16 }}>
+      <SectionNote label="Why not just average position">
+        The headline average position is weighted across whichever queries
+        showed in each period, so a change in the mix moves it even when no
+        ranking moved. Losing a big, competitive position-8 query drops it out
+        of the average and reads as an improvement; picking up lots of small
+        top-3 long-tail queries pulls it down too. &ldquo;Same queries&rdquo;
+        keeps only queries that ranked in both periods and gives each the same
+        weight on both sides (its combined impressions), so it only moves when
+        rankings move. The bands show where impressions actually came from,
+        and the dropped-out list catches queries that vanished entirely, which
+        no average can show. Improved/worse counts only include queries with{" "}
+        10+ combined impressions moving half a place or more.
+      </SectionNote>
+
+      <div style={styles.summaryGrid}>
+        <div style={styles.card}>
+          <p style={styles.cardPage}>Same-queries position</p>
+          <div style={styles.cardTop}>
+            <span style={{ ...styles.cardQuery, fontSize: 20 }}>{sq.positionA ?? "-"}</span>
+            <span style={{ ...styles.cardBadge, ...positionChangeStyle(sq.positionChange) }}>
+              {positionChangeLabel(sq.positionChange)}
+            </span>
+          </div>
+          <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>
+            was {sq.positionB ?? "-"} on the same {sq.queryCount} queries
+          </p>
+          <p style={{ ...styles.cardStatsInline, marginTop: 2 }}>
+            {sq.improved} better, {sq.worsened} worse, {sq.unchanged} steady
+          </p>
+        </div>
+        <div style={styles.card}>
+          <p style={styles.cardPage}>Blended average (for reference)</p>
+          <div style={styles.cardTop}>
+            <span style={{ ...styles.cardQuery, fontSize: 20 }}>{periodA.avgPosition ?? "-"}</span>
+            <span style={{ ...styles.cardBadge, ...positionChangeStyle(blendedChange) }}>
+              {positionChangeLabel(blendedChange)}
+            </span>
+          </div>
+          <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>was {periodB.avgPosition ?? "-"}, mix-sensitive</p>
+        </div>
+        <div style={styles.card}>
+          <p style={styles.cardPage}>Dropped out</p>
+          <div style={styles.cardTop}>
+            <span style={{ ...styles.cardQuery, fontSize: 20 }}>{quality.droppedOut.queryCount}</span>
+            <span style={{ ...styles.cardBadge, color: "#e07856" }}>
+              {quality.droppedOut.impressionsB} impr
+            </span>
+          </div>
+          <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>
+            queries with impressions before, none now
+          </p>
+          <p style={{ ...styles.cardStatsInline, marginTop: 2 }}>
+            vs {quality.newlyRanking.queryCount} new ({quality.newlyRanking.impressionsA} impr)
+          </p>
+        </div>
+      </div>
+
+      <FunnelHeading>Impressions by position band</FunnelHeading>
+      {quality.bands.map((b) => (
+        <div key={b.label} style={styles.cannibalRow}>
+          <span style={styles.cardPage}>{b.label}</span>
+          <span style={styles.cardStatsInline}>
+            {b.impressionsA} impr (was {b.impressionsB},{" "}
+            <span style={deltaStyle(b.impressionsA - b.impressionsB)}>{pctChange(b.impressionsA, b.impressionsB)}</span>
+            ) - {b.clicksA} clicks (was {b.clicksB}) - {b.queriesA} queries (was {b.queriesB})
+          </span>
+        </div>
+      ))}
+      <p style={styles.sectionNote}>
+        Query-level data covers {quality.queryCoverage.a ?? "-"}% of impressions now (
+        {quality.queryCoverage.b ?? "-"}% before). The rest are rare queries Google anonymises.
+      </p>
+
+      {quality.biggestSlips.length > 0 && (
+        <>
+          <FunnelHeading>Biggest ranking slips (same query, weighted by impressions)</FunnelHeading>
+          {quality.biggestSlips.slice(0, 10).map((r) => (
+            <div key={r.query} style={styles.cannibalRow}>
+              <span style={{ ...styles.cardPage, color: "#e07856" }}>{r.query}</span>
+              <span style={styles.cardStatsInline}>
+                #{r.positionA} (was #{r.positionB}, {signed(r.positionChange)}) - {r.impressionsA} impr (was{" "}
+                {r.impressionsB})
+              </span>
+            </div>
+          ))}
+        </>
+      )}
+
+      {quality.droppedOut.top.length > 0 && (
+        <>
+          <FunnelHeading>Largest queries that dropped out</FunnelHeading>
+          {quality.droppedOut.top.map((r) => (
+            <div key={r.key} style={styles.cannibalRow}>
+              <span style={{ ...styles.cardPage, color: "#e07856" }}>{r.key}</span>
+              <span style={styles.cardStatsInline}>
+                was #{r.positionB ?? "-"} with {r.impressionsB} impr, {r.clicksB} clicks
+              </span>
+            </div>
+          ))}
+        </>
+      )}
+    </div>
+  );
+}
+
+// Top of the Rank tracker tab: the last 28 days against the 28 before, with
+// the same mix-proof position figures as Compare periods. The tracker below
+// it stays the 3-day-average, week-on-week view.
+function RankingHealth28() {
+  const [result, setResult] = useState<PeriodComparison | null>(null);
+  const [error, setError] = useState("");
+  const hasRun = useRef(false);
+
+  useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true;
+    const qs = new URLSearchParams(rollingWindows(28));
+    fetch(`/api/compare-report?${qs.toString()}`)
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load ranking health");
+        }
+        return res.json();
+      })
+      .then((data: PeriodComparison) => setResult(data))
+      .catch((err) => setError(err instanceof Error ? err.message : "Failed to load ranking health"));
+  }, []);
+
+  return (
+    <div style={{ marginBottom: 16 }}>
+      <FunnelHeading>Ranking health: last 28 days vs the 28 before</FunnelHeading>
+      {error && <p style={styles.error}>{error}</p>}
+      {!result && !error && <p style={styles.muted}>Loading ranking health...</p>}
+      {result && (
+        <>
+          <p style={styles.sectionNote}>
+            {periodLabel(result.periodA)} vs {periodLabel(result.periodB)}
+          </p>
+          <RankingQualityPanel quality={result.rankingQuality} periodA={result.periodA} periodB={result.periodB} />
+        </>
+      )}
+    </div>
+  );
+}
 
 // "4 days ago" keeps Day A safely clear of GSC's ~3-day processing lag by
 // default - see freshnessWarning() in lib/gsc.ts, which also flags this
@@ -4547,12 +4751,15 @@ function CompareDays() {
   const [error, setError] = useState("");
   const [axis, setAxis] = useState<CompareAxis>("pages");
   const [direction, setDirection] = useState<CompareDirection>("losses");
+  const [mode, setMode] = useState<CompareMode>("days");
   const hasRun = useRef(false);
 
-  function runCompare(a: string, b: string) {
+  function runCompare(a: string, b: string, m: CompareMode = mode) {
     setLoading(true);
     setError("");
-    const qs = new URLSearchParams({ startA: a, endA: a, startB: b, endB: b });
+    const qs = new URLSearchParams(
+      m === "days" ? { startA: a, endA: a, startB: b, endB: b } : rollingWindows(Number(m))
+    );
     fetch(`/api/compare-report?${qs.toString()}`)
       .then(async (res) => {
         if (!res.ok) {
@@ -4577,11 +4784,32 @@ function CompareDays() {
     <div style={styles.list}>
       <SectionNote label="How to use this">
         Pick the day you noticed the spike (Day A) and a day to compare it
-        against (Day B - defaults to the same weekday a week earlier). Shows
-        site-wide totals for each day, then the specific pages and search
-        queries that account for the biggest gains and drops between them.
+        against (Day B - defaults to the same weekday a week earlier), or
+        switch to the last 7 or 28 days against the window before. Shows
+        site-wide totals, ranking health on a fixed set of queries, then the
+        specific pages and search queries that account for the biggest gains
+        and drops between them. Use 7 or 28 days for ranking questions: a
+        single day is dominated by the weekday pattern.
       </SectionNote>
 
+      <div style={styles.metricToggle}>
+        {(["days", "7", "28"] as CompareMode[]).map((m) => (
+          <button
+            key={m}
+            type="button"
+            onClick={() => {
+              setMode(m);
+              runCompare(dateA, dateB, m);
+            }}
+            disabled={loading}
+            style={{ ...styles.toggleButton, ...(mode === m ? styles.toggleButtonActive : {}) }}
+          >
+            {m === "days" ? "Day vs day" : `Last ${m} days vs previous ${m}`}
+          </button>
+        ))}
+      </div>
+
+      {mode === "days" && (
       <div style={styles.compareRow}>
         <label style={styles.compareLabel}>
           Day A
@@ -4610,6 +4838,7 @@ function CompareDays() {
           {loading ? "Comparing..." : "Compare"}
         </button>
       </div>
+      )}
 
       {error && <p style={styles.error}>{error}</p>}
 
@@ -4623,13 +4852,13 @@ function CompareDays() {
 
           <div style={styles.cardStats}>
             <span>
-              {result.periodA.start}: {result.periodA.clicks} clicks,{" "}
+              {periodLabel(result.periodA)}: {result.periodA.clicks} clicks,{" "}
               {result.periodA.impressions} impressions, avg pos {result.periodA.avgPosition ?? "-"}
             </span>
           </div>
           <div style={styles.cardStats}>
             <span>
-              {result.periodB.start}: {result.periodB.clicks} clicks,{" "}
+              {periodLabel(result.periodB)}: {result.periodB.clicks} clicks,{" "}
               {result.periodB.impressions} impressions, avg pos {result.periodB.avgPosition ?? "-"}
             </span>
           </div>
@@ -4643,6 +4872,8 @@ function CompareDays() {
               {result.totalImpressionsDelta} impressions
             </span>
           </div>
+
+          <RankingQualityPanel quality={result.rankingQuality} periodA={result.periodA} periodB={result.periodB} />
 
           <div style={styles.compareRow}>
             <div style={styles.metricToggle}>
@@ -4784,7 +5015,7 @@ function CompareMoverList({
   if (!rows.length) {
     return (
       <EmptyState
-        text={`No ${axis === "pages" ? "page" : "term"} ${direction} cleared the noise threshold between these two days.`}
+        text={`No ${axis === "pages" ? "page" : "term"} ${direction} cleared the noise threshold between these two periods.`}
       />
     );
   }
