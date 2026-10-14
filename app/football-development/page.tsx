@@ -1,4 +1,5 @@
 import CategoryPage from "../components/category-page";
+import InstagramCategoryPromo from "../components/InstagramCategoryPromo";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -19,6 +20,9 @@ export default function FootballDevelopmentPage() {
         "Football development is a long game. The players who make progress are rarely just the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development actually looks like at each stage.",
         "These guides cover the parts of player development that parents often worry about most: football confidence, decision making, football IQ, training load, relative age, late developers and knowing when a child may be ready for a more demanding environment. As a parent with first-hand experience of development centre environments in south London, I have written these guides to give you a realistic picture of what to expect and how to help.",
       ]}
+      // No sponsor yet: the Instagram follow box holds the slot until one
+      // takes it (see app/components/InstagramCategoryPromo.tsx).
+      promo={<InstagramCategoryPromo />}
       startHere={{
         title: "Start Here",
         description:

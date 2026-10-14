@@ -1,4 +1,5 @@
 import CategoryPage from "../components/category-page";
+import InstagramCategoryPromo from "../components/InstagramCategoryPromo";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
@@ -18,6 +19,9 @@ export default function ParentGuidesPage() {
       intro={[
         "Being a football parent involves far more than standing on the touchline. You'll make decisions about clubs, leagues, development centres, academy opportunities and how best to support your child through both successes and setbacks. These guides combine practical football parenting advice with independent explanations of common pathways, helping you make informed decisions without the hype or pressure that often surrounds youth football.",
       ]}
+      // No sponsor yet: the Instagram follow box holds the slot until one
+      // takes it (see app/components/InstagramCategoryPromo.tsx).
+      promo={<InstagramCategoryPromo />}
       startHere={{
         title: "Start Here",
         description:
