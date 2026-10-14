@@ -47,6 +47,7 @@ type Tab =
   | "searches"
   | "cookies"
   | "compare"
+  | "rankingHealth"
   | "pageviews"
   | "pageviewsCompare"
   | "pageviewsTrend"
@@ -65,6 +66,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "progress", label: "Progress pipeline" },
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
+  { id: "rankingHealth", label: "Ranking health" },
   { id: "coachApp", label: "Coach App" },
   { id: "affiliate", label: "Affiliate clicks" },
   { id: "partnerClicks", label: "Football DNA clicks" },
@@ -437,6 +439,7 @@ export default function SeoAdminPage() {
               t.id !== "searches" &&
               t.id !== "cookies" &&
               t.id !== "compare" &&
+              t.id !== "rankingHealth" &&
               t.id !== "pageviews" &&
               t.id !== "pageviewsCompare" &&
               t.id !== "pageviewsTrend" &&
@@ -483,6 +486,8 @@ export default function SeoAdminPage() {
           </>
         ) : tab === "compare" ? (
           <CompareDays />
+        ) : tab === "rankingHealth" ? (
+          <RankingHealth28 />
         ) : tab === "pageviews" ? (
           <>
             {!pageViewStats && !pageViewError && (
@@ -560,10 +565,7 @@ export default function SeoAdminPage() {
                 {tab === "decay" && <DecayList rows={report.decay} />}
                 {tab === "cannibal" && <CannibalList rows={report.cannibalisation} />}
                 {tab === "rank" && (
-                  <>
-                    <RankingHealth28 />
-                    <RankTrackerSection rows={report.rankTracker} summary={report.rankTrackerSummary} />
-                  </>
+                  <RankTrackerSection rows={report.rankTracker} summary={report.rankTrackerSummary} />
                 )}
               </>
             )}
@@ -606,6 +608,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "instagramClicks":
       return 0;
     case "compare":
+      return 0;
+    case "rankingHealth":
       return 0;
     case "pageviews":
       return 0;
@@ -4832,9 +4836,9 @@ function RankingQualityPanel({
   );
 }
 
-// Top of the Rank tracker tab: the last 28 days against the 28 before, with
-// the same mix-proof position figures as Compare periods. The tracker below
-// it stays the 3-day-average, week-on-week view.
+// The Ranking health tab: the last 28 days against the 28 before, with the
+// same mix-proof position figures as Compare periods. Its own tab so the
+// Rank tracker (3-day-average, week-on-week) stays at the top of its page.
 function RankingHealth28() {
   const [result, setResult] = useState<PeriodComparison | null>(null);
   const [error, setError] = useState("");
