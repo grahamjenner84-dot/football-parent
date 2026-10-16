@@ -1639,3 +1639,13 @@ Shortlist put to Graham: Veo price queries (title), soft ground boots shopping q
 - Watch until ~30 Oct.
 
 **Held: `/girls-football/emerging-talent-centres-explained` title.** Live SERP: AI Overview on both "etc football" and "what does etc stand for in football", us not cited (englandfootball.com and tees.ac.uk are). The 0.2% CTR on those queries is the AI Overview, so a title change would not fix it. Not changed.
+
+## 16 Oct 2026: ETC explainer leads with the definition
+
+Page: `/girls-football/emerging-talent-centres-explained` (`3ef42ee`). Two paragraphs swapped at the top of "What is an Emerging Talent Centre?": the definition ("In football, ETC stands for Emerging Talent Centre...") now comes first, before the "If your daughter plays football..." opener. No wording added or removed; title, meta, headings unchanged. Last edit 4 Sept.
+
+Why: in place of the held title change above. Both "etc football" and "what does etc stand for in football" carry an AI Overview that cites englandfootball.com and tees.ac.uk but not us, so the aim is a citation, not CTR from the title. Answer-first, as with the 12 Oct gear intros.
+
+Baseline (28 days to 13 Oct): 5,170 impressions, 73 clicks, position 4.8, CTR 1.4%. "etc football" 5.1 (1,105, 0.2%), "emerging talent centre" 7.6 (527), "etc football meaning" 4.2 (340), "what does etc stand for in football" 4.0 (327, 0 clicks), "etc meaning football" 4.3 (250), "what is etc in football" 4.9 (227). AI Overview citation: not cited on either query (16 Oct).
+
+Revert rule: "etc football" or "emerging talent centre" lose more than ~2 places and hold for a week. Recheck the AI Overview citation on both queries around 30 Oct. Watch until ~30 Oct.
