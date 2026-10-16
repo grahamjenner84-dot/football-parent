@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Veo Camera Alternatives: Cost & Comparisons | Football Parent",
+  title: "Veo Camera Alternatives: Price, Subscription Cost & XbotGo",
   description:
     "Veo camera alternatives compared: real prices, subscription costs, XbotGo comparisons and whether Veo is worth it for grassroots football.",
   path: "/football-gear/veo-camera-alternatives",
