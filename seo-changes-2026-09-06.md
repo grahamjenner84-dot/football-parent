@@ -1575,3 +1575,12 @@ Page: /football-gear/boots/best-football-boots-for-wide-feet-kids. Commit e73166
 Stock check: the Nike Jr. Tiempo Legend 10 (B0C4PHWQJZ) has 10 of 19 sizes sold out, 7 low, 2 normal; no better-stocked Tiempo listing on Amazon UK (Club and junior Academy versions worse, no Legend 11 junior). Kept, since 9 sizes are still buyable. Added the Mizuno Monarcida Neo III Select Jr (B0GY51TYXJ, £23.12, 22 of 23 size/colour options in stock, no Amazon reviews yet) as a third quick pick ("Wide-fit budget option") and linked it where Mizuno is first mentioned in "Best Boot Types". Wide-fit claim is from Mizuno's UK product page, which lists "Wide fit" as a feature. Additive only: no existing pick, heading or link removed.
 
 Rest of the 16 Oct stock check (top 8 pages by 7-day Amazon clicks, 28 products): no dead links, nothing sold out. Watch: Nike Charge (both listings low), Copa Pure Junior (11 of 34 out), Nike Park First Layer (4 left on linked), PUMA Liga Short Tight (1 left on linked), Nike Vapor 16 Club (33 of 50 out).
+
+## 16 Oct 2026: new article, How Girls' Football Works (girls' cluster hub)
+
+Published 16 Oct 2026: `/girls-football/how-girls-football-works` (Girls Football). Targets "girls football" (head term of the girls' space, Ads hides volume) plus Wildcats terms (wildcats football 390, fa wildcats 170, wildcats football near me 90) and the PAAs "What age can girls start playing football?", "Is Wildcats football free?", "What is football for girls called?". Research: `seo-data/exports/girls-football-*-2026-10-06.json`. Added first in Start Here and the article list on `/girls-football`.
+
+Article commit `f16b38c`. Inbound links added the same day, commit `5bf0f7a` (additive, one sentence each, no existing text removed):
+- `/girls-football/how-girls-football-academies-work`: intro, "how girls' football works".
+- `/girls-football/girls-academy-vs-grassroots-football`: "The Case for Grassroots Football", "how girls' football works".
+- `/girls-football/girls-united-daughter-football-interview`: Final Thoughts, "how girls' football works".

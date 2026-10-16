@@ -28,6 +28,12 @@ export default function GirlsFootballPage() {
           "New to the girls football pathway? These guides explain academies, ETCs, RTCs and trials.",
         links: [
           {
+            title: "How Girls' Football Works",
+            href: "/girls-football/how-girls-football-works",
+            description:
+              "covers Wildcats, Squad, age groups, mixed teams and girls' leagues.",
+          },
+          {
             title: "How Girls Football Academies Work",
             href: "/girls-football/how-girls-football-academies-work",
             description:
@@ -54,6 +60,12 @@ export default function GirlsFootballPage() {
         ],
       }}
       articles={[
+        {
+          title: "How Girls' Football Works",
+          href: "/girls-football/how-girls-football-works",
+          description:
+            "Wildcats from age 5, Squad for 11 to 16, then girls' or mixed teams up to Under-18. How girls' football in England works: ages, formats, leagues and clubs.",
+        },
         {
           title: "How Girls Football Academies Work",
           href: "/girls-football/how-girls-football-academies-work",
