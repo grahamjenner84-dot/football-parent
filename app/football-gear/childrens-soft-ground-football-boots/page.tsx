@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Children's Soft Ground Football Boots: Do Kids Need Them? | Football Parent",
+  title: "Children's Soft Ground Football Boots: Best Junior SG Picks",
   description: "Most kids never need soft ground boots. When junior SG boots help on muddy grass, whether metal studs are allowed in youth football, and the 3G pitch rules.",
   path: "/football-gear/childrens-soft-ground-football-boots",
 });
