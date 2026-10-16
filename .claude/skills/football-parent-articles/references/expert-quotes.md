@@ -1320,6 +1320,11 @@ or expert callout (only `emerging-talent-centres-explained` has one); Q1 suits
 `girls-academy-vs-grassroots-football` and the Girls United interview's
 getting-started angle, Q2 suits `late-developers-in-girls-football` and
 `what-age-do-girls-football-academies-recruit`.
+Also wanted for `how-girls-football-works` (written 2026-10-16 with two Girls
+United boxes only, logged as pending): Q1 suits its Wildcats/Squad sections,
+and a third question fits its mixed-teams section:
+3. When a girl moves from a mixed team into girls' football, what is usually
+   behind it, and does it tend to happen at a particular age?
 
 ## Answered — captured, not yet placed in an article
 
