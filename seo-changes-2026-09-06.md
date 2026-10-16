@@ -1584,3 +1584,28 @@ Article commit `f16b38c`. Inbound links added the same day, commit `5bf0f7a` (ad
 - `/girls-football/how-girls-football-academies-work`: intro, "how girls' football works".
 - `/girls-football/girls-academy-vs-grassroots-football`: "The Case for Grassroots Football", "how girls' football works".
 - `/girls-football/girls-united-daughter-football-interview`: Final Thoughts, "how girls' football works".
+
+## Weekly SEO check 2026-10-16
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-10-16.md`. GSC to 13 Oct, page views to 15 Oct, windows from `scripts/seo/cli/change-impact.ts` (same days either side of the change, change day excluded, site as control). Site 28 vs 28 days: impressions +35%, clicks +50%, same-query position 9.2 to 8.0.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| wide-feet boots title | 3 Oct | cfe92d3 | Keep (rankings) | Same-query 7.2 to 5.3, wide-fit variants up 2-5; clicks 73 to 60 vs site +5% (demand) | Clicks read again 20 Oct |
+| footballs by age list | 4 Oct | 9e9d6d8 | Keep, provisional | Same-query 10.0 to 9.5, clicks 9 to 19; revert rule not met | Read again 20 Oct |
+| scholarships FAQ | 4 Oct | 961a614 | Keep | Same-query 7.0 to 6.4, clicks 39 to 47, target 10.0 to 9.3 | Closed |
+| Brentford "academy" link | 4 Oct | 9bda1c0 | Neutral, keep | Target 11.3 to 9.9, page flat | Close 18 Oct |
+| grassroots apps Progress section | 3 Oct | 5149d01 | Mixed, keep | Impr +86%, clicks 24 to 18, same-query flat; muddied by 6 and 11 Oct | Read again 25 Oct |
+| how-academy-football-works quote move | 4 Oct | 4e64155 | Keep | Same-query 8.4 to 8.0; GSC clicks 23 to 14 but organic views flat | Closed |
+| formations title | 25 Sep | 2ed3239 | Too small, keep | 104 to 103 impressions | Closed |
+| Matt Baxter quotes (7 pages) | 28 Sep | 32af46c etc. | Keep | Up on release and child-improving, flat on JPL vs grassroots, rest too small | Closed |
+| Aston Villa title | 9 Oct | db0d9e5 | Too early | Clicks 4 to 21, CTR 0.9% to 3.7% | Read again 20 Oct |
+| AG vs FG title | 9 Oct | b138a61 | Too early | Target 9.0 to 6.8 | Read again 20 Oct |
+| shin pads FAQ | 9 Oct | 0838cfe | Too early | Guard queries within rule (2.2 to 2.4, 2.1 to 2.8) | Read again 20-23 Oct |
+| West Ham title | 9 Oct | c06a4c2 | Too early | Same-query +0.7 | Read again 20 Oct |
+| academy recruit ages FAQ | 9 Oct | 0f86a67 | Too early | Clicks 4 to 11 | Read again 20 Oct |
+| pro footballer FAQ | 9 Oct | d9b5d44 | Too early | Target 6.2 to 7.7 (under rule) | Read again 20 Oct |
+| equal playing time calc section | 6 Oct | b6f2a5b | Too early | Flat | Read again 20 Oct |
+| 10-14 Oct changes (ExpertQA boxes, fixes, 10 titles, Arsenal) | 10-14 Oct | see entries | Too early | | 20-28 Oct |
+
+Shortlist put to Graham: Veo price queries (title), soft ground boots shopping queries (title). Queued behind watch windows: shin pads head terms, Leeds academy, Brentford academy, FA youth format CTR, goals, coaching app terms. Tooling fix the same day: `change-impact.ts` now splits Google Ads clicks (gclid) out of organic search page views; the calculator page's 53 "search" visits were all ads.
