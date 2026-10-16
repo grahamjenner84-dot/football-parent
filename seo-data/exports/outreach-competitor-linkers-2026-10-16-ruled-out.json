@@ -1,0 +1,13 @@
+[
+  {"url": "https://www.spond.com/news-and-blog/top-5-grassroots-football-team-apps/", "source": "linkers:mingle.sport", "title": "The Top 5 Grassroots Football Team Apps in the UK | Spond", "reason": "commercial rival (Spond): will not add a rival app to its own roundup"},
+  {"url": "https://coachmeplus.com/why-your-sports-academy-needs-an-athlete-management-system/", "source": "linkers:mingle.sport", "reason": "vendor marketing page for athlete-management software, no author voice; not UK"},
+  {"url": "https://footballtoast.com/soccer-basics/soccer-positions-and-numbers-a-complete-guide/", "source": "linkers:mingle.sport", "reason": "US 'soccer' explainer with no author, date or first-person voice"},
+  {"url": "https://www.drpaulmccarthy.com/post/how-to-use-sports-psychology-a-cbt-guide-to-restore-football-joy", "source": "linkers:mingle.sport", "reason": "unreadable (Wix site blocks the reader), same as the earlier drpaulmccarthy.com page"},
+  {"url": "https://www.bottlenoses.com/article-blog/the-algorithmic-colonization-of-youth-development-a-critical-analysis-of-ranking-systems-commercial-stratification-and-performance-based-exclusion-in-youth-sports", "source": "linkers:mingle.sport", "reason": "general youth-sports essay with no football angle"},
+  {"url": "https://www.intercom.com/blog/live-chat-support/", "source": "linkers:mingle.sport", "reason": "customer-support software blog citing Mingle as a case study: no football audience"},
+  {"url": "https://www.eu-startups.com/2023/08/utrecht-based-mingle-sport-raises-e1-25-million-to-scale-grassroots-football-app-globally/", "source": "linkers:mingle.sport", "reason": "2023 funding news about Mingle: not replicable, not UK"},
+  {"url": "https://www.teamstats.net/football-coaching/apps/teamstats-vs-mingle-sport", "source": "linkers:mingle.sport", "reason": "competitor (TeamStats) comparison page"},
+  {"url": "https://shekicks.net/weee-kicks-plymouth-phoenix-u-13s/", "source": "linkers:teamstats.net", "reason": "old kids' team Q&A feature naming the girls on the team; the site is now AI-assisted WSL news. No fit for a pitch"},
+  {"url": "https://www.wwpis.co.uk/", "source": "football-dna-outbound", "reason": "redirects to parentsinsport.co.uk (Working with Parents in Sport), already ruled out twice on 25 Sept: no readable contact, posts are promotional. Graham approaches directly if he gets a contact"},
+  {"url": "https://www.non-perfectdad.co.uk/", "source": "football-dna-outbound", "reason": "unreadable (bot check), homepage only"}
+]
