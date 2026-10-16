@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useCallback, useEffect, useMemo, useState, type CSSProperties, type ReactNode } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState, type CSSProperties, type MouseEvent, type ReactNode } from "react";
 import {
   AWAITING,
   chaseBody,
@@ -63,7 +63,7 @@ interface Stats {
   backlog: number;
 }
 
-type Tab = "week" | "backlog" | "noReply" | "discussion" | "rejected" | "won" | "parked" | "ruledOut";
+type Tab = "week" | "backlog" | "noReply" | "discussion" | "rejected" | "won" | "parked" | "ruledOut" | "experts";
 
 const firstName = (name: string | null) => (name ? name.trim().split(/\s+/)[0] : null);
 
@@ -81,6 +81,16 @@ export default function OutreachAdminPage() {
   const [busy, setBusy] = useState<number | null>(null);
   const [expanded, setExpanded] = useState<number | null>(null);
   const [showAdd, setShowAdd] = useState(false);
+  const [expertCount, setExpertCount] = useState<number | null>(null);
+
+  // Count for the tab label; the tab itself loads the full list. Ignored if
+  // the experts table isn't there yet.
+  useEffect(() => {
+    fetch("/api/outreach/experts", { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => json && setExpertCount((json.experts as Expert[]).filter((e) => e.status !== "declined").length))
+      .catch(() => {});
+  }, []);
 
   // State is only set in promise callbacks, never synchronously in the
   // effect body (react-hooks/set-state-in-effect).
@@ -161,6 +171,7 @@ export default function OutreachAdminPage() {
     { id: "won", label: "Won (live)", count: groups.won.length },
     { id: "parked", label: "Parked", count: groups.parked.length },
     { id: "ruledOut", label: "Ruled out", count: groups.ruledOut.length },
+    { id: "experts", label: "Experts to approach", count: expertCount ?? 0 },
   ];
 
   const rowsFor = (t: Tab): Prospect[] =>
@@ -201,13 +212,17 @@ export default function OutreachAdminPage() {
           <>
             <p style={styles.muted}>{TAB_HELP[tab]}</p>
             {tab === "backlog" && <RecheckBar onDone={load} />}
-            <ProspectTable
-              rows={rowsFor(tab)}
-              expanded={expanded}
-              onToggle={(id) => setExpanded((cur) => (cur === id ? null : id))}
-              renderDetail={(p) => <ProspectDetail key={p.id} p={p} busy={busy === p.id} act={act} patch={patch} />}
-              ours={toStrength(ourStrength?.rank)}
-            />
+            {tab === "experts" ? (
+              <ExpertsTab onCount={setExpertCount} />
+            ) : (
+              <ProspectTable
+                rows={rowsFor(tab)}
+                expanded={expanded}
+                onToggle={(id) => setExpanded((cur) => (cur === id ? null : id))}
+                renderDetail={(p) => <ProspectDetail key={p.id} p={p} busy={busy === p.id} act={act} patch={patch} />}
+                ours={toStrength(ourStrength?.rank)}
+              />
+            )}
           </>
         )}
       </section>
@@ -698,6 +713,8 @@ const TAB_HELP: Record<Tab, string> = {
   parked: "Not good leads: ones you've ruled out, plus FA, homepage and partner pages the filter set aside as partnership-only.",
   ruledOut:
     "Everything looked at and ruled out, with the reason: by the quality rules, a research run's vetting or audit, or the backlog re-check. Kept so it's never found, read or paid for again. Tap one and use Back to backlog if the rules got it wrong.",
+  experts:
+    "People whose quote or interview would fill an E-E-A-T gap on one of our pages. Approached by hand (DM or email), not part of the weekly link run. Tap a row to edit it.",
 };
 
 function rowStatus(p: Prospect): string {
@@ -1028,6 +1045,301 @@ function ProspectDetail({ p, busy, act, patch }: { p: Prospect; busy: boolean; a
           </Btn>
         </div>
       </div>
+    </div>
+  );
+}
+
+// Experts to approach (outreach_experts): people whose quote or interview
+// would fill an E-E-A-T gap on one of our pages. Separate from prospects on
+// purpose: no quality gate, no score, no send/chase cycle, just a list
+// worked by hand.
+interface Expert {
+  id: number;
+  name: string;
+  role: string | null;
+  website: string | null;
+  contact: string | null;
+  instagram: string | null;
+  eeat_gap: string | null;
+  fp_pages: string | null;
+  status: ExpertStatus;
+  notes: string | null;
+  contacted_at: string | null;
+  created_at: string;
+}
+
+type ExpertStatus = "to_approach" | "contacted" | "agreed" | "published" | "declined";
+
+const EXPERT_STATUS_LABEL: Record<ExpertStatus, string> = {
+  to_approach: "To approach",
+  contacted: "Contacted",
+  agreed: "Agreed",
+  published: "Published",
+  declined: "Declined",
+};
+
+const EXPERT_FORM_FIELDS: { key: keyof Expert; label: string; placeholder: string; multiline?: boolean }[] = [
+  { key: "name", label: "Name", placeholder: "Lydia Giles" },
+  { key: "role", label: "Role", placeholder: "Sport psychologist, researched academy release with football parents" },
+  { key: "eeat_gap", label: "E-E-A-T gap", placeholder: "What they'd answer, e.g. What do families who cope well with release do in the first week?", multiline: true },
+  { key: "fp_pages", label: "Our page(s), one per line", placeholder: "/academy-pathway/understanding-academy-release", multiline: true },
+  { key: "website", label: "Website", placeholder: "https://www.lgsportpsychology.co.uk" },
+  { key: "contact", label: "Contact (email or contact page)", placeholder: "name@example.com or https://.../contact" },
+  { key: "instagram", label: "Instagram", placeholder: "@handle or instagram.com link" },
+  { key: "notes", label: "Notes", placeholder: "How you found them, mutual contacts, what was said", multiline: true },
+];
+
+type ExpertDraft = Record<string, string>;
+
+const emptyExpert = (): ExpertDraft => Object.fromEntries(EXPERT_FORM_FIELDS.map((f) => [f.key, ""]));
+
+const withProtocol = (u: string) => (/^https?:\/\//i.test(u) ? u : `https://${u}`);
+
+function ContactLink({ contact }: { contact: string | null }) {
+  if (!contact) return <>-</>;
+  const stop = (e: MouseEvent) => e.stopPropagation();
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) {
+    return (
+      <a href={`mailto:${contact}`} style={styles.link} onClick={stop}>
+        {contact}
+      </a>
+    );
+  }
+  if (/^(https?:\/\/|www\.)/i.test(contact)) {
+    return (
+      <a href={withProtocol(contact)} target="_blank" rel="noopener noreferrer" style={styles.link} onClick={stop}>
+        contact page
+      </a>
+    );
+  }
+  return <>{contact}</>;
+}
+
+function ExpertsTab({ onCount }: { onCount: (n: number) => void }) {
+  const [experts, setExperts] = useState<Expert[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [expanded, setExpanded] = useState<number | null>(null);
+  const [showDeclined, setShowDeclined] = useState(false);
+  const [adding, setAdding] = useState(false);
+
+  const load = useCallback(
+    () =>
+      fetch("/api/outreach/experts", { cache: "no-store" })
+        .then(async (res) => {
+          const json = await res.json();
+          if (!res.ok) throw new Error(json.error || res.statusText);
+          const list = json.experts as Expert[];
+          setExperts(list);
+          onCount(list.filter((e) => e.status !== "declined").length);
+          setError(null);
+        })
+        .catch((err) => setError(err instanceof Error ? err.message : String(err)))
+        .finally(() => setLoading(false)),
+    [onCount]
+  );
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  const send = async (method: "POST" | "PATCH" | "DELETE", payload?: Record<string, unknown>, id?: number) => {
+    const res = await fetch(method === "DELETE" ? `/api/outreach/experts?id=${id}` : "/api/outreach/experts", {
+      method,
+      headers: { "content-type": "application/json" },
+      body: payload ? JSON.stringify(payload) : undefined,
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(json.error || res.statusText);
+    await load();
+  };
+
+  const order: ExpertStatus[] = ["to_approach", "contacted", "agreed", "published", "declined"];
+  const rows = experts
+    .filter((e) => showDeclined || e.status !== "declined")
+    .sort((a, b) => order.indexOf(a.status) - order.indexOf(b.status) || b.created_at.localeCompare(a.created_at));
+  const declined = experts.filter((e) => e.status === "declined").length;
+
+  if (loading) return <p style={styles.muted}>Loading...</p>;
+
+  return (
+    <>
+      {error && <p style={styles.error}>{error}</p>}
+      <div style={{ ...styles.actions, marginTop: 0, marginBottom: 10 }}>
+        <Btn onClick={() => setAdding((v) => !v)}>{adding ? "Close" : "+ Add expert"}</Btn>
+        {declined > 0 && (
+          <Btn subtle onClick={() => setShowDeclined((v) => !v)}>
+            {showDeclined ? "Hide declined" : `Show declined (${declined})`}
+          </Btn>
+        )}
+      </div>
+      {adding && (
+        <div style={styles.card}>
+          <ExpertForm
+            initial={emptyExpert()}
+            submitLabel="Add"
+            onSubmit={async (d) => {
+              await send("POST", d);
+              setAdding(false);
+            }}
+          />
+        </div>
+      )}
+      {!rows.length ? (
+        <p style={styles.muted}>Nothing here yet.</p>
+      ) : (
+        <div style={styles.tableWrap}>
+          <table style={styles.table}>
+            <thead>
+              <tr>
+                {["Expert", "E-E-A-T gap", "Our page", "Website", "Contact", "Instagram", "Status"].map((h) => (
+                  <th key={h} style={styles.th}>
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((e) => (
+                <Fragment key={e.id}>
+                  <tr onClick={() => setExpanded((cur) => (cur === e.id ? null : e.id))} style={{ ...styles.tr, ...(expanded === e.id ? styles.trOpen : {}) }}>
+                    <td style={{ ...styles.td, maxWidth: 220 }}>
+                      <div style={{ fontWeight: 600 }}>{e.name}</div>
+                      {e.role && <div style={styles.reasons}>{e.role}</div>}
+                    </td>
+                    <td style={{ ...styles.td, maxWidth: 320 }}>{e.eeat_gap ?? "-"}</td>
+                    <td style={{ ...styles.td, maxWidth: 220 }}>
+                      {e.fp_pages
+                        ? e.fp_pages
+                            .split(/\n+/)
+                            .filter(Boolean)
+                            .map((pth) => (
+                              <div key={pth}>
+                                <a href={pth.trim()} target="_blank" rel="noopener noreferrer" style={styles.link} onClick={(ev) => ev.stopPropagation()}>
+                                  {pth.trim()}
+                                </a>
+                              </div>
+                            ))
+                        : "-"}
+                    </td>
+                    <td style={{ ...styles.td, maxWidth: 200 }}>
+                      {e.website ? (
+                        <a href={withProtocol(e.website)} target="_blank" rel="noopener noreferrer" style={styles.link} onClick={(ev) => ev.stopPropagation()}>
+                          {e.website.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+                        </a>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
+                    <td style={{ ...styles.td, maxWidth: 200 }}>
+                      <ContactLink contact={e.contact} />
+                    </td>
+                    <td style={styles.tdNowrap}>
+                      {e.instagram ? (
+                        <a href={`https://www.instagram.com/${e.instagram}/`} target="_blank" rel="noopener noreferrer" style={styles.link} onClick={(ev) => ev.stopPropagation()}>
+                          @{e.instagram}
+                        </a>
+                      ) : (
+                        "-"
+                      )}
+                    </td>
+                    <td style={styles.tdNowrap} onClick={(ev) => ev.stopPropagation()}>
+                      <select
+                        value={e.status}
+                        onChange={(ev) => send("PATCH", { id: e.id, fields: { status: ev.target.value } }).catch((err) => alert(err.message))}
+                        style={{ ...styles.input, margin: 0, width: "auto", padding: "5px 8px", fontSize: 13 }}
+                      >
+                        {order.map((s) => (
+                          <option key={s} value={s}>
+                            {EXPERT_STATUS_LABEL[s]}
+                          </option>
+                        ))}
+                      </select>
+                      {e.contacted_at && <div style={styles.reasons}>since {fmtDate(e.contacted_at)}</div>}
+                    </td>
+                  </tr>
+                  {expanded === e.id && (
+                    <tr>
+                      <td colSpan={7} style={styles.detailCell}>
+                        <ExpertForm
+                          key={e.id}
+                          initial={Object.fromEntries(EXPERT_FORM_FIELDS.map((f) => [f.key, String(e[f.key] ?? "")]))}
+                          submitLabel="Save"
+                          onSubmit={(d) => send("PATCH", { id: e.id, fields: d })}
+                          onDelete={() => {
+                            if (confirm(`Delete ${e.name}?`)) send("DELETE", undefined, e.id).catch((err) => alert(err.message));
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </>
+  );
+}
+
+function ExpertForm({
+  initial,
+  submitLabel,
+  onSubmit,
+  onDelete,
+}: {
+  initial: ExpertDraft;
+  submitLabel: string;
+  onSubmit: (d: ExpertDraft) => Promise<void>;
+  onDelete?: () => void;
+}) {
+  const [d, setD] = useState<ExpertDraft>(initial);
+  const [msg, setMsg] = useState<string | null>(null);
+  const [working, setWorking] = useState(false);
+
+  const submit = async () => {
+    setWorking(true);
+    setMsg(null);
+    try {
+      await onSubmit(d);
+      setMsg("Saved.");
+    } catch (err) {
+      setMsg(err instanceof Error ? err.message : String(err));
+    } finally {
+      setWorking(false);
+    }
+  };
+
+  return (
+    <div style={styles.detailGrid}>
+      {[EXPERT_FORM_FIELDS.slice(0, 4), EXPERT_FORM_FIELDS.slice(4)].map((col, i) => (
+        <div key={i}>
+          {col.map((f) => (
+            <label key={f.key} style={styles.label}>
+              {f.label}
+              {f.multiline ? (
+                <textarea value={d[f.key]} onChange={(ev) => setD({ ...d, [f.key]: ev.target.value })} placeholder={f.placeholder} style={styles.textarea} rows={3} />
+              ) : (
+                <input value={d[f.key]} onChange={(ev) => setD({ ...d, [f.key]: ev.target.value })} placeholder={f.placeholder} style={styles.input} />
+              )}
+            </label>
+          ))}
+          {i === 1 && (
+            <div style={styles.actions}>
+              <Btn onClick={submit} disabled={working || !d.name.trim()}>
+                {submitLabel}
+              </Btn>
+              {onDelete && (
+                <Btn subtle onClick={onDelete}>
+                  Delete
+                </Btn>
+              )}
+            </div>
+          )}
+          {i === 1 && msg && <p style={styles.meta}>{msg}</p>}
+        </div>
+      ))}
     </div>
   );
 }
