@@ -1,0 +1,53 @@
+[
+  {
+    "url": "https://footballdna.co.uk/mastering-equal-playtime/",
+    "source": "linkers:mingle.sport",
+    "title": "Mastering Equal Playtime - Easily Keep Track Of Your Substitutes - Football DNA",
+    "context": "Football DNA blog post (Aug 2024) on rotating subs for equal minutes; links dofollow to Mingle's download page ('Download the app and try it out!'). Read via the site's WordPress feed: DataForSEO cannot read footballdna.co.uk.",
+    "fit": 10,
+    "fit_note": "Their post explains how to keep equal playtime and sends readers to Mingle to track it; our calculator does the minutes maths for any squad size without an app download",
+    "fp_page": "/coaching/equal-playing-time-calculator",
+    "angle": "Part of the mutual-promotion deal with Stewart (agreed 15 Oct): ask for a calculator link added to this post. Graham raises it with Stewart directly, not a cold email.",
+    "contact_name": "Stewart (Football DNA)"
+  },
+  {
+    "url": "https://www.grassrootsfootballuk.com/mingle-sports-app/",
+    "source": "linkers:mingle.sport",
+    "title": "Mingle Sports app page on Grassroots Football UK",
+    "context": "UK grassroots site with a dedicated page on the Mingle app. Gate: a site page, not an authored article, and a content site that ranks for our keywords.",
+    "fit": 6,
+    "fit_note": "They run a page on Mingle for grassroots coaches; the Coach App does the same job and is UK-built",
+    "fp_page": "/football-parent-coach-app",
+    "angle": "Listing/review ask: offer the Coach App for an equivalent page, pitched as a mutual (they may see us as a rival)"
+  },
+  {
+    "url": "https://footyapps.com/product/teamstats-football-management",
+    "source": "linkers:teamstats.net",
+    "title": "TeamStats on FootyApps",
+    "context": "Football app directory that lists TeamStats (41 links) and Mingle (71 links, now lost). Self-serve listing, not an email pitch.",
+    "fit": 7,
+    "fit_note": "Directory of football apps listing both competitors; the Coach App and Progress have no entry",
+    "fp_page": "/football-parent-coach-app",
+    "angle": "Submit listings for the Coach App and Progress"
+  },
+  {
+    "url": "https://www.sportstartups.org/startup/minglesport/",
+    "source": "linkers:mingle.sport",
+    "title": "Mingle Sport on SportStartups",
+    "context": "Sports startup directory profile for Mingle. Self-serve ('Promote startup').",
+    "fit": 4,
+    "fit_note": "Startup directory profiling Mingle; a profile for the Coach App is free",
+    "fp_page": "/football-parent-coach-app",
+    "angle": "Submit a startup profile for the Coach App"
+  },
+  {
+    "url": "https://www.saashub.com/teamstats-alternatives",
+    "source": "linkers:teamstats.net",
+    "title": "TeamStats Alternatives & Competitors - SaaSHub",
+    "context": "Software alternatives page for TeamStats; links dofollow to teamstats.net. Products appear here once listed on SaaSHub.",
+    "fit": 6,
+    "fit_note": "Lists 10+ TeamStats alternatives; a SaaSHub listing for the Coach App would put it on this page",
+    "fp_page": "/football-parent-coach-app",
+    "angle": "Create a SaaSHub product listing for the Coach App, tagged as a TeamStats/Mingle alternative"
+  }
+]
