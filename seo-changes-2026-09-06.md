@@ -1609,3 +1609,33 @@ Full write-up: `seo-data/exports/weekly-seo-check-2026-10-16.md`. GSC to 13 Oct,
 | 10-14 Oct changes (ExpertQA boxes, fixes, 10 titles, Arsenal) | 10-14 Oct | see entries | Too early | | 20-28 Oct |
 
 Shortlist put to Graham: Veo price queries (title), soft ground boots shopping queries (title). Queued behind watch windows: shin pads head terms, Leeds academy, Brentford academy, FA youth format CTR, goals, coaching app terms. Tooling fix the same day: `change-impact.ts` now splits Google Ads clicks (gclid) out of organic search page views; the calculator page's 53 "search" visits were all ads.
+
+## 16 Oct 2026: three title tags from the weekly check
+
+`<title>` only in each `page.tsx`. H1s, meta descriptions, headings and body unchanged. One commit per page. Widths estimated against the 13 Oct Screaming Frog limit (~561px; Arsenal's 560px title measures 562px on the same estimate). Live SERP check the same day (`ai-overview-check.ts`, $0.016): no AI Overview on "veo camera price"; AI Overview on "crystal palace academy trials" with us not cited. Baselines are GSC 28 days to 13 Oct.
+
+**`/academy-pathway/crystal-palace-development-centre-guide` (`65295d9`). Live traffic page.**
+- Before: "Crystal Palace Development Centre Guide | Football Parent"
+- After: "Crystal Palace Academy Trials & Development Centre Guide" (539px). Graham's option A, "Parent's Guide" shortened to "Guide" to fit (A in full was 623px).
+- Why: same gap as Arsenal (14 Oct), West Ham and Aston Villa (9 Oct). The page's academy and trials queries never appear in the title, though its H2s cover them. Clicks 103 to 72 over 28 days at a steady position, weekly CTR 1.4% to 0.7%.
+- Baseline: 7,244 impressions, 72 clicks, position 6.4, CTR 1.0%. "crystal palace development centre" 3.3 (945), "how to join crystal palace football academy" 6.7 (724, 0.6%), "crystal palace development" 8.1 (470), "crystal palace academy trials" 9.1 (417), "...trials 2026" 9.6 (274), "crystal palace development centre trials" 4.9 (256), "crystal palace academy" 8.4 (238).
+- Revert rule: "crystal palace development centre" or "crystal palace development centre trials" lose more than ~2 places and hold for a week, or page CTR below 0.7% for two weeks running. Trial demand is seasonal, so judge on CTR and positions, not raw clicks.
+- Watch until ~30 Oct.
+
+**`/football-gear/veo-camera-alternatives` (`e47d978`). Live traffic page.**
+- Before: "Veo Camera Alternatives: Cost & Comparisons | Football Parent"
+- After: "Veo Camera Alternatives: Price, Subscription Cost & XbotGo" (539px). Graham's option A.
+- Why: about 3,500 impressions on price queries at 7.5-10 with almost no clicks, and "price" was not in the title. The page already answers it ("How Much Is a Veo Camera?"). No AI Overview on "veo camera price".
+- Baseline: 26,009 impressions, 220 clicks, position 6.4, CTR 0.8%. "veo alternatives uk" 4.4 (1,664), "veo camera price" 10.1 (1,535, 0.3%), "veo subscription cost uk" 5.9 (1,079), "veo alternative" 7.5 (960), "veo camera alternative" 5.5 (941), "veo football camera" 10.0 (786), "how much is a veo camera" 8.6 (542), "xbotgo falcon vs veo" 7.4 (452).
+- Revert rule: "veo alternatives uk" or "veo camera alternative" lose more than ~2 places and hold for a week, or page CTR below 0.6% for two weeks running.
+- Last ranking change 27 Sept (buy box); 12 Oct was a stock swap. Watch until ~30 Oct.
+
+**`/football-gear/childrens-soft-ground-football-boots` (`624961c`).**
+- Before: "Children's Soft Ground Football Boots: Do Kids Need Them? | Football Parent"
+- After: "Children's Soft Ground Football Boots: Best Junior SG Picks" (534px). Graham's option A.
+- Why: shopping queries sit at 10-14 with 0 clicks, about 330 impressions in 28 days, against an informational title.
+- Baseline: 1,485 impressions, 10 clicks, position 6.6, CTR 0.7%. "kids soft ground football boots" 9.9 (78), "childrens soft ground football boots" 10.8 (49), "soft ground football boots junior" 11.2 (47), "childrens football boots soft ground" 14.0 (43), "junior football boots soft ground" 12.9 (39), "boys soft ground football boots" 11.1 (33), "what age can you wear metal studs in football" 4.3 (17).
+- Revert rule: "what age can you wear metal studs in football" or the page's average position lose more than ~2 places for a week. Low traffic page, so low risk.
+- Watch until ~30 Oct.
+
+**Held: `/girls-football/emerging-talent-centres-explained` title.** Live SERP: AI Overview on both "etc football" and "what does etc stand for in football", us not cited (englandfootball.com and tees.ac.uk are). The 0.2% CTR on those queries is the AI Overview, so a title change would not fix it. Not changed.
