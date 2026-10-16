@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Crystal Palace Development Centre Guide | Football Parent",
+  title: "Crystal Palace Academy Trials & Development Centre Guide",
   description:
     "Crystal Palace's pathway has three tiers before the Academy: open, invite-only, then the Talent Centre. How it works for south London and Kent families.",
   path: "/academy-pathway/crystal-palace-development-centre-guide",

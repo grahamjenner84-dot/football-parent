@@ -1584,3 +1584,68 @@ Article commit `f16b38c`. Inbound links added the same day, commit `5bf0f7a` (ad
 - `/girls-football/how-girls-football-academies-work`: intro, "how girls' football works".
 - `/girls-football/girls-academy-vs-grassroots-football`: "The Case for Grassroots Football", "how girls' football works".
 - `/girls-football/girls-united-daughter-football-interview`: Final Thoughts, "how girls' football works".
+
+## Weekly SEO check 2026-10-16
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-10-16.md`. GSC to 13 Oct, page views to 15 Oct, windows from `scripts/seo/cli/change-impact.ts` (same days either side of the change, change day excluded, site as control). Site 28 vs 28 days: impressions +35%, clicks +50%, same-query position 9.2 to 8.0.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| wide-feet boots title | 3 Oct | cfe92d3 | Keep (rankings) | Same-query 7.2 to 5.3, wide-fit variants up 2-5; clicks 73 to 60 vs site +5% (demand) | Clicks read again 20 Oct |
+| footballs by age list | 4 Oct | 9e9d6d8 | Keep, provisional | Same-query 10.0 to 9.5, clicks 9 to 19; revert rule not met | Read again 20 Oct |
+| scholarships FAQ | 4 Oct | 961a614 | Keep | Same-query 7.0 to 6.4, clicks 39 to 47, target 10.0 to 9.3 | Closed |
+| Brentford "academy" link | 4 Oct | 9bda1c0 | Neutral, keep | Target 11.3 to 9.9, page flat | Close 18 Oct |
+| grassroots apps Progress section | 3 Oct | 5149d01 | Mixed, keep | Impr +86%, clicks 24 to 18, same-query flat; muddied by 6 and 11 Oct | Read again 25 Oct |
+| how-academy-football-works quote move | 4 Oct | 4e64155 | Keep | Same-query 8.4 to 8.0; GSC clicks 23 to 14 but organic views flat | Closed |
+| formations title | 25 Sep | 2ed3239 | Too small, keep | 104 to 103 impressions | Closed |
+| Matt Baxter quotes (7 pages) | 28 Sep | 32af46c etc. | Keep | Up on release and child-improving, flat on JPL vs grassroots, rest too small | Closed |
+| Aston Villa title | 9 Oct | db0d9e5 | Too early | Clicks 4 to 21, CTR 0.9% to 3.7% | Read again 20 Oct |
+| AG vs FG title | 9 Oct | b138a61 | Too early | Target 9.0 to 6.8 | Read again 20 Oct |
+| shin pads FAQ | 9 Oct | 0838cfe | Too early | Guard queries within rule (2.2 to 2.4, 2.1 to 2.8) | Read again 20-23 Oct |
+| West Ham title | 9 Oct | c06a4c2 | Too early | Same-query +0.7 | Read again 20 Oct |
+| academy recruit ages FAQ | 9 Oct | 0f86a67 | Too early | Clicks 4 to 11 | Read again 20 Oct |
+| pro footballer FAQ | 9 Oct | d9b5d44 | Too early | Target 6.2 to 7.7 (under rule) | Read again 20 Oct |
+| equal playing time calc section | 6 Oct | b6f2a5b | Too early | Flat | Read again 20 Oct |
+| 10-14 Oct changes (ExpertQA boxes, fixes, 10 titles, Arsenal) | 10-14 Oct | see entries | Too early | | 20-28 Oct |
+
+Shortlist put to Graham: Veo price queries (title), soft ground boots shopping queries (title). Queued behind watch windows: shin pads head terms, Leeds academy, Brentford academy, FA youth format CTR, goals, coaching app terms. Tooling fix the same day: `change-impact.ts` now splits Google Ads clicks (gclid) out of organic search page views; the calculator page's 53 "search" visits were all ads.
+
+## 16 Oct 2026: three title tags from the weekly check
+
+`<title>` only in each `page.tsx`. H1s, meta descriptions, headings and body unchanged. One commit per page. Widths estimated against the 13 Oct Screaming Frog limit (~561px; Arsenal's 560px title measures 562px on the same estimate). Live SERP check the same day (`ai-overview-check.ts`, $0.016): no AI Overview on "veo camera price"; AI Overview on "crystal palace academy trials" with us not cited. Baselines are GSC 28 days to 13 Oct.
+
+**`/academy-pathway/crystal-palace-development-centre-guide` (`65295d9`). Live traffic page.**
+- Before: "Crystal Palace Development Centre Guide | Football Parent"
+- After: "Crystal Palace Academy Trials & Development Centre Guide" (539px). Graham's option A, "Parent's Guide" shortened to "Guide" to fit (A in full was 623px).
+- Why: same gap as Arsenal (14 Oct), West Ham and Aston Villa (9 Oct). The page's academy and trials queries never appear in the title, though its H2s cover them. Clicks 103 to 72 over 28 days at a steady position, weekly CTR 1.4% to 0.7%.
+- Baseline: 7,244 impressions, 72 clicks, position 6.4, CTR 1.0%. "crystal palace development centre" 3.3 (945), "how to join crystal palace football academy" 6.7 (724, 0.6%), "crystal palace development" 8.1 (470), "crystal palace academy trials" 9.1 (417), "...trials 2026" 9.6 (274), "crystal palace development centre trials" 4.9 (256), "crystal palace academy" 8.4 (238).
+- Revert rule: "crystal palace development centre" or "crystal palace development centre trials" lose more than ~2 places and hold for a week, or page CTR below 0.7% for two weeks running. Trial demand is seasonal, so judge on CTR and positions, not raw clicks.
+- Watch until ~30 Oct.
+
+**`/football-gear/veo-camera-alternatives` (`e47d978`). Live traffic page.**
+- Before: "Veo Camera Alternatives: Cost & Comparisons | Football Parent"
+- After: "Veo Camera Alternatives: Price, Subscription Cost & XbotGo" (539px). Graham's option A.
+- Why: about 3,500 impressions on price queries at 7.5-10 with almost no clicks, and "price" was not in the title. The page already answers it ("How Much Is a Veo Camera?"). No AI Overview on "veo camera price".
+- Baseline: 26,009 impressions, 220 clicks, position 6.4, CTR 0.8%. "veo alternatives uk" 4.4 (1,664), "veo camera price" 10.1 (1,535, 0.3%), "veo subscription cost uk" 5.9 (1,079), "veo alternative" 7.5 (960), "veo camera alternative" 5.5 (941), "veo football camera" 10.0 (786), "how much is a veo camera" 8.6 (542), "xbotgo falcon vs veo" 7.4 (452).
+- Revert rule: "veo alternatives uk" or "veo camera alternative" lose more than ~2 places and hold for a week, or page CTR below 0.6% for two weeks running.
+- Last ranking change 27 Sept (buy box); 12 Oct was a stock swap. Watch until ~30 Oct.
+
+**`/football-gear/childrens-soft-ground-football-boots` (`624961c`).**
+- Before: "Children's Soft Ground Football Boots: Do Kids Need Them? | Football Parent"
+- After: "Children's Soft Ground Football Boots: Best Junior SG Picks" (534px). Graham's option A.
+- Why: shopping queries sit at 10-14 with 0 clicks, about 330 impressions in 28 days, against an informational title.
+- Baseline: 1,485 impressions, 10 clicks, position 6.6, CTR 0.7%. "kids soft ground football boots" 9.9 (78), "childrens soft ground football boots" 10.8 (49), "soft ground football boots junior" 11.2 (47), "childrens football boots soft ground" 14.0 (43), "junior football boots soft ground" 12.9 (39), "boys soft ground football boots" 11.1 (33), "what age can you wear metal studs in football" 4.3 (17).
+- Revert rule: "what age can you wear metal studs in football" or the page's average position lose more than ~2 places for a week. Low traffic page, so low risk.
+- Watch until ~30 Oct.
+
+**Held: `/girls-football/emerging-talent-centres-explained` title.** Live SERP: AI Overview on both "etc football" and "what does etc stand for in football", us not cited (englandfootball.com and tees.ac.uk are). The 0.2% CTR on those queries is the AI Overview, so a title change would not fix it. Not changed.
+
+## 16 Oct 2026: ETC explainer leads with the definition
+
+Page: `/girls-football/emerging-talent-centres-explained` (`3ef42ee`). Two paragraphs swapped at the top of "What is an Emerging Talent Centre?": the definition ("In football, ETC stands for Emerging Talent Centre...") now comes first, before the "If your daughter plays football..." opener. No wording added or removed; title, meta, headings unchanged. Last edit 4 Sept.
+
+Why: in place of the held title change above. Both "etc football" and "what does etc stand for in football" carry an AI Overview that cites englandfootball.com and tees.ac.uk but not us, so the aim is a citation, not CTR from the title. Answer-first, as with the 12 Oct gear intros.
+
+Baseline (28 days to 13 Oct): 5,170 impressions, 73 clicks, position 4.8, CTR 1.4%. "etc football" 5.1 (1,105, 0.2%), "emerging talent centre" 7.6 (527), "etc football meaning" 4.2 (340), "what does etc stand for in football" 4.0 (327, 0 clicks), "etc meaning football" 4.3 (250), "what is etc in football" 4.9 (227). AI Overview citation: not cited on either query (16 Oct).
+
+Revert rule: "etc football" or "emerging talent centre" lose more than ~2 places and hold for a week. Recheck the AI Overview citation on both queries around 30 Oct. Watch until ~30 Oct.
