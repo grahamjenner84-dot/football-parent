@@ -1115,6 +1115,62 @@ function ContactLink({ contact }: { contact: string | null }) {
   return <>{contact}</>;
 }
 
+// First page only, with a toggle for the rest: one expert can cover eight
+// pages, which ran a single row past a phone screen.
+function OurPages({ pages }: { pages: string | null }) {
+  const [open, setOpen] = useState(false);
+  const list = (pages ?? "")
+    .split(/\n+/)
+    .map((p) => p.trim())
+    .filter(Boolean);
+  if (!list.length) return <>-</>;
+  const shown = open ? list : list.slice(0, 1);
+  return (
+    <>
+      {shown.map((pth) => (
+        <div key={pth}>
+          <a href={pth} target="_blank" rel="noopener noreferrer" style={styles.link} onClick={(ev) => ev.stopPropagation()}>
+            {pth}
+          </a>
+        </div>
+      ))}
+      {list.length > 1 && (
+        <button
+          onClick={(ev) => {
+            ev.stopPropagation();
+            setOpen((v) => !v);
+          }}
+          style={{ ...styles.subtle, padding: "3px 8px", fontSize: 12, marginTop: 4 }}
+        >
+          {open ? "Show less" : `+${list.length - 1} more`}
+        </button>
+      )}
+    </>
+  );
+}
+
+function ClampedText({ text }: { text: string | null }) {
+  const [open, setOpen] = useState(false);
+  if (!text) return <>-</>;
+  const long = text.length > 140;
+  return (
+    <>
+      <div style={open || !long ? undefined : { display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{text}</div>
+      {long && (
+        <button
+          onClick={(ev) => {
+            ev.stopPropagation();
+            setOpen((v) => !v);
+          }}
+          style={{ ...styles.subtle, padding: "3px 8px", fontSize: 12, marginTop: 4 }}
+        >
+          {open ? "Show less" : "More"}
+        </button>
+      )}
+    </>
+  );
+}
+
 function ExpertsTab({ onCount }: { onCount: (n: number) => void }) {
   const [experts, setExperts] = useState<Expert[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -1207,20 +1263,11 @@ function ExpertsTab({ onCount }: { onCount: (n: number) => void }) {
                       <div style={{ fontWeight: 600 }}>{e.name}</div>
                       {e.role && <div style={styles.reasons}>{e.role}</div>}
                     </td>
-                    <td style={{ ...styles.td, maxWidth: 320 }}>{e.eeat_gap ?? "-"}</td>
+                    <td style={{ ...styles.td, maxWidth: 320 }}>
+                      <ClampedText text={e.eeat_gap} />
+                    </td>
                     <td style={{ ...styles.td, maxWidth: 220 }}>
-                      {e.fp_pages
-                        ? e.fp_pages
-                            .split(/\n+/)
-                            .filter(Boolean)
-                            .map((pth) => (
-                              <div key={pth}>
-                                <a href={pth.trim()} target="_blank" rel="noopener noreferrer" style={styles.link} onClick={(ev) => ev.stopPropagation()}>
-                                  {pth.trim()}
-                                </a>
-                              </div>
-                            ))
-                        : "-"}
+                      <OurPages pages={e.fp_pages} />
                     </td>
                     <td style={{ ...styles.td, maxWidth: 200 }}>
                       {e.website ? (
