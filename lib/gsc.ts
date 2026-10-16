@@ -1332,6 +1332,41 @@ function buildRankingQuality(
 // baked into comparePeriods' response, which already returns keyed by page
 // - fetching every page's full query breakdown up front would be wasted
 // work for the (usual) case where only one or two pages get drilled into.
+// Totals for one date range, for the whole site (no path) or for one page
+// (a site path like /academy-pathway/x, fragment rows folded in). Backs
+// scripts/seo/cli/change-impact.ts, which needs a page's before/after
+// totals plus a site-wide control over the same windows. Undimensioned for
+// the site total for the same reason as comparePeriods: dimensioned rows
+// don't sum back to the true total.
+export async function getPeriodTotals(start: string, end: string, path?: string): Promise<PeriodTotals> {
+  assertValidDate("start", start);
+  assertValidDate("end", end);
+  const filters: GscFilter[] | null = path
+    ? [{ dimension: "page", operator: "includingRegex", expression: `^${escapeRegex(siteOrigin() + path)}(#.*)?$` }]
+    : null;
+  const rows = await fetchRows(start, end, path ? ["page"] : [], filters);
+  let impressions = 0;
+  let clicks = 0;
+  let posWeighted = 0;
+  for (const r of rows) {
+    impressions += r.impressions;
+    clicks += r.clicks;
+    posWeighted += r.position * r.impressions;
+  }
+  return {
+    start,
+    end,
+    impressions,
+    clicks,
+    avgPosition: impressions ? round1(posWeighted / impressions) : null,
+    ctr: impressions ? clicks / impressions : 0,
+  };
+}
+
+export function pageUrl(path: string): string {
+  return siteOrigin() + path;
+}
+
 export async function comparePageQueries(
   page: string,
   startA: string,

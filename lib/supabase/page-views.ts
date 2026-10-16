@@ -870,6 +870,68 @@ export async function getPageViewSourcesForPath(
   };
 }
 
+export interface PageViewSourceDay {
+  date: string;
+  total: number;
+  // Organic search: referrer classifies as "Search" and no gclid. Google Ads
+  // clicks also arrive from google.com, so without the gclid check an ad
+  // landing page reads as organic search (same rule as getPageViewStats).
+  search: number;
+  // Google Ads clicks (gclid present), whatever the referrer.
+  paid: number;
+}
+
+// Daily human views for one exact path from `since` (YYYY-MM-DD, UTC)
+// through today, zero-filled, split into all sources, organic search and
+// paid. Backs the before/after windows in scripts/seo/cli/change-impact.ts.
+// Same bot rules as getPageViewsForPath, so its totals reconcile with the
+// Page trend tab.
+export async function getPageViewSourceDaysForPath(path: string, since: string): Promise<PageViewSourceDay[]> {
+  const supabase = adminClient();
+
+  let rows: { created_at: string; user_agent: string | null; referrer_host: string | null; gclid: string | null }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("page_views")
+      .select("created_at, user_agent, referrer_host, gclid")
+      .eq("path", path)
+      .gte("created_at", `${since}T00:00:00.000Z`)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (error) {
+      throw new Error("Failed to read page_views: " + error.message);
+    }
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  rows = rows.filter((row) => !isBeforeRecordingStart(path, row.created_at));
+  const isBot = isBotRowForPath(path, rows);
+
+  const byDay = new Map<string, { total: number; search: number; paid: number }>();
+  for (const row of rows) {
+    if (isBot(row)) continue;
+    const day = row.created_at.slice(0, 10);
+    const entry = byDay.get(day) ?? { total: 0, search: 0, paid: 0 };
+    entry.total += 1;
+    if (row.gclid) entry.paid += 1;
+    else if (classifyReferrerHost(row.referrer_host).group === "Search") entry.search += 1;
+    byDay.set(day, entry);
+  }
+
+  const result: PageViewSourceDay[] = [];
+  const cursor = new Date(`${since}T00:00:00.000Z`);
+  const end = new Date(`${new Date().toISOString().slice(0, 10)}T00:00:00.000Z`);
+  while (cursor <= end) {
+    const date = cursor.toISOString().slice(0, 10);
+    result.push({ date, ...(byDay.get(date) ?? { total: 0, search: 0, paid: 0 }) });
+    cursor.setUTCDate(cursor.getUTCDate() + 1);
+  }
+  return result;
+}
+
 export async function getPageViewStats(
   days: number = 30,
   options: GetPageViewStatsOptions = {}
