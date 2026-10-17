@@ -226,7 +226,7 @@ export default function AcademyPathwayPage() {
           title: "Wolves Academy and Development Centres Guide",
           href: "/academy-pathway/wolves-development-centre-guide",
           description:
-            "Wolves' academy kept Category One for 2026/27 after a facilities scare. How the club's open development centres and invite-only Advanced Player Centres fit in.",
+            "Wolves' academy kept Category One for 2026/27 after a facilities scare. What the club's development centres cost and how its Advanced Player Centre trials work.",
         },
         {
           title: "Academy Life: Paul Barry Interview",

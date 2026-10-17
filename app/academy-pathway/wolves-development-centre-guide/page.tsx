@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
   title: "Wolves Academy and Development Centres: A Parent's Guide",
-  description: "Wolves' academy kept Category One for 2026/27 after a facilities scare. How the club's open development centres and invite-only Advanced Player Centres fit in.",
+  description: "Wolves' academy kept Category One for 2026/27 after a facilities scare. What the club's development centres cost and how its Advanced Player Centre trials work.",
   path: "/academy-pathway/wolves-development-centre-guide",
 });
 
