@@ -1649,3 +1649,11 @@ Why: in place of the held title change above. Both "etc football" and "what does
 Baseline (28 days to 13 Oct): 5,170 impressions, 73 clicks, position 4.8, CTR 1.4%. "etc football" 5.1 (1,105, 0.2%), "emerging talent centre" 7.6 (527), "etc football meaning" 4.2 (340), "what does etc stand for in football" 4.0 (327, 0 clicks), "etc meaning football" 4.3 (250), "what is etc in football" 4.9 (227). AI Overview citation: not cited on either query (16 Oct).
 
 Revert rule: "etc football" or "emerging talent centre" lose more than ~2 places and hold for a week. Recheck the AI Overview citation on both queries around 30 Oct. Watch until ~30 Oct.
+
+## 17 Oct 2026: new article, Wolves Academy and Development Centres (club guide)
+
+Published 17 Oct 2026: `/academy-pathway/wolves-development-centre-guide` (Academy Pathway). Targets "wolves academy" (1,300/mo) with "wolves development centre" and "wolves academy trials" (140/mo between them, tracker row High, club volume recheck 2 Oct). Title "Wolves Academy and Development Centres: A Parent's Guide". Added to the Academy Pathway index and `lib/routes.ts`.
+
+Article commit `4322fd0`. Inbound links the same day, commit `3e2aabe` (additive, no existing text removed):
+- `/academy-pathway/premier-league-development-centres-list`: Wolves entry, "Wolves academy and development centres guide".
+- `/academy-pathway/football-development-centres-near-me`: Wolves entry, "Our guide" line.
