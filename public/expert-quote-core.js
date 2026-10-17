@@ -30,10 +30,13 @@
   var CAROUSEL_WIDTH = 1080, CAROUSEL_HEIGHT = 1350;
 
   function dims(format) { return format === 'carousel' ? { W: CAROUSEL_WIDTH, H: CAROUSEL_HEIGHT } : { W: WIDTH, H: HEIGHT }; }
+  // Reels: Instagram lays the username, caption and audio line over roughly the
+  // bottom 320-450px of a 1080x1920 frame. At 220px the credit lockup and the
+  // handles line sat under that text, so the reel bottom takes the cautious 450.
   function safe(format) {
     var d = dims(format), W = d.W, H = d.H;
     var car = format === 'carousel';
-    var side = 96, extraR = car ? 0 : 96, top = car ? 150 : 250, bot = car ? 150 : 220;
+    var side = 96, extraR = car ? 0 : 96, top = car ? 150 : 250, bot = car ? 150 : 450;
     var leftX = side, rightEdge = W - side - extraR;
     return { W: W, H: H, leftX: leftX, rightEdge: rightEdge, maxW: rightEdge - leftX, centerX: (leftX + rightEdge) / 2, safeTop: top, safeBottom: H - bot };
   }
