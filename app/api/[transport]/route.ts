@@ -6,6 +6,7 @@ import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
 import { getPageViewStats, getPageViewCountryStats, getBannerVariantStats } from "@/lib/supabase/page-views";
 import { getCoachAppFunnel } from "@/lib/supabase/coach-app-funnel";
 import { getProgressFunnel } from "@/lib/supabase/progress-funnel";
+import { getAffiliateClickStats } from "@/lib/supabase/affiliate-clicks";
 
 const handler = createMcpHandler(
   (server) => {
@@ -200,6 +201,33 @@ const handler = createMcpHandler(
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );
+
+    server.registerTool(
+      "get_affiliate_clicks",
+      {
+        title: "Get affiliate click-outs",
+        description:
+          "Clicks from footballparent.co.uk out to Amazon (and QuickPlay Sport, the other affiliate merchant) from our own first-party tracking (the affiliate_clicks table, football-parent-social project), the same numbers as the 'Amazon clicks' tab on /admin/seo. Not consent-gated, so unlike the GA4 affiliate_click event it counts every visitor; Graham's own clicks (admin cookie or an excluded network) and known bots are left out. Returns totalClicks; botClicks (excluded, reported so the raw table reconciles); byDay (zero-filled UTC dates, each with clicks by page and by product); byPage (clicks, human page views of that page over the same window, and clickRate = clicks / pageViews, the share of that article's readers who clicked out); byProduct (one row per product, the name resolved from the article content, with each individual link's href, placement, page and clicks); byPlacement (gear-picks = the quick picks box, inline = a link in the text). Clicks only: orders, conversion and earnings exist only in Amazon Associates. Read the two together: a day with no orders and no clicks here is traffic or demand; clicks here that Associates does not show as clicks point at the tag or the account. Tracking started 2026-09-09 08:13 UTC and the window is clamped to that on both sides of the click rate.",
+        inputSchema: {
+          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30. Clamped to start at 2026-09-09 08:13 UTC, when click tracking went live."),
+        },
+      },
+      async ({ days }) => {
+        const stats = await getAffiliateClickStats(days ?? 30);
+        // Each day's product rows repeat every link's href, page and anchor
+        // text; the per-link breakdown stays on the whole-window byProduct.
+        const result = {
+          ...stats,
+          byDay: stats.byDay.map((d) => ({
+            date: d.date,
+            clicks: d.clicks,
+            byPage: d.byPage,
+            byProduct: d.byProduct.map((p) => ({ name: p.name, clicks: p.clicks })),
+          })),
+        };
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
   },
   {},
   {
@@ -213,7 +241,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read"] };
   },
   {
     required: true,
