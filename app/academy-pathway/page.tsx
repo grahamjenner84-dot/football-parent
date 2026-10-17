@@ -223,6 +223,12 @@ export default function AcademyPathwayPage() {
             "Watford's Trust runs three development centre tiers, the top one invite only, and the academy dropped to Category Three for 2026/27. What that means for your child.",
         },
         {
+          title: "Wolves Academy and Development Centres Guide",
+          href: "/academy-pathway/wolves-development-centre-guide",
+          description:
+            "Wolves' academy kept Category One for 2026/27 after a facilities scare. What the club's development centres cost and how its Advanced Player Centre trials work.",
+        },
+        {
           title: "Academy Life: Paul Barry Interview",
           href: "/academy-pathway/academy-life-paul-barry-interview",
           description:

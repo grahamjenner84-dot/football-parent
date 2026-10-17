@@ -1649,3 +1649,19 @@ Why: in place of the held title change above. Both "etc football" and "what does
 Baseline (28 days to 13 Oct): 5,170 impressions, 73 clicks, position 4.8, CTR 1.4%. "etc football" 5.1 (1,105, 0.2%), "emerging talent centre" 7.6 (527), "etc football meaning" 4.2 (340), "what does etc stand for in football" 4.0 (327, 0 clicks), "etc meaning football" 4.3 (250), "what is etc in football" 4.9 (227). AI Overview citation: not cited on either query (16 Oct).
 
 Revert rule: "etc football" or "emerging talent centre" lose more than ~2 places and hold for a week. Recheck the AI Overview citation on both queries around 30 Oct. Watch until ~30 Oct.
+
+## 17 Oct 2026: new article, Wolves Academy and Development Centres (club guide)
+
+Published 17 Oct 2026: `/academy-pathway/wolves-development-centre-guide` (Academy Pathway). Targets "wolves academy" (1,300/mo) with "wolves development centre" and "wolves academy trials" (140/mo between them, tracker row High, club volume recheck 2 Oct). Title "Wolves Academy and Development Centres: A Parent's Guide". Added to the Academy Pathway index and `lib/routes.ts`.
+
+Article commit `4322fd0`. Inbound links the same day, commit `3e2aabe` (additive, no existing text removed):
+- `/academy-pathway/premier-league-development-centres-list`: Wolves entry, "Wolves academy and development centres guide".
+- `/academy-pathway/football-development-centres-near-me`: Wolves entry, "Our guide" line.
+
+Fact-check pass before publish, commit `d7ef441`: development centres corrected to Reception to Year 7 (booking site), prices added (£9 a session, monthly blocks; Soccer Schools £25 a day), APCs now described as trial or invitation (free open trial at Telford College, Years 2-5; the only APC venue listed), unverified coach-qualification line dropped, £10m wording corrected, cost and academy-trials FAQs added. Meta description updated to match: "...What the club's development centres cost and how its Advanced Player Centre trials work."
+
+Related fixes the same day:
+- `/academy-pathway/football-development-centres-near-me`: Wolves entry corrected to run by the club's Football Development team, not the Foundation, and the dead Foundation link (404) replaced with coaching.wolves.co.uk. Commit `19bb493`. Correction, not an SEO lever, but logged since the page has traffic.
+- `/academy-pathway/what-is-eppp`: one additive link in the re-auditing paragraph, "Wolves kept Category One for 2026/27 only on condition of new dressing rooms and classrooms". Commit `fc07b00`. Last change to that page was 2 Oct, so it's off watch.
+
+- `/academy-pathway/aston-villa-development-centre-guide` (18 Oct): one additive link in the Category One paragraph, after "clubs like Brentford, Fulham and Tottenham", anchor "Wolves, who kept it for 2026/27 after a facilities scare". Commit `a067dab`. Added at Graham's request while the page is still on watch from the 9 Oct title change and 10 Oct ExpertQA box, so any movement to ~24 Oct has three candidate causes; an internal link out is the least likely of the three to move it.

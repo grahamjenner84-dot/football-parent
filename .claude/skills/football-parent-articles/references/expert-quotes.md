@@ -482,7 +482,10 @@ used with young players.
 
 Given in session for the West Ham guide, from general development-centre
 experience (no West Ham-specific experience). Live in
-west-ham-player-pathway-guide (1/3).
+west-ham-player-pathway-guide (1/3), full version. Reused in
+wolves-development-centre-guide (2/3, 2026-10-17), trimmed to the two middle
+sentences only ("Development centres seem to be a mixture... more of a
+revenue stream."), so it shares no opening with the West Ham version.
 
 > The main thing I'd do is ask other parents about the pathway and about the
 > centre itself: how many players have progressed through the foundation to
@@ -674,7 +677,7 @@ physio also does maturity assessment.
 below, sent to Chris instead). Full answers published as
 `/parent-guides/chris-robinson-football-scout-interview`
 (`content/parent-guides/chris-robinson-football-scout-interview.mdx`), the
-source of record for any excerpt. Placed 2026-10-10 as `<ExpertQA>` boxes, reuse count 1 each: Q9 (agents) in how-to-find-a-football-agent-for-your-child, Q5 (development centres) in are-football-development-centres-worth-it. Q6 (recruitment ages) in what-age-do-football-academies-recruit. Same day: Q2 split across two pages (closing paragraphs on the formal trial and decision in what-happens-at-academy-trials; opening paragraphs on hit-and-miss one-off trials in football-academy-trials-uk) and Q3 split across two (clips and showcases in football-trials-near-me; play at the highest standard in how-football-clubs-recruit-young-players). Each passage used once; don't reuse a passage on a third page. Also 2026-10-10: Q4 (scout approaches) in full in how-football-scouts-identify-players, and Q1 (control, pass and move) in full in what-do-academy-coaches-look-for. Also 2026-10-10, second uses cut differently so no two boxes match: Q1 without its 'simple game' opening in brentford-development-centre-guide (Q1 now on 2 pages: Graham wants it kept to a couple); Q5 first paragraph only in premier-league-development-centres-list; Q4 card half only in tottenham-development-centres-explained. First uses: Q2 para 3 (several experienced scouts decide who comes in on trial) in aston-villa-development-centre-guide; Q6 para 3 (grassroots/academy gap widens with age) in how-to-join-a-football-academy. Unused so far: Q7 (coming back after release), Q8 (parent behaviour), Q10, Q5 para 1. understanding-academy-release and biggest-football-parent-mistakes already carry Paul Barry and Matt Baxter boxes, so Q7/Q8 were held back there (recommended; Graham went ahead with the scouts and academy coaches pages only). Follow the
+source of record for any excerpt. Placed 2026-10-10 as `<ExpertQA>` boxes, reuse count 1 each: Q9 (agents) in how-to-find-a-football-agent-for-your-child, Q5 (development centres) in are-football-development-centres-worth-it. Q6 (recruitment ages) in what-age-do-football-academies-recruit. Same day: Q2 split across two pages (closing paragraphs on the formal trial and decision in what-happens-at-academy-trials; opening paragraphs on hit-and-miss one-off trials in football-academy-trials-uk) and Q3 split across two (clips and showcases in football-trials-near-me; play at the highest standard in how-football-clubs-recruit-young-players). Each passage used once; don't reuse a passage on a third page. Also 2026-10-10: Q4 (scout approaches) in full in how-football-scouts-identify-players, and Q1 (control, pass and move) in full in what-do-academy-coaches-look-for. Also 2026-10-10, second uses cut differently so no two boxes match: Q1 without its 'simple game' opening in brentford-development-centre-guide (Q1 now on 2 pages: Graham wants it kept to a couple); Q5 first paragraph only in premier-league-development-centres-list; Q4 card half only in tottenham-development-centres-explained. First uses: Q2 para 3 (several experienced scouts decide who comes in on trial) in aston-villa-development-centre-guide; Q6 para 3 (grassroots/academy gap widens with age) in how-to-join-a-football-academy. 2026-10-17: Q10 ("Don't get too excited. There is a long way to go.") in full in wolves-development-centre-guide, first use. Unused so far: Q7 (coming back after release), Q8 (parent behaviour), Q5 para 1. understanding-academy-release and biggest-football-parent-mistakes already carry Paul Barry and Matt Baxter boxes, so Q7/Q8 were held back there (recommended; Graham went ahead with the scouts and academy coaches pages only). Follow the
 reuse rule (show Graham the full Q&A with the excerpt highlighted first).
 Credentials (from his own slide, June 2025): Head of Academy Recruitment,
 Southampton FC, Feb 2024 onwards; ex-Head of Integration Recruitment, Chelsea FC
@@ -1108,6 +1111,23 @@ been through the Trust's PDC or Advanced PDC, or a Trust coach.
    was that communicated to the family?
 4. For girls' families: how does the ETC at the training ground compare with
    the girls' PDC groups?
+
+### wolves-development-centre-guide — TBD, tag: Wolves Football Development Centres / Advanced Player Centres / girls' ETC, first-hand experience
+Drafted: 2026-10-17
+Shipped with two callouts: Graham's "Ask about the pathway up front" note
+(middle two sentences) and Chris Robinson Q10. Graham has no Wolves
+experience himself. No Wolves-specific parent voice yet. Well suited to a
+parent whose child has been invited from a Football Development Centre into
+an Advanced Player Centre (Wolverhampton, Telford or Wombourne), or a Wolves
+Football Development coach.
+1. How did the invitation from the development centre to the Advanced
+   Player Centre come about, and what did the coach tell you about why?
+2. Has anyone from the academy's recruitment staff watched APC sessions or
+   fixtures, as far as you know, and how would a recommendation reach you?
+3. Which APC venue does your child go to, and how does it fit around
+   grassroots training and matches?
+4. For girls' families: how did the register-of-interest window for the
+   Girls Academy and ETC work in practice?
 
 ### Elevation academy interview — Crystal Palace academy coach, tag: academy scouting/coaching, U6-U8 development, 1v1/ball mastery, Crystal Palace insider, private coaching crossover, bio-banding
 Drafted: 2026-08-25. Sent, then chased twice by Graham, no reply.
