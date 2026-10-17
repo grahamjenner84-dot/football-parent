@@ -75,6 +75,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /academy-pathway/watford-development-centre-guide
 - /academy-pathway/academy-life-paul-barry-interview
 - /academy-pathway/aston-villa-development-centre-guide
+- /academy-pathway/wolves-development-centre-guide
 
 ## Academy Trials
 
