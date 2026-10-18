@@ -1687,3 +1687,19 @@ Inbound links, 18 Oct (additive, one new paragraph each, no existing text change
 Fact fixes, 18 Oct:
 - `/girls-football/girls-rtcs-explained` (`85d8e73`): ETC count "around 72-73" corrected to the FA's current 70; "intended to be free from 2025-26" and "the cost is capped" corrected to free now (FA ETC page, £6.8m Premier League funding), with a line on paid foundation programmes sitting below the ETC. Same day as the inbound link above, so two changes on this page today.
 - `/academy-pathway/fulham-fc-development-centre-guide` (`7391aea`): girls' section was missing the Foundation's girls-only Girls Development Centre (ages 8-16, £12 a session, invite-only, three venues). New paragraph added, FAQ answer updated from "Yes" to "Yes, two", and the link to the girls' trials article included in the new paragraph. Live traffic page; last change 6 Oct. Correction, additive, no headings or links removed.
+
+## 18 Oct 2026: Coach App page targets fair playing time app searches; calculator made visible to Google
+
+`/football-parent-coach-app` (`content/landing/main.mdx`), commits `8952367` and `6a38e30`, merged in `3058653`:
+- Title: "Football Parent Coach App: Team Selector & Match Tracker" to "Fair Playing Time App for Grassroots Football | Coach App".
+- Description: "Football Parent's Coach App: build your lineup, track live matches and get fair playing-time rotation for your grassroots football team, all in one place." to "A fair playing time app for grassroots football coaches. Pick your lineup, get a substitution plan for every quarter or half and keep minutes even across the season."
+- H1: "Give every kid fair game time" to "The fair playing time app for grassroots coaches".
+- New section "Fair Playing Time and Substitutions", and FAQ "Is there an app for keeping track of playing time?" (a People Also Ask question on these searches; feeds the FAQPage schema). Additive, nothing removed.
+
+Bundled as one change on Graham's call: the page had 22 impressions and no clicks in 56 days, so there is nothing to attribute separately. Why: not in the top 30 for any of 8 app searches ("equal playing time app", "football substitution app", "fair playing time app" and others; DataForSEO SERPs, 18 Oct), while its title never said playing time, subs or grassroots. Research and plan: `seo-data/exports/fairplaycoach-gap-plan-2026-10-18.md`, `top3-plan-app-clusters-2026-10-18.md`.
+
+Watch to about 1 Nov. The risk is `/coaching/equal-playing-time-in-grassroots-football` (3,691 impressions in the last 28 days, around position 6-7 for "equal playing time"): if it slips on "equal playing time" after this, the new title is the first suspect.
+
+`/coaching/equal-playing-time-calculator`: coach-app commit `39e4ea0` (merged `7239549`). The calculator iframe was served by the app's `index.html`, whose plain `noindex` also stops Google counting framed content as part of the embedding page. It is now served by `game-time-calculator.html` with `noindex, indexifembedded`. Before: page indexed (URL Inspection 18 Oct, last crawl 6 Oct) but 0 impressions since launch on 5 Oct, and not in the top 100 for "playing time calculator", "equal playing time calculator" or "equal game time calculator" (DataForSEO, 18 Oct). After the next crawl, check URL Inspection "View crawled page" shows the calculator. Judge from about 8 Nov.
+
+Same day, no SEO effect: calculator frame height handshake (coach-app `a196f94`, site `3de2ed2`), fixing the bottom of the calculator sometimes being cut off until the page was zoomed.
