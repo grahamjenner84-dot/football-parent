@@ -1731,3 +1731,7 @@ Held links added the same day at Graham's request (18 Oct), one additive sentenc
 - `/academy-pathway/aston-villa-development-centre-guide` (`c5f6d5c`), girls' section. On watch (9 Oct title, 10 Oct ExpertQA, 18 Oct Wolves link).
 - `/academy-pathway/west-ham-player-pathway-guide` (`79ede6d`), girls' tier section.
 Tracker: girls-academy-trials-by-club and how-girls-football-works set to published.
+
+- `/coaching/best-grassroots-football-apps` (18 Oct, later the same day): FAQ question "Is there an app for keeping track of playing time?" reworded to "Which app is best for tracking playing time?", answer unchanged, so it no longer duplicates the FAQ added to `/football-parent-coach-app` today. Commit `f986dbd`. Third change to this page today.
+
+Roundup comparison (18 Oct, `seo-data/exports/coaching-apps-roundup-compare-2026-10-18.json`): the pages holding the top 3 for the plain "football coaching app(s)" searches are no stronger on-page (the-football-hub.org blog post with no meta description or section headings, GoRout on American football, First Whistle's own app list at 736 words, GoalStation on player training apps). No on-page change made; the gap reads as authority and links, so the roundup and the calculator are the targets for the next link-building run.
