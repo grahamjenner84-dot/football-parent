@@ -1714,3 +1714,10 @@ From `seo-data/exports/top3-plan-app-clusters-2026-10-18.md`. One edit per page,
 - `/parent-guides/how-to-become-a-football-coach`: bracketed clause in the session-planning sentence linking "[best football coaching apps for grassroots coaches]" to `/coaching/best-grassroots-football-apps` (4 internal links pointing to it before this). Commit `6113be9`.
 
 Held until their watch periods end: the apps roundup's link to the stats page (after about 25 Oct), and the anchor changes on the apps roundup and the equal playing time article (from 1 Nov).
+
+## 18 Oct 2026: held links brought forward (Graham's call)
+
+Graham asked for these not to wait for their watch periods.
+
+- `/coaching/best-grassroots-football-apps`: sentence added to the Coach App all-rounder paragraph linking "[best football stats apps]" to `/parent-guides/best-football-stats-apps`. Commit `76f2c08`. Also on this page: the "Best for Equal Playing Time" pick's "Coach App" link becomes "[equal playing time app]". Anchor only. Commit `58f7199`. The page was last edited 11 Oct, so it is still inside that watch period, and now has two more changes. Any movement to about 1 Nov has three candidate causes.
+- `/coaching/equal-playing-time-in-grassroots-football`: "the [Coach App]" link becomes "the Coach App, our [grassroots football substitution app]". Anchor only. Commit `ed79a0c`. Live traffic (3,691 impressions in the last 28 days). Same day as the coach app page's title change to "Fair Playing Time App for Grassroots Football | Coach App", so if this page slips on "equal playing time", the two can't be separated. Revert the coach app title first, since it is the bigger change.
