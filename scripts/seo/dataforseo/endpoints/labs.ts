@@ -213,10 +213,19 @@ export function competitorsDomain(
 // the same endpoint serves two different freshness purposes.
 export function rankedKeywords(
   target: string,
-  opts: LabsCommonOptions & { cacheFamily?: "keyword_discovery" | "competitor_rankings" }
+  opts: LabsCommonOptions & {
+    cacheFamily?: "keyword_discovery" | "competitor_rankings";
+    // Optional, and only sent when given, so existing callers keep the same
+    // request body and therefore the same cache hash.
+    filters?: unknown[];
+    orderBy?: string[];
+  }
 ): Promise<DataForSeoResult> {
   const endpoint = "dataforseo_labs/google/ranked_keywords/live";
-  const body = baseBody(opts, { target });
+  const extra: Record<string, unknown> = { target };
+  if (opts.filters) extra.filters = opts.filters;
+  if (opts.orderBy) extra.order_by = opts.orderBy;
+  const body = baseBody(opts, extra);
   return dataForSeoRequest({
     workflow: opts.workflow,
     apiFamily: API_FAMILY,

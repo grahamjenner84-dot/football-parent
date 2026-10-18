@@ -41,13 +41,19 @@ export function googleAdsSearchVolume(keywords: string[], opts: KeywordsDataOpti
 // Google Trends interest-over-time + rising related queries for up to 5
 // comparable terms (batch, per the task brief's "batch comparable terms
 // where supported" - do not compare unrelated terms just to save requests).
-export function googleTrendsExplore(keywords: string[], opts: KeywordsDataOptions): Promise<DataForSeoResult> {
+export function googleTrendsExplore(
+  keywords: string[],
+  // timeRange is DataForSEO's time_range (e.g. "past_5_years"); only sent
+  // when given, so existing callers keep the same body and cache hash.
+  opts: KeywordsDataOptions & { timeRange?: string; pollAttempts?: number; pollDelayMs?: number; forceRefresh?: boolean }
+): Promise<DataForSeoResult> {
   const endpoint = "keywords_data/google_trends/explore";
-  const body = {
+  const body: Record<string, unknown> = {
     keywords,
     location_code: opts.locationCode ?? DEFAULT_LOCATION_CODE,
     language_code: opts.languageCode ?? DEFAULT_LANGUAGE_CODE,
   };
+  if (opts.timeRange) body.time_range = opts.timeRange;
   return dataForSeoTaskRequest({
     workflow: opts.workflow,
     apiFamily: API_FAMILY,
@@ -59,7 +65,10 @@ export function googleTrendsExplore(keywords: string[], opts: KeywordsDataOption
     environment: opts.environment,
     confirmLive: opts.confirmLive,
     seedTerms: keywords,
-    locationCode: body.location_code,
-    languageCode: body.language_code,
+    locationCode: body.location_code as number,
+    languageCode: body.language_code as string,
+    pollAttempts: opts.pollAttempts,
+    pollDelayMs: opts.pollDelayMs,
+    forceRefresh: opts.forceRefresh,
   });
 }

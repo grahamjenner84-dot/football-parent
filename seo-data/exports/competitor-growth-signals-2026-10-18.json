@@ -1,0 +1,293 @@
+{
+  "SubTime (google)": {
+    "error": null,
+    "reviews": 220,
+    "avgRating": 4.38,
+    "byYear": {
+      "2017": 2,
+      "2018": 20,
+      "2019": 43,
+      "2020": 28,
+      "2021": 22,
+      "2022": 32,
+      "2023": 21,
+      "2024": 18,
+      "2025": 18,
+      "2026": 16
+    },
+    "signals": {
+      "soccer (US wording)": 31,
+      "football (UK wording)": 6,
+      "recommended by someone": 2,
+      "parents": 4,
+      "search / store": 3
+    },
+    "quotes": [
+      "[recommended by someone] Every coach, assistant coach, and team manager needs this app! I paid for the team subscription which gives me access to 60 minute games and the ability to share live game statistics with family and friends that want to ",
+      "[recommended by someone] Update: didn't realise there was an upload button, that shares between users! great app. when I share team with another Coach appear the History going forward is not merged between us. that world be even more ace.",
+      "[search / store] Very useful app, it has had a few development issues. The developers are really on it though and quick to respond with help or to correct issues. I've found it brilliant for tracking time as we have to adhere to a 50% pl",
+      "[search / store] Being a couch of my daughter's soccer team. I am using it weekly. It will be great if it can support uploading Google doc of players directly",
+      "[search / store] Hi guys.  Fantastic App. Just need the ability to export the game time to another document or save it for review later.  Currently doing screen shots but working it into Google docs or Excel for rolling average over the "
+    ]
+  },
+  "SubTime (apple)": {
+    "error": null,
+    "reviews": 14,
+    "avgRating": 4.71,
+    "byYear": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 3,
+      "2021": 2,
+      "2022": 1,
+      "2023": 2,
+      "2025": 2,
+      "2026": 2
+    },
+    "signals": {
+      "parents": 1,
+      "football (UK wording)": 3,
+      "recommended by someone": 1
+    },
+    "quotes": [
+      "[recommended by someone] Please make it iPad friendly! Great app would be amazing on iPad!"
+    ]
+  },
+  "TeamStats (google)": {
+    "error": null,
+    "reviews": 77,
+    "avgRating": 4.69,
+    "byYear": {
+      "2017": 1,
+      "2018": 10,
+      "2019": 10,
+      "2020": 1,
+      "2021": 7,
+      "2022": 2,
+      "2023": 5,
+      "2024": 5,
+      "2025": 17,
+      "2026": 19
+    },
+    "signals": {
+      "football (UK wording)": 11,
+      "parents": 6,
+      "soccer (US wording)": 2,
+      "club or league uses it": 2,
+      "recommended by someone": 3,
+      "search / store": 2
+    },
+    "quotes": [
+      "[club or league uses it] great app if you are involved with grassroots football. my club has used this app for the past couple of seasons and the AI generated match report is very much worth paying for.",
+      "[recommended by someone] I have bee using Teamstats for about 3 years, I have used it as a manager(Admin) and as a Parent and both experiences have been hassle free and very user friendly. It's so adaptable and easy to pick up, as a dyslexic per",
+      "[recommended by someone] Been using the app for the 21-22 and really impressed. The support from the guys at Teamstats has been excellent and the data produced is excellent. Highly recommend this platform to provide a reliable and user friendly ",
+      "[search / store] I manage two teams and found this app so great to use and I can switch easily between both teams. Being able to see who is attending trainings and available for matches was excellent, and doing the line up for them to se",
+      "[search / store] I found this app really useful for running my team. Being able to see who was attending training and available for matches was excellent. Players being able to pay via the app again was great. I understand that additiona",
+      "[club or league uses it] Loved using this app to organise my squads' payments. So easy to navigate not just for subs but also match reports, live feeds to the league websites and stats.  Will use again in future should it be required!"
+    ]
+  },
+  "TeamStats (apple)": {
+    "error": null,
+    "reviews": 41,
+    "avgRating": 4.93,
+    "byYear": {
+      "2018": 4,
+      "2019": 2,
+      "2020": 6,
+      "2021": 2,
+      "2023": 4,
+      "2024": 2,
+      "2025": 11,
+      "2026": 10
+    },
+    "signals": {
+      "parents": 13,
+      "football (UK wording)": 13,
+      "recommended by someone": 3,
+      "club or league uses it": 2
+    },
+    "quotes": [
+      "[recommended by someone] Team favourite I’ve used this app for many years now due to its simplistic interface. I can see over the years all my individual player stats, split by league, cup and friendly games. Brilliant app and would recommend. I",
+      "[recommended by someone] Excellent app As a coach at a young academy this app has been a massive help. Any coach wanting to keep a closer eye on player minutes, on keeping a good track of assists and goals and attacking attempts should download ",
+      "[club or league uses it] Stats and much more Team Stats has proved invaluable to our club this past season. After looking around for a tool that would help us record goals, assists and more we stumbled across Team Stats. \n\nWhilst the club uses o",
+      "[club or league uses it] Fantastic football team organising and stats app I’m really impressed with TeamStats. I was looking for an app that would help me track some stats for my son’s grassroots football club, primarily to be able to highlight ",
+      "[recommended by someone] Fantastic app and customer support The app to use for anyone looking to record stats, produce match reports, manage finances for your team and more.\n\n-easy to use and looks great\n- all the features you’d want for running"
+    ]
+  },
+  "Centre Circle (google)": {
+    "error": null,
+    "reviews": 41,
+    "avgRating": 3.66,
+    "byYear": {
+      "2022": 1,
+      "2023": 2,
+      "2024": 4,
+      "2025": 11,
+      "2026": 23
+    },
+    "signals": {
+      "county FA / referee": 9,
+      "parents": 1,
+      "search / store": 1
+    },
+    "quotes": [
+      "[county FA / referee] This is the worst app ever do not use ,it locks you out for no reason, and set me up as a ref instead of a perant, use spond it has none of these problems iv used it for years now ,centre circle just got to complicated .",
+      "[county FA / referee] Very good app, much improved on our previous one the County FA used for referee appointments. Very easy and straightforward to use",
+      "[county FA / referee] I ref across several leagues and this app is great to manage my allocations.",
+      "[county FA / referee] is a great tool for aiding referees manages their games. easy to use and navigate",
+      "[county FA / referee] Very good but there's always room for improvement - A problem I've had is that, after a game is \"CONFIRMED\", it cannot be reversed. Subsequently the referee can no longer cover the game & there are only two options - 'Ga",
+      "[county FA / referee] Referee here. I much prefer getting my games allocated by this app, and am glad to have found it when I first started looking for games. A few years on I won't look any further than this app as leagues allocate games to "
+    ]
+  },
+  "Centre Circle (apple)": {
+    "error": null,
+    "reviews": 24,
+    "avgRating": 3.71,
+    "byYear": {
+      "2023": 3,
+      "2024": 1,
+      "2025": 5,
+      "2026": 15
+    },
+    "signals": {
+      "search / store": 1,
+      "county FA / referee": 4,
+      "football (UK wording)": 2,
+      "recommended by someone": 2
+    },
+    "quotes": [
+      "[search / store] Very intuitive A useful app. Easy to search for appointments and updating availability. \nI would like to change colours for league, but not possible.  At least they answered my questions really quickly.",
+      "[county FA / referee] Sussex Referee A superb centralised system that really supports all levels of football.",
+      "[recommended by someone] Good overall Good overall app, pretty self explanatory to use and UI is friendly. A couple of features it should add, being able to set availability for dates with multiple leagues (this has caused leagues to think I was",
+      "[county FA / referee] Super app for referees What a fantastic app to help referees and leagues to organise officials for fixtures.\nEasy to navigate very user friendly",
+      "[recommended by someone] Super app for referees What a fantastic app to help referees and leagues to organise officials for fixtures.\nEasy to navigate very user friendly",
+      "[county FA / referee] Fantastic app This has transformed how we do referee allocations on our league. Super excited to see all the new changes coming for clubs as well. One stop app for all things grass roots"
+    ]
+  },
+  "CoachAny (google)": {
+    "error": null,
+    "reviews": 33,
+    "avgRating": 4.06,
+    "byYear": {
+      "2016": 1,
+      "2017": 4,
+      "2018": 2,
+      "2019": 3,
+      "2021": 2,
+      "2022": 4,
+      "2023": 3,
+      "2024": 3,
+      "2025": 5,
+      "2026": 6
+    },
+    "signals": {
+      "football (UK wording)": 1,
+      "parents": 1,
+      "soccer (US wording)": 1
+    },
+    "quotes": []
+  },
+  "CoachAny (apple)": {
+    "error": null,
+    "reviews": 3,
+    "avgRating": 4,
+    "byYear": {
+      "2019": 2,
+      "2020": 1
+    },
+    "signals": {
+      "recommended by someone": 1,
+      "search / store": 1
+    },
+    "quotes": [
+      "[recommended by someone] Good start but not quit there Found this and gave it a go in a friendly colts rugby game today.\nI was hoping for more, but it didn't really do it for me.\nGood points, easy to add names to the overall squad and then easy ",
+      "[search / store] Good start but not quit there Found this and gave it a go in a friendly colts rugby game today.\nI was hoping for more, but it didn't really do it for me.\nGood points, easy to add names to the overall squad and then easy "
+    ]
+  },
+  "trends UK": {
+    "error": null,
+    "averagesByYear": {
+      "subtime": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "teamstats": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 2,
+        "2024": 0,
+        "2025": 1,
+        "2026": 0
+      },
+      "centre circle app": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      },
+      "coachany": {
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 1,
+        "2025": 1,
+        "2026": 0
+      }
+    },
+    "averages": [
+      0,
+      1,
+      0,
+      1
+    ]
+  },
+  "trends US": {
+    "error": null,
+    "averagesByYear": {
+      "subtime": {
+        "2021": 0,
+        "2022": 2,
+        "2023": 1,
+        "2024": 0,
+        "2025": 2,
+        "2026": 0
+      },
+      "teamstats": {
+        "2021": 0,
+        "2022": 1,
+        "2023": 2,
+        "2024": 0,
+        "2025": 0,
+        "2026": 10
+      },
+      "centre circle app": {
+        "2021": 0,
+        "2022": 2,
+        "2023": 0,
+        "2024": 0,
+        "2025": 2,
+        "2026": 9
+      },
+      "coachany": {
+        "2021": 0,
+        "2022": 1,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0,
+        "2026": 0
+      }
+    },
+    "averages": [
+      1,
+      2,
+      2,
+      0
+    ]
+  }
+}

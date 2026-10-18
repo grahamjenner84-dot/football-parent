@@ -24,17 +24,23 @@ export type SerpOptions = {
   // change (e.g. geo-watchlist-check.ts) - a cache hit there would silently
   // return a stale snapshot and report it as a fresh result.
   forceRefresh?: boolean;
+  // Many AI Overviews load after the page ("asynchronous_ai_overview": true)
+  // and come back empty, citations included, unless the request asks for
+  // them. Costs extra per request; only sent when true, so existing callers
+  // keep the same request body and cache hash.
+  loadAsyncAiOverview?: boolean;
 };
 
 export function googleOrganicSerp(keyword: string, opts: SerpOptions): Promise<DataForSeoResult> {
   const endpoint = "serp/google/organic/live/advanced";
-  const body = {
+  const body: { keyword: string; location_code: number; language_code: string; device: string; depth: number; load_async_ai_overview?: boolean } = {
     keyword,
     location_code: opts.locationCode ?? DEFAULT_LOCATION_CODE,
     language_code: opts.languageCode ?? DEFAULT_LANGUAGE_CODE,
     device: opts.device ?? "desktop",
     depth: opts.depth ?? 100,
   };
+  if (opts.loadAsyncAiOverview) body.load_async_ai_overview = true;
   return dataForSeoRequest({
     workflow: opts.workflow,
     apiFamily: API_FAMILY,

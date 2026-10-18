@@ -1,0 +1,5975 @@
+{
+  "date": "2026-10-18",
+  "cost": 0,
+  "errors": [],
+  "notFound": [
+    "Football Parent Coach App (apple)",
+    "Roll On Football (google)",
+    "SquadSync (google)",
+    "GAFFER (google)",
+    "ClubRoots (google)",
+    "FootballGPT (google)"
+  ],
+  "apps": [
+    {
+      "app": "Football Parent Coach App",
+      "ours": true,
+      "store": "google",
+      "appId": "uk.co.footballparent.coachapp",
+      "title": "Grassroots Football Coach App",
+      "developer": "Football Parent",
+      "installs": "50+",
+      "installsCount": 72,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": "2026-09-28 00:00:00 +00:00",
+      "updated": "2026-10-16 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "SubTime",
+      "ours": false,
+      "store": "google",
+      "appId": "com.gametimes",
+      "title": "SubTime - Sub Timer & Rotation",
+      "developer": "OTDSoft Inc.",
+      "installs": "100,000+",
+      "installsCount": 111194,
+      "rating": 4.6,
+      "ratingVotes": 795,
+      "reviewsCount": 795,
+      "price": 0,
+      "released": "2017-07-24 00:00:00 +00:00",
+      "updated": "2026-09-22 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "SubTime",
+      "ours": false,
+      "store": "apple",
+      "appId": "1248650528",
+      "title": "SubTime - Sub Timer & Rotation",
+      "developer": "OTDSOFT INC.",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.7,
+      "ratingVotes": 223,
+      "reviewsCount": 223,
+      "price": null,
+      "released": null,
+      "updated": "2026-09-24 11:55:32 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "SubNow",
+      "ours": false,
+      "store": "google",
+      "appId": "com.mark.subnow",
+      "title": "SubNow | Ultimate Sub Timer",
+      "developer": "SubNow",
+      "installs": "500+",
+      "installsCount": 760,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": "2026-03-23 00:00:00 +00:00",
+      "updated": "2026-10-13 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "SubNow",
+      "ours": false,
+      "store": "apple",
+      "appId": "1147153746",
+      "title": "SubNow | Ultimate Sub Timer",
+      "developer": "SubNow",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4,
+      "ratingVotes": 19,
+      "reviewsCount": 19,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-15 08:01:50 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Coach Meister",
+      "ours": false,
+      "store": "google",
+      "appId": "com.coachmeister.android",
+      "title": "Coach Meister: Subs Manager",
+      "developer": "COACH MEISTER",
+      "installs": "10+",
+      "installsCount": 36,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": null,
+      "updated": "2026-10-17 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Coach Meister",
+      "ours": false,
+      "store": "apple",
+      "appId": "6502994221",
+      "title": "Coach Meister: Subs Manager",
+      "developer": "COACH MEISTER",
+      "installs": null,
+      "installsCount": null,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-11 19:32:11 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Roll On Football",
+      "ours": false,
+      "store": "apple",
+      "appId": "6816004264",
+      "title": "Roll On Football",
+      "developer": "Peter Taylor",
+      "installs": null,
+      "installsCount": null,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 4.99,
+      "released": null,
+      "updated": null,
+      "categories": null
+    },
+    {
+      "app": "FairPlay FC",
+      "ours": false,
+      "store": "google",
+      "appId": "uk.co.fairplayfc.app",
+      "title": "FairPlay FC",
+      "developer": "JGodwin",
+      "installs": "10+",
+      "installsCount": 29,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": "2026-09-01 00:00:00 +00:00",
+      "updated": "2026-10-09 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "FairPlay FC",
+      "ours": false,
+      "store": "apple",
+      "appId": "6755611235",
+      "title": "FairplayFC",
+      "developer": "James Godwin",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.5,
+      "ratingVotes": 8,
+      "reviewsCount": 8,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-09 19:44:12 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "SquadSync",
+      "ours": false,
+      "store": "apple",
+      "appId": "6803371735",
+      "title": "SquadSync: Football Coach",
+      "developer": "Edward Shaw",
+      "installs": null,
+      "installsCount": null,
+      "rating": 5,
+      "ratingVotes": 6,
+      "reviewsCount": 6,
+      "price": null,
+      "released": null,
+      "updated": null,
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "FTACT",
+      "ours": false,
+      "store": "google",
+      "appId": "com.ftact.app",
+      "title": "FTACT",
+      "developer": "FT Football",
+      "installs": "1,000+",
+      "installsCount": 1233,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": null,
+      "updated": "2026-10-15 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "FTACT",
+      "ours": false,
+      "store": "apple",
+      "appId": "6749849332",
+      "title": "FTACT FT",
+      "developer": "Luke Heald",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.6,
+      "ratingVotes": 30,
+      "reviewsCount": 30,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-16 22:03:04 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "STATZO",
+      "ours": false,
+      "store": "google",
+      "appId": "com.tech.statzo.statzoapp",
+      "title": "STATZO: Grassroots Football",
+      "developer": "STATZO",
+      "installs": "5,000+",
+      "installsCount": 7586,
+      "rating": 5,
+      "ratingVotes": 29,
+      "reviewsCount": 29,
+      "price": 0,
+      "released": "2025-08-21 00:00:00 +00:00",
+      "updated": "2026-10-16 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "STATZO",
+      "ours": false,
+      "store": "apple",
+      "appId": "6670539360",
+      "title": "STATZO: Football Stats Tracker",
+      "developer": "Statzo",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.8,
+      "ratingVotes": 21,
+      "reviewsCount": 21,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-17 14:08:22 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Coach TeamMate",
+      "ours": false,
+      "store": "google",
+      "appId": "com.redahmeid.soccer",
+      "title": "TeamMate",
+      "developer": "The Coaching App Ltd",
+      "installs": "500+",
+      "installsCount": 857,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": "2023-12-22 00:00:00 +00:00",
+      "updated": "2026-10-05 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Coach TeamMate",
+      "ours": false,
+      "store": "apple",
+      "appId": "6473653336",
+      "title": "Coach TeamMate",
+      "developer": "Reda Hmeid",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.4,
+      "ratingVotes": 16,
+      "reviewsCount": 16,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-06 13:26:48 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "CoachAny",
+      "ours": false,
+      "store": "google",
+      "appId": "com.coachany",
+      "title": "CoachAny",
+      "developer": "Stein Inge Morisbak",
+      "installs": "10,000+",
+      "installsCount": 22843,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": "2015-04-19 00:00:00 +00:00",
+      "updated": "2026-07-29 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "CoachAny",
+      "ours": false,
+      "store": "apple",
+      "appId": "987231566",
+      "title": "CoachAny",
+      "developer": "Stein Inge Morisbak",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.3,
+      "ratingVotes": 4,
+      "reviewsCount": 4,
+      "price": null,
+      "released": null,
+      "updated": "2026-08-05 16:26:26 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Match Flow",
+      "ours": false,
+      "store": "google",
+      "appId": "com.craigbutterworth.matchflow",
+      "title": "Match Flow",
+      "developer": "Match Flow Football",
+      "installs": "10+",
+      "installsCount": 16,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": 0,
+      "released": "2026-09-09 00:00:00 +00:00",
+      "updated": "2026-10-04 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Match Flow",
+      "ours": false,
+      "store": "apple",
+      "appId": "6784391434",
+      "title": "Match Flow",
+      "developer": "CRAIG STUART BUTTERWORTH",
+      "installs": null,
+      "installsCount": null,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-06 11:33:09 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "GAFFER",
+      "ours": false,
+      "store": "apple",
+      "appId": "6821197842",
+      "title": "Gaffer: Small-Sided Football",
+      "developer": "Gareth Pearce",
+      "installs": null,
+      "installsCount": null,
+      "rating": 5,
+      "ratingVotes": 4,
+      "reviewsCount": 4,
+      "price": null,
+      "released": null,
+      "updated": null,
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Pytch",
+      "ours": false,
+      "store": "google",
+      "appId": "com.rootsapp.io",
+      "title": "Pytch - Grassroots Football",
+      "developer": "inthenorth Ltd.",
+      "installs": "1,000+",
+      "installsCount": 1721,
+      "rating": 4.6,
+      "ratingVotes": 9,
+      "reviewsCount": 9,
+      "price": 0,
+      "released": "2025-03-04 00:00:00 +00:00",
+      "updated": "2026-10-12 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Pytch",
+      "ours": false,
+      "store": "apple",
+      "appId": "6738351893",
+      "title": "Pytch",
+      "developer": "inthenorth Ltd.",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.1,
+      "ratingVotes": 15,
+      "reviewsCount": 15,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-12 21:28:03 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Centre Circle",
+      "ours": false,
+      "store": "google",
+      "appId": "com.ratech.refsuite",
+      "title": "Centre Circle: Football App",
+      "developer": "Centre Circle",
+      "installs": "10,000+",
+      "installsCount": 20805,
+      "rating": 4.7,
+      "ratingVotes": 218,
+      "reviewsCount": 218,
+      "price": 0,
+      "released": "2019-08-18 00:00:00 +00:00",
+      "updated": "2026-09-30 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "Centre Circle",
+      "ours": false,
+      "store": "apple",
+      "appId": "1465147177",
+      "title": "Centre Circle - Football App",
+      "developer": "RA Technological Solutions",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.7,
+      "ratingVotes": 539,
+      "reviewsCount": 539,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-07 12:08:33 +00:00",
+      "categories": null
+    },
+    {
+      "app": "ClubRoots",
+      "ours": false,
+      "store": "apple",
+      "appId": "6780835251",
+      "title": "ClubRoots",
+      "developer": "Matthew Speller",
+      "installs": null,
+      "installsCount": null,
+      "rating": null,
+      "ratingVotes": null,
+      "reviewsCount": null,
+      "price": null,
+      "released": null,
+      "updated": "2026-10-10 14:30:39 +00:00",
+      "categories": [
+        "Productivity"
+      ]
+    },
+    {
+      "app": "FootballGPT",
+      "ours": false,
+      "store": "apple",
+      "appId": "6757722684",
+      "title": "FootballGPT",
+      "developer": "Kevin Middleton",
+      "installs": null,
+      "installsCount": null,
+      "rating": 1,
+      "ratingVotes": 2,
+      "reviewsCount": 2,
+      "price": null,
+      "released": null,
+      "updated": "2026-02-06 08:26:14 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "TeamStats",
+      "ours": false,
+      "store": "google",
+      "appId": "net.teamstats.app",
+      "title": "TeamStats: Football Management",
+      "developer": "TeamStats",
+      "installs": "50,000+",
+      "installsCount": 58044,
+      "rating": 4.8,
+      "ratingVotes": 165,
+      "reviewsCount": 165,
+      "price": 0,
+      "released": "2017-10-20 00:00:00 +00:00",
+      "updated": "2025-10-18 00:00:00 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    },
+    {
+      "app": "TeamStats",
+      "ours": false,
+      "store": "apple",
+      "appId": "1275644100",
+      "title": "TeamStats - Football Team App",
+      "developer": "Teamstats.net Limited",
+      "installs": null,
+      "installsCount": null,
+      "rating": 4.9,
+      "ratingVotes": 54,
+      "reviewsCount": 54,
+      "price": null,
+      "released": null,
+      "updated": "2025-10-16 18:36:47 +00:00",
+      "categories": [
+        "Sports"
+      ]
+    }
+  ],
+  "storeRanks": [
+    {
+      "store": "google",
+      "keyword": "substitution app",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "com.gametimes",
+          "title": "SubTime - Sub Timer & Rotation",
+          "rating": 4.6,
+          "votes": 795
+        },
+        {
+          "rank": 2,
+          "appId": "com.soccertimeapp",
+          "title": "NextSub Soccer Subs App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 3,
+          "appId": "com.otdsoft.subtimeClub",
+          "title": "SubTime Club Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "app.subschool",
+          "title": "SubSchool",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 5,
+          "appId": "net.easy2coach.exercisesDatabase",
+          "title": "easy2coach - Training",
+          "rating": 3.4,
+          "votes": null
+        },
+        {
+          "rank": 6,
+          "appId": "com.submastery.courses",
+          "title": "SubMastery: Smart Learning App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 7,
+          "appId": "com.agiletrack.totalcoach",
+          "title": "Coach Blitz: Soccer Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "com.subtrack.efbolaji",
+          "title": "SubTrack",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "ten.hcaoc2ysae.www",
+          "title": "easy2coach - Team Manager",
+          "rating": 2.7,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "uk.co.itfc.app",
+          "title": "Ipswich Town Official App",
+          "rating": 4.3,
+          "votes": null
+        }
+      ]
+    },
+    {
+      "store": "apple",
+      "keyword": "substitution app",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "372387251",
+          "title": "Substitutions",
+          "rating": 4.25,
+          "votes": 4
+        },
+        {
+          "rank": 2,
+          "appId": "1468915620",
+          "title": "Substitutions | Diet & Allergy",
+          "rating": 4.28571,
+          "votes": 7
+        },
+        {
+          "rank": 3,
+          "appId": "805834213",
+          "title": "Substitutes",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "1248650528",
+          "title": "SubTime - Sub Timer & Rotation",
+          "rating": 4.71749,
+          "votes": 223
+        },
+        {
+          "rank": 5,
+          "appId": "1313513334",
+          "title": "Football Coach Timer",
+          "rating": 2,
+          "votes": 1
+        },
+        {
+          "rank": 6,
+          "appId": "1147153746",
+          "title": "SubNow | Ultimate Sub Timer",
+          "rating": 4,
+          "votes": 19
+        },
+        {
+          "rank": 7,
+          "appId": "6443649183",
+          "title": "Substitute - Workforce",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "6739991247",
+          "title": "Elimination and Substitution",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "6477780680",
+          "title": "The Hoops Geek | Play Designer",
+          "rating": 5,
+          "votes": 12
+        },
+        {
+          "rank": 10,
+          "appId": "6757622040",
+          "title": "TeamHockey: Hockey Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 11,
+          "appId": "6761838593",
+          "title": "Kickd: Sports Coach App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "6788759733",
+          "title": "The Grassroots Football App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 13,
+          "appId": "319592815",
+          "title": "Smart Chef - Cooking Helper",
+          "rating": 3,
+          "votes": 1
+        },
+        {
+          "rank": 14,
+          "appId": "6736365243",
+          "title": "GameTime Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "6450653830",
+          "title": "NextSub Soccer Subs App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 16,
+          "appId": "6553995199",
+          "title": "InTimer Youth Sports Sub Timer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 17,
+          "appId": "6757949522",
+          "title": "Substitute Now",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 18,
+          "appId": "6753732766",
+          "title": "mise - recipes, simplified",
+          "rating": 3,
+          "votes": 2
+        },
+        {
+          "rank": 19,
+          "appId": "569428005",
+          "title": "EduPage",
+          "rating": 1.6,
+          "votes": 5
+        },
+        {
+          "rank": 20,
+          "appId": "424442630",
+          "title": "kitchenSubs",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 21,
+          "appId": "1630729500",
+          "title": "Day Lewis Pharmacy App",
+          "rating": 2.36458,
+          "votes": 96
+        },
+        {
+          "rank": 22,
+          "appId": "1297082268",
+          "title": "The Cipher",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 23,
+          "appId": "6502994221",
+          "title": "Coach Meister: Subs Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 24,
+          "appId": "1377334813",
+          "title": "Instrukt",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 25,
+          "appId": "6480402991",
+          "title": "AI Homework Solver, Maths App",
+          "rating": 3.4,
+          "votes": 5
+        },
+        {
+          "rank": 26,
+          "appId": "1418984896",
+          "title": "Moves Lite",
+          "rating": 3.92012,
+          "votes": 338
+        },
+        {
+          "rank": 27,
+          "appId": "578264188",
+          "title": "DieSchulApp",
+          "rating": 4.28571,
+          "votes": 14
+        },
+        {
+          "rank": 28,
+          "appId": "6782540188",
+          "title": "MatchMinutes",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 29,
+          "appId": "6470672604",
+          "title": "Touchwood Pharmacy App",
+          "rating": 1,
+          "votes": 6
+        },
+        {
+          "rank": 30,
+          "appId": "1549190465",
+          "title": "Cryptogram - Word Puzzle Game",
+          "rating": 4.21429,
+          "votes": 42
+        },
+        {
+          "rank": 31,
+          "appId": "6473803665",
+          "title": "Anime List: Chizzatto AI",
+          "rating": 4.8,
+          "votes": 10
+        },
+        {
+          "rank": 32,
+          "appId": "6754992672",
+          "title": "Gilbride Pharmacy App",
+          "rating": 4.70526,
+          "votes": 95
+        },
+        {
+          "rank": 33,
+          "appId": "6758862538",
+          "title": "Koora Live",
+          "rating": 4.88,
+          "votes": 25
+        },
+        {
+          "rank": 34,
+          "appId": "1528755301",
+          "title": "Lactose Free Life (Dairy Free)",
+          "rating": 2.66667,
+          "votes": 3
+        },
+        {
+          "rank": 35,
+          "appId": "1373500628",
+          "title": "Fit Foods Coach: Diet Helper",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 36,
+          "appId": "6758715680",
+          "title": "Futgenix",
+          "rating": 4.56522,
+          "votes": 23
+        },
+        {
+          "rank": 37,
+          "appId": "6633426109",
+          "title": "Quris",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 38,
+          "appId": "6758869521",
+          "title": "Soccer Subs",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 39,
+          "appId": "6799438791",
+          "title": "Roll On: Football Subs",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 40,
+          "appId": "6770280599",
+          "title": "Baking Recipes - Bakewell",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 41,
+          "appId": "1564765499",
+          "title": "mPrescribe",
+          "rating": 4.71429,
+          "votes": 14
+        },
+        {
+          "rank": 42,
+          "appId": "1546412142",
+          "title": "Schoolovo",
+          "rating": 4.94545,
+          "votes": 55
+        },
+        {
+          "rank": 43,
+          "appId": "6754262489",
+          "title": "Goulds Chemist",
+          "rating": 4.90164,
+          "votes": 61
+        },
+        {
+          "rank": 44,
+          "appId": "1460464015",
+          "title": "Scolago",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 45,
+          "appId": "894169288",
+          "title": "RegEx Knife",
+          "rating": 3,
+          "votes": 2
+        },
+        {
+          "rank": 46,
+          "appId": "6478384533",
+          "title": "Lansdales Pharmacy",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 47,
+          "appId": "589296925",
+          "title": "The Table Mobile",
+          "rating": 4.93902,
+          "votes": 82
+        },
+        {
+          "rank": 48,
+          "appId": "6746713963",
+          "title": "APPANDTAP",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 49,
+          "appId": "592119245",
+          "title": "Before and After App",
+          "rating": 2.33333,
+          "votes": 3
+        },
+        {
+          "rank": 50,
+          "appId": "6743257911",
+          "title": "Greenchem Pharmacy",
+          "rating": 4.90411,
+          "votes": 146
+        },
+        {
+          "rank": 51,
+          "appId": "6767068987",
+          "title": "FairPlay. Subs, Sorted.",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 52,
+          "appId": "6657973773",
+          "title": "SubPlans",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 53,
+          "appId": "1568351949",
+          "title": "Mote - Read Aloud & Writer",
+          "rating": 5,
+          "votes": 5
+        },
+        {
+          "rank": 54,
+          "appId": "584808082",
+          "title": "200+ Apps in 1 - AppBundle 2",
+          "rating": 4.84706,
+          "votes": 85
+        },
+        {
+          "rank": 55,
+          "appId": "6761046747",
+          "title": "FairSub",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 56,
+          "appId": "6762212024",
+          "title": "Everest Pharmacy App",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 57,
+          "appId": "1666080084",
+          "title": "Translate: Voice & Text",
+          "rating": 3,
+          "votes": 2
+        },
+        {
+          "rank": 58,
+          "appId": "1321278373",
+          "title": "Moment MyJob",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 59,
+          "appId": "6499211500",
+          "title": "Aivi Linguists",
+          "rating": 2.4375,
+          "votes": 16
+        },
+        {
+          "rank": 60,
+          "appId": "1664160080",
+          "title": "MyHealth-Hub",
+          "rating": 2.4,
+          "votes": 20
+        },
+        {
+          "rank": 61,
+          "appId": "1252576748",
+          "title": "RXLive - NHS prescriptions",
+          "rating": 3.52381,
+          "votes": 42
+        },
+        {
+          "rank": 62,
+          "appId": "6554000154",
+          "title": "Renegade Fantasy",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 63,
+          "appId": "959075009",
+          "title": "webPOISONCONTROL® Poison App",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 64,
+          "appId": "557785741",
+          "title": "SubAlert for Frontline Ed",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 65,
+          "appId": "6758929918",
+          "title": "FairPlay Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 66,
+          "appId": "6763108273",
+          "title": "HOLY NOTES Ai",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 67,
+          "appId": "1615019610",
+          "title": "Ontex to you",
+          "rating": 1.88889,
+          "votes": 9
+        },
+        {
+          "rank": 68,
+          "appId": "6755035288",
+          "title": "Bus Stop Finder - Bus Compass",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 69,
+          "appId": "6747688047",
+          "title": "Everetts Pharmacy",
+          "rating": 4.7037,
+          "votes": 27
+        },
+        {
+          "rank": 70,
+          "appId": "6479305794",
+          "title": "Chana Health",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 71,
+          "appId": "6739949388",
+          "title": "Achromator",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 72,
+          "appId": "6767592931",
+          "title": "Man On - Find Players",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 73,
+          "appId": "1504056632",
+          "title": "Orders Made Simple",
+          "rating": 4.5,
+          "votes": 8
+        },
+        {
+          "rank": 74,
+          "appId": "6751407211",
+          "title": "Watterson Pharmacy",
+          "rating": 4.76923,
+          "votes": 39
+        },
+        {
+          "rank": 75,
+          "appId": "1567389036",
+          "title": "Charac",
+          "rating": 4.23529,
+          "votes": 17
+        },
+        {
+          "rank": 76,
+          "appId": "6478384593",
+          "title": "Westbury Chemist",
+          "rating": 4.73332,
+          "votes": 15
+        },
+        {
+          "rank": 77,
+          "appId": "739922591",
+          "title": "EasyDil",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 78,
+          "appId": "6756587246",
+          "title": "Cross Chemist",
+          "rating": 5,
+          "votes": 6
+        },
+        {
+          "rank": 79,
+          "appId": "970293978",
+          "title": "ReadySub",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 80,
+          "appId": "6755482336",
+          "title": "Leyton Pharmacy",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 81,
+          "appId": "1230946730",
+          "title": "Filshill Wholesale",
+          "rating": 4.28571,
+          "votes": 7
+        },
+        {
+          "rank": 82,
+          "appId": "1631505102",
+          "title": "Mili App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 83,
+          "appId": "371354978",
+          "title": "Converter Plus [paid]",
+          "rating": 4.22222,
+          "votes": 18
+        },
+        {
+          "rank": 84,
+          "appId": "6457414147",
+          "title": "Jhoots Pharmacy App",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 85,
+          "appId": "6449703615",
+          "title": "Hodgson Pharmacy",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 86,
+          "appId": "917515055",
+          "title": "FreshFoodHub",
+          "rating": 4.30769,
+          "votes": 13
+        },
+        {
+          "rank": 87,
+          "appId": "6772992573",
+          "title": "GameTime: Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 88,
+          "appId": "6760947117",
+          "title": "Forked Recipes",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 89,
+          "appId": "6450690895",
+          "title": "Werrington Pharmacy App",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 90,
+          "appId": "6450690572",
+          "title": "Pinxton Pharmacy App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 91,
+          "appId": "6744160183",
+          "title": "Newgrove",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 92,
+          "appId": "6755237993",
+          "title": "Click2Pharmacy Rx",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 93,
+          "appId": "1433888754",
+          "title": "Hickey’s Pharmacy App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 94,
+          "appId": "6754321127",
+          "title": "Chase and Headley Pharmacies",
+          "rating": 4.66667,
+          "votes": 3
+        },
+        {
+          "rank": 95,
+          "appId": "6483359200",
+          "title": "SquadPro",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 96,
+          "appId": "6748021631",
+          "title": "Ladywell Pharmacy",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 97,
+          "appId": "6812156748",
+          "title": "Matchday Call",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 98,
+          "appId": "432769116",
+          "title": "Kitchen Buddy",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 99,
+          "appId": "1615670424",
+          "title": "intelli.coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 100,
+          "appId": "6475569859",
+          "title": "Supersub - Your teammanager",
+          "rating": null,
+          "votes": null
+        }
+      ]
+    },
+    {
+      "store": "google",
+      "keyword": "playing time",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "pro.cashtree",
+          "title": "PLAYTIME Rewards - Make Money",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 2,
+          "appId": "com.pathea.mtap",
+          "title": "My Time at Portia",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 3,
+          "appId": "com.gametimes",
+          "title": "SubTime - Sub Timer & Rotation",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "com.MobEntertainment.PoppyPlaytimeChapter3",
+          "title": "Poppy Playtime Chapter 3",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 5,
+          "appId": "com.ttrockstars.app",
+          "title": "Times Tables Rock Stars",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 6,
+          "appId": "com.timesnow.timesplay.android_tv",
+          "title": "Times Play",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 7,
+          "appId": "com.mobentertainment.PoppyPlaytimeChapter4",
+          "title": "Poppy Playtime Chapter 4",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "com.MOBGames.PoppyMobileChap1",
+          "title": "Poppy Playtime Chapter 1",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "com.money.time",
+          "title": "MoneyTime - Play & Earn Money",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "com.buildwithstars.playtime",
+          "title": "PlayTime",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 11,
+          "appId": "com.bestplay.app",
+          "title": "BestPlay: Play Games & Earn",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "com.appimpulse.timestation",
+          "title": "TimeStation",
+          "rating": 3.9,
+          "votes": null
+        },
+        {
+          "rank": 13,
+          "appId": "co.timesquared.timetracker",
+          "title": "Time Clock: Easy Tracker",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 14,
+          "appId": "com.onemt.and.shen",
+          "title": "Attack on Time:Kaisen of girls",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "com.justplay.app",
+          "title": "JustPlay: Earn Money or Donate",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 16,
+          "appId": "com.MojoGames.EraEvolution",
+          "title": "Timeline Up",
+          "rating": 3.8,
+          "votes": null
+        },
+        {
+          "rank": 17,
+          "appId": "com.JindoBlu.FourPlayers",
+          "title": "1 2 3 4 Player Games - Offline",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 18,
+          "appId": "jp.konami.pesam",
+          "title": "eFootball™",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 19,
+          "appId": "com.igg.android.dressuptimeprincess",
+          "title": "Time Princess: Pearl Girl",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 20,
+          "appId": "com.mobile.legends",
+          "title": "Mobile Legends: Bang Bang",
+          "rating": 3.9,
+          "votes": null
+        },
+        {
+          "rank": 21,
+          "appId": "com.nianticlabs.pokemongo",
+          "title": "Pokémon GO",
+          "rating": 3.6,
+          "votes": null
+        },
+        {
+          "rank": 22,
+          "appId": "com.firsttouchgames.dls7",
+          "title": "Dream League Soccer 2026",
+          "rating": 4.4,
+          "votes": null
+        },
+        {
+          "rank": 23,
+          "appId": "com.ea.gp.fifamobile",
+          "title": "EA SPORTS FC Soccer Mobile 27",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 24,
+          "appId": "com.roblox.client",
+          "title": "Roblox",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 25,
+          "appId": "com.snapbreak.timelie",
+          "title": "Timelie",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 26,
+          "appId": "com.strava",
+          "title": "Strava: Run, Bike, Walk",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 27,
+          "appId": "com.outfit7.talkingtomtimerush",
+          "title": "Talking Tom Time Rush",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 28,
+          "appId": "com.miniclip.eightballpool",
+          "title": "8 Ball Pool",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 29,
+          "appId": "com.dts.freefiremax",
+          "title": "Free Fire MAX x NARUTO",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 30,
+          "appId": "com.winnersclub.empire88slots",
+          "title": "Lucky Time Slots Casino Games",
+          "rating": 4.6,
+          "votes": null
+        }
+      ]
+    },
+    {
+      "store": "apple",
+      "keyword": "playing time",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "382745080",
+          "title": "Playing Time",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 2,
+          "appId": "6758028778",
+          "title": "Soccer Playing Time Tracker",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 3,
+          "appId": "6773165169",
+          "title": "VeloPlay: Game Time Tracker",
+          "rating": 4.89286,
+          "votes": 28
+        },
+        {
+          "rank": 4,
+          "appId": "6472632116",
+          "title": "YoYa Time: Build, Share & Play",
+          "rating": 4.53716,
+          "votes": 1009
+        },
+        {
+          "rank": 5,
+          "appId": "6744836650",
+          "title": "PlayBall - Equal Playing Time",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 6,
+          "appId": "1440440391",
+          "title": "Player Timing",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 7,
+          "appId": "284882215",
+          "title": "Facebook",
+          "rating": 4.52119,
+          "votes": 3261453
+        },
+        {
+          "rank": 8,
+          "appId": "310633997",
+          "title": "WhatsApp Messenger",
+          "rating": 4.70319,
+          "votes": 4213127
+        },
+        {
+          "rank": 9,
+          "appId": "1506777555",
+          "title": "Times Radio - Listen Live",
+          "rating": 4.65109,
+          "votes": 15018
+        },
+        {
+          "rank": 10,
+          "appId": "1113153706",
+          "title": "Microsoft Teams",
+          "rating": 4.66177,
+          "votes": 755888
+        },
+        {
+          "rank": 11,
+          "appId": "585027354",
+          "title": "Google Maps",
+          "rating": 4.66033,
+          "votes": 984002
+        },
+        {
+          "rank": 12,
+          "appId": "544007664",
+          "title": "YouTube",
+          "rating": 4.63096,
+          "votes": 6238422
+        },
+        {
+          "rank": 13,
+          "appId": "1491129492",
+          "title": "Baseball Clash: Real-time game",
+          "rating": 4.59159,
+          "votes": 1523
+        },
+        {
+          "rank": 14,
+          "appId": "324684580",
+          "title": "Spotify: Music and Podcasts",
+          "rating": 4.73733,
+          "votes": 7021314
+        },
+        {
+          "rank": 15,
+          "appId": "481607382",
+          "title": "MakeTime2Play",
+          "rating": 3.65854,
+          "votes": 41
+        },
+        {
+          "rank": 16,
+          "appId": "389801252",
+          "title": "Instagram",
+          "rating": 4.70048,
+          "votes": 4221822
+        },
+        {
+          "rank": 17,
+          "appId": "414478124",
+          "title": "WeChat",
+          "rating": 3.89054,
+          "votes": 7939
+        },
+        {
+          "rank": 18,
+          "appId": "410896080",
+          "title": "PlayStation App",
+          "rating": 3.9996,
+          "votes": 12427
+        },
+        {
+          "rank": 19,
+          "appId": "323229106",
+          "title": "Waze Navigation & Live Traffic",
+          "rating": 4.77357,
+          "votes": 164624
+        },
+        {
+          "rank": 20,
+          "appId": "951937596",
+          "title": "Microsoft Outlook",
+          "rating": 4.73123,
+          "votes": 1971643
+        },
+        {
+          "rank": 21,
+          "appId": "1096918571",
+          "title": "Google Meet",
+          "rating": 4.71572,
+          "votes": 67450
+        },
+        {
+          "rank": 22,
+          "appId": "1131342792",
+          "title": "Uber - Driver: Drive & Deliver",
+          "rating": 4.26715,
+          "votes": 54037
+        },
+        {
+          "rank": 23,
+          "appId": "284862083",
+          "title": "NYTimes: Breaking World News",
+          "rating": 4.74364,
+          "votes": 14250
+        },
+        {
+          "rank": 24,
+          "appId": "553834731",
+          "title": "Candy Crush Saga",
+          "rating": 4.67135,
+          "votes": 486798
+        },
+        {
+          "rank": 25,
+          "appId": "525463029",
+          "title": "Apple Podcasts",
+          "rating": 4.82235,
+          "votes": 217480
+        },
+        {
+          "rank": 26,
+          "appId": "6756040831",
+          "title": "Playtime – Play & Create Games",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 27,
+          "appId": "447188370",
+          "title": "Snapchat: Chat with friends",
+          "rating": 4.51408,
+          "votes": 886555
+        },
+        {
+          "rank": 28,
+          "appId": "363590051",
+          "title": "Netflix",
+          "rating": 4.72414,
+          "votes": 893468
+        },
+        {
+          "rank": 29,
+          "appId": "1017492454",
+          "title": "YouTube Music",
+          "rating": 4.6486,
+          "votes": 96163
+        },
+        {
+          "rank": 30,
+          "appId": "686449807",
+          "title": "Telegram Messenger",
+          "rating": 3.63808,
+          "votes": 17349
+        },
+        {
+          "rank": 31,
+          "appId": "307569751",
+          "title": "NYT Games: Wordle & Crossword",
+          "rating": 4.59134,
+          "votes": 8589
+        },
+        {
+          "rank": 32,
+          "appId": "1613518443",
+          "title": "Battery Low - Fun Game",
+          "rating": 4.67827,
+          "votes": 5315
+        },
+        {
+          "rank": 33,
+          "appId": "510855668",
+          "title": "Amazon Music: Songs & Podcasts",
+          "rating": 4.6329,
+          "votes": 478844
+        },
+        {
+          "rank": 34,
+          "appId": "1446075923",
+          "title": "Disney+",
+          "rating": 4.69102,
+          "votes": 318893
+        },
+        {
+          "rank": 35,
+          "appId": "889955088",
+          "title": "Old Time Radio Streamer",
+          "rating": 3.73913,
+          "votes": 23
+        },
+        {
+          "rank": 36,
+          "appId": "422689480",
+          "title": "Gmail - Email by Google",
+          "rating": 4.66082,
+          "votes": 220829
+        },
+        {
+          "rank": 37,
+          "appId": "364709193",
+          "title": "Apple Books",
+          "rating": 4.48395,
+          "votes": 14983
+        },
+        {
+          "rank": 38,
+          "appId": "1115101477",
+          "title": "SmartLife: Smart Living",
+          "rating": 4.66749,
+          "votes": 62059
+        },
+        {
+          "rank": 39,
+          "appId": "835599320",
+          "title": "TikTok - Videos, Music & LIVE",
+          "rating": 4.7184,
+          "votes": 2276305
+        },
+        {
+          "rank": 40,
+          "appId": "1523627747",
+          "title": "Teacher Simulator: Study Time!",
+          "rating": 4.60987,
+          "votes": 123580
+        },
+        {
+          "rank": 41,
+          "appId": "1491074310",
+          "title": "Tetris®",
+          "rating": 4.42218,
+          "votes": 47708
+        },
+        {
+          "rank": 42,
+          "appId": "564079155",
+          "title": "Golf Star™",
+          "rating": 3.29642,
+          "votes": 307
+        },
+        {
+          "rank": 43,
+          "appId": "968323442",
+          "title": "What time is it? [U-F]",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 44,
+          "appId": "6760257481",
+          "title": "Clock Play: Learn to Tell Time",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 45,
+          "appId": "1259949354",
+          "title": "Offline Music Player",
+          "rating": 4.32931,
+          "votes": 10358
+        },
+        {
+          "rank": 46,
+          "appId": "985746746",
+          "title": "Discord – Talk, Play, Hang Out",
+          "rating": 4.6433,
+          "votes": 407496
+        },
+        {
+          "rank": 47,
+          "appId": "1340841589",
+          "title": "Numpuz: Cube Puzzle Time Games",
+          "rating": 4.62577,
+          "votes": 13604
+        },
+        {
+          "rank": 48,
+          "appId": "545519333",
+          "title": "Amazon Prime Video",
+          "rating": 4.71845,
+          "votes": 445379
+        },
+        {
+          "rank": 49,
+          "appId": "1640653011",
+          "title": "Mico - Widget & Live Wallpaper",
+          "rating": 4.64958,
+          "votes": 7063
+        },
+        {
+          "rank": 50,
+          "appId": "546505307",
+          "title": "Zoom Workplace",
+          "rating": 4.67411,
+          "votes": 421599
+        },
+        {
+          "rank": 51,
+          "appId": "6793892368",
+          "title": "途播-APTV播放器",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 52,
+          "appId": "454638411",
+          "title": "Messenger",
+          "rating": 4.64975,
+          "votes": 1373752
+        },
+        {
+          "rank": 53,
+          "appId": "586447913",
+          "title": "Microsoft Word",
+          "rating": 4.64002,
+          "votes": 788867
+        },
+        {
+          "rank": 54,
+          "appId": "1631584032",
+          "title": "PLAYFUL REWARDS: Earn Rewards",
+          "rating": 4.48461,
+          "votes": 10464
+        },
+        {
+          "rank": 55,
+          "appId": "6615086509",
+          "title": "NYT Crossplay: Word Games",
+          "rating": 4.81832,
+          "votes": 16183
+        },
+        {
+          "rank": 56,
+          "appId": "1617391485",
+          "title": "Block Blast!",
+          "rating": 4.84962,
+          "votes": 354190
+        },
+        {
+          "rank": 57,
+          "appId": "1587457403",
+          "title": "Youtify - Music & Playlists",
+          "rating": 4.50645,
+          "votes": 7987
+        },
+        {
+          "rank": 58,
+          "appId": "1094591345",
+          "title": "Pokémon GO",
+          "rating": 4.10249,
+          "votes": 96389
+        },
+        {
+          "rank": 59,
+          "appId": "520502858",
+          "title": "myTuner Radio Player - Live FM",
+          "rating": 4.7522,
+          "votes": 42195
+        },
+        {
+          "rank": 60,
+          "appId": "1641486558",
+          "title": "Temu: Shop Like a Billionaire",
+          "rating": 4.7009,
+          "votes": 394540
+        },
+        {
+          "rank": 61,
+          "appId": "6748776755",
+          "title": "PlayTime: Have Fun!",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 62,
+          "appId": "890740165",
+          "title": "Piano - Play Unlimited Songs",
+          "rating": 4.65163,
+          "votes": 40896
+        },
+        {
+          "rank": 63,
+          "appId": "6760214927",
+          "title": "Niyat: Quran & Prayer Times",
+          "rating": 4.85074,
+          "votes": 67
+        },
+        {
+          "rank": 64,
+          "appId": "333903271",
+          "title": "X",
+          "rating": 4.55941,
+          "votes": 1464574
+        },
+        {
+          "rank": 65,
+          "appId": "488575683",
+          "title": "FotMob - Football Live Scores",
+          "rating": 4.92387,
+          "votes": 59643
+        },
+        {
+          "rank": 66,
+          "appId": "6761760135",
+          "title": "Meowdoku!",
+          "rating": 4.76506,
+          "votes": 32447
+        },
+        {
+          "rank": 67,
+          "appId": "6800211040",
+          "title": "CarTV - M3U IPTV Player & Cast",
+          "rating": 4.59127,
+          "votes": 252
+        },
+        {
+          "rank": 68,
+          "appId": "1491328118",
+          "title": "Johnny Trigger - Shooting Game",
+          "rating": 4.76053,
+          "votes": 93394
+        },
+        {
+          "rank": 69,
+          "appId": "1052879175",
+          "title": "Brave Browser & Private Web",
+          "rating": 4.74216,
+          "votes": 74336
+        },
+        {
+          "rank": 70,
+          "appId": "1181028777",
+          "title": "Flip Clock:Digital Desk Widget",
+          "rating": 4.61055,
+          "votes": 17114
+        },
+        {
+          "rank": 71,
+          "appId": "309735670",
+          "title": "Indeed Job Search",
+          "rating": 4.6944,
+          "votes": 378306
+        },
+        {
+          "rank": 72,
+          "appId": "1568245971",
+          "title": "Count Masters: Crowd Runner 3D",
+          "rating": 4.48693,
+          "votes": 88617
+        },
+        {
+          "rank": 73,
+          "appId": "909319292",
+          "title": "Google Calendar: Get Organised",
+          "rating": 4.48478,
+          "votes": 12385
+        },
+        {
+          "rank": 74,
+          "appId": "368677368",
+          "title": "Uber: Rides, eats, and more",
+          "rating": 4.8669,
+          "votes": 1927780
+        },
+        {
+          "rank": 75,
+          "appId": "495369748",
+          "title": "Steam Mobile",
+          "rating": 2.5064,
+          "votes": 1485
+        },
+        {
+          "rank": 76,
+          "appId": "983156458",
+          "title": "Microsoft Authenticator",
+          "rating": 4.60435,
+          "votes": 171414
+        },
+        {
+          "rank": 77,
+          "appId": "572395608",
+          "title": "Temple Run 2",
+          "rating": 4.49265,
+          "votes": 69798
+        },
+        {
+          "rank": 78,
+          "appId": "6446788829",
+          "title": "Apple Sports",
+          "rating": 4.54237,
+          "votes": 10893
+        },
+        {
+          "rank": 79,
+          "appId": "429047995",
+          "title": "Pinterest: Lifestyle Ideas",
+          "rating": 4.72565,
+          "votes": 615922
+        },
+        {
+          "rank": 80,
+          "appId": "1091944550",
+          "title": "slither.io",
+          "rating": 3.79888,
+          "votes": 537
+        },
+        {
+          "rank": 81,
+          "appId": "577586159",
+          "title": "Yahoo Mail - Organised Email",
+          "rating": 4.67034,
+          "votes": 543723
+        },
+        {
+          "rank": 82,
+          "appId": "503451073",
+          "title": "Alibaba.com B2B Trade App",
+          "rating": 4.62915,
+          "votes": 12849
+        },
+        {
+          "rank": 83,
+          "appId": "1550945606",
+          "title": "Soccer Superstar - Football",
+          "rating": 4.68545,
+          "votes": 93584
+        },
+        {
+          "rank": 84,
+          "appId": "6451431247",
+          "title": "Dola: Smart AI Assistant",
+          "rating": 4.60315,
+          "votes": 32826
+        },
+        {
+          "rank": 85,
+          "appId": "680819774",
+          "title": "Google Home",
+          "rating": 4.321,
+          "votes": 100516
+        },
+        {
+          "rank": 86,
+          "appId": "834465911",
+          "title": "H&M",
+          "rating": 4.83549,
+          "votes": 255181
+        },
+        {
+          "rank": 87,
+          "appId": "408709785",
+          "title": "GarageBand",
+          "rating": 4.03223,
+          "votes": 21840
+        },
+        {
+          "rank": 88,
+          "appId": "414706506",
+          "title": "Google Translate",
+          "rating": 4.18121,
+          "votes": 8929
+        },
+        {
+          "rank": 89,
+          "appId": "384830320",
+          "title": "Life360: Family Safety & GPS",
+          "rating": 4.79577,
+          "votes": 217375
+        },
+        {
+          "rank": 90,
+          "appId": "342898717",
+          "title": "RingGo: Mobile Car Parking App",
+          "rating": 4.76755,
+          "votes": 649220
+        },
+        {
+          "rank": 91,
+          "appId": "563198052",
+          "title": "Telling Time - It's Easy",
+          "rating": 4,
+          "votes": 1
+        },
+        {
+          "rank": 92,
+          "appId": "477537958",
+          "title": "Microsoft OneDrive",
+          "rating": 4.60419,
+          "votes": 112645
+        },
+        {
+          "rank": 93,
+          "appId": "6747492600",
+          "title": "Mahjong Blast",
+          "rating": 4.82731,
+          "votes": 57445
+        },
+        {
+          "rank": 94,
+          "appId": "1558240027",
+          "title": "Meta AI",
+          "rating": 4.62152,
+          "votes": 22577
+        },
+        {
+          "rank": 95,
+          "appId": "1435807944",
+          "title": "Stickman Hook - Racing Games",
+          "rating": 4.68628,
+          "votes": 204549
+        },
+        {
+          "rank": 96,
+          "appId": "936971630",
+          "title": "YouTube Kids",
+          "rating": 4.60443,
+          "votes": 395743
+        },
+        {
+          "rank": 97,
+          "appId": "1001780528",
+          "title": "Stick War: Legacy",
+          "rating": 4.81331,
+          "votes": 9208
+        },
+        {
+          "rank": 98,
+          "appId": "6446901002",
+          "title": "Threads",
+          "rating": 4.54318,
+          "votes": 145566
+        },
+        {
+          "rank": 99,
+          "appId": "1127108818",
+          "title": "EA SPORTS FC™ 27 Companion",
+          "rating": 3.28107,
+          "votes": 52649
+        },
+        {
+          "rank": 100,
+          "appId": "962194608",
+          "title": "Google Photos: Backup & Edit",
+          "rating": 4.74963,
+          "votes": 105221
+        }
+      ]
+    },
+    {
+      "store": "google",
+      "keyword": "football coach",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "com.gamebasics.afm",
+          "title": "Football Head Coach 27 NFL PA",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 2,
+          "appId": "com.coach360.foot",
+          "title": "Coach 360 - Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 3,
+          "appId": "com.achijones.profootballcoach",
+          "title": "Pro Football Coach",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "com.achijones.footballcoach2",
+          "title": "Football Coach 2",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 5,
+          "appId": "com.onpapersports.WinningTraditionFootball",
+          "title": "College Football Coach 27",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 6,
+          "appId": "eu.nordeus.topeleven.android",
+          "title": "Top Eleven Be a Soccer Manager",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 7,
+          "appId": "com.cbanfiel.FootballCoach25",
+          "title": "Pro Football Coach 27",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "com.isvisoft.bcoach",
+          "title": "bcoach - Coach board app",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "com.onbit.footballcoach",
+          "title": "MyPersonalFootballCoach",
+          "rating": 3.8,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "com.coach.os.coachos",
+          "title": "AI Co-Coach Football Training",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 11,
+          "appId": "com.gmz2rk.ufgm",
+          "title": "Ultimate Pro Football GM",
+          "rating": 3.8,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "com.gamebasics.ufm",
+          "title": "Ultimate Football Manager 27",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 13,
+          "appId": "antdroid.cfbcoach",
+          "title": "College Football Coach: Career",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 14,
+          "appId": "ai.coachfrank",
+          "title": "CoachFrank: Soccer Training AI",
+          "rating": 4.9,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "com.ae.USAFootballCoachPlanner",
+          "title": "Coach Planner: USA Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 16,
+          "appId": "com.netflix.NGP.FootballManagerMobile",
+          "title": "Football Manager 26 Mobile",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 17,
+          "appId": "ch.fipi.fbcoach.lite",
+          "title": "The Football Trainer",
+          "rating": 3.1,
+          "votes": null
+        },
+        {
+          "rank": 18,
+          "appId": "com.gridironcoaching.app",
+          "title": "Gridiron Coaching: Football GM",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 19,
+          "appId": "com.coachbetter.coachbetter",
+          "title": "Coachbetter: Soccer Coaching",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 20,
+          "appId": "com.evlonsoft.smartcoach",
+          "title": "Smart Soccer Coach++",
+          "rating": 2.6,
+          "votes": null
+        },
+        {
+          "rank": 21,
+          "appId": "soccer.tutor.reader",
+          "title": "Coach Viewer",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 22,
+          "appId": "com.trophymanager.pro11",
+          "title": "Pro 11 - Soccer Manager Game",
+          "rating": 4.1,
+          "votes": null
+        },
+        {
+          "rank": 23,
+          "appId": "com.gamebasics.osm",
+          "title": "OSM 27 - Football Manager game",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 24,
+          "appId": "com.gmz2rk.ufcm",
+          "title": "Ultimate Football Club Manager",
+          "rating": 4.1,
+          "votes": null
+        },
+        {
+          "rank": 25,
+          "appId": "com.footballlegacymanager.a26",
+          "title": "Football Legacy Manager 26",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 26,
+          "appId": "no.pocketcoach.app",
+          "title": "PocketCoach Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 27,
+          "appId": "com.invinciblesstudioltd.soccermanager2025",
+          "title": "Soccer Manager 2027 - Football",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 28,
+          "appId": "com.gmz2rk.uqbl",
+          "title": "Ultimate QB: Football Legend",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 29,
+          "appId": "com.aerilys.football.twentytwo",
+          "title": "Astonishing Football Manager",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 30,
+          "appId": "ten.hcaoc2ysae.www",
+          "title": "easy2coach - Team Manager",
+          "rating": 2.7,
+          "votes": null
+        }
+      ]
+    },
+    {
+      "store": "apple",
+      "keyword": "football coach",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "834813357",
+          "title": "Coach Tactic Board: Football",
+          "rating": 4.73169,
+          "votes": 1215
+        },
+        {
+          "rank": 2,
+          "appId": "1425844780",
+          "title": "Train Effective: Football",
+          "rating": 4.78756,
+          "votes": 7202
+        },
+        {
+          "rank": 3,
+          "appId": "6762269320",
+          "title": "OnPitch: Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "6805637544",
+          "title": "Football Sessions: Bibs On",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 5,
+          "appId": "1614140639",
+          "title": "Teamsheet - Football Line Up",
+          "rating": 4.66085,
+          "votes": 917
+        },
+        {
+          "rank": 6,
+          "appId": "6772059305",
+          "title": "Football Player Coach",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 7,
+          "appId": "1566854514",
+          "title": "Football Head Coach 27 - FHC",
+          "rating": 4.79638,
+          "votes": 1105
+        },
+        {
+          "rank": 8,
+          "appId": "1495636739",
+          "title": "Football Sessions - Coach",
+          "rating": 4.33333,
+          "votes": 15
+        },
+        {
+          "rank": 9,
+          "appId": "6746320490",
+          "title": "StatMatch: Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "6761639440",
+          "title": "MyCoach: Football Coach",
+          "rating": 4.53846,
+          "votes": 13
+        },
+        {
+          "rank": 11,
+          "appId": "6475090121",
+          "title": "Lineup - Football Team App",
+          "rating": 4.67045,
+          "votes": 88
+        },
+        {
+          "rank": 12,
+          "appId": "1004610095",
+          "title": "My Coach Football",
+          "rating": 3.75,
+          "votes": 4
+        },
+        {
+          "rank": 13,
+          "appId": "6760293448",
+          "title": "Football Trainer: Pro Skills",
+          "rating": 4,
+          "votes": 1
+        },
+        {
+          "rank": 14,
+          "appId": "6475598124",
+          "title": "[GOALS]",
+          "rating": 4.86154,
+          "votes": 65
+        },
+        {
+          "rank": 15,
+          "appId": "962148867",
+          "title": "Team Lineup Basic",
+          "rating": 4.63225,
+          "votes": 1482
+        },
+        {
+          "rank": 16,
+          "appId": "6814703251",
+          "title": "Coached: Football Drills",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 17,
+          "appId": "1013397211",
+          "title": "Smart Football Coach++",
+          "rating": 4.73332,
+          "votes": 120
+        },
+        {
+          "rank": 18,
+          "appId": "6792698496",
+          "title": "Classic Manager: Football",
+          "rating": 4.42373,
+          "votes": 59
+        },
+        {
+          "rank": 19,
+          "appId": "6803925085",
+          "title": "Coach Football Pro",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 20,
+          "appId": "6801102449",
+          "title": "Hobbit · Football Coach AI",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 21,
+          "appId": "1568995326",
+          "title": "Coachbetter: Football Coaching",
+          "rating": 4.4,
+          "votes": 10
+        },
+        {
+          "rank": 22,
+          "appId": "6757084493",
+          "title": "Gridiron Coaching: Football GM",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 23,
+          "appId": "6762107690",
+          "title": "High School Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 24,
+          "appId": "1460719333",
+          "title": "MC Football Coaching",
+          "rating": 4.33333,
+          "votes": 6
+        },
+        {
+          "rank": 25,
+          "appId": "6761661491",
+          "title": "MatchDay Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 26,
+          "appId": "6505062940",
+          "title": "Pro Football Academy",
+          "rating": 4.08333,
+          "votes": 48
+        },
+        {
+          "rank": 27,
+          "appId": "6806063649",
+          "title": "Baller Lab - AI soccer coach",
+          "rating": 4.76923,
+          "votes": 104
+        },
+        {
+          "rank": 28,
+          "appId": "1156440956",
+          "title": "easy2coach - Training",
+          "rating": 3.4,
+          "votes": 5
+        },
+        {
+          "rank": 29,
+          "appId": "6752902399",
+          "title": "Pro Legacy: Football Talent",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 30,
+          "appId": "6807951543",
+          "title": "Tactivo: Football Coaching",
+          "rating": 5,
+          "votes": 9
+        },
+        {
+          "rank": 31,
+          "appId": "6636554608",
+          "title": "Pro Football Coach 27",
+          "rating": 4.42856,
+          "votes": 7
+        },
+        {
+          "rank": 32,
+          "appId": "1520366044",
+          "title": "Coach365 - Soccer Training App",
+          "rating": 4.66667,
+          "votes": 3
+        },
+        {
+          "rank": 33,
+          "appId": "1492901773",
+          "title": "bcoach: for football coaches",
+          "rating": 4.875,
+          "votes": 8
+        },
+        {
+          "rank": 34,
+          "appId": "6749970596",
+          "title": "Golazo AI: Football Training",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 35,
+          "appId": "1613490071",
+          "title": "Football for a better chance",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 36,
+          "appId": "6767314903",
+          "title": "Allenatore: Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 37,
+          "appId": "6757283802",
+          "title": "Football AI: Custom AI Coach",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 38,
+          "appId": "6767044929",
+          "title": "Footballer Career",
+          "rating": 4.30302,
+          "votes": 33
+        },
+        {
+          "rank": 39,
+          "appId": "879056274",
+          "title": "How to Play Soccer Coach & Football Video Skills",
+          "rating": 2.33333,
+          "votes": 3
+        },
+        {
+          "rank": 40,
+          "appId": "6762270628",
+          "title": "BALLR Club",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 41,
+          "appId": "6791477058",
+          "title": "MisterPro: Football Coach",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 42,
+          "appId": "6816726503",
+          "title": "Sack Race: Football Manager",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 43,
+          "appId": "6807483798",
+          "title": "PFC Football Coaching",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 44,
+          "appId": "6763330802",
+          "title": "Campove: football coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 45,
+          "appId": "6449146090",
+          "title": "Football Factory",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 46,
+          "appId": "6772890736",
+          "title": "Stoke: Pro Sports Coaching",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 47,
+          "appId": "6790804105",
+          "title": "SquadFair: Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 48,
+          "appId": "6768533082",
+          "title": "Football Entangled",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 49,
+          "appId": "1550177066",
+          "title": "Football Coach Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 50,
+          "appId": "6760975710",
+          "title": "Football Coach Tactic Board",
+          "rating": 4,
+          "votes": 1
+        },
+        {
+          "rank": 51,
+          "appId": "6743446223",
+          "title": "Summit U: QB Development",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 52,
+          "appId": "1496619180",
+          "title": "Coach Planner: USA Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 53,
+          "appId": "6630381594",
+          "title": "Football Path X",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 54,
+          "appId": "6683308607",
+          "title": "Football Tactics",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 55,
+          "appId": "6755954909",
+          "title": "Football Coach (FC)",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 56,
+          "appId": "6446609726",
+          "title": "Coach Blitz: Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 57,
+          "appId": "6733248094",
+          "title": "Football Skills Coach Academy",
+          "rating": 3.33333,
+          "votes": 3
+        },
+        {
+          "rank": 58,
+          "appId": "1391555631",
+          "title": "Football Owner 2",
+          "rating": 4.56912,
+          "votes": 13368
+        },
+        {
+          "rank": 59,
+          "appId": "6778094186",
+          "title": "Pitch - Football Coaching",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 60,
+          "appId": "6444745505",
+          "title": "The Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 61,
+          "appId": "6791067728",
+          "title": "Coach: Football (Major Monkey)",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 62,
+          "appId": "6805201155",
+          "title": "Football Playbook Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 63,
+          "appId": "6755497315",
+          "title": "CoachPad Football Tactic Board",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 64,
+          "appId": "6761501195",
+          "title": "Plat4rm: Sports Club Manager",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 65,
+          "appId": "6803371735",
+          "title": "SquadSync: Football Coach",
+          "rating": 5,
+          "votes": 6
+        },
+        {
+          "rank": 66,
+          "appId": "421764869",
+          "title": "Flick Kick Football Kickoff",
+          "rating": 3.48846,
+          "votes": 260
+        },
+        {
+          "rank": 67,
+          "appId": "6792360579",
+          "title": "Playr: AI Soccer Coach",
+          "rating": 4.5,
+          "votes": 6
+        },
+        {
+          "rank": 68,
+          "appId": "6786780815",
+          "title": "Striq: AI Football Coach App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 69,
+          "appId": "6444663956",
+          "title": "Football Tactics Board",
+          "rating": 3,
+          "votes": 1
+        },
+        {
+          "rank": 70,
+          "appId": "6792217626",
+          "title": "Eng Sports Events",
+          "rating": 4.47619,
+          "votes": 21
+        },
+        {
+          "rank": 71,
+          "appId": "6812740613",
+          "title": "Soccer Tactical Coach",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 72,
+          "appId": "6776595895",
+          "title": "XO Gridmaker",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 73,
+          "appId": "6451921488",
+          "title": "Footastic - Coach Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 74,
+          "appId": "6770769633",
+          "title": "One Future Football",
+          "rating": 4.85714,
+          "votes": 7
+        },
+        {
+          "rank": 75,
+          "appId": "6757536722",
+          "title": "MeinCoach: Football Training",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 76,
+          "appId": "6670539360",
+          "title": "STATZO: Football Stats Tracker",
+          "rating": 4.7619,
+          "votes": 21
+        },
+        {
+          "rank": 77,
+          "appId": "6444659791",
+          "title": "GameSense Coaching",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 78,
+          "appId": "1611138681",
+          "title": "Coerver Ireland",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 79,
+          "appId": "6476511041",
+          "title": "Lennon Kicks",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 80,
+          "appId": "6444501456",
+          "title": "The Coaching Gig",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 81,
+          "appId": "926100062",
+          "title": "Classico Football Coach",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 82,
+          "appId": "6743344615",
+          "title": "College Football Coach 27",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 83,
+          "appId": "6758677131",
+          "title": "Footly: AI Soccer Coach.",
+          "rating": 4.79275,
+          "votes": 193
+        },
+        {
+          "rank": 84,
+          "appId": "1530542938",
+          "title": "Ultimate Pro Football GM",
+          "rating": 4.7,
+          "votes": 250
+        },
+        {
+          "rank": 85,
+          "appId": "6464569308",
+          "title": "Clinched",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 86,
+          "appId": "1171741624",
+          "title": "Pocket Coach Board Football",
+          "rating": 4.66667,
+          "votes": 3
+        },
+        {
+          "rank": 87,
+          "appId": "6761062391",
+          "title": "FAW NCC 2026",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 88,
+          "appId": "6739284718",
+          "title": "First Strike Soccer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 89,
+          "appId": "1016030069",
+          "title": "Football Blueprint",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 90,
+          "appId": "6772992573",
+          "title": "GameTime: Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 91,
+          "appId": "1582721818",
+          "title": "Ultimate Soccer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 92,
+          "appId": "6775264306",
+          "title": "Idle Football Club",
+          "rating": 4.38462,
+          "votes": 39
+        },
+        {
+          "rank": 93,
+          "appId": "6756168720",
+          "title": "Game1.ai",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 94,
+          "appId": "1313513334",
+          "title": "Football Coach Timer",
+          "rating": 2,
+          "votes": 1
+        },
+        {
+          "rank": 95,
+          "appId": "6751333915",
+          "title": "Football Coach Stats Tracker",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 96,
+          "appId": "6761409085",
+          "title": "Football Board - Tactics",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 97,
+          "appId": "6670394226",
+          "title": "Artball Soccer Training",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 98,
+          "appId": "6763953159",
+          "title": "Matt Tally Player Development",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 99,
+          "appId": "6740756687",
+          "title": "PolyFootball",
+          "rating": 2.33333,
+          "votes": 3
+        },
+        {
+          "rank": 100,
+          "appId": "6743544146",
+          "title": "Tactics Board - Football",
+          "rating": 4.66667,
+          "votes": 12
+        }
+      ]
+    },
+    {
+      "store": "google",
+      "keyword": "grassroots football",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "com.grassrootsfootball.app",
+          "title": "The Grassroots Football App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 2,
+          "appId": "com.tech.statzo.statzoapp",
+          "title": "STATZO: Grassroots Football",
+          "rating": 5,
+          "votes": null
+        },
+        {
+          "rank": 3,
+          "appId": "uk.co.footballparent.coachapp",
+          "title": "Grassroots Football Coach App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "com.ezactive.hkfa",
+          "title": "HKFA Grassroots Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 5,
+          "appId": "uk.co.scottishfa.grassroots",
+          "title": "Scottish FA - Grassroots Game",
+          "rating": 3.6,
+          "votes": null
+        },
+        {
+          "rank": 6,
+          "appId": "com.anonymous.coachapp",
+          "title": "Squadix Grassroots Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 7,
+          "appId": "com.devjonaed.g2g",
+          "title": "Grassroots to Glory",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "de.analyticom.cometlive.sfa",
+          "title": "My Scottish Football",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "club.playera.app",
+          "title": "Playera: Grassroots Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "com.tgc.grassroots",
+          "title": "The Grassroots Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 11,
+          "appId": "com.rootsapp.io",
+          "title": "Pytch - Grassroots Football",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "com.simonreed.grassrootsmanager",
+          "title": "Grassroots Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 13,
+          "appId": "com.thefa.matchdayapp",
+          "title": "Matchday by England Football",
+          "rating": 2.2,
+          "votes": null
+        },
+        {
+          "rank": 14,
+          "appId": "com.footyaddicts",
+          "title": "Footy Addicts",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "com.gamebasics.afm",
+          "title": "Football Head Coach 27 NFL PA",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 16,
+          "appId": "com.maniforoughi.footballdynastyroadtofame",
+          "title": "Football Dynasty: Road To Fame",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 17,
+          "appId": "com.exposure.grassrootstournaments",
+          "title": "Grassroots Tournaments",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 18,
+          "appId": "com.mr.sflandroid",
+          "title": "SFL Soccer",
+          "rating": 4.4,
+          "votes": null
+        },
+        {
+          "rank": 19,
+          "appId": "com.realifetech.southampton",
+          "title": "Southampton FC App",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 20,
+          "appId": "com.gmz2rk.ufgm",
+          "title": "Ultimate Pro Football GM",
+          "rating": 3.8,
+          "votes": null
+        },
+        {
+          "rank": 21,
+          "appId": "uk.co.nottinghamforest.app",
+          "title": "Official Nottingham Forest App",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 22,
+          "appId": "fc.southport.app",
+          "title": "Southport Football Club",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 23,
+          "appId": "com.samivory.FKApp",
+          "title": "Football Knockout",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 24,
+          "appId": "com.halfbrick.brickball",
+          "title": "Halfbrick Sports: Football",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 25,
+          "appId": "touchdown.football.pvp.game",
+          "title": "Touchdown - Football PVP Game",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 26,
+          "appId": "com.fitnessmobileapps.grassrootsyogaventuraca",
+          "title": "Grassroots Yoga - Ventura, Ca",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 27,
+          "appId": "com.ratech.refsuite",
+          "title": "Centre Circle: Football App",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 28,
+          "appId": "com.companyname.fbtrainerplus",
+          "title": "FootballTraining+",
+          "rating": 2.8,
+          "votes": null
+        },
+        {
+          "rank": 29,
+          "appId": "com.idevs.grassroots360",
+          "title": "Grassroots360",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 30,
+          "appId": "co.tapcart.app.id_kHxstbh6WK",
+          "title": "Grassroots California",
+          "rating": null,
+          "votes": null
+        }
+      ]
+    },
+    {
+      "store": "apple",
+      "keyword": "grassroots football",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "1579841897",
+          "title": "Prematch: Real Football",
+          "rating": 4.81611,
+          "votes": 1490
+        },
+        {
+          "rank": 2,
+          "appId": "6774290192",
+          "title": "Pitch1 - Grassroots Football",
+          "rating": 5,
+          "votes": 6
+        },
+        {
+          "rank": 3,
+          "appId": "1401913451",
+          "title": "Matchday by England Football",
+          "rating": 3.05393,
+          "votes": 2188
+        },
+        {
+          "rank": 4,
+          "appId": "6444596889",
+          "title": "Grassroots Football Scorer",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 5,
+          "appId": "1465147177",
+          "title": "Centre Circle - Football App",
+          "rating": 4.718,
+          "votes": 539
+        },
+        {
+          "rank": 6,
+          "appId": "6738351893",
+          "title": "Pytch",
+          "rating": 4.06667,
+          "votes": 15
+        },
+        {
+          "rank": 7,
+          "appId": "1585636783",
+          "title": "HKFA Grassroots Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "6670452865",
+          "title": "Grassroots Manager",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 9,
+          "appId": "6807950154",
+          "title": "YFL",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 10,
+          "appId": "6761103046",
+          "title": "Non League Football Network",
+          "rating": 5,
+          "votes": 6
+        },
+        {
+          "rank": 11,
+          "appId": "6782102812",
+          "title": "DHFC",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 12,
+          "appId": "1275644100",
+          "title": "TeamStats - Football Team App",
+          "rating": 4.87037,
+          "votes": 54
+        },
+        {
+          "rank": 13,
+          "appId": "6755308177",
+          "title": "First Whistle Football Manager",
+          "rating": 5,
+          "votes": 5
+        },
+        {
+          "rank": 14,
+          "appId": "6772964965",
+          "title": "Tekkerz: Football Organiser",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 15,
+          "appId": "1583834945",
+          "title": "Saturdays Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 16,
+          "appId": "6805612808",
+          "title": "KickOff: Social Football",
+          "rating": 5,
+          "votes": 9
+        },
+        {
+          "rank": 17,
+          "appId": "6762492773",
+          "title": "Squadd Football",
+          "rating": 5,
+          "votes": 6
+        },
+        {
+          "rank": 18,
+          "appId": "6805637544",
+          "title": "Football Sessions: Bibs On",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 19,
+          "appId": "6792217626",
+          "title": "Eng Sports Events",
+          "rating": 4.47619,
+          "votes": 21
+        },
+        {
+          "rank": 20,
+          "appId": "1574344841",
+          "title": "Clubbie: Grassroots Sport",
+          "rating": 4.2069,
+          "votes": 29
+        },
+        {
+          "rank": 21,
+          "appId": "6802232363",
+          "title": "ClubChairman LIVE - Football",
+          "rating": 4,
+          "votes": 1
+        },
+        {
+          "rank": 22,
+          "appId": "6762514027",
+          "title": "Uniqua - Grassroots Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 23,
+          "appId": "6798413496",
+          "title": "Gaelic Star: Football Manager",
+          "rating": 4.44,
+          "votes": 25
+        },
+        {
+          "rank": 24,
+          "appId": "6800647245",
+          "title": "Sideline: Grassroots Football",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 25,
+          "appId": "6809006393",
+          "title": "Goal Posts Player Connect",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 26,
+          "appId": "6792752571",
+          "title": "Ballr: Club Football",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 27,
+          "appId": "778300400",
+          "title": "Final Kick: Online football",
+          "rating": 4.30436,
+          "votes": 3325
+        },
+        {
+          "rank": 28,
+          "appId": "6761126493",
+          "title": "Grassroots Football Tracker",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 29,
+          "appId": "6795560491",
+          "title": "38-0 : Football Draft Season",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 30,
+          "appId": "1164049491",
+          "title": "Powerleague - Home of 5-a-side",
+          "rating": 4.55718,
+          "votes": 822
+        },
+        {
+          "rank": 31,
+          "appId": "6761501195",
+          "title": "Plat4rm: Sports Club Manager",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 32,
+          "appId": "1101739185",
+          "title": "SEASON 25 - Football Manager",
+          "rating": 4.48332,
+          "votes": 3029
+        },
+        {
+          "rank": 33,
+          "appId": "6752902399",
+          "title": "Pro Legacy: Football Talent",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 34,
+          "appId": "6760320099",
+          "title": "FIFA Heroes: Football Action",
+          "rating": 4.68344,
+          "votes": 1510
+        },
+        {
+          "rank": 35,
+          "appId": "6450241322",
+          "title": "JUGAD",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 36,
+          "appId": "6575380265",
+          "title": "London Football",
+          "rating": 4.5,
+          "votes": 8
+        },
+        {
+          "rank": 37,
+          "appId": "6740756687",
+          "title": "PolyFootball",
+          "rating": 2.33333,
+          "votes": 3
+        },
+        {
+          "rank": 38,
+          "appId": "1109767634",
+          "title": "Football Nations: Paris",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 39,
+          "appId": "6763328011",
+          "title": "Pachanga: Local Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 40,
+          "appId": "6762454935",
+          "title": "Whistle1 Retro Footballmanager",
+          "rating": 3,
+          "votes": 1
+        },
+        {
+          "rank": 41,
+          "appId": "6752778216",
+          "title": "MatchMode: Football & Soccer",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 42,
+          "appId": "1099348734",
+          "title": "FC BAFA",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 43,
+          "appId": "6790804105",
+          "title": "SquadFair: Football Coach",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 44,
+          "appId": "6800592813",
+          "title": "NextSportz",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 45,
+          "appId": "6740921834",
+          "title": "Gotham Soccer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 46,
+          "appId": "6768032722",
+          "title": "GameGrid: Football Manager",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 47,
+          "appId": "6782117618",
+          "title": "CSFC: Pickup Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 48,
+          "appId": "6753172140",
+          "title": "N - Youth League Cup",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 49,
+          "appId": "6445917513",
+          "title": "TeamFeePay",
+          "rating": 2.83333,
+          "votes": 6
+        },
+        {
+          "rank": 50,
+          "appId": "1123455917",
+          "title": "Ketchapp Football",
+          "rating": 4.2,
+          "votes": 180
+        },
+        {
+          "rank": 51,
+          "appId": "6769832882",
+          "title": "PitchIn: Football Team Hub",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 52,
+          "appId": "6763430737",
+          "title": "Futbolio: Pickup Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 53,
+          "appId": "6445975931",
+          "title": "Clubland®",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 54,
+          "appId": "6783334407",
+          "title": "BOSS93: Retro Football Manager",
+          "rating": 4.8205,
+          "votes": 195
+        },
+        {
+          "rank": 55,
+          "appId": "6739499352",
+          "title": "OffsideMate",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 56,
+          "appId": "6749388261",
+          "title": "Goal Fight - Online Soccer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 57,
+          "appId": "6738376989",
+          "title": "Son of a Pitch Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 58,
+          "appId": "6759096352",
+          "title": "TactiBoard: Grassroots Track",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 59,
+          "appId": "6464374819",
+          "title": "Pocket Football Deluxe",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 60,
+          "appId": "6791703406",
+          "title": "Pitchmark: Football Passport",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 61,
+          "appId": "6761905091",
+          "title": "Kickoff Football Leagues",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 62,
+          "appId": "6759518991",
+          "title": "KickChasers",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 63,
+          "appId": "6478986453",
+          "title": "BASL Soccer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 64,
+          "appId": "6755966449",
+          "title": "ChutApp",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 65,
+          "appId": "1671515956",
+          "title": "Blackburn Eagles FC",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 66,
+          "appId": "6759691327",
+          "title": "Kickoro: Football Lineup",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 67,
+          "appId": "6770288907",
+          "title": "Hillfield AFC",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 68,
+          "appId": "6505062940",
+          "title": "Pro Football Academy",
+          "rating": 4.08333,
+          "votes": 48
+        },
+        {
+          "rank": 69,
+          "appId": "6777403945",
+          "title": "Football tactics board line up",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 70,
+          "appId": "1543885821",
+          "title": "Football Strike Soccer League",
+          "rating": 2.33333,
+          "votes": 3
+        },
+        {
+          "rank": 71,
+          "appId": "1241015249",
+          "title": "MUYL",
+          "rating": 4.33333,
+          "votes": 6
+        },
+        {
+          "rank": 72,
+          "appId": "6788759733",
+          "title": "The Grassroots Football App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 73,
+          "appId": "6761208693",
+          "title": "Stadianity: Football Fans",
+          "rating": 3,
+          "votes": 4
+        },
+        {
+          "rank": 74,
+          "appId": "6783267406",
+          "title": "Spot Kick Duel",
+          "rating": 4,
+          "votes": 4
+        },
+        {
+          "rank": 75,
+          "appId": "1575209914",
+          "title": "+10",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 76,
+          "appId": "6760255942",
+          "title": "Clubin FC 27: Clubs Companion",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 77,
+          "appId": "6758171609",
+          "title": "Squadix: Football team manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 78,
+          "appId": "932978425",
+          "title": "Virtuafoot Football Manager",
+          "rating": 4,
+          "votes": 2
+        },
+        {
+          "rank": 79,
+          "appId": "6444181680",
+          "title": "Soccer world championship game",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 80,
+          "appId": "6761209903",
+          "title": "Ballrz - Football Team Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 81,
+          "appId": "6748828603",
+          "title": "Wilton United FC",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 82,
+          "appId": "6770769633",
+          "title": "One Future Football",
+          "rating": 4.85714,
+          "votes": 7
+        },
+        {
+          "rank": 83,
+          "appId": "1490842678",
+          "title": "Goal Party - Football Freekick",
+          "rating": 4.74491,
+          "votes": 4077
+        },
+        {
+          "rank": 84,
+          "appId": "1494098159",
+          "title": "MakeClub - Soccer transfers",
+          "rating": 4,
+          "votes": 1
+        },
+        {
+          "rank": 85,
+          "appId": "6630381594",
+          "title": "Football Path X",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 86,
+          "appId": "1613490071",
+          "title": "Football for a better chance",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 87,
+          "appId": "6749300266",
+          "title": "The Friendly App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 88,
+          "appId": "6760646301",
+          "title": "Football Club Manager",
+          "rating": 4.5,
+          "votes": 2
+        },
+        {
+          "rank": 89,
+          "appId": "6475598124",
+          "title": "[GOALS]",
+          "rating": 4.86154,
+          "votes": 65
+        },
+        {
+          "rank": 90,
+          "appId": "6738917403",
+          "title": "Football Score - Scoreshare",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 91,
+          "appId": "1490688072",
+          "title": "Grassroots Stats",
+          "rating": 4.66667,
+          "votes": 6
+        },
+        {
+          "rank": 92,
+          "appId": "6755181158",
+          "title": "Transfer Expo",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 93,
+          "appId": "6670148481",
+          "title": "Into The Stands",
+          "rating": 2.5,
+          "votes": 16
+        },
+        {
+          "rank": 94,
+          "appId": "6443469065",
+          "title": "FCMeta",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 95,
+          "appId": "6448338503",
+          "title": "Playbox: Play Real Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 96,
+          "appId": "6764249712",
+          "title": "Kickoff Football 26: Be A Pro",
+          "rating": 4.46457,
+          "votes": 127
+        },
+        {
+          "rank": 97,
+          "appId": "6762024703",
+          "title": "Vizrr - Football Scouting",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 98,
+          "appId": "6463419526",
+          "title": "Sandbach United FC",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 99,
+          "appId": "6480044082",
+          "title": "Sikka | سكه",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 100,
+          "appId": "6443656024",
+          "title": "BLRBOX - The Football Network",
+          "rating": 5,
+          "votes": 2
+        }
+      ]
+    },
+    {
+      "store": "google",
+      "keyword": "football team manager",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "com.valenbyte.footballteammanager",
+          "title": "Football Team Manager",
+          "rating": 3.6,
+          "votes": null
+        },
+        {
+          "rank": 2,
+          "appId": "com.netflix.NGP.FootballManagerMobile",
+          "title": "Football Manager 26 Mobile",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 3,
+          "appId": "com.awesomeprototype.s19",
+          "title": "SEASON 25 - Football Manager",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "com.gamebasics.ufm",
+          "title": "Ultimate Football Manager 27",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 5,
+          "appId": "com.trophymanager.pro11",
+          "title": "Pro 11 - Soccer Manager Game",
+          "rating": 4.1,
+          "votes": null
+        },
+        {
+          "rank": 6,
+          "appId": "eu.nordeus.topeleven.android",
+          "title": "Top Eleven Be a Soccer Manager",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 7,
+          "appId": "com.gamegou.football",
+          "title": "Top Football Manager 2026",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "com.gmz2rk.ufcm",
+          "title": "Ultimate Football Club Manager",
+          "rating": 4.1,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "com.gamebasics.osm",
+          "title": "OSM 27 - Football Manager game",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "com.invinciblesstudioltd.soccermanager2025",
+          "title": "Soccer Manager 2027 - Football",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 11,
+          "appId": "com.DefaultCompany.FM24_MVP",
+          "title": "Prime Football Manager",
+          "rating": 3.6,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "com.footballlegacymanager.a25",
+          "title": "Football Legacy Manager 25",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 13,
+          "appId": "com.footballlegacymanager.a26",
+          "title": "Football Legacy Manager 26",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 14,
+          "appId": "com.GoPlayGames.FirstTeamManager2027",
+          "title": "First Team Manager 2027",
+          "rating": 3.3,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "ten.hcaoc2ysae.www",
+          "title": "easy2coach - Team Manager",
+          "rating": 2.7,
+          "votes": null
+        },
+        {
+          "rank": 16,
+          "appId": "com.footlord_industries.footlord",
+          "title": "FootLord - Football Manager",
+          "rating": 4.4,
+          "votes": null
+        },
+        {
+          "rank": 17,
+          "appId": "com.footballlegacymanager.a24",
+          "title": "Football Legacy Manager 24",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 18,
+          "appId": "com.rfmie",
+          "title": "International Football Manager",
+          "rating": 4.4,
+          "votes": null
+        },
+        {
+          "rank": 19,
+          "appId": "com.stilwer.legendfootballmanager",
+          "title": "Legend Football Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 20,
+          "appId": "az.league.app",
+          "title": "League: Football Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 21,
+          "appId": "com.yorkburkhardt.footballpocketmanager",
+          "title": "Soccer Pocket Manager",
+          "rating": 3.8,
+          "votes": null
+        },
+        {
+          "rank": 22,
+          "appId": "com.mtgsoftworks.edirector",
+          "title": "eDirector™ Football Manager 27",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 23,
+          "appId": "com.rfm25",
+          "title": "RFM27 - Retro Football Manager",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 24,
+          "appId": "com.ejaydev.sidelines",
+          "title": "Sidelines Football Manager",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 25,
+          "appId": "com.gmz2rk.ufgm",
+          "title": "Ultimate Pro Football GM",
+          "rating": 3.8,
+          "votes": null
+        },
+        {
+          "rank": 26,
+          "appId": "com.trophymanager.ultra",
+          "title": "FMU - Football Manager Game",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 27,
+          "appId": "com.mobisoca.btmfootball.bethemanager2023",
+          "title": "Be the Manager 2026 - Soccer",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 28,
+          "appId": "com.aerilys.football.twentytwo",
+          "title": "Astonishing Football Manager",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 29,
+          "appId": "com.trophygames.futuball",
+          "title": "Futuball - Football Manager",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 30,
+          "appId": "com.KediGames.FootballManager",
+          "title": "LFM - Online Football Manager",
+          "rating": null,
+          "votes": null
+        }
+      ]
+    },
+    {
+      "store": "apple",
+      "keyword": "football team manager",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "1102833080",
+          "title": "easy2coach - Team Manager",
+          "rating": 4.66667,
+          "votes": 3
+        },
+        {
+          "rank": 2,
+          "appId": "6743993781",
+          "title": "First Team Manager Season 2026",
+          "rating": 4.1413,
+          "votes": 92
+        },
+        {
+          "rank": 3,
+          "appId": "1565937207",
+          "title": "Matchday Football Manager 2026",
+          "rating": 4.63382,
+          "votes": 3968
+        },
+        {
+          "rank": 4,
+          "appId": "6763239887",
+          "title": "First Team Manager 2027",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 5,
+          "appId": "1101739185",
+          "title": "SEASON 25 - Football Manager",
+          "rating": 4.48332,
+          "votes": 3029
+        },
+        {
+          "rank": 6,
+          "appId": "1186263817",
+          "title": "Pro 11 - Football Manager Game",
+          "rating": 4.59999,
+          "votes": 2075
+        },
+        {
+          "rank": 7,
+          "appId": "6446123740",
+          "title": "Football Manager 26 Mobile",
+          "rating": 4.71214,
+          "votes": 33211
+        },
+        {
+          "rank": 8,
+          "appId": "459035295",
+          "title": "Top Eleven Be Football Manager",
+          "rating": 4.68992,
+          "votes": 97641
+        },
+        {
+          "rank": 9,
+          "appId": "6804465443",
+          "title": "Football Sporting Director",
+          "rating": 4,
+          "votes": 4
+        },
+        {
+          "rank": 10,
+          "appId": "6792698496",
+          "title": "Classic Manager: Football",
+          "rating": 4.42373,
+          "votes": 59
+        },
+        {
+          "rank": 11,
+          "appId": "6737806597",
+          "title": "Line Up Your Team",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "6802232363",
+          "title": "ClubChairman LIVE - Football",
+          "rating": 4,
+          "votes": 1
+        },
+        {
+          "rank": 13,
+          "appId": "6683308607",
+          "title": "Football Tactics",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 14,
+          "appId": "6761209903",
+          "title": "Ballrz - Football Team Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "6801002670",
+          "title": "Football Agent: Career",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 16,
+          "appId": "6816726503",
+          "title": "Sack Race: Football Manager",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 17,
+          "appId": "6774290192",
+          "title": "Pitch1 - Grassroots Football",
+          "rating": 5,
+          "votes": 6
+        },
+        {
+          "rank": 18,
+          "appId": "6761501195",
+          "title": "Plat4rm: Sports Club Manager",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 19,
+          "appId": "6813023661",
+          "title": "Footium Companion",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 20,
+          "appId": "6782858075",
+          "title": "46-0 Football Sim",
+          "rating": 4.9,
+          "votes": 10
+        },
+        {
+          "rank": 21,
+          "appId": "6758171609",
+          "title": "Squadix: Football team manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 22,
+          "appId": "1317253602",
+          "title": "Football Manager Professional",
+          "rating": 3.66667,
+          "votes": 6
+        },
+        {
+          "rank": 23,
+          "appId": "1275644100",
+          "title": "TeamStats - Football Team App",
+          "rating": 4.87037,
+          "votes": 54
+        },
+        {
+          "rank": 24,
+          "appId": "1583591186",
+          "title": "Mingle Sport | Team Manager",
+          "rating": 4.62345,
+          "votes": 162
+        },
+        {
+          "rank": 25,
+          "appId": "6771118537",
+          "title": "Clic - Sport Hub",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 26,
+          "appId": "1530542938",
+          "title": "Ultimate Pro Football GM",
+          "rating": 4.7,
+          "votes": 250
+        },
+        {
+          "rank": 27,
+          "appId": "6757677321",
+          "title": "Ultra Manager Pro",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 28,
+          "appId": "400201466",
+          "title": "Online Soccer Manager (OSM)",
+          "rating": 4.73439,
+          "votes": 30872
+        },
+        {
+          "rank": 29,
+          "appId": "6783334407",
+          "title": "BOSS93: Retro Football Manager",
+          "rating": 4.8205,
+          "votes": 195
+        },
+        {
+          "rank": 30,
+          "appId": "6779756457",
+          "title": "Football Draft: Squad Manager",
+          "rating": 4.66667,
+          "votes": 3
+        },
+        {
+          "rank": 31,
+          "appId": "6809006393",
+          "title": "Goal Posts Player Connect",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 32,
+          "appId": "6773058000",
+          "title": "Onside: Football Team Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 33,
+          "appId": "1568995326",
+          "title": "Coachbetter: Football Coaching",
+          "rating": 4.4,
+          "votes": 10
+        },
+        {
+          "rank": 34,
+          "appId": "6761053085",
+          "title": "Sport Star - Team Manager Game",
+          "rating": 4.17722,
+          "votes": 79
+        },
+        {
+          "rank": 35,
+          "appId": "6755308177",
+          "title": "First Whistle Football Manager",
+          "rating": 5,
+          "votes": 5
+        },
+        {
+          "rank": 36,
+          "appId": "6779740065",
+          "title": "Ultimate 11",
+          "rating": 4.42593,
+          "votes": 54
+        },
+        {
+          "rank": 37,
+          "appId": "6798413496",
+          "title": "Gaelic Star: Football Manager",
+          "rating": 4.44,
+          "votes": 25
+        },
+        {
+          "rank": 38,
+          "appId": "6821197842",
+          "title": "Gaffer: Small-Sided Football",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 39,
+          "appId": "6465972774",
+          "title": "Soccer Dynasty: Club Manager",
+          "rating": 4.75,
+          "votes": 12
+        },
+        {
+          "rank": 40,
+          "appId": "6778970637",
+          "title": "Rondo: Summer Football Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 41,
+          "appId": "6780492544",
+          "title": "Touchline Football Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 42,
+          "appId": "6772617896",
+          "title": "My Legacy: Football Career",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 43,
+          "appId": "6749849332",
+          "title": "FTACT FT",
+          "rating": 4.56667,
+          "votes": 30
+        },
+        {
+          "rank": 44,
+          "appId": "1401913451",
+          "title": "Matchday by England Football",
+          "rating": 3.05393,
+          "votes": 2188
+        },
+        {
+          "rank": 45,
+          "appId": "6448403660",
+          "title": "Sports Team Manager",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 46,
+          "appId": "6760320099",
+          "title": "FIFA Heroes: Football Action",
+          "rating": 4.68344,
+          "votes": 1510
+        },
+        {
+          "rank": 47,
+          "appId": "1553429791",
+          "title": "SquaD - Sports Team Management",
+          "rating": 4.81553,
+          "votes": 103
+        },
+        {
+          "rank": 48,
+          "appId": "6814990423",
+          "title": "Squad IQ Manager",
+          "rating": 5,
+          "votes": 10
+        },
+        {
+          "rank": 49,
+          "appId": "6670452865",
+          "title": "Grassroots Manager",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 50,
+          "appId": "1068396437",
+          "title": "Top Football Manager 2026",
+          "rating": 4.345,
+          "votes": 3258
+        },
+        {
+          "rank": 51,
+          "appId": "1254892489",
+          "title": "Mini Manager Football Retro",
+          "rating": 3.66667,
+          "votes": 3
+        },
+        {
+          "rank": 52,
+          "appId": "6794691935",
+          "title": "Aufstieg: Football Club Boss",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 53,
+          "appId": "6759691327",
+          "title": "Kickoro: Football Lineup",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 54,
+          "appId": "6777474570",
+          "title": "FutBoss: Football Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 55,
+          "appId": "1616000230",
+          "title": "International Football Manager",
+          "rating": 4.38501,
+          "votes": 387
+        },
+        {
+          "rank": 56,
+          "appId": "914253760",
+          "title": "TeamPlus - Team Management",
+          "rating": 4.125,
+          "votes": 8
+        },
+        {
+          "rank": 57,
+          "appId": "6770769633",
+          "title": "One Future Football",
+          "rating": 4.85714,
+          "votes": 7
+        },
+        {
+          "rank": 58,
+          "appId": "6769832882",
+          "title": "PitchIn: Football Team Hub",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 59,
+          "appId": "6759989793",
+          "title": "VS Football Lineup Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 60,
+          "appId": "6783361338",
+          "title": "Maor: Gaelic Football Manager",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 61,
+          "appId": "6756612911",
+          "title": "eDirector™ Football Manager 27",
+          "rating": 2.66667,
+          "votes": 9
+        },
+        {
+          "rank": 62,
+          "appId": "1360417684",
+          "title": "New Star Manager",
+          "rating": 4.6921,
+          "votes": 29962
+        },
+        {
+          "rank": 63,
+          "appId": "6762123995",
+          "title": "Ashcott FC Management App",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 64,
+          "appId": "6781590450",
+          "title": "38-0: Football Draft",
+          "rating": 4.91273,
+          "votes": 1375
+        },
+        {
+          "rank": 65,
+          "appId": "932978425",
+          "title": "Virtuafoot Football Manager",
+          "rating": 4,
+          "votes": 2
+        },
+        {
+          "rank": 66,
+          "appId": "1438330185",
+          "title": "Football: The Manager",
+          "rating": 4.54545,
+          "votes": 132
+        },
+        {
+          "rank": 67,
+          "appId": "6443656024",
+          "title": "BLRBOX - The Football Network",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 68,
+          "appId": "1503354926",
+          "title": "My Football Teams",
+          "rating": 5,
+          "votes": 4
+        },
+        {
+          "rank": 69,
+          "appId": "1667361411",
+          "title": "Football National Manager",
+          "rating": 4.69564,
+          "votes": 92
+        },
+        {
+          "rank": 70,
+          "appId": "1603630991",
+          "title": "ClubBuzz",
+          "rating": 4.44444,
+          "votes": 9
+        },
+        {
+          "rank": 71,
+          "appId": "6760646301",
+          "title": "Football Club Manager",
+          "rating": 4.5,
+          "votes": 2
+        },
+        {
+          "rank": 72,
+          "appId": "6761697427",
+          "title": "Football Management",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 73,
+          "appId": "6758503406",
+          "title": "SLM - Sunday League Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 74,
+          "appId": "421764869",
+          "title": "Flick Kick Football Kickoff",
+          "rating": 3.48846,
+          "votes": 260
+        },
+        {
+          "rank": 75,
+          "appId": "1523847967",
+          "title": "Manager League Football",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 76,
+          "appId": "6630381594",
+          "title": "Football Path X",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 77,
+          "appId": "1142549827",
+          "title": "Teamo - Team Management",
+          "rating": 3.63754,
+          "votes": 309
+        },
+        {
+          "rank": 78,
+          "appId": "6749352900",
+          "title": "Quick Lineup: Team Builder",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 79,
+          "appId": "6758518051",
+          "title": "Globall",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 80,
+          "appId": "6756801851",
+          "title": "Unify Team",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 81,
+          "appId": "6758112980",
+          "title": "Football Club Inside",
+          "rating": 4.33333,
+          "votes": 3
+        },
+        {
+          "rank": 82,
+          "appId": "6792752571",
+          "title": "Ballr: Club Football",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 83,
+          "appId": "6775264306",
+          "title": "Idle Football Club",
+          "rating": 4.38462,
+          "votes": 39
+        },
+        {
+          "rank": 84,
+          "appId": "6762492773",
+          "title": "Squadd Football",
+          "rating": 5,
+          "votes": 6
+        },
+        {
+          "rank": 85,
+          "appId": "1386497236",
+          "title": "Ollie - Football Statistics",
+          "rating": 4.66667,
+          "votes": 12
+        },
+        {
+          "rank": 86,
+          "appId": "898027661",
+          "title": "TeamPlayer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 87,
+          "appId": "6751783021",
+          "title": "CoachPro - Football Manager",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 88,
+          "appId": "6756000878",
+          "title": "Clubman Football App",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 89,
+          "appId": "6445917513",
+          "title": "TeamFeePay",
+          "rating": 2.83333,
+          "votes": 6
+        },
+        {
+          "rank": 90,
+          "appId": "1589263218",
+          "title": "Astonishing Football 26",
+          "rating": 4.5,
+          "votes": 24
+        },
+        {
+          "rank": 91,
+          "appId": "6759547142",
+          "title": "FootballManager.IO",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 92,
+          "appId": "6504602789",
+          "title": "LFM - Online Football Manager",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 93,
+          "appId": "6768032722",
+          "title": "GameGrid: Football Manager",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 94,
+          "appId": "1268854472",
+          "title": "Franchise Football: Pro GM",
+          "rating": 4.68492,
+          "votes": 73
+        },
+        {
+          "rank": 95,
+          "appId": "1338893457",
+          "title": "Abler",
+          "rating": 3.8,
+          "votes": 15
+        },
+        {
+          "rank": 96,
+          "appId": "1661079265",
+          "title": "Ultimate Football Club Manager",
+          "rating": 4.29524,
+          "votes": 105
+        },
+        {
+          "rank": 97,
+          "appId": "1659427194",
+          "title": "Tactician Football",
+          "rating": 4.66507,
+          "votes": 209
+        },
+        {
+          "rank": 98,
+          "appId": "6762269484",
+          "title": "Teamsheet: Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 99,
+          "appId": "6777571114",
+          "title": "FIVEZ Football",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 100,
+          "appId": "1590659803",
+          "title": "Dream Team Football",
+          "rating": 4.55556,
+          "votes": 27
+        }
+      ]
+    },
+    {
+      "store": "google",
+      "keyword": "football stats",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "com.mobilefootie.wc2010",
+          "title": "FotMob - Soccer Live Scores",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 2,
+          "appId": "org.footystats.official",
+          "title": "FootyStats - Soccer Stats",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 3,
+          "appId": "io.football.betsmart",
+          "title": "Statmaster",
+          "rating": 4.3,
+          "votes": null
+        },
+        {
+          "rank": 4,
+          "appId": "com.fivemobile.thescore",
+          "title": "theScore: Sports News & Scores",
+          "rating": 4.4,
+          "votes": null
+        },
+        {
+          "rank": 5,
+          "appId": "com.sofascore.results",
+          "title": "Sofascore: Live Sports Scores",
+          "rating": 3.7,
+          "votes": null
+        },
+        {
+          "rank": 6,
+          "appId": "com.livescore",
+          "title": "LiveScore: Live Sports Scores",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 7,
+          "appId": "com.makeyourstats.app",
+          "title": "MakeYourStats - football stats",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 8,
+          "appId": "com.PressBox.pressbox",
+          "title": "PressBox Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "de.motain.iliga",
+          "title": "OneFootball Live Soccer scores",
+          "rating": 4.4,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "com.aistats.ai_stats",
+          "title": "AIstats: Soccer Stats & Scores",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 11,
+          "appId": "eu.livesport.FlashScore_com",
+          "title": "Flashscore: Live Scores & News",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "co.nexiv.win.finder",
+          "title": "WinFinder - Soccer Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 13,
+          "appId": "com.jawadzaheer.xpertbetmobileapp",
+          "title": "XpertStats - Soccer Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 14,
+          "appId": "com.scores365",
+          "title": "365Scores: Live Scores & Data",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "com.besget.soccerbing",
+          "title": "Scoremer - Soccer Live Scores",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 16,
+          "appId": "com.tseo.theyscored",
+          "title": "TheyScored: Live Soccer Scores",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 17,
+          "appId": "com.football.footballstats",
+          "title": "Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 18,
+          "appId": "com.cornerprobet.cornerproapp",
+          "title": "CornerPro: Football Analysis",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 19,
+          "appId": "org.betality.app",
+          "title": "Bescored - football stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 20,
+          "appId": "com.onesports.score",
+          "title": "AiScore - Live Sports Scores",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 21,
+          "appId": "com.HOFBet.hofbet",
+          "title": "HOF: Sports Stats & Research",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 22,
+          "appId": "com.unity.uniscore",
+          "title": "Uniscore - Live Sports Scores",
+          "rating": 4.2,
+          "votes": null
+        },
+        {
+          "rank": 23,
+          "appId": "com.football433",
+          "title": "433 | The Home of Football",
+          "rating": 4.1,
+          "votes": null
+        },
+        {
+          "rank": 24,
+          "appId": "uk.co.bbc.android.sportdomestic",
+          "title": "BBC Sport - News & Live Scores",
+          "rating": 4.6,
+          "votes": null
+        },
+        {
+          "rank": 25,
+          "appId": "com.artlines.scouter",
+          "title": "Football Tips AI - Scouter",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 26,
+          "appId": "com.onesports.global",
+          "title": "Eleven Football: News & Scores",
+          "rating": 4.7,
+          "votes": null
+        },
+        {
+          "rank": 27,
+          "appId": "eu.livesport.soccerway",
+          "title": "Soccerway Football Live Scores",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 28,
+          "appId": "com.snapscore",
+          "title": "Livescore by SoccerDesk",
+          "rating": 4,
+          "votes": null
+        },
+        {
+          "rank": 29,
+          "appId": "com.followscores",
+          "title": "FollowScores: Live Scores",
+          "rating": 4.5,
+          "votes": null
+        },
+        {
+          "rank": 30,
+          "appId": "com.sunken.amasoccer",
+          "title": "A-FOOTBALL - Team Stats",
+          "rating": null,
+          "votes": null
+        }
+      ]
+    },
+    {
+      "store": "apple",
+      "keyword": "football stats",
+      "results": [
+        {
+          "rank": 1,
+          "appId": "488575683",
+          "title": "FotMob - Football Live Scores",
+          "rating": 4.92387,
+          "votes": 59643
+        },
+        {
+          "rank": 2,
+          "appId": "1579841897",
+          "title": "Prematch: Real Football",
+          "rating": 4.81611,
+          "votes": 1490
+        },
+        {
+          "rank": 3,
+          "appId": "1590091942",
+          "title": "FootyStats - Football Stats",
+          "rating": 4.78571,
+          "votes": 56
+        },
+        {
+          "rank": 4,
+          "appId": "382002079",
+          "title": "OneFootball - Football Scores",
+          "rating": 4.77613,
+          "votes": 179232
+        },
+        {
+          "rank": 5,
+          "appId": "356928178",
+          "title": "LiveScore: Live Sports Scores",
+          "rating": 4.81155,
+          "votes": 93553
+        },
+        {
+          "rank": 6,
+          "appId": "766443283",
+          "title": "Flashscore: Live Scores & News",
+          "rating": 4.86219,
+          "votes": 174665
+        },
+        {
+          "rank": 7,
+          "appId": "1176147574",
+          "title": "Sofascore: Live Sports Scores",
+          "rating": 4.8712,
+          "votes": 20499
+        },
+        {
+          "rank": 8,
+          "appId": "6754819367",
+          "title": "Statzone: Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 9,
+          "appId": "1615048439",
+          "title": "Match-Analytix: Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 10,
+          "appId": "1138895159",
+          "title": "Premier League - Scores, News",
+          "rating": 4.76857,
+          "votes": 657096
+        },
+        {
+          "rank": 11,
+          "appId": "6793199995",
+          "title": "TipsBible Football Predictions",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 12,
+          "appId": "6815125443",
+          "title": "TotalScore Football Prediction",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 13,
+          "appId": "6759366360",
+          "title": "Bollr: Football Stats Explorer",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 14,
+          "appId": "751005894",
+          "title": "Football Statistics",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 15,
+          "appId": "1589421166",
+          "title": "Live Football Stats - ArvStats",
+          "rating": 4.5,
+          "votes": 4
+        },
+        {
+          "rank": 16,
+          "appId": "6760008751",
+          "title": "Navi Football",
+          "rating": 2.5,
+          "votes": 4
+        },
+        {
+          "rank": 17,
+          "appId": "1555872271",
+          "title": "XBet Edge: Football Statistics",
+          "rating": 4.65,
+          "votes": 180
+        },
+        {
+          "rank": 18,
+          "appId": "673141591",
+          "title": "Betting Hub: Football Tips",
+          "rating": 4.74831,
+          "votes": 3711
+        },
+        {
+          "rank": 19,
+          "appId": "6756080502",
+          "title": "ScoreGPT: Football Predictions",
+          "rating": 4.85714,
+          "votes": 21
+        },
+        {
+          "rank": 20,
+          "appId": "6764398932",
+          "title": "Score Buddy: Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 21,
+          "appId": "6755923922",
+          "title": "Bescored - football stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 22,
+          "appId": "6749021898",
+          "title": "BetWiser: Football Stats",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 23,
+          "appId": "1531784834",
+          "title": "MakeYourStats",
+          "rating": 4.71429,
+          "votes": 63
+        },
+        {
+          "rank": 24,
+          "appId": "6478613783",
+          "title": "TotalSportek - Live Football",
+          "rating": 3.4375,
+          "votes": 16
+        },
+        {
+          "rank": 25,
+          "appId": "6757428412",
+          "title": "FIKA FOOTBALL – Live Scores",
+          "rating": 3,
+          "votes": 2
+        },
+        {
+          "rank": 26,
+          "appId": "6805612808",
+          "title": "KickOff: Social Football",
+          "rating": 5,
+          "votes": 9
+        },
+        {
+          "rank": 27,
+          "appId": "6742782395",
+          "title": "Football Stats Lite",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 28,
+          "appId": "6766180761",
+          "title": "Mika Football - TV Livescores",
+          "rating": 4.10714,
+          "votes": 28
+        },
+        {
+          "rank": 29,
+          "appId": "6756605319",
+          "title": "Score808 - Sport App & IPTV",
+          "rating": 4.65217,
+          "votes": 69
+        },
+        {
+          "rank": 30,
+          "appId": "6457265680",
+          "title": "CornerPro Football Stats",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 31,
+          "appId": "6792930447",
+          "title": "American Football: StatScout",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 32,
+          "appId": "6748314338",
+          "title": "Scorza - Football Tracker",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 33,
+          "appId": "6772555228",
+          "title": "Nova Soccer Pro: Live Scores",
+          "rating": 1,
+          "votes": 1
+        },
+        {
+          "rank": 34,
+          "appId": "1592722868",
+          "title": "Stats 365 Football Live Scores",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 35,
+          "appId": "6761343632",
+          "title": "Match Analyze: Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 36,
+          "appId": "6753012394",
+          "title": "WSL Football",
+          "rating": 4.7027,
+          "votes": 37
+        },
+        {
+          "rank": 37,
+          "appId": "6785821173",
+          "title": "Yacine TV : ياسين تيفي",
+          "rating": 4.5,
+          "votes": 12
+        },
+        {
+          "rank": 38,
+          "appId": "6705135002",
+          "title": "Football Stats - Predictions",
+          "rating": 4,
+          "votes": 1
+        },
+        {
+          "rank": 39,
+          "appId": "6756565784",
+          "title": "LeagueBuilder: Football Stats",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 40,
+          "appId": "6768595432",
+          "title": "Football Lab: Smart Scores",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 41,
+          "appId": "6778034974",
+          "title": "Iron: Football Stats",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 42,
+          "appId": "1620234500",
+          "title": "Flag Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 43,
+          "appId": "6783830371",
+          "title": "Football Stats Assistant",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 44,
+          "appId": "6740241721",
+          "title": "Goal Guru - Football Alerts",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 45,
+          "appId": "6770528840",
+          "title": "Luna Soccer - Sports App",
+          "rating": 4.59999,
+          "votes": 20
+        },
+        {
+          "rank": 46,
+          "appId": "6785972460",
+          "title": "Super Stats Football",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 47,
+          "appId": "6788065245",
+          "title": "CNF Sports Pro",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 48,
+          "appId": "6482231158",
+          "title": "PressBox Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 49,
+          "appId": "979320345",
+          "title": "Championship English Livescore",
+          "rating": 4.52071,
+          "votes": 507
+        },
+        {
+          "rank": 50,
+          "appId": "6760916579",
+          "title": "Ressq: Football Analytics",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 51,
+          "appId": "6799360126",
+          "title": "FreeKick: Football Live Scores",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 52,
+          "appId": "518026818",
+          "title": "GOAL: Football Scores & News",
+          "rating": 4.63943,
+          "votes": 1273
+        },
+        {
+          "rank": 53,
+          "appId": "6782017318",
+          "title": "Live Football: Score & Fixture",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 54,
+          "appId": "6785550869",
+          "title": "Neeko Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 55,
+          "appId": "6760419348",
+          "title": "FutBoxd: Football Match Log",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 56,
+          "appId": "6781043718",
+          "title": "Koora Live : كورة لايف",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 57,
+          "appId": "6809123558",
+          "title": "Score AI - Live Match Analysis",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 58,
+          "appId": "6754469004",
+          "title": "Prognozza: Football Analysis",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 59,
+          "appId": "6670539360",
+          "title": "STATZO: Football Stats Tracker",
+          "rating": 4.7619,
+          "votes": 21
+        },
+        {
+          "rank": 60,
+          "appId": "6794601921",
+          "title": "Football Simple Stats Tracker",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 61,
+          "appId": "6462470496",
+          "title": "Betting Tips: Football Scores",
+          "rating": 4.88462,
+          "votes": 52
+        },
+        {
+          "rank": 62,
+          "appId": "1599206150",
+          "title": "Betbook- Football Betting Tips",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 63,
+          "appId": "6475911885",
+          "title": "StatMate: Stats & Live Scores",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 64,
+          "appId": "6780508600",
+          "title": "Football Stats Me!",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 65,
+          "appId": "1492318236",
+          "title": "Edge Football Stats",
+          "rating": 4.38095,
+          "votes": 21
+        },
+        {
+          "rank": 66,
+          "appId": "6777397627",
+          "title": "Statify - Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 67,
+          "appId": "6749062854",
+          "title": "BuzzScores Predictions & Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 68,
+          "appId": "6737802501",
+          "title": "Harlequins Official App",
+          "rating": 3.33333,
+          "votes": 18
+        },
+        {
+          "rank": 69,
+          "appId": "6777043690",
+          "title": "GG AI Football Predictions",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 70,
+          "appId": "1171012600",
+          "title": "All Football - Scores & News",
+          "rating": 4.18804,
+          "votes": 569
+        },
+        {
+          "rank": 71,
+          "appId": "6747270983",
+          "title": "Futi: soccer scores and stats",
+          "rating": 3,
+          "votes": 2
+        },
+        {
+          "rank": 72,
+          "appId": "6738888800",
+          "title": "Al Football Tips - Aldviser",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 73,
+          "appId": "6758254710",
+          "title": "Odds Tracker: Football Lines",
+          "rating": 5,
+          "votes": 2
+        },
+        {
+          "rank": 74,
+          "appId": "6461013725",
+          "title": "TheyScored - Football Scores",
+          "rating": 4.58333,
+          "votes": 12
+        },
+        {
+          "rank": 75,
+          "appId": "1531345768",
+          "title": "Cymru Football",
+          "rating": 4.83312,
+          "votes": 9936
+        },
+        {
+          "rank": 76,
+          "appId": "498907787",
+          "title": "Football Stats Tracker Touch",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 77,
+          "appId": "1636686499",
+          "title": "Football NI",
+          "rating": 4.84142,
+          "votes": 5896
+        },
+        {
+          "rank": 78,
+          "appId": "6755115812",
+          "title": "Suprastats - Livescore & Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 79,
+          "appId": "6749076103",
+          "title": "IntelPicks - Football stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 80,
+          "appId": "6755898538",
+          "title": "Football.Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 81,
+          "appId": "1237698160",
+          "title": "Superfan Sports: NFL Football",
+          "rating": 4.80591,
+          "votes": 237
+        },
+        {
+          "rank": 82,
+          "appId": "6808181540",
+          "title": "AI Football Tips - FieldTips",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 83,
+          "appId": "6761377142",
+          "title": "JPick :J.League Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 84,
+          "appId": "6815376228",
+          "title": "Statside",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 85,
+          "appId": "6745304289",
+          "title": "AI Scorecast Pro",
+          "rating": 3.66667,
+          "votes": 6
+        },
+        {
+          "rank": 86,
+          "appId": "6758236718",
+          "title": "Skill Track Pro",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 87,
+          "appId": "6799349106",
+          "title": "Netted: Youth Football Stats",
+          "rating": 5,
+          "votes": 10
+        },
+        {
+          "rank": 88,
+          "appId": "6446204753",
+          "title": "Enki's Football Stats",
+          "rating": 4.53946,
+          "votes": 76
+        },
+        {
+          "rank": 89,
+          "appId": "6759090216",
+          "title": "ValueBet Football Odds",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 90,
+          "appId": "6478456909",
+          "title": "ProClubs FC",
+          "rating": 4.59999,
+          "votes": 5
+        },
+        {
+          "rank": 91,
+          "appId": "6752576111",
+          "title": "Elizascore: Football Scores",
+          "rating": 5,
+          "votes": 3
+        },
+        {
+          "rank": 92,
+          "appId": "6755324891",
+          "title": "WOF: Live Football Scores",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 93,
+          "appId": "1466709328",
+          "title": "Ranked: College Football",
+          "rating": 4,
+          "votes": 2
+        },
+        {
+          "rank": 94,
+          "appId": "6773625791",
+          "title": "Versy Live: Sports Scores",
+          "rating": 4.46666,
+          "votes": 15
+        },
+        {
+          "rank": 95,
+          "appId": "1052578676",
+          "title": "Primera Chile - Football Stats",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 96,
+          "appId": "6756504425",
+          "title": "ScoreLab: Football Predictions",
+          "rating": 5,
+          "votes": 1
+        },
+        {
+          "rank": 97,
+          "appId": "6749849332",
+          "title": "FTACT FT",
+          "rating": 4.56667,
+          "votes": 30
+        },
+        {
+          "rank": 98,
+          "appId": "6771367364",
+          "title": "YOMA Football",
+          "rating": 3,
+          "votes": 1
+        },
+        {
+          "rank": 99,
+          "appId": "6777967430",
+          "title": "Just Football: Scores & News",
+          "rating": null,
+          "votes": null
+        },
+        {
+          "rank": 100,
+          "appId": "1558488894",
+          "title": "Football Stats - Mutating",
+          "rating": 3,
+          "votes": 2
+        }
+      ]
+    }
+  ]
+}

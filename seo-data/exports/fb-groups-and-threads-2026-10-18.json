@@ -1,0 +1,102 @@
+{
+  "checked": "2026-10-18",
+  "groups": [
+    {
+      "name": "Junior Grassroots Hub",
+      "url": "https://www.facebook.com/groups/grassrootsfootballhub/",
+      "member": true,
+      "notes": "Main venue. Game time threads get 40-150 comments. App makers post often. Runs paid PARTNER POSTs (Centre Circle)."
+    },
+    {
+      "name": "The Grassroots Football Group",
+      "url": "https://www.facebook.com/groups/grassrootsfootball.co.uk/",
+      "size": "10.5K",
+      "activity": "~1,000 posts/month",
+      "notes": "Self-promotion tolerated (FairPlay Coach, ClubRoots, Up For Match)."
+    },
+    {
+      "name": "Grassroots Football UK - FDS",
+      "url": "https://www.facebook.com/groups/3347494538815914/",
+      "size": "42K",
+      "notes": "Mostly players-wanted. Admin sells own Excel stats workbook. SquadSync posted."
+    },
+    {
+      "name": "Grassroots Football Soccer Coaches",
+      "url": "https://www.facebook.com/groups/686131474758321/",
+      "size": "421",
+      "notes": "Coach Meister posted Android beta."
+    },
+    {
+      "name": "North West Junior Football Forum",
+      "url": "https://www.facebook.com/groups/1016207201823443/",
+      "notes": "TactiQ Pro / Boxlytics beta recruitment."
+    },
+    {
+      "name": "Football Coaching For All",
+      "url": "https://www.facebook.com/groups/1500474670246192/",
+      "size": "23K private",
+      "notes": "Not searched"
+    },
+    {
+      "name": "Grassroots Coaching Drills",
+      "url": "https://www.facebook.com/groups/919448005560545/",
+      "size": "152K private",
+      "notes": "Not searched"
+    },
+    {
+      "name": "Essex Youth Football Coaches Network",
+      "url": "https://www.facebook.com/groups/1613138342343439/",
+      "size": "2.4K",
+      "notes": "Not searched"
+    },
+    {
+      "name": "Kent Youth Football Forum",
+      "size": "6K",
+      "notes": "Not searched"
+    }
+  ],
+  "open_threads_no_app_link": [
+    {
+      "url": "https://www.facebook.com/groups/grassrootsfootballhub/permalink/1747386946365293/",
+      "date": "2026-10-18",
+      "comments": 83,
+      "topic": "Parent: child always at training, starts on bench",
+      "kind": "parent"
+    },
+    {
+      "url": "https://www.facebook.com/groups/grassrootsfootballhub/permalink/1746234333147221/",
+      "date": "2026-10-17",
+      "comments": 147,
+      "topic": "Coach here please help (U7-U9 coach deflated)",
+      "kind": "coach"
+    },
+    {
+      "url": "https://www.facebook.com/groups/grassrootsfootballhub/permalink/1742756190161702/",
+      "date": "~2026-10-13",
+      "comments": 88,
+      "topic": "U8 squad of 10, max 7 matchday, two weaker players",
+      "kind": "coach"
+    },
+    {
+      "url": "https://www.facebook.com/groups/grassrootsfootballhub/permalink/1735611630876158/",
+      "date": "2026-10-05",
+      "comments": 23,
+      "topic": "U11 big squad, half a game each, parent complained",
+      "kind": "coach"
+    },
+    {
+      "url": "https://www.facebook.com/groups/grassrootsfootballhub/permalink/1735894607514527/",
+      "date": "2026-10-05",
+      "comments": 69,
+      "topic": "U12 set positions, parent grievance",
+      "kind": "coach"
+    },
+    {
+      "url": "https://www.facebook.com/groups/grassrootsfootballhub/permalink/1734015487702439/",
+      "date": "2026-10-03",
+      "comments": 79,
+      "topic": "Parent: U9 son got 10 minutes",
+      "kind": "parent"
+    }
+  ]
+}

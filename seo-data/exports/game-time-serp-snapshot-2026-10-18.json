@@ -1,0 +1,242 @@
+{
+  "date": "2026-10-18",
+  "engine": "google.co.uk",
+  "note": "Signed-in Chrome, may be personalised. Organic results only.",
+  "queries": [
+    {
+      "query": "equal game time calculator",
+      "results": [
+        {
+          "position": 1,
+          "result": "playingtimecalculator.com",
+          "type": "other"
+        },
+        {
+          "position": 2,
+          "result": "mymathtables.com",
+          "type": "other"
+        },
+        {
+          "position": 3,
+          "result": "belnorth.com/fairgt",
+          "type": "other"
+        },
+        {
+          "position": 4,
+          "result": "Somerset FA: Even Stevens",
+          "type": "other"
+        },
+        {
+          "position": 5,
+          "result": "playingtimecalculator.com/beta",
+          "type": "other"
+        },
+        {
+          "position": 6,
+          "result": "quicksub.fun",
+          "type": "other"
+        },
+        {
+          "position": 7,
+          "result": "thehoopsgeek.com",
+          "type": "other"
+        },
+        {
+          "position": 8,
+          "result": "PlayBall (App Store)",
+          "type": "other"
+        },
+        {
+          "position": 9,
+          "result": "footballparent.co.uk: equal playing time article",
+          "type": "footballparent"
+        }
+      ]
+    },
+    {
+      "query": "fair playing time football coaches app",
+      "results": [
+        {
+          "position": 1,
+          "result": "fairplaycoach.co.uk",
+          "type": "competitor"
+        },
+        {
+          "position": 2,
+          "result": "fairplayfc.co.uk/fair-playing-time",
+          "type": "competitor"
+        },
+        {
+          "position": 3,
+          "result": "fairplayfc.co.uk",
+          "type": "competitor"
+        },
+        {
+          "position": 4,
+          "result": "footballparent.co.uk: best grassroots football apps",
+          "type": "footballparent"
+        },
+        {
+          "position": 5,
+          "result": "SubTime (App Store)",
+          "type": "competitor"
+        },
+        {
+          "position": 6,
+          "result": "footballdna.co.uk: mastering equal playtime",
+          "type": "other"
+        },
+        {
+          "position": 7,
+          "result": "Junior Grassroots Hub Facebook post",
+          "type": "other"
+        },
+        {
+          "position": 8,
+          "result": "Fair Playtime Live (Google Play)",
+          "type": "other"
+        }
+      ]
+    },
+    {
+      "query": "grassroots football substitution app",
+      "results": [
+        {
+          "position": 1,
+          "result": "SubTime (Google Play)",
+          "type": "competitor"
+        },
+        {
+          "position": 2,
+          "result": "footballparent.co.uk: best grassroots football apps",
+          "type": "footballparent"
+        },
+        {
+          "position": 3,
+          "result": "subtimeapp.com",
+          "type": "competitor"
+        },
+        {
+          "position": 4,
+          "result": "fairplaycoach.co.uk",
+          "type": "competitor"
+        },
+        {
+          "position": 5,
+          "result": "OnPitch (App Store)",
+          "type": "other"
+        },
+        {
+          "position": 6,
+          "result": "sportplan.net: best free apps",
+          "type": "other"
+        },
+        {
+          "position": 7,
+          "result": "onpitch.app",
+          "type": "other"
+        },
+        {
+          "position": 8,
+          "result": "pitch-planner.app: 10 best sub apps",
+          "type": "other"
+        },
+        {
+          "position": 9,
+          "result": "fairplayfc.co.uk/fair-playing-time",
+          "type": "competitor"
+        }
+      ]
+    },
+    {
+      "query": "equal playing time app grassroots football",
+      "results": [
+        {
+          "position": 1,
+          "result": "fairplaycoach.co.uk",
+          "type": "competitor"
+        },
+        {
+          "position": 2,
+          "result": "SubTime (Google Play)",
+          "type": "competitor"
+        },
+        {
+          "position": 3,
+          "result": "SubTime (App Store)",
+          "type": "competitor"
+        },
+        {
+          "position": 4,
+          "result": "playingtimecalculator.com",
+          "type": "other"
+        },
+        {
+          "position": 5,
+          "result": "fairplayfc.co.uk/fair-playing-time",
+          "type": "competitor"
+        },
+        {
+          "position": 6,
+          "result": "Junior Grassroots Hub Facebook post",
+          "type": "other"
+        },
+        {
+          "position": 7,
+          "result": "subtimeapp.com",
+          "type": "competitor"
+        },
+        {
+          "position": 8,
+          "result": "footballparent.co.uk: equal playing time article",
+          "type": "footballparent"
+        },
+        {
+          "position": 9,
+          "result": "grassrootscoach.app: equal playing time resource",
+          "type": "other"
+        }
+      ]
+    }
+  ],
+  "own_pages": [
+    {
+      "path": "/football-parent-coach-app",
+      "title": "Football Parent Coach App: Team Selector & Match Tracker",
+      "words": 830,
+      "schema": [
+        "FAQPage",
+        "Organization",
+        "WebSite",
+        "Person"
+      ],
+      "gsc_since_sept": {
+        "impressions": 24,
+        "clicks": 0,
+        "avg_position_approx": 7
+      },
+      "gap": "No SoftwareApplication schema; not in top 9 for the 4 queries"
+    },
+    {
+      "path": "/coaching/equal-playing-time-calculator",
+      "published": "2026-10-05",
+      "words": 3208,
+      "schema": [
+        "WebApplication",
+        "BreadcrumbList",
+        "FAQPage",
+        "Organization",
+        "WebSite",
+        "Person"
+      ],
+      "gsc": {
+        "impressions": 0
+      },
+      "gap": "Too new to judge"
+    },
+    {
+      "path": "/coach-app/",
+      "note": "Sign-in screen for the app, not an SEO page"
+    }
+  ]
+}

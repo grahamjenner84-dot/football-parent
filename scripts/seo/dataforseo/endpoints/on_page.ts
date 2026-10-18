@@ -20,6 +20,26 @@ export type ContentParsingOptions = {
   forceRefresh?: boolean;
 };
 
+// On-Page - Instant Pages. Same no-direct-fetch property as content parsing,
+// but returns the on-page SEO fields content parsing leaves out: meta title,
+// meta description, h1-h6 and word count. It does not list schema types.
+export function instantPages(url: string, opts: ContentParsingOptions): Promise<DataForSeoResult> {
+  const endpoint = "on_page/instant_pages";
+  const body: Record<string, unknown> = { url };
+  if (opts.enableJavascript) body.enable_javascript = true;
+  return dataForSeoRequest({
+    workflow: opts.workflow,
+    apiFamily: API_FAMILY,
+    cacheFamily: "page_content",
+    endpoint,
+    body,
+    environment: opts.environment,
+    confirmLive: opts.confirmLive,
+    forceRefresh: opts.forceRefresh,
+    seedTerms: [url],
+  });
+}
+
 export function contentParsingLive(url: string, opts: ContentParsingOptions): Promise<DataForSeoResult> {
   const endpoint = "on_page/content_parsing/live";
   const body: Record<string, unknown> = { url };
