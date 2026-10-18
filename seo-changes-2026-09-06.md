@@ -1703,3 +1703,14 @@ Watch to about 1 Nov. The risk is `/coaching/equal-playing-time-in-grassroots-fo
 `/coaching/equal-playing-time-calculator`: coach-app commit `39e4ea0` (merged `7239549`). The calculator iframe was served by the app's `index.html`, whose plain `noindex` also stops Google counting framed content as part of the embedding page. It is now served by `game-time-calculator.html` with `noindex, indexifembedded`. Before: page indexed (URL Inspection 18 Oct, last crawl 6 Oct) but 0 impressions since launch on 5 Oct, and not in the top 100 for "playing time calculator", "equal playing time calculator" or "equal game time calculator" (DataForSEO, 18 Oct). After the next crawl, check URL Inspection "View crawled page" shows the calculator. Judge from about 8 Nov.
 
 Same day, no SEO effect: calculator frame height handshake (coach-app `a196f94`, site `3de2ed2`), fixing the bottom of the calculator sometimes being cut off until the page was zoomed.
+
+## 18 Oct 2026: four internal links for the app pages
+
+From `seo-data/exports/top3-plan-app-clusters-2026-10-18.md`. One edit per page, each in its own commit; all four pages last changed 6 Oct or earlier, so none was on watch.
+
+- `/coaching/equal-playing-time-calculator`: the "Coach App" link becomes "Coach App, our [playing time app for grassroots football]". Anchor only, text unchanged. Commit `6bb17e5`. Second change to this page today, after the calculator `indexifembedded` change above; this one only alters an outbound anchor, so the embed change is the one to credit for any ranking movement.
+- `/coaching/football-team-spreadsheet`: the "Coach App" link becomes "The Coach App, our [fair playing time app for grassroots coaches]". Anchor only. Commit `434210a`.
+- `/football-gear/best-football-gps-trackers-for-kids`: one sentence added to the opening paragraph linking "[best football stats apps for kids]" to `/parent-guides/best-football-stats-apps`, which had a single internal link pointing to it and was losing stats searches to the coaching apps roundup. Live affiliate page; watch its click-outs in case the link takes some of them. Commit `cb5ecd5`.
+- `/parent-guides/how-to-become-a-football-coach`: bracketed clause in the session-planning sentence linking "[best football coaching apps for grassroots coaches]" to `/coaching/best-grassroots-football-apps` (4 internal links pointing to it before this). Commit `6113be9`.
+
+Held until their watch periods end: the apps roundup's link to the stats page (after about 25 Oct), and the anchor changes on the apps roundup and the equal playing time article (from 1 Nov).
