@@ -1721,3 +1721,13 @@ Graham asked for these not to wait for their watch periods.
 
 - `/coaching/best-grassroots-football-apps`: sentence added to the Coach App all-rounder paragraph linking "[best football stats apps]" to `/parent-guides/best-football-stats-apps`. Commit `76f2c08`. Also on this page: the "Best for Equal Playing Time" pick's "Coach App" link becomes "[equal playing time app]". Anchor only. Commit `58f7199`. The page was last edited 11 Oct, so it is still inside that watch period, and now has two more changes. Any movement to about 1 Nov has three candidate causes.
 - `/coaching/equal-playing-time-in-grassroots-football`: "the [Coach App]" link becomes "the Coach App, our [grassroots football substitution app]". Anchor only. Commit `ed79a0c`. Live traffic (3,691 impressions in the last 28 days). Same day as the coach app page's title change to "Fair Playing Time App for Grassroots Football | Coach App", so if this page slips on "equal playing time", the two can't be separated. Revert the coach app title first, since it is the bigger change.
+
+Held links added the same day at Graham's request (18 Oct), one additive sentence or paragraph each, anchor "girls' academy trials, club by club". Several of these pages are still on watch from earlier changes, so any movement on them to ~1 Nov has more than one candidate cause; an internal link out is the least likely to move rankings.
+- `/girls-football/emerging-talent-centres-explained` (`f1aac80`), "How to Find Your Nearest ETC". On watch from 16 Oct.
+- `/girls-football/how-girls-football-academies-work` (`45af12f`), "How Players Get Into The Pathway". On watch from 16 Oct.
+- `/girls-football/what-age-do-girls-football-academies-recruit` (`b11b252`), ETC section, with a line on club ETC age ranges.
+- `/academy-pathway/crystal-palace-development-centre-guide` (`b6dd99b`), Girls pathway section. Live traffic page, on watch from the 16 Oct title change.
+- `/academy-pathway/tottenham-development-centres-explained` (`91dce29`), Girls' PDP section.
+- `/academy-pathway/aston-villa-development-centre-guide` (`c5f6d5c`), girls' section. On watch (9 Oct title, 10 Oct ExpertQA, 18 Oct Wolves link).
+- `/academy-pathway/west-ham-player-pathway-guide` (`79ede6d`), girls' tier section.
+Tracker: girls-academy-trials-by-club and how-girls-football-works set to published.
