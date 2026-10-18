@@ -67,6 +67,12 @@ export default function GirlsFootballPage() {
             "Wildcats from age 5, Squad for 11 to 16, then girls' or mixed teams up to Under-18. How girls' football in England works: ages, formats, leagues and clubs.",
         },
         {
+          title: "Girls' Academy Trials 2026/27: Club by Club",
+          href: "/girls-football/girls-academy-trials-by-club",
+          description:
+            "Most 2026/27 girls' academy trials ran April to July. How Arsenal, Chelsea, Man Utd, Leeds, Villa and 23 more clubs recruit girls, and what is still open.",
+        },
+        {
           title: "How Girls Football Academies Work",
           href: "/girls-football/how-girls-football-academies-work",
           description:

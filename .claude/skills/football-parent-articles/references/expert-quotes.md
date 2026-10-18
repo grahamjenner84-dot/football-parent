@@ -1129,6 +1129,21 @@ Football Development coach.
 4. For girls' families: how did the register-of-interest window for the
    Girls Academy and ETC work in practice?
 
+### girls-academy-trials-by-club — TBD, tag: girls' ETC/academy recruitment rounds, applying to several clubs
+Drafted: 2026-10-18
+Shipped with one callout: the Girls United "choosing a club" answer, first two
+sentences only (Graham approved the reuse after seeing the full Q&A). Graham
+has no girls' pathway experience. Well suited to an ETC or girls' academy
+talent ID lead at any of the 28 clubs covered, or a parent whose daughter has
+been through two or three clubs' trial rounds.
+1. When you open an expression-of-interest form, roughly how many girls apply
+   for each place, and what on the form decides who gets invited?
+2. What do you see from girls who trial at several clubs in the same summer,
+   and what would you tell a family deciding between two offers?
+3. How do girls who miss the summer round usually come into your programme
+   during the season?
+4. What is one thing parents get wrong about the step from ETC to academy?
+
 ### Elevation academy interview — Crystal Palace academy coach, tag: academy scouting/coaching, U6-U8 development, 1v1/ball mastery, Crystal Palace insider, private coaching crossover, bio-banding
 Drafted: 2026-08-25. Sent, then chased twice by Graham, no reply.
 **CLOSED 2026-10-02: not interested** (he normally replies quickly, so read
@@ -1519,7 +1534,7 @@ same as the pre-existing `[FutureFit Part 2...]` link pattern.
 **ANSWERED 2026-10-06: all 10 questions**, published as
 `/girls-football/girls-united-daughter-football-interview`
 (`content/girls-football/girls-united-daughter-football-interview.mdx`), the
-source of record for any excerpt. Placed 2026-10-06 as `<ExpertQA>` boxes, reuse count 1 each: "what coaches look for" in girls-football-trials, "talented but lacks confidence" in late-developers-in-girls-football, "choosing a club" in girls-academy-vs-grassroots-football. Every other answer: 0.
+source of record for any excerpt. Placed 2026-10-06 as `<ExpertQA>` boxes, reuse count 1 each: "what coaches look for" in girls-football-trials, "talented but lacks confidence" in late-developers-in-girls-football, "choosing a club" in girls-academy-vs-grassroots-football (full answer) and girls-academy-trials-by-club (first two sentences only, 2026-10-18), so reuse count 2. Every other answer: 0.
 Credit: they asked to be credited as the team, not one person. Answers came
 from Lucien Hodgson (London Marketing Lead), Robert Wright (London Programme
 Lead, FC & Fixtures) and Abigail Ingram (London Manager); name the three in a
