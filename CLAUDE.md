@@ -103,6 +103,7 @@ Why a session created here works in the app: `/coach-app` is a Vercel *rewrite* 
 
   This exists because a past SEO edit cost a page its rankings entirely; reverting recovered them. The point is traceability and reversibility, not timidity.
 - **Log every SEO-relevant change — including new article publishes — to the most recent `seo-changes-YYYY-MM-DD.md` file in the repo root, as it happens, not saved up for the next scheduled check-in write-up.** For an edit: what changed, the page, and the commit hash. For a new article: the publish date, slug/URL and category. This is what makes an unexplained traffic uplift or downturn traceable back to a specific dated change without reconstructing it from git log. When a check-in review gets written up (~every 2 weeks), that file becomes the closed record for that period and a new dated `seo-changes-*.md` file starts as the append target going forward — always log to whichever `seo-changes-*.md` file has the most recent date, not a new one per change.
+- **`SEO_ROADMAP.md` (repo root) holds dated SEO follow-ups that are not articles**: re-checks due on a date (for example the AI Overview re-check on the app searches), watch items, planned non-article work and partnership routes. Planned articles stay in the article roadmap (`pages` table, `seo-data/exports/article-tracker.csv`); shipped changes go in the change log above. When a roadmap item ships, log it there and tick or remove it here.
 
 ## Link-building outreach pipeline
 
