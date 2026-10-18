@@ -1,0 +1,23 @@
+-- Matches finished today, on the Coach App usage snapshot
+-- (coach_app_usage_snapshots, see 20260926180000_coach_app_usage_snapshots.sql).
+--
+-- The Coach App's database now also posts finishedMatchesToday: finished
+-- matches (league/cup/friendly and tournament) whose last match event, the
+-- "Full time" marker, is since UK midnight (coach-app migration 0063). The
+-- day's closing finished_matches total can't stand in for it: excluding an
+-- account or deleting a match takes finished matches out of the total, so on
+-- 18 Oct 2026 three real matches finished while the total stayed at 29,
+-- because Graham's own account (3 finished test matches) was excluded the
+-- same evening.
+--
+-- Still a whole-app count, on the terms Graham approved on 2026-09-26: counts
+-- only, app -> site, never a read of the Coach App database. Nullable:
+-- snapshots from before the app sends it have none.
+--
+-- APPLY THIS BEFORE DEPLOYING THE CODE THAT WRITES THIS COLUMN. The insert
+-- retries without it on PGRST204/42703, so no snapshot is lost, but the count
+-- is dropped until this runs.
+--
+-- Lives in the football-parent-social project (ref jwlwzoklgrzharqvazeg).
+
+alter table coach_app_usage_snapshots add column if not exists finished_matches_today integer;

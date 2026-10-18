@@ -95,6 +95,11 @@ export interface CoachAppUsageCounts {
   finishedMatches: number;
   /** Accounts on a team with at least one finished match. */
   accountsWithFinishedMatch: number;
+  /** Finished matches whose last event (the "Full time" marker) is since UK
+   * midnight (coach-app migration 0063). Unlike the day's change in
+   * finishedMatches, not reduced by an account being excluded or a match
+   * deleted. Null in snapshots sent before the Coach App started reporting it. */
+  finishedMatchesToday: number | null;
   /** Each account's own plan; the three add up to totalAccounts. Paid
    * includes a subscription whose payment is being retried. Lapsed is a
    * trial that ended, a cancelled subscription, or an old free account. */
@@ -132,10 +137,13 @@ export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachApp
     plan_lapsed: counts.planLapsed,
   };
   const supabase = adminClient();
-  const { error } = await supabase.from("coach_app_usage_snapshots").insert({ ...row, emails_today: counts.emailsToday });
-  // Deployed before 20261010090000_usage_snapshot_emails_today.sql was
-  // applied: keep the snapshot, drop the email count, rather than lose every
-  // snapshot until the migration runs.
+  const { error } = await supabase
+    .from("coach_app_usage_snapshots")
+    .insert({ ...row, emails_today: counts.emailsToday, finished_matches_today: counts.finishedMatchesToday });
+  // Deployed before 20261010090000_usage_snapshot_emails_today.sql or
+  // 20261018220000_coach_app_usage_finished_today.sql was applied: keep the
+  // snapshot, drop the optional counts, rather than lose every snapshot until
+  // the migration runs.
   if (error && isMissingColumnError(error)) {
     const retry = await supabase.from("coach_app_usage_snapshots").insert(row);
     if (!retry.error) return;
@@ -168,6 +176,7 @@ type SnapshotRow = {
   plan_trial: number;
   plan_lapsed: number;
   emails_today?: number | null;
+  finished_matches_today?: number | null;
 };
 
 function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string } {
@@ -185,6 +194,7 @@ function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string
     planTrial: r.plan_trial,
     planLapsed: r.plan_lapsed,
     emailsToday: typeof r.emails_today === "number" ? r.emails_today : null,
+    finishedMatchesToday: typeof r.finished_matches_today === "number" ? r.finished_matches_today : null,
   };
 }
 
@@ -196,12 +206,12 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
   const rows: SnapshotRow[] = [];
   const pageSize = 1000;
   // Newest first, so the first row seen for each day is its closing figure.
-  // Without the emails_today migration that column doesn't exist and
-  // selecting it fails: fall back to the rest (emailsToday then reads as
-  // null) so the tab still loads.
+  // Without the emails_today or finished_matches_today migration those
+  // columns don't exist and selecting them fails: fall back to the rest
+  // (they then read as null) so the tab still loads.
   const baseColumns =
     "taken_at, total_accounts, signups_today, signups_today_with_team, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed";
-  let columns = baseColumns + ", emails_today";
+  let columns = baseColumns + ", emails_today, finished_matches_today";
   for (let from = 0; ; from += pageSize) {
     const read = () =>
       supabase

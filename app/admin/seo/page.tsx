@@ -2926,6 +2926,9 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
           value={latest.accountsWithFinishedMatch}
           sub={`${pct(latest.accountsWithFinishedMatch) ?? ""}${pct(latest.accountsWithFinishedMatch) ? ", " : ""}${latest.finishedMatches} matches in all`}
         />
+        {latest.finishedMatchesToday !== null && (
+          <UsageTile label="Matches finished today" value={latest.finishedMatchesToday} />
+        )}
         <UsageTile label="Paid" value={latest.planPaid} sub={pct(latest.planPaid)} />
         <UsageTile label="On trial" value={latest.planTrial} sub={pct(latest.planTrial)} />
         <UsageTile label="Lapsed" value={latest.planLapsed} sub={pct(latest.planLapsed)} />
@@ -2941,7 +2944,10 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         app load). Set up a team means on at least one team, as owner or
         invited coach; under Sign-ups today it is how many of today&rsquo;s
         new accounts have got that far. Finished a match counts league, cup,
-        friendly and tournament games marked finished. Paid, On trial and
+        friendly and tournament games marked finished. Matches finished today
+        is games whose full time was since midnight; the all-time total can
+        go down (an account excluded, a match deleted), so a flat total
+        doesn&rsquo;t mean none were finished. Paid, On trial and
         Lapsed are each account&rsquo;s own plan and add up to Total accounts:
         Paid includes a subscription whose payment is being retried; Lapsed is
         a trial that ended, a cancelled subscription, or an old free account.
@@ -2966,6 +2972,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Active 7d</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>With team</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Finished a match</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Finished that day</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Matches finished</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
@@ -2985,6 +2992,7 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                   <td style={funnelNum}>{d.active7d}</td>
                   <td style={funnelNum}>{d.accountsWithTeam}</td>
                   <td style={funnelNum}>{d.accountsWithFinishedMatch}</td>
+                  <td style={funnelNum}>{d.finishedMatchesToday ?? "-"}</td>
                   <td style={funnelNum}>{d.finishedMatches}</td>
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
