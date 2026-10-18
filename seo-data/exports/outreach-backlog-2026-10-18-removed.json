@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://sportspotter.co.uk/best-lineup-builder-football-apps/",
+    "source": "sweep:best apps for football coaches",
+    "reason": "Content check rejected: a PitchFlow promotion ('PitchFlow vs. The Rest') whose only outbound link is to PitchFlow"
+  },
+  {
+    "url": "https://www.phoenixyouthfc.com/the-rhubarb--custard---updates/i-recently-saw-a-post-from-grassroots-football-uk-about-equal-play-and-it-still-remains-the-most-contentious-part-of-the-grassroots-game-and-probably-the-hardest-for-coaches-to-keep-everyone-happy-though-i-promise-you-they-doi-wrote-this-piece-last-y",
+    "source": "sweep:equal game time football",
+    "reason": "Read with --js: content check rejected, a club post whose only outbound link is a Google Maps link, so it doesn't point readers to other sites"
+  },
+  {
+    "url": "https://www.danscapers.com/playing-time-calculator-for-any-sport/",
+    "source": "sweep:playing time calculator",
+    "reason": "Australian parent-coach blog ('footy', 'a fair go') promoting his own playing time calculator: not a UK audience, and a rival tool"
+  },
+  {
+    "url": "https://playerdevelopmentproject.com/025-should-we-give-players-equal-game-time/",
+    "source": "sweep:equal game time football",
+    "reason": "Content check rejected: membership newsletter page, reads as a site page rather than an authored piece"
+  },
+  {
+    "url": "https://playerdevelopmentproject.com/qa-should-i-give-my-players-equal-playing-time/",
+    "source": "topic:fair playing time youth football opinion",
+    "reason": "Content check rejected: no author, date or first-person voice, reads as a site page"
+  },
+  {
+    "url": "https://thegomezway.com/2025/10/15/subbing-strategies-in-football/",
+    "source": "topic:how to manage substitutions grassroots football",
+    "reason": "Content check rejected: no author voice, and about professional gamesmanship subs rather than youth rotation"
+  },
+  {
+    "url": "https://profootballcoaching.com/blog/top-10-coaching-apps-every-coach-should-try",
+    "source": "sweep:best apps for football coaches",
+    "reason": "Unreadable: no readable text returned (likely blocks crawlers or needs JavaScript); not retried with --js because the site reads as US coaching education"
+  },
+  {
+    "url": "https://www.soccercoachweekly.net/coaching-advice/how-to-handle-the-subs",
+    "source": "topic:how to manage substitutions grassroots football",
+    "reason": "Removed by the independent audit: undated old anecdote (footer 2006-2024), no outbound links at all, metered paywall, US and Canadian testimonials, and a generic commercial-publisher contact form. Odds of adding a free external tool are very low."
+  }
+]

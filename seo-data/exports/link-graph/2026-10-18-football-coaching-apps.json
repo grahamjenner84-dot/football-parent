@@ -1,0 +1,94 @@
+{
+  "keyword": "football coaching apps",
+  "ranAt": "2026-10-18T21:39:47.416Z",
+  "peers": [
+    {
+      "domain": "footballgpt.co",
+      "url": "https://footballgpt.co/",
+      "position": 18,
+      "rank": 202,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 25
+    },
+    {
+      "domain": "profootballcoaching.com",
+      "url": "https://profootballcoaching.com/blog/top-10-coaching-apps-every-coach-should-try",
+      "position": 19,
+      "rank": 177,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "ecoachpro.net",
+      "url": "https://www.ecoachpro.net/post/best-football-training-app-to-improve-player-skills-coaching-experience-ecoach-pro",
+      "position": 24,
+      "rank": 151,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "youcoach.com",
+      "url": "https://www.youcoach.com/pages/youcoach_home",
+      "position": 25,
+      "rank": 400,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "hobbit.football",
+      "url": "https://hobbit.football/tools/best-soccer-coaching-apps",
+      "position": 27,
+      "rank": 162,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 3,
+      "linkersFound": 0
+    },
+    {
+      "domain": "fieldio.pro",
+      "url": "https://fieldio.pro/en/articles/which-football-app-do-you-need-as-an-amateur-football-coach",
+      "position": 28,
+      "rank": 0,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "flicktec.io",
+      "url": "https://flicktec.io/blog/best-soccer-coaching-apps",
+      "position": 30,
+      "rank": 82,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "coachingapps.ch",
+      "url": "https://www.coachingapps.ch/en/home-en/",
+      "position": 32,
+      "rank": 112,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    }
+  ]
+}

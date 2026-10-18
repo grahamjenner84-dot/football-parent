@@ -1,0 +1,83 @@
+{
+  "keyword": "equal playing time calculator",
+  "ranAt": "2026-10-18T21:39:35.377Z",
+  "peers": [
+    {
+      "domain": "calculatorshub.net",
+      "url": "https://calculatorshub.net/sports-calculators/average-points-per-game-calculator/",
+      "position": 15,
+      "rank": 418,
+      "pitchable": true,
+      "kind": "content",
+      "size": "established",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 1
+    },
+    {
+      "domain": "fieldio.pro",
+      "url": "https://fieldio.pro/en/articles/how-to-create-a-football-lineup-for-your-youth-team",
+      "position": 16,
+      "rank": 0,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "jropldyibizm.fit",
+      "url": "https://jropldyibizm.fit/dyczavwqzmtwgzhfzawalpr",
+      "position": 17,
+      "rank": 0,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "equalplay.io",
+      "url": "https://equalplay.io/",
+      "position": 1,
+      "rank": 0,
+      "pitchable": false,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 25
+    },
+    {
+      "domain": "mymathtables.com",
+      "url": "https://www.mymathtables.com/calculator/date/custom-time-add-subtract-hour-minute-calculator.html",
+      "position": 3,
+      "rank": 219,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    },
+    {
+      "domain": "greysonmasters.com",
+      "url": "http://www.greysonmasters.com/blog/no-coach-should-have-to-do-math",
+      "position": 5,
+      "rank": 0,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 1,
+      "linkersFound": 0
+    },
+    {
+      "domain": "teamvibe.app",
+      "url": "https://teamvibe.app/resources/why-equal-play-time-matters/",
+      "position": 6,
+      "rank": 18,
+      "pitchable": true,
+      "kind": "content",
+      "size": "small",
+      "smallSitesLinkedOut": 0,
+      "linkersFound": 0
+    }
+  ]
+}
