@@ -2914,7 +2914,11 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
           value={latest.signupsToday}
           sub={latest.signupsTodayWithTeam === null ? undefined : `${latest.signupsTodayWithTeam} set up a team`}
         />
-        <UsageTile label="Active today" value={latest.activeToday} />
+        <UsageTile
+          label="Active today"
+          value={latest.activeToday}
+          sub={`${Math.max(0, latest.activeToday - latest.signupsToday)} excluding sign-ups`}
+        />
         <UsageTile label="Active last 7 days" value={latest.active7d} sub={pct(latest.active7d)} />
         <UsageTile label="Set up a team" value={latest.accountsWithTeam} sub={pct(latest.accountsWithTeam)} />
         <UsageTile
@@ -2958,9 +2962,11 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                 <th style={{ ...funnelTh, textAlign: "right" }}>Sign-ups</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>of which team set up</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Active</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Active ex sign-ups</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Active 7d</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>With team</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Finished a match</th>
+                <th style={{ ...funnelTh, textAlign: "right" }}>Matches finished</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Paid</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Trial</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Lapsed</th>
@@ -2975,9 +2981,11 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
                   <td style={funnelNum}>{d.signupsToday}</td>
                   <td style={funnelNum}>{d.signupsTodayWithTeam ?? "-"}</td>
                   <td style={funnelNum}>{d.activeToday}</td>
+                  <td style={funnelNum}>{Math.max(0, d.activeToday - d.signupsToday)}</td>
                   <td style={funnelNum}>{d.active7d}</td>
                   <td style={funnelNum}>{d.accountsWithTeam}</td>
                   <td style={funnelNum}>{d.accountsWithFinishedMatch}</td>
+                  <td style={funnelNum}>{d.finishedMatches}</td>
                   <td style={funnelNum}>{d.planPaid}</td>
                   <td style={funnelNum}>{d.planTrial}</td>
                   <td style={funnelNum}>{d.planLapsed}</td>
