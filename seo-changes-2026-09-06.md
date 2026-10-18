@@ -1665,3 +1665,9 @@ Related fixes the same day:
 - `/academy-pathway/what-is-eppp`: one additive link in the re-auditing paragraph, "Wolves kept Category One for 2026/27 only on condition of new dressing rooms and classrooms". Commit `fc07b00`. Last change to that page was 2 Oct, so it's off watch.
 
 - `/academy-pathway/aston-villa-development-centre-guide` (18 Oct): one additive link in the Category One paragraph, after "clubs like Brentford, Fulham and Tottenham", anchor "Wolves, who kept it for 2026/27 after a facilities scare". Commit `a067dab`. Added at Graham's request while the page is still on watch from the 9 Oct title change and 10 Oct ExpertQA box, so any movement to ~24 Oct has three candidate causes; an internal link out is the least likely of the three to move it.
+
+## 18 Oct 2026: new article, Girls' Academy Trials 2026/27: Club by Club
+
+Published 18 Oct 2026 (on branch `girls-academy-trials` until merged): `/girls-football/girls-academy-trials-by-club` (Girls Football). Targets "girls academy trials 2026" plus club girls' academy queries (Arsenal, Chelsea, Leeds, Palace, West Ham, Villa, Fulham). Tracker row High: GSC shows those club girls' queries already landing on the boys' development centre guides (Leeds "girls academy" pos 8.4, Palace 7.2, Villa 4.8, West Ham 6.5-8.0, Arsenal "girls academy trials 2026" 9.0). 28 clubs by region, checked against club pages 18 Oct. Added to the Girls Football index and `lib/routes.ts`. Article commit `67dc7d7`.
+
+Watch for cannibalisation with the boys' club guides on those girls' queries: if this page takes them over, the boys' pages may lose those impressions, which is the intended outcome, not a slip. No inbound links added yet.
