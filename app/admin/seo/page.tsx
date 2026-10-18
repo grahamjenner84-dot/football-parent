@@ -3584,7 +3584,7 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
   );
 }
 
-const JOIN_FORM_STEPS = ["view", "google", "email-open", "email", "email-sent", "email-error"];
+const JOIN_FORM_STEPS = ["view", "google", "google-done", "google-error", "email-open", "email", "email-sent", "email-error"];
 const JOIN_FORM_LABEL: Record<string, string> = {
   "site/join": "/progress, top form",
   "site/join-trial": "/progress, bottom form",

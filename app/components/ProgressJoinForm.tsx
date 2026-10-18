@@ -2,7 +2,12 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
 import { trackProgressFormStep } from "@/lib/progress-form-tracking";
-import { PROGRESS_APP_URL, progressAuthConfigured, sendProgressSignInLink } from "@/lib/progress-auth";
+import {
+  PROGRESS_APP_URL,
+  progressAuthConfigured,
+  sendProgressSignInLink,
+  startProgressGoogleSignIn,
+} from "@/lib/progress-auth";
 import { currentVisitSource } from "@/lib/coach-app-handoff";
 import { trackProgressSignUpConversion } from "@/lib/ads-tracking";
 
@@ -93,13 +98,20 @@ function ResendButton({ sentAt, dark, onResend, busy }: { sentAt: number; dark: 
 // Without the env vars it degrades to a plain GET to the app, whose sign-in
 // screen fills the email in (?email=) and sends the link from there.
 
-// "Sign up with Google" is only a link: the app starts Google sign-in itself
-// (?signin=google), so this site still never calls anything in Progress's
-// Supabase project but signInWithOtp (CLAUDE.md, lib/progress-auth.ts).
+// "Sign up with Google" starts Google sign-in from here (approved by Graham
+// on 18 Oct 2026, lib/progress-auth.ts), and Google returns the parent to the
+// app signed in. Until then it was a link to the app, which loaded and then
+// started Google itself: an extra page, and a jump to another address,
+// before Google. That link is still the fallback (unconfigured, or the
+// start failed), and the href for anyone without JavaScript.
 //
-// No marketing tick-box any more, so no ?marketing= on either route into
-// the app (this link or the email link): the form asks only for the email.
+// No marketing tick-box any more, so no ?marketing= on any route into the
+// app: the form asks only for the email.
 const GOOGLE_HREF = `${PROGRESS_APP_URL}?signin=google`;
+
+// One join event per page load for Google, however often it's tapped: on 15
+// and 16 Oct two parents tapped it three times each, which read as six sends.
+let googleJoinLogged = false;
 
 export default function ProgressJoinForm({ id, dark = false }: { id?: string; dark?: boolean }) {
   const [email, setEmail] = useState("");
@@ -115,6 +127,18 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
   const link = dark ? "text-white underline" : "text-[#0f5d34] underline";
   const errorText = `mt-3 text-sm ${dark ? "text-[#f2a09b]" : "text-red-700"}`;
   const stepForm = id ?? "join";
+  const googleForm = id === "join-trial" ? "join-trial" : "join";
+  const [googleBusy, setGoogleBusy] = useState(false);
+
+  // Back from Google with the back button: the page can come back from the
+  // browser's back-forward cache as it was left, "Opening Google…" and all.
+  useEffect(() => {
+    const onShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setGoogleBusy(false);
+    };
+    window.addEventListener("pageshow", onShow);
+    return () => window.removeEventListener("pageshow", onShow);
+  }, []);
 
   // "Seen", not "rendered": the lower form is a long scroll down. Half the
   // form on screen counts, once per page load (lib/progress-form-tracking.ts).
@@ -230,17 +254,32 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
           inbox and the app. */}
       <a
         href={GOOGLE_HREF}
-        onClick={() => {
+        aria-disabled={googleBusy}
+        onClick={(e) => {
+          if (googleBusy) {
+            e.preventDefault();
+            return;
+          }
           // Counted like a send: one join event (form "<id>-google") and the
-          // once-per-page Ads conversion. Whether Google sign-in then
-          // completes shows in the app snapshot's sign-ups by method.
-          logJoin(id ? `${id}-google` : "google");
+          // once-per-page Ads conversion. Whether it signed them in comes
+          // back from the app as this form's google-done or google-error step.
+          if (!googleJoinLogged) {
+            googleJoinLogged = true;
+            logJoin(id ? `${id}-google` : "google");
+          }
           trackProgressFormStep(stepForm, "google");
           trackProgressSignUpConversion();
+          if (!configured) return; // the plain link: the app starts Google itself
+          e.preventDefault();
+          setGoogleBusy(true);
+          void startProgressGoogleSignIn(googleForm).then(({ error }) => {
+            // Couldn't start it from here: hand over to the app, which can.
+            if (error) window.location.assign(GOOGLE_HREF);
+          });
         }}
-        className="flex w-full items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white! shadow-sm transition-colors hover:bg-[#0f5d34]"
+        className={`flex w-full items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white! shadow-sm transition-colors hover:bg-[#0f5d34] ${googleBusy ? "opacity-70" : ""}`}
       >
-        Sign up with Google
+        {googleBusy ? "Opening Google…" : "Sign up with Google"}
       </a>
       {/* The email form is in view under Google, not behind a link. From
           14 Oct it opened on request only ("No Google?"), as on the Coach

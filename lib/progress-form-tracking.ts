@@ -17,9 +17,11 @@ import { isPageViewOptedOut } from "@/lib/page-view-optout";
 //                                            in the progress repo)
 //
 // Steps: view, google, email-open, email, email-sent, email-error (and
-// google-error from the app). Each counts once per page load. Since
-// 18 Oct 2026 the site forms show the email box from the start, so
-// email-open only comes from the app.
+// google-error from the app). A site form's google-done and google-error
+// come from the app too, when Google started from that form brings the
+// parent back. Each counts once per page load. Since 18 Oct 2026 the site
+// forms show the email box from the start, so email-open only comes from
+// the app.
 
 export const PROGRESS_FORM_STEP_PREFIX = "/progress/join-form";
 
