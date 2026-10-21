@@ -368,8 +368,12 @@ export interface SourceCount {
   count: number;
 }
 
+// A referrer group, or "Android app" for the Coach App's Android opens (see
+// isAndroidAppPath), which carry no referrer to classify.
+export type PageViewSourceGroup = SourceGroup | typeof ANDROID_APP_SOURCE.group;
+
 export interface SourceGroupCount {
-  group: SourceGroup;
+  group: PageViewSourceGroup;
   count: number;
   topSources: SourceCount[];
 }
@@ -500,6 +504,19 @@ export function isCalculatorStepPath(path: string): boolean {
   return CALCULATOR_STEP_PREFIXES.some((prefix) => path.startsWith(prefix));
 }
 
+// The Coach App's Android build reports each app open under its own paths
+// (coach-app src/ui/components/PageViewPing.tsx): /coach-app/android for a
+// signed-in coach, /coach-app/android/sign-in for the sign-in screen. They
+// are page views, inside the /coach-app prefix, so the Coach App views
+// include them. The WebView sends no referrer, so by referrer alone every
+// one would read as a Direct web visit: they get their own source instead.
+const ANDROID_APP_PATH = "/coach-app/android";
+const ANDROID_APP_SOURCE = { group: "Android app", label: "Android app" } as const;
+
+export function isAndroidAppPath(path: string): boolean {
+  return path === ANDROID_APP_PATH || path.startsWith(`${ANDROID_APP_PATH}/`);
+}
+
 function isBeforeRecordingStart(path: string, createdAt: string): boolean {
   const ts = new Date(createdAt).getTime();
   return RECORDING_STARTS.some(
@@ -526,7 +543,7 @@ function isKnownBotIncident(path: string, createdAt: string): boolean {
 // the referrer mid-visit makes page 2 look like a fresh Direct entry;
 // someone opening two tabs from the same search result), but it's a real
 // proxy without adding session tracking.
-function buildSourceGroups(groupMap: Map<SourceGroup, Map<string, number>>): SourceGroupCount[] {
+function buildSourceGroups(groupMap: Map<PageViewSourceGroup, Map<string, number>>): SourceGroupCount[] {
   return Array.from(groupMap.entries())
     .map(([group, labelCounts]) => {
       const topSources = Array.from(labelCounts.entries())
@@ -835,11 +852,11 @@ export async function getPageViewSourcesForPath(
   const isBot = isBotRowForPath(path, rows);
   const humanRows = rows.filter((row) => !isBot(row));
 
-  const groupMap = new Map<SourceGroup, Map<string, number>>();
+  const groupMap = new Map<PageViewSourceGroup, Map<string, number>>();
   const uaMap = new Map<string, PathSourceUserAgent>();
 
   for (const row of humanRows) {
-    const { group, label } = classifyReferrerHost(row.referrer_host);
+    const { group, label } = isAndroidAppPath(path) ? ANDROID_APP_SOURCE : classifyReferrerHost(row.referrer_host);
     const labels = groupMap.get(group) ?? new Map<string, number>();
     labels.set(label, (labels.get(label) ?? 0) + 1);
     groupMap.set(group, labels);
@@ -1004,8 +1021,8 @@ export async function getPageViewStats(
 
   const byDayPathMap = new Map<string, Map<string, number>>();
   const byPathMap = new Map<string, number>();
-  const groupMap = new Map<SourceGroup, Map<string, number>>();
-  const byDayGroupMap = new Map<string, Map<SourceGroup, Map<string, number>>>();
+  const groupMap = new Map<PageViewSourceGroup, Map<string, number>>();
+  const byDayGroupMap = new Map<string, Map<PageViewSourceGroup, Map<string, number>>>();
   const byDayEstimatedVisits = new Map<string, number>();
   const byDayInternalViews = new Map<string, number>();
   const byDayBotViews = new Map<string, number>();
@@ -1034,7 +1051,9 @@ export async function getPageViewStats(
     // result. Takes precedence over the host classification (which would
     // otherwise file it under Search/Google) so paid traffic is visible as
     // its own source rather than inflating organic search.
-    const { group, label } = row.gclid
+    const { group, label } = isAndroidAppPath(row.path)
+      ? ANDROID_APP_SOURCE
+      : row.gclid
       ? ({ group: "Ads", label: "Google Ads" } as const)
       : classifyReferrerHost(row.referrer_host);
     if (group === "Internal") {
@@ -1050,7 +1069,7 @@ export async function getPageViewStats(
     labelBucket.set(label, (labelBucket.get(label) ?? 0) + 1);
     groupMap.set(group, labelBucket);
 
-    const dayGroupMap = byDayGroupMap.get(day) ?? new Map<SourceGroup, Map<string, number>>();
+    const dayGroupMap = byDayGroupMap.get(day) ?? new Map<PageViewSourceGroup, Map<string, number>>();
     const dayLabelBucket = dayGroupMap.get(group) ?? new Map<string, number>();
     dayLabelBucket.set(label, (dayLabelBucket.get(label) ?? 0) + 1);
     dayGroupMap.set(group, dayLabelBucket);
