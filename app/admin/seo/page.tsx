@@ -1895,6 +1895,20 @@ function Dashboard({
       : []
     : [];
 
+  // The Android app's sign-in screen for the chosen scope, from the sign-up
+  // form's step events (coach-app src/data/signupFormTracking.ts). Android
+  // ads send coaches straight to the Play Store, so this, not a page view,
+  // is where most sign-ups start.
+  const caSteps = coachAppViewStats?.calculatorSteps;
+  const caStepPaths = caSteps
+    ? isWindow
+      ? caSteps.topPaths
+      : caSteps.byDay.find((d) => d.date === effective)?.topPaths ?? []
+    : [];
+  const caStepCount = (path: string) => caStepPaths.find((p) => p.path === path)?.count ?? 0;
+  const androidSignInScreens = caStepCount("/coach-app/signup-form/android/sign-in/view");
+  const androidGoogleTaps = caStepCount("/coach-app/signup-form/android/sign-in/google");
+
   // App usage for the chosen scope: the latest snapshot for today or the
   // whole window, otherwise that day's closing figures (UK days, against the
   // page views' UTC days: the same date either way outside 00:00-01:00 BST).
@@ -2014,6 +2028,13 @@ function Dashboard({
             weekAgoDate={weekAgoDate}
           />
           <SourceLine rows={caSources} />
+          {caSteps && (
+            <div style={{ ...styles.cardStats, marginTop: 6 }}>
+              <span>
+                Android sign-in screens: <strong>{androidSignInScreens}</strong> ({androidGoogleTaps} tapped Google)
+              </span>
+            </div>
+          )}
           {usageDay && (
             <div style={{ ...styles.cardStats, marginTop: 6 }}>
               <span>
@@ -2801,7 +2822,11 @@ function CoachAppTab({ stats }: { stats: CoachAppViewStats }) {
         it (every launch, reload or reopened tab), so it measures use of the
         app, not people seeing a sign-up form. /coach-app/sign-in is the
         app&rsquo;s sign-in screen, shown to anyone signed out: that is the
-        app&rsquo;s sign-up form view.
+        app&rsquo;s sign-up form view. /coach-app/android and
+        /coach-app/android/sign-in are the same two for the Android app
+        (counted from its release of 21 Oct 2026; before that no Android
+        open was recorded), with their own &ldquo;Android app&rdquo; source,
+        since the app sends no referrer.
         The game time calculator&rsquo;s steps are left out of these counts
         and shown under Calculator steps below: each step is an event, not
         a page view, and counted as views they doubled the calculator&rsquo;s
