@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { classifyReferrerHost } from "@/lib/referrer-sources";
+import { ANDROID_INSTALL_LANDING_PATH } from "@/lib/coach-app-android";
 import {
   COACH_APP_CHANNELS,
   channelFor,
@@ -317,7 +318,9 @@ export interface CoachAppFunnel {
   totals: { landingViews: number; signInViews: number; signups: number };
   /** Newest first, capped. Anonymous: no account is identifiable here. */
   recentSignups: FunnelSignup[];
-  signupsByDay: { date: string; signups: number }[];
+  /** By UTC day; android is those through the Android app
+   * (ANDROID_INSTALL_LANDING_PATH), the rest came through a web form. */
+  signupsByDay: { date: string; signups: number; android: number }[];
   /** Views against sign-ups per form: the Coach App page, its ad variants,
    * the calculator page and the app's own sign-in screen, plus any other
    * page a sign-up names. Older sign-ups with no channel mostly have no
@@ -518,10 +521,13 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     (a, b) => b.signups - a.signups || (b.views ?? 0) - (a.views ?? 0)
   );
 
-  const dayMap = new Map<string, number>();
+  const dayMap = new Map<string, { signups: number; android: number }>();
   for (const r of signupRows) {
     const d = r.created_at.slice(0, 10);
-    dayMap.set(d, (dayMap.get(d) ?? 0) + 1);
+    const day = dayMap.get(d) ?? { signups: 0, android: 0 };
+    day.signups++;
+    if (r.landing_path === ANDROID_INSTALL_LANDING_PATH) day.android++;
+    dayMap.set(d, day);
   }
 
   const humanCoaching = coachingRows.filter((r) => isHuman(r.user_agent));
@@ -556,7 +562,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
       utmCampaign: r.utm_campaign,
     })),
     signupsByDay: Array.from(dayMap.entries())
-      .map(([date, signups]) => ({ date, signups }))
+      .map(([date, day]) => ({ date, ...day }))
       .sort((a, b) => b.date.localeCompare(a.date)),
     bySignupForm,
     coachingArticles: {

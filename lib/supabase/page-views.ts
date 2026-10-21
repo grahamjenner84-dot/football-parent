@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
+import { isAndroidAppPath } from "@/lib/coach-app-android";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getAllArticleSlugs } from "@/lib/content";
 import {
@@ -504,18 +505,11 @@ export function isCalculatorStepPath(path: string): boolean {
   return CALCULATOR_STEP_PREFIXES.some((prefix) => path.startsWith(prefix));
 }
 
-// The Coach App's Android build reports each app open under its own paths
-// (coach-app src/ui/components/PageViewPing.tsx): /coach-app/android for a
-// signed-in coach, /coach-app/android/sign-in for the sign-in screen. They
-// are page views, inside the /coach-app prefix, so the Coach App views
-// include them. The WebView sends no referrer, so by referrer alone every
-// one would read as a Direct web visit: they get their own source instead.
-const ANDROID_APP_PATH = "/coach-app/android";
+// The Coach App's Android opens (isAndroidAppPath) are page views, inside the
+// /coach-app prefix, so the Coach App views include them. The WebView sends
+// no referrer, so by referrer alone every one would read as a Direct web
+// visit: they get their own source instead.
 const ANDROID_APP_SOURCE = { group: "Android app", label: "Android app" } as const;
-
-export function isAndroidAppPath(path: string): boolean {
-  return path === ANDROID_APP_PATH || path.startsWith(`${ANDROID_APP_PATH}/`);
-}
 
 function isBeforeRecordingStart(path: string, createdAt: string): boolean {
   const ts = new Date(createdAt).getTime();

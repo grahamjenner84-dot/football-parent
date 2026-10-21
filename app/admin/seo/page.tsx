@@ -25,6 +25,7 @@ import type { CoachAppFunnel } from "@/lib/supabase/coach-app-funnel"; // type-o
 import type { ProgressFunnel } from "@/lib/supabase/progress-funnel"; // type-only, as above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
+import { isAndroidAppPath } from "@/lib/coach-app-android"; // plain constants, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & {
   /** The game time calculator's step events (opened in the site's page,
@@ -460,6 +461,7 @@ export default function SeoAdminPage() {
             pageViewStats={pageViewStats}
             coachAppViewStats={coachAppViewStats}
             coachAppUsage={funnel?.usage ?? null}
+            coachAppSignupsByDay={funnel?.signupsByDay ?? null}
             progressFunnel={progressFunnel}
             affiliateStats={affiliateStats}
             pageViewError={pageViewError}
@@ -1832,6 +1834,7 @@ function Dashboard({
   pageViewStats,
   coachAppViewStats,
   coachAppUsage,
+  coachAppSignupsByDay,
   progressFunnel,
   affiliateStats,
   pageViewError,
@@ -1840,6 +1843,8 @@ function Dashboard({
   coachAppViewStats: CoachAppViewStats | null;
   /** From the funnel report; null while it loads. */
   coachAppUsage: CoachAppFunnel["usage"] | null;
+  /** From the funnel report; null while it loads. */
+  coachAppSignupsByDay: CoachAppFunnel["signupsByDay"] | null;
   /** Null while it loads. */
   progressFunnel: ProgressFunnel | null;
   affiliateStats: AffiliateClickStats | null;
@@ -1895,10 +1900,24 @@ function Dashboard({
       : []
     : [];
 
-  // The Android app's sign-in screen for the chosen scope, from the sign-up
-  // form's step events (coach-app src/data/signupFormTracking.ts). Android
-  // ads send coaches straight to the Play Store, so this, not a page view,
-  // is where most sign-ups start.
+  // Web against the Android app for the chosen scope. Android opens are
+  // their own paths within the Coach App views; Android sign-in screens come
+  // from the sign-up form's step events (coach-app
+  // src/data/signupFormTracking.ts), since the Android ads send coaches
+  // straight to the Play Store, so that, not a page view, is where most
+  // sign-ups start. Sign-ups are split by the event each one reports (UTC
+  // days), so on a day split around UK midnight they can differ by one from
+  // the app's own count beside them (UK days).
+  const caPaths = coachAppViewStats ? (isWindow ? coachAppViewStats.topPaths : caDay?.topPaths ?? []) : [];
+  const androidOpens = caPaths.filter((p) => isAndroidAppPath(p.path)).reduce((sum, p) => sum + p.count, 0);
+  const webViews = caTotal - androidOpens;
+  const caSignupDays = coachAppSignupsByDay
+    ? isWindow
+      ? coachAppSignupsByDay
+      : coachAppSignupsByDay.filter((d) => d.date === effective)
+    : null;
+  const androidSignups = caSignupDays?.reduce((sum, d) => sum + d.android, 0) ?? null;
+  const webSignups = caSignupDays?.reduce((sum, d) => sum + d.signups - d.android, 0) ?? null;
   const caSteps = coachAppViewStats?.calculatorSteps;
   const caStepPaths = caSteps
     ? isWindow
@@ -2028,13 +2047,31 @@ function Dashboard({
             weekAgoDate={weekAgoDate}
           />
           <SourceLine rows={caSources} />
-          {caSteps && (
-            <div style={{ ...styles.cardStats, marginTop: 6 }}>
-              <span>
-                Android sign-in screens: <strong>{androidSignInScreens}</strong> ({androidGoogleTaps} tapped Google)
-              </span>
-            </div>
-          )}
+          <div style={{ ...styles.cardStats, marginTop: 6 }}>
+            <span>
+              Web: <strong>{webViews}</strong> views
+              {webSignups !== null && (
+                <>
+                  , <strong>{webSignups}</strong> sign-ups
+                </>
+              )}
+            </span>
+          </div>
+          <div style={{ ...styles.cardStats, marginTop: 6 }}>
+            <span>
+              Android app: <strong>{androidOpens}</strong> opens
+              {caSteps && (
+                <>
+                  , <strong>{androidSignInScreens}</strong> sign-in screens ({androidGoogleTaps} tapped Google)
+                </>
+              )}
+              {androidSignups !== null && (
+                <>
+                  , <strong>{androidSignups}</strong> sign-ups
+                </>
+              )}
+            </span>
+          </div>
           {usageDay && (
             <div style={{ ...styles.cardStats, marginTop: 6 }}>
               <span>
@@ -3756,7 +3793,7 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
       ) : (
         <>
           <p style={styles.sectionNote}>
-            By day: {funnel.signupsByDay.map((d) => `${d.date}: ${d.signups}`).join(" · ")}
+            By day: {funnel.signupsByDay.map((d) => `${d.date}: ${d.signups}${d.android ? ` (${d.android} Android)` : ""}`).join(" · ")}
           </p>
           <div style={{ overflowX: "auto" }}>
             <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
