@@ -1769,3 +1769,33 @@ Full write-up: `seo-data/exports/weekly-seo-check-2026-10-22.md`. GSC to 19 Oct,
 | 17-20 Oct changes | 17-20 Oct | see entries | Too early | | 1 Nov |
 
 Shortlist put to Graham: Brentford title (academy queries, Villa pattern), Leeds title (academy), Chelsea title (pre-academy, after the first two), footballs by age size queries (SERP check first), shin pads head terms (held to 27 Oct).
+
+## 22 Oct 2026: three club guide titles from the weekly check
+
+`<title>` only in each `page.tsx`. H1s, meta descriptions, headings and body unchanged. One commit per page. Same lever as Villa (9 Oct: clicks 11 to 52, CTR 1.4% to 3.9% over 10 days each side). "A Parent's Guide" left off at Graham's request (22 Oct); the Palace title (16 Oct) set the pattern. Baselines are GSC 28 days to 19 Oct (`inspect_page`).
+
+**`/academy-pathway/brentford-development-centre-guide` (`511fff2`).**
+- Before: "Brentford FC Development Centre Guide | Football Parent"
+- After: "Brentford Academy Trials & Development Centre Guide"
+- Why: academy searches about 1,350 impressions in 28 days with 1 click; clicks 66 to 45 and CTR 2.3% to 0.8% while impressions doubled.
+- Baseline: 5,635 impressions, 45 clicks, position 7.0, CTR 0.8%. "brentford development centre" 4.2 (458), "brentford academy" 10.4 (429, 0 clicks), "brentford academy trials" 8.8 (213), "brentford fc academy trials 2026" 7.2 (154), "brentford development centre trials" 6.0 (152), "do brentford have an academy" 8.5 (134), "brentford fc academy" 8.9 (108).
+- Revert rule: "brentford development centre" or "brentford development centre trials" lose more than ~2 places and hold for a week, or page CTR below 0.6% for two weeks running.
+- Watch until ~5 Nov.
+
+**`/academy-pathway/leeds-united-development-centre-guide` (`7c59443`).**
+- Before: "Leeds United Development Centre Guide | Football Parent"
+- After: "Leeds United Academy & Development Centre Guide"
+- Why: "leeds united academy" and three variants (about 690 impressions) at 8-10 not in the title; CTR 3.7% to 2.1% as impressions rose. Girls' academy queries (444 at 8.3) are meant to move to `/girls-football/girls-academy-trials-by-club`, so a fall there is not a slip.
+- Baseline: 8,780 impressions, 180 clicks, position 5.8, CTR 2.1%. "leeds united academy" 8.0 (496, 1.6%), "leeds united technical centre" 4.7 (290), "leeds united development centre" 3.4 (133, 6.0%), "leeds united performance centre of excellence" 2.9 (118), "how to join leeds united academy" 4.4 (98), "leeds academy football" 9.0 (86).
+- Revert rule: "leeds united development centre" or "leeds united technical centre" lose more than ~2 places and hold for a week, or page CTR below 1.5% for two weeks running. **Live traffic page.** Also on watch from the 18 Oct internal link.
+- Watch until ~5 Nov.
+
+**`/academy-pathway/chelsea-fc-development-centre-guide` (`3212dcf`). Live traffic page.**
+- Before: "Chelsea FC Development Centre Guide | Football Parent"
+- After: "Chelsea Pre-Academy & Development Centre Guide"
+- Why: "chelsea pre academy" is the page's biggest query (832 impressions at 7.2, 0.7% CTR); the page covers pre-academy, the title did not.
+- Baseline: 9,447 impressions, 171 clicks, position 5.4, CTR 1.8%. "chelsea pre academy" 7.2 (832), "chelsea development centre" 5.7 (520, 2.9%), "chelsea ppc" 3.1 (511), "chelsea player performance centre" 3.2 (495, 2.8%), "chelsea player development programme" 6.1 (440, 2.7%), "chelsea development" 7.7 (395).
+- Revert rule: "chelsea development centre", "chelsea ppc" or "chelsea player performance centre" lose more than ~2 places and hold for a week, or page CTR below 1.4% for two weeks running.
+- Watch until ~5 Nov.
+
+Also 22 Oct: `/football-gear/best-footballs-by-age` size queries checked live ($0.012): AI Overview on "what size football for 8 / 10 / 6 year old", us not cited (England Football Futurefit, Forza, Herefordshire FA, adidas cited). The 0-click rows at position 8-10 are the AI Overview answering the question, so no title change; the aim would be a citation, not CTR.
