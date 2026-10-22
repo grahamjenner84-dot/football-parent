@@ -1,0 +1,3979 @@
+{
+  "generatedAt": "2026-10-22T21:06:20.897Z",
+  "cost": 0.09,
+  "rows": [
+    {
+      "keyword": "kids football boots",
+      "avgVolume": 22200,
+      "cpc": 0.58,
+      "competition": "HIGH",
+      "nov2025": 33100,
+      "dec2025": 22200,
+      "baselineOtherMonths": 23860,
+      "novLift": 1.4,
+      "decLift": 0.9,
+      "peakMonth": "2026-09",
+      "months": {
+        "2025-10": 27100,
+        "2025-11": 33100,
+        "2025-12": 22200,
+        "2026-01": 18100,
+        "2026-02": 14800,
+        "2026-03": 22200,
+        "2026-04": 22200,
+        "2026-05": 22200,
+        "2026-06": 22200,
+        "2026-07": 22200,
+        "2026-08": 27100,
+        "2026-09": 40500
+      }
+    },
+    {
+      "keyword": "football boots kids",
+      "avgVolume": 22200,
+      "cpc": 0.58,
+      "competition": "HIGH",
+      "nov2025": 33100,
+      "dec2025": 22200,
+      "baselineOtherMonths": 23860,
+      "novLift": 1.4,
+      "decLift": 0.9,
+      "peakMonth": "2026-09",
+      "months": {
+        "2025-10": 27100,
+        "2025-11": 33100,
+        "2025-12": 22200,
+        "2026-01": 18100,
+        "2026-02": 14800,
+        "2026-03": 22200,
+        "2026-04": 22200,
+        "2026-05": 22200,
+        "2026-06": 22200,
+        "2026-07": 22200,
+        "2026-08": 27100,
+        "2026-09": 40500
+      }
+    },
+    {
+      "keyword": "football cards",
+      "avgVolume": 22200,
+      "cpc": 0.29,
+      "competition": "HIGH",
+      "nov2025": 27100,
+      "dec2025": 22200,
+      "baselineOtherMonths": 21460,
+      "novLift": 1.3,
+      "decLift": 1,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 22200,
+        "2025-11": 27100,
+        "2025-12": 22200,
+        "2026-01": 18100,
+        "2026-02": 18100,
+        "2026-03": 22200,
+        "2026-04": 18100,
+        "2026-05": 22200,
+        "2026-06": 22200,
+        "2026-07": 22200,
+        "2026-08": 22200,
+        "2026-09": 27100
+      }
+    },
+    {
+      "keyword": "subbuteo",
+      "avgVolume": 14800,
+      "cpc": 0.16,
+      "competition": "HIGH",
+      "nov2025": 18100,
+      "dec2025": 27100,
+      "baselineOtherMonths": 13450,
+      "novLift": 1.3,
+      "decLift": 2,
+      "peakMonth": "2025-12",
+      "months": {
+        "2025-10": 14800,
+        "2025-11": 18100,
+        "2025-12": 27100,
+        "2026-01": 14800,
+        "2026-02": 12100,
+        "2026-03": 12100,
+        "2026-04": 12100,
+        "2026-05": 12100,
+        "2026-06": 14800,
+        "2026-07": 14800,
+        "2026-08": 12100,
+        "2026-09": 14800
+      }
+    },
+    {
+      "keyword": "football gifts",
+      "avgVolume": 8100,
+      "cpc": 0.55,
+      "competition": "HIGH",
+      "nov2025": 22200,
+      "dec2025": 22200,
+      "baselineOtherMonths": 5280,
+      "novLift": 4.2,
+      "decLift": 4.2,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 9900,
+        "2025-11": 22200,
+        "2025-12": 22200,
+        "2026-01": 3600,
+        "2026-02": 3600,
+        "2026-03": 4400,
+        "2026-04": 3600,
+        "2026-05": 4400,
+        "2026-06": 5400,
+        "2026-07": 5400,
+        "2026-08": 4400,
+        "2026-09": 8100
+      }
+    },
+    {
+      "keyword": "football presents",
+      "avgVolume": 8100,
+      "cpc": 0.55,
+      "competition": "HIGH",
+      "nov2025": 22200,
+      "dec2025": 22200,
+      "baselineOtherMonths": 5280,
+      "novLift": 4.2,
+      "decLift": 4.2,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 9900,
+        "2025-11": 22200,
+        "2025-12": 22200,
+        "2026-01": 3600,
+        "2026-02": 3600,
+        "2026-03": 4400,
+        "2026-04": 3600,
+        "2026-05": 4400,
+        "2026-06": 5400,
+        "2026-07": 5400,
+        "2026-08": 4400,
+        "2026-09": 8100
+      }
+    },
+    {
+      "keyword": "football goal",
+      "avgVolume": 22200,
+      "cpc": 1.09,
+      "competition": "HIGH",
+      "nov2025": 22200,
+      "dec2025": 18100,
+      "baselineOtherMonths": 21290,
+      "novLift": 1,
+      "decLift": 0.9,
+      "peakMonth": "2026-07",
+      "months": {
+        "2025-10": 18100,
+        "2025-11": 22200,
+        "2025-12": 18100,
+        "2026-01": 9900,
+        "2026-02": 12100,
+        "2026-03": 22200,
+        "2026-04": 27100,
+        "2026-05": 27100,
+        "2026-06": 27100,
+        "2026-07": 33100,
+        "2026-08": 18100,
+        "2026-09": 18100
+      }
+    },
+    {
+      "keyword": "veo camera",
+      "avgVolume": 14800,
+      "cpc": 0.47,
+      "competition": "HIGH",
+      "nov2025": 22200,
+      "dec2025": 18100,
+      "baselineOtherMonths": 15310,
+      "novLift": 1.5,
+      "decLift": 1.2,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 18100,
+        "2025-11": 22200,
+        "2025-12": 18100,
+        "2026-01": 18100,
+        "2026-02": 14800,
+        "2026-03": 18100,
+        "2026-04": 14800,
+        "2026-05": 14800,
+        "2026-06": 12100,
+        "2026-07": 12100,
+        "2026-08": 12100,
+        "2026-09": 18100
+      }
+    },
+    {
+      "keyword": "match attax",
+      "avgVolume": 12100,
+      "cpc": 0.23,
+      "competition": "HIGH",
+      "nov2025": 14800,
+      "dec2025": 14800,
+      "baselineOtherMonths": 11710,
+      "novLift": 1.3,
+      "decLift": 1.3,
+      "peakMonth": "2025-10",
+      "months": {
+        "2025-10": 14800,
+        "2025-11": 14800,
+        "2025-12": 14800,
+        "2026-01": 12100,
+        "2026-02": 12100,
+        "2026-03": 12100,
+        "2026-04": 9900,
+        "2026-05": 12100,
+        "2026-06": 12100,
+        "2026-07": 9900,
+        "2026-08": 9900,
+        "2026-09": 12100
+      }
+    },
+    {
+      "keyword": "football rebounder",
+      "avgVolume": 5400,
+      "cpc": 1.04,
+      "competition": "HIGH",
+      "nov2025": 12100,
+      "dec2025": 9900,
+      "baselineOtherMonths": 4320,
+      "novLift": 2.8,
+      "decLift": 2.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 5400,
+        "2025-11": 12100,
+        "2025-12": 9900,
+        "2026-01": 2400,
+        "2026-02": 2400,
+        "2026-03": 3600,
+        "2026-04": 4400,
+        "2026-05": 5400,
+        "2026-06": 4400,
+        "2026-07": 5400,
+        "2026-08": 4400,
+        "2026-09": 5400
+      }
+    },
+    {
+      "keyword": "football ball",
+      "avgVolume": 12100,
+      "cpc": 0.42,
+      "competition": "HIGH",
+      "nov2025": 12100,
+      "dec2025": 9900,
+      "baselineOtherMonths": 12960,
+      "novLift": 0.9,
+      "decLift": 0.8,
+      "peakMonth": "2026-07",
+      "months": {
+        "2025-10": 12100,
+        "2025-11": 12100,
+        "2025-12": 9900,
+        "2026-01": 8100,
+        "2026-02": 8100,
+        "2026-03": 12100,
+        "2026-04": 12100,
+        "2026-05": 12100,
+        "2026-06": 18100,
+        "2026-07": 22200,
+        "2026-08": 9900,
+        "2026-09": 14800
+      }
+    },
+    {
+      "keyword": "football advent calendar",
+      "avgVolume": 2900,
+      "cpc": 0.26,
+      "competition": "HIGH",
+      "nov2025": 18100,
+      "dec2025": 2400,
+      "baselineOtherMonths": 1716,
+      "novLift": 10.5,
+      "decLift": 1.4,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 8100,
+        "2025-11": 18100,
+        "2025-12": 2400,
+        "2026-01": 140,
+        "2026-02": 110,
+        "2026-03": 110,
+        "2026-04": 40,
+        "2026-05": 110,
+        "2026-06": 90,
+        "2026-07": 260,
+        "2026-08": 1600,
+        "2026-09": 6600
+      }
+    },
+    {
+      "keyword": "football training equipment",
+      "avgVolume": 6600,
+      "cpc": 0.96,
+      "competition": "HIGH",
+      "nov2025": 12100,
+      "dec2025": 8100,
+      "baselineOtherMonths": 5330,
+      "novLift": 2.3,
+      "decLift": 1.5,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 8100,
+        "2025-11": 12100,
+        "2025-12": 8100,
+        "2026-01": 3600,
+        "2026-02": 3600,
+        "2026-03": 5400,
+        "2026-04": 5400,
+        "2026-05": 5400,
+        "2026-06": 5400,
+        "2026-07": 5400,
+        "2026-08": 4400,
+        "2026-09": 6600
+      }
+    },
+    {
+      "keyword": "football training aids",
+      "avgVolume": 6600,
+      "cpc": 0.96,
+      "competition": "HIGH",
+      "nov2025": 12100,
+      "dec2025": 8100,
+      "baselineOtherMonths": 5330,
+      "novLift": 2.3,
+      "decLift": 1.5,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 8100,
+        "2025-11": 12100,
+        "2025-12": 8100,
+        "2026-01": 3600,
+        "2026-02": 3600,
+        "2026-03": 5400,
+        "2026-04": 5400,
+        "2026-05": 5400,
+        "2026-06": 5400,
+        "2026-07": 5400,
+        "2026-08": 4400,
+        "2026-09": 6600
+      }
+    },
+    {
+      "keyword": "table football",
+      "avgVolume": 6600,
+      "cpc": 0.78,
+      "competition": "HIGH",
+      "nov2025": 9900,
+      "dec2025": 9900,
+      "baselineOtherMonths": 5440,
+      "novLift": 1.8,
+      "decLift": 1.8,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 6600,
+        "2025-11": 9900,
+        "2025-12": 9900,
+        "2026-01": 6600,
+        "2026-02": 5400,
+        "2026-03": 5400,
+        "2026-04": 5400,
+        "2026-05": 5400,
+        "2026-06": 5400,
+        "2026-07": 4400,
+        "2026-08": 4400,
+        "2026-09": 5400
+      }
+    },
+    {
+      "keyword": "football table",
+      "avgVolume": 6600,
+      "cpc": 0.78,
+      "competition": "HIGH",
+      "nov2025": 9900,
+      "dec2025": 9900,
+      "baselineOtherMonths": 5440,
+      "novLift": 1.8,
+      "decLift": 1.8,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 6600,
+        "2025-11": 9900,
+        "2025-12": 9900,
+        "2026-01": 6600,
+        "2026-02": 5400,
+        "2026-03": 5400,
+        "2026-04": 5400,
+        "2026-05": 5400,
+        "2026-06": 5400,
+        "2026-07": 4400,
+        "2026-08": 4400,
+        "2026-09": 5400
+      }
+    },
+    {
+      "keyword": "football boot bag",
+      "avgVolume": 4400,
+      "cpc": 0.5,
+      "competition": "HIGH",
+      "nov2025": 9900,
+      "dec2025": 8100,
+      "baselineOtherMonths": 3580,
+      "novLift": 2.8,
+      "decLift": 2.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 5400,
+        "2025-11": 9900,
+        "2025-12": 8100,
+        "2026-01": 3600,
+        "2026-02": 2900,
+        "2026-03": 3600,
+        "2026-04": 2400,
+        "2026-05": 2400,
+        "2026-06": 2400,
+        "2026-07": 2900,
+        "2026-08": 3600,
+        "2026-09": 6600
+      }
+    },
+    {
+      "keyword": "grip socks football",
+      "avgVolume": 5400,
+      "cpc": 2.07,
+      "competition": "HIGH",
+      "nov2025": 9900,
+      "dec2025": 8100,
+      "baselineOtherMonths": 4740,
+      "novLift": 2.1,
+      "decLift": 1.7,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 6600,
+        "2025-11": 9900,
+        "2025-12": 8100,
+        "2026-01": 3600,
+        "2026-02": 2900,
+        "2026-03": 4400,
+        "2026-04": 3600,
+        "2026-05": 3600,
+        "2026-06": 3600,
+        "2026-07": 4400,
+        "2026-08": 6600,
+        "2026-09": 8100
+      }
+    },
+    {
+      "keyword": "size 4 football",
+      "avgVolume": 5400,
+      "cpc": 1.33,
+      "competition": "HIGH",
+      "nov2025": 8100,
+      "dec2025": 8100,
+      "baselineOtherMonths": 4600,
+      "novLift": 1.8,
+      "decLift": 1.8,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 5400,
+        "2025-11": 8100,
+        "2025-12": 8100,
+        "2026-01": 2900,
+        "2026-02": 2900,
+        "2026-03": 4400,
+        "2026-04": 5400,
+        "2026-05": 5400,
+        "2026-06": 5400,
+        "2026-07": 5400,
+        "2026-08": 4400,
+        "2026-09": 4400
+      }
+    },
+    {
+      "keyword": "size 3 football",
+      "avgVolume": 5400,
+      "cpc": 0.83,
+      "competition": "HIGH",
+      "nov2025": 8100,
+      "dec2025": 8100,
+      "baselineOtherMonths": 5380,
+      "novLift": 1.5,
+      "decLift": 1.5,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 5400,
+        "2025-11": 8100,
+        "2025-12": 8100,
+        "2026-01": 2900,
+        "2026-02": 2900,
+        "2026-03": 5400,
+        "2026-04": 5400,
+        "2026-05": 6600,
+        "2026-06": 6600,
+        "2026-07": 6600,
+        "2026-08": 5400,
+        "2026-09": 6600
+      }
+    },
+    {
+      "keyword": "match attax advent calendar",
+      "avgVolume": 1300,
+      "cpc": 0.15,
+      "competition": "HIGH",
+      "nov2025": 9900,
+      "dec2025": 2400,
+      "baselineOtherMonths": 381,
+      "novLift": 26,
+      "decLift": 6.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 2400,
+        "2025-11": 9900,
+        "2025-12": 2400,
+        "2026-01": 210,
+        "2026-02": 140,
+        "2026-03": 70,
+        "2026-04": 50,
+        "2026-05": 70,
+        "2026-06": 50,
+        "2026-07": 90,
+        "2026-08": 140,
+        "2026-09": 590
+      }
+    },
+    {
+      "keyword": "panini stickers",
+      "avgVolume": 8100,
+      "cpc": 0.3,
+      "competition": "HIGH",
+      "nov2025": 5400,
+      "dec2025": 4400,
+      "baselineOtherMonths": 9460,
+      "novLift": 0.6,
+      "decLift": 0.5,
+      "peakMonth": "2026-06",
+      "months": {
+        "2025-10": 2900,
+        "2025-11": 5400,
+        "2025-12": 4400,
+        "2026-01": 3600,
+        "2026-02": 2400,
+        "2026-03": 2900,
+        "2026-04": 4400,
+        "2026-05": 22200,
+        "2026-06": 33100,
+        "2026-07": 14800,
+        "2026-08": 5400,
+        "2026-09": 2900
+      }
+    },
+    {
+      "keyword": "football net",
+      "avgVolume": 5400,
+      "cpc": 0.69,
+      "competition": "HIGH",
+      "nov2025": 5400,
+      "dec2025": 4400,
+      "baselineOtherMonths": 5330,
+      "novLift": 1,
+      "decLift": 0.8,
+      "peakMonth": "2026-07",
+      "months": {
+        "2025-10": 4400,
+        "2025-11": 5400,
+        "2025-12": 4400,
+        "2026-01": 2900,
+        "2026-02": 2900,
+        "2026-03": 5400,
+        "2026-04": 6600,
+        "2026-05": 6600,
+        "2026-06": 6600,
+        "2026-07": 8100,
+        "2026-08": 5400,
+        "2026-09": 4400
+      }
+    },
+    {
+      "keyword": "football pump",
+      "avgVolume": 4400,
+      "cpc": 0.34,
+      "competition": "HIGH",
+      "nov2025": 3600,
+      "dec2025": 5400,
+      "baselineOtherMonths": 4360,
+      "novLift": 0.8,
+      "decLift": 1.2,
+      "peakMonth": "2026-07",
+      "months": {
+        "2025-10": 3600,
+        "2025-11": 3600,
+        "2025-12": 5400,
+        "2026-01": 2400,
+        "2026-02": 2400,
+        "2026-03": 4400,
+        "2026-04": 5400,
+        "2026-05": 5400,
+        "2026-06": 5400,
+        "2026-07": 6600,
+        "2026-08": 4400,
+        "2026-09": 3600
+      }
+    },
+    {
+      "keyword": "junior football boots",
+      "avgVolume": 3600,
+      "cpc": 0.54,
+      "competition": "HIGH",
+      "nov2025": 5400,
+      "dec2025": 3600,
+      "baselineOtherMonths": 2960,
+      "novLift": 1.8,
+      "decLift": 1.2,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 3600,
+        "2025-11": 5400,
+        "2025-12": 3600,
+        "2026-01": 2400,
+        "2026-02": 1900,
+        "2026-03": 2400,
+        "2026-04": 2400,
+        "2026-05": 2400,
+        "2026-06": 2900,
+        "2026-07": 3600,
+        "2026-08": 3600,
+        "2026-09": 4400
+      }
+    },
+    {
+      "keyword": "football rebounder net",
+      "avgVolume": 1900,
+      "cpc": 0.9,
+      "competition": "HIGH",
+      "nov2025": 4400,
+      "dec2025": 3600,
+      "baselineOtherMonths": 1610,
+      "novLift": 2.7,
+      "decLift": 2.2,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 1900,
+        "2025-11": 4400,
+        "2025-12": 3600,
+        "2026-01": 880,
+        "2026-02": 720,
+        "2026-03": 1300,
+        "2026-04": 1900,
+        "2026-05": 1900,
+        "2026-06": 1900,
+        "2026-07": 2400,
+        "2026-08": 1600,
+        "2026-09": 1600
+      }
+    },
+    {
+      "keyword": "size 5 football",
+      "avgVolume": 3600,
+      "cpc": 1.45,
+      "competition": "HIGH",
+      "nov2025": 4400,
+      "dec2025": 3600,
+      "baselineOtherMonths": 3610,
+      "novLift": 1.2,
+      "decLift": 1,
+      "peakMonth": "2026-06",
+      "months": {
+        "2025-10": 2900,
+        "2025-11": 4400,
+        "2025-12": 3600,
+        "2026-01": 1600,
+        "2026-02": 1900,
+        "2026-03": 2900,
+        "2026-04": 3600,
+        "2026-05": 4400,
+        "2026-06": 5400,
+        "2026-07": 5400,
+        "2026-08": 4400,
+        "2026-09": 3600
+      }
+    },
+    {
+      "keyword": "football pyjamas",
+      "avgVolume": 1600,
+      "cpc": 0.37,
+      "competition": "HIGH",
+      "nov2025": 4400,
+      "dec2025": 2900,
+      "baselineOtherMonths": 1276,
+      "novLift": 3.4,
+      "decLift": 2.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 2400,
+        "2025-11": 4400,
+        "2025-12": 2900,
+        "2026-01": 880,
+        "2026-02": 1000,
+        "2026-03": 1300,
+        "2026-04": 720,
+        "2026-05": 880,
+        "2026-06": 1000,
+        "2026-07": 880,
+        "2026-08": 1300,
+        "2026-09": 2400
+      }
+    },
+    {
+      "keyword": "football goals for garden",
+      "avgVolume": 4400,
+      "cpc": 1.15,
+      "competition": "HIGH",
+      "nov2025": 3600,
+      "dec2025": 2900,
+      "baselineOtherMonths": 4110,
+      "novLift": 0.9,
+      "decLift": 0.7,
+      "peakMonth": "2026-05",
+      "months": {
+        "2025-10": 2900,
+        "2025-11": 3600,
+        "2025-12": 2900,
+        "2026-01": 1000,
+        "2026-02": 1600,
+        "2026-03": 3600,
+        "2026-04": 5400,
+        "2026-05": 6600,
+        "2026-06": 5400,
+        "2026-07": 6600,
+        "2026-08": 4400,
+        "2026-09": 3600
+      }
+    },
+    {
+      "keyword": "football cones",
+      "avgVolume": 2900,
+      "cpc": 0.8,
+      "competition": "HIGH",
+      "nov2025": 3600,
+      "dec2025": 2400,
+      "baselineOtherMonths": 2960,
+      "novLift": 1.2,
+      "decLift": 0.8,
+      "peakMonth": "2025-10",
+      "months": {
+        "2025-10": 3600,
+        "2025-11": 3600,
+        "2025-12": 2400,
+        "2026-01": 1900,
+        "2026-02": 2400,
+        "2026-03": 2900,
+        "2026-04": 2900,
+        "2026-05": 2900,
+        "2026-06": 2900,
+        "2026-07": 3600,
+        "2026-08": 2900,
+        "2026-09": 3600
+      }
+    },
+    {
+      "keyword": "football bedding",
+      "avgVolume": 2400,
+      "cpc": 0.53,
+      "competition": "HIGH",
+      "nov2025": 2900,
+      "dec2025": 2400,
+      "baselineOtherMonths": 2670,
+      "novLift": 1.1,
+      "decLift": 0.9,
+      "peakMonth": "2026-09",
+      "months": {
+        "2025-10": 2900,
+        "2025-11": 2900,
+        "2025-12": 2400,
+        "2026-01": 2900,
+        "2026-02": 1900,
+        "2026-03": 1900,
+        "2026-04": 1900,
+        "2026-05": 1900,
+        "2026-06": 2400,
+        "2026-07": 2900,
+        "2026-08": 3600,
+        "2026-09": 4400
+      }
+    },
+    {
+      "keyword": "football slippers",
+      "avgVolume": 880,
+      "cpc": 0.32,
+      "competition": "HIGH",
+      "nov2025": 2900,
+      "dec2025": 2400,
+      "baselineOtherMonths": 439,
+      "novLift": 6.6,
+      "decLift": 5.5,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 1000,
+        "2025-11": 2900,
+        "2025-12": 2400,
+        "2026-01": 590,
+        "2026-02": 320,
+        "2026-03": 320,
+        "2026-04": 260,
+        "2026-05": 210,
+        "2026-06": 210,
+        "2026-07": 210,
+        "2026-08": 390,
+        "2026-09": 880
+      }
+    },
+    {
+      "keyword": "football christmas presents",
+      "avgVolume": 590,
+      "cpc": 0.47,
+      "competition": "HIGH",
+      "nov2025": 2900,
+      "dec2025": 1900,
+      "baselineOtherMonths": 184,
+      "novLift": 15.8,
+      "decLift": 10.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 1000,
+        "2025-11": 2900,
+        "2025-12": 1900,
+        "2026-01": 20,
+        "2026-02": 30,
+        "2026-03": 50,
+        "2026-04": 20,
+        "2026-05": 70,
+        "2026-06": 40,
+        "2026-07": 20,
+        "2026-08": 110,
+        "2026-09": 480
+      }
+    },
+    {
+      "keyword": "christmas football gifts",
+      "avgVolume": 590,
+      "cpc": 0.47,
+      "competition": "HIGH",
+      "nov2025": 2900,
+      "dec2025": 1900,
+      "baselineOtherMonths": 184,
+      "novLift": 15.8,
+      "decLift": 10.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 1000,
+        "2025-11": 2900,
+        "2025-12": 1900,
+        "2026-01": 20,
+        "2026-02": 30,
+        "2026-03": 50,
+        "2026-04": 20,
+        "2026-05": 70,
+        "2026-06": 40,
+        "2026-07": 20,
+        "2026-08": 110,
+        "2026-09": 480
+      }
+    },
+    {
+      "keyword": "football skills mat",
+      "avgVolume": 720,
+      "cpc": 1.05,
+      "competition": "HIGH",
+      "nov2025": 2400,
+      "dec2025": 2400,
+      "baselineOtherMonths": 375,
+      "novLift": 6.4,
+      "decLift": 6.4,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 1000,
+        "2025-11": 2400,
+        "2025-12": 2400,
+        "2026-01": 480,
+        "2026-02": 320,
+        "2026-03": 320,
+        "2026-04": 210,
+        "2026-05": 210,
+        "2026-06": 210,
+        "2026-07": 260,
+        "2026-08": 260,
+        "2026-09": 480
+      }
+    },
+    {
+      "keyword": "football lamp",
+      "avgVolume": 1300,
+      "cpc": 0.32,
+      "competition": "HIGH",
+      "nov2025": 2400,
+      "dec2025": 1900,
+      "baselineOtherMonths": 1116,
+      "novLift": 2.2,
+      "decLift": 1.7,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 1600,
+        "2025-11": 2400,
+        "2025-12": 1900,
+        "2026-01": 1300,
+        "2026-02": 1000,
+        "2026-03": 880,
+        "2026-04": 720,
+        "2026-05": 880,
+        "2026-06": 880,
+        "2026-07": 1000,
+        "2026-08": 1300,
+        "2026-09": 1600
+      }
+    },
+    {
+      "keyword": "playermaker",
+      "avgVolume": 1000,
+      "cpc": 0.63,
+      "competition": "HIGH",
+      "nov2025": 2400,
+      "dec2025": 1600,
+      "baselineOtherMonths": 939,
+      "novLift": 2.6,
+      "decLift": 1.7,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 1300,
+        "2025-11": 2400,
+        "2025-12": 1600,
+        "2026-01": 1000,
+        "2026-02": 880,
+        "2026-03": 1300,
+        "2026-04": 1000,
+        "2026-05": 1000,
+        "2026-06": 590,
+        "2026-07": 720,
+        "2026-08": 720,
+        "2026-09": 880
+      }
+    },
+    {
+      "keyword": "personalised football gifts",
+      "avgVolume": 720,
+      "cpc": 0.66,
+      "competition": "HIGH",
+      "nov2025": 1900,
+      "dec2025": 1300,
+      "baselineOtherMonths": 550,
+      "novLift": 3.5,
+      "decLift": 2.4,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 880,
+        "2025-11": 1900,
+        "2025-12": 1300,
+        "2026-01": 390,
+        "2026-02": 390,
+        "2026-03": 480,
+        "2026-04": 590,
+        "2026-05": 720,
+        "2026-06": 590,
+        "2026-07": 480,
+        "2026-08": 390,
+        "2026-09": 590
+      }
+    },
+    {
+      "keyword": "football gift ideas",
+      "avgVolume": 590,
+      "cpc": 0.6,
+      "competition": "HIGH",
+      "nov2025": 1600,
+      "dec2025": 1600,
+      "baselineOtherMonths": 406,
+      "novLift": 3.9,
+      "decLift": 3.9,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 880,
+        "2025-11": 1600,
+        "2025-12": 1600,
+        "2026-01": 260,
+        "2026-02": 260,
+        "2026-03": 320,
+        "2026-04": 260,
+        "2026-05": 320,
+        "2026-06": 390,
+        "2026-07": 390,
+        "2026-08": 390,
+        "2026-09": 590
+      }
+    },
+    {
+      "keyword": "pop up football goals",
+      "avgVolume": 1900,
+      "cpc": 1.04,
+      "competition": "HIGH",
+      "nov2025": 1900,
+      "dec2025": 1300,
+      "baselineOtherMonths": 1876,
+      "novLift": 1,
+      "decLift": 0.7,
+      "peakMonth": "2026-05",
+      "months": {
+        "2025-10": 1600,
+        "2025-11": 1900,
+        "2025-12": 1300,
+        "2026-01": 880,
+        "2026-02": 880,
+        "2026-03": 1600,
+        "2026-04": 2400,
+        "2026-05": 2900,
+        "2026-06": 2400,
+        "2026-07": 2900,
+        "2026-08": 1600,
+        "2026-09": 1600
+      }
+    },
+    {
+      "keyword": "football boots black friday",
+      "avgVolume": 320,
+      "cpc": 0.23,
+      "competition": "LOW",
+      "nov2025": 2900,
+      "dec2025": 260,
+      "baselineOtherMonths": 79,
+      "novLift": 36.7,
+      "decLift": 3.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 90,
+        "2025-11": 2900,
+        "2025-12": 260,
+        "2026-01": 70,
+        "2026-02": 90,
+        "2026-03": 70,
+        "2026-04": 40,
+        "2026-05": 110,
+        "2026-06": 40,
+        "2026-07": 210,
+        "2026-08": 50,
+        "2026-09": 20
+      }
+    },
+    {
+      "keyword": "black friday football boots",
+      "avgVolume": 320,
+      "cpc": 0.23,
+      "competition": "LOW",
+      "nov2025": 2900,
+      "dec2025": 260,
+      "baselineOtherMonths": 79,
+      "novLift": 36.7,
+      "decLift": 3.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 90,
+        "2025-11": 2900,
+        "2025-12": 260,
+        "2026-01": 70,
+        "2026-02": 90,
+        "2026-03": 70,
+        "2026-04": 40,
+        "2026-05": 110,
+        "2026-06": 40,
+        "2026-07": 210,
+        "2026-08": 50,
+        "2026-09": 20
+      }
+    },
+    {
+      "keyword": "football camera",
+      "avgVolume": 1300,
+      "cpc": 0.9,
+      "competition": "HIGH",
+      "nov2025": 1600,
+      "dec2025": 1000,
+      "baselineOtherMonths": 1300,
+      "novLift": 1.2,
+      "decLift": 0.8,
+      "peakMonth": "2026-09",
+      "months": {
+        "2025-10": 1600,
+        "2025-11": 1600,
+        "2025-12": 1000,
+        "2026-01": 1300,
+        "2026-02": 1000,
+        "2026-03": 1600,
+        "2026-04": 1000,
+        "2026-05": 1000,
+        "2026-06": 1300,
+        "2026-07": 1300,
+        "2026-08": 1000,
+        "2026-09": 1900
+      }
+    },
+    {
+      "keyword": "football stocking fillers",
+      "avgVolume": 260,
+      "cpc": 0.58,
+      "competition": "HIGH",
+      "nov2025": 1000,
+      "dec2025": 1300,
+      "baselineOtherMonths": 74,
+      "novLift": 13.5,
+      "decLift": 17.6,
+      "peakMonth": "2025-12",
+      "months": {
+        "2025-10": 390,
+        "2025-11": 1000,
+        "2025-12": 1300,
+        "2026-01": 30,
+        "2026-02": 10,
+        "2026-03": 20,
+        "2026-04": 10,
+        "2026-05": 10,
+        "2026-06": 30,
+        "2026-07": 30,
+        "2026-08": 40,
+        "2026-09": 170
+      }
+    },
+    {
+      "keyword": "goalkeeper gifts",
+      "avgVolume": 320,
+      "cpc": 0.5,
+      "competition": "HIGH",
+      "nov2025": 1000,
+      "dec2025": 1000,
+      "baselineOtherMonths": 174,
+      "novLift": 5.7,
+      "decLift": 5.7,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 390,
+        "2025-11": 1000,
+        "2025-12": 1000,
+        "2026-01": 140,
+        "2026-02": 110,
+        "2026-03": 140,
+        "2026-04": 140,
+        "2026-05": 170,
+        "2026-06": 140,
+        "2026-07": 110,
+        "2026-08": 140,
+        "2026-09": 260
+      }
+    },
+    {
+      "keyword": "premier league stickers",
+      "avgVolume": 1300,
+      "cpc": 0.26,
+      "competition": "HIGH",
+      "nov2025": 880,
+      "dec2025": 1000,
+      "baselineOtherMonths": 1285,
+      "novLift": 0.7,
+      "decLift": 0.8,
+      "peakMonth": "2026-01",
+      "months": {
+        "2025-10": 590,
+        "2025-11": 880,
+        "2025-12": 1000,
+        "2026-01": 2400,
+        "2026-02": 1600,
+        "2026-03": 1000,
+        "2026-04": 880,
+        "2026-05": 1300,
+        "2026-06": 1000,
+        "2026-07": 880,
+        "2026-08": 1900,
+        "2026-09": 1300
+      }
+    },
+    {
+      "keyword": "football annual",
+      "avgVolume": 320,
+      "cpc": 0.34,
+      "competition": "HIGH",
+      "nov2025": 880,
+      "dec2025": 1000,
+      "baselineOtherMonths": 163,
+      "novLift": 5.4,
+      "decLift": 6.1,
+      "peakMonth": "2025-12",
+      "months": {
+        "2025-10": 480,
+        "2025-11": 880,
+        "2025-12": 1000,
+        "2026-01": 210,
+        "2026-02": 90,
+        "2026-03": 140,
+        "2026-04": 70,
+        "2026-05": 90,
+        "2026-06": 90,
+        "2026-07": 110,
+        "2026-08": 140,
+        "2026-09": 210
+      }
+    },
+    {
+      "keyword": "mini football table",
+      "avgVolume": 320,
+      "cpc": 0.27,
+      "competition": "HIGH",
+      "nov2025": 720,
+      "dec2025": 880,
+      "baselineOtherMonths": 257,
+      "novLift": 2.8,
+      "decLift": 3.4,
+      "peakMonth": "2025-12",
+      "months": {
+        "2025-10": 320,
+        "2025-11": 720,
+        "2025-12": 880,
+        "2026-01": 320,
+        "2026-02": 210,
+        "2026-03": 260,
+        "2026-04": 210,
+        "2026-05": 210,
+        "2026-06": 260,
+        "2026-07": 260,
+        "2026-08": 260,
+        "2026-09": 260
+      }
+    },
+    {
+      "keyword": "football gps tracker",
+      "avgVolume": 480,
+      "cpc": 1.7,
+      "competition": "HIGH",
+      "nov2025": 880,
+      "dec2025": 590,
+      "baselineOtherMonths": 465,
+      "novLift": 1.9,
+      "decLift": 1.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 590,
+        "2025-11": 880,
+        "2025-12": 590,
+        "2026-01": 590,
+        "2026-02": 590,
+        "2026-03": 590,
+        "2026-04": 390,
+        "2026-05": 320,
+        "2026-06": 320,
+        "2026-07": 390,
+        "2026-08": 390,
+        "2026-09": 480
+      }
+    },
+    {
+      "keyword": "match annual",
+      "avgVolume": 70,
+      "cpc": 0.17,
+      "competition": "HIGH",
+      "nov2025": 210,
+      "dec2025": 260,
+      "baselineOtherMonths": 43,
+      "novLift": 4.9,
+      "decLift": 6,
+      "peakMonth": "2025-12",
+      "months": {
+        "2025-10": 90,
+        "2025-11": 210,
+        "2025-12": 260,
+        "2026-01": 50,
+        "2026-02": 40,
+        "2026-03": 30,
+        "2026-04": 30,
+        "2026-05": 30,
+        "2026-06": 30,
+        "2026-07": 40,
+        "2026-08": 50,
+        "2026-09": 40
+      }
+    },
+    {
+      "keyword": "nike football boots black friday",
+      "avgVolume": 30,
+      "cpc": null,
+      "competition": "LOW",
+      "nov2025": 260,
+      "dec2025": 50,
+      "baselineOtherMonths": 2,
+      "novLift": 130,
+      "decLift": 25,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 0,
+        "2025-11": 260,
+        "2025-12": 50,
+        "2026-01": 0,
+        "2026-02": 0,
+        "2026-03": 0,
+        "2026-04": 0,
+        "2026-05": 0,
+        "2026-06": 0,
+        "2026-07": 10,
+        "2026-08": 0,
+        "2026-09": 10
+      }
+    },
+    {
+      "keyword": "skills ball",
+      "avgVolume": 90,
+      "cpc": 0.7,
+      "competition": "HIGH",
+      "nov2025": 140,
+      "dec2025": 140,
+      "baselineOtherMonths": 82,
+      "novLift": 1.7,
+      "decLift": 1.7,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 110,
+        "2025-11": 140,
+        "2025-12": 140,
+        "2026-01": 70,
+        "2026-02": 70,
+        "2026-03": 50,
+        "2026-04": 70,
+        "2026-05": 110,
+        "2026-06": 90,
+        "2026-07": 110,
+        "2026-08": 70,
+        "2026-09": 70
+      }
+    },
+    {
+      "keyword": "football agility ladder",
+      "avgVolume": 40,
+      "cpc": 0.78,
+      "competition": "HIGH",
+      "nov2025": 50,
+      "dec2025": 40,
+      "baselineOtherMonths": 31,
+      "novLift": 1.6,
+      "decLift": 1.3,
+      "peakMonth": "2025-11",
+      "months": {
+        "2025-10": 40,
+        "2025-11": 50,
+        "2025-12": 40,
+        "2026-01": 10,
+        "2026-02": 20,
+        "2026-03": 40,
+        "2026-04": 30,
+        "2026-05": 30,
+        "2026-06": 30,
+        "2026-07": 40,
+        "2026-08": 30,
+        "2026-09": 40
+      }
+    },
+    {
+      "keyword": "kick trainer football",
+      "avgVolume": 10,
+      "cpc": null,
+      "competition": "HIGH",
+      "nov2025": 10,
+      "dec2025": 20,
+      "baselineOtherMonths": 9,
+      "novLift": 1.1,
+      "decLift": 2.2,
+      "peakMonth": "2025-12",
+      "months": {
+        "2025-10": 10,
+        "2025-11": 10,
+        "2025-12": 20,
+        "2026-01": 0,
+        "2026-02": 10,
+        "2026-03": 10,
+        "2026-04": 10,
+        "2026-05": 10,
+        "2026-06": 10,
+        "2026-07": 10,
+        "2026-08": 10,
+        "2026-09": 10
+      }
+    },
+    {
+      "keyword": "football speed cage",
+      "avgVolume": 20,
+      "cpc": 1.51,
+      "competition": "HIGH",
+      "nov2025": 10,
+      "dec2025": 10,
+      "baselineOtherMonths": 17,
+      "novLift": 0.6,
+      "decLift": 0.6,
+      "peakMonth": "2026-05",
+      "months": {
+        "2025-10": 10,
+        "2025-11": 10,
+        "2025-12": 10,
+        "2026-01": 10,
+        "2026-02": 10,
+        "2026-03": 10,
+        "2026-04": 10,
+        "2026-05": 30,
+        "2026-06": 20,
+        "2026-07": 30,
+        "2026-08": 20,
+        "2026-09": 20
+      }
+    },
+    {
+      "keyword": "football gifts for kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football gifts for boys",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football gifts for girls",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football books for kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "table football for kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids football goals",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football training equipment for kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids football",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "astro turf trainers kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids astro boots",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "shin pads kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids shin pads",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "goalkeeper gloves kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids goalkeeper gloves",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football gloves kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids football kit",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football kits for kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football tracksuit kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids football coat",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football coat kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football bag kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids football socks",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football base layer kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids thermal football top",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football snood kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football hat kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football hoodie kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "kids football tracker",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    },
+    {
+      "keyword": "football watch kids",
+      "avgVolume": null,
+      "cpc": null,
+      "competition": null,
+      "nov2025": null,
+      "dec2025": null,
+      "baselineOtherMonths": 0,
+      "novLift": null,
+      "decLift": null,
+      "peakMonth": null,
+      "months": {}
+    }
+  ],
+  "trends": [
+    {
+      "group": [
+        "football gifts",
+        "football advent calendar",
+        "table football",
+        "football goals for garden",
+        "football rebounder"
+      ],
+      "weekly": [
+        {
+          "week": "2025-10-19",
+          "values": [
+            7,
+            3,
+            57,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2025-10-26",
+          "values": [
+            8,
+            3,
+            61,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2025-11-02",
+          "values": [
+            11,
+            6,
+            58,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2025-11-09",
+          "values": [
+            16,
+            7,
+            53,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2025-11-16",
+          "values": [
+            19,
+            7,
+            58,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2025-11-23",
+          "values": [
+            24,
+            7,
+            63,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2025-11-30",
+          "values": [
+            30,
+            5,
+            78,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2025-12-07",
+          "values": [
+            29,
+            2,
+            70,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2025-12-14",
+          "values": [
+            25,
+            1,
+            65,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2025-12-21",
+          "values": [
+            10,
+            null,
+            63,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2025-12-28",
+          "values": [
+            4,
+            null,
+            70,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-01-04",
+          "values": [
+            4,
+            null,
+            63,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-11",
+          "values": [
+            4,
+            null,
+            51,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-18",
+          "values": [
+            4,
+            null,
+            63,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-01-25",
+          "values": [
+            5,
+            null,
+            66,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-02-01",
+          "values": [
+            6,
+            null,
+            66,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-02-08",
+          "values": [
+            9,
+            null,
+            71,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-02-15",
+          "values": [
+            8,
+            null,
+            60,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-02-22",
+          "values": [
+            7,
+            null,
+            63,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-03-01",
+          "values": [
+            5,
+            null,
+            73,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-03-08",
+          "values": [
+            6,
+            null,
+            61,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-03-15",
+          "values": [
+            5,
+            null,
+            70,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-03-22",
+          "values": [
+            5,
+            null,
+            55,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-03-29",
+          "values": [
+            5,
+            null,
+            47,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-04-05",
+          "values": [
+            4,
+            null,
+            65,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-04-12",
+          "values": [
+            5,
+            null,
+            78,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-04-19",
+          "values": [
+            5,
+            null,
+            100,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-04-26",
+          "values": [
+            5,
+            null,
+            74,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-05-03",
+          "values": [
+            6,
+            null,
+            68,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-05-10",
+          "values": [
+            8,
+            null,
+            68,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-05-17",
+          "values": [
+            6,
+            null,
+            68,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-05-24",
+          "values": [
+            6,
+            null,
+            45,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-05-31",
+          "values": [
+            9,
+            null,
+            25,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-06-07",
+          "values": [
+            9,
+            null,
+            30,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-06-14",
+          "values": [
+            9,
+            1,
+            40,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-06-21",
+          "values": [
+            7,
+            null,
+            68,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-06-28",
+          "values": [
+            10,
+            null,
+            53,
+            1,
+            2
+          ]
+        },
+        {
+          "week": "2026-07-05",
+          "values": [
+            9,
+            null,
+            47,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-07-12",
+          "values": [
+            8,
+            null,
+            41,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-07-19",
+          "values": [
+            7,
+            null,
+            23,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-07-26",
+          "values": [
+            7,
+            null,
+            24,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-08-02",
+          "values": [
+            7,
+            1,
+            26,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-08-09",
+          "values": [
+            10,
+            null,
+            40,
+            1,
+            1
+          ]
+        },
+        {
+          "week": "2026-08-16",
+          "values": [
+            9,
+            1,
+            39,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-08-23",
+          "values": [
+            6,
+            1,
+            39,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-08-30",
+          "values": [
+            10,
+            2,
+            55,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-09-06",
+          "values": [
+            8,
+            3,
+            49,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-09-13",
+          "values": [
+            8,
+            3,
+            41,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-09-20",
+          "values": [
+            7,
+            2,
+            32,
+            null,
+            1
+          ]
+        },
+        {
+          "week": "2026-09-27",
+          "values": [
+            7,
+            3,
+            30,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-10-04",
+          "values": [
+            7,
+            3,
+            35,
+            0,
+            0
+          ]
+        },
+        {
+          "week": "2026-10-11",
+          "values": [
+            7,
+            3,
+            44,
+            0,
+            1
+          ]
+        },
+        {
+          "week": "2026-10-18",
+          "values": [
+            7,
+            3,
+            43,
+            0,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "group": [
+        "football gifts",
+        "kids football boots",
+        "goalkeeper gloves kids",
+        "kids football kit",
+        "shin pads kids"
+      ],
+      "weekly": [
+        {
+          "week": "2025-10-19",
+          "values": [
+            25,
+            36,
+            null,
+            17,
+            9
+          ]
+        },
+        {
+          "week": "2025-10-26",
+          "values": [
+            26,
+            36,
+            4,
+            18,
+            10
+          ]
+        },
+        {
+          "week": "2025-11-02",
+          "values": [
+            37,
+            40,
+            4,
+            22,
+            7
+          ]
+        },
+        {
+          "week": "2025-11-09",
+          "values": [
+            54,
+            56,
+            3,
+            27,
+            12
+          ]
+        },
+        {
+          "week": "2025-11-16",
+          "values": [
+            63,
+            53,
+            7,
+            37,
+            14
+          ]
+        },
+        {
+          "week": "2025-11-23",
+          "values": [
+            82,
+            61,
+            6,
+            37,
+            14
+          ]
+        },
+        {
+          "week": "2025-11-30",
+          "values": [
+            100,
+            55,
+            6,
+            35,
+            12
+          ]
+        },
+        {
+          "week": "2025-12-07",
+          "values": [
+            97,
+            51,
+            7,
+            31,
+            12
+          ]
+        },
+        {
+          "week": "2025-12-14",
+          "values": [
+            82,
+            40,
+            5,
+            26,
+            7
+          ]
+        },
+        {
+          "week": "2025-12-21",
+          "values": [
+            34,
+            22,
+            4,
+            15,
+            null
+          ]
+        },
+        {
+          "week": "2025-12-28",
+          "values": [
+            14,
+            21,
+            null,
+            9,
+            3
+          ]
+        },
+        {
+          "week": "2026-01-04",
+          "values": [
+            13,
+            23,
+            null,
+            9,
+            5
+          ]
+        },
+        {
+          "week": "2026-01-11",
+          "values": [
+            12,
+            28,
+            2,
+            9,
+            4
+          ]
+        },
+        {
+          "week": "2026-01-18",
+          "values": [
+            14,
+            33,
+            null,
+            13,
+            6
+          ]
+        },
+        {
+          "week": "2026-01-25",
+          "values": [
+            17,
+            27,
+            3,
+            8,
+            6
+          ]
+        },
+        {
+          "week": "2026-02-01",
+          "values": [
+            19,
+            26,
+            2,
+            13,
+            6
+          ]
+        },
+        {
+          "week": "2026-02-08",
+          "values": [
+            29,
+            23,
+            null,
+            12,
+            4
+          ]
+        },
+        {
+          "week": "2026-02-15",
+          "values": [
+            25,
+            22,
+            3,
+            13,
+            3
+          ]
+        },
+        {
+          "week": "2026-02-22",
+          "values": [
+            24,
+            24,
+            2,
+            13,
+            4
+          ]
+        },
+        {
+          "week": "2026-03-01",
+          "values": [
+            17,
+            28,
+            3,
+            15,
+            5
+          ]
+        },
+        {
+          "week": "2026-03-08",
+          "values": [
+            19,
+            32,
+            2,
+            16,
+            6
+          ]
+        },
+        {
+          "week": "2026-03-15",
+          "values": [
+            15,
+            31,
+            null,
+            18,
+            5
+          ]
+        },
+        {
+          "week": "2026-03-22",
+          "values": [
+            16,
+            33,
+            3,
+            25,
+            4
+          ]
+        },
+        {
+          "week": "2026-03-29",
+          "values": [
+            16,
+            24,
+            3,
+            18,
+            4
+          ]
+        },
+        {
+          "week": "2026-04-05",
+          "values": [
+            14,
+            28,
+            2,
+            18,
+            4
+          ]
+        },
+        {
+          "week": "2026-04-12",
+          "values": [
+            16,
+            28,
+            null,
+            20,
+            5
+          ]
+        },
+        {
+          "week": "2026-04-19",
+          "values": [
+            18,
+            33,
+            null,
+            19,
+            5
+          ]
+        },
+        {
+          "week": "2026-04-26",
+          "values": [
+            18,
+            32,
+            3,
+            19,
+            6
+          ]
+        },
+        {
+          "week": "2026-05-03",
+          "values": [
+            22,
+            37,
+            3,
+            23,
+            7
+          ]
+        },
+        {
+          "week": "2026-05-10",
+          "values": [
+            25,
+            33,
+            3,
+            22,
+            8
+          ]
+        },
+        {
+          "week": "2026-05-17",
+          "values": [
+            19,
+            27,
+            4,
+            24,
+            5
+          ]
+        },
+        {
+          "week": "2026-05-24",
+          "values": [
+            21,
+            23,
+            3,
+            31,
+            4
+          ]
+        },
+        {
+          "week": "2026-05-31",
+          "values": [
+            29,
+            36,
+            3,
+            35,
+            7
+          ]
+        },
+        {
+          "week": "2026-06-07",
+          "values": [
+            30,
+            36,
+            3,
+            39,
+            6
+          ]
+        },
+        {
+          "week": "2026-06-14",
+          "values": [
+            31,
+            37,
+            3,
+            45,
+            5
+          ]
+        },
+        {
+          "week": "2026-06-21",
+          "values": [
+            25,
+            34,
+            3,
+            32,
+            3
+          ]
+        },
+        {
+          "week": "2026-06-28",
+          "values": [
+            32,
+            38,
+            2,
+            32,
+            6
+          ]
+        },
+        {
+          "week": "2026-07-05",
+          "values": [
+            30,
+            39,
+            2,
+            35,
+            5
+          ]
+        },
+        {
+          "week": "2026-07-12",
+          "values": [
+            28,
+            38,
+            4,
+            36,
+            5
+          ]
+        },
+        {
+          "week": "2026-07-19",
+          "values": [
+            23,
+            41,
+            3,
+            31,
+            7
+          ]
+        },
+        {
+          "week": "2026-07-26",
+          "values": [
+            24,
+            38,
+            4,
+            25,
+            8
+          ]
+        },
+        {
+          "week": "2026-08-02",
+          "values": [
+            23,
+            44,
+            3,
+            20,
+            6
+          ]
+        },
+        {
+          "week": "2026-08-09",
+          "values": [
+            32,
+            40,
+            3,
+            22,
+            5
+          ]
+        },
+        {
+          "week": "2026-08-16",
+          "values": [
+            30,
+            46,
+            null,
+            18,
+            5
+          ]
+        },
+        {
+          "week": "2026-08-23",
+          "values": [
+            20,
+            58,
+            2,
+            18,
+            7
+          ]
+        },
+        {
+          "week": "2026-08-30",
+          "values": [
+            35,
+            62,
+            4,
+            22,
+            13
+          ]
+        },
+        {
+          "week": "2026-09-06",
+          "values": [
+            26,
+            66,
+            4,
+            24,
+            14
+          ]
+        },
+        {
+          "week": "2026-09-13",
+          "values": [
+            26,
+            54,
+            3,
+            17,
+            11
+          ]
+        },
+        {
+          "week": "2026-09-20",
+          "values": [
+            25,
+            51,
+            3,
+            19,
+            11
+          ]
+        },
+        {
+          "week": "2026-09-27",
+          "values": [
+            23,
+            54,
+            3,
+            22,
+            16
+          ]
+        },
+        {
+          "week": "2026-10-04",
+          "values": [
+            23,
+            50,
+            5,
+            21,
+            9
+          ]
+        },
+        {
+          "week": "2026-10-11",
+          "values": [
+            24,
+            45,
+            3,
+            19,
+            10
+          ]
+        },
+        {
+          "week": "2026-10-18",
+          "values": [
+            24,
+            38,
+            3,
+            18,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "group": [
+        "football gifts",
+        "match attax",
+        "football stocking fillers",
+        "personalised football gifts",
+        "football training equipment"
+      ],
+      "weekly": [
+        {
+          "week": "2025-10-19",
+          "values": [
+            25,
+            41,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2025-10-26",
+          "values": [
+            26,
+            41,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2025-11-02",
+          "values": [
+            37,
+            28,
+            null,
+            5,
+            5
+          ]
+        },
+        {
+          "week": "2025-11-09",
+          "values": [
+            54,
+            37,
+            2,
+            2,
+            5
+          ]
+        },
+        {
+          "week": "2025-11-16",
+          "values": [
+            63,
+            39,
+            2,
+            3,
+            3
+          ]
+        },
+        {
+          "week": "2025-11-23",
+          "values": [
+            82,
+            45,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "week": "2025-11-30",
+          "values": [
+            100,
+            40,
+            4,
+            7,
+            6
+          ]
+        },
+        {
+          "week": "2025-12-07",
+          "values": [
+            97,
+            30,
+            3,
+            8,
+            7
+          ]
+        },
+        {
+          "week": "2025-12-14",
+          "values": [
+            82,
+            37,
+            4,
+            4,
+            7
+          ]
+        },
+        {
+          "week": "2025-12-21",
+          "values": [
+            34,
+            40,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-12-28",
+          "values": [
+            14,
+            32,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-01-04",
+          "values": [
+            13,
+            24,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-11",
+          "values": [
+            12,
+            29,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-18",
+          "values": [
+            14,
+            28,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-25",
+          "values": [
+            17,
+            27,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-02-01",
+          "values": [
+            19,
+            26,
+            null,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-02-08",
+          "values": [
+            29,
+            28,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-02-15",
+          "values": [
+            25,
+            31,
+            null,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2026-02-22",
+          "values": [
+            24,
+            28,
+            null,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-03-01",
+          "values": [
+            17,
+            28,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-03-08",
+          "values": [
+            19,
+            28,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-03-15",
+          "values": [
+            15,
+            30,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-03-22",
+          "values": [
+            16,
+            29,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-03-29",
+          "values": [
+            16,
+            29,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-04-05",
+          "values": [
+            14,
+            24,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-04-12",
+          "values": [
+            16,
+            24,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-04-19",
+          "values": [
+            18,
+            23,
+            null,
+            null,
+            5
+          ]
+        },
+        {
+          "week": "2026-04-26",
+          "values": [
+            18,
+            23,
+            null,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2026-05-03",
+          "values": [
+            22,
+            25,
+            null,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-05-10",
+          "values": [
+            25,
+            29,
+            null,
+            2,
+            null
+          ]
+        },
+        {
+          "week": "2026-05-17",
+          "values": [
+            19,
+            25,
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-05-24",
+          "values": [
+            21,
+            26,
+            null,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-05-31",
+          "values": [
+            29,
+            28,
+            null,
+            2,
+            4
+          ]
+        },
+        {
+          "week": "2026-06-07",
+          "values": [
+            30,
+            27,
+            null,
+            2,
+            2
+          ]
+        },
+        {
+          "week": "2026-06-14",
+          "values": [
+            31,
+            24,
+            null,
+            2,
+            3
+          ]
+        },
+        {
+          "week": "2026-06-21",
+          "values": [
+            25,
+            23,
+            null,
+            2,
+            5
+          ]
+        },
+        {
+          "week": "2026-06-28",
+          "values": [
+            32,
+            25,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-07-05",
+          "values": [
+            30,
+            26,
+            null,
+            3,
+            4
+          ]
+        },
+        {
+          "week": "2026-07-12",
+          "values": [
+            28,
+            25,
+            null,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2026-07-19",
+          "values": [
+            23,
+            28,
+            null,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2026-07-26",
+          "values": [
+            24,
+            26,
+            null,
+            2,
+            3
+          ]
+        },
+        {
+          "week": "2026-08-02",
+          "values": [
+            23,
+            28,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-08-09",
+          "values": [
+            32,
+            41,
+            null,
+            null,
+            6
+          ]
+        },
+        {
+          "week": "2026-08-16",
+          "values": [
+            30,
+            38,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-08-23",
+          "values": [
+            20,
+            33,
+            null,
+            null,
+            3
+          ]
+        },
+        {
+          "week": "2026-08-30",
+          "values": [
+            35,
+            35,
+            null,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2026-09-06",
+          "values": [
+            26,
+            43,
+            null,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2026-09-13",
+          "values": [
+            26,
+            39,
+            null,
+            null,
+            5
+          ]
+        },
+        {
+          "week": "2026-09-20",
+          "values": [
+            25,
+            41,
+            null,
+            null,
+            4
+          ]
+        },
+        {
+          "week": "2026-09-27",
+          "values": [
+            23,
+            34,
+            null,
+            null,
+            2
+          ]
+        },
+        {
+          "week": "2026-10-04",
+          "values": [
+            23,
+            35,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "week": "2026-10-11",
+          "values": [
+            24,
+            35,
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "week": "2026-10-18",
+          "values": [
+            24,
+            32,
+            1,
+            1,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "group": [
+        "football gifts",
+        "football gps tracker",
+        "veo camera",
+        "kids football coat",
+        "football base layer kids"
+      ],
+      "weekly": [
+        {
+          "week": "2025-10-19",
+          "values": [
+            25,
+            null,
+            5,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-10-26",
+          "values": [
+            26,
+            null,
+            7,
+            2,
+            null
+          ]
+        },
+        {
+          "week": "2025-11-02",
+          "values": [
+            37,
+            null,
+            10,
+            2,
+            null
+          ]
+        },
+        {
+          "week": "2025-11-09",
+          "values": [
+            54,
+            null,
+            9,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-11-16",
+          "values": [
+            63,
+            null,
+            6,
+            4,
+            3
+          ]
+        },
+        {
+          "week": "2025-11-23",
+          "values": [
+            82,
+            null,
+            5,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-11-30",
+          "values": [
+            100,
+            null,
+            6,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-12-07",
+          "values": [
+            97,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-12-14",
+          "values": [
+            82,
+            null,
+            5,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-12-21",
+          "values": [
+            34,
+            null,
+            3,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2025-12-28",
+          "values": [
+            14,
+            null,
+            3,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-04",
+          "values": [
+            13,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-11",
+          "values": [
+            12,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-18",
+          "values": [
+            14,
+            null,
+            7,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-01-25",
+          "values": [
+            17,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-02-01",
+          "values": [
+            19,
+            2,
+            7,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-02-08",
+          "values": [
+            29,
+            null,
+            5,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-02-15",
+          "values": [
+            25,
+            null,
+            3,
+            2,
+            null
+          ]
+        },
+        {
+          "week": "2026-02-22",
+          "values": [
+            24,
+            null,
+            5,
+            2,
+            null
+          ]
+        },
+        {
+          "week": "2026-03-01",
+          "values": [
+            17,
+            null,
+            6,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-03-08",
+          "values": [
+            19,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-03-15",
+          "values": [
+            15,
+            null,
+            7,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-03-22",
+          "values": [
+            16,
+            null,
+            6,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-03-29",
+          "values": [
+            16,
+            null,
+            6,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-04-05",
+          "values": [
+            14,
+            null,
+            3,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-04-12",
+          "values": [
+            16,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-04-19",
+          "values": [
+            18,
+            null,
+            7,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-04-26",
+          "values": [
+            18,
+            2,
+            6,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-05-03",
+          "values": [
+            22,
+            null,
+            5,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-05-10",
+          "values": [
+            25,
+            2,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-05-17",
+          "values": [
+            19,
+            null,
+            3,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-05-24",
+          "values": [
+            21,
+            null,
+            3,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-05-31",
+          "values": [
+            29,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-06-07",
+          "values": [
+            30,
+            null,
+            4,
+            2,
+            null
+          ]
+        },
+        {
+          "week": "2026-06-14",
+          "values": [
+            31,
+            null,
+            3,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-06-21",
+          "values": [
+            25,
+            null,
+            5,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-06-28",
+          "values": [
+            32,
+            null,
+            3,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-07-05",
+          "values": [
+            30,
+            null,
+            2,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-07-12",
+          "values": [
+            28,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-07-19",
+          "values": [
+            23,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-07-26",
+          "values": [
+            24,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-08-02",
+          "values": [
+            23,
+            null,
+            4,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-08-09",
+          "values": [
+            32,
+            3,
+            7,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-08-16",
+          "values": [
+            30,
+            null,
+            7,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-08-23",
+          "values": [
+            20,
+            null,
+            5,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-08-30",
+          "values": [
+            35,
+            2,
+            8,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-09-06",
+          "values": [
+            26,
+            null,
+            9,
+            3,
+            null
+          ]
+        },
+        {
+          "week": "2026-09-13",
+          "values": [
+            26,
+            null,
+            9,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-09-20",
+          "values": [
+            25,
+            null,
+            6,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-09-27",
+          "values": [
+            23,
+            null,
+            8,
+            null,
+            null
+          ]
+        },
+        {
+          "week": "2026-10-04",
+          "values": [
+            23,
+            0,
+            8,
+            1,
+            1
+          ]
+        },
+        {
+          "week": "2026-10-11",
+          "values": [
+            24,
+            1,
+            7,
+            2,
+            2
+          ]
+        },
+        {
+          "week": "2026-10-18",
+          "values": [
+            24,
+            0,
+            6,
+            2,
+            2
+          ]
+        }
+      ]
+    }
+  ]
+}
