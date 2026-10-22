@@ -1746,6 +1746,21 @@ Fact fixes, 18 Oct (corrections, additive where possible, no headings or links r
 
 - Outbound links to footballdna.co.uk cut from 28 to 10 (20 Oct, Graham's request, ahead of the Football DNA link partnership). The 18 Paul Barry `ExpertQA` boxes each carried a followed `profileHref` to the Football DNA homepage; those two props removed across 17 articles (academy-pathway x8, academy-trials x3, football-development x4, football-gear/best-football-gps-trackers-for-kids, parent-guides/biggest-football-parent-mistakes; how-academy-football-works had two boxes). The credit is unchanged as plain text, since the `role` prop already reads "Head of Coaching, Content & Club Support, Football DNA". The 10 remaining links are the three interview articles (8) and the two product links in `/coaching/best-grassroots-football-apps`, left as genuine editorial links. No other change to any of the 17 pages; several are on watch from earlier October edits, and an outbound link removal is the least likely of their candidate causes to move rankings. One commit, revertable in one step.
 
+## 22 Oct 2026: private coaching, FORZA Wave rebounder link (home practice)
+
+- `/football-development/is-private-football-coaching-worth-it`: one sentence added after the "back garden for twenty minutes a day" line, with an inline Amazon link to the FORZA Wave rebounder (B0CMJGKVFK, in stock 22 Oct with all 3 variants available) and an internal link to `/football-gear/best-football-rebounders-for-kids`. Commits `42141a1` and `4ff08de`; same day, before going live, the folding steel-frame net (B0BWQHB3Y9, £16.99, 1,857 reviews, in stock) added in the same sentence as the budget option. Page last changed 10 Oct (em dash only), so not on watch. Placed as Amazon on purpose: if QuickPlay signs, swapping it to their REPLAY board is the upgrade we offer them. Watch its inline click-outs on the Amazon clicks tab.
+- Held: the same rebounder link on `how-much-training-is-too-much` (ExpertQA box added 11 Oct, clear from about 25 Oct) and `how-to-join-a-football-academy` (edited 20 Oct, clear from about 1 Nov). To be listed in `SEO_ROADMAP.md`.
+
+## 22 Oct 2026: Nike Charge swapped for adidas Tiro Match Junior (link maintenance)
+
+Stock check, Chrome, 22 Oct. Nike Charge Shinguards Junior (B0C36Q9VFK, size S) down to 1 left, size L 5 left; the other junior Charge listings were out or at 2 left. Replaced with adidas Tiro Match Junior, size S (B0CT1ZLQWR, £11.99, 569 ratings; S and M in stock in black/gold, L and most other colours out). Ankle guard confirmed from the listing bullets, the description and the product photo. The Nike J Guard-CE was considered and rejected: slip-in with sleeves, no ankle guard.
+
+- `/football-gear/shin-pads/best-shin-pads-for-kids-football`: top picks "Ankle protection" and the "Ankle cover, younger" pick now the Tiro Match, note rewritten (junior S and M); Mitre Aircell note now "the one to choose once a child has outgrown the adidas junior M" instead of "alternative to the Charge". Live affiliate page, and the shin pads FAQ (0838cfe) is still being read on 27 Oct: this is a product swap in two GearPicks boxes, not a ranking lever, but watch the ankle-pick click-outs on the Amazon clicks tab.
+- `/football-gear/christmas-football-gifts-for-kids`: "Younger players" shin pad gift pick, same swap.
+- Commit `80bf1d5`.
+
+Rest of the 22 Oct stock check (41 products): nothing else out in the linked variant. Watch: Nike Mercurial Lite (6 left), Nike Legend 10 Academy (5 left, 9 of 19 out), adidas Copa Pure IV Club (5 left, 17 of 34 out), Nike Vapor 16 Club (34 of 50 sizes out), Puma Liga short tights (15 of 25 out), Under Armour ColdGear leggings (1 left), adidas F50 Sparkfusion (3 left), adidas Predator League SG (3 left).
+
 ## Weekly SEO check 2026-10-22
 
 Full write-up: `seo-data/exports/weekly-seo-check-2026-10-22.md`. GSC to 19 Oct, page views to 21 Oct, windows from `scripts/seo/cli/change-impact.ts`. Site 28 vs 28 days: impressions +24%, clicks +26%, same-query position 9.0 to 8.0.
