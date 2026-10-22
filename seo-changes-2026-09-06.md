@@ -1745,3 +1745,27 @@ Fact fixes, 18 Oct (corrections, additive where possible, no headings or links r
 - `/football-development/why-isnt-my-child-improving-at-football` (18 Oct): one sentence added in the "Months 4 to 6: reassess properly" step linking "[football stats apps for kids]" to `/parent-guides/best-football-stats-apps`. Commit `2c6f233`. Last change 28 Sept, off watch. This is the third internal link to the stats page today; the other articles that mention stats tell parents not to fixate on them, so no link was forced there.
 
 - Outbound links to footballdna.co.uk cut from 28 to 10 (20 Oct, Graham's request, ahead of the Football DNA link partnership). The 18 Paul Barry `ExpertQA` boxes each carried a followed `profileHref` to the Football DNA homepage; those two props removed across 17 articles (academy-pathway x8, academy-trials x3, football-development x4, football-gear/best-football-gps-trackers-for-kids, parent-guides/biggest-football-parent-mistakes; how-academy-football-works had two boxes). The credit is unchanged as plain text, since the `role` prop already reads "Head of Coaching, Content & Club Support, Football DNA". The 10 remaining links are the three interview articles (8) and the two product links in `/coaching/best-grassroots-football-apps`, left as genuine editorial links. No other change to any of the 17 pages; several are on watch from earlier October edits, and an outbound link removal is the least likely of their candidate causes to move rankings. One commit, revertable in one step.
+
+## Weekly SEO check 2026-10-22
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-10-22.md`. GSC to 19 Oct, page views to 21 Oct, windows from `scripts/seo/cli/change-impact.ts`. Site 28 vs 28 days: impressions +24%, clicks +26%, same-query position 9.0 to 8.0.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| shin pads FAQ | 9 Oct | 0838cfe | Rule met on clicks, holding (Graham to confirm) | Weekly clicks 90, 74, 51; slide began 7 Oct, before the FAQ; "best" query demand down a third at steady 2-3 positions; impressions rise is head terms at 11.4 from 12 Oct. Guards 2.3 to 2.7 and 2.1 to 3.4 | Read again 27 Oct: revert if guards hold 2+ places worse for the week |
+| wide-feet boots title | 3 Oct | cfe92d3 | Keep | Same-query 7.3 to 5.1; clicks -16% on impressions -19% (demand) | Closed |
+| footballs by age list | 4 Oct | 9e9d6d8 | Keep | Same-query 10.0 to 9.3, clicks 21 to 30 | Closed |
+| grassroots apps Progress section | 3 Oct | 5149d01 | Keep, muddied | Same-query 19.1 to 16.6, clicks 30 to 24 | Read again 1 Nov |
+| Aston Villa title | 9 Oct | db0d9e5 | Keep | Clicks 11 to 52, CTR 1.4% to 3.9% | Closed |
+| West Ham title | 9 Oct | c06a4c2 | Keep | Same-query 8.4 to 7.3, clicks 27 to 33 | Closed |
+| AG vs FG title | 9 Oct | b138a61 | Neutral, keep | Same-query flat, target 8.2 to 7.5 | Closed |
+| academy recruit ages FAQ | 9 Oct | 0f86a67 | Keep | Clicks 12 to 20; target too small to read | Closed |
+| pro footballer FAQ | 9 Oct | d9b5d44 | Keep | Target 8.2 to 6.6 | Closed |
+| equal playing time calc section | 6 Oct | b6f2a5b | Keep | Flat | Closed (page on watch for 18 Oct Coach App title) |
+| stats apps title | 13 Oct | 9a01843 | Too early, flag | Clicks 20 to 8, CTR 6.4% to 2.9% (6 days) | Read again 27 Oct |
+| Arsenal title | 14 Oct | 323e632 | Too early | CTR 0.76% to 0.67% (5 days) | Read again 28 Oct |
+| 10 shortened titles | 13 Oct | see entry | Too early | | 27 Oct |
+| Palace, Veo, soft ground titles; ETC intro | 16 Oct | see entries | Too early | | 30 Oct |
+| 17-20 Oct changes | 17-20 Oct | see entries | Too early | | 1 Nov |
+
+Shortlist put to Graham: Brentford title (academy queries, Villa pattern), Leeds title (academy), Chelsea title (pre-academy, after the first two), footballs by age size queries (SERP check first), shin pads head terms (held to 27 Oct).
