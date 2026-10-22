@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Chelsea FC Development Centre Guide | Football Parent",
+  title: "Chelsea Pre-Academy & Development Centre Guide",
   description:
     "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining.",
   path: "/academy-pathway/chelsea-fc-development-centre-guide",
