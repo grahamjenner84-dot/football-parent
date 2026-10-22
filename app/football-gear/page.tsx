@@ -146,6 +146,12 @@ export default function FootballGearPage() {
           description:
             "Rebound boards vs net rebounders, which suits which age, and how to anchor one on grass, 3G or a patio.",
         },
+        {
+          title: "Football Advent Calendars 2026",
+          href: "/football-gear/football-advent-calendars",
+          description:
+            "Match Attax, Topps Premier League and Adrenalyn XL card calendars, story and quiz calendars and brick builds: what's inside and which age each suits.",
+        },
       ]}
       bottomContent={{
         title: "About Football Gear",

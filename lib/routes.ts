@@ -95,6 +95,7 @@ export const routes = [
   '/football-gear/best-football-gps-trackers-for-kids',
   '/football-gear/christmas-football-gifts-for-kids',
   '/football-gear/best-football-rebounders-for-kids',
+  '/football-gear/football-advent-calendars',
   '/football-gear/best-football-base-layers-for-kids',
 
   // Girls Football
