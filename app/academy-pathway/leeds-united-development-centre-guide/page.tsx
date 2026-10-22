@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Leeds United Development Centre Guide | Football Parent",
+  title: "Leeds United Academy & Development Centre Guide",
   description:
     "Leeds United's academy became Category One in 2020, above a Skills Centre to Technical Centre pathway. Real ages, costs and how trials actually work.",
   path: "/academy-pathway/leeds-united-development-centre-guide",
