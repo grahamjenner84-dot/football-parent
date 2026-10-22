@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Brentford FC Development Centre Guide | Football Parent",
+  title: "Brentford Academy Trials & Development Centre Guide",
   description:
     "Brentford closed its academy in 2016 for a B team model, reopened in 2022 and reached Category One status in 2026. How the Trust's Development Centre fits in.",
   path: "/academy-pathway/brentford-development-centre-guide",
