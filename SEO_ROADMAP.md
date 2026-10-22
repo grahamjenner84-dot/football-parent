@@ -18,6 +18,25 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 - **About 8 Nov:** calculator rankings for "playing time calculator", "equal playing time calculator" and "equal game time calculator" (none in the top 100 on 18 Oct).
 - **About 8 Nov:** stats page title decision. Only change it if "football stats app" searches are still past #20.
 
+### Read-agains from the 22 Oct weekly check
+
+- **27 Oct: shin pads FAQ (`0838cfe`).** The revert rule was met on clicks (weekly 90, 74, 51), but it was held: the slide began before the FAQ, demand for the "best" queries fell, and the impressions rise is head terms at about 11.4 from 12 Oct. Revert if "best shin pads for kids" or "best kids shin pads" hold 2+ places worse through 20-26 Oct (they read 3.3 and 4.7 on 19 Oct). The shin pads head terms ("kids shin pads" and others, about 3,500 impressions a week at 11-12) wait until this is settled.
+- **27 Oct:** stats apps shortened title (clicks 20 to 8 over 6 days), and the 10 shortened titles from 13 Oct.
+- **28 Oct:** Arsenal title, CTR rule (0.67% over the first 5 days, the line is 0.7% for two weeks).
+- **30 Oct:** Palace, Veo and soft ground titles; ETC intro and its AI Overview citation.
+- **About 5 Nov:** Brentford, Leeds and Chelsea titles (22 Oct). Baselines and revert rules are in the change log.
+- **Arsenal and Villa titles still end "Parent's Guide":** Graham (22 Oct) prefers it off, so drop it when each is next off watch (Arsenal after 28 Oct, Villa now). Not a lever on its own; pair it with the next title change on each page.
+
+### Christmas and Black Friday (live by about 7 Nov)
+
+From `seo-data/exports/xmas-affiliate-seasonality-2026-10-22.md`. "football gifts" is at about a quarter of its peak now, doubles in early November and peaks Black Friday week to 20 December. Advent calendars peak around 9 November.
+
+- **New article: football advent calendars for kids.** 18,100 searches in Nov 2025, plus "match attax advent calendar" 9,900. One editorial page in the top 10 (fantasyfootballer.co.uk at #3). Research in progress 22 Oct.
+- **Black Friday readiness on existing pages:** rebounders (12,100 in Nov, 2.8x), kids' boots (33,100), Veo (22,200), size 3 and 4 footballs (1.8x), gifts guide. Stock check about 16-20 Nov, plus any November-specific terms from the 22 Oct research.
+- **Gifts guide additions:** football pyjamas (4,400 in Nov, 3.4x), slippers (2,900, 6.6x), annuals (about 1,000 in Dec, 6x). Research in progress 22 Oct.
+- **Fold into the QuickPlay indoor training article:** "football training equipment" (12,100 in Nov, 2.3x). Mostly shops, two buying guides at #5 and #8.
+- **Ruled out:** boot bags (shops-only SERP), "black friday football boots" (retailer deal pages), skills mats (20 Oct), garden goals (peak May).
+
 ## Planned
 
 - **New article: youth football match lengths, pitch sizes and goal sizes by age group (2026/27).** No page covers it; competitors rank for "pitch dimensions for 9v9" (480/mo), "9v9 goal size" (210), "u12 football match length" (110), "u11 football match length" (70). Check volumes with keyword research before writing, then add it to the article roadmap. See `competitor-keyword-ownership-2026-10-18.md`, section 4.
