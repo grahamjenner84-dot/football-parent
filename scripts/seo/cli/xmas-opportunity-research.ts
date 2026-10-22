@@ -153,10 +153,11 @@ async function main() {
     })
     .sort((a, b) => b.nov2025 + b.dec2025 - (a.nov2025 + a.dec2025));
 
-  // 4. Live SERPs, depth 20, async AI Overviews loaded.
+  // 4. Live SERPs, depth 20. The 22 Oct run also loaded async AI Overviews,
+  // an option that lives in uncommitted serp.ts changes, not on main.
   const serps = [];
   for (const kw of SERPS) {
-    const r = await googleOrganicSerp(kw, { ...opts, depth: 20, loadAsyncAiOverview: true });
+    const r = await googleOrganicSerp(kw, { ...opts, depth: 20 });
     cost += r.cost ?? 0;
     const items = ((r.data?.tasks?.[0]?.result?.[0] as { items?: (SerpItem & OrganicItem)[] } | undefined)?.items ?? []);
     const f = extractSerpFeatures(items);

@@ -6,6 +6,8 @@
 // gives the timing of the climb (Black Friday week vs December).
 // Output: seo-data/exports/xmas-affiliate-seasonality-2026-10-22.json
 //
+// Trends tasks can outlast the client's polling and come back empty; the
+// 22 Oct run fetched three of them afterwards with task_get by id.
 // SAFETY: three-factor live gate; Graham asked for this in-session 2026-10-22.
 // Run:
 //   DATAFORSEO_ENV=live DATAFORSEO_ALLOW_LIVE=true LIVE_CONFIRM=yes npx tsx scripts/seo/cli/xmas-affiliate-seasonality.ts
@@ -98,7 +100,7 @@ async function main() {
 
   const trends: { group: string[]; weekly: { week: string; values: (number | null)[] }[] }[] = [];
   for (const group of TREND_GROUPS) {
-    const r = await googleTrendsExplore(group, { ...opts, pollAttempts: 20, pollDelayMs: 3000 });
+    const r = await googleTrendsExplore(group, opts);
     cost += r.cost ?? 0;
     const items = ((r.data?.tasks?.[0]?.result?.[0] as { items?: GraphItem[] } | undefined)?.items ?? []) as GraphItem[];
     const graph = items.find((i) => i.type === "google_trends_graph");

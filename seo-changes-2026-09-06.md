@@ -1799,3 +1799,17 @@ Shortlist put to Graham: Brentford title (academy queries, Villa pattern), Leeds
 - Watch until ~5 Nov.
 
 Also 22 Oct: `/football-gear/best-footballs-by-age` size queries checked live ($0.012): AI Overview on "what size football for 8 / 10 / 6 year old", us not cited (England Football Futurefit, Forza, Herefordshire FA, adidas cited). The 0-click rows at position 8-10 are the AI Overview answering the question, so no title change; the aim would be a citation, not CTR.
+
+## 22 Oct 2026: new article, Football Advent Calendars 2026
+
+Published 22 Oct 2026: `/football-gear/football-advent-calendars` (Football Gear). Commit `d48157f`. Targets "football advent calendar" (18,100 in Nov 2025, 8,100 in Oct 2025, KD 0) and "football advent calendar 2026" (the 2025 version was 12,100 in Nov 2025), plus "match attax advent calendar" (9,900), card calendars (about 8,000) and the club calendar searches (Liverpool and Arsenal 3,600 each). Page one on 22 Oct had one editorial roundup (fantasyfootballer.co.uk at #4); the rest was Groupon, Manchester Evening News, Amazon, BBC, Pinterest and price comparison. Research: `seo-data/exports/xmas-opportunity-research-2026-10-22.md`.
+
+Title "Football Advent Calendars 2026: The Best for Kids". Picks (Amazon, checked 22 Oct): Topps Match Attax UCC 2026/27 Countdown Calendar, Topps Premier League 2026, Panini FIFA 365 Adrenalyn XL 2026, Football Stars story calendar, an ages 6-12 activity book, a 712-piece building block calendar, FOCO BRXLZ club calendars, one generic figures calendar. Gear page, so no external citations. No ParentNote yet: questions put to Graham 22 Oct, add his answers when they come. Added to `lib/routes.ts` and the Football Gear index. Inbound link from the gifts guide (below). Demand peaks around 9 Nov and is gone by December, so request indexing on publish and check it is indexed by about 29 Oct.
+
+## 22 Oct 2026: gifts guide, Christmas search update
+
+`/football-gear/christmas-football-gifts-for-kids`, commit `6cdaa4c`. Additive, no heading, link or section removed. Bundled as one change at Graham's request (22 Oct) while the page is still on watch from the 13 Oct title (570 impressions, 17 clicks since launch on 9 Oct, so little to attribute either way):
+- Age bands now give ages in years ("Under 7 and Under 8 (around ages 6 and 7)" and so on), since related searches and PAA all use "X year old".
+- Two FAQs from PAA: "What do you buy a 7 year old who loves football?" and "What do you get a 10 year old who loves football?".
+- Stocking Fillers: a football advent calendar bullet linking `/football-gear/football-advent-calendars`, a pyjamas / slippers / annual bullet (tagged Amazon search links), and a Secret Santa / under £10 line ("secret santa football gifts" 1,300 in Dec 2025, 68x).
+- Baseline (since launch, GSC to 19 Oct): 570 impressions, 17 clicks, position 7.4. Watch to about 5 Nov.

@@ -31,9 +31,16 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 
 From `seo-data/exports/xmas-affiliate-seasonality-2026-10-22.md`. "football gifts" is at about a quarter of its peak now, doubles in early November and peaks Black Friday week to 20 December. Advent calendars peak around 9 November.
 
-- **New article: football advent calendars for kids.** 18,100 searches in Nov 2025, plus "match attax advent calendar" 9,900. One editorial page in the top 10 (fantasyfootballer.co.uk at #3). Research in progress 22 Oct.
-- **Black Friday readiness on existing pages:** rebounders (12,100 in Nov, 2.8x), kids' boots (33,100), Veo (22,200), size 3 and 4 footballs (1.8x), gifts guide. Stock check about 16-20 Nov, plus any November-specific terms from the 22 Oct research.
-- **Gifts guide additions:** football pyjamas (4,400 in Nov, 3.4x), slippers (2,900, 6.6x), annuals (about 1,000 in Dec, 6x). Research in progress 22 Oct.
+- **Written 22 Oct: `/football-gear/football-advent-calendars`.** See the change log. Check it is indexed by about 29 Oct (request indexing in Search Console on publish), and its stock before mid-November.
+- **Next to write: gifts for football coaches** (`/parent-guides/gifts-for-football-coaches` or `/coaching/`, Graham's call on category). Research: `seo-data/exports/xmas-opportunity-research-2026-10-22.md`, section 4.
+  - **Demand (UK):** "football gifts for coaches" / "gifts for football coach" 2,400 a month average, 2,900 in Nov 2025 and 5,400 in Dec 2025, KD 0. Steady through the year, so it also catches the end-of-season gift (May-June).
+  - **Page one (22 Oct):** weak. A spirits shop, a Lego-figure shop, Soccer Coach Weekly's 2025 Christmas list, Pinterest, Reddit r/AskUK "What gift should we buy for U9's football coaches?", Wanapix, Etsy, Spized, mysteryshirtinabox, Mumsnet. AI Overview present, citing none of them strongly.
+  - **Questions to answer (PAA and related):** What is the best gift for a coach? What are some good end-of-season football gifts? How much to donate for a coach gift? Plus youth football coach gift ideas, personalised football coach gifts, football coach gifts UK.
+  - **Angle:** parents clubbing together for a grassroots volunteer coach, written by a coach. What coaches actually use (a decent coat, gloves, a tactics board, a whistle, a clipboard), team gifts vs individual ones, how much each family usually puts in, a signed card or team photo. Graham's own view as a coach is the E-E-A-T, and shops cannot match it. Coach App mentioned the subtle way only.
+  - **Amazon:** personalised coach mugs, tactics boards, coach bags, clipboards, whistles, touchline coats and gloves.
+  - **Timing:** live by about 20 Nov for the December peak; refresh in April for the end of season.
+- **Black Friday readiness on existing pages:** rebounders (12,100 in Nov, 2.8x), kids' boots (33,100), Veo (22,200), size 3 and 4 footballs (1.8x), gifts guide. Stock check about 16-20 Nov. From the 22 Oct research: a Veo FAQ on Black Friday and discount codes (County FA offers ran 50% off Veo Go and £500 off Cam 3 last year; PAA "Is there a discount code for Veo camera?") after its watch ends 30 Oct; a rebounders FAQ, "What is the best football rebounder for an 8-year-old?" (PAA).
+- **Gifts guide additions: done 22 Oct** (ages in years on the age bands, two age FAQs from PAA, Secret Santa line, pyjamas / slippers / annuals line, advent calendar link). See the change log.
 - **Fold into the QuickPlay indoor training article:** "football training equipment" (12,100 in Nov, 2.3x). Mostly shops, two buying guides at #5 and #8.
 - **Ruled out:** boot bags (shops-only SERP), "black friday football boots" (retailer deal pages), skills mats (20 Oct), garden goals (peak May).
 
