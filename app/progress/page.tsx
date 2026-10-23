@@ -164,13 +164,12 @@ export default function ProgressPage() {
               Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
             </p>
             <h1 className="text-4xl lg:text-5xl font-bold text-[#16211b] leading-tight mb-5">
-              Every goal.
-              <br />
-              Every season.
+              Your child&apos;s football journey, kept for good
             </h1>
             <p className="text-lg text-[#3c4a40] leading-relaxed max-w-xl mb-8">
-              The app for football parents: log their goals and assists, keep
-              their career stats and coach feedback, and share their season.
+              Progress is the app for football parents. Log every goal and assist,
+              keep their career stats (previous seasons included), track training
+              and coach feedback, and turn the season into cards worth sharing.
             </p>
             <ProgressJoinForm id="join" />
             <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[#5d6b60] list-none p-0">
