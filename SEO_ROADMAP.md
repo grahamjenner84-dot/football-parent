@@ -27,6 +27,10 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 - **About 5 Nov:** Brentford, Leeds and Chelsea titles (22 Oct). Baselines and revert rules are in the change log.
 - **Arsenal and Villa titles still end "Parent's Guide":** Graham (22 Oct) prefers it off, so drop it when each is next off watch (Arsenal after 28 Oct, Villa now). Not a lever on its own; pair it with the next title change on each page.
 
+### /progress copy revert (read about 6 Nov)
+
+- **What:** the 23 Oct revert of the `/progress` headline and intro to the pre-13 Oct copy (`e2b5319`). Read Progress sign-ups (app snapshot) and join form taps against 14-23 Oct: 2 sign-ups, 98 form views, 7 taps. Baseline and keep rule in the change log.
+
 ### Christmas and Black Friday (live by about 7 Nov)
 
 From `seo-data/exports/xmas-affiliate-seasonality-2026-10-22.md`. "football gifts" is at about a quarter of its peak now, doubles in early November and peaks Black Friday week to 20 December. Advent calendars peak around 9 November.
