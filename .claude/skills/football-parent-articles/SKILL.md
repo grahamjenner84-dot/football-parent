@@ -170,7 +170,7 @@ export default async function Page() {
       datePublished={article.frontmatter.date}
       content={article.content}
     >
-      <MDXContent content={article.content} />
+      <MDXContent content={article.content} slug={article.slug} />
     </ArticleLayout>
   );
 }
@@ -197,6 +197,12 @@ Rules:
   from this template for an unknown period and had already shipped on the
   Fulham and Tottenham guides (fixed then, both re-checked against a real
   page render, not just `npm run build`, which does not catch this).
+- Always pass `slug={article.slug}` to `<MDXContent>`. The mid-article
+  banner (Coach App or Progress, which audience, the Progress A/B test, any
+  per-slug banner exception) is chosen from the slug, so without it every
+  article falls back to the default parent banner. Found 2026-10-23: missing
+  from this template, so the coach gifts article first shipped without the
+  share banner it was set up for.
 - Only ever generate a file named `page.tsx` — never `new-page.tsx`,
   `article-page.tsx`, or similar.
 
