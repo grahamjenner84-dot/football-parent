@@ -55,6 +55,12 @@ export default function ParentGuidesPage() {
       }}
       articles={[
         {
+          title: "Football Gifts for Coaches",
+          href: "/parent-guides/gifts-for-football-coaches",
+          description:
+            "Christmas and end of season gifts for grassroots coaches: what they use on the touchline, how much each family puts in, and the card that matters.",
+        },
+        {
           title: "Best Football Stats Apps for Kids",
           href: "/parent-guides/best-football-stats-apps",
           description:
