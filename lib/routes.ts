@@ -130,6 +130,7 @@ export const routes = [
   '/parent-guides/jpl-martin-brock-interview-part-1',
   '/parent-guides/jpl-martin-brock-interview-part-2',
   '/parent-guides/best-football-stats-apps',
+  '/parent-guides/gifts-for-football-coaches',
   '/coaching/football-drills-for-7-and-8-year-olds',
   '/coaching/what-qualifications-do-i-need-to-be-a-football-coach',
   '/coaching/equal-playing-time-in-grassroots-football',
