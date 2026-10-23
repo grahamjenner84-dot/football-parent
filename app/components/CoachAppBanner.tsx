@@ -117,7 +117,6 @@ export const SHARE_AUDIENCE_SLUGS = new Set([
   "is-private-football-coaching-worth-it",
   "girls-academy-vs-grassroots-football",
   "late-developers-in-girls-football",
-  "gifts-for-football-coaches",
 ]);
 
 // When the share audience (and the audience routing below) went live: the
