@@ -10,7 +10,7 @@ import {
   type CoachAppChannel,
 } from "@/lib/coach-app-channels";
 import { getCoachAppShareStats, type CoachAppShareStats } from "@/lib/supabase/coach-app-shares";
-import { PARENT_ARTICLE_BANNER_ENDED_AT, SHARE_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
+import { PARENT_ARTICLE_BANNER_ENDED_AT, SHARE_AUDIENCE_SLUGS, shareBannerKeptAt } from "@/app/components/CoachAppBanner";
 
 // Server-only client using the service role key (football-parent-social),
 // same pattern as the other lib/supabase modules. Never import from client
@@ -399,7 +399,8 @@ const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
 // than taken from the banner test report, whose window goes back to
 // 2026-09-04 and would set weeks of views against hours of taps.
 // Stops at PARENT_ARTICLE_BANNER_ENDED_AT, when those articles swapped the
-// share banner for Progress.
+// share banner for Progress, apart from SHARE_BANNER_KEPT_SLUGS, which count
+// again from SHARE_BANNER_KEPT_FROM.
 async function countShareBannerImpressions(
   supabase: ReturnType<typeof adminClient>,
   since: string
@@ -409,17 +410,18 @@ async function countShareBannerImpressions(
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, user_agent")
+      .select("path, user_agent, created_at")
       .gte("created_at", since)
-      .lt("created_at", PARENT_ARTICLE_BANNER_ENDED_AT)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
     if (error) throw new Error("Failed to read page_views: " + error.message);
-    const batch = (data ?? []) as { path: string; user_agent: string | null }[];
+    const batch = (data ?? []) as { path: string; user_agent: string | null; created_at: string }[];
     for (const row of batch) {
       if (row.path.startsWith(COACHING_PREFIX) || !isHuman(row.user_agent)) continue;
       const slug = row.path.split("/").filter(Boolean).pop();
-      if (slug && SHARE_AUDIENCE_SLUGS.has(slug)) count++;
+      if (row.created_at < PARENT_ARTICLE_BANNER_ENDED_AT) {
+        if (slug && SHARE_AUDIENCE_SLUGS.has(slug)) count++;
+      } else if (shareBannerKeptAt(slug, row.created_at)) count++;
     }
     if (batch.length < pageSize) break;
   }

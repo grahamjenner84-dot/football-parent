@@ -117,7 +117,21 @@ export const SHARE_AUDIENCE_SLUGS = new Set([
   "is-private-football-coaching-worth-it",
   "girls-academy-vs-grassroots-football",
   "late-developers-in-girls-football",
+  "gifts-for-football-coaches",
 ]);
+
+// The exception to PARENT_ARTICLE_BANNER_ENDED_AT: share articles that keep
+// the Coach App share banner in the mid-article slot instead of Progress,
+// because the reader is one message away from the coach the banner is about.
+// From SHARE_BANNER_KEPT_FROM (the deploy that shipped it); before that the
+// slot showed Progress like every other parent article. Graham, 2026-10-23.
+export const SHARE_BANNER_KEPT_SLUGS = new Set(["gifts-for-football-coaches"]);
+export const SHARE_BANNER_KEPT_FROM = "2026-10-23T22:23:00Z";
+
+/** Whether a page view of this slug showed the kept share banner. */
+export function shareBannerKeptAt(slug: string | undefined, createdAt: string): boolean {
+  return !!slug && SHARE_BANNER_KEPT_SLUGS.has(slug) && createdAt >= SHARE_BANNER_KEPT_FROM;
+}
 
 // When the share audience (and the audience routing below) went live: the
 // merge that shipped it, 2026-09-25 19:14 UTC. Before this every article
