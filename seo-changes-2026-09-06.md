@@ -1837,3 +1837,10 @@ Title "Football Advent Calendars 2026: The Best for Kids". Picks (Amazon, checke
 - **Why:** a conversion change, not a search one. Progress sign-ups (the app's own count) were 10 in 8-13 Oct and 2 in 14-23 Oct (17 and 21 Oct), while banner impressions held at about 300 a day and `/progress` had 103 views from 14 Oct. Since 14 Oct the join form was seen 98 times and either button tapped 7 times. The email box went back in view on 18 Oct (`f2532f6`) without sign-ups recovering, so the shorter copy is the next suspect.
 - **Other changes in the same window, so a recovery is not all down to this:** the email box hidden behind "No Google?" from 14 Oct (`0daadcd`) to 18 Oct; "Sign up with Google" starting Google from the site from 18 Oct (`7c5e4db`); banner test 2 from 14 Oct (CTR about 1%, as before).
 - **Read about 6 Nov:** sign-ups and join form taps against the baseline above (`get_progress_funnel`: `usage.byDay[].signupsToday`, `joinFormSteps`). Keep if sign-ups are back above about 3 a week; if they stay at the 14-23 Oct rate, the copy was not it, and the form is next.
+
+## 23 Oct 2026: rebounder links on two more pages (the held ones)
+
+Brought forward from the 25 Oct / 1 Nov dates (Graham's call): neither earlier change is being measured against these. FORZA Wave (B0CMJGKVFK) and the folding net (B0BWQHB3Y9) both in stock on the 22 Oct check.
+
+- `/football-development/how-much-training-is-too-much`: "Lower training load" list item becomes "Passing against a wall or a rebounder such as the [FORZA Wave] (a [folding rebounder net] is a good budget option)". Commit `b5f0397`. The ExpertQA box (11 Oct) is the change to credit for any ranking movement.
+- `/academy-pathway/how-to-join-a-football-academy`: "Focus on development, not exposure" gains "(even twenty minutes a day against a [rebounder] in the garden adds up)", linking the FORZA Wave. Commit `f626d5e`. Live traffic page; the 20 Oct edit here was the Football DNA link cleanup, not a measured change.
