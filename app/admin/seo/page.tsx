@@ -26,6 +26,7 @@ import type { ProgressFunnel } from "@/lib/supabase/progress-funnel"; // type-on
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 import { isAndroidAppPath } from "@/lib/coach-app-android"; // plain constants, no server-only deps - safe from a client component
+import { ukToday } from "@/lib/uk-day"; // plain functions, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & {
   /** The game time calculator's step events (opened in the site's page,
@@ -1426,7 +1427,7 @@ function SearchesList({
           <input
             type="date"
             value={date}
-            max={new Date().toISOString().slice(0, 10)}
+            max={ukToday()}
             onChange={(e) => onDateChange(e.target.value)}
             style={styles.dateInput}
           />
@@ -1860,7 +1861,7 @@ function Dashboard({
   // Newest first already, so the first entry is the default: today.
   const dateOptions = pageViewStats.byDay.map((d) => d.date);
   const latest = dateOptions[0] ?? "";
-  const today = new Date().toISOString().slice(0, 10);
+  const today = ukToday();
   // "" means "use the latest day"; "all" means the whole 30-day window.
   const effective = selectedDate || latest;
   const isWindow = effective === "all";
@@ -1905,9 +1906,10 @@ function Dashboard({
   // from the sign-up form's step events (coach-app
   // src/data/signupFormTracking.ts), since the Android ads send coaches
   // straight to the Play Store, so that, not a page view, is where most
-  // sign-ups start. Sign-ups are split by the event each one reports (UTC
-  // days), so on a day split around UK midnight they can differ by one from
-  // the app's own count beside them (UK days).
+  // sign-ups start. Sign-ups are split by the event each one reports, by UK
+  // day like the app's own count beside them. The two can still differ by
+  // one for a past day: that day's app count is its last snapshot, taken up
+  // to 10 minutes before midnight.
   const caPaths = coachAppViewStats ? (isWindow ? coachAppViewStats.topPaths : caDay?.topPaths ?? []) : [];
   const androidOpens = caPaths.filter((p) => isAndroidAppPath(p.path)).reduce((sum, p) => sum + p.count, 0);
   const webViews = caTotal - androidOpens;
@@ -1929,8 +1931,8 @@ function Dashboard({
   const androidGoogleTaps = caStepCount("/coach-app/signup-form/android/sign-in/google");
 
   // App usage for the chosen scope: the latest snapshot for today or the
-  // whole window, otherwise that day's closing figures (UK days, against the
-  // page views' UTC days: the same date either way outside 00:00-01:00 BST).
+  // whole window, otherwise that day's closing figures. UK days, the same as
+  // every site-side number here (lib/uk-day.ts).
   const usage = coachAppUsage && !("error" in coachAppUsage) ? coachAppUsage : null;
   const usageDay =
     !usage || !usage.latest
@@ -1939,7 +1941,7 @@ function Dashboard({
       ? usage.latest
       : usage.byDay.find((d) => d.date === effective) ?? null;
 
-  // Progress for the chosen scope: the site-side pipeline by UTC day, and
+  // Progress for the chosen scope: the site-side pipeline by UK day, and
   // the app's own counts the same way as the Coach App's above.
   const pgDay =
     isWindow || !progressFunnel ? null : progressFunnel.byDay.find((d) => d.date === effective) ?? null;
@@ -3566,7 +3568,7 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
           <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
             <thead>
               <tr>
-                <th style={funnelTh}>Day (UTC)</th>
+                <th style={funnelTh}>Day</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Impressions</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Banners seen</th>
                 <th style={{ ...funnelTh, textAlign: "right" }}>Banner clicks</th>
@@ -4006,7 +4008,7 @@ function BannerVariantsReport({
         CTR column, not the click column: each arm is shown on a different
         set of articles, so raw clicks mostly reflect which arm drew the
         busier pages. Picking a date below narrows every number here to that
-        one UTC day, bucketed exactly like the page view days it sits next
+        one UK day, bucketed exactly like the page view days it sits next
         to.
         {!selectedDate && stats.clampedToTestStart && (
           <>
@@ -4341,8 +4343,8 @@ type PageViewCompareDirection = "gains" | "losses";
 // below, page_views has no processing lag to work around, so "yesterday" is
 // safe as a default here.
 function ComparePageViews() {
-  const [dateA, setDateA] = useState(daysAgo(1));
-  const [dateB, setDateB] = useState(daysAgo(2));
+  const [dateA, setDateA] = useState(() => daysBefore(ukToday(), 1));
+  const [dateB, setDateB] = useState(() => daysBefore(ukToday(), 2));
   const [result, setResult] = useState<PageViewDayComparison | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");

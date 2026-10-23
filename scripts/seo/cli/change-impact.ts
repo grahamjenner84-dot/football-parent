@@ -27,16 +27,11 @@ import { ensureEnvLoaded, REPO_ROOT } from "../shared/env";
 import { comparePageQueries, getPeriodTotals, pageUrl, type PageQueryMover, type PeriodTotals } from "../../../lib/gsc";
 import { routes } from "../../../lib/routes";
 import { getPageViewSourceDaysForPath, getPageViewStats, type PageViewSourceDay } from "../../../lib/supabase/page-views";
+import { addDays, ukToday } from "../../../lib/uk-day";
 
 ensureEnvLoaded();
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
-
-function addDays(date: string, days: number): string {
-  const d = new Date(`${date}T00:00:00.000Z`);
-  d.setUTCDate(d.getUTCDate() + days);
-  return d.toISOString().slice(0, 10);
-}
 
 function daysBetween(a: string, b: string): number {
   return Math.round((new Date(`${b}T00:00:00Z`).getTime() - new Date(`${a}T00:00:00Z`).getTime()) / 86400000);
@@ -124,7 +119,8 @@ function relatedCommits(pagePath: string, since: string): string[] {
 
 async function main() {
   const { changes, days } = parseArgs(process.argv.slice(2));
-  const today = new Date().toISOString().slice(0, 10);
+  // UK day, the same day the page view numbers are bucketed by.
+  const today = ukToday();
   const gscLast = addDays(today, -3);
   const pvLast = addDays(today, -1);
 

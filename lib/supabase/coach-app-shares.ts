@@ -3,6 +3,7 @@ import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 // utm_source on the link the share button sends: a page view carrying it is
 // a coach (or whoever) opening what a parent sent them.
 import { SHARED_LINK_UTM_SOURCE } from "@/lib/coach-app-channels";
+import { ukDay } from "@/lib/uk-day";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/partner-clicks.ts - this must never be imported from client
@@ -169,7 +170,7 @@ export async function getCoachAppShareStats(days: number = 30, startAt?: string)
 
   const dayMap = new Map<string, ShareDay>();
   const day = (iso: string) => {
-    const date = iso.slice(0, 10);
+    const date = ukDay(iso);
     let d = dayMap.get(date);
     if (!d) {
       d = { date, shares: 0, cancelled: 0, sharedLinkVisits: 0 };

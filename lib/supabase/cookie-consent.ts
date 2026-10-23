@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { ukDay } from "@/lib/uk-day";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/content-queue.ts - this must never be imported from client
@@ -87,7 +88,7 @@ export async function getConsentStats(days: number = 30): Promise<ConsentStats> 
   let analyticsGrantedCount = 0;
 
   for (const row of rows) {
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     const bucket = byDayMap.get(day) ?? {
       bannerShown: 0,
       acceptAll: 0,
