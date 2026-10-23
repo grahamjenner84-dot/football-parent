@@ -343,7 +343,6 @@ export interface ProgressUsage {
   byDay: (ProgressSnapshotCounts & { date: string; takenAt: string })[];
 }
 
-
 function snapshotCounts(r: Record<string, unknown>): ProgressSnapshotCounts & { takenAt: string } {
   const out = { takenAt: r.taken_at as string } as ProgressSnapshotCounts & { takenAt: string };
   for (const f of USAGE_FIELDS) out[f] = r[COLUMN[f]] as number;
