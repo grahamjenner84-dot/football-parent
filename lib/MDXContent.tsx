@@ -17,6 +17,7 @@ import CoachAppBanner, {
   bannerStyleForKey,
   defaultAudienceForSlug,
   type CoachAppAudience,
+  type CoachAppPlacement,
 } from "@/app/components/CoachAppBanner";
 import ProgressBanner from "@/app/components/ProgressBanner";
 import { routes } from "@/lib/routes";
@@ -212,12 +213,16 @@ interface MDXContentProps {
   // The article's slug, used only to assign it one arm of the banner A/B
   // test. Stable across content edits, unlike hashing the body would be.
   slug?: string;
+  // Where the mid-article Coach App banner reports its clicks from
+  // (CoachAppPlacement). "article" unless a page has its own tag.
+  coachAppPlacement?: CoachAppPlacement;
 }
 
 export async function MDXContent({
   content,
   coachAppBanner,
   slug,
+  coachAppPlacement = "article",
 }: MDXContentProps) {
   const split =
     coachAppBanner === "none" ? null : splitAtMiddleHeading(content);
@@ -263,6 +268,7 @@ export async function MDXContent({
             <CoachAppBanner
               audience={audience}
               style={inCoaching ? "sponsor" : bannerStyleForKey(slug)}
+              placement={coachAppPlacement}
             />
           )}
 

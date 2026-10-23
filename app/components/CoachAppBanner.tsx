@@ -36,14 +36,31 @@ export type CoachAppBannerStyle = "dark" | "light" | "sponsor";
 
 // Where a banner sits. "article" is the in-body placement the A/B test runs
 // on; "home" is the homepage; "category" is the section-level promo above a
-// category page's guide grid.
+// category page's guide grid; "calculator" is the in-body banner on the
+// equal playing time calculator page (CALCULATOR_PAGE_PATH), tagged apart
+// from the other /coaching/ articles so clicks from the calculator show on
+// their own.
 //
 // Any new placement must also be taught to bannerOnPath() in
 // lib/supabase/page-views.ts, which decides whether a logged pageview counts
 // as a banner impression. Clicks are counted from the ?b= parameter on any
 // path, so a placement the report doesn't recognise contributes clicks with
 // no matching impressions and reports an inflated CTR.
-export type CoachAppPlacement = "article" | "home" | "category";
+export type CoachAppPlacement = "article" | "home" | "category" | "calculator";
+
+// The calculator page, and when its Coach App banner and its text link to
+// the Coach App page started carrying their own tags (the "calculator"
+// placement, and CALCULATOR_LINK_VARIANT on the link in
+// content/coaching/equal-playing-time-calculator.mdx): the deploy that
+// shipped them, to within a few minutes. Before this the banner was tagged
+// as an ordinary article banner and the link had no tag, so the report only
+// counts calculator impressions from here.
+export const CALCULATOR_PAGE_PATH = "/coaching/equal-playing-time-calculator";
+export const CALCULATOR_TAGS_STARTED_AT = "2026-10-23T19:45:00Z";
+// The ?b= value on that text link. Written as "<style>-<audience>-<placement>"
+// like a banner's, so the banner report splits it the same way; "link" sits
+// outside the dark/light test.
+export const CALCULATOR_LINK_VARIANT = "link-coach-calculator";
 
 // Category index pages carrying the section-level banner, as route paths.
 // Shared with the pageview report so impressions and clicks stay in step.
@@ -219,7 +236,8 @@ export default function CoachAppBanner({
   style?: CoachAppBannerStyle;
   placement?: CoachAppPlacement;
 }) {
-  const spacing = placement === "article" ? "my-10" : "";
+  const inBody = placement === "article" || placement === "calculator";
+  const spacing = inBody ? "my-10" : "";
   const href = `${DESTINATION}?b=${style}-${audience}-${placement}`;
 
   if (style === "dark" && audience === "share") {
@@ -300,7 +318,7 @@ export default function CoachAppBanner({
   return (
     <aside
       className={`rounded-2xl border p-6 lg:p-8 ${spacing} ${
-        placement === "article"
+        inBody
           ? "border-gray-200 bg-gray-50"
           : "border-slate-200 bg-white shadow-sm"
       }`}

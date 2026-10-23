@@ -46,7 +46,9 @@ export default async function Page() {
       dateModified={article.frontmatter.dateModified}
       content={article.content}
     >
-      <MDXContent content={body} slug={article.slug} coachAppBanner="coach" />
+      {/* Its own banner tag, so clicks from the calculator show apart from
+          the other coaching articles (CALCULATOR_PAGE_PATH). */}
+      <MDXContent content={body} slug={article.slug} coachAppBanner="coach" coachAppPlacement="calculator" />
     </ArticleLayout>
   );
 }
