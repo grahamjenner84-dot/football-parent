@@ -16,6 +16,7 @@ import {
   type ProgressBannerTestStatus,
 } from "@/lib/progress-banner-test";
 import { PROGRESS_FORM_STEP_PREFIX } from "@/lib/progress-form-tracking";
+import { ukDay } from "@/lib/uk-day";
 
 // The Progress pipeline: the "Progress pipeline" tab on /admin/seo, the
 // Progress card on its dashboard and the get_progress_funnel MCP tool.
@@ -342,8 +343,6 @@ export interface ProgressUsage {
   byDay: (ProgressSnapshotCounts & { date: string; takenAt: string })[];
 }
 
-const londonDay = (iso: string) =>
-  new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date(iso));
 
 function snapshotCounts(r: Record<string, unknown>): ProgressSnapshotCounts & { takenAt: string } {
   const out = { takenAt: r.taken_at as string } as ProgressSnapshotCounts & { takenAt: string };
@@ -391,7 +390,7 @@ async function getProgressUsage(supabase: ReturnType<typeof adminClient>, days: 
 
   const byDay = new Map<string, ProgressSnapshotCounts & { date: string; takenAt: string }>();
   for (const r of rows) {
-    const date = londonDay(r.taken_at as string);
+    const date = ukDay(r.taken_at as string);
     if (!byDay.has(date)) byDay.set(date, { date, ...snapshotCounts(r) });
   }
   return { latest: rows.length > 0 ? snapshotCounts(rows[0]) : null, byDay: Array.from(byDay.values()) };
@@ -748,23 +747,23 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     const shown = progressBannerOnPath(v.path, articleSlugs);
     if (shown) {
       placements.get(shown)!.impressions++;
-      day(v.created_at.slice(0, 10)).impressions++;
+      day(ukDay(v.created_at)).impressions++;
     }
     if (v.path !== LANDING_PATH) continue;
     landingViews++;
-    day(v.created_at.slice(0, 10)).landingViews++;
+    day(ukDay(v.created_at)).landingViews++;
     channels.get(channelForPageView(v))!.landingViews++;
     const clicked = placementOf(v.banner_variant);
     if (clicked) {
       placements.get(clicked)!.clicks++;
       if (Date.parse(v.created_at) >= seenStartMs) placements.get(clicked)!.seenClicks++;
       bannerClicks++;
-      day(v.created_at.slice(0, 10)).bannerClicks++;
+      day(ukDay(v.created_at)).bannerClicks++;
     }
   }
   for (const r of joinRows) {
     channels.get(joinChannel(r))!.joins++;
-    day(r.created_at.slice(0, 10)).joins++;
+    day(ukDay(r.created_at)).joins++;
   }
   let bannersSeen = 0;
   for (const r of seenRows) {
@@ -772,7 +771,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     if (!row) continue;
     row.seen++;
     bannersSeen++;
-    day(r.created_at.slice(0, 10)).bannersSeen++;
+    day(ukDay(r.created_at)).bannersSeen++;
   }
   for (const p of placements.values()) {
     p.ctr = p.impressions > 0 ? p.clicks / p.impressions : 0;
@@ -783,7 +782,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
   // the tracking start's day on.
   let newAccounts: number | null = null;
   if (!("error" in usage) && usage.latest) {
-    const firstDay = londonDay(since);
+    const firstDay = ukDay(since);
     newAccounts = usage.byDay.filter((d) => d.date >= firstDay).reduce((sum, d) => sum + d.signupsToday, 0);
   }
 

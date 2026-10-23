@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { classifyReferrerHost } from "@/lib/referrer-sources";
 import { ANDROID_INSTALL_LANDING_PATH } from "@/lib/coach-app-android";
+import { ukDay } from "@/lib/uk-day";
 import {
   COACH_APP_CHANNELS,
   channelFor,
@@ -199,9 +200,6 @@ function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string
   };
 }
 
-const londonDay = (iso: string) =>
-  new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London" }).format(new Date(iso));
-
 async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: number): Promise<CoachAppUsage> {
   const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
   const rows: SnapshotRow[] = [];
@@ -234,7 +232,7 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
 
   const byDay = new Map<string, CoachAppUsageCounts & { date: string; takenAt: string }>();
   for (const r of rows) {
-    const date = londonDay(r.taken_at);
+    const date = ukDay(r.taken_at);
     if (!byDay.has(date)) byDay.set(date, { date, ...snapshotCounts(r) });
   }
 
@@ -318,7 +316,7 @@ export interface CoachAppFunnel {
   totals: { landingViews: number; signInViews: number; signups: number };
   /** Newest first, capped. Anonymous: no account is identifiable here. */
   recentSignups: FunnelSignup[];
-  /** By UTC day; android is those through the Android app
+  /** By UK day; android is those through the Android app
    * (ANDROID_INSTALL_LANDING_PATH), the rest came through a web form. */
   signupsByDay: { date: string; signups: number; android: number }[];
   /** Views against sign-ups per form: the Coach App page, its ad variants,
@@ -523,7 +521,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
 
   const dayMap = new Map<string, { signups: number; android: number }>();
   for (const r of signupRows) {
-    const d = r.created_at.slice(0, 10);
+    const d = ukDay(r.created_at);
     const day = dayMap.get(d) ?? { signups: 0, android: 0 };
     day.signups++;
     if (r.landing_path === ANDROID_INSTALL_LANDING_PATH) day.android++;

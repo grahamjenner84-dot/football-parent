@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
 import { isAndroidAppPath } from "@/lib/coach-app-android";
+import { addDays, datesBetween, ukDay, ukDayStart, ukToday } from "@/lib/uk-day";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getAllArticleSlugs } from "@/lib/content";
 import {
@@ -280,7 +281,7 @@ export async function getPageViewCountryStats(days: number = 30): Promise<PageVi
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
     if (!row.user_agent) continue;
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     const key = `${day}|${row.path}|${row.user_agent}`;
     dayPathUaCounts.set(key, (dayPathUaCounts.get(key) ?? 0) + 1);
   }
@@ -289,7 +290,7 @@ export async function getPageViewCountryStats(days: number = 30): Promise<PageVi
     if (isKnownBotIncident(row.path, row.created_at)) return true;
     if (row.user_agent) {
       if (matchesKnownBotPattern(row.user_agent)) return true;
-      const key = `${row.created_at.slice(0, 10)}|${row.path}|${row.user_agent}`;
+      const key = `${ukDay(row.created_at)}|${row.path}|${row.user_agent}`;
       if ((dayPathUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
     }
     return false;
@@ -380,6 +381,7 @@ export interface SourceGroupCount {
 }
 
 export interface PageViewDay {
+  // UK calendar day (lib/uk-day.ts), like every day-bucketed report here.
   date: string;
   // Bot rows (see botViews below) are excluded from count/topPaths/
   // sourceGroups/estimatedVisits/internalViews - these are "true" human
@@ -582,8 +584,8 @@ export interface PageViewDayComparison {
   pages: PageViewCompareRow[];
 }
 
-// Compares page views broken down by path between two single UTC calendar
-// days (same "day" bucketing as getPageViewStats: created_at.slice(0, 10)).
+// Compares page views broken down by path between two single UK calendar
+// days (same "day" bucketing as getPageViewStats: ukDay(created_at)).
 // Applies the same bot exclusions as getPageViewStats, scoped to just the
 // rows in [min(dateA, dateB), max(dateA, dateB)] so the duplicate-UA check
 // isn't diluted by unrelated days.
@@ -591,8 +593,8 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
   const supabase = adminClient();
   const earliest = dateA < dateB ? dateA : dateB;
   const latest = dateA < dateB ? dateB : dateA;
-  const sinceISO = `${earliest}T00:00:00.000Z`;
-  const untilISO = new Date(new Date(`${latest}T00:00:00.000Z`).getTime() + 24 * 60 * 60 * 1000).toISOString();
+  const sinceISO = ukDayStart(earliest);
+  const untilISO = ukDayStart(addDays(latest, 1));
 
   let rows: { path: string; created_at: string; user_agent: string | null }[] = [];
   const pageSize = 1000;
@@ -621,7 +623,7 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
     if (!row.user_agent) continue;
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     const key = `${day}|${row.path}|${row.user_agent}`;
     dayPathUaCounts.set(key, (dayPathUaCounts.get(key) ?? 0) + 1);
   }
@@ -642,7 +644,7 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
   let totalB = 0;
 
   for (const row of rows) {
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     if (day !== dateA && day !== dateB) continue;
     if (isBotRow(row, day)) continue;
 
@@ -685,7 +687,7 @@ function isBotRowForPath<T extends { created_at: string; user_agent: string | nu
   const dayUaCounts = new Map<string, number>();
   for (const row of rows) {
     if (!row.user_agent) continue;
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     const key = `${day}|${row.user_agent}`;
     dayUaCounts.set(key, (dayUaCounts.get(key) ?? 0) + 1);
   }
@@ -694,7 +696,7 @@ function isBotRowForPath<T extends { created_at: string; user_agent: string | nu
     if (isKnownBotIncident(path, row.created_at)) return true;
     if (row.user_agent) {
       if (matchesKnownBotPattern(row.user_agent)) return true;
-      const key = `${row.created_at.slice(0, 10)}|${row.user_agent}`;
+      const key = `${ukDay(row.created_at)}|${row.user_agent}`;
       if ((dayUaCounts.get(key) ?? 0) >= DUPLICATE_UA_SAME_PATH_THRESHOLD) return true;
     }
     return false;
@@ -749,26 +751,18 @@ export async function getPageViewsForPath(path: string, days?: number): Promise<
   const counts = new Map<string, number>();
   for (const row of rows) {
     if (isBotRow(row)) continue;
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     counts.set(day, (counts.get(day) ?? 0) + 1);
   }
 
-  const today = new Date().toISOString().slice(0, 10);
+  const today = ukToday();
   // Earliest surviving (non-bot) day, not the earliest raw row - so a bot
   // incident that predates real traffic on this path doesn't push the
   // "published" proxy date artificially early.
   const earliestDay = Array.from(counts.keys()).sort()[0] ?? null;
-  const startDate = since ? since.slice(0, 10) : (earliestDay ?? today);
+  const startDate = since ? ukDay(since) : (earliestDay ?? today);
 
-  const result: PageViewDailyCount[] = [];
-  const cursor = new Date(`${startDate}T00:00:00.000Z`);
-  const end = new Date(`${today}T00:00:00.000Z`);
-  while (cursor <= end) {
-    const date = cursor.toISOString().slice(0, 10);
-    result.push({ date, count: counts.get(date) ?? 0 });
-    cursor.setUTCDate(cursor.getUTCDate() + 1);
-  }
-  return result;
+  return datesBetween(startDate, today).map((date) => ({ date, count: counts.get(date) ?? 0 }));
 }
 
 export interface PathSourceUserAgent {
@@ -892,7 +886,7 @@ export interface PageViewSourceDay {
   paid: number;
 }
 
-// Daily human views for one exact path from `since` (YYYY-MM-DD, UTC)
+// Daily human views for one exact path from `since` (YYYY-MM-DD, UK day)
 // through today, zero-filled, split into all sources, organic search and
 // paid. Backs the before/after windows in scripts/seo/cli/change-impact.ts.
 // Same bot rules as getPageViewsForPath, so its totals reconcile with the
@@ -907,7 +901,7 @@ export async function getPageViewSourceDaysForPath(path: string, since: string):
       .from("page_views")
       .select("created_at, user_agent, referrer_host, gclid")
       .eq("path", path)
-      .gte("created_at", `${since}T00:00:00.000Z`)
+      .gte("created_at", ukDayStart(since))
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
     if (error) {
@@ -924,7 +918,7 @@ export async function getPageViewSourceDaysForPath(path: string, since: string):
   const byDay = new Map<string, { total: number; search: number; paid: number }>();
   for (const row of rows) {
     if (isBot(row)) continue;
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     const entry = byDay.get(day) ?? { total: 0, search: 0, paid: 0 };
     entry.total += 1;
     if (row.gclid) entry.paid += 1;
@@ -932,15 +926,10 @@ export async function getPageViewSourceDaysForPath(path: string, since: string):
     byDay.set(day, entry);
   }
 
-  const result: PageViewSourceDay[] = [];
-  const cursor = new Date(`${since}T00:00:00.000Z`);
-  const end = new Date(`${new Date().toISOString().slice(0, 10)}T00:00:00.000Z`);
-  while (cursor <= end) {
-    const date = cursor.toISOString().slice(0, 10);
-    result.push({ date, ...(byDay.get(date) ?? { total: 0, search: 0, paid: 0 }) });
-    cursor.setUTCDate(cursor.getUTCDate() + 1);
-  }
-  return result;
+  return datesBetween(since, ukToday()).map((date) => ({
+    date,
+    ...(byDay.get(date) ?? { total: 0, search: 0, paid: 0 }),
+  }));
 }
 
 export async function getPageViewStats(
@@ -998,7 +987,7 @@ export async function getPageViewStats(
   const dayPathUaCounts = new Map<string, number>();
   for (const row of rows) {
     if (!row.user_agent) continue;
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     const key = `${day}|${row.path}|${row.user_agent}`;
     dayPathUaCounts.set(key, (dayPathUaCounts.get(key) ?? 0) + 1);
   }
@@ -1025,7 +1014,7 @@ export async function getPageViewStats(
   let botViewsTotal = 0;
 
   for (const row of rows) {
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
 
     if (isBotRow(row, day)) {
       botViewsTotal += 1;
@@ -1129,8 +1118,8 @@ export interface BannerVariantRow {
   ctr: number;
 }
 
-// One UTC calendar day of the same split test, bucketed by
-// created_at.slice(0, 10) exactly like PageViewDay - so picking a date on
+// One UK calendar day of the same split test, bucketed by
+// ukDay(created_at) exactly like PageViewDay - so picking a date on
 // the Coach App tab lines the banner numbers up with that day's page views.
 export interface BannerVariantDay {
   date: string;
@@ -1308,7 +1297,7 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
   for (const row of rows) {
     if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
 
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
 
     // progress-* clicks come from the Progress banners (ProgressBanner.tsx),
     // not a Coach App creative.

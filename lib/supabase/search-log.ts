@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { addDays, ukDay, ukDayStart } from "@/lib/uk-day";
 
 // Server-only client using the service role key, same pattern as
 // lib/supabase/cookie-consent.ts - this must never be imported from client
@@ -28,7 +29,7 @@ export interface TopSearchRow {
   count: number;
   successCount: number;
   zeroResultCount: number;
-  lastSeen: string; // YYYY-MM-DD (UTC) of the most recent occurrence
+  lastSeen: string; // YYYY-MM-DD (UK day) of the most recent occurrence
 }
 
 export interface SearchLogStats {
@@ -91,16 +92,13 @@ export function collapseTypingFragments(rows: LoggedRow[]): {
 export interface SearchWindow {
   // Rolling window ending now. Ignored when `date` is set.
   days?: number;
-  // One specific UTC day (YYYY-MM-DD).
+  // One specific UK day (YYYY-MM-DD).
   date?: string;
 }
 
 function windowBounds(window: SearchWindow): { since: string; until?: string } {
   if (window.date) {
-    const start = new Date(`${window.date}T00:00:00.000Z`);
-    const end = new Date(start);
-    end.setUTCDate(end.getUTCDate() + 1);
-    return { since: start.toISOString(), until: end.toISOString() };
+    return { since: ukDayStart(window.date), until: ukDayStart(addDays(window.date, 1)) };
   }
   const days = window.days && window.days > 0 ? window.days : 30;
   return { since: new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString() };
@@ -142,7 +140,7 @@ export async function getTopSearches(window: SearchWindow = { days: 30 }): Promi
   for (const row of rows) {
     const key = row.query.trim().toLowerCase();
     if (!key) continue;
-    const day = row.created_at.slice(0, 10);
+    const day = ukDay(row.created_at);
     const bucket =
       byQuery.get(key) ?? { query: key, count: 0, successCount: 0, zeroResultCount: 0, lastSeen: day };
     bucket.count += 1;

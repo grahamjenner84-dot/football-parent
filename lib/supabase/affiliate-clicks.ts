@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getPageViewsForPath } from "@/lib/supabase/page-views";
+import { datesBetween, ukDay, ukToday } from "@/lib/uk-day";
 import { getAffiliateProductNames, normalizeAffiliateHref } from "@/lib/affiliate-products";
 
 // Server-only client using the service role key, same pattern as
@@ -297,7 +298,7 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
   const placementCounts = new Map<string, number>();
 
   for (const row of humanRows) {
-    const date = row.created_at.slice(0, 10);
+    const date = ukDay(row.created_at);
     if (!rowsByDate.has(date)) rowsByDate.set(date, []);
     rowsByDate.get(date)!.push(row);
 
@@ -311,21 +312,15 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
   // vanishing from the chart - same convention as getPageViewsForPath. Each
   // day carries its own by-page and by-product breakdown so the report can
   // filter to a single day without a second request.
-  const byDay: AffiliateClickDay[] = [];
-  const today = new Date().toISOString().slice(0, 10);
-  const cursor = new Date(`${since.slice(0, 10)}T00:00:00.000Z`);
-  const end = new Date(`${today}T00:00:00.000Z`);
-  while (cursor <= end) {
-    const date = cursor.toISOString().slice(0, 10);
+  const byDay: AffiliateClickDay[] = datesBetween(ukDay(since), ukToday()).map((date) => {
     const dayRows = rowsByDate.get(date) ?? [];
-    byDay.push({
+    return {
       date,
       clicks: dayRows.length,
       byPage: buildPageCounts(dayRows),
       byProduct: buildProducts(dayRows, nameMap),
-    });
-    cursor.setUTCDate(cursor.getUTCDate() + 1);
-  }
+    };
+  });
 
   const rankedPaths = Array.from(pathCounts.entries()).sort((a, b) => b[1] - a[1]);
 

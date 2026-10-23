@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getPageViewsForPath } from "@/lib/supabase/page-views";
+import { datesBetween, ukDay, ukToday } from "@/lib/uk-day";
 import { OUTBOUND_PARTNERS } from "@/lib/outbound-partners";
 import { getAllArticleSlugs, getArticleSlugsUsing } from "@/lib/content";
 import { INSTAGRAM_CATEGORY_PATHS } from "@/app/components/InstagramCategoryPromo";
@@ -342,7 +343,7 @@ export async function getPartnerClickStats(
   const partnerCounts = new Map<string, number>();
 
   for (const row of humanRows) {
-    const date = row.created_at.slice(0, 10);
+    const date = ukDay(row.created_at);
     if (!rowsByDate.has(date)) rowsByDate.set(date, []);
     rowsByDate.get(date)!.push(row);
 
@@ -352,20 +353,14 @@ export async function getPartnerClickStats(
 
   // Zero-filled, so a day with no clicks reads as a real zero rather than
   // vanishing from the chart - same convention as affiliate_clicks.
-  const byDay: PartnerClickDay[] = [];
-  const today = new Date().toISOString().slice(0, 10);
-  const cursor = new Date(`${since.slice(0, 10)}T00:00:00.000Z`);
-  const end = new Date(`${today}T00:00:00.000Z`);
-  while (cursor <= end) {
-    const date = cursor.toISOString().slice(0, 10);
+  const byDay: PartnerClickDay[] = datesBetween(ukDay(since), ukToday()).map((date) => {
     const dayRows = rowsByDate.get(date) ?? [];
-    byDay.push({
+    return {
       date,
       clicks: dayRows.length,
       byPage: buildPageCounts(dayRows),
-    });
-    cursor.setUTCDate(cursor.getUTCDate() + 1);
-  }
+    };
+  });
 
   const rankedPaths = Array.from(pathCounts.entries()).sort((a, b) => b[1] - a[1]);
 
