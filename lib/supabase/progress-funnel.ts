@@ -2,7 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getAllArticleSlugs } from "@/lib/content";
 import { COACH_APP_CHANNELS, channelFor, channelForPageView, type CoachAppChannel } from "@/lib/coach-app-channels";
-import { COACH_AUDIENCE_SLUGS } from "@/app/components/CoachAppBanner";
+import { COACH_AUDIENCE_SLUGS, shareBannerKeptAt } from "@/app/components/CoachAppBanner";
 import {
   PROGRESS_BANNER_TEST_MIN_IMPRESSIONS,
   PROGRESS_BANNER_TEST_STARTED_AT,
@@ -562,13 +562,20 @@ const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
  * articles (sponsor version), and every other article whose banner
  * audience isn't "coach" (lib/MDXContent.tsx): at the end until
  * PARENT_ARTICLE_BANNER_ENDED_AT, in the mid-article slot after it. Same
- * pages either way, so the impression count needs no cut-over. */
-export function progressBannerOnPath(path: string, articleSlugs: Set<string>): ProgressPlacement | null {
+ * pages either way, so the impression count needs no cut-over. Articles that
+ * kept the Coach App share banner (SHARE_BANNER_KEPT_SLUGS) drop out from
+ * SHARE_BANNER_KEPT_FROM. */
+export function progressBannerOnPath(
+  path: string,
+  articleSlugs: Set<string>,
+  createdAt: string
+): ProgressPlacement | null {
   if (path === "/") return "home";
   if (path === "/academy-pathway") return "academy-pathway";
   if (path.startsWith("/coaching/") || path.startsWith("/football-parent-coach-app")) return null;
   const slug = path.split("/").filter(Boolean).pop();
   if (!slug || !articleSlugs.has(slug) || COACH_AUDIENCE_SLUGS.has(slug)) return null;
+  if (shareBannerKeptAt(slug, createdAt)) return null;
   return path.startsWith("/academy-pathway/") ? "academy-pathway" : "article";
 }
 
@@ -743,7 +750,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
   let landingViews = 0;
   let bannerClicks = 0;
   for (const v of views) {
-    const shown = progressBannerOnPath(v.path, articleSlugs);
+    const shown = progressBannerOnPath(v.path, articleSlugs, v.created_at);
     if (shown) {
       placements.get(shown)!.impressions++;
       day(ukDay(v.created_at)).impressions++;
@@ -796,7 +803,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
   if (testStarted) {
     for (const v of allViews) {
       if (Date.parse(v.created_at) < testStart) continue;
-      if (inProgressBannerTest(v.path) && progressBannerOnPath(v.path, articleSlugs)) eligibleViews++;
+      if (inProgressBannerTest(v.path) && progressBannerOnPath(v.path, articleSlugs, v.created_at)) eligibleViews++;
       if (v.path !== LANDING_PATH) continue;
       const arm = parseProgressBanner(v.banner_variant)?.arm;
       if (!arm) continue;

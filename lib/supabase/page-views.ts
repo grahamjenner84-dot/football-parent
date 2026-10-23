@@ -13,6 +13,7 @@ import {
   bannerStyleForKey,
   HOME_BANNER_ENDED_AT,
   audienceAt,
+  shareBannerKeptAt,
   coachingSponsorAt,
   PARENT_ARTICLE_BANNER_ENDED_AT,
   type CoachAppAudience,
@@ -1200,8 +1201,14 @@ function bannerOnPath(
 
   const audience = audienceForPath(path, createdAt);
   // Parent and share articles show Progress in this slot from
-  // PARENT_ARTICLE_BANNER_ENDED_AT (lib/MDXContent.tsx).
-  if (audience !== "coach" && createdAt >= PARENT_ARTICLE_BANNER_ENDED_AT) return null;
+  // PARENT_ARTICLE_BANNER_ENDED_AT (lib/MDXContent.tsx), except the ones
+  // that kept the share banner.
+  if (
+    audience !== "coach" &&
+    createdAt >= PARENT_ARTICLE_BANNER_ENDED_AT &&
+    !shareBannerKeptAt(lastSegment, createdAt)
+  )
+    return null;
 
   return {
     // /coaching/ articles carry the sponsor creative from

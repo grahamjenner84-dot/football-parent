@@ -16,6 +16,7 @@ import { competitorLinkProps } from "@/lib/externalLinks";
 import CoachAppBanner, {
   bannerStyleForKey,
   defaultAudienceForSlug,
+  SHARE_BANNER_KEPT_SLUGS,
   type CoachAppAudience,
   type CoachAppPlacement,
 } from "@/app/components/CoachAppBanner";
@@ -231,10 +232,11 @@ export async function MDXContent({
   // (the parents' app) for every other article. Parent and share audiences
   // used to get a Coach App banner here and Progress at the end; since
   // PARENT_ARTICLE_BANNER_ENDED_AT Progress takes the middle and the end
-  // banner is gone. Landing pages ("none") get neither.
+  // banner is gone. Landing pages ("none") get neither. SHARE_BANNER_KEPT_SLUGS
+  // keep the Coach App share banner instead.
   const audience =
     coachAppBanner && coachAppBanner !== "none" ? coachAppBanner : defaultAudienceForSlug(slug);
-  const showProgress = audience !== "coach";
+  const showProgress = audience !== "coach" && !(slug && SHARE_BANNER_KEPT_SLUGS.has(slug));
   // Progress sponsors the Academy Pathway section: its articles get the
   // sponsor version of the banner.
   const inAcademyPathway =
