@@ -6,6 +6,9 @@ import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getAllArticleSlugs } from "@/lib/content";
 import {
   BANNER_TEST_STARTED_AT,
+  CALCULATOR_LINK_VARIANT,
+  CALCULATOR_PAGE_PATH,
+  CALCULATOR_TAGS_STARTED_AT,
   CATEGORY_BANNER_PATHS,
   bannerStyleForKey,
   HOME_BANNER_ENDED_AT,
@@ -1208,7 +1211,9 @@ function bannerOnPath(
         ? "sponsor"
         : bannerStyleForKey(lastSegment),
     audience,
-    placement: "article",
+    // The calculator page's banner has its own tag from
+    // CALCULATOR_TAGS_STARTED_AT.
+    placement: path === CALCULATOR_PAGE_PATH && createdAt >= CALCULATOR_TAGS_STARTED_AT ? "calculator" : "article",
   };
 }
 
@@ -1311,6 +1316,14 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
       const key = `${banner.style}-${banner.audience}-${banner.placement}`;
       impressions.set(key, (impressions.get(key) ?? 0) + 1);
       bump(impressionsByDay, day, key);
+    }
+
+    // The calculator page's text link to the Coach App page is on every view
+    // of it too, so its impressions are the page's views, the same way as a
+    // banner's.
+    if (row.path === CALCULATOR_PAGE_PATH && row.created_at >= CALCULATOR_TAGS_STARTED_AT) {
+      impressions.set(CALCULATOR_LINK_VARIANT, (impressions.get(CALCULATOR_LINK_VARIANT) ?? 0) + 1);
+      bump(impressionsByDay, day, CALCULATOR_LINK_VARIANT);
     }
   }
 
