@@ -56,7 +56,7 @@ export type CoachAppPlacement = "article" | "home" | "category" | "calculator";
 // as an ordinary article banner and the link had no tag, so the report only
 // counts calculator impressions from here.
 export const CALCULATOR_PAGE_PATH = "/coaching/equal-playing-time-calculator";
-export const CALCULATOR_TAGS_STARTED_AT = "2026-10-23T19:45:00Z";
+export const CALCULATOR_TAGS_STARTED_AT = "2026-10-23T22:20:00Z";
 // The ?b= value on that text link. Written as "<style>-<audience>-<placement>"
 // like a banner's, so the banner report splits it the same way; "link" sits
 // outside the dark/light test.
