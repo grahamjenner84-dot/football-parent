@@ -119,8 +119,9 @@ handle); the builder shows it as a reminder under the caption.
 Slide order is cover, bio, Q1, pull-quote, the remaining Q&As, closing. The
 pull-quote sits after the first answer (`"quotePos"` can be `"first"` or
 `"end"` instead, rarely needed) and carries a follow strip, a "FOLLOW
-@football.parent" pill with "for more from Chris" beside it, so the follow ask
-lands at the high point and not only on the last slide, which fewer people
+@football.parent" pill with "for more from Chris" beside it, in place of the
+expert's credit, so that slide is only the quote and the follow ask. The follow
+ask lands at the high point and not only on the last slide, which fewer people
 reach. Pick a quote that is the strongest line in the post.
 
 The closing slide is only the follow ask: a "FOLLOW @football.parent" button,
