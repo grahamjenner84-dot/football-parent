@@ -36,7 +36,10 @@ export async function POST(req: Request) {
     const body = await req.json().catch(() => null);
     const takenAt = typeof body?.takenAt === "string" ? Date.parse(body.takenAt) : NaN;
     const counts: Record<
-      Exclude<keyof CoachAppUsageCounts, "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday">,
+      Exclude<
+        keyof CoachAppUsageCounts,
+        "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday" | "coachesFinishedToday"
+      >,
       number | null
     > = {
       totalAccounts: count(body?.totalAccounts),
@@ -59,12 +62,17 @@ export async function POST(req: Request) {
     const signupsTodayWithTeam = count(body?.signupsTodayWithTeam);
     const emailsToday = count(body?.emailsToday);
     const finishedMatchesToday = count(body?.finishedMatchesToday);
+    const coachesFinishedToday = count(body?.coachesFinishedToday);
 
     await logCoachAppUsageSnapshot(new Date(takenAt).toISOString(), {
-      ...(counts as Omit<CoachAppUsageCounts, "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday">),
+      ...(counts as Omit<
+        CoachAppUsageCounts,
+        "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday" | "coachesFinishedToday"
+      >),
       signupsTodayWithTeam,
       emailsToday,
       finishedMatchesToday,
+      coachesFinishedToday,
     });
     return NextResponse.json({ ok: true });
   } catch (err) {

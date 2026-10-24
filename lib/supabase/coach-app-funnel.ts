@@ -102,6 +102,12 @@ export interface CoachAppUsageCounts {
    * finishedMatches, not reduced by an account being excluded or a match
    * deleted. Null in snapshots sent before the Coach App started reporting it. */
   finishedMatchesToday: number | null;
+  /** Coaches who finished at least one of those, each team's match counting
+   * for its owner (coach-app migration 0066): one coach finishing 7 reads 1.
+   * Null in snapshots sent before the Coach App started reporting it, or
+   * before this site's column
+   * (20261024120000_coach_app_usage_coaches_finished_today.sql) existed. */
+  coachesFinishedToday: number | null;
   /** Each account's own plan; the three add up to totalAccounts. Paid
    * includes a subscription whose payment is being retried. Lapsed is a
    * trial that ended, a cancelled subscription, or an old free account. */
@@ -138,21 +144,20 @@ export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachApp
     plan_trial: counts.planTrial,
     plan_lapsed: counts.planLapsed,
   };
+  const withOptional = { ...row, emails_today: counts.emailsToday, finished_matches_today: counts.finishedMatchesToday };
   const supabase = adminClient();
-  const { error } = await supabase
-    .from("coach_app_usage_snapshots")
-    .insert({ ...row, emails_today: counts.emailsToday, finished_matches_today: counts.finishedMatchesToday });
-  // Deployed before 20261010090000_usage_snapshot_emails_today.sql or
-  // 20261018220000_coach_app_usage_finished_today.sql was applied: keep the
-  // snapshot, drop the optional counts, rather than lose every snapshot until
-  // the migration runs.
-  if (error && isMissingColumnError(error)) {
-    const retry = await supabase.from("coach_app_usage_snapshots").insert(row);
-    if (!retry.error) return;
-    throw new Error("Failed to insert coach_app_usage_snapshots row: " + retry.error.message);
-  }
-  if (error) {
-    throw new Error("Failed to insert coach_app_usage_snapshots row: " + error.message);
+  // Deployed before an optional column's migration was applied: keep the
+  // snapshot, drop the newest optional counts first, rather than lose every
+  // snapshot until the migration runs. Newest first, so a missing
+  // coaches_finished_today (20261024120000) doesn't also drop emails_today
+  // (20261010090000) and finished_matches_today (20261018220000).
+  const attempts = [{ ...withOptional, coaches_finished_today: counts.coachesFinishedToday }, withOptional, row];
+  for (let i = 0; i < attempts.length; i++) {
+    const { error } = await supabase.from("coach_app_usage_snapshots").insert(attempts[i]);
+    if (!error) return;
+    if (i === attempts.length - 1 || !isMissingColumnError(error)) {
+      throw new Error("Failed to insert coach_app_usage_snapshots row: " + error.message);
+    }
   }
 }
 
@@ -179,6 +184,7 @@ type SnapshotRow = {
   plan_lapsed: number;
   emails_today?: number | null;
   finished_matches_today?: number | null;
+  coaches_finished_today?: number | null;
 };
 
 function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string } {
@@ -197,6 +203,7 @@ function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string
     planLapsed: r.plan_lapsed,
     emailsToday: typeof r.emails_today === "number" ? r.emails_today : null,
     finishedMatchesToday: typeof r.finished_matches_today === "number" ? r.finished_matches_today : null,
+    coachesFinishedToday: typeof r.coaches_finished_today === "number" ? r.coaches_finished_today : null,
   };
 }
 
@@ -205,12 +212,17 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
   const rows: SnapshotRow[] = [];
   const pageSize = 1000;
   // Newest first, so the first row seen for each day is its closing figure.
-  // Without the emails_today or finished_matches_today migration those
-  // columns don't exist and selecting them fails: fall back to the rest
-  // (they then read as null) so the tab still loads.
+  // Without an optional column's migration that column doesn't exist and
+  // selecting it fails: fall back, newest column first, to the rest (the
+  // missing ones then read as null) so the tab still loads.
   const baseColumns =
     "taken_at, total_accounts, signups_today, signups_today_with_team, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed";
-  let columns = baseColumns + ", emails_today, finished_matches_today";
+  const columnSets = [
+    baseColumns + ", emails_today, finished_matches_today, coaches_finished_today",
+    baseColumns + ", emails_today, finished_matches_today",
+    baseColumns,
+  ];
+  let columns = columnSets[0];
   for (let from = 0; ; from += pageSize) {
     const read = () =>
       supabase
@@ -220,8 +232,8 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
         .order("taken_at", { ascending: false })
         .range(from, from + pageSize - 1);
     let { data, error } = await read();
-    if (error && from === 0 && isMissingColumnError(error)) {
-      columns = baseColumns;
+    for (let i = 1; error && from === 0 && isMissingColumnError(error) && i < columnSets.length; i++) {
+      columns = columnSets[i];
       ({ data, error } = await read());
     }
     if (error) throw new Error("Failed to read coach_app_usage_snapshots: " + error.message);

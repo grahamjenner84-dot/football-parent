@@ -1,0 +1,22 @@
+-- Coaches who finished a match today, on the Coach App usage snapshot
+-- (coach_app_usage_snapshots, see 20260926180000_coach_app_usage_snapshots.sql).
+--
+-- The Coach App's database now also posts coachesFinishedToday (coach-app
+-- migration 0066): how many coaches finished at least one match since UK
+-- midnight, each team's finished match counting for the team's owner.
+-- finished_matches_today counts matches, so one coach can swing it: on
+-- 24 Oct 2026 one new coach finished 7 (a league game and two tournaments of
+-- short games) and the dashboard read 7 matches against 6 active accounts.
+-- This column reads 1 for that day.
+--
+-- Still a whole-app count, on the terms Graham approved on 2026-09-26: counts
+-- only, app -> site, never a read of the Coach App database. Nullable:
+-- snapshots from before the app sends it have none.
+--
+-- APPLY THIS BEFORE DEPLOYING THE CODE THAT WRITES THIS COLUMN. The insert
+-- retries without it on PGRST204/42703, so no snapshot is lost, but the count
+-- is dropped until this runs.
+--
+-- Lives in the football-parent-social project (ref jwlwzoklgrzharqvazeg).
+
+alter table coach_app_usage_snapshots add column if not exists coaches_finished_today integer;
