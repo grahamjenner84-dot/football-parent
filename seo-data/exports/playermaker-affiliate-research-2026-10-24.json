@@ -1,0 +1,3293 @@
+{
+  "generatedAt": "2026-10-24T11:55:42.272Z",
+  "totalCost": 0.33480000000000015,
+  "rows": [
+    {
+      "keyword": "sports technology",
+      "volume": 1300,
+      "kd": 4,
+      "cpc": 0.85,
+      "months": [
+        1600,
+        1900,
+        1300,
+        1600,
+        1300,
+        1600,
+        1000,
+        1300,
+        880,
+        720,
+        480,
+        1000
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.discoveruni.gov.uk",
+          "title": "Sports Technology at Loughborough University",
+          "url": "https://www.discoveruni.gov.uk/course-details/10004113/KISHC76/FullTime/"
+        },
+        {
+          "rank": 2,
+          "domain": "theconversation.com",
+          "title": "Sport technology – News, Research and Analysis",
+          "url": "https://theconversation.com/topics/sport-technology-3401"
+        },
+        {
+          "rank": 3,
+          "domain": "www.thecompleteuniversityguide.co.uk",
+          "title": "Sports Technology - MEng (Hons) at Loughborough ...",
+          "url": "https://www.thecompleteuniversityguide.co.uk/courses/details/sports-technology-meng/57622118"
+        },
+        {
+          "rank": 4,
+          "domain": "www.whatuni.com",
+          "title": "Sports Technology (with placement year) - BEng (Hons) at ...",
+          "url": "https://www.whatuni.com/degrees/sports-technology-with-placement-year-beng-hons/loughborough-university/cd/54933616/3608"
+        },
+        {
+          "rank": 5,
+          "domain": "sportstechnologyblog.com",
+          "title": "Category: Sports Technology",
+          "url": "https://sportstechnologyblog.com/category/sports-technology/"
+        },
+        {
+          "rank": 6,
+          "domain": "uk.linkedin.com",
+          "title": "7000+ Sports Technology jobs in United Kingdom",
+          "url": "https://uk.linkedin.com/jobs/sports-technology-jobs"
+        },
+        {
+          "rank": 7,
+          "domain": "www.linkedin.com",
+          "title": "What is sports tech? | Andrew Petcash",
+          "url": "https://www.linkedin.com/posts/andrewpetcash_what-is-sports-tech-this-is-a-commonly-asked-activity-7390000227585327104-3JNq"
+        },
+        {
+          "rank": 8,
+          "domain": "www.topuniversities.com",
+          "title": "Sports Technology BEng (Hons) - Loughborough",
+          "url": "https://www.topuniversities.com/universities/loughborough-university/undergrad/sports-technology-beng-hons"
+        },
+        {
+          "rank": 9,
+          "domain": "en.wikipedia.org",
+          "title": "Category:Sports technology",
+          "url": "https://en.wikipedia.org/wiki/Category:Sports_technology"
+        },
+        {
+          "rank": 10,
+          "domain": "www.scienceforsport.com",
+          "title": "How everyday athletes can use sports technology to train ...",
+          "url": "https://www.scienceforsport.com/how-everyday-athletes-can-use-sports-technology-to-train-like-the-pros/?srsltid=AYCX9vLnG-vA5XRYGHDYi1vPgaK_VliyAiCbZ8e4VPvq0GsyF6SZyF68"
+        }
+      ]
+    },
+    {
+      "keyword": "football tech innovations",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "video",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.espn.co.uk",
+          "title": "7 of the latest innovations that could alter soccer's future",
+          "url": "https://www.espn.co.uk/football/story/_/id/47452783/7-latest-innovations-alter-future-soccer"
+        },
+        {
+          "rank": 2,
+          "domain": "www.reddit.com",
+          "title": "Tech within the Football/Soccer Industry : r/Futurology",
+          "url": "https://www.reddit.com/r/Futurology/comments/1bodmea/tech_within_the_footballsoccer_industry/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.linkedin.com",
+          "title": "FIFA's Tech Innovations Shape the Future of Football",
+          "url": "https://www.linkedin.com/posts/thecitizenedition_football-technology-worldcup-activity-7435676250616131584-mC4K"
+        },
+        {
+          "rank": 4,
+          "domain": "www.edtechjournal.org",
+          "title": "Exploring the Impact of Technology on Football",
+          "url": "https://www.edtechjournal.org/index.php/ed/article/download/41/54/136"
+        },
+        {
+          "rank": 5,
+          "domain": "innovation-portal.fifa.org",
+          "title": "FIFA Football Technology and Innovation",
+          "url": "https://innovation-portal.fifa.org/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.bbc.co.uk",
+          "title": "New technology a 'game changer' for stadium fans",
+          "url": "https://www.bbc.co.uk/news/articles/c0edw8e42ddo"
+        },
+        {
+          "rank": 7,
+          "domain": "thefootballleaguestore.co.uk",
+          "title": "Transforming Football Training with Technology",
+          "url": "https://thefootballleaguestore.co.uk/blogs/news/transforming-football-training-technology?srsltid=AYCX9vIbhJWpWDvIvVDS5W_pzi4YTzlIiPOFl3psU5QhZEu4xVT6uyf7"
+        },
+        {
+          "rank": 8,
+          "domain": "www.soccerbible.com",
+          "title": "11 Moments of Innovation That Defined The Decade",
+          "url": "https://www.soccerbible.com/news/2019/12/11-moments-of-innovation-that-defined-the-decade/"
+        }
+      ]
+    },
+    {
+      "keyword": "smart sports equipment",
+      "volume": 10,
+      "kd": null,
+      "cpc": null,
+      "months": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        20,
+        10,
+        10,
+        10,
+        10
+      ],
+      "features": [
+        "popular_products",
+        "people_also_ask",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.rocketmakers.com",
+          "title": "The Future of Play: Exploring Cutting-Edge Sports ...",
+          "url": "https://www.rocketmakers.com/blog/cutting-edge-sports-technology"
+        },
+        {
+          "rank": 2,
+          "domain": "www.youtube.com",
+          "title": "Developing sports equipment to enhance performance and ...",
+          "url": "https://www.youtube.com/watch?v=iyKkUPouKvo"
+        },
+        {
+          "rank": 3,
+          "domain": "www.sportsvenue-technology.com",
+          "title": "Smart Fitness Equipment: The Intersection of Sports and ...",
+          "url": "https://www.sportsvenue-technology.com/articles/smart-fitness-equipment-the-intersection-of-sports-and-exercise-technology"
+        },
+        {
+          "rank": 4,
+          "domain": "en.wikipedia.org",
+          "title": "Sports equipment",
+          "url": "https://en.wikipedia.org/wiki/Sports_equipment"
+        },
+        {
+          "rank": 5,
+          "domain": "www.accio.com",
+          "title": "Top Selling Sports Equipment 2025: Market Trends & Best ...",
+          "url": "https://www.accio.com/business/top-selling-sports-equipment"
+        },
+        {
+          "rank": 6,
+          "domain": "www.amazon.co.uk",
+          "title": "Sports Technology",
+          "url": "https://www.amazon.co.uk/sports-electronics/b?ie=UTF8&node=461182031"
+        },
+        {
+          "rank": 7,
+          "domain": "www.insportline.eu",
+          "title": "Sports and Athletic Equipment - Insportline.eu",
+          "url": "https://www.insportline.eu/sports-and-athletic-equipment"
+        },
+        {
+          "rank": 8,
+          "domain": "www.bretford.com",
+          "title": "Top 5 Technologies Coaches Are Using To Get 1% Better ...",
+          "url": "https://www.bretford.com/blog/top-5-technologies-coaches-are-using-to-get-1-better-in-practice/"
+        },
+        {
+          "rank": 9,
+          "domain": "iisgs.com",
+          "title": "Technology-Driven Fitness: AI & IoT in Sports Equipment - iisgs",
+          "url": "https://iisgs.com/blog/technology-driven-fitness-ai-iot-in-sports-equipment/"
+        },
+        {
+          "rank": 10,
+          "domain": "elitacwearables.com",
+          "title": "Wearable Tech in Sport",
+          "url": "https://elitacwearables.com/wearable-tech-in-sport/"
+        }
+      ]
+    },
+    {
+      "keyword": "soccer analytics",
+      "volume": 10,
+      "kd": 50,
+      "cpc": null,
+      "months": [
+        30,
+        10,
+        10,
+        10,
+        20,
+        10,
+        10,
+        10,
+        20,
+        10,
+        20,
+        10
+      ],
+      "features": [
+        "ai_overview",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.socceredu.com",
+          "title": "Top Soccer Databases: A Comprehensive Guide to ...",
+          "url": "https://www.socceredu.com/en-US/blog/soccer-databases"
+        },
+        {
+          "rank": 2,
+          "domain": "www.mckayjohns.com",
+          "title": "What is a Soccer Data Analyst? A Complete Guide",
+          "url": "https://www.mckayjohns.com/blog/what-is-a-soccer-data-analyst"
+        },
+        {
+          "rank": 3,
+          "domain": "sportanalyticspro.com",
+          "title": "SportAnalytics | Blog",
+          "url": "https://sportanalyticspro.com/blog/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.hudl.com",
+          "title": "Football Video Analysis Software",
+          "url": "https://www.hudl.com/en_gb/sports/football"
+        },
+        {
+          "rank": 5,
+          "domain": "www.catapult.com",
+          "title": "Advanced Football Analytics for Smarter Match Strategies",
+          "url": "https://www.catapult.com/blog/advanced-football-analytics"
+        },
+        {
+          "rank": 6,
+          "domain": "www.quora.com",
+          "title": "What are some of the best examples of football (soccer) ...",
+          "url": "https://www.quora.com/What-are-some-of-the-best-examples-of-football-soccer-analytics"
+        },
+        {
+          "rank": 7,
+          "domain": "medium.com",
+          "title": "Football (Soccer) Analytics 101",
+          "url": "https://medium.com/@lampros.mousselimis/football-soccer-analytics-101-ff8c1d94d0dd"
+        },
+        {
+          "rank": 8,
+          "domain": "thelastmananalytics.home.blog",
+          "title": "The Last Man Analytics – Football analytics and blog posts ...",
+          "url": "https://thelastmananalytics.home.blog/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.ziprecruiter.com",
+          "title": "What is the difference between Soccer Analytics vs ...",
+          "url": "https://www.ziprecruiter.com/e/soccer-analytics-what-is-the-difference-between-soccer-analytics-vs-soccer-data-analyst"
+        },
+        {
+          "rank": 10,
+          "domain": "www.youtube.com",
+          "title": "Analyzing football/soccer with tracking data",
+          "url": "https://www.youtube.com/watch?v=SOIVQKYsMsg"
+        }
+      ]
+    },
+    {
+      "keyword": "football performance analysis",
+      "volume": 170,
+      "kd": 6,
+      "cpc": 6.71,
+      "months": [
+        170,
+        210,
+        170,
+        320,
+        210,
+        260,
+        210,
+        210,
+        90,
+        140,
+        70,
+        140
+      ],
+      "features": [
+        "ai_overview",
+        "scholarly_articles",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "analyticsfc.co.uk",
+          "title": "Analytics FC | Home",
+          "url": "https://analyticsfc.co.uk/"
+        },
+        {
+          "rank": 2,
+          "domain": "www.stepout.ai",
+          "title": "StepOut: AI Football Performance Analysis",
+          "url": "https://www.stepout.ai/en/"
+        },
+        {
+          "rank": 3,
+          "domain": "analyisport.com",
+          "title": "How To Choose A Football Performance Analysis Degree ...",
+          "url": "https://analyisport.com/insights/how-to-choose-a-football-performance-analysis-degree-course/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.performasports.com",
+          "title": "Performa Sports: Performance Analysis Game Changer",
+          "url": "https://www.performasports.com/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.sportperformanceanalysis.com",
+          "title": "Jobs",
+          "url": "https://www.sportperformanceanalysis.com/jobs/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.facebook.com",
+          "title": "Football Performance Analysis",
+          "url": "https://www.facebook.com/footballperformanceanalysis/"
+        },
+        {
+          "rank": 7,
+          "domain": "www.performasports.com",
+          "title": "Performance analysis training courses",
+          "url": "https://www.performasports.com/performance-analsysis-courses"
+        },
+        {
+          "rank": 8,
+          "domain": "nacsport.com",
+          "title": "The Essential Skills for Football Performance Analysts",
+          "url": "https://nacsport.com/blog/index.php/en-gb/Tips/essential-skills-football-performance-analysts-students-and-graduates"
+        },
+        {
+          "rank": 9,
+          "domain": "analyisport.com",
+          "title": "Football Analysis Beyond Tactics: Understanding Player ...",
+          "url": "https://analyisport.com/insights/why-football-analysis-is-more-than-just-tactics/"
+        },
+        {
+          "rank": 10,
+          "domain": "www.nacsport.com",
+          "title": "Football Video Analysis",
+          "url": "https://www.nacsport.com/en-gb/football-video-analysis.php"
+        }
+      ]
+    },
+    {
+      "keyword": "youth soccer development",
+      "volume": 10,
+      "kd": null,
+      "cpc": null,
+      "months": [
+        0,
+        10,
+        10,
+        10,
+        10,
+        0,
+        0,
+        0,
+        30,
+        10,
+        10,
+        10
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "scholarly_articles",
+        "knowledge_graph",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "poddtoppen.se",
+          "title": "Youth Soccer Coaching Player Development Podcast",
+          "url": "https://poddtoppen.se/podcast/1160187750/youth-soccer-coaching-player-development-podcast"
+        },
+        {
+          "rank": 2,
+          "domain": "www.youtube.com",
+          "title": "The Reality of Coaching High School Soccer",
+          "url": "https://www.youtube.com/watch?v=o9Dzt_gZ8eM"
+        },
+        {
+          "rank": 3,
+          "domain": "www.soccerdevelopment.co.uk",
+          "title": "Applications",
+          "url": "https://www.soccerdevelopment.co.uk/applications"
+        },
+        {
+          "rank": 4,
+          "domain": "www.youtube.com",
+          "title": "How to Structure a Complete Youth Soccer Training Session ...",
+          "url": "https://www.youtube.com/watch?v=Gu_rHzvplpg"
+        },
+        {
+          "rank": 5,
+          "domain": "www.thesportingresource.co.uk",
+          "title": "Coaching Community: Who to follow",
+          "url": "https://www.thesportingresource.co.uk/coaching-community-who-to-follow"
+        },
+        {
+          "rank": 6,
+          "domain": "www.facebook.com",
+          "title": "⚽️DEVELOPMENT CENTRES⚽️ #footballfitness # ...",
+          "url": "https://www.facebook.com/fit4footballuk/videos/%EF%B8%8Fdevelopment-centres%EF%B8%8F-footballfitness-socceracademy-footballtraining-footballeli/1367165093146338/"
+        },
+        {
+          "rank": 7,
+          "domain": "www.youtube.com",
+          "title": "How To Be a Better Soccer Coach for Youth Soccer Players ...",
+          "url": "https://www.youtube.com/watch?v=IEX03Domqic"
+        },
+        {
+          "rank": 8,
+          "domain": "thetitansfa.com",
+          "title": "Top Development Centres in London for Kids Uncovered",
+          "url": "https://thetitansfa.com/top-development-centres-in-london-for-kids-uncovered/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.youtube.com",
+          "title": "How to develop some of the Premier League's most promising ...",
+          "url": "https://www.youtube.com/watch?v=x7ltIu8aDvE"
+        },
+        {
+          "rank": 10,
+          "domain": "footy4kids.co.uk",
+          "title": "Successful youth soccer coaching",
+          "url": "https://footy4kids.co.uk/how-to-coach-youth-soccer/coaching-tips/successful-youth-soccer-coaching/"
+        }
+      ]
+    },
+    {
+      "keyword": "soccer training devices",
+      "volume": 90,
+      "kd": 0,
+      "cpc": 1.32,
+      "months": [
+        140,
+        110,
+        110,
+        70,
+        30,
+        50,
+        70,
+        70,
+        70,
+        110,
+        70,
+        50
+      ],
+      "features": [
+        "ai_overview",
+        "popular_products",
+        "video",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "goalstation.com",
+          "title": "The Best Soccer Training Gear That Will Make You an ...",
+          "url": "https://goalstation.com/en-ca/blogs/magazine/the-best-football-training-gear-that-will-make-you-an-amazing-player"
+        },
+        {
+          "rank": 2,
+          "domain": "www.prosocceruk.co.uk",
+          "title": "Cheap Football Equipment Suppliers",
+          "url": "https://www.prosocceruk.co.uk/football-equipment"
+        },
+        {
+          "rank": 3,
+          "domain": "castlesports.com",
+          "title": "Best Soccer Training Equipment",
+          "url": "https://castlesports.com/blogs/news/soccer-training-equipment"
+        },
+        {
+          "rank": 4,
+          "domain": "www.youtube.com",
+          "title": "The Soccer Equipment Mistake Most Players Make",
+          "url": "https://www.youtube.com/watch?v=hUKexh5mIns"
+        },
+        {
+          "rank": 5,
+          "domain": "www.vevor.co.uk",
+          "title": "Search junior football training equipment",
+          "url": "https://www.vevor.co.uk/s/junior-football-training-equipment?srsltid=AYCX9vLhK4DNain-nwwABOAT4GMS7Uw9QRQPgzZKp-T5KC7WfPFm4t_7"
+        },
+        {
+          "rank": 6,
+          "domain": "pricespy.co.uk",
+          "title": "Football practice equipment",
+          "url": "https://pricespy.co.uk/s/football-practice-equipment/"
+        },
+        {
+          "rank": 7,
+          "domain": "www.quickplaysport.com",
+          "title": "Football Training Equipment & Gear",
+          "url": "https://www.quickplaysport.com/collections/football-training-equipment?srsltid=AYCX9vIGB3kv6ctQo3egwTgV5FwvJ4-twqcp6p-VmSCcmQ7ZBTUKF6Sj"
+        },
+        {
+          "rank": 8,
+          "domain": "www.fcgamechanger.com",
+          "title": "The Best Soccer Training Equipment",
+          "url": "https://www.fcgamechanger.com/blog/the-best-soccer-training-equipment-a-comprehensive-guide"
+        },
+        {
+          "rank": 9,
+          "domain": "www.sportsdirect.com",
+          "title": "Football Training Aids & Equipment",
+          "url": "https://www.sportsdirect.com/football/football-equipment/football-training-aids"
+        },
+        {
+          "rank": 10,
+          "domain": "www.sambasports.co.uk",
+          "title": "SAMBA Quality Football Training Equipment",
+          "url": "https://www.sambasports.co.uk/training/?srsltid=AYCX9vLQwFbfqeCdEFATqoaay7YxwFQeFMr8WfFOYYJH9v9CrdEfZyrj"
+        }
+      ]
+    },
+    {
+      "keyword": "performance analysis tools",
+      "volume": 10,
+      "kd": 47,
+      "cpc": null,
+      "months": [
+        10,
+        20,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "scholarly_articles",
+        "related_searches",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "slidechef.net",
+          "title": "10 best tools to use to analyze your business performance",
+          "url": "https://slidechef.net/10-best-tools-to-use-to-analyze-your-business-performance/"
+        },
+        {
+          "rank": 2,
+          "domain": "campaign-creatives.com",
+          "title": "9 Best Tools for Campaign Performance Analysis in 2026",
+          "url": "https://campaign-creatives.com/best-tools-for-campaign-performance-analysis/"
+        },
+        {
+          "rank": 3,
+          "domain": "en.wikipedia.org",
+          "title": "Performance analysis",
+          "url": "https://en.wikipedia.org/wiki/Performance_analysis"
+        },
+        {
+          "rank": 4,
+          "domain": "www.vuemotion.com",
+          "title": "VueMotion: AI-Powered Athletic Performance Analysis Platform",
+          "url": "https://www.vuemotion.com/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.isportsanalysis.com",
+          "title": "iSports Analysis",
+          "url": "https://www.isportsanalysis.com/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.flyingorangewebdesign.com",
+          "title": "Top analytics tools for supercharged performance",
+          "url": "https://www.flyingorangewebdesign.com/blog/top-analytics-tools-for-supercharged-website-performance/"
+        },
+        {
+          "rank": 7,
+          "domain": "startupstash.com",
+          "title": "Top 14 Performance Profiling Tools",
+          "url": "https://startupstash.com/performance-profiling-tools/"
+        },
+        {
+          "rank": 8,
+          "domain": "mattdturner.com",
+          "title": "Quick Guide to Performance Analysis Tools - Tech N Comp",
+          "url": "http://mattdturner.com/wordpress/2018/08/performance-analysis-tools-guide/"
+        },
+        {
+          "rank": 9,
+          "domain": "nestify.io",
+          "title": "Performance Analysis Unlocked: Harnessing Tools for ...",
+          "url": "https://nestify.io/blog/performance-analysis-tools/"
+        },
+        {
+          "rank": 10,
+          "domain": "www.analysispro.com",
+          "title": "AnalysisPro | Your video analysis experts in the UK & Ireland",
+          "url": "https://www.analysispro.com/"
+        }
+      ]
+    },
+    {
+      "keyword": "sports analytics software",
+      "volume": 10,
+      "kd": null,
+      "cpc": null,
+      "months": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        0,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.exlservice.com",
+          "title": "Sports Data Analytics & AI",
+          "url": "https://www.exlservice.com/insights/solution-sheet/sports-data-analytics-ai"
+        },
+        {
+          "rank": 2,
+          "domain": "once.sport",
+          "title": "Video analysis for any sport - Once Sport Analyser",
+          "url": "https://once.sport/analyse-any-sport/"
+        },
+        {
+          "rank": 3,
+          "domain": "analyticsfc.co.uk",
+          "title": "Analytics FC | Home",
+          "url": "https://analyticsfc.co.uk/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.objectstyle.com",
+          "title": "Sports Analytics: Enabling Data-Driven Decisions for ...",
+          "url": "https://www.objectstyle.com/blog/sports-analytics-for-leagues-players-coaches-etc"
+        },
+        {
+          "rank": 5,
+          "domain": "requestum.com",
+          "title": "How to Create Sports Analytics Software",
+          "url": "https://requestum.com/blog/how-to-create-sports-analytics-software"
+        },
+        {
+          "rank": 6,
+          "domain": "www.nacsport.com",
+          "title": "Football Video Analysis",
+          "url": "https://www.nacsport.com/en-gb/football-video-analysis.php"
+        },
+        {
+          "rank": 7,
+          "domain": "www.sportsfirst.net",
+          "title": "Sports Data - Analytics - Solutions for Teams, Leagues, and",
+          "url": "https://www.sportsfirst.net/data-analytics-data-visualization"
+        },
+        {
+          "rank": 8,
+          "domain": "en.wikipedia.org",
+          "title": "Sports analytics",
+          "url": "https://en.wikipedia.org/wiki/Sports_analytics"
+        },
+        {
+          "rank": 9,
+          "domain": "www.youtube.com",
+          "title": "Sports analysis software that is EASY to use! - In-Play Online",
+          "url": "https://www.youtube.com/watch?v=rimexX0BjMc"
+        },
+        {
+          "rank": 10,
+          "domain": "www.sportperformanceanalysis.com",
+          "title": "Sport Performance Analysis",
+          "url": "https://www.sportperformanceanalysis.com/"
+        }
+      ]
+    },
+    {
+      "keyword": "soccer skill tracking",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [],
+      "ours": [],
+      "top10": []
+    },
+    {
+      "keyword": "athletic training gadgets",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "popular_products",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.strengthshop.co.uk",
+          "title": "Accessories",
+          "url": "https://www.strengthshop.co.uk/collections/accessories?srsltid=AYCX9vL3LdK_9nvUTHge9wQPB0P-iw3IdQDuNtPjj5bv2o6aH4dbiDxC"
+        },
+        {
+          "rank": 2,
+          "domain": "www.youtube.com",
+          "title": "ATHLETE ESSENTIALS — What's in my TRAINING bag?",
+          "url": "https://www.youtube.com/watch?v=sUINP6M_Jbs"
+        },
+        {
+          "rank": 3,
+          "domain": "beargrip.co.uk",
+          "title": "Fitness Accessories",
+          "url": "https://beargrip.co.uk/collections/exercise-and-fitness?srsltid=AYCX9vI8pJfXSlazcqh43gtJj285QefP148l4S9h7do139Pyujb2wqa6"
+        },
+        {
+          "rank": 4,
+          "domain": "thegadgetflow.com",
+          "title": "Sports Accessories Archives",
+          "url": "https://thegadgetflow.com/collections/sports-gadgets/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.runnersworld.com",
+          "title": "5 gadgets to improve your strength and conditioning",
+          "url": "https://www.runnersworld.com/uk/gear/tech/a26387362/gadgets-to-improve-your-strength-and-conditioning-workout/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.prokituk.com",
+          "title": "FITNESS ACCESSORIES | ProKitUK.com",
+          "url": "https://www.prokituk.com/equipment/fitness-medical/fitness-accessories.html?srsltid=AYCX9vJ4C8H5kRLcngH74zSY3-jlUhkUd9mktlfCt50T1_EDil9jsJVp"
+        },
+        {
+          "rank": 7,
+          "domain": "www.fitness-world-nutrition.com",
+          "title": "Sports Accessories: Choosing the Best Equipment",
+          "url": "https://www.fitness-world-nutrition.com/en/collections/accessoires-sport?srsltid=AYCX9vIW_Px-rGNWtirtZAryBJMVAx3UfsyFYUzpLLtf5Xx97e4cz-b0"
+        },
+        {
+          "rank": 8,
+          "domain": "www.decathlon.co.uk",
+          "title": "Equip for gyms",
+          "url": "https://www.decathlon.co.uk/vc/equip-for-gyms"
+        },
+        {
+          "rank": 9,
+          "domain": "sports-insight.co.uk",
+          "title": "Top Performance-Boosting Accessories Every Athlete ...",
+          "url": "https://sports-insight.co.uk/trends-features/top-performance-boosting-accessories-every-athlete-should-consider/"
+        },
+        {
+          "rank": 10,
+          "domain": "www.trendhunter.com",
+          "title": "70 Athletic Performance-Enhancing Gifts",
+          "url": "https://www.trendhunter.com/slideshow/performanceenhancing-gifts"
+        }
+      ]
+    },
+    {
+      "keyword": "football training technology",
+      "volume": 10,
+      "kd": null,
+      "cpc": 0.17,
+      "months": [
+        20,
+        30,
+        20,
+        20,
+        10,
+        30,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "features": [
+        "ai_overview",
+        "video",
+        "people_also_ask",
+        "related_searches",
+        "google_reviews",
+        "knowledge_graph"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "playerdata.com",
+          "title": "A Complete Overview of Key Soccer Training Devices",
+          "url": "https://playerdata.com/en-gb/blog/soccer-training-devices"
+        },
+        {
+          "rank": 2,
+          "domain": "www.youtube.com",
+          "title": "Technology Makes Soccer Training More Efficient",
+          "url": "https://www.youtube.com/watch?v=IMeCE0rXuaY"
+        },
+        {
+          "rank": 3,
+          "domain": "foot-techacademy.co.uk",
+          "title": "The Foot-Tech Way: Our Training Explained",
+          "url": "https://foot-techacademy.co.uk/the-foot-tech-way-our-training-explained/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.tocafootball.com",
+          "title": "TOCA Soccer Training Technology ...",
+          "url": "https://www.tocafootball.com/articles/toca-soccer-training-technology"
+        },
+        {
+          "rank": 5,
+          "domain": "legacyoflegends.com",
+          "title": "The Role of Technology in Training at Elite Soccer Academies",
+          "url": "https://legacyoflegends.com/blog/role-of-technology-in-training-elite-soccer-academies/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.youtube.com",
+          "title": "Football Training Device Review - SmartGoals",
+          "url": "https://www.youtube.com/watch?v=umCKY-kDo-k"
+        },
+        {
+          "rank": 7,
+          "domain": "www.forza.com",
+          "title": "Football Training Equipment & Coaching Aids",
+          "url": "https://www.forza.com/uk/football/football-training-equipment?srsltid=AYCX9vIYUyG2-2KZXTsXjBjO7hZPbMeWW3O5_UH9x3UFAlRfdQRe9VQq"
+        },
+        {
+          "rank": 8,
+          "domain": "www.tothe92.co.uk",
+          "title": "How New Technology Is Changing Football Training in 2026",
+          "url": "https://www.tothe92.co.uk/links/changing-football-training.html"
+        },
+        {
+          "rank": 9,
+          "domain": "www.tothe92.co.uk",
+          "title": "How New Technology Is Changing Football Training in 2026",
+          "url": "https://www.tothe92.co.uk/links/changing-football-training.html"
+        },
+        {
+          "rank": 10,
+          "domain": "footballtech.football",
+          "title": "footballtech.football",
+          "url": "https://footballtech.football/"
+        }
+      ]
+    },
+    {
+      "keyword": "wearable technology for athletes",
+      "volume": 90,
+      "kd": 6,
+      "cpc": 3.36,
+      "months": [
+        110,
+        110,
+        90,
+        110,
+        70,
+        110,
+        90,
+        110,
+        30,
+        50,
+        30,
+        90
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "scholarly_articles",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.startus-insights.com",
+          "title": "10 New Companies Advancing Wearable Technology for ...",
+          "url": "https://www.startus-insights.com/innovators-guide/wearable-technology-for-athletes/"
+        },
+        {
+          "rank": 2,
+          "domain": "truesport.org",
+          "title": "What Are Wearables and Do Athletes Need Them? | TrueSport®",
+          "url": "https://truesport.org/preparation-recovery/do-athletes-need-wearables/"
+        },
+        {
+          "rank": 3,
+          "domain": "sportsmedicineweekly.com",
+          "title": "How Wearable Tech Impacts Performance",
+          "url": "https://sportsmedicineweekly.com/fitness/how-wearable-tech-impacts-performance/"
+        },
+        {
+          "rank": 4,
+          "domain": "evalan.com",
+          "title": "Using wearables to improve athletic performance",
+          "url": "https://evalan.com/using-wearables-to-improve-athletic-performance-2/"
+        },
+        {
+          "rank": 5,
+          "domain": "mbicycle.com",
+          "title": "Wearable Technology in Professional Sports",
+          "url": "https://mbicycle.com/blog/wearable-technology-in-sports/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.linkedin.com",
+          "title": "Wearable Technology in Athletics",
+          "url": "https://www.linkedin.com/pulse/wearable-technology-athletics-munira-kashem"
+        },
+        {
+          "rank": 7,
+          "domain": "www.meegle.com",
+          "title": "Wearable Tech For Athletes",
+          "url": "https://www.meegle.com/en_us/topics/wearable-technology/wearable-tech-for-athletes"
+        },
+        {
+          "rank": 8,
+          "domain": "medium.com",
+          "title": "Wearable Technology and the Future of Professional Sports",
+          "url": "https://medium.com/@meaghanneoconnell/wearable-technology-and-the-future-of-professional-sports-1bc4fe99df69"
+        },
+        {
+          "rank": 9,
+          "domain": "www.youtube.com",
+          "title": "How wearable tech helped elite athletes through the pandemic",
+          "url": "https://www.youtube.com/watch?v=XeVHr4Fn2Js"
+        },
+        {
+          "rank": 10,
+          "domain": "medium.com",
+          "title": "Applications of Wearable Technology — Sports Performance",
+          "url": "https://medium.com/@radovan.chovanec75/technology-applications-of-wearable-technology-sports-performance-6c517966425f"
+        }
+      ]
+    },
+    {
+      "keyword": "soccer performance metrics",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "scholarly_articles",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.outputsports.com",
+          "title": "Unlocking Peak Soccer Performance: A Deep Dive into ...",
+          "url": "https://www.outputsports.com/blog/unlocking-peak-soccer-performance-a-deep-dive-into-key-sports-science-measures"
+        },
+        {
+          "rank": 2,
+          "domain": "pmc.ncbi.nlm.nih.gov",
+          "title": "Key Performance Indicators Predictive of Success in Soccer",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11204448/"
+        },
+        {
+          "rank": 3,
+          "domain": "dash.harvard.edu",
+          "title": "All-In-One Player Performance Metrics for Soccer",
+          "url": "https://dash.harvard.edu/bitstreams/92b3797e-5b45-4d1b-a000-08324ea9e9ce/download"
+        },
+        {
+          "rank": 4,
+          "domain": "support.fieldlevel.com",
+          "title": "Soccer performance metrics on FieldLevel",
+          "url": "https://support.fieldlevel.com/en/articles/9288865-soccer-performance-metrics-on-fieldlevel"
+        },
+        {
+          "rank": 5,
+          "domain": "barcainnovationhub.fcbarcelona.com",
+          "title": "Physical KPIs in Modern Football: What to Measure and Why",
+          "url": "https://barcainnovationhub.fcbarcelona.com/blog/physical-kpis-in-modern-football-what-to-measure-and-why/"
+        },
+        {
+          "rank": 6,
+          "domain": "skillcorner.com",
+          "title": "Physical Data",
+          "url": "https://skillcorner.com/products/football/physical-data"
+        },
+        {
+          "rank": 7,
+          "domain": "english-programs.sportsdatacampus.com",
+          "title": "Football Metrics: 8 Key Metrics Every Analyst Should Know",
+          "url": "https://english-programs.sportsdatacampus.com/important-football-metrics/"
+        },
+        {
+          "rank": 8,
+          "domain": "www.facebook.com",
+          "title": "Soccer Player Performance Metrics",
+          "url": "https://www.facebook.com/fb-answers/soccer-player-performance-metrics/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.jssm.org",
+          "title": "Attacking Key Performance Indicators in Soccer",
+          "url": "https://www.jssm.org/jssm-20-158.xml-Fulltext"
+        },
+        {
+          "rank": 10,
+          "domain": "www.northeastrush.com",
+          "title": "Understanding Key Soccer Metrics for Players",
+          "url": "https://www.northeastrush.com/soccer-stats-101-understanding-key-soccer-metrics-for-players"
+        }
+      ]
+    },
+    {
+      "keyword": "sports performance analysis",
+      "volume": 260,
+      "kd": 11,
+      "cpc": 1.8,
+      "months": [
+        320,
+        390,
+        170,
+        320,
+        260,
+        320,
+        210,
+        210,
+        140,
+        170,
+        110,
+        260
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "scholarly_articles",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.cardiffmet.ac.uk",
+          "title": "BSc Sport Performance Analysis",
+          "url": "https://www.cardiffmet.ac.uk/courses/undergraduate/bsc-sport-performance-analysis/"
+        },
+        {
+          "rank": 2,
+          "domain": "www.sportni.net",
+          "title": "Performance Analysis",
+          "url": "http://www.sportni.net/performance/sports-institute-northern-ireland/performance-analysis/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.stmarys.ac.uk",
+          "title": "Sports Performance Analysis Degree BSc",
+          "url": "https://www.stmarys.ac.uk/courses/undergraduate/sports-performance-analysis"
+        },
+        {
+          "rank": 4,
+          "domain": "theaspa.org",
+          "title": "The association of sports performance analysts (ASPA) is the ...",
+          "url": "https://theaspa.org/"
+        },
+        {
+          "rank": 5,
+          "domain": "uksportsinstitute.co.uk",
+          "title": "Performance Analysis in Elite Sport",
+          "url": "https://uksportsinstitute.co.uk/service/performance-analysis/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.sportperformanceanalysis.com",
+          "title": "Sport Performance Analysis",
+          "url": "https://www.sportperformanceanalysis.com/"
+        },
+        {
+          "rank": 7,
+          "domain": "www.uos.ac.uk",
+          "title": "BSc (Hons) Sport Performance Analysis",
+          "url": "https://www.uos.ac.uk/study/bsc-sport-performance-analysis/"
+        },
+        {
+          "rank": 8,
+          "domain": "www.youtube.com",
+          "title": "Performance Analysis Introduction | Sports Science Guide for ...",
+          "url": "https://www.youtube.com/watch?v=azMmcr7oCO4"
+        },
+        {
+          "rank": 9,
+          "domain": "www.isportsanalysis.com",
+          "title": "Sports Performance Analysis & Sports Coding",
+          "url": "https://www.isportsanalysis.com/sport-performance-analysis.php"
+        },
+        {
+          "rank": 10,
+          "domain": "www.mdx.ac.uk",
+          "title": "Sport Performance Analysis MSc 2027 - London",
+          "url": "https://www.mdx.ac.uk/courses/postgraduate/sport-performance-analysis-msc--/"
+        }
+      ]
+    },
+    {
+      "keyword": "soccer fitness tracking",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [],
+      "ours": [],
+      "top10": []
+    },
+    {
+      "keyword": "football player tracking",
+      "volume": 50,
+      "kd": 48,
+      "cpc": 1.16,
+      "months": [
+        50,
+        90,
+        40,
+        70,
+        30,
+        50,
+        30,
+        50,
+        50,
+        70,
+        50,
+        70
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "related_searches",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.amazon.co.uk",
+          "title": "Amazon.co.uk: Football Gps Tracker",
+          "url": "https://www.amazon.co.uk/football-gps-tracker/s?k=football+gps+tracker"
+        },
+        {
+          "rank": 2,
+          "domain": "www.reddit.com",
+          "title": "Football Players Tracking with YOLOv5 + ByteTRACK Tutorial",
+          "url": "https://www.reddit.com/r/computervision/comments/zf8903/football_players_tracking_with_yolov5_bytetrack/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.pitcherogps.com",
+          "title": "Soccer GPS Tracker & Vest for Players and Teams",
+          "url": "https://www.pitcherogps.com/pages/football-gps-tracker?srsltid=AYCX9vKYvhZlVCRjMgaRD7VSKcStapGU8rAvGQcCn86Q4VylzoX3bxJg"
+        },
+        {
+          "rank": 4,
+          "domain": "playerstats.football",
+          "title": "Football Stats & Player Stats | Shots on Target, Passes, Fouls",
+          "url": "https://playerstats.football/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.trackingfootball.com",
+          "title": "Tracking Football | Football Player Athleticism | Athletic Analytics",
+          "url": "https://www.trackingfootball.com/"
+        },
+        {
+          "rank": 6,
+          "domain": "github.com",
+          "title": "Football Tracking using YOLOv5 and OpenCV",
+          "url": "https://github.com/AnshChoudhary/Football-Tracking"
+        },
+        {
+          "rank": 7,
+          "domain": "www.iieta.org",
+          "title": "Football Player Tracking and Performance Analysis Using ...",
+          "url": "https://www.iieta.org/journals/mmep/paper/10.18280/mmep.110113"
+        },
+        {
+          "rank": 8,
+          "domain": "www.driblab.com",
+          "title": "Tracking",
+          "url": "https://www.driblab.com/tracking"
+        },
+        {
+          "rank": 9,
+          "domain": "www.playermaker.com",
+          "title": "Playermaker | AI Soccer Performance Tracker",
+          "url": "https://www.playermaker.com/?srsltid=AYCX9vKTgihOmPPcQGRhJpASRsJXH5k6g1ypnjnhzcziz7EcFK9qGphy"
+        },
+        {
+          "rank": 10,
+          "domain": "www.reddit.com",
+          "title": "Football Players Tracking with YOLOv5 + ByteTRACK Tutorial",
+          "url": "https://www.reddit.com/r/computervision/comments/zf8903/football_players_tracking_with_yolov5_bytetrack/"
+        }
+      ]
+    },
+    {
+      "keyword": "sports tech devices",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.bbc.co.uk",
+          "title": "The sports technology that aims to boost performance",
+          "url": "https://www.bbc.co.uk/news/av/technology-26464288"
+        },
+        {
+          "rank": 2,
+          "domain": "grandslamfitness.co.in",
+          "title": "Essential Sports Technology Tools for Every High- ...",
+          "url": "https://grandslamfitness.co.in/blog/essential-sports-technology-tools-for-every-high-performance-facility"
+        },
+        {
+          "rank": 3,
+          "domain": "www.youtube.com",
+          "title": "Understanding wearable technology in elite sport",
+          "url": "https://www.youtube.com/watch?v=ArUGxQVUthM"
+        },
+        {
+          "rank": 4,
+          "domain": "theindianface.com",
+          "title": "THE LATEST IN TECHNOLOGY FOR SPORTS",
+          "url": "https://theindianface.com/en-ch/blogs/nouvelles/the-last-in-technology-for-doing-sports"
+        },
+        {
+          "rank": 5,
+          "domain": "www.techreviewer.co.uk",
+          "title": "Wearable Technology and its Impact on the World of Sport",
+          "url": "http://www.techreviewer.co.uk/wearable-technology-and-its-impact-on-the-world-of-sport/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.todayfm.com",
+          "title": "Tech Tuesday - Gadgets To Help You Succeed In Your Sport",
+          "url": "https://www.todayfm.com/muireann-oconnell/tech-tuesday-gadgets-to-help-you-succeed-in-your-sport-347597"
+        },
+        {
+          "rank": 7,
+          "domain": "www.techradar.com",
+          "title": "A wearable for every sport: the tech you need for cycling ...",
+          "url": "https://www.techradar.com/news/a-wearable-for-every-sport-the-tech-you-need-for-cycling-swimming-and-more"
+        },
+        {
+          "rank": 8,
+          "domain": "www.techradar.com",
+          "title": "Health & Fitness",
+          "url": "https://www.techradar.com/uk/health-fitness"
+        },
+        {
+          "rank": 9,
+          "domain": "theindianface.com",
+          "title": "THE LATEST IN TECHNOLOGY FOR SPORTS",
+          "url": "https://theindianface.com/en-pt/blogs/news/the-last-in-technology-for-doing-sports"
+        },
+        {
+          "rank": 10,
+          "domain": "my-sport-analysis.myshopify.com",
+          "title": "Five Sports Tech Gadgets to Help with Your New Year's ...",
+          "url": "https://my-sport-analysis.myshopify.com/blogs/sporttechie/five-sports-tech-gadgets-to-help-with-your-new-year-s-resolutions"
+        }
+      ]
+    },
+    {
+      "keyword": "soccer coaching apps",
+      "volume": 20,
+      "kd": 42,
+      "cpc": null,
+      "months": [
+        20,
+        10,
+        20,
+        10,
+        10,
+        10,
+        20,
+        20,
+        10,
+        20,
+        10,
+        30
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "video",
+        "discussions_and_forums",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "igeeksoccer.com",
+          "title": "Best 21 Soccer Training Apps",
+          "url": "https://igeeksoccer.com/best-soccer-training-apps/"
+        },
+        {
+          "rank": 2,
+          "domain": "play.google.com",
+          "title": "box-to-box: Soccer Training – Apps on ...",
+          "url": "https://play.google.com/store/apps/details/box_to_box_Treino_de_Futebol?id=de.streetkickers&hl=en_AU"
+        },
+        {
+          "rank": 3,
+          "domain": "play.google.com",
+          "title": "Soccer Training - Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.fitivity.soccer_skills&hl=en"
+        },
+        {
+          "rank": 4,
+          "domain": "www.anytime-soccer.com",
+          "title": "Best Soccer Coaching Apps (2025 Update)",
+          "url": "https://www.anytime-soccer.com/blog/9473-2"
+        },
+        {
+          "rank": 5,
+          "domain": "goalstation.com",
+          "title": "5 Best Football Training Apps for Players and Coaches in ...",
+          "url": "https://goalstation.com/blogs/magazine/5-best-football-training-apps-for-players-and-coaches-in-2026"
+        },
+        {
+          "rank": 6,
+          "domain": "apps.apple.com",
+          "title": "SoccerXpert Coach App - App Store",
+          "url": "https://apps.apple.com/au/app/soccerxpert-coach-app/id1192812734"
+        },
+        {
+          "rank": 7,
+          "domain": "play.google.com",
+          "title": "Coerver Soccer Skills - Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.coerversoccerskills.android&hl=en"
+        },
+        {
+          "rank": 8,
+          "domain": "www.reddit.com",
+          "title": "Looking for Online Soccer Training Programs/Apps",
+          "url": "https://www.reddit.com/r/youthsoccer/comments/1rytlpl/looking_for_online_soccer_training_programsapps/"
+        },
+        {
+          "rank": 9,
+          "domain": "play.google.com",
+          "title": "Coerver Soccer Skills - Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.coerversoccerskills.android&hl=en"
+        },
+        {
+          "rank": 10,
+          "domain": "www.ertheo.com",
+          "title": "The best software applications for football coaches and ...",
+          "url": "https://www.ertheo.com/blog/en/best-soccer-training-apps"
+        }
+      ]
+    },
+    {
+      "keyword": "football analytics",
+      "volume": 140,
+      "kd": 45,
+      "cpc": 3.04,
+      "months": [
+        170,
+        210,
+        140,
+        170,
+        210,
+        110,
+        90,
+        140,
+        140,
+        140,
+        110,
+        140
+      ],
+      "features": [
+        "people_also_ask",
+        "top_stories",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.bbc.co.uk",
+          "title": "Football - latest news today, results & video highlights",
+          "url": "https://www.bbc.co.uk/sport/football"
+        },
+        {
+          "rank": 2,
+          "domain": "en.wikipedia.org",
+          "title": "Association football",
+          "url": "https://en.wikipedia.org/wiki/Association_football"
+        },
+        {
+          "rank": 3,
+          "domain": "footballfoundation.org.uk",
+          "title": "Local Football Facility Plans",
+          "url": "https://footballfoundation.org.uk/local-plans"
+        },
+        {
+          "rank": 4,
+          "domain": "www.thefa.com",
+          "title": "The website for the English Football Association, Emirates FA ...",
+          "url": "https://www.thefa.com/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.instagram.com",
+          "title": "Diana Al Shammari ديانا الشمري‎ (@thefootballgal)",
+          "url": "https://www.instagram.com/thefootballgal/?hl=en"
+        },
+        {
+          "rank": 6,
+          "domain": "en.wikipedia.org",
+          "title": "Football",
+          "url": "https://en.wikipedia.org/wiki/Football"
+        },
+        {
+          "rank": 7,
+          "domain": "www.tandfonline.com",
+          "title": "Science and Medicine in Football | Journal",
+          "url": "https://www.tandfonline.com/journals/rsmf20"
+        },
+        {
+          "rank": 8,
+          "domain": "www.reddit.com",
+          "title": "r/DynastyFF",
+          "url": "https://www.reddit.com/r/DynastyFF/"
+        },
+        {
+          "rank": 9,
+          "domain": "medium.com",
+          "title": "Football (Soccer) Analytics 101",
+          "url": "https://medium.com/@lampros.mousselimis/football-soccer-analytics-101-ff8c1d94d0dd"
+        },
+        {
+          "rank": 10,
+          "domain": "play.google.com",
+          "title": "Formula Football Analytics - Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=et.com.mnecreatives.formula"
+        }
+      ]
+    },
+    {
+      "keyword": "youth football development",
+      "volume": 20,
+      "kd": 48,
+      "cpc": null,
+      "months": [
+        10,
+        30,
+        20,
+        30,
+        30,
+        40,
+        30,
+        20,
+        30,
+        30,
+        10,
+        20
+      ],
+      "features": [
+        "ai_overview",
+        "related_searches"
+      ],
+      "ours": [
+        {
+          "rank": 22,
+          "domain": "www.thefootballparent.co.uk",
+          "title": "how youth football academies work – a parent's guide",
+          "url": "https://www.thefootballparent.co.uk/how-football-academies-work"
+        },
+        {
+          "rank": 29,
+          "domain": "www.thefootballparent.co.uk",
+          "title": "Inside Youth Football Academies: Youth Academies Explained",
+          "url": "https://www.thefootballparent.co.uk/post/inside-youth-football-academies-youth-academies-explained"
+        }
+      ],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.ouitc.org",
+          "title": "Development Centre | Programmes",
+          "url": "https://www.ouitc.org/programme/development-centre/"
+        },
+        {
+          "rank": 2,
+          "domain": "wemakefootballers.com",
+          "title": "Shepherd's Bush Kids' Football Training",
+          "url": "https://wemakefootballers.com/uk/shepherds-bush"
+        },
+        {
+          "rank": 3,
+          "domain": "www.pathwaydevelopmentcentre.com",
+          "title": "Pathway Development Centre",
+          "url": "https://www.pathwaydevelopmentcentre.com/"
+        },
+        {
+          "rank": 4,
+          "domain": "gtfc.co.uk",
+          "title": "youth development parents/carers handbook",
+          "url": "https://gtfc.co.uk/wp-content/uploads/2023/09/GTFC-Youth-Devleopment-Handbook-23-to-24.pdf"
+        },
+        {
+          "rank": 5,
+          "domain": "wemakefootballers.com",
+          "title": "News & Insights",
+          "url": "https://wemakefootballers.com/uk/news"
+        },
+        {
+          "rank": 6,
+          "domain": "www.facebook.com",
+          "title": "Youth Academy Football Development",
+          "url": "https://www.facebook.com/fb-answers/youth-academy-football-development/"
+        },
+        {
+          "rank": 7,
+          "domain": "www.thefa.com",
+          "title": "Get involved in English football: Play, Coach, Referee ...",
+          "url": "https://www.thefa.com/yourgame"
+        },
+        {
+          "rank": 8,
+          "domain": "thefootballdevelopmentprogramme.co.uk",
+          "title": "The Football Development Programme – Football, Numeracy ...",
+          "url": "https://thefootballdevelopmentprogramme.co.uk/football/"
+        },
+        {
+          "rank": 9,
+          "domain": "universidadeuropea.com",
+          "title": "Youth football coaching techniques | UE Blog",
+          "url": "https://universidadeuropea.com/en/blog/youth-football-coaching/"
+        },
+        {
+          "rank": 10,
+          "domain": "universidadeuropea.com",
+          "title": "Youth football coaching techniques | UE Blog",
+          "url": "https://universidadeuropea.com/en/blog/youth-football-coaching/"
+        }
+      ]
+    },
+    {
+      "keyword": "football training devices",
+      "volume": 6600,
+      "kd": 0,
+      "cpc": 0.96,
+      "months": [
+        8100,
+        12100,
+        8100,
+        3600,
+        3600,
+        5400,
+        5400,
+        5400,
+        5400,
+        5400,
+        4400,
+        6600
+      ],
+      "features": [
+        "popular_products",
+        "people_also_ask",
+        "video",
+        "images",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.quickplaysport.com",
+          "title": "Football Training Equipment & Gear",
+          "url": "https://www.quickplaysport.com/collections/football-training-equipment?srsltid=AYCX9vIAhyTE2y1mjIvjD1h0RXMgn5Z6IoKeWTW1hq4OafMqNFQdYmU0"
+        },
+        {
+          "rank": 2,
+          "domain": "www.forza.com",
+          "title": "Football Training Equipment & Coaching Aids",
+          "url": "https://www.forza.com/uk/football/football-training-equipment?srsltid=AYCX9vLeG-5Zxp1coK_JpcBNYh--jHfUTXOaW0vzwBtDKYASGBTk-gf8"
+        },
+        {
+          "rank": 3,
+          "domain": "www.thesoccerstore.co.uk",
+          "title": "Football Training Equipment | The Soccer Store UK",
+          "url": "https://www.thesoccerstore.co.uk/training-equipment"
+        },
+        {
+          "rank": 4,
+          "domain": "kitlocker.com",
+          "title": "Football Training Equipment | Club Kits & Training Gear",
+          "url": "https://kitlocker.com/collection/football-training-aides/"
+        },
+        {
+          "rank": 5,
+          "domain": "fab-academy.pendlesportswear.co.uk",
+          "title": "Football Training Equipment - FAB Academy",
+          "url": "https://fab-academy.pendlesportswear.co.uk/football-training-equipment/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.sambasports.co.uk",
+          "title": "SAMBA Quality Football Training Equipment",
+          "url": "https://www.sambasports.co.uk/training/?srsltid=AYCX9vLjHnYf63u0RZ8j7L14CG-tsa1bQvpw1KAh4FIOmbx8p7kFGLXV"
+        },
+        {
+          "rank": 7,
+          "domain": "www.networldsports.co.uk",
+          "title": "Football Training & Coaching Equipment",
+          "url": "https://www.networldsports.co.uk/football/football-training-equipment.html"
+        },
+        {
+          "rank": 8,
+          "domain": "diamondfootball.com",
+          "title": "Football training equipment list for top teams",
+          "url": "https://diamondfootball.com/news/4134/the-ultimate-football-training-equipment-list-for-top-teams-and-players?srsltid=AYCX9vKkxAXQ5WRhi9uVtP-PtxSaLtGEnoyJH-c4YLeHBohr0sfstXGJ"
+        },
+        {
+          "rank": 9,
+          "domain": "www.newitts.com",
+          "title": "Football Training Equipment",
+          "url": "https://www.newitts.com/football-training-equipment?srsltid=AYCX9vLtvF3tsu-RhWBFgplvBqYAFTV3MSyPTssjkYGSzhwt5BCWTEqQ"
+        },
+        {
+          "rank": 10,
+          "domain": "www.pricerunner.com",
+          "title": "Football Training Equipment • Compare prices now »",
+          "url": "https://www.pricerunner.com/cl/1206/Football?attr_50046621=58160535"
+        }
+      ]
+    },
+    {
+      "keyword": "football skill tracking",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "video",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "footballinsides.com",
+          "title": "Football Performance Tracker - Top 5 for Players in 2025",
+          "url": "https://footballinsides.com/football-blog/football-performance-tracker/"
+        },
+        {
+          "rank": 2,
+          "domain": "play.google.com",
+          "title": "Football Tracker – Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.webiodd.footballtracker&hl=en_GB"
+        },
+        {
+          "rank": 3,
+          "domain": "skillcorner.com",
+          "title": "Football",
+          "url": "https://skillcorner.com/us/blog-categories/football"
+        },
+        {
+          "rank": 4,
+          "domain": "kinexon-sports.com",
+          "title": "How a Soccer Tracker Can Improve Player Performance",
+          "url": "https://kinexon-sports.com/blog/soccer-tracker-player-performance"
+        },
+        {
+          "rank": 5,
+          "domain": "www.facebook.com",
+          "title": "Semi-pro footballers - have you seen how other players are ...",
+          "url": "https://www.facebook.com/scorzafootball/posts/semi-pro-footballers-have-you-seen-how-other-players-are-tracking-their-performa/122201396396892530/"
+        },
+        {
+          "rank": 6,
+          "domain": "fpromat.co.uk",
+          "title": "How to Track Progress and Stay Motivated",
+          "url": "https://fpromat.co.uk/blogs/articles/football-training-goals-how-to-track-progress-and-stay-motivated"
+        },
+        {
+          "rank": 7,
+          "domain": "www.sportsessionplanner.com",
+          "title": "Football/Soccer Session (Difficult): TRACKING BACK",
+          "url": "https://www.sportsessionplanner.com/s/2PsV/TRACKING-BACK.html?interface=en"
+        },
+        {
+          "rank": 8,
+          "domain": "www.youtube.com",
+          "title": "The Modern Day Footballer X Pro:Direct Soccer",
+          "url": "https://www.youtube.com/watch?v=GNe87Vu7SLE"
+        },
+        {
+          "rank": 9,
+          "domain": "chanceanalytics.wordpress.com",
+          "title": "Homemade Player Tracking | CHANCE ANALYTICS",
+          "url": "https://chanceanalytics.wordpress.com/2018/01/28/homemade-player-tracking/"
+        },
+        {
+          "rank": 10,
+          "domain": "www.scitepress.org",
+          "title": "FOOTBALLTrace: An AI-Based System for Football Player ...",
+          "url": "https://www.scitepress.org/Papers/2023/122268/122268.pdf"
+        }
+      ]
+    },
+    {
+      "keyword": "football performance metrics",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "scholarly_articles",
+        "related_searches",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.statsperform.com",
+          "title": "Football Performance Analysis & Recruitment Data | Opta & ...",
+          "url": "https://www.statsperform.com/team-performance/performance-solutions-for-football/"
+        },
+        {
+          "rank": 2,
+          "domain": "football-metrics.co.uk",
+          "title": "Football Metrics | Home",
+          "url": "https://football-metrics.co.uk/"
+        },
+        {
+          "rank": 3,
+          "domain": "global.gengee.com",
+          "title": "Understanding Football Metrics: A Comprehensive Guide b...",
+          "url": "https://global.gengee.com/blog/understanding-football-metrics-a-comprehensive-guide-by-gengee?srsltid=AYCX9vJUyyLe6rYJxL7QQV3mTAW9q4ZOP-F21YZZx4n_PineS6YZigAn"
+        },
+        {
+          "rank": 4,
+          "domain": "fantasyfootball247.co.uk",
+          "title": "Analysing Key Metrics in Football Performance Using ...",
+          "url": "https://fantasyfootball247.co.uk/analysing-key-metrics-in-football-performance-using-advanced-stats/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.statsperform.com",
+          "title": "How we measure pressure",
+          "url": "https://www.statsperform.com/insights/how-we-measure-pressure/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.hudl.com",
+          "title": "Understanding Performance Analysis for Football Teams",
+          "url": "https://www.hudl.com/blog/performance-analysis-in-football"
+        },
+        {
+          "rank": 7,
+          "domain": "www.researchgate.net",
+          "title": "(PDF) Tracking Performance in Football – An Example ...",
+          "url": "https://www.researchgate.net/publication/258451786_Tracking_Performance_in_Football_-_An_Example_Using_Goal_Scoring_Data"
+        },
+        {
+          "rank": 8,
+          "domain": "www.scribd.com",
+          "title": "Soccer Performance Metrics Guide - Football Codes",
+          "url": "https://www.scribd.com/document/841787692/6b38f86b-e4cc-4aa8-aae0-b840d94e451d-Soccer-Annotation-Metric-1"
+        },
+        {
+          "rank": 9,
+          "domain": "medium.com",
+          "title": "5 Proven Performance Indicators That Help Soccer Players ...",
+          "url": "https://medium.com/@pavlpolo/5-proven-performance-indicators-that-help-soccer-players-and-professionals-advance-their-careers-a65e1cf844c5"
+        },
+        {
+          "rank": 10,
+          "domain": "www.youtube.com",
+          "title": "Football Performance Profiling - A Method for a Comparison ...",
+          "url": "https://www.youtube.com/watch?v=Glj6eKFPZVc"
+        }
+      ]
+    },
+    {
+      "keyword": "football fitness tracking",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "video",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "uk.shop.statsports.com",
+          "title": "STATSports Shop | GPS Trackers, STATSports Academy, Elite ...",
+          "url": "https://uk.shop.statsports.com/"
+        },
+        {
+          "rank": 2,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        },
+        {
+          "rank": 3,
+          "domain": "playerdata.com",
+          "title": "PlayerData: Elite Level GPS Sports Performance Tracking",
+          "url": "https://playerdata.com/en-gb"
+        },
+        {
+          "rank": 4,
+          "domain": "statsports.com",
+          "title": "How a Premier League side uses GPS tracking to improve ...",
+          "url": "https://statsports.com/article/how-a-premier-league-side-uses-gps-tracking-to-improve-performance-and-minimise-injury"
+        },
+        {
+          "rank": 5,
+          "domain": "shop.statsports.com",
+          "title": "STATSports Vest",
+          "url": "https://shop.statsports.com/products/statsports-vest-2-0"
+        },
+        {
+          "rank": 6,
+          "domain": "www.coachweb.com",
+          "title": "Playr First Look: A Fitness Tracker For Serious Footballers",
+          "url": "https://www.coachweb.com/fitness-trackers/7559/playr-first-look-a-fitness-tracker-for-serious-footballers"
+        },
+        {
+          "rank": 7,
+          "domain": "www.tiktok.com",
+          "title": "GPS Tracker in Football: How Players Track Fitness & Speed",
+          "url": "https://www.tiktok.com/@statsports/video/7126962611337399557"
+        },
+        {
+          "rank": 8,
+          "domain": "footballinsides.com",
+          "title": "Football Performance Tracker - Top 5 for Players in 2025",
+          "url": "https://footballinsides.com/football-blog/football-performance-tracker/"
+        },
+        {
+          "rank": 9,
+          "domain": "kinexon-sports.com",
+          "title": "The Best Football GPS Tracker For Coaches",
+          "url": "https://kinexon-sports.com/blog/football-tracker"
+        },
+        {
+          "rank": 10,
+          "domain": "www.amazon.ie",
+          "title": "Football - Activity Trackers / Sports Electronics & Gadgets",
+          "url": "https://www.amazon.ie/Activity-Trackers-Football-Sports-Electronics-Gadgets/s?rh=n%3A94818614031%2Cp_n_g-1003468809111%3A96236342031"
+        }
+      ]
+    },
+    {
+      "keyword": "football coaching apps",
+      "volume": 140,
+      "kd": 0,
+      "cpc": 2.78,
+      "months": [
+        140,
+        110,
+        110,
+        140,
+        110,
+        110,
+        140,
+        140,
+        170,
+        140,
+        170,
+        210
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "play.google.com",
+          "title": "The Football Trainer – Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=ch.fipi.fbcoach.lite&hl=en_GB"
+        },
+        {
+          "rank": 2,
+          "domain": "goalstation.com",
+          "title": "5 Best Football Training Apps for Players and Coaches in ...",
+          "url": "https://goalstation.com/blogs/magazine/5-best-football-training-apps-for-players-and-coaches-in-2026"
+        },
+        {
+          "rank": 3,
+          "domain": "gorout.com",
+          "title": "Football Coaching Apps: A Complete Guide for ...",
+          "url": "https://gorout.com/football-coaching-apps/"
+        },
+        {
+          "rank": 4,
+          "domain": "thrive4grassroots.com",
+          "title": "Six football coaching tools to try in 2026 - Thrive4 Grassroots",
+          "url": "https://thrive4grassroots.com/blog/six-of-the-best-football-coaching-and-tactics-software-to-try-in-2026/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.teamstats.net",
+          "title": "Best Free & Paid Football Coaching Apps",
+          "url": "https://www.teamstats.net/football-coaching/apps/free-vs-paid-football-coaching-apps"
+        },
+        {
+          "rank": 6,
+          "domain": "www.the-football-hub.org",
+          "title": "Football Management Apps: Which One?!",
+          "url": "https://www.the-football-hub.org/post/football-management-apps-which-one"
+        },
+        {
+          "rank": 7,
+          "domain": "firstwhistle.app",
+          "title": "Best Football Management Apps for 2026",
+          "url": "https://firstwhistle.app/best-football-management-apps-for-2026/"
+        },
+        {
+          "rank": 8,
+          "domain": "play.google.com",
+          "title": "Train Effective: Football – Apps on Google Play",
+          "url": "https://play.google.com/store/apps/details?id=com.traineffective&hl=en_GB"
+        },
+        {
+          "rank": 9,
+          "domain": "play.google.com",
+          "title": "CoachFrank: Soccer Training AI – Apps on ...",
+          "url": "https://play.google.com/store/apps/details?id=ai.coachfrank&hl=en_GB"
+        },
+        {
+          "rank": 10,
+          "domain": "www.facebook.com",
+          "title": "What football apps are best for coaches to create training ...",
+          "url": "https://www.facebook.com/groups/860516554455601/posts/2622077084966197/"
+        }
+      ]
+    },
+    {
+      "keyword": "playermaker",
+      "volume": 1000,
+      "kd": 2,
+      "cpc": 0.63,
+      "months": [
+        1300,
+        2400,
+        1600,
+        1000,
+        880,
+        1300,
+        1000,
+        1000,
+        590,
+        720,
+        720,
+        880
+      ],
+      "features": [
+        "people_also_ask",
+        "ai_overview",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.playermaker.com",
+          "title": "Playermaker | AI Soccer Performance Tracker",
+          "url": "https://www.playermaker.com/?srsltid=AYCX9vJlaK9WBatLxezw_jXbSqR963KDkJ_zNGeBamOsku9oJpmiND36"
+        },
+        {
+          "rank": 2,
+          "domain": "www.instagram.com",
+          "title": "Playermaker",
+          "url": "https://www.instagram.com/playermaker/?hl=en"
+        },
+        {
+          "rank": 3,
+          "domain": "en.wikipedia.org",
+          "title": "Playermaker",
+          "url": "https://en.wikipedia.org/wiki/Playermaker"
+        },
+        {
+          "rank": 4,
+          "domain": "uk.trustpilot.com",
+          "title": "Read Customer Service Reviews of playermaker.com",
+          "url": "https://uk.trustpilot.com/review/playermaker.com"
+        },
+        {
+          "rank": 5,
+          "domain": "www.amazon.co.uk",
+          "title": "Playermaker 2.0 Smart Football Tracker, Wearable AI ...",
+          "url": "https://www.amazon.co.uk/Playermaker-2-0-Smart-Football-Tracker/dp/B0DK5W81SJ"
+        },
+        {
+          "rank": 6,
+          "domain": "dashboard.playermaker.co.uk",
+          "title": "PlayerMaker | dashboard",
+          "url": "https://dashboard.playermaker.co.uk/"
+        },
+        {
+          "rank": 7,
+          "domain": "uk.linkedin.com",
+          "title": "Playermaker",
+          "url": "https://uk.linkedin.com/company/playermaker"
+        },
+        {
+          "rank": 8,
+          "domain": "www.reddit.com",
+          "title": "Playermaker Trackers: worth the buy? : r/bootroom",
+          "url": "https://www.reddit.com/r/bootroom/comments/1eh44hg/playermaker_trackers_worth_the_buy/"
+        },
+        {
+          "rank": 9,
+          "domain": "soccerwares.com",
+          "title": "Playermaker 2.0 Review — Tested on Real Youth Player ...",
+          "url": "https://soccerwares.com/blogs/our-blogs/playermaker-smart-gps-soccer-tracker-review-the-game-changing-tracker-for-young-footballers?srsltid=AYCX9vK-mH2jp7IoG9z263LIOe16h2Be0nYVwiefHPWyMrFXq4jt3WEK"
+        },
+        {
+          "rank": 10,
+          "domain": "www.youtube.com",
+          "title": "Device That Changes How You Train Football | Playermaker 2.0",
+          "url": "https://www.youtube.com/watch?v=t4PxIlctzOc"
+        }
+      ]
+    },
+    {
+      "keyword": "playermaker football tracker",
+      "volume": 210,
+      "kd": 1,
+      "cpc": 0.75,
+      "months": [
+        210,
+        480,
+        260,
+        260,
+        170,
+        170,
+        140,
+        170,
+        140,
+        90,
+        90,
+        110
+      ],
+      "features": [
+        "ai_overview",
+        "video",
+        "people_also_ask",
+        "related_searches",
+        "popular_products"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.youtube.com",
+          "title": "Playermaker VS STATSports REVIEW | WHICH ONE SHOULD ...",
+          "url": "https://www.youtube.com/watch?v=pq-wqpnYooo"
+        },
+        {
+          "rank": 2,
+          "domain": "www.playermaker.com",
+          "title": "Teams – Playermaker",
+          "url": "https://www.playermaker.com/pages/teams?srsltid=AYCX9vImovDzG679shxqPeQFIc2YivduS9SypBbdOvGks_12EkJfArtj"
+        },
+        {
+          "rank": 3,
+          "domain": "www.playermaker.com",
+          "title": "News – Page 6",
+          "url": "https://www.playermaker.com/blogs/news?page=6&srsltid=AYCX9vJX1jzd9Kh19crhklBZdNBUtkF49N5mItvDGswiqIc7Uc5zRiwI"
+        },
+        {
+          "rank": 4,
+          "domain": "www.reddit.com",
+          "title": "Anyone have any experience using Playermaker?",
+          "url": "https://www.reddit.com/r/bootroom/comments/ul7aq3/anyone_have_any_experience_using_playermaker/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.youtube.com",
+          "title": "How to Start and End an Activity",
+          "url": "https://www.youtube.com/watch?v=--WKjxo6nNQ"
+        },
+        {
+          "rank": 6,
+          "domain": "www.amazon.com",
+          "title": "Playermaker 2.0 Smart Soccer Tracker, Wearable AI ...",
+          "url": "https://www.amazon.com/clp/B0CZSCWN47"
+        },
+        {
+          "rank": 7,
+          "domain": "soccerwares.com",
+          "title": "Best Soccer GPS Trackers 2025 — Tested, Compared & ...",
+          "url": "https://soccerwares.com/blogs/our-blogs/soccer-gps-tracking?srsltid=AYCX9vLnVj8dvLehK_Uo_nOewT9MSVIW2d9k96h0ufEOuqF6_gzd_cti"
+        },
+        {
+          "rank": 8,
+          "domain": "www.youtube.com",
+          "title": "Playermaker",
+          "url": "https://www.youtube.com/channel/UCmgbRkJ3OBXQUEwjEd7JIzg"
+        },
+        {
+          "rank": 9,
+          "domain": "ie.trustpilot.com",
+          "title": "Read Customer Service Reviews of playermaker.com",
+          "url": "https://ie.trustpilot.com/review/playermaker.com"
+        },
+        {
+          "rank": 10,
+          "domain": "ie.trustpilot.com",
+          "title": "Read Customer Service Reviews of playermaker.com",
+          "url": "https://ie.trustpilot.com/review/playermaker.com"
+        }
+      ]
+    },
+    {
+      "keyword": "playermaker 2.0",
+      "volume": 320,
+      "kd": null,
+      "cpc": 0.72,
+      "months": [
+        260,
+        590,
+        590,
+        320,
+        260,
+        260,
+        260,
+        260,
+        210,
+        260,
+        260,
+        320
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "video",
+        "discussions_and_forums",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.playermaker.com",
+          "title": "Teams – Playermaker",
+          "url": "https://www.playermaker.com/pages/teams?srsltid=AYCX9vLvSCBFJYRu-qWTuNNY9TchpSqk-0MhJmMI4BV8srMQE-SkFf07"
+        },
+        {
+          "rank": 2,
+          "domain": "www.youtube.com",
+          "title": "Playermaker Wearable Tracker for Soccer | How Does It Work?",
+          "url": "https://www.youtube.com/watch?v=XdfOrB0Verw"
+        },
+        {
+          "rank": 3,
+          "domain": "www.trustpilot.com",
+          "title": "Read Customer Service Reviews of playermaker.com",
+          "url": "https://www.trustpilot.com/review/playermaker.com"
+        },
+        {
+          "rank": 4,
+          "domain": "www.amazon.sa",
+          "title": "Playermaker 2.0 Smart Soccer Tracker for Cleats, 25 ...",
+          "url": "https://www.amazon.sa/-/en/Playermaker-2-0-Technical-Technology-Next-Level/dp/B0CZSCWN47"
+        },
+        {
+          "rank": 5,
+          "domain": "www.youtube.com",
+          "title": "How to Start and End an Activity",
+          "url": "https://www.youtube.com/watch?v=--WKjxo6nNQ"
+        },
+        {
+          "rank": 6,
+          "domain": "www.premierinjuries.com",
+          "title": "Playermaker Review: An Effective Wearable Football ...",
+          "url": "https://www.premierinjuries.com/article/playermaker-review-wearable-football-tracker"
+        },
+        {
+          "rank": 7,
+          "domain": "www.ebay.com",
+          "title": "Playermaker 2.0 Smart Soccer Tracker for Cleats, 25 ...",
+          "url": "https://www.ebay.com/itm/126607815722"
+        },
+        {
+          "rank": 8,
+          "domain": "pricespy.co.uk",
+          "title": "Playermaker 2.0 – Find the best price",
+          "url": "https://pricespy.co.uk/s/playermaker-20/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.youtube.com",
+          "title": "PLAYERMAKER Review + 3 Ways To Use It",
+          "url": "https://www.youtube.com/watch?v=2_9BCU4YHwg"
+        },
+        {
+          "rank": 10,
+          "domain": "www.amazon.de",
+          "title": "Playermaker Smart Football Tracker, 25+ Technical and ...",
+          "url": "https://www.amazon.de/-/en/Playermaker-Football-Technical-Physical-Technology/dp/B0DJ3G9F2X"
+        }
+      ]
+    },
+    {
+      "keyword": "playermaker discount code",
+      "volume": 40,
+      "kd": 0,
+      "cpc": 7.28,
+      "months": [
+        50,
+        110,
+        90,
+        40,
+        10,
+        30,
+        30,
+        20,
+        30,
+        10,
+        20,
+        30
+      ],
+      "features": [
+        "ai_overview",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "playermaker.promopro.co.uk",
+          "title": "Playermaker Discount Code: 15% Off (Verified) in October 2026",
+          "url": "https://playermaker.promopro.co.uk/"
+        },
+        {
+          "rank": 2,
+          "domain": "www.dontpayfull.com",
+          "title": "Playermaker Promo Codes - Get 30% Off in October 2026",
+          "url": "https://www.dontpayfull.com/at/uk.playermaker.com"
+        },
+        {
+          "rank": 3,
+          "domain": "playermaker.valuecom.com",
+          "title": "Playermaker Discount Code 15% Off October 2026",
+          "url": "https://playermaker.valuecom.com/"
+        },
+        {
+          "rank": 4,
+          "domain": "getmecodes.co.uk",
+          "title": "15% Off Playermaker Discount Codes & Deals",
+          "url": "https://getmecodes.co.uk/dealstore/playermaker-discount-code/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.facebook.com",
+          "title": "Playermaker Discount Code",
+          "url": "https://www.facebook.com/fb-answers/playermaker-discount-code/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.wethrift.com",
+          "title": "Playermaker Discount Codes - October 2026",
+          "url": "https://www.wethrift.com/codes/playermaker.com"
+        },
+        {
+          "rank": 7,
+          "domain": "simplycodes.com",
+          "title": "Playermaker Promo Codes - 30% Off (+1 Codes) Oct 2026",
+          "url": "https://simplycodes.com/store/playermaker.com"
+        },
+        {
+          "rank": 8,
+          "domain": "www.instagram.com",
+          "title": "Playermaker",
+          "url": "https://www.instagram.com/playermaker/?hl=en"
+        },
+        {
+          "rank": 9,
+          "domain": "playermaker.tenereteam.com",
+          "title": "65% OFF Playermaker Coupon Codes - October 2026 Promo ...",
+          "url": "https://playermaker.tenereteam.com/coupons"
+        },
+        {
+          "rank": 10,
+          "domain": "playermaker.heydiscount.co.uk",
+          "title": "Playermaker Discount Codes & Offers Oct 2026",
+          "url": "https://playermaker.heydiscount.co.uk/"
+        }
+      ]
+    },
+    {
+      "keyword": "cityplay football tracker",
+      "volume": 20,
+      "kd": 0,
+      "cpc": null,
+      "months": [
+        50,
+        70,
+        30,
+        30,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "features": [
+        "ai_overview",
+        "video",
+        "related_searches",
+        "images",
+        "popular_products"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.fourfourtwo.com",
+          "title": "Playermaker CityPlay review: Train and improve like a ...",
+          "url": "https://www.fourfourtwo.com/reviews/cityplay-review-train-and-improve-like-a-professional-footballer-with-game-changing-technology"
+        },
+        {
+          "rank": 2,
+          "domain": "www.facebook.com",
+          "title": "Our EDS players trial CITYPLAY in training!  Track your ...",
+          "url": "https://www.facebook.com/mancity/videos/cityplay-playermaker/1044920803294502/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.reddit.com",
+          "title": "Playermaker Trackers: worth the buy? : r/bootroom",
+          "url": "https://www.reddit.com/r/bootroom/comments/1eh44hg/playermaker_trackers_worth_the_buy/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.youtube.com",
+          "title": "CITYPLAY Review (2026) – Is This the Best Soccer Tracker for ...",
+          "url": "https://www.youtube.com/watch?v=xIg2XfBrSAA"
+        },
+        {
+          "rank": 5,
+          "domain": "www.playermaker.com",
+          "title": "Playermaker CITYPLAY Smart Soccer Tracker Review",
+          "url": "https://www.playermaker.com/blogs/news/playermaker-cityplay-smart-soccer-tracker-review?srsltid=AYCX9vKfo5FBT-bhGWNtq4Is27qMlD1MqukzX5R8SQZonbrzrl12GPxH"
+        },
+        {
+          "rank": 6,
+          "domain": "www.amazon.com",
+          "title": "Playermaker - CITYPLAY Smart Soccer Tracker for Cleats",
+          "url": "https://www.amazon.com/clp/B0BQRNC4TK"
+        },
+        {
+          "rank": 7,
+          "domain": "www.youtube.com",
+          "title": "PLAYERMAKER Review + 3 Ways To Use It",
+          "url": "https://www.youtube.com/watch?v=2_9BCU4YHwg"
+        },
+        {
+          "rank": 8,
+          "domain": "www.amazon.fr",
+          "title": "application CITYPLAY Inclus pour Un accès Complet",
+          "url": "https://www.amazon.fr/Intelligent-Techniques-physiques-lapplication-CITYPLAY/dp/B0BQRNC4TK"
+        },
+        {
+          "rank": 9,
+          "domain": "behindsport.com",
+          "title": "MANCHESTER CITY AND PLAYERMAKER LAUNCH ' ...",
+          "url": "https://behindsport.com/manchester-city-and-playermaker-launch-cityplay-wearable-performance-tracker/"
+        },
+        {
+          "rank": 10,
+          "domain": "behindsport.com",
+          "title": "MANCHESTER CITY AND PLAYERMAKER LAUNCH ' ...",
+          "url": "https://behindsport.com/manchester-city-and-playermaker-launch-cityplay-wearable-performance-tracker/"
+        }
+      ]
+    },
+    {
+      "keyword": "football tracker",
+      "volume": 720,
+      "kd": 46,
+      "cpc": 1.46,
+      "months": [
+        880,
+        1300,
+        1000,
+        590,
+        480,
+        480,
+        480,
+        480,
+        480,
+        590,
+        480,
+        720
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "popular_products",
+        "related_searches",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.amazon.co.uk",
+          "title": "Football Performance Tracker",
+          "url": "https://www.amazon.co.uk/football-performance-tracker/s?k=football+performance+tracker"
+        },
+        {
+          "rank": 2,
+          "domain": "uk.shop.statsports.com",
+          "title": "STATSports Shop | GPS Trackers, STATSports Academy, Elite ...",
+          "url": "https://uk.shop.statsports.com/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.playermaker.com",
+          "title": "Playermaker | AI Soccer Performance Tracker",
+          "url": "https://www.playermaker.com/?srsltid=AYCX9vJE37Z2HYIq3CNxJUWPNqJdSHENRhV5n1XjqqtAmHaGEfrI1IVr"
+        },
+        {
+          "rank": 4,
+          "domain": "soccerbee.me",
+          "title": "SOCCERBEE: Soccer GPS Tracker - Track Your Game",
+          "url": "https://soccerbee.me/"
+        },
+        {
+          "rank": 5,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        },
+        {
+          "rank": 6,
+          "domain": "www.prodirectsport.com",
+          "title": "Shop Football Electronics | Pro:Direct Soccer",
+          "url": "https://www.prodirectsport.com/collections/football-electronics"
+        },
+        {
+          "rank": 7,
+          "domain": "www.pitcherogps.com",
+          "title": "PitcheroGPS - GPS Vest & Tracker For Players Of All Levels",
+          "url": "https://www.pitcherogps.com/?srsltid=AYCX9vJ1fZS50p0kNBn39S8VO7xNGEzMhFya-jprJSr_v23q4-skotX9"
+        },
+        {
+          "rank": 8,
+          "domain": "www.trackingfootball.com",
+          "title": "Tracking Football | Football Player Athleticism | Athletic Analytics",
+          "url": "https://www.trackingfootball.com/"
+        },
+        {
+          "rank": 9,
+          "domain": "playerdata.com",
+          "title": "PlayerData: Elite Level GPS Sports Performance Tracking",
+          "url": "https://playerdata.com/en-gb"
+        },
+        {
+          "rank": 10,
+          "domain": "www.decathlon.co.uk",
+          "title": "Footbar Meteor - Connected Football Tracker",
+          "url": "https://www.decathlon.co.uk/p/footbar-meteor-connected-football-tracker/X8662714/m8662714"
+        }
+      ]
+    },
+    {
+      "keyword": "football tracker kids",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "popular_products",
+        "related_searches"
+      ],
+      "ours": [
+        {
+          "rank": 9,
+          "domain": "www.footballparent.co.uk",
+          "title": "Best Football GPS Trackers for Kids: Vests, Boot Sensors and ...",
+          "url": "https://www.footballparent.co.uk/football-gear/best-football-gps-trackers-for-kids"
+        }
+      ],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.amazon.co.uk",
+          "title": "Football Tracker Kids",
+          "url": "https://www.amazon.co.uk/football-tracker-kids/s?k=football+tracker+kids"
+        },
+        {
+          "rank": 2,
+          "domain": "www.facebook.com",
+          "title": "Honest reviews of Playermaker 2.0 Smart Football Tracker",
+          "url": "https://www.facebook.com/groups/grassrootsfootballhub/posts/1430223708081620/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.playermaker.com",
+          "title": "Playermaker | AI Soccer Performance Tracker",
+          "url": "https://www.playermaker.com/?srsltid=AYCX9vJQMO6ilAW123GZbxcCCsXyP1V-1_VzbkcvyltoZMvFFF_Km78A"
+        },
+        {
+          "rank": 4,
+          "domain": "www.decathlon.co.uk",
+          "title": "Footbar Meteor - Connected Football Tracker",
+          "url": "https://www.decathlon.co.uk/p/footbar-meteor-connected-football-tracker/X8662714/m8662714"
+        },
+        {
+          "rank": 5,
+          "domain": "www.prodirectsport.com",
+          "title": "Shop Football Electronics | Pro:Direct Soccer",
+          "url": "https://www.prodirectsport.com/collections/football-electronics"
+        },
+        {
+          "rank": 6,
+          "domain": "footballflick.com",
+          "title": "Best Football Tracker for Kids – An Intro to Smart Shin Guards ...",
+          "url": "https://footballflick.com/fr-gr/blogs/news/best-football-tracker-for-kids-an-intro-to-smart-shin-guards-by-football-flick?srsltid=AYCX9vIvyoICtP3wnlvNJD8Rym5TGt0ZTwf_fjy_ugrfPp4DgCOkRgag"
+        },
+        {
+          "rank": 7,
+          "domain": "uk.shop.statsports.com",
+          "title": "STATSports Shop | GPS Trackers, STATSports Academy, Elite ...",
+          "url": "https://uk.shop.statsports.com/"
+        },
+        {
+          "rank": 8,
+          "domain": "soccerbee.me",
+          "title": "SOCCERBEE: Soccer GPS Tracker - Track Your Game",
+          "url": "https://soccerbee.me/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.footballparent.co.uk",
+          "title": "Best Football GPS Trackers for Kids: Vests, Boot Sensors and ...",
+          "url": "https://www.footballparent.co.uk/football-gear/best-football-gps-trackers-for-kids"
+        },
+        {
+          "rank": 10,
+          "domain": "www.amazon.co.uk",
+          "title": "Football Gps Tracker Kids",
+          "url": "https://www.amazon.co.uk/football-gps-tracker-kids/s?k=football+gps+tracker+kids"
+        }
+      ]
+    },
+    {
+      "keyword": "kids football tracker",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "popular_products",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        },
+        {
+          "rank": 2,
+          "domain": "playerdata.com",
+          "title": "PlayerData: Elite Level GPS Sports Performance Tracking",
+          "url": "https://playerdata.com/en-gb"
+        },
+        {
+          "rank": 3,
+          "domain": "www.youtube.com",
+          "title": "CITYPLAY Review (2026) – Is This the Best Soccer Tracker for ...",
+          "url": "https://www.youtube.com/watch?v=xIg2XfBrSAA"
+        },
+        {
+          "rank": 4,
+          "domain": "www.very.co.uk",
+          "title": "Playermaker 2.0 Football Performance Tracker",
+          "url": "https://www.very.co.uk/playermaker-20-football-performance-tracker/1601298489.prd"
+        },
+        {
+          "rank": 5,
+          "domain": "uk.shop.statsports.com",
+          "title": "STATSports Academy Youth Pack",
+          "url": "https://uk.shop.statsports.com/products/statsports-academy-youth-pack"
+        },
+        {
+          "rank": 6,
+          "domain": "soccerwares.com",
+          "title": "Best Soccer GPS Trackers 2025 — Tested, Compared & ...",
+          "url": "https://soccerwares.com/blogs/our-blogs/soccer-gps-tracking?srsltid=AYCX9vKhWe_t9OUzxzcFmzWkmwn4O0kwFk3aCIMvA2AZTI0pLbNDBOyC"
+        },
+        {
+          "rank": 7,
+          "domain": "www.amazon.ie",
+          "title": "Football - Activity Trackers / Sports Electronics & Gadgets",
+          "url": "https://www.amazon.ie/Activity-Trackers-Football-Sports-Electronics-Gadgets/s?rh=n%3A94818614031%2Cp_n_g-1003468809111%3A96236342031"
+        },
+        {
+          "rank": 8,
+          "domain": "www.facebook.com",
+          "title": "What performance trackers are recommended for junior ...",
+          "url": "https://www.facebook.com/groups/1888488331429720/posts/3831217483823452/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.pricerunner.com",
+          "title": "Youth Apex Athlete Series GPS Football Performance ...",
+          "url": "https://www.pricerunner.com/pl/288-3203427968/Sat-Navs/Youth-Apex-Athlete-Series-GPS-Football-Performance-Tracker-Compare-Prices"
+        },
+        {
+          "rank": 10,
+          "domain": "www.amazon.co.uk",
+          "title": "STATSports Academy Football GPS Tracker Vest",
+          "url": "https://www.amazon.co.uk/STATSports-Activity-Football-Performance-Technology-Black/dp/B07NZ1V573"
+        }
+      ]
+    },
+    {
+      "keyword": "football boot tracker",
+      "volume": 170,
+      "kd": 10,
+      "cpc": 0.4,
+      "months": [
+        260,
+        480,
+        260,
+        170,
+        140,
+        170,
+        110,
+        90,
+        70,
+        90,
+        90,
+        170
+      ],
+      "features": [
+        "popular_products",
+        "people_also_ask",
+        "images",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "footballinsides.com",
+          "title": "Football Performance Tracker - Top 5 for Players in 2025",
+          "url": "https://footballinsides.com/football-blog/football-performance-tracker/"
+        },
+        {
+          "rank": 2,
+          "domain": "www.youtube.com",
+          "title": "Playermaker VS STATSports REVIEW | WHICH ONE SHOULD ...",
+          "url": "https://www.youtube.com/watch?v=pq-wqpnYooo"
+        },
+        {
+          "rank": 3,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        },
+        {
+          "rank": 4,
+          "domain": "www.pitcherogps.com",
+          "title": "Soccer GPS Tracker & Vest for Players and Teams",
+          "url": "https://www.pitcherogps.com/pages/football-gps-tracker?srsltid=AYCX9vJoueVZYGcAKcZJIlFGWzNar2ZH7XMWvLZnCzmVGV45bd6J5HYy"
+        },
+        {
+          "rank": 5,
+          "domain": "www.amazon.co.uk",
+          "title": "STATSports Academy Football GPS Tracker Vest",
+          "url": "https://www.amazon.co.uk/STATSports-Activity-Football-Performance-Technology-Black/dp/B07NY35SD7"
+        },
+        {
+          "rank": 6,
+          "domain": "www.amazon.in",
+          "title": "CITYPLAY Smart Soccer Tracker for Cleats",
+          "url": "https://www.amazon.in/CITYPLAY-Playermaker-Technical-Physical-Training/dp/B0BQRNC4TK"
+        },
+        {
+          "rank": 7,
+          "domain": "www.reddit.com",
+          "title": "Anybody use the football gps trackers? : r/bootroom",
+          "url": "https://www.reddit.com/r/bootroom/comments/bbj5ji/anybody_use_the_football_gps_trackers/"
+        },
+        {
+          "rank": 8,
+          "domain": "www.playermaker.com",
+          "title": "Soccer Tracker",
+          "url": "https://www.playermaker.com/pages/soccer-tracker?srsltid=AYCX9vJiuWaIUH5jFkntDYMvimuPRdI7mSYEXcV7_3bQ3-OrBV4g0821"
+        },
+        {
+          "rank": 9,
+          "domain": "www.pitcherogps.com",
+          "title": "PitcheroGPS - GPS Vest & Tracker For Players Of All Levels",
+          "url": "https://www.pitcherogps.com/?srsltid=AYCX9vIkynRx8_5RAmmc2061Vem93RZ_wu7ePCmk2KHtcKWQsfV3d2PE"
+        },
+        {
+          "rank": 10,
+          "domain": "www.tiktok.com",
+          "title": "Football Tracker at The Shoe",
+          "url": "https://www.tiktok.com/discover/football-tracker-at-the-shoe"
+        }
+      ]
+    },
+    {
+      "keyword": "football boot tracker kids",
+      "volume": null,
+      "kd": null,
+      "cpc": null,
+      "months": [],
+      "features": [
+        "ai_overview",
+        "popular_products",
+        "related_searches"
+      ],
+      "ours": [
+        {
+          "rank": 6,
+          "domain": "www.footballparent.co.uk",
+          "title": "Best Football GPS Trackers for Kids: Vests, Boot Sensors and ...",
+          "url": "https://www.footballparent.co.uk/football-gear/best-football-gps-trackers-for-kids"
+        }
+      ],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.playermaker.com",
+          "title": "Playermaker | AI Soccer Performance Tracker",
+          "url": "https://www.playermaker.com/?srsltid=AYCX9vKKDbQTH2pRf1RsHp9LbBLcDiZ4Nz0QiwZ_sKL1hkLhQSxj7ZES"
+        },
+        {
+          "rank": 2,
+          "domain": "www.facebook.com",
+          "title": "Honest reviews of Playermaker 2.0 Smart Football Tracker",
+          "url": "https://www.facebook.com/groups/grassrootsfootballhub/posts/1430223708081620/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.amazon.co.uk",
+          "title": "Amazon.co.uk: Football Boot Tracker",
+          "url": "https://www.amazon.co.uk/football-boot-tracker/s?k=football+boot+tracker"
+        },
+        {
+          "rank": 4,
+          "domain": "www.prodirectsport.com",
+          "title": "Shop Football Electronics | Pro:Direct Soccer",
+          "url": "https://www.prodirectsport.com/collections/football-electronics"
+        },
+        {
+          "rank": 5,
+          "domain": "footballflick.com",
+          "title": "Best Football Tracker for Kids – An Intro to Smart Shin Guards ...",
+          "url": "https://footballflick.com/blogs/news/best-football-tracker-for-kids-an-intro-to-smart-shin-guards-by-football-flick?srsltid=AYCX9vIcKOknN8W7MghvNglibxQjXSAa05vvJGW8BOYYq50hLj1Z3ICv"
+        },
+        {
+          "rank": 6,
+          "domain": "www.footballparent.co.uk",
+          "title": "Best Football GPS Trackers for Kids: Vests, Boot Sensors and ...",
+          "url": "https://www.footballparent.co.uk/football-gear/best-football-gps-trackers-for-kids"
+        },
+        {
+          "rank": 7,
+          "domain": "www.youtube.com",
+          "title": "UNO by Playermaker - FULL REVIEW",
+          "url": "https://www.youtube.com/watch?v=NC49_egwV64"
+        },
+        {
+          "rank": 8,
+          "domain": "www.playermaker.com",
+          "title": "Soccer Performance Tracker | Playermaker 2.0",
+          "url": "https://www.playermaker.com/products/playermaker?srsltid=AYCX9vJxSaN2zJZ51-n5Pv6xK3vwPWOebACztc7ADdp6FHJ4PtPVRARP"
+        },
+        {
+          "rank": 9,
+          "domain": "www.decathlon.co.uk",
+          "title": "Footbar Meteor - Connected Football Tracker",
+          "url": "https://www.decathlon.co.uk/p/footbar-meteor-connected-football-tracker/X8662714/m8662714"
+        },
+        {
+          "rank": 10,
+          "domain": "soccerbee.me",
+          "title": "SOCCERBEE: Soccer GPS Tracker - Track Your Game",
+          "url": "https://soccerbee.me/"
+        }
+      ]
+    },
+    {
+      "keyword": "football gps tracker",
+      "volume": 480,
+      "kd": 23,
+      "cpc": 1.7,
+      "months": [
+        590,
+        880,
+        590,
+        590,
+        590,
+        590,
+        390,
+        320,
+        320,
+        390,
+        390,
+        480
+      ],
+      "features": [
+        "ai_overview",
+        "popular_products",
+        "people_also_search",
+        "people_also_ask",
+        "related_searches",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "shop.statsports.com",
+          "title": "STATSports Shop | GPS Trackers, STATSports Academy, Elite ...",
+          "url": "https://shop.statsports.com/"
+        },
+        {
+          "rank": 2,
+          "domain": "www.pitcherogps.com",
+          "title": "Soccer GPS Tracker & Vest for Players and Teams",
+          "url": "https://www.pitcherogps.com/pages/football-gps-tracker?srsltid=AYCX9vJWkbwjIyg6h7i-WItuowjklku94Ad_LTwp84jmiNV_l418KAQJ"
+        },
+        {
+          "rank": 3,
+          "domain": "soccerbee.me",
+          "title": "SOCCERBEE: Soccer GPS Tracker - Track Your Game",
+          "url": "https://soccerbee.me/"
+        },
+        {
+          "rank": 4,
+          "domain": "playerdata.com",
+          "title": "PlayerData: Elite Level GPS Sports Performance Tracking",
+          "url": "https://playerdata.com/en-gb"
+        },
+        {
+          "rank": 5,
+          "domain": "statsports.com",
+          "title": "Should I get a football GPS tracker? Your questions ...",
+          "url": "https://statsports.com/the-locker/should-i-get-a-football-gps-tracker-your-questions-answered"
+        },
+        {
+          "rank": 6,
+          "domain": "www.amazon.co.uk",
+          "title": "STATSports Academy Football GPS Tracker Vest",
+          "url": "https://www.amazon.co.uk/STATSports-Activity-Football-Performance-Technology-Black/dp/B07NYYP1RC"
+        },
+        {
+          "rank": 7,
+          "domain": "www.prodirectsport.com",
+          "title": "Shop Football Electronics | Pro:Direct Soccer",
+          "url": "https://www.prodirectsport.com/collections/football-electronics"
+        },
+        {
+          "rank": 8,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.youtube.com",
+          "title": "GPS Tracker for Football Players - Transform Your Game.",
+          "url": "https://www.youtube.com/watch?v=jc4TxSQvojc"
+        },
+        {
+          "rank": 10,
+          "domain": "www.ebay.co.uk",
+          "title": "Football Gps",
+          "url": "https://www.ebay.co.uk/shop/football-gps?_nkw=football+gps"
+        }
+      ]
+    },
+    {
+      "keyword": "best football gps tracker",
+      "volume": 20,
+      "kd": 43,
+      "cpc": null,
+      "months": [
+        10,
+        20,
+        10,
+        10,
+        20,
+        30,
+        10,
+        10,
+        10,
+        20,
+        30,
+        10
+      ],
+      "features": [
+        "ai_overview",
+        "people_also_ask",
+        "video",
+        "popular_products",
+        "related_searches"
+      ],
+      "ours": [
+        {
+          "rank": 10,
+          "domain": "www.footballparent.co.uk",
+          "title": "Best Football GPS Trackers for Kids: Vests, Boot Sensors and ...",
+          "url": "https://www.footballparent.co.uk/football-gear/best-football-gps-trackers-for-kids"
+        }
+      ],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "shop.statsports.com",
+          "title": "STATSports Shop | GPS Trackers, STATSports Academy, Elite ...",
+          "url": "https://shop.statsports.com/"
+        },
+        {
+          "rank": 2,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.amazon.co.uk",
+          "title": "STATSports Academy Football GPS Tracker Vest",
+          "url": "https://www.amazon.co.uk/STATSports-Activity-Football-Performance-Technology-Black/dp/B07NYYP1RC"
+        },
+        {
+          "rank": 4,
+          "domain": "soccerbee.me",
+          "title": "SOCCERBEE: Soccer GPS Tracker - Track Your Game",
+          "url": "https://soccerbee.me/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.pitcherogps.com",
+          "title": "Soccer GPS Tracker & Vest for Players and Teams",
+          "url": "https://www.pitcherogps.com/pages/football-gps-tracker?srsltid=AYCX9vL8sq_LHmei1DJ2XDGtZRgO_ma_n5_Y6_Tlq4Dp0q8NMD0N1Dgp"
+        },
+        {
+          "rank": 6,
+          "domain": "www.prodirectsport.com",
+          "title": "Shop Football Electronics | Pro:Direct Soccer",
+          "url": "https://www.prodirectsport.com/collections/football-electronics"
+        },
+        {
+          "rank": 7,
+          "domain": "soccerwares.com",
+          "title": "Best Soccer GPS Trackers 2025 — Tested, Compared & ...",
+          "url": "https://soccerwares.com/blogs/our-blogs/soccer-gps-tracking?srsltid=AYCX9vKrL8KCUmUCzi-wFMAFfhF46znVcyMJRbrn95AQO2Mw2q-et5XL"
+        },
+        {
+          "rank": 8,
+          "domain": "www.ebay.co.uk",
+          "title": "Football Gps",
+          "url": "https://www.ebay.co.uk/shop/football-gps?_nkw=football+gps"
+        },
+        {
+          "rank": 9,
+          "domain": "www.ebay.co.uk",
+          "title": "Football Gps",
+          "url": "https://www.ebay.co.uk/shop/football-gps?_nkw=football+gps"
+        },
+        {
+          "rank": 10,
+          "domain": "www.footballparent.co.uk",
+          "title": "Best Football GPS Trackers for Kids: Vests, Boot Sensors and ...",
+          "url": "https://www.footballparent.co.uk/football-gear/best-football-gps-trackers-for-kids"
+        }
+      ]
+    },
+    {
+      "keyword": "football gps vest",
+      "volume": 320,
+      "kd": 15,
+      "cpc": 1.64,
+      "months": [
+        260,
+        390,
+        320,
+        320,
+        260,
+        390,
+        260,
+        260,
+        320,
+        260,
+        210,
+        260
+      ],
+      "features": [
+        "ai_overview",
+        "popular_products",
+        "related_searches"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "www.pitcherogps.com",
+          "title": "Soccer GPS Tracker & Vest for Players and Teams",
+          "url": "https://www.pitcherogps.com/pages/football-gps-tracker?srsltid=AYCX9vJuwWB8hfWzTaTCK8a-aABF2zUR9P9UAW1Dr8wD_v_nwfEm4J4u"
+        },
+        {
+          "rank": 2,
+          "domain": "www.reddit.com",
+          "title": "Best GPS vest tracker for amateur football? (Based in ...",
+          "url": "https://www.reddit.com/r/bootroom/comments/1juccxa/best_gps_vest_tracker_for_amateur_football_based/"
+        },
+        {
+          "rank": 3,
+          "domain": "www.amazon.in",
+          "title": "STATSports Academy Football GPS Tracker Vest",
+          "url": "https://www.amazon.in/STATSports-APEX-Football-Tracker-Vest/dp/B07NY35SD7"
+        },
+        {
+          "rank": 4,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        },
+        {
+          "rank": 5,
+          "domain": "www.amazon.co.uk",
+          "title": "Outdoor Sports GPS Tracker Vest (Vest Only), Football ...",
+          "url": "https://www.amazon.co.uk/Outdoor-Tracker-Football-Lightweight-Breathable/dp/B0H6BYR25Q"
+        },
+        {
+          "rank": 6,
+          "domain": "statsports.com",
+          "title": "Who can wear the STATSports GPS Tracker?",
+          "url": "https://statsports.com/the-locker/who-can-wear-the-statsports-gps-tracker"
+        },
+        {
+          "rank": 7,
+          "domain": "www.unisportstore.com",
+          "title": "Buy your PLAYR SmartVest and SmartPod at Unisport",
+          "url": "https://www.unisportstore.com/v/playr-gps-football-tracking/"
+        },
+        {
+          "rank": 8,
+          "domain": "www.amazon.co.uk",
+          "title": "Amazon.co.uk: Statsports Vest",
+          "url": "https://www.amazon.co.uk/statsports-vest/s?k=statsports+vest"
+        },
+        {
+          "rank": 9,
+          "domain": "eu.shop.statsports.com",
+          "title": "STATSports Shop | GPS Trackers, STATSports Academy, Elite ...",
+          "url": "https://eu.shop.statsports.com/"
+        },
+        {
+          "rank": 10,
+          "domain": "www.independent.co.uk",
+          "title": "How GPS vests are revolutionising way players keep fit ...",
+          "url": "https://www.independent.co.uk/sport/football/premier-league/premier-league-training-gps-vests-statsports-coronavirus-lockdown-a9485676.html"
+        }
+      ]
+    },
+    {
+      "keyword": "football tracker vest",
+      "volume": 320,
+      "kd": 13,
+      "cpc": 1.54,
+      "months": [
+        320,
+        480,
+        390,
+        260,
+        260,
+        260,
+        260,
+        170,
+        210,
+        320,
+        320,
+        320
+      ],
+      "features": [
+        "ai_overview",
+        "popular_products",
+        "people_also_ask",
+        "related_searches",
+        "images"
+      ],
+      "ours": [],
+      "top10": [
+        {
+          "rank": 1,
+          "domain": "uk.shop.statsports.com",
+          "title": "STATSports Shop | GPS Trackers, STATSports Academy, Elite ...",
+          "url": "https://uk.shop.statsports.com/"
+        },
+        {
+          "rank": 2,
+          "domain": "www.pitcherogps.com",
+          "title": "PitcheroGPS - GPS Vest & Tracker For Players Of All Levels",
+          "url": "https://www.pitcherogps.com/?srsltid=AYCX9vIKuCkaWVu1gi0LXrtC-5Mkyb_1ta9nlhkGrBcQVNBsD7iIrrvF"
+        },
+        {
+          "rank": 3,
+          "domain": "www.amazon.co.uk",
+          "title": "Gps Vest Football",
+          "url": "https://www.amazon.co.uk/gps-vest-football/s?k=gps+vest+football"
+        },
+        {
+          "rank": 4,
+          "domain": "shop.statsports.com",
+          "title": "STATSports Vest",
+          "url": "https://shop.statsports.com/products/statsports-vest-2-0"
+        },
+        {
+          "rank": 5,
+          "domain": "playerdata.com",
+          "title": "PlayerData: Elite Level GPS Sports Performance Tracking",
+          "url": "https://playerdata.com/en-gb"
+        },
+        {
+          "rank": 6,
+          "domain": "www.decathlon.co.uk",
+          "title": "Academy Football GPS Tracker Vest - Tracks 24 Key ...",
+          "url": "https://www.decathlon.co.uk/p/mp/academy-football-gps-tracker-vest-tracks-24-key-metrics-with-pro-coaching/e6129a8c-adcf-44a3-8770-bd95bb8491a8/c1"
+        },
+        {
+          "rank": 7,
+          "domain": "www.youtube.com",
+          "title": "TRACK YOUR PERFORMANCE LIKE A PRO! STATSPORTS ...",
+          "url": "https://www.youtube.com/watch?v=Xj-BGl_sdSE"
+        },
+        {
+          "rank": 8,
+          "domain": "www.reddit.com",
+          "title": "Best GPS vest tracker for amateur football? (Based in ...",
+          "url": "https://www.reddit.com/r/bootroom/comments/1juccxa/best_gps_vest_tracker_for_amateur_football_based/"
+        },
+        {
+          "rank": 9,
+          "domain": "www.ebay.co.uk",
+          "title": "Gps Vest",
+          "url": "https://www.ebay.co.uk/shop/gps-vest?_nkw=gps+vest"
+        },
+        {
+          "rank": 10,
+          "domain": "zone14.ai",
+          "title": "Best Football GPS Trackers 2026: Vests, Wearables & Video",
+          "url": "https://zone14.ai/en/blog/football-data/best-football-trackers-compared/"
+        }
+      ]
+    }
+  ]
+}

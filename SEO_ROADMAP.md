@@ -65,7 +65,7 @@ From `seo-data/exports/xmas-affiliate-seasonality-2026-10-22.md`. "football gift
 - **County FAs:** Somerset FA's "Even Stevens" and Sheffield FA's equal playing time page rank for the calculator searches. Centre Circle grew through county FAs (190 county FA links).
 - **England Football's "Helpful apps & websites: Matchday" page:** #7 for "grassroots football substitution app". Needs a partnership conversation, not a cold email.
 
-## Sponsorship pitches (Graham)
+## Sponsored and affiliate ideas (Graham)
 
 ### QuickPlay: article angles to offer (researched 20 Oct 2026)
 
@@ -80,3 +80,16 @@ Goals and rebounders are already covered (`best-football-goals-for-kids`, `best-
 - **Also checked and ruled out:** ball stop netting 390 and ball stop netting for gardens 260 (specialist sellers only), football target nets 590 (QuickPlay already #1, shops only), pop up football goals 1,900 (overlaps our goals article; "best pop up football goals" only 50), football agility ladder 40.
 - **Swap-in offer: rebounder links already in place (22-23 Oct 2026).** Amazon rebounder links (FORZA Wave B0CMJGKVFK, budget folding net B0BWQHB3Y9) went into three non-gear articles on purpose, so swapping them to QuickPlay (REPLAY board, SPOT rebounder) is something concrete to offer if they sign: `football-development/is-private-football-coaching-worth-it` (back garden paragraph, both links), `football-development/how-much-training-is-too-much` ("Lower training load" list, both links), `academy-pathway/how-to-join-a-football-academy` ("Focus on development", FORZA Wave). Logged in `seo-changes-2026-09-06.md`. Their inline click-outs on the Amazon clicks tab are the numbers to show QuickPlay. Other spots that fit later: `how-to-become-a-professional-footballer` ("spend plenty of time with a ball") and `why-isnt-my-child-improving-at-football` ("add touches", once the 18 Oct change is off watch). Leave `football-burnout` alone (Graham's own note).
 - **Not article material:** brand searches ("quickplay" 1,600, "quickplay goals" 1,000, "quickplay rebounder" 590) are navigational with QuickPlay #1 on all; "quickplay review" is ~10/mo with Trustpilot top. "quickplay discount code" (210/mo) only works as a deal term: ask for an exclusive code and put it inside the articles, not on a page of its own.
+
+### Playermaker affiliate programme: future article (researched 24 Oct 2026)
+
+Graham's list of 40 Playermaker affiliate and tracker terms. Full research in `seo-data/exports/playermaker-affiliate-research-2026-10-24.md` (raw data in the matching `.json`).
+
+- **Article: Playermaker 2.0 vs CityPlay review, for parents** (`/football-gear/`). Standalone, because the trackers article only gives Playermaker one paragraph and we rank for none of the brand terms. Review slots on page one are held by small sites (soccerwares #7-9, premierinjuries #6, FourFourTwo #1 for CityPlay), Reddit and YouTube.
+  - Keywords (UK/mo): playermaker 1,000 (KD 2, mostly navigational, a review can realistically reach #8-10), playermaker 2.0 320, playermaker football tracker 210 (KD 1), football boot tracker 170 (KD 10, no proper comparison on page one), playermaker discount code 40 (voucher sites only), cityplay football tracker 20 (KD 0).
+  - **Before writing:** ask the affiliate programme for a review unit. Gear pages earn trust from first-hand testing, and the reviews on page one say "tested on a real youth player". Ask for an exclusive discount code too, and put it inside the review rather than on a page of its own.
+  - **Timing:** "playermaker" peaks in December (about 2,400 against 600-900 in quiet months). Live by mid-November to catch it.
+  - Link it from the kids trackers article's "Playermaker 2.0 and SoccerBee" paragraph once live (one lever, after that page's watch).
+- **Later: GPS vest terms (re-check late Nov).** "football gps vest" 320 (KD 15) and "football tracker vest" 320 (KD 13): page one is shops plus zone14 and Reddit. `/football-gear/best-football-gps-trackers-for-kids` has "Vests" in its title but is not in the top 30 for either. If it hasn't picked them up by late November, consider a standalone "best football GPS vests", checking for cannibalisation with the kids page first.
+- **Leave alone:** the kids tracker terms (football tracker kids #9, football boot tracker kids #6, best football gps tracker #10). The existing page covers them and is three weeks old and still climbing. "football tracker" (720, KD 46) and "football gps tracker" (480, KD 23) are brand and shop dominated: not a target now.
+- **Ruled out:** the generic and "soccer" terms. "sports technology" (1,300) is university courses, "sports performance analysis" (260) and "football performance analysis" (170) are degrees and B2B software, "football analytics" (140) is read as "football" (BBC, the FA). "football training devices" (6,600) is Google Ads lumping it with "football training equipment": an equipment-shop SERP, not a tracker search. The rest have 0-20 UK searches a month.
