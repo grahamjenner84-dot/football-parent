@@ -11,14 +11,16 @@ function publishedPost(overrides: Partial<Parameters<typeof makePost>[0]> = {}) 
   return makePost({ status: "published", ig_media_id: "ig-media-1", published_at: hoursAgo(1000), ...overrides });
 }
 
-test("getPullWindows: defaults to initial@60h + followup_7d@168h when unset", () => {
+test("getPullWindows: defaults to early@6h (until 30h) + initial@60h + followup_7d@168h + followup_28d@672h when unset", () => {
   const original = process.env.INSIGHTS_PULL_WINDOWS;
   delete process.env.INSIGHTS_PULL_WINDOWS;
   try {
     const windows = getPullWindows();
     assert.deepEqual(windows, [
+      { label: "early", delayHours: 6, maxAgeHours: 30 },
       { label: "initial", delayHours: 60 },
       { label: "followup_7d", delayHours: 168 },
+      { label: "followup_28d", delayHours: 672 },
     ]);
   } finally {
     if (original === undefined) delete process.env.INSIGHTS_PULL_WINDOWS;
@@ -31,8 +33,8 @@ test("getPullWindows: parses a custom schedule from env", () => {
   process.env.INSIGHTS_PULL_WINDOWS = "12:early, 240:late";
   try {
     assert.deepEqual(getPullWindows(), [
-      { label: "early", delayHours: 12 },
-      { label: "late", delayHours: 240 },
+      { label: "early", delayHours: 12, maxAgeHours: undefined },
+      { label: "late", delayHours: 240, maxAgeHours: undefined },
     ]);
   } finally {
     if (original === undefined) delete process.env.INSIGHTS_PULL_WINDOWS;
@@ -116,8 +118,8 @@ test("getDueInsightsPulls: a post published 170h ago with no prior pulls is due 
   );
 });
 
-test("getDueInsightsPulls: a post published only 10h ago is not due for anything yet", async () => {
-  const post = publishedPost({ id: "p1", published_at: hoursAgo(10) });
+test("getDueInsightsPulls: a post published only 3h ago is not due for anything yet", async () => {
+  const post = publishedPost({ id: "p1", published_at: hoursAgo(3) });
   const { client } = createFakeInsightsSupabase({ posts: [post] });
   const due = await getDueInsightsPulls(client);
   assert.equal(due.length, 0);
@@ -132,6 +134,42 @@ test("getDueInsightsPulls: a window with an existing post_metrics row (success O
   const due = await getDueInsightsPulls(client);
   assert.equal(due.length, 1);
   assert.equal(due[0].window.label, "followup_7d", "initial already has a row, so only followup_7d should still be due");
+});
+
+test("getDueInsightsPulls: a post past 28 days with its earlier pulls done is due for 'followup_28d' only", async () => {
+  const post = publishedPost({ id: "p1", published_at: hoursAgo(700) });
+  const { client } = createFakeInsightsSupabase({
+    posts: [post],
+    postMetrics: [
+      { post_id: "p1", pull_window: "initial", reach: 100 },
+      { post_id: "p1", pull_window: "followup_7d", reach: 120 },
+    ],
+  });
+  const due = await getDueInsightsPulls(client);
+  assert.deepEqual(due.map((d) => d.window.label), ["followup_28d"]);
+});
+
+test("getDueInsightsPulls: a backlog of 28-day pulls doesn't push a newer post's 7-day pull past the limit", async () => {
+  const backlog = [1000, 900, 800].map((h, i) =>
+    publishedPost({ id: `old${i}`, published_at: hoursAgo(h) })
+  );
+  const recent = publishedPost({ id: "recent", published_at: hoursAgo(170) });
+  const { client } = createFakeInsightsSupabase({
+    posts: [...backlog, recent],
+    postMetrics: [
+      ...backlog.flatMap((p) => [
+        { post_id: p.id, pull_window: "initial", reach: 100 },
+        { post_id: p.id, pull_window: "followup_7d", reach: 100 },
+      ]),
+      { post_id: "recent", pull_window: "initial", reach: 100 },
+    ],
+  });
+  const due = await getDueInsightsPulls(client, 2);
+  assert.deepEqual(
+    due.map((d) => `${d.post.id}:${d.window.label}`),
+    ["recent:followup_7d", "old2:followup_28d"],
+    "the 7-day pull goes first, then the newest of the 28-day backlog"
+  );
 });
 
 test("getDueInsightsPulls: respects the limit across multiple posts", async () => {

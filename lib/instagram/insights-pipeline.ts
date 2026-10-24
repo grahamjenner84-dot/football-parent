@@ -26,10 +26,18 @@ export interface PullWindow {
 // "early" (added Oct 2026) is a first look a few hours in, to compare with
 // the later pulls. The cron runs once a night, so in practice it lands
 // between 6 and 30 hours after posting; posts older than that never get one.
+//
+// "followup_28d" (added Oct 2026) catches posts that take off after the
+// first week, e.g. a collab the expert reposts a few days in: the 17 Oct
+// Chris Robinson carousel read 82 views at its 3-day pull and 3.1K in the
+// app a week later. When it was added, every post already older than 28
+// days became due at once, so for those it is a one-off catch-up at
+// whatever age they had reached; pulled_at gives the real age.
 const DEFAULT_PULL_WINDOWS: PullWindow[] = [
   { label: "early", delayHours: 6, maxAgeHours: 30 },
   { label: "initial", delayHours: 60 },
   { label: "followup_7d", delayHours: 168 },
+  { label: "followup_28d", delayHours: 672 },
 ];
 
 export function getPullWindows(): PullWindow[] {
@@ -118,7 +126,15 @@ export async function getDueInsightsPulls(supabase: SupabaseClient, limit = 20):
   }
   // Early windows first: they expire (maxAgeHours), the others don't, so a
   // backlog of late pulls mustn't push a new post's early look past its age.
-  due.sort((a, b) => Number(b.window.maxAgeHours != null) - Number(a.window.maxAgeHours != null));
+  // Then shortest window first, so a backlog of followup_28d pulls can't
+  // hold up the 3- and 7-day pulls, and newest post first within a window,
+  // so a catch-up backlog reaches recent posts before last summer's.
+  due.sort(
+    (a, b) =>
+      Number(b.window.maxAgeHours != null) - Number(a.window.maxAgeHours != null) ||
+      a.window.delayHours - b.window.delayHours ||
+      new Date(b.post.published_at as string).getTime() - new Date(a.post.published_at as string).getTime()
+  );
   return due.slice(0, limit);
 }
 
