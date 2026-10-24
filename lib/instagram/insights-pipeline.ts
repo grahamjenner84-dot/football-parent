@@ -95,7 +95,13 @@ export interface DuePull {
 // the row's mere existence (success or permanent-failure marker, see
 // pull_error) is what stops a window being re-pulled; a transient/outage
 // error leaves no row, so that window stays due and is retried next call.
-export async function getDueInsightsPulls(supabase: SupabaseClient, limit = 20): Promise<DuePull[]> {
+interface ExistingPull {
+  post_id: string;
+  pull_window: string;
+  pulled_at: string;
+}
+
+async function loadPublishedPostsAndPulls(supabase: SupabaseClient): Promise<{ posts: PostRow[]; pulls: ExistingPull[] }> {
   const { data: posts, error } = await supabase
     .from("posts")
     .select("*, post_slides(*)")
@@ -105,13 +111,19 @@ export async function getDueInsightsPulls(supabase: SupabaseClient, limit = 20):
     .order("published_at", { ascending: true });
   if (error) throw new Error("Failed to query published posts: " + error.message);
   const publishedPosts = (posts ?? []) as PostRow[];
-  if (!publishedPosts.length) return [];
+  if (!publishedPosts.length) return { posts: [], pulls: [] };
 
   const postIds = publishedPosts.map((p) => p.id);
-  const { data: existingPulls, error: pullsError } = await supabase.from("post_metrics").select("post_id, pull_window").in("post_id", postIds);
+  const { data: existingPulls, error: pullsError } = await supabase.from("post_metrics").select("post_id, pull_window, pulled_at").in("post_id", postIds);
   if (pullsError) throw new Error("Failed to query existing post_metrics pulls: " + pullsError.message);
+  return { posts: publishedPosts, pulls: (existingPulls ?? []) as ExistingPull[] };
+}
 
-  const pulledWindows = new Set((existingPulls ?? []).map((r) => `${r.post_id}:${r.pull_window}`));
+export async function getDueInsightsPulls(supabase: SupabaseClient, limit = 20): Promise<DuePull[]> {
+  const { posts: publishedPosts, pulls: existingPulls } = await loadPublishedPostsAndPulls(supabase);
+  if (!publishedPosts.length) return [];
+
+  const pulledWindows = new Set(existingPulls.map((r) => `${r.post_id}:${r.pull_window}`));
   const windows = getPullWindows();
   const now = Date.now();
 
@@ -136,6 +148,40 @@ export async function getDueInsightsPulls(supabase: SupabaseClient, limit = 20):
       new Date(b.post.published_at as string).getTime() - new Date(a.post.published_at as string).getTime()
   );
   return due.slice(0, limit);
+}
+
+// The daily refresh (added Oct 2026): a second nightly cron
+// (/api/cron/insights-refresh) re-pulls every post under
+// REFRESH_MAX_AGE_DAYS old into one "current" row per post, overwritten
+// each time, so the latest figures are never more than a day old. It is
+// what catches a late repost the next morning rather than at day 7 or 28.
+// The fixed windows above stay the like-for-like comparison (every post
+// measured at the same age); "current" is only the freshest number. Older
+// posts are left alone because by then they barely move: the 25 Sep Paul
+// Barry carousel went from 4,188 to 4,275 reach between days 14 and 29.
+export const REFRESH_WINDOW: PullWindow = { label: "current", delayHours: 0 };
+export const REFRESH_MAX_AGE_DAYS = 30;
+// Under a day, because Vercel only promises the hour a cron fires in: a run
+// at 04:05 must still find a row written at 04:55 the night before stale.
+const REFRESH_STALE_AFTER_HOURS = 20;
+
+export async function getDueRefreshPulls(supabase: SupabaseClient, limit = 40): Promise<DuePull[]> {
+  const { posts, pulls } = await loadPublishedPostsAndPulls(supabase);
+  const now = Date.now();
+  const oldestPublish = now - REFRESH_MAX_AGE_DAYS * 24 * 60 * 60 * 1000;
+  const staleBefore = now - REFRESH_STALE_AFTER_HOURS * 60 * 60 * 1000;
+
+  const lastRefreshed = new Map(pulls.filter((r) => r.pull_window === REFRESH_WINDOW.label).map((r) => [r.post_id, new Date(r.pulled_at).getTime()]));
+  return (
+    posts
+      .filter((p) => new Date(p.published_at as string).getTime() >= oldestPublish)
+      .filter((p) => (lastRefreshed.get(p.id) ?? 0) < staleBefore)
+      // Stalest first, so if more than `limit` are ever due, the ones left
+      // for the next run are the ones refreshed most recently.
+      .sort((a, b) => (lastRefreshed.get(a.id) ?? 0) - (lastRefreshed.get(b.id) ?? 0))
+      .slice(0, limit)
+      .map((post) => ({ post, window: REFRESH_WINDOW }))
+  );
 }
 
 // The `values` array is the documented shape for lifetime/day metrics

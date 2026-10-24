@@ -1,11 +1,21 @@
 name: Instagram insights run (manual)
 
-# The insights cron runs nightly on Vercel (vercel.json, 03:00 UTC). This
-# runs the same endpoint on demand, e.g. right after a deploy, and prints
-# its JSON summary (posts discovered, account snapshot, pulls) in the job
-# log. Same CRON_SECRET bearer as cron-publish.yml.
+# The insights crons run nightly on Vercel (vercel.json): insights at 03:00
+# UTC (fixed pull windows, new posts, account snapshot) and
+# insights-refresh at 04:00 UTC (the "current" figures for posts under 30
+# days old). This runs either on demand, e.g. right after a deploy, and
+# prints its JSON summary in the job log. Same CRON_SECRET bearer as
+# cron-publish.yml.
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      endpoint:
+        description: Which run
+        type: choice
+        options:
+          - insights
+          - insights-refresh
+        default: insights
 
 jobs:
   trigger-insights:
@@ -14,7 +24,7 @@ jobs:
       - name: Call insights endpoint
         run: |
           status=$(curl -s -o response.txt -w "%{http_code}" --max-time 90 \
-            -X POST "https://www.footballparent.co.uk/api/cron/insights" \
+            -X POST "https://www.footballparent.co.uk/api/cron/${{ inputs.endpoint || 'insights' }}" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}")
           echo "HTTP status: $status"
           cat response.txt

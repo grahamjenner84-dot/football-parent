@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { installMockFetch } from "./helpers/mock-fetch";
 import { makePost, fakeCreds, createFakeInsightsSupabase } from "./helpers/fixtures";
-import { getDueInsightsPulls } from "../lib/instagram/insights-pipeline";
+import { getDueInsightsPulls, getDueRefreshPulls } from "../lib/instagram/insights-pipeline";
 import { pullInsightsForPost, runInsightsBatch } from "../lib/instagram/insights-flow";
 
 function hoursAgo(h: number): string {
@@ -173,6 +173,29 @@ test("runInsightsBatch: multiple due pulls across posts and windows are each rec
     assert.equal(summary.pulled, 3);
     assert.equal(upsertCalls.length, 3);
     assert.equal(new Set(upsertCalls.map((r) => `${r.post_id}:${r.pull_window}`)).size, 3, "each (post, window) pair must be a distinct row");
+  } finally {
+    mock.restore();
+  }
+});
+
+test("runInsightsBatch: with concurrency, the daily refresh writes one 'current' row per post and keeps results in order", async () => {
+  const posts = ["a", "b", "c"].map((id, i) =>
+    makePost({ id, format: "carousel", status: "published", ig_media_id: `ig-${id}`, published_at: hoursAgo(24 * (i + 1)) })
+  );
+  const { client, state } = createFakeInsightsSupabase({ posts });
+  // Each pull is one insights request plus two breakdown probes; the
+  // probes reading a plain insights body just leaves their numbers null.
+  const mock = installMockFetch(Array.from({ length: 9 }, () => carouselInsights));
+
+  try {
+    const due = await getDueRefreshPulls(client);
+    const summary = await runInsightsBatch(client, due, fakeCreds, 3);
+    assert.equal(summary.pulled, 3);
+    assert.deepEqual(summary.results.map((r) => `${r.postId}:${r.window}`), due.map((d) => `${d.post.id}:current`));
+    assert.deepEqual(state.postMetrics.map((r) => `${r.post_id}:${r.pull_window}:${r.reach}`).sort(), ["a:current:500", "b:current:500", "c:current:500"]);
+
+    // A second run straight after finds nothing stale.
+    assert.equal((await getDueRefreshPulls(client)).length, 0);
   } finally {
     mock.restore();
   }

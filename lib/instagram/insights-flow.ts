@@ -84,11 +84,23 @@ export interface InsightsBatchSummary {
   results: InsightsPullOutcome[];
 }
 
-export async function runInsightsBatch(supabase: SupabaseClient, dues: DuePull[], creds: AccountCredentials): Promise<InsightsBatchSummary> {
+// concurrency > 1 runs that many pulls side by side (the daily refresh,
+// which covers every recent post inside one 60s function). Results keep the
+// order of `dues` either way.
+export async function runInsightsBatch(supabase: SupabaseClient, dues: DuePull[], creds: AccountCredentials, concurrency = 1): Promise<InsightsBatchSummary> {
   const summary: InsightsBatchSummary = { pulled: 0, deferred: 0, failed: 0, results: [] };
 
-  for (const due of dues) {
-    const outcome = await pullInsightsForPost(supabase, due, creds);
+  const outcomes: InsightsPullOutcome[] = new Array(dues.length);
+  let next = 0;
+  async function worker() {
+    while (next < dues.length) {
+      const i = next++;
+      outcomes[i] = await pullInsightsForPost(supabase, dues[i], creds);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(Math.max(1, concurrency), dues.length) }, worker));
+
+  for (const outcome of outcomes) {
     summary.results.push(outcome);
     if (outcome.outcome === "pulled") {
       summary.pulled++;

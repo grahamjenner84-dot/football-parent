@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { makePost, createFakeInsightsSupabase } from "./helpers/fixtures";
-import { getDueInsightsPulls, getPullWindows, metricsForFormat, parseInsightsResponse, buildMetricsRow, buildErrorRow } from "../lib/instagram/insights-pipeline";
+import { getDueInsightsPulls, getDueRefreshPulls, getPullWindows, metricsForFormat, parseInsightsResponse, buildMetricsRow, buildErrorRow } from "../lib/instagram/insights-pipeline";
 
 function hoursAgo(h: number): string {
   return new Date(Date.now() - h * 60 * 60 * 1000).toISOString();
@@ -170,6 +170,43 @@ test("getDueInsightsPulls: a backlog of 28-day pulls doesn't push a newer post's
     ["recent:followup_7d", "old2:followup_28d"],
     "the 7-day pull goes first, then the newest of the 28-day backlog"
   );
+});
+
+test("getDueRefreshPulls: refreshes posts under 30 days old into 'current', skipping older posts and ones refreshed in the last 20h", async () => {
+  const posts = [
+    publishedPost({ id: "never", published_at: hoursAgo(5 * 24) }),
+    publishedPost({ id: "stale", published_at: hoursAgo(10 * 24) }),
+    publishedPost({ id: "fresh", published_at: hoursAgo(2 * 24) }),
+    publishedPost({ id: "too-old", published_at: hoursAgo(31 * 24) }),
+  ];
+  const { client } = createFakeInsightsSupabase({
+    posts,
+    postMetrics: [
+      { post_id: "stale", pull_window: "current", pulled_at: hoursAgo(21), reach: 10 },
+      { post_id: "fresh", pull_window: "current", pulled_at: hoursAgo(2), reach: 10 },
+      // A fixed-window row doesn't count as a refresh.
+      { post_id: "never", pull_window: "initial", pulled_at: hoursAgo(1), reach: 10 },
+    ],
+  });
+  const due = await getDueRefreshPulls(client);
+  assert.deepEqual(
+    due.map((d) => `${d.post.id}:${d.window.label}`),
+    ["never:current", "stale:current"],
+    "never-refreshed first, then the stalest; the fresh and the 31-day-old posts are left alone"
+  );
+});
+
+test("getDueRefreshPulls: doesn't touch the fixed windows' due list", async () => {
+  const post = publishedPost({ id: "p1", published_at: hoursAgo(700) });
+  const { client } = createFakeInsightsSupabase({
+    posts: [post],
+    postMetrics: [
+      { post_id: "p1", pull_window: "initial", reach: 100 },
+      { post_id: "p1", pull_window: "followup_7d", reach: 120 },
+      { post_id: "p1", pull_window: "current", pulled_at: hoursAgo(30), reach: 130 },
+    ],
+  });
+  assert.deepEqual((await getDueInsightsPulls(client)).map((d) => d.window.label), ["followup_28d"]);
 });
 
 test("getDueInsightsPulls: respects the limit across multiple posts", async () => {
