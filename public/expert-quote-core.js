@@ -423,7 +423,9 @@
   }
   // Follow strip on a mid-carousel pull-quote: a small "FOLLOW @football.parent"
   // pill with the reason beside it ("for more from Chris"), or under it when
-  // the two won't share a line. Sits between the quote and the credit lockup.
+  // the two won't share a line. It takes the credit lockup's place at the
+  // bottom, so that slide is the quote and the follow ask and nothing else
+  // (the expert is credited on the cover, the bio and every answer).
   var DEFAULT_QUOTE_FOLLOW = 'for a new *expert* every week';
   function quoteFollowLayout(ctx, S, data) {
     var pillFs = 28, pillH = Math.round(pillFs * 2.4);
@@ -457,7 +459,7 @@
     stamp(ctx, S.centerX, S.safeTop + 50, t);
     var ay = S.safeBottom - 150;
     var fl = slide && slide.follow ? quoteFollowLayout(ctx, S, data) : null;
-    var followY = fl ? ay - 40 - fl.h : 0;
+    var followY = fl ? ay + 64 - fl.h : 0; // ends a little above where the lockup's logo did, clear of the pitch line
     var regionTop = S.safeTop + 140, regionBot = (fl ? followY : ay) - 56;
     var markH = Math.min(150, (regionBot - regionTop) * 0.24);
     var markGap = Math.round(markH * 0.32);
@@ -469,7 +471,7 @@
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = "400 " + markFs + "px 'Anton'"; ctx.fillStyle = accent; ctx.fillText('“', S.leftX - 6, y + markH);
     y += markH + markGap; ctx.textBaseline = 'top';
     ctx.font = "400 " + f.size + "px 'Anton'"; drawLines(ctx, f.wrapped[0], S.leftX, y, f.lineH, 'left', f.space, t.text, accent);
-    if (fl) drawQuoteFollow(ctx, S, t, followY, fl, data.platform);
+    if (fl) return drawQuoteFollow(ctx, S, t, followY, fl, data.platform);
     var r = 44; logoCircle(ctx, S.leftX + r, ay + r, r, t.accent, images.logoImg, data.name);
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = "400 42px 'Anton'"; ctx.fillStyle = t.text;
     ctx.fillText(creditName(data).toUpperCase(), S.leftX + 2 * r + 22, ay + 40);
