@@ -68,14 +68,23 @@
 
   /* ---------- slide model ---------- */
   function hasBio(data) { return !!((data.bio && data.bio.trim()) || data.bioSrc); }
+  // Where the pull-quote goes: 'mid' (after the first answer, the default),
+  // 'first' (straight after the bio) or 'end' (just before the closing
+  // slide). Anywhere but the end it carries a follow strip (slide.follow),
+  // so the follow ask also lands at the carousel's high point and not only
+  // on the last slide, which the fewest people reach. Saved state from
+  // before quotePos only has quoteFirst.
+  function quotePos(data) { return data.quotePos || (data.quoteFirst ? 'first' : 'mid'); }
   function slideList(data) {
     var qas = data.qas || [];
     var list = [{ type: 'cover' }];
     if (hasBio(data)) list.push({ type: 'bio' });
-    var showQuote = data.coverStyle !== 'quote';
-    if (showQuote && data.quoteFirst) list.push({ type: 'quote' });
-    qas.forEach(function (x, i) { list.push({ type: 'qa', i: i }); });
-    if (showQuote && !data.quoteFirst) list.push({ type: 'quote' });
+    var pos = data.coverStyle !== 'quote' ? quotePos(data) : null;
+    var quoteAt = Math.min(pos === 'first' ? 0 : pos === 'mid' ? 1 : qas.length, qas.length);
+    for (var i = 0; i <= qas.length; i++) {
+      if (pos && i === quoteAt) list.push(i < qas.length ? { type: 'quote', follow: true } : { type: 'quote' });
+      if (i < qas.length) list.push({ type: 'qa', i: i });
+    }
     list.push({ type: 'cta' });
     return list;
   }
@@ -412,13 +421,44 @@
     drawCredit(ctx, S, t, creditY, data, images);
     footerHandles(ctx, S, !t.light, data.platform, data.handle);
   }
-  function drawQuote(ctx, format, data, images) {
+  // Follow strip on a mid-carousel pull-quote: a small "FOLLOW @football.parent"
+  // pill with the reason beside it ("for more from Chris"), or under it when
+  // the two won't share a line. Sits between the quote and the credit lockup.
+  var DEFAULT_QUOTE_FOLLOW = 'for a new *expert* every week';
+  function quoteFollowLayout(ctx, S, data) {
+    var pillFs = 28, pillH = Math.round(pillFs * 2.4);
+    ctx.font = "800 " + pillFs + "px 'Archivo'";
+    var pillW = ctx.measureText('FOLLOW ' + myHandle(data.platform)).width + pillH;
+    var reason = ((data.quoteFollow || '').trim()) || DEFAULT_QUOTE_FOLLOW;
+    var fs = 40, gap = 24;
+    ctx.font = "400 " + fs + "px 'Anton'";
+    var rf = fitWords(ctx, [wordsUC(reason)], S.maxW, fs * 2.2, fs, 30, 1.05, 0, function (s) { return "400 " + s + "px 'Anton'"; });
+    var lines = rf.wrapped[0];
+    ctx.font = "400 " + rf.size + "px 'Anton'";
+    var reasonW = 0; (lines[0] || []).forEach(function (wd, j) { reasonW += ctx.measureText(wd.t).width + (j ? rf.space : 0); });
+    var inline = lines.length === 1 && pillW + gap + reasonW <= S.maxW;
+    var h = inline ? pillH : pillH + 18 + lines.length * rf.lineH;
+    return { pillFs: pillFs, pillH: pillH, pillW: pillW, rf: rf, gap: gap, inline: inline, h: h };
+  }
+  function drawQuoteFollow(ctx, S, t, y, L, platform) {
+    ctx.save();
+    ctx.fillStyle = t.accent; roundRect(ctx, S.leftX, y, L.pillW, L.pillH, L.pillH / 2); ctx.fill();
+    ctx.fillStyle = '#0b0b0d'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = "800 " + L.pillFs + "px 'Archivo'";
+    ctx.fillText('FOLLOW ' + myHandle(platform), S.leftX + L.pillW / 2, y + L.pillH / 2 + 2);
+    ctx.font = "400 " + L.rf.size + "px 'Anton'"; ctx.textBaseline = 'middle';
+    if (L.inline) drawLines(ctx, L.rf.wrapped[0], S.leftX + L.pillW + L.gap, y + L.pillH / 2 + 2, L.rf.lineH, 'left', L.rf.space, t.text, t.accent);
+    else { ctx.textBaseline = 'top'; drawLines(ctx, L.rf.wrapped[0], S.leftX, y + L.pillH + 18, L.rf.lineH, 'left', L.rf.space, t.text, t.accent); }
+    ctx.restore();
+  }
+  function drawQuote(ctx, format, data, images, slide) {
     var S = safe(format), t = theme(bgFor(data.bgBySlide, 'quote'));
     bgDark(ctx, format, t); goldGlow();
     var accent = data.quoteWhite ? t.text : t.accent;
     stamp(ctx, S.centerX, S.safeTop + 50, t);
     var ay = S.safeBottom - 150;
-    var regionTop = S.safeTop + 140, regionBot = ay - 56;
+    var fl = slide && slide.follow ? quoteFollowLayout(ctx, S, data) : null;
+    var followY = fl ? ay - 40 - fl.h : 0;
+    var regionTop = S.safeTop + 140, regionBot = (fl ? followY : ay) - 56;
     var markH = Math.min(150, (regionBot - regionTop) * 0.24);
     var markGap = Math.round(markH * 0.32);
     var qw = wordsUC(data.quote);
@@ -429,6 +469,7 @@
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = "400 " + markFs + "px 'Anton'"; ctx.fillStyle = accent; ctx.fillText('“', S.leftX - 6, y + markH);
     y += markH + markGap; ctx.textBaseline = 'top';
     ctx.font = "400 " + f.size + "px 'Anton'"; drawLines(ctx, f.wrapped[0], S.leftX, y, f.lineH, 'left', f.space, t.text, accent);
+    if (fl) drawQuoteFollow(ctx, S, t, followY, fl, data.platform);
     var r = 44; logoCircle(ctx, S.leftX + r, ay + r, r, t.accent, images.logoImg, data.name);
     ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic'; ctx.font = "400 42px 'Anton'"; ctx.fillStyle = t.text;
     ctx.fillText(creditName(data).toUpperCase(), S.leftX + 2 * r + 22, ay + 40);
@@ -497,17 +538,19 @@
     ctx.restore();
   }
 
-  // slide: {type:'cover'|'bio'|'qa'|'quote'|'cta', i?} (i = qa index, for type 'qa').
-  // data: {name,handle,role,person,quoteWhite,topic,bio,bioSrc,quoteFirst,coverStyle,
-  //   coverQuestion,coverEyebrow,coverContext,followLine,qas,quote,cta,interview,siteUrl,
-  //   platform,format,bgBySlide}. images: {logoImg,bioImg} (loaded Image or null).
+  // slide: {type:'cover'|'bio'|'qa'|'quote'|'cta', i?, follow?} (i = qa index, for
+  //   type 'qa'; follow = the quote's follow strip, set by slideList()).
+  // data: {name,handle,role,person,quoteWhite,topic,bio,bioSrc,quotePos,quoteFirst,
+  //   quoteFollow,coverStyle,coverQuestion,coverEyebrow,coverContext,followLine,qas,
+  //   quote,cta,interview,siteUrl,platform,format,bgBySlide}. images: {logoImg,bioImg}
+  //   (loaded Image or null).
   function draw(ctx, slide, data, images) {
     images = images || {};
     var t = slide.type;
     if (t === 'cover') return drawCover(ctx, data.format, data, images);
     if (t === 'bio') return drawBio(ctx, data.format, data, images);
     if (t === 'qa') return drawQA(ctx, data.format, data, images, slide);
-    if (t === 'quote') return drawQuote(ctx, data.format, data, images);
+    if (t === 'quote') return drawQuote(ctx, data.format, data, images, slide);
     return drawCTA(ctx, data.format, data, images);
   }
 
@@ -525,6 +568,7 @@
     myHandle: myHandle,
     platformName: platformName,
     hasBio: hasBio,
+    quotePos: quotePos,
     slideList: slideList,
     slideCount: slideCount,
     slideName: slideName,
@@ -556,6 +600,8 @@
     drawBio: drawBio,
     drawQA: drawQA,
     drawQuote: drawQuote,
+    quoteFollowLayout: quoteFollowLayout,
+    DEFAULT_QUOTE_FOLLOW: DEFAULT_QUOTE_FOLLOW,
     followPill: followPill,
     drawWordmark: drawWordmark,
     drawCTA: drawCTA,

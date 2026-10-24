@@ -11,7 +11,9 @@
 //     with " … "), rewording is not. Each piece must appear word for word in
 //     the article (case, curly quotes, *gold* markers and edge punctuation
 //     ignored).
-//   - length caps (short copy is a rule, not a preference).
+//   - length caps (short copy is a rule, not a preference), including the
+//     tease: the few words the expert's other posts quote in their "More
+//     from Chris coming up: ..." caption line (composed by the builder).
 //   - slide fit, via lib/instagram/slide-fit.ts (same measurements the
 //     renderer uses).
 //   - the expert preset exists.
@@ -27,6 +29,8 @@ type Post = {
   article: string;
   audience?: string;
   theme?: string;
+  tease?: string;
+  quotePos?: "first" | "mid" | "end";
   coverEyebrow?: string;
   coverQuestion: string;
   coverContext?: string;
@@ -37,7 +41,7 @@ type Post = {
   caption?: string;
   collab?: string;
 };
-type Preset = { id: string; bio?: string; logoSrc?: string; bioSrc?: string; [k: string]: unknown };
+type Preset = { id: string; bio?: string; logoSrc?: string; bioSrc?: string; shortName?: string; person?: string; [k: string]: unknown };
 
 export const LIMITS = {
   coverWords: 10,
@@ -47,6 +51,7 @@ export const LIMITS = {
   quoteWords: 20,
   ctaWords: 10,
   followWords: 14,
+  teaseWords: 8,
   captionChars: 600,
   minQas: 2,
   maxQas: 4,
@@ -133,6 +138,8 @@ async function main() {
     if (post.quote) cap("quote", words(post.quote), LIMITS.quoteWords);
     if (post.cta) cap("closing line", words(post.cta), LIMITS.ctaWords);
     if (post.followLine) cap("follow line", words(post.followLine), LIMITS.followWords);
+    if (post.tease) cap("tease", words(post.tease), LIMITS.teaseWords);
+    else warns.push("no tease, so the expert's other posts can't name this one in their \"coming up\" line");
     if ((post.caption || "").length > LIMITS.captionChars) errs.push(`caption: ${post.caption!.length} chars, max ${LIMITS.captionChars}`);
     const n = (post.qas || []).length;
     if (n < LIMITS.minQas || n > LIMITS.maxQas) errs.push(`${n} Q&As, want ${LIMITS.minQas}-${LIMITS.maxQas}`);
@@ -172,15 +179,18 @@ async function main() {
     if (errs.length) failed++;
 
     if (renderDir && preset) {
-      const { renderExpertQuoteSlidePNG } = await import("../lib/renderers/expert-quote-server");
+      const { renderExpertQuoteSlidePNG, Core } = await import("../lib/renderers/expert-quote-server");
       fs.mkdirSync(renderDir, { recursive: true });
       const data = {
         ...preset, bioSrc: dataUri(preset.bioSrc) ?? undefined,
         coverStyle: "question", coverEyebrow: post.coverEyebrow || "Football Parent asks",
         coverQuestion: post.coverQuestion, coverContext: post.coverContext || "",
         qas: post.qas, quote: post.quote || "", cta: post.cta || "", followLine: post.followLine || "", format: "carousel", platform: "ig",
+        // As the builder shows it while the expert has other posts to come.
+        quotePos: post.quotePos || "mid",
+        quoteFollow: "for more from " + String(preset.shortName || preset.person || "").split(/\s+/).map((w) => `*${w}*`).join(" "),
       };
-      const slides = [{ type: "cover" }, { type: "bio" }, ...post.qas.map((_, i) => ({ type: "qa", i })), { type: "quote" }, { type: "cta" }];
+      const slides: { type: string; i?: number }[] = Core.slideList(data);
       for (let i = 0; i < slides.length; i++) {
         const buf = await renderExpertQuoteSlidePNG(slides[i] as never, data as never, dataUri(preset.logoSrc));
         fs.writeFileSync(path.join(renderDir, `${post.id}-${String(i + 1).padStart(2, "0")}-${slides[i].type}.png`), buf);

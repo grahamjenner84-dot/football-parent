@@ -81,6 +81,7 @@ Add (or update, if the `id` already exists; never duplicate) an entry in
   "name": "Organisation or brand, as the credit sub-line shows it",
   "handle": "@instagramhandle",
   "person": "First Last",
+  "shortName": "First",
   "role": "Title · Organisation",
   "logoSrc": "/images/people/<org>-logo.png",
   "bioSrc": "/images/people/<photo file>",
@@ -98,6 +99,9 @@ Fit limits, because the builder draws these onto fixed-size slides:
   not the long About paragraph.
 - `name` is the account or organisation (the credit reads "PERSON" over
   "NAME · @HANDLE"), not the person again.
+- `shortName` is how the builder's "More from Chris coming up" and "for more
+  from Chris" lines name them: a first name for a person, the organisation's
+  name for a team ("Girls United").
 - Paths are site-root paths starting with `/`, pointing at the files from
   step 2.
 

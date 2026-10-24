@@ -6,9 +6,14 @@ description: Harvests a published Football Parent expert interview into 2-3 Inst
 # Football Parent Expert Carousel
 
 One interview becomes 2-3 separate carousels, each on its own angle, posted
-a few weeks apart with the expert as an Instagram collaborator. Each post gets
-shared to the expert's audience as well as ours, so each one has to stand on
-its own and give a different reason to stop scrolling.
+as a run a few days apart, in whatever order Graham chooses, with the expert as
+an Instagram collaborator. Each post gets shared to the expert's audience as
+well as ours, and a stranger may only ever see one, so each one has to stand on
+its own and give a different reason to stop scrolling. The builder ties the run
+together: while an expert has posts not yet marked as posted, the post being
+loaded names them in its caption ("More from Chris coming up: ...") and says
+"for more from Chris" on its follow asks. That is a reason for a stranger to
+follow now, and it never commits Graham to an order or a date.
 
 Output: entries in `public/expert-posts.json`. In the builder
 (`/expert-quote-builder.html`), Graham picks one from "Saved posts" and every
@@ -73,9 +78,15 @@ this interview so nothing is repeated.
 - **Pull-quote:** the single punchiest exact line on this angle, not
   repeating a Q&A answer in the same post.
 - **Follow line (optional):** see the closing slide note below.
+- **Tease:** what this post is about, in a few words that read after "More
+  from Chris coming up:", e.g. "spotting a fake scout or agent" or "whether
+  it's ever too late". Lower case, no full stop, 8 words max. The expert's
+  other posts quote it, so it should make a reader want this one.
 - **Caption:** a hook line, one or two lines on why it matters, credit the
   expert's handle, one line telling this audience who to send it to ("Send
-  this to your coaching WhatsApp group"), "Full interview: link in bio". No hashtag walls (3 at
+  this to your coaching WhatsApp group"), "Full interview: link in bio". Don't
+  write a "coming up" or follow line: the builder adds one, above "Full
+  interview", from whichever posts are still to come when the post is loaded. No hashtag walls (3 at
   most), no em dashes, none of the slop phrases in CLAUDE.md's editorial rules.
 
 ### 4. Save to `public/expert-posts.json`
@@ -88,6 +99,7 @@ this interview so nothing is repeated.
   "article": "/parent-guides/matt-baxter-young-footballer-mindset-interview",
   "audience": "parents",
   "theme": "what to say after a bad game",
+  "tease": "what to say on the car ride home",
   "coverEyebrow": "Football Parent asks",
   "coverQuestion": "What do you say after a *bad* game?",
   "coverContext": "Mindset coach Matt Baxter on the car ride home",
@@ -104,9 +116,18 @@ set in posting order, strongest first, so the dropdown reads as a plan.
 `collab` is the handle to invite as a collaborator (usually the preset's
 handle); the builder shows it as a reminder under the caption.
 
+Slide order is cover, bio, Q1, pull-quote, the remaining Q&As, closing. The
+pull-quote sits after the first answer (`"quotePos"` can be `"first"` or
+`"end"` instead, rarely needed) and carries a follow strip, a "FOLLOW
+@football.parent" pill with "for more from Chris" beside it, so the follow ask
+lands at the high point and not only on the last slide, which fewer people
+reach. Pick a quote that is the strongest line in the post.
+
 The closing slide is only the follow ask: a "FOLLOW @football.parent" button,
 then `followLine` large as the rest of that sentence, and the interview line at
-the bottom. The share ask goes in the caption, not on the slide. `followLine` starts with "for" and marks one *gold* word.
+the bottom. While the expert has other posts to come, the builder replaces it
+with "for more from *Chris* and a new expert every week"; on the last one it
+uses `followLine` as written. The share ask goes in the caption, not on the slide. `followLine` starts with "for" and marks one *gold* word.
 Leave it out on parent posts to get the default ("for a new *expert* answering
 parents' questions every week"); give coach posts their own, e.g. "for academy
 coaches answering *your* coaching questions every week". Views on a collab come
@@ -133,7 +154,10 @@ is what shows on the grid, so check it reads at a glance.
 ### 6. Hand over
 
 Show Graham each post's audience, angle and cover question, plus a posting
-plan: posts roughly two to three weeks apart, alternating audiences where
-possible, each with the expert invited as a collaborator. Commit the posts
+plan: the run a few days apart, alternating audiences where possible, each with
+the expert invited as a collaborator and asked to repost it (a repost took one
+Chris Robinson post from 30 people reached to over 1,000). Remind him to tap
+"Mark as posted" after each one: the "coming up" lines are worked out from
+those marks. Commit the posts
 file on its own; it only reaches his phone once it is live, so when he says
 to put it live, merge to `main` and confirm the deploy (CLAUDE.md).
