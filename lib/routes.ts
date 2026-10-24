@@ -80,6 +80,7 @@ export const routes = [
   '/football-development/bio-banding-football',
   '/football-development/why-isnt-my-child-improving-at-football',
   '/football-development/football-burnout',
+  '/football-development/indoor-football-training-for-kids',
 
   // Football Gear
   '/football-gear/ag-vs-fg-boots',

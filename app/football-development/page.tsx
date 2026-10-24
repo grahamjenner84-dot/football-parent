@@ -56,6 +56,12 @@ export default function FootballDevelopmentPage() {
       }}
       articles={[
         {
+          title: "Indoor Football Training for Kids",
+          href: "/football-development/indoor-football-training-for-kids",
+          description:
+            "Drills and games for a hallway or living room, a keepy uppy progression, ball mastery on a mat, and the indoor kit worth buying.",
+        },
+        {
           title: "How to Become a Professional Footballer",
           href: "/football-development/how-to-become-a-professional-footballer",
           description:
