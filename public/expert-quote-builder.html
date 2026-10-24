@@ -158,8 +158,13 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
         <textarea id="fieldQuote" class="fld" placeholder="Future Fit isn't about *winning* at eight." style="margin-top:7px;height:80px;resize:vertical"></textarea>
         <div style="display:flex;align-items:center;gap:8px;margin-top:8px">
           <span class="ar" style="font-size:11px;color:#7d7d77;font-weight:600;letter-spacing:.04em;text-transform:uppercase">Position</span>
-          <button id="btnQuoteAfter" class="seg" style="padding:5px 11px;font-size:12px">After Q&amp;A</button>
           <button id="btnQuoteFirst" class="seg" style="padding:5px 11px;font-size:12px">Before Q&amp;A</button>
+          <button id="btnQuoteMid" class="seg" style="padding:5px 11px;font-size:12px">After Q1</button>
+          <button id="btnQuoteAfter" class="seg" style="padding:5px 11px;font-size:12px">At the end</button>
+        </div>
+        <div id="blockQuoteFollow" style="margin-top:9px">
+          <span class="ar" style="font-size:11px;color:#7d7d77;font-weight:600;letter-spacing:.04em;text-transform:uppercase">Follow strip under the quote</span>
+          <textarea id="fieldQuoteFollow" class="fld" placeholder="Blank = for a new *expert* every week" style="margin-top:5px;height:44px;resize:vertical"></textarea>
         </div>
       </div>
 
@@ -258,7 +263,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     topic: 'On the *Future Fit* changes',
     bio: 'A grassroots-to-academy coaching team behind thousands of young players. Coach education, player development and the stuff parents actually ask about.',
     bioSrc: '',
-    quoteFirst: false,
+    quotePos: 'mid',
+    quoteFollow: '',
     coverStyle: 'question',
     coverQuestion: '',
     coverEyebrow: 'A parent asks',
@@ -271,6 +277,11 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     siteUrl: 'footballparent.co.uk',
     caption: '',
     collab: '',
+    // Last values seriesCopy() wrote, so refreshSeries() can tell an
+    // untouched field from one Graham has edited.
+    autoCaption: '',
+    autoFollowLine: '',
+    autoQuoteFollow: '',
     platform: 'ig',
     format: 'reel',
     active: 0,
@@ -295,16 +306,20 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
       var s = state;
       localStorage.setItem('fp_expert_builder', JSON.stringify({
         name: s.name, handle: s.handle, role: s.role, person: s.person, quoteWhite: s.quoteWhite, bgMode: s.bgMode,
-        logoSrc: s.logoSrc, topic: s.topic, bio: s.bio, bioSrc: s.bioSrc, quoteFirst: s.quoteFirst, coverStyle: s.coverStyle,
+        logoSrc: s.logoSrc, topic: s.topic, bio: s.bio, bioSrc: s.bioSrc, quotePos: s.quotePos, quoteFollow: s.quoteFollow, coverStyle: s.coverStyle,
         coverQuestion: s.coverQuestion, coverEyebrow: s.coverEyebrow, coverContext: s.coverContext, followLine: s.followLine,
         qas: s.qas, quote: s.quote, cta: s.cta, interview: s.interview, siteUrl: s.siteUrl,
-        format: s.format, bgBySlide: s.bgBySlide, caption: s.caption, collab: s.collab
+        format: s.format, bgBySlide: s.bgBySlide, caption: s.caption, collab: s.collab,
+        autoCaption: s.autoCaption, autoFollowLine: s.autoFollowLine, autoQuoteFollow: s.autoQuoteFollow
       }));
     } catch (e) {}
   }
   (function init() {
     var s = load();
     Object.keys(s).forEach(function (k) { if (s[k] != null && k in state) state[k] = s[k]; });
+    // Saved before quotePos existed: quoteFirst true meant before the Q&A;
+    // false (the old end position) moves to the new default, after Q1.
+    if (!s.quotePos && s.quoteFirst) state.quotePos = 'first';
     if (!state.qas || !state.qas.length) state.qas = sampleQAs();
   })();
   function loadPrompt() {
@@ -402,8 +417,8 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     fetch('/expert-posts.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : []; })
       .then(function (list) {
         posts = Array.isArray(list) ? list : [];
-        buildPostOptions(); renderPosted();
-        return loadPostedFromServer().then(function () { buildPostOptions(); renderPosted(); });
+        buildPostOptions(); renderPosted(); refreshSeries();
+        return loadPostedFromServer().then(function () { buildPostOptions(); renderPosted(); refreshSeries(); });
       }).catch(function () {});
   }
   function buildPostOptions() {
@@ -449,10 +464,62 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     buildPostOptions(); renderPosted();
     if (synced) savePosted(p.id, date).then(function (ok) { if (!ok) setStatus('⚠ Couldn\'t sync the posted mark; it\'s saved on this device.'); });
   }
+  /* ---------- series lines (the expert's other posts still to come) ---------- */
+  // An expert's saved posts can go out in any order, so the "coming up" copy
+  // is written when a post loads, from that expert's posts not yet marked as
+  // posted: a caption line naming them (each post's `tease`), and "for more
+  // from Chris" on the follow strip under the pull-quote and on the closing
+  // slide. On the expert's last post both fall back to the usual follow
+  // lines. It is only as right as the Mark as posted button.
+  function goldName(name) { return name.split(/\s+/).filter(Boolean).map(function (w) { return '*' + w + '*'; }).join(' '); }
+  function seriesCopy(p) {
+    var ex = presets.find(function (x) { return x.id === p.expert; }) || {};
+    var name = ex.shortName || ex.person || '';
+    var rest = posts.filter(function (x) { return x.expert === p.expert && x.id !== p.id && !isPosted(x); });
+    // Same audience first: those are the posts this one's readers want next.
+    rest.sort(function (a, b) { return (b.audience === p.audience) - (a.audience === p.audience); });
+    if (!rest.length || !name) {
+      return {
+        followLine: p.followLine || '',
+        quoteFollow: '',
+        captionLine: "Follow @football.parent: a new expert answers " + (p.audience === 'coaches' ? "coaches'" : "parents'") + " questions every week."
+      };
+    }
+    var teases = rest.map(function (x) { return (x.tease || '').trim(); }).filter(Boolean);
+    var listed = teases.slice(0, 2).join(' and ');
+    var lead = 'More from ' + name + ' coming up' + (teases.length > 2 ? ', including ' + listed : teases.length ? ': ' + listed : '');
+    return {
+      followLine: 'for more from ' + goldName(name) + ' and a new expert every week',
+      quoteFollow: 'for more from ' + goldName(name),
+      captionLine: lead + ". Follow @football.parent so you don't miss " + (rest.length > 1 ? 'them' : 'it') + '.'
+    };
+  }
+  // The series line goes in as its own paragraph before "Full interview: link
+  // in bio" (or before the hashtags, or at the end).
+  function withSeriesLine(caption, line) {
+    if (!caption) return caption;
+    var paras = caption.split(/\n\s*\n/);
+    var at = paras.findIndex(function (x) { return /full interview/i.test(x); });
+    if (at < 0) at = paras.findIndex(function (x) { return /^\s*#/.test(x); });
+    if (at < 0) at = paras.length;
+    paras.splice(at, 0, line);
+    return paras.join('\n\n');
+  }
+  // Posted marks can arrive after a post was loaded (the server sync), so the
+  // series lines are worked out again, leaving any field Graham has edited.
+  function refreshSeries() {
+    var p = posts.find(function (x) { return x.id === loadedPostId; }); if (!p) return;
+    var sc = seriesCopy(p), changed = false;
+    [['caption', 'autoCaption', withSeriesLine(p.caption || '', sc.captionLine)], ['followLine', 'autoFollowLine', sc.followLine], ['quoteFollow', 'autoQuoteFollow', sc.quoteFollow]].forEach(function (f) {
+      if (state[f[0]] === state[f[1]] && state[f[0]] !== f[2]) { state[f[0]] = f[2]; state[f[1]] = f[2]; changed = true; }
+    });
+    if (changed) { persist(); render(); }
+  }
   function applyPost(id) {
     var p = posts.find(function (x) { return x.id === id; }); if (!p) return;
     loadedPostId = p.id; writeStore(LOADED_KEY, p.id); renderPosted();
     if (p.expert) applyPreset(p.expert, true);
+    var sc = seriesCopy(p), caption = withSeriesLine(p.caption || '', sc.captionLine);
     Object.assign(state, {
       coverStyle: 'question',
       coverEyebrow: p.coverEyebrow || 'Football Parent asks',
@@ -460,11 +527,15 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
       coverContext: p.coverContext || '',
       qas: (p.qas || []).map(function (x) { return { q: x.q || '', a: x.a || '' }; }),
       quote: p.quote || '',
-      quoteFirst: false,
+      quotePos: p.quotePos || 'mid',
+      quoteFollow: sc.quoteFollow,
       cta: p.cta || state.cta,
-      followLine: p.followLine || '',
+      followLine: sc.followLine,
       interview: p.interview || state.interview,
-      caption: p.caption || '',
+      caption: caption,
+      autoCaption: caption,
+      autoFollowLine: sc.followLine,
+      autoQuoteFollow: sc.quoteFollow,
       collab: p.collab || '',
       bgBySlide: {},
       active: 0,
@@ -858,6 +929,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
     setVal('fieldSiteUrl', state.siteUrl);
     setVal('fieldInterview', state.interview);
     setVal('fieldFollowLine', state.followLine);
+    setVal('fieldQuoteFollow', state.quoteFollow);
     setVal('fieldCoverEyebrow', state.coverEyebrow);
     setVal('fieldCoverQuestion', state.coverQuestion);
     setVal('fieldCoverContext', state.coverContext);
@@ -882,8 +954,11 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
     document.getElementById('btnQuoteGold').classList.toggle('on', !state.quoteWhite);
     document.getElementById('btnQuoteWhite').classList.toggle('on', !!state.quoteWhite);
-    document.getElementById('btnQuoteAfter').classList.toggle('on', !state.quoteFirst);
-    document.getElementById('btnQuoteFirst').classList.toggle('on', !!state.quoteFirst);
+    var qp = Core.quotePos(state);
+    document.getElementById('btnQuoteFirst').classList.toggle('on', qp === 'first');
+    document.getElementById('btnQuoteMid').classList.toggle('on', qp === 'mid');
+    document.getElementById('btnQuoteAfter').classList.toggle('on', qp === 'end');
+    document.getElementById('blockQuoteFollow').style.display = qp === 'end' ? 'none' : '';
 
     document.getElementById('btnFmtReel').classList.toggle('on', (state.format || 'reel') === 'reel');
     document.getElementById('btnFmtCarousel').classList.toggle('on', state.format === 'carousel');
@@ -961,6 +1036,7 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
   document.getElementById('fieldSiteUrl').addEventListener('change', function (e) { set('siteUrl', e.target.value); });
   document.getElementById('fieldInterview').addEventListener('change', function (e) { set('interview', e.target.value); });
   document.getElementById('fieldFollowLine').addEventListener('change', function (e) { set('followLine', e.target.value); });
+  document.getElementById('fieldQuoteFollow').addEventListener('change', function (e) { set('quoteFollow', e.target.value); });
   document.getElementById('fieldCoverEyebrow').addEventListener('change', function (e) { set('coverEyebrow', e.target.value); });
   document.getElementById('fieldCoverQuestion').addEventListener('change', function (e) { set('coverQuestion', e.target.value); });
   document.getElementById('fieldCoverContext').addEventListener('change', function (e) { set('coverContext', e.target.value); });
@@ -978,8 +1054,9 @@ body{color:#eaeaea;font-family:Helvetica,Arial,sans-serif;display:flex;flex-dire
 
   document.getElementById('btnQuoteGold').addEventListener('click', function () { set('quoteWhite', false); });
   document.getElementById('btnQuoteWhite').addEventListener('click', function () { set('quoteWhite', true); });
-  document.getElementById('btnQuoteAfter').addEventListener('click', function () { set('quoteFirst', false); });
-  document.getElementById('btnQuoteFirst').addEventListener('click', function () { set('quoteFirst', true); });
+  document.getElementById('btnQuoteFirst').addEventListener('click', function () { set('quotePos', 'first'); });
+  document.getElementById('btnQuoteMid').addEventListener('click', function () { set('quotePos', 'mid'); });
+  document.getElementById('btnQuoteAfter').addEventListener('click', function () { set('quotePos', 'end'); });
 
   document.getElementById('btnAddQA').addEventListener('click', addQA);
 
