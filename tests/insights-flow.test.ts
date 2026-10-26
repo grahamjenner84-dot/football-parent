@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { installMockFetch } from "./helpers/mock-fetch";
 import { makePost, fakeCreds, createFakeInsightsSupabase } from "./helpers/fixtures";
-import { getDueInsightsPulls, getDueRefreshPulls } from "../lib/instagram/insights-pipeline";
+import { getDueInsightsPulls, getDueRefreshPulls, metricAttemptsForFormat, BREAKDOWN_PROBES, type DuePull } from "../lib/instagram/insights-pipeline";
 import { pullInsightsForPost, runInsightsBatch } from "../lib/instagram/insights-flow";
 
 function hoursAgo(h: number): string {
@@ -40,6 +40,15 @@ const reelInsights = ok({
     { name: "ig_reels_avg_watch_time", values: [{ value: 6400 }] }, // milliseconds, per the real API's own field title
   ],
 });
+
+// A breakdown probe's answer with nothing in it: the probe's numbers stay null.
+const emptyBreakdown = ok({ data: [] });
+
+// Everything one successful pull asks Meta for, in order: the insights
+// request, then one request per breakdown probe (see pullInsightsForPost).
+function pullResponses(due: DuePull) {
+  return [due.post.format === "reel" ? reelInsights : carouselInsights, ...BREAKDOWN_PROBES.map(() => emptyBreakdown)];
+}
 
 test("carousel: a due pull writes reach/likes/comments/saves/shares/total_interactions - no impressions, no watch time", async () => {
   const post = makePost({ id: "p1", format: "carousel", status: "published", ig_media_id: "ig-media-1", published_at: hoursAgo(61) });
@@ -114,16 +123,43 @@ test("a platform outage (HTTP 500, code 1 - the exact shape hit for real on 2026
   }
 });
 
+test("a rejected metric list steps down to a shorter one and still records the post's numbers", async () => {
+  const post = makePost({ id: "p1", format: "carousel", status: "published", ig_media_id: "ig-media-1", published_at: hoursAgo(61) });
+  const { client, upsertCalls } = createFakeInsightsSupabase({ posts: [post] });
+  const mock = installMockFetch([
+    err(400, 100, "Invalid metric for this media type"),
+    carouselInsights,
+    ...BREAKDOWN_PROBES.map(() => emptyBreakdown),
+  ]);
+
+  try {
+    const due = await getDueInsightsPulls(client);
+    const outcome = await pullInsightsForPost(client, due[0], fakeCreds);
+
+    assert.equal(outcome.outcome, "pulled");
+    assert.equal(upsertCalls.length, 1);
+    assert.equal(upsertCalls[0].reach, 500);
+    assert.equal(upsertCalls[0].pull_error ?? null, null);
+    assert.match(mock.calls[0].url, /follows/, "the first request asks for the richest list");
+    assert.doesNotMatch(mock.calls[1].url, /follows/, "the retry drops the extras");
+  } finally {
+    mock.restore();
+  }
+});
+
 test("a non-transient error (bad metric request) is marked failed with a terminal pull_error row - not retried forever", async () => {
   const post = makePost({ id: "p1", format: "carousel", status: "published", ig_media_id: "ig-media-1", published_at: hoursAgo(61) });
   const { client, upsertCalls } = createFakeInsightsSupabase({ posts: [post] });
-  const mock = installMockFetch([err(400, 100, "Invalid metric for this media type")]);
+  // Rejected at every step down, the shortest list included.
+  const attempts = metricAttemptsForFormat("carousel").length;
+  const mock = installMockFetch(Array.from({ length: attempts }, () => err(400, 100, "Invalid metric for this media type")));
 
   try {
     const due = await getDueInsightsPulls(client);
     const outcome = await pullInsightsForPost(client, due[0], fakeCreds);
 
     assert.equal(outcome.outcome, "failed");
+    assert.equal(mock.calls.length, attempts, "each shorter list is tried once, and no breakdown probes follow a failure");
     assert.equal(upsertCalls.length, 1);
     assert.match(String(upsertCalls[0].pull_error), /Invalid metric/);
 
@@ -138,13 +174,14 @@ test("a non-transient error (bad metric request) is marked failed with a termina
 test("runInsightsBatch: idempotent across two consecutive runs - the second makes zero network calls once everything due is pulled", async () => {
   const post = makePost({ id: "p1", format: "carousel", status: "published", ig_media_id: "ig-media-1", published_at: hoursAgo(61) });
   const { client } = createFakeInsightsSupabase({ posts: [post] });
-  const mock = installMockFetch([carouselInsights]);
+  const due = await getDueInsightsPulls(client);
+  const mock = installMockFetch(due.flatMap(pullResponses));
 
   try {
-    const due = await getDueInsightsPulls(client);
     const summary = await runInsightsBatch(client, due, fakeCreds);
     assert.equal(summary.pulled, 1);
-    assert.equal(mock.calls.length, 1);
+    const firstRunCalls = 1 + BREAKDOWN_PROBES.length;
+    assert.equal(mock.calls.length, firstRunCalls);
 
     // Second "cron tick": nothing left due, so runInsightsBatch is never
     // even asked to do anything, and definitely makes no extra API calls.
@@ -152,7 +189,7 @@ test("runInsightsBatch: idempotent across two consecutive runs - the second make
     assert.equal(dueSecondRun.length, 0);
     const summary2 = await runInsightsBatch(client, dueSecondRun, fakeCreds);
     assert.equal(summary2.pulled, 0);
-    assert.equal(mock.calls.length, 1, "no duplicate insights call for an already-pulled window");
+    assert.equal(mock.calls.length, firstRunCalls, "no duplicate insights call for an already-pulled window");
   } finally {
     mock.restore();
   }
@@ -164,11 +201,11 @@ test("runInsightsBatch: multiple due pulls across posts and windows are each rec
     makePost({ id: "p2", format: "reel", status: "published", ig_media_id: "ig-media-2", published_at: hoursAgo(61) }), // 1 window due
   ];
   const { client, upsertCalls } = createFakeInsightsSupabase({ posts });
-  const mock = installMockFetch([carouselInsights, carouselInsights, reelInsights]);
+  const due = await getDueInsightsPulls(client);
+  assert.equal(due.length, 3);
+  const mock = installMockFetch(due.flatMap(pullResponses));
 
   try {
-    const due = await getDueInsightsPulls(client);
-    assert.equal(due.length, 3);
     const summary = await runInsightsBatch(client, due, fakeCreds);
     assert.equal(summary.pulled, 3);
     assert.equal(upsertCalls.length, 3);
