@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
+import { isMetaScanRow } from "@/lib/meta-link-scan";
+import { metaScanBursts } from "@/lib/supabase/page-views";
 import { getAllArticleSlugs } from "@/lib/content";
 import { COACH_APP_CHANNELS, channelFor, channelForPageView, type CoachAppChannel } from "@/lib/coach-app-channels";
 import { COACH_AUDIENCE_SLUGS, shareBannerKeptAt } from "@/app/components/CoachAppBanner";
@@ -638,7 +640,8 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
       rows.push(...batch);
       if (batch.length < pageSize) break;
     }
-    return rows.filter((r) => isHuman(r.user_agent));
+    const scanBursts = metaScanBursts(rows);
+    return rows.filter((r) => isHuman(r.user_agent) && !isMetaScanRow(r, scanBursts));
   }
 
   // "Banner seen" rows (progress_banner_seen) from the same start, and the

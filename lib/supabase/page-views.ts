@@ -3,6 +3,7 @@ import { classifyReferrerHost, type SourceGroup } from "@/lib/referrer-sources";
 import { isAndroidAppPath } from "@/lib/coach-app-android";
 import { addDays, datesBetween, ukDay, ukDayStart, ukToday } from "@/lib/uk-day";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
+import { findMetaScanBursts, isMetaScanRow, type MetaScanBurst } from "@/lib/meta-link-scan";
 import { getAllArticleSlugs } from "@/lib/content";
 import {
   BANNER_TEST_STARTED_AT,
@@ -278,6 +279,7 @@ export async function getPageViewCountryStats(days: number = 30): Promise<PageVi
     if (batch.length < pageSize) break;
   }
 
+  const scanBursts = metaScanBursts(rows);
   rows = rows.filter(
     (row) => !isBeforeRecordingStart(row.path, row.created_at) && !isCalculatorStepPath(row.path)
   );
@@ -292,6 +294,7 @@ export async function getPageViewCountryStats(days: number = 30): Promise<PageVi
 
   function isBotRow(row: (typeof rows)[number]): boolean {
     if (isKnownBotIncident(row.path, row.created_at)) return true;
+    if (isMetaScanRow(row, scanBursts)) return true;
     if (row.user_agent) {
       if (matchesKnownBotPattern(row.user_agent)) return true;
       const key = `${ukDay(row.created_at)}|${row.path}|${row.user_agent}`;
@@ -534,6 +537,50 @@ function isKnownBotIncident(path: string, createdAt: string): boolean {
   );
 }
 
+type MetaScanSourceRow = {
+  path: string;
+  created_at: string;
+  referrer_host: string | null;
+  user_agent: string | null;
+};
+
+// Meta link-scanner bursts (lib/meta-link-scan.ts) in rows read from every
+// path. Call it before narrowing the rows to a path prefix or dropping the
+// step events: a scan is only recognisable across pages.
+export function metaScanBursts(rows: MetaScanSourceRow[]): MetaScanBurst[] {
+  return findMetaScanBursts(rows, isCalculatorStepPath);
+}
+
+// The same bursts for a report that reads one page, or one slice of the
+// table, and so can't see a scan's other pages. Reads only the rows referred
+// by Facebook or Instagram in the window, a handful on a normal day. `since`
+// null means all history, as getPageViewsForPath does without `days`.
+export async function loadMetaScanBursts(since: string | null, until?: string): Promise<MetaScanBurst[]> {
+  const supabase = adminClient();
+  const rows: MetaScanSourceRow[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    let query = supabase
+      .from("page_views")
+      .select("path, created_at, referrer_host, user_agent")
+      .or("referrer_host.ilike.*facebook.com,referrer_host.ilike.*instagram.com")
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (since) query = query.gte("created_at", since);
+    if (until) query = query.lt("created_at", until);
+    const { data, error } = await query;
+
+    if (error) {
+      throw new Error("Failed to read page_views for Meta link scans: " + error.message);
+    }
+
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+  return metaScanBursts(rows);
+}
+
 // estimatedVisits approximates "distinct visits" from raw pageview rows,
 // without a session id or cookie: only the first page of a visit carries a
 // referrer other than this site itself (every later page in that same
@@ -600,12 +647,12 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
   const sinceISO = ukDayStart(earliest);
   const untilISO = ukDayStart(addDays(latest, 1));
 
-  let rows: { path: string; created_at: string; user_agent: string | null }[] = [];
+  let rows: MetaScanSourceRow[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, created_at, user_agent")
+      .select("path, created_at, referrer_host, user_agent")
       .gte("created_at", sinceISO)
       .lt("created_at", untilISO)
       .order("id", { ascending: true })
@@ -620,6 +667,7 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
     if (batch.length < pageSize) break;
   }
 
+  const scanBursts = metaScanBursts(rows);
   rows = rows.filter(
     (row) => !isBeforeRecordingStart(row.path, row.created_at) && !isCalculatorStepPath(row.path)
   );
@@ -634,6 +682,7 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
 
   function isBotRow(row: (typeof rows)[number], day: string): boolean {
     if (isKnownBotIncident(row.path, row.created_at)) return true;
+    if (isMetaScanRow(row, scanBursts)) return true;
     if (row.user_agent) {
       if (matchesKnownBotPattern(row.user_agent)) return true;
       const key = `${day}|${row.path}|${row.user_agent}`;
@@ -683,10 +732,12 @@ export async function comparePageViewsByDay(dateA: string, dateB: string): Promi
 // and the per-path source breakdown (getPageViewSourcesForPath) so the two
 // can never disagree about which rows are real. Returns a predicate rather
 // than a filtered array because the duplicate-UA rule needs the whole set
-// counted first.
-function isBotRowForPath<T extends { created_at: string; user_agent: string | null }>(
+// counted first. `scanBursts` comes from loadMetaScanBursts, since one
+// path's rows can't show a Meta scan's other pages.
+function isBotRowForPath<T extends { created_at: string; user_agent: string | null; referrer_host: string | null }>(
   path: string,
-  rows: T[]
+  rows: T[],
+  scanBursts: MetaScanBurst[]
 ): (row: T) => boolean {
   const dayUaCounts = new Map<string, number>();
   for (const row of rows) {
@@ -698,6 +749,7 @@ function isBotRowForPath<T extends { created_at: string; user_agent: string | nu
 
   return (row: T) => {
     if (isKnownBotIncident(path, row.created_at)) return true;
+    if (isMetaScanRow(row, scanBursts)) return true;
     if (row.user_agent) {
       if (matchesKnownBotPattern(row.user_agent)) return true;
       const key = `${ukDay(row.created_at)}|${row.user_agent}`;
@@ -720,17 +772,23 @@ export interface PageViewDailyCount {
 // page_views table only exists from 2026-08-19 (when view tracking was
 // added), so any page published before then will show a truncated history
 // starting there instead of its real publish date. Pass `days` to instead
-// start from N days ago. Same bot exclusions as getPageViewStats.
-export async function getPageViewsForPath(path: string, days?: number): Promise<PageViewDailyCount[]> {
+// start from N days ago. Same bot exclusions as getPageViewStats. A caller
+// asking for many paths at once (the click-out reports) loads the Meta scan
+// bursts once and passes them in, rather than having each path read them.
+export async function getPageViewsForPath(
+  path: string,
+  days?: number,
+  scanBursts?: MetaScanBurst[]
+): Promise<PageViewDailyCount[]> {
   const supabase = adminClient();
   const since = days ? new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString() : null;
 
-  let rows: { created_at: string; user_agent: string | null }[] = [];
+  let rows: { created_at: string; user_agent: string | null; referrer_host: string | null }[] = [];
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     let query = supabase
       .from("page_views")
-      .select("created_at, user_agent")
+      .select("created_at, user_agent, referrer_host")
       .eq("path", path)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
@@ -750,7 +808,7 @@ export async function getPageViewsForPath(path: string, days?: number): Promise<
 
   rows = rows.filter((row) => !isBeforeRecordingStart(path, row.created_at));
 
-  const isBotRow = isBotRowForPath(path, rows);
+  const isBotRow = isBotRowForPath(path, rows, scanBursts ?? (await loadMetaScanBursts(since)));
 
   const counts = new Map<string, number>();
   for (const row of rows) {
@@ -841,7 +899,7 @@ export async function getPageViewSourcesForPath(
 
   rows = rows.filter((row) => !isBeforeRecordingStart(path, row.created_at));
 
-  const isBot = isBotRowForPath(path, rows);
+  const isBot = isBotRowForPath(path, rows, await loadMetaScanBursts(since));
   const humanRows = rows.filter((row) => !isBot(row));
 
   const groupMap = new Map<PageViewSourceGroup, Map<string, number>>();
@@ -917,7 +975,7 @@ export async function getPageViewSourceDaysForPath(path: string, since: string):
   }
 
   rows = rows.filter((row) => !isBeforeRecordingStart(path, row.created_at));
-  const isBot = isBotRowForPath(path, rows);
+  const isBot = isBotRowForPath(path, rows, await loadMetaScanBursts(ukDayStart(since)));
 
   const byDay = new Map<string, { total: number; search: number; paid: number }>();
   for (const row of rows) {
@@ -973,6 +1031,10 @@ export async function getPageViewStats(
     if (batch.length < pageSize) break;
   }
 
+  // From every path, before the prefix and step filters narrow the rows: on
+  // the Coach App tab the scan's other pages would otherwise be gone.
+  const scanBursts = metaScanBursts(rows);
+
   if (options.pathPrefixes) {
     const prefixes = options.pathPrefixes;
     rows = rows.filter((row) => matchesPathPrefixes(row.path, prefixes));
@@ -998,6 +1060,7 @@ export async function getPageViewStats(
 
   function isBotRow(row: (typeof rows)[number], day: string): boolean {
     if (isKnownBotIncident(row.path, row.created_at)) return true;
+    if (isMetaScanRow(row, scanBursts)) return true;
     if (row.user_agent) {
       if (matchesKnownBotPattern(row.user_agent)) return true;
       const key = `${day}|${row.path}|${row.user_agent}`;
@@ -1273,6 +1336,7 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
   const rows: {
     path: string;
     created_at: string;
+    referrer_host: string | null;
     user_agent: string | null;
     banner_variant: string | null;
   }[] = [];
@@ -1280,7 +1344,7 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, created_at, user_agent, banner_variant")
+      .select("path, created_at, referrer_host, user_agent, banner_variant")
       .gte("created_at", since)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
@@ -1306,8 +1370,11 @@ export async function getBannerVariantStats(days: number = 30): Promise<BannerVa
     byDay.set(date, bucket);
   }
 
+  const scanBursts = metaScanBursts(rows);
+
   for (const row of rows) {
     if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
+    if (isMetaScanRow(row, scanBursts)) continue;
 
     const day = ukDay(row.created_at);
 

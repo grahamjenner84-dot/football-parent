@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
+import { isMetaScanRow, type MetaScanBurst } from "@/lib/meta-link-scan";
+import { loadMetaScanBursts } from "@/lib/supabase/page-views";
 import { classifyReferrerHost } from "@/lib/referrer-sources";
 import { ANDROID_INSTALL_LANDING_PATH } from "@/lib/coach-app-android";
 import { ukDay } from "@/lib/uk-day";
@@ -415,21 +417,28 @@ const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
 // again from SHARE_BANNER_KEPT_FROM.
 async function countShareBannerImpressions(
   supabase: ReturnType<typeof adminClient>,
-  since: string
+  since: string,
+  scanBursts: MetaScanBurst[]
 ): Promise<number> {
   let count = 0;
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, user_agent, created_at")
+      .select("path, referrer_host, user_agent, created_at")
       .gte("created_at", since)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
     if (error) throw new Error("Failed to read page_views: " + error.message);
-    const batch = (data ?? []) as { path: string; user_agent: string | null; created_at: string }[];
+    const batch = (data ?? []) as {
+      path: string;
+      referrer_host: string | null;
+      user_agent: string | null;
+      created_at: string;
+    }[];
     for (const row of batch) {
       if (row.path.startsWith(COACHING_PREFIX) || !isHuman(row.user_agent)) continue;
+      if (isMetaScanRow(row, scanBursts)) continue;
       const slug = row.path.split("/").filter(Boolean).pop();
       if (row.created_at < PARENT_ARTICLE_BANNER_ENDED_AT) {
         if (slug && SHARE_AUDIENCE_SLUGS.has(slug)) count++;
@@ -458,6 +467,11 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   const clampedToTrackingStart = trackingStart > requestedSince;
   const since = new Date(Math.max(requestedSince, trackingStart)).toISOString();
 
+  // Each read below is one slice of page_views, which can't show a Meta
+  // link scan's other pages, so the scans are found once up front.
+  const scanBursts = await loadMetaScanBursts(since);
+  const isHumanView = (r: ViewRow) => isHuman(r.user_agent) && !isMetaScanRow(r, scanBursts);
+
   const [landingRows, signInRows, coachingRows, signupResult, sharing, shareBannerImpressions, usage] = await Promise.all([
     readViews(supabase, since, { like: `${LANDING_PREFIX}%` }),
     readViews(supabase, since, { eq: SIGN_IN_PATH }),
@@ -473,7 +487,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     getCoachAppShareStats(days, since).catch((err: unknown) => ({
       error: err instanceof Error ? err.message : "Unknown error",
     })),
-    countShareBannerImpressions(supabase, since),
+    countShareBannerImpressions(supabase, since, scanBursts),
     getCoachAppUsage(supabase, days).catch((err: unknown) => ({
       error: err instanceof Error ? err.message : "Unknown error",
     })),
@@ -486,15 +500,15 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     COACH_APP_CHANNELS.map((channel) => [channel, { channel, landingViews: 0, signInViews: 0, signups: 0 }])
   );
   for (const row of landingRows) {
-    if (isHuman(row.user_agent)) byChannel.get(channelForPageView(row))!.landingViews++;
+    if (isHumanView(row)) byChannel.get(channelForPageView(row))!.landingViews++;
   }
   for (const row of coachingRows) {
-    if (row.path === CALCULATOR_PATH && isHuman(row.user_agent) && channelForPageView(row) === "Google Ads") {
+    if (row.path === CALCULATOR_PATH && isHumanView(row) && channelForPageView(row) === "Google Ads") {
       byChannel.get("Google Ads")!.landingViews++;
     }
   }
   for (const row of signInRows) {
-    if (isHuman(row.user_agent)) byChannel.get(channelForPageView(row))!.signInViews++;
+    if (isHumanView(row)) byChannel.get(channelForPageView(row))!.signInViews++;
   }
   for (const row of signupRows) byChannel.get(signupChannel(row))!.signups++;
 
@@ -520,7 +534,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     return row;
   };
   for (const r of [...landingRows, ...signInRows, ...coachingRows.filter((c) => c.path === CALCULATOR_PATH)]) {
-    if (!isHuman(r.user_agent)) continue;
+    if (!isHumanView(r)) continue;
     const row = formRow(r.path);
     row.views = (row.views ?? 0) + 1;
   }
@@ -542,7 +556,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     dayMap.set(d, day);
   }
 
-  const humanCoaching = coachingRows.filter((r) => isHuman(r.user_agent));
+  const humanCoaching = coachingRows.filter(isHumanView);
   const groupMap = new Map<string, number>();
   const articleMap = new Map<string, CoachingArticleRow>();
   for (const r of humanCoaching) {

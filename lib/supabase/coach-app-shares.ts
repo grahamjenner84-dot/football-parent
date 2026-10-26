@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
+import { isMetaScanRow } from "@/lib/meta-link-scan";
+import { loadMetaScanBursts } from "@/lib/supabase/page-views";
 // utm_source on the link the share button sends: a page view carrying it is
 // a coach (or whoever) opening what a parent sent them.
 import { SHARED_LINK_UTM_SOURCE } from "@/lib/coach-app-channels";
@@ -135,9 +137,9 @@ export async function getCoachAppShareStats(days: number = 30, startAt?: string)
   const since = new Date(sinceMs).toISOString();
 
   type TapRow = { path: string; banner_variant: string; method: string; user_agent: string | null; created_at: string };
-  type VisitRow = { user_agent: string | null; created_at: string };
+  type VisitRow = { referrer_host: string | null; user_agent: string | null; created_at: string };
 
-  const [tapRows, visitRows] = await Promise.all([
+  const [tapRows, visitRows, scanBursts] = await Promise.all([
     readAll<TapRow>(
       (from, to) =>
         supabase
@@ -152,18 +154,21 @@ export async function getCoachAppShareStats(days: number = 30, startAt?: string)
       (from, to) =>
         supabase
           .from("page_views")
-          .select("user_agent, created_at")
+          .select("referrer_host, user_agent, created_at")
           .eq("utm_source", SHARED_LINK_UTM_SOURCE)
           .gte("created_at", since)
           .order("id", { ascending: true })
           .range(from, to),
       "page_views (shared-link visits)"
     ),
+    // A shared link posted on Facebook gets fetched by Meta's link scanner
+    // like any other (lib/meta-link-scan.ts).
+    loadMetaScanBursts(since),
   ]);
 
   const isHuman = (ua: string | null) => !ua || !matchesKnownBotPattern(ua);
   const taps = tapRows.filter((r) => isHuman(r.user_agent));
-  const visits = visitRows.filter((r) => isHuman(r.user_agent));
+  const visits = visitRows.filter((r) => isHuman(r.user_agent) && !isMetaScanRow(r, scanBursts));
 
   const cancelled = taps.filter((r) => r.method === "share-cancelled").length;
   const shares = taps.length - cancelled;

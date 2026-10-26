@@ -1,6 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
-import { getPageViewsForPath } from "@/lib/supabase/page-views";
+import { getPageViewsForPath, loadMetaScanBursts } from "@/lib/supabase/page-views";
 import { datesBetween, ukDay, ukToday } from "@/lib/uk-day";
 import { getAffiliateProductNames, normalizeAffiliateHref } from "@/lib/affiliate-products";
 
@@ -323,6 +323,8 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
   });
 
   const rankedPaths = Array.from(pathCounts.entries()).sort((a, b) => b[1] - a[1]);
+  // Once for every page below, rather than once per page.
+  const scanBursts = await loadMetaScanBursts(since);
 
   const byPage: AffiliateClickPage[] = await Promise.all(
     rankedPaths.map(async ([path, clicks], index) => {
@@ -338,7 +340,7 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
       // days back, and the window here is usually a partial day since
       // tracking went live rather than a whole number of them.
       const windowDays = (Date.now() - sinceMs) / (24 * 60 * 60 * 1000);
-      const daily = await getPageViewsForPath(path, windowDays).catch(() => []);
+      const daily = await getPageViewsForPath(path, windowDays, scanBursts).catch(() => []);
       const pageViews = daily.reduce((sum, d) => sum + d.count, 0);
 
       return {

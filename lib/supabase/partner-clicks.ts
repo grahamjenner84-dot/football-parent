@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
-import { getPageViewsForPath } from "@/lib/supabase/page-views";
+import { getPageViewsForPath, loadMetaScanBursts } from "@/lib/supabase/page-views";
+import { isMetaScanRow } from "@/lib/meta-link-scan";
 import { datesBetween, ukDay, ukToday } from "@/lib/uk-day";
 import { OUTBOUND_PARTNERS } from "@/lib/outbound-partners";
 import { getAllArticleSlugs, getArticleSlugsUsing } from "@/lib/content";
@@ -139,20 +140,27 @@ async function getInstagramImpressions(
   const articleSlugs = getAllArticleSlugs();
   const promoSlugs = getArticleSlugsUsing("<InstagramPromo");
   const counts = new Map<string, number>();
+  const scanBursts = await loadMetaScanBursts(since);
 
   const pageSize = 1000;
   for (let from = 0; ; from += pageSize) {
     const { data, error } = await supabase
       .from("page_views")
-      .select("path, user_agent")
+      .select("path, referrer_host, user_agent, created_at")
       .gte("created_at", since)
       .order("id", { ascending: true })
       .range(from, from + pageSize - 1);
     if (error) throw new Error("Failed to read page_views: " + error.message);
 
-    const batch = (data ?? []) as { path: string; user_agent: string | null }[];
+    const batch = (data ?? []) as {
+      path: string;
+      referrer_host: string | null;
+      user_agent: string | null;
+      created_at: string;
+    }[];
     for (const row of batch) {
       if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
+      if (isMetaScanRow(row, scanBursts)) continue;
       if (row.path.startsWith("/admin")) continue;
       for (const p of instagramPlacementsOnPath(row.path, articleSlugs, promoSlugs)) {
         counts.set(p, (counts.get(p) ?? 0) + 1);
@@ -363,6 +371,8 @@ export async function getPartnerClickStats(
   });
 
   const rankedPaths = Array.from(pathCounts.entries()).sort((a, b) => b[1] - a[1]);
+  // Once for every page below, rather than once per page.
+  const scanBursts = await loadMetaScanBursts(since);
 
   const byPage: PartnerClickPage[] = await Promise.all(
     rankedPaths.map(async ([path, clicks], index) => {
@@ -375,7 +385,7 @@ export async function getPartnerClickStats(
       // Page views tab counts it. Fractional days: getPageViewsForPath takes a
       // number of days back and this window is usually a partial day.
       const windowDays = (Date.now() - sinceMs) / (24 * 60 * 60 * 1000);
-      const daily = await getPageViewsForPath(path, windowDays).catch(() => []);
+      const daily = await getPageViewsForPath(path, windowDays, scanBursts).catch(() => []);
       const pageViews = daily.reduce((sum, d) => sum + d.count, 0);
 
       return {
