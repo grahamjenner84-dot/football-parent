@@ -1867,3 +1867,27 @@ Title "Indoor Football Training for Kids: Drills, Games and Kit for Home". Four 
 - Inbound link (`a5fd50c`): `/coaching/football-drills-for-7-and-8-year-olds`, garden drills intro, one clause added after the goals link ("for dark or wet evenings our guide to indoor football training for kids..."). Additive; last change there 9 Oct. The rebounders guide (title 13 Oct) and how much training (23 Oct) are on watch, so not touched.
 - Review pass (`7635064`): signposting line after the intro cut; nutmeg challenge rule made specific; "pop-up goals the size of a doorway" now "about 2.5ft wide"; "best training partner" cliché and the dome cone claim rewritten. Facts checked against the Amazon listings (FPRO 2m by 2m, SoftStrike size 4 soft foam, Mitre mini stitched, FORZA Wave floor board), the site's own size 3 to Under 11 guidance, and England Football Learning's Play Phase sessions.
 - Three more inbound links (`6391bd8`), all on pages off watch (last edited 22 Sept to 12 Oct): `/football-gear/best-footballs-by-age` (training balls paragraph: soft or mini ball indoors), `/football-development/good-football-development-environment` (ball contact paragraph, after the ball mastery drills link), `/football-development/what-is-football-iq` (garden 1v1 bullet: the same game in a living room). Four inbound links in total.
+
+## Weekly SEO check 2026-10-29
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-10-29.md`. GSC to 26 Oct, page views to 28 Oct, windows from `scripts/seo/cli/change-impact.ts`. Site 28 vs 28 days: impressions +19%, clicks +7%, same-query position 8.9 to 8.1.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| shin pads FAQ | 9 Oct | 0838cfe | Keep | Rule not met: guards 2.5 to 2.1 and 2.2 to 2.9; weekly clicks 90, 74, 51, 51 (slide stopped; "best" query demand down at steady top 3) | Closed |
+| stats apps title | 13 Oct | 9a01843 | Revert candidate (Graham) | Clicks 24 to 16, CTR 5.1% to 2.7%, same-query position not worse | Graham to decide |
+| Arsenal title | 14 Oct | 323e632 | Keep (neutral) | Guards 6.3 to 6.6, 4.2 to 4.1; CTR 0.79%; "arsenal academy trials" 6.8 to 6.4 | Closed |
+| Crystal Palace title | 16 Oct | 65295d9 | Keep, provisional | Same-query 7.9 to 6.5, CTR 0.60% to 0.79%, guards flat or up | Read again 2 Nov |
+| Veo title | 16 Oct | e47d978 | Neutral, keep | Same-query 6.4 to 6.0, CTR 0.83% to 0.79%, price clicks not up | Read again 2 Nov |
+| soft ground title | 16 Oct | 624961c | Keep | Clicks 6 to 12, CTR 0.63% to 0.90% | Closed |
+| ETC definition first | 16 Oct | 3ef42ee | Neutral, keep | "etc football" 4.1 to 4.3, "emerging talent centre" 7.0 to 8.1 | AI Overview recheck ~30 Oct |
+| 10 shortened titles | 13 Oct | see entry | Closed, not readable | New pages or too small | Closed |
+| calculator indexifembedded | 18 Oct | 39e4ea0 | Worked | 0 to 560 impressions, 15 clicks in a week, calculator queries 5-7.6 | Read again 8 Nov |
+| equal playing time article | 18 Oct | ed79a0c | Keep (not a slip) | Impressions 1,008 to 458 at steady position: calculator took its calculator queries; combined clicks 13 to 18 | Closed |
+| Coach App page | 18 Oct | 8952367 | Too early | 2 to 46 impressions | Read again 5 Nov |
+| grassroots apps roundup | 18 Oct | 76f2c08 etc. | Keep, looks good | Same-query 18.2 to 14.7, "football coaching app" 16.4 to 8.8 | Read again 1 Nov |
+| Brentford title | 22 Oct | 511fff2 | Too early, promising | Clicks 2 to 14, CTR 0.30% to 1.16% (4 days) | Read again 5 Nov |
+| Leeds title | 22 Oct | 7c59443 | Too early, flag | CTR 1.48% to 0.80% (4 days), guards fine | Read again 2 Nov |
+| Chelsea title | 22 Oct | 3212dcf | Too early, flag | Guard "chelsea player performance centre" 1.9 to no impressions; "chelsea pre academy" 6.3 to 4.6 | Read again 2 Nov |
+
+Shortlist put to Graham: base layers title (thermals), FA youth format age table (AI Overview check first), shin pads meta description, academy categories SERP check.
