@@ -1891,3 +1891,29 @@ Full write-up: `seo-data/exports/weekly-seo-check-2026-10-29.md`. GSC to 26 Oct,
 | Chelsea title | 22 Oct | 3212dcf | Too early, flag | Guard "chelsea player performance centre" 1.9 to no impressions; "chelsea pre academy" 6.3 to 4.6 | Read again 2 Nov |
 
 Shortlist put to Graham: base layers title (thermals), FA youth format age table (AI Overview check first), shin pads meta description, academy categories SERP check.
+
+## 29 Oct 2026: three changes from the weekly check
+
+One lever per page, one commit each. Baselines are GSC to 26 Oct (`inspect_page`). Watch all three until ~12 Nov.
+
+**`/parent-guides/best-football-stats-apps` (`caa1bf6`): 13 Oct title shortening reverted.**
+- Before: "Best Football Stats Apps for Kids and Grassroots (2026)"
+- After (back to the launch title): "Best Football Stats Apps for Kids and Grassroots Players (2026) | Football Parent"
+- Why: after 9a01843, clicks 24 to 16 and CTR 5.1% to 2.7% (13 days each side) with the same-query position not worse. The shortening had no target query. Graham's call, 29 Oct.
+- Baseline (28 days): 1,123 impressions, 43 clicks, position 6.6, CTR 3.8%. Weekly CTR 6.4% (6 Oct), 2.9% (13 Oct), 2.3% (20 Oct).
+- Read: weekly CTR back above ~4% at a similar position means the title was the cause; if it stays at 2-3%, it was the launch bump fading and the short title can return if needed.
+
+**`/football-gear/best-football-base-layers-for-kids` (`1e3e408`): `<title>` only.**
+- Before: "Football Skins for Kids: The Best Base Layers for Winter"
+- After: "Football Skins and Thermals for Kids: Best Base Layers" (Graham's option A)
+- Why: thermal queries rank 10.5-11.6 with no clicks while the body says thermal(s) 21 times and the title didn't. Winter demand peaks now.
+- Baseline (since launch, 13-26 Oct): 7,830 impressions, 66 clicks, position 8.6, CTR 0.8%. "kids football thermals" 11.0 (184), "kids thermal base layer football" 10.5 (84), "football thermals kids" 10.8 (76), "boys football thermals" 11.6 (61). Guards: "kids football skins" 8.8 (313), "football skins for juniors" 9.0 (168), "boys football skins" 10.6 (207).
+- Revert rule: a skins guard loses more than ~2 places and holds for a week, or page CTR below 0.6% for two weeks running.
+
+**`/football-development/new-fa-youth-football-format` (`21d2667`): age-group format table at the top of "What Is Changing?". Live traffic page.**
+- Additive: the lead sentence now introduces a five-row table (U7 3v3, U8-U9 5v5, U10-U11 7v7, U12-U13 9v9, U14+ 11v11) and one line ("children now start 11-a-side football at Under-14, a year later than before"); the existing bullets follow unchanged. Facts are the article's own, from the FA's Know Your Format guide. No heading, link or section removed. Last change 9 Oct (goals link).
+- Why: clicks 126 to 57 over 28 days, weekly 22, 10, 12, 3, position 5.0 to 5.7 (6.1 last week). Its queries are "what age is 11-a-side" questions where it ranks 1.6-5 with no clicks, the AI Overview pattern. Aim: an AI Overview citation and snippet-friendly answer. No SERP check run first (Graham's call).
+- Baseline (28 days): 6,097 impressions, 57 clicks, position 5.7, CTR 0.9%. "fa age group team sizes" 6.5 (82), "is under 11 football 9 a side" 7.4 (57), "what age do you start playing 11 a side football" 5.8 (50), "when do kids play 11 a side" 3.7 (49), "is under 13 football 11 a side" 4.9 (44), "what age do kids play 11 aside football" 1.6 (29).
+- Revert rule: page position worse than 7.0, or clicks below the 20-26 Oct week (3) for two weeks running, net of the site. Demand is seasonal (September peak), so judge on positions and CTR.
+
+**Checked, not changed: `/academy-pathway/academy-categories-explained` CTR** (`ai-overview-check.ts`, $0.012, 29 Oct). AI Overview on "cat 1 academy", "cat 4 academies list" and "football academy categories"; we are cited in all three (source #2-3). The 1.2% CTR is the AI Overview, so no title change. Possible later lever, not queued: the "cat X academies list" queries (about 2,500 impressions in 28 days at 7-10) want club lists by category, which the page does not give.
