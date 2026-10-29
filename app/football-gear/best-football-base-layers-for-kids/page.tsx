@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Skins for Kids: The Best Base Layers for Winter",
+  title: "Football Skins and Thermals for Kids: Best Base Layers",
   description: "In matches, kids' football skins must match the shirt sleeve colour. Skins vs thermals, sizing, leggings and snoods, plus base layer picks for winter.",
   path: "/football-gear/best-football-base-layers-for-kids",
 });
