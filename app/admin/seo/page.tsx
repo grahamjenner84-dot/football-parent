@@ -3403,6 +3403,66 @@ function ProgressActivationSection({ usage }: { usage: ProgressFunnel["usage"] }
   );
 }
 
+// The /academy-pathway category page's own banner, before vs after it moved
+// above the intro copy (PROMO_ABOVE_INTRO_FROM in category-page.tsx). The
+// placement table can't show this: its Academy Pathway row also covers the
+// section's articles.
+function AcademyPathwayPageSection({
+  page,
+  pct,
+}: {
+  page: ProgressFunnel["academyPathwayPage"];
+  pct: (a: number, b: number) => string;
+}) {
+  const at = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const rows = [
+    { label: `Below the intro (${at(page.before.from)} to ${at(page.movedAt)})`, p: page.before },
+    { label: `Above the intro (since ${at(page.movedAt)})`, p: page.after },
+  ];
+  return (
+    <>
+      <FunnelHeading>Academy Pathway page banner, before vs after the move</FunnelHeading>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={funnelTh}>Banner position</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Page views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Banners seen</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Seen / views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Clicks / views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>CTR on seen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ label, p }) => (
+              <tr key={label}>
+                <td style={funnelTd}>{label}</td>
+                <td style={funnelNum}>{p.views}</td>
+                <td style={funnelNum}>{p.seen}</td>
+                <td style={funnelNum}>{pct(p.seen, p.views)}</td>
+                <td style={funnelNum}>{p.clicks}</td>
+                <td style={funnelNum}>{pct(p.clicks, p.views)}</td>
+                <td style={funnelNum}>{pct(p.clicks, p.seen)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <SectionNote label="How this is counted">
+        The /academy-pathway page on its own, whatever the window above. Clicks
+        are landings on /progress with the page&rsquo;s untagged
+        progress-academy-pathway link, so this starts when the banner test
+        did: from then the section&rsquo;s articles tag theirs -a or -b.
+        Moving the banner up should lift Seen / views; Clicks / views says
+        whether that turned into more clicks. At about five views a day, give
+        it a few weeks before reading anything into it.
+      </SectionNote>
+    </>
+  );
+}
+
 const PLACEMENT_LABEL: Record<string, string> = {
   home: "Homepage",
   article: "End of articles",
@@ -3535,6 +3595,8 @@ function ProgressPipelineTab({ funnel }: { funnel: ProgressFunnel }) {
         the banners seen. With JavaScript off a banner can be clicked without
         being counted as seen.
       </SectionNote>
+
+      <AcademyPathwayPageSection page={funnel.academyPathwayPage} pct={pct} />
 
       <ProgressBannerTestSection test={funnel.bannerTest} />
 
