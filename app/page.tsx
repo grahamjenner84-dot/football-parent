@@ -62,6 +62,58 @@ const categories = [
   },
 ];
 
+// Picked 30 Oct 2026 from Search Console and page views: the most read
+// guides plus the ones with the most impressions still ranking around 6-9.
+// Pages on an SEO watch were left out (Leeds, Chelsea, Brentford, Crystal
+// Palace, Veo, base layers); swap in once their reads are done.
+const popularGuides = [
+  {
+    href: "/academy-pathway/academy-categories-explained",
+    label: "Academy Pathway",
+    title: "Football academy categories explained",
+  },
+  {
+    href: "/academy-pathway/how-academy-football-works",
+    label: "Academy Pathway",
+    title: "How academy football works in the UK",
+  },
+  {
+    href: "/academy-pathway/football-scholarships-uk",
+    label: "Academy Pathway",
+    title: "Football scholarships in the UK",
+  },
+  {
+    href: "/academy-pathway/arsenal-development-centre-guide",
+    label: "Academy Pathway",
+    title: "Arsenal academy and development centre guide",
+  },
+  {
+    href: "/parent-guides/what-is-the-junior-premier-league",
+    label: "Parent Guides",
+    title: "What is the Junior Premier League (JPL)?",
+  },
+  {
+    href: "/parent-guides/what-is-grassroots-football",
+    label: "Parent Guides",
+    title: "What is grassroots football?",
+  },
+  {
+    href: "/football-gear/shin-pads/best-shin-pads-for-kids-football",
+    label: "Football Gear",
+    title: "Best shin pads for kids",
+  },
+  {
+    href: "/football-gear/best-footballs-by-age",
+    label: "Football Gear",
+    title: "Football sizes by age",
+  },
+  {
+    href: "/football-gear/boots/best-football-boots-for-wide-feet-kids",
+    label: "Football Gear",
+    title: "Best football boots for kids with wide feet",
+  },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
@@ -113,6 +165,29 @@ export default function Home() {
           2 Oct 2026 (it was the Coach App's parent banner until then). */}
       <section className="mx-auto max-w-6xl px-5 pb-12 md:pb-16">
         <ProgressBanner placement="home" />
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-12 md:pb-16">
+        <h2 className="mb-6 text-3xl font-bold tracking-tight text-slate-950">
+          Popular guides
+        </h2>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {popularGuides.map((guide) => (
+            <Link
+              key={guide.href}
+              href={guide.href}
+              className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition duration-200 hover:border-slate-300 hover:shadow-md"
+            >
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                {guide.label}
+              </p>
+              <h3 className="text-lg font-semibold leading-snug text-slate-950 group-hover:text-emerald-700">
+                {guide.title}
+              </h3>
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="border-t border-slate-200 bg-white">
