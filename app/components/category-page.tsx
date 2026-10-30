@@ -42,11 +42,12 @@ type CategoryPageProps = {
 };
 
 // When /coaching and /academy-pathway moved their promo from "grid" to "top":
-// the deploy that shipped it. The Progress pipeline reads the Academy
-// Pathway page's banner before vs after this (lib/supabase/progress-
-// funnel.ts); the Coach App banner report's category row is /coaching alone,
-// so its before/after is the same row read either side of this time.
-export const PROMO_ABOVE_INTRO_FROM = "2026-10-30T14:15:00Z";
+// the deploy that shipped it (live between 14:04:07 and 14:04:28 UTC). The
+// Progress pipeline reads the Academy Pathway page's banner before vs after
+// this (lib/supabase/progress-funnel.ts); the Coach App banner report's
+// category row is /coaching alone, so its before/after is the same row read
+// either side of this time.
+export const PROMO_ABOVE_INTRO_FROM = "2026-10-30T14:04:20Z";
 
 export default function CategoryPage({
   eyebrow,
