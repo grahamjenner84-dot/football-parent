@@ -48,6 +48,13 @@ From `seo-data/exports/xmas-affiliate-seasonality-2026-10-22.md`. "football gift
 - **Fold into the QuickPlay indoor training article:** "football training equipment" (12,100 in Nov, 2.3x). Mostly shops, two buying guides at #5 and #8.
 - **Ruled out:** boot bags (shops-only SERP), "black friday football boots" (retailer deal pages), skills mats (20 Oct), garden goals (peak May).
 
+### Section banners above the intro (watch to 13 Nov, read about 27 Nov)
+
+- **What:** the Coach App banner on `/coaching` and the Progress banner on `/academy-pathway` moved from above the guide grid to above the intro on 30 Oct (`PROMO_ABOVE_INTRO_FROM`). Baselines in the change log.
+- **To about 13 Nov:** `/academy-pathway` rankings and clicks (live traffic; its average position was already drifting from about 13 to 20 before the move). Don't move its intro copy below the grid until this is read.
+- **About 27 Nov:** clicks per view before vs after. `/coaching`: Coach App tab, `sponsor-coach-category` row. `/academy-pathway`: Progress pipeline tab, "Academy Pathway page banner" table (or `get_progress_funnel.academyPathwayPage`). Keep the new position if clicks per view hold or rise; move back (`promoPosition` off) if they fall clearly.
+- **Then:** moving the long intro copy below the guide grid on the category pages, one page at a time, low-traffic pages first and `/academy-pathway` last (Graham, 30 Oct: an idea, not decided).
+
 ### Internal links held from the 30 Oct link audit
 
 See the change log (30 Oct). One link per page, each in its own commit, once the page is off watch.
