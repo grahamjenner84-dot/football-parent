@@ -20,7 +20,10 @@ export default function AcademyPathwayPage() {
         "The football academy system in the UK is structured around the Elite Player Performance Plan, which divides clubs into Category 1 to 4 academies with different levels of resource, coaching, and player commitment. Alongside full academies, most professional clubs also run development centres that are open to a wider range of players. Understanding where your child fits in this pathway, and what each stage actually involves, is what these guides are designed to help with. Written from first-hand experience of Crystal Palace and Chelsea's development programmes in south London.",
       ]}
       // Progress sponsors this section (the strapline version of its banner).
+      // Above the intro from PROMO_ABOVE_INTRO_FROM (Graham, 2026-10-30), so
+      // it's on a phone's first screen.
       promo={<ProgressBanner placement="academy-pathway" />}
+      promoPosition="top"
       startHere={{
         title: "Start Here",
         description:
