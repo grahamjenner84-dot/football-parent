@@ -57,8 +57,10 @@ export default function CoachingPage() {
       // starts, how minutes get shared out, and the admin that eats the
       // week. The sponsor version (the dark creative plus "Coaching is
       // supported by"): the Coach App is the section's house sponsor until a
-      // paying one takes the slot.
+      // paying one takes the slot. Above the intro from PROMO_ABOVE_INTRO_FROM
+      // (Graham, 2026-10-30), so it's on a phone's first screen.
       promo={<CoachAppBanner audience="coach" style="sponsor" placement="category" />}
+      promoPosition="top"
       articles={[
         {
           title: "What Qualifications Do You Need to Be a Football Coach?",

@@ -33,10 +33,20 @@ type CategoryPageProps = {
   startHere?: StartHereSection;
   articlesHeading?: string;
   bottomContent?: BottomContentSection;
-  // Section-level promo rendered directly above the guide grid. Optional:
-  // most categories don't have one.
+  // Section-level promo. Optional: most categories don't have one.
   promo?: ReactNode;
+  // Where the promo sits: "grid" (the original slot, directly above the
+  // guide grid, below the intro and Start Here) or "top" (straight under the
+  // header, above the intro copy, so it's on a phone's first screen).
+  promoPosition?: "top" | "grid";
 };
+
+// When /coaching and /academy-pathway moved their promo from "grid" to "top":
+// the deploy that shipped it. The Progress pipeline reads the Academy
+// Pathway page's banner before vs after this (lib/supabase/progress-
+// funnel.ts); the Coach App banner report's category row is /coaching alone,
+// so its before/after is the same row read either side of this time.
+export const PROMO_ABOVE_INTRO_FROM = "2026-10-30T14:15:00Z";
 
 export default function CategoryPage({
   eyebrow,
@@ -48,7 +58,10 @@ export default function CategoryPage({
   articlesHeading = "All Guides",
   bottomContent,
   promo,
+  promoPosition = "grid",
 }: CategoryPageProps) {
+  const promoTop = !!promo && promoPosition === "top";
+
   return (
     <main className="min-h-screen bg-slate-50 text-slate-900">
       <section className="border-b border-slate-200 bg-white">
@@ -67,9 +80,11 @@ export default function CategoryPage({
         </div>
       </section>
 
-      {((intro && intro.length > 0) || startHere) && (
+      {((intro && intro.length > 0) || startHere || promoTop) && (
         <section className="border-b border-slate-200 bg-white">
           <div className="mx-auto max-w-6xl px-5 pt-6 pb-10">
+            {promoTop && <div className="mb-8 max-w-3xl">{promo}</div>}
+
             {intro && intro.length > 0 && (
               <div className="max-w-3xl space-y-4 text-base leading-7 text-slate-600">
                 {intro.map((paragraph, index) => (
@@ -110,7 +125,7 @@ export default function CategoryPage({
       )}
 
       <section className="mx-auto max-w-6xl px-5 py-12 md:py-16">
-        {promo && <div className="mb-12">{promo}</div>}
+        {promo && !promoTop && <div className="mb-12">{promo}</div>}
 
         <h2 className="mb-6 text-2xl font-bold tracking-tight text-slate-950">
           {articlesHeading}

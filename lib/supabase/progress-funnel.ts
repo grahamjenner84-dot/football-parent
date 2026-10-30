@@ -19,6 +19,7 @@ import {
 } from "@/lib/progress-banner-test";
 import { PROGRESS_FORM_STEP_PREFIX } from "@/lib/progress-form-tracking";
 import { ukDay } from "@/lib/uk-day";
+import { PROMO_ABOVE_INTRO_FROM } from "@/app/components/category-page";
 
 // The Progress pipeline: the "Progress pipeline" tab on /admin/seo, the
 // Progress card on its dashboard and the get_progress_funnel MCP tool.
@@ -45,6 +46,11 @@ function adminClient() {
 export const PROGRESS_TRACKING_STARTED_AT = "2026-10-02T13:16:00Z";
 
 const LANDING_PATH = "/progress";
+
+// The Academy Pathway category page and the ?b= value its banner links with
+// (no test arm: the test runs on the section's articles, not this page).
+const ACADEMY_PATHWAY_PATH = "/academy-pathway";
+const ACADEMY_PATHWAY_PAGE_BANNER = "progress-academy-pathway";
 
 // ---------------------------------------------------------------------------
 // Writing (from the public endpoints)
@@ -484,6 +490,19 @@ export interface ProgressBannerTest {
   threshold: number;
 }
 
+/** One period of the /academy-pathway category page's own banner. */
+export interface CategoryBannerPeriod {
+  from: string;
+  /** null: still running. */
+  to: string | null;
+  /** Views of /academy-pathway. */
+  views: number;
+  /** Of those, how many had half the banner on screen. */
+  seen: number;
+  /** Landings on /progress with the page's plain ?b=progress-academy-pathway. */
+  clicks: number;
+}
+
 export interface ProgressFunnel {
   days: number;
   /** Start of every site-side number: the later of `days` ago and
@@ -517,6 +536,13 @@ export interface ProgressFunnel {
   joinsError?: string;
   usage: ProgressUsage | { error: string };
   bannerTest: ProgressBannerTest;
+  /** The banner on the /academy-pathway category page on its own (the
+   * academy-pathway placement also covers the section's articles), before
+   * and after it moved above the intro copy at movedAt. Cumulative whatever
+   * `days` is. Starts at the banner test's start: from then the section's
+   * articles tag their links -a / -b, so the plain progress-academy-pathway
+   * value is this page's (bar a click before an article's banner hydrates). */
+  academyPathwayPage: { movedAt: string; before: CategoryBannerPeriod; after: CategoryBannerPeriod };
   bannerSeen: ProgressBannerSeenInfo;
   /** The join forms' own steps (lib/progress-form-tracking.ts): per form
    * (site/join, site/join-trial, app/sign-in) how many times each step
@@ -551,6 +577,7 @@ type JoinRow = {
 };
 
 type SeenRow = {
+  path: string;
   placement: string;
   arm: string | null;
   user_agent: string | null;
@@ -663,7 +690,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
         for (let from = 0; ; from += pageSize) {
           const { data, error } = await supabase
             .from("progress_banner_seen")
-            .select("placement, arm, user_agent, created_at")
+            .select("path, placement, arm, user_agent, created_at")
             .gte("created_at", readFrom)
             .order("id", { ascending: true })
             .range(from, from + pageSize - 1);
@@ -860,6 +887,33 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     threshold: PROGRESS_BANNER_TEST_THRESHOLD,
   };
 
+  // The /academy-pathway page's own banner, before and after the move. Rows
+  // are read from the test's start whenever it has started (readFrom).
+  const movedMs = Date.parse(PROMO_ABOVE_INTRO_FROM);
+  const before: CategoryBannerPeriod = {
+    from: PROGRESS_BANNER_TEST_STARTED_AT,
+    to: PROMO_ABOVE_INTRO_FROM,
+    views: 0,
+    seen: 0,
+    clicks: 0,
+  };
+  const after: CategoryBannerPeriod = { from: PROMO_ABOVE_INTRO_FROM, to: null, views: 0, seen: 0, clicks: 0 };
+  const periodAt = (createdAt: string) => {
+    const t = Date.parse(createdAt);
+    if (!testStarted || t < testStart) return null;
+    return t < movedMs ? before : after;
+  };
+  for (const v of allViews) {
+    const period = periodAt(v.created_at);
+    if (!period) continue;
+    if (v.path === ACADEMY_PATHWAY_PATH) period.views++;
+    else if (v.path === LANDING_PATH && v.banner_variant === ACADEMY_PATHWAY_PAGE_BANNER) period.clicks++;
+  }
+  for (const r of seenResult.rows) {
+    const period = periodAt(r.created_at);
+    if (period && r.path === ACADEMY_PATHWAY_PATH) period.seen++;
+  }
+
   return {
     days,
     since,
@@ -880,6 +934,7 @@ export async function getProgressFunnel(days: number = 30): Promise<ProgressFunn
     ...(joinsError ? { joinsError } : {}),
     usage,
     bannerTest,
+    academyPathwayPage: { movedAt: PROMO_ABOVE_INTRO_FROM, before, after },
     bannerSeen: {
       startedAt: seenResult.startedAt,
       ...(seenResult.error ? { error: seenResult.error } : {}),
