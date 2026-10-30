@@ -12,7 +12,13 @@ import {
   type CoachAppChannel,
 } from "@/lib/coach-app-channels";
 import { getCoachAppShareStats, type CoachAppShareStats } from "@/lib/supabase/coach-app-shares";
-import { PARENT_ARTICLE_BANNER_ENDED_AT, SHARE_AUDIENCE_SLUGS, shareBannerKeptAt } from "@/app/components/CoachAppBanner";
+import {
+  COACHING_SPONSOR_STARTED_AT,
+  PARENT_ARTICLE_BANNER_ENDED_AT,
+  SHARE_AUDIENCE_SLUGS,
+  shareBannerKeptAt,
+} from "@/app/components/CoachAppBanner";
+import { PROMO_ABOVE_INTRO_FROM } from "@/app/components/category-page";
 
 // Server-only client using the service role key (football-parent-social),
 // same pattern as the other lib/supabase modules. Never import from client
@@ -275,6 +281,21 @@ const COACHING_PREFIX = "/coaching/";
 // (from 2026-10-11). Those ad clicks count as landing views, like the ad
 // variants under LANDING_PREFIX; its organic views stay on the SEO side only.
 const CALCULATOR_PATH = "/coaching/equal-playing-time-calculator";
+// The Coaching category page and the ?b= value of its banner (the sponsor
+// creative, the only banner on the page).
+const COACHING_PAGE_PATH = "/coaching";
+const COACHING_PAGE_BANNER = "sponsor-coach-category";
+
+/** One period of the /coaching category page's own banner. */
+export interface CoachingPageBannerPeriod {
+  from: string;
+  /** null: still running. */
+  to: string | null;
+  /** Views of /coaching. */
+  views: number;
+  /** Landings with ?b=sponsor-coach-category. */
+  clicks: number;
+}
 
 export interface FunnelChannelRow {
   channel: CoachAppChannel;
@@ -356,6 +377,12 @@ export interface CoachAppFunnel {
   /** Whole-app counts from the Coach App database. Not clamped to
    * FUNNEL_TRACKING_STARTED_AT: the totals are all-time by definition. */
   usage: CoachAppUsage | { error: string };
+  /** The banner on the /coaching category page, before and after it moved
+   * above the intro copy at movedAt. Cumulative from when the page got the
+   * sponsor creative (COACHING_SPONSOR_STARTED_AT), whatever `days` is, so
+   * both periods show the same creative. No banner-seen tracking on Coach
+   * App banners, so views and clicks only. */
+  coachingPage: { movedAt: string; before: CoachingPageBannerPeriod; after: CoachingPageBannerPeriod };
 }
 
 type ViewRow = {
@@ -386,7 +413,7 @@ type SignupRow = {
 async function readViews(
   supabase: ReturnType<typeof adminClient>,
   since: string,
-  filter: { like?: string; eq?: string }
+  filter: { like?: string; eq?: string; banner?: string }
 ): Promise<ViewRow[]> {
   const rows: ViewRow[] = [];
   const pageSize = 1000;
@@ -397,6 +424,7 @@ async function readViews(
       .gte("created_at", since);
     if (filter.like) q = q.like("path", filter.like);
     if (filter.eq) q = q.eq("path", filter.eq);
+    if (filter.banner) q = q.eq("banner_variant", filter.banner);
     const { data, error } = await q.order("id", { ascending: true }).range(from, from + pageSize - 1);
     if (error) throw new Error("Failed to read page_views: " + error.message);
     const batch = (data ?? []) as ViewRow[];
@@ -469,10 +497,24 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
 
   // Each read below is one slice of page_views, which can't show a Meta
   // link scan's other pages, so the scans are found once up front.
-  const scanBursts = await loadMetaScanBursts(since);
+  // From the earlier of `since` and the Coaching page's sponsor start, which
+  // its before/after reads from whatever the window.
+  const scanBursts = await loadMetaScanBursts(
+    Date.parse(COACHING_SPONSOR_STARTED_AT) < Date.parse(since) ? COACHING_SPONSOR_STARTED_AT : since
+  );
   const isHumanView = (r: ViewRow) => isHuman(r.user_agent) && !isMetaScanRow(r, scanBursts);
 
-  const [landingRows, signInRows, coachingRows, signupResult, sharing, shareBannerImpressions, usage] = await Promise.all([
+  const [
+    landingRows,
+    signInRows,
+    coachingRows,
+    signupResult,
+    sharing,
+    shareBannerImpressions,
+    usage,
+    coachingPageViews,
+    coachingPageClicks,
+  ] = await Promise.all([
     readViews(supabase, since, { like: `${LANDING_PREFIX}%` }),
     readViews(supabase, since, { eq: SIGN_IN_PATH }),
     readViews(supabase, since, { like: `${COACHING_PREFIX}%` }),
@@ -491,6 +533,8 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     getCoachAppUsage(supabase, days).catch((err: unknown) => ({
       error: err instanceof Error ? err.message : "Unknown error",
     })),
+    readViews(supabase, COACHING_SPONSOR_STARTED_AT, { eq: COACHING_PAGE_PATH }),
+    readViews(supabase, COACHING_SPONSOR_STARTED_AT, { banner: COACHING_PAGE_BANNER }),
   ]);
 
   const signupRows = ((signupResult.data ?? []) as SignupRow[]).filter((r) => isHuman(r.user_agent));
@@ -573,6 +617,19 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     if (group === "Search") a.searchViews++;
   }
 
+  // The /coaching page's own banner, before and after the move.
+  const movedMs = Date.parse(PROMO_ABOVE_INTRO_FROM);
+  const before: CoachingPageBannerPeriod = {
+    from: COACHING_SPONSOR_STARTED_AT,
+    to: PROMO_ABOVE_INTRO_FROM,
+    views: 0,
+    clicks: 0,
+  };
+  const after: CoachingPageBannerPeriod = { from: PROMO_ABOVE_INTRO_FROM, to: null, views: 0, clicks: 0 };
+  const periodAt = (createdAt: string) => (Date.parse(createdAt) < movedMs ? before : after);
+  for (const r of coachingPageViews) if (isHumanView(r)) periodAt(r.created_at).views++;
+  for (const r of coachingPageClicks) if (isHumanView(r)) periodAt(r.created_at).clicks++;
+
   return {
     days,
     since,
@@ -603,5 +660,6 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     shareBannerImpressions,
     ...(signupsError ? { signupsError } : {}),
     usage,
+    coachingPage: { movedAt: PROMO_ABOVE_INTRO_FROM, before, after },
   };
 }
