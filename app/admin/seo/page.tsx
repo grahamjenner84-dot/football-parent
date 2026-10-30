@@ -3899,6 +3899,8 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         </>
       )}
 
+      <CoachingPageSection page={funnel.coachingPage} />
+
       <FunnelHeading>SEO: coaching articles, {windowLabel}</FunnelHeading>
       <p style={styles.sectionNote}>
         {funnel.coachingArticles.totalViews} views of /coaching/ articles,{" "}
@@ -3932,6 +3934,54 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
 
       <SharingReport stats={funnel.sharing} impressions={funnel.shareBannerImpressions} />
     </div>
+  );
+}
+
+// The /coaching category page's own Coach App banner, before vs after it
+// moved above the intro copy (PROMO_ABOVE_INTRO_FROM in category-page.tsx).
+// The Progress pipeline tab has the same table for /academy-pathway.
+function CoachingPageSection({ page }: { page: CoachAppFunnel["coachingPage"] }) {
+  const pct = (a: number, b: number) => (b > 0 ? `${((a / b) * 100).toFixed(1)}%` : "n/a");
+  const at = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const rows = [
+    { label: `Below the intro (${at(page.before.from)} to ${at(page.movedAt)})`, p: page.before },
+    { label: `Above the intro (since ${at(page.movedAt)})`, p: page.after },
+  ];
+  return (
+    <>
+      <FunnelHeading>Coaching page banner, before vs after the move</FunnelHeading>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={funnelTh}>Banner position</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Page views</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Clicks</th>
+              <th style={{ ...funnelTh, textAlign: "right" }}>Clicks / views</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ label, p }) => (
+              <tr key={label}>
+                <td style={funnelTd}>{label}</td>
+                <td style={funnelNum}>{p.views}</td>
+                <td style={funnelNum}>{p.clicks}</td>
+                <td style={funnelNum}>{pct(p.clicks, p.views)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <SectionNote label="How this is counted">
+        The /coaching page on its own, whatever the window above. Clicks are
+        landings with the page&rsquo;s sponsor-coach-category link. It starts
+        when the page got the sponsor creative, so both rows show the same
+        banner and only its position differs. Coach App banners don&rsquo;t
+        record when they&rsquo;re scrolled into view, so there&rsquo;s no
+        seen column. At under two views a day, give it a few weeks before
+        reading anything into it.
+      </SectionNote>
+    </>
   );
 }
 
