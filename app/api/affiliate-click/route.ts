@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { logAffiliateClick } from "@/lib/supabase/affiliate-clicks";
-import { isAffiliateLink } from "@/lib/affiliate";
+import { affiliateDestination, isAffiliateLink } from "@/lib/affiliate";
 import { isKnownBot } from "@/lib/user-agent-bots";
 import { isOwnerRequest } from "@/lib/owner-request";
 
@@ -41,7 +41,9 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "href is not an affiliate link" }, { status: 400 });
     }
 
-    const merchant = new URL(href).hostname.toLowerCase().slice(0, MAX_HOST_LENGTH);
+    // The retailer, not the network: an Awin link logs as quickplaysport.com,
+    // the same merchant its pre-Awin direct links logged as.
+    const merchant = new URL(affiliateDestination(href)).hostname.toLowerCase().slice(0, MAX_HOST_LENGTH);
     const userAgent = cleanString(req.headers.get("user-agent"), MAX_UA_LENGTH);
 
     // Same owner-device exclusion as the page-view endpoint, and for the

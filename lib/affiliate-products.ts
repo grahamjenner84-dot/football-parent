@@ -1,5 +1,5 @@
 import { getAllArticles } from "@/lib/content";
-import { isAffiliateLink } from "@/lib/affiliate";
+import { affiliateDestination, isAffiliateLink } from "@/lib/affiliate";
 
 // The affiliate click log stores the anchor's own text as link_text. For an
 // ordinary inline link that is the product name as the reader saw it, but for
@@ -14,10 +14,12 @@ import { isAffiliateLink } from "@/lib/affiliate";
 
 // Strips the tracking query (?tag=), www. and any trailing slash so the href
 // logged at click time (the resolved absolute URL) and the href written in the
-// MDX collapse to the same key. Applied identically to both sides.
+// MDX collapse to the same key. Applied identically to both sides. An Awin
+// deep link is unwrapped to its `ued` destination first, so it keys on the
+// product page and also matches clicks logged before the switch to Awin.
 export function normalizeAffiliateHref(href: string): string {
   try {
-    const u = new URL(href);
+    const u = new URL(affiliateDestination(href));
     return (u.hostname.replace(/^www\./, "") + u.pathname).replace(/\/+$/, "").toLowerCase();
   } catch {
     return href.trim().toLowerCase();
