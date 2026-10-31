@@ -1955,3 +1955,13 @@ Read both in about four weeks (about 27 Nov): at these volumes two weeks is too 
 ## QuickPlay affiliate links moved to Awin — 31 October 2026
 
 All 15 QuickPlay links switched from the direct `quickplaysport.com/products/<slug>?ref=footballparent` link (session cookie) to Awin deep links (`awin1.com/cread.php?awinmid=72387&awinaffid=3063761&ued=<product url>`, 30-day cookie). Same products and product pages (all 9 checked returning 200), same anchor text, same `rel="sponsored nofollow noopener"`. Pages: `/football-gear/best-football-rebounders-for-kids` (10 links), `/football-gear/best-football-goals-for-kids` (3), `/football-gear/christmas-football-gifts-for-kids` (2). Commit `750ce84`. Not a ranking lever (outbound links were already nofollow sponsored); logged so a change in QuickPlay click-outs or commissions can be dated. Click reporting unwraps the Awin `ued` so QuickPlay clicks still group per product under quickplaysport.com, continuous with earlier rows.
+
+## 31 Oct: affiliate stock check (link maintenance)
+
+Weekly stock sweep of every Amazon `/dp/` link in Chrome (58 ASINs, each linked variant and every size/colour). No copy changes beyond the two replaced products' names and notes.
+
+- `best-shin-pads-for-kids-football`: JOGA Shin Pad Sleeves, Youth (`B0G9DVZW4K`) "Currently unavailable" with no other youth listing. Replaced in both GearPicks with PUMA Ultra Light Sleeve, black/white XS (`B0BXZ2K19Y`, 245 reviews, XS to XL in stock). Notes rewritten: it is a hardshell in a compression sleeve, not a pad built into a youth-sized sleeve.
+- Nike Mercurial Lite: linked XS black had 1 left. Swapped to S black (`B0B5HBWL23` to `B0B5HDMB8P`) on the shin pads article and the Christmas gifts guide. Same product.
+- `best-football-base-layers-for-kids`: PUMA LIGA Baselayer Short Tight Jr (`B077SPFNHM`) out in 17 of 25 size/colours, black left in two sizes. Replaced with Under Armour HeatGear Shorts, youth, black M (`B086ZMZFML`, 817 reviews). Under Armour ColdGear leggings: linked age 9 had 1 left, swapped to youth S black/white (`B08LMWJM63` to `B086ZNBF6G`).
+- adidas Predator Club Fold-Over Tongue: linked UK 9 had 3 left, swapped to UK 3.5 same colour (`B0F1WYXFZ6` to `B0F1XGZ91J`) in ag-vs-fg-boots, boots for girls, boots for kids, soft ground boots.
+- Nike Jr Tiempo Legend 10 Academy (wide-feet boots): 10 of 20 variants out, linked UK 2.5 low. Swapped to UK 3.5 same colour, in stock (`B0C4PHWQJZ` to `B0C4PHSP5Y`). On watch: the Legend 10 is thinning out and may need replacing with its successor.
