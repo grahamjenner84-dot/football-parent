@@ -232,7 +232,7 @@ export default function AcademyPathwayPage() {
             "Wolves' academy kept Category One for 2026/27 after a facilities scare. What the club's development centres cost and how its Advanced Player Centre trials work.",
         },
         {
-          title: "QPR Academy Trials and Development Programmes Guide",
+          title: "QPR Academy Trials and Development Programmes",
           href: "/academy-pathway/qpr-development-centre-guide",
           description:
             "QPR's Category 2 academy is applying for Category 1. How it recruits, what the Trust's ADP and £80-a-month Showcase squad involve, and girls' trial dates.",

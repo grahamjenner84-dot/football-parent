@@ -4,7 +4,7 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "QPR Academy Trials and Development Programmes: A Parent's Guide",
+  title: "QPR Academy Trials and Development Programmes",
   description: "QPR's Category 2 academy is applying for Category 1. How it recruits, what the Trust's ADP and £80-a-month Showcase squad involve, and girls' trial dates.",
   path: "/academy-pathway/qpr-development-centre-guide",
 });
