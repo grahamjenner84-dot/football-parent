@@ -2008,3 +2008,7 @@ Picked from the 1 Nov link-count check: pages with fewer in-body inbound links t
 Judge each target on impressions and position. Watch all three until ~15 Nov.
 
 Held: `/football-gear/veo-camera-alternatives` (6 inbound, 19.5k impressions, position 6.0). The only natural source is `/parent-guides/best-football-stats-apps` (tracker vs app paragraph), which is on watch from the 29 Oct title revert until ~12 Nov. Add then: after "A tracker records how they moved, so the two work well together." add "A match camera records the game itself, and our [Veo alternatives guide](/football-gear/veo-camera-alternatives) compares the cheaper options for filming grassroots matches."
+
+## 1 Nov 2026: girls' academy trials article, indexing requested
+
+`/girls-football/girls-academy-trials-by-club` (published 18 Oct) had 0 GSC impressions in 11 days (weekly check 1 Nov). Graham confirmed in URL Inspection it was not indexed. Live test clean (fetch OK, indexing allowed, user canonical self, breadcrumbs valid); indexing requested 1 Nov, 10:55. Read about 5 Nov: impressions should start within days; if it is still missing and the status is "Crawled, currently not indexed", look at overlap with the club guides rather than requesting again.
