@@ -498,6 +498,36 @@ revenue stream."), so it shares no opening with the West Ham version.
 **Topics:** any club foundation / development-centre guide; trims well to
 the "some have a genuine pathway... others a revenue stream" sentence.
 
+### What development centres gave us, and what to look for (Graham, 2026-11-01)
+
+Given in session for the QPR guide (no QPR experience; his son did Chelsea
+and Palace development centres and didn't reach an academy). Placed in
+qpr-development-centre-guide (1/3) as two ParentNotes in the "What to Look
+For in Any Programme" section. One line cut as a contrast construction
+("being in the development centres itself didn't seem that important, the
+more important thing was finding good quality coaching").
+
+> The main thing we got from the development centres was more football. He
+> went to Chelsea and Palace, and the level of coaching could vary week to
+> week depending on who was coaching that day, and so could the level of the
+> other players. You could argue that going puts you in front of people who
+> might have a connection, or who could put you forward to the academy
+> coaches if you truly stand out. But as the coaches changed, I'm not sure
+> they really had enough time to assess the players.
+
+> I'd mainly focus on whether my child enjoys it, is getting lots of good
+> touches and is being given good feedback. I'd look at the coaches'
+> attention to detail. Are they correcting a bad first touch or giving advice
+> on it? Are they doing good demonstrations of skills? Can they command the
+> attention of the group and keep them engaged? All these things point
+> towards development. In my experience his grassroots coaches were sometimes
+> better, as they were more invested in his development and saw him every
+> week.
+
+**Topics:** any club development-centre guide, are-football-development-
+centres-worth-it, choosing a coach or programme. The second note trims well
+to the attention-to-detail questions alone. Trim differently on each reuse.
+
 ## Pending — questions drafted for an expert, not yet sent/answered
 
 ### equal-playing-time-calculator — Graham (own ParentNote) — answered 2026-10-06, placed as three ParentNotes
@@ -677,7 +707,7 @@ physio also does maturity assessment.
 below, sent to Chris instead). Full answers published as
 `/parent-guides/chris-robinson-football-scout-interview`
 (`content/parent-guides/chris-robinson-football-scout-interview.mdx`), the
-source of record for any excerpt. Placed 2026-10-10 as `<ExpertQA>` boxes, reuse count 1 each: Q9 (agents) in how-to-find-a-football-agent-for-your-child, Q5 (development centres) in are-football-development-centres-worth-it. Q6 (recruitment ages) in what-age-do-football-academies-recruit. Same day: Q2 split across two pages (closing paragraphs on the formal trial and decision in what-happens-at-academy-trials; opening paragraphs on hit-and-miss one-off trials in football-academy-trials-uk) and Q3 split across two (clips and showcases in football-trials-near-me; play at the highest standard in how-football-clubs-recruit-young-players). Each passage used once; don't reuse a passage on a third page. Also 2026-10-10: Q4 (scout approaches) in full in how-football-scouts-identify-players, and Q1 (control, pass and move) in full in what-do-academy-coaches-look-for. Also 2026-10-10, second uses cut differently so no two boxes match: Q1 without its 'simple game' opening in brentford-development-centre-guide (Q1 now on 2 pages: Graham wants it kept to a couple); Q5 first paragraph only in premier-league-development-centres-list; Q4 card half only in tottenham-development-centres-explained. First uses: Q2 para 3 (several experienced scouts decide who comes in on trial) in aston-villa-development-centre-guide; Q6 para 3 (grassroots/academy gap widens with age) in how-to-join-a-football-academy. 2026-10-17: Q10 ("Don't get too excited. There is a long way to go.") in full in wolves-development-centre-guide, first use. Unused so far: Q7 (coming back after release), Q8 (parent behaviour), Q5 para 1. understanding-academy-release and biggest-football-parent-mistakes already carry Paul Barry and Matt Baxter boxes, so Q7/Q8 were held back there (recommended; Graham went ahead with the scouts and academy coaches pages only). Follow the
+source of record for any excerpt. Placed 2026-10-10 as `<ExpertQA>` boxes, reuse count 1 each: Q9 (agents) in how-to-find-a-football-agent-for-your-child, Q5 (development centres) in are-football-development-centres-worth-it. Q6 (recruitment ages) in what-age-do-football-academies-recruit. Same day: Q2 split across two pages (closing paragraphs on the formal trial and decision in what-happens-at-academy-trials; opening paragraphs on hit-and-miss one-off trials in football-academy-trials-uk) and Q3 split across two (clips and showcases in football-trials-near-me; play at the highest standard in how-football-clubs-recruit-young-players). Each passage used once; don't reuse a passage on a third page. Also 2026-10-10: Q4 (scout approaches) in full in how-football-scouts-identify-players, and Q1 (control, pass and move) in full in what-do-academy-coaches-look-for. Also 2026-10-10, second uses cut differently so no two boxes match: Q1 without its 'simple game' opening in brentford-development-centre-guide (Q1 now on 2 pages: Graham wants it kept to a couple); Q5 first paragraph only in premier-league-development-centres-list; Q4 card half only in tottenham-development-centres-explained. First uses: Q2 para 3 (several experienced scouts decide who comes in on trial) in aston-villa-development-centre-guide; Q6 para 3 (grassroots/academy gap widens with age) in how-to-join-a-football-academy. 2026-10-17: Q10 ("Don't get too excited. There is a long way to go.") in full in wolves-development-centre-guide, first use. 2026-11-01: Q3 para 3 (showcase events vary, research the track record) on its own in qpr-development-centre-guide, beside the Trust's Showcase squad; second use of that paragraph (first is football-trials-near-me, paired with the clips paragraph). Graham approved the excerpt in session. Unused so far: Q7 (coming back after release), Q8 (parent behaviour), Q5 para 1. understanding-academy-release and biggest-football-parent-mistakes already carry Paul Barry and Matt Baxter boxes, so Q7/Q8 were held back there (recommended; Graham went ahead with the scouts and academy coaches pages only). Follow the
 reuse rule (show Graham the full Q&A with the excerpt highlighted first).
 Credentials (from his own slide, June 2025): Head of Academy Recruitment,
 Southampton FC, Feb 2024 onwards; ex-Head of Integration Recruitment, Chelsea FC
