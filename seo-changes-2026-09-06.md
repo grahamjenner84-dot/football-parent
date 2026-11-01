@@ -1996,3 +1996,15 @@ Shortlist put to Graham: girls' academy trials indexing (technical), advent cale
 - Why: the advent calendars page ranks 8-10 on its head terms with only two in-body inbound links (gifts guide, goals guide), and demand peaks around 9 Nov (weekly check 1 Nov, shortlist 2).
 - Baseline (23-29 Oct, first full week): 3,108 impressions, 52 clicks, position 8.2. "football advent calendar" 9.8 (391 over 28 days), "football card advent calendar 2026" 8.3 (299), "football advent calendar 2026" 9.2 (159), "premier league advent calendar 2026" 7.2 (116).
 - Seasonal page: judge on positions, not clicks. Watch until ~15 Nov.
+
+## 1 Nov 2026: three inbound links (West Ham, soft ground boots, coaching apps roundup)
+
+Picked from the 1 Nov link-count check: pages with fewer in-body inbound links than the median (8) and real impressions, off watch (Graham's pick). One additive sentence or clause per source page, one commit each, nothing removed. Baselines are GSC 2-29 Oct (28 days).
+
+- `/academy-pathway/how-players-progress-through-football-development-centres`, the "how each club's own tier system works" sentence after the ParentNote gains "and for a three-tier pathway that ends in JPL football, our [West Ham development centre guide]". Commit `ea7b046`. Source last changed 20 Oct (Football DNA cleanup). **Target `/academy-pathway/west-ham-player-pathway-guide`:** 6 inbound links to 7; 6,051 impressions, 86 clicks, position 7.0.
+- `/academy-pathway/how-much-does-academy-football-cost`, "Football boots" paragraph, one sentence added: "Most children never need a separate pair of [soft ground football boots], even for muddy winter pitches, so that is one cost you can usually skip." Commit `41ad560`. Live traffic source page; this is its second added link since 30 Oct (shin pads), both additive. **Target `/football-gear/childrens-soft-ground-football-boots`:** 5 to 6; 3,115 impressions, 22 clicks, position 7.1 (winter demand rising).
+- `/coaching/what-qualifications-do-i-need-to-be-a-football-coach`, end of the team management paragraph: "If you want to compare the options first, our round-up of the [best football coaching apps for grassroots coaches] sets them side by side." Commit `f4079b4`. Source last changed 6 Oct. **Target `/coaching/best-grassroots-football-apps`:** 5 to 6; 4,391 impressions, 47 clicks, position 11.5 (page 2: "football coaching app" 8.2, "apps for football coaches" 16.3, "best football team management app" 21.9).
+
+Judge each target on impressions and position. Watch all three until ~15 Nov.
+
+Held: `/football-gear/veo-camera-alternatives` (6 inbound, 19.5k impressions, position 6.0). The only natural source is `/parent-guides/best-football-stats-apps` (tracker vs app paragraph), which is on watch from the 29 Oct title revert until ~12 Nov. Add then: after "A tracker records how they moved, so the two work well together." add "A match camera records the game itself, and our [Veo alternatives guide](/football-gear/veo-camera-alternatives) compares the cheaper options for filming grassroots matches."
