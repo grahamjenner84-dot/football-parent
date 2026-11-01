@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { logConsentEvent, type ConsentAction } from "@/lib/supabase/cookie-consent";
+import { isPreviewDeployment } from "@/lib/owner-request";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -31,6 +32,11 @@ export async function POST(req: NextRequest) {
     typeof analyticsGranted !== "boolean"
   ) {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  }
+
+  // A preview writes to the live table too. See lib/owner-request.ts.
+  if (isPreviewDeployment()) {
+    return NextResponse.json({ ok: true });
   }
 
   try {

@@ -6,7 +6,7 @@ import { ADMIN_SESSION_COOKIE, NO_TRACK_COOKIE, hasAdminSession } from "@/lib/ad
 // endpoint (page views, affiliate and partner clicks, Coach App shares and
 // sign-ups, Progress joins). Server-only: reads the service role key.
 //
-// Two signals, either is enough:
+// Three signals, any one is enough:
 //
 // 1. The admin cookies set by /admin login (fp_admin_session, or the
 //    year-long fp_no_track). Reliable in a browser profile that keeps
@@ -16,6 +16,8 @@ import { ADMIN_SESSION_COOKIE, NO_TRACK_COOKIE, hasAdminSession } from "@/lib/ad
 //    included, and Playwright screenshots run from his PC. Not his phone on
 //    mobile data: that address changes daily, and the cookie is the answer
 //    there.
+// 3. The request was served by a Vercel preview deployment (see
+//    isPreviewDeployment). Whoever it is, it is someone testing a branch.
 //
 // Addresses are compared and discarded, never stored: visitors' never were,
 // and his own go into the table only as a keyed hash (see networkHash), so
@@ -130,7 +132,21 @@ export async function matchOwner(req: Request): Promise<OwnerMatch> {
   return { owner: false, by: null, network };
 }
 
+// A preview runs the branch's code against the same live tables as
+// production, and nobody but Graham, or a Claude session checking a branch,
+// ever opens one. Neither the cookie nor the network layer reliably covers
+// that: on 1 Nov 2026 clicking through the header redesign on its preview, on
+// his PC and his phone, put 51 rows into the day's page views. VERCEL_ENV is
+// Vercel's own system variable. It is unset locally, where the browser ping
+// already skips localhost, and if it were ever missing on Vercel this reads
+// as "not a preview", which leaves production tracking running rather than
+// silently stopping it.
+export function isPreviewDeployment(): boolean {
+  return process.env.VERCEL_ENV === "preview";
+}
+
 // The one call every tracking endpoint makes before writing a row.
 export async function isOwnerRequest(req: Request): Promise<boolean> {
+  if (isPreviewDeployment()) return true;
   return (await matchOwner(req)).owner;
 }
