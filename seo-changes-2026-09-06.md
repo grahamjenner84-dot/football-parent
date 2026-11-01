@@ -1965,3 +1965,26 @@ Weekly stock sweep of every Amazon `/dp/` link in Chrome (58 ASINs, each linked 
 - `best-football-base-layers-for-kids`: PUMA LIGA Baselayer Short Tight Jr (`B077SPFNHM`) out in 17 of 25 size/colours, black left in two sizes. Replaced with Under Armour HeatGear Shorts, youth, black M (`B086ZMZFML`, 817 reviews). Under Armour ColdGear leggings: linked age 9 had 1 left, swapped to youth S black/white (`B08LMWJM63` to `B086ZNBF6G`).
 - adidas Predator Club Fold-Over Tongue: linked UK 9 had 3 left, swapped to UK 3.5 same colour (`B0F1WYXFZ6` to `B0F1XGZ91J`) in ag-vs-fg-boots, boots for girls, boots for kids, soft ground boots.
 - Nike Jr Tiempo Legend 10 Academy (wide-feet boots): 10 of 20 variants out, linked UK 2.5 low. Swapped to UK 3.5 same colour, in stock (`B0C4PHWQJZ` to `B0C4PHSP5Y`). On watch: the Legend 10 is thinning out and may need replacing with its successor.
+
+## Weekly SEO check 2026-11-01
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-11-01.md`. GSC to 29 Oct, page views to 31 Oct, windows from `scripts/seo/cli/change-impact.ts`. Site 28 vs 28 days: impressions +22%, clicks +7%, same-query position 8.8 to 8.1. The 22 Oct title commits were rebased on merge: on `main` they are `8fd3936` (Brentford), `eb79590` (Leeds), `22ca92a` (Chelsea).
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| Crystal Palace title | 16 Oct | 65295d9 | Keep | Same-query 7.6 to 6.4, CTR 0.63% to 0.72%, "academy trials" 9.4 to 7.2, guard flat | Closed |
+| Veo title | 16 Oct | e47d978 | Neutral, keep | Same-query 6.5 to 5.9; impressions -27% is demand ("veo football camera" 437 to 49); price queries flat | Closed |
+| ETC definition first | 16 Oct | 3ef42ee | Neutral, keep | "etc football" 3.9 to 4.2, "emerging talent centre" 6.9 to 7.4 (rule not met) | AI Overview recheck outstanding |
+| grassroots apps roundup | 18 Oct | 76f2c08 etc. | Keep | Same-query 18.0 to 14.3, "football coaching app" 15.4 to 8.2 | Closed |
+| Coach App page | 18 Oct | 8952367 | Too small | 2 to 57 impressions | Read again 5 Nov |
+| calculator indexifembedded | 18 Oct | 39e4ea0 | Worked | 837 impressions, 20 clicks, position 5.3 | Read again 8 Nov |
+| Brentford title | 22 Oct | 8fd3936 | Keep, provisional | Clicks 8 to 26, CTR 0.65% to 1.11%, same-query 9.4 to 8.4, guards up (7 days) | Read again 5 Nov |
+| Leeds title | 22 Oct | eb79590 | Flag: rule half met | Week 1 CTR 0.89% (rule below 1.5% two weeks); clicks -22% vs site +14%; organic views -22%; guards fine | Read 5 Nov: revert if week 2 also below 1.5% |
+| Chelsea title | 22 Oct | 22ca92a | Too early, flag | CTR 1.62% (rule 1.4%), guards within 2; clicks 58 to 45; "chelsea pre academy" 5.4 to 3.6 | Read again 5 Nov |
+| Wolves guide (new) | 17 Oct | | Doing well | 1,281 impressions, 87 clicks, CTR 6.8% | Closed |
+| Girls' academy trials by club (new) | 18 Oct | | Not in Google | 0 impressions in 11 days; page 200, self canonical, in sitemap | Graham: URL Inspection + request indexing |
+| Advent calendars (new) | 22 Oct | d48157f | Ranking 8-10 | 3,108 impressions, 52 clicks first full week | See shortlist |
+| Coach gifts, indoor training (new) | 23-24 Oct | | Indexed | 230 and 526 impressions | Read again 12 Nov |
+| 29-30 Oct changes | 29-30 Oct | see entries | Too early | | 12-13 Nov |
+
+Shortlist put to Graham: girls' academy trials indexing (technical), advent calendars inbound link from the rebounders guide (before the ~9 Nov peak), Leeds revert decision on 5 Nov. Shin pads head terms held to ~13 Nov (on watch).
