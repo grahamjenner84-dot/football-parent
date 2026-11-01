@@ -4,11 +4,10 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 
 ## Due
 
-### Veo alternatives inbound link (add about 12 Nov 2026)
+### Soft ground boots inbound link from the Christmas gifts guide (add after about 5 Nov 2026)
 
-- **What:** in `/parent-guides/best-football-stats-apps`, after "A tracker records how they moved, so the two work well together." add "A match camera records the game itself, and our [Veo alternatives guide](/football-gear/veo-camera-alternatives) compares the cheaper options for filming grassroots matches."
-- **Why:** the Veo page has 6 in-body inbound links (median 8) on 19.5k impressions a month at position 6.0; this is the only natural source found on 1 Nov.
-- **Why 12 Nov:** the stats apps page is on watch from the 29 Oct title revert until then. Log it in the change log when it ships.
+- **What:** in `/football-gear/christmas-football-gifts-for-kids`, the "The surface matters" bullet, link "Soft ground boots with longer studs" to `/football-gear/childrens-soft-ground-football-boots`.
+- **Why after 5 Nov:** the gifts guide is on watch from its 22-23 Oct changes until then. (The Veo link that was here shipped 1 Nov, `4de4401`.) Log it when it ships.
 
 ### AI Overview citations on the app searches (re-check about 8 Nov 2026)
 
