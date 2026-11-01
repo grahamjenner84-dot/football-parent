@@ -26,12 +26,36 @@ const navItems = [
 // lib/supabase/page-views.ts knows, so an unregistered header tag would add
 // a clicks-only row with an inflated CTR. Header clicks count as "Site link"
 // in both funnels until the report learns a header placement.
-const appLinks = [
+//
+// The Coach App link goes to the app itself, whose first screen for a
+// signed-out visitor is its own sign-up form (and returning coaches land
+// where they log in), not to the /football-parent-coach-app landing page.
+// The app reads fp-first-touch itself when a coach signs up there
+// (lib/coach-app-handoff.ts), so the visit's source still reaches the
+// sign-up event.
+type AppLinkItem = { label: string; href: string; colours: string; external?: boolean };
+
+const appLinks: AppLinkItem[] = [
   { label: "Progress app", href: "/progress", colours: "bg-[#1A7A45] text-white" },
-  // Straight to the sign-up form in the landing page's hero (#signup in
-  // CoachLandingPage), not the top of the page.
-  { label: "Coach App", href: "/football-parent-coach-app#signup", colours: "bg-[#3D86FF] text-[#201E1D]" },
+  { label: "Coach App", href: "/coach-app", colours: "bg-[#3D86FF] text-[#201E1D]", external: true },
 ];
+
+// /coach-app is a rewrite to the app's own deployment (vercel.json), not a
+// route in this Next app, so it gets a plain <a> and a full page load.
+function AppLink({ app, className, onClick }: { app: AppLinkItem; className: string; onClick?: () => void }) {
+  if (app.external) {
+    return (
+      <a href={app.href} className={className} onClick={onClick}>
+        {app.label}
+      </a>
+    );
+  }
+  return (
+    <Link href={app.href} scroll={true} className={className} onClick={onClick}>
+      {app.label}
+    </Link>
+  );
+}
 
 const pill =
   "whitespace-nowrap rounded-full border-2 border-[#201E1D] px-4 py-2 text-[15px] font-bold no-underline shadow-[3px_3px_0_#201E1D] transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_#201E1D]";
@@ -80,14 +104,7 @@ export default function Header() {
 
         <div className="flex items-center gap-2.5 lg:ml-auto">
           {appLinks.map((app) => (
-            <Link
-              key={app.href}
-              href={app.href}
-              scroll={true}
-              className={`hidden md:inline-block ${pill} ${app.colours}`}
-            >
-              {app.label}
-            </Link>
+            <AppLink key={app.href} app={app} className={`hidden md:inline-block ${pill} ${app.colours}`} />
           ))}
 
           <button
@@ -147,15 +164,12 @@ export default function Header() {
             ))}
             <div className="mt-4 flex flex-wrap gap-3">
               {appLinks.map((app) => (
-                <Link
+                <AppLink
                   key={app.href}
-                  href={app.href}
-                  scroll={true}
+                  app={app}
                   onClick={() => setOpen(false)}
                   className={`inline-block ${pill} ${app.colours}`}
-                >
-                  {app.label}
-                </Link>
+                />
               ))}
             </div>
           </div>

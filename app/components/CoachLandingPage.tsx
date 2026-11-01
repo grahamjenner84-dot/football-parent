@@ -110,10 +110,7 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
             {frontmatter.subhead}
           </p>
 
-          {/* id="signup": the header's Coach App link lands here, on the
-              form rather than the top of the page. scroll-mt clears the
-              sticky header so the form's heading isn't hidden under it. */}
-          <div id="signup" className="mt-8 scroll-mt-36">
+          <div className="mt-8">
             <CoachSignUpForm heading={frontmatter.formHeading} />
           </div>
 
