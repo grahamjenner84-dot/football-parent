@@ -16,6 +16,50 @@ const navItems = [
   { label: "Football Gear", href: "/football-gear" },
 ];
 
+// Our two apps, set apart from the article categories as filled pills in
+// their own brand colours: Progress green, and the Coach App's blue from the
+// strip on its icon (#3D86FF, public/parent/readme.txt), with ink text
+// because white on that blue is too faint.
+//
+// Neither link carries a ?b= tag. The Coach App banner report counts clicks
+// from any ?b= value but impressions only for placements bannerOnPath() in
+// lib/supabase/page-views.ts knows, so an unregistered header tag would add
+// a clicks-only row with an inflated CTR. Header clicks count as "Site link"
+// in both funnels until the report learns a header placement.
+//
+// The Coach App link goes to the app itself, whose first screen for a
+// signed-out visitor is its own sign-up form (and returning coaches land
+// where they log in), not to the /football-parent-coach-app landing page.
+// The app reads fp-first-touch itself when a coach signs up there
+// (lib/coach-app-handoff.ts), so the visit's source still reaches the
+// sign-up event.
+type AppLinkItem = { label: string; href: string; colours: string; external?: boolean };
+
+const appLinks: AppLinkItem[] = [
+  { label: "Progress app", href: "/progress", colours: "bg-[#1A7A45] text-white" },
+  { label: "Coach App", href: "/coach-app", colours: "bg-[#3D86FF] text-[#201E1D]", external: true },
+];
+
+// /coach-app is a rewrite to the app's own deployment (vercel.json), not a
+// route in this Next app, so it gets a plain <a> and a full page load.
+function AppLink({ app, className, onClick }: { app: AppLinkItem; className: string; onClick?: () => void }) {
+  if (app.external) {
+    return (
+      <a href={app.href} className={className} onClick={onClick}>
+        {app.label}
+      </a>
+    );
+  }
+  return (
+    <Link href={app.href} scroll={true} className={className} onClick={onClick}>
+      {app.label}
+    </Link>
+  );
+}
+
+const pill =
+  "whitespace-nowrap rounded-full border-2 border-[#201E1D] px-4 py-2 text-[15px] font-bold no-underline shadow-[3px_3px_0_#201E1D] transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_#201E1D]";
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -38,53 +82,34 @@ export default function Header() {
   // component.
   if (/^\/football-parent-coach-app\/[^/]+$/.test(pathname ?? "")) return null;
 
+  // The section the current page belongs to, underlined in the nav row.
+  const section = navItems.find(
+    (item) => pathname === item.href || pathname?.startsWith(`${item.href}/`),
+  )?.href;
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white text-slate-950 shadow-sm">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+    <header className="sticky top-0 z-50 w-full border-b-[3px] border-[#201E1D] bg-white font-ui text-[#201E1D]">
+      <div className="mx-auto flex max-w-[1220px] items-center gap-x-3 gap-y-3 px-5 py-3 sm:gap-x-4 lg:gap-x-7 lg:px-6">
         <Link href="/" scroll={true} className="flex shrink-0 items-center gap-1.5 no-underline">
-          <Image
-            src="/parent/icon/parent-circle-512.png"
-            alt=""
-            width={58}
-            height={58}
-          />
+          <Image src="/parent/icon/parent-circle-512.png" alt="" width={50} height={50} />
           <Image
             src="/parent/horizontal/parent-wordmark-text-424.png"
             alt="Football Parent"
-            width={148}
-            height={62}
+            width={115}
+            height={48}
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 px-4 text-sm font-medium text-slate-700 xl:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              scroll={true}
-              className="text-slate-700 no-underline transition hover:text-slate-950"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <SearchPanel className="ml-auto lg:ml-0 lg:max-w-[520px] lg:flex-1" />
 
-        <div className="flex items-center gap-3">
-          {/* Our own app, set apart from the article categories. From md up
-              it sits in the bar; the seven category links only fit beside it
-              from xl, so below that they live in the Menu (as on phones). */}
-          <Link
-            href="/progress"
-            scroll={true}
-            className="hidden whitespace-nowrap rounded-full bg-[#1a7a45] px-3.5 py-1.5 text-sm font-semibold text-white no-underline transition hover:bg-[#0f5d34] md:inline-block"
-          >
-            Progress app
-          </Link>
-          <SearchPanel />
+        <div className="flex items-center gap-2.5 lg:ml-auto">
+          {appLinks.map((app) => (
+            <AppLink key={app.href} app={app} className={`hidden md:inline-block ${pill} ${app.colours}`} />
+          ))}
 
           <button
             type="button"
-            className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-900 xl:hidden"
+            className="inline-flex h-11 items-center rounded-[10px] border-2 border-[#201E1D] bg-white px-3.5 text-[15px] font-bold text-[#201E1D] lg:hidden"
             onClick={() => setOpen((current) => !current)}
             aria-label="Toggle menu"
             aria-expanded={open}
@@ -94,28 +119,59 @@ export default function Header() {
         </div>
       </div>
 
+      <div className="hidden border-t border-[#E8E4DA] lg:block">
+        <nav
+          aria-label="Sections"
+          className="mx-auto flex max-w-[1220px] flex-wrap gap-x-7 gap-y-2 px-6 pb-3 pt-2.5 text-[15px] font-medium"
+        >
+          {navItems.map((item) => {
+            const active = item.href === section;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                scroll={true}
+                aria-current={pathname === item.href ? "page" : active ? "true" : undefined}
+                className={
+                  active
+                    ? "font-bold text-[#201E1D] underline decoration-[3px] underline-offset-[6px]"
+                    : "text-[#201E1D] no-underline underline-offset-[6px] hover:underline"
+                }
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+
       {open && (
-        <nav className="border-t border-slate-200 bg-white px-5 py-4 xl:hidden">
-          <div className="mx-auto grid max-w-6xl gap-2">
+        <nav aria-label="Menu" className="border-t-2 border-[#201E1D] bg-white px-5 pb-5 pt-1 lg:hidden">
+          <div className="mx-auto grid max-w-[1220px]">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 scroll={true}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-slate-800 no-underline transition hover:bg-slate-100 hover:text-slate-950"
+                aria-current={pathname === item.href ? "page" : item.href === section ? "true" : undefined}
+                className={`border-b border-[#E8E4DA] py-3 text-base text-[#201E1D] no-underline ${
+                  item.href === section ? "font-bold" : "font-medium"
+                }`}
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              href="/progress"
-              scroll={true}
-              onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-3 text-sm font-semibold text-[#1a7a45] no-underline transition hover:bg-slate-100"
-            >
-              Progress app: track your child&apos;s football
-            </Link>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {appLinks.map((app) => (
+                <AppLink
+                  key={app.href}
+                  app={app}
+                  onClick={() => setOpen(false)}
+                  className={`inline-block ${pill} ${app.colours}`}
+                />
+              ))}
+            </div>
           </div>
         </nav>
       )}
