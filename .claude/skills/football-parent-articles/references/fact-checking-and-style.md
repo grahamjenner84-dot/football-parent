@@ -297,6 +297,8 @@ The frontmatter `description` is the literal `<meta name="description">` tag
 (copied verbatim into `page.tsx` per the SKILL.md template rule) — write it
 to earn a click on a real SERP, not to describe the article to a librarian.
 
+The same applies to the title and H1: no "A Parent's Guide", "Guide for Parents", "Explained: A Parent's Guide" or similar suffix, even though older club development-centre guides carry one. Those are a legacy convention Graham has not ruled on, not a template for new articles (the QPR guide shipped with it on 2026-11-01 and had to be retitled the same day). Lead the title with the club and the search term, e.g. "QPR Academy Trials and Development Programmes".
+
 Never self-label the content. Cut any opening like "A [practical/honest/
 clear/realistic/balanced/grounded] guide to...", "A [clear, honest] breakdown
 of...", "A jargon-free explanation of...", "An independent guide to...", "A
