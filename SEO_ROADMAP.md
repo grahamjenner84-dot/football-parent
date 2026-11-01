@@ -66,7 +66,7 @@ See the change log (30 Oct). One link per page, each in its own commit, once the
 
 - **After the Leeds title read (2 Nov, about 5 Nov if extended):** `/academy-pathway/academy-categories-explained`, Category 1 paragraph, add Leeds next to the Aston Villa example (Category One since 2020) linking `/academy-pathway/leeds-united-development-centre-guide`; and a club guides line in the body of `/academy-pathway/uk-football-development-centres-explained`, which links only Crystal Palace in its body. Leeds then goes on the homepage "Popular guides" block.
 - **After the Chelsea title read (about 5 Nov):** Chelsea's PTC, PDC and PPC section links `/academy-pathway/pdc-vs-ptc-vs-rtc-explained` (it explains the terms at length and has no link). Also the Leeds guide's scholarship line to `/academy-pathway/football-scholarships-uk` once Leeds is off watch.
-- **After the base layers title read (about 12 Nov):** `/football-gear/childrens-soft-ground-football-boots`, "For the rest of the winter kit list" sentence, add the base layers guide next to gloves and shin pads. Base layers could then join the homepage block.
+- **Base layers:** the soft ground boots link shipped early on 1 Nov (`48f41c7`, Graham's call, winter peak). Still to do after the 12 Nov read: base layers could join the homepage block.
 - **Read the 30 Oct links and homepage block (about 13 Nov):** in-body link counts went scholarships 3 to 5, PDC explainer 1 to 2, girls' boots 0 to 1, Watford 4 to 5.
 
 ## Planned

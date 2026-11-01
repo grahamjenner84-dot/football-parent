@@ -2020,3 +2020,12 @@ Held: `/football-gear/veo-camera-alternatives` (6 inbound, 19.5k impressions, po
 - `/parent-guides/gifts-for-football-coaches`, after "Christmas vs End of Season Gifts": "Shopping for your own child at the same time? Our round-up of [football advent calendars] covers the Match Attax, Topps and Adrenalyn card calendars that start on 1 December." Commit `cccdb4d`. Second inbound link to advent calendars today (with `1c2d6b7`), same baseline.
 
 Held: `/football-gear/christmas-football-gifts-for-kids` "The surface matters" bullet already mentions soft ground boots and links AG vs FG; a link to `/football-gear/childrens-soft-ground-football-boots` fits there, but that page is on watch to ~5 Nov (two levers already). Add after 5 Nov.
+
+## 1 Nov 2026: base layers, two inbound links (Graham's call, inside the title watch)
+
+Graham asked for these now because winter demand peaks soon, so they land inside the 29 Oct thermals title watch (`1e3e408`, to ~12 Nov). Read the title and the links together from here: CTR on the thermal queries is the title's number, positions on the page 2 terms are the links'.
+
+- `/football-gear/childrens-soft-ground-football-boots`, "For the rest of the winter kit list" sentence: "[kids football thermals]" added between the gloves and shin pads links. Commit `48f41c7`. (Held item from `SEO_ROADMAP.md`.)
+- `/academy-pathway/how-much-does-academy-football-cost`, "Training kit" paragraph: "Base layers" becomes "[Football skins and base layers]". Commit `abf4c78`. Third additive link on this source page since 30 Oct (shin pads, soft ground boots, now this); no text removed.
+
+Anchors use the page 2 terms, varied: "kids football thermals" (205 impressions at 11.1) and "football skins" ("boys football skins" 242 at 10.6, "football skins for juniors" 214 at 9.1). **Target `/football-gear/best-football-base-layers-for-kids`:** in-body inbound links 3 to 5. Baseline as in the 29 Oct entry, plus 28 days to 29 Oct: 10,491 impressions, 79 clicks, position 8.7. Watch until ~15 Nov.
