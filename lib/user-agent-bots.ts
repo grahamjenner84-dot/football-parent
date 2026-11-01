@@ -48,6 +48,14 @@ const BOT_UA_PATTERNS = [
   // The same checker sometimes sends a bare "Google" UA. Anchored to the whole
   // string so a real browser UA that merely mentions Google isn't caught.
   /^google$/i,
+  // Two more Google agents that render pages and so fire the ping, with no
+  // "bot" in the name. GoogleOther is a general-purpose crawler (sometimes the
+  // bare word, sometimes inside a Chrome UA, ~160 rows by 1 Nov 2026).
+  // Google-InspectionTool is Search Console's URL Inspection live test and
+  // "Request indexing", so it hits exactly the page that was just published
+  // or fixed (~100 rows).
+  /googleother/i,
+  /google-inspectiontool/i,
 ];
 
 // Live write-time check (app/api/page-view/route.ts): a missing UA header
