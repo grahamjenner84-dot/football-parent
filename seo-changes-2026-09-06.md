@@ -1988,3 +1988,11 @@ Full write-up: `seo-data/exports/weekly-seo-check-2026-11-01.md`. GSC to 29 Oct,
 | 29-30 Oct changes | 29-30 Oct | see entries | Too early | | 12-13 Nov |
 
 Shortlist put to Graham: girls' academy trials indexing (technical), advent calendars inbound link from the rebounders guide (before the ~9 Nov peak), Leeds revert decision on 5 Nov. Shin pads head terms held to ~13 Nov (on watch).
+
+## 1 Nov 2026: advent calendars, inbound link from the rebounders guide
+
+`/football-gear/best-football-rebounders-for-kids`, "Buying a Rebounder as a Present": the closing gifts guide sentence gains a clause, "and for something to open every day in December our round-up of [football advent calendars] covers the Match Attax, Topps and Adrenalyn card calendars". Commit `1c2d6b7`. Additive, nothing removed. The source page's last edits were the 31 Oct Awin swap (link maintenance) and the 13 Oct title, so it is off watch.
+
+- Why: the advent calendars page ranks 8-10 on its head terms with only two in-body inbound links (gifts guide, goals guide), and demand peaks around 9 Nov (weekly check 1 Nov, shortlist 2).
+- Baseline (23-29 Oct, first full week): 3,108 impressions, 52 clicks, position 8.2. "football advent calendar" 9.8 (391 over 28 days), "football card advent calendar 2026" 8.3 (299), "football advent calendar 2026" 9.2 (159), "premier league advent calendar 2026" 7.2 (116).
+- Seasonal page: judge on positions, not clicks. Watch until ~15 Nov.
