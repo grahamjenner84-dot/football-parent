@@ -28,7 +28,9 @@ const navItems = [
 // in both funnels until the report learns a header placement.
 const appLinks = [
   { label: "Progress app", href: "/progress", colours: "bg-[#1A7A45] text-white" },
-  { label: "Coach App", href: "/football-parent-coach-app", colours: "bg-[#3D86FF] text-[#201E1D]" },
+  // Straight to the sign-up form in the landing page's hero (#signup in
+  // CoachLandingPage), not the top of the page.
+  { label: "Coach App", href: "/football-parent-coach-app#signup", colours: "bg-[#3D86FF] text-[#201E1D]" },
 ];
 
 const pill =
