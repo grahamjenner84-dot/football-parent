@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Script from "next/script";
 import type { Metadata } from "next";
+import { Fira_Sans } from "next/font/google";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import CookieConsent from "./components/CookieConsent";
@@ -9,6 +10,19 @@ import AffiliateClickTracker from "./components/AffiliateClickTracker";
 import PartnerClickTracker from "./components/PartnerClickTracker";
 import { brandOgImage } from "@/lib/seo";
 import "./globals.css";
+
+// Fira Sans, the brand's own family (the wordmark is Fira Sans Condensed),
+// for the redesigned header and footer. next/font self-hosts it, so no
+// request goes to Google and the fallback is size-matched to stop text
+// jumping when it loads. Only the weights the header and footer use: body
+// text stays on the system stack until the article template moves over, so
+// add weights here as more of the site switches.
+const firaSans = Fira_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-fira-sans",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Football Parent",
@@ -78,7 +92,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="h-full antialiased">
+    <html lang="en" className={`h-full antialiased ${firaSans.variable}`}>
       <body className="min-h-full flex flex-col">
         {/* Impact.com site verification. Rendered as a literal tag (React 19
             hoists it into <head>) rather than via Next's metadata.verification
