@@ -4,6 +4,12 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 
 ## Due
 
+### Veo alternatives inbound link (add about 12 Nov 2026)
+
+- **What:** in `/parent-guides/best-football-stats-apps`, after "A tracker records how they moved, so the two work well together." add "A match camera records the game itself, and our [Veo alternatives guide](/football-gear/veo-camera-alternatives) compares the cheaper options for filming grassroots matches."
+- **Why:** the Veo page has 6 in-body inbound links (median 8) on 19.5k impressions a month at position 6.0; this is the only natural source found on 1 Nov.
+- **Why 12 Nov:** the stats apps page is on watch from the 29 Oct title revert until then. Log it in the change log when it ships.
+
 ### AI Overview citations on the app searches (re-check about 8 Nov 2026)
 
 - **What:** re-pull the AI Overviews on the 8 app searches ("equal playing time app grassroots football", "fair playing time football coaches app", "fair playing time app", "equal game time app", "football substitution app", "playing time app football", "grassroots football substitution app", "equal playing time app") and see whether footballparent.co.uk or the Coach App's Play listing is now cited.
