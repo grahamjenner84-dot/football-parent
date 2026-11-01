@@ -2061,3 +2061,7 @@ Shin pads is on watch to ~13 Nov (30 Oct internal link and homepage block); Grah
 - Footer: the same links as before (About, Graham Jenner, Editorial Policy, Privacy Policy, Cookie Policy, Terms & Conditions, Cookie Settings, Contact, Instagram with `utm_content=footer`, YouTube) and the copyright line, restyled dark.
 - Fonts: Fira Sans 400/500/700, self-hosted through next/font, for the header and footer only. Body text stays on system fonts. This is the first web font the site has loaded, so watch Search Console's Core Web Vitals report and page speed.
 - No ranking effect expected, since no content or links changed. If anything moves site-wide in the next two weeks, this is the change to rule in or out first. The Progress banner A/B test on Academy Pathway and Academy Trials articles is unaffected: both arms get the same header and footer.
+
+## 1 Nov 2026: `/calculator` short link for the calculator's shared images
+
+- **New permanent redirect** `/calculator` → `/coaching/equal-playing-time-calculator?utm_source=calc-share` in `next.config.ts`. It is the address printed on, and copied with, the image from the calculator's new "Share this plan" button (Coach App branch `calculator-share`, commit `030c33a`). No content change to the calculator page; its canonical stays the clean URL, so the parameter does not create a duplicate. Visits from shared plans count as `utm_source = calc-share` in `page_views`. Never repoint `/calculator`: images already shared carry it.

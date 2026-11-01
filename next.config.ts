@@ -13,6 +13,17 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The short link printed on, and copied with, the calculator's "Share
+      // this plan" image (Coach App, 1 Nov 2026): easy to read off a photo in
+      // a team WhatsApp and type. Tagged so visits from shared plans show as
+      // utm_source=calc-share in page_views; the page's canonical stays the
+      // clean URL. Never repoint it: images already shared carry it, so a
+      // second calculator gets its own path.
+      {
+        source: '/calculator',
+        destination: '/coaching/equal-playing-time-calculator?utm_source=calc-share',
+        permanent: true,
+      },
       // A mistyped inbound link picked up a trailing colon, most likely from
       // a citation or post that wrote the URL followed by ": Title" and had
       // the auto-linker swallow the colon. It sent 25 hits on 9 September,
