@@ -17,15 +17,12 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --surface: #111827;
-    --foreground: #f8fafc;
-    --muted: #94a3b8;
-    --border: #334155;
-  }
-}
+/* The site is light only. There was a prefers-color-scheme: dark block here,
+   left over from the create-next-app template, that turned the body near-black
+   for visitors on a dark OS theme. Pages that paint their own white background
+   hid it, but the 404 page does not, so its fixed dark grey text sat on a
+   near-black page and was unreadable. Don't bring it back without giving every
+   page dark styles to match. */
 
 /* These element resets are wrapped in @layer base deliberately. Turbopack
    emits this file's rules a second time, unlayered, after @layer utilities
