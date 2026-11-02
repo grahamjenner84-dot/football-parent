@@ -15,6 +15,7 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 - **How:** `googleOrganicSerp` with `loadAsyncAiOverview: true` and `forceRefresh: true`, depth 10, the same way as the 18 Oct pull (about $0.03). These overviews load asynchronously and come back empty without the flag.
 - **Baseline (18 Oct):** none of the 8 cites us or our Play listing; store listings are cited on all 8 (SubTime's on 5); FairPlay Coach on 2, the two it ranks for. See `seo-data/exports/app-terms-ai-overviews-2026-10-18.md`.
 - **Why 8 Nov:** gives Google time to recrawl the coach app page (new title, heading, section and FAQ) and the calculator (now visible to Google), both re-indexed 18 Oct.
+- **Confounded from 2 Nov:** the site header's Coach App link now points at `/football-parent-coach-app` (it went to the noindex app before), a link from every page. If the coach app page gains citations or rankings by 8 Nov, the 18 Oct copy and the header link can't be separated. Graham chose to ship it before the check.
 - **Also:** `ai-overview-check.ts` doesn't pass `loadAsyncAiOverview`, so it reads asynchronous overviews as empty. Fix it before relying on its citation log.
 
 ### Watch items from 18 Oct

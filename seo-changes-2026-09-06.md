@@ -2085,3 +2085,9 @@ Shin pads is on watch to ~13 Nov (30 Oct internal link and homepage block); Grah
 - New: a phone screenshot beside the hero form on wide screens only (`public/coach-app-screens/hero/`, 720x1440 from the app's 1080x2160 store-listing PNGs). The main page, equal-game-time and the calculator variant show the game time screen, `lineup-builder` shows team selection and `team-stats` shows the team stats screen (`heroScreen` frontmatter). The extra alt text is the only crawlable addition.
 - Carousel cards, order and copy unchanged, still matching the app's sign-in carousel.
 - The main page's title/H1 change of 18 Oct has its AI Overview re-check due 8 Nov (`SEO_ROADMAP.md`). This change leaves every ranking lever alone, so that read is unaffected.
+
+## 2 Nov 2026: header Coach App link points at the Coach App page
+
+- **Sitewide internal link.** The header's "Coach App" pill (desktop header and the phone menu, every page except the PPC variants, which drop the header) now goes to `/football-parent-coach-app` instead of `/coach-app`. `/coach-app` is the app itself and carries `noindex`, so the one link on every page was going to a page that can never rank. Anchor text "Coach App" unchanged, untagged as before (header clicks still count as Site link).
+- Returning coaches can sign in with the same form on the page (Google or email link sign in an existing account). Side effect on the funnel: the page's form steps (`/coach-app/signup-form/football-parent-coach-app/*`) will now include some returning coaches signing in, so taps per form view can rise without more sign-ups. Sign-ups themselves are unaffected (the app posts them only for new accounts).
+- **Shipped before the 8 Nov AI Overview re-check on Graham's call**, so that read now has two causes (the 18 Oct copy and this link). Noted in `SEO_ROADMAP.md`. Watch the page's impressions and positions to about 16 Nov.
