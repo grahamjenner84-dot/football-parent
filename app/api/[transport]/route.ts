@@ -16,14 +16,18 @@ import {
   getKeywordPerformance,
   GoogleAdsApiError,
 } from "@/lib/google-ads";
+import { getAndroidAppAnalytics, AnalyticsApiError } from "@/lib/firebase-analytics";
 
-// Google Ads errors go back word for word, so a rejection is never mistaken
+// Google API errors go back word for word, so a rejection is never mistaken
 // for an empty result.
-async function googleAdsResult(run: () => Promise<unknown>) {
+async function apiResult(run: () => Promise<unknown>) {
   try {
     return { content: [{ type: "text" as const, text: JSON.stringify(await run()) }] };
   } catch (err) {
-    const text = err instanceof GoogleAdsApiError ? `Google Ads API error ${err.status}:\n${err.body}` : String(err);
+    const text =
+      err instanceof GoogleAdsApiError || err instanceof AnalyticsApiError
+        ? `${err instanceof GoogleAdsApiError ? "Google Ads API" : "Google Analytics Data API"} error ${err.status}:\n${err.body}`
+        : String(err);
     return { isError: true, content: [{ type: "text" as const, text }] };
   }
 }
@@ -290,7 +294,7 @@ const handler = createMcpHandler(
         },
       },
       async ({ keywords, url, geoTargetConstants, language, limit }) =>
-        googleAdsResult(() => getKeywordIdeas({ keywords, url, geoTargetConstants, language, limit }))
+        apiResult(() => getKeywordIdeas({ keywords, url, geoTargetConstants, language, limit }))
     );
 
     server.registerTool(
@@ -306,7 +310,7 @@ const handler = createMcpHandler(
         },
       },
       async ({ keywords, geoTargetConstants, language }) =>
-        googleAdsResult(() => getKeywordMetrics({ keywords, geoTargetConstants, language }))
+        apiResult(() => getKeywordMetrics({ keywords, geoTargetConstants, language }))
     );
 
     server.registerTool(
@@ -317,7 +321,7 @@ const handler = createMcpHandler(
           "Accounts under the Football Parent Google Ads manager account (4186725350), including the manager itself: ID, name, status, currency, whether it is a manager, and its level in the hierarchy. Read-only.",
         inputSchema: {},
       },
-      async () => googleAdsResult(() => listAdsAccounts())
+      async () => apiResult(() => listAdsAccounts())
     );
 
     server.registerTool(
@@ -329,7 +333,7 @@ const handler = createMcpHandler(
           adsReportNote,
         inputSchema: adsReportSchema,
       },
-      async (args) => googleAdsResult(() => getCampaignPerformance(args))
+      async (args) => apiResult(() => getCampaignPerformance(args))
     );
 
     server.registerTool(
@@ -344,7 +348,7 @@ const handler = createMcpHandler(
           limit: z.number().int().min(1).max(10000).optional().describe("Most rows to return. Defaults to 500."),
         },
       },
-      async (args) => googleAdsResult(() => getSearchTerms(args))
+      async (args) => apiResult(() => getSearchTerms(args))
     );
 
     server.registerTool(
@@ -356,7 +360,21 @@ const handler = createMcpHandler(
           adsReportNote,
         inputSchema: adsReportSchema,
       },
-      async (args) => googleAdsResult(() => getKeywordPerformance(args))
+      async (args) => apiResult(() => getKeywordPerformance(args))
+    );
+
+    server.registerTool(
+      "get_android_app_analytics",
+      {
+        title: "Get Coach App Android analytics (Firebase)",
+        description:
+          "Firebase Analytics for the Coach App's Android app (uk.co.footballparent.coachapp), read through the Google Analytics Data API on GA4 property 556206553. Read-only, counts only. Per day for the range: activeUsers; for each of first_open, sign_up, onboarding_complete, squad_added, app_remove, notification_receive, notification_open, notification_dismiss and app_update, eventCount and uniqueUsers (GA4 totalUsers); activeUsersByAppVersion. Plus retention: one cohort of users whose first session fell in the range, with cohortActiveUsers and cohortTotalUsers on each day 0-7 (day1 and day7 picked out; no fraction is computed). eventsNeverSeen lists events with no rows in the range. first_open is never recorded for this app: it fires before the coach answers the consent banner, while every consent type is denied by default, so Firebase sends it as an unattributed ping that reports do not show. Days are the GA4 property's time zone (Etc/GMT), not UK local. Numbers are exactly as the API returned them (strings); metadata says if GA4 withheld small counts. The Android app was released 21 Oct 2026.",
+        inputSchema: {
+          startDate: z.string().describe("YYYY-MM-DD"),
+          endDate: z.string().describe("YYYY-MM-DD, inclusive. 'today' and 'yesterday' are not accepted, give a date."),
+        },
+      },
+      async ({ startDate, endDate }) => apiResult(() => getAndroidAppAnalytics({ startDate, endDate }))
     );
   },
   {},
@@ -371,7 +389,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read", "keyword_planner:read"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read", "keyword_planner:read", "android_analytics:read"] };
   },
   {
     required: true,
