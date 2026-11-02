@@ -27,17 +27,19 @@ const navItems = [
 // a clicks-only row with an inflated CTR. Header clicks count as "Site link"
 // in both funnels until the report learns a header placement.
 //
-// The Coach App link goes to the app itself, whose first screen for a
-// signed-out visitor is its own sign-up form (and returning coaches land
-// where they log in), not to the /football-parent-coach-app landing page.
-// The app reads fp-first-touch itself when a coach signs up there
-// (lib/coach-app-handoff.ts), so the visit's source still reaches the
-// sign-up event.
+// The Coach App link goes to /football-parent-coach-app, the one indexable
+// Coach App page, so the link on every page of the site points Google at the
+// page that can rank (Graham, 2 Nov 2026). From 1 to 2 Nov it went to
+// /coach-app, the app itself, which is noindex, so a sitewide link was spent
+// on a page that can never rank. The landing page's form signs returning
+// coaches in as well as signing new ones up (Google and the email link both
+// sign in an existing account), so nobody is stranded there; it is one tap
+// more for a coach who used the header to open the app.
 type AppLinkItem = { label: string; href: string; colours: string; external?: boolean };
 
 const appLinks: AppLinkItem[] = [
   { label: "Progress app", href: "/progress", colours: "bg-[#1A7A45] text-white" },
-  { label: "Coach App", href: "/coach-app", colours: "bg-[#3D86FF] text-[#201E1D]", external: true },
+  { label: "Coach App", href: "/football-parent-coach-app", colours: "bg-[#3D86FF] text-[#201E1D]" },
 ];
 
 // /coach-app is a rewrite to the app's own deployment (vercel.json), not a
