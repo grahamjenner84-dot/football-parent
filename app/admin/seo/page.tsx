@@ -162,6 +162,20 @@ function searchPaths(paths: string[], query: string, limit: number): string[] {
 }
 
 export default function SeoAdminPage() {
+  // Always open at the top. On a reload or Back the browser tries to restore
+  // the old scroll position, but this page renders as a short loading shell
+  // and fills in from client fetches, so the restore clamps to the bottom of
+  // the shell and parks the view on the site footer until the data lands.
+  // The restored position is meaningless once the report reloads anyway.
+  useEffect(() => {
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+    window.scrollTo({ top: 0, behavior: "instant" });
+    return () => {
+      window.history.scrollRestoration = previous;
+    };
+  }, []);
+
   const [report, setReport] = useState<SeoReport | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
