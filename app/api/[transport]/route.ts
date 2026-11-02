@@ -7,6 +7,50 @@ import { getPageViewStats, getPageViewCountryStats, getBannerVariantStats } from
 import { getCoachAppFunnel } from "@/lib/supabase/coach-app-funnel";
 import { getProgressFunnel } from "@/lib/supabase/progress-funnel";
 import { getAffiliateClickStats } from "@/lib/supabase/affiliate-clicks";
+import {
+  getKeywordIdeas,
+  getKeywordMetrics,
+  listAdsAccounts,
+  getCampaignPerformance,
+  getSearchTerms,
+  getKeywordPerformance,
+  GoogleAdsApiError,
+} from "@/lib/google-ads";
+
+// Google Ads errors go back word for word, so a rejection is never mistaken
+// for an empty result.
+async function googleAdsResult(run: () => Promise<unknown>) {
+  try {
+    return { content: [{ type: "text" as const, text: JSON.stringify(await run()) }] };
+  } catch (err) {
+    const text = err instanceof GoogleAdsApiError ? `Google Ads API error ${err.status}:\n${err.body}` : String(err);
+    return { isError: true, content: [{ type: "text" as const, text }] };
+  }
+}
+
+const keywordTargetingSchema = {
+  geoTargetConstants: z
+    .array(z.string())
+    .max(10)
+    .optional()
+    .describe("Location resource names, up to 10. Defaults to ['geoTargetConstants/2826'] (United Kingdom)."),
+  language: z.string().optional().describe("Language resource name. Defaults to 'languageConstants/1000' (English)."),
+};
+
+const adsReportSchema = {
+  startDate: z.string().optional().describe("YYYY-MM-DD. Give with endDate; omit both for the last 30 days (account time zone)."),
+  endDate: z.string().optional().describe("YYYY-MM-DD, inclusive."),
+  customerId: z
+    .string()
+    .optional()
+    .describe("Ad account ID (digits, dashes optional). Defaults to GOOGLE_ADS_CUSTOMER_ID; list_ads_accounts gives the others."),
+};
+
+const adsReportNote =
+  " Read-only (GoogleAdsService.Search, GAQL SELECT). Money fields ending GBP are converted from micros; everything else is exactly as the API returned it. hasData is false, with noDataMessage saying so, when nothing had an impression or any spend in the range (rows that are all zeros are still listed). If the API rejects the request the exact error is returned.";
+
+const keywordFieldsNote =
+  "Each keyword has: avgMonthlySearches, monthlySearchVolumes (the last 12 months, year/month/monthlySearches), competition (LOW/MEDIUM/HIGH), competitionIndex (0-100), lowTopOfPageBidMicros and highTopOfPageBidMicros (20th/80th percentile top-of-page bid, in micros, NOT pounds: divide by 1,000,000, so 625324 is £0.63 and 450000 is 45p). Network is Google Search only. Numbers are exactly what the Google Ads API returned, never estimated: int64 values come as strings, a value the API left out is null (not zero), and nullCounts/note in the response say which. If the API rejects the request the exact error is returned.";
 
 const handler = createMcpHandler(
   (server) => {
@@ -230,6 +274,90 @@ const handler = createMcpHandler(
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );
+
+    server.registerTool(
+      "get_keyword_ideas",
+      {
+        title: "Get keyword ideas from Google Ads Keyword Planner",
+        description:
+          "Keyword ideas from the Google Ads API Keyword Planner (KeywordPlanIdeaService.GenerateKeywordIdeas) for seed keywords, a seed URL, or both. Defaults: UK, English, Google Search. " +
+          keywordFieldsNote,
+        inputSchema: {
+          keywords: z.array(z.string()).optional().describe("Seed keywords, e.g. ['grassroots football coaching']."),
+          url: z.string().optional().describe("Seed URL, e.g. https://www.footballparent.co.uk/coaching. With keywords too, ideas come from both."),
+          ...keywordTargetingSchema,
+          limit: z.number().int().min(1).max(1000).optional().describe("Most ideas to return. Defaults to 100. totalSize says how many the API has."),
+        },
+      },
+      async ({ keywords, url, geoTargetConstants, language, limit }) =>
+        googleAdsResult(() => getKeywordIdeas({ keywords, url, geoTargetConstants, language, limit }))
+    );
+
+    server.registerTool(
+      "get_keyword_metrics",
+      {
+        title: "Get Google Ads Keyword Planner metrics for exact keywords",
+        description:
+          "Historical metrics for an exact list of keywords from the Google Ads API Keyword Planner (KeywordPlanIdeaService.GenerateKeywordHistoricalMetrics). Defaults: UK, English, Google Search. The API merges near-exact duplicates ('car' and 'cars' come back as one row, the other listed in closeVariants); notReturned lists any keyword asked for that has no row. " +
+          keywordFieldsNote,
+        inputSchema: {
+          keywords: z.array(z.string()).min(1).max(10000).describe("Keywords to get metrics for, up to 10,000."),
+          ...keywordTargetingSchema,
+        },
+      },
+      async ({ keywords, geoTargetConstants, language }) =>
+        googleAdsResult(() => getKeywordMetrics({ keywords, geoTargetConstants, language }))
+    );
+
+    server.registerTool(
+      "list_ads_accounts",
+      {
+        title: "List Google Ads accounts",
+        description:
+          "Accounts under the Football Parent Google Ads manager account (4186725350), including the manager itself: ID, name, status, currency, whether it is a manager, and its level in the hierarchy. Read-only.",
+        inputSchema: {},
+      },
+      async () => googleAdsResult(() => listAdsAccounts())
+    );
+
+    server.registerTool(
+      "get_campaign_performance",
+      {
+        title: "Get Google Ads campaign performance",
+        description:
+          "Per campaign for a date range (default last 30 days): status, channel type, daily budget, impressions, clicks, CTR, average CPC, cost, conversions and conversion value, highest cost first." +
+          adsReportNote,
+        inputSchema: adsReportSchema,
+      },
+      async (args) => googleAdsResult(() => getCampaignPerformance(args))
+    );
+
+    server.registerTool(
+      "get_search_terms",
+      {
+        title: "Get the Google Ads search terms report",
+        description:
+          "Search terms that triggered ads for a date range (default last 30 days): search term, its status (added/excluded/none), campaign, ad group, impressions, clicks, cost and conversions, most impressions first. Search and Shopping campaigns only: App and Performance Max campaigns have no rows here." +
+          adsReportNote,
+        inputSchema: {
+          ...adsReportSchema,
+          limit: z.number().int().min(1).max(10000).optional().describe("Most rows to return. Defaults to 500."),
+        },
+      },
+      async (args) => googleAdsResult(() => getSearchTerms(args))
+    );
+
+    server.registerTool(
+      "get_keyword_performance",
+      {
+        title: "Get Google Ads keyword performance",
+        description:
+          "Per keyword for a date range (default last 30 days): keyword, match type, status, quality score (null where Google has not assigned one), campaign, ad group, impressions, clicks, cost and conversions. Keyword-targeted campaigns only: App campaigns have no keywords." +
+          adsReportNote,
+        inputSchema: adsReportSchema,
+      },
+      async (args) => googleAdsResult(() => getKeywordPerformance(args))
+    );
   },
   {},
   {
@@ -243,7 +371,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read", "keyword_planner:read"] };
   },
   {
     required: true,
