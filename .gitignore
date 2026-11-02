@@ -61,3 +61,7 @@ scripts/tmp-*
 # Stale broken-link-finder root outputs, regenerated on demand
 external-links.json
 external-links-checked.json
+
+# Google OAuth client secrets and tokens (Google Ads refresh-token script)
+client_secret*.json
+*refresh-token*.txt
