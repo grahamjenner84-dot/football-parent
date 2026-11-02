@@ -41,6 +41,11 @@ export interface LandingFrontmatter {
   index?: boolean;
   /** Show the app screenshot carousel between the hero and the body copy. */
   carousel?: boolean;
+  /** The phone screenshot beside the hero form on wide screens, picked to
+   * show what the headline promises. One of the keys of HERO_SCREENS in
+   * app/components/CoachLandingPage.tsx; omitted, it is the game time
+   * screen, the main page's own promise. */
+  heroScreen?: "stats-minutes" | "team-selection" | "stats-team-overview";
 }
 
 export interface LandingPage {

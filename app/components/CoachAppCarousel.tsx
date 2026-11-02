@@ -91,48 +91,69 @@ export default function CoachAppCarousel() {
     });
   }
 
+  const first = visible.indexOf(true);
+  const last = visible.lastIndexOf(true);
+
   return (
-    <section className="py-12 lg:py-16 border-b border-gray-200">
-      <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
+    <section className="border-b-[3px] border-[#201E1D] bg-[#FFF8E1] py-12 text-[#201E1D] lg:py-16">
+      <div className="mx-auto flex max-w-[1120px] items-end justify-between gap-4 px-5 lg:px-6">
+        <h2 className="font-display text-[32px] font-extrabold leading-[1.05] lg:text-[40px]">
           Everything You Need on the Touchline
         </h2>
+        {/* Arrows from sm up: on a phone a swipe is the natural move and the
+            dots below already say there is more. */}
+        <div className="hidden shrink-0 gap-3 sm:flex">
+          <ArrowButton
+            direction="previous"
+            disabled={first <= 0}
+            onClick={() => scrollToCard(Math.max(0, first - 1))}
+          />
+          <ArrowButton
+            direction="next"
+            disabled={last === -1 || last >= FEATURES.length - 1}
+            onClick={() => scrollToCard(Math.min(FEATURES.length - 1, first + 1))}
+          />
+        </div>
       </div>
 
       {/* `relative` matters: it makes the scroller the offsetParent, so the
-          cards' offsetLeft is measured against it rather than the page. */}
+          cards' offsetLeft is measured against it rather than the page.
+          The bottom and right padding leave room for the cards' offset
+          shadows, which overflow-x would otherwise clip. */}
       <div
         ref={scrollerRef}
         onScroll={measure}
-        className="relative flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-pl-6 px-6 pb-2 max-w-4xl mx-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="relative mx-auto mt-8 flex max-w-[1120px] snap-x snap-mandatory scroll-pl-5 gap-6 overflow-x-auto px-5 pb-4 pr-8 [scrollbar-width:none] lg:scroll-pl-6 lg:px-6 [&::-webkit-scrollbar]:hidden"
       >
         {FEATURES.map((feature) => (
           <div
             key={feature.image}
-            className="flex-none w-[260px] sm:w-[288px] snap-start flex flex-col"
+            className="flex w-[260px] flex-none snap-start flex-col rounded-[20px] border-2 border-[#201E1D] bg-white p-4 pb-5 shadow-[5px_5px_0_#201E1D] sm:w-[300px] lg:w-[326px]"
           >
-            <h3 className="text-base font-bold text-gray-900 mb-1">
+            <h3 className="font-display text-[22px] font-extrabold leading-[1.1]">
               {feature.title}
             </h3>
-            <p className="text-sm text-gray-600 leading-relaxed mb-3">
+            <p className="mb-4 mt-2 text-[15px] leading-relaxed text-[#3A3836]">
               {feature.body}
             </p>
             {/* Cards stretch to the tallest in the row, so pushing the image
                 to the bottom keeps every screenshot starting at the same
                 height however many lines the title and body wrap to. */}
+            {/* eslint-disable-next-line @next/next/no-img-element -- static
+                screenshots, sized and lazy; next/image adds nothing here. */}
             <img
               src={`/coach-app-screens/${feature.image}`}
               alt={feature.alt}
               width={780}
               height={1560}
               loading="lazy"
-              className="mt-auto w-full h-auto rounded-2xl border border-gray-200 shadow-lg"
+              className="mt-auto h-auto w-full rounded-2xl border-2 border-[#201E1D]"
             />
           </div>
         ))}
       </div>
 
-      <div className="flex items-center justify-center gap-2 mt-6">
+      <div className="mt-6 flex items-center justify-center gap-2.5">
         {FEATURES.map((feature, i) => (
           <button
             key={feature.image}
@@ -141,13 +162,52 @@ export default function CoachAppCarousel() {
             aria-label={`Show screenshot ${i + 1} of ${FEATURES.length}: ${feature.title}`}
             // Several dots can be lit at once, but only the leading one is
             // "current" for assistive tech, where a range would be noise.
-            aria-current={i === visible.indexOf(true)}
-            className={`h-2 w-2 rounded-full transition-colors ${
-              visible[i] ? "bg-gray-900" : "bg-gray-300 hover:bg-gray-400"
-            }`}
-          />
+            aria-current={i === first}
+            // A 24px tap target around a 12px dot.
+            className="flex h-6 w-6 items-center justify-center"
+          >
+            <span
+              className={`block h-3 w-3 rounded-full border-2 border-[#201E1D] transition-colors ${
+                visible[i] ? "bg-[#201E1D]" : "bg-white hover:bg-[#FFC400]"
+              }`}
+            />
+          </button>
         ))}
       </div>
     </section>
+  );
+}
+
+function ArrowButton({
+  direction,
+  disabled,
+  onClick,
+}: {
+  direction: "previous" | "next";
+  disabled: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={direction === "next" ? "Next screenshot" : "Previous screenshot"}
+      className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#201E1D] bg-[#FFC400] shadow-[3px_3px_0_#201E1D] transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_#201E1D] disabled:translate-x-0 disabled:translate-y-0 disabled:bg-white disabled:opacity-40 disabled:shadow-none"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#201E1D"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        {direction === "next" ? <path d="M9 5l7 7-7 7" /> : <path d="M15 5l-7 7 7 7" />}
+      </svg>
+    </button>
   );
 }

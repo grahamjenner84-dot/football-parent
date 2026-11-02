@@ -2077,3 +2077,11 @@ Shin pads is on watch to ~13 Nov (30 Oct internal link and homepage block); Grah
 - **Images and alt text only**, on `/football-parent-coach-app` and its four variants (equal-game-time, equal-playing-time-calculator, lineup-builder, team-stats), which all render `CoachAppCarousel`. Titles, meta descriptions, headings, body copy, links and structured data are unchanged.
 - The five screenshots in `public/coach-app-screens/` are replaced with the app's new design, copied from the Coach App's `public/marketing/` (coach-app PR #70). `goal-details.webp` is replaced by `live-match.webp`, and the cards are reordered to match the app's own sign-in carousel: team, availability, live, stats, game time. Alt text is rewritten to describe the new screens.
 - No ranking effect expected. Image search could pick up the new alt text.
+
+## 2 Nov 2026: Coach App landing pages moved to the comic-accent design
+
+- **Design only**, on `/football-parent-coach-app` and its four noindex variants (`CoachLandingPage`, `CoachAppCarousel`, `CoachSignUpForm`). Title, meta description, H1 text, body copy, headings, links, FAQ and structured data are unchanged. The H1 is uppercase via CSS only.
+- Ink outlines, hard offset shadows, Fira Sans with Fira Sans Condensed 800 headings, yellow buttons (the app's own yellow), a cream carousel band with arrows, and a yellow half-tone band behind the closing form. The MDX body is restyled through descendant rules on the landing page only, so articles are untouched.
+- New: a phone screenshot beside the hero form on wide screens only (`public/coach-app-screens/hero/`, 720x1440 from the app's 1080x2160 store-listing PNGs). The main page, equal-game-time and the calculator variant show the game time screen, `lineup-builder` shows team selection and `team-stats` shows the team stats screen (`heroScreen` frontmatter). The extra alt text is the only crawlable addition.
+- Carousel cards, order and copy unchanged, still matching the app's sign-in carousel.
+- The main page's title/H1 change of 18 Oct has its AI Overview re-check due 8 Nov (`SEO_ROADMAP.md`). This change leaves every ranking lever alone, so that read is unaffected.

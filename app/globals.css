@@ -18,6 +18,11 @@
   /* `font-ui`: Fira Sans from next/font (app/layout.tsx), used by the header
      and footer. */
   --font-ui: var(--font-fira-sans), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  /* `font-display`: Fira Sans Condensed 800, the comic-accent design's
+     headline face. Only loaded where a page defines --font-fira-sans-condensed
+     (the Coach App landing pages so far, app/components/CoachLandingPage.tsx);
+     anywhere else it falls back to Fira Sans bold. */
+  --font-display: var(--font-fira-sans-condensed), var(--font-fira-sans), system-ui, sans-serif;
 }
 
 /* The site is light only. There was a prefers-color-scheme: dark block here,
@@ -67,5 +72,14 @@
   select,
   textarea {
     font: inherit;
+  }
+}
+/* Comic-accent design: the yellow half-tone band behind a call to action
+   (Football Parent homepage concepts canvas, `.dots`). */
+@layer components {
+  .dots-yellow {
+    background-color: #ffc400;
+    background-image: radial-gradient(rgba(32, 30, 29, 0.2) 1.6px, transparent 1.9px);
+    background-size: 10px 10px;
   }
 }
