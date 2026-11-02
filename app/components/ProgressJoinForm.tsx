@@ -1,5 +1,6 @@
 "use client";
 
+import { GoogleG } from "./GoogleG";
 import { useEffect, useRef, useState, useSyncExternalStore, type FormEvent } from "react";
 import { trackProgressFormStep } from "@/lib/progress-form-tracking";
 import {
@@ -277,9 +278,10 @@ export default function ProgressJoinForm({ id, dark = false }: { id?: string; da
             if (error) window.location.assign(GOOGLE_HREF);
           });
         }}
-        className={`flex w-full items-center justify-center rounded-full bg-[#1a7a45] px-7 py-3.5 text-base font-semibold text-white! shadow-sm transition-colors hover:bg-[#0f5d34] ${googleBusy ? "opacity-70" : ""}`}
+        className={`flex w-full items-center justify-center gap-3 rounded-full bg-[#1a7a45] py-2 pl-2 pr-7 text-base font-semibold text-white! shadow-sm transition-colors hover:bg-[#0f5d34] ${googleBusy ? "opacity-70" : ""}`}
       >
-        {googleBusy ? "Opening Google…" : "Sign up with Google"}
+        <GoogleG size={36} />
+        <span className="flex-1 text-center">{googleBusy ? "Opening Google…" : "Sign up with Google"}</span>
       </a>
       {/* The email form is in view under Google, not behind a link. From
           14 Oct it opened on request only ("No Google?"), as on the Coach

@@ -9,6 +9,7 @@ import {
 } from "@/lib/coach-app-auth";
 import { stashLandingHandoff } from "@/lib/coach-app-handoff";
 import { trackSignupFormStep } from "@/lib/coach-app-form-tracking";
+import { GoogleG } from "./GoogleG";
 
 // The sign-up form itself, embedded directly on the Coach App landing page so
 // a visitor converts on the page they arrived at. Before this existed the CTA
@@ -146,9 +147,10 @@ export default function CoachSignUpForm({
           <button
             type="button"
             onClick={() => void handleGoogle()}
-            className={`w-full px-6 py-3 text-[17px] ${PRIMARY_BUTTON}`}
+            className={`flex w-full items-center justify-center gap-3 py-2 pl-2 pr-6 text-[17px] ${PRIMARY_BUTTON}`}
           >
-            Sign up with Google
+            <GoogleG size={34} />
+            <span className="flex-1 text-center">Sign up with Google</span>
           </button>
 
           {emailOpen ? (
