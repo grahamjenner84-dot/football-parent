@@ -41,11 +41,9 @@ const FEATURES = [
 
 export default function CoachAppCarousel() {
   const scrollerRef = useRef<HTMLDivElement>(null);
-  // One dot per screenshot, and a dot is lit when its screenshot is on
-  // screen. Three cards fit side by side on desktop, so three dots light at
-  // once there and one on mobile. Anything cleverer (a dot per scroll
-  // position) ends up showing fewer dots than there are images, which just
-  // reads as a bug.
+  // One dot per screenshot, lit when its screenshot is on screen. Each slide
+  // is the full width of the scroller, so exactly one shows (and one dot
+  // lights) at a time on every screen size.
   const [visible, setVisible] = useState<boolean[]>(() =>
     FEATURES.map((_, i) => i === 0),
   );
@@ -117,38 +115,43 @@ export default function CoachAppCarousel() {
       </div>
 
       {/* `relative` matters: it makes the scroller the offsetParent, so the
-          cards' offsetLeft is measured against it rather than the page.
-          The bottom and right padding leave room for the cards' offset
-          shadows, which overflow-x would otherwise clip. */}
+          slides' offsetLeft is measured against it rather than the page.
+          Each slide is full width with its card centred inside, and the
+          slide's padding leaves room for the card's offset shadow, which
+          overflow-x would otherwise clip. */}
       <div
         ref={scrollerRef}
         onScroll={measure}
-        className="relative mx-auto mt-8 flex max-w-[1120px] snap-x snap-mandatory scroll-pl-5 gap-6 overflow-x-auto px-5 pb-4 pr-8 [scrollbar-width:none] lg:scroll-pl-6 lg:px-6 [&::-webkit-scrollbar]:hidden"
+        className="relative mx-auto mt-8 flex max-w-[1120px] snap-x snap-mandatory overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {FEATURES.map((feature) => (
           <div
             key={feature.image}
-            className="flex w-[260px] flex-none snap-start flex-col rounded-[20px] border-2 border-[#201E1D] bg-white p-4 pb-5 shadow-[5px_5px_0_#201E1D] sm:w-[300px] lg:w-[326px]"
+            className="flex w-full flex-none snap-start justify-center px-5 pb-4 lg:px-6"
           >
-            <h3 className="font-display text-[22px] font-extrabold leading-[1.1]">
-              {feature.title}
-            </h3>
-            <p className="mb-4 mt-2 text-[15px] leading-relaxed text-[#3A3836]">
-              {feature.body}
-            </p>
-            {/* Cards stretch to the tallest in the row, so pushing the image
-                to the bottom keeps every screenshot starting at the same
-                height however many lines the title and body wrap to. */}
-            {/* eslint-disable-next-line @next/next/no-img-element -- static
-                screenshots, sized and lazy; next/image adds nothing here. */}
-            <img
-              src={`/coach-app-screens/${feature.image}`}
-              alt={feature.alt}
-              width={780}
-              height={1560}
-              loading="lazy"
-              className="mt-auto h-auto w-full rounded-2xl border-2 border-[#201E1D]"
-            />
+            <div className="flex w-full max-w-[340px] flex-col rounded-[20px] border-2 border-[#201E1D] bg-white p-4 pb-5 shadow-[5px_5px_0_#201E1D] lg:max-w-[760px] lg:flex-row lg:items-center lg:gap-10 lg:p-8">
+              <div className="lg:flex-1">
+                <h3 className="font-display text-[22px] font-extrabold leading-[1.1] lg:text-[30px]">
+                  {feature.title}
+                </h3>
+                <p className="mb-4 mt-2 text-[15px] leading-relaxed text-[#3A3836] lg:mb-0 lg:mt-3 lg:text-[17px]">
+                  {feature.body}
+                </p>
+              </div>
+              {/* Slides stretch to the tallest, so pushing the image to the
+                  bottom keeps every screenshot starting at the same height
+                  however many lines the title and body wrap to. */}
+              {/* eslint-disable-next-line @next/next/no-img-element -- static
+                  screenshots, sized and lazy; next/image adds nothing here. */}
+              <img
+                src={`/coach-app-screens/${feature.image}`}
+                alt={feature.alt}
+                width={780}
+                height={1560}
+                loading="lazy"
+                className="mt-auto h-auto w-full rounded-2xl border-2 border-[#201E1D] lg:mt-0 lg:w-[280px] lg:flex-none"
+              />
+            </div>
           </div>
         ))}
       </div>
@@ -160,8 +163,6 @@ export default function CoachAppCarousel() {
             type="button"
             onClick={() => scrollToCard(i)}
             aria-label={`Show screenshot ${i + 1} of ${FEATURES.length}: ${feature.title}`}
-            // Several dots can be lit at once, but only the leading one is
-            // "current" for assistive tech, where a range would be noise.
             aria-current={i === first}
             // A 24px tap target around a 12px dot.
             className="flex h-6 w-6 items-center justify-center"
