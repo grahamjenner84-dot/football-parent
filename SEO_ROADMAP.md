@@ -70,6 +70,15 @@ See the change log (30 Oct). One link per page, each in its own commit, once the
 - **Base layers:** the soft ground boots link shipped early on 1 Nov (`48f41c7`, Graham's call, winter peak). Still to do after the 12 Nov read: base layers could join the homepage block.
 - **Read the 30 Oct links and homepage block (about 13 Nov):** in-body link counts went scholarships 3 to 5, PDC explainer 1 to 2, girls' boots 0 to 1, Watford 4 to 5.
 
+## Data sources waiting on someone else
+
+Data we want in the `/api/mcp` server but can't add yet (as of 2 Nov 2026). The Google Ads tools and `get_android_app_analytics` went live 2 Nov (`d14208d`, `16664f9`).
+
+- **Android installs and uninstalls (Play Console), access check 3 Nov 10:00.** Reports bucket `gs://pubsite_prod_7505496605632837477/stats/installs/`. `keyword-agent@football-parent-keyword-agent.iam.gserviceaccount.com` was granted "View app information and download bulk reports (read-only)" at account level on 2 Nov, but still got 403 that day (Google allows up to 24 hours). A one-off scheduled task (`play-bucket-access-retry`) checks it at 10:00. Once it can read a file, build `get_play_install_stats` (by day and country: installs, uninstalls, device loss, install base) from the real CSV column names, saying which Play field is which, since device loss also counts devices unused for 30+ days.
+- **Google Trends:** waiting for Google to approve the alpha application.
+- **AI Overview impressions:** waiting for Google to add it to the Search Console API. The Generative AI report is only on the Search Console website for now. Tested 2 Nov against `sc-domain:footballparent.co.uk`: the API's search types are web, image, video, news, discover and googleNews only, and it rejects every AI type. Re-check when Google announces API support, then add `get_ai_feature_impressions` (by page, country, device, date).
+- **People Also Ask / AI Overview content:** no Google API exists. DataForSEO is the route if we want it (`googleOrganicSerp`, with `loadAsyncAiOverview: true` for AI Overviews).
+
 ## Planned
 
 - **New article: youth football match lengths, pitch sizes and goal sizes by age group (2026/27).** No page covers it; competitors rank for "pitch dimensions for 9v9" (480/mo), "9v9 goal size" (210), "u12 football match length" (110), "u11 football match length" (70). Check volumes with keyword research before writing, then add it to the article roadmap. See `competitor-keyword-ownership-2026-10-18.md`, section 4.
