@@ -2071,3 +2071,9 @@ Shin pads is on watch to ~13 Nov (30 Oct internal link and homepage block); Grah
 - **Measurement only**, no site change. Commits `225a011` (previews) and `f24c1fa` (bot filter).
 - Vercel preview deployments no longer write to the live first-party tables: `isOwnerRequest()` treats `VERCEL_ENV=preview` as owner traffic, and the cookie-consent and site-search logs skip previews too. Testing the header redesign on its preview put 51 rows into 1 Nov's page views, deleted by hand the same evening.
 - `GoogleOther` and `Google-InspectionTool` are now filtered as bots. The reports apply the patterns on read, so past page views drop by those rows as well: about 160 GoogleOther and 100 URL Inspection views since late August, roughly 3 a day, with Inspection hits landing on the pages where indexing was requested. Before/after page view numbers read slightly lower than when they were first reported, so a small drop across this date is the filter, not traffic.
+
+## 2 Nov 2026: Coach App landing pages, new carousel screenshots
+
+- **Images and alt text only**, on `/football-parent-coach-app` and its four variants (equal-game-time, equal-playing-time-calculator, lineup-builder, team-stats), which all render `CoachAppCarousel`. Titles, meta descriptions, headings, body copy, links and structured data are unchanged.
+- The five screenshots in `public/coach-app-screens/` are replaced with the app's new design, copied from the Coach App's `public/marketing/` (coach-app PR #70). `goal-details.webp` is replaced by `live-match.webp`, and the cards are reordered to match the app's own sign-in carousel: team, availability, live, stats, game time. Alt text is rewritten to describe the new screens.
+- No ranking effect expected. Image search could pick up the new alt text.

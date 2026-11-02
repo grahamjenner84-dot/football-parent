@@ -8,34 +8,34 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // public/marketing/*.webp, all 780x1560.
 const FEATURES = [
   {
-    title: "Track all your team's stats at the touch of a button",
-    body: "Results, goals, top scorers and more, all worked out for you the moment a match is saved.",
-    image: "stats-team-overview.webp",
-    alt: "Coach App stats screen showing the Team tab: record, goals, leading the squad and a full player stats table",
-  },
-  {
-    title: "Monitor every player's game time",
-    body: "See each player's share of the available minutes update automatically, so game time stays fair without you doing the maths.",
-    image: "stats-team.webp",
-    alt: "Coach App stats screen showing the Fair Play Time table with every player's share of available minutes",
-  },
-  {
     title: "Auto-generate the team",
     body: "Set your formation and rules once, then generate a fair lineup in one tap.",
     image: "team-selection-auto.webp",
-    alt: "Coach App team selection screen showing an auto-generated lineup on the pitch, with formation and mode controls above",
+    alt: "Coach App team selection screen showing an auto-picked lineup on the pitch, with the auto-pick rules above and subs below",
   },
   {
     title: "Track availability",
     body: "Send the availability link and see who's in, who's out and who hasn't replied, at a glance.",
     image: "confirm-squad.webp",
-    alt: "Coach App confirm squad screen showing each player's availability status: available, not available or no reply yet",
+    alt: "Coach App confirm squad screen showing each player's availability from the parent link: eight available and one who can't play",
   },
   {
     title: "Track goals and assists live",
     body: "Log goals, assists and cards from the touchline in a couple of taps, no clipboard needed.",
-    image: "goal-details.webp",
-    alt: "Coach App live match goal details sheet showing body part, goal type and assist selection",
+    image: "live-match.webp",
+    alt: "Coach App live match screen, 2-1 up in the 2nd quarter with the clock running, Goal for and Goal against buttons and the players on the pitch",
+  },
+  {
+    title: "Track all your team's stats at the touch of a button",
+    body: "Results, goals, top scorers and more, all worked out for you the moment a match is saved.",
+    image: "stats-team-overview.webp",
+    alt: "Coach App team stats: win, draw and loss record, top scorer, top assister and player of the match, and goals for and against",
+  },
+  {
+    title: "Monitor every player's game time",
+    body: "See each player's share of the available minutes update automatically, so game time stays fair without you doing the maths.",
+    image: "stats-team.webp",
+    alt: "Coach App game time stats: the squad's average share of minutes and the fair play time table with every player's share",
   },
 ];
 
