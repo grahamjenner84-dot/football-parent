@@ -129,12 +129,16 @@ export default function CoachAppCarousel() {
             key={feature.image}
             className="flex w-full flex-none snap-start justify-center px-5 pb-4 lg:px-6"
           >
-            <div className="flex w-full max-w-[340px] flex-col rounded-[20px] border-2 border-[#201E1D] bg-white p-4 pb-5 shadow-[5px_5px_0_#201E1D] lg:max-w-[760px] lg:flex-row lg:items-center lg:gap-10 lg:p-8">
+            {/* A card on phones. On desktop the white card goes: one short
+                caption in a wide box left a big empty panel beside the
+                screenshot, so the text sits on the section background and
+                the screenshot carries the frame and shadow. */}
+            <div className="flex w-full max-w-[340px] flex-col rounded-[20px] border-2 border-[#201E1D] bg-white p-4 pb-5 shadow-[5px_5px_0_#201E1D] lg:max-w-[760px] lg:flex-row lg:items-center lg:gap-16 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:pb-2 lg:shadow-none">
               <div className="lg:flex-1">
-                <h3 className="font-display text-[22px] font-extrabold leading-[1.1] lg:text-[30px]">
+                <h3 className="font-display text-[22px] font-extrabold leading-[1.1] lg:text-[40px] lg:leading-[1.05]">
                   {feature.title}
                 </h3>
-                <p className="mb-4 mt-2 text-[15px] leading-relaxed text-[#3A3836] lg:mb-0 lg:mt-3 lg:text-[17px]">
+                <p className="mb-4 mt-2 text-[15px] leading-relaxed text-[#3A3836] lg:mb-0 lg:mt-4 lg:text-[19px]">
                   {feature.body}
                 </p>
               </div>
@@ -149,7 +153,7 @@ export default function CoachAppCarousel() {
                 width={780}
                 height={1560}
                 loading="lazy"
-                className="mt-auto h-auto w-full rounded-2xl border-2 border-[#201E1D] lg:mt-0 lg:w-[280px] lg:flex-none"
+                className="mt-auto h-auto w-full rounded-2xl border-2 border-[#201E1D] lg:mt-0 lg:w-[300px] lg:flex-none lg:rounded-[24px] lg:shadow-[8px_8px_0_#201E1D]"
               />
             </div>
           </div>
