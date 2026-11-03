@@ -3,6 +3,7 @@ import Script from "next/script";
 import { BRAND_IMAGES } from "@/lib/seo";
 import { extractFaqs } from "@/lib/faq";
 import InstagramFollow from "@/app/components/InstagramFollow";
+import { COMIC_BODY_STYLES, firaSansCondensed, type ArticleDesign } from "@/lib/comic-design";
 
 interface ArticleLayoutProps {
   title: string;
@@ -32,8 +33,48 @@ interface ArticleLayoutProps {
   // article shows its description, so the hero (the calculator) starts as
   // high as possible, inside the first screen on a phone.
   lead?: React.ReactNode;
+  // "comic" renders the page in the comic-accent design (lib/comic-design.ts):
+  // ink outlines, offset shadows and Fira Sans Condensed headings. Pass the
+  // article's frontmatter `design`, and give MDXContent the same value so the
+  // callout boxes match. Text, headings, links and schema are identical in
+  // both designs; only the styling changes.
+  design?: ArticleDesign;
   children: React.ReactNode;
 }
+
+const CLASSIC_STYLES = {
+  main: "min-h-screen bg-white",
+  crumbBar: "bg-gray-50 border-b border-gray-200",
+  crumbText: "text-gray-600",
+  crumbSep: "text-gray-400",
+  crumbCurrent: "text-gray-900 font-medium",
+  header: "bg-white border-b border-gray-200",
+  pill: "px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-6",
+  h1: "font-bold leading-tight mb-6 text-gray-900",
+  h1Size: "text-4xl lg:text-5xl",
+  description: "text-lg text-gray-600 leading-relaxed max-w-2xl mb-6",
+  byline: "flex flex-wrap items-center gap-6 text-sm text-gray-500 pt-6 border-t border-gray-200",
+  body: "",
+  authorBand: "bg-white border-t border-gray-200",
+  authorCard: "bg-gray-50 rounded-lg p-8 lg:p-10",
+};
+
+const COMIC_STYLES = {
+  main: `${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`,
+  crumbBar: "bg-[#FFF8E1] border-b-2 border-[#201E1D]",
+  crumbText: "text-[#3A3836]",
+  crumbSep: "text-[#9A948A]",
+  crumbCurrent: "text-[#201E1D] font-semibold",
+  header: "bg-white border-b-[3px] border-[#201E1D]",
+  pill: "px-3 py-1 bg-[#FFC400] border-2 border-[#201E1D] text-[#201E1D] text-xs font-bold uppercase tracking-[0.12em] rounded-full mb-6",
+  h1: "font-display font-extrabold leading-[1.04] mb-6 text-[#201E1D]",
+  h1Size: "text-[38px] sm:text-5xl lg:text-[56px]",
+  description: "text-lg lg:text-xl text-[#3A3836] leading-relaxed max-w-2xl mb-6",
+  byline: "flex flex-wrap items-center gap-6 text-sm text-[#3A3836] pt-6 border-t-2 border-[#201E1D]",
+  body: `text-[#3A3836] ${COMIC_BODY_STYLES}`,
+  authorBand: "dots-yellow border-t-[3px] border-[#201E1D]",
+  authorCard: "bg-white rounded-2xl border-[3px] border-[#201E1D] shadow-[6px_6px_0_#201E1D] p-8 lg:p-10",
+};
 
 function createAbsoluteUrl(path: string) {
   if (path.startsWith("https://")) {
@@ -85,8 +126,10 @@ export default function ArticleLayout({
   kind = "article",
   hero,
   lead,
+  design = "classic",
   children,
 }: ArticleLayoutProps) {
+  const st = design === "comic" ? COMIC_STYLES : CLASSIC_STYLES;
   const articleUrl = path ? createAbsoluteUrl(path) : undefined;
   const categoryAbsoluteUrl = createAbsoluteUrl(categoryUrl);
   const schemaId = createSchemaId(title);
@@ -200,7 +243,7 @@ export default function ArticleLayout({
       : null;
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className={st.main}>
       {mainSchema && (
         <Script
           id={`article-schema-${schemaId}`}
@@ -231,29 +274,29 @@ export default function ArticleLayout({
         />
       )}
 
-      <div className="bg-gray-50 border-b border-gray-200">
+      <div className={st.crumbBar}>
         <nav className="max-w-7xl mx-auto px-6 py-4 text-sm">
-          <div className={`flex items-center gap-2 text-gray-600 ${isTool ? "min-w-0" : ""}`}>
+          <div className={`flex items-center gap-2 ${st.crumbText} ${isTool ? "min-w-0" : ""}`}>
             <Link href="/" className="hover:text-gray-900">
               Home
             </Link>
-            <span className="text-gray-400">/</span>
+            <span className={st.crumbSep}>/</span>
             <Link href={categoryUrl} className="hover:text-gray-900">
               {category}
             </Link>
-            <span className="text-gray-400">/</span>
-            <span className={`text-gray-900 font-medium ${isTool ? "truncate" : ""}`}>{title}</span>
+            <span className={st.crumbSep}>/</span>
+            <span className={`${st.crumbCurrent} ${isTool ? "truncate" : ""}`}>{title}</span>
           </div>
         </nav>
       </div>
 
-      <div className="bg-white border-b border-gray-200">
+      <div className={st.header}>
         <div className={`max-w-4xl mx-auto px-6 ${isTool ? "py-6 lg:py-20" : "py-16 lg:py-20"}`}>
-          <span className={`${isTool ? "hidden sm:inline-block" : "inline-block"} px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-6`}>
+          <span className={`${isTool ? "hidden sm:inline-block" : "inline-block"} ${st.pill}`}>
             {isTool ? "Free tool" : "Guide"}
           </span>
 
-          <h1 className={`${isTool ? "text-3xl sm:text-4xl" : "text-4xl"} lg:text-5xl font-bold leading-tight mb-6 text-gray-900`}>
+          <h1 className={`${isTool ? "text-3xl sm:text-4xl lg:text-5xl" : st.h1Size} ${st.h1}`}>
             {title}
           </h1>
 
@@ -263,12 +306,12 @@ export default function ArticleLayout({
           {isTool ? (
             lead && <div className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">{lead}</div>
           ) : (
-            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">
+            <p className={st.description}>
               {description}
             </p>
           )}
 
-          <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 pt-6 border-t border-gray-200">
+          <div className={st.byline}>
             <div className="flex items-center gap-2">
               <span className="text-gray-400">By</span>
               <Link
@@ -340,15 +383,15 @@ export default function ArticleLayout({
               </div>
             </aside>
 
-            <article className="flex-1 max-w-2xl">{children}</article>
+            <article className={`flex-1 max-w-2xl ${st.body}`}>{children}</article>
           </div>
         </div>
       </div>
 
-      <div className="bg-white border-t border-gray-200">
+      <div className={st.authorBand}>
         <div className={`${isTool ? "max-w-4xl" : "max-w-7xl"} mx-auto px-6 py-12 lg:py-16`}>
           <div className="max-w-4xl">
-            <div className="bg-gray-50 rounded-lg p-8 lg:p-10">
+            <div className={st.authorCard}>
               <div className="flex gap-6 mb-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-white border border-gray-200">
                   <img

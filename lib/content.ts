@@ -11,6 +11,9 @@ export interface ArticleFrontmatter {
   categoryUrl: string;
   readTime: number;
   sections: { id: string; title: string }[];
+  // "comic" moves the article onto the comic-accent design
+  // (lib/comic-design.ts). Absent means the classic article template.
+  design?: "classic" | "comic";
 }
 
 export interface Article {

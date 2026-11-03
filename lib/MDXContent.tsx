@@ -11,6 +11,7 @@ import GearPicks from "@/app/components/mdx/GearPicks";
 import InstagramEmbed from "@/app/components/mdx/InstagramEmbed";
 import InstagramPromo from "@/app/components/mdx/InstagramPromo";
 import ToolCallout from "@/app/components/mdx/ToolCallout";
+import type { ArticleDesign } from "@/lib/comic-design";
 import { affiliateLinkProps } from "@/lib/affiliate";
 import { competitorLinkProps } from "@/lib/externalLinks";
 import CoachAppBanner, {
@@ -150,6 +151,23 @@ const mdxOptions = {
   },
 };
 
+// The comic-accent design (lib/comic-design.ts) swaps the callout boxes for
+// their comic versions. Element styles (headings, links, tables) are
+// restyled by ArticleLayout's wrapper instead, the same way the Coach App
+// landing pages do it.
+const comicComponents = {
+  ...components,
+  ParentNote: (props: React.ComponentProps<typeof ParentNote>) => (
+    <ParentNote {...props} design="comic" />
+  ),
+  ExpertOpinion: (props: React.ComponentProps<typeof ExpertOpinion>) => (
+    <ExpertOpinion {...props} design="comic" />
+  ),
+  ExpertQA: (props: React.ComponentProps<typeof ExpertQA>) => (
+    <ExpertQA {...props} design="comic" />
+  ),
+};
+
 // Find the "## " heading nearest the middle of the article and split there, so
 // the Coach App banner lands between two sections rather than interrupting one.
 // Only splits at a heading in the middle 30-70% of the body, and only counts
@@ -217,6 +235,9 @@ interface MDXContentProps {
   // Where the mid-article Coach App banner reports its clicks from
   // (CoachAppPlacement). "article" unless a page has its own tag.
   coachAppPlacement?: CoachAppPlacement;
+  // "comic" renders the callouts in the comic-accent design. Pass the
+  // article's frontmatter `design`, the same value ArticleLayout gets.
+  design?: ArticleDesign;
 }
 
 export async function MDXContent({
@@ -224,7 +245,9 @@ export async function MDXContent({
   coachAppBanner,
   slug,
   coachAppPlacement = "article",
+  design = "classic",
 }: MDXContentProps) {
+  const mdxComponents = design === "comic" ? comicComponents : components;
   const split =
     coachAppBanner === "none" ? null : splitAtMiddleHeading(content);
   // One app per article, in the mid-article slot: the Coach App for coach
@@ -256,7 +279,7 @@ export async function MDXContent({
         <>
           <MDXRemote
             source={split[0]}
-            components={components}
+            components={mdxComponents}
             options={mdxOptions}
           />
 
@@ -276,7 +299,7 @@ export async function MDXContent({
 
           <MDXRemote
             source={split[1]}
-            components={components}
+            components={mdxComponents}
             options={mdxOptions}
           />
         </>
@@ -284,7 +307,7 @@ export async function MDXContent({
         <>
           <MDXRemote
             source={content}
-            components={components}
+            components={mdxComponents}
             options={mdxOptions}
           />
 

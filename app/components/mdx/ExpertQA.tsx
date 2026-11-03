@@ -33,6 +33,9 @@ type ExpertQAProps = {
   // Football Parent interview article this Q&A is drawn from.
   profileHref?: string;
   profileLabel?: string;
+  // Set by MDXContent on pages using the comic-accent design
+  // (lib/comic-design.ts); never authored in MDX.
+  design?: "classic" | "comic";
 };
 
 export default function ExpertQA({
@@ -46,6 +49,7 @@ export default function ExpertQA({
   sourceLabel,
   profileHref,
   profileLabel,
+  design = "classic",
 }: ExpertQAProps) {
   const items = React.Children.toArray(children).filter(
     (child): child is React.ReactElement<ExpertQAItemProps> =>
@@ -53,6 +57,23 @@ export default function ExpertQA({
   );
 
   if (!items.length) return null;
+
+  if (design === "comic") {
+    return (
+      <ComicExpertQA
+        items={items}
+        name={name}
+        role={role}
+        bio={bio}
+        photoSrc={photoSrc}
+        photoAlt={photoAlt}
+        sourceHref={sourceHref}
+        sourceLabel={sourceLabel}
+        profileHref={profileHref}
+        profileLabel={profileLabel}
+      />
+    );
+  }
 
   return (
     <div className="my-6 overflow-hidden rounded-xl border border-amber-200">
@@ -113,6 +134,97 @@ export default function ExpertQA({
             className="text-amber-800 underline underline-offset-2 hover:text-amber-950 transition"
           >
             {sourceLabel ?? "Read the full interview"}
+          </a>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// The comic-accent version: an ink-outlined card with a hard offset shadow, a
+// yellow header band carrying the expert, and the answer set as a quote.
+function ComicExpertQA({
+  items,
+  name,
+  role,
+  bio,
+  photoSrc,
+  photoAlt,
+  sourceHref,
+  sourceLabel,
+  profileHref,
+  profileLabel,
+}: Omit<ExpertQAProps, "children" | "design"> & {
+  items: React.ReactElement<ExpertQAItemProps>[];
+}) {
+  return (
+    <div className="not-prose my-8 overflow-hidden rounded-2xl border-[3px] border-[#201E1D] bg-white shadow-[6px_6px_0_#201E1D]">
+      <div className="flex items-center gap-4 border-b-[3px] border-[#201E1D] bg-[#FFC400] px-5 py-4">
+        {photoSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={photoSrc}
+            alt={photoAlt ?? name}
+            width={64}
+            height={64}
+            className="h-16 w-16 shrink-0 rounded-full border-[3px] border-[#201E1D] bg-white object-cover"
+          />
+        ) : null}
+        <div className="min-w-0">
+          <div className="mb-1 inline-block rounded-full border-2 border-[#201E1D] bg-white px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#201E1D]">
+            Expert view
+          </div>
+          <div className="font-display text-[22px] font-extrabold leading-tight text-[#201E1D]">
+            {name}
+          </div>
+          {role ? (
+            <div className="text-sm font-semibold text-[#201E1D]">{role}</div>
+          ) : null}
+        </div>
+      </div>
+
+      {bio || profileHref ? (
+        <div className="border-b-2 border-dashed border-[#C9C4BA] bg-[#FFF8E1] px-5 py-3 text-sm leading-6 text-[#3A3836]">
+          {bio}
+          {profileHref ? (
+            <>
+              {bio ? " " : null}
+              <a
+                href={profileHref}
+                target="_blank"
+                rel="noopener"
+                className="font-bold underline underline-offset-2"
+              >
+                {profileLabel ?? profileHref}
+              </a>
+            </>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="divide-y-2 divide-dashed divide-[#C9C4BA]">
+        {items.map((item, index) => (
+          <div key={index} className="px-5 py-5">
+            <div className="mb-3 text-[13px] font-bold uppercase tracking-[0.12em] text-[#1F5FD6]">
+              Football Parent asks
+            </div>
+            <div className="mb-4 font-semibold leading-7 text-[#201E1D]">
+              {item.props.q}
+            </div>
+            <div className="relative border-l-[5px] border-[#FFC400] pl-4 leading-8 text-[#3A3836] [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:mb-3">
+              {item.props.children}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {sourceHref ? (
+        <div className="border-t-[3px] border-[#201E1D] bg-white px-5 py-3 text-right">
+          <a
+            href={sourceHref}
+            className="inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-4 py-1.5 text-sm font-bold !text-[#201E1D] no-underline shadow-[3px_3px_0_#201E1D] transition hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0_#201E1D]"
+          >
+            {sourceLabel ?? "Read the full interview"} →
           </a>
         </div>
       ) : null}

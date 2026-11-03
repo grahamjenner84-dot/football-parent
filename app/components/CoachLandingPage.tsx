@@ -1,10 +1,10 @@
 import Script from "next/script";
-import { Fira_Sans_Condensed } from "next/font/google";
 import CoachAppCarousel from "@/app/components/CoachAppCarousel";
 import CoachSignUpForm from "@/app/components/CoachSignUpForm";
 import { MDXContent } from "@/lib/MDXContent";
 import { extractFaqs } from "@/lib/faq";
 import type { LandingPage } from "@/lib/landing";
+import { COMIC_BODY_STYLES as BODY_STYLES, firaSansCondensed } from "@/lib/comic-design";
 
 // Shared shell for every Coach App landing page, so a variant differs from
 // the main page only in its words - same hero shape, same form, same
@@ -21,16 +21,8 @@ const TRUST_SIGNALS = [
   "Built by grassroots coaches",
 ];
 
-// The comic-accent design's headline face (Football Parent homepage concepts
-// canvas, "B · Comic accents (yellow)"). Loaded here rather than in the root
-// layout so only these pages preload it until the rest of the site moves
-// over; globals.css maps `font-display` onto the variable.
-const firaSansCondensed = Fira_Sans_Condensed({
-  subsets: ["latin"],
-  weight: ["800"],
-  variable: "--font-fira-sans-condensed",
-  display: "swap",
-});
+// The comic-accent design's headline face and body overrides live in
+// lib/comic-design.ts, shared with the articles that opt in to the design.
 
 // The phone beside the hero form, from the app's store-listing screenshots
 // (coach-app store-listing/screenshots/, 1080x2160, resized to 720x1440).
@@ -73,19 +65,6 @@ function CheckIcon() {
   );
 }
 
-// The MDX body is rendered by the shared MDXContent, whose element styles are
-// the article template's. These descendant overrides restyle it here only,
-// in the comic-accent look, without touching the articles (which move over
-// in their own step). A `[&_h2]` rule beats MDXContent's own classes because
-// it is one element more specific.
-const BODY_STYLES = [
-  "[&_h2]:font-display [&_h2]:text-[32px] [&_h2]:lg:text-[40px] [&_h2]:leading-[1.05] [&_h2]:text-[#201E1D] [&_h2]:font-extrabold",
-  "[&_h3]:text-[22px] [&_h3]:text-[#201E1D]",
-  "[&_a]:text-[#1F5FD6] [&_a]:font-bold",
-  "[&_table]:border-2 [&_table]:border-[#201E1D] [&_th]:border-[#201E1D] [&_td]:border-[#C9C4BA] [&_th]:bg-[#FFC400] [&_th]:text-[#201E1D]",
-  "[&_tr:nth-child(even)]:bg-[#FFF8E1]",
-  "[&_blockquote]:border-2 [&_blockquote]:border-l-2 [&_blockquote]:border-[#201E1D] [&_blockquote]:bg-[#FFF8E1] [&_blockquote]:rounded-xl [&_blockquote]:shadow-[4px_4px_0_#201E1D]",
-].join(" ");
 
 export default function CoachLandingPage({ page }: { page: LandingPage }) {
   const { frontmatter, content, slug } = page;
