@@ -478,6 +478,25 @@ coaching approach looks like in practice, reflective/self-assessment tools
 used with young players.
 **Used in:** [crystal-palace-development-centre-guide](/academy-pathway/crystal-palace-development-centre-guide) (1/3)
 
+### Trial-day pep talk: too relaxed vs too important (Graham, 2026-11-03)
+
+> I tried different approaches. For one trial I decided he might be nervous,
+> so I didn't say anything really, just stayed casual and said have fun and
+> enjoy yourself. He took that a bit literally and was trying to do rainbow
+> flicks when he should have been doing step-overs in the warm-up. By trying
+> to remove the pressure, I'd kind of made it less important. I'd taken that
+> approach because I'd bigged up another trial, and he'd looked nervous and
+> not himself.
+>
+> So for me the best approach was to combine the two: have fun, get on the
+> ball, but work hard. I read something about using a word like "stay
+> involved", so I tried to focus on that. If you make it too important they
+> freeze. But too relaxed, and they don't have that little bit of fear you
+> sometimes need to do your best.
+
+**Topics:** what to say before a trial, trial nerves, pre-match talk.
+**Used in:** [david-jervis-football-trials-interview](/parent-guides/david-jervis-football-trials-interview) (1/3), 2026-11-03, after David's Q3 (the week before a trial). Good fits for reuse: what-happens-at-academy-trials ("What Parents Should Avoid"), what-to-say-after-football-matches.
+
 ### Ask about the pathway up front (Graham, 2026-10-10)
 
 Given in session for the West Ham guide, from general development-centre
