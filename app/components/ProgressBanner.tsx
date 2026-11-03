@@ -78,7 +78,13 @@ export default function ProgressBanner({
 }) {
   const comic = design === "comic";
   const sponsor = placement === "academy-pathway";
-  const className = comic
+  // The homepage's comic banner is the canvas's full-width version: bigger
+  // type and the share card at full size, beside the text on wide screens
+  // and under the button on phones.
+  const homeComic = comic && placement === "home";
+  const className = homeComic
+    ? "group block rounded-[20px] border-[3px] border-[#201E1D] bg-[#f4f6f1] p-6 no-underline shadow-[6px_6px_0_#201E1D] transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#201E1D] sm:p-10"
+    : comic
     ? `group block rounded-[18px] border-[3px] border-[#201E1D] bg-[#f4f6f1] px-6 py-6 no-underline shadow-[6px_6px_0_#201E1D] transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#201E1D] sm:px-[26px] ${
         inArticle ? "my-10" : ""
       }`
@@ -174,6 +180,40 @@ export default function ProgressBanner({
     </div>
   );
 
+  const homeInner = (body: string): ReactNode => (
+    <div className="flex flex-wrap items-center gap-x-12 gap-y-8">
+      <div className="flex min-w-0 flex-[999_1_440px] flex-col">
+        {/* eslint-disable-next-line @next/next/no-img-element -- one small SVG logo */}
+        <img
+          src="/progress/progress-lockup.svg"
+          alt="Progress by Football Parent"
+          width={574}
+          height={146}
+          className="h-10 w-auto self-start"
+        />
+        <p className="m-0 mt-[18px] text-[clamp(26px,2.8vw,34px)] font-bold leading-[1.15] text-[#16211b]">
+          Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
+        </p>
+        <p className="m-0 mt-3.5 max-w-[560px] text-[19px] leading-[1.6] text-[#3c4a40]">{body}</p>
+        <span className="mt-6 inline-flex items-center gap-2 self-start whitespace-nowrap rounded-full border-[3px] border-[#201E1D] bg-[#1a7a45] px-[22px] py-3.5 text-lg font-bold text-white shadow-[4px_4px_0_#201E1D] transition-colors group-hover:bg-[#0f5d34]">
+          Start free trial
+          <Arrow />
+        </span>
+      </div>
+      <div className="flex flex-[1_1_240px] justify-center">
+        {/* eslint-disable-next-line @next/next/no-img-element -- one small static image */}
+        <img
+          src="/progress/progress-potm-card.webp"
+          alt="A Progress share card: Alfie, Player of the Match, 1–0 vs Wanderers"
+          width={480}
+          height={600}
+          loading="lazy"
+          className="h-auto w-[240px] rotate-[4deg] rounded-xl border-[3px] border-[#201E1D] shadow-[8px_8px_0_#201E1D]"
+        />
+      </div>
+    </div>
+  );
+
   const inner = (body: string, withCard = false, cta = "Start free trial"): ReactNode =>
     comic ? comicInner(body, withCard, cta) : classicInner(body, withCard, cta);
 
@@ -218,7 +258,7 @@ export default function ProgressBanner({
 
   return (
     <ProgressBannerLink banner={`progress-${placement}`} className={className}>
-      {inner(controlBody)}
+      {homeComic ? homeInner(controlBody) : inner(controlBody)}
     </ProgressBannerLink>
   );
 }
