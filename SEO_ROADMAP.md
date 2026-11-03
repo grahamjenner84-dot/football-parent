@@ -72,9 +72,8 @@ See the change log (30 Oct). One link per page, each in its own commit, once the
 
 ## Data sources waiting on someone else
 
-Data we want in the `/api/mcp` server but can't add yet (as of 2 Nov 2026). The Google Ads tools and `get_android_app_analytics` went live 2 Nov (`d14208d`, `16664f9`).
+Data we want in the `/api/mcp` server but can't add yet (as of 2 Nov 2026). The Google Ads tools and `get_android_app_analytics` went live 2 Nov (`d14208d`, `16664f9`); `get_play_install_stats` was built 3 Nov once Play reports access came through.
 
-- **Android installs and uninstalls (Play Console), access check 3 Nov 10:00.** Reports bucket `gs://pubsite_prod_7505496605632837477/stats/installs/`. `keyword-agent@football-parent-keyword-agent.iam.gserviceaccount.com` was granted "View app information and download bulk reports (read-only)" at account level on 2 Nov, but still got 403 that day (Google allows up to 24 hours). A one-off scheduled task (`play-bucket-access-retry`) checks it at 10:00. Once it can read a file, build `get_play_install_stats` (by day and country: installs, uninstalls, device loss, install base) from the real CSV column names, saying which Play field is which, since device loss also counts devices unused for 30+ days.
 - **Google Trends:** waiting for Google to approve the alpha application.
 - **AI Overview impressions:** waiting for Google to add it to the Search Console API. The Generative AI report is only on the Search Console website for now. Tested 2 Nov against `sc-domain:footballparent.co.uk`: the API's search types are web, image, video, news, discover and googleNews only, and it rejects every AI type. Re-check when Google announces API support, then add `get_ai_feature_impressions` (by page, country, device, date).
 - **People Also Ask / AI Overview content:** no Google API exists. DataForSEO is the route if we want it (`googleOrganicSerp`, with `loadAsyncAiOverview: true` for AI Overviews).
