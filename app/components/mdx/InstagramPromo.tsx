@@ -10,7 +10,41 @@ import { INSTAGRAM_HANDLE, InstagramIcon, instagramUrl } from "@/app/components/
 //
 // Clicks are counted by PartnerClickTracker like the end-of-article card,
 // told apart by the utm_content in the link (see instagramUrl).
-export default function InstagramPromo() {
+export default function InstagramPromo({
+  design = "classic",
+}: {
+  // Set by MDXContent on comic-accent pages (lib/comic-design.ts).
+  design?: "classic" | "comic";
+} = {}) {
+  // Comic-accent version, as on the homepage concepts canvas's Article board.
+  if (design === "comic") {
+    return (
+      <aside
+        data-instagram-placement="mid-article"
+        className="not-prose my-8 flex flex-wrap items-center gap-x-5 gap-y-2.5 rounded-2xl border-2 border-[#201E1D] bg-white px-[22px] py-5"
+      >
+        <p className="m-0 flex flex-[1_1_100%] items-center gap-2.5 font-display text-xl font-extrabold text-[#201E1D]">
+          <InstagramIcon className="h-6 w-6 text-[#dd2a7b]" />
+          More like this on Instagram
+        </p>
+        <p className="m-0 flex-[999_1_300px] text-base leading-[1.55] text-[#3A3836]">
+          Quick expert insights from youth coaches and the people who run
+          grassroots football, plus what we have learned as football
+          parents. {INSTAGRAM_HANDLE}
+        </p>
+        <a
+          href={instagramUrl("mid-article")}
+          target="_blank"
+          rel="noopener"
+          className="inline-flex flex-shrink-0 items-center gap-2 rounded-full border-2 border-[#201E1D] bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] px-[18px] py-[11px] text-[15px] font-bold !text-white no-underline transition hover:opacity-90"
+        >
+          <InstagramIcon />
+          Follow on Instagram
+        </a>
+      </aside>
+    );
+  }
+
   return (
     <aside
       data-instagram-placement="mid-article"

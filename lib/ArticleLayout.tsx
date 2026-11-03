@@ -327,7 +327,7 @@ export default function ArticleLayout({
                   </p>
                 </div>
               </div>
-              <InstagramFollow />
+              <InstagramFollow design="comic" />
             </div>
           </div>
         </section>

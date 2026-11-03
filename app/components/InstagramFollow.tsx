@@ -34,7 +34,34 @@ export function InstagramIcon({ className = "h-5 w-5" }: { className?: string })
   );
 }
 
-export default function InstagramFollow() {
+export default function InstagramFollow({
+  design = "classic",
+}: {
+  // "comic" on comic-accent articles (lib/ArticleLayout.tsx).
+  design?: "classic" | "comic";
+} = {}) {
+  if (design === "comic") {
+    return (
+      <div className="mt-6 flex flex-wrap items-center justify-between gap-x-5 gap-y-3 border-t-2 border-[#201E1D] pt-[18px]">
+        <p className="m-0 flex-[1_1_300px] text-[15px] leading-normal text-[#3A3836]">
+          <strong className="block text-base text-[#201E1D]">Follow Football Parent on Instagram</strong>
+          Tips from academy coaches and parents who have been through it, in a
+          minute a day. {INSTAGRAM_HANDLE}
+        </p>
+        <a
+          href={instagramUrl("end-card")}
+          target="_blank"
+          // No noreferrer: the profile visit should show it came from us.
+          rel="noopener"
+          className="inline-flex flex-shrink-0 items-center gap-2 rounded-full border-2 border-[#201E1D] bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] px-[18px] py-[11px] text-[15px] font-bold !text-white no-underline transition hover:opacity-90"
+        >
+          <InstagramIcon />
+          Follow on Instagram
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-6 flex flex-col gap-4 border-t border-gray-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
       <div>

@@ -63,17 +63,28 @@ export default function ProgressBanner({
   placement = "article",
   inArticle = placement === "article",
   test = false,
+  design = "classic",
 }: {
   placement?: ProgressPlacement;
   /** Adds the vertical spacing an in-body banner needs. */
   inArticle?: boolean;
   /** Runs the trial/development-centre A/B test on this banner. */
   test?: boolean;
+  /** "comic" on comic-accent articles (lib/comic-design.ts): ink outline,
+   *  offset shadow and the card on the right, as on the homepage concepts
+   *  canvas. Same words, links and measurement as the classic banner, and
+   *  both test arms change together, so the A/B comparison is unaffected. */
+  design?: "classic" | "comic";
 }) {
+  const comic = design === "comic";
   const sponsor = placement === "academy-pathway";
-  const className = `group block rounded-2xl border border-[#d8ded1] bg-[#f4f6f1] px-6 py-6 no-underline transition hover:border-[#1a7a45] sm:px-8 ${
-    inArticle ? "my-10" : ""
-  }`;
+  const className = comic
+    ? `group block rounded-[18px] border-[3px] border-[#201E1D] bg-[#f4f6f1] px-6 py-6 no-underline shadow-[6px_6px_0_#201E1D] transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#201E1D] sm:px-[26px] ${
+        inArticle ? "my-10" : ""
+      }`
+    : `group block rounded-2xl border border-[#d8ded1] bg-[#f4f6f1] px-6 py-6 no-underline transition hover:border-[#1a7a45] sm:px-8 ${
+        inArticle ? "my-10" : ""
+      }`;
   const controlBody = sponsor
     ? "Whatever the pathway brings, keep a record of it: goals, assists and career stats, training and coach feedback, and season cards worth sharing."
     : "Track their goals and assists, log their progress and keep coach feedback in one place, season after season.";
@@ -112,7 +123,61 @@ export default function ProgressBanner({
     />
   );
 
-  const inner = (body: string, withCard = false, cta = "Start free trial"): ReactNode => (
+  // Comic layout: label, logo, strapline, body and button in one column,
+  // the share card tilted on the right with a hard shadow.
+  const comicCard = (className: string) => (
+    // eslint-disable-next-line @next/next/no-img-element -- one small static image
+    <img
+      src="/progress/progress-potm-card.webp"
+      alt="A Progress share card: Alfie, Player of the Match, 1–0 vs Wanderers"
+      width={480}
+      height={600}
+      loading="lazy"
+      className={`h-auto shrink-0 rotate-[4deg] rounded-[10px] border-[3px] border-[#201E1D] shadow-[5px_5px_0_#201E1D] ${className}`}
+    />
+  );
+
+  // Comic layout: label, logo, strapline, body and button in one column,
+  // the share card tilted on the right with a hard shadow (beside the logo
+  // on phones, as in the classic banner).
+  const comicInner = (body: string, withCard = false, cta = "Start free trial"): ReactNode => (
+    <div className="flex items-center gap-[26px]">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex items-center gap-4">
+          <div className="flex min-w-0 flex-1 flex-col">
+            {sponsor && (
+              <p className="m-0 mb-2.5 text-[15px] font-semibold text-[#5d6b60]">
+                Academy Pathway is supported by
+              </p>
+            )}
+            {/* eslint-disable-next-line @next/next/no-img-element -- one small SVG logo */}
+            <img
+              src="/progress/progress-lockup.svg"
+              alt="Progress by Football Parent"
+              width={574}
+              height={146}
+              className="h-[34px] w-auto self-start"
+            />
+          </div>
+          {withCard && comicCard("w-[84px] sm:hidden")}
+        </div>
+        <p className="m-0 mt-2.5 text-[21px] font-bold leading-[1.25] text-[#16211b]">
+          Trust the process. Track the <span className="text-[#1a7a45]">progress</span>.
+        </p>
+        <p className="m-0 mt-2 text-base leading-[1.6] text-[#3c4a40]">{body}</p>
+        <span className="mt-4 inline-flex items-center gap-2 self-start whitespace-nowrap rounded-full border-[3px] border-[#201E1D] bg-[#1a7a45] px-[18px] py-2.5 text-base font-bold text-white shadow-[3px_3px_0_#201E1D] transition-colors group-hover:bg-[#0f5d34]">
+          {cta}
+          <Arrow />
+        </span>
+      </div>
+      {withCard && comicCard("hidden w-[130px] sm:block")}
+    </div>
+  );
+
+  const inner = (body: string, withCard = false, cta = "Start free trial"): ReactNode =>
+    comic ? comicInner(body, withCard, cta) : classicInner(body, withCard, cta);
+
+  const classicInner = (body: string, withCard = false, cta = "Start free trial"): ReactNode => (
     <>
       {sponsor && (
         <p className="m-0 mb-3 text-xs font-semibold uppercase tracking-wide text-[#5d6b60]">

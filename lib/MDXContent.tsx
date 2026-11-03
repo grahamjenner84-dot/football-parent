@@ -183,6 +183,7 @@ const comicComponents = {
   InterviewAnswer: (props: React.ComponentProps<typeof InterviewAnswer>) => (
     <InterviewAnswer {...props} design="comic" />
   ),
+  InstagramPromo: () => <InstagramPromo design="comic" />,
 
   h2: ({ children }: { children?: React.ReactNode }) => (
     <h2
@@ -375,6 +376,7 @@ export async function MDXContent({
 
           {showProgress ? (
             <ProgressBanner
+              design={design}
               placement={inAcademyPathway ? "academy-pathway" : "article"}
               inArticle
               test={progressTest}
@@ -405,6 +407,7 @@ export async function MDXContent({
               the end as before. */}
           {coachAppBanner !== "none" && showProgress && (
             <ProgressBanner
+              design={design}
               placement={inAcademyPathway ? "academy-pathway" : "article"}
               inArticle
               test={progressTest}
