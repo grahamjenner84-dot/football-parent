@@ -128,6 +128,7 @@ export const routes = [
   '/parent-guides/futurefit-football-dna-interview-part-2',
   '/parent-guides/matt-baxter-young-footballer-mindset-interview',
   '/parent-guides/chris-robinson-football-scout-interview',
+  '/parent-guides/david-jervis-football-trials-interview',
   '/parent-guides/pre-academy-football-parent-interview',
   '/parent-guides/jpl-martin-brock-interview-part-1',
   '/parent-guides/jpl-martin-brock-interview-part-2',

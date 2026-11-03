@@ -70,5 +70,17 @@
     "logoSrc": "/images/people/girls-united-logo-600.png",
     "bioSrc": "/images/people/girls-united-logo-600.png",
     "bio": "Girls United runs girls' football clubs and sessions in London and Mexico, including Play Like a Girl in South London, where girls can start even if they've never played or don't know anyone."
+  },
+  {
+    "id": "david-jervis",
+    "label": "David Jervis (Premier Football UK)",
+    "name": "Premier Football UK",
+    "handle": "@premier_football_uk_trials",
+    "person": "David Jervis",
+    "shortName": "David",
+    "role": "Founder · Premier Football UK",
+    "logoSrc": "/images/people/premier-football-uk-logo.png",
+    "bioSrc": "/images/people/david-jervis-premier-football-uk.jpg",
+    "bio": "David is the founder of Premier Football UK, which has run UK football trials for players aged 7 to 21 in front of professional club staff since 2009."
   }
 ]

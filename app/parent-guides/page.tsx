@@ -139,6 +139,12 @@ export default function ParentGuidesPage() {
             "Southampton academy recruitment head and ex-Chelsea scout Chris Robinson on what scouts notice, how trials really work, spotting genuine scouts and agents.",
         },
         {
+          title: "Football Trials: David Jervis Interview",
+          href: "/parent-guides/david-jervis-football-trials-interview",
+          description:
+            "Premier Football UK founder David Jervis on what coaches notice at trials, the mistakes that cost a second look, how scholarships work and routes in after 15.",
+        },
+        {
           title: "Pre-Academy Football: A Parent's Story",
           href: "/parent-guides/pre-academy-football-parent-interview",
           description:

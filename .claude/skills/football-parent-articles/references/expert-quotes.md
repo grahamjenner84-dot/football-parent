@@ -756,6 +756,55 @@ Reusable lines and the articles they fit (each answer's full text is in the inte
   [how-to-find-a-football-agent-for-your-child]
 - Q10 "Don't get too excited. There is a long way to go."
 
+### David Jervis (Premier Football UK) — trials provider founder, tag: trials, scholarships, late developers, release, trial preparation
+**ANSWERED 2026-11-03: all 8 questions.** Full answers published as
+`/parent-guides/david-jervis-football-trials-interview`
+(`content/parent-guides/david-jervis-football-trials-interview.mdx`), the
+source of record for any excerpt. Not yet placed as `<ExpertQA>` boxes
+anywhere. Note when placing: Premier Football UK is a commercial trials
+provider and several answers promote its own trials (Q5 para 3, Q7 last
+para, Q8 last para); cut those out of any excerpt, and prefer excerpts that
+stand on their own as advice.
+Credentials (premierfootballuk.com/about, checked 2026-11-03): Founder &
+Managing Director, Premier Football UK; arranging trials since 2009; players
+aged 7-21 in front of professional club staff. Player stories cited (all on
+premierfootballuk.com/football-trial-success-stories): Isaac Lee (Stoke City
+academy, released, non-league, Shrewsbury Town Jan 2026, 6ft 5in), Dale Eve
+(Stoke scholarship, 50 Bermuda caps), Cameron Reid (Charlton scholarship),
+Joe Hunter (Fleetwood Town), Anton Dudik (Carlisle United).
+Instagram: @premier_football_uk_trials (linked from the PFUK site).
+Headshot: `/images/people/david-jervis-premier-football-uk.jpg` (PFUK about
+page). Logo: `/images/people/premier-football-uk-logo.png`.
+Attribution scaffold:
+```
+name="David Jervis"
+role="Founder, Premier Football UK"
+bio="Founder of Premier Football UK, which has run UK football trials for players aged 7 to 21 in front of professional club staff since 2009."
+```
+Reusable lines and the articles they fit (each answer's full text is in the interview):
+- Q1 "Most of a trial happens when the ball is nowhere near the player."
+  The 30 seconds between drills, the five seconds after a mistake, the
+  touchline gets clocked. [what-happens-at-academy-trials,
+  what-do-academy-coaches-look-for, biggest-football-parent-mistakes]
+- Q2 trying to play their highlight reel; sulking about position; reacting
+  badly to being subbed. [what-happens-at-academy-trials, football-academy-trials-uk]
+- Q3 "The week before a trial is not the week to get fit."; no new boots;
+  two or three specific things to show. [what-happens-at-academy-trials,
+  football-trials-near-me]
+- Q4 scholarship basics; "A scholarship is not a professional contract.";
+  Category 3 minutes vs Category 1 bench. [football-scholarships-uk,
+  academy-categories-explained]
+- Q5 "has to be clearly better than someone the club already knows. Not just
+  as good. Better."; full matches not highlight clips; FIFA under-18 rule
+  for overseas players. [football-scholarships-uk, what-age-do-football-academies-recruit,
+  how-to-get-scouted-for-football]
+- Q6 Isaac Lee / Dale Eve late developers; "Technique built when they were
+  small." [late-developers-in-football, relative-age-effect-football]
+- Q7 "Being released is one club's opinion at one point in time."; keep the
+  education going, watch what you say in the car. [understanding-academy-release]
+- Q8 "Be the player the coach would want in his team on a cold, wet Tuesday
+  night." [what-do-academy-coaches-look-for, football-academy-trials-uk]
+
 ### The Pre Academy Player (anonymous parent author) — pre-academy parent experience, tag: pre-academy, scouting, release, grassroots, parent pressure
 **ANSWERED 2026-10-11: all 14 questions.** Published as
 `/parent-guides/pre-academy-football-parent-interview`
