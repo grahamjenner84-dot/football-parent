@@ -117,8 +117,8 @@ export interface PartnerClickPlacement {
 
 // When the homepage's expert Q&A card (app/page.tsx, the eighth card in the
 // section grid) went live. Homepage views before it are not impressions.
-// Set to the real deploy time when it ships.
-const INSTAGRAM_HOME_CARD_FROM = "2026-11-03T00:00:00Z";
+// Set to the production deploy time.
+const INSTAGRAM_HOME_CARD_FROM = "2026-11-03T23:28:00Z";
 
 // Which placements a page view counts as an impression for. Must mirror where
 // the components render: the end card is in lib/ArticleLayout.tsx (every MDX
