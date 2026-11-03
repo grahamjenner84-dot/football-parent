@@ -20,6 +20,7 @@ export default async function Page() {
     <ArticleLayout
       title={article.frontmatter.title}
       datePublished={article.frontmatter.date}
+      design={article.frontmatter.design}
       path="/academy-pathway/football-scholarships-uk"
       description={article.frontmatter.description}
       category={article.frontmatter.category}
@@ -29,7 +30,7 @@ export default async function Page() {
       content={article.content}
       
     >
-      <MDXContent content={article.content} slug={article.slug} />
+      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }
