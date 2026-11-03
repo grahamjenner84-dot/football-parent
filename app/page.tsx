@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { generateSEO } from "@/lib/seo";
 import { firaSansCondensed } from "@/lib/comic-design";
 import ProgressBanner from "@/app/components/ProgressBanner";
+import { InstagramIcon, instagramUrl } from "@/app/components/InstagramFollow";
 
 export const metadata = generateSEO({
   title: "Football Parent | UK Academy Pathways & Youth Football Advice",
@@ -212,6 +213,36 @@ export default function Home() {
               </p>
             </Link>
           ))}
+
+          {/* The eighth card, filling the gap the seven categories leave on
+              four columns: the expert carousels on Instagram. Its title is a
+              <p>, not an <h2>, so the page's headings stay the seven
+              sections. Clicks are logged by PartnerClickTracker and reported
+              under the "home" placement (utm_content, see instagramUrl). */}
+          <a
+            href={instagramUrl("home")}
+            target="_blank"
+            // No noreferrer: the profile visit should show it came from us.
+            rel="noopener"
+            className={card}
+          >
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-[#201E1D] bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white">
+              <InstagramIcon className="h-[22px] w-[22px]" />
+            </span>
+
+            <p className="m-0 mt-0.5 min-w-0 font-display text-[26px] font-extrabold leading-[1.05]">
+              Expert Q&amp;As
+            </p>
+
+            <p className="m-0 text-base leading-[1.55] text-[#3A3836]">
+              Academy coaches, scouts and youth football leaders answer
+              parents&apos; questions.
+            </p>
+
+            <p className="m-0 mt-auto text-base font-bold">
+              Follow us on Instagram →
+            </p>
+          </a>
         </div>
       </section>
 
