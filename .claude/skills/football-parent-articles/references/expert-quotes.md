@@ -760,8 +760,15 @@ Reusable lines and the articles they fit (each answer's full text is in the inte
 **ANSWERED 2026-11-03: all 8 questions.** Full answers published as
 `/parent-guides/david-jervis-football-trials-interview`
 (`content/parent-guides/david-jervis-football-trials-interview.mdx`), the
-source of record for any excerpt. Not yet placed as `<ExpertQA>` boxes
-anywhere. Note when placing: Premier Football UK is a commercial trials
+source of record for any excerpt. Placed 2026-11-03 as `<ExpertQA>` boxes,
+reuse count 1 each: Q4 (para 2 plus the first two misconceptions) in
+football-scholarships-uk; Q6 (opening line, Isaac Lee paragraph, the four
+"what they have in common" bullets; Dale Eve left out) in
+late-developers-in-football; Q3 (para 1, the mental plan and its two
+examples, the parents paragraph; physical bullets left out as the page
+already covers kit, rest and breakfast) in what-happens-at-academy-trials.
+Graham approved all three in session. Each passage used once; cut
+differently if reused. Note when placing: Premier Football UK is a commercial trials
 provider and several answers promote its own trials (Q5 para 3, Q7 last
 para, Q8 last para); cut those out of any excerpt, and prefer excerpts that
 stand on their own as advice.
