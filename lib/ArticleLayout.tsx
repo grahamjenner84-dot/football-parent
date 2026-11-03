@@ -3,7 +3,7 @@ import Script from "next/script";
 import { BRAND_IMAGES } from "@/lib/seo";
 import { extractFaqs } from "@/lib/faq";
 import InstagramFollow from "@/app/components/InstagramFollow";
-import { COMIC_BODY_STYLES, firaSansCondensed, type ArticleDesign } from "@/lib/comic-design";
+import { firaSansCondensed, type ArticleDesign } from "@/lib/comic-design";
 
 interface ArticleLayoutProps {
   title: string;
@@ -33,48 +33,16 @@ interface ArticleLayoutProps {
   // article shows its description, so the hero (the calculator) starts as
   // high as possible, inside the first screen on a phone.
   lead?: React.ReactNode;
-  // "comic" renders the page in the comic-accent design (lib/comic-design.ts):
-  // ink outlines, offset shadows and Fira Sans Condensed headings. Pass the
-  // article's frontmatter `design`, and give MDXContent the same value so the
-  // callout boxes match. Text, headings, links and schema are identical in
-  // both designs; only the styling changes.
+  // "comic" renders the page in the comic-accent design (lib/comic-design.ts)
+  // drawn on the homepage concepts canvas ("Article" and "Interview" boards):
+  // uppercase condensed headline, no sidebar, the body in one 760px column.
+  // Pass the article's frontmatter `design`, and give MDXContent the same
+  // value so the body and callouts match. Title, description, headings,
+  // links and schema are identical in both designs. Articles only: a tool
+  // page keeps the classic layout.
   design?: ArticleDesign;
   children: React.ReactNode;
 }
-
-const CLASSIC_STYLES = {
-  main: "min-h-screen bg-white",
-  crumbBar: "bg-gray-50 border-b border-gray-200",
-  crumbText: "text-gray-600",
-  crumbSep: "text-gray-400",
-  crumbCurrent: "text-gray-900 font-medium",
-  header: "bg-white border-b border-gray-200",
-  pill: "px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-6",
-  h1: "font-bold leading-tight mb-6 text-gray-900",
-  h1Size: "text-4xl lg:text-5xl",
-  description: "text-lg text-gray-600 leading-relaxed max-w-2xl mb-6",
-  byline: "flex flex-wrap items-center gap-6 text-sm text-gray-500 pt-6 border-t border-gray-200",
-  body: "",
-  authorBand: "bg-white border-t border-gray-200",
-  authorCard: "bg-gray-50 rounded-lg p-8 lg:p-10",
-};
-
-const COMIC_STYLES = {
-  main: `${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`,
-  crumbBar: "bg-[#FFF8E1] border-b-2 border-[#201E1D]",
-  crumbText: "text-[#3A3836]",
-  crumbSep: "text-[#9A948A]",
-  crumbCurrent: "text-[#201E1D] font-semibold",
-  header: "bg-white border-b-[3px] border-[#201E1D]",
-  pill: "px-3 py-1 bg-[#FFC400] border-2 border-[#201E1D] text-[#201E1D] text-xs font-bold uppercase tracking-[0.12em] rounded-full mb-6",
-  h1: "font-display font-extrabold leading-[1.04] mb-6 text-[#201E1D]",
-  h1Size: "text-[38px] sm:text-5xl lg:text-[56px]",
-  description: "text-lg lg:text-xl text-[#3A3836] leading-relaxed max-w-2xl mb-6",
-  byline: "flex flex-wrap items-center gap-6 text-sm text-[#3A3836] pt-6 border-t-2 border-[#201E1D]",
-  body: `text-[#3A3836] ${COMIC_BODY_STYLES}`,
-  authorBand: "dots-yellow border-t-[3px] border-[#201E1D]",
-  authorCard: "bg-white rounded-2xl border-[3px] border-[#201E1D] shadow-[6px_6px_0_#201E1D] p-8 lg:p-10",
-};
 
 function createAbsoluteUrl(path: string) {
   if (path.startsWith("https://")) {
@@ -129,7 +97,6 @@ export default function ArticleLayout({
   design = "classic",
   children,
 }: ArticleLayoutProps) {
-  const st = design === "comic" ? COMIC_STYLES : CLASSIC_STYLES;
   const articleUrl = path ? createAbsoluteUrl(path) : undefined;
   const categoryAbsoluteUrl = createAbsoluteUrl(categoryUrl);
   const schemaId = createSchemaId(title);
@@ -242,8 +209,134 @@ export default function ArticleLayout({
         }
       : null;
 
+  const schemaScripts = (
+    <>
+      {mainSchema && (
+        <Script
+          id={`article-schema-${schemaId}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(mainSchema),
+          }}
+        />
+      )}
+
+      {breadcrumbSchema && (
+        <Script
+          id={`breadcrumb-schema-${schemaId}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema),
+          }}
+        />
+      )}
+
+      {faqSchema && (
+        <Script
+          id={`faq-schema-${schemaId}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(faqSchema),
+          }}
+        />
+      )}
+    </>
+  );
+
+  if (design === "comic" && !isTool) {
+    return (
+      <main className={`${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`}>
+        {schemaScripts}
+
+        <nav
+          aria-label="Breadcrumb"
+          className="mx-auto flex max-w-[1220px] flex-wrap gap-x-2 gap-y-1 px-6 pt-[18px] text-sm text-[#5A5650]"
+        >
+          <Link href="/" className="text-[#5A5650] underline-offset-2 hover:underline">
+            Home
+          </Link>
+          <span aria-hidden="true">/</span>
+          <Link href={categoryUrl} className="text-[#5A5650] underline-offset-2 hover:underline">
+            {category}
+          </Link>
+          <span aria-hidden="true">/</span>
+          <span className="font-medium text-[#201E1D]">{title}</span>
+        </nav>
+
+        <section className="mx-auto max-w-[1220px] px-6 pt-[34px] pb-11">
+          <div className="max-w-[880px]">
+            {/* Uppercase is CSS only: the heading text Google reads is the
+                frontmatter title exactly. */}
+            <h1 className="m-0 font-display text-[clamp(36px,5vw,64px)] font-extrabold uppercase leading-[1.02]">
+              {title}
+            </h1>
+            <p className="mt-5 text-lg leading-[1.6] text-[#3A3836] sm:text-xl">{description}</p>
+            <div className="mt-[26px] flex flex-wrap items-center gap-x-[18px] gap-y-2.5 border-t-2 border-[#201E1D] pt-[18px] text-[15px] text-[#5A5650]">
+              <span className="flex items-center gap-2.5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/parent/icon/parent-icon-256.png" alt="" width={40} height={40} className="h-10 w-10" />
+                <span>
+                  By{" "}
+                  <Link href="/author/graham-jenner" className="font-bold text-[#201E1D] hover:underline">
+                    Graham Jenner
+                  </Link>
+                </span>
+              </span>
+              {formatDate(datePublished) && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>Published {formatDate(datePublished)}</span>
+                </>
+              )}
+              {formatDate(dateModified) && (
+                <>
+                  <span aria-hidden="true">·</span>
+                  <span>Updated {formatDate(dateModified)}</span>
+                </>
+              )}
+              <span aria-hidden="true">·</span>
+              <span>{readTime} min read</span>
+            </div>
+          </div>
+        </section>
+
+        {hero && <div className="mx-auto max-w-[1220px] px-6 pb-10">{hero}</div>}
+
+        <div className="mx-auto max-w-[1220px] px-6 pb-[72px]">
+          <article className="max-w-[760px]">{children}</article>
+        </div>
+
+        <section className="border-t-[3px] border-[#201E1D] bg-[#FFF8E1]">
+          <div className="mx-auto max-w-[1220px] px-6 pt-14 pb-16">
+            <div className="max-w-[880px] rounded-[18px] border-2 border-[#201E1D] bg-white px-7 py-[26px]">
+              <div className="flex flex-wrap items-start gap-x-[22px] gap-y-[18px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/parent/icon/parent-icon-256.png" alt="" width={72} height={72} className="h-[72px] w-[72px] shrink-0" />
+                <div className="min-w-0 flex-[1_1_300px]">
+                  <p className="m-0 text-sm font-semibold text-[#5A5650]">Written by</p>
+                  <p className="m-0 mt-1 font-display text-2xl font-extrabold">
+                    <Link href="/author/graham-jenner" className="text-[#201E1D] hover:underline">
+                      Graham Jenner
+                    </Link>
+                  </p>
+                  <p className="m-0 mt-2 text-base leading-[1.6] text-[#3A3836]">
+                    Graham is the founder of Football Parent. As a football
+                    parent and grassroots coach, he provides independent
+                    guidance on academies, development centres, trials and youth
+                    football pathways in the UK.
+                  </p>
+                </div>
+              </div>
+              <InstagramFollow />
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   return (
-    <main className={st.main}>
+    <main className="min-h-screen bg-white">
       {mainSchema && (
         <Script
           id={`article-schema-${schemaId}`}
@@ -274,29 +367,29 @@ export default function ArticleLayout({
         />
       )}
 
-      <div className={st.crumbBar}>
+      <div className="bg-gray-50 border-b border-gray-200">
         <nav className="max-w-7xl mx-auto px-6 py-4 text-sm">
-          <div className={`flex items-center gap-2 ${st.crumbText} ${isTool ? "min-w-0" : ""}`}>
+          <div className={`flex items-center gap-2 text-gray-600 ${isTool ? "min-w-0" : ""}`}>
             <Link href="/" className="hover:text-gray-900">
               Home
             </Link>
-            <span className={st.crumbSep}>/</span>
+            <span className="text-gray-400">/</span>
             <Link href={categoryUrl} className="hover:text-gray-900">
               {category}
             </Link>
-            <span className={st.crumbSep}>/</span>
-            <span className={`${st.crumbCurrent} ${isTool ? "truncate" : ""}`}>{title}</span>
+            <span className="text-gray-400">/</span>
+            <span className={`text-gray-900 font-medium ${isTool ? "truncate" : ""}`}>{title}</span>
           </div>
         </nav>
       </div>
 
-      <div className={st.header}>
+      <div className="bg-white border-b border-gray-200">
         <div className={`max-w-4xl mx-auto px-6 ${isTool ? "py-6 lg:py-20" : "py-16 lg:py-20"}`}>
-          <span className={`${isTool ? "hidden sm:inline-block" : "inline-block"} ${st.pill}`}>
+          <span className={`${isTool ? "hidden sm:inline-block" : "inline-block"} px-3 py-1 bg-blue-50 text-blue-700 text-xs font-semibold rounded-full mb-6`}>
             {isTool ? "Free tool" : "Guide"}
           </span>
 
-          <h1 className={`${isTool ? "text-3xl sm:text-4xl lg:text-5xl" : st.h1Size} ${st.h1}`}>
+          <h1 className={`${isTool ? "text-3xl sm:text-4xl" : "text-4xl"} lg:text-5xl font-bold leading-tight mb-6 text-gray-900`}>
             {title}
           </h1>
 
@@ -306,12 +399,12 @@ export default function ArticleLayout({
           {isTool ? (
             lead && <div className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">{lead}</div>
           ) : (
-            <p className={st.description}>
+            <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mb-6">
               {description}
             </p>
           )}
 
-          <div className={st.byline}>
+          <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 pt-6 border-t border-gray-200">
             <div className="flex items-center gap-2">
               <span className="text-gray-400">By</span>
               <Link
@@ -383,15 +476,15 @@ export default function ArticleLayout({
               </div>
             </aside>
 
-            <article className={`flex-1 max-w-2xl ${st.body}`}>{children}</article>
+            <article className="flex-1 max-w-2xl">{children}</article>
           </div>
         </div>
       </div>
 
-      <div className={st.authorBand}>
+      <div className="bg-white border-t border-gray-200">
         <div className={`${isTool ? "max-w-4xl" : "max-w-7xl"} mx-auto px-6 py-12 lg:py-16`}>
           <div className="max-w-4xl">
-            <div className={st.authorCard}>
+            <div className="bg-gray-50 rounded-lg p-8 lg:p-10">
               <div className="flex gap-6 mb-6">
                 <div className="w-20 h-20 rounded-full overflow-hidden flex-shrink-0 bg-white border border-gray-200">
                   <img

@@ -83,3 +83,74 @@
     background-size: 10px 10px;
   }
 }
+
+/* Comic-accent articles (design: "comic", lib/comic-design.ts), drawn from
+   the Football Parent homepage concepts canvas: "Article components" and
+   "Interview" boards. */
+@layer components {
+  /* The speech bubble an expert's answer sits in, its tail pointing down-left
+     at their photo underneath. */
+  .fp-bubble {
+    position: relative;
+    background: #ffffff;
+    border: 3px solid #201e1d;
+    border-radius: 24px;
+    box-shadow: 5px 5px 0 #201e1d;
+  }
+  .fp-bubble::before {
+    content: "";
+    position: absolute;
+    left: 58px;
+    bottom: -27px;
+    width: 36px;
+    height: 27px;
+    background: #201e1d;
+    clip-path: polygon(0 0, 100% 0, 12% 100%);
+  }
+  .fp-bubble::after {
+    content: "";
+    position: absolute;
+    left: 62px;
+    bottom: -21px;
+    width: 26px;
+    height: 21px;
+    background: #ffffff;
+    clip-path: polygon(0 0, 100% 0, 12% 100%);
+  }
+}
+
+/* Related Articles as a grid of cards. Unlayered on purpose: it has to beat
+   the list utilities MDXContent puts on the <ul>, and it only matches the one
+   list straight after the Related Articles heading. */
+.fp-comic-prose #related-articles + ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fp-comic-prose #related-articles + ul > li {
+  margin: 0;
+}
+.fp-comic-prose #related-articles + ul a {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  border: 2px solid #201e1d;
+  border-radius: 14px;
+  padding: 16px 18px;
+  background: #ffffff;
+  color: #201e1d;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.2;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.fp-comic-prose #related-articles + ul a:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 #201e1d;
+}

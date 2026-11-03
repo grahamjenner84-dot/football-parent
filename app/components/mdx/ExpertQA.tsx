@@ -141,8 +141,10 @@ export default function ExpertQA({
   );
 }
 
-// The comic-accent version: an ink-outlined card with a hard offset shadow, a
-// yellow header band carrying the expert, and the answer set as a quote.
+// The comic-accent version ("Expert Q&A" on the homepage concepts canvas's
+// "Article components" board): our question in the yellow caption, their
+// answer in a speech bubble, and their photo, role and background under it,
+// with the link to the full interview beside them.
 function ComicExpertQA({
   items,
   name,
@@ -158,76 +160,64 @@ function ComicExpertQA({
   items: React.ReactElement<ExpertQAItemProps>[];
 }) {
   return (
-    <div className="not-prose my-8 overflow-hidden rounded-2xl border-[3px] border-[#201E1D] bg-white shadow-[6px_6px_0_#201E1D]">
-      <div className="flex items-center gap-4 border-b-[3px] border-[#201E1D] bg-[#FFC400] px-5 py-4">
-        {photoSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={photoSrc}
-            alt={photoAlt ?? name}
-            width={64}
-            height={64}
-            className="h-16 w-16 shrink-0 rounded-full border-[3px] border-[#201E1D] bg-white object-cover"
-          />
-        ) : null}
-        <div className="min-w-0">
-          <div className="mb-1 inline-block rounded-full border-2 border-[#201E1D] bg-white px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#201E1D]">
-            Expert view
+    <div className="my-10 flex flex-col gap-[22px]">
+      {items.map((item, index) => (
+        <React.Fragment key={index}>
+          <div className="max-w-[620px] rounded-xl border-[3px] border-[#201E1D] bg-[#FFE89A] px-[18px] py-[14px]">
+            <p className="m-0 text-[13px] font-bold leading-[1.4] text-[#5A4A00]">
+              Football Parent asks
+            </p>
+            <p className="m-0 mt-1 text-[17px] font-bold leading-[1.45] text-[#201E1D]">
+              {item.props.q}
+            </p>
           </div>
-          <div className="font-display text-[22px] font-extrabold leading-tight text-[#201E1D]">
-            {name}
-          </div>
-          {role ? (
-            <div className="text-sm font-semibold text-[#201E1D]">{role}</div>
-          ) : null}
-        </div>
-      </div>
+          <blockquote className="fp-bubble m-0 px-[26px] pt-[22px] pb-[6px] text-[17px] leading-[1.65] text-[#201E1D] [&_li]:mb-1.5 [&_p]:mb-4 [&_ul]:mb-4">
+            {item.props.children}
+          </blockquote>
+        </React.Fragment>
+      ))}
 
-      {bio || profileHref ? (
-        <div className="border-b-2 border-dashed border-[#C9C4BA] bg-[#FFF8E1] px-5 py-3 text-sm leading-6 text-[#3A3836]">
-          {bio}
-          {profileHref ? (
-            <>
-              {bio ? " " : null}
+      <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-3.5 pl-9">
+        <span className="flex items-center gap-3.5">
+          {photoSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={photoSrc}
+              alt={photoAlt ?? name}
+              width={66}
+              height={66}
+              className="h-[66px] w-[66px] shrink-0 rounded-full border-[3px] border-[#201E1D] object-cover"
+            />
+          ) : null}
+          <span className="flex flex-col gap-0.5">
+            <span className="text-[17px] font-bold leading-[1.3] text-[#201E1D]">{name}</span>
+            {role ? (
+              <span className="text-[15px] leading-[1.4] text-[#5A5650]">{role}</span>
+            ) : null}
+            {bio ? (
+              <span className="mt-0.5 max-w-[440px] text-sm leading-[1.45] text-[#3A3836]">{bio}</span>
+            ) : null}
+            {profileHref ? (
               <a
                 href={profileHref}
                 target="_blank"
                 rel="noopener"
-                className="font-bold underline underline-offset-2"
+                className="text-sm font-bold text-[#1F5FD6] underline underline-offset-2"
               >
                 {profileLabel ?? profileHref}
               </a>
-            </>
-          ) : null}
-        </div>
-      ) : null}
-
-      <div className="divide-y-2 divide-dashed divide-[#C9C4BA]">
-        {items.map((item, index) => (
-          <div key={index} className="px-5 py-5">
-            <div className="mb-3 text-[13px] font-bold uppercase tracking-[0.12em] text-[#1F5FD6]">
-              Football Parent asks
-            </div>
-            <div className="mb-4 font-semibold leading-7 text-[#201E1D]">
-              {item.props.q}
-            </div>
-            <div className="relative border-l-[5px] border-[#FFC400] pl-4 leading-8 text-[#3A3836] [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:mb-3">
-              {item.props.children}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {sourceHref ? (
-        <div className="border-t-[3px] border-[#201E1D] bg-white px-5 py-3 text-right">
+            ) : null}
+          </span>
+        </span>
+        {sourceHref ? (
           <a
             href={sourceHref}
-            className="inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-4 py-1.5 text-sm font-bold !text-[#201E1D] no-underline shadow-[3px_3px_0_#201E1D] transition hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[2px_2px_0_#201E1D]"
+            className="text-base font-bold text-[#1F5FD6] underline underline-offset-[3px] hover:text-[#174AA8]"
           >
-            {sourceLabel ?? "Read the full interview"} →
+            {sourceLabel ?? "Read the full interview"}
           </a>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </div>
   );
 }

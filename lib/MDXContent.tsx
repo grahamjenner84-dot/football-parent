@@ -11,6 +11,7 @@ import GearPicks from "@/app/components/mdx/GearPicks";
 import InstagramEmbed from "@/app/components/mdx/InstagramEmbed";
 import InstagramPromo from "@/app/components/mdx/InstagramPromo";
 import ToolCallout from "@/app/components/mdx/ToolCallout";
+import { InterviewQuestion, InterviewAnswer } from "@/app/components/mdx/Interview";
 import type { ArticleDesign } from "@/lib/comic-design";
 import { affiliateLinkProps } from "@/lib/affiliate";
 import { competitorLinkProps } from "@/lib/externalLinks";
@@ -36,6 +37,8 @@ const components = {
   InstagramEmbed,
   InstagramPromo,
   ToolCallout,
+  InterviewQuestion,
+  InterviewAnswer,
 
   h2: ({ children }: any) => (
     <h2
@@ -151,10 +154,18 @@ const mdxOptions = {
   },
 };
 
-// The comic-accent design (lib/comic-design.ts) swaps the callout boxes for
-// their comic versions. Element styles (headings, links, tables) are
-// restyled by ArticleLayout's wrapper instead, the same way the Coach App
-// landing pages do it.
+// The comic-accent design (lib/comic-design.ts, design: "comic"): its own
+// element styles, from the "Article components" and "Interview" boards of
+// the homepage concepts canvas, and the comic versions of the callouts.
+// Classic pages never see any of this.
+const slugify = (children: unknown) =>
+  typeof children === "string"
+    ? children
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+    : "";
+
 const comicComponents = {
   ...components,
   ParentNote: (props: React.ComponentProps<typeof ParentNote>) => (
@@ -165,6 +176,79 @@ const comicComponents = {
   ),
   ExpertQA: (props: React.ComponentProps<typeof ExpertQA>) => (
     <ExpertQA {...props} design="comic" />
+  ),
+  InterviewQuestion: (props: React.ComponentProps<typeof InterviewQuestion>) => (
+    <InterviewQuestion {...props} design="comic" />
+  ),
+  InterviewAnswer: (props: React.ComponentProps<typeof InterviewAnswer>) => (
+    <InterviewAnswer {...props} design="comic" />
+  ),
+
+  h2: ({ children }: { children?: React.ReactNode }) => (
+    <h2
+      id={slugify(children)}
+      className="scroll-mt-24 mt-14 mb-4 font-display text-[30px] font-extrabold leading-[1.1] text-[#201E1D] first:mt-0 sm:text-[34px]"
+    >
+      {children}
+    </h2>
+  ),
+  h3: ({ children }: { children?: React.ReactNode }) => (
+    <h3 className="mt-8 mb-2 font-display text-2xl font-extrabold leading-[1.2] text-[#201E1D]">
+      {children}
+    </h3>
+  ),
+  h4: ({ children }: { children?: React.ReactNode }) => (
+    <h4 className="mt-6 mb-2 text-lg font-bold text-[#201E1D]">{children}</h4>
+  ),
+  p: ({ children }: { children?: React.ReactNode }) => (
+    <p className="mb-[18px]">{children}</p>
+  ),
+  ul: ({ children }: { children?: React.ReactNode }) => (
+    <ul className="mb-[22px] list-disc pl-6">{children}</ul>
+  ),
+  ol: ({ children }: { children?: React.ReactNode }) => (
+    <ol className="mb-[22px] list-decimal pl-6">{children}</ol>
+  ),
+  li: ({ children }: { children?: React.ReactNode }) => (
+    <li className="mb-2">{children}</li>
+  ),
+  strong: ({ children }: { children?: React.ReactNode }) => (
+    <strong className="font-bold text-[#201E1D]">{children}</strong>
+  ),
+  a: ({ children, href }: { children?: React.ReactNode; href?: string }) => {
+    const url = typeof href === "string" ? href : "";
+    return (
+      <a
+        href={url}
+        className="font-medium text-[#1F5FD6] underline underline-offset-[3px] transition hover:text-[#174AA8]"
+        {...affiliateLinkProps(url)}
+        {...competitorLinkProps(url)}
+      >
+        {children}
+      </a>
+    );
+  },
+  hr: () => <hr className="my-12 border-0 border-t-2 border-[#E8E4DA]" />,
+  table: ({ children }: { children?: React.ReactNode }) => (
+    <div className="mb-6 overflow-x-auto rounded-xl border-[3px] border-[#201E1D]">
+      <table className="w-full border-collapse">{children}</table>
+    </div>
+  ),
+  tr: ({ children }: { children?: React.ReactNode }) => (
+    <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">{children}</tr>
+  ),
+  th: ({ children }: { children?: React.ReactNode }) => (
+    <th className="border-b-2 border-[#201E1D] bg-[#FFC400] p-3 text-left font-bold text-[#201E1D]">
+      {children}
+    </th>
+  ),
+  td: ({ children }: { children?: React.ReactNode }) => (
+    <td className="border-t border-[#C9C4BA] p-3">{children}</td>
+  ),
+  blockquote: ({ children }: { children?: React.ReactNode }) => (
+    <blockquote className="my-8 rounded-[14px] border-[3px] border-[#201E1D] bg-[#FFE89A] px-[22px] pt-[18px] pb-1 shadow-[5px_5px_0_#201E1D]">
+      {children}
+    </blockquote>
   ),
 };
 
@@ -274,7 +358,13 @@ export async function MDXContent({
   const inCoaching = !!slug && routes.some((r) => r === `/coaching/${slug}`);
 
   return (
-    <div className="space-y-6 text-gray-700 leading-relaxed max-w-none">
+    <div
+      className={
+        design === "comic"
+          ? "fp-comic-prose text-[18px] leading-[1.75] text-[#33312E]"
+          : "space-y-6 text-gray-700 leading-relaxed max-w-none"
+      }
+    >
       {split ? (
         <>
           <MDXRemote

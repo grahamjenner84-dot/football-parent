@@ -13,36 +13,40 @@ type ExpertOpinionProps = {
 };
 
 export default function ExpertOpinion({ name, role, org, orgHref, children, design = "classic" }: ExpertOpinionProps) {
-  const orgNode =
-    org && orgHref ? (
-      <a
-        href={orgHref}
-        target="_blank"
-        rel="noopener"
-        className="underline underline-offset-2"
-      >
-        {org}
-      </a>
-    ) : (
-      org
-    );
-
+  // Comic-accent design: the expert's words in a speech bubble with a quote
+  // mark, pointing at their name underneath ("Expert quote" on the homepage
+  // concepts canvas's "Article components" board).
   if (design === "comic") {
     return (
-      <div className="my-8 rounded-2xl border-[3px] border-[#201E1D] bg-[#FFF8E1] p-5 shadow-[6px_6px_0_#201E1D]">
-        <div className="mb-3 flex flex-wrap items-center gap-2 text-sm font-semibold text-[#201E1D]">
-          <span className="inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em]">
-            Expert opinion
+      <figure className="m-0 my-10">
+        <blockquote className="fp-bubble m-0 px-7 pt-8 pb-[10px] text-[#201E1D] [&_p]:mb-4">
+          <span
+            aria-hidden="true"
+            className="absolute -top-6 left-6 flex h-[46px] w-[46px] items-center justify-center rounded-full border-[3px] border-[#201E1D] bg-[#FFC400]"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#201E1D" aria-hidden="true">
+              <path d="M10 7H6.5A2.5 2.5 0 0 0 4 9.5V13h4v4h2V7zm10 0h-3.5A2.5 2.5 0 0 0 14 9.5V13h4v4h2V7z" />
+            </svg>
           </span>
-          <span>
-            {name}
-            {role ? `, ${role}` : ""}
-            {org ? ", " : ""}
-            {orgNode}
-          </span>
-        </div>
-        <div className="border-l-[5px] border-[#FFC400] pl-4 leading-8 text-[#3A3836]">{children}</div>
-      </div>
+          {children}
+        </blockquote>
+        <figcaption className="mt-[34px] flex flex-col gap-0.5 pl-9">
+          <span className="text-[17px] font-bold text-[#201E1D]">{name}</span>
+          {role || org ? (
+            <span className="text-[15px] leading-[1.4] text-[#5A5650]">
+              {role}
+              {role && org ? ", " : ""}
+              {org && orgHref ? (
+                <a href={orgHref} target="_blank" rel="noopener" className="underline underline-offset-2">
+                  {org}
+                </a>
+              ) : (
+                org
+              )}
+            </span>
+          ) : null}
+        </figcaption>
+      </figure>
     );
   }
 

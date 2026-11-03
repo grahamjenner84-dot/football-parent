@@ -6,14 +6,18 @@ type ParentNoteProps = {
 };
 
 export default function ParentNote({ children, design = "classic" }: ParentNoteProps) {
+  // Comic-accent design: our own voice in the yellow caption box, as on the
+  // homepage concepts canvas's "Article components" board.
   if (design === "comic") {
     return (
-      <div className="my-8 rounded-2xl border-[3px] border-[#201E1D] bg-[#EAF1FF] p-5 shadow-[6px_6px_0_#201E1D]">
-        <div className="mb-3 inline-block rounded-full border-2 border-[#201E1D] bg-[#1F5FD6] px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white">
+      <aside className="my-8 rounded-[14px] border-[3px] border-[#201E1D] bg-[#FFE89A] px-[22px] pt-[18px] pb-[22px] shadow-[5px_5px_0_#201E1D]">
+        <p className="m-0 mb-2.5 flex items-center gap-2.5 font-display text-[21px] font-extrabold leading-[1.2] text-[#201E1D]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/parent/icon/parent-icon-256.png" alt="" width={38} height={38} className="h-[38px] w-[38px]" />
           Football Parent note
-        </div>
-        <div className="leading-8 text-[#3A3836]">{children}</div>
-      </div>
+        </p>
+        <div className="text-[18px] leading-[1.7] text-[#201E1D] [&_p:last-child]:mb-0">{children}</div>
+      </aside>
     );
   }
 

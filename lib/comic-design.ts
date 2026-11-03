@@ -21,8 +21,10 @@ export const firaSansCondensed = Fira_Sans_Condensed({
   display: "swap",
 });
 
-// Restyles an MDX body rendered by the shared MDXContent, whose element
-// styles are the classic article template's. A `[&_h2]` rule beats
+// The Coach App landing pages' body overrides. They restyle an MDX body
+// rendered by the shared MDXContent, whose element styles are the classic
+// article template's. Comic articles do not use this: MDXContent gives them
+// their own element styles (design="comic"). A `[&_h2]` rule beats
 // MDXContent's own classes because it is one element more specific.
 export const COMIC_BODY_STYLES = [
   "[&_h2]:font-display [&_h2]:text-[32px] [&_h2]:lg:text-[40px] [&_h2]:leading-[1.05] [&_h2]:text-[#201E1D] [&_h2]:font-extrabold",
