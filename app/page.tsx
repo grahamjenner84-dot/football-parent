@@ -93,6 +93,11 @@ const categories: { href: string; title: string; description: string; icon: Reac
 // guides plus the ones with the most impressions still ranking around 6-9.
 // Pages on an SEO watch were left out (Leeds, Chelsea, Brentford, Crystal
 // Palace, Veo, base layers); swap in once their reads are done.
+//
+// The tenth, added 3 Nov 2026 with the homepage redesign, is a page 1/2
+// boost rather than a most-read pick: the AG vs FG guide's artificial-grass
+// queries sat at 8-11.5 over the previous 28 days. Its anchor is worded
+// after those queries; every other link to it says "FG vs AG boots".
 const popularGuides = [
   {
     href: "/academy-pathway/academy-categories-explained",
@@ -138,6 +143,11 @@ const popularGuides = [
     href: "/football-gear/boots/best-football-boots-for-wide-feet-kids",
     label: "Football Gear",
     title: "Best football boots for kids with wide feet",
+  },
+  {
+    href: "/football-gear/ag-vs-fg-boots",
+    label: "Football Gear",
+    title: "Can kids wear FG boots on artificial grass?",
   },
 ];
 
