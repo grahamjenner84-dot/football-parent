@@ -93,6 +93,12 @@ export default function CoachingPage() {
             "Cone circuits, 1v1 games and passing routines for 7 and 8 year olds, plus how long a ball mastery session should actually last.",
         },
         {
+          title: "Football Drills for 9 and 10 Year Olds",
+          href: "/coaching/football-drills-for-9-and-10-year-olds",
+          description:
+            "Receiving, turning, 1v1 and rondo drills for 9 and 10 year olds stepping up to 7v7, plus how to fit them into a 60-minute session.",
+        },
+        {
           title: "Football Team Spreadsheet",
           href: "/coaching/football-team-spreadsheet",
           description:
