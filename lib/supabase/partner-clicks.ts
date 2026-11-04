@@ -115,13 +115,20 @@ export interface PartnerClickPlacement {
   ctr: number | null;
 }
 
+// When the homepage's expert Q&A card (app/page.tsx, the eighth card in the
+// section grid) went live. Homepage views before it are not impressions.
+// Set to the production deploy time.
+const INSTAGRAM_HOME_CARD_FROM = "2026-11-03T23:22:00Z";
+
 // Which placements a page view counts as an impression for. Must mirror where
 // the components render: the end card is in lib/ArticleLayout.tsx (every MDX
 // article), the mid-article box wherever an article's MDX uses
 // <InstagramPromo />, the category box on the category pages in
-// INSTAGRAM_CATEGORY_PATHS, and the footer link is on every page.
+// INSTAGRAM_CATEGORY_PATHS, the homepage card on /, and the footer link is
+// on every page.
 function instagramPlacementsOnPath(
   path: string,
+  createdAt: string,
   articleSlugs: Set<string>,
   promoSlugs: Set<string>
 ): string[] {
@@ -130,6 +137,7 @@ function instagramPlacementsOnPath(
   if (slug && articleSlugs.has(slug)) placements.push("end-card");
   if (slug && promoSlugs.has(slug)) placements.push("mid-article");
   if (INSTAGRAM_CATEGORY_PATHS.includes(path.replace(/\/+$/, ""))) placements.push("category");
+  if (path === "/" && createdAt >= INSTAGRAM_HOME_CARD_FROM) placements.push("home");
   return placements;
 }
 
@@ -162,7 +170,7 @@ async function getInstagramImpressions(
       if (row.user_agent && matchesKnownBotPattern(row.user_agent)) continue;
       if (isMetaScanRow(row, scanBursts)) continue;
       if (row.path.startsWith("/admin")) continue;
-      for (const p of instagramPlacementsOnPath(row.path, articleSlugs, promoSlugs)) {
+      for (const p of instagramPlacementsOnPath(row.path, row.created_at, articleSlugs, promoSlugs)) {
         counts.set(p, (counts.get(p) ?? 0) + 1);
       }
     }
@@ -180,6 +188,7 @@ const INSTAGRAM_PLACEMENT_LABELS: Record<string, string> = {
   "end-card": "End of article card",
   "mid-article": "Mid-article box",
   category: "Category page box",
+  home: "Homepage card",
   footer: "Footer link",
   unlabelled: "Unlabelled (before placements were tagged)",
 };
@@ -324,7 +333,7 @@ export async function getPartnerClickStats(
     // Every placement gets a row, clicked or not, so a box nobody clicks
     // still shows its impressions.
     const counts = new Map<string, number>(
-      ["end-card", "mid-article", "category", "footer"].map((p) => [p, 0])
+      ["end-card", "mid-article", "category", "home", "footer"].map((p) => [p, 0])
     );
     for (const row of humanRows) {
       const placement = instagramPlacementFromHref(row.href)!;

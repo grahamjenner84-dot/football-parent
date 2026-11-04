@@ -17,6 +17,7 @@ import {
   GoogleAdsApiError,
 } from "@/lib/google-ads";
 import { getAndroidAppAnalytics, AnalyticsApiError } from "@/lib/firebase-analytics";
+import { getPlayInstallStats, PlayReportsError } from "@/lib/play-installs";
 
 // Google API errors go back word for word, so a rejection is never mistaken
 // for an empty result.
@@ -25,8 +26,8 @@ async function apiResult(run: () => Promise<unknown>) {
     return { content: [{ type: "text" as const, text: JSON.stringify(await run()) }] };
   } catch (err) {
     const text =
-      err instanceof GoogleAdsApiError || err instanceof AnalyticsApiError
-        ? `${err instanceof GoogleAdsApiError ? "Google Ads API" : "Google Analytics Data API"} error ${err.status}:\n${err.body}`
+      err instanceof GoogleAdsApiError || err instanceof AnalyticsApiError || err instanceof PlayReportsError
+        ? `${err instanceof GoogleAdsApiError ? "Google Ads API" : err instanceof AnalyticsApiError ? "Google Analytics Data API" : "Google Play reports (Cloud Storage)"} error ${err.status}:\n${err.body}`
         : String(err);
     return { isError: true, content: [{ type: "text" as const, text }] };
   }
@@ -376,6 +377,21 @@ const handler = createMcpHandler(
       },
       async ({ startDate, endDate }) => apiResult(() => getAndroidAppAnalytics({ startDate, endDate }))
     );
+
+    server.registerTool(
+      "get_play_install_stats",
+      {
+        title: "Get Coach App Google Play install stats",
+        description:
+          "Google Play install statistics for the Coach App's Android app (uk.co.footballparent.coachapp), from Play Console's bulk reports (monthly CSVs in Cloud Storage). Read-only. byDay is all countries, byDayAndCountry splits by country (ISO alpha-2, ZZ = unknown). Columns keep Play's own names, values exactly as given: Daily Device Installs (new devices, the console's device acquisitions), Daily User Installs (new users), Daily User Uninstalls and Uninstall events (uninstalls only), Install events, Update events, and Active Device Installs (install base: devices with the app that checked in with Google in the past 30 days, so it falls on uninstalls and on devices unused for 30 days; the nearest thing to installs minus losses). There is no device loss column. Total User Installs, Daily Device Uninstalls and Daily Device Upgrades are retired by Google and always 0: do not read Total User Installs as a running total. The fields object explains every column. Play posts each day 3-7 days late, so the newest days are missing rather than zero (latestDate says how far the data goes). The Android app went live on Play in Oct 2026.",
+        inputSchema: {
+          startDate: z.string().describe("YYYY-MM-DD"),
+          endDate: z.string().describe("YYYY-MM-DD, inclusive."),
+          country: z.string().length(2).optional().describe("Only this country in byDayAndCountry, ISO alpha-2, e.g. GB. byDay stays all countries."),
+        },
+      },
+      async ({ startDate, endDate, country }) => apiResult(() => getPlayInstallStats({ startDate, endDate, country }))
+    );
   },
   {},
   {
@@ -389,7 +405,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read", "keyword_planner:read", "android_analytics:read"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read", "keyword_planner:read", "android_analytics:read", "play_installs:read"] };
   },
   {
     required: true,
