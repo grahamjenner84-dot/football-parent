@@ -6,11 +6,13 @@ type ParentNoteProps = {
 };
 
 export default function ParentNote({ children, design = "classic" }: ParentNoteProps) {
-  // Comic-accent design: our own voice in the yellow caption box, as on the
-  // homepage concepts canvas's "Article components" board.
+  // Comic-accent design: the caption box from the homepage concepts canvas's
+  // "Article components" board, in light blue rather than the canvas's
+  // caption yellow (Graham, 4 Nov 2026): yellow is kept for "Football Parent
+  // asks", and a note in the same yellow next to a question read as one block.
   if (design === "comic") {
     return (
-      <aside className="my-8 rounded-[14px] border-[3px] border-[#201E1D] bg-[#FFE89A] px-[22px] pt-[18px] pb-[22px] shadow-[5px_5px_0_#201E1D]">
+      <aside className="my-8 rounded-[14px] border-[3px] border-[#201E1D] bg-[#E3EDFF] px-[22px] pt-[18px] pb-[22px] shadow-[5px_5px_0_#201E1D]">
         <p className="m-0 mb-2.5 flex items-center gap-2.5 font-display text-[21px] font-extrabold leading-[1.2] text-[#201E1D]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/parent/icon/parent-icon-256.png" alt="" width={38} height={38} className="h-[38px] w-[38px]" />

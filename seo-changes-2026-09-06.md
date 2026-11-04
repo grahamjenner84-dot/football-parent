@@ -2134,3 +2134,4 @@ Re-run of the Chrome stock sweep after 121 Amazon click-outs on 2 Nov returned 6
 ## 4 Nov 2026: David Jervis interview, two links to his trials page
 
 - `/parent-guides/david-jervis-football-trials-interview`: "UK football trials" in his About bio and in his answer to Q5 now link to `https://premierfootballuk.com/uk-football-trials/`, at David's request. Outbound links only, no wording changed. In return Premier Football UK will link the interview, `/academy-pathway/football-scholarships-uk`, `/football-development/late-developers-in-football` and `/academy-trials/what-happens-at-academy-trials` from their news piece, and repost the Instagram collabs (outreach row `warm:david-jervis`).
+- Same day: on comic-design pages the Football Parent note box is light blue instead of caption yellow, so it no longer blends into the yellow "Football Parent asks" boxes beside it (Graham). Design only.
