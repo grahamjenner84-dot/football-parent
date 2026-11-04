@@ -2122,10 +2122,6 @@ Published 3 Nov 2026 (on merge to `main`): `/parent-guides/david-jervis-football
 - **New Instagram placement**: an "Expert Q&As" card fills the eighth slot of the section grid, linking to the profile with `utm_content=home`. Reported as "Homepage card" on the Instagram clicks tab, with homepage views from 23:22 UTC as its impressions (`INSTAGRAM_HOME_CARD_FROM` in `lib/supabase/partner-clicks.ts`). Its title is a `<p>`, so the page's headings are still the seven sections.
 - Fonts: the homepage now loads Fira Sans Condensed 800 (already on the comic articles and Coach App pages) for its headings.
 
-## 4 Nov 2026: David Jervis interview, two links to his trials page
-
-- `/parent-guides/david-jervis-football-trials-interview`: "UK football trials" in his About bio and in his answer to Q5 now link to `https://premierfootballuk.com/uk-football-trials/`, at David's request. Outbound links only, no wording changed. In return Premier Football UK will link the interview, `/academy-pathway/football-scholarships-uk`, `/football-development/late-developers-in-football` and `/academy-trials/what-happens-at-academy-trials` from their news piece, and repost the Instagram collabs (outreach row `warm:david-jervis`).
-
 ## 3 Nov 2026: affiliate stock check (link maintenance)
 
 Re-run of the Chrome stock sweep after 121 Amazon click-outs on 2 Nov returned 6 orders. All 58 `/dp/` ASINs checked, every size/colour on the products with clicks counted per size (in stock in any colour). Two picks changed.
@@ -2134,3 +2130,7 @@ Re-run of the Chrome stock sweep after 121 Amazon click-outs on 2 Nov returned 6
 - `football-advent-calendars` quick picks (live traffic, about 20 Amazon clicks a day): Topps Match Attax UCC 2026/27 Countdown Calendar (`B0HJNTJTDK`) has no buy box, only "See All Buying Options" from third-party sellers at £28.99 flagged "price higher than typical", after 16 click-outs since 24 Oct. Its "Card collectors" slot now holds Panini FIFA 365 Adrenalyn XL 2026 Advent Calendar (`B0FXXWVPK9`, in stock, £34.14, 8 reviews), previously linked only in the body. The Match Attax body section, FAQ, title and meta description are unchanged and still link `B0HJNTJTDK`; restore the pick if its buy box returns.
 - On watch, not changed: Nike Tiempo Legend 10 (10 of 20 variants out, linked colour all in stock), adidas Tiro Match Junior (size L out in every colour, S and M in black only), Nike Jr Mercurial Vapor 16 Club (36 of 50 variants out, UK 4.5 and 13.5 none).
 - False alarms: four books (`1801509247`, `B0CCCKYMZF`, `B0D1P58YB6`, `1836893493`) read as out by the script because books use a different price block; all in stock. adidas Predator Club (`B0F1XGZ91J`) is a parent page with no default size selected; every size from 4 has stock.
+
+## 4 Nov 2026: David Jervis interview, two links to his trials page
+
+- `/parent-guides/david-jervis-football-trials-interview`: "UK football trials" in his About bio and in his answer to Q5 now link to `https://premierfootballuk.com/uk-football-trials/`, at David's request. Outbound links only, no wording changed. In return Premier Football UK will link the interview, `/academy-pathway/football-scholarships-uk`, `/football-development/late-developers-in-football` and `/academy-trials/what-happens-at-academy-trials` from their news piece, and repost the Instagram collabs (outreach row `warm:david-jervis`).
