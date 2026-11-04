@@ -26,9 +26,10 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       path="/academy-pathway/academy-life-paul-barry-interview"
       datePublished={article.frontmatter.date}
+      design={article.frontmatter.design}
       content={article.content}
     >
-      <MDXContent content={article.content} slug={article.slug} />
+      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }
