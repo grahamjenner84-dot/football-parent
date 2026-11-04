@@ -5,7 +5,7 @@ import React from "react";
 //   <InterviewQuestion>What do coaches notice at a trial?</InterviewQuestion>
 //
 //   <InterviewAnswer name="David Jervis" org="Premier Football UK"
-//     role="Founder" photoSrc="/images/people/david-jervis-premier-football-uk.jpg">
+//     role="Founder" photoSrc="/images/people/david-jervis-premier-football-uk-400.jpg">
 //   The answer, in markdown, in the expert's own words.
 //   </InterviewAnswer>
 //
