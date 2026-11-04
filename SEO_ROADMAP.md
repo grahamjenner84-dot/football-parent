@@ -91,7 +91,7 @@ Data we want in the `/api/mcp` server but can't add yet (as of 2 Nov 2026). The 
 
 ## Partnership routes for links (Graham)
 
-- **Football DNA:** its equal-playtime page ranks #7 for "equal playing time app". Raise the calculator within the sponsorship conversation.
+- **Football DNA (partnership agreed 14 Oct 2026, Stewart):** first result, 4 Nov: links added from footballdna.co.uk/common-challenges-for-grassroots-coaches/ to `/coaching/equal-playing-time-in-grassroots-football` and from footballdna.co.uk/a-grassroots-game-day-guide/ to `/parent-guides/what-is-grassroots-football`, three links from the domain in all. The calculator link from their equal-playtime page (#7 for "equal playing time app") was asked for and not added; Graham's call is not to chase it, three links is enough. Open: Stewart has a Coach App test account and may review the app; if he does, the calculator link belongs in the review, not in a separate ask. Our side: outbound links to them cut from 28 to 10 on 20 Oct (PR #94). Check the two new links carry no `rel="nofollow"` or `sponsored` and point at the exact www URLs (not checkable from a cloud session, the domain is off the allowlist).
 - **County FAs:** Somerset FA's "Even Stevens" and Sheffield FA's equal playing time page rank for the calculator searches. Centre Circle grew through county FAs (190 county FA links).
 - **England Football's "Helpful apps & websites: Matchday" page:** #7 for "grassroots football substitution app". Needs a partnership conversation, not a cold email.
 
