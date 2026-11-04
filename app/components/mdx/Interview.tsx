@@ -50,6 +50,9 @@ type InterviewAnswerProps = {
   // Used on classic pages, in the attribution line above the answer.
   role?: string;
   photoSrc?: string;
+  // "contain" for a logo standing in for a photo (Girls United), so it is
+  // shown whole on white rather than cropped to the circle.
+  photoFit?: "cover" | "contain";
   children: React.ReactNode;
   design?: Design;
 };
@@ -59,6 +62,7 @@ export function InterviewAnswer({
   org,
   role,
   photoSrc,
+  photoFit = "cover",
   children,
   design = "classic",
 }: InterviewAnswerProps) {
@@ -76,7 +80,9 @@ export function InterviewAnswer({
               alt=""
               width={52}
               height={52}
-              className="h-[52px] w-[52px] shrink-0 rounded-full border-[3px] border-[#201E1D] object-cover"
+              className={`h-[52px] w-[52px] shrink-0 rounded-full border-[3px] border-[#201E1D] ${
+                photoFit === "contain" ? "bg-white object-contain p-1" : "object-cover"
+              }`}
             />
           ) : null}
           <span>
