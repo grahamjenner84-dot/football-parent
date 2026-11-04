@@ -25,9 +25,10 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       path="/parent-guides/matt-baxter-young-footballer-mindset-interview"
       datePublished={article.frontmatter.date}
+      design={article.frontmatter.design}
       content={article.content}
     >
-      <MDXContent content={article.content} slug={article.slug} />
+      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }
