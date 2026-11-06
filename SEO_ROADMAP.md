@@ -4,11 +4,6 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 
 ## Due
 
-### Soft ground boots inbound link from the Christmas gifts guide (add after about 5 Nov 2026)
-
-- **What:** in `/football-gear/christmas-football-gifts-for-kids`, the "The surface matters" bullet, link "Soft ground boots with longer studs" to `/football-gear/childrens-soft-ground-football-boots`.
-- **Why after 5 Nov:** the gifts guide is on watch from its 22-23 Oct changes until then. (The Veo link that was here shipped 1 Nov, `4de4401`.) Log it when it ships.
-
 ### AI Overview citations on the app searches (re-check about 8 Nov 2026)
 
 - **What:** re-pull the AI Overviews on the 8 app searches ("equal playing time app grassroots football", "fair playing time football coaches app", "fair playing time app", "equal game time app", "football substitution app", "playing time app football", "grassroots football substitution app", "equal playing time app") and see whether footballparent.co.uk or the Coach App's Play listing is now cited.
