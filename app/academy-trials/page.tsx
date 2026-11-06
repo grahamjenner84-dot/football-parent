@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Academy Trials and Scouting | Football Parent",
   description:
-    "Most academy players are found through scouting, not open trials. What coaches actually look for, how recruitment really works, and what happens on trial day.",
+    "Most academy players are found through scouting, not open trials. What coaches look for, how recruitment works, and what happens on trial day.",
   path: "/academy-trials",
   type: "website",
 });
@@ -14,7 +14,7 @@ export default function AcademyTrialsPage() {
   return (
     <CategoryPage
       title="Football Academy Trials"
-      description="Most academy players are found through scouting, not open trials. What coaches actually look for, how recruitment really works, and what happens on trial day."
+      description="Most academy players are found through scouting, not open trials. What coaches look for, how recruitment works, and what happens on trial day."
       intro={[
         "Football academy trials are widely misunderstood. Most players will attend at least one trial during their development years, whether that is an open trial at a local club, an invitation to an EPPP academy session, or a development centre assessment.",
       ]}

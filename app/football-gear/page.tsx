@@ -4,7 +4,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Gear | Football Parent",
   description:
-    "Boots, shin pads, footballs and training kit for young players: what actually matters for sizing, fit and durability, and what's worth skipping.",
+    "Boots, shin pads, footballs and training kit for young players: what matters for sizing, fit and durability, and what's worth skipping.",
   path: "/football-gear",
   type: "website",
 });
@@ -13,7 +13,7 @@ export default function FootballGearPage() {
   return (
     <CategoryPage
       title="Football Gear"
-      description="Boots, shin pads, footballs and training kit for young players: what actually matters for sizing, fit and durability, and what's worth skipping."
+      description="Boots, shin pads, footballs and training kit for young players: what matters for sizing, fit and durability, and what's worth skipping."
       intro={[
         "Buying football equipment for a child who is developing quickly is rarely straightforward. Boot technology has outpaced most buying guides, sizing varies between brands, and what works on a 3G surface does not always work on grass.",
       ]}

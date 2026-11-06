@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "Football Development for Young Players | Football Parent",
   description:
-    "Football confidence, decision making, training load and late development: what actually predicts long-term progress in young players.",
+    "Football confidence, decision making, training load and late development: what predicts long-term progress in young players.",
   path: "/football-development",
   type: "website",
 });
@@ -14,7 +14,7 @@ export default function FootballDevelopmentPage() {
   return (
     <CategoryPage
       title="Football Development"
-      description="Football confidence, decision making, training load and late development: what actually predicts long-term progress in young players."
+      description="Football confidence, decision making, training load and late development: what predicts long-term progress in young players."
       intro={[
         "Football development is a long game. The players who make progress are rarely just the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development looks like at each stage.",
       ]}
