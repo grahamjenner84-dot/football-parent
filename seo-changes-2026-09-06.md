@@ -2154,3 +2154,23 @@ Re-run of the Chrome stock sweep after 121 Amazon click-outs on 2 Nov returned 6
 - `/parent-guides/what-is-grassroots-football` → `/football-gear/boots/best-football-boots-for-wide-feet-kids`, anchor "football boots for wide feet", appended to the costs paragraph. `2a0e2ff`. **Live traffic on both ends.** Baseline: page position 8.3, 53,583 impr, 464 clicks; "boys wide fit football boots" 11.2 (311), "football boots for wide feet" 15.3 (219), "boys wide football boots" 12.3 (144). Confounded: the page's GearPicks boot changed on 3 Nov (stock check above), so a change here can't be pinned on this link alone.
 
 Considered and not done: a body link from part 1 to `/football-development/new-fa-youth-football-format`. Graham's call: the format changes have been in force for months, so linking to them again from an interview about them adds little.
+
+## Weekly SEO check 2026-11-06
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-11-06.md`. GSC to 3 Nov, page views to 5 Nov, windows from `scripts/seo/cli/change-impact.ts`. Site 28 vs 28 days: impressions +25%, clicks +11%, same-query position 8.8 to 8.1. No unlogged SEO commits.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| Leeds title | 22 Oct | eb79590 | Revert rule met (Graham) | Weekly CTR 0.9% then 0.5% (rule below 1.5% two weeks); weekly clicks 42, 38, 28, 18; organic views -32% vs site +21%; guards fine | Graham to decide |
+| Brentford title | 22 Oct | 8fd3936 | Keep | Clicks 16 to 56, CTR 0.83% to 1.51%, same-query 9.2 to 8.5 | Closed |
+| Chelsea title | 22 Oct | 22ca92a | Keep, soft | CTR 1.59% (rule 1.4%), guards fine, "pre academy" 5.1 to 3.3; clicks -15% vs site +34% | Read again 12 Nov |
+| calculator indexifembedded | 18 Oct | 39e4ea0 | Worked | 1,452 impressions, 37 clicks, position 4.9 in 14 days | Closed |
+| Coach App page | 18 Oct | 8952367 | Too small, confounded (2 Nov header link) | 88 impressions, 4 clicks | 8 Nov AI Overview re-check |
+| stats apps title revert | 29 Oct | caa1bf6 | Too early, looks right | CTR 2.9% to 4.7% (5 days) | Read again 12 Nov |
+| base layers title | 29 Oct | 1e3e408 | Too early, flag | CTR 0.66% to 0.26%, clicks 28 to 19 (5 days); same-query flat | Read 10-12 Nov: revert if week 2 below 0.6% |
+| FA format table | 29 Oct | 21d2667 | Too early, promising | CTR 0.40% to 0.93%, same-query 7.0 to 5.7 | Read again 12 Nov |
+| girls' trials by club | 1 Nov | | Indexed | 55 organic views in 4 days | GSC from 8 Nov |
+| design rollout (header 1 Nov, comic pages 2-4 Nov, homepage 3 Nov) | 1-4 Nov | see entries | Too early for GSC; nothing negative | Internal views 11.3% to 12.7% of views; 3 Progress joins via the header since 1 Nov | Read ~15 Nov, CWV from ~15 Nov |
+| 30 Oct-5 Nov links, anchors, QPR, advent | | see entries | Too early | | 13-19 Nov |
+
+Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts guide (held item, now or 15 Nov); AI Overview check on playing up an age group and can academy players play grassroots (both `decay` at a steady position) before any edit.
