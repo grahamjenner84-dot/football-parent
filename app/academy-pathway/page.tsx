@@ -16,7 +16,7 @@ export default function AcademyPathwayPage() {
       title="Academy Pathway"
       description="The UK academy pathway runs through EPPP's Category 1-4 system, from development centres and scouting to scholarships and release. What each stage actually involves."
       intro={[
-        "The football academy system in the UK is structured around the Elite Player Performance Plan, which divides clubs into Category 1 to 4 academies with different levels of resource, coaching, and player commitment. Alongside full academies, most professional clubs also run development centres that are open to a wider range of players. Understanding where your child fits in this pathway, and what each stage actually involves, is what these guides are designed to help with. Written from first-hand experience of Crystal Palace and Chelsea's development programmes in south London.",
+        "The football academy system in the UK is structured around the Elite Player Performance Plan, which divides clubs into Category 1 to 4 academies with different levels of resource, coaching, and player commitment. Alongside full academies, most professional clubs also run development centres that are open to a wider range of players.",
       ]}
       // Progress sponsors this section (the strapline version of its banner).
       // Above the intro from PROMO_ABOVE_INTRO_FROM (Graham, 2026-10-30), so
@@ -178,7 +178,7 @@ export default function AcademyPathwayPage() {
           title: "How Chelsea FC's Development Centre Works",
           href: "/academy-pathway/chelsea-fc-development-centre-guide",
           description:
-            "Chelsea's development centre isn't the Academy - PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining.",
+            "Chelsea's development centre isn't the Academy: PTC, PDC and PPC are separate tiers run via Soccer Schools. How each level works, and what to ask before joining.",
         },
         {
           title: "Premier League Development Centres",
@@ -203,7 +203,7 @@ export default function AcademyPathwayPage() {
           title: "Football Development Centres in London",
           href: "/academy-pathway/football-development-centres-in-london",
           description:
-            "London has more youth football development pathways than anywhere else in England - the options for both boys and girls across the capital.",
+            "London has more youth football development pathways than anywhere else in England. The options for boys and girls across the capital.",
         },
         {
           title: "How to Find a Football Agent for Your Child",
@@ -306,8 +306,8 @@ export default function AcademyPathwayPage() {
         title: "About the Academy Pathway",
         content: [
           "The academy pathway is not one single route. For most young players, it sits somewhere between grassroots football, development centres, pre-academy groups, club trials, scouting and, for a much smaller number, full academy registration. That can make the system difficult for parents to judge from the outside, especially when different clubs use different names for their programmes.",
-          "This section is designed to help parents understand how the wider football academy system fits together. It covers the main stages of the player pathway, including development centres, academy categories, recruitment ages, EPPP rules, scholarships, release decisions and the difference between training opportunities and genuine academy registration.",
-          "The aim is not to suggest that every child should chase academy football. A good pathway should support the player's long-term development, confidence and enjoyment of the game. For some children, that may mean a professional club environment. For others, it may mean grassroots football, extra coaching, school football, futsal, private training or simply finding the right team at the right time.",
+          "The guides here show how the wider academy system fits together. They cover the main stages of the player pathway: development centres, academy categories, recruitment ages, EPPP rules, scholarships, release decisions and the difference between a training opportunity and full academy registration.",
+          "Not every child should chase academy football. A good pathway should support the player's long-term development, confidence and enjoyment of the game. For some children, that may mean a professional club environment. For others, it may mean grassroots football, extra coaching, school football, futsal, private training or simply finding a team that suits them.",
         ],
       }}
     />

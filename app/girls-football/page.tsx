@@ -15,9 +15,6 @@ export default function GirlsFootballPage() {
     <CategoryPage
       title="Girls Football"
       description="Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway works for UK families."
-      intro={[
-        "Girls football in the UK has changed significantly in recent years, but the pathway from grassroots to academy level remains poorly understood by most parents. Whether your daughter is playing for a local club and wondering about the next step, or you have heard about Emerging Talent Centres and Regional Talent Clubs and want to know what they actually involve, these guides explain how the girls football development system works and what to realistically expect at each stage.",
-      ]}
       // No sponsor yet: the Instagram follow box holds the slot until one
       // takes it (see app/components/InstagramCategoryPromo.tsx).
       promo={<InstagramCategoryPromo />}
@@ -123,9 +120,9 @@ export default function GirlsFootballPage() {
       bottomContent={{
         title: "About Girls Football",
         content: [
-          "Girls football has more opportunities than ever, but the pathway can still feel unclear for parents. A young player might move between grassroots football, school football, Emerging Talent Centres, Regional Talent Clubs, academy-style programmes or open trials, depending on her age, ability, location and the structure of clubs nearby.",
-          "The most important thing is understanding what each environment is actually designed to do. Some programmes focus on widening access and giving talented girls more coaching time. Others are more selective and closer to an academy pathway. Grassroots football can still be an excellent development environment, especially when a player is getting good coaching, meaningful match time and the chance to build confidence.",
-          "The guides in this section help parents understand girls football academies, ETCs, RTCs, trials, recruitment ages, late development and the difference between academy and grassroots football. The aim is to give families a realistic view of the girls football pathway in the UK, so decisions are based on development, enjoyment and the individual child rather than pressure or hype.",
+          "Girls football in the UK has changed a lot in recent years, and there are more opportunities than there were, but the route from grassroots to academy level can still be hard for parents to follow. A young player might move between grassroots football, school football, Emerging Talent Centres, academy-style programmes or open trials, depending on her age, ability, location and the structure of clubs nearby.",
+          "Each environment is set up to do something different. Some programmes focus on widening access and giving talented girls more coaching time. Others are more selective and closer to an academy pathway. Grassroots football can still be an excellent development environment, especially when a player is getting good coaching, meaningful match time and the chance to build confidence.",
+          "The guides here cover girls football academies, ETCs, RTCs, trials, recruitment ages, late development and the difference between academy and grassroots football, so that decisions rest on development, enjoyment and the individual child rather than pressure.",
         ],
       }}
     />

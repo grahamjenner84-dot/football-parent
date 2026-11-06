@@ -15,7 +15,7 @@ export default function FootballGearPage() {
       title="Football Gear"
       description="Boots, shin pads, footballs and training kit for young players: what actually matters for sizing, fit and durability, and what's worth skipping."
       intro={[
-        "Buying football equipment for a child who is developing quickly is rarely straightforward. Boot technology has outpaced most buying guides, sizing varies between brands, and what works on a 3G surface does not always work on grass. These guides cut through the noise with honest, practical advice on boots, goals, training equipment and kit, written for parents rather than coaches or serious players.",
+        "Buying football equipment for a child who is developing quickly is rarely straightforward. Boot technology has outpaced most buying guides, sizing varies between brands, and what works on a 3G surface does not always work on grass.",
       ]}
       startHere={{
         title: "Start Here",
@@ -155,9 +155,9 @@ export default function FootballGearPage() {
       bottomContent={{
         title: "About Football Gear",
         content: [
-          "Choosing football gear for children is often more confusing than it needs to be. Parents have to think about boot fit, playing surface, shin pad comfort, football size, winter training, school requirements and how quickly children grow out of kit. The best option is not always the most expensive one, especially for young players who are still developing physically and technically.",
-          "Good football equipment should help a child play comfortably and safely without becoming a distraction. Boots need to suit the surface as well as the shape of the foot, footballs should match the correct age group, and shin pads should be protective without stopping a child from moving naturally. Small details such as grip, warmth, sizing and comfort can make a real difference over a full season.",
-          "The guides in this section are written for parents who want practical football kit advice without overcomplicated product language. They cover football boots, AG and FG soleplates, football sizes, shin pads, gloves and other training essentials, with the aim of helping families buy suitable equipment for young players at grassroots, school and development centre level.",
+          "Parents have to think about boot fit, playing surface, shin pad comfort, football size, winter training, school requirements and how quickly children grow out of kit. The best option is not always the most expensive one, especially for young players who are still developing physically and technically.",
+          "Good football equipment should help a child play comfortably and safely without becoming a distraction. Boots need to suit the surface as well as the shape of the foot, footballs should match the correct age group, and shin pads should be protective without stopping a child from moving naturally. Grip, warmth, sizing and comfort all count over a full season.",
+          "The guides here are written for parents rather than coaches or serious players, and cover football boots, AG and FG soleplates, football sizes, shin pads, gloves and other training kit for young players at grassroots, school and development centre level.",
         ],
       }}
     />

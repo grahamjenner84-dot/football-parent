@@ -16,8 +16,7 @@ export default function FootballDevelopmentPage() {
       title="Football Development"
       description="Football confidence, decision making, training load and late development: what actually predicts long-term progress in young players."
       intro={[
-        "Football development is a long game. The players who make progress are rarely just the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development actually looks like at each stage.",
-        "These guides cover the parts of player development that parents often worry about most: football confidence, decision making, football IQ, training load, relative age, late developers and knowing when a child may be ready for a more demanding environment. As a parent with first-hand experience of development centre environments in south London, I have written these guides to give you a realistic picture of what to expect and how to help.",
+        "Football development is a long game. The players who make progress are rarely just the ones who trained hardest at age nine. They are usually the ones who stayed engaged, kept improving year on year, and had parents who understood what good development looks like at each stage.",
       ]}
       // No sponsor yet: the Instagram follow box holds the slot until one
       // takes it (see app/components/InstagramCategoryPromo.tsx).
@@ -64,7 +63,7 @@ export default function FootballDevelopmentPage() {
           title: "How to Become a Professional Footballer",
           href: "/football-development/how-to-become-a-professional-footballer",
           description:
-            "The real pathways into professional football - the academy route, non-league development, late developers, and why environment and education matter as much as talent.",
+            "The pathways into professional football: the academy route, non-league development, late developers, and why environment and education matter as much as talent.",
         },
         {
           title: "Is My Child Ready for Academy Football?",
@@ -88,7 +87,7 @@ export default function FootballDevelopmentPage() {
           title: "Improve Football Decision Making",
           href: "/football-development/improve-football-decision-making",
           description:
-            "Decision making is one of the most important skills in youth football - and one of the hardest to coach. How parents and coaches can help young players think faster and clearer on the pitch.",
+            "Decision making is one of the most important skills in youth football, and one of the hardest to coach. How parents and coaches can help young players think faster and clearer on the pitch.",
         },
         {
           title: "Good Football Development Environment",
@@ -154,9 +153,9 @@ export default function FootballDevelopmentPage() {
       bottomContent={{
         title: "About Football Development",
         content: [
-          "Football development is about more than technical practice or moving into a higher-level team as early as possible. For young players, progress usually depends on a mix of confidence, game understanding, physical maturity, decision making, enjoyment and the quality of the environment around them. Parents often see only the visible parts of development, such as goals, tackles or selection decisions, but many of the most important improvements happen gradually over time.",
-          "A good football development pathway should help children become more skilful, more resilient and more confident without losing their love of the game. That means balancing training with recovery, recognising the impact of growth and relative age, understanding that late developers can still catch up, and judging opportunities by how well they support the individual child rather than by the badge on the kit.",
-          "The guides in this section are designed to help parents make sense of player development at grassroots, development centre and academy level. They cover football confidence, decision making, football IQ, training load, late development, playing up an age group and knowing when a child may be ready for a more demanding football environment.",
+          "Technical practice and an early move to a higher-level team are only a small part of football development. For young players, progress usually depends on a mix of confidence, game understanding, physical maturity, decision making, enjoyment and the quality of the environment around them. Parents often see only the visible parts of development, such as goals, tackles or selection decisions, but many of the most important improvements happen gradually over time.",
+          "A good football development pathway should help children become more skilful, more resilient and more confident without losing their love of the game. That means balancing training with recovery, recognising the impact of growth and relative age, understanding that late developers can still catch up, and judging an opportunity by how well it suits your child, not by how big the club is.",
+          "The guides here cover player development at grassroots, development centre and academy level: football confidence, decision making, football IQ, training load, relative age, late development, playing up an age group and knowing when a child may be ready for a more demanding football environment.",
         ],
       }}
     />
