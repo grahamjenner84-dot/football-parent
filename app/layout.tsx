@@ -92,7 +92,18 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`h-full antialiased ${firaSans.variable}`}>
+    // data-scroll-behavior="smooth" because globals.css sets smooth scrolling
+    // on <html> (for in-page links). Since Next.js 16 that also animates the
+    // jump to the top on a page change, unless this attribute tells Next to
+    // switch it off during navigation: without it, Next checks the new page's
+    // position before the animation has moved, then scrolls the content to
+    // the window's top edge, under the sticky header, and a new page opens
+    // about 124px down with its heading hidden.
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`h-full antialiased ${firaSans.variable}`}
+    >
       <body className="min-h-full flex flex-col">
         {/* Impact.com site verification. Rendered as a literal tag (React 19
             hoists it into <head>) rather than via Next's metadata.verification
