@@ -64,6 +64,7 @@ export default function ProgressBanner({
   inArticle = placement === "article",
   test = false,
   design = "classic",
+  withCard = false,
 }: {
   placement?: ProgressPlacement;
   /** Adds the vertical spacing an in-body banner needs. */
@@ -75,6 +76,10 @@ export default function ProgressBanner({
    *  canvas. Same words, links and measurement as the classic banner, and
    *  both test arms change together, so the A/B comparison is unaffected. */
   design?: "classic" | "comic";
+  /** Adds the Player of the Match card to a comic banner outside the test
+   *  (the Academy Pathway category page, as on the canvas). Article banners
+   *  leave it off so they stay as they are. */
+  withCard?: boolean;
 }) {
   const comic = design === "comic";
   const sponsor = placement === "academy-pathway";
@@ -258,7 +263,7 @@ export default function ProgressBanner({
 
   return (
     <ProgressBannerLink banner={`progress-${placement}`} className={className}>
-      {homeComic ? homeInner(controlBody) : inner(controlBody)}
+      {homeComic ? homeInner(controlBody) : inner(controlBody, comic && withCard)}
     </ProgressBannerLink>
   );
 }

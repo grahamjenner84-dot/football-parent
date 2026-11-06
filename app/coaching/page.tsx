@@ -13,12 +13,10 @@ export const metadata = generateSEO({
 export default function CoachingPage() {
   return (
     <CategoryPage
-      eyebrow="Coaching"
       title="Coaching"
       description="Coaching qualifications, formations by age group, session drills, fair playing time and squad admin: practical guides for grassroots volunteer coaches."
       intro={[
         "Most grassroots coaches start the same way: someone at the club asks whether you fancy helping out, and a few weeks later you are running a squad of twelve on a Sunday morning. There is very little handed to you beyond a bag of balls and a fixture list, and the questions come quickly. What qualification do you actually need? Which formation suits an under-10 side? How do you rotate players so nobody's parent feels short-changed?",
-        "These guides answer those questions from the touchline rather than from a coaching manual. They cover the FA courses and what they cost, the 2026/27 format changes and what they mean for your age group, ball mastery sessions that work with young players, playing time that is genuinely fair, and the admin side of tracking a squad across a season.",
       ]}
       startHere={{
         title: "Start Here",
@@ -59,7 +57,7 @@ export default function CoachingPage() {
       // supported by"): the Coach App is the section's house sponsor until a
       // paying one takes the slot. Above the intro from PROMO_ABOVE_INTRO_FROM
       // (Graham, 2026-10-30), so it's on a phone's first screen.
-      promo={<CoachAppBanner audience="coach" style="sponsor" placement="category" />}
+      promo={<CoachAppBanner audience="coach" style="sponsor" placement="category" design="comic" />}
       promoPosition="top"
       articles={[
         {
@@ -110,7 +108,7 @@ export default function CoachingPage() {
         content: [
           "Grassroots coaching in England is overwhelmingly volunteer work. Most teams are run by a parent who agreed to help and then found themselves responsible for session planning, matchday selection, substitutions, kit, subs collection and the WhatsApp group. The FA's own courses cover a lot of the football side, but they say far less about the week-to-week judgement calls that take up most of a coach's time.",
           "The decisions that cause the most friction are rarely tactical. They are about who starts, how minutes get shared out, whether a weaker player gets the same development as a stronger one, and how to explain any of it to a parent on the touchline. Getting those right early tends to matter more to whether children stay in the game than the formation you pick.",
-          "These guides are written from the perspective of someone doing the job rather than teaching it, covering qualifications, formats, session content, rotation and record keeping for coaches at under-7 through to under-14 level.",
+          "The guides here are written from the touchline rather than from a coaching manual, for coaches from under-7 to under-14. They cover the FA courses and what they cost, the 2026/27 format changes and what they mean for your age group, ball mastery sessions that work with young players, playing time that is fair, and the admin side of tracking a squad across a season.",
         ],
       }}
     />

@@ -245,10 +245,14 @@ export default function CoachAppBanner({
   audience = "parent",
   style = ACTIVE_BANNER_STYLE,
   placement = "article",
+  design = "classic",
 }: {
   audience?: CoachAppAudience;
   style?: CoachAppBannerStyle;
   placement?: CoachAppPlacement;
+  /** "comic" on the comic-accent category pages: the dark and sponsor
+   *  creatives get the ink outline and offset shadow. Same words and link. */
+  design?: "classic" | "comic";
 }) {
   const inBody = placement === "article" || placement === "calculator";
   const spacing = inBody ? "my-10" : "";
@@ -295,7 +299,11 @@ export default function CoachAppBanner({
         // transparent one, so any off-black background shows it as a visible
         // rectangle. For the same reason the hover state changes a ring
         // rather than the background, which would bring the box back.
-        className={`group block rounded-2xl bg-black px-6 py-6 text-white transition hover:ring-1 hover:ring-white/25 sm:px-8 ${spacing}`}
+        className={`group block bg-black px-6 py-6 text-white transition sm:px-8 ${spacing} ${
+          design === "comic"
+            ? "rounded-[18px] border-[3px] border-[#201E1D] shadow-[6px_6px_0_#201E1D] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[8px_8px_0_#201E1D]"
+            : "rounded-2xl hover:ring-1 hover:ring-white/25"
+        }`}
       >
         {style === "sponsor" && (
           <p className="m-0 mb-4 text-xs font-semibold uppercase tracking-wide text-white/60">

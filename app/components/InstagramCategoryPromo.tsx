@@ -23,19 +23,25 @@ export const INSTAGRAM_CATEGORY_PATHS = [
   "/parent-guides",
 ];
 
+// In the category pages' comic-accent design (app/components/category-page.tsx):
+// a white box with the ink outline and offset shadow, the Instagram gradient
+// on the icon tile and the button. Same words and link as before.
 export default function InstagramCategoryPromo() {
   return (
-    <aside className="rounded-2xl border border-[#f3d3e3] bg-gradient-to-br from-[#fff5ec] via-[#fdf0f6] to-[#f5effb] px-6 py-6 sm:px-8">
-      <p className="m-0 mb-3 text-xs font-semibold uppercase tracking-wide text-[#8a5a73]">
-        Football Parent on Instagram
-      </p>
+    <aside className="rounded-[18px] border-[3px] border-[#201E1D] bg-white px-6 py-6 shadow-[6px_6px_0_#201E1D] sm:px-7">
+      <p className="m-0 mb-3 text-[15px] font-semibold text-[#5A5650]">Football Parent on Instagram</p>
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-8">
         <div className="flex-1">
-          <p className="m-0 mb-2 flex items-center gap-2 text-lg font-bold leading-snug text-slate-950 sm:text-xl">
-            <InstagramIcon className="h-6 w-6 flex-shrink-0 text-[#dd2a7b]" />
+          <p className="m-0 mb-2 flex items-center gap-3 text-xl font-bold leading-snug text-[#201E1D]">
+            <span
+              aria-hidden="true"
+              className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border-2 border-[#201E1D] bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white"
+            >
+              <InstagramIcon className="h-5 w-5" />
+            </span>
             Follow us for the latest interviews
           </p>
-          <p className="m-0 text-base leading-7 text-slate-700">
+          <p className="m-0 text-base leading-[1.6] text-[#3A3836]">
             Academy coaches, scouts and the people who run grassroots football,
             in their own words, plus what we have learned as football parents.{" "}
             {INSTAGRAM_HANDLE}
@@ -46,7 +52,7 @@ export default function InstagramCategoryPromo() {
           target="_blank"
           // No noreferrer: the profile visit should show it came from us.
           rel="noopener"
-          className="inline-flex flex-shrink-0 items-center justify-center gap-2 self-start whitespace-nowrap rounded-full bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] px-6 py-3 text-sm font-semibold !text-white no-underline shadow-sm transition hover:opacity-90 sm:self-auto"
+          className="inline-flex flex-shrink-0 items-center justify-center gap-2 self-start whitespace-nowrap rounded-full border-2 border-[#201E1D] bg-gradient-to-r from-[#f58529] via-[#dd2a7b] to-[#8134af] px-[18px] py-[11px] text-[15px] font-bold !text-white no-underline shadow-[3px_3px_0_#201E1D] transition hover:opacity-90 sm:self-auto"
         >
           <InstagramIcon />
           Follow on Instagram

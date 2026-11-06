@@ -13,12 +13,8 @@ export const metadata = generateSEO({
 export default function ParentGuidesPage() {
   return (
     <CategoryPage
-      eyebrow="Parent guides"
       title="Parent Guides"
       description="Academy decisions, the Junior Premier League, matchday behaviour and player development: what UK football parents need to weigh up before deciding."
-      intro={[
-        "Being a football parent involves far more than standing on the touchline. You'll make decisions about clubs, leagues, development centres, academy opportunities and how best to support your child through both successes and setbacks. These guides combine practical football parenting advice with independent explanations of common pathways, helping you make informed decisions without the hype or pressure that often surrounds youth football.",
-      ]}
       // No sponsor yet: the Instagram follow box holds the slot until one
       // takes it (see app/components/InstagramCategoryPromo.tsx).
       promo={<InstagramCategoryPromo />}
@@ -88,7 +84,7 @@ export default function ParentGuidesPage() {
           title: "Does the Junior Premier League Lead to Academy Football?",
           href: "/parent-guides/jpl-and-academy-football",
           description:
-            "Playing in the JPL doesn't create an automatic route into an academy - scouts select on ability, not league. What actually gets a child noticed.",
+            "Playing in the JPL doesn't create an automatic route into an academy: scouts select on ability, not league. What actually gets a child noticed.",
         },
         {
           title: "JPL Trials: How to Get Into the JPL",
@@ -185,8 +181,8 @@ export default function ParentGuidesPage() {
         title: "About Football Parent Guides",
         content: [
           "Football parenting is often about making judgement calls without having perfect information. Parents may need to decide whether to move clubs, accept a development centre place, attend JPL trials, pursue academy opportunities, change teams or simply step back and let a child enjoy the game. Those decisions can feel bigger than they are when everyone around youth football seems to have an opinion.",
-          "Good football parenting is not about pushing a child as far as possible as quickly as possible. It is about understanding the environment, protecting confidence, asking better questions and recognising when an opportunity genuinely supports long-term development. The right decision for one child may be completely wrong for another, depending on personality, maturity, motivation, coaching quality, match time and family circumstances.",
-          "The guides in this section help parents navigate the wider football journey, including grassroots football, academy decisions, the Junior Premier League, development centres, matchday behaviour, confidence and setbacks. The aim is to give families realistic, independent advice so they can support young players with more clarity and less pressure.",
+          "Good football parenting means understanding the environment, protecting confidence, asking better questions and recognising when an opportunity supports long-term development, rather than pushing a child as far and as fast as possible. The right decision for one child may be completely wrong for another, depending on personality, maturity, motivation, coaching quality, match time and family circumstances.",
+          "The guides here cover grassroots football, academy decisions, the Junior Premier League, development centres, matchday behaviour, confidence and setbacks.",
         ],
       }}
     />
