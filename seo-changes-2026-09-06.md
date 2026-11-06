@@ -2196,3 +2196,9 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - Why: "can a child play 2 years up in football" (31 impressions at 8.1, 0 clicks) and "can you play 2 years up in grassroots football" (20 at 8.6, ranking on the academy/grassroots page) were not answered on either page.
 - Baseline (28 days to 3 Nov): 2,588 impressions, 22 clicks, position 5.5, CTR 0.9%.
 - Judge on the two-years-up queries' positions and any newly ranking "2 years up" variants. Revert if page position is worse than 6.5 for a week. Watch until ~20 Nov.
+
+## 6 Nov 2026: pages open at the top again after a page change (site-wide fix)
+
+- `app/layout.tsx`, commit `bce1136`, live 6 Nov 2026 at 19:07 UTC. `<html>` gains `data-scroll-behavior="smooth"`.
+- The bug: `globals.css` sets smooth scrolling on `<html>` for in-page links, and since Next.js 16 that also animated the jump to the top on every in-site page change. Next then scrolled the new page's content to the window's top edge, under the sticky header, so pages reached from another page opened about 124px down with the H1 hidden. It had been there since the Next 16 upgrade, and was more noticeable after the 1 Nov header redesign made the header two rows tall. First-time visits from Google were not affected (a full page load starts at the top); only clicks within the site were.
+- No content, heading, link or metadata change. If pages-per-visit or the share of internal page views moves in the next fortnight, rule this in first.
