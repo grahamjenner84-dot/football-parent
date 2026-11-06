@@ -2174,3 +2174,18 @@ Full write-up: `seo-data/exports/weekly-seo-check-2026-11-06.md`. GSC to 3 Nov, 
 | 30 Oct-5 Nov links, anchors, QPR, advent | | see entries | Too early | | 13-19 Nov |
 
 Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts guide (held item, now or 15 Nov); AI Overview check on playing up an age group and can academy players play grassroots (both `decay` at a steady position) before any edit.
+
+## 6 Nov 2026: Leeds title reverted, soft ground link from the gifts guide, AI Overview check on two decay pages
+
+**`/academy-pathway/leeds-united-development-centre-guide` (`1373915`, reverts `eb79590`): `<title>` only. Live traffic page.**
+- Before: "Leeds United Academy & Development Centre Guide"
+- After (back to the pre-22 Oct title): "Leeds United Development Centre Guide | Football Parent"
+- Why: the 22 Oct revert rule was met (weekly CTR 0.9% and 0.5%, rule below 1.5% two weeks running), Graham's call 6 Nov. The academy queries it targeted did not improve ("leeds united academy" 7.7 to 8.7, "leeds football academy" 8.8 to 11.4). The doubling in impressions came from Leeds trials searches ("leeds united open trials 2026" 8 to 374, "leeds united academy trials" 9 to 305, "leeds united trials" 21 to 271, "leeds united trials 2026" 9 to 192, 12 days each side), demand the title did not target, ranking 6-9 with almost no clicks.
+- Baseline (28 days to 3 Nov): 12,522 impressions, 142 clicks, position 6.3, CTR 1.1%. Weekly clicks 42, 38, 28, 18 (7 Oct to 28 Oct weeks). "leeds united development centre" 3.2, "leeds united technical centre" 4.5, "leeds united academy" 8.1.
+- Read: weekly clicks back above ~30 with CTR above 1.5% means the title was the cause. If CTR stays near 0.5-1% while trials impressions stay high, it was query mix and the trials searches (about 1,100 impressions at 6-9, 0 clicks) are the next lever to look at, not the title. Watch until ~20 Nov.
+
+**`/football-gear/christmas-football-gifts-for-kids` (`e5635ce`): internal link.** "The surface matters" bullet: "Soft ground boots with longer studs" now links to `/football-gear/childrens-soft-ground-football-boots`. Held item from `SEO_ROADMAP.md`. Additive, no wording changed. Source last changed 31 Oct (stock swap). Graham's call to add it now, inside the target's watch from the 1 Nov links and anchors (its third inbound link change since 1 Nov): read all of them together as "more internal links". **Target baseline** (28 days to 3 Nov): 3,464 impressions, 31 clicks, position 7.4; "kids soft ground football boots" 9.9 (372), "childrens football boots soft ground" 11.2 (113), "junior football boots soft ground" 11.9 (106). Watch until ~20 Nov.
+
+**Checked, not changed** (`ai-overview-check.ts`, $0.012, 6 Nov):
+- `/academy-pathway/can-academy-players-play-grassroots-football` (decay, clicks 63 to 44 at a steady 4.8): AI Overview on "can academy players play grassroots football" (we are cited, source #2) and "can you play for an academy and grassroots" (cited, #3). The CTR loss is the AI Overview; no edit.
+- `/football-development/playing-up-an-age-group-football` (decay, clicks 32 to 22 at a steady 5.5): no AI Overview on "can a child play up an age group in football" ("playing up an age group football" errored at DataForSEO, not charged). Clicks were 44 in September and 25 in October, the start-of-season decision month, at the same position, so this reads as seasonal demand. No edit. Possible small addition later: "can a child play 2 years up" (31 impressions at 8.1) is not answered on the page; it needs the FA rule sourced before writing.
