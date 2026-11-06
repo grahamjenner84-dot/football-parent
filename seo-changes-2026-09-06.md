@@ -2202,3 +2202,19 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - `app/layout.tsx`, commit `bce1136`, live 6 Nov 2026 at 19:07 UTC. `<html>` gains `data-scroll-behavior="smooth"`.
 - The bug: `globals.css` sets smooth scrolling on `<html>` for in-page links, and since Next.js 16 that also animated the jump to the top on every in-site page change. Next then scrolled the new page's content to the window's top edge, under the sticky header, so pages reached from another page opened about 124px down with the H1 hidden. It had been there since the Next 16 upgrade, and was more noticeable after the 1 Nov header redesign made the header two rows tall. First-time visits from Google were not affected (a full page load starts at the top); only clicks within the site were.
 - No content, heading, link or metadata change. If pages-per-visit or the share of internal page views moves in the next fortnight, rule this in first.
+
+## 6 Nov 2026: weekly Amazon stock check (link maintenance) and advent calendar budget picks
+
+**Link maintenance (`d586970`)**, 58 product links checked across every size and colour:
+- Nike Jr Mercurial Vapor 16 Club `B0DPHTVG8T` (48 of 50 sizes out, end of line): adidas F50 Hyperfast Club `B0FVDXK9JM` (43 of 47 in stock) on `/football-gear/best-football-boots-for-kids` (both picks boxes), `/football-gear/ag-vs-fg-boots` (both) and `/football-gear/childrens-soft-ground-football-boots`; Nike Jr Mercurial Vapor 17 Club `B0H6R21SGT` on `/football-gear/best-football-boots-for-girls` (pick and prose link, kept Nike because the page already picks the F50 Sparkfusion). Pick names and the "1 to 5" size claim updated.
+- adidas Predator Club FG/MG: linked size out, `B0F1XGZ91J` to `B0F1XBC44C` (4 UK, same product) on the same four boot pages.
+- adidas Tiro shin pads: linked size S out, `B0D386HH7C` to `B0D47NPXR4` (M) on `/football-gear/best-shin-pads-for-kids-football`.
+- Nike Academy ball: CU8047-100 `B08QVPQJ1R` has no buy box, `B08TMK2CN4` (CU8047-720, same ball) on `/football-gear/best-footballs-by-age`.
+- Watch (low stock or thinning): Nike Tiempo Legend 10 Academy `B0C4PHSP5Y` on the wide feet guide (8 of 20 sizes buyable, successor is the Tiempo Maestro, which has almost no reviews yet), adidas F50 Sparkfusion League `B0FVF4QB8T` (32 of 68), Topps PL advent calendar (4 left), adidas Predator League SG/AG, Puma Ultra Light sleeve, Joma thermal top.
+
+**`/football-gear/football-advent-calendars` (same commit): quick picks and prices.** Live traffic page (264 views, 125 click-outs since publish, no orders reported).
+- Match Attax 2026/27 Countdown Calendar `B0HJNTJTDK` back in the quick picks (removed in `cfd97e2` for no buy box; it now has one, £26.99, and is the cheapest card calendar). Adrenalyn relabelled "Adrenalyn collectors".
+- New "Under £20" pick: iZoeL Football Advent Calendar `B0H7981GFK` (£18.68, 4.3 from 411 reviews), also named in the generic calendars paragraph.
+- Prices refreshed: Topps PL £37 to £42 (and per-card maths), Football Stars £17 to £15, activity book "under £10" to about £12 (label "Under £12").
+- Why: Graham's read that £30-£40 is a lot for an advent calendar; the top quick pick for Premier League fans was last season's set at £42.
+- Judge on Amazon orders from this page over the next two weeks (peak buying window) and click share on the two budget picks.
