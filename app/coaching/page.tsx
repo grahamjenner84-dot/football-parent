@@ -13,7 +13,6 @@ export const metadata = generateSEO({
 export default function CoachingPage() {
   return (
     <CategoryPage
-      eyebrow="Coaching"
       title="Coaching"
       description="Coaching qualifications, formations by age group, session drills, fair playing time and squad admin: practical guides for grassroots volunteer coaches."
       intro={[
@@ -59,7 +58,7 @@ export default function CoachingPage() {
       // supported by"): the Coach App is the section's house sponsor until a
       // paying one takes the slot. Above the intro from PROMO_ABOVE_INTRO_FROM
       // (Graham, 2026-10-30), so it's on a phone's first screen.
-      promo={<CoachAppBanner audience="coach" style="sponsor" placement="category" />}
+      promo={<CoachAppBanner audience="coach" style="sponsor" placement="category" design="comic" />}
       promoPosition="top"
       articles={[
         {

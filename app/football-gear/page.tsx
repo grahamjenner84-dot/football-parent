@@ -12,7 +12,6 @@ export const metadata = generateSEO({
 export default function FootballGearPage() {
   return (
     <CategoryPage
-      eyebrow="Football gear"
       title="Football Gear"
       description="Boots, shin pads, footballs and training kit for young players: what actually matters for sizing, fit and durability, and what's worth skipping."
       intro={[

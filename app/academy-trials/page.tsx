@@ -13,7 +13,6 @@ export const metadata = generateSEO({
 export default function AcademyTrialsPage() {
   return (
     <CategoryPage
-      eyebrow="Academy trials"
       title="Football Academy Trials"
       description="Most academy players are found through scouting, not open trials. What coaches actually look for, how recruitment really works, and what happens on trial day."
       intro={[

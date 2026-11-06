@@ -13,7 +13,6 @@ export const metadata = generateSEO({
 export default function AcademyPathwayPage() {
   return (
     <CategoryPage
-      eyebrow="Academy pathway"
       title="Academy Pathway"
       description="The UK academy pathway runs through EPPP's Category 1-4 system, from development centres and scouting to scholarships and release. What each stage actually involves."
       intro={[
@@ -22,8 +21,67 @@ export default function AcademyPathwayPage() {
       // Progress sponsors this section (the strapline version of its banner).
       // Above the intro from PROMO_ABOVE_INTRO_FROM (Graham, 2026-10-30), so
       // it's on a phone's first screen.
-      promo={<ProgressBanner placement="academy-pathway" />}
+      promo={<ProgressBanner placement="academy-pathway" design="comic" withCard />}
       promoPosition="top"
+      // The guides below, grouped under filter chips. Every article must be
+      // in one group (the build fails otherwise); clubs run A to Z.
+      groups={[
+        {
+          id: "academy",
+          label: "How academies work",
+          heading: "How the academy system works",
+          subheading: "Categories, EPPP, joining, costs, scholarships and release",
+          hrefs: [
+            "/academy-pathway/how-academy-football-works",
+            "/academy-pathway/academy-categories-explained",
+            "/academy-pathway/what-is-eppp",
+            "/academy-pathway/what-age-do-football-academies-recruit",
+            "/academy-pathway/how-to-join-a-football-academy",
+            "/academy-pathway/how-much-does-academy-football-cost",
+            "/academy-pathway/can-academy-players-play-grassroots-football",
+            "/academy-pathway/understanding-academy-release",
+            "/academy-pathway/football-scholarships-uk",
+            "/academy-pathway/how-to-find-a-football-agent-for-your-child",
+            "/academy-pathway/academy-life-paul-barry-interview",
+          ],
+        },
+        {
+          id: "dc",
+          label: "Development centres",
+          heading: "Development centres",
+          subheading: "PDC, PTC and RTC, pre-academy, and finding one near you",
+          hrefs: [
+            "/academy-pathway/development-centres-vs-academies",
+            "/academy-pathway/uk-football-development-centres-explained",
+            "/academy-pathway/pdc-vs-ptc-vs-rtc-explained",
+            "/academy-pathway/how-players-progress-through-football-development-centres",
+            "/academy-pathway/pre-academy-football",
+            "/academy-pathway/premier-league-development-centres-list",
+            "/academy-pathway/football-development-centres-near-me",
+            "/academy-pathway/football-development-centres-in-london",
+          ],
+        },
+        {
+          id: "clubs",
+          label: "Club guides",
+          heading: "Club guides",
+          subheading: "How each club's academy and development centres work, A to Z",
+          hrefs: [
+            "/academy-pathway/arsenal-development-centre-guide",
+            "/academy-pathway/aston-villa-development-centre-guide",
+            "/academy-pathway/brentford-development-centre-guide",
+            "/academy-pathway/chelsea-fc-development-centre-guide",
+            "/academy-pathway/crystal-palace-development-centre-guide",
+            "/academy-pathway/fulham-fc-development-centre-guide",
+            "/academy-pathway/leeds-united-development-centre-guide",
+            "/academy-pathway/qpr-development-centre-guide",
+            "/academy-pathway/tottenham-development-centres-explained",
+            "/academy-pathway/watford-development-centre-guide",
+            "/academy-pathway/west-ham-player-pathway-guide",
+            "/academy-pathway/wolves-development-centre-guide",
+          ],
+        },
+      ]}
       startHere={{
         title: "Start Here",
         description:

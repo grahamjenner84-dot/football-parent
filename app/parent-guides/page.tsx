@@ -13,7 +13,6 @@ export const metadata = generateSEO({
 export default function ParentGuidesPage() {
   return (
     <CategoryPage
-      eyebrow="Parent guides"
       title="Parent Guides"
       description="Academy decisions, the Junior Premier League, matchday behaviour and player development: what UK football parents need to weigh up before deciding."
       intro={[

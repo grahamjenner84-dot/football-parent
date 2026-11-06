@@ -13,7 +13,6 @@ export const metadata = generateSEO({
 export default function GirlsFootballPage() {
   return (
     <CategoryPage
-      eyebrow="Girls football"
       title="Girls Football"
       description="Girls football now runs through Emerging Talent Centres, not the old RTC system, alongside academies and grassroots. How the pathway works for UK families."
       intro={[

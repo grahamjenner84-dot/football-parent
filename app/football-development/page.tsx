@@ -13,7 +13,6 @@ export const metadata = generateSEO({
 export default function FootballDevelopmentPage() {
   return (
     <CategoryPage
-      eyebrow="Football development"
       title="Football Development"
       description="Football confidence, decision making, training load and late development: what actually predicts long-term progress in young players."
       intro={[
