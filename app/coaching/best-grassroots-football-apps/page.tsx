@@ -18,6 +18,7 @@ export default async function Page() {
 
   return (
     <ArticleLayout
+      design={article.frontmatter.design}
       title={article.frontmatter.title}
       description={article.frontmatter.description}
       category={article.frontmatter.category}
@@ -28,7 +29,7 @@ export default async function Page() {
       datePublished={article.frontmatter.date}
       content={article.content}
     >
-      <MDXContent content={article.content} slug={article.slug} coachAppBanner="coach" />
+      <MDXContent content={article.content} slug={article.slug} coachAppBanner="coach" design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }

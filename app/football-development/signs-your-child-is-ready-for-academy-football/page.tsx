@@ -18,6 +18,7 @@ export default async function Page() {
 
   return (
     <ArticleLayout
+      design={article.frontmatter.design}
       title={article.frontmatter.title}
       datePublished={article.frontmatter.date}
       path="/football-development/signs-your-child-is-ready-for-academy-football"
@@ -29,7 +30,7 @@ export default async function Page() {
       content={article.content}
       
     >
-      <MDXContent content={article.content} slug={article.slug} />
+      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }

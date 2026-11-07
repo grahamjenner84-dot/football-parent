@@ -18,6 +18,7 @@ export default async function Page() {
 
   return (
     <ArticleLayout
+      design={article.frontmatter.design}
       title={article.frontmatter.title}
       datePublished={article.frontmatter.date}
       path="/football-development/bio-banding-football"
@@ -28,7 +29,7 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       content={article.content}
     >
-      <MDXContent content={article.content} slug={article.slug} />
+      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }

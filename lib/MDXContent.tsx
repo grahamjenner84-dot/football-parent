@@ -386,6 +386,10 @@ export async function MDXContent({
               audience={audience}
               style={inCoaching ? "sponsor" : bannerStyleForKey(slug)}
               placement={coachAppPlacement}
+              // The comic frame only on the Coaching sponsor banner. Elsewhere
+              // articles are split dark vs light (AB_TEST_ENABLED), and framing
+              // only the dark one would skew that comparison.
+              design={inCoaching ? design : undefined}
             />
           )}
 

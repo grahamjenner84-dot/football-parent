@@ -17,6 +17,7 @@ export default async function Page() {
 
   return (
     <ArticleLayout
+      design={article.frontmatter.design}
       title={article.frontmatter.title}
       description={article.frontmatter.description}
       category={article.frontmatter.category}
@@ -27,7 +28,7 @@ export default async function Page() {
       path="/football-development/why-isnt-my-child-improving-at-football"
       datePublished={article.frontmatter.date}
     >
-      <MDXContent content={article.content} slug={article.slug} />
+      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }
