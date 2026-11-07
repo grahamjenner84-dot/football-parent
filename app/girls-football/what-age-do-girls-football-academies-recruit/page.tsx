@@ -6,7 +6,7 @@ import { generateSEO } from "@/lib/seo";
 export const metadata = generateSEO({
   title: "What Age Do Girls Academies Recruit? | Football Parent",
   description:
-    "Understanding the recruitment ages and pathway stages within girls academy football in the UK.",
+    "Girls' academies recruit at several stages: Emerging Talent Centres from around age 8, Professional Game Academies from 14, and later routes in after 16.",
   path: "/girls-football/what-age-do-girls-football-academies-recruit",
 });
 
