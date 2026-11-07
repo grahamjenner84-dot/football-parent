@@ -184,6 +184,8 @@ const comicComponents = {
     <InterviewAnswer {...props} design="comic" />
   ),
   InstagramPromo: () => <InstagramPromo design="comic" />,
+  InfoTable: (props: React.ComponentProps<typeof InfoTable>) => <InfoTable {...props} design="comic" />,
+  GearPicks: (props: React.ComponentProps<typeof GearPicks>) => <GearPicks {...props} design="comic" />,
 
   h2: ({ children }: { children?: React.ReactNode }) => (
     <h2
@@ -386,6 +388,10 @@ export async function MDXContent({
               audience={audience}
               style={inCoaching ? "sponsor" : bannerStyleForKey(slug)}
               placement={coachAppPlacement}
+              // The comic frame only on the Coaching sponsor banner. Elsewhere
+              // articles are split dark vs light (AB_TEST_ENABLED), and framing
+              // only the dark one would skew that comparison.
+              design={inCoaching ? design : undefined}
             />
           )}
 
