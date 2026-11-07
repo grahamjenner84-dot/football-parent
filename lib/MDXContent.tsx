@@ -185,6 +185,7 @@ const comicComponents = {
   ),
   InstagramPromo: () => <InstagramPromo design="comic" />,
   InfoTable: (props: React.ComponentProps<typeof InfoTable>) => <InfoTable {...props} design="comic" />,
+  GearPicks: (props: React.ComponentProps<typeof GearPicks>) => <GearPicks {...props} design="comic" />,
 
   h2: ({ children }: { children?: React.ReactNode }) => (
     <h2
