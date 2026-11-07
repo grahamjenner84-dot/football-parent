@@ -2262,3 +2262,4 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - Four GearPicks (adidas Copa Club Junior, Reusch Attrakt Solid Junior, T1TAN Classic 1.0 White-Out Junior, Precision Fusion X Finger Protect), each checked in stock by size on Amazon UK on 7 Nov. Reusch size 4 was out of stock.
 - Two Graham ParentNotes, no external citations (gear page). Added to `lib/routes.ts` and the Football Gear category page.
 - To do: request indexing on publish. Then, as a separate commit, link it from the "Are goalkeeper gloves any use for outfield players?" FAQ in `/football-gear/best-football-gloves-for-winter-training`. Stock check before Black Friday.
+- Same day: moved onto the comic design before publishing (`0c66383`), with a new comic version of the GearPicks box. Template change only, no copy change. From now on every new article ships with `design: "comic"` (Graham, 7 Nov).
