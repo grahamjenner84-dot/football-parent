@@ -86,6 +86,12 @@ export default function FootballGearPage() {
             "When junior SG boots genuinely help on muddy grass, whether metal studs are allowed in youth football, and why 3G pitch rules vary by venue.",
         },
         {
+          title: "Best Children's Astro Turf Trainers",
+          href: "/football-gear/childrens-astro-turf-trainers",
+          description:
+            "When astro trainers beat boots, why some 3G pitches ban them, TF vs AG vs indoor soles, and how much growth room to leave.",
+        },
+        {
           title: "Best Football Gloves for Winter Training",
           href: "/football-gear/best-football-gloves-for-winter-training",
           description:

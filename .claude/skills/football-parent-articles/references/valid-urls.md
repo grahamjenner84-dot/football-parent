@@ -118,6 +118,7 @@ on the assumption they're still live. Flag it if any of them have moved.)
 - /football-gear/best-football-goals-for-kids
 - /football-gear/best-football-gps-trackers-for-kids
 - /football-gear/childrens-soft-ground-football-boots
+- /football-gear/childrens-astro-turf-trainers
 - /football-gear/best-goalkeeper-gloves-for-kids
 
 ## Girls Football
