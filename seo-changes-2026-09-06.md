@@ -2258,9 +2258,9 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 
 ## 7 Nov 2026: new article, best goalkeeper gloves for kids
 
-- Commit `aa66961`. New page `/football-gear/best-goalkeeper-gloves-for-kids` (Football Gear), from `seo-data/exports/winter-affiliate-ideas-2026-11-07.md` shortlist #1. Target "goalkeeper gloves" (22,200/mo UK, 14,800 Jan-Feb, November top) and the kids phrasings; page one had no AI Overview, shops plus Reddit and small keeper guides. PAA answered: best goalie gloves for kids, what size for a 7 year old.
+- Commit `ec5a47a`. New page `/football-gear/best-goalkeeper-gloves-for-kids` (Football Gear), from `seo-data/exports/winter-affiliate-ideas-2026-11-07.md` shortlist #1. Target "goalkeeper gloves" (22,200/mo UK, 14,800 Jan-Feb, November top) and the kids phrasings; page one had no AI Overview, shops plus Reddit and small keeper guides. PAA answered: best goalie gloves for kids, what size for a 7 year old.
 - Four GearPicks (adidas Copa Club Junior, Reusch Attrakt Solid Junior, T1TAN Classic 1.0 White-Out Junior, Precision Fusion X Finger Protect), each checked in stock by size on Amazon UK on 7 Nov. Reusch size 4 was out of stock.
 - Two Graham ParentNotes, no external citations (gear page). Added to `lib/routes.ts` and the Football Gear category page.
 - To do: request indexing on publish. Then, as a separate commit, link it from the "Are goalkeeper gloves any use for outfield players?" FAQ in `/football-gear/best-football-gloves-for-winter-training`. Stock check before Black Friday.
-- Same day: moved onto the comic design before publishing (`0c66383`), with a new comic version of the GearPicks box. Template change only, no copy change. From now on every new article ships with `design: "comic"` (Graham, 7 Nov).
-- Same day, before publish: fact-check fixes and two PAA FAQs (`ac105b7`).
+- Same day: moved onto the comic design before publishing (`c771c52`), using the comic Quick picks box from articles batch 1. Template change only, no copy change. From now on every new article ships with `design: "comic"` (Graham, 7 Nov).
+- Same day, before publish: fact-check fixes and two PAA FAQs (`aa2fe6f`).
