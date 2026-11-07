@@ -92,6 +92,12 @@ export default function FootballGearPage() {
             "Choosing football gloves for winter training: what to look for, what to avoid, and which types work best for younger players in cold and wet conditions.",
         },
         {
+          title: "Best Goalkeeper Gloves for Kids",
+          href: "/football-gear/best-goalkeeper-gloves-for-kids",
+          description:
+            "How to measure for goalkeeper gloves when the size charts disagree, which palms last on 3G, and whether young keepers need finger protection.",
+        },
+        {
           title: "Football Skins for Kids: Best Base Layers",
           href: "/football-gear/best-football-base-layers-for-kids",
           description:
