@@ -2264,3 +2264,9 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - To do: request indexing on publish. Then, as a separate commit, link it from the "Are goalkeeper gloves any use for outfield players?" FAQ in `/football-gear/best-football-gloves-for-winter-training`. Stock check before Black Friday.
 - Same day: moved onto the comic design before publishing (`c771c52`), using the comic Quick picks box from articles batch 1. Template change only, no copy change. From now on every new article ships with `design: "comic"` (Graham, 7 Nov).
 - Same day, before publish: fact-check fixes and two PAA FAQs (`aa2fe6f`).
+
+## 7 Nov 2026: Ahrefs site audit technical fixes (not yet live)
+
+- **Structured data now in the server HTML** (commit `f940202`). Every JSON-LD block (BlogPosting or WebApplication, BreadcrumbList, FAQPage on articles; Organization, WebSite, Person site-wide; FAQPage on the Coach App landing pages) was rendered through next/script and only existed after hydration, so Ahrefs flagged 112 articles as missing Article schema and non-JS crawlers (Bing, most AI crawlers) saw none. Now a plain `<script>` via `lib/JsonLd.tsx`. Data unchanged except `dateModified`, which falls back to `date` on the 106 articles with no `dateModified` (same rule as the sitemap's lastmod). Site-wide, so any movement in rich results or AI citations from the deploy date onwards is a candidate effect.
+- **og:url on six static pages** (commit `ab49cfb`): /about, /terms-and-conditions, /privacy-policy, /cookie-policy, /editorial-policy, /author/graham-jenner. Link-preview metadata only.
+- **Progress app shell canonical** (progress repo, branch `seo/canonical-app-shell`, commit `4fe44c1`): `index.html` canonicals to https://progress.footballparent.co.uk/, so `?signin=google` (linked from /progress) stops reading as its own indexable page. /privacy and /terms keep their own canonicals.
