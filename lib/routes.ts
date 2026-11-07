@@ -88,6 +88,7 @@ export const routes = [
   '/football-gear/best-football-boots-for-kids',
   '/football-gear/best-football-boots-for-girls',
   '/football-gear/childrens-soft-ground-football-boots',
+  '/football-gear/childrens-astro-turf-trainers',
   '/football-gear/best-football-goals-for-kids',
   '/football-gear/best-football-gloves-for-winter-training',
   '/football-gear/best-footballs-by-age',

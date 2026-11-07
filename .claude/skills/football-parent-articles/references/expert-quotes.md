@@ -547,6 +547,23 @@ more important thing was finding good quality coaching").
 centres-worth-it, choosing a coach or programme. The second note trims well
 to the attention-to-detail questions alone. Trim differently on each reuse.
 
+### Astro boots on 3G, coach suggested AG or moulded (Graham)
+
+Graham's own, live in best-football-boots-for-kids (1/3), full version.
+Reused in childrens-astro-turf-trainers (2/3, 2026-11-07, Graham approved),
+trimmed: the "focused heavily on ball mastery and 1v1s" clause and the
+"bit of a perfectionist" line cut.
+
+> My son would sometimes wear his astro boots on a 3G pitch, and it wasn't a
+> major issue. But one coach at a higher-level session, focused heavily on
+> ball mastery and 1v1s with a lot of cutting and changing direction,
+> suggested AG or moulded boots would help on that surface. He did say my son
+> was a bit of a perfectionist, so I wouldn't call it essential, just
+> something that could help.
+
+**Topics:** boot or trainer choice on 3G, sole type vs surface. One reuse left;
+trim differently again.
+
 ## Pending — questions drafted for an expert, not yet sent/answered
 
 ### equal-playing-time-calculator — Graham (own ParentNote) — answered 2026-10-06, placed as three ParentNotes
