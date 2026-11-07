@@ -2238,3 +2238,11 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 
 - **What changed.** Ten images flagged by Screaming Frog as missing alt text all had a deliberate empty `alt=""` (decorative next to a visible name). They now carry descriptive alts: the header icon ("Football Parent logo"), the Football Parent icon in the byline, author box, ParentNote and the Editor's Note / perspective headings in the interview MDX ("Football Parent"), the Coach App banner icon ("Football Parent Coach App logo"), and expert photos in comic-design interview answers (`InterviewAnswer`, default "Name, Org", new `photoAlt` prop used for the Girls United logo and The Pre Academy Player book cover).
 - **Pages:** every page (header) plus all interview articles. No copy, heading or link changes. Not expected to move rankings measurably; recorded so it is not mistaken for a cause.
+
+## 7 Nov 2026: dead external links fixed (Screaming Frog crawl)
+
+- Commit `3d64f2d`. Outbound links only, no titles, headings or internal links touched. 17 external 4xx in the crawl: 11 were bot-blocking 403s that load for visitors (UK Coaching, AAP, Official Soccer Schools, PFA course and After Academy pages), 6 were real 404s.
+- `/academy-pathway/football-development-centres-near-me`: Crystal Palace to palaceforlife.org/course/player-development-emerging-talent/, AFC Wimbledon to afcwimbledonfoundation.com/development-centres, Norwich to communitysportsfoundation.org.uk/programmes/boys-football/ (anchor was "nccsf.org.uk"), Huddersfield "Official page" line removed (no development centre listed on htafcfoundation.com any more; entry kept).
+- `/girls-football/girls-academy-trials-by-club`: Millwall girls academy URL updated, and "2026/27 interest form has closed" changed to "registration of interest for 2027/28 trials is open" (Millwall's page, 7 Nov).
+- `/academy-pathway/what-is-eppp`: PFA Youth Advisory link to thepfa.com/players/youth-advisory/independent-advice.
+- Follow-up: check whether Huddersfield Town Foundation still runs a development centre before the next refresh of that guide.
