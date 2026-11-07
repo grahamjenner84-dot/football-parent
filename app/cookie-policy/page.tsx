@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { staticPageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Cookie Policy | Football Parent",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.footballparent.co.uk/cookie-policy",
   },
+  openGraph: staticPageOpenGraph("/cookie-policy"),
 };
 
 export default function CookiePolicyPage() {

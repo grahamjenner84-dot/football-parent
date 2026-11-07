@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { staticPageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Football Parent",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.footballparent.co.uk/privacy-policy",
   },
+  openGraph: staticPageOpenGraph("/privacy-policy"),
 };
 
 export default function PrivacyPolicyPage() {

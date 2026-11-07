@@ -80,3 +80,15 @@ export function generateSEO({
     },
   };
 }
+// openGraph for the pages that write their own metadata (about, author,
+// policy pages). A page's openGraph replaces the root layout's rather than
+// merging with it, so this repeats the layout defaults and adds og:url.
+export function staticPageOpenGraph(path: string) {
+  return {
+    url: `${siteUrl}${path}`,
+    siteName: "Football Parent",
+    locale: "en_GB",
+    type: "website" as const,
+    images: [brandOgImage()],
+  };
+}

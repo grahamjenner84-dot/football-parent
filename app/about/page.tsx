@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { staticPageOpenGraph } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About Football Parent | Football Parent",
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.footballparent.co.uk/about",
   },
+  openGraph: staticPageOpenGraph("/about"),
 };
 
 export default function AboutFootballParentPage() {

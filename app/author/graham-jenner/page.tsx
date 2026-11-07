@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { staticPageOpenGraph } from "@/lib/seo";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.footballparent.co.uk/author/graham-jenner",
   },
+  openGraph: staticPageOpenGraph("/author/graham-jenner"),
 };
 
 export default function GrahamJennerAuthorPage() {
