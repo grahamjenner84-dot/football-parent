@@ -111,6 +111,7 @@ date: "YYYY-MM-DD"
 category: "CATEGORY NAME"
 categoryUrl: "/category-slug"
 readTime: N
+design: "comic"
 sections:
   - id: "h2-slug-one"
     title: "H2 Heading One"
@@ -125,6 +126,15 @@ Rules:
   matching the heading's slug exactly.
 - Do not include `relatedArticles` in frontmatter — related articles live in
   the MDX body only.
+- `design: "comic"` is mandatory on every new article (Graham, 7 Nov 2026:
+  no more articles in the old design). It puts the page on the comic-accent
+  design (`lib/comic-design.ts`), and only takes effect if `page.tsx` passes
+  `design={article.frontmatter.design}` to both `ArticleLayout` and
+  `MDXContent`, as in the template below. Older articles stay classic until
+  moved deliberately. If an article uses a component with no comic version
+  yet (check `comicComponents` in `lib/MDXContent.tsx`), add one there in the
+  same pattern as `ParentNote`/`GearPicks` rather than shipping a classic box
+  inside a comic page.
 
 ## Related Articles (bottom of MDX body, mandatory)
 
@@ -168,9 +178,10 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       path="/category-slug/article-slug"
       datePublished={article.frontmatter.date}
+      design={article.frontmatter.design}
       content={article.content}
     >
-      <MDXContent content={article.content} slug={article.slug} />
+      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
     </ArticleLayout>
   );
 }
