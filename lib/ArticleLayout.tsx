@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Script from "next/script";
+import JsonLd from "@/lib/JsonLd";
 import { BRAND_IMAGES } from "@/lib/seo";
 import { extractFaqs } from "@/lib/faq";
 import InstagramFollow from "@/app/components/InstagramFollow";
@@ -152,7 +152,9 @@ export default function ArticleLayout({
 
   const dates = {
     ...(datePublished ? { datePublished } : {}),
-    ...(dateModified ? { dateModified } : {}),
+    // Same fallback as the sitemap's lastmod: an article never edited since
+    // publishing was last modified on its publish date.
+    ...(dateModified || datePublished ? { dateModified: dateModified ?? datePublished } : {}),
   };
 
   const mainSchema = !articleUrl
@@ -212,33 +214,15 @@ export default function ArticleLayout({
   const schemaScripts = (
     <>
       {mainSchema && (
-        <Script
-          id={`article-schema-${schemaId}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(mainSchema),
-          }}
-        />
+        <JsonLd data={mainSchema} />
       )}
 
       {breadcrumbSchema && (
-        <Script
-          id={`breadcrumb-schema-${schemaId}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbSchema),
-          }}
-        />
+        <JsonLd data={breadcrumbSchema} />
       )}
 
       {faqSchema && (
-        <Script
-          id={`faq-schema-${schemaId}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqSchema),
-          }}
-        />
+        <JsonLd data={faqSchema} />
       )}
     </>
   );
@@ -338,33 +322,15 @@ export default function ArticleLayout({
   return (
     <main className="min-h-screen bg-white">
       {mainSchema && (
-        <Script
-          id={`article-schema-${schemaId}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(mainSchema),
-          }}
-        />
+        <JsonLd data={mainSchema} />
       )}
 
       {breadcrumbSchema && (
-        <Script
-          id={`breadcrumb-schema-${schemaId}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(breadcrumbSchema),
-          }}
-        />
+        <JsonLd data={breadcrumbSchema} />
       )}
 
       {faqSchema && (
-        <Script
-          id={`faq-schema-${schemaId}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(faqSchema),
-          }}
-        />
+        <JsonLd data={faqSchema} />
       )}
 
       <div className="bg-gray-50 border-b border-gray-200">

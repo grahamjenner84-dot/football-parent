@@ -1,4 +1,4 @@
-import Script from "next/script";
+import JsonLd from "@/lib/JsonLd";
 import CoachAppCarousel from "@/app/components/CoachAppCarousel";
 import CoachSignUpForm from "@/app/components/CoachSignUpForm";
 import { MDXContent } from "@/lib/MDXContent";
@@ -103,11 +103,7 @@ export default function CoachLandingPage({ page }: { page: LandingPage }) {
   return (
     <main className={`${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`}>
       {faqSchema && (
-        <Script
-          id={`landing-faq-schema-${slug}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
+        <JsonLd data={faqSchema} />
       )}
       <section className="border-b-[3px] border-[#201E1D] bg-white">
         <div className="mx-auto grid max-w-[1120px] items-center gap-12 px-5 py-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-6 lg:py-16">

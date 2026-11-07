@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Script from "next/script";
+import JsonLd from "@/lib/JsonLd";
 import type { Metadata } from "next";
 import { Fira_Sans } from "next/font/google";
 import Header from "./components/header";
@@ -168,29 +169,11 @@ export default function RootLayout({
         <AffiliateClickTracker />
         <PartnerClickTracker />
 
-        <Script
-          id="organization-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationSchema),
-          }}
-        />
+        <JsonLd data={organizationSchema} />
 
-        <Script
-          id="website-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteSchema),
-          }}
-        />
+        <JsonLd data={websiteSchema} />
 
-        <Script
-          id="person-schema"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personSchema),
-          }}
-        />
+        <JsonLd data={personSchema} />
 
         {/* Google Analytics */}
         <Script
