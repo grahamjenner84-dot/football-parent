@@ -2263,3 +2263,4 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - Two Graham ParentNotes, no external citations (gear page). Added to `lib/routes.ts` and the Football Gear category page.
 - To do: request indexing on publish. Then, as a separate commit, link it from the "Are goalkeeper gloves any use for outfield players?" FAQ in `/football-gear/best-football-gloves-for-winter-training`. Stock check before Black Friday.
 - Same day: moved onto the comic design before publishing (`0c66383`), with a new comic version of the GearPicks box. Template change only, no copy change. From now on every new article ships with `design: "comic"` (Graham, 7 Nov).
+- Same day, before publish: fact-check fixes and two PAA FAQs (`ac105b7`).
