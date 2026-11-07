@@ -53,6 +53,8 @@ type InterviewAnswerProps = {
   // "contain" for a logo standing in for a photo (Girls United), so it is
   // shown whole on white rather than cropped to the circle.
   photoFit?: "cover" | "contain";
+  // Alt text for the photo; defaults to "Name, Org".
+  photoAlt?: string;
   children: React.ReactNode;
   design?: Design;
 };
@@ -63,6 +65,7 @@ export function InterviewAnswer({
   role,
   photoSrc,
   photoFit = "cover",
+  photoAlt,
   children,
   design = "classic",
 }: InterviewAnswerProps) {
@@ -77,7 +80,7 @@ export function InterviewAnswer({
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={photoSrc}
-              alt=""
+              alt={photoAlt ?? (org ? `${name}, ${org}` : name)}
               width={52}
               height={52}
               className={`h-[52px] w-[52px] shrink-0 rounded-full border-[3px] border-[#201E1D] ${

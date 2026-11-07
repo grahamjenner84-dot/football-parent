@@ -93,7 +93,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b-[3px] border-[#201E1D] bg-white font-ui text-[#201E1D]">
       <div className="mx-auto flex max-w-[1220px] items-center gap-x-3 gap-y-3 px-5 py-3 sm:gap-x-4 lg:gap-x-7 lg:px-6">
         <Link href="/" scroll={true} className="flex shrink-0 items-center gap-1.5 no-underline">
-          <Image src="/parent/icon/parent-circle-512.png" alt="" width={50} height={50} />
+          <Image src="/parent/icon/parent-circle-512.png" alt="Football Parent logo" width={50} height={50} />
           <Image
             src="/parent/horizontal/parent-wordmark-text-424.png"
             alt="Football Parent"

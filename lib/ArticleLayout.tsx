@@ -274,7 +274,7 @@ export default function ArticleLayout({
             <div className="mt-[26px] flex flex-wrap items-center gap-x-[18px] gap-y-2.5 border-t-2 border-[#201E1D] pt-[18px] text-[15px] text-[#5A5650]">
               <span className="flex items-center gap-2.5">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/parent/icon/parent-icon-160.webp" alt="" width={40} height={40} className="h-10 w-10" />
+                <img src="/parent/icon/parent-icon-160.webp" alt="Football Parent" width={40} height={40} className="h-10 w-10" />
                 <span>
                   By{" "}
                   <Link href="/author/graham-jenner" className="font-bold text-[#201E1D] hover:underline">
@@ -311,7 +311,7 @@ export default function ArticleLayout({
             <div className="max-w-[880px] rounded-[18px] border-2 border-[#201E1D] bg-white px-7 py-[26px]">
               <div className="flex flex-wrap items-start gap-x-[22px] gap-y-[18px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/parent/icon/parent-icon-160.webp" alt="" width={72} height={72} className="h-[72px] w-[72px] shrink-0" />
+                <img src="/parent/icon/parent-icon-160.webp" alt="Football Parent" width={72} height={72} className="h-[72px] w-[72px] shrink-0" />
                 <div className="min-w-0 flex-[1_1_300px]">
                   <p className="m-0 text-sm font-semibold text-[#5A5650]">Written by</p>
                   <p className="m-0 mt-1 font-display text-2xl font-extrabold">
