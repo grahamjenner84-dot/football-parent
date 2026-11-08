@@ -19,6 +19,7 @@ import {
   shareBannerKeptAt,
 } from "@/app/components/CoachAppBanner";
 import { PROMO_ABOVE_INTRO_FROM } from "@/app/components/category-page";
+import { getLatestCoachAppInsights, type CoachAppInsights } from "@/lib/supabase/coach-app-insights";
 
 // Server-only client using the service role key (football-parent-social),
 // same pattern as the other lib/supabase modules. Never import from client
@@ -383,6 +384,21 @@ export interface CoachAppFunnel {
    * both periods show the same creative. No banner-seen tracking on Coach
    * App banners, so views and clicks only. */
   coachingPage: { movedAt: string; before: CoachingPageBannerPeriod; after: CoachingPageBannerPeriod };
+  /** Weekly activity, habit and paying counts the Coach App posts hourly
+   * (coach-app migration 0071). Null before the first arrives. */
+  insights: CoachAppInsights | null | { error: string };
+  /** Human views of the Coach App landing pages per UK day, newest first,
+   * by channel: ads (Google Ads, the calculator's ad clicks included),
+   * search, and everything else; plus views of the app's web sign-in screen. */
+  dailyVisits: DailyVisits[];
+}
+
+export interface DailyVisits {
+  date: string;
+  ads: number;
+  search: number;
+  other: number;
+  signInViews: number;
 }
 
 type ViewRow = {
@@ -514,6 +530,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     usage,
     coachingPageViews,
     coachingPageClicks,
+    insights,
   ] = await Promise.all([
     readViews(supabase, since, { like: `${LANDING_PREFIX}%` }),
     readViews(supabase, since, { eq: SIGN_IN_PATH }),
@@ -535,6 +552,9 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     })),
     readViews(supabase, COACHING_SPONSOR_STARTED_AT, { eq: COACHING_PAGE_PATH }),
     readViews(supabase, COACHING_SPONSOR_STARTED_AT, { banner: COACHING_PAGE_BANNER }),
+    getLatestCoachAppInsights().catch((err: unknown) => ({
+      error: err instanceof Error ? err.message : "Unknown error",
+    })),
   ]);
 
   const signupRows = ((signupResult.data ?? []) as SignupRow[]).filter((r) => isHuman(r.user_agent));
@@ -553,6 +573,33 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
   }
   for (const row of signInRows) {
     if (isHumanView(row)) byChannel.get(channelForPageView(row))!.signInViews++;
+  }
+
+  const visitDays = new Map<string, DailyVisits>();
+  const visitDay = (createdAt: string) => {
+    const date = ukDay(createdAt);
+    let d = visitDays.get(date);
+    if (!d) {
+      d = { date, ads: 0, search: 0, other: 0, signInViews: 0 };
+      visitDays.set(date, d);
+    }
+    return d;
+  };
+  for (const row of landingRows) {
+    if (!isHumanView(row)) continue;
+    const channel = channelForPageView(row);
+    const d = visitDay(row.created_at);
+    if (channel === "Google Ads") d.ads++;
+    else if (channel === "Search") d.search++;
+    else d.other++;
+  }
+  for (const row of coachingRows) {
+    if (row.path === CALCULATOR_PATH && isHumanView(row) && channelForPageView(row) === "Google Ads") {
+      visitDay(row.created_at).ads++;
+    }
+  }
+  for (const row of signInRows) {
+    if (isHumanView(row)) visitDay(row.created_at).signInViews++;
   }
   for (const row of signupRows) byChannel.get(signupChannel(row))!.signups++;
 
@@ -661,5 +708,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     ...(signupsError ? { signupsError } : {}),
     usage,
     coachingPage: { movedAt: PROMO_ABOVE_INTRO_FROM, before, after },
+    insights,
+    dailyVisits: Array.from(visitDays.values()).sort((a, b) => b.date.localeCompare(a.date)),
   };
 }
