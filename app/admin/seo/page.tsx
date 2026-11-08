@@ -539,7 +539,18 @@ export default function SeoAdminPage() {
             {!funnel && !funnelError && <p style={styles.muted}>Loading Coach App funnel...</p>}
             {funnelError && <p style={styles.error}>{funnelError}</p>}
             {funnel && (
-              <>
+              <div className="coach-tab">
+                {/* Freeze the first column of every wide table on this tab, so
+                    the row label stays in view when scrolling sideways. */}
+                <style>{`
+                  .coach-tab table tr > :first-child {
+                    position: sticky;
+                    left: 0;
+                    z-index: 1;
+                    background: #1a1410;
+                    box-shadow: 1px 0 0 #3a2c1d;
+                  }
+                `}</style>
                 <CoachAppOverview funnel={funnel} views={coachAppViewStats} />
                 <CoachAppWaysInSection funnel={funnel} waysIn={waysIn} waysInError={waysInError} />
                 <details style={{ marginTop: 18 }}>
@@ -559,7 +570,7 @@ export default function SeoAdminPage() {
                     !coachAppViewError && <p style={styles.muted}>Loading Coach App view report...</p>
                   )}
                 </details>
-              </>
+              </div>
             )}
           </>
         ) : tab === "progress" ? (
@@ -4152,11 +4163,13 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
               label="Matches created"
               value={ins.rolling.last7.matchesCreated}
               prev={ins.rolling.prev7.matchesCreated}
+              sub={`by ${ins.rolling.last7.scheduled} coach${ins.rolling.last7.scheduled === 1 ? "" : "es"}`}
             />
             <DeltaTile
               label="Matches completed"
               value={ins.rolling.last7.matchesFinished}
               prev={ins.rolling.prev7.matchesFinished}
+              sub={`by ${ins.rolling.last7.finished} coach${ins.rolling.last7.finished === 1 ? "" : "es"}`}
             />
             <DeltaTile label="Sign-ins (app opens)" value={signIns.last7} prev={signIns.prev7} />
             <DeltaTile label="Coaches signing in" value={ins.rolling.last7.opened} prev={ins.rolling.prev7.opened} />
@@ -4171,9 +4184,7 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
                   : undefined
               }
             />
-            <DeltaTile label="Coaches who scheduled a match" value={ins.rolling.last7.scheduled} prev={ins.rolling.prev7.scheduled} />
             <DeltaTile label="Coaches who ran a match live" value={ins.rolling.last7.wentLive} prev={ins.rolling.prev7.wentLive} />
-            <DeltaTile label="Coaches who finished a match" value={ins.rolling.last7.finished} prev={ins.rolling.prev7.finished} />
             <DeltaTile
               label="With a match habit"
               value={ins.habit.matchHabit}
@@ -4198,7 +4209,8 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
       </div>
       <SectionNote label="What these count">
         Last 7 UK days, today included, against the 7 before. Matches created and completed count matches (a
-        tournament counts once when created, each of its games when finished). Sign-ins count every time a
+        tournament counts once when created, each of its games when finished); &ldquo;by N coaches&rdquo; under
+        each is how many different coaches those matches belong to. Sign-ins count every time a
         signed-in coach opens the app, web or Android, from this site&rsquo;s own tracking, which leaves you out
         when your browser or network is excluded but not on mobile data; coaches signing in counts each coach
         once. Sign-ups who set up a team are the period&rsquo;s sign-ups now on a team. The coach tiles count
