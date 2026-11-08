@@ -27,6 +27,13 @@ export interface ActivityCounts {
   finished: number;
   /** Scheduled, went live or finished: anything beyond opening the app. */
   didSomething: number;
+  /** Matches, not coaches (coach-app migration 0072): matches and
+   * tournaments created, and matches and tournament games finished. Null
+   * from a sender that predates them. */
+  matchesCreated: number | null;
+  matchesFinished: number | null;
+  /** Sign-ups in the period now on a team. Null from an older sender. */
+  signupsWithTeam: number | null;
 }
 
 export const STAGES = ["signedUp", "team", "scheduled", "live", "finished1", "finished2"] as const;
@@ -194,6 +201,9 @@ function activity(value: unknown, where: string): ActivityCounts {
     wentLive: n(o.wentLive, `${where}.wentLive`),
     finished: n(o.finished, `${where}.finished`),
     didSomething: n(o.didSomething, `${where}.didSomething`),
+    matchesCreated: o.matchesCreated === undefined ? null : nOrNull(o.matchesCreated, `${where}.matchesCreated`),
+    matchesFinished: o.matchesFinished === undefined ? null : nOrNull(o.matchesFinished, `${where}.matchesFinished`),
+    signupsWithTeam: o.signupsWithTeam === undefined ? null : nOrNull(o.signupsWithTeam, `${where}.signupsWithTeam`),
   };
 }
 

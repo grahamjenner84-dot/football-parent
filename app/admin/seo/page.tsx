@@ -539,7 +539,18 @@ export default function SeoAdminPage() {
             {!funnel && !funnelError && <p style={styles.muted}>Loading Coach App funnel...</p>}
             {funnelError && <p style={styles.error}>{funnelError}</p>}
             {funnel && (
-              <>
+              <div className="coach-tab">
+                {/* Freeze the first column of every wide table on this tab, so
+                    the row label stays in view when scrolling sideways. */}
+                <style>{`
+                  .coach-tab table tr > :first-child {
+                    position: sticky;
+                    left: 0;
+                    z-index: 1;
+                    background: #1a1410;
+                    box-shadow: 1px 0 0 #3a2c1d;
+                  }
+                `}</style>
                 <CoachAppOverview funnel={funnel} views={coachAppViewStats} />
                 <CoachAppWaysInSection funnel={funnel} waysIn={waysIn} waysInError={waysInError} />
                 <details style={{ marginTop: 18 }}>
@@ -559,7 +570,7 @@ export default function SeoAdminPage() {
                     !coachAppViewError && <p style={styles.muted}>Loading Coach App view report...</p>
                   )}
                 </details>
-              </>
+              </div>
             )}
           </>
         ) : tab === "progress" ? (
@@ -3840,7 +3851,7 @@ function DeltaTile({
   const colour = diff === null || diff === 0 ? "#9c8a72" : diff > 0 ? TONE_COLOUR.good : TONE_COLOUR.bad;
   return (
     <div style={styles.card}>
-      <p style={styles.cardPage}>{label}</p>
+      <p style={{ ...styles.cardPage, wordBreak: "normal", overflowWrap: "normal" }}>{label}</p>
       <span style={{ ...styles.cardQuery, fontSize: 20 }}>{value ?? "-"}</span>
       {diff !== null && (
         <p style={{ ...styles.cardStatsInline, marginTop: 4, color: colour }}>
@@ -4092,6 +4103,20 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
   const newPaid = latest && weekAgoSnapshot ? latest.planPaid - weekAgoSnapshot.planPaid : null;
 
   const funnelDays = buildFunnelDays(funnel, views);
+
+  // Sign-ins: every open of the app by a signed-in coach, web and Android,
+  // from this site's page views (/coach-app and /coach-app/android). The
+  // Coach App itself only records one visit per coach per day.
+  const appOpens = (from: number, to: number) => {
+    if (!views) return null;
+    let total = 0;
+    for (let k = from; k <= to; k++) {
+      const day = views.byDay.find((d) => d.date === addDays(ukToday(), -k));
+      for (const p of day?.topPaths ?? []) if (p.path === "/coach-app" || p.path === "/coach-app/android") total += p.count;
+    }
+    return total;
+  };
+  const signIns = { last7: appOpens(0, 6), prev7: appOpens(7, 13) };
   const working = workingList(funnel, views, ins);
 
   const stageForecast = ins ? payingForecast(ins.paying.byStage) : null;
@@ -4131,14 +4156,35 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
       )}
 
       <FunnelHeading>How it&rsquo;s doing: last 7 days</FunnelHeading>
-      <div style={styles.summaryGrid}>
+      <div style={{ ...styles.summaryGrid, gridTemplateColumns: "repeat(auto-fill, minmax(170px, 1fr))" }}>
         {ins ? (
           <>
+            <DeltaTile
+              label="Matches created"
+              value={ins.rolling.last7.matchesCreated}
+              prev={ins.rolling.prev7.matchesCreated}
+              sub={`by ${ins.rolling.last7.scheduled} coach${ins.rolling.last7.scheduled === 1 ? "" : "es"}`}
+            />
+            <DeltaTile
+              label="Matches completed"
+              value={ins.rolling.last7.matchesFinished}
+              prev={ins.rolling.prev7.matchesFinished}
+              sub={`by ${ins.rolling.last7.finished} coach${ins.rolling.last7.finished === 1 ? "" : "es"}`}
+            />
+            <DeltaTile label="Sign-ins (app opens)" value={signIns.last7} prev={signIns.prev7} />
+            <DeltaTile label="Coaches signing in" value={ins.rolling.last7.opened} prev={ins.rolling.prev7.opened} />
             <DeltaTile label="Sign-ups" value={ins.rolling.last7.signups} prev={ins.rolling.prev7.signups} />
-            <DeltaTile label="Coaches who opened the app" value={ins.rolling.last7.opened} prev={ins.rolling.prev7.opened} />
-            <DeltaTile label="Scheduled a match" value={ins.rolling.last7.scheduled} prev={ins.rolling.prev7.scheduled} />
-            <DeltaTile label="Ran a match live" value={ins.rolling.last7.wentLive} prev={ins.rolling.prev7.wentLive} />
-            <DeltaTile label="Finished a match" value={ins.rolling.last7.finished} prev={ins.rolling.prev7.finished} />
+            <DeltaTile
+              label="Sign-ups who set up a team"
+              value={ins.rolling.last7.signupsWithTeam}
+              prev={ins.rolling.prev7.signupsWithTeam}
+              sub={
+                ins.rolling.last7.signupsWithTeam !== null
+                  ? `${pctOf(ins.rolling.last7.signupsWithTeam, ins.rolling.last7.signups)} of sign-ups`
+                  : undefined
+              }
+            />
+            <DeltaTile label="Coaches who ran a match live" value={ins.rolling.last7.wentLive} prev={ins.rolling.prev7.wentLive} />
             <DeltaTile
               label="With a match habit"
               value={ins.habit.matchHabit}
@@ -4162,7 +4208,13 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
         )}
       </div>
       <SectionNote label="What these count">
-        Coaches, not matches or devices, Graham&rsquo;s accounts left out. A coach scheduled, ran or finished a
+        Last 7 UK days, today included, against the 7 before. Matches created and completed count matches (a
+        tournament counts once when created, each of its games when finished); &ldquo;by N coaches&rdquo; under
+        each is how many different coaches those matches belong to. Sign-ins count every time a
+        signed-in coach opens the app, web or Android, from this site&rsquo;s own tracking, which leaves you out
+        when your browser or network is excluded but not on mobile data; coaches signing in counts each coach
+        once. Sign-ups who set up a team are the period&rsquo;s sign-ups now on a team. The coach tiles count
+        coaches, not matches or devices, Graham&rsquo;s accounts left out. A coach scheduled, ran or finished a
         match when a team they are on did (owner or assistant). Opened is any app open while signed in. Ran
         live is pressing Go live (matches before 25 Oct count on the day they finished). Match habit: used it at
         a match in 3 or 4 of the last 4 complete weeks. Paying this week is the change in the paid count since
