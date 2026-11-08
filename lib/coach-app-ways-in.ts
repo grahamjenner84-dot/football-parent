@@ -2,6 +2,7 @@ import { getSectionSearchSummary, type SectionSearchRow } from "@/lib/gsc";
 import { getCampaignPerformance } from "@/lib/google-ads";
 import { getPlayInstallStats } from "@/lib/play-installs";
 import { addDays, ukToday } from "@/lib/uk-day";
+import { getCoachAppFunnel, type CoachAppFunnel } from "@/lib/supabase/coach-app-funnel";
 
 // The outside half of the Coach App's ways in, for the Coach App tab on
 // /admin/seo: Search Console for the Coach App page and the coaching
@@ -15,9 +16,16 @@ import { addDays, ukToday } from "@/lib/uk-day";
 export const COACH_APP_SEARCH_PATHS = ["/football-parent-coach-app", "/coaching"];
 
 // Search Console posts a day 2-3 days late; ending 3 days back keeps the
-// window complete, the same as getSeoReport.
+// window complete, the same as getSeoReport. The period (7, 28 or 90 days)
+// is the tab's filter; the comparison is the same number of days before.
 const GSC_LAG_DAYS = 3;
-export const WAYS_IN_DAYS = 28;
+/** The periods the tab offers; anything else falls back to 28. */
+export const WAYS_IN_PERIODS = [7, 28, 90] as const;
+export type WaysInDays = (typeof WAYS_IN_PERIODS)[number];
+export function waysInDays(value: unknown): WaysInDays {
+  const n = Number(value);
+  return (WAYS_IN_PERIODS as readonly number[]).includes(n) ? (n as WaysInDays) : 28;
+}
 
 export interface SearchPageRow {
   path: string;
@@ -39,8 +47,24 @@ export interface SearchQueryRow {
 }
 
 export interface CoachAppWaysIn {
-  /** Search Console and Ads window, and the 28 days before it for search. */
+  days: WaysInDays;
+  /** Search Console, Ads and Play window (ending 3 days ago, as Google posts
+   * late), and the same number of days before it for search. */
   window: { start: string; end: string; prevStart: string; prevEnd: string };
+  /** This site's own visits and sign-ups over the last `days` days to today. */
+  site:
+    | Pick<
+        CoachAppFunnel,
+        | "days"
+        | "since"
+        | "clampedToTrackingStart"
+        | "channels"
+        | "bySignupForm"
+        | "signupsByEntryPath"
+        | "landingPages"
+        | "coachingArticles"
+      >
+    | { error: string };
   search:
     | {
         totals: { clicks: number; impressions: number; position: number | null };
@@ -153,17 +177,33 @@ async function playPart(window: CoachAppWaysIn["window"]): Promise<CoachAppWaysI
   };
 }
 
-export async function getCoachAppWaysIn(): Promise<CoachAppWaysIn> {
+async function sitePart(days: WaysInDays): Promise<CoachAppWaysIn["site"]> {
+  const f = await getCoachAppFunnel(days);
+  return {
+    days: f.days,
+    since: f.since,
+    clampedToTrackingStart: f.clampedToTrackingStart,
+    channels: f.channels,
+    bySignupForm: f.bySignupForm,
+    signupsByEntryPath: f.signupsByEntryPath,
+    landingPages: f.landingPages,
+    coachingArticles: f.coachingArticles,
+  };
+}
+
+export async function getCoachAppWaysIn(daysParam: unknown = 28): Promise<CoachAppWaysIn> {
+  const days = waysInDays(daysParam);
   const end = addDays(ukToday(), -GSC_LAG_DAYS);
-  const start = addDays(end, -(WAYS_IN_DAYS - 1));
+  const start = addDays(end, -(days - 1));
   const prevEnd = addDays(start, -1);
-  const prevStart = addDays(prevEnd, -(WAYS_IN_DAYS - 1));
+  const prevStart = addDays(prevEnd, -(days - 1));
   const window = { start, end, prevStart, prevEnd };
 
-  const [search, ads, play] = await Promise.all([
+  const [search, ads, play, site] = await Promise.all([
     searchPart(window).catch(errorOf),
     adsPart(window).catch(errorOf),
     playPart(window).catch(errorOf),
+    sitePart(days).catch(errorOf),
   ]);
-  return { window, search, ads, play };
+  return { days, window, site, search, ads, play };
 }
