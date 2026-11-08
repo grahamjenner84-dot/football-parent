@@ -22,11 +22,12 @@ import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // t
 import type { PartnerClickStats } from "@/lib/supabase/partner-clicks"; // type-only, same reasoning as the page-views import above
 import type { CoachAppShareStats } from "@/lib/supabase/coach-app-shares"; // type-only, as above
 import type { CoachAppFunnel } from "@/lib/supabase/coach-app-funnel"; // type-only, as above
+import type { CoachAppWaysIn } from "@/lib/coach-app-ways-in"; // type-only, as above
 import type { ProgressFunnel } from "@/lib/supabase/progress-funnel"; // type-only, as above
 import type { SourceGroupCount, PathSourceUserAgent } from "@/lib/supabase/page-views"; // type-only, as above
 import { routes as siteRoutes } from "@/lib/routes"; // plain string array, no server-only deps - safe from a client component
 import { isAndroidAppPath } from "@/lib/coach-app-android"; // plain constants, no server-only deps - safe from a client component
-import { ukToday } from "@/lib/uk-day"; // plain functions, no server-only deps - safe from a client component
+import { addDays, ukDay, ukToday } from "@/lib/uk-day"; // plain functions, no server-only deps - safe from a client component
 
 type CoachAppViewStats = PageViewStats & {
   /** The game time calculator's step events (opened in the site's page,
@@ -54,7 +55,6 @@ type Tab =
   | "pageviewsCompare"
   | "pageviewsTrend"
   | "countries"
-  | "coachApp"
   | "coachFunnel"
   | "progress"
   | "affiliate"
@@ -64,12 +64,11 @@ type DayWindow = 7 | 28 | 90;
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "dashboard", label: "Dashboard" },
-  { id: "coachFunnel", label: "Coach App funnel" },
+  { id: "coachFunnel", label: "Coach App" },
   { id: "progress", label: "Progress pipeline" },
   { id: "pageviews", label: "Page views" },
   { id: "rank", label: "Rank tracker" },
   { id: "rankingHealth", label: "Ranking health" },
-  { id: "coachApp", label: "Coach App" },
   { id: "affiliate", label: "Affiliate clicks" },
   { id: "partnerClicks", label: "Football DNA clicks" },
   { id: "instagramClicks", label: "Instagram clicks" },
@@ -202,6 +201,9 @@ export default function SeoAdminPage() {
   const [coachAppViewError, setCoachAppViewError] = useState("");
   const [funnel, setFunnel] = useState<CoachAppFunnel | null>(null);
   const [funnelError, setFunnelError] = useState("");
+  const [waysIn, setWaysIn] = useState<CoachAppWaysIn | null>(null);
+  const [waysInError, setWaysInError] = useState("");
+  const waysInRequested = useRef(false);
   const [progressFunnel, setProgressFunnel] = useState<ProgressFunnel | null>(null);
   const [progressError, setProgressError] = useState("");
   const [affiliateStats, setAffiliateStats] = useState<AffiliateClickStats | null>(null);
@@ -298,6 +300,23 @@ export default function SeoAdminPage() {
       })
       .catch((err) => setFunnelError(err.message));
   }, []);
+
+  // Search Console, Ads and Play are slower external calls: only when the
+  // Coach App tab is opened, once.
+  useEffect(() => {
+    if (tab !== "coachFunnel" || waysInRequested.current) return;
+    waysInRequested.current = true;
+    fetch("/api/coach-app-ways-in-report")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load Search Console, Ads and Play numbers");
+        }
+        return res.json();
+      })
+      .then((data: CoachAppWaysIn) => setWaysIn(data))
+      .catch((err) => setWaysInError(err.message));
+  }, [tab]);
 
   useEffect(() => {
     fetch("/api/progress-funnel-report?days=30")
@@ -433,9 +452,6 @@ export default function SeoAdminPage() {
             {t.id === "pageviews" && pageViewStats && (
               <span style={styles.tabCount}>{pageViewStats.totalViews}</span>
             )}
-            {t.id === "coachApp" && coachAppViewStats && (
-              <span style={styles.tabCount}>{coachAppViewStats.totalViews}</span>
-            )}
             {t.id === "coachFunnel" && funnel && (
               <span style={styles.tabCount}>{funnel.totals.signups}</span>
             )}
@@ -459,7 +475,6 @@ export default function SeoAdminPage() {
               t.id !== "pageviews" &&
               t.id !== "pageviewsCompare" &&
               t.id !== "pageviewsTrend" &&
-              t.id !== "coachApp" &&
               t.id !== "coachFunnel" &&
               t.id !== "progress" &&
               t.id !== "affiliate" &&
@@ -519,20 +534,32 @@ export default function SeoAdminPage() {
           <PageViewTrend observedPaths={pageViewStats?.topPaths.map((p) => p.path) ?? []} />
         ) : tab === "countries" ? (
           <CountriesReport />
-        ) : tab === "coachApp" ? (
-          <>
-            {!coachAppViewStats && !coachAppViewError && (
-              <p style={styles.muted}>Loading Coach App view report...</p>
-            )}
-            {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
-            {coachAppViewStats && <CoachAppTab stats={coachAppViewStats} />}
-          </>
         ) : tab === "coachFunnel" ? (
           <>
             {!funnel && !funnelError && <p style={styles.muted}>Loading Coach App funnel...</p>}
             {funnelError && <p style={styles.error}>{funnelError}</p>}
             {funnel && (
-              <CoachAppFunnelTab funnel={funnel} />
+              <>
+                <CoachAppOverview funnel={funnel} views={coachAppViewStats} />
+                <CoachAppWaysInSection funnel={funnel} waysIn={waysIn} waysInError={waysInError} />
+                <details style={{ marginTop: 18 }}>
+                  <summary style={styles.coachDetailSummary}>
+                    Funnel detail: channels, forms, each sign-up, SEO, sharing, daily usage snapshot
+                  </summary>
+                  <CoachAppFunnelTab funnel={funnel} />
+                </details>
+                <details style={{ marginTop: 10 }}>
+                  <summary style={styles.coachDetailSummary}>
+                    Page views, form and calculator steps, banner tests
+                  </summary>
+                  {coachAppViewError && <p style={styles.error}>{coachAppViewError}</p>}
+                  {coachAppViewStats ? (
+                    <CoachAppTab stats={coachAppViewStats} />
+                  ) : (
+                    !coachAppViewError && <p style={styles.muted}>Loading Coach App view report...</p>
+                  )}
+                </details>
+              </>
             )}
           </>
         ) : tab === "progress" ? (
@@ -635,8 +662,6 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "pageviewsTrend":
       return 0;
     case "countries":
-      return 0;
-    case "coachApp":
       return 0;
     case "coachFunnel":
       return 0;
@@ -3762,6 +3787,1058 @@ const JOIN_FORM_LABEL: Record<string, string> = {
 
 // Traffic and sign-ups per channel, side by side, plus the SEO articles and
 // the share loop. Channel rules: lib/coach-app-channels.ts.
+// ---------------------------------------------------------------------------
+// Coach App overview: the top of the Coach App tab. Answers "how is it doing"
+// without SQL: headline numbers against the 7 days before, an automatic list
+// of what's working and what isn't, coaches doing things by week, habit, when
+// coaches last used it, how each sign-up week got on, paying, and the funnel
+// by day. Weekly, habit and paying numbers come from the Coach App's hourly
+// insights (coach-app migration 0071, coach_app_insights); the rest from this
+// site's own tables and the 10-minute usage snapshot.
+// ---------------------------------------------------------------------------
+
+type Insights = Exclude<CoachAppFunnel["insights"], null | { error: string }>;
+type Tone = "good" | "bad" | "watch";
+const TONE_COLOUR: Record<Tone, string> = { good: "#7cc68a", bad: "#e07856", watch: "#e8b04b" };
+
+const STAGE_LABEL: Record<Insights["paying"]["byStage"][number]["stage"], string> = {
+  signedUp: "Signed up only",
+  team: "Set up a team",
+  scheduled: "Scheduled a match",
+  live: "Ran a match live, not finished",
+  finished1: "Finished 1 match",
+  finished2: "Finished 2+ matches",
+};
+const HABIT_LABEL: Record<Insights["paying"]["byHabit"][number]["segment"], string> = {
+  matchHabit: "Match habit (at a match 3 of last 4 weeks)",
+  appHabitOnly: "App habit only (opened 3 of last 4 weeks)",
+  noHabit: "No habit",
+};
+
+function pctOf(a: number, b: number): string {
+  return b > 0 ? `${Math.round((a / b) * 100)}%` : "n/a";
+}
+
+function shortDay(date: string): string {
+  return new Date(`${date}T12:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+}
+
+function DeltaTile({
+  label,
+  value,
+  prev,
+  sub,
+  prevLabel = "the 7 days before",
+}: {
+  label: string;
+  value: number | null;
+  prev?: number | null;
+  sub?: string;
+  prevLabel?: string;
+}) {
+  const diff = value !== null && prev !== null && prev !== undefined ? value - prev : null;
+  const colour = diff === null || diff === 0 ? "#9c8a72" : diff > 0 ? TONE_COLOUR.good : TONE_COLOUR.bad;
+  return (
+    <div style={styles.card}>
+      <p style={styles.cardPage}>{label}</p>
+      <span style={{ ...styles.cardQuery, fontSize: 20 }}>{value ?? "-"}</span>
+      {diff !== null && (
+        <p style={{ ...styles.cardStatsInline, marginTop: 4, color: colour }}>
+          {diff === 0 ? "same as" : diff > 0 ? `+${diff} on` : `${diff} on`} {prevLabel} ({prev})
+        </p>
+      )}
+      {sub && <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>{sub}</p>}
+    </div>
+  );
+}
+
+// Paying rate per segment among accounts that have decided (paid or lapsed),
+// and how many of today's trials that rate says will pay. A segment with
+// fewer than 5 decided accounts borrows the overall rate.
+function payingForecast(rows: { paid: number; trial: number; lapsed: number }[]) {
+  const paid = rows.reduce((t, r) => t + r.paid, 0);
+  const decided = rows.reduce((t, r) => t + r.paid + r.lapsed, 0);
+  const overall = decided > 0 ? paid / decided : 0;
+  const rateFor = (r: { paid: number; lapsed: number }) =>
+    r.paid + r.lapsed >= 5 ? r.paid / (r.paid + r.lapsed) : overall;
+  const expected = rows.reduce((t, r) => t + r.trial * rateFor(r), 0);
+  return { overall, decided, paid, rateFor, expected };
+}
+
+type FunnelDayRow = {
+  date: string;
+  ads: number;
+  search: number;
+  other: number;
+  webSignIn: number;
+  androidSignIn: number;
+  formViews: number;
+  googleTaps: number;
+  emailsSent: number;
+  signups: number;
+  android: number;
+  withTeam: number | null;
+  active: number | null;
+  coachesFinished: number | null;
+};
+type FunnelDayKey = Exclude<keyof FunnelDayRow, "date">;
+
+function buildFunnelDays(funnel: CoachAppFunnel, views: CoachAppViewStats | null): FunnelDayRow[] {
+  const dates = new Set<string>();
+  const visits = new Map(funnel.dailyVisits.map((d) => [d.date, d]));
+  const signups = new Map(funnel.signupsByDay.map((d) => [d.date, d]));
+  const usage = "error" in funnel.usage ? new Map() : new Map(funnel.usage.byDay.map((d) => [d.date, d]));
+  const viewDays = new Map((views?.byDay ?? []).map((d) => [d.date, d]));
+  const stepDays = new Map((views?.calculatorSteps?.byDay ?? []).map((d) => [d.date, d]));
+  for (const m of [visits, signups, usage, viewDays, stepDays]) for (const k of m.keys()) dates.add(k as string);
+  const since = ukDay(funnel.since);
+  return Array.from(dates)
+    .filter((d) => d >= since)
+    .sort((a, b) => b.localeCompare(a))
+    .map((date) => {
+      const v = visits.get(date);
+      const s = signups.get(date);
+      const u = usage.get(date);
+      const steps = stepDays.get(date)?.topPaths ?? [];
+      const stepCount = (test: (p: string) => boolean) =>
+        steps.filter((p) => p.path.startsWith("/coach-app/signup-form/") && test(p.path)).reduce((t, p) => t + p.count, 0);
+      return {
+        date,
+        ads: v?.ads ?? 0,
+        search: v?.search ?? 0,
+        other: v?.other ?? 0,
+        webSignIn: v?.signInViews ?? 0,
+        androidSignIn: viewDays.get(date)?.topPaths.find((p) => p.path === "/coach-app/android/sign-in")?.count ?? 0,
+        formViews: stepCount((p) => p.endsWith("/view")),
+        googleTaps: stepCount((p) => p.endsWith("/google")),
+        emailsSent: stepCount((p) => p.endsWith("/email-sent")),
+        signups: s?.signups ?? 0,
+        android: s?.android ?? 0,
+        withTeam: u?.signupsTodayWithTeam ?? null,
+        active: u?.activeToday ?? null,
+        coachesFinished: u ? (u.coachesFinishedToday ?? u.finishedMatchesToday ?? null) : null,
+      };
+    });
+}
+
+// Same weekday over the weeks before (up to 4, at least 2), so a quiet
+// Tuesday isn't compared with a match-day Saturday.
+function weekdayBaseline(rows: FunnelDayRow[], index: number, key: FunnelDayKey): number | null {
+  const samples: number[] = [];
+  for (let k = 1; k <= 4; k++) {
+    const r = rows[index + 7 * k];
+    const v = r?.[key];
+    if (typeof v === "number") samples.push(v);
+  }
+  return samples.length >= 2 ? samples.reduce((a, b) => a + b, 0) / samples.length : null;
+}
+
+function cellTone(value: number | null, baseline: number | null): string | undefined {
+  if (value === null || baseline === null) return undefined;
+  if (Math.abs(value - baseline) < 2) return undefined;
+  if (value >= baseline * 1.25) return TONE_COLOUR.good;
+  if (value <= baseline * 0.75) return TONE_COLOUR.bad;
+  return undefined;
+}
+
+function workingList(funnel: CoachAppFunnel, views: CoachAppViewStats | null, ins: Insights | null) {
+  const items: { tone: Tone; text: string }[] = [];
+
+  // Sign-ups, last 7 days against the 7 before.
+  if (ins) {
+    const { last7, prev7 } = ins.rolling;
+    if (last7.signups + prev7.signups >= 4) {
+      const tone: Tone = last7.signups > prev7.signups ? "good" : last7.signups < prev7.signups ? "bad" : "watch";
+      items.push({ tone, text: `Sign-ups: ${last7.signups} in the last 7 days against ${prev7.signups} the 7 before.` });
+    }
+    if (last7.didSomething + prev7.didSomething >= 4) {
+      const tone: Tone =
+        last7.didSomething > prev7.didSomething ? "good" : last7.didSomething < prev7.didSomething ? "bad" : "watch";
+      items.push({
+        tone,
+        text: `Coaches doing something (scheduling, running or finishing a match): ${last7.didSomething} in the last 7 days against ${prev7.didSomething}.`,
+      });
+    }
+
+    // Weakest step of the sign-up ladder, over sign-up weeks old enough to
+    // have had a go (skip this week and last).
+    const settled = ins.cohorts.slice(2);
+    const sum = (k: keyof Insights["cohorts"][number]) =>
+      settled.reduce((t, c) => t + (typeof c[k] === "number" ? (c[k] as number) : 0), 0);
+    const steps: { from: string; to: string; a: number; b: number }[] = [
+      { from: "signed up", to: "set up a team", a: sum("signedUp"), b: sum("team") },
+      { from: "set up a team", to: "scheduled a match", a: sum("team"), b: sum("scheduled") },
+      { from: "scheduled a match", to: "ran one live", a: sum("scheduled"), b: sum("wentLive") },
+      { from: "ran one live", to: "finished one", a: sum("wentLive"), b: sum("finished") },
+      { from: "finished one", to: "finished a second", a: sum("finished"), b: sum("finished2") },
+    ].filter((s) => s.a >= 5);
+    if (steps.length > 0) {
+      const weakest = steps.reduce((w, s) => (s.b / s.a < w.b / w.a ? s : w));
+      items.push({
+        tone: "bad",
+        text: `Biggest drop-off (sign-up weeks 2 to 8 weeks old): of ${weakest.a} who ${weakest.from}, ${weakest.b} ${weakest.to} (${pctOf(weakest.b, weakest.a)}).`,
+      });
+    }
+    if (ins.recency.matchNext7dNeverLive > 0) {
+      items.push({
+        tone: "watch",
+        text: `${ins.recency.matchNext7dNeverLive} coach${ins.recency.matchNext7dNeverLive === 1 ? " has" : "es have"} a match in the next 7 days and ${ins.recency.matchNext7dNeverLive === 1 ? "has" : "have"} never run one live: the moment a nudge matters most.`,
+      });
+    }
+    if (ins.recency.atRisk > 0) {
+      items.push({
+        tone: "watch",
+        text: `${ins.recency.atRisk} coach${ins.recency.atRisk === 1 ? "" : "es"} who ran a match before ${ins.recency.atRisk === 1 ? "hasn't" : "haven't"} opened the app in 14 days.`,
+      });
+    }
+    if (ins.paying.trialsEndingNext7d > 0) {
+      items.push({
+        tone: "watch",
+        text: `${ins.paying.trialsEndingNext7d} trial${ins.paying.trialsEndingNext7d === 1 ? " ends" : "s end"} in the next 7 days.`,
+      });
+    }
+  }
+
+  // Channels whose sign-ups go on to run a match, best and worst, among
+  // those with 5+ accounts old enough to have had a go.
+  const judged = (ins?.bySource ?? []).filter((r) => r.settled >= 5);
+  if (judged.length >= 2) {
+    const liveRate = (r: QualityRow) => r.wentLive / r.settled;
+    const best = judged.reduce((b, r) => (liveRate(r) > liveRate(b) ? r : b));
+    const worst = judged.reduce((w, r) => (liveRate(r) < liveRate(w) ? r : w));
+    if (liveRate(best) - liveRate(worst) >= 0.15) {
+      items.push({
+        tone: "good",
+        text: `Best sign-ups: ${best.label}, ${pctOf(best.wentLive, best.settled)} of ${best.settled} went on to run a match live.`,
+      });
+      items.push({
+        tone: "bad",
+        text: `Weakest sign-ups: ${worst.label}, ${pctOf(worst.wentLive, worst.settled)} of ${worst.settled} ran a match live.`,
+      });
+    }
+  }
+
+  // Sign-up forms with plenty of views and nothing to show for it.
+  for (const f of funnel.bySignupForm) {
+    if (f.path && f.views !== null && f.views >= 50 && f.signups === 0) {
+      items.push({ tone: "bad", text: `${f.path}: ${f.views} views, no sign-ups (last ${funnel.days} days).` });
+    }
+  }
+  const bestForm = funnel.bySignupForm
+    .filter((f) => f.views !== null && f.views >= 20 && f.signups > 0)
+    .sort((a, b) => b.signups / (b.views ?? 1) - a.signups / (a.views ?? 1))[0];
+  if (bestForm) {
+    items.push({
+      tone: "good",
+      text: `Best-converting form: ${bestForm.path}, ${bestForm.signups} sign-ups from ${bestForm.views} views (${pctOf(bestForm.signups, bestForm.views ?? 0)}).`,
+    });
+  }
+  const androidSignups = funnel.signupsByDay.reduce((t, d) => t + d.android, 0);
+  if (funnel.totals.signups >= 5 && androidSignups / funnel.totals.signups >= 0.3) {
+    items.push({
+      tone: "good",
+      text: `Android brought ${androidSignups} of ${funnel.totals.signups} sign-ups (last ${funnel.days} days).`,
+    });
+  }
+
+  // Banners with real impressions and no clicks.
+  for (const row of views?.bannerVariants?.rows ?? []) {
+    if (row.impressions >= 100 && row.clicks === 0) {
+      items.push({ tone: "bad", text: `Banner ${row.variant}: ${row.impressions} impressions, no clicks.` });
+    }
+  }
+
+  // The /coaching page banner move.
+  const { before, after } = funnel.coachingPage;
+  if (before.views >= 15 && after.views >= 15) {
+    const b = before.clicks / before.views;
+    const a = after.clicks / after.views;
+    if (Math.abs(a - b) >= 0.03) {
+      items.push({
+        tone: a > b ? "good" : "bad",
+        text: `/coaching banner since the move: ${after.clicks} clicks from ${after.views} views (${pctOf(after.clicks, after.views)}) against ${before.clicks} from ${before.views} (${pctOf(before.clicks, before.views)}) before.`,
+      });
+    }
+  }
+
+  // Attribution gaps make the channel table unreliable.
+  const unknown = funnel.channels.find((c) => c.channel === "Unknown")?.signups ?? 0;
+  if (funnel.totals.signups >= 5 && unknown / funnel.totals.signups > 0.3) {
+    items.push({
+      tone: "watch",
+      text: `${unknown} of ${funnel.totals.signups} sign-ups have no channel (declined cookies), so read the channel table with care.`,
+    });
+  }
+
+  // The share loop.
+  if (!("error" in funnel.sharing) && funnel.shareBannerImpressions >= 20 && funnel.sharing.taps === 0) {
+    items.push({
+      tone: "bad",
+      text: `Share banner: ${funnel.shareBannerImpressions} views, no taps on "Send it to your child's coach".`,
+    });
+  }
+
+  const order: Tone[] = ["bad", "watch", "good"];
+  return items.sort((a, b) => order.indexOf(a.tone) - order.indexOf(b.tone));
+}
+
+function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: CoachAppViewStats | null }) {
+  const ins = funnel.insights && !("error" in funnel.insights) ? funnel.insights : null;
+  const usage = "error" in funnel.usage ? null : funnel.usage;
+  const latest = usage?.latest ?? null;
+
+  // New paying accounts: the plan split's change over 7 days of snapshots.
+  const weekAgoSnapshot = usage?.byDay.find((d) => d.date <= addDays(ukToday(), -7)) ?? null;
+  const newPaid = latest && weekAgoSnapshot ? latest.planPaid - weekAgoSnapshot.planPaid : null;
+
+  const funnelDays = buildFunnelDays(funnel, views);
+  const working = workingList(funnel, views, ins);
+
+  const stageForecast = ins ? payingForecast(ins.paying.byStage) : null;
+  const habitForecast = ins ? payingForecast(ins.paying.byHabit) : null;
+
+  const th = funnelTh;
+  const thR: CSSProperties = { ...funnelTh, textAlign: "right" };
+  const funnelCols: { key: FunnelDayKey; label: string }[] = [
+    { key: "ads", label: "Visits: ads" },
+    { key: "search", label: "Visits: search" },
+    { key: "other", label: "Visits: other" },
+    { key: "webSignIn", label: "Web sign-in screen" },
+    { key: "androidSignIn", label: "Android sign-in screen" },
+    { key: "formViews", label: "Form seen" },
+    { key: "googleTaps", label: "Google taps" },
+    { key: "emailsSent", label: "Emails sent" },
+    { key: "signups", label: "Sign-ups" },
+    { key: "android", label: "of which Android" },
+    { key: "withTeam", label: "Set up a team" },
+    { key: "active", label: "Coaches active" },
+    { key: "coachesFinished", label: "Finished a match" },
+  ];
+
+  return (
+    <div style={styles.list}>
+      {funnel.insights && "error" in funnel.insights && (
+        <p style={styles.error}>
+          Couldn&rsquo;t load the Coach App&rsquo;s weekly counts: {funnel.insights.error}. If it says the
+          coach_app_insights table is missing, run 20261108120000_coach_app_insights.sql.
+        </p>
+      )}
+      {!funnel.insights && (
+        <p style={styles.sectionNote}>
+          Weekly activity, habit and paying numbers appear once the Coach App sends its first hourly counts
+          (coach-app migration 0071, after this site&rsquo;s 20261108120000_coach_app_insights.sql).
+        </p>
+      )}
+
+      <FunnelHeading>How it&rsquo;s doing: last 7 days</FunnelHeading>
+      <div style={styles.summaryGrid}>
+        {ins ? (
+          <>
+            <DeltaTile label="Sign-ups" value={ins.rolling.last7.signups} prev={ins.rolling.prev7.signups} />
+            <DeltaTile label="Coaches who opened the app" value={ins.rolling.last7.opened} prev={ins.rolling.prev7.opened} />
+            <DeltaTile label="Scheduled a match" value={ins.rolling.last7.scheduled} prev={ins.rolling.prev7.scheduled} />
+            <DeltaTile label="Ran a match live" value={ins.rolling.last7.wentLive} prev={ins.rolling.prev7.wentLive} />
+            <DeltaTile label="Finished a match" value={ins.rolling.last7.finished} prev={ins.rolling.prev7.finished} />
+            <DeltaTile
+              label="With a match habit"
+              value={ins.habit.matchHabit}
+              sub={`${ins.habit.appHabit} open the app most weeks`}
+            />
+          </>
+        ) : (
+          latest && (
+            <>
+              <DeltaTile label="Coaches active (7 days)" value={latest.active7d} />
+              <DeltaTile label="Accounts" value={latest.totalAccounts} />
+            </>
+          )
+        )}
+        {latest && (
+          <DeltaTile
+            label="Paying"
+            value={latest.planPaid}
+            sub={`${newPaid !== null ? `${newPaid >= 0 ? "+" : ""}${newPaid} this week, ` : ""}${latest.planTrial} on trial${ins ? `, ${ins.paying.trialsEndingNext7d} ending within 7 days` : ""}`}
+          />
+        )}
+      </div>
+      <SectionNote label="What these count">
+        Coaches, not matches or devices, Graham&rsquo;s accounts left out. A coach scheduled, ran or finished a
+        match when a team they are on did (owner or assistant). Opened is any app open while signed in. Ran
+        live is pressing Go live (matches before 25 Oct count on the day they finished). Match habit: used it at
+        a match in 3 or 4 of the last 4 complete weeks. Paying this week is the change in the paid count since
+        the snapshot 7 days ago.
+      </SectionNote>
+
+      <FunnelHeading>What&rsquo;s working, what isn&rsquo;t</FunnelHeading>
+      {working.length === 0 ? (
+        <p style={styles.muted}>Nothing stands out yet: not enough data for any check.</p>
+      ) : (
+        <ul style={{ margin: 0, paddingLeft: 18, display: "flex", flexDirection: "column", gap: 4 }}>
+          {working.map((w, i) => (
+            <li key={i} style={{ color: "#e9dcc5", fontSize: 13, lineHeight: 1.5 }}>
+              <span style={{ color: TONE_COLOUR[w.tone], fontWeight: 600 }}>
+                {w.tone === "good" ? "Working" : w.tone === "bad" ? "Not working" : "Watch"}:
+              </span>{" "}
+              {w.text}
+            </li>
+          ))}
+        </ul>
+      )}
+      <SectionNote label="How this list is made">
+        Rules, not judgement: each check only appears once there&rsquo;s enough data for it (for example a form
+        needs 50 views before &ldquo;no sign-ups&rdquo; counts, a banner 100 impressions). Problems first, then
+        things to watch, then what&rsquo;s working.
+      </SectionNote>
+
+      {ins && (
+        <>
+          <FunnelHeading>Coaches doing things, by week</FunnelHeading>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={th}>Week of</th>
+                  <th style={thR}>Sign-ups</th>
+                  <th style={thR}>Opened the app</th>
+                  <th style={thR}>Scheduled a match</th>
+                  <th style={thR}>Ran one live</th>
+                  <th style={thR}>Finished one</th>
+                  <th style={thR}>Any of those</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ins.weeks.map((w, i) => (
+                  <tr key={w.weekStart}>
+                    <td style={funnelTd}>
+                      {shortDay(w.weekStart)}
+                      {i === 0 && <span style={{ color: "#9c8a72" }}> (so far)</span>}
+                    </td>
+                    <td style={funnelNum}>{w.signups}</td>
+                    <td style={funnelNum}>{w.opened ?? "-"}</td>
+                    <td style={funnelNum}>{w.scheduled}</td>
+                    <td style={funnelNum}>{w.wentLive}</td>
+                    <td style={funnelNum}>{w.finished}</td>
+                    <td style={funnelNum}>{w.didSomething}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={styles.sectionNote}>
+            UK weeks, Monday to Sunday, so each weekend&rsquo;s matches land in the week they were played.
+            Opened is only recorded from {shortDay(ins.openedTrackedFrom)}.
+          </p>
+
+          <FunnelHeading>Habit</FunnelHeading>
+          <p style={styles.sectionNote}>
+            Of the {ins.habit.eligible} accounts that existed for all 4 weeks from {shortDay(ins.habit.windowStart)}{" "}
+            to {shortDay(ins.habit.windowEnd)}, how many weeks each one used the app:
+          </p>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={th}>Weeks of the 4</th>
+                  {[0, 1, 2, 3, 4].map((k) => (
+                    <th key={k} style={thR}>
+                      {k}
+                    </th>
+                  ))}
+                  <th style={thR}>Habit (3+)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { label: "Opened the app", spread: ins.habit.openedWeeks },
+                  { label: "Used it at a match", spread: ins.habit.matchWeeks },
+                ].map((r) => (
+                  <tr key={r.label}>
+                    <td style={funnelTd}>{r.label}</td>
+                    {r.spread.map((v, k) => (
+                      <td key={k} style={funnelNum}>
+                        {v}
+                      </td>
+                    ))}
+                    <td style={{ ...funnelNum, fontWeight: 600 }}>
+                      {r.spread[3] + r.spread[4]} ({pctOf(r.spread[3] + r.spread[4], ins.habit.eligible)})
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <FunnelHeading>When coaches last used it</FunnelHeading>
+          <div style={styles.summaryGrid}>
+            <UsageTile label="Today" value={ins.recency.today} />
+            <UsageTile label="1 to 7 days ago" value={ins.recency.d1to7} />
+            <UsageTile label="8 to 14 days ago" value={ins.recency.d8to14} />
+            <UsageTile label="15 to 30 days ago" value={ins.recency.d15to30} />
+            <UsageTile label="Over 30 days ago" value={ins.recency.over30} />
+            <UsageTile label="Never" value={ins.recency.never} />
+          </div>
+          <div style={styles.summaryGrid}>
+            <UsageTile
+              label="Never came back after day one"
+              value={ins.recency.onlyFirstDay}
+              sub="signed up 2+ days ago"
+            />
+            <UsageTile label="At risk" value={ins.recency.atRisk} sub="ran a match before, not opened in 14 days" />
+            <UsageTile
+              label="Match in the next 7 days"
+              value={ins.recency.matchNext7d}
+              sub={`${ins.recency.matchNext7dNeverLive} of them never run one live`}
+            />
+          </div>
+
+          <FunnelHeading>How each sign-up week got on</FunnelHeading>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={th}>Signed up week of</th>
+                  <th style={thR}>Signed up</th>
+                  <th style={thR}>Team</th>
+                  <th style={thR}>Players</th>
+                  <th style={thR}>Scheduled</th>
+                  <th style={thR}>Ran live</th>
+                  <th style={thR}>Finished</th>
+                  <th style={thR}>2+ finished</th>
+                  <th style={thR}>Back after week 1</th>
+                  <th style={thR}>Paid</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ins.cohorts.map((c, i) => {
+                  const cell = (v: number, show = true) => (
+                    <td style={funnelNum}>
+                      {show ? (
+                        <>
+                          {v} <span style={{ color: "#9c8a72" }}>{pctOf(v, c.signedUp)}</span>
+                        </>
+                      ) : (
+                        <span style={{ color: "#9c8a72" }}>too soon</span>
+                      )}
+                    </td>
+                  );
+                  return (
+                    <tr key={c.weekStart}>
+                      <td style={funnelTd}>
+                        {shortDay(c.weekStart)}
+                        {i === 0 && <span style={{ color: "#9c8a72" }}> (so far)</span>}
+                      </td>
+                      <td style={funnelNum}>{c.signedUp}</td>
+                      {cell(c.team)}
+                      {cell(c.players)}
+                      {cell(c.scheduled)}
+                      {cell(c.wentLive)}
+                      {cell(c.finished)}
+                      {cell(c.finished2)}
+                      {cell(c.backAfterWeek1, i >= 2)}
+                      {cell(c.paid)}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p style={styles.sectionNote}>
+            How far each week&rsquo;s sign-ups have got so far, all time: recent weeks are still filling in, so
+            compare weeks of a similar age. Back after week 1 is opened the app 7 or more days after signing up.
+          </p>
+
+          <FunnelHeading>Paying</FunnelHeading>
+          <div style={styles.summaryGrid}>
+            <UsageTile label="Paid" value={ins.paying.paid} />
+            <UsageTile label="On trial" value={ins.paying.trial} />
+            <UsageTile label="Lapsed" value={ins.paying.lapsed} />
+            <UsageTile label="Trials ending, next 7 days" value={ins.paying.trialsEndingNext7d} />
+            <UsageTile label="Trials ended, last 7 days" value={ins.paying.trialsEndedLast7d} sub="and didn't pay" />
+            {stageForecast && (
+              <UsageTile
+                label="Expected to pay from today's trials"
+                value={Math.round(stageForecast.expected)}
+                sub={`at past rates by stage (${stageForecast.expected.toFixed(1)})`}
+              />
+            )}
+          </div>
+          {[
+            {
+              title: "By furthest stage reached",
+              rows: ins.paying.byStage.map((r) => ({ ...r, label: STAGE_LABEL[r.stage], ending: r.trialEndingNext7d })),
+              forecast: stageForecast!,
+            },
+            {
+              title: "By habit",
+              rows: ins.paying.byHabit.map((r) => ({ ...r, label: HABIT_LABEL[r.segment], ending: null as number | null })),
+              forecast: habitForecast!,
+            },
+          ].map((t) => (
+            <div key={t.title} style={{ overflowX: "auto" }}>
+              <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+                <thead>
+                  <tr>
+                    <th style={th}>{t.title}</th>
+                    <th style={thR}>Accounts</th>
+                    <th style={thR}>Paid</th>
+                    <th style={thR}>On trial</th>
+                    <th style={thR}>Lapsed</th>
+                    <th style={thR}>Paying rate</th>
+                    <th style={thR}>Expected to pay</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {t.rows.map((r) => {
+                    const decided = r.paid + r.lapsed;
+                    return (
+                      <tr key={r.label}>
+                        <td style={funnelTd}>{r.label}</td>
+                        <td style={funnelNum}>{r.accounts}</td>
+                        <td style={funnelNum}>{r.paid}</td>
+                        <td style={funnelNum}>
+                          {r.trial}
+                          {r.ending ? <span style={{ color: "#9c8a72" }}> ({r.ending} ending)</span> : null}
+                        </td>
+                        <td style={funnelNum}>{r.lapsed}</td>
+                        <td style={funnelNum}>
+                          {decided > 0 ? `${pctOf(r.paid, decided)} of ${decided}` : "n/a"}
+                        </td>
+                        <td style={funnelNum}>{(r.trial * t.forecast.rateFor(r)).toFixed(1)}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          ))}
+          <SectionNote label="How the paying rate and forecast work">
+            Paying rate is paid out of accounts that have decided (paid or lapsed), so trials still running
+            don&rsquo;t drag it down. Expected to pay applies each row&rsquo;s rate to its accounts still on
+            trial; a row with fewer than 5 decided accounts uses the overall rate instead (
+            {stageForecast ? pctOf(stageForecast.paid, stageForecast.decided) : "n/a"} of{" "}
+            {stageForecast?.decided ?? 0}). With only a handful of paying accounts these are rough: the useful
+            part today is which stages the paying accounts came from, and how many trials are ending.
+          </SectionNote>
+        </>
+      )}
+
+      <FunnelHeading>Funnel by day</FunnelHeading>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={th}>Day</th>
+              {funnelCols.map((c) => (
+                <th key={c.key} style={thR}>
+                  {c.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {funnelDays.slice(0, 21).map((row, i) => (
+              <tr key={row.date}>
+                <td style={{ ...funnelTd, whiteSpace: "nowrap" }}>{shortDay(row.date)}</td>
+                {funnelCols.map((c) => {
+                  const value = row[c.key];
+                  const tone = cellTone(value, weekdayBaseline(funnelDays, i, c.key));
+                  return (
+                    <td key={c.key} style={{ ...funnelNum, ...(tone ? { color: tone, fontWeight: 600 } : {}) }}>
+                      {value ?? "-"}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <SectionNote label="How to read this">
+        UK days, newest first. Green is at least a quarter above the same weekday&rsquo;s average over the weeks
+        before (when there are at least two), red at least a quarter below, ignoring differences under 2.
+        Visits are human views of the Coach App page and its ad variants (ads include ad clicks landing on the
+        calculator). Form seen, Google taps and Emails sent are the sign-up forms&rsquo; own steps, web and
+        Android. Set up a team, Coaches active and Finished a match are the Coach App&rsquo;s own closing
+        figures for the day (finished counts coaches where the app reports it, otherwise matches).
+      </SectionNote>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Where sign-ups come from and how good they turn out, every way in side by
+// side, and the Search Console summary for the Coach App's pages. Quality
+// comes from the Coach App's insights (bySource, byForm), visits and site
+// sign-ups from the funnel, search, ads and installs from
+// /api/coach-app-ways-in-report.
+// ---------------------------------------------------------------------------
+
+type QualityRow = Insights["bySource"][number];
+
+// Site paths behind each sign-up form label in the insights.
+function formViews(label: string, funnel: CoachAppFunnel): number | null {
+  const views = (test: (p: string) => boolean) =>
+    funnel.bySignupForm.filter((f) => f.path && test(f.path)).reduce((t, f) => t + (f.views ?? 0), 0);
+  switch (label) {
+    case "Coach App page":
+      return views((p) => p === "/football-parent-coach-app");
+    case "Coach App ad pages":
+      return views((p) => p.startsWith("/football-parent-coach-app/"));
+    case "Calculator":
+      return views((p) => p === "/coaching/equal-playing-time-calculator");
+    case "App sign-in screen":
+      return views((p) => p === "/coach-app/sign-in");
+    default:
+      return null;
+  }
+}
+
+function QualityTable({
+  title,
+  rows,
+  visitsFor,
+  visitsLabel,
+}: {
+  title: string;
+  rows: QualityRow[];
+  visitsFor: (label: string) => number | null;
+  visitsLabel: string;
+}) {
+  const all = rows.reduce(
+    (t, r) => ({ settled: t.settled + r.settled, wentLive: t.wentLive + r.wentLive }),
+    { settled: 0, wentLive: 0 }
+  );
+  const overallLive = all.settled > 0 ? all.wentLive / all.settled : null;
+  const rate = (v: number, r: QualityRow, highlight = false) => {
+    if (r.settled === 0) return <td style={funnelNum}>-</td>;
+    const share = v / r.settled;
+    let colour: string | undefined;
+    if (highlight && overallLive !== null && r.settled >= 5) {
+      if (share >= overallLive + 0.1) colour = TONE_COLOUR.good;
+      else if (share <= overallLive - 0.1) colour = TONE_COLOUR.bad;
+    }
+    return (
+      <td style={{ ...funnelNum, ...(colour ? { color: colour, fontWeight: 600 } : {}) }}>
+        {pctOf(v, r.settled)} <span style={{ color: "#9c8a72" }}>{v}</span>
+      </td>
+    );
+  };
+  const thR: CSSProperties = { ...funnelTh, textAlign: "right" };
+  return (
+    <div style={{ overflowX: "auto" }}>
+      <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+        <thead>
+          <tr>
+            <th style={funnelTh}>{title}</th>
+            <th style={thR}>{visitsLabel}</th>
+            <th style={thR}>Sign-ups, 30 days</th>
+            <th style={thR}>Accounts, all time</th>
+            <th style={thR}>14+ days old</th>
+            <th style={thR}>Set up a team</th>
+            <th style={thR}>Ran a match live</th>
+            <th style={thR}>Finished one</th>
+            <th style={thR}>Back after week 1</th>
+            <th style={thR}>Match habit</th>
+            <th style={thR}>Paid / decided</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => {
+            const decided = r.paid + r.lapsed;
+            return (
+              <tr key={r.label}>
+                <td style={funnelTd}>{r.label}</td>
+                <td style={funnelNum}>{visitsFor(r.label) ?? "-"}</td>
+                <td style={funnelNum}>{r.last30d}</td>
+                <td style={funnelNum}>{r.accounts}</td>
+                <td style={funnelNum}>{r.settled}</td>
+                {rate(r.team, r)}
+                {rate(r.wentLive, r, true)}
+                {rate(r.finished, r)}
+                {rate(r.backAfterWeek1, r)}
+                {rate(r.matchHabit, r)}
+                <td style={{ ...funnelNum, whiteSpace: "nowrap" }}>
+                  {r.paid}
+                  <span style={{ color: "#9c8a72" }}>{decided > 0 ? ` / ${decided}` : ""}</span>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function signedDelta(cur: number, prev: number, lowerIsBetter = false): ReactNode {
+  const d = Math.round((cur - prev) * 10) / 10;
+  if (d === 0) return null;
+  const good = lowerIsBetter ? d < 0 : d > 0;
+  return (
+    <span style={{ color: good ? TONE_COLOUR.good : TONE_COLOUR.bad, marginLeft: 4 }}>
+      {d > 0 ? "+" : ""}
+      {d}
+    </span>
+  );
+}
+
+function CoachAppWaysInSection({
+  funnel,
+  waysIn,
+  waysInError,
+}: {
+  funnel: CoachAppFunnel;
+  waysIn: CoachAppWaysIn | null;
+  waysInError: string;
+}) {
+  const ins = funnel.insights && !("error" in funnel.insights) ? funnel.insights : null;
+  const channel = (name: string) => funnel.channels.find((c) => c.channel === name);
+  const siteVisits = (name: string) => {
+    const c = channel(name);
+    return c ? c.landingViews + c.signInViews : null;
+  };
+  const siteSignups = (name: string) => channel(name)?.signups ?? 0;
+  const source = (label: string) => ins?.bySource.find((r) => r.label === label);
+  const signups30 = (...labels: string[]) =>
+    ins ? labels.reduce((t, l) => t + (source(l)?.last30d ?? 0), 0) : null;
+
+  const search = waysIn && !("error" in waysIn.search) ? waysIn.search : null;
+  const ads = waysIn && !("error" in waysIn.ads) ? waysIn.ads : null;
+  const play = waysIn && !("error" in waysIn.play) ? waysIn.play : null;
+  const money = (v: number) => `£${v.toFixed(2)}`;
+
+  const adsSignups = signups30("Google Ads") ?? siteSignups("Google Ads");
+  const waysRows: {
+    way: string;
+    seen: ReactNode;
+    clicks: ReactNode;
+    visits: number | null;
+    signups: number | null;
+    cost: ReactNode;
+    perSignup: ReactNode;
+  }[] = [
+    {
+      way: "Google search (organic)",
+      seen: search ? search.totals.impressions : "-",
+      clicks: search ? `${search.totals.clicks} clicks` : "-",
+      visits: (siteVisits("Search") ?? 0) + (siteVisits("Article banner") ?? 0),
+      signups: signups30("Search", "Article banner") ?? siteSignups("Search") + siteSignups("Article banner"),
+      cost: "-",
+      perSignup: "-",
+    },
+    {
+      way: "Google Ads",
+      seen: ads ? ads.impressions : "-",
+      clicks: ads ? `${ads.clicks} clicks` : "-",
+      visits: siteVisits("Google Ads"),
+      signups: adsSignups,
+      cost: ads ? money(ads.costGBP) : "-",
+      perSignup: ads && adsSignups ? money(ads.costGBP / adsSignups) : "-",
+    },
+    {
+      way: "Android app (Play, no ad)",
+      seen: "-",
+      clicks: play ? `${play.userInstalls} installs` : "-",
+      visits: null,
+      signups: signups30("Android app", "Unknown (Android)") ?? siteSignups("Android app"),
+      cost: "-",
+      perSignup: "-",
+    },
+    { way: "Shared link from a parent", seen: "-", clicks: "-", visits: siteVisits("Shared link"), signups: signups30("Shared link") ?? siteSignups("Shared link"), cost: "-", perSignup: "-" },
+    { way: "Link from another page of ours", seen: "-", clicks: "-", visits: siteVisits("Site link"), signups: signups30("Site link") ?? siteSignups("Site link"), cost: "-", perSignup: "-" },
+    { way: "Direct", seen: "-", clicks: "-", visits: siteVisits("Direct"), signups: signups30("Direct") ?? siteSignups("Direct"), cost: "-", perSignup: "-" },
+    { way: "Other sites, AI, social", seen: "-", clicks: "-", visits: siteVisits("Other"), signups: signups30("Other") ?? siteSignups("Other"), cost: "-", perSignup: "-" },
+    { way: "Not known (declined cookies, web)", seen: "-", clicks: "-", visits: null, signups: signups30("Unknown (web)") ?? siteSignups("Unknown"), cost: "-", perSignup: "-" },
+  ];
+
+  // Site views and sign-ups per search page, beside Search Console.
+  const siteViews = new Map<string, { views: number; searchViews: number }>();
+  for (const a of funnel.coachingArticles.byArticle) siteViews.set(a.path, a);
+  for (const p of funnel.landingPages) siteViews.set(p.path, p);
+  const startedHere = new Map(funnel.signupsByEntryPath.map((r) => [r.path, r.signups]));
+  const thR: CSSProperties = { ...funnelTh, textAlign: "right" };
+  const windowLabel = waysIn ? `${shortDay(waysIn.window.start)} to ${shortDay(waysIn.window.end)}` : "";
+
+  return (
+    <div style={styles.list}>
+      <FunnelHeading>Where sign-ups come from, and how good they turn out</FunnelHeading>
+      {ins && ins.bySource.length > 0 ? (
+        <>
+          <QualityTable
+            title="Channel"
+            rows={ins.bySource}
+            visitsFor={(label) => siteVisits(label)}
+            visitsLabel="Visits, 30 days"
+          />
+          <QualityTable
+            title="Signed up on"
+            rows={ins.byForm}
+            visitsFor={(label) => formViews(label, funnel)}
+            visitsLabel="Page views, 30 days"
+          />
+          <SectionNote label="How to read this">
+            Each account&rsquo;s channel is where it first came from, recorded by the app when the coach accepted
+            analytics cookies, using the same rules as the channel table below; without that it&rsquo;s Not
+            known, split by whether the account started in the Android app. The rates (set up a team, ran a match
+            live and so on) are of accounts at least 14 days old, so this month&rsquo;s sign-ups don&rsquo;t drag
+            a channel down before they&rsquo;ve had a weekend. Ran a match live is green when a channel is 10
+            points or more above the average, red when 10 below, once it has 5 accounts old enough. Paid counts
+            all accounts; &ldquo;decided&rdquo; is paid or lapsed. Sign-ups, 30 days is the app&rsquo;s own count;
+            visits are this site&rsquo;s.
+          </SectionNote>
+        </>
+      ) : (
+        <p style={styles.muted}>
+          Appears once the Coach App sends its hourly counts with the channel split (coach-app migration 0071).
+        </p>
+      )}
+
+      <FunnelHeading>Every way in{windowLabel && `, ${windowLabel}`}</FunnelHeading>
+      {waysInError && <p style={styles.error}>{waysInError}</p>}
+      {!waysIn && !waysInError && <p style={styles.muted}>Loading Search Console, Ads and Play numbers...</p>}
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={funnelTh}>Way in</th>
+              <th style={thR}>Seen (impressions)</th>
+              <th style={thR}>Clicks or installs</th>
+              <th style={thR}>Coach App visits, 30 days</th>
+              <th style={thR}>Sign-ups, 30 days</th>
+              <th style={thR}>Cost</th>
+              <th style={thR}>Cost per sign-up</th>
+            </tr>
+          </thead>
+          <tbody>
+            {waysRows.map((r) => (
+              <tr key={r.way}>
+                <td style={funnelTd}>{r.way}</td>
+                <td style={funnelNum}>{r.seen}</td>
+                <td style={funnelNum}>{r.clicks}</td>
+                <td style={funnelNum}>{r.visits ?? "-"}</td>
+                <td style={funnelNum}>{r.signups ?? "-"}</td>
+                <td style={funnelNum}>{r.cost}</td>
+                <td style={funnelNum}>{r.perSignup}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {waysIn && (
+        <>
+          {"error" in waysIn.search && <p style={styles.error}>Search Console: {waysIn.search.error}</p>}
+          {"error" in waysIn.ads && <p style={styles.error}>Google Ads: {waysIn.ads.error}</p>}
+          {"error" in waysIn.play && <p style={styles.error}>Play installs: {waysIn.play.error}</p>}
+        </>
+      )}
+      <SectionNote label="Where each number comes from">
+        Search impressions and clicks are Search Console for the Coach App page and every /coaching/ page, over 28
+        days ending 3 days ago (Google posts late). Ads are the Coach App campaigns over the same 28 days (anything
+        named for Progress is left out); cost per sign-up divides that by the last 30 days&rsquo; Google Ads
+        sign-ups, so treat it as a guide. Installs are Play&rsquo;s new users from the same start date, posted 3 to 7
+        days late{play?.latestDate ? ` (latest day: ${shortDay(play.latestDate)})` : ""}. Organic search sign-ups
+        include coaches who arrived on an article and came through its Coach App banner. Visits and sign-ups are the
+        last 30 days.
+      </SectionNote>
+
+      <FunnelHeading>SEO: the Coach App&rsquo;s pages in Google{windowLabel && `, ${windowLabel}`}</FunnelHeading>
+      {search ? (
+        <>
+          <div style={styles.summaryGrid}>
+            <DeltaTile label="Clicks from Google" value={search.totals.clicks} prev={search.prevTotals.clicks} prevLabel="the 28 days before" />
+            <DeltaTile label="Impressions" value={search.totals.impressions} prev={search.prevTotals.impressions} prevLabel="the 28 days before" />
+            <div style={styles.card}>
+              <p style={styles.cardPage}>Average position</p>
+              <span style={{ ...styles.cardQuery, fontSize: 20 }}>{search.totals.position ?? "-"}</span>
+              <p style={{ ...styles.cardStatsInline, marginTop: 4 }}>
+                {search.prevTotals.position ?? "-"} the 28 days before. Blended across queries, so read the pages
+                below for real moves.
+              </p>
+            </div>
+          </div>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={funnelTh}>Page</th>
+                  <th style={thR}>Clicks</th>
+                  <th style={thR}>Impressions</th>
+                  <th style={thR}>Position</th>
+                  <th style={thR}>Site views, 30 days</th>
+                  <th style={thR}>of which search</th>
+                  <th style={thR}>Sign-ups that began here</th>
+                </tr>
+              </thead>
+              <tbody>
+                {search.pages.map((p) => {
+                  const v = siteViews.get(p.path);
+                  return (
+                    <tr key={p.path}>
+                      <td style={funnelTd}>{p.path}</td>
+                      <td style={funnelNum}>
+                        {p.clicks}
+                        {signedDelta(p.clicks, p.prevClicks)}
+                      </td>
+                      <td style={funnelNum}>
+                        {p.impressions}
+                        {signedDelta(p.impressions, p.prevImpressions)}
+                      </td>
+                      <td style={funnelNum}>
+                        {p.position ?? "-"}
+                        {p.position !== null && p.prevPosition !== null && signedDelta(p.position, p.prevPosition, true)}
+                      </td>
+                      <td style={funnelNum}>{v?.views ?? "-"}</td>
+                      <td style={funnelNum}>{v?.searchViews ?? "-"}</td>
+                      <td style={funnelNum}>{startedHere.get(p.path) ?? 0}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <FunnelHeading>Top searches for these pages</FunnelHeading>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={funnelTh}>Search</th>
+                  <th style={thR}>Impressions</th>
+                  <th style={thR}>Clicks</th>
+                  <th style={thR}>Position</th>
+                </tr>
+              </thead>
+              <tbody>
+                {search.queries.map((q) => (
+                  <tr key={q.query}>
+                    <td style={funnelTd}>{q.query}</td>
+                    <td style={funnelNum}>
+                      {q.impressions}
+                      {signedDelta(q.impressions, q.prevImpressions)}
+                    </td>
+                    <td style={funnelNum}>{q.clicks}</td>
+                    <td style={funnelNum}>
+                      {q.position ?? "-"}
+                      {q.position !== null && q.prevPosition !== null && signedDelta(q.position, q.prevPosition, true)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <SectionNote label="How to read this">
+            Each figure is the last 28 days to {waysIn && shortDay(waysIn.window.end)}, with the change on the 28
+            days before beside it (green is better: more clicks or impressions, a lower position number). Site views
+            and sign-ups that began on a page are the last 30 days from this site&rsquo;s own tracking; sign-ups only
+            name a page when the coach accepted analytics cookies.
+          </SectionNote>
+        </>
+      ) : (
+        waysIn && "error" in waysIn.search && <p style={styles.muted}>Search Console numbers unavailable.</p>
+      )}
+    </div>
+  );
+}
+
 function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
   const per100 = (signups: number, views: number) => (views > 0 ? ((signups / views) * 100).toFixed(1) : "n/a");
   const sinceLabel = new Date(funnel.since).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
@@ -5710,6 +6787,13 @@ const styles: Record<string, CSSProperties> = {
   muted: {
     color: "#9c8a72",
     fontSize: 14,
+  },
+  coachDetailSummary: {
+    cursor: "pointer",
+    color: "#e8b04b",
+    fontSize: 13,
+    fontWeight: 600,
+    padding: "6px 0",
   },
   sectionNote: {
     color: "#9c8a72",
