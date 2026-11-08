@@ -47,6 +47,7 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith("/api/outreach") ||
     pathname.startsWith("/api/coach-app-view-report") ||
     pathname.startsWith("/api/coach-app-funnel-report") ||
+    pathname.startsWith("/api/coach-app-ways-in-report") ||
     pathname.startsWith("/api/progress-funnel-report") ||
     pathname.startsWith("/api/expert-posted") ||
     pathname.startsWith("/api/owner-network");
@@ -101,6 +102,7 @@ export const config = {
     "/api/outreach/:path*",
     "/api/coach-app-view-report",
     "/api/coach-app-funnel-report",
+    "/api/coach-app-ways-in-report",
     "/api/progress-funnel-report",
     "/api/expert-posted",
     "/api/owner-network",

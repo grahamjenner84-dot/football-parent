@@ -391,6 +391,13 @@ export interface CoachAppFunnel {
    * by channel: ads (Google Ads, the calculator's ad clicks included),
    * search, and everything else; plus views of the app's web sign-in screen. */
   dailyVisits: DailyVisits[];
+  /** Sign-ups in the window by the page their visit began on
+   * (coach_app_signups.entry_path); null is no page known (no consent, or
+   * the Android app). */
+  signupsByEntryPath: { path: string | null; signups: number }[];
+  /** Human views of each Coach App landing page (main page and ad variants)
+   * in the window, with how many began from a search engine. */
+  landingPages: { path: string; views: number; searchViews: number }[];
 }
 
 export interface DailyVisits {
@@ -710,5 +717,19 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
     coachingPage: { movedAt: PROMO_ABOVE_INTRO_FROM, before, after },
     insights,
     dailyVisits: Array.from(visitDays.values()).sort((a, b) => b.date.localeCompare(a.date)),
+    signupsByEntryPath: Array.from(
+      signupRows.reduce((m, r) => m.set(r.entry_path, (m.get(r.entry_path) ?? 0) + 1), new Map<string | null, number>())
+    )
+      .map(([path, signups]) => ({ path, signups }))
+      .sort((a, b) => b.signups - a.signups),
+    landingPages: Array.from(
+      landingRows.filter(isHumanView).reduce((m, r) => {
+        const row = m.get(r.path) ?? { path: r.path, views: 0, searchViews: 0 };
+        row.views++;
+        if (!r.gclid && classifyReferrerHost(r.referrer_host).group === "Search") row.searchViews++;
+        m.set(r.path, row);
+        return m;
+      }, new Map<string, { path: string; views: number; searchViews: number }>()).values()
+    ).sort((a, b) => b.views - a.views),
   };
 }

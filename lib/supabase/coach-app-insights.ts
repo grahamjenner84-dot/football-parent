@@ -32,6 +32,48 @@ export interface ActivityCounts {
 export const STAGES = ["signedUp", "team", "scheduled", "live", "finished1", "finished2"] as const;
 export type Stage = (typeof STAGES)[number];
 
+export const SOURCE_LABELS = [
+  "Google Ads",
+  "Android app",
+  "Shared link",
+  "Article banner",
+  "Search",
+  "Site link",
+  "Direct",
+  "Other",
+  "Unknown (Android)",
+  "Unknown (web)",
+] as const;
+export const FORM_LABELS = [
+  "Android app",
+  "Coach App page",
+  "Coach App ad pages",
+  "Calculator",
+  "App sign-in screen",
+  "Other page",
+  "Unknown",
+] as const;
+
+/** Sign-up quality for one channel or form. Stage counts are of `settled`
+ * (accounts signed up 14+ days ago); plan counts are of all accounts. */
+export interface QualityRow {
+  label: string;
+  accounts: number;
+  last30d: number;
+  settled: number;
+  team: number;
+  scheduled: number;
+  wentLive: number;
+  finished: number;
+  finished2: number;
+  backAfterWeek1: number;
+  matchHabit: number;
+  appHabit: number;
+  paid: number;
+  trial: number;
+  lapsed: number;
+}
+
 export const HABIT_SEGMENTS = ["matchHabit", "appHabitOnly", "noHabit"] as const;
 export type HabitSegment = (typeof HABIT_SEGMENTS)[number];
 
@@ -89,6 +131,10 @@ export interface CoachAppInsights {
     backAfterWeek1: number;
     paid: number;
   }[];
+  /** Sign-up quality by channel and by form. Empty from a sender that
+   * predates them. */
+  bySource: QualityRow[];
+  byForm: QualityRow[];
   paying: {
     paid: number;
     trial: number;
@@ -160,6 +206,21 @@ function planSplit(o: Obj, where: string): PlanSplit {
   };
 }
 
+function qualityRows(value: unknown, allowed: readonly string[], where: string): QualityRow[] {
+  if (value === undefined) return [];
+  return arr(value, where, allowed.length).map((r, i) => {
+    const o = obj(r, `${where}[${i}]`);
+    const w = `${where}[${i}]`;
+    const keys = [
+      "accounts", "last30d", "settled", "team", "scheduled", "wentLive", "finished", "finished2",
+      "backAfterWeek1", "matchHabit", "appHabit", "paid", "trial", "lapsed",
+    ] as const;
+    const row = { label: oneOf(o.label, allowed, `${w}.label`) } as QualityRow;
+    for (const k of keys) row[k] = n(o[k], `${w}.${k}`);
+    return row;
+  });
+}
+
 /** The payload rebuilt from known keys, or throws BadInsights. */
 export function parseInsights(body: unknown): CoachAppInsights {
   const b = obj(body, "body");
@@ -222,6 +283,8 @@ export function parseInsights(body: unknown): CoachAppInsights {
         paid: n(o.paid, `${w}.paid`),
       };
     }),
+    bySource: qualityRows(b.bySource, SOURCE_LABELS, "bySource"),
+    byForm: qualityRows(b.byForm, FORM_LABELS, "byForm"),
     paying: {
       paid: n(paying.paid, "paying.paid"),
       trial: n(paying.trial, "paying.trial"),

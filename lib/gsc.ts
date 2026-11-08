@@ -1477,3 +1477,42 @@ export async function comparePeriods(
     dataFreshnessWarning: freshnessWarning(startA, endA, startB, endB),
   };
 }
+
+export interface SectionSearchRow {
+  key: string;
+  clicks: number;
+  impressions: number;
+  position: number | null;
+}
+
+/** Search Console clicks, impressions and position for a group of pages
+ * (paths matching any of `pathPrefixes`, each either the exact path or
+ * anything under it), per page and per query, for one date range. Backs the
+ * Coach App tab's "Ways in" SEO summary (lib/coach-app-ways-in.ts). */
+export async function getSectionSearchSummary(
+  pathPrefixes: string[],
+  start: string,
+  end: string
+): Promise<{ pages: SectionSearchRow[]; queries: SectionSearchRow[] }> {
+  assertValidDate("start", start);
+  assertValidDate("end", end);
+  const alternatives = pathPrefixes.map(escapeRegex).join("|");
+  const filters: GscFilter[] = [
+    { dimension: "page", operator: "includingRegex", expression: `^${escapeRegex(siteOrigin())}(${alternatives})(/[^#]*)?(#.*)?$` },
+  ];
+  const [pageRows, queryRows] = await Promise.all([
+    fetchRows(start, end, ["page"], filters),
+    fetchRows(start, end, ["query"], filters),
+  ]);
+  const toRow = (r: GscRow, key: string): SectionSearchRow => ({
+    key,
+    clicks: r.clicks,
+    impressions: r.impressions,
+    position: r.impressions ? round1(r.position) : null,
+  });
+  const origin = siteOrigin();
+  return {
+    pages: pageRows.map((r) => toRow(r, r.keys[0].startsWith(origin) ? r.keys[0].slice(origin.length) || "/" : r.keys[0])),
+    queries: queryRows.map((r) => toRow(r, r.keys[0])),
+  };
+}
