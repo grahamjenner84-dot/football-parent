@@ -13,6 +13,7 @@ import InstagramPromo from "@/app/components/mdx/InstagramPromo";
 import ToolCallout from "@/app/components/mdx/ToolCallout";
 import VideoEmbed from "@/app/components/mdx/VideoEmbed";
 import ReviewVerdict from "@/app/components/mdx/ReviewVerdict";
+import AppScreenshots from "@/app/components/mdx/AppScreenshots";
 import { InterviewQuestion, InterviewAnswer } from "@/app/components/mdx/Interview";
 import type { ArticleDesign } from "@/lib/comic-design";
 import { affiliateLinkProps } from "@/lib/affiliate";
@@ -41,6 +42,7 @@ const components = {
   ToolCallout,
   VideoEmbed,
   ReviewVerdict,
+  AppScreenshots,
   InterviewQuestion,
   InterviewAnswer,
 
@@ -192,6 +194,7 @@ const comicComponents = {
   GearPicks: (props: React.ComponentProps<typeof GearPicks>) => <GearPicks {...props} design="comic" />,
   VideoEmbed: (props: React.ComponentProps<typeof VideoEmbed>) => <VideoEmbed {...props} design="comic" />,
   ReviewVerdict: (props: React.ComponentProps<typeof ReviewVerdict>) => <ReviewVerdict {...props} design="comic" />,
+  AppScreenshots: (props: React.ComponentProps<typeof AppScreenshots>) => <AppScreenshots {...props} design="comic" />,
 
   h2: ({ children }: { children?: React.ReactNode }) => (
     <h2
