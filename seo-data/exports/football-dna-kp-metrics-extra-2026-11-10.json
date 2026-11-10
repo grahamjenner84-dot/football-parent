@@ -1,0 +1,237 @@
+{
+ "source": "get_keyword_metrics, UK, 10 Nov 2026 (rows missing from the ideas call)",
+ "keywords": [
+  {
+   "keyword": "football dna app",
+   "avgMonthlySearches": "110",
+   "monthlySearchVolumes": [
+    {
+     "month": "OCT",
+     "monthlySearches": "70"
+    },
+    {
+     "month": "NOV",
+     "monthlySearches": "70"
+    },
+    {
+     "month": "DEC",
+     "monthlySearches": "30"
+    },
+    {
+     "month": "JAN",
+     "monthlySearches": "140"
+    },
+    {
+     "month": "FEB",
+     "monthlySearches": "210"
+    },
+    {
+     "month": "MAR",
+     "monthlySearches": "140"
+    },
+    {
+     "month": "APR",
+     "monthlySearches": "70"
+    },
+    {
+     "month": "MAY",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "JUN",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "JUL",
+     "monthlySearches": "110"
+    },
+    {
+     "month": "AUG",
+     "monthlySearches": "170"
+    },
+    {
+     "month": "SEP",
+     "monthlySearches": "140"
+    }
+   ],
+   "competition": "LOW",
+   "competitionIndex": "20",
+   "lowTopOfPageBidMicros": "208005",
+   "highTopOfPageBidMicros": "1382232"
+  },
+  {
+   "keyword": "football dna cost",
+   "avgMonthlySearches": "10",
+   "monthlySearchVolumes": [
+    {
+     "month": "OCT",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "NOV",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "DEC",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "JAN",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "FEB",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "MAR",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "APR",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "MAY",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "JUN",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "JUL",
+     "monthlySearches": "20"
+    },
+    {
+     "month": "AUG",
+     "monthlySearches": "20"
+    },
+    {
+     "month": "SEP",
+     "monthlySearches": "10"
+    }
+   ],
+   "competition": "LOW",
+   "competitionIndex": "19",
+   "lowTopOfPageBidMicros": null,
+   "highTopOfPageBidMicros": null
+  },
+  {
+   "keyword": "football dna login",
+   "avgMonthlySearches": "90",
+   "monthlySearchVolumes": [
+    {
+     "month": "OCT",
+     "monthlySearches": "110"
+    },
+    {
+     "month": "NOV",
+     "monthlySearches": "110"
+    },
+    {
+     "month": "DEC",
+     "monthlySearches": "70"
+    },
+    {
+     "month": "JAN",
+     "monthlySearches": "140"
+    },
+    {
+     "month": "FEB",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "MAR",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "APR",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "MAY",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "JUN",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "JUL",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "AUG",
+     "monthlySearches": "90"
+    },
+    {
+     "month": "SEP",
+     "monthlySearches": "110"
+    }
+   ],
+   "competition": "LOW",
+   "competitionIndex": "0",
+   "lowTopOfPageBidMicros": null,
+   "highTopOfPageBidMicros": null
+  },
+  {
+   "keyword": "grassroots football session plans",
+   "avgMonthlySearches": "10",
+   "monthlySearchVolumes": [
+    {
+     "month": "OCT",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "NOV",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "DEC",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "JAN",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "FEB",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "MAR",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "APR",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "MAY",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "JUN",
+     "monthlySearches": "10"
+    },
+    {
+     "month": "JUL",
+     "monthlySearches": "0"
+    },
+    {
+     "month": "AUG",
+     "monthlySearches": "0"
+    },
+    {
+     "month": "SEP",
+     "monthlySearches": "10"
+    }
+   ],
+   "competition": "LOW",
+   "competitionIndex": "10",
+   "lowTopOfPageBidMicros": null,
+   "highTopOfPageBidMicros": null
+  }
+ ]
+}

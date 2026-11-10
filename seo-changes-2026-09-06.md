@@ -2326,3 +2326,17 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - 10 Nov: **the earlier roundup fix (`eaf6146`) was wrong.** Football DNA does have a free section. The original wording and link are restored, with the checked count and prices added (`fe43dda`). Net change against the live page: the free-content sentence now carries "56 practices and a handful of full sessions" and the prices, and the FAQ line says "free section" rather than "free content tier".
 - Price re-check after 1 January 2027 added to `SEO_ROADMAP.md`.
 - 10 Nov: Graham asked for the review to go live with **noindex** so Football DNA can see it before Google does. The page is live at `/coaching/football-dna-review` with robots noindex,follow, and the new `noindex: true` frontmatter flag keeps it out of the sitemap and site search. It is not on the Coaching category page, and the roundup's link to it is held back (`a1574a8`), so the only change going live on the roundup is the free-section and price wording (`fe43dda`). **Real publish date to be logged when noindex comes off:** remove the flag and the robots line, add it to `app/coaching/page.tsx`, restore the roundup link, request indexing.
+
+## 10 Nov 2026: Football DNA review, keyword and PAA optimisation (page still noindex)
+
+- From the keyword, PAA and SERP research in `seo-data/research/football-dna-keywords-2026-11-10.md` (`e64f9f4`), items 1 to 9 as approved by Graham. The page is still noindex, so none of this is in Google yet. The watch window starts when the noindex comes off, and all nine count as one launch state rather than separate changes.
+  - Title tag "Football DNA App Review: Is It Worth It? A Coach's Verdict" (was "...Is It Worth £7.99 a Month? | Football Parent"), H1 "Football DNA App Review: Is It Worth It for Grassroots Coaches?". The price is out of the title because it rises on 1 January (`0f2bee5`).
+  - The opening sentence is now the direct answer to "is Football DNA worth it", with the price and no free trial in the next sentence. No separate answer box (`cad32bb`).
+  - H2 "Football DNA Price: Is It Worth the Money?" becomes "How Much Does Football DNA Cost?", with an answer-first sentence (`20447fa`).
+  - H2 "What Football DNA Is" becomes "What Is Football DNA?" (`2d53ad6`).
+  - FAQ "Is Football DNA good for under 7s?", facts only: the U5 to U8 filter and curriculum, used with an U8 team (`89dc73b`).
+  - FAQ "Can you cancel Football DNA at any time?" (`467027f`).
+  - H2 "The Curriculums: A Week-by-Week Plan" becomes "The Football DNA Curriculum: A Week-by-Week Plan". Heading only: the 36-week structure waits for Football DNA to confirm it (`490b02b`).
+  - Schema: `ReviewVerdict` gains optional `offers` and `sameAs` props. The review's SoftwareApplication now lists the £7.99 monthly and £59.99 annual plans, plus its App Store and Google Play listings (`3b48ff6`).
+  - Links out: both Paul Barry interviews, and the coaching qualifications guide from the England Football Learning alternative (`da163f6`). Graham's edits on main (e133e4d) removed the partner paragraph from "How We Reviewed It", so at merge the Paul Barry links went into the intro sentence that still names him, and "What Is Football DNA?" is the renamed version of his rewritten, moved section. The links into the review are held for the noindex lift (`SEO_ROADMAP.md`).
+- Article roadmap: playing out from the back drills (High), a session plan template page (Medium) and 1v1 drills for kids (Low, unchecked) (`d5c333f`).

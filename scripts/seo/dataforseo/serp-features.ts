@@ -9,7 +9,7 @@ const TARGET_DOMAIN = "footballparent.co.uk";
 export type SerpItem = {
   type: string;
   text?: string;
-  references?: Array<{ url?: string; domain?: string; title?: string }>;
+  references?: Array<{ url?: string; domain?: string; title?: string; source?: string }>;
   items?: Array<SerpItem | string>; // people_also_ask nests one sub-item per question; related_searches nests plain strings (observed) or objects
   title?: string; // people_also_ask sub-item question text
   keyword?: string; // related_searches sub-item text, when present as an object
@@ -25,11 +25,62 @@ export function isOurDomain(url: string | undefined): boolean {
   }
 }
 
-export function citationSummary(refs: Array<{ url?: string; domain?: string }> | undefined) {
+// The fields DataForSEO gives a result or an AI Overview reference that can
+// say which site it is.
+export type SiteFields = {
+  url?: string;
+  domain?: string;
+  breadcrumb?: string; // organic results, e.g. "https://www.footballdna.co.uk › sessions"
+  website_name?: string; // organic results, e.g. "Football DNA" or "Facebook · Junior Grassroots Hub"
+  source?: string; // AI Overview references, e.g. "Football DNA"
+};
+
+// Names Google shows for this site when it hides the address.
+const OUR_SITE_NAMES = new Set(["football parent", "footballparent.co.uk", "footballparent"]);
+
+function hostOf(url: string | undefined): string | null {
+  if (!url) return null;
+  try {
+    return new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+  } catch {
+    return null;
+  }
+}
+
+// Since about Nov 2026 DataForSEO returns many results and AI Overview
+// references as a https://google.com/goto?url=... redirect, with domain
+// "google.com" (64 of 148 AI Overview references and most organic results in
+// the 10 Nov Football DNA pull). The real site is then only in the breadcrumb
+// (organic) or the site name. Returns the bare hostname when it can be known,
+// otherwise null.
+export function siteOf(item: SiteFields): string | null {
+  const fromUrl = hostOf(item.url);
+  if (fromUrl && fromUrl !== "google.com") return fromUrl;
+  const domain = item.domain?.replace(/^www\./, "").toLowerCase();
+  if (domain && domain !== "google.com") return domain;
+  const crumb = item.breadcrumb?.match(/^https?:\/\/[^\s›]+/)?.[0];
+  return hostOf(crumb);
+}
+
+// A readable label for reports: the hostname, or the site name Google shows.
+export function siteLabel(item: SiteFields): string {
+  return siteOf(item) ?? item.source ?? item.website_name ?? "unknown";
+}
+
+export function isOurResult(item: SiteFields): boolean {
+  const site = siteOf(item);
+  if (site) return site === TARGET_DOMAIN;
+  // Address hidden: match the site name exactly, so "Football Parents UK"
+  // groups and similar don't count as us.
+  const name = (item.source ?? item.website_name ?? "").trim().toLowerCase();
+  return OUR_SITE_NAMES.has(name);
+}
+
+export function citationSummary(refs: SiteFields[] | undefined) {
   const list = refs ?? [];
-  const ourIndex = list.findIndex((r) => isOurDomain(r.url));
+  const ourIndex = list.findIndex((r) => isOurResult(r));
   const competitorDomains = [
-    ...new Set(list.map((r) => r.domain?.replace(/^www\./, "")).filter((d): d is string => !!d && d !== TARGET_DOMAIN)),
+    ...new Set(list.filter((r) => !isOurResult(r)).map((r) => siteLabel(r)).filter((d) => d !== "unknown")),
   ];
   return { cited: ourIndex !== -1, position: ourIndex === -1 ? null : ourIndex + 1, competitorDomains };
 }

@@ -24,17 +24,36 @@ export type SerpOptions = {
   // change (e.g. geo-watchlist-check.ts) - a cache hit there would silently
   // return a stale snapshot and report it as a fresh result.
   forceRefresh?: boolean;
+  // Many AI Overviews load after the page ("asynchronous_ai_overview": true)
+  // and come back empty, citations included, unless the request asks for
+  // them. Costs extra per request; only sent when true, so existing callers
+  // keep the same request body and cache hash.
+  loadAsyncAiOverview?: boolean;
+  // Expands People Also Ask by clicking questions (1-4 levels), returning
+  // the extra questions Google loads on click. Costs extra per click; only
+  // sent when set, for the same cache-hash reason as above.
+  peopleAlsoAskClickDepth?: 1 | 2 | 3 | 4;
 };
 
 export function googleOrganicSerp(keyword: string, opts: SerpOptions): Promise<DataForSeoResult> {
   const endpoint = "serp/google/organic/live/advanced";
-  const body = {
+  const body: {
+    keyword: string;
+    location_code: number;
+    language_code: string;
+    device: string;
+    depth: number;
+    load_async_ai_overview?: boolean;
+    people_also_ask_click_depth?: number;
+  } = {
     keyword,
     location_code: opts.locationCode ?? DEFAULT_LOCATION_CODE,
     language_code: opts.languageCode ?? DEFAULT_LANGUAGE_CODE,
     device: opts.device ?? "desktop",
     depth: opts.depth ?? 100,
   };
+  if (opts.loadAsyncAiOverview) body.load_async_ai_overview = true;
+  if (opts.peopleAlsoAskClickDepth) body.people_also_ask_click_depth = opts.peopleAlsoAskClickDepth;
   return dataForSeoRequest({
     workflow: opts.workflow,
     apiFamily: API_FAMILY,
