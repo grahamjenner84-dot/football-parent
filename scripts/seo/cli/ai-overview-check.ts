@@ -45,6 +45,11 @@ async function main() {
       environment: "live",
       confirmLive: true,
       depth: 20,
+      // Without this many AI Overviews come back empty (Google loads them
+      // after the page), so they were logged as "no AI Overview" or "not
+      // cited". On from 10 Nov 2026; rows from then on say "async AIO" in the
+      // notes column, so older rows aren't compared like for like.
+      loadAsyncAiOverview: true,
     });
     totalCost += result.cost ?? 0;
 
@@ -63,14 +68,14 @@ async function main() {
       console.log(`AI Overview present. Cited: ${cited ? `YES (source #${position})` : "no"}`);
       if (competitorDomains.length) console.log(`  Other sources: ${competitorDomains.slice(0, 5).join(", ")}`);
       csvRows.push(
-        [today, "Google AI Overview (DataForSEO)", keyword, cited ? "Y" : "N", position ?? "", competitorDomains.slice(0, 5).join("; "), "auto-pulled live SERP"]
+        [today, "Google AI Overview (DataForSEO)", keyword, cited ? "Y" : "N", position ?? "", competitorDomains.slice(0, 5).join("; "), "auto-pulled live SERP, async AIO"]
           .map((v) => csvEscape(String(v)))
           .join(",")
       );
     } else {
       console.log("No AI Overview on this SERP.");
       csvRows.push(
-        [today, "Google AI Overview (DataForSEO)", keyword, "N", "", "", "no AI Overview element on this SERP"]
+        [today, "Google AI Overview (DataForSEO)", keyword, "N", "", "", "no AI Overview element on this SERP, async AIO"]
           .map((v) => csvEscape(String(v)))
           .join(",")
       );
@@ -88,7 +93,7 @@ async function main() {
     for (const { question, item } of paaExpandedOverviews) {
       const { cited, position, competitorDomains } = citationSummary(item.references);
       csvRows.push(
-        [today, "Google PAA AI Overview (DataForSEO)", question, cited ? "Y" : "N", position ?? "", competitorDomains.slice(0, 5).join("; "), "auto-pulled live SERP"]
+        [today, "Google PAA AI Overview (DataForSEO)", question, cited ? "Y" : "N", position ?? "", competitorDomains.slice(0, 5).join("; "), "auto-pulled live SERP, async AIO"]
           .map((v) => csvEscape(String(v)))
           .join(",")
       );

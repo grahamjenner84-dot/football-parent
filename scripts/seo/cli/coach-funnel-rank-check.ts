@@ -11,7 +11,20 @@
 import fs from "node:fs";
 import path from "node:path";
 import { googleOrganicSerp } from "../dataforseo/endpoints/serp";
-import { extractSerpFeatures, citationSummary, isOurDomain, type SerpItem } from "../dataforseo/serp-features";
+import {
+  extractSerpFeatures,
+  citationSummary,
+  isOurResult,
+  siteOf,
+  siteLabel,
+  type SerpItem,
+  type SiteFields,
+} from "../dataforseo/serp-features";
+
+// Google's redirect form: the real page address is then only in the breadcrumb.
+function hostOfUrlIsGoogle(url: string | undefined): boolean {
+  return /^https?:\/\/(www\.)?google\.com\/goto/.test(url ?? "");
+}
 import { REPO_ROOT } from "../shared/env";
 
 const PLAY_PACKAGE = "uk.co.footballparent.coachapp";
@@ -126,6 +139,9 @@ async function main() {
       confirmLive: true,
       device,
       depth: DEPTH,
+      // Many AI Overviews load after the page and come back empty without
+      // this, so `aio`/`aioCited` under-reported before 10 Nov 2026.
+      loadAsyncAiOverview: true,
     });
     cost += result.cost ?? 0;
     if (result.error || !result.data) {
@@ -133,9 +149,13 @@ async function main() {
       continue;
     }
     const items = ((result.data.tasks?.[0]?.result as unknown[])?.[0] as { items?: SerpItem[] } | undefined)?.items ?? [];
-    const organic = items.filter((i) => i.type === "organic") as Array<SerpItem & { rank_group?: number; url?: string; domain?: string }>;
-    const ours = organic.find((i) => isOurDomain(i.url));
-    const play = organic.find((i) => (i.url ?? "").includes(PLAY_PACKAGE));
+    const organic = items.filter((i) => i.type === "organic") as Array<SerpItem & SiteFields & { rank_group?: number }>;
+    // Sites come from siteOf/isOurResult, not the url: many results now come
+    // back as google.com/goto redirects (see serp-features.ts).
+    const ours = organic.find((i) => isOurResult(i));
+    const play = organic.find(
+      (i) => (i.url ?? "").includes(PLAY_PACKAGE) || (siteOf(i) === "play.google.com" && /football parent/i.test(i.title ?? ""))
+    );
     const { aiOverview } = extractSerpFeatures(items);
     const cite = aiOverview ? citationSummary(aiOverview.references) : null;
     rows.push({
@@ -143,12 +163,12 @@ async function main() {
       keyword,
       device,
       ourRank: ours?.rank_group ?? null,
-      ourUrl: ours?.url ?? null,
+      ourUrl: ours ? (hostOfUrlIsGoogle(ours.url) ? ours.breadcrumb ?? ours.url ?? null : ours.url ?? null) : null,
       aio: !!aiOverview,
       aioCited: cite?.cited ? cite.position ?? null : null,
-      storeInTop10: organic.filter((i) => (i.rank_group ?? 99) <= 10 && STORE_DOMAINS.includes(i.domain ?? "")).length,
+      storeInTop10: organic.filter((i) => (i.rank_group ?? 99) <= 10 && STORE_DOMAINS.includes(siteOf(i) ?? "")).length,
       playListingRank: play?.rank_group ?? null,
-      top3: organic.slice(0, 3).map((i) => i.domain ?? ""),
+      top3: organic.slice(0, 3).map((i) => siteLabel(i)),
     });
     process.stdout.write(".");
   }

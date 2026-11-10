@@ -56,6 +56,10 @@ type HistoryRecord = {
   citationPosition: number | null;
   competitorDomains: string[];
   paaQuestions: string[];
+  // True from 10 Nov 2026, when checks started asking DataForSEO to load
+  // asynchronous AI Overviews. Older records saw many overviews as empty, so
+  // AIO presence and citation can't be compared across that line.
+  asyncAioLoaded?: boolean;
 };
 
 function csvEscape(value: string): string {
@@ -101,6 +105,11 @@ function daysSince(dateStr: string): number {
 
 function diffStatus(prior: HistoryRecord | undefined, current: { aioPresent: boolean; cited: boolean }): string {
   if (!prior) return current.aioPresent ? (current.cited ? "first check - cited" : "first check - gap") : "first check - no AIO";
+  // The last check didn't load asynchronous AI Overviews, so a difference now
+  // may be the measurement, not Google. Start a new baseline instead of
+  // reporting a change (these strings deliberately avoid the "Notable
+  // changes" keywords below).
+  if (!prior.asyncAioLoaded) return current.aioPresent ? (current.cited ? "new baseline - cited" : "new baseline - gap") : "new baseline - no AIO";
   if (!prior.aioPresent && current.aioPresent) return current.cited ? "AIO appeared - cited" : "AIO appeared - gap";
   if (prior.aioPresent && !current.aioPresent) return "AIO disappeared";
   if (!prior.cited && current.cited) return "NEWLY CITED";
@@ -184,6 +193,9 @@ async function main() {
       // today's result (caught the hard way: the first baseline run on 12
       // Sept reused a 22 Aug cached response for one keyword).
       forceRefresh: true,
+      // Many AI Overviews load after the page and come back empty without
+      // this. On from 10 Nov 2026 (see asyncAioLoaded on HistoryRecord).
+      loadAsyncAiOverview: true,
     });
     totalCost += result.cost ?? 0;
 
@@ -224,18 +236,19 @@ async function main() {
       citationPosition: position,
       competitorDomains,
       paaQuestions,
+      asyncAioLoaded: true,
     };
     newHistoryLines.push(JSON.stringify(record));
 
     if (aioPresent) {
       csvRows.push(
-        [today, "Google AI Overview (DataForSEO)", entry.keyword, cited ? "Y" : "N", position ?? "", competitorDomains.slice(0, 5).join("; "), `geo-watchlist (${entry.bucket})`]
+        [today, "Google AI Overview (DataForSEO)", entry.keyword, cited ? "Y" : "N", position ?? "", competitorDomains.slice(0, 5).join("; "), `geo-watchlist (${entry.bucket}), async AIO`]
           .map((v) => csvEscape(String(v)))
           .join(",")
       );
     } else {
       csvRows.push(
-        [today, "Google AI Overview (DataForSEO)", entry.keyword, "N", "", "", `geo-watchlist (${entry.bucket}) - no AI Overview on this SERP`]
+        [today, "Google AI Overview (DataForSEO)", entry.keyword, "N", "", "", `geo-watchlist (${entry.bucket}) - no AI Overview on this SERP, async AIO`]
           .map((v) => csvEscape(String(v)))
           .join(",")
       );
@@ -244,7 +257,7 @@ async function main() {
     for (const { question, item } of paaExpandedOverviews) {
       const paaCitation = citationSummary(item.references);
       csvRows.push(
-        [today, "Google PAA AI Overview (DataForSEO)", question, paaCitation.cited ? "Y" : "N", paaCitation.position ?? "", paaCitation.competitorDomains.slice(0, 5).join("; "), `geo-watchlist (${entry.bucket})`]
+        [today, "Google PAA AI Overview (DataForSEO)", question, paaCitation.cited ? "Y" : "N", paaCitation.position ?? "", paaCitation.competitorDomains.slice(0, 5).join("; "), `geo-watchlist (${entry.bucket}), async AIO`]
           .map((v) => csvEscape(String(v)))
           .join(",")
       );

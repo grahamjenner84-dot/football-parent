@@ -30,7 +30,7 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 - **Baseline (18 Oct):** none of the 8 cites us or our Play listing; store listings are cited on all 8 (SubTime's on 5); FairPlay Coach on 2, the two it ranks for. See `seo-data/exports/app-terms-ai-overviews-2026-10-18.md`.
 - **Why 8 Nov:** gives Google time to recrawl the coach app page (new title, heading, section and FAQ) and the calculator (now visible to Google), both re-indexed 18 Oct.
 - **Confounded from 2 Nov:** the site header's Coach App link now points at `/football-parent-coach-app` (it went to the noindex app before), a link from every page. If the coach app page gains citations or rankings by 8 Nov, the 18 Oct copy and the header link can't be separated. Graham chose to ship it before the check.
-- **Also:** `ai-overview-check.ts` doesn't pass `loadAsyncAiOverview`, so it reads asynchronous overviews as empty. Fix it before relying on its citation log.
+- **Also:** fixed 10 Nov 2026: `ai-overview-check.ts`, `geo-watchlist-check.ts` and `coach-funnel-rank-check.ts` now load asynchronous overviews, and recognise sites that DataForSEO returns as `google.com/goto` redirects. Rows from then on say "async AIO" in `ai-citation-log.csv`. Earlier rows under-count AI Overviews and citations, so don't compare across that date. The watchlist treats its next check of each keyword as a new baseline.
 
 ### Watch items from 18 Oct
 
