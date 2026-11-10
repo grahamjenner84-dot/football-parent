@@ -8,6 +8,20 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 
 - **What:** Football DNA says its prices rise on 1 January. Re-check the membership page and update `/coaching/football-dna-review` (price table, verdict box `price`/`priceUnit`, title and description, which name £7.99 and £59.99) and the FootballDNA line in `/coaching/best-grassroots-football-apps`.
 - **Baseline (checked 10 Nov 2026):** £7.99 a month, £59.99 a year, no free trial, 14-day money-back on the annual plan only, a free section of 56 items, club membership for 5+ coaches priced on request.
+- **Since 10 Nov:** the title no longer names a price. The price is in the meta description, the opening paragraph, the "How Much Does Football DNA Cost?" first sentence, the price table, the FAQs and the verdict box's `price` and `offers` props (the schema now has both plans).
+
+### Football DNA review: when the noindex comes off
+
+- **What:** the review (`/coaching/football-dna-review`) stays noindex until Football DNA have seen it. When Graham lifts it, the links into the review go in with that change, not before (the same reasoning as a1574a8). Paste-ready text is in `seo-data/research/football-dna-keywords-2026-11-10.md`, section 5.6:
+  - **Apps roundup, FootballDNA section:** restore "For the price, what the filmed sessions add and where it falls short, see our full [Football DNA review](/coaching/football-dna-review)."
+  - **FutureFit Part 1, intro paragraph:** after "...how to deliver it.", add "Our [Football DNA review](/coaching/football-dna-review) covers the price, the curriculums and how the filmed sessions work at training."
+  - **Paul Barry academy-life interview, intro:** after "...adapt a session for your group.", add "We've reviewed the platform in full, after a year of paid use, in our [Football DNA review](/coaching/football-dna-review)."
+  - **`/coaching` hub:** add the review card (see the comment in `app/coaching/football-dna-review/page.tsx`).
+- **Ask Football DNA while they review it:**
+  - Is the curriculum 36 weeks in six 6-week blocks, with three practices per session? So far this only comes from their social posts. If they confirm it, add it to "The Football DNA Curriculum: A Week-by-Week Plan".
+  - Can one membership be used on more than one device? A Junior Grassroots Hub thread asks this. If they answer, it becomes an FAQ.
+- **Not done, decide later:** a new meta description (5.2), the FAQs "Is there a free Football DNA curriculum?" and "Is Football DNA the same as the FA's England DNA?" (the second needs the thefa.com Boot Room URL), the SoftwareApplication `@id` / BlogPosting `about` link, and aligning "thousands of drills" in the two interviews with "more than 1,000".
+- **Watch from indexing:** "football dna" (1,600/mo, KD 20), "football dna app" (110), "football dna review" (20), "football dna cost" and "price". No independent written review ranked in the top 20 for any of them on 10 Nov.
 
 ### AI Overview citations on the app searches (re-check about 8 Nov 2026)
 
