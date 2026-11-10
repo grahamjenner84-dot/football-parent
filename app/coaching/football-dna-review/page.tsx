@@ -9,7 +9,7 @@ import { generateSEO } from "@/lib/seo";
 // review link back in the apps roundup.
 export const metadata = {
   ...generateSEO({
-  title: "Football DNA App Review: Is It Worth £7.99 a Month? | Football Parent",
+  title: "Football DNA App Review: Is It Worth It? A Coach's Verdict",
   description: "Football DNA costs £7.99 a month or £59.99 a year. A grassroots coach's review after a year of paid use: filmed sessions, curriculums and who should pay.", // must be word-for-word identical to the mdx frontmatter description
   path: "/coaching/football-dna-review",
   }),
