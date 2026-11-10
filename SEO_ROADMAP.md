@@ -4,6 +4,11 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 
 ## Due
 
+### Football DNA prices (re-check early January 2027)
+
+- **What:** Football DNA says its prices rise on 1 January. Re-check the membership page and update `/coaching/football-dna-review` (price table, verdict box `price`/`priceUnit`, title and description, which name £7.99 and £59.99) and the FootballDNA line in `/coaching/best-grassroots-football-apps`.
+- **Baseline (checked 10 Nov 2026):** £7.99 a month, £59.99 a year, no free trial, 14-day money-back on the annual plan only, a free section of 56 items, club membership for 5+ coaches priced on request.
+
 ### AI Overview citations on the app searches (re-check about 8 Nov 2026)
 
 - **What:** re-pull the AI Overviews on the 8 app searches ("equal playing time app grassroots football", "fair playing time football coaches app", "fair playing time app", "equal game time app", "football substitution app", "playing time app football", "grassroots football substitution app", "equal playing time app") and see whether footballparent.co.uk or the Coach App's Play listing is now cited.
