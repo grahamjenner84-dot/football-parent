@@ -14,6 +14,13 @@ type ReviewVerdictProps = {
   price?: string;
   // e.g. "per month". Shown after the price.
   priceUnit?: string;
+  // Schema only: every plan, as a JSON array of {"price": "7.99",
+  // "billingDuration": "P1M"} (ISO 8601 durations). Replaces the single
+  // Offer built from `price` when set; the box still shows `price`.
+  offers?: string;
+  // Schema only: JSON array of the product's official listings (App Store,
+  // Google Play), so the review is tied to the right app.
+  sameAs?: string;
   // schema.org applicationCategory, e.g. "SportsApplication".
   applicationCategory?: string;
   operatingSystem?: string;
@@ -41,6 +48,38 @@ function parseList(value?: string): string[] {
   }
 }
 
+type PlanOffer = { price: string; billingDuration?: string };
+
+function parseOffers(value?: string): PlanOffer[] {
+  if (!value) return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed)
+      ? parsed.filter((o): o is PlanOffer => !!o && typeof o.price === "string")
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+function offerSchema({ price, billingDuration }: PlanOffer) {
+  return {
+    "@type": "Offer",
+    price,
+    priceCurrency: "GBP",
+    ...(billingDuration
+      ? {
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            price,
+            priceCurrency: "GBP",
+            billingDuration,
+          },
+        }
+      : {}),
+  };
+}
+
 function itemList(items: string[]) {
   return {
     "@type": "ItemList",
@@ -65,6 +104,8 @@ export default function ReviewVerdict({
   cons,
   price,
   priceUnit,
+  offers,
+  sameAs,
   applicationCategory = "SportsApplication",
   operatingSystem,
   url,
@@ -73,6 +114,8 @@ export default function ReviewVerdict({
 }: ReviewVerdictProps) {
   const prosList = parseList(pros);
   const consList = parseList(cons);
+  const planOffers = parseOffers(offers);
+  const sameAsList = parseList(sameAs);
   const score = Number(rating);
   const fullStars = Math.floor(score);
   const halfStar = score - fullStars >= 0.5;
@@ -84,9 +127,12 @@ export default function ReviewVerdict({
     applicationCategory,
     ...(operatingSystem ? { operatingSystem } : {}),
     ...(url ? { url } : {}),
-    ...(price
-      ? { offers: { "@type": "Offer", price, priceCurrency: "GBP" } }
-      : {}),
+    ...(sameAsList.length ? { sameAs: sameAsList } : {}),
+    ...(planOffers.length
+      ? { offers: planOffers.map(offerSchema) }
+      : price
+        ? { offers: { "@type": "Offer", price, priceCurrency: "GBP" } }
+        : {}),
     review: {
       "@type": "Review",
       author: AUTHOR,
