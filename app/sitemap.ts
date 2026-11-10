@@ -22,6 +22,16 @@ const siteUrl = 'https://www.footballparent.co.uk'
 // a level deeper (/football-gear/boots/<slug>) while their MDX still lives
 // flat in content/football-gear. Same reasoning as getAllArticleSlugs() in
 // lib/content.ts. Slugs are unique across categories, so this is unambiguous.
+// Articles with `noindex: true` in frontmatter are live but hidden from
+// Google, so they stay out of the sitemap too. Keyed by slug, as above.
+function buildNoindexSlugs(): Set<string> {
+  return new Set(
+    getAllArticles()
+      .filter((article) => article.frontmatter.noindex)
+      .map((article) => article.slug)
+  )
+}
+
 function buildLastModifiedIndex(): Map<string, Date> {
   const index = new Map<string, Date>()
 
@@ -40,8 +50,14 @@ function buildLastModifiedIndex(): Map<string, Date> {
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModifiedBySlug = buildLastModifiedIndex()
+  const noindexSlugs = buildNoindexSlugs()
 
-  return routes.map((route) => {
+  return routes
+    .filter((route) => {
+      const slug = route.split('/').filter(Boolean).pop()
+      return !(slug && noindexSlugs.has(slug))
+    })
+    .map((route) => {
     const slug = route.split('/').filter(Boolean).pop()
     const lastModified = slug ? lastModifiedBySlug.get(slug) : undefined
 

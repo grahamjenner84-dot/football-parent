@@ -37,7 +37,8 @@ export function getSearchIndex(): SearchIndexEntry[] {
         article.frontmatter.title &&
         article.frontmatter.description &&
         article.frontmatter.category &&
-        article.frontmatter.categoryUrl
+        article.frontmatter.categoryUrl &&
+        !article.frontmatter.noindex
     )
     .map((article) => ({
       title: article.frontmatter.title,

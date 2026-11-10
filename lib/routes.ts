@@ -143,6 +143,7 @@ export const routes = [
   '/coaching/best-football-formations-by-age-group',
   '/coaching/football-team-spreadsheet',
   '/coaching/best-grassroots-football-apps',
+  '/coaching/football-dna-review',
 
   // Coach App
   '/football-parent-coach-app',
