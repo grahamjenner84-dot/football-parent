@@ -5,7 +5,7 @@ import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
   title: "Football DNA App Review: Is It Worth £7.99 a Month? | Football Parent",
-  description: "Football DNA costs £7.99 a month for 1,000+ filmed sessions. A grassroots U8 coach's review: what you get, what's missing, and who should pay for it.", // must be word-for-word identical to the mdx frontmatter description
+  description: "Football DNA costs £7.99 a month or £59.99 a year. A grassroots coach's review after a year of paid use: filmed sessions, curriculums and who should pay.", // must be word-for-word identical to the mdx frontmatter description
   path: "/coaching/football-dna-review",
 });
 
