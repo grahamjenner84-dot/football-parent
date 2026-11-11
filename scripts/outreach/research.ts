@@ -62,6 +62,7 @@ import { migrate } from "../seo/database/migrate";
 import { getDb } from "../seo/database/db";
 import { ensureEnvLoaded } from "../seo/shared/env";
 import { googleOrganicSerp } from "../seo/dataforseo/endpoints/serp";
+import { siteOf } from "../seo/dataforseo/serp-features";
 import { contentParsingLive } from "../seo/dataforseo/endpoints/on_page";
 import { backlinksList, backlinksSummary, bulkRanks, referringDomains } from "../seo/dataforseo/endpoints/backlinks";
 import { compareStrength, toStrength, type OurStrength } from "../../lib/outreach/strength";
@@ -113,6 +114,25 @@ async function ourStrength() {
   if (res.environment !== "live") return { environment: res.environment, note: "sandbox: not saved", ...r };
   return writeOurStrength({ rank: r.rank ?? 0, referringDomains: r.referring_domains ?? null, backlinks: r.backlinks ?? null, source: "DataForSEO backlinks/summary" });
 }
+// Domain strength for a list of sites (one bulk_ranks call), on the same
+// 0-100 scale as our-strength, with the comparison against ours. Used to
+// judge Q&A and collaboration partners, where the site's size is the point.
+async function domainRanks(domains: string[]) {
+  const hosts = [...new Set(domains.map((d) => d.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/.*$/, "").toLowerCase()))];
+  const rr = await bulkRanks(hosts.slice(0, 1000), { ...requestOpts() });
+  if (rr.error) throw new Error(rr.error);
+  const rows = (rr.data?.tasks?.[0]?.result?.[0] as { items?: { target?: string; rank?: number }[] } | undefined)?.items ?? [];
+  const ours = readOurStrength();
+  return {
+    environment: rr.environment,
+    cost: rr.cost,
+    ours: ours ? toStrength(ours.rank) : null,
+    sites: rows
+      .map((r) => ({ domain: (r.target ?? "").replace(/^www\./, ""), rank: r.rank ?? null, strength: toStrength(r.rank ?? null), vsUs: ours ? compareStrength(toStrength(r.rank ?? null), toStrength(ours.rank)) : null }))
+      .sort((a, b) => (b.rank ?? 0) - (a.rank ?? 0)),
+  };
+}
+
 const BUDGET_USD = Number(process.env.OUTREACH_RESEARCH_BUDGET_USD || 5);
 
 function liveReady(): boolean {
@@ -135,7 +155,7 @@ function requestOpts() {
   return { workflow: WORKFLOW, environment: live ? ("live" as const) : ("sandbox" as const), confirmLive: live };
 }
 
-type SerpItem = { type?: string; url?: string; title?: string; description?: string; rank_absolute?: number };
+type SerpItem = { type?: string; url?: string; title?: string; description?: string; rank_absolute?: number; domain?: string; breadcrumb?: string; website_name?: string };
 
 async function search(query: string, depth: number) {
   const res = await googleOrganicSerp(query, { ...requestOpts(), depth });
@@ -147,8 +167,15 @@ async function search(query: string, depth: number) {
     cache: res.cacheStatus,
     cost: res.cost,
     results: items.map((i) => {
-      const q = assessProspect({ url: i.url!, title: i.title, context: i.description });
-      return { rank: i.rank_absolute, url: i.url, title: i.title, description: i.description, verdict: q.verdict, type: q.type, reasons: q.reasons };
+      // Google now often returns google.com/goto redirect links in place of
+      // the page address. The redirect can't be read, so report the real site
+      // (from the domain or breadcrumb) and gate on that; the page itself has
+      // to be found from the breadcrumb or the site before a `read`.
+      const site = siteOf(i);
+      const hidden = /^https?:\/\/(www\.)?google\.com\/goto/i.test(i.url!);
+      const gateUrl = hidden && site ? `https://${site}/` : i.url!;
+      const q = assessProspect({ url: gateUrl, title: i.title, context: i.description });
+      return { rank: i.rank_absolute, url: i.url, site, ...(hidden ? { addressHidden: true, breadcrumb: i.breadcrumb, siteName: i.website_name } : {}), title: i.title, description: i.description, verdict: q.verdict, type: q.type, reasons: q.reasons };
     }),
   };
 }
@@ -388,6 +415,7 @@ async function main() {
     out = await linkGraph(args[0], Number(value("--depth") ?? 30), Number(value("--peers") ?? 8), Number(value("--linkers") ?? 25));
   else if (cmd === "competitor-map") out = competitorMap();
   else if (cmd === "our-strength") out = await ourStrength();
+  else if (cmd === "ranks" && args.length) out = await domainRanks(args);
   else if (cmd === "spend") out = { workflow: WORKFLOW, live: liveReady(), spentLast24hUsd: Number(spentLast24h().toFixed(4)), budgetUsd: BUDGET_USD };
   else {
     console.error("Usage: research.ts search \"<query>\" [--depth 20] | read <url> [--js] | our-pages [--refresh] | linkers <url> [--limit 50] | link-graph \"<keyword>\" [--depth 30] [--peers 8] [--linkers 25] | competitor-map | our-strength | spend");
