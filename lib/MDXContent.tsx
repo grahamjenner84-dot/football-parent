@@ -8,6 +8,7 @@ import ExpertOpinion from "@/app/components/mdx/ExpertOpinion";
 import ExpertQA, { ExpertQAItem } from "@/app/components/mdx/ExpertQA";
 import AffiliateDisclosure from "@/app/components/mdx/AffiliateDisclosure";
 import GearPicks from "@/app/components/mdx/GearPicks";
+import ProductPhoto from "@/app/components/mdx/ProductPhoto";
 import InstagramEmbed from "@/app/components/mdx/InstagramEmbed";
 import InstagramPromo from "@/app/components/mdx/InstagramPromo";
 import ToolCallout from "@/app/components/mdx/ToolCallout";
@@ -37,6 +38,7 @@ const components = {
   ExpertQAItem,
   AffiliateDisclosure,
   GearPicks,
+  ProductPhoto,
   InstagramEmbed,
   InstagramPromo,
   ToolCallout,
@@ -192,6 +194,7 @@ const comicComponents = {
   InstagramPromo: () => <InstagramPromo design="comic" />,
   InfoTable: (props: React.ComponentProps<typeof InfoTable>) => <InfoTable {...props} design="comic" />,
   GearPicks: (props: React.ComponentProps<typeof GearPicks>) => <GearPicks {...props} design="comic" />,
+  ProductPhoto: (props: React.ComponentProps<typeof ProductPhoto>) => <ProductPhoto {...props} design="comic" />,
   VideoEmbed: (props: React.ComponentProps<typeof VideoEmbed>) => <VideoEmbed {...props} design="comic" />,
   ReviewVerdict: (props: React.ComponentProps<typeof ReviewVerdict>) => <ReviewVerdict {...props} design="comic" />,
   AppScreenshots: (props: React.ComponentProps<typeof AppScreenshots>) => <AppScreenshots {...props} design="comic" />,

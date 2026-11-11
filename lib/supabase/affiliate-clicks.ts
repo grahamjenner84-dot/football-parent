@@ -110,7 +110,7 @@ export interface AffiliateClickProductLink {
   href: string;
   // The raw anchor text as logged, kept for reference.
   linkText: string;
-  // gear-picks | inline | unknown - which component rendered it.
+  // gear-picks | photo | inline | unknown - which component rendered it.
   placement: string;
   // The article the click came from.
   path: string;

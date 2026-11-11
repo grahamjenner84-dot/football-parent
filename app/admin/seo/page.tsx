@@ -1728,6 +1728,7 @@ function friendlyGroup(group: string): string {
 function placementLabel(placement: string): string {
   if (placement === "gear-picks") return "Quick picks";
   if (placement === "inline") return "Inline";
+  if (placement === "photo") return "Product photo";
   return placement;
 }
 
