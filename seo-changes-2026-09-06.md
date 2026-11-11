@@ -2348,3 +2348,6 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - `/football-gear/best-football-goals-for-kids`: Q-FOLD Mini 3x2.5ft photo in "One Big Goal or Two Small Ones?", after the ParentNote (`09d0654`). Live traffic page.
 - `/football-gear/christmas-football-gifts-for-kids`: REPLAY Station photo in "A rebounder" (`b3e3116`). No goal photo here, because the ParentNote in the goal section names the Samba goal Graham actually bought.
 - Live 11 Nov 2026 (main `a05ecc6`, which also sets string width/height and caps square photos at 440px). One change per page. Watch 10 to 14 days from 11 Nov: rankings, plus click-out rate per article and `photo` placement clicks on the Amazon clicks tab.
+- 11 Nov 2026, same day, Graham's call: more QuickPlay photos, taking each page to three. This stacks a second change inside the watch window on both pages, so read the 10 to 14 day result as the photos together, not one photo.
+  - `/football-gear/best-football-rebounders-for-kids`: SPOT Rebounder 5x3ft in "Best Football Rebounder Nets", and TEKKERS GS Trainer 6x4ft in "A Goal and Rebounder in One" (`36c8516`).
+  - `/football-gear/best-football-goals-for-kids`: KICKSTER 6x4ft at the end of "What Size Football Goal Does My Child Need?", and Q-FOLD 8x5ft (folds flat) at the end of "Nets, Storage and What Wears Out First" (`0f78168`).
