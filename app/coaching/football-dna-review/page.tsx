@@ -35,7 +35,12 @@ export default async function Page() {
       design={article.frontmatter.design}
       content={article.content}
     >
-      <MDXContent content={article.content} slug={article.slug} design={article.frontmatter.design} />
+      <MDXContent
+        content={article.content}
+        slug={article.slug}
+        design={article.frontmatter.design}
+        coachAppBanner={article.frontmatter.hideBanners ? "none" : undefined}
+      />
     </ArticleLayout>
   );
 }
