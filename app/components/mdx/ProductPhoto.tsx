@@ -20,8 +20,11 @@ type ProductPhotoProps = {
   // Affiliate deep link to the product shown.
   href: string;
   caption?: string;
-  width: number;
-  height: number;
+  // Intrinsic pixel size, so the space is reserved before the image loads.
+  // Strings because next-mdx-remote strips {expression} props from MDX, so
+  // author them as width="1200", not width={1200}.
+  width: number | string;
+  height: number | string;
   // Set by MDXContent on pages using the comic-accent design
   // (lib/comic-design.ts); never authored in MDX.
   design?: "classic" | "comic";
@@ -38,9 +41,18 @@ export default function ProductPhoto({
   design = "classic",
 }: ProductPhotoProps) {
   const comic = design === "comic";
+  const w = Number(width) || 0;
+  const h = Number(height) || 0;
+  // A square or portrait photo at full column width runs to ~700px tall and
+  // swamps the text around it, so those are capped and centred; wide photos
+  // use the full width.
+  const compact = w > 0 && h >= w * 0.8;
 
   return (
-    <figure className="my-8" data-affiliate-placement="photo">
+    <figure
+      className={`my-8 ${compact ? "mx-auto max-w-[440px]" : ""}`}
+      data-affiliate-placement="photo"
+    >
       <a
         href={href}
         {...affiliateLinkProps(href)}
@@ -54,8 +66,8 @@ export default function ProductPhoto({
         <img
           src={src}
           alt={alt}
-          width={width}
-          height={height}
+          width={w || undefined}
+          height={h || undefined}
           loading="lazy"
           decoding="async"
           className="block h-auto w-full"
