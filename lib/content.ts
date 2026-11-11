@@ -19,6 +19,11 @@ export interface ArticleFrontmatter {
   // out of the sitemap and the site search. Used to show a partner an
   // article before it goes to Google. Remove the line to publish properly.
   noindex?: boolean;
+  // No mid-article app banner (Coach App or Progress). Set on reviews
+  // (Graham, 11 Nov 2026), where a promo for our own app sits badly next
+  // to a verdict on someone else's. The page.tsx must pass it through as
+  // coachAppBanner="none", see app/coaching/football-dna-review/page.tsx.
+  hideBanners?: boolean;
 }
 
 export interface Article {
