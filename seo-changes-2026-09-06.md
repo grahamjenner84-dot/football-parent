@@ -2347,4 +2347,4 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - `/football-gear/best-football-rebounders-for-kids`: REPLAY Station photo (flat setting, returning a pass) in "Best Football Rebound Boards", before the ParentNote (`8e955e5`). Live traffic page.
 - `/football-gear/best-football-goals-for-kids`: Q-FOLD Mini 3x2.5ft photo in "One Big Goal or Two Small Ones?", after the ParentNote (`09d0654`). Live traffic page.
 - `/football-gear/christmas-football-gifts-for-kids`: REPLAY Station photo in "A rebounder" (`b3e3116`). No goal photo here, because the ParentNote in the goal section names the Samba goal Graham actually bought.
-- One change per page. Watch 10 to 14 days from the deploy date: rankings, plus click-out rate per article and `photo` placement clicks on the Amazon clicks tab.
+- Live 11 Nov 2026 (main `a05ecc6`, which also sets string width/height and caps square photos at 440px). One change per page. Watch 10 to 14 days from 11 Nov: rankings, plus click-out rate per article and `photo` placement clicks on the Amazon clicks tab.
