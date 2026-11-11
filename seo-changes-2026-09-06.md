@@ -2340,3 +2340,11 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
   - Schema: `ReviewVerdict` gains optional `offers` and `sameAs` props. The review's SoftwareApplication now lists the £7.99 monthly and £59.99 annual plans, plus its App Store and Google Play listings (`3b48ff6`).
   - Links out: both Paul Barry interviews, and the coaching qualifications guide from the England Football Learning alternative (`da163f6`). Graham's edits on main (e133e4d) removed the partner paragraph from "How We Reviewed It", so at merge the Paul Barry links went into the intro sentence that still names him, and "What Is Football DNA?" is the renamed version of his rewritten, moved section. The links into the review are held for the noindex lift (`SEO_ROADMAP.md`).
 - Article roadmap: playing out from the back drills (High), a session plan template page (Medium) and 1v1 drills for kids (Low, unchecked) (`d5c333f`).
+
+## 11 Nov 2026: QuickPlay product photos (one per article, in the text)
+
+- QuickPlay asked for product images on the blog and gave Graham written permission to use theirs. Photos taken from quickplaysport.com's own product images, converted to WebP in `public/gear/quickplay/`. They go in the article text beside the paragraph about the product, with a caption, not in the quick picks box, so the picks list stays even next to Amazon picks (whose images we cannot host). New `ProductPhoto` component (`ffae92c`): the photo links to the same Awin deep link as the product's text link, and its clicks report as placement `photo` on the Amazon clicks tab.
+- `/football-gear/best-football-rebounders-for-kids`: REPLAY Station photo (flat setting, returning a pass) in "Best Football Rebound Boards", before the ParentNote (`8e955e5`). Live traffic page.
+- `/football-gear/best-football-goals-for-kids`: Q-FOLD Mini 3x2.5ft photo in "One Big Goal or Two Small Ones?", after the ParentNote (`09d0654`). Live traffic page.
+- `/football-gear/christmas-football-gifts-for-kids`: REPLAY Station photo in "A rebounder" (`b3e3116`). No goal photo here, because the ParentNote in the goal section names the Samba goal Graham actually bought.
+- One change per page. Watch 10 to 14 days from the deploy date: rankings, plus click-out rate per article and `photo` placement clicks on the Amazon clicks tab.
