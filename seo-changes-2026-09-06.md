@@ -2392,7 +2392,7 @@ Shortlist put to Graham: coach gifts inbound link from `what-is-grassroots-footb
 
 **`/parent-guides/what-is-grassroots-football` (`c99ed2d`): one sentence added** at the end of the volunteer coaches paragraph ("I've seen lots of grassroots coaches who are brilliant..."): "If your child has one of those coaches, our round-up of [football gifts for coaches](/parent-guides/gifts-for-football-coaches) has Christmas and end of season ideas the team can club together for." Additive, nothing else changed. Live traffic source page (16,884 impressions, 49 clicks, position 5.6 in the 28 days to 10 Nov), inside its watch windows from the 5 Nov wide feet link and the 7 Nov comic batch: Graham's call (13 Nov), for the December gift peak.
 - **Target baseline** (`/parent-guides/gifts-for-football-coaches`, 28 days to 10 Nov, published 23 Oct): 741 impressions, 14 clicks, position 8.4, CTR 1.9%. "gifts for football coaches" 11.7, "football coach gifts" 12.5, "football gift ideas for coaches" 13.9, "gifts for football coach" 13.0, "coach gifts" 16.9. Third inbound link (others: Christmas gifts for kids, winter gloves).
-- **Read:** target head terms into the top 10 by ~27 Nov. Revert if the source page's position is worse than 6.5 for a week (net of the site). Watch until ~27 Nov.
+- **Read:** under the tiered rule (`1599401`) this is Tier 0 on the source page (a link from it, no watch) and Tier 1 on the gifts page, inside its Nov-Dec season window: read after 7 days, about 20 Nov (live 13 Nov). Target head terms into the top 10 by ~27 Nov. Revert if the source page's position is worse than 6.5 for a week (net of the site).
 
 ## 13 Nov 2026: AI Overview checks (no site change)
 
