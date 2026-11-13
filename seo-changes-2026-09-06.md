@@ -2387,3 +2387,28 @@ Full write-up: `seo-data/exports/weekly-seo-check-2026-11-13.md`. GSC to 10 Nov,
 | 7-11 Nov changes | | see entries | Too early | | 20-25 Nov |
 
 Shortlist put to Graham: coach gifts inbound link from `what-is-grassroots-football` (seasonal, inside that page's watch window, or wait to ~19 Nov); Coach App AI Overview re-check (~$0.03); AI Overview check on the JPL how-to and Fulham decay pages (~$0.024); exact-URL row in `change-impact.ts`.
+
+## 13 Nov 2026: coach gifts, inbound link from what is grassroots football
+
+**`/parent-guides/what-is-grassroots-football` (`c99ed2d`): one sentence added** at the end of the volunteer coaches paragraph ("I've seen lots of grassroots coaches who are brilliant..."): "If your child has one of those coaches, our round-up of [football gifts for coaches](/parent-guides/gifts-for-football-coaches) has Christmas and end of season ideas the team can club together for." Additive, nothing else changed. Live traffic source page (16,884 impressions, 49 clicks, position 5.6 in the 28 days to 10 Nov), inside its watch windows from the 5 Nov wide feet link and the 7 Nov comic batch: Graham's call (13 Nov), for the December gift peak.
+- **Target baseline** (`/parent-guides/gifts-for-football-coaches`, 28 days to 10 Nov, published 23 Oct): 741 impressions, 14 clicks, position 8.4, CTR 1.9%. "gifts for football coaches" 11.7, "football coach gifts" 12.5, "football gift ideas for coaches" 13.9, "gifts for football coach" 13.0, "coach gifts" 16.9. Third inbound link (others: Christmas gifts for kids, winter gloves).
+- **Read:** target head terms into the top 10 by ~27 Nov. Revert if the source page's position is worse than 6.5 for a week (net of the site). Watch until ~27 Nov.
+
+## 13 Nov 2026: AI Overview checks (no site change)
+
+`ai-overview-check.ts`, async overviews, $0.050. Rows in `ai-citation-log.csv`.
+- **Coach App searches (roadmap re-check, due 8 Nov):** 6 of 8 returned (2 errored at DataForSEO), AI Overview on all 6, us cited on none. Same as the 18 Oct baseline: store listings, SubTime, FairPlay Coach, pitchflow, playingtimecalculator.com, Somerset FA cited. The 18 Oct page changes and the 2 Nov header link have not won a citation yet.
+- **`/parent-guides/how-to-get-into-the-jpl` decay:** "jpl trials" has an AI Overview without us; "how to join a jpl team" cites us (#4). Impressions down from ~550 to ~300 a week at a steady 6-7: post-September demand. No edit.
+- **`/academy-pathway/fulham-fc-development-centre-guide` decay:** "fulham development centre" cites us (#2); "fulham academy trials" has an overview without us. Weekly clicks flat at 6-9 since mid-September; the flag is the September peak leaving the window. No edit.
+
+## 13 Nov 2026: `change-impact.ts` reports CTR for the URL alone (`05f455f`)
+
+Tooling only. `getPeriodTotals` gains an `exactUrl` option (default unchanged, so the admin dashboard is unaffected) and `change-impact.ts` prints a "CTR, URL only" row. Page totals include `#fragment` URLs (jump links, AI Overview links), which can carry big impression counts with no clicks: base layers read 0.23% merged vs 0.70% for the URL. **Judge CTR revert rules on the URL-only row from now on.**
+
+## 13 Nov 2026: design impact read (comic-accent design)
+
+Full tables in `seo-data/exports/weekly-seo-check-2026-11-13.md`, section 4. Redesigned pages against the 35 classic Academy Pathway / Trials articles over the same days (page views, 7-day windows; GSC URL only).
+- 3-4 Nov group (13 pages): views +32% vs control +15%, GSC clicks +35% vs +4%. Almost all from `football-scholarships-uk`, which got the David Jervis box the same day; interviews too small to read.
+- 7 Nov batch (43 articles, 5 days): views +9% vs control -2%, GSC clicks -1% vs -10% (3 GSC days). Nothing negative.
+- GPS guide: Amazon click-out 53% over 5 days vs 55% baseline (classic gear guides 33% to 36%). In line, not a drop.
+- Read again 21 Nov as planned, before moving more gear pages.

@@ -70,3 +70,38 @@ Most of the site is inside a watch window (7 Nov comic batch to ~21 Nov, plus th
 - `/academy-pathway` category page slipped 13 to 18 from mid-October, but it is ~300 impressions and ~1 click a week. Not worth a lever.
 - The one `silence` entry is a `#category-2` fragment URL: expected.
 - JPL explainer CTR: not re-raised (memory).
+
+## 3. Follow-ups done the same day (Graham approved 1-4)
+
+**AI Overview checks** (`ai-overview-check.ts`, async overviews, $0.050 actual; "fair playing time app" and "playing time app football" errored at DataForSEO):
+- Coach App searches (roadmap item, baseline 18 Oct: none cite us): AI Overview on all 6 that returned, **we are cited on none**. Cited instead: App Store listings, subtimeapp.com, FairPlay Coach / fairplayfc.co.uk, pitchflow.co.uk, playingtimecalculator.com, somersetfa.com, Google Play, GameChanger, Smartsubs, Facebook. No change since 18 Oct. Related searches keep surfacing "equal playing time calculator" and "playing time calculator", where the calculator page already ranks ~5.
+- `/parent-guides/how-to-get-into-the-jpl`: "jpl trials" (its top query, 216 impr at 7.1) has an AI Overview that does not cite us (juniorpremierleague.com, Bromley, Pompey ITC, Sussex RTC, Sutton United). "how to join a jpl team" has one citing us (#4). Weekly impressions fell from ~550 a week in Aug-Sept to ~300 at a steady position 6-7: that is demand after the September trials window, plus the overview on the main query. **No edit.**
+- `/academy-pathway/fulham-fc-development-centre-guide`: "fulham development centre" AI Overview cites us (#2); "fulham academy trials" has one that does not cite anyone we track. Weekly clicks 6-9 and CTR 1.3-1.6% have been flat since mid-September: the "decay" flag is the September peak dropping out of the window. **No edit.**
+
+## 4. Design impact (comic-accent design)
+
+Method: page views (first-party, 7-day windows so every weekday counts once) and GSC on the URL itself (no fragment rows), redesigned pages against pages still on the classic design over the same days. Academy Pathway / Academy Trials articles (35, classic, waiting on the Progress banner test) are the control for non-gear pages; the 14 classic gear guides are the control for the GPS guide. The header (1 Nov), homepage (3 Nov) and category pages (6 Nov) changed for every page, so the control absorbs them.
+
+**Group A, 13 pages switched 3-4 Nov** (all interviews plus scholarships, academy trials, late developers). Views 27 Oct-2 Nov vs 5-11 Nov; GSC 28 Oct-2 Nov vs 5-10 Nov.
+
+| | Views | Organic views | GSC impr | GSC clicks | CTR | Position |
+|---|---|---|---|---|---|---|
+| Redesigned (13) | 134 → 177 (+32%) | 67 → 87 (+30%) | 2,327 → 2,445 (+5%) | 37 → 50 (+35%) | 1.59% → 2.04% | 5.2 → 4.8 |
+| Control (35 classic) | 1,242 → 1,430 (+15%) | 768 → 814 (+6%) | 22,997 → 22,720 (-1%) | 497 → 519 (+4%) | 2.16% → 2.28% | 5.9 → 6.0 |
+
+Ahead of the control, but nearly all of it is one page: `football-scholarships-uk` 67 → 96 views (organic 42 → 68), which got the David Jervis expert box the same day, so the gain can't be credited to the design. The interviews have 0-20 views a week each: too small to read.
+
+**Group B, 43 articles switched 7 Nov (22:33 UTC)**. Views 1-5 Nov vs 8-12 Nov (Sun-Thu both sides); GSC 1-3 Nov vs 8-10 Nov (only 3 days).
+
+| | Views | Organic views | GSC impr | GSC clicks | CTR | Position |
+|---|---|---|---|---|---|---|
+| Redesigned (43) | 538 → 587 (+9%) | 313 → 347 (+11%) | 9,779 → 9,820 (0%) | 155 → 153 (-1%) | 1.59% → 1.56% | 6.6 → 7.1 |
+| Control (35 classic) | 1,057 → 1,037 (-2%) | 618 → 604 (-2%) | 12,295 → 11,734 (-5%) | 308 → 277 (-10%) | 2.51% → 2.36% | 5.9 → 6.1 |
+
+About 10 points ahead of the control on views and 9 on GSC clicks after 5 days. The blended position slipping 6.6 to 7.1 on 3 days of GSC is not readable yet (impressions flat, CTR flat). Nothing negative. Baseline in the log was ~520 views a week; the 5-day pace is ~820 a week (part of that is the site's November growth).
+
+**GPS trackers guide (first gear page on the comic design, 7 Nov).** Views 51 → 105, GSC clicks 20 → 43, Amazon clicks 32 → 56. Click-out rate (Amazon clicks per view) 63% → 53% over these 5 days, against the 55% 28-day baseline in the log; the classic gear guides went 33% → 36%. In line with its baseline, not a drop, but 5 days of ~100 views is thin: read again 21 Nov as planned before moving more gear pages.
+
+**Hub pages.** Homepage 85 → 135 views in the week after its 3 Nov redesign. Category pages are 5-40 views a week each (no readable change). The Coach App page 15 → 43 is the header link pointing at it from 2 Nov, not its design.
+
+**Verdict:** no sign of harm anywhere; small positive signs on the 7 Nov batch against the control. Read again 21 Nov (14 days, GSC to 18 Nov) before the gear rollout decision.
