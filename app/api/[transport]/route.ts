@@ -5,6 +5,7 @@ import { addToContentQueue } from "@/lib/supabase/content-queue";
 import { getInstagramPerformance } from "@/lib/supabase/instagram-performance";
 import { getPageViewStats, getPageViewCountryStats, getBannerVariantStats } from "@/lib/supabase/page-views";
 import { getCoachAppFunnel } from "@/lib/supabase/coach-app-funnel";
+import { getCalculatorPlans } from "@/lib/supabase/calculator-plans";
 import { getProgressFunnel } from "@/lib/supabase/progress-funnel";
 import { getAffiliateClickStats } from "@/lib/supabase/affiliate-clicks";
 import {
@@ -225,6 +226,22 @@ const handler = createMcpHandler(
             byDay: calculatorSteps.byDay.map((d) => ({ date: d.date, count: d.count, byPath: d.topPaths })),
           },
         };
+        return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
+
+    server.registerTool(
+      "get_calculator_plans",
+      {
+        title: "Get game time calculator plans",
+        description:
+          "What coaches set up in the public game time calculator (/coaching/equal-playing-time-calculator and the full-screen /coach-app/game-time-calculator), from the calculator_plans table in football-parent-social. One plan per page load, as it stood when the coach stopped changing settings. Returns: byFormat (3v3 to 11v11, each with ageHint, the usual age group for that format, since the calculator has no age field), squadSize and benchSize (median and distribution), matchSetup (halves/quarters x minutes), rotation (changeWindowsPerGame: planned change points per game, where 1 = half time only; stintsPerPeriod; breaksOnlyShare; median subs planned; median minutes spread between most and least played; share rotating positions, rotating the keeper, naming a fixed keeper), limits (max subs, minimum time per player), customisedShare/keptDefaults/customisedSettings (which settings coaches changed from the format defaults; the calculator opens on 5v5, so an uncustomised 5v5 plan may be a coach who never looked), where (embedded on the article vs full screen), returningVisits, and byDay (UK days). Anonymous: no names, ids or player positions are stored. Counted from the calculator release that started sending them (since).",
+        inputSchema: {
+          days: z.number().int().min(1).optional().describe("How many days back to include. Defaults to 30."),
+        },
+      },
+      async ({ days }) => {
+        const result = await getCalculatorPlans(days ?? 30);
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
       }
     );
