@@ -4,6 +4,14 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 
 ## Due
 
+### External links won: read about 11 Dec 2026
+
+- **What:** a 4 to 5 week read on the pages that external sites now link to, so any movement is put down to the right cause. Links take longer to show than on-page edits, so don't judge these at 7 to 14 days.
+- **Football DNA (4 Nov):** `/coaching/equal-playing-time-in-grassroots-football` and `/parent-guides/what-is-grassroots-football`. Compare 28 days to the read date against 28 days to 3 Nov (`compare_search_console_periods` / `inspect_page`). Baseline for what-is-grassroots-football is in the 5 Nov change log entry; the equal-playing-time page has none logged, so use the 28 days to 3 Nov. Confounded: what-is-grassroots-football's GearPicks changed on 3 Nov.
+- **Premier Football UK (13 Nov):** the David Jervis interview, `/academy-trials/what-happens-at-academy-trials`, `/academy-pathway/football-scholarships-uk`, `/football-development/late-developers-in-football`. Baselines in the 13 Nov change log entry. Confounded: all three articles got an expert box on 3 Nov.
+- **Also check:** visits arriving from footballdna.co.uk and premierfootballuk.com in `page_views`, and that every link still has no `nofollow` or `sponsored` (the Football DNA ones are still unchecked, see "Partnership routes for links").
+- **Expectation:** one or two links from small sites rarely move rankings much on their own. The point is a record, not a clear before and after.
+
 ### Football DNA prices (re-check early January 2027)
 
 - **What:** Football DNA says its prices rise on 1 January. Re-check the membership page and update `/coaching/football-dna-review` (price table, verdict box `price`/`priceUnit`, title and description, which name £7.99 and £59.99) and the FootballDNA line in `/coaching/best-grassroots-football-apps`.

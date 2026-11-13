@@ -2431,3 +2431,22 @@ Research: `seo-data/research/boots-keywords-2026-11-13.md`. The "best ... footba
 - **Two FAQs from People Also Ask** (`1d785cd`): "What are the best football boots for a 5-year-old?" (easy-fasten moulded, links the Nike Jr Vapor Club velcro search) and "Do kids need to size up in football boots?" (no: thumb's width, check every few months).
 - **Baseline** (GSC 28 days to ~10 Nov): 7,121 impressions, 38 clicks, average 8.1 (flattered by AI-style long questions at 3 to 7). Head queries: "best kids football boots" 13.9, "best football boots for kids" 16.1, "best childrens football boots" 16.8, "football boots for kids" 23.5, "kids football boots" 27. First-party 60 days: 313 views, 46 Amazon click-outs (15%, vs 51% on the wide feet page).
 - **Read:** 7 days from deploy for positions on the head queries; click-out rate over 14 days. Watch the girls page on "best football boots for kids" too, in case the two swap rather than both rising.
+
+## 13 Nov 2026: Premier Football UK backlinks (external, not ours)
+
+Premier Football UK published `premierfootballuk.com/football-parent-football-trials-interview/` on 13 Nov 2026 (`datePublished` 02:27 UTC). This is the return side of the 4 Nov arrangement above (outreach row `warm:david-jervis`). It has five follow links to us, all `rel="noopener"` only, page `index, follow`, no X-Robots-Tag, self-canonical:
+
+- `/parent-guides/david-jervis-football-trials-interview`, twice: anchors "Football Parent" and "read the full interview on Football Parent"
+- `/academy-trials/what-happens-at-academy-trials`, anchor "what happens at academy trials and how to prepare"
+- `/academy-pathway/football-scholarships-uk`, anchor "how football scholarships work in the UK"
+- `/football-development/late-developers-in-football`, anchor "late developers in football and the players who make it later"
+
+Any movement on these four pages from here may be this link. **Confounded:** all three articles got a David Jervis `ExpertQA` box and the comic design on 3 Nov, so their numbers already include ten days of that change. The scholarships page's position was already improving before then (weekly 6.6 in September, 4.4 week of 4 Nov).
+
+**Baselines** (GSC 28 days to about 10 Nov, prior 28 days in brackets):
+- Interview: 20 impressions, 0 clicks, position 7.4 (published 3 Nov, no prior). Only query: "david jervis" 9.2.
+- `what-happens-at-academy-trials`: 2,346 impressions, 26 clicks, 5.5 (2,339, 28, 5.7). Head queries: "what happens in football trials" 6.4, "how long do football trials last" 10.0, "how do football trials work" 13.9, "academy trials" 43.4, "football academy trials" 68.3.
+- `football-scholarships-uk`: 12,223 impressions, 120 clicks, 5.1 (10,614, 124, 6.1). Head queries: "football scholarships uk" 7.3 (1,426 impr), "football scholarships for 16 year olds" 9.9, "football scholarships" 9.6, "how to get a football scholarship" 8.5.
+- `late-developers-in-football`: 609 impressions, 13 clicks, 4.9 (519, 14, 4.6). "late developer" 13.3, "late developers" 8.4.
+
+**Read:** about 11 Dec, with the Football DNA links from 4 Nov (`SEO_ROADMAP.md`, "External links won").
