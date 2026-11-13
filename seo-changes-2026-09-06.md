@@ -2367,6 +2367,52 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
   - `/football-gear/football-advent-calendars`, Adrenalyn pick and body link: Panini FIFA 365 Adrenalyn XL calendar `B0FXXWVPK9` (unavailable since the 10 Nov check) swapped to `B0FWKPPKBL`, the same calendar, £34.90 (note's "About £36" still holds). Sold by a third-party seller, only 3 left: re-check next week.
 - Watch list (linked variant in stock but low or much of the range out): adidas F50 Sparkfusion League (girls boots, linked colour 12 of 17 sizes in), Nike Legend 10 Academy (wide feet, linked colour 6 of 7 in), adidas Copa Pure IV Club FG and Turf, adidas Predator League FG/SG, BootBuddy cleaner (4 left), SAMBA garden goal (1 left).
 
+## Weekly SEO check 2026-11-13
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-11-13.md`. GSC to 10 Nov, page views to 12 Nov. Site 28 vs 28 days: impressions +41%, clicks +31%, same-query position 8.9 to 8.2. Unlogged: `7d10049` and `0ccf973` (small notes on two interview/guide pages, 3 Nov, no ranking lever). **Tool note:** `change-impact.ts` merges `#fragment` rows into page totals; they carry big impressions and no clicks, so page CTR reads low on pages that gained them (base layers 0.23% merged vs 0.70% on the URL itself). Judge CTR revert rules on the exact URL.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| Chelsea title | 22 Oct | 22ca92a | Keep | CTR 1.62% (rule 1.4%), same-query 4.7 to 4.3, "pre academy" 5.3 to 3.2; clicks -13% vs site +43% | Closed |
+| stats apps title revert | 29 Oct | caa1bf6 | Keep | CTR 2.67% to 3.23%, same-query 15.4 to 8.7 | Closed |
+| base layers title | 29 Oct | 1e3e408 | Keep for now (rule not met on the URL) | Exact-URL weekly CTR 0.9, 0.9 then 0.7, 0.7%; clicks 65 to 55 at flat 8.5; guards fine; thermals 10-11, 0 clicks | Read again 17 Nov |
+| FA format table | 29 Oct | 21d2667 | Worked | Clicks 12 to 37, exact-URL CTR 0.67% to 1.48%, same-query 6.6 to 6.2 | Closed |
+| Coach App page | 18 Oct | 8952367 | Too small | 88 impr, 4 clicks; app AI Overview re-check not yet run | Pending ~$0.03 |
+| coach gifts (new) | 23 Oct | 5977598 | Page 2 | 533 impr, 12 clicks, head terms 12-15 | Shortlist |
+| QPR, girls' trials by club, indoor (new) | 24 Oct-1 Nov | | Doing well | QPR 4.6 / 43 clicks; girls' trials 69 clicks, 5.7% CTR | Closed |
+| 1 Nov links (West Ham, soft ground, advent, Veo, Palace) | 1 Nov | see entries | Too early / positive | Soft ground same-query 9.6 to 9.1; Veo 5.8 to 5.6; Palace flat | Read again 16-20 Nov |
+| Leeds title revert | 6 Nov | 1373915 | Too early, looks right | 4 days: CTR 0.45% to 1.23%, clicks 10 to 27 | Read again 20 Nov |
+| playing up FAQ | 6 Nov | 02ec54b | Too early | | Read again 20 Nov |
+| shin pads meta, girls' ages meta | 7 Nov | 6dba33b, bf486a1 | Too early | | Read again 21 Nov |
+| 7-11 Nov changes | | see entries | Too early | | 20-25 Nov |
+
+Shortlist put to Graham: coach gifts inbound link from `what-is-grassroots-football` (seasonal, inside that page's watch window, or wait to ~19 Nov); Coach App AI Overview re-check (~$0.03); AI Overview check on the JPL how-to and Fulham decay pages (~$0.024); exact-URL row in `change-impact.ts`.
+
+## 13 Nov 2026: coach gifts, inbound link from what is grassroots football
+
+**`/parent-guides/what-is-grassroots-football` (`c99ed2d`): one sentence added** at the end of the volunteer coaches paragraph ("I've seen lots of grassroots coaches who are brilliant..."): "If your child has one of those coaches, our round-up of [football gifts for coaches](/parent-guides/gifts-for-football-coaches) has Christmas and end of season ideas the team can club together for." Additive, nothing else changed. Live traffic source page (16,884 impressions, 49 clicks, position 5.6 in the 28 days to 10 Nov), inside its watch windows from the 5 Nov wide feet link and the 7 Nov comic batch: Graham's call (13 Nov), for the December gift peak.
+- **Target baseline** (`/parent-guides/gifts-for-football-coaches`, 28 days to 10 Nov, published 23 Oct): 741 impressions, 14 clicks, position 8.4, CTR 1.9%. "gifts for football coaches" 11.7, "football coach gifts" 12.5, "football gift ideas for coaches" 13.9, "gifts for football coach" 13.0, "coach gifts" 16.9. Third inbound link (others: Christmas gifts for kids, winter gloves).
+- **Read:** under the tiered rule (`1599401`) this is Tier 0 on the source page (a link from it, no watch) and Tier 1 on the gifts page, inside its Nov-Dec season window: read after 7 days, about 20 Nov (live 13 Nov). Target head terms into the top 10 by ~27 Nov. Revert if the source page's position is worse than 6.5 for a week (net of the site).
+
+## 13 Nov 2026: AI Overview checks (no site change)
+
+`ai-overview-check.ts`, async overviews, $0.050. Rows in `ai-citation-log.csv`.
+- **Coach App searches (roadmap re-check, due 8 Nov):** 6 of 8 returned (2 errored at DataForSEO), AI Overview on all 6, us cited on none. Same as the 18 Oct baseline: store listings, SubTime, FairPlay Coach, pitchflow, playingtimecalculator.com, Somerset FA cited. The 18 Oct page changes and the 2 Nov header link have not won a citation yet.
+- **`/parent-guides/how-to-get-into-the-jpl` decay:** "jpl trials" has an AI Overview without us; "how to join a jpl team" cites us (#4). Impressions down from ~550 to ~300 a week at a steady 6-7: post-September demand. No edit.
+- **`/academy-pathway/fulham-fc-development-centre-guide` decay:** "fulham development centre" cites us (#2); "fulham academy trials" has an overview without us. Weekly clicks flat at 6-9 since mid-September; the flag is the September peak leaving the window. No edit.
+
+## 13 Nov 2026: `change-impact.ts` reports CTR for the URL alone (`05f455f`)
+
+Tooling only. `getPeriodTotals` gains an `exactUrl` option (default unchanged, so the admin dashboard is unaffected) and `change-impact.ts` prints a "CTR, URL only" row. Page totals include `#fragment` URLs (jump links, AI Overview links), which can carry big impression counts with no clicks: base layers read 0.23% merged vs 0.70% for the URL. **Judge CTR revert rules on the URL-only row from now on.**
+
+## 13 Nov 2026: design impact read (comic-accent design)
+
+Full tables in `seo-data/exports/weekly-seo-check-2026-11-13.md`, section 4. Redesigned pages against the 35 classic Academy Pathway / Trials articles over the same days (page views, 7-day windows; GSC URL only).
+- 3-4 Nov group (13 pages): views +32% vs control +15%, GSC clicks +35% vs +4%. Almost all from `football-scholarships-uk`, which got the David Jervis box the same day; interviews too small to read.
+- 7 Nov batch (43 articles, 5 days): views +9% vs control -2%, GSC clicks -1% vs -10% (3 GSC days). Nothing negative.
+- GPS guide: Amazon click-out 53% over 5 days vs 55% baseline (classic gear guides 33% to 36%). In line, not a drop.
+- Read again 21 Nov as planned, before moving more gear pages.
+
 ## 13 Nov 2026: gifts guide by age, and two inbound links (season override)
 
 First changes under the tiered watch rule (`1599401`, CLAUDE.md rule 6): Tier 1 changes inside the gifts peak (23 Nov to 20 Dec), read together.
