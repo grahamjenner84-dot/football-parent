@@ -159,12 +159,14 @@ async function main() {
     } else {
       const preEnd = addDays(date, -1);
       const preStart = addDays(date, -len);
-      const [after, before, movers, siteAfter, siteBefore] = await Promise.all([
+      const [after, before, movers, siteAfter, siteBefore, exactAfter, exactBefore] = await Promise.all([
         getPeriodTotals(postStart, postEnd, p),
         getPeriodTotals(preStart, preEnd, p),
         comparePageQueries(pageUrl(p), postStart, postEnd, preStart, preEnd),
         siteGsc(postStart, postEnd),
         siteGsc(preStart, preEnd),
+        getPeriodTotals(postStart, postEnd, p, { exactUrl: true }),
+        getPeriodTotals(preStart, preEnd, p, { exactUrl: true }),
       ]);
       const same = sameQueryPositions(movers);
       console.log(`**Search Console, ${len} days each side:** before ${preStart} to ${preEnd}, after ${postStart} to ${postEnd}${len < days ? ` (short of the ${days}-day target, read again later)` : ""}\n`);
@@ -173,6 +175,9 @@ async function main() {
       console.log(`| Impressions | ${before.impressions} | ${after.impressions} | ${pct(after.impressions, before.impressions)} | ${pct(siteAfter.impressions, siteBefore.impressions)} |`);
       console.log(`| Clicks | ${before.clicks} | ${after.clicks} | ${pct(after.clicks, before.clicks)} | ${pct(siteAfter.clicks, siteBefore.clicks)} |`);
       console.log(`| CTR | ${(before.ctr * 100).toFixed(2)}% | ${(after.ctr * 100).toFixed(2)}% | | ${(siteBefore.ctr * 100).toFixed(2)}% to ${(siteAfter.ctr * 100).toFixed(2)}% |`);
+      // #fragment rows (jump links, AI Overview links) are in the totals above
+      // and can swamp CTR; judge CTR revert rules on this row.
+      console.log(`| CTR, URL only (no #fragment rows) | ${(exactBefore.ctr * 100).toFixed(2)}% (${exactBefore.clicks}/${exactBefore.impressions}) | ${(exactAfter.ctr * 100).toFixed(2)}% (${exactAfter.clicks}/${exactAfter.impressions}) | | |`);
       console.log(`| Avg position (blended) | ${pos(before.avgPosition)} | ${pos(after.avgPosition)} | | |`);
       console.log(`| Same-query position (${same.queries} queries) | ${pos(same.before)} | ${pos(same.after)} | ${same.before !== null && same.after !== null ? (same.before - same.after >= 0 ? "+" : "") + (same.before - same.after).toFixed(1) + " (positive = better)" : ""} | |\n`);
 

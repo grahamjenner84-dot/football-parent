@@ -1338,11 +1338,21 @@ function buildRankingQuality(
 // totals plus a site-wide control over the same windows. Undimensioned for
 // the site total for the same reason as comparePeriods: dimensioned rows
 // don't sum back to the true total.
-export async function getPeriodTotals(start: string, end: string, path?: string): Promise<PeriodTotals> {
+// By default a page's totals include its #fragment URLs (jump links, AI
+// Overview and snippet links), which Search Console reports as separate
+// rows. Those rows can carry large impression counts with almost no clicks,
+// so `exactUrl` gives the URL on its own: use it when judging CTR.
+export async function getPeriodTotals(
+  start: string,
+  end: string,
+  path?: string,
+  opts: { exactUrl?: boolean } = {}
+): Promise<PeriodTotals> {
   assertValidDate("start", start);
   assertValidDate("end", end);
+  const fragment = opts.exactUrl ? "" : "(#.*)?";
   const filters: GscFilter[] | null = path
-    ? [{ dimension: "page", operator: "includingRegex", expression: `^${escapeRegex(siteOrigin() + path)}(#.*)?$` }]
+    ? [{ dimension: "page", operator: "includingRegex", expression: `^${escapeRegex(siteOrigin() + path)}${fragment}$` }]
     : null;
   const rows = await fetchRows(start, end, path ? ["page"] : [], filters);
   let impressions = 0;
