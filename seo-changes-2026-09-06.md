@@ -2360,6 +2360,13 @@ Shortlist put to Graham: Leeds revert; soft ground link from the Christmas gifts
 - Inbound anchor: `/coaching/football-team-spreadsheet`, "the best grassroots football apps" becomes "the best football coach apps" (`04de03a`).
 - Baseline (GSC 28 days to ~9 Nov): best football coaching apps 7.7, football coaching app 10.0, football coaching apps 12.8, football coach app 12.8, best football coach app 14.1, best apps for football coaches 17.7, football coach apps 17.9, apps for football coaches 21.6, best football coaching app 4.5, free football coaching app 6.3.
 
+## 13 Nov 2026: weekly Amazon stock check, link maintenance
+
+- Checked all 66 linked ASINs on Amazon.co.uk in Chrome, with every size and colour variant. No dead pages. Two listings had gone "Currently unavailable", both swapped to another listing of the same product:
+  - `/football-gear/best-footballs-by-age`, Step up pick and two body links: Nike Academy ball `B08TMK2CN4` (CU8047-720, unavailable) swapped to `B08QVV1NC8` (CU8047-100, in stock, 2,019 ratings). No Nike Academy size 4 is in stock on Amazon, so the pick note now says size 5 (Under 14s upwards) and the training-ball paragraph calls it the size 5 step up. Live traffic page: copy change limited to the size claim.
+  - `/football-gear/football-advent-calendars`, Adrenalyn pick and body link: Panini FIFA 365 Adrenalyn XL calendar `B0FXXWVPK9` (unavailable since the 10 Nov check) swapped to `B0FWKPPKBL`, the same calendar, £34.90 (note's "About £36" still holds). Sold by a third-party seller, only 3 left: re-check next week.
+- Watch list (linked variant in stock but low or much of the range out): adidas F50 Sparkfusion League (girls boots, linked colour 12 of 17 sizes in), Nike Legend 10 Academy (wide feet, linked colour 6 of 7 in), adidas Copa Pure IV Club FG and Turf, adidas Predator League FG/SG, BootBuddy cleaner (4 left), SAMBA garden goal (1 left).
+
 ## 13 Nov 2026: gifts guide by age, and two inbound links (season override)
 
 First changes under the tiered watch rule (`1599401`, CLAUDE.md rule 6): Tier 1 changes inside the gifts peak (23 Nov to 20 Dec), read together.

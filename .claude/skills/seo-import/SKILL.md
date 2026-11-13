@@ -47,3 +47,7 @@ everything as unchanged, not silently duplicate or wipe data.
   `duplicates_ignored`, not inserted/updated twice.
 - Every import is logged in the `imports` table (file path, hash, type,
   counts, timestamp) so `/seo-status` can show latest imports.
+
+## Last step: sync to the phone connector
+
+When the run wrote anything to `seo-data/database/seo.db` or `ai-citation-log.csv`, finish with `npm run seo:sync` (from the main checkout, where `seo.db` lives). It pushes the database and citation log to the `seo_*` tables in the football-parent-social Supabase project, which the SEO connector reads from the Claude app on a phone. Say in the report that it ran, or that it failed and why. Skip it for a dry run or a sandbox-only run.

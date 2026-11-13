@@ -18,6 +18,14 @@ import {
 } from "@/lib/google-ads";
 import { getAndroidAppAnalytics, AnalyticsApiError } from "@/lib/firebase-analytics";
 import { getPlayInstallStats, PlayReportsError } from "@/lib/play-installs";
+import { getArticleTracker, getKeywordData, getPastResearch, getAiCitations, getDataforseoSpend } from "@/lib/seo-research/read-tools";
+import { checkSerp, getTrends, findRelatedKeywords, getCompetitorKeywords, getDomainStrength } from "@/lib/seo-research/paid-tools";
+
+// Paid DataForSEO tools share this note so every description says the same
+// thing about cost and the cap.
+const paidNote =
+  " PAID: one live DataForSEO call, logged against the connector's daily spend cap (MCP_DATAFORSEO_BUDGET_USD in Vercel, default $3 per rolling 24 hours). Results are cached, so the same question again within the cache window costs nothing; pass refresh: true only when a fresh answer is really needed. The response's spend block gives the cost, whether it came from cache, and spend so far. At the cap the call is refused and nothing is charged.";
+const refreshSchema = z.boolean().optional().describe("Ignore the cache and make a new paid call. Default false.");
 
 // Google API errors go back word for word, so a rejection is never mistaken
 // for an empty result.
@@ -392,6 +400,164 @@ const handler = createMcpHandler(
       },
       async ({ startDate, endDate, country }) => apiResult(() => getPlayInstallStats({ startDate, endDate, country }))
     );
+
+    // ------------------------------------------------------------------
+    // SEO research data (lib/seo-research). The free tools read the copy of
+    // the PC's SEO database that `npm run seo:sync` pushes to Supabase; each
+    // response's syncedFromPcAt says how fresh it is. The paid tools make
+    // capped DataForSEO calls.
+
+    server.registerTool(
+      "get_article_tracker",
+      {
+        title: "Get the article tracker",
+        description:
+          "The Football Parent article tracker from the SEO database: every tracked page with its primary and secondary keywords, cluster, status (planned = the article roadmap, published, superseded; no status = an existing page), target search volume, priority, notes, and review state (fact-checked, SEO-optimised, expert quotes, personal stories, voice %, inbound internal links). Free. GSC columns are from the last tracker import, not live: use inspect_page for current Search Console numbers.",
+        inputSchema: {
+          status: z.string().optional().describe("Only this status, e.g. 'planned' or 'published'."),
+          search: z.string().optional().describe("Match in the URL, article title, primary keyword or cluster, e.g. 'shin pads'."),
+        },
+      },
+      async ({ status, search }) => apiResult(() => getArticleTracker({ status, search }))
+    );
+
+    server.registerTool(
+      "get_keyword_data",
+      {
+        title: "Get stored keyword research",
+        description:
+          "What the SEO database already knows about a keyword or a page, free: monthly volume, difficulty, intent, CPC, 12-month search history, cluster and notes, and which of our pages target it. Pass keyword to find stored keywords containing that phrase, or page (path or URL) for every keyword tied to that page. An empty result means it was never researched, not that nobody searches it: use get_keyword_metrics (Google Ads, free) for volume, or find_related_keywords (paid) to research around it.",
+        inputSchema: {
+          keyword: z.string().optional().describe("A phrase, e.g. 'astro trainers'."),
+          page: z.string().optional().describe("A page path or URL, e.g. /football-gear/best-shin-pads-for-kids."),
+          limit: z.number().int().min(1).max(100).optional().describe("Most keywords to return, default 25."),
+        },
+      },
+      async ({ keyword, page, limit }) => apiResult(() => getKeywordData({ keyword, page, limit }))
+    );
+
+    server.registerTool(
+      "get_past_research",
+      {
+        title: "Get past keyword-discovery research",
+        description:
+          "Past keyword-discovery runs from the seo-page and seo-content skills, newest first, free: date, the page they were for, seed terms, and the keywords found with volume, difficulty and classification (ruled-out ones are counted, not listed). Filter by a seed-term phrase or a page. Answers 'what did we find when we researched X' before paying for the same research again.",
+        inputSchema: {
+          search: z.string().optional().describe("Phrase in the seed terms, e.g. 'pushy parents'."),
+          page: z.string().optional().describe("Page path or URL the research was for."),
+          limit: z.number().int().min(1).max(40).optional().describe("Most runs to return, default 10."),
+        },
+      },
+      async ({ search, page, limit }) => apiResult(() => getPastResearch({ search, page, limit }))
+    );
+
+    server.registerTool(
+      "get_ai_citations",
+      {
+        title: "Get AI citation history",
+        description:
+          "History of whether Football Parent is cited in Google AI Overviews, the AI answers under People Also Ask questions, and hand-checked ChatGPT and Perplexity answers, free. Returns the latest result per question and platform, what it was at the previous check, which ones changed, and the other sites cited most often; with search, also the GEO watchlist history for matching keywords. Built from ai-citation-log.csv on the PC plus every check_serp run through this connector.",
+        inputSchema: {
+          search: z.string().optional().describe("Phrase in the question/keyword, e.g. 'grassroots'."),
+          platform: z.string().optional().describe("e.g. 'AI Overview', 'PAA', 'ChatGPT', 'Perplexity'."),
+          sinceDays: z.number().int().min(1).max(730).optional().describe("Only checks in the last N days, default 120."),
+          citedOnly: z.boolean().optional().describe("Only questions where we are cited at the latest check."),
+        },
+      },
+      async ({ search, platform, sinceDays, citedOnly }) => apiResult(() => getAiCitations({ search, platform, sinceDays, citedOnly }))
+    );
+
+    server.registerTool(
+      "get_dataforseo_spend",
+      {
+        title: "Get DataForSEO spend",
+        description:
+          "DataForSEO spend, free: the connector's spend in the last 24 hours against its daily cap, by tool, and over 30 days with cache hits and refusals; plus the PC scripts' spend over 30 days by workflow, as of the last sync.",
+        inputSchema: {},
+      },
+      async () => apiResult(() => getDataforseoSpend())
+    );
+
+    server.registerTool(
+      "check_serp",
+      {
+        title: "Check a live Google SERP (AI Overview, People Also Ask)",
+        description:
+          "Live Google UK desktop results for one search: our position and URL, whether an AI Overview shows and whether it cites us (and which other sites it cites), the People Also Ask questions with whether the AI answer under each cites us, related searches, other SERP features, and the top 10-20 results. Each fresh check is added to the AI citation history (get_ai_citations). Cached for 7 days." +
+          paidNote,
+        inputSchema: {
+          keyword: z.string().min(2).max(200).describe("The search, as a parent would type it."),
+          depth: z.number().int().min(10).max(20).optional().describe("Results to fetch, 10 or 20 (default 20)."),
+          refresh: refreshSchema,
+        },
+      },
+      async ({ keyword, depth, refresh }) => apiResult(() => checkSerp({ keyword, depth, refresh }))
+    );
+
+    server.registerTool(
+      "get_trends",
+      {
+        title: "Get Google Trends",
+        description:
+          "Google Trends for up to 5 terms in the UK (web search): relative interest by month, each term's average by calendar month with its peak and quietest months (the seasonality answer, for when to publish or promote), and top and rising related queries. Interest is 0-100 relative to the highest point among the terms given, not search volume. Compare only terms that belong together. Cached for 7 days." +
+          paidNote,
+        inputSchema: {
+          keywords: z.array(z.string().min(2).max(100)).min(1).max(5).describe("1-5 terms to compare."),
+          timeRange: z.enum(["past_12_months", "past_5_years"]).optional().describe("Default past_5_years, which shows the yearly pattern."),
+          refresh: refreshSchema,
+        },
+      },
+      async ({ keywords, timeRange, refresh }) => apiResult(() => getTrends({ keywords, timeRange, refresh }))
+    );
+
+    server.registerTool(
+      "find_related_keywords",
+      {
+        title: "Find related keywords",
+        description:
+          "New keyword research around a seed, UK English, from DataForSEO Labs: mode 'suggestions' (default) gives longer phrases containing the seed (the long tail), mode 'related' gives Google's related searches, which can be different wording for the same need. Each with monthly volume, difficulty, intent and CPC, biggest first. Check get_keyword_data and get_past_research first in case it was researched already. Cached for 30 days." +
+          paidNote,
+        inputSchema: {
+          seed: z.string().min(2).max(100).describe("The seed phrase, e.g. 'football boots for wide feet'."),
+          mode: z.enum(["suggestions", "related"]).optional(),
+          limit: z.number().int().min(10).max(100).optional().describe("Keywords to return, default 50."),
+          refresh: refreshSchema,
+        },
+      },
+      async ({ seed, mode, limit, refresh }) => apiResult(() => findRelatedKeywords({ seed, mode, limit, refresh }))
+    );
+
+    server.registerTool(
+      "get_competitor_keywords",
+      {
+        title: "Get a competitor's ranking keywords",
+        description:
+          "What a domain ranks for in Google UK, biggest searches first: keyword, volume, difficulty, its position and ranking URL, estimated monthly clicks; optionally only keywords containing a phrase. DataForSEO only measures part of the long tail, so pair with check_serp on parent-phrased searches before concluding a site doesn't rank for something. Cached for 14 days." +
+          paidNote,
+        inputSchema: {
+          domain: z.string().min(3).max(200).describe("Domain, e.g. footballdna.co.uk."),
+          contains: z.string().max(100).optional().describe("Only keywords containing this, e.g. 'academy'."),
+          limit: z.number().int().min(10).max(100).optional().describe("Keywords to return, default 50."),
+          refresh: refreshSchema,
+        },
+      },
+      async ({ domain, contains, limit, refresh }) => apiResult(() => getCompetitorKeywords({ domain, contains, limit, refresh }))
+    );
+
+    server.registerTool(
+      "get_domain_strength",
+      {
+        title: "Get a domain's backlink strength",
+        description:
+          "Backlink summary for a domain from DataForSEO: its rank (DataForSEO's own 0-1000 scale), backlinks, referring domains (and nofollow share), broken backlinks and spam score. For sizing up a competitor or outreach prospect against us (footballparent.co.uk). Not comparable with Moz DA or Ahrefs DR. Cached for 30 days." +
+          paidNote,
+        inputSchema: {
+          domain: z.string().min(3).max(200).describe("Domain, e.g. footballparent.co.uk."),
+          refresh: refreshSchema,
+        },
+      },
+      async ({ domain, refresh }) => apiResult(() => getDomainStrength({ domain, refresh }))
+    );
   },
   {},
   {
@@ -405,7 +571,7 @@ const authHandler = withMcpAuth(
   (req, bearerToken) => {
     const expected = process.env.MCP_ACCESS_TOKEN;
     if (!expected || bearerToken !== expected) return undefined;
-    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read", "keyword_planner:read", "android_analytics:read", "play_installs:read"] };
+    return { token: bearerToken, clientId: "graham", scopes: ["seo:read", "content_queue:write", "instagram_performance:read", "page_views:read", "affiliate_clicks:read", "keyword_planner:read", "android_analytics:read", "play_installs:read", "seo_research:read", "dataforseo:capped"] };
   },
   {
     required: true,

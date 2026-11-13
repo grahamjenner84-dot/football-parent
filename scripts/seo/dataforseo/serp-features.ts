@@ -72,7 +72,9 @@ export function isOurResult(item: SiteFields): boolean {
   if (site) return site === TARGET_DOMAIN;
   // Address hidden: match the site name exactly, so "Football Parents UK"
   // groups and similar don't count as us.
-  const name = (item.source ?? item.website_name ?? "").trim().toLowerCase();
+  // Google sometimes shows the bare host as the name instead ("www.footballparent.co.uk",
+  // seen 13 Nov 2026), so drop a leading www. before comparing.
+  const name = (item.source ?? item.website_name ?? "").trim().toLowerCase().replace(/^www\./, "");
   return OUR_SITE_NAMES.has(name);
 }
 
