@@ -2412,3 +2412,13 @@ Full tables in `seo-data/exports/weekly-seo-check-2026-11-13.md`, section 4. Red
 - 7 Nov batch (43 articles, 5 days): views +9% vs control -2%, GSC clicks -1% vs -10% (3 GSC days). Nothing negative.
 - GPS guide: Amazon click-out 53% over 5 days vs 55% baseline (classic gear guides 33% to 36%). In line, not a drop.
 - Read again 21 Nov as planned, before moving more gear pages.
+
+## 13 Nov 2026: gifts guide by age, and two inbound links (season override)
+
+First changes under the tiered watch rule (`1599401`, CLAUDE.md rule 6): Tier 1 changes inside the gifts peak (23 Nov to 20 Dec), read together.
+
+- **`/football-gear/christmas-football-gifts-for-kids` (`60821a2`), Tier 1, additive.** Why: the page shows for the age searches at 10 to 20 (GSC 28 days: "football gifts for 10 year old boy" 14.5, "for 6 year olds" 14.8, "for 9 year olds" 12.8, "for 12 year old boy" 18.3, "childrens football gift ideas" 20.6), and the age section sat near the bottom as four bold paragraphs. Each age paragraph, kept word for word, now sits under an H3 ("Football Gifts for 6 and 7 Year Olds", "...8, 9 and 10 Year Olds", "...11 and 12 Year Olds", "...13 Year Olds and Teenagers") with a "Gift ideas for this age" list built from products already on the page. New H3 "Football Gifts for Girls" (related searches "for 10 year old girl", "kids girls"). Intro "by age" now links to the section. Nothing removed.
+- **Inbound links, Tier 1:** `/football-gear/shin-pads/best-shin-pads-for-kids-football`, end of the kit-setup sentence in "Common Parent Mistakes", anchor "football gifts for kids" (`dd2a5ef`). `/football-gear/boots/best-football-boots-for-wide-feet-kids`, new "Boots as a Christmas present" paragraph in "Buying Tips", anchor "Christmas football presents for kids" (`9850a3d`). These two pages are the busiest buyer pages (60 days: 1,249 and 859 views, 60% and 51% click out). Inbound in-body links to the gifts guide: 8 to 10. Source pages: link out only (Tier 0); the shin pads meta change of ~6 Nov is unaffected.
+- **Baseline, gifts guide** (GSC 28 days to ~10 Nov): 3,650 impressions, 53 clicks, average position 7.6; weekly impressions 233, 359, 468, 848, 1,617 from 7 Oct. First-party 60 days: 142 views, 33 Amazon click-outs (23%).
+- **Read:** 7 days (about 20 Nov), positions on the age queries above plus "football gifts for kids" (12.7) and "football presents for kids" (11.2). Demand doubles into the peak, so judge on positions, not impressions. Title change (Tier 2) only if the age queries have not moved by about 24 Nov.
+- Request indexing for the gifts guide in Search Console after deploy.
