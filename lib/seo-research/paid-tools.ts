@@ -24,6 +24,13 @@ function spendNote(r: PaidResult) {
 
 // ---------------------------------------------------------------- SERP
 
+// DataForSEO now often gives results as google.com/goto redirects; those are
+// long and useless on a phone, so only real addresses are shown.
+function readableUrl(url: string | undefined): string | null {
+  if (!url) return null;
+  return /^https?:\/\/(www\.)?google\.com\/goto/.test(url) ? null : url;
+}
+
 type OrganicItem = SerpItem & {
   rank_group?: number;
   rank_absolute?: number;
@@ -66,7 +73,8 @@ export async function checkSerp(opts: { keyword: string; depth?: number; refresh
   const aio = aiOverview ? citationSummary(aiOverview.references) : null;
   const paa = paaExpandedOverviews.map(({ question, item }) => {
     const c = citationSummary(item.references);
-    return { question, aiAnswerCitesUs: c.cited, ourSourcePosition: c.position, otherSources: c.competitorDomains.slice(0, 5) };
+    return { question, // No references at all means the answer was not loaded, not that it skips us.
+    aiAnswerCitesUs: item.references?.length ? c.cited : null, ourSourcePosition: c.position, otherSources: c.competitorDomains.slice(0, 5) };
   });
 
   // Same rows the PC scripts append to ai-citation-log.csv, so the history
@@ -104,7 +112,7 @@ export async function checkSerp(opts: { keyword: string; depth?: number; refresh
     keyword,
     location: "United Kingdom, English, desktop",
     ourPosition: ours[0]?.rank_group ?? null,
-    ourUrls: ours.map((o) => ({ position: o.rank_group, url: o.url })),
+    ourUrls: ours.map((o) => ({ position: o.rank_group, url: readableUrl(o.url) })),
     aiOverview: aiOverview
       ? {
           present: true,
@@ -124,7 +132,7 @@ export async function checkSerp(opts: { keyword: string; depth?: number; refresh
       position: o.rank_group,
       site: siteLabel(o),
       title: o.title,
-      url: o.url,
+      url: readableUrl(o.url),
       isUs: isOurResult(o),
     })),
     note:

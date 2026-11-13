@@ -9,10 +9,12 @@ function normalise(raw: string): string {
   return raw.toLowerCase().normalize("NFKC").replace(/\s+/g, " ").trim();
 }
 
-// PostgREST's ilike takes * or % as wildcards; strip the characters that
-// would change the filter's meaning.
+// PostgREST's ilike takes * as a wildcard. Characters that would change the
+// filter's meaning are dropped, and each gap between words becomes a
+// wildcard, so "shin pads" also matches "shin-pads" in a URL.
 function likeTerm(raw: string): string {
-  return `%${normalise(raw).replace(/[%_*,()\\]/g, " ").trim()}%`;
+  const words = normalise(raw).replace(/[%_*,()"\\.:]/g, " ").split(/[\s-]+/).filter(Boolean);
+  return `*${words.join("*")}*`;
 }
 
 function pathOf(raw: string): string {
@@ -45,7 +47,7 @@ export async function getArticleTracker(opts: { status?: string; search?: string
   if (opts.status) query = query.eq("status", opts.status);
   if (opts.search?.trim()) {
     const t = likeTerm(opts.search);
-    query = query.or(`url.ilike.${t},article.ilike.${t},primary_keyword.ilike.${t},cluster.ilike.${t}`);
+    query = query.or(`url.ilike.${t},article.ilike.${t},primary_keyword.ilike.${t},secondary_keywords.ilike.${t},cluster.ilike.${t}`);
   }
   const rows = check(await query, "the article tracker") as Array<Record<string, unknown>>;
   const counts: Record<string, number> = {};

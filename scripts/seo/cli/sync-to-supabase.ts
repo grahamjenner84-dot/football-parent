@@ -61,7 +61,10 @@ const MIRRORS: Array<{ table: string; sql: string }> = [
   },
   {
     table: "seo_keyword_metrics",
-    sql: `SELECT id, keyword_id, retrieved_at, search_volume, cpc, competition, keyword_difficulty, search_intent
+    // competition is sometimes a level ("LOW") rather than 0-1 in SQLite; only numbers go up.
+    sql: `SELECT id, keyword_id, retrieved_at, search_volume, cpc,
+            CASE WHEN typeof(competition) IN ('real', 'integer') THEN competition END AS competition,
+            keyword_difficulty, search_intent
           FROM keyword_metrics WHERE is_sandbox = 0`,
   },
   {
