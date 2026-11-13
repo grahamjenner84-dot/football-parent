@@ -191,4 +191,7 @@ a live page, so `CLAUDE.md`'s SEO rules apply:
 - Additive only. Never remove an existing heading, internal link or section
   to make room.
 - Never change the slug of a page that already has impressions.
-- After publishing, that page waits 10 to 14 days before the next change.
+- Swapping a link for an in-stock variant or an equivalent product (the
+  weekly stock check, or a sold-out pick) is maintenance: no watch window,
+  and it never waits for one. Log it and carry on. Adding picks or a new
+  product section follows the watch tiers in `CLAUDE.md` rule 6.
