@@ -38,3 +38,28 @@ Nothing has been sent. None of these sites was on the outreach list or the Exper
 - Instagram handles taken only from links on each site, then follower counts checked on Instagram.
 
 Spend: about $0.11.
+
+## Round 3 (13 Nov): 8 more, with strength
+
+10 new UK searches covered agents, mental health, bio-banding, futsal, scholarships, 1-to-1 coaching, referee abuse, school balance, pre-academy and girls. All 8 below are on the Experts tab.
+
+| # | Who | Strength | Instagram | Contact | Q&A or collab idea | Our page |
+|---|-----|---------|-----------|---------|--------------------|----------|
+| 20 | Rob Anderson, The Athlete Academy (UKSCA Youth Coach of the Year 2024) | 10 | @_theathleteacademy, **26k** | rob@theathleteacademy.uk | Fills the S&C and maturity gap: bio-banding, growth spurts, strength work for under-14s | /football-development/bio-banding-football |
+| 21 | Dr Chris Platts, career planning for young footballers | 16 | X only | info@chrisplatts.co.uk | Scholarships at 16, realistic odds, planning a back-up route | /academy-pathway/football-scholarships-uk |
+| 22 | FAB Academy (scholarships with education) | 24 | @fab_academy, 3k | contact@fabacademy.co.uk | The scholarship route outside club academies | /academy-pathway/football-scholarships-uk |
+| 23 | Socatots (football for ages 0-5) | 20 | @socatots, 2.3k | contact page | Starting age, and signs a child is ready for a team | /academy-pathway/what-age-do-football-academies-recruit |
+| 24 | First Class Football / F2 Academy (Kent and Sussex, futsal centre) | 20 | @firstclassfootballuk, 872 | info@firstclassfootball.com | Futsal, and independent development academies | /parent-guides/are-football-development-centres-worth-it |
+| 25 | Premier Education (school PE and holiday clubs) | 31 | @premiereducationuk, 2.5k | about page | Multi-sport before specialising. Weaker fit | /football-development/how-much-training-is-too-much |
+| 26 | Inform Performance (rehab podcasts) | 19 | @informperformance | via site | Return to play after growth injuries | /football-development/how-much-training-is-too-much |
+| 27 | The Parenting Daily (Lizz Banks; accepts contributed posts) | **43** | @theparentingdaily, 923 | team@theparentingdaily.co.uk | A contributed feature from Graham, not an expert quote. Check whether its links are followed | /parent-guides/what-to-say-after-football-matches |
+
+Ruled out this round:
+- ConnectSport: a sport-for-change charity (CIC), not youth football advice.
+- mummymummymum.com: general family blog.
+- Ignite Sport UK: no contact found.
+- Learn 1to1 Cambridge: redirects off-domain.
+- Storm Futbol: US.
+- CSR Academy: unreadable.
+
+Spend for rounds 2 and 3: about $0.15.
