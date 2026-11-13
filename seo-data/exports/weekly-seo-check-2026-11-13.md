@@ -105,3 +105,16 @@ About 10 points ahead of the control on views and 9 on GSC clicks after 5 days. 
 **Hub pages.** Homepage 85 → 135 views in the week after its 3 Nov redesign. Category pages are 5-40 views a week each (no readable change). The Coach App page 15 → 43 is the header link pointing at it from 2 Nov, not its design.
 
 **Verdict:** no sign of harm anywhere; small positive signs on the 7 Nov batch against the control. Read again 21 Nov (14 days, GSC to 18 Nov) before the gear rollout decision.
+
+## Why the Coach App is not cited on the app searches (looked into 13 Nov)
+
+1. **AI Overviews cite what already ranks.** On each of these searches the cited sites are almost all in the organic top 10 (Somerset FA #2 and belnorth #1 on "equal playing time app"; pitchflow, Playing Time Calculator and Dan's Capers in the top 10 on "equal game time app"). In today's top 19 we appear on one search only: "grassroots football substitution app", at #8 (`/football-parent-coach-app`). We were in none of them on 18 Oct, so that is the first sign of progress. The other five searches that returned have no footballparent.co.uk result in the top 19.
+2. **Search Console agrees.** From 14 Oct to 10 Nov, `/football-parent-coach-app` had about 140 impressions, nearly all from brand and anonymised searches. Its only app search was "grassroots football app", at #27.6. None of the 8 tracked searches shows a single impression on any of our pages. The site's app traffic goes to the apps roundup (`/coaching/best-grassroots-football-apps`, "best football coaching apps" #6.4). The calculator ranks for calculator searches (#5-7), not app searches.
+3. **The overview is a table of named apps.** On "grassroots football substitution app", Google's overview is a table headed "Top Grassroots Football Substitution Apps": FairPlay Coach, FairPlay FC, SubTime, SubNow. Each row is sourced from that app's own homepage or store listing. Every one of them leads its title with a distinct brand name ("FairPlay FC | Grassroots Football Coaching App"). Our page's title is "Fair Playing Time App for Grassroots Football | Coach App": "Coach App" comes last and is a generic phrase, so it doesn't read as a product name. We also have no App Store listing, and Apple listings are cited on 5 of the 6. Forum threads (Reddit, Facebook) fill the rest, and Facebook alone is cited on "equal playing time app grassroots football".
+
+**What would move it** (not done, each would be its own lever after the watch window):
+
+- Rank the page in the top 10 on more of these searches. The header link from 2 Nov is the main lever already in place.
+- Get the app named on third-party "best apps" lists that rank, such as sportplan.net's "Best Free Apps for Grassroots Football Teams in 2026" (#6 on the search above). Outreach could target these.
+- Put a distinctive app name first in the title on the next title change.
+- Re-check about 4 Dec.
