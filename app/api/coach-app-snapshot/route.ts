@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     const counts: Record<
       Exclude<
         keyof CoachAppUsageCounts,
-        "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday" | "coachesFinishedToday"
+        "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday" | "coachesFinishedToday" | "activeTodayAndroid" | "active7dAndroid"
       >,
       number | null
     > = {
@@ -63,16 +63,20 @@ export async function POST(req: Request) {
     const emailsToday = count(body?.emailsToday);
     const finishedMatchesToday = count(body?.finishedMatchesToday);
     const coachesFinishedToday = count(body?.coachesFinishedToday);
+    const activeTodayAndroid = count(body?.activeTodayAndroid);
+    const active7dAndroid = count(body?.active7dAndroid);
 
     await logCoachAppUsageSnapshot(new Date(takenAt).toISOString(), {
       ...(counts as Omit<
         CoachAppUsageCounts,
-        "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday" | "coachesFinishedToday"
+        "signupsTodayWithTeam" | "emailsToday" | "finishedMatchesToday" | "coachesFinishedToday" | "activeTodayAndroid" | "active7dAndroid"
       >),
       signupsTodayWithTeam,
       emailsToday,
       finishedMatchesToday,
       coachesFinishedToday,
+      activeTodayAndroid,
+      active7dAndroid,
     });
     return NextResponse.json({ ok: true });
   } catch (err) {

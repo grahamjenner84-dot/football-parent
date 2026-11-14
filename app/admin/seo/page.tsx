@@ -570,7 +570,7 @@ export default function SeoAdminPage() {
                 />
                 <details style={{ marginTop: 18 }}>
                   <summary style={styles.coachDetailSummary}>
-                    Funnel detail: channels, forms, each sign-up, SEO, sharing, daily usage snapshot
+                    Funnel detail: channels, forms, SEO, sharing, daily usage snapshot
                   </summary>
                   <CoachAppFunnelTab funnel={funnel} />
                 </details>
@@ -3015,6 +3015,12 @@ function ukTimeLabel(instant: string): string {
   return `${day} ${time}`;
 }
 
+// ", 3 web, 2 Android app" from a total and its Android part; nothing when the
+// snapshot predates the split (coach-app migration 0077).
+function webAndroid(total: number, android: number | null, lead: string): string {
+  return android === null ? "" : `${lead}${Math.max(0, total - android)} web, ${android} Android app`;
+}
+
 function UsageTile({ label, value, sub }: { label: string; value: number; sub?: string }) {
   return (
     <div style={styles.card}>
@@ -3061,9 +3067,13 @@ function CoachAppUsageSection({ usage }: { usage: CoachAppFunnel["usage"] }) {
         <UsageTile
           label="Active today"
           value={latest.activeToday}
-          sub={`${Math.max(0, latest.activeToday - latest.signupsToday)} excluding sign-ups`}
+          sub={`${Math.max(0, latest.activeToday - latest.signupsToday)} excluding sign-ups${webAndroid(latest.activeToday, latest.activeTodayAndroid, ", ")}`}
         />
-        <UsageTile label="Active last 7 days" value={latest.active7d} sub={pct(latest.active7d)} />
+        <UsageTile
+          label="Active last 7 days"
+          value={latest.active7d}
+          sub={`${pct(latest.active7d) ?? ""}${webAndroid(latest.active7d, latest.active7dAndroid, pct(latest.active7d) ? ", " : "")}`}
+        />
         <UsageTile label="Set up a team" value={latest.accountsWithTeam} sub={pct(latest.accountsWithTeam)} />
         <UsageTile
           label="Finished a match"
@@ -3919,7 +3929,11 @@ type FunnelDayRow = {
   signups: number;
   android: number;
   withTeam: number | null;
+  opensWeb: number;
+  opensAndroid: number;
   active: number | null;
+  activeWeb: number | null;
+  activeAndroid: number | null;
   coachesFinished: number | null;
 };
 type FunnelDayKey = Exclude<keyof FunnelDayRow, "date">;
@@ -3941,6 +3955,8 @@ function buildFunnelDays(funnel: CoachAppFunnel, views: CoachAppViewStats | null
       const s = signups.get(date);
       const u = usage.get(date);
       const steps = stepDays.get(date)?.topPaths ?? [];
+      const dayViews = viewDays.get(date)?.topPaths ?? [];
+      const pathCount = (path: string) => dayViews.find((p) => p.path === path)?.count ?? 0;
       const stepCount = (test: (p: string) => boolean) =>
         steps.filter((p) => p.path.startsWith("/coach-app/signup-form/") && test(p.path)).reduce((t, p) => t + p.count, 0);
       return {
@@ -3949,17 +3965,79 @@ function buildFunnelDays(funnel: CoachAppFunnel, views: CoachAppViewStats | null
         search: v?.search ?? 0,
         other: v?.other ?? 0,
         webSignIn: v?.signInViews ?? 0,
-        androidSignIn: viewDays.get(date)?.topPaths.find((p) => p.path === "/coach-app/android/sign-in")?.count ?? 0,
+        androidSignIn: pathCount("/coach-app/android/sign-in"),
         formViews: stepCount((p) => p.endsWith("/view")),
         googleTaps: stepCount((p) => p.endsWith("/google")),
         emailsSent: stepCount((p) => p.endsWith("/email-sent")),
         signups: s?.signups ?? 0,
         android: s?.android ?? 0,
         withTeam: u?.signupsTodayWithTeam ?? null,
+        opensWeb: pathCount("/coach-app"),
+        opensAndroid: pathCount("/coach-app/android"),
         active: u?.activeToday ?? null,
+        activeWeb: u && u.activeTodayAndroid !== null ? Math.max(0, u.activeToday - u.activeTodayAndroid) : null,
+        activeAndroid: u?.activeTodayAndroid ?? null,
         coachesFinished: u ? (u.coachesFinishedToday ?? u.finishedMatchesToday ?? null) : null,
       };
     });
+}
+
+// Every sign-up in the window, newest first, with the UK time, web or Android,
+// and the channel. Anonymous: the Coach App reports each new account as an
+// event with no id, email or name (coach_app_signups).
+function SignupList({ funnel }: { funnel: CoachAppFunnel }) {
+  const when = (iso: string) =>
+    new Date(iso).toLocaleString("en-GB", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Europe/London",
+    });
+  const total = funnel.recentSignups.length;
+  return (
+    <>
+      <FunnelHeading>Every sign-up</FunnelHeading>
+      {funnel.signupsError ? null : total === 0 ? (
+        <p style={styles.muted}>No sign-ups in the last {funnel.days} days.</p>
+      ) : (
+        <>
+          <p style={styles.sectionNote}>
+            {total === 50 ? "The latest 50" : `All ${total}`} in the last {funnel.days} days, newest first, UK
+            time. {funnel.recentSignups.filter((r) => r.android).length} in the Android app, the rest through a
+            web form.
+          </p>
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={funnelTh}>When</th>
+                  <th style={funnelTh}>Where</th>
+                  <th style={funnelTh}>Channel</th>
+                  <th style={funnelTh}>Signed up on</th>
+                  <th style={funnelTh}>Visit began on</th>
+                  <th style={funnelTh}>Banner / campaign</th>
+                </tr>
+              </thead>
+              <tbody>
+                {funnel.recentSignups.map((r, i) => (
+                  <tr key={`${r.createdAt}-${i}`}>
+                    <td style={{ ...funnelTd, whiteSpace: "nowrap" }}>{when(r.createdAt)}</td>
+                    <td style={funnelTd}>{r.android ? "Android" : "Web"}</td>
+                    <td style={funnelTd}>{r.channel}</td>
+                    <td style={funnelTd}>{r.android ? "Android app" : (r.landingPath ?? "-")}</td>
+                    <td style={funnelTd}>{r.entryPath ?? "-"}</td>
+                    <td style={funnelTd}>{r.banner ?? r.utmCampaign ?? "-"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+    </>
+  );
 }
 
 // Same weekday over the weeks before (up to 4, at least 2), so a quiet
@@ -4137,16 +4215,21 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
   // Sign-ins: every open of the app by a signed-in coach, web and Android,
   // from this site's page views (/coach-app and /coach-app/android). The
   // Coach App itself only records one visit per coach per day.
-  const appOpens = (from: number, to: number) => {
+  const appOpens = (from: number, to: number, paths = ["/coach-app", "/coach-app/android"]) => {
     if (!views) return null;
     let total = 0;
     for (let k = from; k <= to; k++) {
       const day = views.byDay.find((d) => d.date === addDays(ukToday(), -k));
-      for (const p of day?.topPaths ?? []) if (p.path === "/coach-app" || p.path === "/coach-app/android") total += p.count;
+      for (const p of day?.topPaths ?? []) if (paths.includes(p.path)) total += p.count;
     }
     return total;
   };
-  const signIns = { last7: appOpens(0, 6), prev7: appOpens(7, 13) };
+  const signIns = {
+    last7: appOpens(0, 6),
+    prev7: appOpens(7, 13),
+    web7: appOpens(0, 6, ["/coach-app"]),
+    android7: appOpens(0, 6, ["/coach-app/android"]),
+  };
   const working = workingList(funnel, views, ins);
 
   // The hourly insights' time, shown on each section they fill. "Today" in
@@ -4176,7 +4259,11 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
     { key: "signups", label: "Sign-ups" },
     { key: "android", label: "of which Android" },
     { key: "withTeam", label: "Set up a team" },
+    { key: "opensWeb", label: "App opens: web" },
+    { key: "opensAndroid", label: "App opens: Android" },
     { key: "active", label: "Coaches active" },
+    { key: "activeWeb", label: "Active: web" },
+    { key: "activeAndroid", label: "Active: Android app" },
     { key: "coachesFinished", label: "Finished a match" },
   ];
 
@@ -4211,7 +4298,12 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
               prev={ins.rolling.prev7.matchesFinished}
               sub={`by ${ins.rolling.last7.finished} coach${ins.rolling.last7.finished === 1 ? "" : "es"}`}
             />
-            <DeltaTile label="Sign-ins (app opens)" value={signIns.last7} prev={signIns.prev7} />
+            <DeltaTile
+              label="Sign-ins (app opens)"
+              value={signIns.last7}
+              prev={signIns.prev7}
+              sub={signIns.web7 !== null ? `${signIns.web7} web, ${signIns.android7} Android` : undefined}
+            />
             <DeltaTile label="Coaches signing in" value={ins.rolling.last7.opened} prev={ins.rolling.prev7.opened} />
             <DeltaTile label="Sign-ups" value={ins.rolling.last7.signups} prev={ins.rolling.prev7.signups} />
             <DeltaTile
@@ -4554,9 +4646,15 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
         before (when there are at least two), red at least a quarter below, ignoring differences under 2.
         Visits are human views of the Coach App page and its ad variants (ads include ad clicks landing on the
         calculator). Form seen, Google taps and Emails sent are the sign-up forms&rsquo; own steps, web and
-        Android. Set up a team, Coaches active and Finished a match are the Coach App&rsquo;s own closing
-        figures for the day (finished counts coaches where the app reports it, otherwise matches).
+        Android. App opens are every launch or reload by a signed-in coach, from this site&rsquo;s page views
+        (/coach-app on the web, /coach-app/android in the Android app), so one coach can open it several
+        times. Set up a team, Coaches active and Finished a match are the Coach App&rsquo;s own closing
+        figures for the day (finished counts coaches where the app reports it, otherwise matches). Active:
+        web and Android app split Coaches active by where each coach last opened it that day, so a coach
+        who used both counts once; they read &ldquo;-&rdquo; for days before the app reported the split.
       </SectionNote>
+
+      <SignupList funnel={funnel} />
     </div>
   );
 }
@@ -5097,41 +5195,6 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
         </>
       )}
 
-      <FunnelHeading>Sign-ups</FunnelHeading>
-      {funnel.recentSignups.length === 0 ? (
-        <p style={styles.muted}>No sign-ups reported {windowLabel}.</p>
-      ) : (
-        <>
-          <p style={styles.sectionNote}>
-            By day: {funnel.signupsByDay.map((d) => `${d.date}: ${d.signups}${d.android ? ` (${d.android} Android)` : ""}`).join(" · ")}
-          </p>
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
-              <thead>
-                <tr>
-                  <th style={funnelTh}>When</th>
-                  <th style={funnelTh}>Channel</th>
-                  <th style={funnelTh}>Signed up on</th>
-                  <th style={funnelTh}>Visit began on</th>
-                  <th style={funnelTh}>Banner / campaign</th>
-                </tr>
-              </thead>
-              <tbody>
-                {funnel.recentSignups.map((r, i) => (
-                  <tr key={`${r.createdAt}-${i}`}>
-                    <td style={funnelTd}>{new Date(r.createdAt).toLocaleString("en-GB")}</td>
-                    <td style={funnelTd}>{r.channel}</td>
-                    <td style={funnelTd}>{r.landingPath ?? "-"}</td>
-                    <td style={funnelTd}>{r.entryPath ?? "-"}</td>
-                    <td style={funnelTd}>{r.banner ?? r.utmCampaign ?? "-"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
-
       <CoachingPageSection page={funnel.coachingPage} />
 
       <FunnelHeading>SEO: coaching articles, {windowLabel}</FunnelHeading>
@@ -5142,7 +5205,7 @@ function CoachAppFunnelTab({ funnel }: { funnel: CoachAppFunnel }) {
       </p>
       <SectionNote label="Where these show up as sign-ups">
         Sign-ups these articles produced show above as Article banner, Search or
-        Site link; the Sign-ups table names the article each visit began on.
+        Site link; the Every sign-up table names the article each visit began on.
       </SectionNote>
       <div style={{ overflowX: "auto" }}>
         <table style={{ borderCollapse: "collapse", fontSize: 12, width: "100%" }}>
