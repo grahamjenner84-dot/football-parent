@@ -100,6 +100,13 @@ export interface CoachAppUsageCounts {
   activeToday: number;
   /** Accounts that opened the app in the last 7 days. */
   active7d: number;
+  /** Of activeToday and active7d, the accounts whose latest open was in the
+   * Android app (coach-app migration 0077); the rest opened it on the web. A
+   * coach who used both counts for the one they used last. Null in snapshots
+   * sent before the Coach App started reporting it, or before this site's
+   * columns (20261114120000_coach_app_usage_active_android.sql) existed. */
+  activeTodayAndroid: number | null;
+  active7dAndroid: number | null;
   /** Accounts on at least one team (a team exists once onboarding is done). */
   accountsWithTeam: number;
   /** League/cup/friendly and tournament games marked finished. */
@@ -160,7 +167,14 @@ export async function logCoachAppUsageSnapshot(takenAt: string, counts: CoachApp
   // snapshot until the migration runs. Newest first, so a missing
   // coaches_finished_today (20261024120000) doesn't also drop emails_today
   // (20261010090000) and finished_matches_today (20261018220000).
-  const attempts = [{ ...withOptional, coaches_finished_today: counts.coachesFinishedToday }, withOptional, row];
+  const withFinished = { ...withOptional, coaches_finished_today: counts.coachesFinishedToday };
+  const attempts = [
+    // 20261114120000
+    { ...withFinished, active_today_android: counts.activeTodayAndroid, active_7d_android: counts.active7dAndroid },
+    withFinished,
+    withOptional,
+    row,
+  ];
   for (let i = 0; i < attempts.length; i++) {
     const { error } = await supabase.from("coach_app_usage_snapshots").insert(attempts[i]);
     if (!error) return;
@@ -194,6 +208,8 @@ type SnapshotRow = {
   emails_today?: number | null;
   finished_matches_today?: number | null;
   coaches_finished_today?: number | null;
+  active_today_android?: number | null;
+  active_7d_android?: number | null;
 };
 
 function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string } {
@@ -213,6 +229,8 @@ function snapshotCounts(r: SnapshotRow): CoachAppUsageCounts & { takenAt: string
     emailsToday: typeof r.emails_today === "number" ? r.emails_today : null,
     finishedMatchesToday: typeof r.finished_matches_today === "number" ? r.finished_matches_today : null,
     coachesFinishedToday: typeof r.coaches_finished_today === "number" ? r.coaches_finished_today : null,
+    activeTodayAndroid: typeof r.active_today_android === "number" ? r.active_today_android : null,
+    active7dAndroid: typeof r.active_7d_android === "number" ? r.active_7d_android : null,
   };
 }
 
@@ -227,6 +245,7 @@ async function getCoachAppUsage(supabase: ReturnType<typeof adminClient>, days: 
   const baseColumns =
     "taken_at, total_accounts, signups_today, signups_today_with_team, active_today, active_7d, accounts_with_team, finished_matches, accounts_with_finished_match, plan_paid, plan_trial, plan_lapsed";
   const columnSets = [
+    baseColumns + ", emails_today, finished_matches_today, coaches_finished_today, active_today_android, active_7d_android",
     baseColumns + ", emails_today, finished_matches_today, coaches_finished_today",
     baseColumns + ", emails_today, finished_matches_today",
     baseColumns,
@@ -331,6 +350,9 @@ export interface FunnelSignup {
   entryPath: string | null;
   banner: string | null;
   utmCampaign: string | null;
+  /** Signed up in the Android app (landing path ANDROID_INSTALL_LANDING_PATH);
+   * otherwise through a web form. */
+  android: boolean;
 }
 
 export interface CoachingArticleRow {
@@ -697,6 +719,7 @@ export async function getCoachAppFunnel(days: number = 30): Promise<CoachAppFunn
       entryPath: r.entry_path,
       banner: r.banner,
       utmCampaign: r.utm_campaign,
+      android: r.landing_path === ANDROID_INSTALL_LANDING_PATH,
     })),
     signupsByDay: Array.from(dayMap.entries())
       .map(([date, day]) => ({ date, ...day }))
