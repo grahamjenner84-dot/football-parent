@@ -2995,10 +2995,24 @@ const funnelTh: CSSProperties = {
 const funnelTd: CSSProperties = { padding: "6px 8px", borderBottom: "1px solid #2e2319", color: "#e9dcc5" };
 const funnelNum: CSSProperties = { ...funnelTd, textAlign: "right", fontVariantNumeric: "tabular-nums" };
 
-function FunnelHeading({ children }: { children: ReactNode }) {
+function FunnelHeading({ children, asOf }: { children: ReactNode; asOf?: string | null }) {
   return (
-    <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "14px 0 2px" }}>{children}</h3>
+    <h3 style={{ fontSize: 13, fontWeight: 600, color: "#e8b04b", margin: "14px 0 2px" }}>
+      {children}
+      {asOf && <span style={{ fontWeight: 400, color: "#a89a86" }}> &middot; as of {asOf}</span>}
+    </h3>
   );
+}
+
+// "08:07" for a time today (UK), "Fri 13 Nov 23:07" for an older one. For
+// the hourly Coach App insights, which can be up to an hour behind the
+// 10-minute snapshot shown beside them.
+function ukTimeLabel(instant: string): string {
+  const d = new Date(instant);
+  const time = d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/London" });
+  if (ukDay(instant) === ukToday()) return time;
+  const day = d.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "Europe/London" });
+  return `${day} ${time}`;
 }
 
 function UsageTile({ label, value, sub }: { label: string; value: number; sub?: string }) {
@@ -4135,6 +4149,16 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
   const signIns = { last7: appOpens(0, 6), prev7: appOpens(7, 13) };
   const working = workingList(funnel, views, ins);
 
+  // The hourly insights' time, shown on each section they fill. "Today" in
+  // the recency tiles comes from the 10-minute snapshot instead when that is
+  // newer and for the same UK day: both count last_active_at since UK
+  // midnight over the same accounts, so the tile matches "Coaches active".
+  const insAsOf = ins ? ukTimeLabel(ins.takenAt) : null;
+  const snapshotToday =
+    ins && latest && ukDay(latest.takenAt) === ins.today && Date.parse(latest.takenAt) > Date.parse(ins.takenAt)
+      ? latest
+      : null;
+
   const stageForecast = ins ? payingForecast(ins.paying.byStage) : null;
   const habitForecast = ins ? payingForecast(ins.paying.byHabit) : null;
 
@@ -4260,7 +4284,7 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
 
       {ins && (
         <>
-          <FunnelHeading>Coaches doing things, by week</FunnelHeading>
+          <FunnelHeading asOf={insAsOf}>Coaches doing things, by week</FunnelHeading>
           <div style={{ overflowX: "auto" }}>
             <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
               <thead>
@@ -4297,7 +4321,7 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
             Opened is only recorded from {shortDay(ins.openedTrackedFrom)}.
           </p>
 
-          <FunnelHeading>Habit</FunnelHeading>
+          <FunnelHeading asOf={insAsOf}>Habit</FunnelHeading>
           <p style={styles.sectionNote}>
             Of the {ins.habit.eligible} accounts that existed for all 4 weeks from {shortDay(ins.habit.windowStart)}{" "}
             to {shortDay(ins.habit.windowEnd)}, how many weeks each one used the app:
@@ -4336,9 +4360,13 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
             </table>
           </div>
 
-          <FunnelHeading>When coaches last used it</FunnelHeading>
+          <FunnelHeading asOf={insAsOf}>When coaches last used it</FunnelHeading>
           <div style={styles.summaryGrid}>
-            <UsageTile label="Today" value={ins.recency.today} />
+            <UsageTile
+              label="Today"
+              value={snapshotToday ? snapshotToday.activeToday : ins.recency.today}
+              sub={snapshotToday ? `as of ${ukTimeLabel(snapshotToday.takenAt)}` : undefined}
+            />
             <UsageTile label="1 to 7 days ago" value={ins.recency.d1to7} />
             <UsageTile label="8 to 14 days ago" value={ins.recency.d8to14} />
             <UsageTile label="15 to 30 days ago" value={ins.recency.d15to30} />
@@ -4359,7 +4387,7 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
             />
           </div>
 
-          <FunnelHeading>How each sign-up week got on</FunnelHeading>
+          <FunnelHeading asOf={insAsOf}>How each sign-up week got on</FunnelHeading>
           <div style={{ overflowX: "auto" }}>
             <table style={{ borderCollapse: "collapse", fontSize: 13, width: "100%" }}>
               <thead>
@@ -4415,7 +4443,7 @@ function CoachAppOverview({ funnel, views }: { funnel: CoachAppFunnel; views: Co
             compare weeks of a similar age. Back after week 1 is opened the app 7 or more days after signing up.
           </p>
 
-          <FunnelHeading>Paying</FunnelHeading>
+          <FunnelHeading asOf={insAsOf}>Paying</FunnelHeading>
           <div style={styles.summaryGrid}>
             <UsageTile label="Paid" value={ins.paying.paid} />
             <UsageTile label="On trial" value={ins.paying.trial} />
