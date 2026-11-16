@@ -2450,3 +2450,12 @@ Any movement on these four pages from here may be this link. **Confounded:** all
 - `late-developers-in-football`: 609 impressions, 13 clicks, 4.9 (519, 14, 4.6). "late developer" 13.3, "late developers" 8.4.
 
 **Read:** about 11 Dec, with the Football DNA links from 4 Nov (`SEO_ROADMAP.md`, "External links won").
+
+## 16 Nov 2026: Football DNA review published (new article goes indexable)
+
+- **Publish:** `/coaching/football-dna-review` (Coaching), written 10 Nov and live but noindex until Football DNA had seen it. Noindex removed, so it is now in the sitemap and site search, and it has a card on the `/coaching` hub (`f43bd62`).
+- **Inbound links, one commit each:**
+  - `/coaching/best-grassroots-football-apps`, FootballDNA section, anchor "Football DNA review" (restores the link held back in a1574a8) (`6a104a1`)
+  - `/parent-guides/futurefit-football-dna-interview-part-1`, intro, anchor "Football DNA review" (`fe82490`)
+  - `/academy-pathway/academy-life-paul-barry-interview`, intro, anchor "Football DNA review" (`9a39d3b`)
+- **Watch:** "football dna" (1,600/mo, KD 20), "football dna app", "football dna review", "football dna cost"/"price". No baseline: the page had no impressions while noindex. Request indexing in Search Console.
