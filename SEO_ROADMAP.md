@@ -21,9 +21,7 @@ Dated SEO follow-ups and planned work that isn't an article (planned articles li
 ### Football DNA review: open items (published 16 Nov 2026)
 
 - **Done 16 Nov:** noindex lifted, in the sitemap, site search and the `/coaching` hub, with four inbound links (apps roundup, FutureFit Parts 1 and 2, Paul Barry interview). See the 16 Nov change log entry.
-- **Still to ask Football DNA:**
-  - Is the curriculum 36 weeks in six 6-week blocks, with three practices per session? So far this only comes from their social posts. If they confirm it, add it to "The Football DNA Curriculum: A Week-by-Week Plan".
-- **Not done, decide later:** a new meta description (5.2), the FAQs "Is there a free Football DNA curriculum?" and "Is Football DNA the same as the FA's England DNA?" (the second needs the thefa.com Boot Room URL), the SoftwareApplication `@id` / BlogPosting `about` link, and aligning "thousands of drills" in the two interviews with "more than 1,000".
+- **Not done, decide later:** a new meta description (5.2), the FAQs "Is there a free Football DNA curriculum?" and "Is Football DNA the same as the FA's England DNA?" (the second needs the thefa.com Boot Room URL), the SoftwareApplication `@id` / BlogPosting `about` link.
 - **Watch from 16 Nov:** "football dna" (1,600/mo, KD 20), "football dna app" (110), "football dna review" (20), "football dna cost" and "price". No independent written review ranked in the top 20 for any of them on 10 Nov.
 
 ### AI Overview citations on the app searches (re-check about 8 Nov 2026)

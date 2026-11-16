@@ -2459,4 +2459,5 @@ Any movement on these four pages from here may be this link. **Confounded:** all
   - `/parent-guides/futurefit-football-dna-interview-part-1`, intro, anchor "Football DNA review" (`fe82490`)
   - `/academy-pathway/academy-life-paul-barry-interview`, intro, anchor "Football DNA review" (`9a39d3b`)
   - `/parent-guides/futurefit-football-dna-interview-part-2`, closing paragraph after the Football DNA link, anchor "Football DNA review" (`02eefa5`)
+- **Facts confirmed by Football DNA (Graham, 16 Nov):** the U5 to U8 curriculum is 36 weeks in six-week blocks (`0ecfc88`), and the library is more than 1,000 drills: added to "What Is Football DNA?" (`5c4d7c4`) and replacing "thousands of drills" in FutureFit Part 1 and the Paul Barry interview intros (`5fa5a03`). Shipped before indexing, so not separate levers to measure.
 - **Watch:** "football dna" (1,600/mo, KD 20), "football dna app", "football dna review", "football dna cost"/"price". No baseline: the page had no impressions while noindex. Request indexing in Search Console.
