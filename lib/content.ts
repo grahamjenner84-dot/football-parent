@@ -15,7 +15,7 @@ export interface ArticleFrontmatter {
   // (lib/comic-design.ts). Absent means the classic article template.
   design?: "classic" | "comic";
   // Live but hidden: the page gets a robots noindex tag (its page.tsx must
-  // pass robots, see app/coaching/football-dna-review/page.tsx) and is left
+  // also export `robots: { index: false, follow: true }` in its metadata) and is left
   // out of the sitemap and the site search. Used to show a partner an
   // article before it goes to Google. Remove the line to publish properly.
   noindex?: boolean;

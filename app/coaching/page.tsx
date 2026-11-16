@@ -102,6 +102,12 @@ export default function CoachingPage() {
           description:
             "FootballDNA for drills, Spond for payments, and where our own Coach App fits: one coach's picks for the best football coaching apps in 2026.",
         },
+        {
+          title: "Football DNA App Review",
+          href: "/coaching/football-dna-review",
+          description:
+            "A grassroots coach's verdict after a year of paid use: the filmed sessions, the curriculums, the price and who should pay for it.",
+        },
       ]}
       bottomContent={{
         title: "About Grassroots Coaching",
