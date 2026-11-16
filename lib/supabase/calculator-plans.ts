@@ -54,6 +54,9 @@ export interface CalculatorPlanEvent {
   minutesSpread: number | null;
   customised: string[];
   returningVisit: boolean;
+  // Hours since this device last made a plan; null on a first plan or
+  // without analytics consent (the app keeps no timestamp then).
+  hoursSinceLastPlan: number | null;
   referrerHost: string | null;
   hadGclid: boolean;
 }
@@ -86,6 +89,7 @@ export async function logCalculatorPlan(event: CalculatorPlanEvent, userAgent: s
     minutes_spread: event.minutesSpread,
     customised: event.customised,
     returning_visit: event.returningVisit,
+    hours_since_last_plan: event.hoursSinceLastPlan,
     referrer_host: event.referrerHost,
     had_gclid: event.hadGclid,
     user_agent: userAgent,
@@ -162,6 +166,7 @@ type Row = {
   minutes_spread: number | null;
   customised: string[] | null;
   returning_visit: boolean;
+  hours_since_last_plan: number | null;
   created_at: string;
 };
 
@@ -194,7 +199,7 @@ export async function getCalculatorPlans(days: number = 30) {
     const { data, error } = await supabase
       .from("calculator_plans")
       .select(
-        "embedded, format, formation, period_type, period_minutes, squad_size, on_pitch, stints_per_period, rotate_positions, gk_rotates, max_substitutions, min_time_per_player, fixed_keeper, subs, minutes_spread, customised, returning_visit, created_at"
+        "embedded, format, formation, period_type, period_minutes, squad_size, on_pitch, stints_per_period, rotate_positions, gk_rotates, max_substitutions, min_time_per_player, fixed_keeper, subs, minutes_spread, customised, returning_visit, hours_since_last_plan, created_at"
       )
       .gte("created_at", since)
       .order("id", { ascending: true })
@@ -246,6 +251,23 @@ export async function getCalculatorPlans(days: number = 30) {
     customisedSettings: [...customisedCounts.entries()].map(([setting, plans]) => ({ setting, plans, share: pct(plans) })).sort((a, b) => b.plans - a.plans),
     where: { embeddedOnArticle: rows.filter((r) => r.embedded).length, fullScreen: rows.filter((r) => !r.embedded).length },
     returningVisits: rows.filter((r) => r.returning_visit).length,
+    // How long since the same device last made a plan. Only known for
+    // coaches who accepted analytics cookies (and from 16 Nov 2026), so
+    // `unknown` also holds first plans and no-consent coaches.
+    sinceLastPlan: {
+      note: "Time since the same device last made a plan. Known only with analytics consent, recorded from 16 Nov 2026; unknown = first plan on that device, no consent, or before then.",
+      buckets: (
+        [
+          ["same hour (reload or tweak)", (h: number) => h < 1],
+          ["same day", (h: number) => h >= 1 && h < 24],
+          ["1-5 days", (h: number) => h >= 24 && h < 6 * 24],
+          ["6-8 days (weekly)", (h: number) => h >= 6 * 24 && h < 9 * 24],
+          ["9-20 days", (h: number) => h >= 9 * 24 && h < 21 * 24],
+          ["3 weeks or more", (h: number) => h >= 21 * 24],
+        ] as const
+      ).map(([label, test]) => ({ label, plans: rows.filter((r) => r.hours_since_last_plan !== null && test(r.hours_since_last_plan)).length })),
+      unknown: rows.filter((r) => r.hours_since_last_plan === null).length,
+    },
     byDay: tally(rows, (r) => ukDay(r.created_at)).sort((a, b) => (a.value < b.value ? 1 : -1)).map((t) => ({ date: t.value, plans: t.plans })),
   };
 }

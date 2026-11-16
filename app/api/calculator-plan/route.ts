@@ -81,6 +81,7 @@ export async function POST(req: Request) {
         minutesSpread: spread,
         customised: customised as string[],
         returningVisit: body.returningVisit === true,
+        hoursSinceLastPlan: int(body.hoursSinceLastPlan, 0, 24 * 365),
         referrerHost: match(body.referrerHost, HOST),
         hadGclid: body.hadGclid === true,
       },
