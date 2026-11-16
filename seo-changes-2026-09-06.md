@@ -2458,4 +2458,5 @@ Any movement on these four pages from here may be this link. **Confounded:** all
   - `/coaching/best-grassroots-football-apps`, FootballDNA section, anchor "Football DNA review" (restores the link held back in a1574a8) (`6a104a1`)
   - `/parent-guides/futurefit-football-dna-interview-part-1`, intro, anchor "Football DNA review" (`fe82490`)
   - `/academy-pathway/academy-life-paul-barry-interview`, intro, anchor "Football DNA review" (`9a39d3b`)
+  - `/parent-guides/futurefit-football-dna-interview-part-2`, closing paragraph after the Football DNA link, anchor "Football DNA review" (`02eefa5`)
 - **Watch:** "football dna" (1,600/mo, KD 20), "football dna app", "football dna review", "football dna cost"/"price". No baseline: the page had no impressions while noindex. Request indexing in Search Console.
