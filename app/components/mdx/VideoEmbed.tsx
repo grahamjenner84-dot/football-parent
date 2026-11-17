@@ -9,7 +9,9 @@ type VideoEmbedProps = {
   // One or two sentences on what the video shows. Used as the caption and
   // in the VideoObject schema, so write it for a reader, not a crawler.
   description: string;
-  // ISO date the video was published (required by Google for video results).
+  // Date the video was published (required by Google for video results).
+  // A plain "2026-11-10" is fine: it is expanded to a full datetime with a
+  // timezone below, which is what Google's video rich results require.
   uploadDate: string;
   // ISO 8601 duration, e.g. "PT33S". Optional.
   duration?: string;
@@ -30,6 +32,20 @@ type VideoEmbedProps = {
 // YouTube: only the thumbnail loads until tapped, then a youtube-nocookie
 // iframe. Self-hosted: a native <video> with preload="none" and a poster.
 // Either way it emits VideoObject JSON-LD for Google's video results.
+// Google flags a date-only uploadDate ("Invalid datetime value", "missing a
+// timezone"), so a bare date becomes midnight UK time on that day.
+function toIsoDateTime(value: string): string {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  const noonUtc = new Date(`${value}T12:00:00Z`);
+  const offset = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/London",
+    timeZoneName: "shortOffset",
+  })
+    .formatToParts(noonUtc)
+    .find((p) => p.type === "timeZoneName")?.value;
+  return `${value}T00:00:00${offset === "GMT+1" ? "+01:00" : "+00:00"}`;
+}
+
 export default function VideoEmbed({
   title,
   description,
@@ -56,7 +72,7 @@ export default function VideoEmbed({
     name: title,
     description,
     ...(thumbnail ? { thumbnailUrl: thumbnail } : {}),
-    uploadDate,
+    uploadDate: toIsoDateTime(uploadDate),
     ...(id
       ? {
           embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
