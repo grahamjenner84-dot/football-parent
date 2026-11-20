@@ -1641,6 +1641,12 @@ interview article and a link to [Football DNA](https://footballdna.co.uk):
   sentences (the "underdog"/staff-wear-more-than-one-hat point, which fits a
   club that has just dropped a category). Relevant because Paul coached in
   Watford's academy in 2021. Graham approved the excerpt 2026-10-02.
+- `football-academies-by-category-list` (2026-11-20) - Q5 again (2nd article
+  after `how-academy-football-works`), as an `<ExpertQA>` in "What the List
+  Doesn't Tell You". Trimmed the opposite way: that one keeps sentences 1-2
+  (staff numbers, Player Care roles); this one keeps only sentence 3 ("With
+  more staff, more care and attention can be provided..."). Graham approved
+  2026-11-20.
 
 `pdc-vs-ptc-vs-rtc-explained` and `pre-academy-football` still have no
 callout from this round - no answer above was a strong enough topical fit
