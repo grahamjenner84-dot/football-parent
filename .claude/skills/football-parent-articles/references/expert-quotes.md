@@ -886,7 +886,7 @@ how-much-does-academy-football-cost; Q1 first half + Q10 paras 2-3 in
 what-age-do-football-academies-recruit; Q6 in
 can-academy-players-play-grassroots-football; Q8 in
 understanding-academy-release; Q13 in biggest-football-parent-mistakes.
-Each passage used once. Unused so far: Q2, Q7, Q9, Q11, Q12, Q14.
+Each passage used once. Q7 para 3 ("When he was at the Category 1 academy... he signed.") placed 2026-11-20 in football-academies-by-category-list, "What the List Doesn't Tell You", Graham approved. Unused so far: Q2, Q9, Q11, Q12, Q14.
 Follow the reuse rule (show Graham the full Q&A with the excerpt highlighted first).
 **Anonymous: never name them or guess a name, and don't gender the author
 (they/them). Their son is "he".** Credit as "The Pre Academy Player" / "Parent and author".
@@ -920,6 +920,16 @@ Reusable lines and the articles they fit:
   harm than good". [what-age-do-football-academies-recruit,
   signs-your-child-is-ready-for-academy-football]
 - Q13 "Don't chase academy football. Let academy football chase you."
+
+### football-academies-by-category-list — experience gap, no Graham ParentNote possible
+Logged 2026-11-20. Graham's son has never trialled for or been registered at
+an academy (development centres only), so a ParentNote on choosing between
+academy categories would imply experience he doesn't have. Don't use his
+development-centre stories here (he judged the Chelsea/Palace line misleading
+in this context). Voice comes from Paul Barry Q5 and a Pre Academy Player
+excerpt instead. If a later round needs more: ask an academy parent or Paul
+Barry what families should ask a club that has just changed category (Watford,
+Crewe, Bolton, Bournemouth in 2026).
 
 ### David Hobson (PFSA) — scout / scouting educator, tag: scouting, recruitment, trials, development centres
 Drafted 2026-09-23. Graham emailed David Hobson, founder of the PFSA
