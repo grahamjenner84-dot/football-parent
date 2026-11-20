@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { staticPageOpenGraph } from "@/lib/seo";
+import { firaSansCondensed } from "@/lib/comic-design";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -14,18 +15,18 @@ export const metadata: Metadata = {
 
 export default function EditorialPolicyPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
-          <p className="text-sm font-semibold text-blue-700 mb-4">
+    <main className={`${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`}>
+      <section className="border-b-[3px] border-[#201E1D] bg-[#FFF8E1]">
+        <div className="max-w-4xl mx-auto px-6 pt-12 pb-11 lg:pt-16">
+          <p className="mb-5 inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-3 py-1 text-sm font-bold text-[#201E1D]">
             Football Parent
           </p>
 
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="mb-6 font-display text-[clamp(36px,5vw,64px)] font-extrabold uppercase leading-[1.02] text-[#201E1D]">
             Editorial Policy
           </h1>
 
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg leading-[1.6] text-[#3A3836] sm:text-xl">
             How Football Parent researches, writes, fact-checks and updates
             content for football families.
           </p>
@@ -33,10 +34,10 @@ export default function EditorialPolicyPage() {
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
-        <div className="space-y-6 text-gray-700 text-lg leading-8">
+        <div className="space-y-6 text-[18px] leading-[1.75] text-[#33312E]">
           
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Mission
           </h2>
 
@@ -56,7 +57,7 @@ export default function EditorialPolicyPage() {
             editorial content.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             How we research content
           </h2>
 
@@ -99,7 +100,7 @@ export default function EditorialPolicyPage() {
             something is uncertain or varies between clubs, we say so clearly.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Source standards
           </h2>
 
@@ -132,7 +133,7 @@ export default function EditorialPolicyPage() {
             directly or described clearly enough that a reader could verify it.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Fact-checking
           </h2>
 
@@ -156,7 +157,7 @@ export default function EditorialPolicyPage() {
             relevant club or organisation before making decisions.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Article review process
           </h2>
 
@@ -173,7 +174,7 @@ export default function EditorialPolicyPage() {
 
           <h2
             id="corrections"
-            className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8"
+            className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8"
           >
             Corrections policy
           </h2>
@@ -188,7 +189,7 @@ export default function EditorialPolicyPage() {
             To report an error, email:{" "}
 <a
   href="mailto:footballparentuk@gmail.com"
-  className="font-semibold text-blue-700 hover:text-blue-900"
+  className="font-bold text-[#1F5FD6] hover:underline"
 >
   footballparentuk@gmail.com
 </a>
@@ -206,7 +207,7 @@ export default function EditorialPolicyPage() {
             <li>Update the article&apos;s review or modified date where used</li>
           </ol>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Update policy
           </h2>
 
@@ -229,7 +230,7 @@ export default function EditorialPolicyPage() {
             and we do not accept payment to produce or modify editorial content.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Affiliate disclosure
           </h2>
 
@@ -251,7 +252,7 @@ export default function EditorialPolicyPage() {
             providers or any football organisation. 
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Contact
           </h2>
 
@@ -260,14 +261,14 @@ export default function EditorialPolicyPage() {
 in touch at:{" "}
 <a
   href="mailto:footballparentuk@gmail.com"
-  className="font-semibold text-blue-700 hover:text-blue-900"
+  className="font-bold text-[#1F5FD6] hover:underline"
 >
   footballparentuk@gmail.com
 </a>.
             
           </p>
 
-          <p className="pt-6 italic text-gray-600">
+          <p className="pt-6 italic text-[#5A5650]">
             Last reviewed: August 2026
           </p>
         </div>

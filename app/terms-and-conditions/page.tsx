@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { staticPageOpenGraph } from "@/lib/seo";
+import { firaSansCondensed } from "@/lib/comic-design";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | Football Parent",
@@ -13,25 +14,25 @@ export const metadata: Metadata = {
 
 export default function TermsAndConditionsPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
-          <p className="text-sm font-semibold text-blue-700 mb-4">
+    <main className={`${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`}>
+      <section className="border-b-[3px] border-[#201E1D] bg-[#FFF8E1]">
+        <div className="max-w-4xl mx-auto px-6 pt-12 pb-11 lg:pt-16">
+          <p className="mb-5 inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-3 py-1 text-sm font-bold text-[#201E1D]">
             Football Parent
           </p>
 
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="mb-6 font-display text-[clamp(36px,5vw,64px)] font-extrabold uppercase leading-[1.02] text-[#201E1D]">
             Terms &amp; Conditions
           </h1>
 
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg leading-[1.6] text-[#3A3836] sm:text-xl">
             Last updated: 27 August 2026
           </p>
         </div>
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
-        <div className="space-y-6 text-gray-700 text-lg leading-8">
+        <div className="space-y-6 text-[18px] leading-[1.75] text-[#33312E]">
           <p>
             These terms govern your use of the Coach App, provided by
             Jenneral Trading Ltd, trading as Football Parent (&quot;we&quot;,
@@ -39,7 +40,7 @@ export default function TermsAndConditionsPage() {
             have any questions, email us at{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               footballparentuk@gmail.com
             </a>
@@ -50,7 +51,7 @@ export default function TermsAndConditionsPage() {
             Our{" "}
             <a
               href="/privacy-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               Privacy Policy
             </a>{" "}
@@ -58,7 +59,7 @@ export default function TermsAndConditionsPage() {
             alongside these terms.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             1. What the Coach App is
           </h2>
 
@@ -71,7 +72,7 @@ export default function TermsAndConditionsPage() {
             players&apos; families.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             2. Your account
           </h2>
 
@@ -94,7 +95,7 @@ export default function TermsAndConditionsPage() {
             assistant on another.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             3. Teams, ownership and transfers
           </h2>
 
@@ -116,7 +117,7 @@ export default function TermsAndConditionsPage() {
             holder subscribes on their own account.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             4. Free features and the paid tier
           </h2>
 
@@ -129,7 +130,7 @@ export default function TermsAndConditionsPage() {
             takes effect on your account.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             5. Subscription, billing and cancellation
           </h2>
 
@@ -173,7 +174,7 @@ export default function TermsAndConditionsPage() {
             before that happens to avoid interruption.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             6. Your data
           </h2>
 
@@ -206,7 +207,7 @@ export default function TermsAndConditionsPage() {
             action it yourself.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             7. Acceptable use
           </h2>
 
@@ -228,7 +229,7 @@ export default function TermsAndConditionsPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             8. Availability and changes to the app
           </h2>
 
@@ -241,7 +242,7 @@ export default function TermsAndConditionsPage() {
             subscription gives you, we&apos;ll let you know in advance.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             9. Liability
           </h2>
 
@@ -264,7 +265,7 @@ export default function TermsAndConditionsPage() {
             arose.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             10. Ending your account
           </h2>
 
@@ -299,7 +300,7 @@ export default function TermsAndConditionsPage() {
             tell you why if we do.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             11. Changes to these terms
           </h2>
 
@@ -310,7 +311,7 @@ export default function TermsAndConditionsPage() {
             know via the app or by email.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             12. Governing law
           </h2>
 
@@ -319,7 +320,7 @@ export default function TermsAndConditionsPage() {
             any dispute will be handled by the courts of England and Wales.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             13. Contact us
           </h2>
 
@@ -334,7 +335,7 @@ export default function TermsAndConditionsPage() {
             Email:{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               footballparentuk@gmail.com
             </a>

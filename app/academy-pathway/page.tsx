@@ -70,6 +70,7 @@ export default function AcademyPathwayPage() {
             "/academy-pathway/arsenal-development-centre-guide",
             "/academy-pathway/aston-villa-development-centre-guide",
             "/academy-pathway/brentford-development-centre-guide",
+            "/academy-pathway/charlton-athletic-development-centre-guide",
             "/academy-pathway/chelsea-fc-development-centre-guide",
             "/academy-pathway/crystal-palace-development-centre-guide",
             "/academy-pathway/fulham-fc-development-centre-guide",
@@ -288,6 +289,12 @@ export default function AcademyPathwayPage() {
           href: "/academy-pathway/wolves-development-centre-guide",
           description:
             "Wolves' academy kept Category One for 2026/27 after a facilities scare. What the club's development centres cost and how its Advanced Player Centre trials work.",
+        },
+        {
+          title: "Charlton Academy Trials and Development Centres",
+          href: "/academy-pathway/charlton-athletic-development-centre-guide",
+          description:
+            "Charlton's Category 2 academy at Sparrows Lane recruits by scouting. How the Trust's £8.50 Development Centres, invite-only Advanced Centre and girls' trials work.",
         },
         {
           title: "QPR Academy Trials and Development Programmes",
