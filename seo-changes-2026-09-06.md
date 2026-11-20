@@ -2523,3 +2523,7 @@ The GPS pilot passed its 21 Nov gate (weekly check 20 Nov: GSC clicks +124% vs +
 Held on classic until after about 20 Dec (peak weeks): advent calendars, Christmas gifts, shin pads, base layers, wide feet boots. Also not yet moved: kids boots (inside its 13 Nov read), girls boots, soft ground boots. Academy Pathway (29 of 31 still classic) and Academy Trials (6 of 7) wait for the Progress banner test to call (about 26-27 Nov).
 - **Baseline (12 days to 19 Nov, Amazon click-out):** rebounders 15 of 31 views (48%), goals 13 of 48 (27%), AG vs FG 7 of 36 (19%), Veo 46 of 145 (32%), footballs by age 8 of 142 (6%).
 - **Read:** 14 days after deploy, click-out per page against these and against the classic gear guides over the same days; GSC clicks URL only. Revert a page on its own if its click-out drops by more than a third with views steady.
+
+## 20 Nov 2026: editorial and legal pages on the comic design
+
+`/about`, `/author/graham-jenner`, `/editorial-policy`, `/privacy-policy`, `/cookie-policy`, `/terms-and-conditions` (`e89aea4`). Class changes only: yellow header band with an ink rule, uppercase H1 (CSS only, the text is unchanged), Fira Sans Condensed headings, blue bold links, yellow table headers. Text, headings, links, titles and meta unchanged. These pages carry almost no search traffic: no watch, Tier 0. Not changed: `/search` and `/progress` (the Progress landing page with the join form, a conversion page).
