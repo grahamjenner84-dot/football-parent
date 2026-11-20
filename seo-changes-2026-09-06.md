@@ -2527,3 +2527,12 @@ Held on classic until after about 20 Dec (peak weeks): advent calendars, Christm
 ## 20 Nov 2026: editorial and legal pages on the comic design
 
 `/about`, `/author/graham-jenner`, `/editorial-policy`, `/privacy-policy`, `/cookie-policy`, `/terms-and-conditions` (`e89aea4`). Class changes only: yellow header band with an ink rule, uppercase H1 (CSS only, the text is unchanged), Fira Sans Condensed headings, blue bold links, yellow table headers. Text, headings, links, titles and meta unchanged. These pages carry almost no search traffic: no watch, Tier 0. Not changed: `/search` and `/progress` (the Progress landing page with the join form, a conversion page).
+
+## 20 Nov 2026: QPR guide, two inbound links (Brentford, Fulham)
+
+QPR (published 24 Oct) is one of the round's best new pages but had only 2 contextual inbound links (London and near-me development centre lists). Two additive sentences, one commit each:
+- `/academy-pathway/brentford-development-centre-guide`, end of the first "What to Weigh Up Before Committing" paragraph: "If you're in west London, the other nearby option with a full academy is QPR, a Category Two academy in Heston that has applied for Category One: our guide to [QPR academy trials and development programmes](/academy-pathway/qpr-development-centre-guide) covers how it recruits and what its Trust runs alongside it." (`510251e`)
+- `/academy-pathway/fulham-fc-development-centre-guide`, new paragraph after the travel paragraph in "Is It Worth It? A Parent's View": "If travel is a factor and you live further west, QPR is worth comparing too: our guide to [QPR academy trials](/academy-pathway/qpr-development-centre-guide) covers its Heston academy and the development programmes its Trust runs." (`04a8bd1`)
+- Source pages: links out only (Tier 0, no watch). Target: Tier 1.
+- **Baseline** (`/academy-pathway/qpr-development-centre-guide`, GSC 28 days to 17 Nov): 2,046 impressions, 80 clicks, position 4.9, CTR 3.9%; weekly 261 / 712 / 873 impressions. "qpr academy" 9.1 (114 impr), "qpr academy trials 2026" 4.7, "qpr trials" 4.1, "qpr academy trials" 3.4, "qpr development centre" 4.9, "qpr girls academy" 7.1.
+- **Read:** about 27 Nov (7 days). Aim: "qpr academy" into the top 5. Revert either link only if its source page's position worsens by more than 1 for a week, net of the site.
