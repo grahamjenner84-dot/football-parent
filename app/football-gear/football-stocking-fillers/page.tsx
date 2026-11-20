@@ -4,8 +4,8 @@ import { MDXContent } from "@/lib/MDXContent";
 import { generateSEO } from "@/lib/seo";
 
 export const metadata = generateSEO({
-  title: "Football Stocking Fillers for Kids (Christmas 2026, Most Under £15) | Football Parent",
-  description: "Football stocking fillers for kids, most under £15: a pump with needles, Match Attax 2026/27 packs, the 2027 annuals, sock tape in the club colour and flat cones.",
+  title: "Football Stocking Fillers for Kids: Under £5, £10 and £15 (2026) | Football Parent",
+  description: "Football stocking fillers for kids under £5, £10 and £15: a pump with needles, Match Attax 2026/27 packs, the 2027 annuals, and team Secret Santa ideas.",
   path: "/football-gear/football-stocking-fillers",
 });
 
