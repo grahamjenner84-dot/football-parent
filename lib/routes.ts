@@ -101,6 +101,7 @@ export const routes = [
   '/football-gear/football-advent-calendars',
   '/football-gear/best-football-base-layers-for-kids',
   '/football-gear/best-goalkeeper-gloves-for-kids',
+  '/football-gear/football-stocking-fillers',
 
   // Girls Football
   '/girls-football/girls-academy-vs-grassroots-football',

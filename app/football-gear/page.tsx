@@ -163,6 +163,12 @@ export default function FootballGearPage() {
           description:
             "Match Attax, Topps Premier League and Adrenalyn XL card calendars, story and quiz calendars and brick builds: what's inside and which age each suits.",
         },
+        {
+          title: "Football Stocking Fillers for Kids",
+          href: "/football-gear/football-stocking-fillers",
+          description:
+            "Small football presents, most under £15: a pump with needles, Match Attax packs, the 2027 annuals, sock tape in the club colour and flat cones.",
+        },
       ]}
       bottomContent={{
         title: "About Football Gear",

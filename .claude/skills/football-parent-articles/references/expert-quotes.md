@@ -564,6 +564,31 @@ trimmed: the "focused heavily on ball mastery and 1v1s" clause and the
 **Topics:** boot or trainer choice on 3G, sole type vs surface. One reuse left;
 trim differently again.
 
+### Boot Buddy after the match
+
+> One thing we got last year was the Boot Buddy. It's really handy straight
+> after the game to scrape the mud off and give the boots a little wash while
+> the mud is still wet. It also makes him more likely to do it himself rather
+> than relying on me.
+
+**Topics:** boot cleaning, stocking fillers, matchday kit.
+**Used in:** [christmas-football-gifts-for-kids](/football-gear/christmas-football-gifts-for-kids) (full) and
+[football-stocking-fillers](/football-gear/football-stocking-fillers) (trimmed, without the opening line) (2/3), 2026-11-20.
+
+### Foam keepie-up ball used indoors
+
+> A few presents were good for an hour and then nothing, like table football,
+> mainly because it's hard to find time to play and he can't do it on his
+> own. With our son it's mainly things that help him play the game. He also
+> got one of those ball-on-a-string keepie-up trainers. He unscrewed the rope
+> and played with the ball all the time instead. It was foam and maybe a size
+> 2, so quite nice for mucking around the house with, and being foam it
+> wasn't as loud banging away on the walls.
+
+**Topics:** presents that get used, foam balls, indoor football.
+**Used in:** [christmas-football-gifts-for-kids](/football-gear/christmas-football-gifts-for-kids) (full) and
+[football-stocking-fillers](/football-gear/football-stocking-fillers) (keepie-up trainer part only) (2/3), 2026-11-20.
+
 ## Pending — questions drafted for an expert, not yet sent/answered
 
 ### equal-playing-time-calculator — Graham (own ParentNote) — answered 2026-10-06, placed as three ParentNotes
