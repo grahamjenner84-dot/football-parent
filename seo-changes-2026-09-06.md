@@ -2471,3 +2471,28 @@ Any movement on these four pages from here may be this link. **Confounded:** all
 ## 17 Nov 2026: VideoObject uploadDate fix (Search Console warning)
 
 - Search Console flagged 2 Videos structured data issues on `/coaching/football-dna-review`: "Invalid datetime value for uploadDate" and "uploadDate is missing a timezone". The MDX passes a date only (`2026-11-10`). `app/components/mdx/VideoEmbed.tsx` now expands a bare date to midnight UK time with an offset (`2026-11-10T00:00:00+00:00`, `+01:00` in BST), so every current and future embed is fixed in one place. Schema only, no visible change: Tier 0, no watch. After deploy, use Validate Fix in Search Console's Videos report.
+
+## Weekly SEO check 2026-11-20
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-11-20.md`. GSC to 17 Nov, page views to 19 Nov. Site 28 vs 28 days: impressions +64%, clicks +61%, same-query position 9.0 to 8.2. No unlogged SEO commits.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| Leeds title revert | 6 Nov | 1373915 | Keep (rule met: old title was the cause) | URL CTR 1.67% to 2.70%, clicks 40 to 61 (+53% vs site +35%), same-query 7.8 to 7.3 | Closed |
+| playing up FAQ | 6 Nov | 02ec54b | Keep (too small, rule not met) | Page 5.2 to 5.3 (rule 6.5); target query 7.5 to 7.1 on 7 impr | Closed |
+| shin pads meta | 7 Nov | 6dba33b | Keep | URL CTR 1.07% to 1.18%, clicks +76% vs site +34%, same-query 8.7 to 8.5 | Closed |
+| girls' ages meta | 7 Nov | bf486a1 | Too small | 226 to 256 impr, 6 to 4 clicks | Read again 28 Nov (`--days 28`) |
+| base layers title | 29 Oct | 1e3e408 | Keep | URL CTR 0.94% to 0.75% over 14 days but weekly clicks 21, 33, 57 since; same-query 9.9 to 9.6; rule not met | Closed |
+| 1 Nov links (soft ground, Veo, Palace, West Ham, advent) | 1 Nov | see entries | Keep | Same-query: soft ground 9.9 to 9.3, Veo 5.9 to 5.4, Palace 6.8 to 6.6, West Ham 7.9 to 7.3, advent 8.9 to 7.8 | Closed |
+| pro footballer fact fixes | 7 Nov | 1d0d60a | Keep | Clicks 15 to 26, URL CTR 0.53% to 0.82%, same-query 8.8 to 8.6 | Meta next (shortlist) |
+| category pages redesign | 6 Nov | see entry | Keep | Academy Pathway weekly 17.3, 16.6, 14.5; Trials 16.3, 16.3, 14.5 | Closed |
+| comic design, 43 articles + GPS | 7 Nov | 3b8dd3b, 903c49c | Keep; gear gate passed | Views +26% vs control -10%; GSC clicks +26% vs -4%; GPS clicks +124% vs gear +81%, click-out 59% vs 55% | Gear rollout is Graham's call |
+| apps roundup "coach app" | 11 Nov | abbe2dc, b26142c, 04de03a | Too early, promising | Same-query 20.9 to 16.1; "football coach apps" 28.7 to 8.8, "best football coach app" 19.4 to 9.2 | Read again 25 Nov |
+| gifts guide by age + links | 13 Nov | 60821a2, dd2a5ef, 9850a3d | Too early, positive | Same-query 12.7 to 9.9 (4 days) | Read again 24 Nov |
+| coach gifts link | 13 Nov | c99ed2d | Too early | Same-query 12.6 to 13.8 on tiny numbers; source page 5.5 | Read again 24 Nov |
+| kids boots picks + FAQs | 13 Nov | 1b44e2b, 1d785cd | Too early, positive | Same-query 10.7 to 9.8; click-out 24% vs 15% | Read again 24 Nov |
+| Football DNA review | 16 Nov | f43bd62 | Too early | 25 impr at 5.7 | Read again 30 Nov |
+
+Progress banner test 2: A 27 clicks / 1,079 seen (2.5%), B 14 / 1,124 (1.2%), joins 7 each, P(B beats A) 2.1%, about 3,420 of 4,000 impressions per arm: calls about 26-27 Nov.
+
+Shortlist put to Graham: girls boots title for "girls football boots" (3,716 impr at 11.7; SERP check first, ~$0.002); pro footballer meta (after 21 Nov); AI Overview check on the footballs-by-age size searches (~$0.02); gear pages onto the comic design, off-peak pages first.
