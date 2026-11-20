@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { staticPageOpenGraph } from "@/lib/seo";
+import { firaSansCondensed } from "@/lib/comic-design";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Football Parent",
@@ -13,25 +14,25 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
-          <p className="text-sm font-semibold text-blue-700 mb-4">
+    <main className={`${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`}>
+      <section className="border-b-[3px] border-[#201E1D] bg-[#FFF8E1]">
+        <div className="max-w-4xl mx-auto px-6 pt-12 pb-11 lg:pt-16">
+          <p className="mb-5 inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-3 py-1 text-sm font-bold text-[#201E1D]">
             Football Parent
           </p>
 
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="mb-6 font-display text-[clamp(36px,5vw,64px)] font-extrabold uppercase leading-[1.02] text-[#201E1D]">
             Privacy Policy
           </h1>
 
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg leading-[1.6] text-[#3A3836] sm:text-xl">
             Last updated: 6 October 2026
           </p>
         </div>
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
-        <div className="space-y-6 text-gray-700 text-lg leading-8">
+        <div className="space-y-6 text-[18px] leading-[1.75] text-[#33312E]">
           <p>
             Jenneral Trading Ltd, trading as Football Parent (&quot;we&quot;,
             &quot;us&quot;), operates footballparent.co.uk and the Coach App.
@@ -43,14 +44,14 @@ export default function PrivacyPolicyPage() {
             If you have any questions, email us at{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               footballparentuk@gmail.com
             </a>
             .
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             1. What this policy covers
           </h2>
 
@@ -65,7 +66,7 @@ export default function PrivacyPolicyPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             2. What we collect
           </h2>
 
@@ -168,179 +169,179 @@ export default function PrivacyPolicyPage() {
             at any time through your browser or the{" "}
             <a
               href="/cookie-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               cookie settings
             </a>{" "}
             on our site or in the app.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             3. Why we process your data, and on what basis
           </h2>
 
           <div className="overflow-x-auto mb-6">
-            <table className="w-full border-collapse border border-gray-300">
+            <table className="w-full border-collapse border-2 border-[#201E1D]">
               <thead>
                 <tr>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     What
                   </th>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Why
                   </th>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Legal basis
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">Account data</td>
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">Account data</td>
+                  <td className="border border-[#C9C4BA] p-3">
                     To provide and secure your account
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Performance of a contract
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Team/squad data
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To provide the app&apos;s core features
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Performance of a contract
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Subscription and payment data
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To provide and manage your subscription
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Performance of a contract
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Feedback you send us
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To fix problems and improve the app
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Legitimate interests
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Site visit counts
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To see which pages are read and where visitors come from
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Legitimate interests
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     How you found us (sign-up source)
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To understand which of our marketing works
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Consent
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Billing records
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To meet our tax and accounting obligations
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Legal obligation
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Match reminder emails and notifications
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To help you run the matches you&apos;ve set up (you can
                     switch these off in Settings)
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Legitimate interests
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Reminders and tips emails (getting started, new features)
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To help you get set up and make the most of the app (you
                     can switch these off in Settings)
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Legitimate interests
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Trial and account emails
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To tell you about your own plan and account, for example
                     when a trial is ending
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Performance of a contract
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Partner offer emails (e.g. from VEO)
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To let you know about relevant offers, only if
                     you&apos;ve opted in
                   </td>
-                  <td className="border border-gray-300 p-3">Consent</td>
+                  <td className="border border-[#C9C4BA] p-3">Consent</td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Analytics cookies
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To understand and improve how the site/app is used
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Consent (where not strictly necessary)
                   </td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     Advertising and retargeting cookies
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     To show relevant ads and measure their performance
                   </td>
-                  <td className="border border-gray-300 p-3">Consent</td>
+                  <td className="border border-[#C9C4BA] p-3">Consent</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             4. Emails we send
           </h2>
 
@@ -382,7 +383,7 @@ export default function PrivacyPolicyPage() {
             </li>
           </ul>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             5. Affiliate links and sponsored content
           </h2>
 
@@ -403,7 +404,7 @@ export default function PrivacyPolicyPage() {
             that site&apos;s data handling.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             6. Children&apos;s data
           </h2>
 
@@ -417,7 +418,7 @@ export default function PrivacyPolicyPage() {
             about individual players.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             7. Who processes your data, and where it&apos;s stored
           </h2>
 
@@ -474,7 +475,7 @@ export default function PrivacyPolicyPage() {
             contractual clauses) are in place.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             8. How long we keep your data
           </h2>
 
@@ -503,7 +504,7 @@ export default function PrivacyPolicyPage() {
             Settings in the Coach App, or by emailing{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               footballparentuk@gmail.com
             </a>
@@ -532,7 +533,7 @@ export default function PrivacyPolicyPage() {
             live service.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             9. Your rights
           </h2>
 
@@ -552,7 +553,7 @@ export default function PrivacyPolicyPage() {
               Complain to the{" "}
               <a
                 href="https://ico.org.uk"
-                className="font-semibold text-blue-700 hover:text-blue-900"
+                className="font-bold text-[#1F5FD6] hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -578,7 +579,7 @@ export default function PrivacyPolicyPage() {
             consent - email{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               footballparentuk@gmail.com
             </a>
@@ -586,7 +587,7 @@ export default function PrivacyPolicyPage() {
             specifically.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             10. Changes to this policy
           </h2>
 
@@ -597,7 +598,7 @@ export default function PrivacyPolicyPage() {
             know via the app or by email.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             11. Contact us
           </h2>
 
@@ -612,7 +613,7 @@ export default function PrivacyPolicyPage() {
             Email:{" "}
             <a
               href="mailto:footballparentuk@gmail.com"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               footballparentuk@gmail.com
             </a>
