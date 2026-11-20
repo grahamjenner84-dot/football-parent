@@ -516,6 +516,10 @@ revenue stream."), so it shares no opening with the West Ham version.
 
 **Topics:** any club foundation / development-centre guide; trims well to
 the "some have a genuine pathway... others a revenue stream" sentence.
+**Used 3/3 (cap reached):** charlton-athletic-development-centre-guide
+(2026-11-20, Graham approved in session), first and last sentences only, so
+it shares no sentence with the Wolves trim. Don't reuse again unless Graham
+raises the cap.
 
 ### What development centres gave us, and what to look for (Graham, 2026-11-01)
 
@@ -546,6 +550,10 @@ more important thing was finding good quality coaching").
 **Topics:** any club development-centre guide, are-football-development-
 centres-worth-it, choosing a coach or programme. The second note trims well
 to the attention-to-detail questions alone. Trim differently on each reuse.
+**Used 2/3:** charlton-athletic-development-centre-guide (2026-11-20, Graham
+approved in session), second note trimmed to the attention-to-detail
+sentences only ("I'd look at the coaches' attention to detail... All these
+things point towards development.").
 
 ### Astro boots on 3G, coach suggested AG or moulded (Graham)
 
@@ -1235,6 +1243,21 @@ attended the Trust's Football Development Centre, or a Trust/academy coach.
    assessment or a normal coaching session?
 4. What would you tell a parent whose child has just been invited to the FDC,
    that isn't obvious from the club's own information?
+
+### charlton-athletic-development-centre-guide — TBD, tag: CACT Development Centres / Advanced Centre, first-hand experience
+Drafted: 2026-11-20
+Graham has no direct experience of Charlton's academy or the Community Trust's
+programmes (confirmed 2026-11-20, in-session). Well suited to a parent whose
+child has done a CACT Development Centre or the Advanced Centre, or a Trust
+coach.
+1. How did your child end up at a CACT Development Centre, and what was the
+   first block like compared with their grassroots training?
+2. Did anyone in your child's group get invited to the Advanced Centre, and
+   how did the families find out how that happened?
+3. Did you ever see academy staff at Development Centre or Advanced Centre
+   sessions, or hear of a player going from there to an academy trial?
+4. At £8.50 a session, what would you tell a parent weighing up whether it's
+   worth a third evening of football?
 
 ### aston-villa-development-centre-guide — TBD, tag: Aston Villa Foundation Coaching Centres, first-hand experience
 Drafted: 2026-09-06

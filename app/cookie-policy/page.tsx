@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { staticPageOpenGraph } from "@/lib/seo";
+import { firaSansCondensed } from "@/lib/comic-design";
 
 export const metadata: Metadata = {
   title: "Cookie Policy | Football Parent",
@@ -13,25 +14,25 @@ export const metadata: Metadata = {
 
 export default function CookiePolicyPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
-          <p className="text-sm font-semibold text-blue-700 mb-4">
+    <main className={`${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`}>
+      <section className="border-b-[3px] border-[#201E1D] bg-[#FFF8E1]">
+        <div className="max-w-4xl mx-auto px-6 pt-12 pb-11 lg:pt-16">
+          <p className="mb-5 inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-3 py-1 text-sm font-bold text-[#201E1D]">
             Football Parent
           </p>
 
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="mb-6 font-display text-[clamp(36px,5vw,64px)] font-extrabold uppercase leading-[1.02] text-[#201E1D]">
             Cookie Policy
           </h1>
 
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg leading-[1.6] text-[#3A3836] sm:text-xl">
             Last updated: 6 October 2026
           </p>
         </div>
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
-        <div className="space-y-6 text-gray-700 text-lg leading-8">
+        <div className="space-y-6 text-[18px] leading-[1.75] text-[#33312E]">
           <p>
             footballparent.co.uk is operated by Jenneral Trading Ltd,
             trading as Football Parent. This page explains the cookies we
@@ -39,14 +40,14 @@ export default function CookiePolicyPage() {
             handle personal data more broadly, see our{" "}
             <a
               href="/privacy-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               Privacy Policy
             </a>
             .
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Strictly necessary cookies
           </h2>
 
@@ -56,7 +57,7 @@ export default function CookiePolicyPage() {
             updated.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Analytics cookies
           </h2>
 
@@ -66,7 +67,7 @@ export default function CookiePolicyPage() {
             them via our cookie banner or{" "}
             <a
               href="/cookie-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               cookie settings
             </a>
@@ -76,7 +77,7 @@ export default function CookiePolicyPage() {
             explained in our{" "}
             <a
               href="/privacy-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               Privacy Policy
             </a>
@@ -84,50 +85,50 @@ export default function CookiePolicyPage() {
           </p>
 
           <div className="overflow-x-auto mb-6">
-            <table className="w-full border-collapse border border-gray-300">
+            <table className="w-full border-collapse border-2 border-[#201E1D]">
               <thead>
                 <tr>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Cookie
                   </th>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Purpose
                   </th>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Duration
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     <code>_ga</code>
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Distinguishes unique visitors, used by Google Analytics
                     to calculate visitor, session and campaign data.
                   </td>
-                  <td className="border border-gray-300 p-3">2 years</td>
+                  <td className="border border-[#C9C4BA] p-3">2 years</td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     <code>_ga_&lt;container-id&gt;</code>
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Used by Google Analytics to persist session state for
                     this specific property.
                   </td>
-                  <td className="border border-gray-300 p-3">2 years</td>
+                  <td className="border border-[#C9C4BA] p-3">2 years</td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     <code>_gid</code>
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Distinguishes unique visitors for a shorter window,
                     also used by Google Analytics.
                   </td>
-                  <td className="border border-gray-300 p-3">24 hours</td>
+                  <td className="border border-[#C9C4BA] p-3">24 hours</td>
                 </tr>
               </tbody>
             </table>
@@ -138,7 +139,7 @@ export default function CookiePolicyPage() {
             cookies. See{" "}
             <a
               href="https://policies.google.com/technologies/cookies"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -147,7 +148,7 @@ export default function CookiePolicyPage() {
             for more detail.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Advertising and retargeting cookies
           </h2>
 
@@ -159,7 +160,7 @@ export default function CookiePolicyPage() {
             our cookie banner or{" "}
             <a
               href="/cookie-policy"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
             >
               cookie settings
             </a>
@@ -168,49 +169,49 @@ export default function CookiePolicyPage() {
           </p>
 
           <div className="overflow-x-auto mb-6">
-            <table className="w-full border-collapse border border-gray-300">
+            <table className="w-full border-collapse border-2 border-[#201E1D]">
               <thead>
                 <tr>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Cookie
                   </th>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Purpose
                   </th>
-                  <th className="border border-gray-300 p-3 text-left font-semibold bg-gray-100">
+                  <th className="border border-[#201E1D] p-3 text-left font-bold bg-[#FFC400] text-[#201E1D]">
                     Duration
                   </th>
                 </tr>
               </thead>
               <tbody>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     <code>_gcl_au</code>
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Set by Google Ads to measure ad conversions.
                   </td>
-                  <td className="border border-gray-300 p-3">90 days</td>
+                  <td className="border border-[#C9C4BA] p-3">90 days</td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     <code>_fbp</code>
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Set by the Meta Pixel to identify browsers for ad
                     delivery and measurement.
                   </td>
-                  <td className="border border-gray-300 p-3">90 days</td>
+                  <td className="border border-[#C9C4BA] p-3">90 days</td>
                 </tr>
-                <tr className="[&:nth-child(even)]:bg-gray-50">
-                  <td className="border border-gray-300 p-3">
+                <tr className="[&:nth-child(even)]:bg-[#FFF8E1]">
+                  <td className="border border-[#C9C4BA] p-3">
                     <code>_fbc</code>
                   </td>
-                  <td className="border border-gray-300 p-3">
+                  <td className="border border-[#C9C4BA] p-3">
                     Set by the Meta Pixel to record that a visit came from a
                     Meta ad click.
                   </td>
-                  <td className="border border-gray-300 p-3">90 days</td>
+                  <td className="border border-[#C9C4BA] p-3">90 days</td>
                 </tr>
               </tbody>
             </table>
@@ -221,7 +222,7 @@ export default function CookiePolicyPage() {
             these cookies. See{" "}
             <a
               href="https://policies.google.com/technologies/cookies"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -230,7 +231,7 @@ export default function CookiePolicyPage() {
             and{" "}
             <a
               href="https://www.facebook.com/privacy/policies/cookies/"
-              className="font-semibold text-blue-700 hover:text-blue-900"
+              className="font-bold text-[#1F5FD6] hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -239,7 +240,7 @@ export default function CookiePolicyPage() {
             for more detail.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Changing your preferences
           </h2>
 

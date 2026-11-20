@@ -52,6 +52,7 @@ export const routes = [
   '/academy-pathway/watford-development-centre-guide',
   '/academy-pathway/wolves-development-centre-guide',
   '/academy-pathway/qpr-development-centre-guide',
+  '/academy-pathway/charlton-athletic-development-centre-guide',
   '/academy-pathway/can-academy-players-play-grassroots-football',
   '/academy-pathway/how-much-does-academy-football-cost',
   '/academy-pathway/football-development-centres-in-london',

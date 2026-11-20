@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { staticPageOpenGraph } from "@/lib/seo";
+import { firaSansCondensed } from "@/lib/comic-design";
 
 export const metadata: Metadata = {
   title: "About Football Parent | Football Parent",
@@ -13,18 +14,18 @@ export const metadata: Metadata = {
 
 export default function AboutFootballParentPage() {
   return (
-    <main className="min-h-screen bg-white">
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 lg:py-20">
-          <p className="text-sm font-semibold text-blue-700 mb-4">
+    <main className={`${firaSansCondensed.variable} min-h-screen bg-white font-ui text-[#201E1D]`}>
+      <section className="border-b-[3px] border-[#201E1D] bg-[#FFF8E1]">
+        <div className="max-w-4xl mx-auto px-6 pt-12 pb-11 lg:pt-16">
+          <p className="mb-5 inline-block rounded-full border-2 border-[#201E1D] bg-[#FFC400] px-3 py-1 text-sm font-bold text-[#201E1D]">
             Independent guidance for football families
           </p>
 
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="mb-6 font-display text-[clamp(36px,5vw,64px)] font-extrabold uppercase leading-[1.02] text-[#201E1D]">
             About Football Parent
           </h1>
 
-          <p className="text-lg text-gray-700 leading-relaxed">
+          <p className="text-lg leading-[1.6] text-[#3A3836] sm:text-xl">
             Football Parent exists because navigating youth football in the UK
             is harder than it should be - and most families are figuring it out
             on their own.
@@ -33,7 +34,7 @@ export default function AboutFootballParentPage() {
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-12 lg:py-16">
-        <div className="space-y-6 text-gray-700 text-lg leading-8">
+        <div className="space-y-6 text-[18px] leading-[1.75] text-[#33312E]">
           
 
           <p>
@@ -41,7 +42,7 @@ export default function AboutFootballParentPage() {
             through it.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             The problem this site tries to solve
           </h2>
 
@@ -66,7 +67,7 @@ export default function AboutFootballParentPage() {
 
           
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Who this is for
           </h2>
 
@@ -112,7 +113,7 @@ export default function AboutFootballParentPage() {
             expectations, and keeping football enjoyable apply at every level.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             What this site covers
           </h2>
 
@@ -122,7 +123,7 @@ export default function AboutFootballParentPage() {
             skimming every aspect of football.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-[22px] lg:text-2xl font-bold text-[#201E1D] pt-4">
             Football academies
           </h3>
 
@@ -132,7 +133,7 @@ export default function AboutFootballParentPage() {
             family perspective, and what happens at each age group.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-[22px] lg:text-2xl font-bold text-[#201E1D] pt-4">
             Development centres
           </h3>
 
@@ -143,7 +144,7 @@ export default function AboutFootballParentPage() {
             content.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-[22px] lg:text-2xl font-bold text-[#201E1D] pt-4">
             Academy trials
           </h3>
 
@@ -153,7 +154,7 @@ export default function AboutFootballParentPage() {
             to handle the outcome - whether positive or not.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-[22px] lg:text-2xl font-bold text-[#201E1D] pt-4">
             Player development
           </h3>
 
@@ -163,7 +164,7 @@ export default function AboutFootballParentPage() {
             development, and where they sometimes hinder it.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-[22px] lg:text-2xl font-bold text-[#201E1D] pt-4">
             Girls&apos; football pathways
           </h3>
 
@@ -173,7 +174,7 @@ export default function AboutFootballParentPage() {
             girls&apos; pathway compares to and differs from the boys&apos;.
           </p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-gray-900 pt-4">
+          <h3 className="text-[22px] lg:text-2xl font-bold text-[#201E1D] pt-4">
             Football parenting
           </h3>
 
@@ -184,7 +185,7 @@ export default function AboutFootballParentPage() {
             than coaching from the touchline.
           </p>
 
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             Why independent guidance matters
           </h2>
 
@@ -209,7 +210,7 @@ export default function AboutFootballParentPage() {
           </p>
 
                     
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 pt-8">
+          <h2 className="font-display text-[30px] lg:text-[38px] font-extrabold leading-[1.05] text-[#201E1D] pt-8">
             A note on the content
           </h2>
 
@@ -225,13 +226,13 @@ export default function AboutFootballParentPage() {
 in touch at{" "}
 <a
   href="mailto:footballparentuk@gmail.com"
-  className="font-semibold text-blue-700 hover:text-blue-900"
+  className="font-bold text-[#1F5FD6] hover:underline"
 >
   footballparentuk@gmail.com
 </a>.
           </p>
 
-          <p className="pt-6 italic text-gray-600">
+          <p className="pt-6 italic text-[#5A5650]">
             Football Parent is an independent website. It is not affiliated with
             the FA, the Premier League, or any football club.
           </p>

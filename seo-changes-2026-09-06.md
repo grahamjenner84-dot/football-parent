@@ -2480,6 +2480,71 @@ Any movement on these four pages from here may be this link. **Confounded:** all
   - `/football-gear/football-advent-calendars`, Adrenalyn pick and body link: the Panini FIFA 365 Adrenalyn XL calendar `B0FWKPPKBL` (swapped in on 13 Nov) has gone "Currently unavailable" and no other Adrenalyn advent calendar listing is on Amazon UK. Replaced with a tagged search link (`/s?k=panini+adrenalyn+advent+calendar`) rather than leave a dead product link.
 - Watch list (linked variant in stock but low or much of the range out): Topps Match Attax UCC 2026/27 calendar `B0HJNTJTDK` (no Amazon buy box, resellers from £44.50 against the note's "About £30", put to Graham), Topps Premier League 2026 calendar (resellers only, from £44.99), adidas F50 Sparkfusion League (3 left, 39 of 67 out), adidas Predator League FG and AG (2 left each), adidas Predator Club Turf (1 left), adidas Copa Pure IV Club FG and Turf (about half out), Nike Legend Academy (12 of 20 out), adidas Tiro Match Junior shin pads (6 of 9 out, linked S in stock).
 
+## Weekly SEO check 2026-11-20
+
+Full write-up: `seo-data/exports/weekly-seo-check-2026-11-20.md`. GSC to 17 Nov, page views to 19 Nov. Site 28 vs 28 days: impressions +64%, clicks +61%, same-query position 9.0 to 8.2. No unlogged SEO commits.
+
+| Page | Changed | Commit | Verdict | Numbers | Next |
+|---|---|---|---|---|---|
+| Leeds title revert | 6 Nov | 1373915 | Keep (rule met: old title was the cause) | URL CTR 1.67% to 2.70%, clicks 40 to 61 (+53% vs site +35%), same-query 7.8 to 7.3 | Closed |
+| playing up FAQ | 6 Nov | 02ec54b | Keep (too small, rule not met) | Page 5.2 to 5.3 (rule 6.5); target query 7.5 to 7.1 on 7 impr | Closed |
+| shin pads meta | 7 Nov | 6dba33b | Keep | URL CTR 1.07% to 1.18%, clicks +76% vs site +34%, same-query 8.7 to 8.5 | Closed |
+| girls' ages meta | 7 Nov | bf486a1 | Too small | 226 to 256 impr, 6 to 4 clicks | Read again 28 Nov (`--days 28`) |
+| base layers title | 29 Oct | 1e3e408 | Keep | URL CTR 0.94% to 0.75% over 14 days but weekly clicks 21, 33, 57 since; same-query 9.9 to 9.6; rule not met | Closed |
+| 1 Nov links (soft ground, Veo, Palace, West Ham, advent) | 1 Nov | see entries | Keep | Same-query: soft ground 9.9 to 9.3, Veo 5.9 to 5.4, Palace 6.8 to 6.6, West Ham 7.9 to 7.3, advent 8.9 to 7.8 | Closed |
+| pro footballer fact fixes | 7 Nov | 1d0d60a | Keep | Clicks 15 to 26, URL CTR 0.53% to 0.82%, same-query 8.8 to 8.6 | Meta next (shortlist) |
+| category pages redesign | 6 Nov | see entry | Keep | Academy Pathway weekly 17.3, 16.6, 14.5; Trials 16.3, 16.3, 14.5 | Closed |
+| comic design, 43 articles + GPS | 7 Nov | 3b8dd3b, 903c49c | Keep; gear gate passed | Views +26% vs control -10%; GSC clicks +26% vs -4%; GPS clicks +124% vs gear +81%, click-out 59% vs 55% | Gear rollout is Graham's call |
+| apps roundup "coach app" | 11 Nov | abbe2dc, b26142c, 04de03a | Too early, promising | Same-query 20.9 to 16.1; "football coach apps" 28.7 to 8.8, "best football coach app" 19.4 to 9.2 | Read again 25 Nov |
+| gifts guide by age + links | 13 Nov | 60821a2, dd2a5ef, 9850a3d | Too early, positive | Same-query 12.7 to 9.9 (4 days) | Read again 24 Nov |
+| coach gifts link | 13 Nov | c99ed2d | Too early | Same-query 12.6 to 13.8 on tiny numbers; source page 5.5 | Read again 24 Nov |
+| kids boots picks + FAQs | 13 Nov | 1b44e2b, 1d785cd | Too early, positive | Same-query 10.7 to 9.8; click-out 24% vs 15% | Read again 24 Nov |
+| Football DNA review | 16 Nov | f43bd62 | Too early | 25 impr at 5.7 | Read again 30 Nov |
+
+Progress banner test 2: A 27 clicks / 1,079 seen (2.5%), B 14 / 1,124 (1.2%), joins 7 each, P(B beats A) 2.1%, about 3,420 of 4,000 impressions per arm: calls about 26-27 Nov.
+
+Shortlist put to Graham: girls boots title for "girls football boots" (3,716 impr at 11.7; SERP check first, ~$0.002); pro footballer meta (after 21 Nov); AI Overview check on the footballs-by-age size searches (~$0.02); gear pages onto the comic design, off-peak pages first.
+
+## 20 Nov 2026: live SERP checks from the weekly shortlist (no site change)
+
+`check_serp` (connector), $0.010, rows in the AI citation history.
+- **"girls football boots"** (3,716 impressions at 11.7 in GSC): a shop SERP. AI Overview citing Nike, adidas, Sports Direct, JD, Very, Next, M&M; popular products block; the top 17 desktop results are all retailers and brand pages, and we are not among them. A title change cannot move this, so the girls boots title stays as it is ("Best Football Boots for Girls (2026): Fit and Sizing", 52 characters, already #3 for "best girls football boots"). Shortlist item 1 dropped.
+- **`best-footballs-by-age` size searches:** AI Overview on all three. It gives the size outright ("Size 3"), sourced mainly from England Football FutureFit. It **cites us** (source #6) on "what size football for 8 year old", not on "...10 year old" or "football sizes by age". The page already answers each age in its quick reference table and "by age in years" list, so the near-zero CTR is the overview answering the question, not the title or the content. No title or meta change. The overview's 2026/27 lists use school years (Year 2 to Year 6 for size 3); our table has Under 7 to Under 11 only. Adding school years to the table is a possible additive lever later (Tier 1), after this page's design change below has had its 14 days.
+
+## 20 Nov 2026: gear guides on the comic design, batch 1 (off-peak pages)
+
+The GPS pilot passed its 21 Nov gate (weekly check 20 Nov: GSC clicks +124% vs +81% for the classic gear guides, Amazon click-out 59% vs 55% baseline), so five off-peak gear guides move to the comic design, one commit each so any can be reverted alone. Design only: text, title, meta, headings, links, structured data and every affiliate link unchanged.
+- `/football-gear/best-football-rebounders-for-kids` (`61a9f39`)
+- `/football-gear/best-football-goals-for-kids` (`511338d`)
+- `/football-gear/ag-vs-fg-boots` (`cb02708`)
+- `/football-gear/veo-camera-alternatives` (`0375d18`)
+- `/football-gear/best-footballs-by-age` (`6ca26ff`). Shares its read with the stocking fillers inbound link added the same day (`18a74e3`).
+
+Held on classic until after about 20 Dec (peak weeks): advent calendars, Christmas gifts, shin pads, base layers, wide feet boots. Also not yet moved: kids boots (inside its 13 Nov read), girls boots, soft ground boots. Academy Pathway (29 of 31 still classic) and Academy Trials (6 of 7) wait for the Progress banner test to call (about 26-27 Nov).
+- **Baseline (12 days to 19 Nov, Amazon click-out):** rebounders 15 of 31 views (48%), goals 13 of 48 (27%), AG vs FG 7 of 36 (19%), Veo 46 of 145 (32%), footballs by age 8 of 142 (6%).
+- **Read:** 14 days after deploy, click-out per page against these and against the classic gear guides over the same days; GSC clicks URL only. Revert a page on its own if its click-out drops by more than a third with views steady.
+
+## 20 Nov 2026: editorial and legal pages on the comic design
+
+`/about`, `/author/graham-jenner`, `/editorial-policy`, `/privacy-policy`, `/cookie-policy`, `/terms-and-conditions` (`e89aea4`). Class changes only: yellow header band with an ink rule, uppercase H1 (CSS only, the text is unchanged), Fira Sans Condensed headings, blue bold links, yellow table headers. Text, headings, links, titles and meta unchanged. These pages carry almost no search traffic: no watch, Tier 0. Not changed: `/search` and `/progress` (the Progress landing page with the join form, a conversion page).
+
+## 20 Nov 2026: QPR guide, two inbound links (Brentford, Fulham)
+
+QPR (published 24 Oct) is one of the round's best new pages but had only 2 contextual inbound links (London and near-me development centre lists). Two additive sentences, one commit each:
+- `/academy-pathway/brentford-development-centre-guide`, end of the first "What to Weigh Up Before Committing" paragraph: "If you're in west London, the other nearby option with a full academy is QPR, a Category Two academy in Heston that has applied for Category One: our guide to [QPR academy trials and development programmes](/academy-pathway/qpr-development-centre-guide) covers how it recruits and what its Trust runs alongside it." (`510251e`)
+- `/academy-pathway/fulham-fc-development-centre-guide`, new paragraph after the travel paragraph in "Is It Worth It? A Parent's View": "If travel is a factor and you live further west, QPR is worth comparing too: our guide to [QPR academy trials](/academy-pathway/qpr-development-centre-guide) covers its Heston academy and the development programmes its Trust runs." (`04a8bd1`)
+- Source pages: links out only (Tier 0, no watch). Target: Tier 1.
+- **Baseline** (`/academy-pathway/qpr-development-centre-guide`, GSC 28 days to 17 Nov): 2,046 impressions, 80 clicks, position 4.9, CTR 3.9%; weekly 261 / 712 / 873 impressions. "qpr academy" 9.1 (114 impr), "qpr academy trials 2026" 4.7, "qpr trials" 4.1, "qpr academy trials" 3.4, "qpr development centre" 4.9, "qpr girls academy" 7.1.
+- **Read:** about 27 Nov (7 days). Aim: "qpr academy" into the top 5. Revert either link only if its source page's position worsens by more than 1 for a week, net of the site.
+
+## 20 Nov 2026: new article, Charlton academy trials and development centres guide
+
+- **Publish:** `/academy-pathway/charlton-athletic-development-centre-guide` (Academy Pathway), comic design, on the `/academy-pathway` hub (club guides list and article cards) and in `lib/routes.ts` (`c41c37c`). About 1,750 words. Targets "charlton academy trials" (Keyword Planner ~90 a month, peaks 170 in March) and "charlton development centre" (~40), chosen because club guides were the round's strongest format (Wolves 20 to 235 clicks in 28 days; QPR 4.9 with 80 clicks in its first month). Published before the January to May trials season.
+- **Fact and slop check (football-parent-review, 20 Nov):** category sourced to Training Ground Guru's 2020/21 ranking (third highest Category Two academy; the 2021/22 article is paywalled and the Premier League EPPP page 404s, so medium confidence on current category); graduates from the club's academy page; ETC details from Charlton's 2026/27 form; prices and venues from the Trust's booking site (autumn 2026 block). Removed a "badge" cliché, three reject-then-reveal lines and three unsupported claims.
+- **Callouts:** two ParentNotes reused from Graham's development-centre notes, approved in session ("Ask about the pathway up front", 3/3; "What to look for", 2/3). Graham has no Charlton experience; a Charlton-specific request (Trust parent or coach) is logged in `expert-quotes.md`.
+- **Inbound links (one commit each):** `/academy-pathway/football-development-centres-in-london` Charlton entry (`982bd2d`), `/academy-pathway/football-development-centres-near-me` "Our guide" line (`3fce710`), `/academy-pathway/crystal-palace-development-centre-guide` "Locations and logistics" (`3be99cd`), `/girls-football/girls-academy-trials-by-club` Charlton section (`389ff47`). All link-outs on their source pages (Tier 0, no watch).
+- **Watch:** "charlton academy trials", "charlton development centre", "charlton academy", "cact development centre". Request indexing in Search Console after deploy. Refresh the Trust's prices and dates when the spring 2027 block is listed.
+
 ## 20 Nov 2026: football stocking fillers (new article)
 
 - **Publish:** `/football-gear/football-stocking-fillers` (Football Gear, comic design), commit `33f2a74`. Card on `/football-gear`. Target "football stocking fillers": Keyword Planner UK 1,000 in Nov and 1,300 in Dec 2025, near zero Jan to Aug. Page one on 16 Nov was weak (Pinterest, Etsy, grfe.co.uk, a US blog, Facebook, Amazon category pages), with an AI Overview citing only Amazon. The gifts guide has a stocking fillers section but only showed at 9.8 for one long-tail query ("football stocking fillers for my footy-mad son", 20 impressions), so no cannibalisation expected.
