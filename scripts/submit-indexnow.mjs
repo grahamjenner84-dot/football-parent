@@ -10,12 +10,12 @@
  *
  * Usage:
  *   node scripts/submit-indexnow.mjs /academy-pathway/some-guide /parent-guides/another-guide
- *   node scripts/submit-indexnow.mjs --all              # every route in app/sitemap.ts
+ *   node scripts/submit-indexnow.mjs --all              # every route in lib/routes.ts
  */
 
 import path from "path";
 import { fileURLToPath } from "url";
-import { routes } from "../app/sitemap.ts";
+import { routes } from "../lib/routes.ts";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
