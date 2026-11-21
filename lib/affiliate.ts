@@ -13,7 +13,22 @@
 // never an Awin short link (tidd.ly), for the same reason as amzn.to: the
 // tracking ids belong visibly in the page source. quickplaysport.com stays in
 // the list so any direct link left behind still gets rel="sponsored".
-export const AFFILIATE_HOSTS = ["amzn.to", "amazon.co.uk", "amazon.com", "quickplaysport.com", "awin1.com"];
+//
+// eBay links go through the eBay Partner Network (from 21 Nov 2026), campaign
+// id 5339256925. Author them as full eBay URLs carrying the EPN parameters
+// (campid=5339256925 and the rest, from the portal's "Create a promotable
+// link"), not ebay.us short links, for the same reason as amzn.to. ebay.us is
+// listed so a short link that slips in still gets rel="sponsored" and counts.
+export const AFFILIATE_HOSTS = [
+  "amzn.to",
+  "amazon.co.uk",
+  "amazon.com",
+  "quickplaysport.com",
+  "awin1.com",
+  "ebay.co.uk",
+  "ebay.com",
+  "ebay.us",
+];
 
 const AWIN_HOSTS = ["awin1.com"];
 
