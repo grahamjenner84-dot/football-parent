@@ -60,14 +60,16 @@
       },
       "semantic": {
         "voice": 45,
-        "slop": 50,
+        "slop": 34,
         "bucket": "C",
         "expert": "none",
         "reviewed": "2026-11-21",
         "prevVoice": 38,
         "prevSlop": 57,
         "prevBucket": "C",
-        "note": "2026-11-21 re-read (was voice 38, slop 57, C): It now carries two strong expert boxes: Chris Robinson (eight-week trial, mid-trial review, recruitment's call) and David Jervis (don't get fit the week before; pick two or three controllable aims like 'check my shoulder'; no team talk in the car). The surrounding prose is still impersonal, with no intro and one generic 'Football Parent note'. Slop is lower than before because the boxes dilute it, but tells remain: spaced hyphens as dashes, 'The goal is not to play perfectly. The goal is', 'This is completely normal', 'not as a high-stakes judgment day'. The FAQ answer 'It gives them somewhere to report any safeguarding concerns and is expected' is muddled. | Earlier: 2026-10-10: Chris Robinson ExpertQA box (formal eight week trial, mid-trial review, consensus but recruitment's call) after a one-line fix to trial length (several weeks, often six to eight). Re-marked C the same day under Graham's rule: a genuine quote from the expert the page needed counts as the bucket fix; voice still shows how much of the page is personal, and a Graham note would lift it further."
+        "note": "2026-11-21 slop tidy, slop 50 to 34 (estimate): sentence level only, 20 to 3 tells; headings, links, components and quotes untouched. Bucket unchanged. | 2026-11-21 re-read (was voice 38, slop 57, C): It now carries two strong expert boxes: Chris Robinson (eight-week trial, mid-trial review, recruitment's call) and David Jervis (don't get fit the week before; pick two or three controllable aims like 'check my shoulder'; no team talk in the car). The surrounding prose is still impersonal, with no intro and one generic 'Football Parent note'. Slop is lower than before because the boxes dilute it, but tells remain: spaced hyphens as dashes, 'The goal is not to play perfectly. The goal is', 'This is completely normal', 'not as a high-stakes judgment day'. The FAQ answer 'It gives them somewhere to report any safeguarding concerns and is expected' is muddled. | Earlier: 2026-10-10: Chris Robinson ExpertQA box (formal eight week trial, mid-trial review, consensus but recruitment's call) after a one-line fix to trial length (several weeks, often six to eight). Re-marked C the same day under Graham's rule: a genuine quote from the expert the page needed counts as the bucket fix; voice still shows how much of the page is personal, and a Graham note would lift it further.",
+        "preTidySlop": 50,
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -163,11 +165,13 @@
       },
       "semantic": {
         "voice": 22,
-        "slop": 60,
+        "slop": 35,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-10-06",
-        "note": "2026-10-06: Girls United ExpertQA box (choosing a club) in 'The Real Variables'. Best fit of the three, still a general answer: stays B."
+        "reviewed": "2026-11-21",
+        "note": "2026-11-21 slop tidy, slop 60 to 35 (estimate): sentence level only, ~24 to ~5 tells; headings, links, components and quotes untouched. Bucket unchanged. | 2026-10-06: Girls United ExpertQA box (choosing a club) in 'The Real Variables'. Best fit of the three, still a general answer: stays B.",
+        "preTidySlop": 60,
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -188,11 +192,13 @@
       },
       "semantic": {
         "voice": 24,
-        "slop": 50,
+        "slop": 32,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-10-06",
-        "note": "2026-10-06: Girls United ExpertQA box (what coaches look for beyond technical ability) in 'What Coaches Are Actually Looking For'. A grassroots organisation's general answer, not a pathway coach: partial fill, stays B. The mechanical experience/isInterview jump comes from the ExpertQA tag, not real depth."
+        "reviewed": "2026-11-21",
+        "note": "2026-11-21 slop tidy, slop 50 to 32 (estimate): sentence level only, ~26 to ~5 tells; headings, links, components and quotes untouched. Bucket unchanged. | 2026-10-06: Girls United ExpertQA box (what coaches look for beyond technical ability) in 'What Coaches Are Actually Looking For'. A grassroots organisation's general answer, not a pathway coach: partial fill, stays B. The mechanical experience/isInterview jump comes from the ExpertQA tag, not real depth.",
+        "preTidySlop": 50,
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -213,14 +219,16 @@
       },
       "semantic": {
         "voice": 16,
-        "slop": 60,
+        "slop": 34,
         "bucket": "B",
         "expert": "sports-scientist",
         "reviewed": "2026-11-21",
         "prevVoice": 12,
         "prevSlop": 66,
         "prevBucket": "B",
-        "note": "2026-11-21 re-read (was voice 12, slop 66, B): One Pre Academy Player box (picked one club, not training every day) plus a generic 'Football Parent note' blockquote. No load or physiology expert, so the sports-scientist gap is unfilled. Heavy slop: one em dash ('reduce football—it is'), many spaced hyphens used as dashes, reframes ('Rest is not the absence of training - it's part of', 'The aim isn't to reduce football'), 'honest account', 'It's worth keeping', and a copy-paste glitch where two sentences repeat in the section after the age table. The page also opens straight on an H2 with no intro."
+        "note": "2026-11-21 slop tidy, slop 60 to 34 (estimate): sentence level only, ~31 to ~6 tells, after removing two repeated sentences and an em dash; headings, links, components and quotes untouched. Bucket unchanged. | 2026-11-21 re-read (was voice 12, slop 66, B): One Pre Academy Player box (picked one club, not training every day) plus a generic 'Football Parent note' blockquote. No load or physiology expert, so the sports-scientist gap is unfilled. Heavy slop: one em dash ('reduce football—it is'), many spaced hyphens used as dashes, reframes ('Rest is not the absence of training - it's part of', 'The aim isn't to reduce football'), 'honest account', 'It's worth keeping', and a copy-paste glitch where two sentences repeat in the section after the age table. The page also opens straight on an H2 with no intro.",
+        "preTidySlop": 60,
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -289,11 +297,13 @@
       },
       "semantic": {
         "voice": 22,
-        "slop": 62,
+        "slop": 34,
         "bucket": "B",
         "expert": "girls-pathway-coach",
-        "reviewed": "2026-10-06",
-        "note": "2026-10-06: Girls United ExpertQA box (talented but lacks confidence) in 'The Confidence Dimension'. Partial fill, stays B; still wants a girls-pathway coach on puberty and maturation."
+        "reviewed": "2026-11-21",
+        "note": "2026-11-21 slop tidy, slop 62 to 34 (estimate): sentence level only, ~34 to ~6 tells; headings, links, components and quotes untouched. Bucket unchanged. | 2026-10-06: Girls United ExpertQA box (talented but lacks confidence) in 'The Confidence Dimension'. Partial fill, stays B; still wants a girls-pathway coach on puberty and maturation.",
+        "preTidySlop": 62,
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -1177,11 +1187,13 @@
       },
       "semantic": {
         "voice": 58,
-        "slop": 50,
+        "slop": 35,
         "bucket": "C",
         "expert": "none",
-        "reviewed": "2026-10-10",
-        "note": "2026-10-10: Bucket A citations job done (c6bfbf4): JPL official site, EPPP categories (Premier League), independent advice (PL Parent Hub support page). Factual claims only, each source different. A to C. Same day: 'FA-registered academies do not charge for trials' corrected to 'Professional club academies operating under the EPPP do not normally charge for trials'."
+        "reviewed": "2026-11-21",
+        "note": "2026-11-21 slop tidy, slop 50 to 35 (estimate): sentence level only, 17 to 5 tells; headings, links, components and quotes untouched. Bucket unchanged. | 2026-10-10: Bucket A citations job done (c6bfbf4): JPL official site, EPPP categories (Premier League), independent advice (PL Parent Hub support page). Factual claims only, each source different. A to C. Same day: 'FA-registered academies do not charge for trials' corrected to 'Professional club academies operating under the EPPP do not normally charge for trials'.",
+        "preTidySlop": 50,
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -1253,10 +1265,13 @@
       },
       "semantic": {
         "voice": 10,
-        "slop": 55,
+        "slop": 34,
         "bucket": "B",
         "expert": "graham",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-11-21",
+        "preTidySlop": 55,
+        "note": "2026-11-21 slop tidy, slop 55 to 34 (estimate): sentence level only, ~24 to ~5 tells; headings, links, components and quotes untouched. Bucket unchanged. | undefined",
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -2017,10 +2032,13 @@
       },
       "semantic": {
         "voice": 47,
-        "slop": 54,
+        "slop": 32,
         "bucket": "B",
         "expert": "academy-coach",
-        "reviewed": "2026-09-22"
+        "reviewed": "2026-11-21",
+        "preTidySlop": 54,
+        "note": "2026-11-21 slop tidy, slop 54 to 32 (estimate): sentence level only, ~16 to ~4 tells; headings, links, components and quotes untouched. Bucket unchanged. | undefined",
+        "tidied": "2026-11-21"
       }
     },
     {
@@ -2393,12 +2411,12 @@
         "authoritativeness": 66
       },
       "semantic": {
-        "voice": 20,
+        "voice": 15,
         "slop": 26,
         "bucket": "B",
         "expert": "scout",
         "reviewed": "2026-11-21",
-        "note": "2026-11-21 first score: Two Graham ParentNotes, both generic advice (ask other parents about progression, judge the coaches' attention to detail), with no story or Charlton experience and no expert box. The second note is word for word the same as a QPR note. The content is strongly club-specific (Sparrows Lane, the Training Ground Guru ranking, £8.50 CACT blocks with venues and days, the Advanced Centre route, the girls' ETC on Tuesdays 5-6.30pm), but it sits on the shared club-guide skeleton: 'Not open ones for boys, as far as we can find', 'The practical example is a Year 5...', the same safeguarding list and the same summary close. Low slop. The summary says the Girls Academy 'runs trials', which the body never states."
+        "note": "2026-11-21: lines copied from the QPR guide reworded, and the ParentNote duplicated word for word from QPR replaced with plain advice (voice 20 to 15). Still B: needs a Graham story or an expert box. | 2026-11-21 first score: Two Graham ParentNotes, both generic advice (ask other parents about progression, judge the coaches' attention to detail), with no story or Charlton experience and no expert box. The second note is word for word the same as a QPR note. The content is strongly club-specific (Sparrows Lane, the Training Ground Guru ranking, £8.50 CACT blocks with venues and days, the Advanced Centre route, the girls' ETC on Tuesdays 5-6.30pm), but it sits on the shared club-guide skeleton: 'Not open ones for boys, as far as we can find', 'The practical example is a Year 5...', the same safeguarding list and the same summary close. Low slop. The summary says the Girls Academy 'runs trials', which the body never states."
       }
     },
     {
@@ -2855,7 +2873,7 @@
   "semanticSummary": {
     "reviewed": 113,
     "avgVoice": 50,
-    "avgSlop": 34,
+    "avgSlop": 32,
     "buckets": {
       "A": 3,
       "B": 25,
@@ -2902,6 +2920,10 @@
     "rescore2026_11_21": {
       "articles": 24,
       "note": "Re-score: 18 articles published since 10 Oct scored for the first time (gear and gift guides, Charlton/QPR/Wolves guides, academies-by-category list, girls trials-by-club, how-girls-football-works, indoor training, Football DNA review, David Jervis and Pre Academy Player interviews, coach gifts), plus 6 re-reads of pages given Pre Academy Player or David Jervis boxes. Only football-scholarships-uk moved (B to C, Jervis fills the gap); the three Pre Academy Player pages stay B because a parent answer is not the academy coach or sports scientist they need. New B: best-football-boots-for-girls (podiatrist), girls-academy-trials-by-club (girls-pathway-coach), charlton-athletic-development-centre-guide (scout). Scorer fixed to parse the category on Windows paths."
+    },
+    "slopTidy2026_11_21": {
+      "articles": 8,
+      "note": "Eight highest-slop pages not in a watch window: late-developers-in-girls-football 62 to 34, girls-academy-vs-grassroots-football 60 to 35, how-much-training-is-too-much 60 to 34, veo-camera-alternatives 55 to 34, what-is-football-iq 54 to 32, what-happens-at-academy-trials 50 to 34, girls-football-trials 50 to 32, jpl-and-academy-football 50 to 35 (after-scores are the editors estimates). Sentence level only, one commit per page. Held back for watch windows: Aston Villa, Brentford, wide-feet boots, AG vs FG, winter gloves, London DCs. Factual issues found were listed, not fixed."
     }
   }
 }

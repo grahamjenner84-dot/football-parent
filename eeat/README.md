@@ -299,3 +299,18 @@ other recruits above are still open.
 - New totals: **113 articles, A = 3, B = 25, C = 85; voice 50, slop 34.**
   Expert demand: girls-pathway coach 8, academy coach 7, podiatrist 3, Graham 3,
   sports scientist 2, scout 2.
+
+## Update 2026-11-21: slop tidy on eight pages, plus fixes
+
+- Eight highest-slop pages outside a watch window tidied at sentence level
+  (one commit each, scores are the editors' estimates): late-developers-in-girls-football
+  62 to 34, girls-academy-vs-grassroots-football 60 to 35, how-much-training-is-too-much
+  60 to 34, veo-camera-alternatives 55 to 34, what-is-football-iq 54 to 32,
+  what-happens-at-academy-trials 50 to 34, girls-football-trials 50 to 32,
+  jpl-and-academy-football 50 to 35. Buckets unchanged.
+- Charlton guide: QPR-copied lines reworded and the shared "What to look for"
+  ParentNote replaced with plain advice (voice 20 to 15, still B).
+- Site average slop now 32, voice 50. 13 pages still at slop 45 or more, six of
+  them waiting on watch windows (Aston Villa, Brentford, wide-feet boots, AG vs
+  FG, winter gloves, London DCs).
+- Factual issues the editors found were listed for Graham, not fixed.
