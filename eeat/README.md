@@ -269,3 +269,33 @@ other recruits above are still open.
    rewrite the voice.
 4. Follow the CLAUDE.md SEO guardrails when editing live pages (one lever per
    commit, log to the current `seo-changes-*.md`, 10-14 day watch after).
+
+## Update 2026-11-21: re-score (new articles plus pages given boxes)
+
+- 18 articles published since 10 Oct scored for the first time and 6 re-read
+  after Pre Academy Player or David Jervis boxes. All 113 articles (landing
+  pages excluded) now carry a semantic score.
+- **football-scholarships-uk B to C** (voice 5 to 30): David Jervis's box is
+  specific to the page. The three Pre Academy Player pages (pre-academy-football,
+  how-much-training-is-too-much, how-much-does-academy-football-cost) **stay B**:
+  voice up a little, but a parent's answer does not fill the academy coach or
+  sports scientist gap.
+- New articles: 15 C, 3 B. The B pages are best-football-boots-for-girls
+  (podiatrist), girls-academy-trials-by-club (girls-pathway-coach) and
+  charlton-athletic-development-centre-guide (scout: generic notes, no story or box).
+  Weakest new C pages: advent calendars (26), astro trainers (30), stocking
+  fillers (30, both notes copied from the Christmas gifts guide), Wolves (22),
+  how-girls-football-works (22, Girls United is the right kind of source for a
+  grassroots page).
+- Issues found during the read: duplicated sentences on how-much-training and
+  late-developers-in-football; one em dash on how-much-training; a box/body
+  contradiction on pre-academy-football (free vs fee) and academy-cost (petrol
+  vs £10-20 sessions); the same Graham note word for word in the Charlton and
+  QPR guides; Christmas gifts calls the QuickPlay board "a net"; a Bournemouth
+  "three seasons" claim on the category list; football-dna-review has no
+  partner disclosure.
+- Scorer fix: `score-eeat.mjs` parsed the category from `/`-split paths, which
+  came out `undefined` on Windows; it now splits on either separator.
+- New totals: **113 articles, A = 3, B = 25, C = 85; voice 50, slop 34.**
+  Expert demand: girls-pathway coach 8, academy coach 7, podiatrist 3, Graham 3,
+  sports scientist 2, scout 2.

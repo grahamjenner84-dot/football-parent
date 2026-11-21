@@ -15,7 +15,7 @@ for(const file of files){
   const fmMatch = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   const fm = fmMatch?fmMatch[1]:'';
   const body = fmMatch?fmMatch[2]:raw;
-  const cat = file.split('/')[1];
+  const cat = file.split(/[\\/]/)[1];
   const slug = path.basename(file,'.mdx');
 
   // words (strip mdx components/links loosely)
