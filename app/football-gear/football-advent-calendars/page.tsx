@@ -26,6 +26,7 @@ export default async function Page() {
       sections={article.frontmatter.sections}
       path="/football-gear/football-advent-calendars"
       datePublished={article.frontmatter.date}
+      dateModified={article.frontmatter.dateModified}
       content={article.content}
     >
       <MDXContent content={article.content} slug={article.slug} />
