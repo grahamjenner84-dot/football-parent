@@ -19,6 +19,7 @@ import type { PeriodComparison, PeriodTotals, PageQueryMover, RankingQuality } f
 import { isPageViewOptedOut, setPageViewOptOut } from "@/lib/page-view-optout";
 import type { PageViewStats, PageViewDay, PageViewDayComparison, PageViewDailyCount, BannerVariantStats, PageViewCountryStats, CountryViewRow } from "@/lib/supabase/page-views"; // type-only import, erased at build time - safe from a client component
 import type { AffiliateClickStats } from "@/lib/supabase/affiliate-clicks"; // type-only, same reasoning as the page-views import above
+import type { EpnReport } from "@/lib/epn"; // type-only, as above
 import type { PartnerClickStats } from "@/lib/supabase/partner-clicks"; // type-only, same reasoning as the page-views import above
 import type { CoachAppShareStats } from "@/lib/supabase/coach-app-shares"; // type-only, as above
 import type { CoachAppFunnel } from "@/lib/supabase/coach-app-funnel"; // type-only, as above
@@ -58,6 +59,7 @@ type Tab =
   | "coachFunnel"
   | "progress"
   | "affiliate"
+  | "ebay"
   | "partnerClicks"
   | "instagramClicks";
 type DayWindow = 7 | 28 | 90;
@@ -70,6 +72,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "rank", label: "Rank tracker" },
   { id: "rankingHealth", label: "Ranking health" },
   { id: "affiliate", label: "Affiliate clicks" },
+  { id: "ebay", label: "eBay earnings" },
   { id: "partnerClicks", label: "Football DNA clicks" },
   { id: "instagramClicks", label: "Instagram clicks" },
   { id: "pageviewsCompare", label: "Compare page views" },
@@ -209,6 +212,8 @@ export default function SeoAdminPage() {
   const [progressError, setProgressError] = useState("");
   const [affiliateStats, setAffiliateStats] = useState<AffiliateClickStats | null>(null);
   const [affiliateError, setAffiliateError] = useState("");
+  const [ebayReport, setEbayReport] = useState<EpnReport | null>(null);
+  const [ebayError, setEbayError] = useState("");
   const [partnerStats, setPartnerStats] = useState<PartnerClickStats | null>(null);
   const [partnerError, setPartnerError] = useState("");
   const [instagramStats, setInstagramStats] = useState<PartnerClickStats | null>(null);
@@ -357,6 +362,22 @@ export default function SeoAdminPage() {
         setAffiliateError("");
       })
       .catch((err) => setAffiliateError(err.message));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/ebay-earnings-report?days=30")
+      .then(async (res) => {
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          throw new Error(body.error || "Failed to load eBay earnings report");
+        }
+        return res.json();
+      })
+      .then((data: EpnReport) => {
+        setEbayReport(data);
+        setEbayError("");
+      })
+      .catch((err) => setEbayError(err.message));
   }, []);
 
   useEffect(() => {
@@ -602,6 +623,12 @@ export default function SeoAdminPage() {
             {affiliateError && <p style={styles.error}>{affiliateError}</p>}
             {affiliateStats && <AffiliateClicksReport stats={affiliateStats} />}
           </>
+        ) : tab === "ebay" ? (
+          <>
+            {!ebayReport && !ebayError && <p style={styles.muted}>Loading eBay earnings...</p>}
+            {ebayError && <p style={styles.error}>{ebayError}</p>}
+            {ebayReport && <EbayEarningsReport report={ebayReport} />}
+          </>
         ) : tab === "partnerClicks" ? (
           <>
             {!partnerStats && !partnerError && (
@@ -672,6 +699,8 @@ function countFor(report: SeoReport, tab: Tab): number {
     case "cookies":
       return 0;
     case "affiliate":
+      return 0;
+    case "ebay":
       return 0;
     case "partnerClicks":
       return 0;
@@ -2307,6 +2336,131 @@ function Dashboard({
           )}
         </>
       )}
+    </div>
+  );
+}
+
+const gbp = (n: number) => `£${n.toFixed(2)}`;
+
+function EbayEarningsReport({ report }: { report: EpnReport }) {
+  const recentDays = report.byDay.slice().reverse();
+  const hasEpnData = report.totals.epnClicks > 0 || report.totals.transactions > 0 || report.transactions.length > 0;
+
+  return (
+    <div style={styles.list}>
+      <SectionNote label="Where these numbers come from, and how fresh they are">
+        Earnings, sales and eBay&rsquo;s own click count come from the eBay
+        Partner Network reporting API (performance by day and the transaction
+        detail report), read live each time this tab opens. They are not real
+        time: eBay processes clicks and sales in batches, so today and
+        yesterday are usually incomplete, and a sale stays Pending until eBay
+        approves it after the buyer&rsquo;s return window, when its earnings
+        can still change. &ldquo;Site clicks&rdquo; is our own first-party
+        count of clicks out to ebay.co.uk (the same tracker as the Affiliate
+        clicks tab), which is real time. eBay&rsquo;s dates are eBay&rsquo;s
+        own; site clicks use UK days. Sales by article come from the
+        <code> customid</code> on each eBay link, so give every new eBay link
+        its article slug as the customid.
+      </SectionNote>
+
+      {!report.configured && (
+        <p style={styles.error}>
+          Not connected yet: EPN_ACCOUNT_SID and EPN_AUTH_TOKEN are not set. In
+          the eBay Partner Network portal, click the cloud icon (bottom left),
+          then API, then Enable API Access, and add the two values to Vercel
+          and .env.local. Site clicks below still work without them.
+        </p>
+      )}
+      {report.errors.map((e) => (
+        <p key={e} style={styles.error}>
+          {e}
+        </p>
+      ))}
+
+      <p style={styles.muted}>
+        {report.from} to {report.to}
+        {report.latestEpnDataDate ? `. Latest day eBay has reported anything for: ${report.latestEpnDataDate}.` : "."}
+      </p>
+
+      <div style={styles.cardStats}>
+        <span>Earnings: {gbp(report.totals.earnings)}</span>
+        <span>Pending: {gbp(report.totals.pendingEarnings)}</span>
+        <span>Approved: {gbp(report.totals.approvedEarnings)}</span>
+        <span>Sales: {gbp(report.totals.sales)}</span>
+        <span>Transactions: {report.totals.transactions}</span>
+        <span>eBay clicks: {report.totals.epnClicks}</span>
+        <span>Site clicks: {report.totals.siteClicks}</span>
+      </div>
+
+      <h3 style={styles.affiliateHeading}>By article (customid)</h3>
+      {report.byCustomId.length === 0 ? (
+        <EmptyState text="No eBay sales in this window yet." />
+      ) : (
+        report.byCustomId.map((row) => (
+          <div key={row.customId} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{row.customId}</span>
+              <span style={styles.cardBadge}>{gbp(row.earnings)}</span>
+            </div>
+            <div style={styles.cardStats}>
+              <span>Transactions: {row.transactions}</span>
+              <span>Sales: {gbp(row.sales)}</span>
+            </div>
+          </div>
+        ))
+      )}
+
+      <h3 style={styles.affiliateHeading}>Sales</h3>
+      {report.transactions.length === 0 ? (
+        <EmptyState text={hasEpnData ? "No transactions in this window." : "No eBay transactions yet."} />
+      ) : (
+        report.transactions.slice(0, 100).map((t, i) => (
+          <div key={`${t.itemId}-${t.eventDate}-${i}`} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{t.itemName || `Item ${t.itemId}`}</span>
+              <span style={styles.cardBadge}>{gbp(t.earnings)}</span>
+            </div>
+            <div style={styles.cardStats}>
+              <span>{t.eventDate}</span>
+              <span>{t.status || "status unknown"}</span>
+              <span>Sale: {gbp(t.sales)}</span>
+              {t.quantity > 1 && <span>Qty: {t.quantity}</span>}
+              {t.customId && <span>customid: {t.customId}</span>}
+              {t.category && <span>{t.category}</span>}
+            </div>
+          </div>
+        ))
+      )}
+
+      <h3 style={styles.affiliateHeading}>Site clicks to eBay by page</h3>
+      {report.siteClicksByPath.length === 0 ? (
+        <EmptyState text="No clicks out to eBay recorded in this window." />
+      ) : (
+        report.siteClicksByPath.map((row) => (
+          <div key={row.path} style={styles.card}>
+            <div style={styles.cardTop}>
+              <span style={styles.cardQuery}>{row.path}</span>
+              <span style={styles.cardBadge}>{row.clicks} clicks</span>
+            </div>
+          </div>
+        ))
+      )}
+
+      <h3 style={styles.affiliateHeading}>By day</h3>
+      {recentDays.map((d) => (
+        <div key={d.date} style={styles.card}>
+          <div style={styles.cardTop}>
+            <span style={styles.cardQuery}>{d.date}</span>
+            <span style={styles.cardBadge}>{gbp(d.earnings)}</span>
+          </div>
+          <div style={styles.cardStats}>
+            <span>Site clicks: {d.siteClicks}</span>
+            <span>eBay clicks: {d.epnClicks}</span>
+            <span>Transactions: {d.transactions}</span>
+            <span>Sales: {gbp(d.sales)}</span>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

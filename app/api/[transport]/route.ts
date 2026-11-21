@@ -8,6 +8,7 @@ import { getCoachAppFunnel } from "@/lib/supabase/coach-app-funnel";
 import { getCalculatorPlans } from "@/lib/supabase/calculator-plans";
 import { getProgressFunnel } from "@/lib/supabase/progress-funnel";
 import { getAffiliateClickStats } from "@/lib/supabase/affiliate-clicks";
+import { getEpnReport } from "@/lib/epn";
 import {
   getKeywordIdeas,
   getKeywordMetrics,
@@ -302,6 +303,22 @@ const handler = createMcpHandler(
           })),
         };
         return { content: [{ type: "text", text: JSON.stringify(result) }] };
+      }
+    );
+
+    server.registerTool(
+      "get_ebay_earnings",
+      {
+        title: "Get eBay Partner Network earnings",
+        description:
+          "eBay affiliate earnings for footballparent.co.uk from the eBay Partner Network reporting API (performance by day and transaction detail, campaign 5339256925 and any other campaign on the account), beside our own first-party count of clicks out to ebay.co.uk. The same numbers as the 'eBay earnings' tab on /admin/seo. Returns configured (false until EPN_ACCOUNT_SID / EPN_AUTH_TOKEN are set in Vercel); totals (earnings, approvedEarnings, pendingEarnings, sales, transactions, itemsOrdered, epnClicks = eBay's own click count, siteClicks = ours); byDay (zero-filled, eBay's dates for the EPN columns, UK days for siteClicks); transactions (each sale: eventDate, status, itemName, sales, earnings, customId); byCustomId (sales and earnings per link customid, which is set to the article slug, so this is earnings per article); siteClicksByPath; latestEpnDataDate (the last day eBay has reported anything for, a read on processing lag); errors (per-source failures). Not real time: eBay reports in batches, so today and yesterday are usually incomplete, and sales stay Pending until approved after the return window. Amounts are in the account currency (GBP).",
+        inputSchema: {
+          days: z.number().int().min(1).max(90).optional().describe("How many days back to include, today counting as one. Defaults to 30, maximum 90."),
+        },
+      },
+      async ({ days }) => {
+        const report = await getEpnReport(days ?? 30);
+        return { content: [{ type: "text", text: JSON.stringify(report) }] };
       }
     );
 

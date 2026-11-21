@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { matchesKnownBotPattern } from "@/lib/user-agent-bots";
 import { getPageViewsForPath, loadMetaScanBursts } from "@/lib/supabase/page-views";
-import { datesBetween, ukDay, ukToday } from "@/lib/uk-day";
+import { datesBetween, ukDay, ukDayStart, ukToday } from "@/lib/uk-day";
 import { getAffiliateProductNames, normalizeAffiliateHref } from "@/lib/affiliate-products";
 
 // Server-only client using the service role key, same pattern as
@@ -364,5 +364,67 @@ export async function getAffiliateClickStats(days: number = 30): Promise<Affilia
       .map(([placement, clicks]) => ({ placement, clicks }))
       .sort((a, b) => b.clicks - a.clicks),
     botClicks,
+  };
+}
+
+export interface MerchantClickCounts {
+  total: number;
+  byDay: { date: string; clicks: number }[];
+  byPath: { path: string; clicks: number }[];
+}
+
+// First-party click-outs to one merchant (matched on the logged destination
+// host, e.g. "ebay.co.uk" matches www.ebay.co.uk), zero-filled by UK day from
+// `fromDate` (YYYY-MM-DD) to today. Same bot re-filter as
+// getAffiliateClickStats. Used beside a merchant's own reported clicks (the
+// eBay Partner Network tab), so the two can be read against each other.
+export async function getMerchantClickCounts(
+  hostSuffix: string,
+  fromDate: string
+): Promise<MerchantClickCounts> {
+  const supabase = adminClient();
+  const since = new Date(
+    Math.max(new Date(ukDayStart(fromDate)).getTime(), new Date(AFFILIATE_TRACKING_STARTED_AT).getTime())
+  ).toISOString();
+
+  const rows: { path: string; merchant: string; user_agent: string | null; created_at: string }[] = [];
+  const pageSize = 1000;
+  for (let from = 0; ; from += pageSize) {
+    const { data, error } = await supabase
+      .from("affiliate_clicks")
+      .select("path, merchant, user_agent, created_at")
+      .ilike("merchant", `%${hostSuffix}`)
+      .gte("created_at", since)
+      .order("id", { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (error) throw new Error("Failed to read affiliate_clicks: " + error.message);
+    const batch = data ?? [];
+    rows.push(...batch);
+    if (batch.length < pageSize) break;
+  }
+
+  const suffix = hostSuffix.toLowerCase();
+  const human = rows.filter((r) => {
+    const host = r.merchant.toLowerCase();
+    if (host !== suffix && !host.endsWith(`.${suffix}`)) return false;
+    return !r.user_agent || !matchesKnownBotPattern(r.user_agent);
+  });
+
+  const dayCounts = new Map<string, number>();
+  const pathCounts = new Map<string, number>();
+  for (const r of human) {
+    const d = ukDay(r.created_at);
+    if (d < fromDate) continue;
+    dayCounts.set(d, (dayCounts.get(d) ?? 0) + 1);
+    pathCounts.set(r.path, (pathCounts.get(r.path) ?? 0) + 1);
+  }
+
+  const byDay = datesBetween(fromDate, ukToday()).map((date) => ({ date, clicks: dayCounts.get(date) ?? 0 }));
+  return {
+    total: byDay.reduce((s, d) => s + d.clicks, 0),
+    byDay,
+    byPath: Array.from(pathCounts.entries())
+      .map(([path, clicks]) => ({ path, clicks }))
+      .sort((a, b) => b.clicks - a.clicks),
   };
 }
